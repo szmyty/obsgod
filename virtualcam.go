@@ -19,7 +19,7 @@ var (
 		Use:   "toggle",
 		Short: "Toggle virtual camera status",
 		RunE: func(cmd *coral.Command, args []string) error {
-			return starStopVirtualCam()
+			return startStopVirtualCam()
 		},
 	}
 
@@ -48,7 +48,7 @@ var (
 	}
 )
 
-func starStopVirtualCam() error {
+func startStopVirtualCam() error {
 	_, err := client.Outputs.ToggleVirtualCam()
 	return err
 }
