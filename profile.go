@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/andreykaipov/goobs/api/requests/profiles"
+	"github.com/andreykaipov/goobs/api/requests/config"
 	"github.com/muesli/coral"
 )
 
@@ -46,32 +46,30 @@ var (
 )
 
 func listProfiles() error {
-	r, err := client.Profiles.ListProfiles()
+	r, err := client.Config.GetProfileList()
 	if err != nil {
 		return err
 	}
 
 	for _, v := range r.Profiles {
-		fmt.Println(v.ProfileName)
+		fmt.Println(v)
 	}
 	return nil
 }
 
 func setProfile(profile string) error {
-	r := profiles.SetCurrentProfileParams{
-		ProfileName: profile,
-	}
-	_, err := client.Profiles.SetCurrentProfile(&r)
+	r := config.NewSetCurrentProfileParams().WithProfileName(profile)
+	_, err := client.Config.SetCurrentProfile(r)
 	return err
 }
 
 func getProfile() error {
-	r, err := client.Profiles.GetCurrentProfile()
+	r, err := client.Config.GetProfileList()
 	if err != nil {
 		return err
 	}
 
-	fmt.Println(r.ProfileName)
+	fmt.Println(r.CurrentProfileName)
 	return nil
 }
 

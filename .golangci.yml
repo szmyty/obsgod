@@ -16,14 +16,12 @@ linters:
   enable:
     - bodyclose
     - dupl
-    - exportloopref
     - goconst
     - godot
     - godox
     - goimports
     - goprintffuncname
     - gosec
-    - ifshort
     - misspell
     - prealloc
     - revive

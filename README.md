@@ -1,35 +1,49 @@
-# obs-cli
+# obsgod
 
-[![Latest Release](https://img.shields.io/github/release/muesli/obs-cli.svg)](https://github.com/muesli/obs-cli/releases)
-[![Build Status](https://github.com/muesli/obs-cli/workflows/build/badge.svg)](https://github.com/muesli/obs-cli/actions)
-[![Go ReportCard](https://goreportcard.com/badge/muesli/obs-cli)](https://goreportcard.com/report/muesli/obs-cli)
-[![GoDoc](https://godoc.org/github.com/golang/gddo?status.svg)](https://pkg.go.dev/github.com/muesli/obs-cli)
+[![Latest Release](https://img.shields.io/github/release/szmyty/obsgod.svg)](https://github.com/szmyty/obsgod/releases)
+[![Build Status](https://github.com/szmyty/obsgod/workflows/build/badge.svg)](https://github.com/szmyty/obsgod/actions)
+[![Go ReportCard](https://goreportcard.com/badge/szmyty/obsgod)](https://goreportcard.com/report/szmyty/obsgod)
+[![GoDoc](https://godoc.org/github.com/golang/gddo?status.svg)](https://pkg.go.dev/github.com/szmyty/obsgod)
 
-OBS-cli is a command-line remote control for OBS. It requires the
-[obs-websocket](https://github.com/Palakis/obs-websocket) plugin to be installed
-on your system.
+obsgod is a command-line remote control for OBS. It requires OBS Studio 28+ with the built-in
+[OBS WebSocket v5](https://github.com/obsproject/obs-websocket) support.
 
 ## Installation
 
 ### Packages & Binaries
 
-On Arch Linux you can simply install the package from the AUR:
-
-    yay -S obs-cli
-
-Or download a binary from the [releases](https://github.com/muesli/obs-cli/releases)
+Download a binary from the [releases](https://github.com/szmyty/obsgod/releases)
 page. Linux (including ARM) binaries are available, as well as Debian and RPM
 packages.
 
 ### Build From Source
 
-Alternatively you can also build `obs-cli` from source. Make sure you have a
-working Go environment (Go 1.12 or higher is required). See the
+Alternatively you can also build `obsgod` from source. Make sure you have a
+working Go environment (Go 1.21 or higher is required). See the
 [install instructions](https://golang.org/doc/install.html).
 
-To install obs-cli, simply run:
+To install obsgod, simply run:
 
-    go install github.com/muesli/obs-cli@latest
+    go install github.com/szmyty/obsgod@latest
+
+## Configuration
+
+All commands support the following flags:
+
+- `--host`: OBS host to connect to (default: `localhost`, env: `OBS_HOST`)
+- `--port`: OBS port to connect to (default: `4455`, env: `OBS_PORT`)
+- `--password`: OBS WebSocket password (env: `OBS_PASSWORD`)
+
+Environment variables are applied as defaults and can be overridden by CLI flags.
+
+Example using environment variables:
+
+```sh
+export OBS_HOST=192.168.1.100
+export OBS_PORT=4455
+export OBS_PASSWORD=mysecret
+obsgod stream status
+```
 
 ## Usage
 
@@ -44,15 +58,15 @@ All commands support the following flags:
 Change the streaming state:
 
 ```
-obs-cli stream start
-obs-cli stream stop
-obs-cli stream toggle
+obsgod stream start
+obsgod stream stop
+obsgod stream toggle
 ```
 
 Display streaming status:
 
 ```
-obs-cli stream status
+obsgod stream status
 ```
 
 ### Recordings
@@ -60,23 +74,23 @@ obs-cli stream status
 Change the recording state:
 
 ```
-obs-cli recording start
-obs-cli recording stop
-obs-cli recording toggle
+obsgod recording start
+obsgod recording stop
+obsgod recording toggle
 ```
 
 Pause or resume a recording:
 
 ```
-obs-cli recording pause enable
-obs-cli recording pause resume
-obs-cli recording pause toggle
+obsgod recording pause enable
+obsgod recording pause resume
+obsgod recording pause toggle
 ```
 
 Display recording status:
 
 ```
-obs-cli recording status
+obsgod recording status
 ```
 
 ### Scenes
@@ -84,31 +98,31 @@ obs-cli recording status
 List all scene names:
 
 ```
-obs-cli scene list
+obsgod scene list
 ```
 
 Show the current scene name:
 
 ```
-obs-cli scene get
+obsgod scene get
 ```
 
 Switch program to a scene:
 
 ```
-obs-cli scene current <scene>
+obsgod scene current <scene>
 ```
 
 Switch preview to a scene (studio mode must be enabled):
 
 ```
-obs-cli scene preview <scene>
+obsgod scene preview <scene>
 ```
 
 Switch program (studio mode disabled) or preview (studio mode enabled) to a scene:
 
 ```
-obs-cli scene switch <scene>
+obsgod scene switch <scene>
 ```
 
 ### Scene Collections
@@ -116,19 +130,19 @@ obs-cli scene switch <scene>
 List all scene collections:
 
 ```
-obs-cli scenecollection list
+obsgod scenecollection list
 ```
 
 Show the current scene collection:
 
 ```
-obs-cli scenecollection get
+obsgod scenecollection get
 ```
 
 Switch to a scene collection:
 
 ```
-obs-cli scenecollection set <scenecollection>
+obsgod scenecollection set <scenecollection>
 ```
 
 ### Scene Items
@@ -136,41 +150,41 @@ obs-cli scenecollection set <scenecollection>
 List all items of a scene:
 
 ```
-obs-cli sceneitem list <scene>
+obsgod sceneitem list <scene>
 ```
 
 Change the visibility of a scene-item:
 
 ```
-obs-cli sceneitem show <scene> <item>
-obs-cli sceneitem hide <scene> <item>
-obs-cli sceneitem toggle <scene> <item>
+obsgod sceneitem show <scene> <item>
+obsgod sceneitem hide <scene> <item>
+obsgod sceneitem toggle <scene> <item>
 ```
 
 Display the visibility of a scene-item:
 
 ```
-obs-cli sceneitem visible <scene> <item>
+obsgod sceneitem visible <scene> <item>
 ```
 
 Center a scene-item horizontally:
 
 ```
-obs-cli sceneitem center <scene> <item>
+obsgod sceneitem center <scene> <item>
 ```
 
 ### Labels
 
-Change a FreeType text label:
+Change a text label:
 
 ```
-obs-cli label text <label> <text>
+obsgod label text <label> <text>
 ```
 
 Trigger a countdown and continuously update a label with the remaining time:
 
 ```
-obs-cli label countdown <label> <duration>
+obsgod label countdown <label> <duration>
 ```
 
 ### Sources
@@ -178,13 +192,13 @@ obs-cli label countdown <label> <duration>
 List special sources:
 
 ```
-obs-cli source list
+obsgod source list
 ```
 
 Toggle mute status of a source:
 
 ```
-obs-cli source toggle-mute <source>
+obsgod source toggle-mute <source>
 ```
 
 ### Studio Mode
@@ -192,21 +206,21 @@ obs-cli source toggle-mute <source>
 Enable or disable Studio Mode:
 
 ```
-obs-cli studiomode enable
-obs-cli studiomode disable
-obs-cli studiomode toggle
+obsgod studiomode enable
+obsgod studiomode disable
+obsgod studiomode toggle
 ```
 
 Display studio mode status:
 
 ```
-obs-cli studiomode status
+obsgod studiomode status
 ```
 
 Transition to program (when the studio mode is enabled):
 
 ```
-obs-cli studiomode transition
+obsgod studiomode transition
 ```
 
 ### Profiles
@@ -214,19 +228,19 @@ obs-cli studiomode transition
 List all profiles:
 
 ```
-obs-cli profile list
+obsgod profile list
 ```
 
 Show the current profile:
 
 ```
-obs-cli profile get
+obsgod profile get
 ```
 
 Switch to a profile:
 
 ```
-obs-cli profile set <profile>
+obsgod profile set <profile>
 ```
 
 ### Replay Buffer
@@ -234,20 +248,20 @@ obs-cli profile set <profile>
 Change the replay buffer state:
 
 ```
-obs-cli replaybuffer start
-obs-cli replaybuffer stop
+obsgod replaybuffer start
+obsgod replaybuffer stop
 ```
 
 Save the replay buffer:
 
 ```
-obs-cli replaybuffer save
+obsgod replaybuffer save
 ```
 
 Display replay buffer status:
 
 ```
-obs-cli replaybuffer status
+obsgod replaybuffer status
 ```
 
 ### Virtual Camera
@@ -255,13 +269,13 @@ obs-cli replaybuffer status
 Change the virtual camera state:
 
 ```
-obs-cli virtualcam start
-obs-cli virtualcam stop
-obs-cli virtualcam toggle
+obsgod virtualcam start
+obsgod virtualcam stop
+obsgod virtualcam toggle
 ```
 
 Display virtual camera status:
 
 ```
-obs-cli virtualcam status
+obsgod virtualcam status
 ```

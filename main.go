@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/andreykaipov/goobs"
 	"github.com/muesli/coral"
@@ -16,8 +17,8 @@ var (
 	version  string
 
 	rootCmd = &coral.Command{
-		Use:   "obs-cli",
-		Short: "obs-cli is a command-line remote control for OBS",
+		Use:   "obsgod",
+		Short: "obsgod is a command-line remote control for OBS",
 	}
 
 	client *goobs.Client
@@ -34,15 +35,32 @@ func main() {
 	}
 }
 
+func envOrDefault(key, def string) string {
+	if v := os.Getenv(key); v != "" {
+		return v
+	}
+	return def
+}
+
 func init() {
 	coral.OnInitialize(connectOBS)
-	rootCmd.PersistentFlags().StringVar(&host, "host", "localhost", "host to connect to")
-	rootCmd.PersistentFlags().StringVar(&password, "password", "", "password for connection")
-	rootCmd.PersistentFlags().Uint32VarP(&port, "port", "p", 4444, "port to connect to")
+
+	defaultHost := envOrDefault("OBS_HOST", "localhost")
+	defaultPassword := os.Getenv("OBS_PASSWORD")
+	defaultPort := uint32(4455)
+	if v := os.Getenv("OBS_PORT"); v != "" {
+		if n, err := strconv.ParseUint(v, 10, 32); err == nil {
+			defaultPort = uint32(n)
+		}
+	}
+
+	rootCmd.PersistentFlags().StringVar(&host, "host", defaultHost, "OBS host to connect to (env: OBS_HOST)")
+	rootCmd.PersistentFlags().StringVar(&password, "password", defaultPassword, "OBS password (env: OBS_PASSWORD)")
+	rootCmd.PersistentFlags().Uint32VarP(&port, "port", "p", defaultPort, "OBS port to connect to (env: OBS_PORT)")
 }
 
 func getUserAgent() string {
-	userAgent := "obs-cli"
+	userAgent := "obsgod"
 	if version != "" {
 		userAgent += "/" + version
 	}
