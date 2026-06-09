@@ -45,6 +45,17 @@ export OBS_PASSWORD=mysecret
 obsgod stream status
 ```
 
+## Architecture
+
+The CLI now uses a small internal package layout to keep command construction, configuration, and OBS integration separate:
+
+- `internal/config`: shared OBS connection settings
+- `internal/commands`: CLI command tree and command orchestration
+- `internal/obs`: lazy OBS service abstraction over obs-websocket
+- `internal/version`: binary naming and version helpers
+
+Dependency flow is `main -> config + obs service -> commands`. The OBS websocket connection is created lazily, so `obsgod --help` and `obsgod --version` work even when OBS is offline. See [`docs/architecture.md`](docs/architecture.md) for package responsibilities and lifecycle details.
+
 ## Usage
 
 All commands support the following flags:
