@@ -19,7 +19,7 @@ var (
 		Use:   "toggle",
 		Short: "Toggle virtual camera status",
 		RunE: func(cmd *coral.Command, args []string) error {
-			return starStopVirtualCam()
+			return startStopVirtualCam()
 		},
 	}
 
@@ -48,33 +48,28 @@ var (
 	}
 )
 
-func starStopVirtualCam() error {
-	_, err := client.VirtualCam.StartStopVirtualCam()
+func startStopVirtualCam() error {
+	_, err := client.Outputs.ToggleVirtualCam()
 	return err
 }
 
 func startVirtualCam() error {
-	_, err := client.VirtualCam.StartVirtualCam()
+	_, err := client.Outputs.StartVirtualCam()
 	return err
 }
 
 func stopVirtualCam() error {
-	_, err := client.VirtualCam.StopVirtualCam()
+	_, err := client.Outputs.StopVirtualCam()
 	return err
 }
 
 func virtualCamStatus() error {
-	r, err := client.VirtualCam.GetVirtualCamStatus()
+	r, err := client.Outputs.GetVirtualCamStatus()
 	if err != nil {
 		return err
 	}
 
-	fmt.Printf("Virtual camera: %s\n", strconv.FormatBool(r.IsVirtualCam))
-	if !r.IsVirtualCam {
-		return nil
-	}
-
-	fmt.Printf("Timecode: %s\n", r.VirtualCamTimecode)
+	fmt.Printf("Virtual camera: %s\n", strconv.FormatBool(r.OutputActive))
 	return nil
 }
 
