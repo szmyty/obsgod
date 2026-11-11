@@ -14,3 +14,12 @@ test("unknown never looks stopped; offline and setup are distinct",()=>{
   assert.equal(health({ok:true,state:"stopped",stream:{active:false}},0,0).label,"Stopped");
   assert.equal(health({ok:true,state:"setup"},0,0).label,"Setup required");
 });
+test("unconfirmed or blank capture cannot show healthy green",()=>{
+  const live={ok:true,state:"streaming",output_known:true,stream:{active:true,bytes:4096}};
+  assert.equal(health({...live,output_known:false},1000,1100).live,false);
+  assert.equal(health({...live,frames:"blank"},1000,1100).label,"Check capture");
+  assert.equal(health({...live,frames:"unknown"},1000,1100).live,false);
+  assert.equal(health({...live,frames:"visible"},1000,1100).live,true);
+  assert.equal(health({...live,frames:"visible",capture:"unavailable"},1000,1100).live,false);
+  assert.equal(health({ok:true,state:"stopped",recording:true},0,0).label,"Recording locally");
+});

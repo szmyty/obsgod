@@ -56,11 +56,17 @@ def main():
                 console.get_by_text("No diagnostic events yet.",exact=False).wait_for()
                 assert page.get_by_role("button",name="Copy console log").is_disabled()
                 assert page.get_by_role("button",name="Refresh status").bounding_box()["y"] < console.bounding_box()["y"]
+                assert page.get_by_role("button",name="Stop streaming",exact=True).is_disabled()
                 page.screenshot(path=str(args.screenshots / "panel-stopped.png"))
-                page.get_by_role("button", name="Start streaming", exact=True).click()
+                # Rapid clicks must produce one request even before React paints
+                # the disabled state. The success toast comes from a status poll.
+                page.get_by_role("button",name="Start streaming",exact=True).evaluate("button=>{button.click();button.click();button.click();}")
                 page.get_by_role("status").filter(has_text="OBS streaming").wait_for()
                 page.get_by_role("img", name="OBS streaming").wait_for()
                 console.get_by_text("Streaming fixture started",exact=False).wait_for()
+                assert page.evaluate("fixture.calls.start") == 1
+                assert page.get_by_role("button",name="Start streaming",exact=True).is_disabled()
+                assert page.evaluate("fixture.toasts.filter(t=>t.body.includes('OBS is streaming.')).length") == 1
                 page.get_by_role("button",name="Copy console log").click()
                 page.get_by_text("Copied 1 diagnostic event.",exact=False).wait_for()
                 assert "Streaming fixture started" in page.evaluate("navigator.clipboard.readText()")
@@ -75,11 +81,15 @@ def main():
                 page.get_by_role("button", name="Refresh status").click()
                 page.get_by_role("status").filter(has_text="Check OBS").wait_for()
                 page.screenshot(path=str(args.screenshots / "panel-unconfirmed.png"))
-                page.get_by_role("button", name="Stop streaming / cancel").click()
+                page.get_by_role("button", name="Stop streaming / recover").click()
                 page.get_by_role("status").filter(has_text="Stopped").wait_for()
+                assert page.get_by_role("button",name="Stop streaming",exact=True).is_disabled()
+                assert page.evaluate("fixture.calls.stop") == 1
+                assert page.evaluate("fixture.toasts.filter(t=>t.body.includes('streaming has stopped')).length") == 1
                 page.get_by_role("button", name="Make 10-second test clip").click()
                 console.get_by_text("Waiting for fixture OBS",exact=False).wait_for()
                 assert page.get_by_role("button",name="Make 10-second test clip").is_disabled()
+                assert page.get_by_role("button",name="Cancel operation").is_enabled()
                 page.get_by_role("status").filter(has_text="Stopped").wait_for()
                 page.evaluate("fixture.finishTest()")
                 console.get_by_text("Local fixture clip saved", exact=False).wait_for()
@@ -120,10 +130,15 @@ def main():
                 page.get_by_role("log").get_by_text("History event 14",exact=False).wait_for()
                 assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
                 page.screenshot(path=str(args.screenshots / "panel-console.png"),full_page=True)
+                page.get_by_role("button",name="Check for updates",exact=True).click()
+                page.get_by_text("A preview update is available.",exact=False).wait_for()
+                assert page.evaluate("fixture.calls.check_for_updates") == 1
+                assert not page.evaluate("fixture.active")
+                assert page.get_by_role("button",name="Check for updates",exact=True).bounding_box()["y"] > console.bounding_box()["y"]
                 page.evaluate("plugin.onDismount()")
                 assert not errors, errors
                 browser.close()
-            print("PASS: release ZIP frontend; colors/lifecycle, pending progress, full timeout, history paging/clear/reload; actual clipboard copies all history and version, excludes settings, works during streaming, legacy fallback preserves focus and denial reports failure. Real controller/Decky runtime untested.")
+            print("PASS: release ZIP frontend; automatic polls/confirmed transition toasts, duplicate Start coalescing, idle Stop disabled, pending Cancel, check-only updates, colors/lifecycle, full timeout, history paging/clear/reload; actual clipboard copies all history and version, excludes settings, works during streaming, legacy fallback preserves focus and denial reports failure. Real controller/Decky runtime untested.")
         finally:
             server.shutdown()
             server.server_close()
