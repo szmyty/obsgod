@@ -2,6 +2,7 @@
 # Run inside obs-smoke.Dockerfile as uid 1000, with /src and writable /work.
 # This is synthetic Linux OBS qualification, never Steam Deck hardware evidence.
 set -euo pipefail
+ulimit -c 0
 test -f /.dockerenv || { echo 'Run this harness only in its disposable Docker container.' >&2; exit 2; }
 # Every run gets a fresh fixture; persistent PulseAudio/Wayland socket and pid
 # files from a previous container must not impersonate a running daemon.
@@ -29,7 +30,10 @@ pactl load-module module-null-sink sink_name=obsgod_test >/dev/null
 pactl set-default-sink obsgod_test
 (
   while true; do
-    gst-launch-1.0 -q videotestsrc is-live=true pattern=ball ! video/x-raw,width=1280,height=800,framerate=30/1 ! pipewiresink mode=provide 'stream-properties=props,node.name=gamescope,media.class=Video/Source' >>/work/video-producer.log 2>&1 || true
+    # GStreamer 1.26's synthetic PipeWire sink can fault on consumer teardown.
+    # Disable its debugger spin so this disposable fixture actually exits and
+    # the supervisor can restart it. Gamescope itself is not this gst process.
+    gst-launch-1.0 --no-fault -q videotestsrc is-live=true pattern=ball ! video/x-raw,width=1280,height=800,framerate=30/1 ! pipewiresink mode=provide 'stream-properties=props,node.name=gamescope,media.class=Video/Source' >>/work/video-producer.log 2>&1 || true
     sleep .2
   done
 ) &

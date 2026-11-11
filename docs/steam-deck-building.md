@@ -79,6 +79,10 @@ WebSocket authentication, GStreamer, PipeWire, PulseAudio, x264/AAC, recording a
 loopback RTMP. A synthetic moving-video producer stands in for Gamescope and
 restarts after consumer disconnects. This does not test Flatpak sandbox behavior,
 SteamOS session changes, AMD hardware encoding, actual game capture or Kick.
+The fixture disables gst-launch's debugger spin: its GStreamer 1.26 PipeWire sink
+can fault during consumer teardown, and must exit so the supervisor can restart
+it. A previous run exposed this fixture failure; OBSGod's rendered-frame gate
+correctly refused to broadcast the blank feed. This is not a Gamescope repair.
 
 The output directory contains redacted command results, media probes, rendered
 pixels/frame hashes and audio measurements. It also tests start failure with no
