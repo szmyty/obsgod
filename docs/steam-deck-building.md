@@ -105,6 +105,9 @@ archive without rebuilding or relabeling that streaming runtime:
 go test -race ./...
 python3 -m unittest discover -s steamdeck/tests -p 'test_*.py' -v
 python3 scripts/package-updater.py
+python3 steamdeck/tests/updater-smoke.py dist/obsgod-one-click-update_0.1.0-deck.4-updater.1_linux_amd64.zip \
+  --upstream /path/to/pinned-decky-sources \
+  --previous-archive /path/to/obsgod-deck_0.1.0-deck.1_linux_amd64.tar.gz
 ```
 
 Its own source revision and file hashes are recorded in its updater manifest.
@@ -117,6 +120,16 @@ the helper validates the ZIP identity/paths/hash before any installation request
 It confirms only the matching OBSGod request and then verifies the installed
 enabled version. Keep other Steam/Decky clients closed during this Desktop update
 because Decky's router supports a single frontend connection.
+
+The fixture directory must contain `browser.py`, `helpers.py` and `wsrouter.py`
+from `backend/decky_loader/` at Decky 3.3.1 revision
+`ffd103b9c1a4ce5bf305e7c0998eda6e05457dad`. The harness verifies their Git blob
+hashes before importing them. Fetch these GPL test inputs outside the product
+tree; the updater does not bundle or modify Decky Loader. The test uses fixture
+credentials, a temporary home, unrelated test plugins and a local service on
+127.0.0.1:1337. It runs the extracted desktop entry twice and verifies app/plugin
+replacement, preserved settings/key/media/OBS files, private backups, plugin
+order and repeatability. It does not contact an external streaming service.
 
 Publish the exact clean revision and verified artifacts as a **prerelease** until
 the [Steam Deck acceptance checklist](steam-deck.md#acceptance-on-your-deck) has

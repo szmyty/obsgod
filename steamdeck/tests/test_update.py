@@ -59,6 +59,12 @@ class UpdateSafety(unittest.TestCase):
         self.assertEqual(sentinel.read_bytes(), b"old installation")
         self.assertFalse(list(self.base.glob(".update-*")))
 
+    def test_download_rejects_bytes_that_do_not_match_pinned_digest(self):
+        destination = self.home / "payload.tar.gz"
+        with patch.object(updater.urllib.request, "urlopen", return_value=io.BytesIO(b"corrupted download")):
+            with self.assertRaisesRegex(updater.UpdateError, "checksum mismatch"):
+                updater.download_payload(destination)
+
     def test_unsafe_archive_paths_and_links_are_refused_before_extraction(self):
         for name, kind in [("../outside", tarfile.REGTYPE), ("OBSGod-" + updater.VERSION + "/../../outside", tarfile.REGTYPE), ("OBSGod-" + updater.VERSION + "/link", tarfile.SYMTYPE)]:
             archive = self.home / "payload.tar"
