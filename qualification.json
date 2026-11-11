@@ -1,0 +1,83 @@
+{
+  "artifacts": {
+    "manifest.json": "f495d743742321ff9a2c00c568385b12ed17e3e465ef1eee0f3af78deb8a5e3d",
+    "obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz": "c584c04ed3c79a01f1b846adc4f8bbe86c8132a4bca2cf6ba60cc557eba39ce1",
+    "obsgod-decky.zip": "3eec780691c0d9d62ba286bfe946ae64ceda2124339e1e2f9314fb89ac8cae54"
+  },
+  "checks": [
+    {
+      "command": "python3 scripts/package-deck.py",
+      "outcome": "passed",
+      "scope": "Pinned Go build, Decky typecheck/build, current clean revision packaged"
+    },
+    {
+      "command": "npm --prefix steamdeck/decky test",
+      "outcome": "passed",
+      "test_cases": 2
+    },
+    {
+      "command": "python3 steamdeck/tests/browser-panel.py dist/obsgod-decky.zip --screenshots /workspace/.obsgod-tools/deck4-panel",
+      "outcome": "passed",
+      "scope": "Actual ZIP in simulated Steam/Decky host; real Chromium clipboard writes/readback; all retained history across hidden pages, version/UTC timestamps/newest-first order, settings/key exclusion, no streaming-state change, legacy fallback with sentinel clipboard replacement and focus restoration, denied-clipboard failure, plus existing console/lifecycle/timeout/reload checks"
+    },
+    {
+      "command": "python3 scripts/package-deck.py (twice); cmp dist/SHA256SUMS /workspace/.obsgod-tools/deck4-first-SHA256SUMS",
+      "outcome": "passed",
+      "scope": "Byte-identical archive, ZIP and manifest"
+    },
+    {
+      "command": "git diff --quiet 32160e1 HEAD -- main.go internal pkg go.mod go.sum steamdeck/decky/main.py steamdeck/install.py steamdeck/bridge.py steamdeck/setup.py steamdeck/uninstall.py",
+      "outcome": "passed",
+      "scope": "Go runtime, Python backend and Desktop installer/setup unchanged from preview 3"
+    },
+    {
+      "command": "git diff --check",
+      "outcome": "passed"
+    },
+    {
+      "check": "Full Go/race/vet/vulnerability, Python installer/security, native OBS recording/RTMP and cross-platform matrix for preview 4 binary",
+      "outcome": "unrun",
+      "reason": "Frontend-only addition with no runtime/backend/installer/dependency changes. Previous exact-source preview-3 evidence is linked separately and not relabeled as a preview-4 run."
+    },
+    {
+      "check": "Real Steam Deck/SteamOS/Flatpak/Gamescope/VAAPI/controller and Steam clipboard integration",
+      "outcome": "unavailable",
+      "reason": "No device access in cloud. Browser clipboard/focus checks are not real Steam/controller qualification."
+    },
+    {
+      "check": "Kick viewer and resolution of the user-reported OBS readiness timeout",
+      "outcome": "unrun",
+      "reason": "Need user device console evidence. Timeout still occurs with a game open; this update adds copying and does not repair that unproven failure."
+    },
+    {
+      "check": "GitHub CI",
+      "outcome": "unavailable",
+      "reason": "No branch check receipts reported; local checks are not CI evidence."
+    }
+  ],
+  "classification": "Frontend-only copy-console update",
+  "generated_at_utc": "2026-11-11T16:41:02.164009+00:00",
+  "intermediate_failure": {
+    "check": "Actual ZIP clipboard fallback focus check",
+    "outcome": "failed",
+    "resolution": "The busy button had been disabled, losing focus before fallback. Final source keeps it enabled while a guarded handler prevents duplicate copying; actual fallback focus and clipboard replacement checks now pass.",
+    "revision": "c7ebd6508e1ece54ce642bffbb008a8b6fe628af"
+  },
+  "platform": {
+    "chromium": "151.0.7922.173",
+    "go": "1.27.4",
+    "host": "Debian GNU/Linux 13.6, Linux 6.18.57 x86_64",
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "playwright": "1.62.0",
+    "python": "3.12.14"
+  },
+  "previous_exact_source_evidence": "https://raw.githubusercontent.com/szmyty/obsgod/6082fe686c4eb474b9f8850d777e6bbc7544ce3c/qualification.json",
+  "previous_runtime_revision": "32160e1f54f074df178add393b605ff8f89dad51",
+  "publication_transport": "Immutable artifact-only orphan branch in this repository; native release-upload authentication was rejected for earlier previews and was not retried.",
+  "release": "v0.1.0-deck.4",
+  "review": "Draft PR #15 remains open. No merge, issue closure, deployment or paid resource. Automatic Decky installation deferred.",
+  "revision": "55c03dd4160e6f6b517e778cf99a755801eb0a28",
+  "schema_version": 1,
+  "update": "Replace only the Decky ZIP to obtain the copy button. Existing Desktop installation, settings and credentials remain usable. Full archive also provided for fresh installs."
+}

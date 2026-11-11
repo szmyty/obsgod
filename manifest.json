@@ -1,0 +1,20 @@
+{
+  "dirty": false,
+  "files": {
+    "LICENSE": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af",
+    "STEAM-DECK.md": "0c4bf94fb18a6d67fffc2545c8a7a295dcfef6a2f4133a2e7d60bd1f1b9e5dc7",
+    "THIRD_PARTY_NOTICES.md": "910c23b70e51d74ebd04bf57daaba544426043cfef04eadbbbe7649c11f0ba34",
+    "bridge.py": "c832865a66654d9180f7b154d4a8b8a3896af5be48677ee2a9eea599429249e5",
+    "obsgod": "433b42528baf044adc47f207804915737d4b8758f85929c7ed2044351c78b0ca",
+    "obsgod-decky.zip": "3eec780691c0d9d62ba286bfe946ae64ceda2124339e1e2f9314fb89ac8cae54",
+    "setup.css": "bd4e03527ec3a1e72d126e1690bb30a1296ae70dde99bbfa80cb79f1c5e87396",
+    "setup.html": "3d68835f79fd1fb8844062b71a11d8f508c9ffbfe98814dc07b363693e61e58e",
+    "setup.js": "ed8362fbf64091bde48ffbe8bed04c0c0c712cdb0e64afc886665c1e1b4aa0d3",
+    "setup.py": "2befe28d3233e34855c4f9a518d531eb6bad81caad48bb82436edf782a801069",
+    "uninstall.py": "90741db6073e2ba4444c65b60cd91513af3e3e64e27989ba3925b287bbd30e70"
+  },
+  "go": "go1.27.4",
+  "platform": "linux/amd64",
+  "revision": "55c03dd4160e6f6b517e778cf99a755801eb0a28",
+  "version": "0.1.0-deck.4"
+}
