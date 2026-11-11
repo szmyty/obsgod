@@ -6,7 +6,7 @@ import io
 import json
 import os
 from pathlib import Path
-import subprocess
+import shutil
 import tarfile
 import tempfile
 import unittest
@@ -30,43 +30,57 @@ class UpdateSafety(unittest.TestCase):
         self.env.stop()
         self.temp.cleanup()
 
-    def test_bundle_checksum_and_symlink_validation_before_helper_execution(self):
+    def fixture(self):
+        version = "0.1.0-deck.5"
+        files = {name: b"verified fixture" for name in ["obsgod", "install.py", "bridge.py", "decky.py", "decky-install", "update.py", "releases.py", "obsgod-decky.zip"]}
+        manifest = {"version": version, "revision": "1" * 40, "platform": "linux/amd64", "dirty": False, "updater_version": version, "files": {name: hashlib.sha256(data).hexdigest() for name, data in files.items()}}
+        files["manifest.json"] = json.dumps(manifest).encode()
+        candidate = {"version": version, "revision": manifest["revision"], "manifest": manifest, "manifest_sha256": hashlib.sha256(files["manifest.json"]).hexdigest()}
+        release = Mock()
+        release.inspect_updates.return_value = ({"ok": True, "available": True}, candidate)
+
+        def download(_candidate, destination):
+            with tarfile.open(destination, "w:gz") as archive:
+                for name, data in files.items():
+                    member = tarfile.TarInfo("OBSGod-" + version + "/" + name)
+                    member.size = len(data)
+                    archive.addfile(member, io.BytesIO(data))
+        release.download_archive.side_effect = download
+        return release, candidate, files
+
+    def test_bundle_checksum_and_symlink_validation_before_download(self):
         package = self.home / "updater"
         package.mkdir()
-        files = {name: b"fixture" for name in ["update.py", "decky-install", "Update OBSGod.desktop", "Update OBSGod.sh", "LICENSE", "THIRD_PARTY_NOTICES.md"]}
+        files = {name: b"fixture" for name in ["update.py", "releases.py", "Update OBSGod.desktop", "Update OBSGod.sh", "decky-install"]}
         for name, content in files.items():
             (package / name).write_bytes(content)
-        (package / "manifest.json").write_text(json.dumps({"target_version": updater.VERSION, "files": {name: hashlib.sha256(content).hexdigest() for name, content in files.items()}}))
+        (package / "manifest.json").write_text(json.dumps({"platform": "linux/amd64", "files": {name: hashlib.sha256(content).hexdigest() for name, content in files.items()}}))
         with patch.object(updater, "ROOT", package):
             updater.verify_bundle()
-            self.assertTrue(os.access(package / "decky-install", os.X_OK))
             (package / "decky-install").write_bytes(b"changed")
             with self.assertRaisesRegex(updater.UpdateError, "checksum"):
                 updater.verify_bundle()
             (package / "decky-install").unlink()
-            (package / "decky-install").symlink_to(package / "LICENSE")
+            (package / "decky-install").symlink_to(package / "update.py")
             with self.assertRaisesRegex(updater.UpdateError, "checksum"):
                 updater.verify_bundle()
 
-    def test_download_failure_keeps_existing_installation(self):
+    def test_download_failure_preserves_current_install_and_has_recovery_record(self):
+        release, _, _ = self.fixture()
+        release.download_archive.side_effect = RuntimeError("download failed")
         self.base.mkdir(parents=True)
         sentinel = self.base / "keep"
         sentinel.write_bytes(b"old installation")
-        with patch.object(updater, "verify_bundle"), patch.object(updater, "check_decky"), patch.object(updater, "download_payload", side_effect=updater.UpdateError("checksum mismatch")), patch.object(updater, "close_managed_obs") as close:
-            with contextlib.redirect_stdout(io.StringIO()), self.assertRaisesRegex(updater.UpdateError, "checksum"):
+        with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release), patch.object(updater, "load_module") as load:
+            with contextlib.redirect_stdout(io.StringIO()), self.assertRaisesRegex(RuntimeError, "download failed"):
                 updater.run_update()
-        close.assert_not_called()
+        load.assert_not_called()
         self.assertEqual(sentinel.read_bytes(), b"old installation")
         self.assertFalse(list(self.base.glob(".update-*")))
+        self.assertEqual(json.loads((self.base / "update-status.json").read_text())["state"], "interrupted-or-failed")
 
-    def test_download_rejects_bytes_that_do_not_match_pinned_digest(self):
-        destination = self.home / "payload.tar.gz"
-        with patch.object(updater.urllib.request, "urlopen", return_value=io.BytesIO(b"corrupted download")):
-            with self.assertRaisesRegex(updater.UpdateError, "checksum mismatch"):
-                updater.download_payload(destination)
-
-    def test_unsafe_archive_paths_and_links_are_refused_before_extraction(self):
-        for name, kind in [("../outside", tarfile.REGTYPE), ("OBSGod-" + updater.VERSION + "/../../outside", tarfile.REGTYPE), ("OBSGod-" + updater.VERSION + "/link", tarfile.SYMTYPE)]:
+    def test_unsafe_archive_paths_and_links_refused_before_extraction(self):
+        for name, kind in [("../outside", tarfile.REGTYPE), ("OBSGod-0.1.0-deck.5/../../outside", tarfile.REGTYPE), ("OBSGod-0.1.0-deck.5/link", tarfile.SYMTYPE)]:
             archive = self.home / "payload.tar"
             with tarfile.open(archive, "w") as output:
                 member = tarfile.TarInfo(name)
@@ -76,56 +90,119 @@ class UpdateSafety(unittest.TestCase):
             destination = self.home / "extract"
             destination.mkdir(exist_ok=True)
             with self.assertRaisesRegex(updater.UpdateError, "Unsafe"):
-                updater.unpack_payload(archive, destination)
+                updater.unpack_payload(archive, destination, "0.1.0-deck.5")
             self.assertEqual(list(destination.iterdir()), [])
             self.assertFalse((self.home / "outside").exists())
 
-    def test_unknown_output_and_active_recording_are_never_force_killed(self):
-        bridge = Mock()
-        bridge.run_cli.side_effect = [{"ok": False, "state": "unknown", "configured": True}, {"ok": False, "message": "OBS output cannot be confirmed"}]
-        with self.assertRaisesRegex(updater.UpdateError, "Could not confirm OBS stopped"):
-            updater.close_managed_obs(bridge)
-        self.assertEqual([call.args[0] for call in bridge.run_cli.call_args_list], ["status", "stop"])
-        bridge.reset_mock()
-        bridge.run_cli.side_effect = [{"ok": True, "state": "stopped", "configured": True}, {"ok": False, "message": "stop streaming and recording before restarting OBSGod"}]
-        with self.assertRaisesRegex(updater.UpdateError, "Stop any recording"):
-            updater.close_managed_obs(bridge)
-        self.assertEqual([call.args[0] for call in bridge.run_cli.call_args_list], ["status", "restart"])
+    def test_unknown_starting_active_and_recording_output_never_stopped_by_updater(self):
+        for state in [{"ok": False, "state": "unknown"}, {"ok": True, "state": "starting"}, {"ok": True, "state": "streaming", "stream": {"active": True}}, {"ok": True, "state": "stopped", "recording": True}, {"ok": True, "state": "stopped", "output_known": False}, {"ok": True, "state": "stopped", "operation": "start"}]:
+            bridge = Mock()
+            bridge.run_cli.return_value = state
+            with self.assertRaisesRegex(updater.UpdateError, "Update blocked"):
+                updater.require_idle(bridge)
+            self.assertEqual([call.args[0] for call in bridge.run_cli.call_args_list], ["status"])
 
-    def test_existing_dependencies_do_not_change_remotes_or_reinstall(self):
-        with patch.object(updater.shutil, "which", return_value="/usr/bin/flatpak"), patch.object(updater.subprocess, "run", return_value=Mock(returncode=0)) as run:
-            updater.ensure_dependencies()
-        self.assertEqual(len(run.call_args_list), 2)
-        for call in run.call_args_list:
-            self.assertEqual(call.args[0][:3], ["flatpak", "info", "--user"])
+    def test_no_update_does_not_download_install_or_downgrade(self):
+        release, candidate, _ = self.fixture()
+        release.inspect_updates.return_value = ({"ok": True, "available": False, "message": "No newer runtime"}, candidate)
+        with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release), patch.object(updater, "load_module") as load:
+            with contextlib.redirect_stdout(io.StringIO()):
+                message = updater.run_update()
+        release.download_archive.assert_not_called()
+        load.assert_not_called()
+        self.assertIn("Nothing was replaced", message)
+        self.assertFalse((self.base / "update-status.json").exists())
 
-    def test_settings_backup_is_private_and_originals_are_unchanged(self):
+    def test_historical_app_only_installer_is_not_misreported_as_unified_success(self):
+        release, candidate, _ = self.fixture()
+        del candidate["manifest"]["files"]["decky.py"]
+        with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release):
+            with contextlib.redirect_stdout(io.StringIO()), self.assertRaisesRegex(updater.UpdateError, "historical runtime"):
+                updater.run_update()
+        release.download_archive.assert_not_called()
+
+    def test_tampered_payload_stops_before_any_downloaded_code_is_imported(self):
+        release, candidate, files = self.fixture()
+        files["install.py"] = b"tampered installer"
+        with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release), patch.object(updater, "load_module") as load:
+            with contextlib.redirect_stdout(io.StringIO()), self.assertRaisesRegex(updater.UpdateError, "checksum"):
+                updater.run_update()
+        load.assert_not_called()
+
+    def test_unified_install_invoked_once_with_key_preservation_and_final_revision_check(self):
+        release, candidate, files = self.fixture()
         config = self.home / ".config/obsgod"
         config.mkdir(parents=True)
         for name in ["deck.json", "secrets.json"]:
             (config / name).write_bytes(b"fixture-never-real")
-        updater.backup_settings(self.base, self.home)
-        for name in ["deck.json", "secrets.json"]:
-            self.assertEqual((config / name).read_bytes(), b"fixture-never-real")
-            copies = list((self.base / "backups").glob("*/" + name))
-            self.assertEqual(len(copies), 1)
-            self.assertEqual(copies[0].stat().st_mode & 0o777, 0o600)
+        media = self.home / "Videos/OBSGod/keep.mkv"
+        media.parent.mkdir(parents=True)
+        media.write_bytes(b"existing recording")
+        installer = Mock()
+        bridge = Mock()
+        bridge.run_cli.return_value = {"ok": True, "state": "stopped", "output_known": True, "recording": False}
 
-    def test_helper_invalid_output_does_not_echo_stderr_or_secrets(self):
-        with patch.object(updater.subprocess, "run", return_value=Mock(stdout="fixture-private-token", stderr="fixture-stream-key", returncode=1)):
-            with self.assertRaises(updater.UpdateError) as caught:
-                updater.replace_plugin(self.home)
-        self.assertNotIn("fixture-private-token", str(caught.exception))
-        self.assertNotIn("fixture-stream-key", str(caught.exception))
+        def install(launch):
+            self.assertFalse(launch)
+            target = self.base / "releases" / candidate["version"]
+            target.mkdir(parents=True)
+            for name, data in files.items():
+                (target / name).write_bytes(data)
+            (self.base / "current").symlink_to(target)
+            return self.base / "current"
+        installer.install.side_effect = install
+        with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release), patch.object(updater, "load_module", side_effect=lambda name, path: installer if name == "obsgod_payload_installer" else bridge):
+            with contextlib.redirect_stdout(io.StringIO()):
+                message = updater.run_update()
+        installer.verify_payload.assert_called_once()
+        installer.install.assert_called_once_with(launch=False)
+        self.assertIn(candidate["version"], message)
+        self.assertEqual(media.read_bytes(), b"existing recording")
+        self.assertEqual((config / "secrets.json").read_bytes(), b"fixture-never-real")
+        backup = list((self.base / "backups").glob("updater-*/secrets.json"))
+        self.assertEqual(len(backup), 1)
+        self.assertEqual(backup[0].stat().st_mode & 0o777, 0o600)
+        self.assertEqual(json.loads((self.base / "update-status.json").read_text())["state"], "complete")
+
+    def test_interruption_preserves_previous_activation_and_records_retry(self):
+        release, _, _ = self.fixture()
+        old = self.base / "releases/old"
+        old.mkdir(parents=True)
+        (old / "manifest.json").write_text(json.dumps({"version": "0.1.0-deck.4"}))
+        (self.base / "current").symlink_to(old)
+        installer = Mock()
+        installer.install.side_effect = KeyboardInterrupt()
+        bridge = Mock()
+        bridge.run_cli.return_value = {"ok": True, "state": "stopped", "output_known": True}
+        with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release), patch.object(updater, "load_module", side_effect=lambda name, path: installer if name == "obsgod_payload_installer" else bridge):
+            with contextlib.redirect_stdout(io.StringIO()), self.assertRaises(KeyboardInterrupt):
+                updater.run_update()
+        self.assertEqual((self.base / "current").resolve(), old)
+        self.assertEqual(json.loads((self.base / "update-status.json").read_text())["state"], "interrupted-or-failed")
+        self.assertFalse(list(self.base.glob(".update-*")))
 
     def test_concurrent_updater_stops_before_network_and_writes(self):
         self.base.mkdir(parents=True)
         with (self.base / "update.lock").open("w") as lock:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-            with patch.object(updater, "verify_bundle"), patch.object(updater, "check_decky") as check:
+            with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module") as release:
                 with self.assertRaisesRegex(updater.UpdateError, "Another OBSGod updater"):
                     updater.run_update()
-                check.assert_not_called()
+                release.return_value.inspect_updates.assert_not_called()
+
+    def test_settings_backup_private_and_symlinked_recovery_record_refused(self):
+        config = self.home / ".config/obsgod"
+        config.mkdir(parents=True)
+        (config / "secrets.json").write_bytes(b"fixture-never-real")
+        updater.backup_settings(self.base, self.home)
+        saved = next((self.base / "backups").glob("*/secrets.json"))
+        self.assertEqual(saved.stat().st_mode & 0o777, 0o600)
+        protected = self.home / "preserved"
+        protected.write_bytes(b"unchanged")
+        (self.base / "update-status.json").symlink_to(protected)
+        with self.assertRaisesRegex(updater.UpdateError, "unsafe"):
+            updater.save_progress(self.base, {"state": "downloading"})
+        self.assertEqual(protected.read_bytes(), b"unchanged")
 
 
 if __name__ == "__main__":
