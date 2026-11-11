@@ -1,0 +1,5 @@
+OBSGod v0.1.0-deck.3
+Source: 32160e1f54f074df178add393b605ff8f89dad51
+Platform: linux/amd64
+Go: 1.27.4; Node: 24.19.0; npm: 11.9.0; Python: 3.12.14
+Hardware preview; real SteamOS, VAAPI, controller and Kick acceptance pending.

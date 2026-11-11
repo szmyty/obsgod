@@ -1,0 +1,130 @@
+{
+  "artifacts": {
+    "manifest.json": "59875e0a16f04d55a68d752958fe78d1d05370f87b04cf1b6814d2bfb5f843ba",
+    "obsgod-deck_0.1.0-deck.3_linux_amd64.tar.gz": "87dc83d3e594168e6c0d665a9b7271471bbd1541017b2a181ee402cc90722fb8",
+    "obsgod-decky.zip": "f0e500222c077d3e09bd8cba727864cb3edeb6c7a772c391651e28c135cc09c3"
+  },
+  "automatic_decky_installation": "Deferred by user; Decky Loader remains separately installed. Replace OBSGod plugin using new ZIP.",
+  "changes": [
+    "Persistent private last-100-event diagnostic console beneath Refresh status, polled during operations; full fixed messages, paging, clear and plugin version",
+    "Only whitelisted event identifiers, timestamps and numeric OBS/launch codes stored; no arbitrary errors, settings, stream URLs, keys or raw subprocess logs",
+    "Report early OBS/Flatpak exit before generic startup timeout; detached OBS inherits real /dev/null descriptors instead of CLI-owned log pipes",
+    "Serialize installers; verify and stage immutable payload; activate current last, restore entry points on activation failure, preserve earlier releases/backups",
+    "Support upgrade, repeat install, same-version replacement and damaged/missing-manifest/permission repair while retaining settings, keys, media and diagnostics"
+  ],
+  "checks": [
+    {
+      "command": "go test -race -json ./...",
+      "outcome": "passed",
+      "passed_test_cases": 16,
+      "skip": "TestRealOBSReadOnly requires an explicitly supplied existing OBS instance; native harness below independently passed.",
+      "skipped_test_cases": 1
+    },
+    {
+      "command": "go vet ./...",
+      "outcome": "passed"
+    },
+    {
+      "command": "/workspace/.obsgod-tools/pkg/bin/govulncheck -json ./...",
+      "findings": 0,
+      "outcome": "passed",
+      "tool_version": "v1.9.0"
+    },
+    {
+      "command": "python3 -m unittest discover -s steamdeck/tests -p 'test_*.py' -v",
+      "outcome": "passed",
+      "scope": "HTTP security, cancellation, desktop startup, update/reinstall/repair, activation rollback, concurrent installers and symlink preservation",
+      "test_cases": 14
+    },
+    {
+      "command": "npm --prefix steamdeck/decky run typecheck; npm --prefix steamdeck/decky run build",
+      "execution": "Both run by package-deck.py",
+      "outcome": "passed"
+    },
+    {
+      "command": "npm --prefix steamdeck/decky test",
+      "outcome": "passed",
+      "test_cases": 2
+    },
+    {
+      "advisories": 0,
+      "command": "npm --prefix steamdeck/decky audit --json",
+      "outcome": "passed"
+    },
+    {
+      "command": "python3 steamdeck/tests/browser-panel.py dist/obsgod-decky.zip --screenshots /workspace/.obsgod-tools/deck3-panel",
+      "outcome": "passed",
+      "scope": "Actual ZIP native ESM imports in simulated Steam/Decky host, truthful colors, pending-operation progress, full timeout, history paging, clear without stop, reload"
+    },
+    {
+      "command": "python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.3_linux_amd64.tar.gz --screenshots /workspace/.obsgod-tools/deck3-setup",
+      "outcome": "passed",
+      "scope": "Actual desktop launcher/archive, clean home, browser configuration/reload, private credentials, terminal hold, repeat install and uninstall"
+    },
+    {
+      "command": "python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.3_linux_amd64.tar.gz --upgrade-from dist/obsgod-deck_0.1.0-deck.1_linux_amd64.tar.gz --screenshots /workspace/.obsgod-tools/deck3-upgrade",
+      "outcome": "passed",
+      "scope": "Install original published preview, configure fixture credentials, upgrade to actual preview 3 archive; settings, key, recording and isolated OBS preferences remain byte-identical"
+    },
+    {
+      "command": "env -u DOCKER_HOST -u DOCKER_CONTEXT -u DOCKER_TLS -u DOCKER_TLS_VERIFY -u DOCKER_CERT_PATH docker --host=unix:///var/run/docker.sock run --rm --name obsgod-deck3-smoke --user 1000:1000 --mount type=bind,src=/workspace/obsgod,dst=/src,readonly --mount type=bind,src=/workspace/.obsgod-tools/smoke,dst=/work obsgod-obs-smoke:local dbus-run-session -- bash /src/steamdeck/tests/native-obs-smoke.sh",
+      "image": "sha256:9ad9c28bfe007871956666f0df6c75b515b1f276531671e7a8402803a344f9d2",
+      "limitations": "Native OBS replaces Flatpak only in the disposable fixture; synthetic producer is not Gamescope. Its restart supervisor handles a known GStreamer fixture sink teardown fault.",
+      "outcome": "passed",
+      "scope": "Real OBS/GStreamer/PipeWire/PulseAudio, synthetic moving video and tone, x264/AAC 1280x720 local recording/local RTMP, nonblank/moving frames, audio content, repeated lifecycle, failed-start cleanup and no late connection"
+    },
+    {
+      "command": "python3 scripts/package-deck.py (twice); cmp dist/SHA256SUMS /workspace/.obsgod-tools/deck3-first-SHA256SUMS",
+      "outcome": "passed",
+      "scope": "Archive, plugin ZIP and manifest reproduce byte for byte"
+    },
+    {
+      "command": "desktop-file-validate 'steamdeck/Install OBSGod.desktop'; python3 -m py_compile steamdeck/*.py steamdeck/decky/main.py steamdeck/tests/*.py; gofmt -l <all repository Go files>; git diff --check",
+      "outcome": "passed"
+    },
+    {
+      "command": "CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build; CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build; CGO_ENABLED=0 GOOS=darwin GOARCH=arm64 go build",
+      "outcome": "passed",
+      "scope": "Builds only; resulting binaries were not executed"
+    },
+    {
+      "check": "Real Steam Deck / SteamOS / Flatpak sandbox / Gamescope / AMD VAAPI / hardware audio / controller focus / session lifecycle",
+      "outcome": "unavailable",
+      "reason": "Cloud has no access to the user device. Simulator/native checks do not establish hardware acceptance."
+    },
+    {
+      "check": "Kick viewer picture and sound",
+      "outcome": "unrun",
+      "reason": "Requires user-owned account and device; no real stream key or external broadcast used."
+    },
+    {
+      "command": "gh pr checks 15 --repo szmyty/obsgod; gh pr view 15 --repo szmyty/obsgod --json statusCheckRollup",
+      "observation": "No checks reported; statusCheckRollup is empty. Local receipts are not CI receipts.",
+      "outcome": "unavailable"
+    }
+  ],
+  "classification": "Steam Deck hardware preview: persistent diagnostics and recoverable updates",
+  "generated_at_utc": "2026-11-11T16:26:34.135185+00:00",
+  "platform": {
+    "chromium": "151.0.7922.173",
+    "docker": "28.4.0 / vfs",
+    "go": "1.27.4",
+    "gstreamer": "1.26.2-2",
+    "gstreamer_source_archive_sha256": "566d547e83140d53a0aa22ed152cebc436725b47e4ead452e79cf250da531268",
+    "gstreamer_source_revision": "b60942f8cd9d788c95ef7dee256f52e14bdf023e",
+    "host": "Debian GNU/Linux 13.6 x86_64, Linux 6.18.57",
+    "native_obs": "30.2.3+dfsg-3",
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "pipewire": "1.4.2-1",
+    "playwright": "1.62.0",
+    "pulseaudio": "17.0+dfsg1-2+b1",
+    "python": "3.12.14"
+  },
+  "publication_transport": "Files pinned in same-repository artifact-only orphan branch. Existing runtime credentials work for API/Git but native release-upload host rejected them for previous previews; this upload path was not retried for preview 3.",
+  "release": "v0.1.0-deck.3",
+  "review": "Draft PR #15; master remains d0268d13381b463f5950d202917f437a6288a3e4. No merge or issue closure. Broader v1 acceptance remains open.",
+  "revision": "32160e1f54f074df178add393b605ff8f89dad51",
+  "schema_version": 1,
+  "user_observation": "User reported timeout with incomplete notification, then confirmed no game was running. Original failure cause remains unproven. Next acceptance step is install both updated components, open a game in Gaming Mode and make a local clip; use console if it fails. A red streaming dot during a local clip is expected."
+}
