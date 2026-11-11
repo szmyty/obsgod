@@ -10,6 +10,8 @@ import (
 	"io"
 	"log"
 	"net"
+	"regexp"
+	"strconv"
 	"time"
 
 	"github.com/andreykaipov/goobs"
@@ -25,6 +27,19 @@ type Config struct {
 
 // Client owns one connection. Operations on a Client must be sequential.
 type Client struct{ obs *goobs.Client }
+
+// RequestError exposes a protocol status code without the server's free-form
+// comment or response body. Those fields are deliberately excluded.
+type RequestError struct {
+	Operation string
+	Code      int
+}
+
+func (e *RequestError) Error() string {
+	return fmt.Sprintf("OBS %s failed (code %d); check OBSGod diagnostics on the device", e.Operation, e.Code)
+}
+
+var statusCode = regexp.MustCompile(`\(([0-9]{3})\)`)
 
 // Connect establishes an authenticated connection with bounded readiness.
 func Connect(ctx context.Context, cfg Config) (*Client, error) {
@@ -83,7 +98,11 @@ func request[T any](ctx context.Context, name string, f func() (T, error)) (T, e
 		return zero, ctx.Err()
 	case r := <-ch:
 		if r.err != nil {
-			return zero, fmt.Errorf("OBS %s failed; check OBSGod diagnostics on the device", name)
+			code := 0
+			if match := statusCode.FindStringSubmatch(r.err.Error()); len(match) == 2 {
+				code, _ = strconv.Atoi(match[1])
+			}
+			return zero, &RequestError{Operation: name, Code: code}
 		}
 		return r.value, nil
 	}

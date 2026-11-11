@@ -1,2 +1,7 @@
 obs-cli
 dist/
+node_modules/
+__pycache__/
+*.pyc
+*.cov
+steamdeck/decky/dist/

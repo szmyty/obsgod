@@ -8,6 +8,7 @@ import (
 	"image"
 	_ "image/png"
 	"net"
+	"os"
 	"strings"
 	"time"
 
@@ -19,6 +20,8 @@ const IdleScene = "OBSGod Idle"
 const CaptureInput = "OBSGod Gamescope"
 const GameAudio = "OBSGod Game Audio"
 const MicAudio = "OBSGod Microphone"
+
+var errUnmanaged = errors.New("the OBS instance is not using the managed OBSGod profile; refusing to change it")
 
 // Do not request a fixed framerate from Gamescope: some versions crash their
 // PipeWire node during negotiation. OBS controls output framerate separately.
@@ -42,10 +45,16 @@ func connect(ctx context.Context, secret Secrets, timeout time.Duration) (*autom
 
 func Status(ctx context.Context, p Paths) Result {
 	s, secret, e := Load(p)
-	if e != nil {
-		return Result{OK: true, State: "setup", Message: e.Error()}
-	}
 	r := Result{OK: true, Configured: true, Settings: &s, State: "stopped", Message: "Not streaming"}
+	if e != nil {
+		r = Result{OK: true, State: "setup", Message: e.Error()}
+		// Corrupted/missing non-secret preferences must not hide an active stream
+		// or prevent the owner from stopping it.
+		secret, e = loadCredentials(p)
+		if e != nil {
+			return r
+		}
+	}
 	ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
 	defer cancel()
 	c, e := connect(ctx, secret, 600*time.Millisecond)
@@ -109,31 +118,45 @@ func Doctor(ctx context.Context, p Paths) Result {
 }
 
 func ready(ctx context.Context, p Paths, s Settings, secret Secrets) (*automation.Client, error) {
-	c, e := connect(ctx, secret, 700*time.Millisecond)
+	c, e := connect(ctx, secret, 5*time.Second)
 	if e == nil {
-		return verifyManaged(ctx, c)
-	}
-	// An occupied port with different credentials must not cause a second OBS.
-	conn, e := net.DialTimeout("tcp", "127.0.0.1:"+Port, 300*time.Millisecond)
-	if e == nil {
-		_ = conn.Close()
-		return nil, errors.New("port 4457 is already in use or OBSGod credentials do not match; stop the conflicting instance in Desktop Mode")
-	}
-	if len(managedProcesses(p)) == 0 {
-		if e := Prepare(p, s, secret); e != nil {
+		c, e = verifyManaged(ctx, c)
+		if e == nil {
+			return c, nil
+		}
+		if errors.Is(e, errUnmanaged) {
 			return nil, e
 		}
-		if e := launchOBS(p); e != nil {
-			return nil, e
+	} else {
+		// An occupied port with different credentials must not cause a second OBS.
+		conn, probeErr := net.DialTimeout("tcp", "127.0.0.1:"+Port, 300*time.Millisecond)
+		if probeErr == nil {
+			_ = conn.Close()
+			return nil, errors.New("port 4457 is already in use or OBSGod credentials do not match; stop the conflicting instance in Desktop Mode")
+		}
+		if len(managedProcesses(p)) == 0 {
+			if e := Prepare(p, s, secret); e != nil {
+				return nil, e
+			}
+			if e := launchOBS(p); e != nil {
+				return nil, e
+			}
 		}
 	}
 	for {
 		if e := wait(ctx, 500*time.Millisecond); e != nil {
 			return nil, errors.New("OBS did not become ready before the timeout; run Desktop setup diagnostics")
 		}
-		c, e = connect(ctx, secret, time.Second)
+		c, e = connect(ctx, secret, 5*time.Second)
 		if e == nil {
-			return verifyManaged(ctx, c)
+			// OBS can accept authentication before its frontend accepts requests.
+			c, e = verifyManaged(ctx, c)
+			if e == nil {
+				return c, nil
+			}
+			if errors.Is(e, errUnmanaged) {
+				return nil, e
+			}
 		}
 		if ctx.Err() != nil {
 			return nil, ctx.Err()
@@ -149,7 +172,7 @@ func verifyManaged(ctx context.Context, c *automation.Client) (*automation.Clien
 	}
 	if r.Profile != "OBSGod" {
 		_ = c.Close()
-		return nil, errors.New("the OBS instance is not using the managed OBSGod profile; refusing to change it")
+		return nil, errUnmanaged
 	}
 	return c, nil
 }
@@ -203,6 +226,10 @@ func NonblankCapture(data string) bool {
 	if e != nil {
 		return false
 	}
+	cfg, _, e := image.DecodeConfig(bytes.NewReader(b))
+	if e != nil || cfg.Width > 2048 || cfg.Height > 2048 {
+		return false
+	}
 	im, _, e := image.Decode(bytes.NewReader(b))
 	if e != nil || im.Bounds().Dx() < 16 || im.Bounds().Dy() < 16 {
 		return false
@@ -229,7 +256,9 @@ func NonblankCapture(data string) bool {
 
 func waitCapture(ctx context.Context, c *automation.Client) error {
 	for {
-		data, e := c.Screenshot(ctx, CaptureInput)
+		// Check the rendered program scene, including transforms. A source can
+		// have valid pixels while a mis-scaled/hidden scene still broadcasts black.
+		data, e := c.Screenshot(ctx, LiveScene)
 		if e == nil && NonblankCapture(data) {
 			return nil
 		}
@@ -247,9 +276,6 @@ func Start(ctx context.Context, p Paths) (Result, error) {
 	if e = checkDependencies(ctx); e != nil {
 		return Result{}, e
 	}
-	if !gamescopeReady(ctx) {
-		return Result{}, errors.New("switch to Gaming Mode and open a game first; the Gamescope capture feed is not available")
-	}
 	c, e := ready(ctx, p, s, secret)
 	if e != nil {
 		return Result{}, e
@@ -260,6 +286,9 @@ func Start(ctx context.Context, p Paths) (Result, error) {
 		return Result{}, e
 	}
 	if !state.Active {
+		if !gamescopeReady(ctx) {
+			return Result{}, errors.New("switch to Gaming Mode and open a game first; the Gamescope capture feed is not available")
+		}
 		if e = ensureCapture(ctx, c, s); e != nil {
 			return Result{}, e
 		}
@@ -292,7 +321,7 @@ func Start(ctx context.Context, p Paths) (Result, error) {
 }
 
 func Stop(ctx context.Context, p Paths) (Result, error) {
-	_, secret, e := Load(p)
+	secret, e := loadCredentials(p)
 	if e != nil {
 		return Result{}, e
 	}
@@ -368,7 +397,10 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 	if e != nil {
 		return Result{}, e
 	}
-	if e = c.StartRecording(ctx); e != nil {
+	recordCtx, recordCancel := context.WithTimeout(ctx, 15*time.Second)
+	e = c.StartRecording(recordCtx)
+	recordCancel()
+	if e != nil {
 		return Result{}, e
 	}
 	if e = wait(ctx, 10*time.Second); e != nil {
@@ -378,11 +410,14 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 	if e != nil {
 		return Result{}, e
 	}
+	if info, err := os.Stat(path); path == "" || err != nil || !info.Mode().IsRegular() || info.Size() == 0 {
+		return Result{}, errors.New("OBS did not produce a test recording; no successful clip can be confirmed")
+	}
 	return Result{OK: true, Configured: true, Connected: true, State: "stopped", Message: "Local test saved; watch it in Desktop Mode to check picture, game audio and microphone before broadcasting", RecordingPath: path}, nil
 }
 
 func Restart(ctx context.Context, p Paths) (Result, error) {
-	_, secret, e := Load(p)
+	secret, e := loadCredentials(p)
 	if e != nil {
 		return Result{}, e
 	}

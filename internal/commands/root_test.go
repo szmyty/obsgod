@@ -55,6 +55,21 @@ func TestVersionDoesNotConnectToOBS(t *testing.T) {
 	}
 }
 
+func TestHelpNeverPrintsConfiguredPassword(t *testing.T) {
+	cfg := config.Config{Host: "127.0.0.1", Port: 4455, Password: "secret-that-must-stay-private"}
+	service := obs.NewService(&cfg, "")
+	cmd := NewRoot(&cfg, service, "")
+	var out bytes.Buffer
+	cmd.SetOut(&out)
+	cmd.SetArgs([]string{"--help"})
+	if err := cmd.Execute(); err != nil {
+		t.Fatal(err)
+	}
+	if strings.Contains(out.String(), cfg.Password) {
+		t.Fatal("help leaked configured password")
+	}
+}
+
 func TestOperationalCommandConnectsLazily(t *testing.T) {
 	var dialCount int
 	service := obs.NewServiceWithDialer(&config.Config{Host: "127.0.0.1", Port: 1}, "", func(address string, options ...goobs.Option) (*goobs.Client, error) {

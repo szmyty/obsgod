@@ -4,6 +4,7 @@ package deck
 
 import (
 	"crypto/rand"
+	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
@@ -27,8 +28,9 @@ type Settings struct {
 }
 
 type Secrets struct {
-	StreamKey   string `json:"stream_key"`
-	OBSPassword string `json:"obs_password"`
+	StreamKey    string `json:"stream_key"`
+	OBSPassword  string `json:"obs_password"`
+	SettingsHash string `json:"settings_hash"`
 }
 
 type Paths struct{ Config, Secrets, OBSConfig, State, Videos string }
@@ -88,7 +90,27 @@ func Load(p Paths) (Settings, Secrets, error) {
 	if secret.StreamKey == "" || secret.OBSPassword == "" {
 		return s, Secrets{}, errors.New("save your stream key in OBSGod Desktop setup")
 	}
+	if secret.SettingsHash != settingsHash(s) {
+		return s, Secrets{}, errors.New("settings and credentials do not match; save Desktop setup again before starting")
+	}
 	return s, secret, nil
+}
+
+func settingsHash(s Settings) string {
+	b, _ := json.Marshal(s)
+	h := sha256.Sum256(b)
+	return hex.EncodeToString(h[:])
+}
+
+func loadCredentials(p Paths) (Secrets, error) {
+	var secret Secrets
+	if e := readPrivateJSON(p.Secrets, &secret); e != nil {
+		return secret, e
+	}
+	if secret.OBSPassword == "" {
+		return secret, errors.New("OBS credentials are unavailable; inspect OBS in Desktop Mode")
+	}
+	return secret, nil
 }
 
 func Configure(p Paths, r io.Reader) (Settings, error) {
@@ -127,6 +149,9 @@ func Configure(p Paths, r io.Reader) (Settings, error) {
 		}
 		secret.OBSPassword = hex.EncodeToString(b)
 	}
+	// Bind the pair so a failed second write cannot combine an old server URL
+	// with a new secret. Recovery is simply saving setup again.
+	secret.SettingsHash = settingsHash(input.Settings)
 	if e := writeJSON(p.Secrets, secret); e != nil {
 		return Settings{}, e
 	}
@@ -210,14 +235,18 @@ func writeJSON(path string, v any) error {
 // Prepare writes only inside OBSGod's isolated Flatpak config, while it is offline.
 func Prepare(p Paths, s Settings, secret Secrets) error {
 	profile := filepath.Join(p.OBSConfig, "obs-studio/basic/profiles/OBSGod")
-	for _, dir := range []string{p.State, p.Videos, profile} {
+	for _, dir := range []string{p.OBSConfig, p.State, p.Videos, profile} {
 		if e := privateDir(dir); e != nil {
 			return e
 		}
 	}
-	global := "[General]\nConfigOnNewProfile=false\n\n[Basic]\nProfile=OBSGod\nProfileDir=OBSGod\nSceneCollection=OBSGod\nSceneCollectionFile=OBSGod\n\n[BasicWindow]\nPreviewEnabled=false\nSysTrayEnabled=true\nSysTrayWhenStarted=true\nWarnBeforeStartingStream=false\nWarnBeforeStoppingStream=false\n"
-	if e := atomicWrite(filepath.Join(p.OBSConfig, "obs-studio/global.ini"), []byte(global)); e != nil {
-		return e
+	global := "[General]\nFirstRun=true\nConfigOnNewProfile=false\n\n[Basic]\nProfile=OBSGod\nProfileDir=OBSGod\nSceneCollection=OBSGod\nSceneCollectionFile=OBSGod\n\n[BasicWindow]\nPreviewEnabled=false\nSysTrayEnabled=true\nSysTrayWhenStarted=true\nWarnBeforeStartingStream=false\nWarnBeforeStoppingStream=false\n"
+	// OBS 30 uses global.ini; current OBS separates user preferences into
+	// user.ini. FirstRun=true suppresses its interactive auto-config wizard.
+	for _, name := range []string{"global.ini", "user.ini"} {
+		if e := atomicWrite(filepath.Join(p.OBSConfig, "obs-studio", name), []byte(global)); e != nil {
+			return e
+		}
 	}
 	encoder := "ffmpeg_vaapi_tex"
 	if s.Encoder == "x264" {

@@ -3,6 +3,7 @@ package automation
 import (
 	"context"
 	"errors"
+	"time"
 
 	"github.com/andreykaipov/goobs/api/requests/config"
 	"github.com/andreykaipov/goobs/api/requests/inputs"
@@ -63,7 +64,7 @@ func (c *Client) FitInput(ctx context.Context, scene, name string) error {
 		return e
 	}
 	_, e = request(ctx, "SetSceneItemTransform", func() (*sceneitems.SetSceneItemTransformResponse, error) {
-		return c.obs.SceneItems.SetSceneItemTransform(sceneitems.NewSetSceneItemTransformParams().WithSceneName(scene).WithSceneItemId(r.SceneItemId).WithSceneItemTransform(&typedefs.SceneItemTransform{PositionX: 640, PositionY: 360, Alignment: 0, BoundsType: "OBS_BOUNDS_SCALE_INNER", BoundsWidth: 1280, BoundsHeight: 720}))
+		return c.obs.SceneItems.SetSceneItemTransform(sceneitems.NewSetSceneItemTransformParams().WithSceneName(scene).WithSceneItemId(r.SceneItemId).WithSceneItemTransform(&typedefs.SceneItemTransform{PositionX: 640, PositionY: 360, ScaleX: 1, ScaleY: 1, Alignment: 0, BoundsType: "OBS_BOUNDS_SCALE_INNER", BoundsWidth: 1280, BoundsHeight: 720}))
 	})
 	return e
 }
@@ -201,7 +202,21 @@ func (c *Client) StartRecording(ctx context.Context) error {
 		return e
 	}
 	_, e = empty(ctx, "StartRecord", c.obs.Record.StartRecord)
-	return e
+	if e != nil {
+		return e
+	}
+	for {
+		r, e = empty(ctx, "GetRecordStatus", c.obs.Record.GetRecordStatus)
+		if e != nil {
+			return e
+		}
+		if r.OutputActive && r.OutputBytes > 0 {
+			return nil
+		}
+		if e = pause(ctx, 250*time.Millisecond); e != nil {
+			return errors.New("OBS did not begin recording; inspect the managed OBS window and encoder settings in Desktop Mode")
+		}
+	}
 }
 func (c *Client) StopRecording(ctx context.Context) (string, error) {
 	r, e := empty(ctx, "GetRecordStatus", c.obs.Record.GetRecordStatus)

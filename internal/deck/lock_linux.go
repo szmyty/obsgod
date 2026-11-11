@@ -11,6 +11,7 @@ import (
 )
 
 func Lock(ctx context.Context, p Paths) (func(), error) {
+	privateUmask()
 	if e := privateDir(p.State); e != nil {
 		return nil, e
 	}

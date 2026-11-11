@@ -23,6 +23,9 @@ func NewRoot(cfg *config.Config, service obs.Service, buildVersion string) *cora
 
 	rootCmd.PersistentFlags().StringVar(&cfg.Host, "host", cfg.Host, "OBS host to connect to (env: OBS_HOST)")
 	rootCmd.PersistentFlags().StringVar(&cfg.Password, "password", cfg.Password, "OBS password (env: OBS_PASSWORD)")
+	// pflag prints a string flag's default in help; environment-backed passwords
+	// are configuration values, never help text.
+	rootCmd.PersistentFlags().Lookup("password").DefValue = ""
 	rootCmd.PersistentFlags().Uint32VarP(&cfg.Port, "port", "p", cfg.Port, "OBS port to connect to (env: OBS_PORT)")
 
 	rootCmd.AddCommand(newLabelCommand(service))
