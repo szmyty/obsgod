@@ -104,6 +104,7 @@ def main():
                 assert "must-not-copy" not in copied and "rtmps://" not in copied
                 # Exercise the legacy clipboard path using the real browser
                 # clipboard, then prove failures never claim a successful copy.
+                page.evaluate("navigator.clipboard.writeText('fixture clipboard sentinel')")
                 page.evaluate("""fixture.readClipboard=navigator.clipboard.readText.bind(navigator.clipboard);
                   Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async()=>{throw new Error('fixture denied')}}});""")
                 page.get_by_role("button",name="Copy console log").click()
