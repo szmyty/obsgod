@@ -10,13 +10,11 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"os/exec"
 	"path/filepath"
-	"reflect"
 	"strings"
 	"testing"
 	"time"
-
-	"github.com/gorilla/websocket"
 )
 
 func fixtureZIP(t *testing.T, change func(map[string]string)) Input {
@@ -89,100 +87,129 @@ func TestInvalidArchivesNeverReachDecky(t *testing.T) {
 	}
 }
 
-func TestAuthenticatedInstallConfirmsOnlyExpectedPackageAndRestoresOrder(t *testing.T) {
+func TestAuthenticatedFrontendTransportNeverOpensSecondWebSocket(t *testing.T) {
 	input := fixtureZIP(t, nil)
 	for _, reject := range []bool{false, true} {
 		t.Run(map[bool]string{false: "installed", true: "rejected"}[reject], func(t *testing.T) {
-			order := []string{"Alpha", "OBSGod", "Beta"}
-			confirmed := false
-			finished := make(chan struct{})
+			calls := 0
 			const token = "12345678-1234-1234-1234-123456789012"
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				if r.URL.Path == "/auth/token" {
 					_, _ = w.Write([]byte(token))
 					return
 				}
-				if r.URL.Path != "/ws" || r.URL.Query().Get("auth") != token {
+				if r.URL.Path != "/methods/execute_in_tab" || r.Method != "POST" || r.Header.Get("X-Decky-Auth") != token {
+					t.Errorf("unexpected transport %s %s", r.Method, r.URL.Path)
 					w.WriteHeader(403)
 					return
 				}
-				conn, err := (&websocket.Upgrader{}).Upgrade(w, r, nil)
-				if err != nil {
+				var request struct {
+					Tab   string `json:"tab"`
+					Async bool   `json:"run_async"`
+					Code  string `json:"code"`
+				}
+				if json.NewDecoder(r.Body).Decode(&request) != nil || !request.Async || strings.Contains(request.Code, "__OBSGOD_REQUEST__") || !strings.Contains(request.Code, `"version":"`+input.Version+`"`) {
+					t.Error("invalid scoped frontend request")
+				}
+				calls++
+				if calls == 1 {
+					_ = json.NewEncoder(w).Encode(map[string]any{"success": true, "result": map[string]any{"success": false, "result": token + " fixture-secret"}})
 					return
 				}
-				defer conn.Close()
-				defer close(finished)
-				for {
-					var call struct {
-						Type  int               `json:"type"`
-						ID    int64             `json:"id"`
-						Route string            `json:"route"`
-						Args  []json.RawMessage `json:"args"`
-					}
-					if conn.ReadJSON(&call) != nil {
-						return
-					}
-					if call.Type == 3 {
-						continue
-					}
-					if call.Type != 0 || call.ID < 1 || call.ID > 1<<53 {
-						t.Error("invalid call identity")
-						return
-					}
-					var result any
-					switch call.Route {
-					case "utilities/settings/get":
-						result = order
-					case "utilities/install_plugin":
-						var artifact, name, version, digest string
-						var kind int
-						_ = json.Unmarshal(call.Args[0], &artifact)
-						_ = json.Unmarshal(call.Args[1], &name)
-						_ = json.Unmarshal(call.Args[2], &version)
-						_ = json.Unmarshal(call.Args[3], &digest)
-						_ = json.Unmarshal(call.Args[4], &kind)
-						if artifact != "file://"+filepath.ToSlash(input.ZIPPath) || name != "OBSGod" || version != input.Version || digest != input.SHA256 || kind != 4 {
-							t.Error("wrong install request")
-							return
-						}
-						_ = conn.WriteJSON(map[string]any{"type": 5, "event": "loader/add_plugin_install_prompt", "args": []any{"Other", version, "do-not-confirm", digest, 4}})
-						_ = conn.WriteJSON(map[string]any{"type": 5, "event": "loader/add_plugin_install_prompt", "args": []any{name, version, "expected-request", digest, 4}})
-					case "utilities/confirm_plugin_install":
-						var request string
-						_ = json.Unmarshal(call.Args[0], &request)
-						if request != "expected-request" {
-							t.Error("confirmed an unrelated request")
-							return
-						}
-						if reject {
-							_ = conn.WriteJSON(map[string]any{"type": -1, "id": call.ID, "error": map[string]any{"message": token + " fixture-secret"}})
-							continue
-						}
-						confirmed = true
-						order = []string{"Alpha", "Beta"}
-					case "loader/get_plugins":
-						result = []installedPlugin{{Name: "OBSGod", Version: input.Version, LoadType: 1}}
-					case "utilities/settings/set":
-						_ = json.Unmarshal(call.Args[1], &order)
-					default:
-						t.Error("unexpected route", call.Route)
-						return
-					}
-					_ = conn.WriteJSON(map[string]any{"type": 1, "id": call.ID, "result": result})
+				if request.Tab != "Steam Shared Context presented by Valve™" {
+					t.Error("did not try a known shared context")
 				}
+				value := map[string]any{"ok": true, "decky_version": "v3.3.1", "frontend_connected": true, "version": input.Version}
+				if reject {
+					value = map[string]any{"ok": false, "code": "install-unconfirmed", "raw": token + " fixture-secret"}
+				}
+				serialized, _ := json.Marshal(value)
+				_ = json.NewEncoder(w).Encode(map[string]any{"success": true, "result": map[string]any{"success": true, "result": string(serialized)}})
 			}))
 			defer server.Close()
 			ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 			defer cancel()
 			err := installAt(ctx, input, server.URL)
-			<-finished
 			if reject {
-				if err == nil || strings.Contains(err.Error(), token) || strings.Contains(err.Error(), "fixture-secret") {
-					t.Fatal("unsafe or absent rejection", err)
+				if err == nil || strings.Contains(err.Error(), token) || strings.Contains(err.Error(), "fixture-secret") || strings.Contains(err.Error(), "Big Picture") {
+					t.Fatal("unsafe/absent rejection", err)
 				}
-			} else if err != nil || !confirmed || !reflect.DeepEqual(order, []string{"Alpha", "OBSGod", "Beta"}) {
-				t.Fatal("installation/order not confirmed", err, confirmed, order)
+			} else if err != nil {
+				t.Fatal(err)
+			}
+			if calls != 2 {
+				t.Fatal("unexpected call count", calls)
 			}
 		})
+	}
+}
+
+func TestProbeAndInvalidOperation(t *testing.T) {
+	calls := 0
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		calls++
+		if r.URL.Path == "/auth/token" {
+			_, _ = w.Write([]byte("12345678-1234-1234-1234-123456789012"))
+			return
+		}
+		value := `{"ok":true,"decky_version":"v3.3.1","frontend_connected":true}`
+		_ = json.NewEncoder(w).Encode(map[string]any{"success": true, "result": map[string]any{"success": true, "result": value}})
+	}))
+	defer server.Close()
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+	report, err := runAt(ctx, Input{Operation: "probe"}, server.URL)
+	if err != nil || report.DeckyVersion != "v3.3.1" || !report.FrontendConnected || report.Version != "" {
+		t.Fatal(report, err)
+	}
+	for _, input := range []Input{{Operation: "other"}, {Operation: "probe", ZIPPath: "/must-not-read"}} {
+		if _, err := runAt(ctx, input, server.URL); err == nil {
+			t.Fatal("accepted invalid operation")
+		}
+	}
+	if calls != 2 {
+		t.Fatal("invalid input reached Decky", calls)
+	}
+}
+
+func TestMissingFrontendAndAuthenticationErrorsAreActionableAndRedacted(t *testing.T) {
+	for _, badToken := range []bool{false, true} {
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			if r.URL.Path == "/auth/token" {
+				if badToken {
+					_, _ = w.Write([]byte("unsafe fixture-secret"))
+				} else {
+					_, _ = w.Write([]byte("12345678-1234-1234-1234-123456789012"))
+				}
+				return
+			}
+			_, _ = w.Write([]byte(`{"success":true,"result":{"success":false,"result":"fixture-secret"}}`))
+		}))
+		_, err := runAt(context.Background(), Input{Operation: "probe"}, server.URL)
+		server.Close()
+		if err == nil || strings.Contains(err.Error(), "fixture-secret") || strings.Contains(err.Error(), "Big Picture") {
+			t.Fatal(err)
+		}
+	}
+}
+
+func TestFrontendInstallerBehavior(t *testing.T) {
+	node, err := exec.LookPath("node")
+	if err != nil {
+		t.Skip("Node is required to execute the shared-frontend behavior fixture")
+	}
+	script, err := os.ReadFile("frontend-install.test.cjs")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, mode := range []string{"install", "reject", "missing-prompt", "no-frontend", "probe"} {
+		command := exec.Command(node, "--input-type=commonjs", "-e", string(script))
+		request, _ := json.Marshal(Input{Operation: map[bool]string{true: "probe", false: "install"}[mode == "probe"], ZIPPath: "/home/deck/space and %20/plugin.zip", SHA256: strings.Repeat("a", 64), Version: "0.1.0-test"})
+		command.Stdin = strings.NewReader(strings.Replace(frontendScript, "__OBSGOD_REQUEST__", string(request), 1))
+		command.Env = append(os.Environ(), "OBSGOD_TRANSPORT_TEST_MODE="+mode)
+		output, err := command.CombinedOutput()
+		if err != nil {
+			t.Fatalf("%s: %v %s", mode, err, output)
+		}
 	}
 }

@@ -14,6 +14,8 @@ from urllib.parse import urlsplit
 import webbrowser
 
 from bridge import private_process, run_cli
+import decky
+import install as installer
 
 ROOT = Path(__file__).resolve().parent
 MAX_BODY = 16384
@@ -39,17 +41,31 @@ class SetupServer(ThreadingHTTPServer):
         return dict(self.job)
 
     def install_dependencies(self):
-        commands = [
-            ["flatpak", "remote-add", "--user", "--if-not-exists", "flathub", "https://flathub.org/repo/flathub.flatpakrepo"],
-            ["flatpak", "install", "--user", "--noninteractive", "-y", "flathub", "com.obsproject.Studio", "com.obsproject.Studio.Plugin.Gstreamer"],
-        ]
-        result = {"running": False, "ok": False, "message": "Flatpak installation failed. Check your connection, free disk space and Discover, then retry."}
+        result = {"running": False, "ok": False, "message": "OBS/capture installation failed. Check Discover, disk space and your connection, then retry."}
         try:
-            for command in commands:
-                subprocess.run(command, check=True, timeout=1200, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            result = {"running": False, "ok": True, "message": "OBS and the GStreamer capture plugin are installed. Save your settings below."}
-        except (OSError, subprocess.SubprocessError):
+            installer.ensure_dependencies()
+            result = {"running": False, "ok": True, "message": "Compatible OBS with bundled WebSocket support and its capture plugin are installed. Save your settings below."}
+        except (OSError, RuntimeError, subprocess.SubprocessError):
             pass
+        with self.job_lock:
+            self.job = result
+
+    def install_plugin(self):
+        with self.job_lock:
+            if self.job["running"]:
+                return dict(self.job)
+            self.job = {"running": True, "message": "Checking output, preserving your settings and installing OBSGod through Decky…"}
+        threading.Thread(target=self.finish_plugin_install, daemon=True).start()
+        return dict(self.job)
+
+    def finish_plugin_install(self):
+        try:
+            installer.install(launch=False)
+            result = {"running": False, "ok": True, "message": "The OBSGod app and Decky plugin are installed and verified. Return to Gaming Mode to make a local clip before streaming."}
+        except RuntimeError as error:
+            result = {"running": False, "ok": False, "message": str(error)}
+        except (OSError, ValueError, KeyError, subprocess.SubprocessError):
+            result = {"running": False, "ok": False, "message": "Installation could not be verified. Keep Steam/Decky open in Desktop Mode and rerun the complete installer. Your settings were not reset."}
         with self.job_lock:
             self.job = result
 
@@ -97,7 +113,8 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/status":
             result = run_cli("status", timeout=6)
             result["flatpak"] = shutil.which("flatpak") is not None
-            result["decky"] = (Path.home() / "homebrew" / "plugins").is_dir()
+            result["decky_status"] = decky.status()
+            result["decky"] = result["decky_status"]["ok"]
             result["plugin_zip"] = str(ROOT / "obsgod-decky.zip")
             self.send_data(200, result)
         elif path == "/api/job":
@@ -125,12 +142,14 @@ class Handler(BaseHTTPRequestHandler):
             action = request.get("action")
             if action == "dependencies":
                 self.send_data(200, self.server.dependencies())
+            elif action == "install-plugin":
+                self.send_data(200, self.server.install_plugin())
             elif action == "configure":
                 settings = request.get("settings")
                 if not isinstance(settings, dict):
                     raise ValueError()
                 self.send_data(200, run_cli("configure", settings))
-            elif action in {"doctor", "stop", "restart"}:
+            elif action in {"doctor", "stop", "restart", "open-obs"}:
                 self.send_data(200, run_cli(action))
             elif action == "close":
                 self.send_data(200, {"ok": True, "message": "Setup closed. You can close this tab."})

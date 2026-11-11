@@ -19,7 +19,7 @@ async function refresh() {
   }
   if (data.configured) el("key").placeholder = "Saved securely · leave blank to keep";
   el("zip-path").textContent = data.plugin_zip;
-  el("decky-status").textContent = data.decky ? "Decky installation detected. Install the ZIP through Decky when you return to Gaming Mode." : "Decky was not detected. Install Decky first to get the side-panel toggle.";
+  el("decky-status").textContent = data.decky_status?.message || "Decky service readiness has not been verified.";
   if (!data.flatpak) message("dependency-status", {ok:false,message:"Flatpak was not found. This installer is intended for SteamOS / Steam Deck."});
 }
 el("settings").addEventListener("submit", async (event) => {
@@ -37,7 +37,16 @@ el("dependencies").addEventListener("click", async () => {
   }catch(error){message("dependency-status",{ok:false,message:error.message});}
   finally{el("dependencies").disabled=false;}
 });
-for (const action of ["doctor","restart","stop"]) el(action).addEventListener("click",async()=>{
+el("install-plugin").addEventListener("click", async () => {
+  el("install-plugin").disabled = true;
+  try {
+    message("plugin-status", await api("/api/action", {action:"install-plugin"}));
+    let data; do { await new Promise(resolve=>setTimeout(resolve,1500)); data=await api("/api/job"); message("plugin-status",data); } while(data.running);
+    if (data.ok) await refresh();
+  } catch(error) { message("plugin-status", {ok:false,message:error.message}); }
+  finally { el("install-plugin").disabled=false; }
+});
+for (const action of ["doctor","restart","stop","open-obs"]) el(action).addEventListener("click",async()=>{
   el(action).disabled=true;el("diagnostics").textContent="Checking device…";
   try{const data=await api("/api/action",{action});el("diagnostics").textContent=data.message+(data.runtime?"\n"+JSON.stringify(data.runtime,null,2):"");}
   catch(error){el("diagnostics").textContent=error.message;}

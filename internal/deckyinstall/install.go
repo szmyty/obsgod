@@ -6,16 +6,12 @@ import (
 	"archive/zip"
 	"bytes"
 	"context"
-	"crypto/rand"
 	"crypto/sha256"
-	"encoding/binary"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io"
 	"net/http"
-	"net/url"
 	"os"
 	"path"
 	"path/filepath"
@@ -23,13 +19,14 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gorilla/websocket"
+	_ "embed"
 )
 
 type Input struct {
-	ZIPPath string `json:"zip_path"`
-	SHA256  string `json:"sha256"`
-	Version string `json:"version"`
+	Operation string `json:"operation,omitempty"`
+	ZIPPath   string `json:"zip_path"`
+	SHA256    string `json:"sha256"`
+	Version   string `json:"version"`
 }
 
 var hashPattern = regexp.MustCompile(`^[a-f0-9]{64}$`)
@@ -102,181 +99,139 @@ func validate(input Input) (string, error) {
 	return resolved, nil
 }
 
-type message struct {
-	Type   int               `json:"type"`
-	ID     int64             `json:"id"`
-	Event  string            `json:"event"`
-	Args   []json.RawMessage `json:"args"`
-	Result json.RawMessage   `json:"result"`
+// Report contains only validated versions and fixed state, never Decky's token,
+// frontend exceptions or process output.
+type Report struct {
+	Version           string `json:"version,omitempty"`
+	DeckyVersion      string `json:"decky_version"`
+	FrontendConnected bool   `json:"frontend_connected"`
 }
 
-type client struct {
-	conn   *websocket.Conn
-	id     int64
-	input  Input
-	prompt string
+//go:embed frontend-install.js
+var frontendScript string
+
+type frontendResult struct {
+	OK                bool   `json:"ok"`
+	Code              string `json:"code"`
+	Version           string `json:"version"`
+	DeckyVersion      string `json:"decky_version"`
+	FrontendConnected bool   `json:"frontend_connected"`
 }
 
-// All connection errors deliberately discard the URL, which contains Decky's
-// local authentication token. The token never enters argv, files or output.
-func connect(ctx context.Context, endpoint string) (*client, error) {
-	request, _ := http.NewRequestWithContext(ctx, "GET", endpoint+"/auth/token", nil)
-	httpClient := &http.Client{Timeout: 3 * time.Second, CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }}
-	response, err := httpClient.Do(request)
+func httpClient() *http.Client {
+	return &http.Client{Timeout: 85 * time.Second, CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }}
+}
+
+func authToken(ctx context.Context, endpoint string) (string, error) {
+	request, err := http.NewRequestWithContext(ctx, "GET", endpoint+"/auth/token", nil)
 	if err != nil {
-		return nil, errors.New("Decky Loader is not reachable. Keep it installed and run this updater in Desktop Mode")
+		return "", errors.New("invalid local Decky endpoint")
+	}
+	response, err := httpClient().Do(request)
+	if err != nil {
+		return "", errors.New("Decky Loader is not reachable. Install/start Decky using its official instructions, keep Steam open in Desktop Mode, and retry")
 	}
 	defer response.Body.Close()
-	token, err := io.ReadAll(io.LimitReader(response.Body, 1024))
+	token, err := io.ReadAll(io.LimitReader(response.Body, 1025))
 	if err != nil || response.StatusCode != 200 || !tokenPattern.Match(token) {
-		return nil, errors.New("could not authenticate with the local Decky service")
+		return "", errors.New("could not authenticate with the local Decky service; check Decky Loader and retry")
 	}
-	dialer := websocket.Dialer{HandshakeTimeout: 3 * time.Second, Proxy: http.ProxyFromEnvironment}
-	conn, _, err := dialer.DialContext(ctx, "ws"+strings.TrimPrefix(endpoint, "http")+"/ws?"+url.Values{"auth": []string{string(token)}}.Encode(), nil)
+	return string(token), nil
+}
+
+func evaluate(ctx context.Context, endpoint, token, tab, script string) (frontendResult, error) {
+	var result frontendResult
+	payload, _ := json.Marshal(map[string]any{"tab": tab, "run_async": true, "code": script})
+	request, err := http.NewRequestWithContext(ctx, "POST", endpoint+"/methods/execute_in_tab", bytes.NewReader(payload))
 	if err != nil {
-		return nil, errors.New("could not connect to Decky's authenticated local installer")
+		return result, errors.New("invalid local Decky endpoint")
 	}
-	conn.SetReadLimit(4 * 1024 * 1024)
-	if deadline, ok := ctx.Deadline(); ok {
-		_ = conn.SetReadDeadline(deadline)
+	request.Header.Set("Content-Type", "application/json")
+	request.Header.Set("X-Decky-Auth", token)
+	response, err := httpClient().Do(request)
+	if err != nil {
+		return result, errors.New("Decky's frontend request ended or timed out. Installation state is unconfirmed; keep Steam open, inspect Decky and rerun to verify")
 	}
-	var seed [8]byte
-	if _, err = rand.Read(seed[:]); err != nil {
-		_ = conn.Close()
-		return nil, errors.New("could not initialize installer request IDs")
+	defer response.Body.Close()
+	var outer struct {
+		Success bool `json:"success"`
+		Result  struct {
+			Success bool            `json:"success"`
+			Result  json.RawMessage `json:"result"`
+		} `json:"result"`
 	}
-	return &client{conn: conn, id: int64(binary.LittleEndian.Uint64(seed[:]) & ((1 << 52) - 1))}, nil
+	if response.StatusCode != 200 || json.NewDecoder(io.LimitReader(response.Body, 65537)).Decode(&outer) != nil || !outer.Success || !outer.Result.Success {
+		// Raw responses can include traceback, user data or authentication tokens.
+		// A missing named Steam context is not an assertion about Big Picture mode.
+		return result, nil
+	}
+	var serialized string
+	if json.Unmarshal(outer.Result.Result, &serialized) != nil || len(serialized) > 16384 || json.Unmarshal([]byte(serialized), &result) != nil {
+		return frontendResult{}, nil
+	}
+	return result, nil
 }
 
-func (c *client) send(value any) error {
-	_ = c.conn.SetWriteDeadline(time.Now().Add(5 * time.Second))
-	if err := c.conn.WriteJSON(value); err != nil {
-		return errors.New("Decky's connection changed. Close Steam's Big Picture window in Desktop Mode and rerun the updater")
-	}
-	return nil
-}
+var deckyVersionPattern = regexp.MustCompile(`^v?3\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?$`)
 
-func (c *client) call(route string, args ...any) (json.RawMessage, error) {
-	c.id++
-	id := c.id
-	if args == nil {
-		args = []any{}
+func runAt(ctx context.Context, input Input, endpoint string) (Report, error) {
+	var report Report
+	if input.Operation != "" && input.Operation != "install" && input.Operation != "probe" {
+		return report, errors.New("invalid OBSGod installer operation")
 	}
-	if err := c.send(map[string]any{"type": 0, "id": id, "route": route, "args": args}); err != nil {
-		return nil, err
+	if input.Operation == "probe" {
+		if input.ZIPPath != "" || input.SHA256 != "" || input.Version != "" {
+			return report, errors.New("probe cannot include an installation request")
+		}
+	} else {
+		resolved, err := validate(input)
+		if err != nil {
+			return report, err
+		}
+		input.ZIPPath = resolved
+		input.Operation = "install"
 	}
-	for {
-		var response message
-		if err := c.conn.ReadJSON(&response); err != nil {
-			return nil, errors.New("Decky's installer connection ended or timed out. Close Steam's Big Picture window in Desktop Mode, then rerun the updater")
+	token, err := authToken(ctx, endpoint)
+	if err != nil {
+		return report, err
+	}
+	value, _ := json.Marshal(input)
+	script := strings.Replace(frontendScript, "__OBSGOD_REQUEST__", string(value), 1)
+	for _, tab := range []string{"SP", "Steam Shared Context presented by Valve™", "SharedJSContext", "Steam"} {
+		result, err := evaluate(ctx, endpoint, token, tab, script)
+		if err != nil {
+			return report, err
 		}
-		if response.Type == 5 && response.Event == "loader/add_plugin_install_prompt" && len(response.Args) == 5 {
-			var name, version, requestID, digest string
-			var installType int
-			if json.Unmarshal(response.Args[0], &name) == nil && json.Unmarshal(response.Args[1], &version) == nil && json.Unmarshal(response.Args[2], &requestID) == nil && json.Unmarshal(response.Args[3], &digest) == nil && json.Unmarshal(response.Args[4], &installType) == nil && name == "OBSGod" && version == c.input.Version && digest == c.input.SHA256 && installType == 4 && len(requestID) > 0 && len(requestID) < 128 {
-				c.prompt = requestID
-			}
-		}
-		if response.ID != id || response.Type == 5 {
+		if !result.OK && (result.Code == "no-frontend" || result.Code == "") {
 			continue
 		}
-		if err := c.send(map[string]any{"type": 3, "id": id}); err != nil {
-			return nil, err
+		if !result.OK {
+			messages := map[string]string{
+				"unsupported":         "Decky's frontend is incompatible with this installer. Update Decky Loader using its official instructions and retry",
+				"busy":                "Another OBSGod Decky installation is running. Let it finish, then retry",
+				"install-unconfirmed": "Decky did not confirm the requested OBSGod installation. Saved settings were preserved; inspect Decky and retry to verify or repair",
+				"probe-failed":        "Decky's version or plugin service could not be verified. Keep Steam open in Desktop Mode, check Decky and retry",
+			}
+			if message, ok := messages[result.Code]; ok {
+				return report, errors.New(message)
+			}
+			return report, errors.New("Decky's installation state could not be verified. Keep Steam open, inspect Decky and retry")
 		}
-		if response.Type != 1 {
-			return nil, fmt.Errorf("Decky rejected %s; update Decky Loader and rerun the updater", route)
+		if !result.FrontendConnected || !deckyVersionPattern.MatchString(result.DeckyVersion) || (input.Operation != "probe" && result.Version != input.Version) {
+			return report, errors.New("Decky returned an unexpected version or readiness result; installation is unconfirmed")
 		}
-		return response.Result, nil
+		return Report{Version: result.Version, DeckyVersion: result.DeckyVersion, FrontendConnected: true}, nil
 	}
+	return report, errors.New("Decky is running, but its Steam frontend is unavailable. Keep the normal Steam client open in Desktop Mode, wait for Decky to load, and retry; do not uninstall your plugin")
 }
 
-type installedPlugin struct {
-	Name     string `json:"name"`
-	Version  string `json:"version"`
-	Disabled bool   `json:"disabled"`
-	LoadType int    `json:"load_type"`
+func Run(ctx context.Context, input Input) (Report, error) {
+	return runAt(ctx, input, "http://127.0.0.1:1337")
 }
 
-func Install(ctx context.Context, input Input) error {
-	return installAt(ctx, input, "http://127.0.0.1:1337")
-}
+func Install(ctx context.Context, input Input) error { _, err := Run(ctx, input); return err }
 
 func installAt(ctx context.Context, input Input, endpoint string) error {
-	zipPath, err := validate(input)
-	if err != nil {
-		return err
-	}
-	c, err := connect(ctx, endpoint)
-	if err != nil {
-		return err
-	}
-	defer c.conn.Close()
-	stopCancellation := context.AfterFunc(ctx, func() { _ = c.conn.Close() })
-	defer stopCancellation()
-	c.input = input
-	previous, err := c.call("utilities/settings/get", "pluginOrder", []string{})
-	if err != nil {
-		return err
-	}
-	var oldOrder []string
-	if json.Unmarshal(previous, &oldOrder) != nil {
-		return errors.New("Decky returned an invalid plugin order")
-	}
-	// The explicit updater invocation authorizes this one verified OBSGod
-	// package. Use the same request + confirmation routes as Decky's own UI.
-	if _, err = c.call("utilities/install_plugin", "file://"+filepath.ToSlash(zipPath), "OBSGod", input.Version, input.SHA256, 4); err != nil {
-		return err
-	}
-	if c.prompt == "" {
-		return errors.New("Decky did not offer the expected verified OBSGod installation")
-	}
-	if _, err = c.call("utilities/confirm_plugin_install", c.prompt); err != nil {
-		return err
-	}
-	result, err := c.call("loader/get_plugins")
-	if err != nil {
-		return err
-	}
-	var plugins []installedPlugin
-	if json.Unmarshal(result, &plugins) != nil {
-		return errors.New("could not verify Decky's installed plugin list")
-	}
-	found := false
-	for _, plugin := range plugins {
-		if plugin.Name == "OBSGod" && plugin.Version == input.Version && !plugin.Disabled && plugin.LoadType == 1 {
-			found = true
-		}
-	}
-	if !found {
-		return errors.New("Decky did not confirm the expected enabled OBSGod version; keep the error visible and rerun after checking Decky")
-	}
-	// Decky's reinstall removes the old plugin-order entry. Restore just
-	// OBSGod's position, preserving the relative order of every other plugin.
-	current, err := c.call("utilities/settings/get", "pluginOrder", []string{})
-	if err != nil {
-		return err
-	}
-	var order []string
-	if json.Unmarshal(current, &order) != nil {
-		return errors.New("could not verify Decky's plugin order")
-	}
-	for _, name := range order {
-		if name == "OBSGod" {
-			return nil
-		}
-	}
-	position := len(order)
-	for index, name := range oldOrder {
-		if name == "OBSGod" {
-			position = min(index, len(order))
-			break
-		}
-	}
-	order = append(order, "")
-	copy(order[position+1:], order[position:])
-	order[position] = "OBSGod"
-	if _, err = c.call("utilities/settings/set", "pluginOrder", order); err != nil {
-		return err
-	}
-	return nil
+	_, err := runAt(ctx, input, endpoint)
+	return err
 }
