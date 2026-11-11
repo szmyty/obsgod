@@ -98,6 +98,7 @@ func TestEarlyOBSExitIsReportedBeforeStartupTimeout(t *testing.T) {
 		t.Fatal(err)
 	}
 	t.Setenv("PATH", bin)
+	t.Setenv("DISPLAY", ":99")
 	ctx, cancel := context.WithTimeout(context.Background(), 4*time.Second)
 	defer cancel()
 	_, err := ready(ctx, p, s, secret)

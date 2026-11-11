@@ -12,6 +12,7 @@ import (
 	"net"
 	"regexp"
 	"strconv"
+	"sync"
 	"time"
 
 	"github.com/andreykaipov/goobs"
@@ -41,6 +42,23 @@ func (e *RequestError) Error() string {
 
 var statusCode = regexp.MustCompile(`\(([0-9]{3})\)`)
 
+// ConnectionError reports a fixed, credential-free connection stage. The
+// underlying server text, endpoint and password are never included.
+type ConnectionError struct{ Kind string }
+
+func (e *ConnectionError) Error() string {
+	switch e.Kind {
+	case "authentication":
+		return "OBS WebSocket authentication failed; the managed password does not match"
+	case "timeout":
+		return "OBS control connection did not authenticate within its connection limit"
+	case "refused":
+		return "OBS WebSocket listener is not available"
+	default:
+		return "OBS control connection failed before authenticated readiness"
+	}
+}
+
 // Connect establishes an authenticated connection with bounded readiness.
 func Connect(ctx context.Context, cfg Config) (*Client, error) {
 	if _, _, err := net.SplitHostPort(cfg.Address); err != nil {
@@ -49,8 +67,33 @@ func Connect(ctx context.Context, cfg Config) (*Client, error) {
 	if cfg.Timeout <= 0 {
 		cfg.Timeout = 3 * time.Second
 	}
+	attempt, cancel := context.WithTimeout(ctx, cfg.Timeout)
+	defer cancel()
+	// goobs does not expose a half-open connection if authentication fails.
+	// Own the transport so cancellation and unsuccessful handshakes release it.
+	var mu sync.Mutex
+	var transport net.Conn
+	closeTransport := func() {
+		mu.Lock()
+		defer mu.Unlock()
+		if transport != nil {
+			_ = transport.Close()
+		}
+	}
+	stopCancellation := context.AfterFunc(attempt, closeTransport)
+	defer stopCancellation()
 	dialer := &websocket.Dialer{HandshakeTimeout: cfg.Timeout, NetDialContext: func(_ context.Context, network, address string) (net.Conn, error) {
-		return (&net.Dialer{Timeout: cfg.Timeout}).DialContext(ctx, network, address)
+		conn, err := (&net.Dialer{Timeout: cfg.Timeout}).DialContext(attempt, network, address)
+		if err != nil {
+			return nil, err
+		}
+		mu.Lock()
+		transport = conn
+		if attempt.Err() != nil {
+			_ = conn.Close()
+		}
+		mu.Unlock()
+		return conn, nil
 	}}
 	type result struct {
 		client *goobs.Client
@@ -62,18 +105,51 @@ func Connect(ctx context.Context, cfg Config) (*Client, error) {
 			goobs.WithResponseTimeoutDuration(cfg.Timeout), goobs.WithEventSubscriptions(0), goobs.WithLogger(log.New(io.Discard, "", 0)))
 		select {
 		case ch <- result{c, err}:
-		case <-ctx.Done():
+		case <-attempt.Done():
 			if c != nil {
 				_ = c.Disconnect()
 			}
 		}
 	}()
 	select {
-	case <-ctx.Done():
-		return nil, ctx.Err()
+	case <-attempt.Done():
+		closeTransport()
+		if ctx.Err() != nil {
+			return nil, ctx.Err()
+		}
+		return nil, &ConnectionError{Kind: "timeout"}
 	case r := <-ch:
-		if r.err != nil {
-			return nil, errors.New("OBS connection failed: check that OBS and WebSocket authentication are ready")
+		if r.err != nil || attempt.Err() != nil {
+			closeTransport()
+			if ctx.Err() != nil {
+				return nil, ctx.Err()
+			}
+			kind := "transport"
+			var closeErr *websocket.CloseError
+			var opErr *net.OpError
+			switch {
+			case errors.As(r.err, &closeErr) && closeErr.Code == 4009:
+				kind = "authentication"
+			case attempt.Err() != nil:
+				kind = "timeout"
+			case errors.As(r.err, &opErr):
+				if opErr.Timeout() {
+					kind = "timeout"
+				} else {
+					kind = "refused"
+				}
+			}
+			return nil, &ConnectionError{Kind: kind}
+		}
+		// Stop the cancellation hook before canceling the attempt context. The
+		// authenticated client's own requests retain their individual time limits.
+		if !stopCancellation() {
+			closeTransport()
+			_ = r.client.Disconnect()
+			if ctx.Err() != nil {
+				return nil, ctx.Err()
+			}
+			return nil, &ConnectionError{Kind: "timeout"}
 		}
 		return &Client{obs: r.client}, nil
 	}

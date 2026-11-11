@@ -38,42 +38,60 @@ type Result struct {
 	Settings      *Settings                 `json:"settings,omitempty"`
 	RecordingPath string                    `json:"recording_path,omitempty"`
 	Diagnostics   []DiagnosticEntry         `json:"diagnostics"`
+	Process       string                    `json:"process"`
+	Connection    string                    `json:"connection"`
+	OutputKnown   bool                      `json:"output_known"`
+	Recording     bool                      `json:"recording"`
+	Capture       string                    `json:"capture"`
+	Game          string                    `json:"game"`
+	Frames        string                    `json:"frames"`
 }
 
 func connect(ctx context.Context, secret Secrets, timeout time.Duration) (*automation.Client, error) {
 	return automation.Connect(ctx, automation.Config{Address: net.JoinHostPort("127.0.0.1", Port), Password: secret.OBSPassword, Timeout: timeout})
 }
 
+// presence is conservative: an occupied control port without a matching managed
+// process is still possibly active output, never proof that OBS is stopped.
+func presence(p Paths) (string, bool) {
+	process := obsProcessState(p)
+	conn, err := net.DialTimeout("tcp", "127.0.0.1:"+Port, 150*time.Millisecond)
+	if conn != nil {
+		_ = conn.Close()
+	}
+	if err == nil && process == "absent" {
+		process = "unknown"
+	}
+	return process, err == nil
+}
+
 func Status(ctx context.Context, p Paths) Result {
-	s, secret, e := Load(p)
-	r := Result{OK: true, Configured: true, Settings: &s, State: "stopped", Message: "Not streaming"}
-	if e != nil {
-		r = Result{OK: true, State: "setup", Message: e.Error()}
-		// Corrupted/missing non-secret preferences must not hide an active stream
-		// or prevent the owner from stopping it.
-		secret, e = loadCredentials(p)
-		if e != nil {
-			conn, probeErr := net.DialTimeout("tcp", "127.0.0.1:"+Port, 200*time.Millisecond)
-			if conn != nil {
-				_ = conn.Close()
-			}
-			if probeErr == nil || len(managedProcesses(p)) > 0 {
-				r.OK = false
-				r.State = "unknown"
-				r.Message = "OBS may still be running but its credentials are unavailable. Inspect OBS in Desktop Mode before uninstalling or changing settings"
-			}
-			return r
+	s, secret, loadErr := Load(p)
+	process, listener := presence(p)
+	r := Result{OK: true, Configured: loadErr == nil, State: "stopped", Message: "Not streaming", Process: process, Connection: "disconnected", Capture: "unknown", Game: "unknown", Frames: "unknown"}
+	if loadErr == nil {
+		r.Settings = &s
+	} else {
+		r.State, r.Message = "setup", loadErr.Error()
+		secret, loadErr = loadCredentials(p)
+	}
+	if process == "absent" && !listener {
+		r.OutputKnown = true
+		r.Connection = "unavailable"
+	}
+	if loadErr != nil {
+		if !r.OutputKnown {
+			r.OK = false
+			r.State = "unknown"
+			r.Message = "OBS may still be running but its credentials are unavailable. Inspect the managed OBS window before changing settings"
 		}
+		return r
 	}
 	ctx, cancel := context.WithTimeout(ctx, 2*time.Second)
 	defer cancel()
-	c, e := connect(ctx, secret, 600*time.Millisecond)
-	if e != nil {
-		conn, err := net.DialTimeout("tcp", "127.0.0.1:"+Port, 200*time.Millisecond)
-		if err == nil || len(managedProcesses(p)) > 0 {
-			if conn != nil {
-				_ = conn.Close()
-			}
+	c, err := connect(ctx, secret, 600*time.Millisecond)
+	if err != nil {
+		if !r.OutputKnown {
 			r.OK = false
 			r.State = "unknown"
 			r.Message = "OBS is present but its output state cannot be confirmed"
@@ -81,20 +99,45 @@ func Status(ctx context.Context, p Paths) Result {
 		return r
 	}
 	defer c.Close()
-	r.Connected = true
-	r.Stream, e = c.StreamStatus(ctx)
-	if e != nil {
-		r.OK = false
-		r.State = "unknown"
+	r.Connected, r.Connection = true, "ready"
+	runtime, err := c.RuntimeStatus(ctx)
+	if err != nil || runtime.Profile != "OBSGod" {
+		r.OK, r.State, r.OutputKnown = false, "unknown", false
+		r.Message = "The managed OBS profile and output state could not be verified"
+		return r
+	}
+	r.Process, r.Runtime, r.Recording = "running", &runtime, runtime.Recording
+	r.Stream, err = c.StreamStatus(ctx)
+	if err != nil {
+		r.OK, r.State, r.OutputKnown = false, "unknown", false
 		r.Message = "OBS status unavailable; check the connection"
 		return r
 	}
+	r.OutputKnown = true
+	captureCtx, captureCancel := context.WithTimeout(ctx, 400*time.Millisecond)
+	r.Capture = captureAvailability(captureCtx)
+	captureCancel()
+	if r.Stream.Active || r.Recording {
+		data, frameErr := c.Screenshot(ctx, runtime.Scene)
+		if frameErr == nil {
+			r.Frames = "blank"
+			if NonblankCapture(data) {
+				r.Frames = "visible"
+			}
+		}
+	}
 	if r.Stream.Active {
-		r.State = "starting"
-		r.Message = "Connecting or reconnecting to the stream server"
+		r.State, r.Message = "starting", "Connecting or reconnecting to the stream server"
 		if !r.Stream.Reconnecting && r.Stream.Bytes > 0 {
-			r.State = "streaming"
-			r.Message = "OBS streaming"
+			r.State, r.Message = "streaming", "OBS streaming"
+			if r.Frames != "visible" || r.Capture == "unavailable" {
+				r.Message = "OBS output is active; captured picture cannot be confirmed. Check capture or use Stop"
+			}
+		}
+	} else if r.Configured {
+		r.State, r.Message = "stopped", "Not streaming"
+		if r.Recording {
+			r.Message = "Recording locally; not streaming"
 		}
 	}
 	return r
@@ -102,89 +145,118 @@ func Status(ctx context.Context, p Paths) Result {
 
 func Doctor(ctx context.Context, p Paths) Result {
 	r := Status(ctx, p)
-	if e := checkDependencies(ctx); e != nil {
+	if err := checkDependencies(ctx); err != nil {
 		r.OK = false
-		r.Message = e.Error()
+		r.Message = err.Error()
 		return r
 	}
-	if !gamescopeReady(ctx) {
-		r.Message = "Gamescope capture is unavailable here. Switch to Gaming Mode and launch a game before starting."
-	}
-	if r.Connected {
-		_, secret, e := Load(p)
-		if e != nil {
-			return r
-		}
-		c, e := connect(ctx, secret, time.Second)
-		if e == nil {
-			defer c.Close()
-			v, e := c.RuntimeStatus(ctx)
-			if e == nil {
-				r.Runtime = &v
-			}
-		}
+	captureCtx, cancel := context.WithTimeout(ctx, time.Second)
+	defer cancel()
+	r.Capture = captureAvailability(captureCtx)
+	// Capture availability is independent of process, connection and output state.
+	// A missing feed must never overwrite a live-stream status.
+	if r.Capture == "unavailable" && r.State != "streaming" && r.State != "starting" && r.State != "unknown" {
+		r.Message = "Gamescope capture feed is unavailable in this session. OBS control does not require a game; a local clip or broadcast still requires usable captured frames"
 	}
 	return r
 }
 
+const connectAttemptTimeout = time.Second
+const startupTimeout = 20 * time.Second
+
+func connectionKind(err error) string {
+	var e *automation.ConnectionError
+	if errors.As(err, &e) {
+		return e.Kind
+	}
+	return "transport"
+}
+
 func ready(ctx context.Context, p Paths, s Settings, secret Secrets) (*automation.Client, error) {
+	return readyWithin(ctx, p, s, secret, startupTimeout)
+}
+
+func readyWithin(ctx context.Context, p Paths, s Settings, secret Secrets, budget time.Duration) (*automation.Client, error) {
+	ctx, cancel := context.WithTimeout(ctx, budget)
+	defer cancel()
 	logEvent(p, "obs.connecting")
 	var launched <-chan int
-	c, e := connect(ctx, secret, 5*time.Second)
-	if e == nil {
-		c, e = verifyManaged(ctx, c)
-		if e == nil {
-			logEvent(p, "obs.ready")
-			return c, nil
-		}
-		if errors.Is(e, errUnmanaged) {
-			return nil, e
-		}
-	} else {
-		// An occupied port with different credentials must not cause a second OBS.
-		conn, probeErr := net.DialTimeout("tcp", "127.0.0.1:"+Port, 300*time.Millisecond)
-		if probeErr == nil {
-			_ = conn.Close()
-			return nil, errors.New("port 4457 is already in use or OBSGod credentials do not match; stop the conflicting instance in Desktop Mode")
-		}
-		if len(managedProcesses(p)) == 0 {
-			if e := Prepare(p, s, secret); e != nil {
-				return nil, e
-			}
-			logEvent(p, "obs.launching")
-			var launchErr error
-			launched, launchErr = launchOBS(p)
-			if launchErr != nil {
-				return nil, launchErr
-			}
-		}
-	}
-	logEvent(p, "obs.waiting")
+	lastStage := "obs.listener-unavailable"
+	recovery := recoveryMarkerPresent(p)
 	for {
-		if e := wait(ctx, 500*time.Millisecond); e != nil {
-			logEvent(p, "obs.timeout")
-			return nil, errors.New("OBS did not become ready before the timeout; run Desktop setup diagnostics")
-		}
-		select {
-		case exitCode := <-launched:
-			logEvent(p, "obs.exited", exitCode)
-			return nil, errors.New("OBS exited before becoming ready; check the diagnostic console and open OBS in Desktop Mode")
-		default:
-		}
-		c, e = connect(ctx, secret, 5*time.Second)
-		if e == nil {
-			// OBS can accept authentication before its frontend accepts requests.
-			c, e = verifyManaged(ctx, c)
-			if e == nil {
+		c, err := connect(ctx, secret, connectAttemptTimeout)
+		if err == nil {
+			// Authentication can finish while the OBS frontend is still loading.
+			attempt, done := context.WithTimeout(ctx, connectAttemptTimeout)
+			c, err = verifyManaged(attempt, c)
+			done()
+			if err == nil {
 				logEvent(p, "obs.ready")
 				return c, nil
 			}
-			if errors.Is(e, errUnmanaged) {
-				return nil, e
+			if errors.Is(err, errUnmanaged) {
+				return nil, err
+			}
+			lastStage = "obs.frontend-waiting"
+		} else {
+			if connectionKind(err) == "authentication" {
+				logEvent(p, "obs.authentication-failed")
+				return nil, errors.New("OBS WebSocket authentication failed; open the managed OBS window and verify its local server settings. No second OBS instance was launched")
+			}
+			process, listening := presence(p)
+			if process == "unknown" && !listening {
+				logEvent(p, "obs.ownership-unknown")
+				return nil, errors.New("an owned OBS process could not be identified safely. Inspect its window before launching another instance")
+			}
+			if listening {
+				lastStage = "obs.authentication-waiting"
+				if launched == nil && len(managedProcesses(p)) == 0 {
+					return nil, errors.New("port 4457 is already in use or OBSGod credentials do not match; stop the conflicting instance in Desktop Mode")
+				}
+			} else {
+				lastStage = "obs.listener-unavailable"
+			}
+			if launched == nil && !listening && process == "absent" {
+				if err := ctx.Err(); err != nil {
+					return nil, err
+				}
+				if err := Prepare(p, s, secret); err != nil {
+					return nil, err
+				}
+				if recovery {
+					logEvent(p, "obs.recovery-marker")
+				}
+				logEvent(p, "obs.launching")
+				launched, err = launchOBS(p)
+				if err != nil {
+					return nil, err
+				}
+				logEvent(p, "obs.waiting")
 			}
 		}
-		if ctx.Err() != nil {
-			return nil, ctx.Err()
+		select {
+		case code := <-launched:
+			logEvent(p, "obs.exited", code)
+			return nil, errors.New("OBS exited before becoming ready; check installed Flatpaks and open the managed OBS window in Desktop Mode")
+		default:
+		}
+		if err := wait(ctx, 200*time.Millisecond); err != nil {
+			if errors.Is(err, context.Canceled) {
+				return nil, err
+			}
+			logEvent(p, lastStage)
+			logEvent(p, "obs.timeout")
+			if recovery {
+				return nil, errors.New("OBS startup reached its time limit and a previous unclean-shutdown marker was found. Open the managed OBS window to resolve its recovery dialog; do not choose Safe Mode because it disables control and capture plugins")
+			}
+			switch lastStage {
+			case "obs.frontend-waiting":
+				return nil, errors.New("OBS authenticated but its frontend did not become ready within the startup limit. Open the managed OBS window and check for a setup or plugin dialog")
+			case "obs.authentication-waiting":
+				return nil, errors.New("OBS control port opened but authentication did not complete within the startup limit. Check the managed WebSocket server and password in Desktop Mode")
+			default:
+				return nil, errors.New("OBS did not open its control listener within the startup limit. Open the managed OBS window to check launch, display/session, recovery dialogs and the built-in WebSocket server")
+			}
 		}
 	}
 }
@@ -294,7 +366,7 @@ func waitCapture(ctx context.Context, c *automation.Client, p Paths) error {
 		}
 		if e := wait(ctx, 600*time.Millisecond); e != nil {
 			logEvent(p, "capture.blank")
-			return errors.New("no visible game frames arrived. Open a game and try again; a black Gamescope feed cannot be streamed safely. No broadcast was started")
+			return errors.New("no usable captured frames arrived. Check the current Gamescope feed and visible content; a blank feed cannot be broadcast safely. No new broadcast was started")
 		}
 	}
 }
@@ -336,19 +408,30 @@ func Start(ctx context.Context, p Paths) (Result, error) {
 	if e != nil {
 		return Result{}, e
 	}
+	runtime, err := c.RuntimeStatus(ctx)
+	if err != nil {
+		return Result{}, err
+	}
+	if !state.Active && runtime.Recording {
+		return Result{}, errors.New("a local recording is already active; stop it before changing capture or starting a new stream")
+	}
+
 	succeeded := false
 	defer func() {
 		if !succeeded && !state.Active {
 			cleanup, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 			defer cancel()
-			haltCapture(cleanup, c)
+			runtime, err := c.RuntimeStatus(cleanup)
+			if err == nil && !runtime.Recording {
+				haltCapture(cleanup, c)
+			}
 		}
 	}()
 	if !state.Active {
 		logEvent(p, "capture.checking")
 		if !waitGamescope(ctx) {
 			logEvent(p, "capture.unavailable")
-			return Result{}, errors.New("switch to Gaming Mode and open a game first; the Gamescope capture feed is not available")
+			return Result{}, errors.New("the Gamescope capture feed is unavailable in this session; OBS is ready, but a broadcast requires usable captured frames")
 		}
 		logEvent(p, "capture.configuring")
 		if e = ensureCapture(ctx, c, s); e != nil {
@@ -393,12 +476,9 @@ func Stop(ctx context.Context, p Paths) (Result, error) {
 	}
 	c, e := connect(ctx, secret, time.Second)
 	if e != nil {
-		conn, err := net.DialTimeout("tcp", "127.0.0.1:"+Port, 300*time.Millisecond)
-		if err != nil && len(managedProcesses(p)) == 0 {
+		process, listener := presence(p)
+		if process == "absent" && !listener {
 			return Result{OK: true, Configured: true, State: "stopped", Message: "OBS is offline"}, nil
-		}
-		if conn != nil {
-			_ = conn.Close()
 		}
 		return Result{}, errors.New("cannot confirm the stream has stopped: OBS is present but unreachable")
 	}
@@ -432,11 +512,6 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 		logEvent(p, "dependencies.missing")
 		return Result{}, e
 	}
-	logEvent(p, "capture.checking")
-	if !waitGamescope(ctx) {
-		logEvent(p, "capture.unavailable")
-		return Result{}, errors.New("open a game in Gaming Mode before making the local test clip")
-	}
 	c, e := ready(ctx, p, s, secret)
 	if e != nil {
 		return Result{}, e
@@ -452,6 +527,11 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 	}
 	if r.Recording || st.Active {
 		return Result{}, errors.New("stop the existing stream or recording before making a test clip")
+	}
+	logEvent(p, "capture.checking")
+	if !waitGamescope(ctx) {
+		logEvent(p, "capture.unavailable")
+		return Result{}, errors.New("the Gamescope capture feed is unavailable in this session; OBS is ready, but a local clip requires usable captured frames")
 	}
 	logEvent(p, "capture.configuring")
 	if e = ensureCapture(ctx, c, s); e != nil {
@@ -491,6 +571,40 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 	return Result{OK: true, Configured: true, Connected: true, State: "stopped", Message: "Local test saved; watch it in Desktop Mode to check picture, game audio and microphone before broadcasting", RecordingPath: path}, nil
 }
 
+// OpenOBS is an explicit Desktop recovery action. It launches the isolated
+// profile visibly without starting a stream or recording and never duplicates
+// an instance whose output state might be unknown.
+func OpenOBS(ctx context.Context, p Paths) (Result, error) {
+	s, secret, err := Load(p)
+	if err != nil {
+		return Result{}, err
+	}
+	if err := checkDependencies(ctx); err != nil {
+		return Result{}, err
+	}
+	process, listener := presence(p)
+	if process != "absent" || listener {
+		return Result{}, errors.New("managed OBS or its control port is already present; inspect the existing OBS window instead of launching a second instance")
+	}
+	if err := prepare(p, s, secret, true); err != nil {
+		return Result{}, err
+	}
+	logEvent(p, "obs.open-visible")
+	exited, err := launchVisibleOBS(p)
+	if err != nil {
+		return Result{}, err
+	}
+	select {
+	case code := <-exited:
+		logEvent(p, "obs.exited", code)
+		return Result{}, errors.New("managed OBS exited before its recovery window could be confirmed; check the installed Flatpaks and graphical session")
+	case <-ctx.Done():
+		return Result{}, ctx.Err()
+	case <-time.After(200 * time.Millisecond):
+	}
+	return Result{OK: true, Message: "Managed OBS launch requested in a visible window. Resolve any setup or recovery dialog; this action does not start a stream or recording"}, nil
+}
+
 func Restart(ctx context.Context, p Paths) (Result, error) {
 	secret, e := loadCredentials(p)
 	if e != nil {
@@ -498,6 +612,9 @@ func Restart(ctx context.Context, p Paths) (Result, error) {
 	}
 	c, e := connect(ctx, secret, time.Second)
 	if e == nil {
+		if _, err := verifyManaged(ctx, c); err != nil {
+			return Result{}, err
+		}
 		r, err := c.RuntimeStatus(ctx)
 		if err != nil {
 			_ = c.Close()
@@ -511,11 +628,15 @@ func Restart(ctx context.Context, p Paths) (Result, error) {
 		if r.Recording || s.Active {
 			return Result{}, errors.New("stop streaming and recording before restarting OBSGod")
 		}
-	} else if len(managedProcesses(p)) > 0 {
+	} else if process, listener := presence(p); process != "absent" || listener {
 		return Result{}, errors.New("cannot safely restart an unreachable OBS instance; inspect it in Desktop Mode first")
 	}
 	if e = stopManagedOBS(ctx, p); e != nil {
 		return Result{}, e
+	}
+	process, listener := presence(p)
+	if process != "absent" || listener {
+		return Result{}, errors.New("managed OBS shutdown could not be confirmed; inspect its window before changing settings")
 	}
 	return Result{OK: true, Configured: true, State: "stopped", Message: "Managed OBS closed; saved settings will apply on the next start"}, nil
 }

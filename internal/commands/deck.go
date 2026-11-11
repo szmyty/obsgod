@@ -12,9 +12,9 @@ import (
 
 func newDeckCommand() *coral.Command {
 	root := &coral.Command{Use: "deck", Short: "Manage the optional Steam Deck streaming preview (JSON output)"}
-	for _, name := range []string{"status", "doctor", "configure", "start", "stop", "test-recording", "restart", "clear-logs"} {
+	for _, name := range []string{"status", "doctor", "configure", "start", "stop", "test-recording", "restart", "open-obs", "clear-logs"} {
 		name := name
-		cmd := &coral.Command{Use: name, Short: map[string]string{"status": "Read live output state without starting OBS", "doctor": "Diagnose installation, capture and OBS", "configure": "Save settings and key from JSON stdin, never argv", "start": "Capture Gaming Mode and wait for real stream output", "stop": "Stop streaming and confirm it stopped", "test-recording": "Save a ten-second local clip without broadcasting", "restart": "Close idle managed OBS to apply saved settings"}[name], Args: coral.NoArgs}
+		cmd := &coral.Command{Use: name, Short: map[string]string{"status": "Read live output state without starting OBS", "doctor": "Diagnose installation, capture and OBS", "configure": "Save settings and key from JSON stdin, never argv", "start": "Capture Gaming Mode and wait for real stream output", "stop": "Stop streaming and confirm it stopped", "test-recording": "Save a ten-second local clip without broadcasting", "restart": "Close idle managed OBS to apply saved settings", "open-obs": "Open the isolated OBS window visibly for Desktop recovery without starting output"}[name], Args: coral.NoArgs}
 		cmd.RunE = func(cmd *coral.Command, _ []string) error {
 			ctx, cancel := context.WithTimeout(cmd.Context(), 75*time.Second)
 			defer cancel()
@@ -55,14 +55,31 @@ func newDeckCommand() *coral.Command {
 						result, e = deck.Stop(ctx, paths)
 					case "test-recording":
 						result, e = deck.TestRecording(ctx, paths)
+					case "open-obs":
+						result, e = deck.OpenOBS(ctx, paths)
 					case "restart":
 						result, e = deck.Restart(ctx, paths)
 					}
 				}
 			}
-			if e != nil {
-				result = deck.Result{OK: false, State: "error", Message: e.Error()}
+			if name != "status" && name != "doctor" && name != "clear-logs" {
+				// Action failure is separate from observed output. Even cancellation must
+				// return a fresh conservative snapshot so the panel can offer recovery Stop.
+				snapshotCtx, done := context.WithTimeout(context.Background(), 2*time.Second)
+				snapshot := deck.Status(snapshotCtx, paths)
+				done()
+				snapshot.OK = result.OK && e == nil
+				if result.Message != "" {
+					snapshot.Message = result.Message
+				}
+				snapshot.RecordingPath = result.RecordingPath
+				result = snapshot
 			}
+			if e != nil {
+				result.OK = false
+				result.Message = e.Error()
+			}
+
 			if name != "status" && name != "clear-logs" {
 				deck.RecordOutcome(paths, e, result.OK)
 			}
