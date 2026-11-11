@@ -1,5 +1,22 @@
 # Steam Deck preview qualification
 
+## Current Roadmap 1 candidate
+
+Candidate `0.1.0-deck.5` is locally qualified at exact source
+`2287ed4c2f3fcc9b8ec42bbd68ac531063b5d578` and available as a **draft review
+artifact**, not a release. Read [the acceptance/review packet](roadmap1-acceptance.md)
+for downloads, hashes, criterion-level evidence, failed-run repairs and gates.
+Go 56/Python 56/Node 8, static/security, actual-package browsers, pinned Decky
+installer/updater fixtures, reproducible builds and native OBS media/lifecycle
+checks passed. One optional existing-OBS test was skipped. Cross-builds were
+not executed. Real Steam Deck/Kick acceptance and owner review remain open.
+
+GitHub Actions jobs were created but no steps ran: GitHub reports an account
+billing lock. Their failure/cancelled conclusions do not establish code-test
+results. Clearing that lock and running required checks remains a closure gate.
+
+## Historical previews and evidence interpretation
+
 Each [preview release](https://github.com/szmyty/obsgod/releases) carries its exact
 source revision in `manifest.json`, artifact hashes in `SHA256SUMS`, and commands,
 outcomes and limitations in `qualification.json`. Use that release's receipts;
@@ -29,7 +46,7 @@ No user stream key, live provider account or paid resource is used by cloud test
 | Linux ARM64 / Windows x86_64 / macOS ARM64 | CLI cross-build checks only; these are not Steam Deck runtime qualifications. |
 | Steam Deck / SteamOS | Unavailable here: actual Flatpak sandbox, Gamescope, AMD VAAPI, audio devices, controller focus and session lifecycle. |
 | Kick viewer | Unrun here: user URL/key and real channel picture/audio must be checked on the device. |
-| GitHub Actions | No current branch checks were reported during implementation; local results are not CI receipts. |
+| GitHub Actions | Current candidate jobs did not start because GitHub reports an account billing lock; local results are not CI receipts. |
 
 The native harness verifies moving, nonblank recorded video, nonblank streamed
 video, audio content, repeated start/stop, failed-start cleanup and no unexpected
