@@ -21,7 +21,7 @@ govulncheck ./...
 Commit source before making a release candidate:
 
 ```sh
-python3 scripts/package-deck.py --version 0.1.0-deck.4
+python3 scripts/package-deck.py --version 0.1.0-deck.5
 ```
 
 The script uses the current full commit SHA and refuses a dirty checkout. For
@@ -35,8 +35,8 @@ Browser tests use Playwright **1.62.0** and Chromium. They install into temporar
 homes, use fixture credentials and extract the actual archive/ZIP:
 
 ```sh
-python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz
-python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz --upgrade-from /path/to/obsgod-deck_0.1.0-deck.1_linux_amd64.tar.gz
+python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.5_linux_amd64.tar.gz
+python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.5_linux_amd64.tar.gz --upgrade-from /path/to/obsgod-deck_0.1.0-deck.1_linux_amd64.tar.gz
 python3 steamdeck/tests/browser-panel.py dist/obsgod-decky.zip
 ```
 
@@ -95,44 +95,84 @@ For optional read-only diagnostics against an already running OBS, set
 and run `go test ./pkg/automation -run TestRealOBSReadOnly -v`. Otherwise that test
 is explicitly skipped. Never put a password or stream key into command arguments.
 
-## Publication
+## Unified installer and updater integration
 
-The separate one-click updater packages a helper for Decky's authenticated local
-installer and `steamdeck/update.py`. It installs the already-qualified preview-4
-archive without rebuilding or relabeling that streaming runtime:
+The runtime archive includes its maintained updater, release discovery module,
+Decky helper, setup and updater Desktop launchers. Build the optional standalone
+updater from that exact clean runtime archive, without rebuilding the runtime:
 
 ```sh
-go test -race ./...
-python3 -m unittest discover -s steamdeck/tests -p 'test_*.py' -v
-python3 scripts/package-updater.py
-python3 steamdeck/tests/updater-smoke.py dist/obsgod-one-click-update_0.1.0-deck.4-updater.1_linux_amd64.zip \
-  --upstream /path/to/pinned-decky-sources \
-  --previous-archive /path/to/obsgod-deck_0.1.0-deck.1_linux_amd64.tar.gz
+python3 scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.5_linux_amd64.tar.gz
 ```
 
-Its own source revision and file hashes are recorded in its updater manifest.
-Run its actual desktop entry and helper against the pinned Decky 3.3.1
-WebSocket router/installer fixture before publishing the updater ZIP. The fixture
-tests real upstream protocol/extraction logic, with loader lifecycle/ownership
-operations substituted in a private temporary home. It is not SteamOS or root
-service qualification. The archive target and checksum are pinned in update.py;
-the helper validates the ZIP identity/paths/hash before any installation request.
-It confirms only the matching OBSGod request and then verifies the installed
-enabled version. Keep other Steam/Decky clients closed during this Desktop update
-because Decky's router supports a single frontend connection.
+Check discovery without changing the installation:
 
-The fixture directory must contain `browser.py`, `helpers.py` and `wsrouter.py`
-from `backend/decky_loader/` at Decky 3.3.1 revision
-`ffd103b9c1a4ce5bf305e7c0998eda6e05457dad`. The harness verifies their Git blob
-hashes before importing them. Fetch these GPL test inputs outside the product
-tree; the updater does not bundle or modify Decky Loader. The test uses fixture
-credentials, a temporary home, unrelated test plugins and a local service on
-127.0.0.1:1337. It runs the extracted desktop entry twice and verifies app/plugin
-replacement, preserved settings/key/media/OBS files, private backups, plugin
-order and repeatability. It does not contact an external streaming service.
+```sh
+python3 /path/to/extracted/OBSGod-Updater/update.py --check --json --channel preview
+```
 
-Publish the exact clean revision and verified artifacts as a **prerelease** until
-the [Steam Deck acceptance checklist](steam-deck.md#acceptance-on-your-deck) has
-real-device evidence. Include source SHA, tool versions, commands, outcomes,
-artifact checksums and remaining hardware/CI limits in the release evidence.
-The broader v1 roadmap issues stay open until their full criteria are satisfied.
+The bottom panel button calls the same read-only release checker. Applying an
+update is an explicit Desktop action after output is confirmed idle; use the
+installed **Update OBSGod** Applications entry or bundled Desktop launcher.
+Normal update skips a matching version; `--repair` explicitly reinstalls it.
+Channels distinguish stable releases and previews, and ignore updater-only tags.
+Only official repository assets or immutable same-repository artifact links are
+accepted, with matching tagged source, manifest, platform and file hashes.
+Historical preview 4 is discoverable but lacks unified installation and cannot
+be automatically applied by this newer updater.
+
+The protocol smoke uses the unmodified Decky 3.3.1 backend router/installer and
+its actual frontend WebSocket router at revision
+`ffd103b9c1a4ce5bf305e7c0998eda6e05457dad`. Keep these GPL test inputs outside the
+product tree. The harness verifies their Git blob identities and downloads the
+pinned frontend router if it is absent from that directory. It holds the actual
+frontend connection open while the compiled helper probes, installs/reinstalls,
+and verifies the plugin and unrelated order/prompts:
+
+```sh
+python3 steamdeck/tests/decky-transport-smoke.py dist/decky-install dist/obsgod-decky.zip \
+  --upstream /path/to/pinned-decky-sources \
+  --runtime-archive dist/obsgod-deck_0.1.0-deck.5_linux_amd64.tar.gz \
+  --previous-archive /path/to/obsgod-deck_0.1.0-deck.1_linux_amd64.tar.gz \
+  --updater-zip dist/obsgod-one-click-update_0.1.0-deck.5_linux_amd64.zip
+```
+
+The full-archive options execute the real unified installer twice and check
+configuration/key/media/history/other-plugin preservation. The fixture still
+substitutes CDP forwarding, ownership operations, loader lifecycle, dialogs,
+Flatpak info and the surrounding Steam window. It cannot qualify real SteamOS
+or its Decky service. `updater-smoke.py` belongs to the historical updater-4
+second-WebSocket protocol; it is not the Roadmap 1 candidate harness.
+
+The updater option executes the unmodified extracted Desktop/file-URI launcher.
+A disposable Python startup fixture supplies only exact canonical release/tag,
+checksum, manifest and archive HTTP responses. Real discovery, hashing,
+extraction and unified installation still execute, including no-update,
+explicit same-version repair and a corrupted download that preserves the
+existing installation. This is a network fixture, not a published release or
+an actual Steam frontend.
+
+The browser setup harness explicitly requests app-only installation to isolate
+its Desktop entry/setup/clipboard path. Full Decky installation is exercised by
+the separate pinned-transport integration above. Keep those evidence claims
+separate. The native OBS harness likewise does not test Flatpak's actual
+sandbox or Gamescope's real Steam UI capture.
+
+## Candidate and publication gates
+
+At the final clean source revision run the full applicable command matrix,
+browser checks, native OBS, pinned Decky transport and updater integration.
+Build both packages twice and compare SHA256SUMS and UPDATER-SHA256SUMS. Keep
+source revision, harness revision, tool/platform versions, exact commands and
+outcomes in candidate qualification evidence. Label optional skipped tests,
+compilation-only platforms and unavailable real-device/CI checks explicitly.
+
+`.github/workflows/steam-deck.yml` provides a pinned Linux validation/package
+workflow and uploads review artifacts only; it never publishes a release or
+changes deployments. Existing snapshot workflows were inspected for publishing
+side effects. Missing workflow runs are not passing CI evidence.
+
+Draft PR checkpoints are review artifacts. Do not publish the candidate or
+merge/close its acceptance issues without owner review and required evidence.
+A release publication is a separate action from building or uploading a draft
+review artifact. All broader v1 and Roadmap 2 requirements remain separate.

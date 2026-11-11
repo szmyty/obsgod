@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Run the actual updater against pinned upstream Decky router/installer code.
+"""Historical updater-4 qualification against its second-WebSocket protocol.
+
+Use decky-transport-smoke.py for Roadmap 1 candidates; this harness only
+reproduces the previously shipped updater/source and must not qualify new code.
 
 Upstream GPL sources are fetched outside this repository, never redistributed in
 the product. Real loader lifecycle, ownership operations and Steam are fixtures.

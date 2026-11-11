@@ -23,3 +23,9 @@ native/mock receipts as Steam Deck qualification.
 Final source/artifact revisions and evidence will be recorded in the campaign's
 qualification documents. No issue is complete merely because code or a package
 exists; required device, CI and review gaps remain explicit closure gates.
+
+Implementation checkpoints are stacked drafts #26 (plan), #27 (runtime), #28
+(state), #29 (installer) and #30 (updater). The integration/qualification branch
+is `codex/roadmap1-qualification`. Read each PR's base before reviewing/merging;
+these branches depend on the preserved draft #15 foundation. Final cloud
+qualification is in progress; no real Steam Deck success has been established.

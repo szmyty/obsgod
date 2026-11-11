@@ -389,6 +389,20 @@ func haltCapture(ctx context.Context, c *automation.Client) {
 	_ = c.UpdateInputIfPresent(ctx, CaptureInput, map[string]any{"stop_on_hide": true})
 }
 
+// haltCaptureIfIdle must not disrupt an independently started recording or an
+// output whose shutdown could not be verified. Keep capture running on unknown.
+func haltCaptureIfIdle(ctx context.Context, c *automation.Client) {
+	stream, err := c.StreamStatus(ctx)
+	if err != nil || stream.Active {
+		return
+	}
+	runtime, err := c.RuntimeStatus(ctx)
+	if err != nil || runtime.Recording {
+		return
+	}
+	haltCapture(ctx, c)
+}
+
 func Start(ctx context.Context, p Paths) (Result, error) {
 	s, secret, e := Load(p)
 	if e != nil {
@@ -408,26 +422,24 @@ func Start(ctx context.Context, p Paths) (Result, error) {
 	if e != nil {
 		return Result{}, e
 	}
+	wasActive := state.Active
 	runtime, err := c.RuntimeStatus(ctx)
 	if err != nil {
 		return Result{}, err
 	}
-	if !state.Active && runtime.Recording {
+	if !wasActive && runtime.Recording {
 		return Result{}, errors.New("a local recording is already active; stop it before changing capture or starting a new stream")
 	}
 
 	succeeded := false
 	defer func() {
-		if !succeeded && !state.Active {
+		if !succeeded && !wasActive {
 			cleanup, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 			defer cancel()
-			runtime, err := c.RuntimeStatus(cleanup)
-			if err == nil && !runtime.Recording {
-				haltCapture(cleanup, c)
-			}
+			haltCaptureIfIdle(cleanup, c)
 		}
 	}()
-	if !state.Active {
+	if !wasActive {
 		logEvent(p, "capture.checking")
 		if !waitGamescope(ctx) {
 			logEvent(p, "capture.unavailable")
@@ -452,12 +464,16 @@ func Start(ctx context.Context, p Paths) (Result, error) {
 	logEvent(p, "stream.connecting")
 	state, e = c.StartStream(startCtx)
 	if e != nil {
-		// A failed/cancelled start must not silently keep broadcasting later.
+		if wasActive {
+			logEvent(p, "stream.existing-unconfirmed")
+			return Result{}, errors.New("the existing stream did not confirm advancing output. It was not stopped automatically; inspect it or use Stop streaming")
+		}
+		// A failed/cancelled new start must not silently keep broadcasting later.
 		cleanup, done := context.WithTimeout(context.Background(), 5*time.Second)
 		defer done()
 		_, stopErr := c.StopStream(cleanup)
 		if stopErr == nil {
-			haltCapture(cleanup, c)
+			haltCaptureIfIdle(cleanup, c)
 			logEvent(p, "stream.failed-stopped")
 			return Result{}, errors.New("stream did not reach a healthy output and was stopped; check the ingest URL, key, network and encoder in Desktop setup")
 		}
@@ -541,7 +557,7 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 		cleanup, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 		_, _ = c.StopRecording(cleanup)
-		haltCapture(cleanup, c)
+		haltCaptureIfIdle(cleanup, c)
 	}()
 	capCtx, cancel := context.WithTimeout(ctx, 12*time.Second)
 	e = waitCapture(capCtx, c, p)

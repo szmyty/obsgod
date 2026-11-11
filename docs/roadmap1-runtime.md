@@ -33,7 +33,10 @@ detected without deletion. Their presence is reported as a possible recovery
 prompt, not proof that a prompt caused the owner's timeout. Safe Mode is never
 selected automatically because it disables the required WebSocket and capture
 plugins. A stuck startup needs inspection of the **managed** OBS window; an
-ordinary OBS launch uses a different configuration.
+ordinary OBS launch uses a different configuration. `deck open-obs` is an explicit
+visible Desktop recovery action using the managed profile, without automatic
+stream/recording. It refuses a duplicate managed process or occupied control port.
+The Desktop setup offers this action without requiring a terminal command.
 
 ## Snapshot contract
 
@@ -53,6 +56,12 @@ A streaming state does not establish viewer-side reception or picture/sound.
 Active output retains recovery Stop even if capture is blank or unavailable.
 Action errors return a fresh conservative snapshot instead of replacing output
 state with a generic error. Recording and streaming remain separate facts.
+Unreadable environment information for an owned OBS process stays unknown,
+whereas an identifiable ordinary OBS profile is left alone. Starting a new
+stream refuses an existing local recording before changing capture. Failure of
+a repeated Start preserves a preexisting stream; failed/cancelled new-start
+capture cleanup runs only after both stream and recording are confirmed idle.
+Frame health samples the current program scene, not an unused managed source.
 
 ## No-game boundary
 

@@ -173,6 +173,124 @@ async def runtime_installer_upgrade(fixture, args, work, plugins, loader, settin
     assert not list(current.parent.glob(".install-*"))
     print("PASS: actual runtime archive default unified install.py --no-launch upgraded " + old_metadata["version"] +
           " to " + manifest["version"] + " and repeated same-version installation; authenticated active-frontend plugin replacement, app/plugin pair, bundled updater/menu entry, private settings/key, recordings, ordinary/managed OBS files, diagnostic data, prior release and unrelated plugins/order preserved. Flatpak installation/version, Steam/CDP and loader ownership/lifecycle are fixtures.")
+    if args.updater_zip:
+        await desktop_updater_upgrade(fixture, args, work, env, previous_package, package,
+                                      current, plugins, loader, settings, snapshots,
+                                      history, saved_event, manifest)
+
+
+async def desktop_updater_upgrade(fixture, args, work, env, previous_package, package,
+                                  current, plugins, loader, settings, snapshots,
+                                  history, saved_event, manifest):
+    """Run the unmodified extracted Desktop updater with network responses staged.
+
+    sitecustomize exists only in this disposable fixture. It substitutes HTTPS
+    responses at urllib's boundary; the real discovery/origin/tag/checksum,
+    archive download/verification/extraction and unified installer all execute.
+    No product environment variable or arbitrary runtime URL bypass is added.
+    """
+    extracted = work / "updater package with spaces %20"
+    extracted.mkdir()
+    with zipfile.ZipFile(args.updater_zip) as archive:
+        archive.extractall(extracted)
+    updater = extracted / "OBSGod-Updater"
+    assert (updater / "update.py").is_file()
+    network = work / "updater-network-fixture"
+    network.mkdir()
+    version = manifest["version"]
+    archive_name = "obsgod-deck_" + version + "_linux_amd64.tar.gz"
+    base_url = "https://github.com/szmyty/obsgod/releases/download/v" + version + "/"
+    release = {"tag_name": "v" + version, "target_commitish": manifest["revision"],
+               "draft": False, "prerelease": "-" in version,
+               "assets": [{"name": name, "browser_download_url": base_url + name}
+                          for name in [archive_name, "manifest.json", "SHA256SUMS"]]}
+    # An updater-only release with a higher version must never become the
+    # streaming runtime. This also exercises the real release-list filtering.
+    release_list = network / "releases.json"
+    release_list.write_text(json.dumps([
+        {"tag_name": "v99.0.0-updater.1", "draft": False, "prerelease": True, "assets": []},
+        release]))
+    commit = network / "commit.json"
+    commit.write_text(json.dumps({"sha": manifest["revision"]}))
+    checksums = network / "SHA256SUMS"
+    checksums.write_text(hashlib.sha256(args.runtime_archive.read_bytes()).hexdigest() + "  " + archive_name + "\n" +
+                         hashlib.sha256((package / "manifest.json").read_bytes()).hexdigest() + "  manifest.json\n")
+    responses = {
+        "https://api.github.com/repos/szmyty/obsgod/releases?per_page=100": str(release_list),
+        "https://api.github.com/repos/szmyty/obsgod/commits/v" + version: str(commit),
+        base_url + "manifest.json": str(package / "manifest.json"),
+        base_url + "SHA256SUMS": str(checksums),
+        base_url + archive_name: str(args.runtime_archive.resolve()),
+    }
+    response_file = network / "responses.json"
+    response_file.write_text(json.dumps(responses))
+    (network / "sitecustomize.py").write_text(
+        "import json,os,urllib.request\n"
+        "from pathlib import Path\n"
+        "_responses=json.loads(Path(os.environ['OBSGOD_UPDATE_TEST_RESPONSES']).read_text())\n"
+        "def _fixture_open(request,*args,**kwargs):\n"
+        "    url=request.full_url if isinstance(request,urllib.request.Request) else request\n"
+        "    if url not in _responses: raise OSError('unexpected fixture network request')\n"
+        "    return open(_responses[url],'rb')\n"
+        "urllib.request.urlopen=_fixture_open\n")
+    test_env = dict(env, OBSGOD_UPDATE_TEST_RESPONSES=str(response_file),
+                    PYTHONPATH=str(network) + os.pathsep + env.get("PYTHONPATH", ""))
+    # Desktop result dialogs are substituted, avoiding a hidden modal in CI.
+    dialog = network / "last-dialog"
+    dialogs = network / "bin"
+    dialogs.mkdir()
+    (dialogs / "kdialog").write_text("#!" + sys.executable + "\nimport sys\nfrom pathlib import Path\nPath(" + repr(str(dialog)) + ").write_text(sys.argv[-1])\n")
+    (dialogs / "kdialog").chmod(0o700)
+    test_env["PATH"] = str(dialogs) + os.pathsep + test_env["PATH"]
+
+    # Start from the actual legacy app and plugin again; preserve its real key
+    # and user data while exercising all current updater stages.
+    await fixture.execute([sys.executable, str(previous_package / "install.py"), "--no-launch"], env)
+    with zipfile.ZipFile(previous_package / "obsgod-decky.zip") as archive:
+        shutil.rmtree(plugins / "obsgod")  # Disposable fixture only.
+        archive.extractall(plugins)
+    old_metadata = json.loads((plugins / "obsgod/package.json").read_text())
+    loader.plugins["OBSGod"] = fixture.Plugin("OBSGod", old_metadata["version"], "obsgod")
+    desktop_command = fixture.desktop_command(updater / "Update OBSGod.desktop", as_uri=True)
+    output = await fixture.execute(desktop_command, test_env, cwd=current.parent)
+    assert b"DONE:" in output and b"4/4 Verified" in output, output
+    assert version in dialog.read_text()
+    assert json.loads((current / "manifest.json").read_text())["revision"] == manifest["revision"]
+    assert json.loads((plugins / "obsgod/package.json").read_text())["version"] == version
+    assert all(path.read_bytes() == data for path, data in snapshots.items())
+    assert saved_event in json.loads(history.read_text())
+    assert json.loads((current.parent / "update-status.json").read_text())["state"] == "complete"
+    assert settings.getSetting("pluginOrder") == ["Alpha", "OBSGod", "Beta"]
+    assert not list(current.parent.glob(".update-*"))
+
+    # A repeated Desktop invocation is an honest no-update result. Explicit
+    # same-version repair executes the complete verified install path again.
+    output = await fixture.execute(desktop_command, test_env, cwd=current.parent)
+    assert b"Nothing was replaced" in output and b"3/4 Installing" not in output, output
+    output = await fixture.execute([sys.executable, str(updater / "update.py"), "--repair"], test_env)
+    assert b"4/4 Verified" in output, output
+
+    # A corrupted archive fails its real expected checksum before replacement;
+    # retain exact activated app/plugin/data and a concrete retry record.
+    corrupted = network / "corrupted-archive"
+    corrupted.write_bytes(b"fixture corrupted transfer")
+    responses[base_url + archive_name] = str(corrupted)
+    response_file.write_text(json.dumps(responses))
+    activated = current.resolve()
+    plugin_digest = hashlib.sha256((plugins / "obsgod/package.json").read_bytes()).hexdigest()
+    process = await asyncio.create_subprocess_exec(sys.executable, str(updater / "update.py"), "--repair",
+        env=test_env, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.STDOUT)
+    output, _ = await asyncio.wait_for(process.communicate(), 30)
+    assert process.returncode == 1 and b"checksum does not match" in output, output
+    assert current.resolve() == activated
+    assert hashlib.sha256((plugins / "obsgod/package.json").read_bytes()).hexdigest() == plugin_digest
+    assert all(path.read_bytes() == data for path, data in snapshots.items())
+    assert b"fixture-stream-key-never-real" not in output
+    assert json.loads((current.parent / "update-status.json").read_text())["state"] == "interrupted-or-failed"
+    assert not list(current.parent.glob(".update-*"))
+    backups = list((current.parent / "backups").glob("updater-*/secrets.json"))
+    assert len(backups) == 2 and all(path.stat().st_mode & 0o777 == 0o600 for path in backups)
+    print("PASS: actual extracted updater ZIP and Desktop/file-URI entry perform official-shape release discovery (skipping updater-only), exact tag/manifest/archive verification, legacy-to-candidate unified app/plugin upgrade, repeat no-update, explicit same-version repair, and checksum-failure preservation/recovery. HTTPS responses, Flatpak installation/version, dialogs, Steam/CDP and service ownership/lifecycle are fixtures; the product source and all verification/installer paths are unmodified.")
 
 
 async def run(args):
@@ -284,7 +402,7 @@ async def run(args):
             if args.runtime_archive:
                 await runtime_installer_upgrade(fixture,args,work,plugins,loader,settings)
                 assert connection_count == 1, "unified installer opened a competing frontend connection"
-                assert prompt_count == 4, "unified installation changed unrelated prompt behavior"
+                assert prompt_count == (6 if args.updater_zip else 4), "unified installation changed unrelated prompt behavior"
                 assert not installer.install_requests
         finally:
             if frontend is not None and frontend.returncode is None:
@@ -300,9 +418,12 @@ def main():
     parser.add_argument("--upstream",type=Path,required=True)
     parser.add_argument("--runtime-archive",type=Path,help="Also execute the packaged default unified installer twice")
     parser.add_argument("--previous-archive",type=Path,help="Legacy runtime archive to upgrade in the unified-installer test")
+    parser.add_argument("--updater-zip",type=Path,help="Also execute the extracted maintained Desktop updater with fixture release responses")
     args=parser.parse_args()
     if bool(args.runtime_archive) != bool(args.previous_archive):
         parser.error("--runtime-archive and --previous-archive must be provided together")
+    if args.updater_zip and not args.runtime_archive:
+        parser.error("--updater-zip requires --runtime-archive and --previous-archive")
     asyncio.run(run(args))
 
 

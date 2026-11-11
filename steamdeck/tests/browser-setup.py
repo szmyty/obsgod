@@ -57,7 +57,10 @@ Path(os.environ['OBSGOD_TEST_BROWSER_URL']).write_text(sys.argv[1])
 """)
         probe.chmod(0o700)
         env.update(BROWSER=str(probe), OBSGOD_TEST_BROWSER_URL=str(ready))
-        process = subprocess.Popen(desktop_command(package / "Install OBSGod.desktop", as_uri=True), cwd=home,
+        # This suite qualifies the actual Desktop entry and browser/setup path.
+        # The unmodified pinned Decky frontend/installer is exercised separately
+        # by decky-transport-smoke.py against the same runtime archive.
+        process = subprocess.Popen(desktop_command(package / "Install OBSGod.desktop", as_uri=True) + ["--app-only"], cwd=home,
                                    env=env, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                    start_new_session=True)
         try:
@@ -104,12 +107,12 @@ Path(os.environ['OBSGOD_TEST_BROWSER_URL']).write_text(sys.argv[1])
             assert process.poll() is None, "Desktop terminal did not stay open after setup"
             process.communicate(b"\n",timeout=10)
             assert process.returncode==0
-            subprocess.run([sys.executable, str(package / "install.py"), "--no-launch"], env=env, check=True)
+            subprocess.run([sys.executable, str(package / "install.py"), "--no-launch", "--app-only"], env=env, check=True)
             assert all(path.read_bytes()==data for path,data in snapshots.items()), "Repeat install altered user data"
             subprocess.run(["python3", str(current / "uninstall.py"), "--purge-settings"], env=env, check=True)
             assert not (home / ".local/bin/obsgod").exists()
             assert not secret.exists()
-            print("PASS: actual desktop launcher, foreground startup, browser setup/reload, private credentials, terminal hold, repeat install, clean uninstall; fixture credentials only" + ("; actual earlier-preview upgrade preserves all user data" if snapshots else ""))
+            print("PASS: actual desktop launcher in explicit app-only test mode, foreground startup, browser setup/reload, private credentials, terminal hold, repeat install, clean uninstall; Decky installation qualified separately; fixture credentials only" + ("; actual earlier-preview upgrade preserves all user data" if snapshots else ""))
         finally:
             if process.poll() is None:
                 os.killpg(process.pid,signal.SIGTERM)
