@@ -71,11 +71,12 @@ func (c *Client) FitInput(ctx context.Context, scene, name string) error {
 
 // RuntimeStatus contains safe diagnostic fields, never stream-service settings.
 type RuntimeStatus struct {
-	Version    string `json:"obs_version"`
-	Profile    string `json:"profile"`
-	Collection string `json:"collection"`
-	Scene      string `json:"scene"`
-	Recording  bool   `json:"recording"`
+	Version          string `json:"obs_version"`
+	WebSocketVersion string `json:"websocket_version"`
+	Profile          string `json:"profile"`
+	Collection       string `json:"collection"`
+	Scene            string `json:"scene"`
+	Recording        bool   `json:"recording"`
 }
 
 func (c *Client) RuntimeStatus(ctx context.Context) (RuntimeStatus, error) {
@@ -85,6 +86,7 @@ func (c *Client) RuntimeStatus(ctx context.Context) (RuntimeStatus, error) {
 		return s, e
 	}
 	s.Version = v.ObsVersion
+	s.WebSocketVersion = v.ObsWebSocketVersion
 	p, e := empty(ctx, "GetProfileList", c.obs.Config.GetProfileList)
 	if e != nil {
 		return s, e

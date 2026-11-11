@@ -5,6 +5,7 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"io"
 	"log"
 	"net/http"
@@ -173,7 +174,77 @@ func TestCancellationAndAuthenticationFailure(t *testing.T) {
 	if bad != nil || e == nil {
 		t.Fatal("incorrect authentication accepted")
 	}
+	var connectionError *ConnectionError
+	if !errors.As(e, &connectionError) || connectionError.Kind != "authentication" {
+		t.Fatalf("authentication stage missing: %v", e)
+	}
 	if strings.Contains(e.Error(), "incorrect") {
 		t.Fatal("password echoed")
+	}
+}
+
+func TestSilentAuthenticationIsBoundedAndClosesTheTransport(t *testing.T) {
+	closed := make(chan struct{})
+	up := websocket.Upgrader{}
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		conn, err := up.Upgrade(w, r, nil)
+		if err != nil {
+			return
+		}
+		defer conn.Close()
+		// Deliberately never send Hello. The client must bound authentication,
+		// release this upgraded socket and avoid retaining the transport on failure.
+		_, _, _ = conn.ReadMessage()
+		close(closed)
+	}))
+	defer server.Close()
+	start := time.Now()
+	client, err := Connect(context.Background(), Config{Address: strings.TrimPrefix(server.URL, "http://"), Password: "do-not-echo-this", Timeout: 60 * time.Millisecond})
+	var connectionError *ConnectionError
+	if client != nil || !errors.As(err, &connectionError) || connectionError.Kind != "timeout" {
+		t.Fatalf("incorrect timeout classification: %v", err)
+	}
+	if time.Since(start) > 300*time.Millisecond {
+		t.Fatal("connection timeout did not bound authentication")
+	}
+	if strings.Contains(err.Error(), "do-not-echo-this") {
+		t.Fatal("connection error disclosed password")
+	}
+	select {
+	case <-closed:
+	case <-time.After(time.Second):
+		t.Fatal("failed authentication retained transport")
+	}
+}
+
+func TestConnectionCancellationClosesAnUpgradedTransport(t *testing.T) {
+	ready, closed := make(chan struct{}), make(chan struct{})
+	up := websocket.Upgrader{}
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		conn, err := up.Upgrade(w, r, nil)
+		if err != nil {
+			return
+		}
+		defer conn.Close()
+		close(ready)
+		_, _, _ = conn.ReadMessage()
+		close(closed)
+	}))
+	defer server.Close()
+	ctx, cancel := context.WithCancel(context.Background())
+	result := make(chan error, 1)
+	go func() {
+		_, err := Connect(ctx, Config{Address: strings.TrimPrefix(server.URL, "http://"), Timeout: time.Second})
+		result <- err
+	}()
+	<-ready
+	cancel()
+	if err := <-result; err != context.Canceled {
+		t.Fatalf("cancellation not preserved: %v", err)
+	}
+	select {
+	case <-closed:
+	case <-time.After(time.Second):
+		t.Fatal("cancelled connection retained transport")
 	}
 }

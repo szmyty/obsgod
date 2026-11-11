@@ -233,7 +233,9 @@ func writeJSON(path string, v any) error {
 }
 
 // Prepare writes only inside OBSGod's isolated Flatpak config, while it is offline.
-func Prepare(p Paths, s Settings, secret Secrets) error {
+func Prepare(p Paths, s Settings, secret Secrets) error { return prepare(p, s, secret, false) }
+
+func prepare(p Paths, s Settings, secret Secrets, visible bool) error {
 	profile := filepath.Join(p.OBSConfig, "obs-studio/basic/profiles/OBSGod")
 	for _, dir := range []string{p.OBSConfig, p.State, p.Videos, profile} {
 		if e := privateDir(dir); e != nil {
@@ -241,6 +243,9 @@ func Prepare(p Paths, s Settings, secret Secrets) error {
 		}
 	}
 	global := "[General]\nFirstRun=true\nConfigOnNewProfile=false\n\n[Basic]\nProfile=OBSGod\nProfileDir=OBSGod\nSceneCollection=OBSGod\nSceneCollectionFile=OBSGod\n\n[BasicWindow]\nPreviewEnabled=false\nSysTrayEnabled=true\nSysTrayWhenStarted=true\nWarnBeforeStartingStream=false\nWarnBeforeStoppingStream=false\n"
+	if visible {
+		global = strings.Replace(global, "SysTrayWhenStarted=true", "SysTrayWhenStarted=false", 1)
+	}
 	// OBS 30 uses global.ini; current OBS separates user preferences into
 	// user.ini. FirstRun=true suppresses its interactive auto-config wizard.
 	for _, name := range []string{"global.ini", "user.ini"} {

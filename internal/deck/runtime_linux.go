@@ -10,6 +10,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"sort"
 	"strconv"
 	"strings"
 	"syscall"
@@ -27,10 +28,22 @@ func sessionEnvironment() []string {
 	}
 	// Decky's service can retain Desktop Mode environment. The current Steam
 	// process is authoritative for the graphical session; import only this list.
-	for _, p := range ownedProcesses("steam") {
+	processes := ownedProcesses("steam")
+	sort.Slice(processes, func(i, j int) bool {
+		a, _ := strconv.Atoi(filepath.Base(processes[i]))
+		b, _ := strconv.Atoi(filepath.Base(processes[j]))
+		return a > b
+	})
+	for _, p := range processes {
 		b, e := os.ReadFile(filepath.Join(p, "environ"))
 		if e != nil {
 			continue
+		}
+		// A current Steam session replaces stale graphical/session values, including
+		// keys absent from its environment; do not combine Desktop Wayland with a
+		// different Gaming Mode X11 session.
+		for k := range sessionKeys {
+			delete(m, k)
 		}
 		for _, s := range strings.Split(string(b), "\x00") {
 			k, v, ok := strings.Cut(s, "=")
@@ -38,6 +51,7 @@ func sessionEnvironment() []string {
 				m[k] = v
 			}
 		}
+		break
 	}
 	if m["XDG_RUNTIME_DIR"] == "" {
 		m["XDG_RUNTIME_DIR"] = "/run/user/" + strconv.Itoa(os.Getuid())
@@ -72,21 +86,43 @@ func ownedProcesses(comm string) []string {
 	return result
 }
 
-func managedProcesses(p Paths) []int {
+func inspectOBSProcesses(p Paths, processes []string) ([]int, bool) {
 	var result []int
-	for _, proc := range ownedProcesses("obs") {
-		b, e := os.ReadFile(filepath.Join(proc, "environ"))
-		if e != nil {
+	unidentified := false
+	for _, proc := range processes {
+		b, err := os.ReadFile(filepath.Join(proc, "environ"))
+		if err != nil {
+			if !os.IsNotExist(err) {
+				unidentified = true
+			}
 			continue
 		}
-		for _, v := range strings.Split(string(b), "\x00") {
-			if v == "XDG_CONFIG_HOME="+p.OBSConfig {
-				id, _ := strconv.Atoi(filepath.Base(proc))
-				result = append(result, id)
+		for _, value := range strings.Split(string(b), "\x00") {
+			if value == "XDG_CONFIG_HOME="+p.OBSConfig {
+				id, err := strconv.Atoi(filepath.Base(proc))
+				if err == nil && id > 0 {
+					result = append(result, id)
+				}
 			}
 		}
 	}
-	return result
+	return result, unidentified
+}
+
+func managedProcesses(p Paths) []int {
+	processes, _ := inspectOBSProcesses(p, ownedProcesses("obs"))
+	return processes
+}
+
+func obsProcessState(p Paths) string {
+	processes, unidentified := inspectOBSProcesses(p, ownedProcesses("obs"))
+	if len(processes) > 0 {
+		return "running"
+	}
+	if unidentified {
+		return "unknown"
+	}
+	return "absent"
 }
 
 func commandOutput(ctx context.Context, name string, args ...string) ([]byte, error) {
@@ -101,19 +137,22 @@ func checkDependencies(ctx context.Context) error {
 		return errors.New("Flatpak is missing; use OBSGod on SteamOS or install Flatpak first")
 	}
 	for _, id := range []string{"com.obsproject.Studio", "com.obsproject.Studio.Plugin.Gstreamer"} {
-		if _, e := commandOutput(ctx, "flatpak", "info", "--user", id); e != nil {
+		dependencyCtx, cancel := context.WithTimeout(ctx, 3*time.Second)
+		_, err := commandOutput(dependencyCtx, "flatpak", "info", "--user", id)
+		cancel()
+		if err != nil {
 			return errors.New("install OBS and its GStreamer capture plugin using OBSGod Desktop setup")
 		}
 	}
 	return nil
 }
 
-func gamescopeReady(ctx context.Context) bool {
+func captureAvailability(ctx context.Context) string {
 	ctx, cancel := context.WithTimeout(ctx, 3*time.Second)
 	defer cancel()
 	b, e := commandOutput(ctx, "pw-dump")
 	if e != nil || len(b) > 16*1024*1024 {
-		return false
+		return "unknown"
 	}
 	var nodes []struct {
 		Info struct {
@@ -121,31 +160,72 @@ func gamescopeReady(ctx context.Context) bool {
 		} `json:"info"`
 	}
 	if json.Unmarshal(b, &nodes) != nil {
-		return false
+		return "unknown"
 	}
 	for _, n := range nodes {
 		if n.Info.Props["node.name"] == "gamescope" {
+			return "available"
+		}
+	}
+	return "unavailable"
+}
+
+func gamescopeReady(ctx context.Context) bool { return captureAvailability(ctx) == "available" }
+
+// OBS 28+ bundles WebSocket v5. Do not use Safe Mode: it disables WebSockets
+// and the third-party GStreamer capture source. Let Qt choose its backend from
+// the current session; forcing xcb conflicts with Flatpak's fallback-x11 when
+// a Wayland socket is available.
+func obsLaunchArgs(p Paths) []string {
+	return []string{"run", "--user", "--env=XDG_CONFIG_HOME=" + p.OBSConfig, "com.obsproject.Studio", "--profile", "OBSGod", "--collection", "OBSGod", "--multi", "--minimize-to-tray", "--disable-missing-files-check"}
+}
+
+func graphicalSession(env []string) bool {
+	for _, variable := range env {
+		if (strings.HasPrefix(variable, "DISPLAY=") && variable != "DISPLAY=") || (strings.HasPrefix(variable, "WAYLAND_DISPLAY=") && variable != "WAYLAND_DISPLAY=") {
 			return true
 		}
 	}
 	return false
 }
 
-func launchOBS(p Paths) (<-chan int, error) {
+func recoveryMarkerPresent(p Paths) bool {
+	// Only detect; never delete OBS crash evidence or bypass its recovery choice.
+	if info, err := os.Lstat(filepath.Join(p.OBSConfig, "obs-studio/safe_mode")); err == nil && info.Mode().IsRegular() {
+		return true
+	}
+	paths, _ := filepath.Glob(filepath.Join(p.OBSConfig, "obs-studio/.sentinel/run_*"))
+	for _, path := range paths {
+		if info, err := os.Lstat(path); err == nil && info.Mode().IsRegular() {
+			return true
+		}
+	}
+	return false
+}
+
+func launchOBS(p Paths) (<-chan int, error)        { return launchOBSWindow(p, false) }
+func launchVisibleOBS(p Paths) (<-chan int, error) { return launchOBSWindow(p, true) }
+func launchOBSWindow(p Paths, visible bool) (<-chan int, error) {
 	if e := privateDir(p.OBSConfig); e != nil {
 		return nil, e
 	}
-	cmd := exec.Command("flatpak", "run", "--user", "--env=XDG_CONFIG_HOME="+p.OBSConfig, "--env=QT_QPA_PLATFORM=xcb", "com.obsproject.Studio", "--profile", "OBSGod", "--collection", "OBSGod", "--multi", "--minimize-to-tray", "--disable-shutdown-check", "--disable-missing-files-check")
-	cmd.Env = sessionEnvironment()
-	hasDisplay := false
-	for _, variable := range cmd.Env {
-		if strings.HasPrefix(variable, "DISPLAY=") && variable != "DISPLAY=" {
-			hasDisplay = true
+	args := obsLaunchArgs(p)
+	if visible {
+		filtered := args[:0]
+		for _, arg := range args {
+			if arg != "--minimize-to-tray" {
+				filtered = append(filtered, arg)
+			}
 		}
+		args = filtered
 	}
-	if !hasDisplay {
+	cmd := exec.Command("flatpak", args...)
+	cmd.Env = sessionEnvironment()
+	if !graphicalSession(cmd.Env) {
 		logEvent(p, "session.no-display")
+		return nil, errors.New("no graphical display is available for the current Steam session; restart Gaming Mode or open the managed OBS instance in Desktop Mode")
 	}
+
 	cmd.Stdin = nil
 	output, err := os.OpenFile(os.DevNull, os.O_WRONLY, 0)
 	if err != nil {
