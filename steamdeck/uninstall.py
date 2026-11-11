@@ -27,9 +27,10 @@ def main():
     executable = home / ".local/bin/obsgod"
     if executable.is_symlink() and executable.readlink() == base / "current/obsgod":
         executable.unlink()
-    desktop = home / ".local/share/applications/obsgod-setup.desktop"
-    if desktop.is_file() and not desktop.is_symlink() and "X-OBSGod-Managed=true" in desktop.read_text():
-        desktop.unlink()
+    for name in ["obsgod-setup.desktop", "obsgod-update.desktop"]:
+        desktop = home / ".local/share/applications" / name
+        if desktop.is_file() and not desktop.is_symlink() and "X-OBSGod-Managed=true" in desktop.read_text():
+            desktop.unlink()
     if args.purge_settings:
         config = Path(os.environ.get("XDG_CONFIG_HOME", str(home / ".config"))) / "obsgod"
         obs = home / ".var/app/com.obsproject.Studio/config/obsgod"

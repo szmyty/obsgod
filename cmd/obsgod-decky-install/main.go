@@ -26,16 +26,24 @@ func main() {
 		err = io.ErrUnexpectedEOF
 	}
 	message := "Invalid installer request"
+	var report deckyinstall.Report
 	if err == nil {
-		err = deckyinstall.Install(ctx, input)
+		report, err = deckyinstall.Run(ctx, input)
 		message = "Decky confirmed the requested OBSGod version is installed and enabled"
+		if input.Operation == "probe" {
+			message = "Decky service and its connected Steam frontend are ready"
+		}
 		if err != nil {
 			message = err.Error()
 		}
 	}
 	result := map[string]any{"ok": err == nil, "message": message}
 	if err == nil {
-		result["version"] = input.Version
+		result["decky_version"] = report.DeckyVersion
+		result["frontend_connected"] = report.FrontendConnected
+		if report.Version != "" {
+			result["version"] = report.Version
+		}
 	}
 	_ = json.NewEncoder(os.Stdout).Encode(result)
 	if err != nil {
