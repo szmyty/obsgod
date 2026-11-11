@@ -1,211 +1,163 @@
-# OBSGod Steam Deck preview
+# OBSGod Steam Deck reliability candidate
 
-This preview adds Desktop setup and a Decky Quick Access toggle to OBSGod. It
-uses OBS Studio's Flatpak, an isolated OBSGod profile, and the upstream GStreamer
-plugin to capture Gamescope. It requires SteamOS/Linux x86_64 and Decky Loader.
-It does not require per-game launch options or disabling SteamOS read-only mode.
+OBSGod runs an isolated OBS Studio Flatpak and exposes streaming controls in
+Decky's Quick Access panel. Stock OBS still needs a graphical session; this is
+managed background OBS, not a headless OBS server. SteamOS/Linux x86_64 is the
+supported target. Normal use does not disable SteamOS read-only protection.
 
-**Status:** cloud Linux tests do not establish Steam Deck hardware compatibility.
-The preview is for the first real Deck test. Gamescope capture, AMD VAAPI,
-controller navigation, audio routing and Kick viewer output need verification on
-your device. See the qualification evidence attached to the
-[preview release](https://github.com/szmyty/obsgod/releases).
+**Roadmap 1 is under draft review.** Use the candidate and checksums identified
+in its draft PRs, not an older published preview as evidence of these fixes.
+Cloud tests do not establish actual Steam Deck, Flatpak, Gamescope, AMD encoder,
+controller, audio or Kick compatibility. Required device checks remain open.
 
-## Install tomorrow morning
+## Install or upgrade
 
-1. In **Desktop Mode**, open [OBSGod releases](https://github.com/szmyty/obsgod/releases)
-   and download the Steam Deck preview archive ending in `_linux_amd64.tar.gz`.
-   Extract it in Downloads.
-2. Open **Install OBSGod.desktop** in the extracted folder. Choose **Execute** if
-   KDE asks. If your file manager opens it as text, open Konsole in that folder
-   and run `python3 install.py`. Do not use sudo.
-   Keep the terminal open until you choose **Finish and close setup** in the
-   browser. The launcher waits for Enter afterward so any error stays visible.
-   If the browser does not open automatically, use the local setup link printed
-   in the terminal. Do not share that link.
-3. The local **OBSGod Setup** page opens in your browser. Click **Install / check
-   OBS + capture plugin**. The initial Flathub download can take several minutes
-   and a few GB. The installer uses user Flatpaks, including when a system OBS
-   already exists.
-4. Paste your Kick dashboard's **server URL** and **secret stream key** into the
-   separate fields. Keep **4500 kbps, 30 fps, AMD hardware H.264** for the first
-   attempt. Microphone is **off by default**. Save settings and finish setup.
-5. If Decky is not installed, follow [Decky's official installation](https://decky.xyz/).
-   Switch to **Gaming Mode**. Press **••• → Decky → Settings → General**, enable
-   **Developer mode**, then open **Developer → Install Plugin from ZIP**. Select
-   `obsgod-decky.zip` from the extracted download folder. The installed copy also
-   lives at `/home/deck/.local/share/obsgod/current/obsgod-decky.zip` for the default
-   `deck` user.
-6. **Open a game**. Press **••• → Decky → OBSGod → Make 10-second test clip**.
-   This does not broadcast. Return to Desktop Mode and watch the saved MKV in
-   **Videos/OBSGod** to check the game picture, game audio and optional microphone.
-7. Return to Gaming Mode, open your game and choose **Start streaming**. Watch
-   your Kick channel on another device to verify the live picture and sound.
-   Use **Stop streaming / cancel** when finished.
+1. In **Desktop Mode**, download the reviewed candidate archive ending in
+   `_linux_amd64.tar.gz` and extract the entire archive. Leave an existing OBSGod
+   installation in place; settings and the stream key should be preserved.
+2. Make sure **Decky Loader** is installed and Steam is running normally in
+   Desktop Mode. Decky is part of the **••• Quick Access panel** in Gaming Mode;
+   it is not a normal Desktop Applications entry. If Decky is missing or its
+   frontend is unavailable, the installer stops with a concrete recovery step.
+   Follow [Decky's official installation](https://decky.xyz/) if needed, then
+   rerun OBSGod. Do not manually delete plugin directories or run OBSGod as root.
+3. Open **Install OBSGod.desktop** in the extracted folder and choose **Execute**
+   if asked. Keep the terminal open. The installer checks dependencies, verifies
+   its files and installs both the app and the exact bundled OBSGod Decky plugin.
+   Its final result stays visible; errors must not disappear with the terminal.
+4. In **OBSGod Setup**, enter the server URL and secret key from your Kick
+   dashboard. For the initial test use 4500 kbps, 30 fps and AMD H.264; switch to
+   software H.264 if hardware encoding fails. Microphone is off unless selected.
+   Save and choose **Finish and close setup**. Existing settings do not require
+   key re-entry. Never share the private setup link or the key.
+5. Return to **Gaming Mode**, then open **••• → Decky → OBSGod**. Make a
+   **10-second test clip** first. This never broadcasts, so a red streaming dot
+   during the clip is normal. The clip is saved in **Videos/OBSGod**; check its
+   video and sound in Desktop Mode before broadcasting.
+6. Choose **Start streaming**, then watch the Kick channel on another device.
+   Confirm both picture and sound. Use **Cancel operation** while starting or
+   **Stop streaming** when output is active. Unknown output retains a recovery
+   Stop action; inspect OBS and the channel if stopping cannot be confirmed.
 
-Decky lives in the **••• Quick Access panel**, which is on the right side on a
-standard Steam Deck. The STEAM button's left-side menu is a different menu.
-This preview does not install itself into Decky's public plugin store.
+A game is not required for OBS lifecycle or its control connection. Actual
+capture must still deliver usable nonblank frames before a test or broadcast
+starts. Some Gamescope versions cannot capture the Steam UI with no game; a
+blank/unavailable feed is an explicit platform blocker, not proof that OBS
+failed to launch. Custom idle images/videos belong to Roadmap 2.
 
-If an older preview's launcher flashes closed, open a terminal in the extracted
-folder and run `python3 install.py --no-launch`. If that succeeds, open
-**OBSGod Setup** from Applications, or run
-`python3 ~/.local/share/obsgod/current/setup.py`. Once the browser page opens,
-continue setup there; reinstalling is unnecessary.
+If the launcher is opened as text, open Konsole in the extracted folder and run
+`python3 install.py`. `--no-launch` installs without opening setup. Use the normal
+unified installer for a complete install; an explicitly requested app-only
+repair does not establish that Decky's plugin was upgraded.
 
-## Status indicator
+## Live state and diagnostics
+
+Status updates automatically. **Refresh status** remains available for a manual
+resynchronization. The icon and panel use the same observations:
 
 | Indicator | Meaning |
 | --- | --- |
 | Green — OBS streaming | OBS reports active output, no reconnect, and recent byte progress. |
-| Red — Stopped | OBS reports inactive output, or its managed process/port is offline. |
-| Amber — Connecting / stalled | Output is reconnecting or byte progress stopped. |
-| Amber — Check OBS | The output state could not be confirmed. It may still be live. |
-| Amber — Setup required | Save URL/key in Desktop setup first. |
+| Red — Stopped | Output is confirmed inactive, or the managed process/listener is absent. |
+| Amber — Connecting / stalled | Output is reconnecting or recent byte progress stopped. |
+| Amber — Check OBS | Output is unconfirmed; it may still be live. |
+| Amber — Setup required | Complete local configuration. |
 
-The icon and panel reflect the same state. Green is **OBS output health**, not a
-Kick API confirmation. An ingest connection cannot prove that viewers see the
-right game or hear your microphone. A nonblank screenshot is required before a
-new broadcast; a game loading screen may need a few seconds before retrying.
+A click is not proof of a stream transition. Controls follow current state;
+repeated requests are coalesced and successful stream notifications follow
+confirmed transitions. Action errors do not overwrite a still-live stream.
+Green describes OBS output health, not what a Kick viewer receives.
 
-## Runtime and settings
+The **Diagnostic console** below Refresh shows startup stages and persists the
+latest 100 filtered events. **Copy console log** copies all retained pages,
+including UTC timestamps, severity and plugin version. Keys, URLs and raw OBS
+output are excluded. Copying does not change output state. If copying fails,
+the panel says so and leaves the console selectable. Logs live beneath
+`~/.local/state/obsgod/diagnostics/` (or `$XDG_STATE_HOME/obsgod`).
 
-Configure in Desktop Mode, but **start inside Gaming Mode**. Switching sessions
-may terminate OBS. This preview makes no promise that a Desktop stream survives
-the mode transition. It starts a fresh managed OBS as needed and uses the current
-Steam session's display, D-Bus and audio environment.
+For startup failure, copy the log while still in the same Gaming Mode session.
+Report the visible error and installed versions. Switching to Desktop may end
+OBS, so its absence afterward does not prove launch never occurred. Startup has
+separate bounded connection and cold-start budgets; a timeout is not a diagnosis.
+A recovery/safe-mode dialog, display failure, disabled WebSocket or authentication
+mismatch must be distinguished through observed diagnostics. Never start a
+second unmanaged OBS instance to work around an occupied control port.
 
-Settings live in `~/.config/obsgod/deck.json` (or `$XDG_CONFIG_HOME/obsgod`). Keys
-and a random OBS WebSocket password live in `secrets.json` with mode 0600 inside
-a mode 0700 directory. OBS maintains its own service settings inside:
+## OBS, capture and settings
 
-`~/.var/app/com.obsproject.Studio/config/obsgod/obs-studio/`
+Compatible OBS 28+ includes **obs-websocket**. OBSGod verifies the installed OBS
+and capture dependencies and maintains an enabled local WebSocket listener with
+a random password; a separate WebSocket plugin download is normally unnecessary.
+User-facing password change/reset controls are deferred to Roadmap 2.
 
-This is separate from your ordinary OBS configuration. These local files are not
-encrypted against your own account or a privileged local user. Never attach them
-to an issue. The setup HTTP server binds only to `127.0.0.1`, requires a random
-per-run token for API access and rejects other website origins. Finish setup to
-close that server. It does not become a background service.
+Configure in Desktop Mode and start inside Gaming Mode. Session switching may
+terminate OBS; Desktop-to-Gaming stream continuity is not promised without
+recorded platform evidence. The launcher follows the current Steam graphical,
+D-Bus and audio session without forcing an incompatible Qt backend.
 
-The OBS connection uses localhost port **4457**, a random password, and OBS's
-normal authenticated WebSocket listener. OBS itself may listen on other network
-interfaces; no router port forwarding is needed. Do not expose that port publicly.
+Settings live in `~/.config/obsgod/deck.json`; the stream key and generated OBS
+password are in `secrets.json` with private permissions. Managed OBS files live
+under `~/.var/app/com.obsproject.Studio/config/obsgod/obs-studio/`. Ordinary OBS
+profiles are separate. Never edit secrets into command arguments or support logs.
 
-Stop capture before changing settings. In Desktop setup, use **Close idle OBS /
-apply settings**, save changes, then start again in Gaming Mode. That button
-refuses to close an active recording or stream. Stopping a broadcast leaves the
-managed OBS available and switches to an empty idle scene to release capture.
-Plugin unload requests a stream stop; a crash or lost connection still requires
-checking OBS/Kick. Sleep, network loss and session changes are not continuity
-guarantees.
+Gamescope feeds the separately installed obs-gstreamer plugin. Video, game audio
+and microphone are independent checks. Upstream black-frame limitations include
+[Gamescope #2508](https://github.com/ValveSoftware/gamescope/issues/2508) and
+[#1898](https://github.com/ValveSoftware/gamescope/issues/1898). OBSGod must refuse
+a new broadcast from blank capture; it cannot declare unsupported Steam UI
+capture working by changing a message.
 
-Output is H.264/AAC, 1280×720, 30 fps by default, 2-second keyframes, 4500 kbps.
-The game fits inside the canvas without stretching. The hardware preset uses
-AMD VAAPI on `/dev/dri/renderD128`; software x264 is an explicit fallback and may
-reduce game performance. Capture follows the default game-audio output and, when
-enabled, the default microphone. Changing devices during a stream is unqualified.
-OBS's initial global microphone inputs are muted automatically.
+## Updates and recovery
 
-## Troubleshooting
+**Check for updates** is at the bottom of the panel. It shows the installed and
+latest compatible runtime versions, no-update, offline or failure results. A
+check never replaces files or interrupts output. Updater-only releases are not
+mistaken for new streaming runtimes. Historical immutable same-repository
+artifacts and normal GitHub release assets are validated through their manifests
+and checksums; downloads are never accepted from arbitrary repositories.
 
-- **Find the full error:** open OBSGod in Decky and read **Diagnostic console**
-  directly below **Refresh status**. It updates while an operation is running,
-  retains the last 100 events across reloads/updates and shows the newest first.
-  Use **Older events** / **Latest events** to read history and **Clear console**
-  to erase it without stopping a stream. **Copy console log** copies all retained
-  events across every page, with timestamps and the plugin version, for pasting
-  into a support message. It reports success or clipboard failure without
-  changing streaming state. Logs use fixed diagnostic messages and
-  numeric OBS/launch codes; keys, server URLs and raw OBS output are excluded.
-  Events live at `~/.local/state/obsgod/diagnostics/events.json` (or beneath
-  `$XDG_STATE_HOME/obsgod`) with private file permissions.
-  A local ten-second recording does not broadcast, so its streaming dot stays red.
-  A game must be open in Gaming Mode before testing; a timeout by itself does
-  not tell us what failed. Report the stage/error from the console.
-- **OBS will not start / missing input:** rerun setup's dependency installation.
-  Both OBS and `com.obsproject.Studio.Plugin.Gstreamer` must be user Flatpaks.
-  Run diagnostics. If another process uses 4457, resolve that conflict first.
-- **No visible frames:** start a game first; try SDR and an updated SteamOS stable
-  build. Some Gamescope versions have upstream black-frame issues, including
-  [#2508](https://github.com/ValveSoftware/gamescope/issues/2508) and
-  [#1898](https://github.com/ValveSoftware/gamescope/issues/1898). OBSGod will refuse
-  a new broadcast if it cannot see nonblank capture. It cannot repair Gamescope.
-- **Encoder failure:** stop, return to Desktop setup, close idle managed OBS,
-  select software H.264, save and retry a local test. This uses more CPU.
-- **No sound:** check the Deck's default output/microphone, enable microphone in
-  setup if wanted, and make another local clip. Do not infer audio from green.
-- **Start failed or status unknown:** press Stop. If stop cannot be confirmed,
-  inspect OBS and your Kick dashboard immediately. A missing connection is not
-  proof that streaming stopped.
-- **OBS appears as another running app:** this is an ordinary GUI OBS process
-  launched within Gaming Mode. SteamOS can list it. Do not force-quit it during a
-  stream; use the panel's Stop first.
+To apply an update, stop streaming and recording, enter **Desktop Mode**, and
+open **Update OBSGod** from Applications → Multimedia, or the bundled
+**Update OBSGod.desktop** (also available as `Update OBSGod.sh`). The updater checks output safety, downloads/verifies a
+compatible candidate and runs the same unified installer. It preserves key,
+settings, media and unrelated plugins. Repeated installation and same-version
+repair are supported; a partial failure must show what changed and how to retry
+or recover. Do not assume Decky's own Reinstall button fetches a newer OBSGod
+runtime.
 
-## Update / uninstall
+Keep Steam's normal Desktop frontend available for Decky's supported installer
+bridge. The earlier generic instruction to close Big Picture was not a proven
+cause of the owner's failure. The new transport preserves the frontend's
+WebSocket instead of taking its single connection. Cloud protocol fixtures do
+not prove the actual Steam frontend works; that remains a device check.
 
-For an update without terminal commands or manually replacing the plugin,
-download the [one-click updater](https://github.com/szmyty/obsgod/releases/tag/v0.1.0-deck.4-updater.1).
-In **Desktop Mode**, extract the entire updater ZIP and open **Update
-OBSGod.desktop**. Keep Steam's Big Picture window closed until it finishes.
-Choose **Execute** if Dolphin asks. The updater checks/downloads the pinned,
-qualified preview **0.1.0-deck.4**, closes idle managed OBS after confirming its
-output is stopped, checks user Flatpak dependencies, backs up saved preferences
-and credentials privately, installs the Desktop app and replaces/enables OBSGod
-using Decky's authenticated local installer. It verifies the resulting plugin
-version and preserves other plugins' relative order. No sudo, password entry,
-manual plugin removal or stream-key re-entry is needed for an existing setup.
+To uninstall, remove OBSGod through Decky and run
+`python3 ~/.local/share/obsgod/current/uninstall.py`.
+Add `--purge-settings` only to delete OBSGod credentials and isolated OBS settings.
+Recordings and executable backups remain. OBS/capture Flatpaks remain separately
+installed and can be removed through Discover if no longer wanted.
 
-This updates **OBSGod**, using the Decky Loader you already installed. It does not
-install Decky Loader itself. If output cannot be confirmed stopped, it pauses
-with instructions instead of killing OBS. If the plugin update fails after the
-Desktop app installs, it reports that partial state and can be rerun. A completion
-or error dialog keeps the result visible; if no dialog tool is available, close
-the terminal window when it finishes. Fresh setups open the local settings page
-for their own URL/key. This updater does not establish a fix for the reported OBS
-readiness timeout; use **Copy console log** if a subsequent game test still fails.
+## Required device acceptance
 
-For manual updates:
+Record the candidate source SHA, archive/plugin hashes, SteamOS/device model,
+OBS/GStreamer/Decky/Steam versions, encoder settings and exact outcomes:
 
-Download/extract the next preview, stop streaming, close idle managed OBS, run its
-installer, then use Decky's **Install Plugin from ZIP** to replace OBSGod with
-the new `obsgod-decky.zip`. There is no need to uninstall first or enter the key
-again. The Desktop installation and Decky ZIP are separate updates: check the
-plugin version shown in its console after replacing the ZIP. Decky itself is
-still installed separately.
+- Fresh install, reinstall, old-preview upgrade, interrupted update and recovery;
+  verify app/plugin versions, preserved key/settings/media and other plugins.
+- Cold/warm startup, authentication, early exit, bounded failure, cancellation,
+  OBS restart and output-state recovery.
+- Local clip with moving 720p video, game sound and the selected microphone
+  policy; no credentials in ordinary output or process arguments.
+- Game-open and game-closed capture, launch/exit, QAM reopen, controller focus,
+  reboot and the supported session topology. Record unsupported cases explicitly.
+- Start, repeated clicks, Stop and Cancel; red only after confirmed stop, amber
+  for unknown/reconnecting/stalled output, no duplicate success notifications.
+- Actual Kick viewer picture/sound on a second device, plus game FPS/encoder load.
+- Update checks while streaming do not mutate files; applying while active,
+  recording or unconfirmed is blocked. Verify no-update, offline, bad checksum,
+  interrupted apply, same-version repair and recovery.
 
-Repeat installation and same-version replacement are supported. The installer
-verifies and stages the payload, preserves earlier release directories, and
-switches the current release after preparing the application entries. A failed
-activation rolls back those entries. A damaged installed copy is repaired using
-a fresh directory; existing processes keep their original files. Settings, keys,
-recordings, diagnostics and ordinary OBS scenes are preserved. Existing
-`~/.local/bin/obsgod` executables are backed up under
-`~/.local/share/obsgod/backups/`; the installer never overwrites their contents.
-
-Uninstall the plugin through Decky, then run:
-
-```sh
-python3 ~/.local/share/obsgod/current/uninstall.py
-```
-
-Add `--purge-settings` to also remove OBSGod credentials and isolated OBS settings.
-Recordings and executable backups are always preserved. OBS/GStreamer Flatpaks
-remain installed and can be removed through Discover if no longer wanted.
-
-## Acceptance on your Deck
-
-Record SteamOS, Deck LCD/OLED, OBS, GStreamer plugin and Decky versions. Check:
-
-- Install/update/uninstall without sudo or changing SteamOS read-only settings.
-- Settings persist across Desktop → Gaming Mode and a reboot; stream stays off
-  until explicitly started.
-- Test clip contains moving game video at 720p, game audio, and only the selected
-  microphone policy. No key appears in process arguments or ordinary output.
-- Start reaches green and the Kick viewer sees/hears correct output.
-- Game launch/exit, QAM close/reopen and controller focus remain usable.
-- Repeated Start/Stop is safe. Red follows confirmed stop; unknown stays amber.
-- Bad key, disconnected network, OBS exit and cancellation show truthful status
-  and allow recovery. Do not perform failure tests during a public stream.
-- Measure game FPS / encoder load and confirm any selected 60 fps preset.
-
-Those results, not cloud builds, qualify #10's real Gaming Mode acceptance.
+Do not run failure tests during an unintended public broadcast. Passed cloud
+checks cannot close #10, #21 or #22 without the required actual-device evidence
+and owner review. See [qualification](steam-deck-qualification.md) for the exact
+candidate matrix and remaining gates.

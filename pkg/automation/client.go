@@ -59,6 +59,28 @@ func (e *ConnectionError) Error() string {
 	}
 }
 
+func connectionFailureKind(err error, contextErr error, deadline, completedAt time.Time) string {
+	// goobs owns an authentication timer as well as our attempt context. Its
+	// untyped timeout can win the scheduling race before Context.Err is set.
+	// Classify against the monotonic attempt deadline, never server/error text.
+	if contextErr != nil || !completedAt.Before(deadline) || errors.Is(err, context.DeadlineExceeded) {
+		return "timeout"
+	}
+	var closeErr *websocket.CloseError
+	if errors.As(err, &closeErr) && closeErr.Code == 4009 {
+		return "authentication"
+	}
+	var timeout net.Error
+	if errors.As(err, &timeout) && timeout.Timeout() {
+		return "timeout"
+	}
+	var opErr *net.OpError
+	if errors.As(err, &opErr) {
+		return "refused"
+	}
+	return "transport"
+}
+
 // Connect establishes an authenticated connection with bounded readiness.
 func Connect(ctx context.Context, cfg Config) (*Client, error) {
 	if _, _, err := net.SplitHostPort(cfg.Address); err != nil {
@@ -69,6 +91,7 @@ func Connect(ctx context.Context, cfg Config) (*Client, error) {
 	}
 	attempt, cancel := context.WithTimeout(ctx, cfg.Timeout)
 	defer cancel()
+	deadline, _ := attempt.Deadline()
 	// goobs does not expose a half-open connection if authentication fails.
 	// Own the transport so cancellation and unsuccessful handshakes release it.
 	var mu sync.Mutex
@@ -119,26 +142,16 @@ func Connect(ctx context.Context, cfg Config) (*Client, error) {
 		}
 		return nil, &ConnectionError{Kind: "timeout"}
 	case r := <-ch:
-		if r.err != nil || attempt.Err() != nil {
+		completedAt := time.Now()
+		if r.err != nil || attempt.Err() != nil || !completedAt.Before(deadline) {
+			if r.client != nil {
+				_ = r.client.Disconnect()
+			}
 			closeTransport()
 			if ctx.Err() != nil {
 				return nil, ctx.Err()
 			}
-			kind := "transport"
-			var closeErr *websocket.CloseError
-			var opErr *net.OpError
-			switch {
-			case errors.As(r.err, &closeErr) && closeErr.Code == 4009:
-				kind = "authentication"
-			case attempt.Err() != nil:
-				kind = "timeout"
-			case errors.As(r.err, &opErr):
-				if opErr.Timeout() {
-					kind = "timeout"
-				} else {
-					kind = "refused"
-				}
-			}
+			kind := connectionFailureKind(r.err, attempt.Err(), deadline, completedAt)
 			return nil, &ConnectionError{Kind: kind}
 		}
 		// Stop the cancellation hook before canceling the attempt context. The

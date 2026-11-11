@@ -19,13 +19,17 @@ import (
 )
 
 type fakeOBS struct {
-	mu             sync.Mutex
-	active         bool
-	bytes          float64
-	starts, stops  int
-	rejectSettings bool
-	hangStatus     bool
-	authed         bool
+	mu              sync.Mutex
+	active          bool
+	bytes           float64
+	starts, stops   int
+	rejectSettings  bool
+	hangStatus      bool
+	authed          bool
+	recording       bool
+	recordStopping  bool
+	recordStops     int
+	recordStopPolls int
 }
 
 func (f *fakeOBS) server(t *testing.T) *httptest.Server {
@@ -89,6 +93,20 @@ func (f *fakeOBS) server(t *testing.T) *httptest.Server {
 			case "StopStream":
 				f.stops++
 				f.active = false
+			case "GetRecordStatus":
+				if f.recordStopping {
+					if f.recordStopPolls > 0 {
+						f.recordStopPolls--
+					} else {
+						f.recording = false
+					}
+				}
+				data = map[string]any{"outputActive": f.recording, "outputBytes": 4096}
+			case "StopRecord":
+				f.recordStops++
+				f.recordStopping = true
+				data = map[string]any{"outputPath": "/fixture/finalized-recording.mkv"}
+
 			case "SetStreamServiceSettings":
 				if f.rejectSettings {
 					code = 600
@@ -246,5 +264,58 @@ func TestConnectionCancellationClosesAnUpgradedTransport(t *testing.T) {
 	case <-closed:
 	case <-time.After(time.Second):
 		t.Fatal("cancelled connection retained transport")
+	}
+}
+
+func TestStopRecordingWaitsForConfirmedMuxerShutdown(t *testing.T) {
+	f := &fakeOBS{recording: true, recordStopPolls: 3}
+	c := dialFixture(t, f)
+	start := time.Now()
+	path, err := c.StopRecording(context.Background())
+	if err != nil || path != "/fixture/finalized-recording.mkv" {
+		t.Fatalf("recording shutdown failed: %q %v", path, err)
+	}
+	f.mu.Lock()
+	defer f.mu.Unlock()
+	if f.recording || f.recordStops != 1 {
+		t.Fatalf("returned before recording stopped: active=%v stops=%d", f.recording, f.recordStops)
+	}
+	if time.Since(start) < 250*time.Millisecond {
+		t.Fatal("returned on StopRecord acknowledgement without waiting for inactive output")
+	}
+}
+
+func TestStopRecordingCannotClaimSuccessWhenShutdownIsUnconfirmed(t *testing.T) {
+	f := &fakeOBS{recording: true, recordStopPolls: 1000}
+	c := dialFixture(t, f)
+	ctx, cancel := context.WithTimeout(context.Background(), 40*time.Millisecond)
+	defer cancel()
+	path, err := c.StopRecording(ctx)
+	if !errors.Is(err, context.DeadlineExceeded) || path != "" {
+		t.Fatalf("unconfirmed recording reported success: %q %v", path, err)
+	}
+	f.mu.Lock()
+	defer f.mu.Unlock()
+	if !f.recording || f.recordStops != 1 {
+		t.Fatal("fixture did not exercise asynchronous recording shutdown")
+	}
+}
+
+func TestConnectionTimeoutClassificationDoesNotDependOnTimerScheduling(t *testing.T) {
+	deadline := time.Now()
+	// A generic library error arriving at the deadline must be a timeout even
+	// before the attempt context's timer goroutine has set Err. No free-form
+	// error text is parsed or exposed to make that decision.
+	err := errors.New("untrusted-server-data-must-not-affect-classification")
+	for _, completedAt := range []time.Time{deadline, deadline.Add(time.Microsecond)} {
+		if kind := connectionFailureKind(err, nil, deadline, completedAt); kind != "timeout" {
+			t.Fatalf("expired attempt classified as %q", kind)
+		}
+	}
+	if kind := connectionFailureKind(err, nil, deadline, deadline.Add(-time.Microsecond)); kind != "transport" {
+		t.Fatalf("early generic failure misclassified as %q", kind)
+	}
+	if kind := connectionFailureKind(context.DeadlineExceeded, nil, deadline, deadline.Add(-time.Second)); kind != "timeout" {
+		t.Fatalf("wrapped context timeout misclassified as %q", kind)
 	}
 }

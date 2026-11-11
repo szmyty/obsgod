@@ -95,12 +95,31 @@ class UpdateSafety(unittest.TestCase):
             self.assertFalse((self.home / "outside").exists())
 
     def test_unknown_starting_active_and_recording_output_never_stopped_by_updater(self):
-        for state in [{"ok": False, "state": "unknown"}, {"ok": True, "state": "starting"}, {"ok": True, "state": "streaming", "stream": {"active": True}}, {"ok": True, "state": "stopped", "recording": True}, {"ok": True, "state": "stopped", "output_known": False}, {"ok": True, "state": "stopped", "operation": "start"}]:
+        for state in [{"ok": False, "state": "unknown"}, {"ok": True, "state": "starting"}, {"ok": True, "state": "streaming", "stream": {"active": True}}, {"ok": True, "state": "stopped", "recording": True}, {"ok": True, "state": "stopped", "output_known": False}, {"ok": True, "state": "stopped", "operation": "start"}, {"ok": True, "state": "stopped", "operation": {"state": "starting"}}, {"ok": True, "state": []}, {"ok": True, "state": "stopped", "stream": []}]:
             bridge = Mock()
             bridge.run_cli.return_value = state
             with self.assertRaisesRegex(updater.UpdateError, "Update blocked"):
                 updater.require_idle(bridge)
             self.assertEqual([call.args[0] for call in bridge.run_cli.call_args_list], ["status"])
+
+    def test_wrong_manifest_json_type_returns_machine_readable_error(self):
+        old = self.base / "releases/old"
+        old.mkdir(parents=True)
+        (self.base / "current").symlink_to(old)
+        saved = old / "manifest.json"
+        for malformed in [[], None, 1, "valid-json-wrong-type", {}, {"version": []}]:
+            saved.write_text(json.dumps(malformed))
+            with patch.object(updater, "verify_bundle"), patch.object(updater.sys, "argv", ["update.py", "--check", "--json"]):
+                output = io.StringIO()
+                with contextlib.redirect_stdout(output):
+                    code = updater.main()
+            self.assertEqual(code, 1)
+            self.assertEqual(json.loads(output.getvalue())["state"], "error")
+        package = self.home / "malformed-bundle"
+        package.mkdir()
+        (package / "manifest.json").write_text("[]")
+        with patch.object(updater, "ROOT", package), self.assertRaisesRegex(updater.UpdateError, "manifest is invalid"):
+            updater.verify_bundle()
 
     def test_no_update_does_not_download_install_or_downgrade(self):
         release, candidate, _ = self.fixture()

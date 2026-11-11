@@ -37,6 +37,8 @@ def verify_bundle():
     if saved.is_symlink() or not saved.is_file() or saved.stat().st_size > 64 * 1024:
         raise UpdateError("Extract the entire OBSGod archive first, then open Update OBSGod.desktop inside that folder.")
     manifest = json.loads(saved.read_text())
+    if not isinstance(manifest, dict):
+        raise UpdateError("The updater manifest is invalid. Extract a fresh complete archive.")
     files = manifest.get("files")
     required = {"update.py", "releases.py", "Update OBSGod.desktop", "Update OBSGod.sh"}
     if not isinstance(files, dict) or not required.issubset(files) or len(files) > 64 or manifest.get("platform") != "linux/amd64":
@@ -71,7 +73,10 @@ def installed_release(home):
     saved = current / "manifest.json"
     if saved.is_symlink() or not saved.is_file() or saved.stat().st_size > 64 * 1024:
         raise UpdateError("The installed manifest is unavailable. Use the complete installer to repair the current version.")
-    return current, json.loads(saved.read_text())
+    manifest = json.loads(saved.read_text())
+    if not isinstance(manifest, dict) or not isinstance(manifest.get("version"), str) or not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?", manifest["version"]):
+        raise UpdateError("The installed manifest is invalid. Use the complete installer to repair the current version.")
+    return current, manifest
 
 
 def check(channel="preview"):
@@ -114,7 +119,7 @@ def unpack_payload(archive, destination, version):
 
 def require_idle(bridge):
     state = bridge.run_cli("status", timeout=6)
-    if not isinstance(state, dict) or not state.get("ok") or state.get("state") not in {"stopped", "setup"} or state.get("stream", {}).get("active") or state.get("recording") or state.get("output_known") is False or state.get("operation") not in {None, "", "idle"}:
+    if not isinstance(state, dict) or not state.get("ok") or state.get("state") not in ("stopped", "setup") or not isinstance(state.get("stream", {}), dict) or state.get("stream", {}).get("active") or state.get("recording") or state.get("output_known") is False or state.get("operation") not in (None, "", "idle"):
         raise UpdateError("Update blocked: OBS output is active, starting, recording or unconfirmed. Use Stop/cancel, wait for confirmed idle, then run Update OBSGod in Desktop Mode.")
     # No implicit Stop: the installer rechecks and closes only verified idle OBS.
 

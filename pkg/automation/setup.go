@@ -238,17 +238,33 @@ func (c *Client) StartRecording(ctx context.Context) error {
 		}
 	}
 }
+
+// StopRecording waits for OBS's asynchronous muxer shutdown to finish. A
+// successful StopRecord response alone does not establish inactive recording.
 func (c *Client) StopRecording(ctx context.Context) (string, error) {
-	r, e := empty(ctx, "GetRecordStatus", c.obs.Record.GetRecordStatus)
-	if e != nil {
-		return "", e
+	ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
+	defer cancel()
+	r, err := empty(ctx, "GetRecordStatus", c.obs.Record.GetRecordStatus)
+	if err != nil {
+		return "", err
 	}
 	if !r.OutputActive {
 		return "", nil
 	}
-	s, e := empty(ctx, "StopRecord", c.obs.Record.StopRecord)
-	if e != nil {
-		return "", e
+	stopped, err := empty(ctx, "StopRecord", c.obs.Record.StopRecord)
+	if err != nil {
+		return "", err
 	}
-	return s.OutputPath, nil
+	for {
+		r, err = empty(ctx, "GetRecordStatus", c.obs.Record.GetRecordStatus)
+		if err != nil {
+			return "", err
+		}
+		if !r.OutputActive {
+			return stopped.OutputPath, nil
+		}
+		if err := pause(ctx, 100*time.Millisecond); err != nil {
+			return "", err
+		}
+	}
 }

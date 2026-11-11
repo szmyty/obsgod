@@ -8,6 +8,16 @@ process.stdin.on("end", async () => {
   const digest = "a".repeat(64);
   let order = ["Alpha", "OBSGod", "Beta"];
   let confirms = 0;
+  let pendingConfirmation;
+  let settleConfirmation;
+  if (mode === "confirm-timeout" || mode === "confirm-timeout-reject") {
+    // Exercise the actual timeout path without a one-minute test delay.
+    const originalSetTimeout = global.setTimeout;
+    global.setTimeout = (callback, milliseconds, ...args) => originalSetTimeout(callback, Math.min(milliseconds, 5), ...args);
+    pendingConfirmation = new Promise((resolve, reject) => {
+      settleConfirmation = mode === "confirm-timeout-reject" ? reject : resolve;
+    });
+  }
   const prompts = [];
   const original = (...args) => {prompts.push(args[0]);};
   const listeners = new Map([[event, new Set([original])]]);
@@ -30,6 +40,7 @@ process.stdin.on("end", async () => {
       if (route === "utilities/confirm_plugin_install") {
         assert.deepEqual(args,["expected-request"]); confirms++;
         if (mode === "reject") throw Error("fixture-secret do not expose");
+        if (pendingConfirmation && confirms === 1) await pendingConfirmation;
         order=["Alpha","Beta"];
         return;
       }
@@ -40,6 +51,24 @@ process.stdin.on("end", async () => {
   const result = JSON.parse(await eval(source));
   assert.equal(backend.ws,socket,"Steam frontend connection replaced");
   assert.deepEqual(Array.from(listeners.get(event)),[original],"event listeners not restored");
+  if (mode === "confirm-timeout" || mode === "confirm-timeout-reject") {
+    assert.deepEqual(result,{ok:false,code:"install-unconfirmed"});
+    assert.equal(confirms,1);
+    assert(window.__obsgodInstallerRunning,"timed-out backend mutation lost its guard");
+    const again = JSON.parse(await eval(source));
+    assert.deepEqual(again,{ok:false,code:"busy"});
+    assert.equal(confirms,1,"retry started another mutation while the original was pending");
+    settleConfirmation(mode === "confirm-timeout-reject" ? new Error("fixture-secret late rejection") : undefined);
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(window.__obsgodInstallerRunning,undefined,"settled mutation never released its guard");
+    const after = JSON.parse(await eval(source));
+    assert.equal(after.ok,true,"settled mutation prevented a safe retry");
+    assert.equal(confirms,2);
+    assert.equal(window.__obsgodInstallerRunning,undefined);
+    assert.deepEqual(Array.from(listeners.get(event)),[original]);
+    assert(!JSON.stringify(result).includes("fixture-secret"));
+    return;
+  }
   assert.equal(window.__obsgodInstallerRunning,undefined);
   if (["install","probe"].includes(mode)) assert.equal(result.ok,true);
   else assert.equal(result.ok,false);
