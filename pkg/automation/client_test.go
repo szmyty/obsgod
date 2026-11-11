@@ -300,3 +300,22 @@ func TestStopRecordingCannotClaimSuccessWhenShutdownIsUnconfirmed(t *testing.T) 
 		t.Fatal("fixture did not exercise asynchronous recording shutdown")
 	}
 }
+
+func TestConnectionTimeoutClassificationDoesNotDependOnTimerScheduling(t *testing.T) {
+	deadline := time.Now()
+	// A generic library error arriving at the deadline must be a timeout even
+	// before the attempt context's timer goroutine has set Err. No free-form
+	// error text is parsed or exposed to make that decision.
+	err := errors.New("untrusted-server-data-must-not-affect-classification")
+	for _, completedAt := range []time.Time{deadline, deadline.Add(time.Microsecond)} {
+		if kind := connectionFailureKind(err, nil, deadline, completedAt); kind != "timeout" {
+			t.Fatalf("expired attempt classified as %q", kind)
+		}
+	}
+	if kind := connectionFailureKind(err, nil, deadline, deadline.Add(-time.Microsecond)); kind != "transport" {
+		t.Fatalf("early generic failure misclassified as %q", kind)
+	}
+	if kind := connectionFailureKind(context.DeadlineExceeded, nil, deadline, deadline.Add(-time.Second)); kind != "timeout" {
+		t.Fatalf("wrapped context timeout misclassified as %q", kind)
+	}
+}
