@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Install OBSGod
+Comment=Install the Steam Deck streaming preview to your home directory
+Exec=python3 -c "import os,sys,subprocess; from urllib.parse import unquote,urlparse; p=sys.argv[1]; p=unquote(urlparse(p).path) if p.startswith('file:') else p; p=os.path.dirname(os.path.abspath(p)); result=subprocess.run([sys.executable,os.path.join(p,'install.py')],cwd=p); input('Press Enter to close this window.'); sys.exit(result.returncode)" %k
+Icon=video-display
+Terminal=true
+Categories=AudioVideo;

@@ -8,6 +8,15 @@
 obsgod is a command-line remote control for OBS. It requires OBS Studio 28+ with the built-in
 [OBS WebSocket v5](https://github.com/obsproject/obs-websocket) support.
 
+## Steam Deck streaming preview
+
+The [Steam Deck guide](docs/steam-deck.md) covers installing the preview in Desktop
+Mode, entering your stream URL/key locally, and starting/stopping through a Decky
+Quick Access panel with red/green output status. OBS configuration is automatic
+and isolated from your existing scenes. Make a local test clip before broadcasting.
+Real Steam Deck / Kick qualification remains pending; this is a hardware preview,
+not a stable v1 release. See [qualification](docs/steam-deck-qualification.md).
+
 ## Installation
 
 ### Packages & Binaries
@@ -19,7 +28,7 @@ packages.
 ### Build From Source
 
 Alternatively you can also build `obsgod` from source. Make sure you have a
-working Go environment (Go 1.21 or higher is required). See the
+working Go environment (the pinned build toolchain is Go 1.27.4). See the
 [install instructions](https://golang.org/doc/install.html).
 
 To install obsgod, simply run:

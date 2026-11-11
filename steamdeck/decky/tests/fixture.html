@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><title>OBSGod simulated Decky host</title>
+<style>body{margin:0;background:#0b1019;color:#f0f3fc;font:15px system-ui}#root{width:330px;margin:0 auto;padding:14px}section{padding:8px 0;border-top:1px solid #425067}h2{font-size:12px;letter-spacing:1px;color:#a8b7ce}button{width:100%;background:#354765;color:#fff;padding:12px;margin:5px 0;border:0;border-radius:4px;font:inherit}button:disabled{opacity:.45}button:focus{outline:3px solid #86d5ff}.row{margin:9px 0}</style></head><body><div id="root"></div><script src="runtime.js"></script><script type="module">
+const h=SP_REACT.createElement;
+window.DFL={staticClasses:{Title:"title"},PanelSection:({title,children})=>h("section",null,h("h2",null,title),children),PanelSectionRow:({children})=>h("div",{className:"row"},children),ButtonItem:({children,onClick,disabled})=>h("button",{onClick,disabled},children)};
+window.fixture={active:false,bytes:0,stalled:false,failure:false,events:JSON.parse(sessionStorage.getItem("fixtureEvents")||"[]"),testFailure:false};
+function event(message,level="info"){fixture.events.push({time:new Date().toISOString(),level,message});}
+function status(){if(fixture.failure)throw Error("simulated backend unavailable");sessionStorage.setItem("fixtureEvents",JSON.stringify(fixture.events));if(fixture.active&&!fixture.stalled)fixture.bytes+=2048;return {ok:true,configured:true,state:fixture.active?"streaming":"stopped",message:fixture.active?"OBS streaming":"Not streaming",stream:{active:fixture.active,reconnecting:false,bytes:fixture.bytes,duration_ms:fixture.bytes},diagnostics:fixture.events,plugin_version:"0.1.0-console-fixture",settings:{server:"rtmps://must-not-copy.invalid/app",stream_key:"must-not-copy"}};}
+window.__DECKY_SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED_deckyLoaderAPIInit={connect:()=>({_version:2,callable:(method)=>async()=>{
+ if(method==="start"){fixture.active=true;fixture.bytes=2048;event("Streaming fixture started");}
+ if(method==="stop"){fixture.active=false;fixture.bytes=0;fixture.failure=false;event("Streaming fixture stopped");}
+ if(method==="clear_logs"){fixture.events=[];}
+ if(method==="test_recording"){
+  event("Waiting for fixture OBS to become ready");
+  await new Promise(resolve=>{fixture.finishTest=resolve;});
+  delete fixture.finishTest;
+  if(fixture.testFailure){event("OBS startup timed out before its authenticated control connection became ready. Open OBS in Desktop Mode and check the connection before retrying.","error");return {ok:false,state:"error",message:fixture.events.at(-1).message};}
+  event("Local fixture clip saved");return {ok:true,state:"stopped",message:"Local fixture clip saved",recording_path:"/fixture/Videos/OBSGod/test.mkv"};
+ }
+ return status();
+},toaster:{toast:()=>{}}})};
+const module=await import("./obsgod/dist/index.js");
+window.plugin=module.default();
+fixtureRoot(document.getElementById("root")).render(h(SP_REACT.Fragment,null,h("div",{style:{display:"flex",gap:12,alignItems:"center",marginBottom:18}},plugin.icon,plugin.titleView),plugin.content));
+</script></body></html>

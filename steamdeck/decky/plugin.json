@@ -1,0 +1,10 @@
+{
+  "name": "OBSGod",
+  "author": "szmyty",
+  "flags": [],
+  "api_version": 1,
+  "publish": {
+    "tags": ["streaming", "OBS", "utility"],
+    "description": "Start and stop your configured OBS stream from Quick Access. Steam Deck hardware preview."
+  }
+}
