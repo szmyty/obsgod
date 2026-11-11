@@ -55,17 +55,53 @@ async function clearConsole(){
   changed();
 }
 
+async function copyText(text:string){
+  try{
+    if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);return;}
+  }catch{/* Steam's browser may deny the asynchronous clipboard API. */}
+  const focused=document.activeElement;
+  const field=document.createElement("textarea");
+  field.value=text;field.readOnly=true;field.setAttribute("aria-hidden","true");
+  field.style.cssText="position:fixed;left:0;top:0;width:1px;height:1px;opacity:0";
+  document.body.appendChild(field);
+  try{
+    field.select();
+    if(!document.execCommand("copy"))throw new Error("Clipboard unavailable");
+  }finally{
+    field.remove();
+    if(focused instanceof HTMLElement)focused.focus({preventScroll:true});
+  }
+}
+
 function Console(){
   // useStateView subscribes this component to the same updates as the dot.
   useStateView();
   const [page,setPage]=useState(0);
+  const [copying,setCopying]=useState(false);
+  const [copyNotice,setCopyNotice]=useState("");
   const offset=Math.min(page,Math.max(0,Math.ceil(diagnostics.length/8)-1));
   const end=diagnostics.length-offset*8;
   const text=diagnostics.slice(Math.max(0,end-8),end).reverse().map(entry=>`${new Date(entry.time).toLocaleTimeString()} [${entry.level.toUpperCase()}] ${entry.message}`).join("\n\n");
+  async function copyConsole(){
+    if(copying||!diagnostics.length)return;
+    // Copy only the already-filtered event history, never the status/settings
+    // object or free-form operation results. Include every retained page.
+    const entries=[...diagnostics].reverse();
+    const payload=`OBSGod plugin ${pluginVersion||"unknown"}\n${entries.length} diagnostic events (newest first)\n\n`+entries.map(entry=>`${entry.time} [${entry.level.toUpperCase()}] ${entry.message}`).join("\n\n");
+    setCopying(true);setCopyNotice("");
+    try{
+      await copyText(payload);
+      setCopyNotice(`Copied ${entries.length} diagnostic events. Paste them into your message.`);
+    }catch{
+      setCopyNotice("Could not access the clipboard. Select the console text or take a photo.");
+    }finally{setCopying(false);}
+  }
   return <>
     <PanelSectionRow><div style={{fontWeight:700,marginTop:8}}>Diagnostic console{pluginVersion&&<small style={{display:"block",fontWeight:400,opacity:.7}}>Plugin {pluginVersion}</small>}</div></PanelSectionRow>
     <PanelSectionRow><div role="log" aria-label="OBSGod diagnostic console" aria-live="off" style={{background:"#111923",border:"1px solid #536274",borderRadius:4,padding:10,fontSize:12,lineHeight:1.5,whiteSpace:"pre-wrap",overflowWrap:"anywhere",userSelect:"text"}}>{text||"No diagnostic events yet. Open a game, then make a local test clip. The streaming dot stays red during a local recording."}</div></PanelSectionRow>
     <PanelSectionRow><div style={{fontSize:12,opacity:.75}}>Newest first · {diagnostics.length} / 100 events saved on this Deck across reloads and updates. Keys, URLs and raw OBS output are excluded.</div></PanelSectionRow>
+    <PanelSectionRow><ButtonItem layout="below" disabled={copying||!diagnostics.length} onClick={()=>void copyConsole()}>{copying?"Copying…":"Copy console log"}</ButtonItem></PanelSectionRow>
+    {copyNotice&&<PanelSectionRow><div aria-live="polite" style={{fontSize:13,lineHeight:1.5}}>{copyNotice}</div></PanelSectionRow>}
     {diagnostics.length>8&&<>
       <PanelSectionRow><ButtonItem layout="below" disabled={end<=8} onClick={()=>setPage(offset+1)}>Older events</ButtonItem></PanelSectionRow>
       <PanelSectionRow><ButtonItem layout="below" disabled={offset===0} onClick={()=>setPage(0)}>Latest events</ButtonItem></PanelSectionRow>

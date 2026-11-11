@@ -47,18 +47,24 @@ def main():
             with sync_playwright() as p:
                 browser = p.chromium.launch(executable_path=args.browser, headless=True, args=["--no-sandbox"])
                 page = browser.new_page(viewport={"width": 800, "height": 900})
+                page.context.grant_permissions(["clipboard-read","clipboard-write"])
                 errors = []
                 page.on("pageerror", lambda error: errors.append(str(error)))
                 page.goto("http://127.0.0.1:" + str(server.server_port))
                 page.get_by_role("status").filter(has_text="Stopped").wait_for()
                 console=page.get_by_role("log",name="OBSGod diagnostic console")
                 console.get_by_text("No diagnostic events yet.",exact=False).wait_for()
+                assert page.get_by_role("button",name="Copy console log").is_disabled()
                 assert page.get_by_role("button",name="Refresh status").bounding_box()["y"] < console.bounding_box()["y"]
                 page.screenshot(path=str(args.screenshots / "panel-stopped.png"))
                 page.get_by_role("button", name="Start streaming", exact=True).click()
                 page.get_by_role("status").filter(has_text="OBS streaming").wait_for()
                 page.get_by_role("img", name="OBS streaming").wait_for()
                 console.get_by_text("Streaming fixture started",exact=False).wait_for()
+                page.get_by_role("button",name="Copy console log").click()
+                page.get_by_text("Copied 1 diagnostic events.",exact=False).wait_for()
+                assert "Streaming fixture started" in page.evaluate("navigator.clipboard.readText()")
+                page.get_by_role("status").filter(has_text="OBS streaming").wait_for()
                 page.get_by_role("button",name="Clear console").click()
                 console.get_by_text("No diagnostic events yet.",exact=False).wait_for()
                 page.get_by_role("status").filter(has_text="OBS streaming").wait_for()
@@ -87,6 +93,26 @@ def main():
                 console.get_by_text("History event 14",exact=False).wait_for()
                 page.get_by_role("button",name="Older events").click()
                 console.get_by_text("History event 6",exact=False).wait_for()
+                page.get_by_role("button",name="Copy console log").click()
+                page.get_by_text("Copied 20 diagnostic events.",exact=False).wait_for()
+                copied=page.evaluate("navigator.clipboard.readText()")
+                assert "OBSGod plugin 0.1.0-console-fixture" in copied
+                assert "20 diagnostic events (newest first)" in copied
+                assert "History event 14" in copied and "History event 0" in copied
+                assert copied.index("History event 14") < copied.index("History event 0")
+                assert "OBS startup timed out before its authenticated control connection became ready." in copied
+                assert "must-not-copy" not in copied and "rtmps://" not in copied
+                # Exercise the legacy clipboard path using the real browser
+                # clipboard, then prove failures never claim a successful copy.
+                page.evaluate("""fixture.readClipboard=navigator.clipboard.readText.bind(navigator.clipboard);
+                  Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async()=>{throw new Error('fixture denied')}}});""")
+                page.get_by_role("button",name="Copy console log").click()
+                page.get_by_text("Copied 20 diagnostic events.",exact=False).wait_for()
+                assert page.evaluate("fixture.readClipboard()") == copied
+                assert page.get_by_role("button",name="Copy console log").evaluate("button=>document.activeElement===button")
+                page.evaluate("document.execCommand=()=>false")
+                page.get_by_role("button",name="Copy console log").click()
+                page.get_by_text("Could not access the clipboard.",exact=False).wait_for()
                 page.get_by_role("button",name="Latest events").click()
                 console.get_by_text("History event 14",exact=False).wait_for()
                 page.reload()
@@ -96,7 +122,7 @@ def main():
                 page.evaluate("plugin.onDismount()")
                 assert not errors, errors
                 browser.close()
-            print("PASS: release ZIP frontend; green/red/amber, failed polls, stop/test actions, live console during pending operation, full timeout text, history paging, clear without stopping and reload. Real controller/Decky runtime untested.")
+            print("PASS: release ZIP frontend; colors/lifecycle, pending progress, full timeout, history paging/clear/reload; actual clipboard copies all history and version, excludes settings, works during streaming, legacy fallback preserves focus and denial reports failure. Real controller/Decky runtime untested.")
         finally:
             server.shutdown()
             server.server_close()

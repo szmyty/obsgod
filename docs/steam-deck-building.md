@@ -21,7 +21,7 @@ govulncheck ./...
 Commit source before making a release candidate:
 
 ```sh
-python3 scripts/package-deck.py --version 0.1.0-deck.3
+python3 scripts/package-deck.py --version 0.1.0-deck.4
 ```
 
 The script uses the current full commit SHA and refuses a dirty checkout. For
@@ -35,8 +35,8 @@ Browser tests use Playwright **1.62.0** and Chromium. They install into temporar
 homes, use fixture credentials and extract the actual archive/ZIP:
 
 ```sh
-python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.3_linux_amd64.tar.gz
-python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.3_linux_amd64.tar.gz --upgrade-from /path/to/obsgod-deck_0.1.0-deck.1_linux_amd64.tar.gz
+python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz
+python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz --upgrade-from /path/to/obsgod-deck_0.1.0-deck.1_linux_amd64.tar.gz
 python3 steamdeck/tests/browser-panel.py dist/obsgod-decky.zip
 ```
 

@@ -112,7 +112,10 @@ OBS's initial global microphone inputs are muted automatically.
   directly below **Refresh status**. It updates while an operation is running,
   retains the last 100 events across reloads/updates and shows the newest first.
   Use **Older events** / **Latest events** to read history and **Clear console**
-  to erase it without stopping a stream. Logs use fixed diagnostic messages and
+  to erase it without stopping a stream. **Copy console log** copies all retained
+  events across every page, with timestamps and the plugin version, for pasting
+  into a support message. It reports success or clipboard failure without
+  changing streaming state. Logs use fixed diagnostic messages and
   numeric OBS/launch codes; keys, server URLs and raw OBS output are excluded.
   Events live at `~/.local/state/obsgod/diagnostics/events.json` (or beneath
   `$XDG_STATE_HOME/obsgod`) with private file permissions.
