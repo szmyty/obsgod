@@ -97,6 +97,27 @@ is explicitly skipped. Never put a password or stream key into command arguments
 
 ## Publication
 
+The separate one-click updater packages a helper for Decky's authenticated local
+installer and `steamdeck/update.py`. It installs the already-qualified preview-4
+archive without rebuilding or relabeling that streaming runtime:
+
+```sh
+go test -race ./...
+python3 -m unittest discover -s steamdeck/tests -p 'test_*.py' -v
+python3 scripts/package-updater.py
+```
+
+Its own source revision and file hashes are recorded in its updater manifest.
+Run its actual desktop entry and helper against the pinned Decky 3.3.1
+WebSocket router/installer fixture before publishing the updater ZIP. The fixture
+tests real upstream protocol/extraction logic, with loader lifecycle/ownership
+operations substituted in a private temporary home. It is not SteamOS or root
+service qualification. The archive target and checksum are pinned in update.py;
+the helper validates the ZIP identity/paths/hash before any installation request.
+It confirms only the matching OBSGod request and then verifies the installed
+enabled version. Keep other Steam/Decky clients closed during this Desktop update
+because Decky's router supports a single frontend connection.
+
 Publish the exact clean revision and verified artifacts as a **prerelease** until
 the [Steam Deck acceptance checklist](steam-deck.md#acceptance-on-your-deck) has
 real-device evidence. Include source SHA, tool versions, commands, outcomes,

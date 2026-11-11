@@ -143,6 +143,29 @@ OBS's initial global microphone inputs are muted automatically.
 
 ## Update / uninstall
 
+For an update without terminal commands or manually replacing the plugin,
+download the [one-click updater](https://github.com/szmyty/obsgod/releases/tag/v0.1.0-deck.4-updater.1).
+In **Desktop Mode**, extract the entire updater ZIP and open **Update
+OBSGod.desktop**. Keep Steam's Big Picture window closed until it finishes.
+Choose **Execute** if Dolphin asks. The updater checks/downloads the pinned,
+qualified preview **0.1.0-deck.4**, closes idle managed OBS after confirming its
+output is stopped, checks user Flatpak dependencies, backs up saved preferences
+and credentials privately, installs the Desktop app and replaces/enables OBSGod
+using Decky's authenticated local installer. It verifies the resulting plugin
+version and preserves other plugins' relative order. No sudo, password entry,
+manual plugin removal or stream-key re-entry is needed for an existing setup.
+
+This updates **OBSGod**, using the Decky Loader you already installed. It does not
+install Decky Loader itself. If output cannot be confirmed stopped, it pauses
+with instructions instead of killing OBS. If the plugin update fails after the
+Desktop app installs, it reports that partial state and can be rerun. A completion
+or error dialog keeps the result visible; if no dialog tool is available, close
+the terminal window when it finishes. Fresh setups open the local settings page
+for their own URL/key. This updater does not establish a fix for the reported OBS
+readiness timeout; use **Copy console log** if a subsequent game test still fails.
+
+For manual updates:
+
 Download/extract the next preview, stop streaming, close idle managed OBS, run its
 installer, then use Decky's **Install Plugin from ZIP** to replace OBSGod with
 the new `obsgod-decky.zip`. There is no need to uninstall first or enter the key
