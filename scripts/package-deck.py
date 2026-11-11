@@ -64,7 +64,7 @@ def zip_payload(files, epoch):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--version", default="0.1.0-deck.4")
+    parser.add_argument("--version", default="0.1.0-deck.5")
     parser.add_argument("--revision", default=None)
     parser.add_argument("--allow-dirty", action="store_true", help="Local test packages only; manifest is marked dirty")
     args = parser.parse_args()
@@ -81,6 +81,8 @@ def main():
     epoch = int(command("git", "show", "-s", "--format=%ct", revision))
     if "go1.27.4" not in command("go", "version"):
         raise SystemExit("Use the pinned Go 1.27.4 toolchain")
+    if command("node", "--version") != "v24.19.0" or command("npm", "--version") != "11.9.0":
+        raise SystemExit("Use the pinned Node 24.19.0 and npm 11.9.0 tools")
     subprocess.run(["npm", "run", "typecheck"], cwd=REPO / "steamdeck/decky", check=True)
     subprocess.run(["npm", "run", "build"], cwd=REPO / "steamdeck/decky", check=True)
     dist = REPO / "dist"
@@ -88,9 +90,12 @@ def main():
     binary = dist / "obsgod"
     env = dict(os.environ, CGO_ENABLED="0", GOOS="linux", GOARCH="amd64")
     subprocess.run(["go", "build", "-trimpath", "-buildvcs=false", "-ldflags", "-s -w -buildid= -X main.version=" + args.version + " -X main.commitSHA=" + revision, "-o", str(binary), "."], cwd=REPO, env=env, check=True)
+    helper = dist / "decky-install"
+    subprocess.run(["go", "build", "-trimpath", "-buildvcs=false", "-ldflags", "-s -w -buildid=", "-o", str(helper), "./cmd/obsgod-decky-install"], cwd=REPO, env=env, check=True)
     third_party = notices().encode()
     plugin = {
         "main.py": (REPO / "steamdeck/decky/main.py").read_bytes(),
+        "releases.py": (REPO / "steamdeck/releases.py").read_bytes(),
         "plugin.json": (REPO / "steamdeck/decky/plugin.json").read_bytes(),
         "package.json": json.dumps({"name": "obsgod", "version": args.version, "license": "MIT", "type":"module"}, sort_keys=True).encode(),
         "bin/obsgod": binary.read_bytes(),
@@ -110,9 +115,9 @@ def main():
     plugin["source/decky-api/BUILDING.md"] = b"The unmodified preferred TypeScript source of @decky/api 1.1.3 is included here. OBSGod's pinned TypeScript build and rollup.config.js are in the release's corresponding GitHub source archive. The runtime dist/decky-api.js is a separate replaceable module. Its build changes only the manifest import to ./manifest.js and the types export to ./types.js; dist/manifest.js supplies the OBSGod name. The complete LGPL-2.1 license is at the plugin root.\n"
     plugin_zip = zip_payload(plugin, epoch)
     (dist / "obsgod-decky.zip").write_bytes(plugin_zip)
-    files = {name: (REPO / "steamdeck" / name).read_bytes() for name in ["setup.py", "bridge.py", "setup.html", "setup.js", "setup.css", "uninstall.py"]}
-    files.update({"obsgod": binary.read_bytes(), "LICENSE": (REPO / "LICENSE").read_bytes(), "THIRD_PARTY_NOTICES.md": third_party, "STEAM-DECK.md": (REPO / "docs/steam-deck.md").read_bytes(), "obsgod-decky.zip": plugin_zip})
-    manifest = {"version": args.version, "revision": revision, "dirty": dirty, "go": "go1.27.4", "platform": "linux/amd64", "files": {name: hashlib.sha256(data).hexdigest() for name, data in sorted(files.items())}}
+    files = {name: (REPO / "steamdeck" / name).read_bytes() for name in ["setup.py", "bridge.py", "setup.html", "setup.js", "setup.css", "uninstall.py", "install.py", "Install OBSGod.desktop", "decky.py", "update.py", "releases.py", "Update OBSGod.desktop", "Update OBSGod.sh"]}
+    files.update({"obsgod": binary.read_bytes(), "decky-install": helper.read_bytes(), "LICENSE": (REPO / "LICENSE").read_bytes(), "THIRD_PARTY_NOTICES.md": third_party, "STEAM-DECK.md": (REPO / "docs/steam-deck.md").read_bytes(), "obsgod-decky.zip": plugin_zip})
+    manifest = {"version": args.version, "updater_version": args.version, "revision": revision, "dirty": dirty, "go": "go1.27.4", "node": "24.19.0", "npm": "11.9.0", "platform": "linux/amd64", "files": {name: hashlib.sha256(data).hexdigest() for name, data in sorted(files.items())}}
     files["manifest.json"] = (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode()
     files["install.py"] = (REPO / "steamdeck/install.py").read_bytes()
     files["Install OBSGod.desktop"] = (REPO / "steamdeck/Install OBSGod.desktop").read_bytes()
@@ -124,7 +129,7 @@ def main():
                     info = tarfile.TarInfo("OBSGod-" + args.version + "/" + name)
                     info.size = len(data)
                     info.mtime = epoch
-                    info.mode = 0o755 if name in {"obsgod", "install.py", "Install OBSGod.desktop"} else 0o644
+                    info.mode = 0o755 if name in {"obsgod", "decky-install", "install.py", "Install OBSGod.desktop", "Update OBSGod.desktop", "Update OBSGod.sh"} else 0o644
                     archive.addfile(info, io.BytesIO(data))
     (dist / "manifest.json").write_bytes(files["manifest.json"])
     artifacts = [archive_path, dist / "obsgod-decky.zip", dist / "manifest.json"]
