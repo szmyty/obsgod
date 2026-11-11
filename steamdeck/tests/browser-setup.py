@@ -18,6 +18,7 @@ from test_bootstrap import desktop_command, read_until
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archive", type=Path)
+    parser.add_argument("--upgrade-from", type=Path, help="Install an earlier real archive and preserve its configured user data")
     parser.add_argument("--browser", default="/usr/bin/chromium")
     parser.add_argument("--screenshots", type=Path, default=Path("/tmp/obsgod-browser"))
     args = parser.parse_args()
@@ -31,6 +32,20 @@ def main():
         home.mkdir()
         env = dict(os.environ, HOME=str(home), XDG_CONFIG_HOME=str(home / ".config"), XDG_STATE_HOME=str(home / ".local/state"))
         current = home / ".local/share/obsgod/current"
+        snapshots = {}
+        if args.upgrade_from:
+            older = base / "older"
+            older.mkdir()
+            with tarfile.open(args.upgrade_from) as archive:
+                archive.extractall(older, filter="data")
+            old_package = next(older.glob("OBSGod-*"))
+            subprocess.run([sys.executable, str(old_package / "install.py"), "--no-launch"], env=env, check=True)
+            fixture = {"server":"rtmps://example.invalid/app","stream_key":"browser-fixture-never-real"}
+            subprocess.run([str(current / "obsgod"), "deck", "configure"], input=json.dumps(fixture), env=env, capture_output=True, text=True, check=True)
+            for path in [home / "Videos/OBSGod/keep.mkv", home / ".var/app/com.obsproject.Studio/config/obsgod/obs-studio/global.ini"]:
+                path.parent.mkdir(parents=True,exist_ok=True)
+                path.write_bytes(b"preserved fixture data")
+            snapshots = {path:path.read_bytes() for path in [home / ".config/obsgod/deck.json",home / ".config/obsgod/secrets.json",home / "Videos/OBSGod/keep.mkv",home / ".var/app/com.obsproject.Studio/config/obsgod/obs-studio/global.ini"]}
         ready = base / "browser-url"
         probe = base / "browser-probe"
         probe.write_text("#!" + sys.executable + "\n" + """
@@ -52,6 +67,7 @@ Path(os.environ['OBSGOD_TEST_BROWSER_URL']).write_text(sys.argv[1])
                     raise AssertionError("Desktop installer exited before opening setup")
                 time.sleep(0.05)
             assert ready.exists(), "The actual installer did not open a working setup server"
+            assert all(path.read_bytes()==data for path,data in snapshots.items()), "Upgrade altered settings, secrets, recordings or managed OBS preferences"
             with sync_playwright() as p:
                 browser = p.chromium.launch(executable_path=args.browser, headless=True, args=["--no-sandbox"])
                 page = browser.new_page(viewport={"width": 1280, "height": 800})
@@ -88,10 +104,12 @@ Path(os.environ['OBSGOD_TEST_BROWSER_URL']).write_text(sys.argv[1])
             assert process.poll() is None, "Desktop terminal did not stay open after setup"
             process.communicate(b"\n",timeout=10)
             assert process.returncode==0
+            subprocess.run([sys.executable, str(package / "install.py"), "--no-launch"], env=env, check=True)
+            assert all(path.read_bytes()==data for path,data in snapshots.items()), "Repeat install altered user data"
             subprocess.run(["python3", str(current / "uninstall.py"), "--purge-settings"], env=env, check=True)
             assert not (home / ".local/bin/obsgod").exists()
             assert not secret.exists()
-            print("PASS: actual desktop launcher, foreground startup, browser setup/reload, private credentials, terminal hold, clean uninstall; fixture credentials only")
+            print("PASS: actual desktop launcher, foreground startup, browser setup/reload, private credentials, terminal hold, repeat install, clean uninstall; fixture credentials only" + ("; actual earlier-preview upgrade preserves all user data" if snapshots else ""))
         finally:
             if process.poll() is None:
                 os.killpg(process.pid,signal.SIGTERM)

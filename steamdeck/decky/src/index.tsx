@@ -3,11 +3,13 @@ import { callable, definePlugin, toaster } from "@decky/api";
 import { useEffect, useState } from "react";
 import { health } from "./health.mjs";
 
-type Result = {ok:boolean; state:string; message:string; configured?:boolean; stream?:{active:boolean; reconnecting:boolean; bytes:number; duration_ms:number}; recording_path?:string};
+type Diagnostic = {time:string; level:string; message:string};
+type Result = {ok:boolean; state:string; message:string; configured?:boolean; stream?:{active:boolean; reconnecting:boolean; bytes:number; duration_ms:number}; recording_path?:string; diagnostics?:Diagnostic[]; plugin_version?:string};
 const readStatus=callable<[],Result>("status");
 const start=callable<[],Result>("start");
 const stop=callable<[],Result>("stop");
 const test=callable<[],Result>("test_recording");
+const clearLogs=callable<[],Result>("clear_logs");
 let result:Result|undefined;
 let progressAt=0;
 let previousBytes=0;
@@ -15,6 +17,8 @@ let lastPoll=0;
 let polling=false;
 let busy="";
 let notice="";
+let diagnostics:Diagnostic[]=[];
+let pluginVersion="";
 const listeners=new Set<()=>void>();
 const changed=()=>listeners.forEach(listener=>listener());
 
@@ -25,6 +29,8 @@ async function refresh(){
     const now=Date.now();
     if(next.stream?.active && next.stream.bytes>0 && (next.stream.bytes!==previousBytes || !result?.stream?.active)) progressAt=now;
     previousBytes=next.stream?.bytes??0; result=next;lastPoll=now;
+    if(next.diagnostics)diagnostics=next.diagnostics;
+    if(next.plugin_version)pluginVersion=next.plugin_version;
   }catch{
     result={ok:false,state:"unknown",message:"OBS connection unavailable. Use Stop streaming or inspect OBS."};
   }finally{polling=false;changed();}
@@ -39,6 +45,34 @@ function useStateView(){
 }
 
 function Dot(){const state=useStateView();return <span role="img" aria-label={state.label} style={{color:state.color,fontSize:24,lineHeight:1}}>●</span>;}
+
+async function clearConsole(){
+  try{
+    const next=await clearLogs();
+    if(next.diagnostics)diagnostics=next.diagnostics;
+    if(!next.ok)notice=next.message;
+  }catch{notice="Could not clear the console. Refresh status and try again.";}
+  changed();
+}
+
+function Console(){
+  // useStateView subscribes this component to the same updates as the dot.
+  useStateView();
+  const [page,setPage]=useState(0);
+  const offset=Math.min(page,Math.max(0,Math.ceil(diagnostics.length/8)-1));
+  const end=diagnostics.length-offset*8;
+  const text=diagnostics.slice(Math.max(0,end-8),end).reverse().map(entry=>`${new Date(entry.time).toLocaleTimeString()} [${entry.level.toUpperCase()}] ${entry.message}`).join("\n\n");
+  return <>
+    <PanelSectionRow><div style={{fontWeight:700,marginTop:8}}>Diagnostic console{pluginVersion&&<small style={{display:"block",fontWeight:400,opacity:.7}}>Plugin {pluginVersion}</small>}</div></PanelSectionRow>
+    <PanelSectionRow><div role="log" aria-label="OBSGod diagnostic console" aria-live="off" style={{background:"#111923",border:"1px solid #536274",borderRadius:4,padding:10,fontSize:12,lineHeight:1.5,whiteSpace:"pre-wrap",overflowWrap:"anywhere",userSelect:"text"}}>{text||"No diagnostic events yet. Open a game, then make a local test clip. The streaming dot stays red during a local recording."}</div></PanelSectionRow>
+    <PanelSectionRow><div style={{fontSize:12,opacity:.75}}>Newest first · {diagnostics.length} / 100 events saved on this Deck across reloads and updates. Keys, URLs and raw OBS output are excluded.</div></PanelSectionRow>
+    {diagnostics.length>8&&<>
+      <PanelSectionRow><ButtonItem layout="below" disabled={end<=8} onClick={()=>setPage(offset+1)}>Older events</ButtonItem></PanelSectionRow>
+      <PanelSectionRow><ButtonItem layout="below" disabled={offset===0} onClick={()=>setPage(0)}>Latest events</ButtonItem></PanelSectionRow>
+    </>}
+    <PanelSectionRow><ButtonItem layout="below" onClick={()=>void clearConsole()}>Clear console</ButtonItem></PanelSectionRow>
+  </>;
+}
 
 async function act(action:"start"|"stop"|"test"){
   if(busy&&action!=="stop")return;
@@ -68,6 +102,7 @@ function Content(){
       <PanelSectionRow><ButtonItem layout="below" disabled={!!busy||!!result?.stream?.active||!result?.configured} onClick={()=>act("test")}>Make 10-second test clip</ButtonItem></PanelSectionRow>
       <PanelSectionRow><div style={{fontSize:13,lineHeight:1.5,opacity:.8}}>Open a game before starting. Test clips save to Videos/OBSGod. Enter your URL and key in OBSGod Setup in Desktop Mode. Microphone is off unless enabled there.</div></PanelSectionRow>
       <PanelSectionRow><ButtonItem layout="below" onClick={()=>refresh()}>Refresh status</ButtonItem></PanelSectionRow>
+      <Console/>
     </PanelSection>
   </>;
 }

@@ -11,6 +11,8 @@ import subprocess
 import sys
 import tempfile
 import time
+import fcntl
+from contextlib import contextmanager
 
 ROOT = Path(__file__).resolve().parent
 
@@ -48,6 +50,110 @@ def verify_payload():
     return manifest
 
 
+@contextmanager
+def installation_lock(base):
+    descriptor = os.open(base / "install.lock", os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
+    with os.fdopen(descriptor, "w") as lock:
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            raise RuntimeError("Another OBSGod installer is running. Let it finish, then retry")
+        yield
+
+
+def matching_release(release, manifest):
+    return all(
+        not (release / name).is_symlink() and (release / name).is_file()
+        and hashlib.sha256((release / name).read_bytes()).hexdigest() == digest
+        for name, digest in manifest["files"].items()
+    )
+
+
+def prepare_release(releases, manifest):
+    current = releases.parent / "current"
+    if current.is_symlink() and current.resolve().parent == releases:
+        try:
+            installed = json.loads((current / "manifest.json").read_text())
+        except (OSError, ValueError):
+            installed = {}
+        if installed.get("version") == manifest["version"] and matching_release(current.resolve(), manifest):
+            for name in manifest["files"]:
+                (current / name).chmod(0o700 if name == "obsgod" else 0o600)
+            return current.resolve()
+    release = releases / manifest["version"]
+    if release.exists() or release.is_symlink():
+        if release.is_symlink() or not release.is_dir():
+            raise RuntimeError("Unsafe existing release path")
+        if matching_release(release, manifest):
+            # ZIP/filesystem tools can drop mode bits. Repair a verified copy.
+            for name in manifest["files"]:
+                (release / name).chmod(0o700 if name == "obsgod" else 0o600)
+            return release
+        # Preserve an older/damaged copy, including files mapped by a running
+        # process. A fresh directory allows repair and same-version replacement.
+        release = releases / (manifest["version"] + "-" + str(time.time_ns()))
+    staging = Path(tempfile.mkdtemp(prefix=".install-", dir=releases))
+    try:
+        for name in manifest["files"]:
+            shutil.copyfile(ROOT / name, staging / name)
+            (staging / name).chmod(0o700 if name == "obsgod" else 0o600)
+        shutil.copyfile(ROOT / "manifest.json", staging / "manifest.json")
+        staging.rename(release)
+    finally:
+        if staging.exists():
+            shutil.rmtree(staging)
+    return release
+
+
+def activate_release(base, releases, bin_dir, apps, home, manifest):
+    current = base / "current"
+    if current.exists() or current.is_symlink():
+        if not current.is_symlink() or not current.resolve().is_relative_to(releases):
+            raise RuntimeError("OBSGod current path is not an owned release link")
+    executable = bin_dir / "obsgod"
+    desktop = apps / "obsgod-setup.desktop"
+    for path in [executable, desktop]:
+        if path.exists() and not (path.is_file() or path.is_symlink()):
+            raise RuntimeError("Refusing to replace a non-file application entry")
+    release = prepare_release(releases, manifest)
+    launch_code = "import subprocess,sys; result=subprocess.run([sys.executable,sys.argv[1]]); input('Press Enter to close this window.'); sys.exit(result.returncode)"
+    content = "[Desktop Entry]\nType=Application\nName=OBSGod Setup\nComment=Configure Steam Deck streaming locally\nExec=python3 " + quote_exec(launch_code) + " " + quote_exec(str(current / "setup.py")) + "\nIcon=video-display\nTerminal=true\nCategories=AudioVideo;\nX-OBSGod-Managed=true\n"
+    backup = base / "backups" / str(time.time_ns())
+    changes = []
+    # Each entry is replaced atomically. Switch current last: any failure before
+    # activation restores the old entry points and leaves the old release live.
+    with tempfile.TemporaryDirectory(prefix=".activate-", dir=base) as temporary:
+        staging = Path(temporary)
+        (staging / "executable").symlink_to(current / "obsgod")
+        (staging / "desktop").write_text(content)
+        (staging / "desktop").chmod(0o600)
+        (staging / "current").symlink_to(release)
+        try:
+            for source, destination in [(staging / "executable", executable), (staging / "desktop", desktop)]:
+                if destination == executable and destination.is_symlink() and destination.readlink() == current / "obsgod":
+                    continue
+                if destination == desktop and not destination.is_symlink() and destination.is_file() and destination.read_text() == content:
+                    continue
+                saved = None
+                if destination.exists() or destination.is_symlink():
+                    owned_directory(backup, home)
+                    saved = backup / destination.name
+                    # Copy links themselves, including dangling links; never
+                    # write through somebody else's application/menu symlink.
+                    shutil.copy2(destination, saved, follow_symlinks=False)
+                source.replace(destination)
+                changes.append((destination, saved))
+            (staging / "current").replace(current)
+        except (OSError, RuntimeError):
+            for destination, saved in reversed(changes):
+                if saved is not None:
+                    saved.replace(destination)
+                else:
+                    destination.unlink(missing_ok=True)
+            raise
+    return current
+
+
 def install(launch=True):
     if platform.system() != "Linux" or platform.machine() not in {"x86_64", "amd64"}:
         raise RuntimeError("This preview package requires Linux x86_64 (Steam Deck)")
@@ -62,55 +168,12 @@ def install(launch=True):
     apps = home / ".local/share/applications"
     for path in [base, releases, bin_dir, apps]:
         owned_directory(path, home)
-    current = base / "current"
-    if current.exists() or current.is_symlink():
-        if not current.is_symlink() or not current.resolve().is_relative_to(releases):
-            raise RuntimeError("OBSGod current path is not an owned release link")
-    release = releases / manifest["version"]
-    if release.exists() or release.is_symlink():
-        if release.is_symlink() or not release.is_dir():
-            raise RuntimeError("Unsafe existing release path")
-        if any(not (release / name).is_file() or hashlib.sha256((release / name).read_bytes()).hexdigest() != digest for name, digest in manifest["files"].items()):
-            raise RuntimeError("A different package already uses this version; remove that version explicitly before reinstalling")
-    else:
-        staging = Path(tempfile.mkdtemp(prefix=".install-", dir=releases))
-        try:
-            for name in manifest["files"]:
-                shutil.copyfile(ROOT / name, staging / name)
-                (staging / name).chmod(0o700 if name == "obsgod" else 0o600)
-            shutil.copyfile(ROOT / "manifest.json", staging / "manifest.json")
-            staging.rename(release)
-        finally:
-            if staging.exists():
-                shutil.rmtree(staging)
-    link = base / ".current-next"
-    if link.exists() or link.is_symlink():
-        raise RuntimeError("An incomplete install is present; inspect .current-next before retrying")
-    link.symlink_to(release)
-    link.replace(current)
-
-    executable = bin_dir / "obsgod"
-    backup = base / "backups" / str(time.time_ns())
-    if executable.exists() or executable.is_symlink():
-        if not (executable.is_symlink() and executable.readlink() == current / "obsgod"):
-            owned_directory(backup, home)
-            executable.rename(backup / "obsgod")
-            print("Previous obsgod executable preserved at " + str(backup / "obsgod"))
-        else:
-            executable.unlink()
-    executable.symlink_to(current / "obsgod")
-    desktop = apps / "obsgod-setup.desktop"
-    if desktop.exists():
-        if desktop.is_symlink() or "X-OBSGod-Managed=true" not in desktop.read_text():
-            owned_directory(backup, home)
-            desktop.rename(backup / "obsgod-setup.desktop")
-    launch_code = "import subprocess,sys; result=subprocess.run([sys.executable,sys.argv[1]]); input('Press Enter to close this window.'); sys.exit(result.returncode)"
-    content = "[Desktop Entry]\nType=Application\nName=OBSGod Setup\nComment=Configure Steam Deck streaming locally\nExec=python3 " + quote_exec(launch_code) + " " + quote_exec(str(current / "setup.py")) + "\nIcon=video-display\nTerminal=true\nCategories=AudioVideo;\nX-OBSGod-Managed=true\n"
-    desktop.write_text(content)
-    desktop.chmod(0o600)
+    with installation_lock(base):
+        current = activate_release(base, releases, bin_dir, apps, home, manifest)
     print("Installed OBSGod " + manifest["version"])
     print("Decky plugin ZIP: " + str(current / "obsgod-decky.zip"))
     print("Reopen setup from Applications → Multimedia → OBSGod Setup.")
+    print("Settings, keys and recordings are preserved. Replace OBSGod in Decky using the ZIP above as well.")
     if launch:
         print("Keep this terminal open while configuring OBSGod. Finish setup in the browser when done.", flush=True)
         result = subprocess.run([sys.executable, str(current / "setup.py")])

@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 import signal
+import re
 
 
 class Plugin:
@@ -11,6 +12,13 @@ class Plugin:
         self.pending = None
         self.busy = False
         self.cancel_requested = False
+
+    def _version(self):
+        try:
+            value = json.loads((Path(__file__).resolve().parent / "package.json").read_text())["version"]
+            return value if isinstance(value, str) and re.fullmatch(r"[A-Za-z0-9.-]{1,80}", value) else "unknown"
+        except (OSError, ValueError, KeyError):
+            return "unknown"
 
     async def _main(self):
         os.umask(0o077)
@@ -42,6 +50,7 @@ class Plugin:
             result = json.loads(output)
             if not isinstance(result, dict) or not isinstance(result.get("ok"), bool):
                 raise ValueError()
+            result["plugin_version"] = self._version()
             return result
         except (asyncio.TimeoutError, ValueError, UnicodeError):
             if process.returncode is None:
@@ -61,6 +70,9 @@ class Plugin:
             return await self._run("status")
         except OSError:
             return {"ok": False, "state": "unknown", "message": "OBSGod executable is unavailable. Reinstall the plugin ZIP."}
+
+    async def clear_logs(self):
+        return await self._run("clear-logs")
 
     async def start(self):
         if self.busy:

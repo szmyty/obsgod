@@ -12,7 +12,7 @@ import (
 
 func newDeckCommand() *coral.Command {
 	root := &coral.Command{Use: "deck", Short: "Manage the optional Steam Deck streaming preview (JSON output)"}
-	for _, name := range []string{"status", "doctor", "configure", "start", "stop", "test-recording", "restart"} {
+	for _, name := range []string{"status", "doctor", "configure", "start", "stop", "test-recording", "restart", "clear-logs"} {
 		name := name
 		cmd := &coral.Command{Use: name, Short: map[string]string{"status": "Read live output state without starting OBS", "doctor": "Diagnose installation, capture and OBS", "configure": "Save settings and key from JSON stdin, never argv", "start": "Capture Gaming Mode and wait for real stream output", "stop": "Stop streaming and confirm it stopped", "test-recording": "Save a ten-second local clip without broadcasting", "restart": "Close idle managed OBS to apply saved settings"}[name], Args: coral.NoArgs}
 		cmd.RunE = func(cmd *coral.Command, _ []string) error {
@@ -23,7 +23,13 @@ func newDeckCommand() *coral.Command {
 				return e
 			}
 			var result deck.Result
-			if name == "status" {
+			if name != "status" && name != "clear-logs" {
+				deck.RecordOperation(paths, name)
+			}
+			if name == "clear-logs" {
+				e = deck.ClearDiagnostics(ctx, paths)
+				result = deck.Status(ctx, paths)
+			} else if name == "status" {
 				result = deck.Status(ctx, paths)
 			} else if name == "doctor" {
 				result = deck.Doctor(ctx, paths)
@@ -57,6 +63,10 @@ func newDeckCommand() *coral.Command {
 			if e != nil {
 				result = deck.Result{OK: false, State: "error", Message: e.Error()}
 			}
+			if name != "status" && name != "clear-logs" {
+				deck.RecordOutcome(paths, e, result.OK)
+			}
+			result.Diagnostics = deck.ReadDiagnostics(paths)
 			if err := json.NewEncoder(cmd.OutOrStdout()).Encode(result); err != nil {
 				return err
 			}

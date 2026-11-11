@@ -37,6 +37,7 @@ type Result struct {
 	Runtime       *automation.RuntimeStatus `json:"runtime,omitempty"`
 	Settings      *Settings                 `json:"settings,omitempty"`
 	RecordingPath string                    `json:"recording_path,omitempty"`
+	Diagnostics   []DiagnosticEntry         `json:"diagnostics"`
 }
 
 func connect(ctx context.Context, secret Secrets, timeout time.Duration) (*automation.Client, error) {
@@ -127,10 +128,13 @@ func Doctor(ctx context.Context, p Paths) Result {
 }
 
 func ready(ctx context.Context, p Paths, s Settings, secret Secrets) (*automation.Client, error) {
+	logEvent(p, "obs.connecting")
+	var launched <-chan int
 	c, e := connect(ctx, secret, 5*time.Second)
 	if e == nil {
 		c, e = verifyManaged(ctx, c)
 		if e == nil {
+			logEvent(p, "obs.ready")
 			return c, nil
 		}
 		if errors.Is(e, errUnmanaged) {
@@ -147,20 +151,32 @@ func ready(ctx context.Context, p Paths, s Settings, secret Secrets) (*automatio
 			if e := Prepare(p, s, secret); e != nil {
 				return nil, e
 			}
-			if e := launchOBS(p); e != nil {
-				return nil, e
+			logEvent(p, "obs.launching")
+			var launchErr error
+			launched, launchErr = launchOBS(p)
+			if launchErr != nil {
+				return nil, launchErr
 			}
 		}
 	}
+	logEvent(p, "obs.waiting")
 	for {
 		if e := wait(ctx, 500*time.Millisecond); e != nil {
+			logEvent(p, "obs.timeout")
 			return nil, errors.New("OBS did not become ready before the timeout; run Desktop setup diagnostics")
+		}
+		select {
+		case exitCode := <-launched:
+			logEvent(p, "obs.exited", exitCode)
+			return nil, errors.New("OBS exited before becoming ready; check the diagnostic console and open OBS in Desktop Mode")
+		default:
 		}
 		c, e = connect(ctx, secret, 5*time.Second)
 		if e == nil {
 			// OBS can accept authentication before its frontend accepts requests.
 			c, e = verifyManaged(ctx, c)
 			if e == nil {
+				logEvent(p, "obs.ready")
 				return c, nil
 			}
 			if errors.Is(e, errUnmanaged) {
@@ -266,15 +282,18 @@ func NonblankCapture(data string) bool {
 	return hi > 1024 && hi > lo+512
 }
 
-func waitCapture(ctx context.Context, c *automation.Client) error {
+func waitCapture(ctx context.Context, c *automation.Client, p Paths) error {
+	logEvent(p, "capture.waiting")
 	for {
 		// Check the rendered program scene, including transforms. A source can
 		// have valid pixels while a mis-scaled/hidden scene still broadcasts black.
 		data, e := c.Screenshot(ctx, LiveScene)
 		if e == nil && NonblankCapture(data) {
+			logEvent(p, "capture.ready")
 			return nil
 		}
 		if e := wait(ctx, 600*time.Millisecond); e != nil {
+			logEvent(p, "capture.blank")
 			return errors.New("no visible game frames arrived. Open a game and try again; a black Gamescope feed cannot be streamed safely. No broadcast was started")
 		}
 	}
@@ -303,7 +322,9 @@ func Start(ctx context.Context, p Paths) (Result, error) {
 	if e != nil {
 		return Result{}, e
 	}
+	logEvent(p, "dependencies.checking")
 	if e = checkDependencies(ctx); e != nil {
+		logEvent(p, "dependencies.missing")
 		return Result{}, e
 	}
 	c, e := ready(ctx, p, s, secret)
@@ -324,14 +345,17 @@ func Start(ctx context.Context, p Paths) (Result, error) {
 		}
 	}()
 	if !state.Active {
+		logEvent(p, "capture.checking")
 		if !waitGamescope(ctx) {
+			logEvent(p, "capture.unavailable")
 			return Result{}, errors.New("switch to Gaming Mode and open a game first; the Gamescope capture feed is not available")
 		}
+		logEvent(p, "capture.configuring")
 		if e = ensureCapture(ctx, c, s); e != nil {
 			return Result{}, e
 		}
 		captureCtx, cancel := context.WithTimeout(ctx, 12*time.Second)
-		e = waitCapture(captureCtx, c)
+		e = waitCapture(captureCtx, c, p)
 		cancel()
 		if e != nil {
 			return Result{}, e
@@ -342,6 +366,7 @@ func Start(ctx context.Context, p Paths) (Result, error) {
 	}
 	startCtx, cancel := context.WithTimeout(ctx, 25*time.Second)
 	defer cancel()
+	logEvent(p, "stream.connecting")
 	state, e = c.StartStream(startCtx)
 	if e != nil {
 		// A failed/cancelled start must not silently keep broadcasting later.
@@ -350,11 +375,14 @@ func Start(ctx context.Context, p Paths) (Result, error) {
 		_, stopErr := c.StopStream(cleanup)
 		if stopErr == nil {
 			haltCapture(cleanup, c)
+			logEvent(p, "stream.failed-stopped")
 			return Result{}, errors.New("stream did not reach a healthy output and was stopped; check the ingest URL, key, network and encoder in Desktop setup")
 		}
+		logEvent(p, "stream.unconfirmed")
 		return Result{}, errors.New("stream start could not be confirmed and stop could not be confirmed. Use Stop streaming or inspect OBS immediately")
 	}
 	succeeded = true
+	logEvent(p, "stream.ready")
 	return Result{OK: true, Configured: true, Connected: true, State: "streaming", Message: "OBS streaming — verify picture and sound on your Kick channel", Stream: state}, nil
 }
 
@@ -389,6 +417,7 @@ func Stop(ctx context.Context, p Paths) (Result, error) {
 	if !r.Recording {
 		haltCapture(ctx, c)
 	}
+	logEvent(p, "stream.stopped")
 	return Result{OK: true, Configured: true, Connected: true, State: "stopped", Message: "Streaming stopped", Stream: state}, nil
 }
 
@@ -398,10 +427,14 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 	if e != nil {
 		return Result{}, e
 	}
+	logEvent(p, "dependencies.checking")
 	if e = checkDependencies(ctx); e != nil {
+		logEvent(p, "dependencies.missing")
 		return Result{}, e
 	}
+	logEvent(p, "capture.checking")
 	if !waitGamescope(ctx) {
+		logEvent(p, "capture.unavailable")
 		return Result{}, errors.New("open a game in Gaming Mode before making the local test clip")
 	}
 	c, e := ready(ctx, p, s, secret)
@@ -420,6 +453,7 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 	if r.Recording || st.Active {
 		return Result{}, errors.New("stop the existing stream or recording before making a test clip")
 	}
+	logEvent(p, "capture.configuring")
 	if e = ensureCapture(ctx, c, s); e != nil {
 		return Result{}, e
 	}
@@ -430,17 +464,19 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 		haltCapture(cleanup, c)
 	}()
 	capCtx, cancel := context.WithTimeout(ctx, 12*time.Second)
-	e = waitCapture(capCtx, c)
+	e = waitCapture(capCtx, c, p)
 	cancel()
 	if e != nil {
 		return Result{}, e
 	}
 	recordCtx, recordCancel := context.WithTimeout(ctx, 15*time.Second)
+	logEvent(p, "recording.starting")
 	e = c.StartRecording(recordCtx)
 	recordCancel()
 	if e != nil {
 		return Result{}, e
 	}
+	logEvent(p, "recording.running")
 	if e = wait(ctx, 10*time.Second); e != nil {
 		return Result{}, e
 	}
@@ -451,6 +487,7 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 	if info, err := os.Stat(path); path == "" || err != nil || !info.Mode().IsRegular() || info.Size() == 0 {
 		return Result{}, errors.New("OBS did not produce a test recording; no successful clip can be confirmed")
 	}
+	logEvent(p, "recording.saved")
 	return Result{OK: true, Configured: true, Connected: true, State: "stopped", Message: "Local test saved; watch it in Desktop Mode to check picture, game audio and microphone before broadcasting", RecordingPath: path}, nil
 }
 

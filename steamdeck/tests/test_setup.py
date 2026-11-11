@@ -87,8 +87,8 @@ class InstallerSafety(unittest.TestCase):
         self.root = patch.object(install, "ROOT", self.source)
         self.root.start()
 
-    def manifest(self):
-        (self.source / "manifest.json").write_text(json.dumps({"version": "0.1.0-test", "files": {name: hashlib.sha256((self.source / name).read_bytes()).hexdigest() for name in self.files}}))
+    def manifest(self, version="0.1.0-test"):
+        (self.source / "manifest.json").write_text(json.dumps({"version": version, "files": {name: hashlib.sha256((self.source / name).read_bytes()).hexdigest() for name in self.files}}))
 
     def tearDown(self):
         self.root.stop()
@@ -132,6 +132,88 @@ class InstallerSafety(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "inside your home"):
             install.install(launch=False)
         self.assertEqual(list(outside.iterdir()), [])
+
+    def test_update_same_version_replacement_and_repair_preserve_user_data(self):
+        protected = [
+            self.home / ".config/obsgod/deck.json",
+            self.home / ".config/obsgod/secrets.json",
+            self.home / "Videos/OBSGod/keep.mkv",
+            self.home / ".var/app/com.obsproject.Studio/config/obsgod/obs-studio/global.ini",
+            self.home / ".local/state/obsgod/diagnostics/events.json",
+        ]
+        for path in protected:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("keep " + path.name)
+        snapshots = {path: path.read_bytes() for path in protected}
+        with contextlib.redirect_stdout(__import__("io").StringIO()):
+            current = install.install(launch=False)
+            original = current.resolve()
+            (self.source / "obsgod").write_text("new executable")
+            self.manifest("0.2.0-test")
+            install.install(launch=False)
+            updated = current.resolve()
+            self.assertNotEqual(original, updated)
+            self.assertEqual((original / "obsgod").read_text(), "fixture obsgod")
+            (self.source / "obsgod").write_text("replacement with same version")
+            self.manifest("0.2.0-test")
+            install.install(launch=False)
+            replacement = current.resolve()
+            self.assertNotEqual(replacement, updated)
+            self.assertEqual((updated / "obsgod").read_text(), "new executable")
+            # Simulate a damaged canonical install, then rerun the same package.
+            (self.source / "obsgod").write_text("new executable")
+            self.manifest("0.2.0-test")
+            (updated / "obsgod").write_text("damaged")
+            install.install(launch=False)
+            self.assertEqual((current / "obsgod").read_text(), "new executable")
+            repaired = current.resolve()
+            (current / "obsgod").chmod(0o600)
+            install.install(launch=False)
+            self.assertEqual(current.resolve(), repaired)
+            self.assertTrue(os.access(current / "obsgod", os.X_OK))
+        self.assertEqual({path: path.read_bytes() for path in protected}, snapshots)
+
+    def test_activation_failure_keeps_old_version_and_restores_entry_points(self):
+        with contextlib.redirect_stdout(__import__("io").StringIO()):
+            current = install.install(launch=False)
+        previous = current.resolve()
+        desktop = self.home / ".local/share/applications/obsgod-setup.desktop"
+        desktop.write_text("my existing desktop entry")
+        self.manifest("0.2.0-test")
+        replace = Path.replace
+
+        def fail_current(path, target):
+            if target == current:
+                raise OSError("simulated activation failure")
+            return replace(path, target)
+
+        with patch.object(Path, "replace", fail_current), self.assertRaisesRegex(OSError, "activation failure"):
+            install.install(launch=False)
+        self.assertEqual(current.resolve(), previous)
+        self.assertEqual(desktop.read_text(), "my existing desktop entry")
+        self.assertEqual((self.home / ".local/bin/obsgod").resolve(), previous / "obsgod")
+
+    def test_dangling_desktop_link_is_backed_up_without_writing_its_target(self):
+        desktop = self.home / ".local/share/applications/obsgod-setup.desktop"
+        desktop.parent.mkdir(parents=True)
+        target = self.home / "unrelated-file"
+        desktop.symlink_to(target)
+        with contextlib.redirect_stdout(__import__("io").StringIO()):
+            install.install(launch=False)
+        self.assertFalse(target.exists())
+        self.assertFalse(desktop.is_symlink())
+        copies = list((self.home / ".local/share/obsgod/backups").glob("*/obsgod-setup.desktop"))
+        self.assertEqual(len(copies), 1)
+        self.assertEqual(copies[0].readlink(), target)
+
+    def test_concurrent_installer_is_refused_without_changing_current(self):
+        with contextlib.redirect_stdout(__import__("io").StringIO()):
+            current = install.install(launch=False)
+        previous = current.resolve()
+        with install.installation_lock(current.parent):
+            with self.assertRaisesRegex(RuntimeError, "Another OBSGod installer"):
+                install.install(launch=False)
+        self.assertEqual(current.resolve(), previous)
 
 
 if __name__ == "__main__":

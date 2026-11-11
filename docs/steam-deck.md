@@ -108,6 +108,15 @@ OBS's initial global microphone inputs are muted automatically.
 
 ## Troubleshooting
 
+- **Find the full error:** open OBSGod in Decky and read **Diagnostic console**
+  directly below **Refresh status**. It updates while an operation is running,
+  retains the last 100 events across reloads/updates and shows the newest first.
+  Use **Older events** / **Latest events** to read history and **Clear console**
+  to erase it without stopping a stream. Logs use fixed diagnostic messages and
+  numeric OBS/launch codes; keys, server URLs and raw OBS output are excluded.
+  A local ten-second recording does not broadcast, so its streaming dot stays red.
+  A game must be open in Gaming Mode before testing; a timeout by itself does
+  not tell us what failed. Report the stage/error from the console.
 - **OBS will not start / missing input:** rerun setup's dependency installation.
   Both OBS and `com.obsproject.Studio.Plugin.Gstreamer` must be user Flatpaks.
   Run diagnostics. If another process uses 4457, resolve that conflict first.
@@ -130,8 +139,19 @@ OBS's initial global microphone inputs are muted automatically.
 ## Update / uninstall
 
 Download/extract the next preview, stop streaming, close idle managed OBS, run its
-installer, then update the Decky plugin through its ZIP installer. Settings and
-keys are preserved. Existing `~/.local/bin/obsgod` executables are backed up under
+installer, then use Decky's **Install Plugin from ZIP** to replace OBSGod with
+the new `obsgod-decky.zip`. There is no need to uninstall first or enter the key
+again. The Desktop installation and Decky ZIP are separate updates: check the
+plugin version shown in its console after replacing the ZIP. Decky itself is
+still installed separately.
+
+Repeat installation and same-version replacement are supported. The installer
+verifies and stages the payload, preserves earlier release directories, and
+switches the current release after preparing the application entries. A failed
+activation rolls back those entries. A damaged installed copy is repaired using
+a fresh directory; existing processes keep their original files. Settings, keys,
+recordings, diagnostics and ordinary OBS scenes are preserved. Existing
+`~/.local/bin/obsgod` executables are backed up under
 `~/.local/share/obsgod/backups/`; the installer never overwrites their contents.
 
 Uninstall the plugin through Decky, then run:

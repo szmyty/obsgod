@@ -131,20 +131,43 @@ func gamescopeReady(ctx context.Context) bool {
 	return false
 }
 
-func launchOBS(p Paths) error {
+func launchOBS(p Paths) (<-chan int, error) {
 	if e := privateDir(p.OBSConfig); e != nil {
-		return e
+		return nil, e
 	}
 	cmd := exec.Command("flatpak", "run", "--user", "--env=XDG_CONFIG_HOME="+p.OBSConfig, "--env=QT_QPA_PLATFORM=xcb", "com.obsproject.Studio", "--profile", "OBSGod", "--collection", "OBSGod", "--multi", "--minimize-to-tray", "--disable-shutdown-check", "--disable-missing-files-check")
 	cmd.Env = sessionEnvironment()
+	hasDisplay := false
+	for _, variable := range cmd.Env {
+		if strings.HasPrefix(variable, "DISPLAY=") && variable != "DISPLAY=" {
+			hasDisplay = true
+		}
+	}
+	if !hasDisplay {
+		logEvent(p, "session.no-display")
+	}
 	cmd.Stdin = nil
-	cmd.Stdout = io.Discard
-	cmd.Stderr = io.Discard
+	output, err := os.OpenFile(os.DevNull, os.O_WRONLY, 0)
+	if err != nil {
+		return nil, errors.New("could not prepare the OBS launch")
+	}
+	defer output.Close()
+	// A real inherited descriptor survives this short-lived CLI. A Go writer
+	// would create pipes that disappear when the CLI exits, breaking OBS later.
+	cmd.Stdout = output
+	cmd.Stderr = output
 	cmd.SysProcAttr = &syscall.SysProcAttr{Setsid: true}
 	if e := cmd.Start(); e != nil {
-		return errors.New("OBS launch failed; open OBSGod Desktop setup and check dependencies")
+		return nil, errors.New("OBS launch failed; open OBSGod Desktop setup and check dependencies")
 	}
-	return cmd.Process.Release()
+	// Observe early Flatpak/OBS failures instead of waiting 75 seconds for a
+	// connection that cannot appear. No pipes keep this CLI attached to OBS.
+	exited := make(chan int, 1)
+	go func() {
+		_ = cmd.Wait()
+		exited <- cmd.ProcessState.ExitCode()
+	}()
+	return exited, nil
 }
 
 func stopManagedOBS(ctx context.Context, p Paths) error {
