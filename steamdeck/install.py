@@ -8,6 +8,7 @@ from pathlib import Path
 import platform
 import shutil
 import subprocess
+import sys
 import tempfile
 import time
 
@@ -29,6 +30,8 @@ def quote_exec(value):
 
 
 def verify_payload():
+    if not (ROOT / "manifest.json").is_file():
+        raise RuntimeError("Extract the entire OBSGod archive to a folder first, then run Install OBSGod.desktop from that extracted folder")
     manifest = json.loads((ROOT / "manifest.json").read_text())
     version = manifest["version"]
     if not version or any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-" for c in version):
@@ -101,14 +104,18 @@ def install(launch=True):
         if desktop.is_symlink() or "X-OBSGod-Managed=true" not in desktop.read_text():
             owned_directory(backup, home)
             desktop.rename(backup / "obsgod-setup.desktop")
-    content = "[Desktop Entry]\nType=Application\nName=OBSGod Setup\nComment=Configure Steam Deck streaming locally\nExec=python3 " + quote_exec(str(current / "setup.py")) + "\nIcon=video-display\nTerminal=false\nCategories=AudioVideo;\nX-OBSGod-Managed=true\n"
+    launch_code = "import subprocess,sys; result=subprocess.run([sys.executable,sys.argv[1]]); input('Press Enter to close this window.'); sys.exit(result.returncode)"
+    content = "[Desktop Entry]\nType=Application\nName=OBSGod Setup\nComment=Configure Steam Deck streaming locally\nExec=python3 " + quote_exec(launch_code) + " " + quote_exec(str(current / "setup.py")) + "\nIcon=video-display\nTerminal=true\nCategories=AudioVideo;\nX-OBSGod-Managed=true\n"
     desktop.write_text(content)
     desktop.chmod(0o600)
     print("Installed OBSGod " + manifest["version"])
     print("Decky plugin ZIP: " + str(current / "obsgod-decky.zip"))
     print("Reopen setup from Applications → Multimedia → OBSGod Setup.")
     if launch:
-        subprocess.Popen(["python3", str(current / "setup.py")], stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+        print("Keep this terminal open while configuring OBSGod. Finish setup in the browser when done.", flush=True)
+        result = subprocess.run([sys.executable, str(current / "setup.py")])
+        if result.returncode:
+            raise RuntimeError("Files were installed, but the setup page failed to start. The error is shown above; rerun OBSGod Setup after correcting it")
     return current
 
 

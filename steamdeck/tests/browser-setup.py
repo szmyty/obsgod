@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
 """Exercise the actual extracted installer and local setup in Chromium."""
 import argparse
-import importlib.util
 import json
 import os
 from pathlib import Path
+import signal
 import subprocess
 import sys
 import tarfile
 import tempfile
-import threading
+import time
 
 from playwright.sync_api import sync_playwright
+from test_bootstrap import desktop_command, read_until
 
 
 def main():
@@ -29,24 +30,34 @@ def main():
         home = base / "home with spaces"
         home.mkdir()
         env = dict(os.environ, HOME=str(home), XDG_CONFIG_HOME=str(home / ".config"), XDG_STATE_HOME=str(home / ".local/state"))
-        subprocess.run(["python3", str(package / "install.py"), "--no-launch"], env=env, check=True)
         current = home / ".local/share/obsgod/current"
-        for key in ["HOME", "XDG_CONFIG_HOME", "XDG_STATE_HOME"]:
-            os.environ[key] = env[key]
-        sys.path.insert(0, str(current))
-        spec = importlib.util.spec_from_file_location("installed_obsgod_setup", current / "setup.py")
-        setup = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(setup)
-        server = setup.SetupServer()
-        thread = threading.Thread(target=server.serve_forever, daemon=True)
-        thread.start()
+        ready = base / "browser-url"
+        probe = base / "browser-probe"
+        probe.write_text("#!" + sys.executable + "\n" + """
+import os,sys,urllib.request
+from pathlib import Path
+with urllib.request.urlopen(sys.argv[1].split('#')[0],timeout=3) as response:
+ assert response.status==200
+Path(os.environ['OBSGOD_TEST_BROWSER_URL']).write_text(sys.argv[1])
+""")
+        probe.chmod(0o700)
+        env.update(BROWSER=str(probe), OBSGOD_TEST_BROWSER_URL=str(ready))
+        process = subprocess.Popen(desktop_command(package / "Install OBSGod.desktop", as_uri=True), cwd=home,
+                                   env=env, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                   start_new_session=True)
         try:
+            deadline = time.monotonic() + 15
+            while not ready.exists() and time.monotonic() < deadline:
+                if process.poll() is not None:
+                    raise AssertionError("Desktop installer exited before opening setup")
+                time.sleep(0.05)
+            assert ready.exists(), "The actual installer did not open a working setup server"
             with sync_playwright() as p:
                 browser = p.chromium.launch(executable_path=args.browser, headless=True, args=["--no-sandbox"])
                 page = browser.new_page(viewport={"width": 1280, "height": 800})
                 errors = []
                 page.on("pageerror", lambda error: errors.append(str(error)))
-                page.goto(server.origin + "/#" + server.token)
+                page.goto(ready.read_text())
                 page.get_by_role("heading", name="Connect your stream").wait_for()
                 assert not page.locator("#microphone").is_checked()
                 page.locator("#server").fill("rtmps://example.invalid/app")
@@ -72,14 +83,19 @@ def main():
                 page.get_by_role("button", name="Finish and close setup").click()
                 page.get_by_text("Setup closed. You can close this tab.", exact=True).wait_for()
                 browser.close()
+            output=read_until(process,b"Press Enter to close",timeout=10)
+            assert b"browser-fixture-never-real" not in output
+            assert process.poll() is None, "Desktop terminal did not stay open after setup"
+            process.communicate(b"\n",timeout=10)
+            assert process.returncode==0
             subprocess.run(["python3", str(current / "uninstall.py"), "--purge-settings"], env=env, check=True)
             assert not (home / ".local/bin/obsgod").exists()
             assert not secret.exists()
-            print("PASS: archive install, credential setup, refresh, responsive page, clean uninstall; no real credentials used")
+            print("PASS: actual desktop launcher, foreground startup, browser setup/reload, private credentials, terminal hold, clean uninstall; fixture credentials only")
         finally:
-            server.shutdown()
-            server.server_close()
-            thread.join()
+            if process.poll() is None:
+                os.killpg(process.pid,signal.SIGTERM)
+                process.communicate(timeout=10)
 
 
 if __name__ == "__main__":

@@ -145,14 +145,26 @@ def main():
     private_process()
     server = SetupServer()
     url = server.origin + "/#" + server.token
-    print("OBSGod setup is open locally. Close this window or the setup page when done.", flush=True)
+    # Some browser launchers wait for the first page to load before returning.
+    # Serve first so those launchers cannot block their own HTTP response.
+    thread = threading.Thread(target=server.serve_forever, kwargs={"poll_interval": 0.5}, daemon=True)
+    thread.start()
+    print("OBSGod Setup is running locally. Keep this terminal open until you finish setup.", flush=True)
+    print("If the browser does not open, open this link on this Deck:", flush=True)
+    print(url, flush=True)
     try:
-        if not webbrowser.open(url):
-            print("Open this local setup link: " + url, flush=True)
-        server.serve_forever(poll_interval=0.5)
+        try:
+            if not webbrowser.open(url):
+                print("Automatic browser launch was unavailable. Use the local link above.", flush=True)
+        except (webbrowser.Error, OSError):
+            print("Automatic browser launch failed. Use the local link above.", flush=True)
+        while thread.is_alive():
+            thread.join(0.5)
     except KeyboardInterrupt:
         pass
     finally:
+        server.shutdown()
+        thread.join()
         server.server_close()
 
 

@@ -19,6 +19,10 @@ your device. See the qualification evidence attached to the
 2. Open **Install OBSGod.desktop** in the extracted folder. Choose **Execute** if
    KDE asks. If your file manager opens it as text, open Konsole in that folder
    and run `python3 install.py`. Do not use sudo.
+   Keep the terminal open until you choose **Finish and close setup** in the
+   browser. The launcher waits for Enter afterward so any error stays visible.
+   If the browser does not open automatically, use the local setup link printed
+   in the terminal. Do not share that link.
 3. The local **OBSGod Setup** page opens in your browser. Click **Install / check
    OBS + capture plugin**. The initial Flathub download can take several minutes
    and a few GB. The installer uses user Flatpaks, including when a system OBS
@@ -42,6 +46,12 @@ your device. See the qualification evidence attached to the
 Decky lives in the **••• Quick Access panel**, which is on the right side on a
 standard Steam Deck. The STEAM button's left-side menu is a different menu.
 This preview does not install itself into Decky's public plugin store.
+
+If an older preview's launcher flashes closed, open a terminal in the extracted
+folder and run `python3 install.py --no-launch`. If that succeeds, open
+**OBSGod Setup** from Applications, or run
+`python3 ~/.local/share/obsgod/current/setup.py`. Once the browser page opens,
+continue setup there; reinstalling is unnecessary.
 
 ## Status indicator
 

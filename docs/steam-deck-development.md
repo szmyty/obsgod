@@ -59,3 +59,18 @@ patching jsonparser to v1.1.2, and replacing Decky's old Rollup preset. Stream k
 remain local/stdin only; normal output is redacted. Publication will be a hardware
 preview from a clean exact commit with fresh artifact receipts; no roadmap issue
 is closed by these synthetic tests. See steam-deck-building.md for reproduction.
+
+2026-11-11 installer follow-up: the user reported that the desktop launcher
+opened and immediately closed a terminal. They then reported successful manual
+installation with `python3 install.py --no-launch` and an open browser setup page.
+That establishes their manual install/browser recovery, not the cause of the
+original double-click behavior or successful game capture.
+
+Confirmed preview defects: setup child output was discarded, the desktop entry
+did not hold the terminal, and setup attempted to launch a browser before serving
+HTTP. The installer now runs setup visibly in the foreground; launcher failures
+wait for Enter; the server serves before browser launch. Regression tests execute
+the desktop entry for missing extraction and setup crashes, including spaces,
+literal percent escapes and file URIs. Browser qualification now launches the
+actual archive entrypoint instead of importing SetupServer directly. These are
+installer/startup changes; the OBS streaming implementation is unchanged.
