@@ -2,11 +2,13 @@ package deck
 
 import (
 	"bytes"
+	"context"
 	"encoding/base64"
 	"encoding/json"
 	"image"
 	"image/color"
 	"image/png"
+	"net"
 	"os"
 	"path/filepath"
 	"strings"
@@ -152,5 +154,17 @@ func TestPreparePreservesOtherOBSConfig(t *testing.T) {
 	b, _ := os.ReadFile(other)
 	if string(b) != "my existing scenes" {
 		t.Fatal("changed other OBS settings")
+	}
+}
+
+func TestMissingCredentialsCannotHideAnOccupiedOBSPort(t *testing.T) {
+	listener, e := net.Listen("tcp", "127.0.0.1:"+Port)
+	if e != nil {
+		t.Skip("test OBS port is already occupied")
+	}
+	defer listener.Close()
+	r := Status(context.Background(), testPaths(t))
+	if r.OK || r.State != "unknown" {
+		t.Fatalf("unconfirmed OBS must remain unknown, got %+v", r)
 	}
 }

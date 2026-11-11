@@ -23,7 +23,7 @@ async function refresh(){
   try{
     const next=await readStatus();
     const now=Date.now();
-    if(next.stream?.active && (next.stream.bytes>previousBytes || !result?.stream?.active)) progressAt=now;
+    if(next.stream?.active && next.stream.bytes>0 && (next.stream.bytes!==previousBytes || !result?.stream?.active)) progressAt=now;
     previousBytes=next.stream?.bytes??0; result=next;lastPoll=now;
   }catch{
     result={ok:false,state:"unknown",message:"OBS connection unavailable. Use Stop streaming or inspect OBS."};

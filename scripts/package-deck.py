@@ -100,6 +100,14 @@ def main():
     }
     for name in ["index.js", "decky-api.js", "manifest.js", "types.js"]:
         plugin["dist/" + name] = (REPO / "steamdeck/decky/dist" / name).read_bytes()
+    # Include the SDK's preferred source form as well as its replaceable runtime
+    # module, so the LGPL dependency can be rebuilt and modified independently.
+    sdk = REPO / "steamdeck/decky/node_modules/@decky/api"
+    for path in sorted((sdk / "src").rglob("*")):
+        if path.is_file():
+            plugin["source/decky-api/" + path.relative_to(sdk).as_posix()] = path.read_bytes()
+    plugin["source/decky-api/package.json"] = (sdk / "package.json").read_bytes()
+    plugin["source/decky-api/BUILDING.md"] = b"The unmodified preferred TypeScript source of @decky/api 1.1.3 is included here. OBSGod's pinned TypeScript build and rollup.config.js are in the release's corresponding GitHub source archive. The runtime dist/decky-api.js is a separate replaceable module. Its build changes only the manifest import to ./manifest.js and the types export to ./types.js; dist/manifest.js supplies the OBSGod name. The complete LGPL-2.1 license is at the plugin root.\n"
     plugin_zip = zip_payload(plugin, epoch)
     (dist / "obsgod-decky.zip").write_bytes(plugin_zip)
     files = {name: (REPO / "steamdeck" / name).read_bytes() for name in ["setup.py", "bridge.py", "setup.html", "setup.js", "setup.css", "uninstall.py"]}

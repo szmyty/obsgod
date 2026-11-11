@@ -36,5 +36,26 @@ Official capture references inspected:
 - https://github.com/SteamDeckHomebrew/decky-plugin-template
 
 Upstream Gamescope issues #2508/#1898 describe black-frame/Steam UI limitations.
-The preview checks for a real nonblank source image before starting a broadcast;
+The preview checks the real rendered program scene for nonblank pixels before starting a broadcast;
 this is not proof that every game, audio route or SteamOS build works.
+
+2026-11-11 implementation checkpoints: PR #15 preserves 0cbcb57 and 02c3f16.
+Desktop archive install/configure/reload/uninstall passed in Chromium. The actual
+Decky frontend ZIP passed in a simulated loader. Native OBS 30.2.3 with GStreamer
+1.26.2 and synthetic PipeWire/PulseAudio passed moving 720p recording, nonblank
+local RTMP with audio, repeated start/stop, failed-start cleanup and a later
+listener receiving no unexpected connection. These are Linux synthetic results,
+not Steam Deck or Kick acceptance.
+
+Integration repairs included disabling the first-run OBS wizard in global.ini
+and user.ini, setting nonzero scene scale, checking the rendered scene, and
+running capture independently of transient preview visibility during preflight.
+Stop explicitly pauses that capture. A three-second bounded node-readiness retry
+handles the synthetic producer's reconnect transition. Backend cancellation also
+covers Stop arriving before Start's child process has attached.
+
+Security qualification required upgrading the pinned compiler to Go 1.27.4,
+patching jsonparser to v1.1.2, and replacing Decky's old Rollup preset. Stream keys
+remain local/stdin only; normal output is redacted. Publication will be a hardware
+preview from a clean exact commit with fresh artifact receipts; no roadmap issue
+is closed by these synthetic tests. See steam-deck-building.md for reproduction.

@@ -185,6 +185,24 @@ func (c *Client) SetInputMuted(ctx context.Context, name string, muted bool) err
 	return e
 }
 
+// UpdateInputIfPresent overlays source-specific settings without creating an
+// input. This is useful for idempotent cleanup after partial setup failures.
+func (c *Client) UpdateInputIfPresent(ctx context.Context, name string, settings map[string]any) error {
+	l, e := empty(ctx, "GetInputList", c.obs.Inputs.GetInputList)
+	if e != nil {
+		return e
+	}
+	for _, input := range l.Inputs {
+		if input.InputName == name {
+			_, e = request(ctx, "SetInputSettings", func() (*inputs.SetInputSettingsResponse, error) {
+				return c.obs.Inputs.SetInputSettings(inputs.NewSetInputSettingsParams().WithInputName(name).WithInputSettings(settings).WithOverlay(true))
+			})
+			return e
+		}
+	}
+	return nil
+}
+
 // Screenshot returns image data to the caller; callers must not log it.
 func (c *Client) Screenshot(ctx context.Context, name string) (string, error) {
 	r, e := request(ctx, "GetSourceScreenshot", func() (*sources.GetSourceScreenshotResponse, error) {

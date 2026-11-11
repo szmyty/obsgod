@@ -65,11 +65,12 @@ clip=$(python3 -c 'import json;print(json.load(open("/work/output/test-recording
 ffprobe -v error -show_streams -show_format -of json "$clip" > /work/output/recording-probe.json
 ffmpeg -v error -ss 2 -i "$clip" -frames:v 1 -y /work/output/capture.png
 ffmpeg -v error -ss 2 -i "$clip" -frames:v 1 -f rawvideo -pix_fmt rgb24 -y /work/output/frame.rgb
-ffmpeg -v error -ss 1 -i "$clip" -vf fps=1 -frames:v 3 -f framemd5 -y /work/output/frames.md5
+ffmpeg -v error -ss 1 -i "$clip" -an -vf fps=1 -frames:v 3 -f framemd5 -y /work/output/frames.md5
 ffmpeg -hide_banner -i "$clip" -af volumedetect -vn -f null - >/work/output/recording-audio.txt 2>&1
 
 ffmpeg -hide_banner -listen 1 -i rtmp://127.0.0.1:1935/live/fixture-key -c copy -y /work/output/received.flv >/work/rtmp.log 2>&1 &
 receiver=$!
+pw-dump >/work/output/nodes-before-stream.json
 /src/dist/obsgod deck start > /work/output/start.json
 /src/dist/obsgod deck start > /work/output/start-again.json
 sleep 4
@@ -78,6 +79,25 @@ sleep 4
 /src/dist/obsgod deck stop > /work/output/stop-again.json
 wait "$receiver" || true
 ffprobe -v error -show_streams -show_format -of json /work/output/received.flv > /work/output/stream-probe.json
+ffmpeg -v error -ss 2 -i /work/output/received.flv -frames:v 1 -f rawvideo -pix_fmt rgb24 -y /work/output/stream-frame.rgb
+ffmpeg -hide_banner -i /work/output/received.flv -af volumedetect -vn -f null - >/work/output/stream-audio.txt 2>&1
+# Failed start must stop its pending output and must not auto-start later when
+# a server appears. No external provider or actual stream key is involved.
+if /src/dist/obsgod deck start >/work/output/start-failure.json 2>/work/output/start-failure.stderr; then
+  echo 'Expected a failed start with no RTMP receiver' >&2; exit 1
+fi
+/src/dist/obsgod deck status >/work/output/status-after-failure.json
+python3 - <<'PY'
+import json,socket
+s=socket.socket();s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1);s.bind(('127.0.0.1',1935));s.listen(1);s.settimeout(6)
+connected=False
+try:
+ c,_=s.accept();connected=True;c.close()
+except TimeoutError: pass
+finally:s.close()
+json.dump({'unexpected_connection':connected},open('/work/output/no-late-start.json','w'))
+assert not connected,'OBS attempted an unexpected late stream connection'
+PY
 /src/dist/obsgod deck restart > /work/output/restart.json
 python3 - <<'PY'
 import json,re
@@ -95,10 +115,14 @@ for name in ['recording-probe','stream-probe']:
  assert video['codec_name']=='h264' and video['width']==1280 and video['height']==720
  assert audio['codec_name']=='aac'
 pixels=(p/'frame.rgb').read_bytes();assert max(pixels)>32 and max(pixels)-min(pixels)>16,'recorded output is blank'
+pixels=(p/'stream-frame.rgb').read_bytes();assert max(pixels)>32 and max(pixels)-min(pixels)>16,'streamed output is blank'
 hashes=[line.split(',')[-1].strip() for line in (p/'frames.md5').read_text().splitlines() if not line.startswith('#')]
 assert len(hashes)==3 and len(set(hashes))>1,'video frames do not move'
 audio=(p/'recording-audio.txt').read_text();assert re.search(r'max_volume: -?[0-9.]+ dB',audio),audio
+audio=(p/'stream-audio.txt').read_text();assert re.search(r'max_volume: -?[0-9.]+ dB',audio),audio
+assert not json.loads((p/'start-failure.json').read_text())['ok']
+assert not json.loads((p/'status-after-failure.json').read_text())['stream']['active']
 for name in ['configure','test-recording','start','status-live','stop']:
  assert 'fixture-key' not in (p/(name+'.json')).read_text(),name
-print('PASS: real OBS / GStreamer / synthetic PipeWire / PulseAudio / local recording / local RTMP / repeated lifecycle. Hardware and Kick untested.')
+print('PASS: real OBS / GStreamer / synthetic PipeWire / PulseAudio / moving recording / nonblank local RTMP / repeated lifecycle / failed-start cleanup / no late connection. Hardware and Kick untested.')
 PY

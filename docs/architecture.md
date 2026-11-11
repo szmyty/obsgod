@@ -9,6 +9,19 @@
 - `internal/commands` builds the CLI tree and contains command-specific orchestration.
 - `internal/obs` exposes the OBS service abstraction and owns the websocket connection lifecycle.
 - `internal/version` centralizes application naming and version formatting.
+- `pkg/automation` exposes experimental context-aware OBS operations through the
+  pinned goobs adapter. Free-form server errors are reduced to safe protocol codes.
+- `internal/deck` owns the optional Linux Flatpak runtime, private XDG settings,
+  serialized lifecycle commands and rendered-capture/stream readiness checks.
+- `steamdeck` contains the user installer, authenticated loopback setup page and
+  unprivileged Decky adapter. Both interfaces invoke `obsgod deck` over JSON.
+
+The Steam Deck adapter uses a generic RTMP(S) server/key contract. It does not
+perform Kick API or creator-account orchestration. The future StreamGod boundary
+in #9/#13 remains open; this preview does not declare a stable public Go API.
+Legacy OBS commands keep their existing connection configuration and behavior.
+
+See [Steam Deck installation](steam-deck.md) and [build/qualification](steam-deck-building.md).
 
 ## Dependency Flow
 

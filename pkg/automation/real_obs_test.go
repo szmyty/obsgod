@@ -22,7 +22,7 @@ func TestRealOBSReadOnly(t *testing.T) {
 	defer c.Close()
 	_, e = c.obs.General.GetVersion()
 	if e != nil {
-		t.Fatalf("GetVersion adapter returned %T: %v", e, e)
+		t.Fatalf("GetVersion adapter returned %T", e)
 	}
 	r, e := c.RuntimeStatus(ctx)
 	if e != nil {

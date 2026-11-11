@@ -8,7 +8,8 @@ It does not require per-game launch options or disabling SteamOS read-only mode.
 **Status:** cloud Linux tests do not establish Steam Deck hardware compatibility.
 The preview is for the first real Deck test. Gamescope capture, AMD VAAPI,
 controller navigation, audio routing and Kick viewer output need verification on
-your device. See [the qualification record](steam-deck-qualification.md).
+your device. See the qualification evidence attached to the
+[preview release](https://github.com/szmyty/obsgod/releases).
 
 ## Install tomorrow morning
 

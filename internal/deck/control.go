@@ -52,6 +52,15 @@ func Status(ctx context.Context, p Paths) Result {
 		// or prevent the owner from stopping it.
 		secret, e = loadCredentials(p)
 		if e != nil {
+			conn, probeErr := net.DialTimeout("tcp", "127.0.0.1:"+Port, 200*time.Millisecond)
+			if conn != nil {
+				_ = conn.Close()
+			}
+			if probeErr == nil || len(managedProcesses(p)) > 0 {
+				r.OK = false
+				r.State = "unknown"
+				r.Message = "OBS may still be running but its credentials are unavailable. Inspect OBS in Desktop Mode before uninstalling or changing settings"
+			}
 			return r
 		}
 	}
@@ -186,7 +195,10 @@ func ensureCapture(ctx context.Context, c *automation.Client, s Settings) error 
 			return e
 		}
 	}
-	settings := map[string]any{"pipeline": CapturePipeline, "use_timestamps_video": true, "sync_appsink_video": false, "disable_async_appsink_video": true, "disable_async_appsink_audio": true, "no_buffer": true, "drop_video": true, "stop_on_hide": true, "clear_on_end": true, "restart_on_error": true, "restart_on_eos": true, "restart_timeout": 2000}
+	// Capture must run during preflight even when OBS's preview/window is hidden.
+	// Pause it explicitly on stop instead of allowing transient show/hide events
+	// from screenshot requests to tear down the PipeWire connection.
+	settings := map[string]any{"pipeline": CapturePipeline, "use_timestamps_video": true, "sync_appsink_video": false, "disable_async_appsink_video": true, "disable_async_appsink_audio": true, "no_buffer": true, "drop_video": true, "stop_on_hide": false, "clear_on_end": true, "restart_on_error": true, "restart_on_eos": true, "restart_timeout": 2000}
 	if e := c.EnsureInput(ctx, LiveScene, CaptureInput, "gstreamer-source", settings); e != nil {
 		return e
 	}
@@ -268,6 +280,24 @@ func waitCapture(ctx context.Context, c *automation.Client) error {
 	}
 }
 
+func waitGamescope(ctx context.Context) bool {
+	ctx, cancel := context.WithTimeout(ctx, 3*time.Second)
+	defer cancel()
+	for {
+		if gamescopeReady(ctx) {
+			return true
+		}
+		if wait(ctx, 150*time.Millisecond) != nil {
+			return false
+		}
+	}
+}
+
+func haltCapture(ctx context.Context, c *automation.Client) {
+	_ = c.SetScene(ctx, IdleScene)
+	_ = c.UpdateInputIfPresent(ctx, CaptureInput, map[string]any{"stop_on_hide": true})
+}
+
 func Start(ctx context.Context, p Paths) (Result, error) {
 	s, secret, e := Load(p)
 	if e != nil {
@@ -285,8 +315,16 @@ func Start(ctx context.Context, p Paths) (Result, error) {
 	if e != nil {
 		return Result{}, e
 	}
+	succeeded := false
+	defer func() {
+		if !succeeded && !state.Active {
+			cleanup, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+			defer cancel()
+			haltCapture(cleanup, c)
+		}
+	}()
 	if !state.Active {
-		if !gamescopeReady(ctx) {
+		if !waitGamescope(ctx) {
 			return Result{}, errors.New("switch to Gaming Mode and open a game first; the Gamescope capture feed is not available")
 		}
 		if e = ensureCapture(ctx, c, s); e != nil {
@@ -296,7 +334,6 @@ func Start(ctx context.Context, p Paths) (Result, error) {
 		e = waitCapture(captureCtx, c)
 		cancel()
 		if e != nil {
-			_ = c.SetScene(ctx, IdleScene)
 			return Result{}, e
 		}
 		if e = c.ConfigureRTMP(ctx, s.Server, secret.StreamKey); e != nil {
@@ -312,11 +349,12 @@ func Start(ctx context.Context, p Paths) (Result, error) {
 		defer done()
 		_, stopErr := c.StopStream(cleanup)
 		if stopErr == nil {
-			_ = c.SetScene(cleanup, IdleScene)
+			haltCapture(cleanup, c)
 			return Result{}, errors.New("stream did not reach a healthy output and was stopped; check the ingest URL, key, network and encoder in Desktop setup")
 		}
 		return Result{}, errors.New("stream start could not be confirmed and stop could not be confirmed. Use Stop streaming or inspect OBS immediately")
 	}
+	succeeded = true
 	return Result{OK: true, Configured: true, Connected: true, State: "streaming", Message: "OBS streaming — verify picture and sound on your Kick channel", Stream: state}, nil
 }
 
@@ -349,7 +387,7 @@ func Stop(ctx context.Context, p Paths) (Result, error) {
 		return Result{}, e
 	}
 	if !r.Recording {
-		_ = c.SetScene(ctx, IdleScene)
+		haltCapture(ctx, c)
 	}
 	return Result{OK: true, Configured: true, Connected: true, State: "stopped", Message: "Streaming stopped", Stream: state}, nil
 }
@@ -363,7 +401,7 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 	if e = checkDependencies(ctx); e != nil {
 		return Result{}, e
 	}
-	if !gamescopeReady(ctx) {
+	if !waitGamescope(ctx) {
 		return Result{}, errors.New("open a game in Gaming Mode before making the local test clip")
 	}
 	c, e := ready(ctx, p, s, secret)
@@ -389,7 +427,7 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 		cleanup, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 		_, _ = c.StopRecording(cleanup)
-		_ = c.SetScene(cleanup, IdleScene)
+		haltCapture(cleanup, c)
 	}()
 	capCtx, cancel := context.WithTimeout(ctx, 12*time.Second)
 	e = waitCapture(capCtx, c)
