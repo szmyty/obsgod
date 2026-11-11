@@ -1,0 +1,14 @@
+{
+  "files": {
+    "LICENSE": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af",
+    "THIRD_PARTY_NOTICES.md": "910c23b70e51d74ebd04bf57daaba544426043cfef04eadbbbe7649c11f0ba34",
+    "Update OBSGod.desktop": "5253995de90dcf3943d4fcf7dbba029d5b50cc4bc3463910c8a20c818b5cb059",
+    "Update OBSGod.sh": "b7f587b83634a2c95ca03c2b95a80d76d9e261a77c24b5d88f5d329888749089",
+    "decky-install": "d76f09a90d1528de340d36b0134832658d4ce592270296ad4f0bbf3863e53e75",
+    "update.py": "c31ac7fcee7f779a534c44332992b0a2bede1c82ba571c4146d43f70e65fb212"
+  },
+  "platform": "linux/amd64",
+  "revision": "0eb8324c2b1f23fea069570eded1cd0c75d99274",
+  "target_version": "0.1.0-deck.4",
+  "version": "0.1.0-deck.4-updater.1"
+}

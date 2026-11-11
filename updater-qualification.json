@@ -1,0 +1,124 @@
+{
+  "artifacts": {
+    "obsgod-one-click-update_0.1.0-deck.4-updater.1_linux_amd64.zip": "4d33ea8594deba08a98d243ce3a901e071b713fdf354ef4ce979dba97375ead5",
+    "updater-manifest.json": "5a6b7038e52c988d89d1fc9a3c33b475dad2382c97d8f18bccb9c9c83ff17c3f"
+  },
+  "authorization": "The user explicitly requested a script to replace/update OBSGod app and plugin. It uses the already-installed Decky service and normal local authentication; it does not install Decky Loader, use sudo, change system read-only settings, remove unrelated plugins or publish/deploy another repository.",
+  "checks": [
+    {
+      "command": "go test -race -json ./...",
+      "outcome": "passed",
+      "passed_test_cases": 25,
+      "scope": "Existing CLI/runtime plus new archive validation, authenticated Decky request/confirmation, exact package scope, token/error redaction and plugin-order preservation",
+      "skip": "Optional existing-OBS read-only test has no supplied endpoint/credentials",
+      "skipped_test_cases": 1
+    },
+    {
+      "command": "go vet ./...",
+      "outcome": "passed"
+    },
+    {
+      "command": "/workspace/.obsgod-tools/pkg/bin/govulncheck -json ./...",
+      "findings": 0,
+      "outcome": "passed",
+      "tool_version": "v1.9.0"
+    },
+    {
+      "command": "python3 -m unittest discover -s steamdeck/tests -p 'test_*.py' -v",
+      "outcome": "passed",
+      "scope": "Existing app safety/startup plus updater checksums, private backups, archive path/link rejection, output-state gates, existing dependency preservation, safe helper errors and concurrent-updater refusal",
+      "test_cases": 23
+    },
+    {
+      "command": "python3 scripts/package-updater.py",
+      "outcome": "passed",
+      "scope": "Pinned static Linux AMD64 helper, original MIT/third-party licenses, manifest and executable desktop/shell launchers"
+    },
+    {
+      "command": "python3 steamdeck/tests/updater-smoke.py dist/obsgod-one-click-update_0.1.0-deck.4-updater.1_linux_amd64.zip --upstream /workspace/.obsgod-tools/decky-upstream-v3.3.1 --previous-archive dist/obsgod-deck_0.1.0-deck.1_linux_amd64.tar.gz",
+      "limits": "Flatpak info, GUI dialog, loader process lifecycle and ownership/chmod operations are fixtures. No real Steam, root Decky service or Steam Deck involved. Upstream source loaded from external test cache, not bundled in product.",
+      "outcome": "passed",
+      "scope": "Actual updater ZIP, actual desktop/file-URI launcher with spaces and literal percent escapes, real compiled helper, unmodified pinned upstream Decky CSRF middleware/WebSocket router/PluginBrowser installer; install original preview with fixture credentials then upgrade app/plugin and repeat updater; verify settings/key/media/OBS contents, private backup and other plugins/order preserved"
+    },
+    {
+      "command": "python3 scripts/package-updater.py (twice); compare updater ZIP SHA256",
+      "outcome": "passed",
+      "scope": "Byte-identical updater archive"
+    },
+    {
+      "command": "desktop-file-validate 'steamdeck/Update OBSGod.desktop'; bash -n 'steamdeck/Update OBSGod.sh'; python3 -m py_compile steamdeck/update.py scripts/package-updater.py steamdeck/tests/updater-smoke.py; gofmt -l internal/deckyinstall cmd/obsgod-decky-install; git diff --check",
+      "outcome": "passed"
+    },
+    {
+      "command": "git diff --quiet 55c03dd HEAD -- main.go internal/deck internal/commands internal/obs internal/config pkg go.mod go.sum steamdeck/decky steamdeck/install.py steamdeck/bridge.py steamdeck/setup.py steamdeck/uninstall.py scripts/package-deck.py",
+      "outcome": "passed",
+      "scope": "Streaming runtime, existing installer, setup, Decky plugin and dependency versions unchanged. Updater downloads the exact published preview-4 archive, not a rebuilt streaming binary."
+    },
+    {
+      "check": "Real Steam Deck Desktop launch, privileged Decky ownership/lifecycle, Steam client connection, actual Flatpak installation and Gaming Mode/VAAPI/audio/controller/Kick viewer",
+      "outcome": "unavailable",
+      "reason": "No access to user hardware. Reference installer test is not device qualification; owner must run the updater and subsequent game test."
+    },
+    {
+      "check": "New native OBS/RTMP and clipboard matrix for updater tool",
+      "outcome": "unrun",
+      "reason": "The updater delivers the exact unchanged preview-4 artifacts. Earlier exact-revision runtime evidence stays linked separately; no new streaming pass is claimed."
+    },
+    {
+      "check": "Original OBS readiness timeout with a game open",
+      "outcome": "unresolved",
+      "reason": "Await copied owner-device diagnostic messages. Installing the updater does not establish a streaming fix."
+    },
+    {
+      "command": "gh pr view 15 --repo szmyty/obsgod --json headRefOid,isDraft,statusCheckRollup",
+      "observation": "Draft head matches current revision; statusCheckRollup empty. Local tests are not CI receipts.",
+      "outcome": "unavailable"
+    }
+  ],
+  "classification": "One-click updater tool; installs the unchanged qualified preview-4 payload",
+  "generated_at_utc": "2026-11-11T17:13:56.199874+00:00",
+  "platform": {
+    "go": "1.27.4",
+    "host": "Debian GNU/Linux 13.6, Linux 6.18.57 x86_64",
+    "python": "3.12.14",
+    "upstream_decky_release": "v3.3.1",
+    "upstream_decky_revision": "ffd103b9c1a4ce5bf305e7c0998eda6e05457dad",
+    "user": "Unprivileged UID 1000"
+  },
+  "publication_transport": "Immutable artifact-only orphan branch in this repository; native release-upload host rejected injected authentication for earlier previews and was not retried.",
+  "release": "v0.1.0-deck.4-updater.1",
+  "review": "Source draft PR #15 remains open; master unchanged. No issues closed, deployments or paid resources.",
+  "revision": "0eb8324c2b1f23fea069570eded1cd0c75d99274",
+  "safety": "Never purge credentials/media. Unknown output or active recording blocks unsafe shutdown. Auth token stays in memory and is discarded from all connection errors. ZIP must match pinned hash and expected unprivileged OBSGod metadata; no root flags, extra top-level paths or remote-binary downloads accepted. Only matching install prompt is confirmed; server reply alone is insufficient without installed-version verification.",
+  "schema_version": 1,
+  "target": {
+    "archive_sha256": "c584c04ed3c79a01f1b846adc4f8bbe86c8132a4bca2cf6ba60cc557eba39ce1",
+    "archive_url": "https://raw.githubusercontent.com/szmyty/obsgod/64039036e0ef8d0fa0e9242cf6abf8cf2583a606/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz",
+    "plugin_zip_sha256": "3eec780691c0d9d62ba286bfe946ae64ceda2124339e1e2f9314fb89ac8cae54",
+    "qualification": "https://raw.githubusercontent.com/szmyty/obsgod/64039036e0ef8d0fa0e9242cf6abf8cf2583a606/qualification.json",
+    "revision": "55c03dd4160e6f6b517e778cf99a755801eb0a28",
+    "version": "0.1.0-deck.4"
+  },
+  "upstream_fixture": {
+    "files": {
+      "browser.py": {
+        "git_blob": "81ae4461c074cae4724681d1b9fd8a2f6a521349",
+        "sha256": "cfbc0e29778d2428e6aea6e03fb17f45eee7b7829a5bf9a2abea05bb2415d968",
+        "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-loader/ffd103b9c1a4ce5bf305e7c0998eda6e05457dad/backend/decky_loader/browser.py"
+      },
+      "helpers.py": {
+        "git_blob": "bc3302982510e17649937df0d4afc43c265a717d",
+        "sha256": "1380d802d6fd8bd8e803f5e634b8c74446c9b52bc26c3a21585ba2e15fa1a271",
+        "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-loader/ffd103b9c1a4ce5bf305e7c0998eda6e05457dad/backend/decky_loader/helpers.py"
+      },
+      "wsrouter.py": {
+        "git_blob": "b0610b317b4375c61f1bfba74b85f6197a92afda",
+        "sha256": "5ec6eb2acfa152c80b04d1a677113ddbf492747e0467dec72362b3406cc49b8d",
+        "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-loader/ffd103b9c1a4ce5bf305e7c0998eda6e05457dad/backend/decky_loader/wsrouter.py"
+      }
+    },
+    "release": "v3.3.1",
+    "revision": "ffd103b9c1a4ce5bf305e7c0998eda6e05457dad"
+  },
+  "workflow": "User launches Update OBSGod.desktop in Desktop Mode with Big Picture closed. Validate own bundle, probe existing Decky, download/hash-check pinned archive, safely stop/close managed OBS, check/install missing user Flatpaks, private preference/key backup, existing app installer, authenticated exact-package Decky request/confirmation, verify enabled version and preserve other plugin order. Open local setup only for unconfigured installations. Show completion/error dialog; never claim full completion after a partial failure."
+}
