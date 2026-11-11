@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "state": "update-available",
+  "available": true,
+  "current_version": "0.1.0-deck.3",
+  "latest_version": "0.1.0-deck.4",
+  "revision": "55c03dd4160e6f6b517e778cf99a755801eb0a28",
+  "channel": "preview",
+  "release_url": "https://github.com/szmyty/obsgod/releases/tag/v0.1.0-deck.4",
+  "latest_updater_version": "not-bundled",
+  "automatic_update_supported": false,
+  "message": "Historical OBSGod 0.1.0-deck.4 is available. Open its official release page for installation instructions; it predates the unified updater."
+}

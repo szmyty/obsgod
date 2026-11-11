@@ -1,0 +1,10 @@
+{
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "python": "3.12.14",
+  "node": "v24.19.0",
+  "npm": "11.9.0",
+  "chromium": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+  "playwright": "Version 1.62.0",
+  "docker": "28.4.0",
+  "native_image_id": "sha256:9ad9c28bfe007871956666f0df6c75b515b1f276531671e7a8402803a344f9d2"
+}

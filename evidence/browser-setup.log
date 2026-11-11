@@ -1,0 +1,8 @@
+Installed OBSGod 0.1.0-deck.5 app files only; Decky was not installed or verified.
+Reopen setup from Applications → Multimedia → OBSGod Setup.
+Check and apply updates from Applications → Multimedia → Update OBSGod.
+Settings, keys, recordings, diagnostic history and unrelated plugins are preserved.
+Manual Decky ZIP: /tmp/obsgod-browser-ujj_o3xa/home with spaces/.local/share/obsgod/current/obsgod-decky.zip
+OBSGod removed. Recordings and executable backups are preserved.
+Remove the OBSGod plugin through Decky as well. OBS / GStreamer remain installed.
+PASS: actual desktop launcher in explicit app-only test mode, foreground startup, browser setup/reload, private credentials, terminal hold, repeat install, clean uninstall; Decky installation qualified separately; fixture credentials only

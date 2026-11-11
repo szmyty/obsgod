@@ -1,0 +1,2 @@
+dbus-run-session: ignoring unknown child process 100
+PASS: real OBS / GStreamer / synthetic PipeWire / PulseAudio / moving recording / nonblank local RTMP / repeated lifecycle / failed-start cleanup / no late connection. Hardware and Kick untested.

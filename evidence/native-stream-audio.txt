@@ -1,0 +1,38 @@
+Input #0, flv, from '/work/output/received.flv':
+  Metadata:
+    fileSize        : 0
+    audiochannels   : 2
+    2.1             : false
+    3.1             : false
+    4.0             : false
+    4.1             : false
+    5.1             : false
+    7.1             : false
+    encoder         : Lavf61.7.103
+  Duration: 00:00:05.50, start: 0.000000, bitrate: 3117 kb/s
+  Stream #0:0: Video: h264 (High), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 3072 kb/s, 30 fps, 30 tbr, 1k tbn
+  Stream #0:1: Audio: aac (LC), 48000 Hz, stereo, fltp, 163 kb/s
+[Parsed_volumedetect_0 @ 0x5636f2cdbd40] n_samples: 0
+Stream mapping:
+  Stream #0:1 -> #0:0 (aac (native) -> pcm_s16le (native))
+Press [q] to stop, [?] for help
+Output #0, null, to 'pipe:':
+  Metadata:
+    fileSize        : 0
+    audiochannels   : 2
+    2.1             : false
+    3.1             : false
+    4.0             : false
+    4.1             : false
+    5.1             : false
+    7.1             : false
+    encoder         : Lavf61.7.103
+  Stream #0:0: Audio: pcm_s16le, 48000 Hz, stereo, s16, 1536 kb/s
+      Metadata:
+        encoder         : Lavc61.19.101 pcm_s16le
+[Parsed_volumedetect_0 @ 0x7f3f24002400] n_samples: 528384
+[Parsed_volumedetect_0 @ 0x7f3f24002400] mean_volume: -5.0 dB
+[Parsed_volumedetect_0 @ 0x7f3f24002400] max_volume: -1.6 dB
+[Parsed_volumedetect_0 @ 0x7f3f24002400] histogram_1db: 34985
+[out#0/null @ 0x5636f2be1c00] video:0KiB audio:1032KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+size=N/A time=00:00:05.50 bitrate=N/A speed= 638x    

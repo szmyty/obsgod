@@ -1,0 +1,7 @@
+
+> obsgod-decky@0.1.0-deck.5 build
+> rollup -c
+
+
+src/index.tsx → dist...
+created dist in 195ms
