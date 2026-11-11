@@ -11,7 +11,7 @@ import tarfile
 import tempfile
 import time
 
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import expect, sync_playwright
 from test_bootstrap import desktop_command, read_until
 
 
@@ -86,7 +86,7 @@ Path(os.environ['OBSGOD_TEST_BROWSER_URL']).write_text(sys.argv[1])
                 assert page.locator("#key").input_value() == ""
                 page.screenshot(path=str(args.screenshots / "desktop-setup.png"), full_page=True)
                 page.reload()
-                page.wait_for_function("document.querySelector('#server').value === 'rtmps://example.invalid/app'")
+                expect(page.locator("#server")).to_have_value("rtmps://example.invalid/app")
                 assert page.locator("#key").input_value() == ""
                 page.get_by_text("Manual repair ZIP", exact=True).click()
                 assert page.locator("#zip-path").inner_text().endswith("obsgod-decky.zip")
