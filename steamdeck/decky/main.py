@@ -17,7 +17,7 @@ class Plugin:
         try:
             value = json.loads((Path(__file__).resolve().parent / "package.json").read_text())["version"]
             return value if isinstance(value, str) and re.fullmatch(r"[A-Za-z0-9.-]{1,80}", value) else "unknown"
-        except (OSError, ValueError, KeyError):
+        except (OSError, ValueError, KeyError, TypeError):
             return "unknown"
 
     async def _main(self):

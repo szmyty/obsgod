@@ -62,7 +62,8 @@ def installation_lock(base):
 
 
 def matching_release(release, manifest):
-    return all(
+    saved = release / "manifest.json"
+    return not saved.is_symlink() and saved.is_file() and saved.read_bytes() == (ROOT / "manifest.json").read_bytes() and all(
         not (release / name).is_symlink() and (release / name).is_file()
         and hashlib.sha256((release / name).read_bytes()).hexdigest() == digest
         for name, digest in manifest["files"].items()
@@ -72,11 +73,7 @@ def matching_release(release, manifest):
 def prepare_release(releases, manifest):
     current = releases.parent / "current"
     if current.is_symlink() and current.resolve().parent == releases:
-        try:
-            installed = json.loads((current / "manifest.json").read_text())
-        except (OSError, ValueError):
-            installed = {}
-        if installed.get("version") == manifest["version"] and matching_release(current.resolve(), manifest):
+        if matching_release(current.resolve(), manifest):
             for name in manifest["files"]:
                 (current / name).chmod(0o700 if name == "obsgod" else 0o600)
             return current.resolve()

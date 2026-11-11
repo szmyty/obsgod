@@ -114,6 +114,8 @@ OBS's initial global microphone inputs are muted automatically.
   Use **Older events** / **Latest events** to read history and **Clear console**
   to erase it without stopping a stream. Logs use fixed diagnostic messages and
   numeric OBS/launch codes; keys, server URLs and raw OBS output are excluded.
+  Events live at `~/.local/state/obsgod/diagnostics/events.json` (or beneath
+  `$XDG_STATE_HOME/obsgod`) with private file permissions.
   A local ten-second recording does not broadcast, so its streaming dot stays red.
   A game must be open in Gaming Mode before testing; a timeout by itself does
   not tell us what failed. Report the stage/error from the console.

@@ -21,7 +21,7 @@ var diagnosticMessages = map[string]string{
 	"configure.requested":      "Saving local settings.",
 	"doctor.requested":         "Checking dependencies, capture and OBS.",
 	"operation.succeeded":      "Operation completed.",
-	"operation.failed":         "Operation failed. The full result is displayed above this console.",
+	"operation.failed":         "Operation failed. Read the preceding events for the last completed step; the current result appears above the console.",
 	"operation.cancelled":      "Operation cancelled; checking or cleaning up output.",
 	"operation.timeout":        "Operation exceeded its time limit; output must be checked before retrying.",
 	"obs.request-failed":       "OBS request failed with status code",

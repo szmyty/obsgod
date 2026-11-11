@@ -171,6 +171,9 @@ class InstallerSafety(unittest.TestCase):
             install.install(launch=False)
             self.assertEqual(current.resolve(), repaired)
             self.assertTrue(os.access(current / "obsgod", os.X_OK))
+            (current / "manifest.json").unlink()
+            install.install(launch=False)
+            self.assertTrue((current / "manifest.json").is_file())
         self.assertEqual({path: path.read_bytes() for path in protected}, snapshots)
 
     def test_activation_failure_keeps_old_version_and_restores_entry_points(self):
