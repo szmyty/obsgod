@@ -91,7 +91,7 @@ function Console(){
     setCopying(true);setCopyNotice("");
     try{
       await copyText(payload);
-      setCopyNotice(`Copied ${entries.length} diagnostic events. Paste them into your message.`);
+      setCopyNotice(`Copied ${entries.length} diagnostic ${entries.length===1?"event":"events"}. Paste them into your message.`);
     }catch{
       setCopyNotice("Could not access the clipboard. Select the console text or take a photo.");
     }finally{setCopying(false);}

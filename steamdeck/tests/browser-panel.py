@@ -62,7 +62,7 @@ def main():
                 page.get_by_role("img", name="OBS streaming").wait_for()
                 console.get_by_text("Streaming fixture started",exact=False).wait_for()
                 page.get_by_role("button",name="Copy console log").click()
-                page.get_by_text("Copied 1 diagnostic events.",exact=False).wait_for()
+                page.get_by_text("Copied 1 diagnostic event.",exact=False).wait_for()
                 assert "Streaming fixture started" in page.evaluate("navigator.clipboard.readText()")
                 page.get_by_role("status").filter(has_text="OBS streaming").wait_for()
                 page.get_by_role("button",name="Clear console").click()
