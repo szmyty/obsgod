@@ -36,6 +36,7 @@ func NewRoot(cfg *config.Config, service obs.Service, buildVersion string) *cora
 	rootCmd.AddCommand(newStreamCommand(service))
 	rootCmd.AddCommand(newStudioModeCommand(service))
 	rootCmd.AddCommand(newVirtualCamCommand(service))
+	rootCmd.AddCommand(newDeckCommand())
 
 	return rootCmd
 }

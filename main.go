@@ -1,8 +1,10 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
+	"os/signal"
 
 	"github.com/szmyty/obsgod/internal/commands"
 	"github.com/szmyty/obsgod/internal/config"
@@ -21,7 +23,9 @@ func main() {
 	}()
 
 	cmd := commands.NewRoot(&cfg, service, version)
-	if err := cmd.Execute(); err != nil {
+	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
+	defer cancel()
+	if err := cmd.ExecuteContext(ctx); err != nil {
 		fmt.Fprintf(os.Stderr, "error: %v\n", err)
 		os.Exit(1)
 	}
