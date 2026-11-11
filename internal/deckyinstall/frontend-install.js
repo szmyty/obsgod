@@ -28,7 +28,24 @@
   // Use Decky's existing frontend transport. Opening a second /ws connection
   // would disconnect Steam and races WSRouter's single-socket cleanup in 3.3.1.
   if (window.__obsgodInstallerRunning) return answer({ok:false,code:"busy"});
-  window.__obsgodInstallerRunning = true;
+  const operation = {};
+  window.__obsgodInstallerRunning = operation;
+  const pendingMutations = new Set();
+  let finished = false;
+  const release = () => {
+    if (finished && pendingMutations.size === 0 && window.__obsgodInstallerRunning === operation) {
+      delete window.__obsgodInstallerRunning;
+    }
+  };
+  const mutate = (route, ...args) => {
+    // A UI/HTTP timeout does not cancel Decky's original call. Keep ownership
+    // until that actual mutation settles, including after this script returns.
+    const pending = Promise.resolve(backend.call(route, ...args));
+    pendingMutations.add(pending);
+    const settled = () => { pendingMutations.delete(pending); release(); };
+    pending.then(settled, settled);
+    return pending;
+  };
   const event = "loader/add_plugin_install_prompt";
   const original = Array.from(backend.eventListeners.get(event) || []);
   let prompt = "";
@@ -48,7 +65,7 @@
     filtered = true;
     await bounded(backend.call("utilities/install_plugin", "file://" + request.zip_path, "OBSGod", request.version, request.sha256, 4));
     if (!prompt) throw new Error("prompt");
-    await bounded(backend.call("utilities/confirm_plugin_install", prompt), 60000);
+    await bounded(mutate("utilities/confirm_plugin_install", prompt), 60000);
     const plugins = await bounded(backend.call("loader/get_plugins"));
     if (!Array.isArray(plugins) || !plugins.some(plugin => plugin?.name === "OBSGod" && plugin.version === request.version &&
         plugin.disabled === false && plugin.load_type === 1)) throw new Error("version");
@@ -58,7 +75,7 @@
     const updated = current.filter(name => name !== "OBSGod");
     updated.splice(position < 0 ? updated.length : Math.min(position, updated.length), 0, "OBSGod");
     if (JSON.stringify(updated) !== JSON.stringify(current)) {
-      await bounded(backend.call("utilities/settings/set", "pluginOrder", updated));
+      await bounded(mutate("utilities/settings/set", "pluginOrder", updated));
     }
     return answer({ok:true,version:request.version,decky_version:version,frontend_connected:backend.ws?.readyState === 1});
   } catch (_) { return answer({ok:false,code:"install-unconfirmed"}); }
@@ -67,6 +84,7 @@
       backend.removeEventListener(event, listener);
       for (const previous of original) backend.addEventListener(event, previous);
     }
-    delete window.__obsgodInstallerRunning;
+    finished = true;
+    release();
   }
 })()

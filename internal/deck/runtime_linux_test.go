@@ -8,6 +8,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -379,5 +380,101 @@ func TestVisibleRecoveryPreservesSafetyAndRefusesDuplicateOBS(t *testing.T) {
 	_, err = OpenOBS(context.Background(), p)
 	if err == nil || !strings.Contains(err.Error(), "already present") {
 		t.Fatalf("duplicate recovery launch was allowed: %v", err)
+	}
+}
+
+func TestOnlyConfirmedTerminalOBSProcessesAreIgnored(t *testing.T) {
+	for _, state := range []string{"Z", "X", "R", "S", "T", ""} {
+		t.Run("state_"+state, func(t *testing.T) {
+			p := testPaths(t)
+			proc := filepath.Join(t.TempDir(), "42")
+			// A directory reproduces an unreadable environ without relying on root
+			// privileges or proc mount policy. State is the independent kernel fact.
+			if err := os.MkdirAll(filepath.Join(proc, "environ"), 0700); err != nil {
+				t.Fatal(err)
+			}
+			if state != "" {
+				if err := os.WriteFile(filepath.Join(proc, "status"), []byte("Name:\tobs\nState:\t"+state+" (fixture)\n"), 0600); err != nil {
+					t.Fatal(err)
+				}
+			}
+			managed, unidentified := inspectOBSProcesses(p, []string{proc})
+			terminal := state == "Z" || state == "X"
+			if len(managed) != 0 || unidentified == terminal {
+				t.Fatalf("incorrect terminal/live handling for %q: %v unknown=%v", state, managed, unidentified)
+			}
+		})
+	}
+}
+
+func TestRealZombieDoesNotPreventConfirmedOBSAbsence(t *testing.T) {
+	cmd := exec.Command("/bin/sh", "-c", "exit 0")
+	if err := cmd.Start(); err != nil {
+		t.Fatal(err)
+	}
+	defer cmd.Wait()
+	proc := filepath.Join("/proc", strconv.Itoa(cmd.Process.Pid))
+	deadline := time.Now().Add(time.Second)
+	for !processExited(proc) && time.Now().Before(deadline) {
+		time.Sleep(5 * time.Millisecond)
+	}
+	if !processExited(proc) {
+		t.Fatal("test process never reached terminal state before being reaped")
+	}
+	managed, unidentified := inspectOBSProcesses(testPaths(t), []string{proc})
+	if len(managed) != 0 || unidentified {
+		t.Fatalf("zombie was treated as running or unknown: %v %v", managed, unidentified)
+	}
+}
+
+func TestManagedShutdownWaitsForKnownProcessAfterDiscoveryChanges(t *testing.T) {
+	python, err := exec.LookPath("python3")
+	if err != nil {
+		t.Skip("Python helper unavailable")
+	}
+	p := testPaths(t)
+	marker := filepath.Join(t.TempDir(), "ready")
+	script := `import ctypes, os, signal, sys, time
+libc = ctypes.CDLL(None)
+libc.prctl(15, b"obs", 0, 0, 0)
+def stop(sig, frame):
+    libc.prctl(15, b"stopping", 0, 0, 0)
+    libc.prctl(4, 0, 0, 0, 0)
+    time.sleep(0.25)
+    sys.exit(0)
+signal.signal(signal.SIGTERM, stop)
+open(sys.argv[1], "w").write("ready")
+while True: signal.pause()
+`
+	cmd := exec.Command(python, "-c", script, marker)
+	cmd.Env = append(os.Environ(), "XDG_CONFIG_HOME="+p.OBSConfig)
+	if err := cmd.Start(); err != nil {
+		t.Fatal(err)
+	}
+	defer func() { _ = cmd.Process.Kill(); _ = cmd.Wait() }()
+	deadline := time.Now().Add(time.Second)
+	for {
+		if _, err := os.Stat(marker); err == nil {
+			break
+		}
+		if time.Now().After(deadline) {
+			t.Fatal("shutdown helper did not become ready")
+		}
+		time.Sleep(5 * time.Millisecond)
+	}
+	if len(managedProcesses(p)) != 1 {
+		t.Fatal("known managed helper was not identified")
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancel()
+	start := time.Now()
+	if err := stopManagedOBS(ctx, p); err != nil {
+		t.Fatal(err)
+	}
+	if time.Since(start) < 200*time.Millisecond {
+		t.Fatal("claimed shutdown while a known process was still alive")
+	}
+	if !processExited(filepath.Join("/proc", strconv.Itoa(cmd.Process.Pid))) {
+		t.Fatal("helper exit was not confirmed")
 	}
 }

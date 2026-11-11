@@ -202,7 +202,7 @@ func TestFrontendInstallerBehavior(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	for _, mode := range []string{"install", "reject", "missing-prompt", "no-frontend", "probe"} {
+	for _, mode := range []string{"install", "reject", "missing-prompt", "no-frontend", "probe", "confirm-timeout", "confirm-timeout-reject"} {
 		command := exec.Command(node, "--input-type=commonjs", "-e", string(script))
 		request, _ := json.Marshal(Input{Operation: map[bool]string{true: "probe", false: "install"}[mode == "probe"], ZIPPath: "/home/deck/space and %20/plugin.zip", SHA256: strings.Repeat("a", 64), Version: "0.1.0-test"})
 		command.Stdin = strings.NewReader(strings.Replace(frontendScript, "__OBSGOD_REQUEST__", string(request), 1))

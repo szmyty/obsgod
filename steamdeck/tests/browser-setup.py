@@ -88,6 +88,7 @@ Path(os.environ['OBSGOD_TEST_BROWSER_URL']).write_text(sys.argv[1])
                 page.reload()
                 page.wait_for_function("document.querySelector('#server').value === 'rtmps://example.invalid/app'")
                 assert page.locator("#key").input_value() == ""
+                page.get_by_text("Manual repair ZIP", exact=True).click()
                 assert page.locator("#zip-path").inner_text().endswith("obsgod-decky.zip")
                 result = subprocess.run([str(current / "obsgod"), "deck", "status"], env=env, capture_output=True, text=True, check=True)
                 assert json.loads(result.stdout)["configured"]

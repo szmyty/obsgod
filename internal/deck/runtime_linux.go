@@ -86,13 +86,33 @@ func ownedProcesses(comm string) []string {
 	return result
 }
 
+// A zombie has no executable image or output sockets, but remains in /proc
+// until its parent reaps it. Its environ may be unreadable. Ignore only a
+// positively identified terminal state; unreadable live processes stay unknown.
+func processExited(proc string) bool {
+	data, err := os.ReadFile(filepath.Join(proc, "status"))
+	if err != nil {
+		return false
+	}
+	for _, line := range strings.Split(string(data), "\n") {
+		if strings.HasPrefix(line, "State:") {
+			fields := strings.Fields(strings.TrimPrefix(line, "State:"))
+			return len(fields) > 0 && (fields[0] == "Z" || fields[0] == "X")
+		}
+	}
+	return false
+}
+
 func inspectOBSProcesses(p Paths, processes []string) ([]int, bool) {
 	var result []int
 	unidentified := false
 	for _, proc := range processes {
+		if processExited(proc) {
+			continue
+		}
 		b, err := os.ReadFile(filepath.Join(proc, "environ"))
 		if err != nil {
-			if !os.IsNotExist(err) {
+			if !os.IsNotExist(err) && !processExited(proc) {
 				unidentified = true
 			}
 			continue
@@ -251,19 +271,38 @@ func launchOBSWindow(p Paths, visible bool) (<-chan int, error) {
 }
 
 func stopManagedOBS(ctx context.Context, p Paths) error {
-	for _, pid := range managedProcesses(p) {
-		if e := syscall.Kill(pid, syscall.SIGTERM); e != nil && e != syscall.ESRCH {
+	ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
+	defer cancel()
+	processes := managedProcesses(p)
+	for _, pid := range processes {
+		if err := syscall.Kill(pid, syscall.SIGTERM); err != nil && err != syscall.ESRCH {
 			return errors.New("could not stop the managed OBS process")
 		}
 	}
-	for len(managedProcesses(p)) > 0 {
+	for {
+		// Keep observing the already-identified children even if a live process
+		// briefly loses readable environ/comm during shutdown. Never signal an
+		// unknown process or infer exit from disappearance from discovery alone.
+		pending := false
+		for _, pid := range processes {
+			proc := filepath.Join("/proc", strconv.Itoa(pid))
+			if _, err := os.Stat(proc); os.IsNotExist(err) {
+				continue
+			}
+			if !processExited(proc) {
+				pending = true
+			}
+		}
+		process, listener := presence(p)
+		if !pending && process == "absent" && !listener {
+			return nil
+		}
 		select {
 		case <-ctx.Done():
 			return ctx.Err()
-		case <-time.After(200 * time.Millisecond):
+		case <-time.After(100 * time.Millisecond):
 		}
 	}
-	return nil
 }
 
 func privateUmask() { syscall.Umask(0077) }

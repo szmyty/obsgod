@@ -113,6 +113,10 @@ for name in ['start','start-again','status-live']:
  r=json.loads((p/(name+'.json')).read_text());assert r['stream']['active'] and r['stream']['bytes']>0
 for name in ['stop','stop-again']:
  assert not json.loads((p/(name+'.json')).read_text())['stream']['active']
+clip=json.loads((p/'test-recording.json').read_text())
+assert clip['recording'] is False and clip['runtime']['recording'] is False,'clip completion preceded confirmed recording stop'
+restart=json.loads((p/'restart.json').read_text())
+assert restart['process']=='absent' and restart['output_known'] is True,'managed OBS shutdown was not confirmed'
 for name in ['recording-probe','stream-probe']:
  r=json.loads((p/(name+'.json')).read_text());streams=r['streams']
  video=next(s for s in streams if s['codec_type']=='video');audio=next(s for s in streams if s['codec_type']=='audio')
