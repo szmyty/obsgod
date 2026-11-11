@@ -19,13 +19,48 @@ cleanup() {
 }
 trap cleanup EXIT
 Xvfb :99 -screen 0 1280x800x24 -ac >/work/xvfb.log 2>&1 &
+
+wait_for_fixture_service() {
+  local fixture_service=$1 fixture_pid=$2 fixture_log=$3
+  shift 3
+  for attempt in {1..50}; do
+    if ! kill -0 "$fixture_pid" 2>/dev/null; then
+      echo "$fixture_service exited during fixture startup; inspect $fixture_log" >&2
+      return 1
+    fi
+    if "$@" >/dev/null 2>&1; then return 0; fi
+    sleep .2
+  done
+  echo "$fixture_service did not become ready within the bounded fixture startup wait; inspect $fixture_log" >&2
+  return 1
+}
+
+wireplumber_connected() {
+  timeout 1 pw-dump >/work/output/wireplumber-ready.json || return 1
+  python3 - "$wireplumber_pid" /work/output/wireplumber-ready.json <<'PY'
+import json,sys
+nodes=json.load(open(sys.argv[2]))
+connected=any(
+ node.get('type')=='PipeWire:Interface:Client' and
+ str((node.get('info') or {}).get('props',{}).get('application.process.id'))==sys.argv[1] and
+ ((node.get('info') or {}).get('props',{}).get('application.name','').casefold()=='wireplumber' or
+  (node.get('info') or {}).get('props',{}).get('application.process.binary')=='wireplumber')
+ for node in nodes)
+raise SystemExit(0 if connected else 1)
+PY
+}
+
+# WirePlumber can exit if its first connection races PipeWire startup. Require
+# the server first, then the live session-manager client, then PulseAudio.
 pipewire >/work/pipewire.log 2>&1 &
+pipewire_pid=$!
+wait_for_fixture_service PipeWire "$pipewire_pid" /work/pipewire.log timeout 1 pw-dump
 wireplumber >/work/wireplumber.log 2>&1 &
+wireplumber_pid=$!
+wait_for_fixture_service WirePlumber "$wireplumber_pid" /work/wireplumber.log wireplumber_connected
 pulseaudio --daemonize=no --exit-idle-time=-1 >/work/pulse.log 2>&1 &
-for attempt in {1..50}; do
-  if pw-dump >/dev/null 2>&1 && pactl info >/dev/null 2>&1; then break; fi
-  sleep .2
-done
+pulse_pid=$!
+wait_for_fixture_service PulseAudio "$pulse_pid" /work/pulse.log timeout 1 pactl info
 pactl load-module module-null-sink sink_name=obsgod_test >/dev/null
 pactl set-default-sink obsgod_test
 (
