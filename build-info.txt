@@ -1,0 +1,20 @@
+dist/obsgod: go1.27.4
+	path	github.com/szmyty/obsgod
+	mod	github.com/szmyty/obsgod	(devel)	
+	dep	github.com/andreykaipov/goobs	v1.8.3	h1:G/WWpXY0EHO4JJPEunifq7/JRCMmVrPRfF1yHV1MoH0=
+	dep	github.com/buger/jsonparser	v1.1.2	h1:frqHqw7otoVbk5M8LlE/L7HTnIq2v9RX6EJ48i9AxJk=
+	dep	github.com/gorilla/websocket	v1.5.3	h1:saDtZ6Pbx/0u+bgYQ3q96pZgCzfhKXGPqt7kZ72aNNg=
+	dep	github.com/hashicorp/logutils	v1.0.0	h1:dLEQVugN8vlakKOUE3ihGLTZJRB4j+M2cdTm/ORI65Y=
+	dep	github.com/mitchellh/mapstructure	v1.5.0	h1:jeMsZIYE/09sWLaz43PL7Gy6RuMjD2eJVyuac5Z2hdY=
+	dep	github.com/mmcloughlin/profile	v0.1.1	h1:jhDmAqPyebOsVDOCICJoINoLb/AnLBaUw58nFzxWS2w=
+	dep	github.com/muesli/coral	v1.0.0	h1:odyqkoEg4aJAINOzvnjN4tUsdp+Zleccs7tRIAkkYzU=
+	dep	github.com/nu7hatch/gouuid	v0.0.0-20131221200532-179d4d0c4d8d	h1:VhgPp6v9qf9Agr/56bj7Y/xa04UccTW04VP0Qed4vnQ=
+	dep	github.com/spf13/pflag	v1.0.5	h1:iy+VFUOCP1a+8yFto/drg2CJ5u0yRoB7fZw3DKv/JXA=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	-trimpath=true
+	build	DefaultGODEBUG=containermaxprocs=0,cryptocustomrand=1,decoratemappings=0,gotestjsonbuildtext=1,httpcookiemaxnum=0,httpservecontentmaxranges=1,multipathtcp=0,randseednop=0,rsa1024min=0,tlsmlkem=0,tlssecpmlkem=0,tlssha1=1,tracebacklabels=0,updatemaxprocs=0,urlmaxqueryparams=0,urlstrictcolons=0,x509rsacrt=0,x509sha256skid=0,x509sslcertoverrideplatform=0,x509usepolicies=0
+	build	CGO_ENABLED=0
+	build	GOARCH=amd64
+	build	GOOS=linux
+	build	GOAMD64=v1

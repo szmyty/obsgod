@@ -1,0 +1,359 @@
+{
+  "artifacts": {
+    "build-info.txt": "8424734c0076a53d05bcdd2ee8f57ccfb5df1f1ae8a437d0ffb8381d62ea8e81",
+    "manifest.json": "8bcf11a502f9cb35cfa242023ef28f6247b2c3b7c8b0da77785aafc5112654c1",
+    "obsgod-deck_0.1.0-deck.1_linux_amd64.tar.gz": "b68bb88257fab0a753772275ebdd14c8c983ec142de54742b742428fa0858258",
+    "obsgod-decky.zip": "436fc92edecfc1524f70471c18922aa4781d9fd1f932c22399a62b37968141b2"
+  },
+  "checks": [
+    {
+      "check": "Go protocol/unit tests with race detection",
+      "command": "go test -race -json ./...",
+      "outcome": "passed",
+      "passed_test_cases": 12,
+      "skipped_test_cases": 1
+    },
+    {
+      "check": "Existing-OBS read-only opt-in test",
+      "outcome": "skipped",
+      "reason": "No OBSGOD_TEST_OBS_ADDRESS supplied; separate native harness exercises a real OBS fixture"
+    },
+    {
+      "check": "Go vet",
+      "command": "go vet ./...",
+      "outcome": "passed"
+    },
+    {
+      "check": "Go known vulnerabilities",
+      "command": "govulncheck v1.9.0 -json ./...",
+      "findings": 0,
+      "outcome": "passed"
+    },
+    {
+      "check": "Setup HTTP security, installer safety, backend cancellation",
+      "command": "python3 -m unittest discover -s steamdeck/tests -p 'test_*.py' -v",
+      "outcome": "passed",
+      "test_cases": 7
+    },
+    {
+      "check": "Decky types/build and indicator logic",
+      "commands": [
+        "npm run typecheck",
+        "npm run build",
+        "npm test"
+      ],
+      "indicator_test_cases": 2,
+      "outcome": "passed"
+    },
+    {
+      "advisories": 0,
+      "check": "npm dependency audit, including development tools",
+      "command": "npm audit --json",
+      "outcome": "passed"
+    },
+    {
+      "check": "Archive installation, setup, private secret storage, refresh, responsive page, uninstall",
+      "command": "python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.1_linux_amd64.tar.gz",
+      "outcome": "passed",
+      "scope": "Actual archive, temporary Linux home, Chromium, fixture credentials"
+    },
+    {
+      "check": "Decky ZIP module-selection contract and frontend browser behavior",
+      "command": "python3 steamdeck/tests/browser-panel.py dist/obsgod-decky.zip",
+      "outcome": "passed",
+      "scope": "Actual ZIP and SDK modules; simulated loader calls and Steam UI globals"
+    },
+    {
+      "check": "Real OBS integration",
+      "command": "docker run --rm --user 1000:1000 --mount type=bind,src=<source>,dst=/src,readonly --mount type=bind,src=<disposable-work>,dst=/work obsgod-obs-smoke:local dbus-run-session -- bash /src/steamdeck/tests/native-obs-smoke.sh",
+      "limits": "Native OBS launcher replaces Flatpak; synthetic PipeWire producer replaces Gamescope; x264 replaces AMD hardware encoder",
+      "outcome": "passed",
+      "scope": [
+        "moving nonblank 1280x720 H.264 recording",
+        "AAC game audio content",
+        "nonblank 1280x720 H.264/AAC loopback RTMP",
+        "idempotent repeated start/stop",
+        "failed-start cleanup",
+        "no unexpected later connection"
+      ]
+    },
+    {
+      "check": "Byte-for-byte package reproducibility",
+      "commands": [
+        "python3 scripts/package-deck.py",
+        "repeat identical build",
+        "cmp first-build-SHA256SUMS dist/SHA256SUMS",
+        "sha256sum -c SHA256SUMS (in dist/)"
+      ],
+      "outcome": "passed"
+    },
+    {
+      "built_only": [
+        "linux/arm64",
+        "windows/amd64",
+        "darwin/arm64"
+      ],
+      "check": "CLI cross-compilation",
+      "outcome": "passed",
+      "runtime_execution": "unrun"
+    },
+    {
+      "check": "Real SteamOS, Flatpak install/sandbox, Gamescope, VAAPI, microphone, controller/focus, mode transitions",
+      "outcome": "unavailable",
+      "reason": "No Steam Deck attached to this cloud runtime"
+    },
+    {
+      "check": "Kick audience-side picture/audio and account adoption",
+      "outcome": "unrun",
+      "reason": "Requires user-owned device, locally entered ingest credentials and viewer check"
+    },
+    {
+      "check": "GitHub CI for candidate branch",
+      "outcome": "unavailable",
+      "reason": "PR statusCheckRollup was empty; gh pr checks reported no checks. Local checks are not CI evidence"
+    },
+    {
+      "check": "Native GitHub release asset upload",
+      "outcome": "unavailable",
+      "reason": "uploads.github.com returned HTTP 401 Bad credentials; regular API authentication and repository writes passed. Downloads are provided through an immutable artifact commit in the same repository."
+    }
+  ],
+  "classification": "hardware preview; not stable v1",
+  "earlier_attempts": [
+    {
+      "outcome": "failed native integration",
+      "reason": "Synthetic GStreamer PipeWire sink faulted during consumer teardown and entered its debugger spin. OBSGod refused blank capture. The harness was corrected to disable the fault handler and restart its synthetic producer. This does not repair or qualify Gamescope.",
+      "revision": "bf739e0c063943f5d29dbe5f23fce7435418354d"
+    },
+    {
+      "check": "Initial checksum verification command",
+      "outcome": "failed command",
+      "reason": "Ran sha256sum from repository root while entries are relative to dist. Repeated in dist and all checks passed."
+    }
+  ],
+  "generated_at_utc": "2026-11-11T07:18:39.970381+00:00",
+  "native_redacted_results": {
+    "configure": {
+      "configured": true,
+      "connected": false,
+      "message": "Settings saved on this device",
+      "ok": true,
+      "settings": {
+        "bitrate": 3000,
+        "encoder": "x264",
+        "fps": 30,
+        "microphone": false,
+        "server": "rtmp://127.0.0.1:1935/live",
+        "version": 1
+      },
+      "state": "stopped",
+      "stream": {
+        "active": false,
+        "bytes": 0,
+        "duration_ms": 0,
+        "reconnecting": false,
+        "skipped_frames": 0,
+        "total_frames": 0
+      }
+    },
+    "no-late-start": {
+      "unexpected_connection": false
+    },
+    "restart": {
+      "configured": true,
+      "connected": false,
+      "message": "Managed OBS closed; saved settings will apply on the next start",
+      "ok": true,
+      "state": "stopped",
+      "stream": {
+        "active": false,
+        "bytes": 0,
+        "duration_ms": 0,
+        "reconnecting": false,
+        "skipped_frames": 0,
+        "total_frames": 0
+      }
+    },
+    "start": {
+      "configured": true,
+      "connected": true,
+      "message": "OBS streaming \u2014 verify picture and sound on your Kick channel",
+      "ok": true,
+      "state": "streaming",
+      "stream": {
+        "active": true,
+        "bytes": 108535,
+        "duration_ms": 366,
+        "reconnecting": false,
+        "skipped_frames": 0,
+        "total_frames": 11
+      }
+    },
+    "start-again": {
+      "configured": true,
+      "connected": true,
+      "message": "OBS streaming \u2014 verify picture and sound on your Kick channel",
+      "ok": true,
+      "state": "streaming",
+      "stream": {
+        "active": true,
+        "bytes": 279737,
+        "duration_ms": 799,
+        "reconnecting": false,
+        "skipped_frames": 0,
+        "total_frames": 24
+      }
+    },
+    "start-failure": {
+      "configured": false,
+      "connected": false,
+      "message": "stream did not reach a healthy output and was stopped; check the ingest URL, key, network and encoder in Desktop setup",
+      "ok": false,
+      "state": "error",
+      "stream": {
+        "active": false,
+        "bytes": 0,
+        "duration_ms": 0,
+        "reconnecting": false,
+        "skipped_frames": 0,
+        "total_frames": 0
+      }
+    },
+    "status-after-failure": {
+      "configured": true,
+      "connected": true,
+      "message": "Not streaming",
+      "ok": true,
+      "settings": {
+        "bitrate": 3000,
+        "encoder": "x264",
+        "fps": 30,
+        "microphone": false,
+        "server": "rtmp://127.0.0.1:1935/live",
+        "version": 1
+      },
+      "state": "stopped",
+      "stream": {
+        "active": false,
+        "bytes": 0,
+        "duration_ms": 0,
+        "reconnecting": false,
+        "skipped_frames": 0,
+        "total_frames": 164
+      }
+    },
+    "status-live": {
+      "configured": true,
+      "connected": true,
+      "message": "OBS streaming",
+      "ok": true,
+      "settings": {
+        "bitrate": 3000,
+        "encoder": "x264",
+        "fps": 30,
+        "microphone": false,
+        "server": "rtmp://127.0.0.1:1935/live",
+        "version": 1
+      },
+      "state": "streaming",
+      "stream": {
+        "active": true,
+        "bytes": 1865753,
+        "duration_ms": 4799,
+        "reconnecting": false,
+        "skipped_frames": 0,
+        "total_frames": 144
+      }
+    },
+    "stop": {
+      "configured": true,
+      "connected": true,
+      "message": "Streaming stopped",
+      "ok": true,
+      "state": "stopped",
+      "stream": {
+        "active": false,
+        "bytes": 2117409,
+        "duration_ms": 0,
+        "reconnecting": false,
+        "skipped_frames": 0,
+        "total_frames": 164
+      }
+    },
+    "stop-again": {
+      "configured": true,
+      "connected": true,
+      "message": "Streaming stopped",
+      "ok": true,
+      "state": "stopped",
+      "stream": {
+        "active": false,
+        "bytes": 2117409,
+        "duration_ms": 0,
+        "reconnecting": false,
+        "skipped_frames": 0,
+        "total_frames": 164
+      }
+    },
+    "test-recording": {
+      "configured": true,
+      "connected": true,
+      "message": "Local test saved; watch it in Desktop Mode to check picture, game audio and microphone before broadcasting",
+      "ok": true,
+      "recording_path": "/work/home/Videos/OBSGod/2026-11-11 07-10-08.mkv",
+      "state": "stopped",
+      "stream": {
+        "active": false,
+        "bytes": 0,
+        "duration_ms": 0,
+        "reconnecting": false,
+        "skipped_frames": 0,
+        "total_frames": 0
+      }
+    }
+  },
+  "platform": {
+    "chromium": "151.0.7922.173",
+    "docker": "28.4.0",
+    "encoder": "software x264/AAC",
+    "go": "1.27.4",
+    "gstreamer": "1.26.2",
+    "gstreamer_package": "1.26.2-2",
+    "host": "Debian 13, Linux 6.18.57, x86_64",
+    "native_test_image": "sha256:9ad9c28bfe007871956666f0df6c75b515b1f276531671e7a8402803a344f9d2",
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "obs": "30.2.3",
+    "obs_package": "30.2.3+dfsg-3",
+    "pipewire_package": "1.4.2-1",
+    "playwright": "1.62.0",
+    "pulseaudio_package": "17.0+dfsg1-2+b1",
+    "python": "3.12.14"
+  },
+  "pr": "https://github.com/szmyty/obsgod/pull/15",
+  "release": "v0.1.0-deck.1",
+  "release_status": {
+    "artifact_signing": "unsigned; SHA256 integrity checks, no CI attestation",
+    "consumer_adoption": "unrun",
+    "deployment": "none",
+    "hardware_verified": false,
+    "intent": "publish GitHub prerelease assets for first hardware test",
+    "main_merged": false,
+    "publication_transport": "GitHub prerelease with pinned repository artifact links; standard uploads.github.com rejected the injected credential with HTTP 401 while api.github.com and Git writes remained authenticated.",
+    "stable_release": false
+  },
+  "remaining_open_issues": [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "required_user_action": "Install in Desktop Mode, configure URL/key locally, install included ZIP through Decky, open a game, make and review a local test clip, then verify the Kick channel before relying on the stream.",
+  "revision": "77b6378fa1ab06ccef0bd0240564ac97e81d2144",
+  "schema_version": 1,
+  "source_clean": true
+}
