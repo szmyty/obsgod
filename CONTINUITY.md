@@ -3,11 +3,13 @@
 Repository: `szmyty/obsgod`. Active campaign:
 [Roadmap 1 / #8](https://github.com/szmyty/obsgod/issues/8).
 
-The owner approved implementing Roadmap 1 on 2026-11-11. Work through its scoped
-children and push reviewable draft PR checkpoints. Keep all merges and issue
-closure for owner review. Do not publish a release, deploy, spend money, change
-other repositories, implement Roadmap 2, or expand the deferred product backlog
-as part of this campaign.
+The owner approved implementing Roadmap 1 on 2026-11-11, then explicitly requested
+merging the prepared PR stack and closing milestone 1. Normal merges and
+owner-directed administrative milestone closure are now authorized. Keep
+unverified acceptance issues open: closure of the implementation milestone does
+not establish actual Deck/Kick or CI success. Do not bypass branch protections,
+publish a release, deploy, spend money, change other repositories, implement
+Roadmap 2, or expand the deferred product backlog.
 
 Read [the execution record](docs/roadmap1-development.md) for inspected source,
 artifact provenance, PR sequence, preservation and qualification requirements.
@@ -37,8 +39,10 @@ into source. Later evidence-only documentation does not relabel that candidate.
 Read [the current acceptance packet](docs/roadmap1-acceptance.md) before resuming.
 Do not rebuild another SHA and reuse its receipts.
 
-All Roadmap 1 issues remain open: actual Steam Deck/Kick/adoption and owner
-review are missing, and current GitHub CI jobs did not start because GitHub
-reports an account billing lock. No money was spent or billing changed. Source
-`master` and preview PR #15 are unchanged. No release/tag/deployment/merge/closure
-was performed. Roadmap 2 and deferred backlog remain untouched.
+Actual Steam Deck/Kick/adoption and successful CI remain unverified; previous CI
+jobs did not start because GitHub reported an account billing lock. The owner has
+now authorized implementation merges despite those recorded gaps. Check live PR,
+master and milestone state for merge/administrative-closure results; keep the
+remaining acceptance issues and their original criteria intact. No money or
+billing changes, release/tag publication or deployment are authorized. Roadmap 2
+and the deferred backlog remain separate.

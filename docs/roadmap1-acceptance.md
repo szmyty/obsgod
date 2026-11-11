@@ -1,9 +1,11 @@
 # Roadmap 1 review packet
 
-Implementation and available local qualification are prepared in stacked draft
-PRs. **Roadmap 1 is not closed.** Actual Deck/Kick acceptance, functioning GitHub
-CI and owner PR review remain gates. No merge, issue closure, release publication,
-deployment, billing change or other-repository change was performed.
+Implementation and available local qualification were prepared in stacked draft
+PRs. The owner has now explicitly authorized merging that stack and closing
+milestone 1. This is an administrative implementation checkpoint, not proof of
+actual Deck/Kick or CI acceptance. Keep unverified acceptance issues open with
+their existing criteria. The live PR/milestone records show merge and closure
+results; no release publication, deployment or billing change is authorized.
 
 ## Exact candidate and review order
 
@@ -12,7 +14,7 @@ deployment, billing change or other-repository change was performed.
 - Immutable review artifact commit: `1fbf92ff36eea77bee0f3da186e99d856c80774e`.
 - Foundation: draft [#15](https://github.com/szmyty/obsgod/pull/15), unchanged at
   `0eb8324c2b1f23fea069570eded1cd0c75d99274`.
-- Stacked review/merge order, after acceptance and owner review: [#26](https://github.com/szmyty/obsgod/pull/26)
+- Owner-authorized stacked merge order: [#26](https://github.com/szmyty/obsgod/pull/26)
   provenance → [#27](https://github.com/szmyty/obsgod/pull/27) runtime →
   [#28](https://github.com/szmyty/obsgod/pull/28) state →
   [#29](https://github.com/szmyty/obsgod/pull/29) installation →
@@ -100,7 +102,8 @@ image ID, source pins, commands and individual outcomes are in qualification JSO
 | #22 final matrix and handoff | Exact candidate, commands, tools, statuses, package hashes, public downloads, local integration and instructions prepared. | Billing lock cleared, required CI executed successfully, device/Kick/adoption proof and owner review. |
 | Parent #8 | Scope, dependencies, PR sequence and preserved original planning reconciled. | All child acceptance and required reviews before closing parent/milestone. |
 
-No child is closed from code or package existence. Broad optional workflow/API/
+No child is closed from code or package existence. Owner-directed milestone
+closure does not mark the remaining acceptance as passed. Broad optional workflow/API/
 CLI/stable-v1/StreamGod acceptance remains in #7/#9/#11/#12/#13/#14. Roadmap 2
 #23/#24/#25 remains deferred: custom idle media/transitions and user-facing
 password controls were not implemented. Generated authenticated connectivity is
@@ -124,7 +127,7 @@ ran against frozen artifacts after the repeat-build comparison.
 
 ## Owner actions and publication path
 
-1. Review the draft stack and this candidate. Clear GitHub's account billing
+1. Merge approval for the prepared stack has been received. Clear GitHub's account billing
    lock, then rerun all required checks; no billing change or spending was attempted.
 2. Install this exact candidate on the Deck. Record version/hash/device details,
    test the local clip, no-game/game launch/exit/QAM/recovery/update cases and
@@ -132,8 +135,10 @@ ran against frozen artifacts after the repeat-build comparison.
 3. When ready to broadcast, explicitly Start and confirm correct Kick picture
    and sound from a second device. That owner-device result is adoption proof;
    the prior preview installation is not candidate adoption.
-4. After acceptance and review, merge in stack order and close only satisfied
-   issues/milestone. A later exact source rebuild requires its own qualification.
+4. The owner has requested implementation merges in stack order and administrative
+   milestone closure now. Keep unsatisfied acceptance issues open, and close those
+   only after their evidence is available. A later exact source rebuild requires
+   its own qualification.
 5. Release publication remains a separate owner approval. Proposed destination
    is this repository's GitHub prerelease `v0.1.0-deck.5`, tagged at the exact
    candidate source with these exact artifacts/receipts. The repository owner
