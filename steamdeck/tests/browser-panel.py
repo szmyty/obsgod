@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Render the actual release ZIP frontend in a simulated Decky/Steam UI host."""
 import argparse
+import json
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -29,6 +30,14 @@ def main():
         root = Path(directory)
         with zipfile.ZipFile(args.plugin_zip) as archive:
             archive.extractall(root)
+        # Decky's real PluginWrapper selects ESMODULE_V1 only when the shipped
+        # package.json declares type=module. Direct browser imports alone cannot
+        # detect an archive that the real loader would incorrectly eval as IIFE.
+        package=json.loads((root / "obsgod/package.json").read_text())
+        assert package.get("type")=="module", "Decky would select its legacy eval loader"
+        metadata=json.loads((root / "obsgod/plugin.json").read_text())
+        assert metadata["name"]=="OBSGod" and metadata["api_version"]==1
+        assert "root" not in metadata["flags"] and "_root" not in metadata["flags"]
         subprocess.run(["node", "tests/build-fixture.mjs", str(root / "runtime.js")], cwd=decky, check=True)
         shutil.copyfile(decky / "tests/fixture.html", root / "index.html")
         server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=str(root)))

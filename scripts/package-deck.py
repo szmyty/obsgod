@@ -92,7 +92,7 @@ def main():
     plugin = {
         "main.py": (REPO / "steamdeck/decky/main.py").read_bytes(),
         "plugin.json": (REPO / "steamdeck/decky/plugin.json").read_bytes(),
-        "package.json": json.dumps({"name": "obsgod", "version": args.version, "license": "MIT"}, sort_keys=True).encode(),
+        "package.json": json.dumps({"name": "obsgod", "version": args.version, "license": "MIT", "type":"module"}, sort_keys=True).encode(),
         "bin/obsgod": binary.read_bytes(),
         "LICENSE": (REPO / "LICENSE").read_bytes(),
         "LICENSE.LGPL-2.1": (REPO / "steamdeck/decky/LICENSE.LGPL-2.1").read_bytes(),
