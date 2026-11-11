@@ -1,0 +1,60 @@
+{
+  "artifacts": {
+    "manifest.json": "0ec961caa098d9e59a892cccfeb4704ffa07e95f70fa3ae5293c6e58be32dc1a",
+    "obsgod-deck_0.1.0-deck.2_linux_amd64.tar.gz": "ef42b6512a446dfc7056a8eb32be74657bf451e3f2f854e0d3df0a85791f7416",
+    "obsgod-decky.zip": "6ce2aad12cbc6dbd42d46e20873129b72116592df8cb45bd31299fe804061df0"
+  },
+  "changes": [
+    "Keep desktop terminal open until Enter after installer exits",
+    "Run setup visibly in the foreground and propagate startup errors",
+    "Start HTTP serving before calling blocking browser launchers",
+    "Print a local setup link for browser-launch recovery",
+    "Preserve literal percent escapes in filesystem paths; support file URIs"
+  ],
+  "checks": [
+    {
+      "command": "python3 -m unittest discover -s steamdeck/tests -p 'test_*.py' -v",
+      "outcome": "passed",
+      "scope": "HTTP security, installer safety, backend cancellation, desktop failure hold, path/URI handling, blocking-browser startup",
+      "test_cases": 10
+    },
+    {
+      "command": "python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.2_linux_amd64.tar.gz",
+      "outcome": "passed",
+      "scope": "Actual archive desktop entry, foreground server startup, Chromium configuration, reload, credentials, terminal hold and uninstall"
+    },
+    {
+      "command": "desktop-file-validate steamdeck/Install OBSGod.desktop",
+      "outcome": "passed"
+    },
+    {
+      "command": "python3 scripts/package-deck.py",
+      "outcome": "passed",
+      "scope": "Go build and Decky typecheck/build"
+    },
+    {
+      "command": "git diff --quiet 77b6378 4e68518d4ed6b6732ec17f64e11d09782359ec13 -- main.go internal pkg go.mod go.sum",
+      "outcome": "passed",
+      "scope": "Streaming source unchanged from preview 1"
+    },
+    {
+      "check": "Streaming matrix for new binary",
+      "outcome": "unrun",
+      "reason": "Installer/startup-only hotfix; no Go streaming or Decky source changes. Previous exact-revision evidence remains linked separately, not relabeled as a new run."
+    },
+    {
+      "check": "Real Steam Deck capture, VAAPI, controller behavior and Kick viewer",
+      "outcome": "unverified",
+      "reason": "No device access in cloud; user reported successful manual installation and browser recovery, not completed streaming acceptance."
+    }
+  ],
+  "classification": "installer/startup hotfix for hardware preview",
+  "existing_installation": "No reinstall required if the setup page already works; settings are preserved.",
+  "generated_at_utc": "2026-11-11T16:00:54.823049+00:00",
+  "previous_streaming_evidence": "https://raw.githubusercontent.com/szmyty/obsgod/1120f75bb623c8ec54ba7f357b488c16c4e79eb1/qualification.json",
+  "publication_transport": "Pinned artifact commit in the same repository; native release upload authentication was rejected for preview 1.",
+  "release": "v0.1.0-deck.2",
+  "revision": "4e68518d4ed6b6732ec17f64e11d09782359ec13",
+  "schema_version": 1,
+  "user_observation": "User reported that manual python3 install.py --no-launch worked and setup opened in the browser. This does not identify the original double-click failure cause."
+}
