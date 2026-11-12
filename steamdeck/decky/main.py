@@ -15,6 +15,7 @@ class Plugin:
         self.cancel_requested = False
         self._control_task = None
         self._control_action = None
+        self._control_payload = None
         self._stop_task = None
         self._status_task = None
         self._operation_id = 0
@@ -67,12 +68,12 @@ class Plugin:
         return {"ok": False, "state": "unknown", "output_known": False,
                 "process": "unknown", "connection": "unavailable", "message": message}
 
-    async def _run(self, action):
+    async def _run(self, action, payload=None):
         binary = Path(__file__).resolve().parent / "bin/obsgod"
         if not os.access(binary, os.X_OK):
             binary.chmod(0o700)
         spawning = asyncio.create_task(asyncio.create_subprocess_exec(
-            str(binary), "deck", action, stdin=asyncio.subprocess.DEVNULL,
+            str(binary), "deck", action, stdin=asyncio.subprocess.PIPE if payload is not None else asyncio.subprocess.DEVNULL,
             stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.DEVNULL,
         ))
         try:
@@ -95,7 +96,8 @@ class Plugin:
             if self.cancel_requested and process.returncode is None:
                 self._signal_pending()
         try:
-            output, _ = await asyncio.wait_for(process.communicate(), 85 if action not in {"status", "clear-logs"} else 6)
+            communication = process.communicate(json.dumps(payload).encode()) if payload is not None else process.communicate()
+            output, _ = await asyncio.wait_for(communication, 85 if action not in {"status", "clear-logs"} else 6)
             result = json.loads(output)
             if not isinstance(result, dict) or not isinstance(result.get("ok"), bool):
                 raise ValueError()
@@ -158,10 +160,19 @@ class Plugin:
             pass
         return await self.status()
 
-    async def _perform(self, action, operation_id, command=None):
+    async def _perform(self, action, operation_id, command=None, payload=None):
         if command is None:
             try:
-                command = await self._run(action)
+                if action == "set-capture-mode":
+                    # This read occurs after the control operation is reserved.
+                    # Never use a pre-click cached panel snapshot to authorize
+                    # changing capture, and keep the CLI's own lock/state gate.
+                    current = await self._run("status")
+                    if (current.get("output_known") is not True or
+                            current.get("stream", {}).get("active") or current.get("recording")):
+                        command = {"ok": False, "message": "Stop streaming and recording, then wait for confirmed status before changing capture mode."}
+                if command is None:
+                    command = await self._run(action, payload) if payload is not None else await self._run(action)
             except OSError:
                 command = self._unknown("OBSGod executable is unavailable. Reinstall OBSGod from its Desktop installer.")
         # Command success/error is not an output snapshot. Re-query actual OBS
@@ -182,14 +193,14 @@ class Plugin:
         observed["action_result"] = outcome
         return observed
 
-    async def _begin(self, action):
+    async def _begin(self, action, payload=None):
         if self._closing:
             result = await self.status()
             result["action_result"] = {"ok": False, "action": action,
                                        "message": "OBSGod is shutting down. Wait for the plugin to reload."}
             return result
         if self._control_task and not self._control_task.done():
-            if self._control_action == action and not self.cancel_requested:
+            if self._control_action == action and self._control_payload == payload and not self.cancel_requested:
                 return await asyncio.shield(self._control_task)
             result = await self.status()
             result["action_result"] = {"ok": False, "action": action,
@@ -202,8 +213,9 @@ class Plugin:
             return result
         self.cancel_requested = False
         self._control_action = action
+        self._control_payload = payload
         self._operation_id += 1
-        self._control_task = asyncio.create_task(self._perform(action, self._operation_id))
+        self._control_task = asyncio.create_task(self._perform(action, self._operation_id, payload=payload))
         return await asyncio.shield(self._control_task)
 
     async def start(self):
@@ -211,6 +223,14 @@ class Plugin:
 
     async def test_recording(self):
         return await self._begin("test-recording")
+
+    async def set_capture_mode(self, mode):
+        if not isinstance(mode, str) or mode not in {"screen", "game"}:
+            result = await self.status()
+            result["action_result"] = {"ok": False, "action": "set-capture-mode",
+                                       "message": "Choose entire screen or game only."}
+            return result
+        return await self._begin("set-capture-mode", {"capture_mode": mode})
 
     async def _stop(self, operation_id):
         if not (self._control_task and not self._control_task.done()):

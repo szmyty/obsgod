@@ -12,7 +12,7 @@ import (
 
 func newDeckCommand() *coral.Command {
 	root := &coral.Command{Use: "deck", Short: "Manage the optional Steam Deck streaming preview (JSON output)"}
-	for _, name := range []string{"status", "doctor", "configure", "start", "stop", "test-recording", "restart", "open-obs", "clear-logs"} {
+	for _, name := range []string{"status", "doctor", "configure", "set-capture-mode", "start", "stop", "test-recording", "restart", "open-obs", "clear-logs"} {
 		name := name
 		cmd := &coral.Command{Use: name, Short: map[string]string{"status": "Read live output state without starting OBS", "doctor": "Diagnose installation, capture and OBS", "configure": "Save settings and key from JSON stdin, never argv", "start": "Capture Gaming Mode and wait for real stream output", "stop": "Stop streaming and confirm it stopped", "test-recording": "Save a ten-second local clip without broadcasting", "restart": "Close idle managed OBS to apply saved settings", "open-obs": "Open the isolated OBS window visibly for Desktop recovery without starting output"}[name], Args: coral.NoArgs}
 		cmd.RunE = func(cmd *coral.Command, _ []string) error {
@@ -51,6 +51,8 @@ func newDeckCommand() *coral.Command {
 						result = deck.Result{OK: e == nil, Configured: e == nil, State: "stopped", Message: "Settings saved on this device", Settings: &settings}
 					case "start":
 						result, e = deck.Start(ctx, paths)
+					case "set-capture-mode":
+						result, e = deck.SetCaptureMode(ctx, paths, cmd.InOrStdin())
 					case "stop":
 						result, e = deck.Stop(ctx, paths)
 					case "test-recording":

@@ -24,6 +24,9 @@ type Config struct {
 	Address  string
 	Password string
 	Timeout  time.Duration
+	// Zero preserves request-only connections. Meter observations use their own
+	// bounded connection so high-volume events cannot delay control operations.
+	EventSubscriptions int
 }
 
 // Client owns one connection. Operations on a Client must be sequential.
@@ -125,7 +128,7 @@ func Connect(ctx context.Context, cfg Config) (*Client, error) {
 	ch := make(chan result)
 	go func() {
 		c, err := goobs.New(cfg.Address, goobs.WithPassword(cfg.Password), goobs.WithDialer(dialer),
-			goobs.WithResponseTimeoutDuration(cfg.Timeout), goobs.WithEventSubscriptions(0), goobs.WithLogger(log.New(io.Discard, "", 0)))
+			goobs.WithResponseTimeoutDuration(cfg.Timeout), goobs.WithEventSubscriptions(cfg.EventSubscriptions), goobs.WithLogger(log.New(io.Discard, "", 0)))
 		select {
 		case ch <- result{c, err}:
 		case <-attempt.Done():

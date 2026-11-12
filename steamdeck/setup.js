@@ -15,6 +15,10 @@ async function refresh() {
   const data = await api("/api/status");
   if (data.settings) {
     for (const id of ["server", "bitrate", "fps", "encoder"]) el(id).value = data.settings[id];
+    el("capture_mode").value = data.settings.capture_mode || "screen";
+    el("idle_style").value = data.settings.idle_style || "black";
+    el("idle_text").value = data.settings.idle_text ?? "Game starting soon";
+    updateIdleFields();
     el("microphone").checked = data.settings.microphone;
   }
   if (data.configured) el("key").placeholder = "Saved securely · leave blank to keep";
@@ -22,9 +26,16 @@ async function refresh() {
   el("decky-status").textContent = data.decky_status?.message || "Decky service readiness has not been verified.";
   if (!data.flatpak) message("dependency-status", {ok:false,message:"Flatpak was not found. This installer is intended for SteamOS / Steam Deck."});
 }
+function updateIdleFields() {
+  el("idle_style").disabled = el("capture_mode").value !== "game";
+  el("idle_text").disabled = el("capture_mode").value !== "game" || el("idle_style").value !== "placeholder";
+}
+el("capture_mode").addEventListener("change", updateIdleFields);
+el("idle_style").addEventListener("change", updateIdleFields);
+updateIdleFields();
 el("settings").addEventListener("submit", async (event) => {
   event.preventDefault(); el("save").disabled = true;
-  const settings = {version:1, server:el("server").value.trim(), stream_key:el("key").value.trim(), bitrate:Number(el("bitrate").value), fps:Number(el("fps").value), encoder:el("encoder").value, microphone:el("microphone").checked};
+  const settings = {version:1, server:el("server").value.trim(), stream_key:el("key").value.trim(), bitrate:Number(el("bitrate").value), fps:Number(el("fps").value), encoder:el("encoder").value, microphone:el("microphone").checked, capture_mode:el("capture_mode").value, idle_style:el("idle_style").value, idle_text:el("idle_text").value};
   try {const data=await api("/api/action", {action:"configure",settings});message("save-status", data);if(data.ok){el("key").value="";el("key").placeholder="Saved securely · leave blank to keep";}}
   catch(error){message("save-status", {ok:false,message:error.message});}
   finally{settings.stream_key="";el("save").disabled=false;}

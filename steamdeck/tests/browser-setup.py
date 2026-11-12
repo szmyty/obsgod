@@ -79,6 +79,12 @@ Path(os.environ['OBSGOD_TEST_BROWSER_URL']).write_text(sys.argv[1])
                 page.goto(ready.read_text())
                 page.get_by_role("heading", name="Connect your stream").wait_for()
                 assert not page.locator("#microphone").is_checked()
+                expect(page.locator("#capture_mode")).to_have_value("screen")
+                assert page.locator("#idle_style").is_disabled()
+                assert page.locator("#idle_text").is_disabled()
+                page.locator("#capture_mode").select_option("game")
+                page.locator("#idle_style").select_option("placeholder")
+                page.locator("#idle_text").fill("Back soon — <not HTML>")
                 page.locator("#server").fill("rtmps://example.invalid/app")
                 page.locator("#key").fill("browser-fixture-never-real")
                 page.get_by_role("button", name="Save on this Deck").click()
@@ -88,14 +94,27 @@ Path(os.environ['OBSGOD_TEST_BROWSER_URL']).write_text(sys.argv[1])
                 page.reload()
                 expect(page.locator("#server")).to_have_value("rtmps://example.invalid/app")
                 assert page.locator("#key").input_value() == ""
+                expect(page.locator("#capture_mode")).to_have_value("game")
+                expect(page.locator("#idle_style")).to_have_value("placeholder")
+                expect(page.locator("#idle_text")).to_have_value("Back soon — <not HTML>")
                 page.get_by_text("Manual repair ZIP", exact=True).click()
                 assert page.locator("#zip-path").inner_text().endswith("obsgod-decky.zip")
                 result = subprocess.run([str(current / "obsgod"), "deck", "status"], env=env, capture_output=True, text=True, check=True)
-                assert json.loads(result.stdout)["configured"]
+                configured=json.loads(result.stdout)
+                assert configured["configured"]
+                assert configured["settings"]["capture_mode"] == "game"
+                assert configured["settings"]["idle_style"] == "placeholder"
+                assert configured["settings"]["idle_text"] == "Back soon — <not HTML>"
                 assert "browser-fixture-never-real" not in result.stdout + result.stderr
                 secret = home / ".config/obsgod/secrets.json"
                 assert secret.stat().st_mode & 0o777 == 0o600
                 assert json.loads(secret.read_text())["stream_key"] == "browser-fixture-never-real"
+                # Explicitly saving new capture/fallback settings changes the
+                # app settings/hash pair; repeat install must preserve that new
+                # pair as well as the original OBS preferences and media.
+                for path in list(snapshots):
+                    if path in {home / ".config/obsgod/deck.json", secret}:
+                        snapshots[path] = path.read_bytes()
                 page.set_viewport_size({"width": 800, "height": 1280})
                 page.screenshot(path=str(args.screenshots / "desktop-setup-portrait.png"), full_page=True)
                 assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
@@ -113,7 +132,7 @@ Path(os.environ['OBSGOD_TEST_BROWSER_URL']).write_text(sys.argv[1])
             subprocess.run(["python3", str(current / "uninstall.py"), "--purge-settings"], env=env, check=True)
             assert not (home / ".local/bin/obsgod").exists()
             assert not secret.exists()
-            print("PASS: actual desktop launcher in explicit app-only test mode, foreground startup, browser setup/reload, private credentials, terminal hold, repeat install, clean uninstall; Decky installation qualified separately; fixture credentials only" + ("; actual earlier-preview upgrade preserves all user data" if snapshots else ""))
+            print("PASS: actual desktop launcher in explicit app-only test mode, foreground startup, browser setup/reload with preserved game-only/fallback settings, private credentials, terminal hold, repeat install, clean uninstall; Decky installation qualified separately; fixture credentials only" + ("; actual earlier-preview upgrade preserves all user data" if snapshots else ""))
         finally:
             if process.poll() is None:
                 os.killpg(process.pid,signal.SIGTERM)

@@ -6,12 +6,13 @@ import { createView, currentResult, observe, controls } from "./state.mjs";
 
 type Diagnostic = {time:string; level:string; message:string};
 type Outcome = {id?:number; action?:string; ok:boolean; message:string; recording_path?:string};
-type Result = {ok:boolean; state:string; message:string; configured?:boolean; output_known?:boolean; process?:string; connection?:string; recording?:boolean; capture?:string; frames?:string; game?:string; backend_id?:string; snapshot_id?:number; operation?:{id:number; action:string; state:string}|null; action_result?:Outcome; last_action?:Outcome; stream?:{active:boolean; reconnecting:boolean; bytes:number; duration_ms:number}; recording_path?:string; diagnostics?:Diagnostic[]; plugin_version?:string};
+type Result = {ok:boolean; state:string; message:string; configured?:boolean; output_known?:boolean; process?:string; connection?:string; recording?:boolean; capture?:string; frames?:string; game?:string; backend_id?:string; snapshot_id?:number; operation?:{id:number; action:string; state:string}|null; action_result?:Outcome; last_action?:Outcome; stream?:{active:boolean; reconnecting:boolean; bytes:number; duration_ms:number}; recording_path?:string; diagnostics?:Diagnostic[]; plugin_version?:string; settings?:{capture_mode?:"screen"|"game";idle_style?:"black"|"placeholder"};audio?:{state:string;message?:string}};
 type UpdateResult = {ok:boolean; state:string; message:string; current_version?:string; latest_version?:string; available?:boolean; current_app_version?:string; current_plugin_version?:string; current_updater_version?:string; mismatch?:boolean; channel?:string};
 const readStatus=callable<[],Result>("status");
 const start=callable<[],Result>("start");
 const stop=callable<[],Result>("stop");
 const test=callable<[],Result>("test_recording");
+const setCaptureMode=callable<[mode:string],Result>("set_capture_mode");
 const clearLogs=callable<[],Result>("clear_logs");
 const checkUpdates=callable<[],UpdateResult>("check_for_updates");
 let result:Result|undefined;
@@ -164,6 +165,31 @@ async function act(action:"start"|"stop"|"test"){
   }
 }
 
+function canChangeCaptureMode(current:Result|undefined){
+  return !!current?.configured && current.output_known===true && !current.stream?.active &&
+    !current.recording && !current.operation && !busy;
+}
+
+async function changeCaptureMode(){
+  const current=currentResult(view,Date.now()) as Result|undefined;
+  if(!canChangeCaptureMode(current))return;
+  const mode=current?.settings?.capture_mode==="game"?"screen":"game";
+  const token=++actionSerial,generation=instance;
+  currentAction=token;busy="capture-mode";view.epoch++;actionNoticeAt=0;
+  notice="Saving capture mode…";changed();
+  try{
+    const next=await bounded(setCaptureMode(mode),15000);
+    if(!active||instance!==generation||currentAction!==token)return;
+    const outcome=next.action_result??next;
+    notice=outcome.message;actionNoticeAt=Date.now();
+    if(!outcome.ok)toaster.toast({title:"OBSGod needs attention",body:outcome.message});
+  }catch{
+    if(active&&instance===generation&&currentAction===token){notice="Capture mode could not be confirmed. Refresh status before starting.";actionNoticeAt=Date.now();}
+  }finally{
+    if(active&&instance===generation&&currentAction===token){busy="";await refresh();changed();}
+  }
+}
+
 async function checkForUpdates(){
   if(updateChecking)return;
   const generation=instance;
@@ -178,7 +204,9 @@ async function checkForUpdates(){
 
 function Content(){
   const state=useStateView();
-  const available=controls(currentResult(view,Date.now()),busy);
+  const current=currentResult(view,Date.now()) as Result|undefined;
+  const available=controls(current,busy);
+  const captureMode=current?.settings?.capture_mode==="game"?"game":"screen";
   const seconds=Math.floor((result?.stream?.duration_ms??0)/1000);
   const duration=Math.floor(seconds/60)+":"+String(seconds%60).padStart(2,"0");
   return <>
@@ -191,9 +219,15 @@ function Content(){
       <PanelSectionRow><div aria-live="polite" style={{fontSize:14,lineHeight:1.5,whiteSpace:"pre-wrap",overflowWrap:"anywhere"}}>{busy&&notice?notice:result?.message||"Checking the local OBS connection…"}</div></PanelSectionRow>
       {!busy&&notice&&actionNoticeAt>0&&<PanelSectionRow><div style={{fontSize:12,lineHeight:1.5,opacity:.8,whiteSpace:"pre-wrap",overflowWrap:"anywhere"}}>Last action · {new Date(actionNoticeAt).toLocaleTimeString()}: {notice}</div></PanelSectionRow>}
     </PanelSection>
+    <PanelSection title="CAPTURE">
+      <PanelSectionRow><div style={{fontSize:15,fontWeight:700}}>Capture mode: {captureMode==="game"?"Game only":"Entire screen"}</div></PanelSectionRow>
+      <PanelSectionRow><ButtonItem layout="below" disabled={!canChangeCaptureMode(current)} onClick={()=>void changeCaptureMode()}>{busy==="capture-mode"?"Saving capture mode…":captureMode==="game"?"Switch to entire screen":"Switch to game only"}</ButtonItem></PanelSectionRow>
+      <PanelSectionRow><div style={{fontSize:13,lineHeight:1.5,opacity:.8}}>Change modes while streaming and recording are stopped. Entire screen includes Steam menus. Game only uses the between-game screen when a compatible game source is unavailable; it never falls back to sharing the entire screen. Customize that screen in Desktop Setup.</div></PanelSectionRow>
+      {current?.audio&&<PanelSectionRow><div style={{fontSize:13,lineHeight:1.5}}>Game audio: {current.audio.message||current.audio.state}. Check a local clip and your channel for sound.</div></PanelSectionRow>}
+    </PanelSection>
     <PanelSection title="FIRST STREAM CHECK">
       <PanelSectionRow><ButtonItem layout="below" disabled={available.testDisabled} onClick={()=>act("test")}>Make 10-second test clip</ButtonItem></PanelSectionRow>
-      <PanelSectionRow><div style={{fontSize:13,lineHeight:1.5,opacity:.8}}>A game is not required to control OBS. Capture must provide usable frames before a test or broadcast starts. Test clips save to Videos/OBSGod. Enter your URL and key in OBSGod Setup in Desktop Mode. Microphone is off unless enabled there.</div></PanelSectionRow>
+      <PanelSectionRow><div style={{fontSize:13,lineHeight:1.5,opacity:.8}}>Game only shows your between-game screen until compatible game capture is available. Entire screen must provide usable frames before a test or broadcast starts. Test clips save to Videos/OBSGod. Enter your URL and key in OBSGod Setup in Desktop Mode. Microphone is off unless enabled there.</div></PanelSectionRow>
       <PanelSectionRow><ButtonItem layout="below" onClick={()=>refresh()}>Refresh status</ButtonItem></PanelSectionRow>
       <Console/>
     </PanelSection>
