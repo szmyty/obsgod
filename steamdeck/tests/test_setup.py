@@ -263,6 +263,36 @@ class UnifiedInstallerSafety(unittest.TestCase):
         self.loader.stop()
         InstallerSafety.tearDown(self)
 
+    def test_native_capture_bundle_is_verified_installed_and_preserved(self):
+        capture = {"libgstobsgodcapture.so", "CAPTURE-SOURCE.tar.gz"}
+        self.files |= capture
+        for name in capture:
+            (self.source / name).write_bytes(b"fixture native capture " + name.encode())
+        self.manifest()
+        with contextlib.redirect_stdout(__import__("io").StringIO()):
+            first = install.install(launch=False)
+            second = install.install(launch=False)
+        self.assertEqual(first, second)
+        for name in capture:
+            self.assertEqual((first / name).read_bytes(), (self.source / name).read_bytes())
+            self.assertEqual((first / name).stat().st_mode & 0o777, 0o600)
+        (self.source / "libgstobsgodcapture.so").write_bytes(b"tampered plugin")
+        with self.assertRaisesRegex(RuntimeError, "checksum mismatch"):
+            install.verify_payload()
+        self.assertEqual((first / "libgstobsgodcapture.so").read_bytes(), b"fixture native capture libgstobsgodcapture.so")
+
+    def test_partial_native_capture_bundle_and_unexpected_files_are_refused(self):
+        for extra in ["libgstobsgodcapture.so", "CAPTURE-SOURCE.tar.gz", "unexpected-native.so"]:
+            with self.subTest(extra=extra):
+                self.files.add(extra)
+                (self.source / extra).write_bytes(b"fixture")
+                self.manifest()
+                with self.assertRaisesRegex(RuntimeError, "Unexpected package manifest"):
+                    install.verify_payload()
+                self.files.remove(extra)
+                (self.source / extra).unlink()
+        self.manifest()
+
     def test_default_installs_verified_plugin_before_activating_app(self):
         current = self.home / ".local/share/obsgod/current"
         def verify_first(operation, candidate, manifest):

@@ -12,6 +12,13 @@ import (
 
 func newDeckCommand() *coral.Command {
 	root := &coral.Command{Use: "deck", Short: "Manage the optional Steam Deck streaming preview (JSON output)"}
+	root.AddCommand(&coral.Command{Use: "capture-watch", Hidden: true, Args: coral.NoArgs, RunE: func(cmd *coral.Command, _ []string) error {
+		paths, err := deck.UserPaths()
+		if err != nil {
+			return err
+		}
+		return deck.WatchCapture(cmd.Context(), paths)
+	}})
 	for _, name := range []string{"status", "doctor", "configure", "set-capture-mode", "start", "stop", "test-recording", "restart", "open-obs", "clear-logs"} {
 		name := name
 		cmd := &coral.Command{Use: name, Short: map[string]string{"status": "Read live output state without starting OBS", "doctor": "Diagnose installation, capture and OBS", "configure": "Save settings and key from JSON stdin, never argv", "start": "Capture Gaming Mode and wait for real stream output", "stop": "Stop streaming and confirm it stopped", "test-recording": "Save a ten-second local clip without broadcasting", "restart": "Close idle managed OBS to apply saved settings", "open-obs": "Open the isolated OBS window visibly for Desktop recovery without starting output"}[name], Args: coral.NoArgs}

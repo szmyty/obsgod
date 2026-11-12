@@ -45,6 +45,7 @@ type Result struct {
 	Capture       string                    `json:"capture"`
 	Game          string                    `json:"game"`
 	Frames        string                    `json:"frames"`
+	Audio         *AudioStatus              `json:"audio,omitempty"`
 }
 
 func connect(ctx context.Context, secret Secrets, timeout time.Duration) (*automation.Client, error) {
@@ -114,6 +115,7 @@ func Status(ctx context.Context, p Paths) Result {
 		return r
 	}
 	r.OutputKnown = true
+	r.Audio = readAudioStatus(p)
 	captureCtx, captureCancel := context.WithTimeout(ctx, 400*time.Millisecond)
 	r.Capture = captureAvailability(captureCtx)
 	captureCancel()
@@ -126,11 +128,25 @@ func Status(ctx context.Context, p Paths) Result {
 			}
 		}
 	}
+	if (r.Stream.Active || r.Recording) && ctx.Err() == nil {
+		audioCtx, audioCancel := context.WithTimeout(ctx, 450*time.Millisecond)
+		r.Audio = measureAudio(audioCtx, p, secret, 180*time.Millisecond, false)
+		audioCancel()
+	}
+	if s.CaptureModeName() == "game" && runtime.Scene == IdleScene {
+		r.Frames = "placeholder"
+		r.Game = "idle"
+	}
+	if s.CaptureModeName() == "game" && runtime.Scene == GameScene {
+		r.Game = "running"
+	}
 	if r.Stream.Active {
 		r.State, r.Message = "starting", "Connecting or reconnecting to the stream server"
 		if !r.Stream.Reconnecting && r.Stream.Bytes > 0 {
 			r.State, r.Message = "streaming", "OBS streaming"
-			if r.Frames != "visible" || r.Capture == "unavailable" {
+			if s.CaptureModeName() == "game" && runtime.Scene == IdleScene {
+				r.Message = "OBS streaming — between-game screen; waiting for verified game capture"
+			} else if r.Frames != "visible" || (s.CaptureModeName() == "screen" && r.Capture == "unavailable") {
 				r.Message = "OBS output is active; captured picture cannot be confirmed. Check capture or use Stop"
 			}
 		}
@@ -145,6 +161,11 @@ func Status(ctx context.Context, p Paths) Result {
 
 func Doctor(ctx context.Context, p Paths) Result {
 	r := Status(ctx, p)
+	if settings, _, err := Load(p); err == nil {
+		route, audioErr := DiscoverAudio(ctx, settings.Microphone)
+		status := safeAudioStatus(route, audioErr)
+		r.Audio = &status
+	}
 	if err := checkDependencies(ctx); err != nil {
 		r.OK = false
 		r.Message = err.Error()
@@ -274,45 +295,11 @@ func verifyManaged(ctx context.Context, c *automation.Client) (*automation.Clien
 	return c, nil
 }
 
-func ensureCapture(ctx context.Context, c *automation.Client, s Settings) error {
-	if e := c.EnsureCollection(ctx, "OBSGod"); e != nil {
-		return e
+func ensureCapture(ctx context.Context, c *automation.Client, p Paths, s Settings) error {
+	if err := ensureVideo(ctx, c, p, s); err != nil {
+		return err
 	}
-	for _, scene := range []string{IdleScene, LiveScene} {
-		if e := c.EnsureScene(ctx, scene); e != nil {
-			return e
-		}
-	}
-	// Capture must run during preflight even when OBS's preview/window is hidden.
-	// Pause it explicitly on stop instead of allowing transient show/hide events
-	// from screenshot requests to tear down the PipeWire connection.
-	settings := map[string]any{"pipeline": CapturePipeline, "use_timestamps_video": true, "sync_appsink_video": false, "disable_async_appsink_video": true, "disable_async_appsink_audio": true, "no_buffer": true, "drop_video": true, "stop_on_hide": false, "clear_on_end": true, "restart_on_error": true, "restart_on_eos": true, "restart_timeout": 2000}
-	if e := c.EnsureInput(ctx, LiveScene, CaptureInput, "gstreamer-source", settings); e != nil {
-		return e
-	}
-	if e := c.FitInput(ctx, LiveScene, CaptureInput); e != nil {
-		return e
-	}
-	if e := c.EnsureInput(ctx, LiveScene, GameAudio, "pulse_output_capture", map[string]any{"device_id": "default"}); e != nil {
-		return e
-	}
-	if e := c.SetInputMuted(ctx, GameAudio, false); e != nil {
-		return e
-	}
-	keep := map[string]bool{GameAudio: true}
-	if s.Microphone {
-		if e := c.EnsureInput(ctx, LiveScene, MicAudio, "pulse_input_capture", map[string]any{"device_id": "default"}); e != nil {
-			return e
-		}
-		if e := c.SetInputMuted(ctx, MicAudio, false); e != nil {
-			return e
-		}
-		keep[MicAudio] = true
-	}
-	if e := c.MuteOtherAudio(ctx, keep); e != nil {
-		return e
-	}
-	return c.SetScene(ctx, LiveScene)
+	return ensureAudio(ctx, c, p, s)
 }
 
 // NonblankCapture checks actual screenshot pixels, not just source registration.
@@ -387,6 +374,7 @@ func waitGamescope(ctx context.Context) bool {
 func haltCapture(ctx context.Context, c *automation.Client) {
 	_ = c.SetScene(ctx, IdleScene)
 	_ = c.UpdateInputIfPresent(ctx, CaptureInput, map[string]any{"stop_on_hide": true})
+	_ = c.UpdateInputIfPresent(ctx, GameCaptureInput, map[string]any{"stop_on_hide": true})
 }
 
 // haltCaptureIfIdle must not disrupt an independently started recording or an
@@ -441,16 +429,18 @@ func Start(ctx context.Context, p Paths) (Result, error) {
 	}()
 	if !wasActive {
 		logEvent(p, "capture.checking")
-		if !waitGamescope(ctx) {
+		if s.CaptureModeName() == "screen" && !waitGamescope(ctx) {
 			logEvent(p, "capture.unavailable")
 			return Result{}, errors.New("the Gamescope capture feed is unavailable in this session; OBS is ready, but a broadcast requires usable captured frames")
 		}
 		logEvent(p, "capture.configuring")
-		if e = ensureCapture(ctx, c, s); e != nil {
+		if e = ensureCapture(ctx, c, p, s); e != nil {
 			return Result{}, e
 		}
 		captureCtx, cancel := context.WithTimeout(ctx, 12*time.Second)
-		e = waitCapture(captureCtx, c, p)
+		if s.CaptureModeName() == "screen" {
+			e = waitCapture(captureCtx, c, p)
+		}
 		cancel()
 		if e != nil {
 			return Result{}, e
@@ -481,6 +471,14 @@ func Start(ctx context.Context, p Paths) (Result, error) {
 		return Result{}, errors.New("stream start could not be confirmed and stop could not be confirmed. Use Stop streaming or inspect OBS immediately")
 	}
 	succeeded = true
+	if s.CaptureModeName() == "game" {
+		if err := StartCaptureWatch(p); err != nil {
+			logEvent(p, "game.watch-unavailable")
+		}
+	}
+	audioCtx, audioCancel := context.WithTimeout(ctx, 1500*time.Millisecond)
+	_ = measureAudio(audioCtx, p, secret, time.Second, true)
+	audioCancel()
 	logEvent(p, "stream.ready")
 	return Result{OK: true, Configured: true, Connected: true, State: "streaming", Message: "OBS streaming — verify picture and sound on your Kick channel", Stream: state}, nil
 }
@@ -545,12 +543,12 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 		return Result{}, errors.New("stop the existing stream or recording before making a test clip")
 	}
 	logEvent(p, "capture.checking")
-	if !waitGamescope(ctx) {
+	if s.CaptureModeName() == "screen" && !waitGamescope(ctx) {
 		logEvent(p, "capture.unavailable")
 		return Result{}, errors.New("the Gamescope capture feed is unavailable in this session; OBS is ready, but a local clip requires usable captured frames")
 	}
 	logEvent(p, "capture.configuring")
-	if e = ensureCapture(ctx, c, s); e != nil {
+	if e = ensureCapture(ctx, c, p, s); e != nil {
 		return Result{}, e
 	}
 	defer func() {
@@ -560,7 +558,9 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 		haltCaptureIfIdle(cleanup, c)
 	}()
 	capCtx, cancel := context.WithTimeout(ctx, 12*time.Second)
-	e = waitCapture(capCtx, c, p)
+	if s.CaptureModeName() == "screen" {
+		e = waitCapture(capCtx, c, p)
+	}
 	cancel()
 	if e != nil {
 		return Result{}, e
@@ -572,6 +572,14 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 	if e != nil {
 		return Result{}, e
 	}
+	if s.CaptureModeName() == "game" {
+		if err := StartCaptureWatch(p); err != nil {
+			logEvent(p, "game.watch-unavailable")
+		}
+	}
+	audioCtx, audioCancel := context.WithTimeout(ctx, 1500*time.Millisecond)
+	_ = measureAudio(audioCtx, p, secret, time.Second, true)
+	audioCancel()
 	logEvent(p, "recording.running")
 	if e = wait(ctx, 10*time.Second); e != nil {
 		return Result{}, e

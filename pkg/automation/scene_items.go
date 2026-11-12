@@ -44,3 +44,23 @@ func (c *Client) SetSceneItemEnabledIfPresent(ctx context.Context, scene, source
 	}
 	return nil
 }
+
+// EnableOnlySceneItems is for caller-owned scenes. It excludes stale or manual
+// sources from a strict capture scene without deleting the user's inputs.
+func (c *Client) EnableOnlySceneItems(ctx context.Context, scene string, keep map[string]bool) error {
+	l, err := request(ctx, "GetSceneItemList", func() (*sceneitems.GetSceneItemListResponse, error) {
+		return c.obs.SceneItems.GetSceneItemList(sceneitems.NewGetSceneItemListParams().WithSceneName(scene))
+	})
+	if err != nil {
+		return err
+	}
+	for _, item := range l.SceneItems {
+		_, err = request(ctx, "SetSceneItemEnabled", func() (*sceneitems.SetSceneItemEnabledResponse, error) {
+			return c.obs.SceneItems.SetSceneItemEnabled(sceneitems.NewSetSceneItemEnabledParams().WithSceneName(scene).WithSceneItemId(item.SceneItemID).WithSceneItemEnabled(keep[item.SourceName]))
+		})
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}

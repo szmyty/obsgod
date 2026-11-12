@@ -22,6 +22,7 @@ var diagnosticMessages = map[string]string{
 	"obs.open-visible":            "Launching the isolated OBSGod profile visibly for Desktop recovery.",
 	"restart.requested":           "Close idle managed OBS requested.",
 	"configure.requested":         "Saving local settings.",
+	"set-capture-mode.requested":  "Changing the next capture mode after confirming output is idle.",
 	"doctor.requested":            "Checking dependencies, capture and OBS.",
 	"operation.succeeded":         "Operation completed.",
 	"operation.failed":            "Operation failed. Read the preceding events for the last completed step; the current result appears above the console.",
@@ -51,6 +52,17 @@ var diagnosticMessages = map[string]string{
 	"capture.waiting":             "Waiting for usable rendered capture frames.",
 	"capture.ready":               "Usable rendered capture frames confirmed.",
 	"capture.blank":               "No usable rendered capture frames arrived. Check the current feed and visible content. No new broadcast was started.",
+	"audio.discovering":           "Finding the current game or default system output monitor and selected microphone.",
+	"audio.ready":                 "OBS verified the selected audio device, volume, track 1 and monitoring-off settings.",
+	"audio.unavailable":           "Audio routing could not be verified. Check the SteamOS output and the device visible inside OBS.",
+	"audio.system-muted":          "The selected system output is muted or has zero volume. OBSGod does not change system volume.",
+	"audio.signal":                "OBS detected audio signal on the selected output. Verify sound in the saved clip or on your channel.",
+	"audio.silent":                "No sound was detected during the short audio check. Play game audio and inspect the local clip; silence does not stop output.",
+	"audio.meters-unavailable":    "OBS audio meters could not be observed. Current sound is unconfirmed.",
+	"game.watch-unavailable":      "Automatic game transitions could not be started. Output remains active; inspect capture or use Stop.",
+	"game.waiting":                "Showing the selected between-game screen while waiting for a verified game.",
+	"game.ready":                  "App-filtered game capture is visible. Whole-screen fallback is disabled in game-only mode.",
+	"game.capture-unavailable":    "App-filtered game capture is unavailable or unconfirmed. Showing the selected between-game screen.",
 	"stream.connecting":           "Connecting OBS to the configured streaming server.",
 	"stream.ready":                "OBS is sending streaming output. Check picture and sound on your channel.",
 	"stream.existing-unconfirmed": "An existing stream did not confirm advancing output. It was preserved; inspect it or use Stop streaming.",
@@ -106,7 +118,7 @@ func ReadDiagnostics(p Paths) []DiagnosticEntry {
 		}
 		level := "info"
 		switch event.Code {
-		case "obs.listener-unavailable", "obs.authentication-waiting", "obs.authentication-failed", "obs.frontend-waiting", "obs.recovery-marker", "obs.exited", "obs.timeout", "obs.request-failed", "obs.conflict", "obs.unmanaged", "settings.missing", "operation.failed", "operation.timeout", "capture.blank", "capture.unavailable", "stream.unconfirmed", "stream.failed-stopped", "dependencies.missing", "session.no-display":
+		case "audio.unavailable", "audio.meters-unavailable", "game.watch-unavailable", "obs.listener-unavailable", "obs.authentication-waiting", "obs.authentication-failed", "obs.frontend-waiting", "obs.recovery-marker", "obs.exited", "obs.timeout", "obs.request-failed", "obs.conflict", "obs.unmanaged", "settings.missing", "operation.failed", "operation.timeout", "capture.blank", "capture.unavailable", "stream.unconfirmed", "stream.failed-stopped", "dependencies.missing", "session.no-display":
 			level = "error"
 		}
 		if event.Code == "obs.exited" || event.Code == "obs.request-failed" {

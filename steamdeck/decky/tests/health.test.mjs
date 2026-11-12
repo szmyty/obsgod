@@ -23,3 +23,12 @@ test("unconfirmed or blank capture cannot show healthy green",()=>{
   assert.equal(health({...live,frames:"visible",capture:"unavailable"},1000,1100).live,false);
   assert.equal(health({ok:true,state:"stopped",recording:true},0,0).label,"Recording locally");
 });
+
+test("intentional between-game screen requires matching mode, scene and advancing output",()=>{
+  const idle={ok:true,state:"streaming",output_known:true,stream:{active:true,bytes:4096},settings:{capture_mode:"game"},runtime:{scene:"OBSGod Idle"},game:"idle",frames:"placeholder",capture:"unavailable"};
+  assert.equal(health(idle,1000,1100).label,"Streaming · between games");
+  assert.equal(health(idle,1000,9000).live,false);
+  assert.equal(health({...idle,settings:{capture_mode:"screen"}},1000,1100).live,false);
+  assert.equal(health({...idle,runtime:{scene:"OBSGod Live"}},1000,1100).live,false);
+  assert.equal(health({...idle,output_known:false},1000,1100).live,false);
+});

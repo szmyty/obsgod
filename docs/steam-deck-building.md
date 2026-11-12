@@ -1,7 +1,11 @@
 # Build and qualify the Steam Deck preview
 
 Use Go **1.27.4**, Node **24.19.0**, npm **11.9.0**, and Python **3.12+** for the
-packaging/test environment. End users install the binary package and do not need
+packaging/test environment. Packaging also requires a working local Docker
+daemon to build the small app-filtered capture source against the pinned
+bookworm builder in `steamdeck/capture/build.Dockerfile`. The compiler stage runs
+without network; the image ID, package versions and symbol requirements are
+recorded in `dist/capture-build.json`. End users install the binary package and do not need
 Go, Node, npm or Docker. The Desktop helper uses the Deck's system Python 3.9+.
 
 ```sh

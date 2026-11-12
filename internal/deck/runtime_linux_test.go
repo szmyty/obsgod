@@ -27,7 +27,7 @@ func TestLaunchUsesSessionBackendAndOnlyManagedConfiguration(t *testing.T) {
 			t.Fatalf("unsupported or unsafe launch argument: %s", forbidden)
 		}
 	}
-	if !strings.Contains(args, "--command=/usr/bin/env com.obsproject.Studio XDG_CONFIG_HOME="+p.OBSConfig+" obs") || !strings.Contains(args, "--profile OBSGod --collection OBSGod") {
+	if !strings.Contains(args, "--command=/usr/bin/env com.obsproject.Studio XDG_CONFIG_HOME="+p.OBSConfig+" GST_PLUGIN_PATH_1_0=") || !strings.Contains(args, "--profile OBSGod --collection OBSGod") {
 		t.Fatal("launch escapes managed configuration", args)
 	}
 	if !graphicalSession([]string{"WAYLAND_DISPLAY=wayland-0"}) || !graphicalSession([]string{"DISPLAY=:1"}) {

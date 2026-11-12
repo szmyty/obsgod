@@ -14,6 +14,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"unicode"
+	"unicode/utf8"
 )
 
 const Port = "4457"
@@ -104,8 +106,13 @@ func (s Settings) Validate() error {
 	if s.IdleStyle != "" && s.IdleStyle != "black" && s.IdleStyle != "placeholder" {
 		return errors.New("between-game screen must be black or placeholder")
 	}
-	if len([]rune(s.IdleText)) > 200 || strings.ContainsAny(s.IdleText, "\x00\r") {
+	if !utf8.ValidString(s.IdleText) || len([]rune(s.IdleText)) > 200 {
 		return errors.New("between-game message must be at most 200 characters without control characters")
+	}
+	for _, r := range s.IdleText {
+		if unicode.IsControl(r) && r != '\n' {
+			return errors.New("between-game message contains an unsupported control character")
+		}
 	}
 	return nil
 }

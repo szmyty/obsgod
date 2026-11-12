@@ -49,7 +49,11 @@ def verify_payload():
             raise RuntimeError("Package checksum mismatch: " + name)
     required = {"obsgod", "setup.py", "bridge.py", "setup.html", "setup.js", "setup.css", "uninstall.py", "obsgod-decky.zip", "LICENSE", "THIRD_PARTY_NOTICES.md", "STEAM-DECK.md"}
     unified = {"decky-install", "decky.py", "install.py", "Install OBSGod.desktop", "update.py", "releases.py", "Update OBSGod.desktop", "Update OBSGod.sh"}
-    if set(manifest["files"]) not in (required, required | unified):
+    capture = {"libgstobsgodcapture.so", "CAPTURE-SOURCE.tar.gz"}
+    # Historical archives remain repairable. New native-capture archives must
+    # contain the complete unified payload and both binary and preferred source;
+    # accepting a single arbitrary extra file would weaken the exact schema.
+    if set(manifest["files"]) not in (required, required | unified, required | unified | capture):
         raise RuntimeError("Unexpected package manifest")
     return manifest
 
