@@ -37,7 +37,7 @@ func newStudioModeCommand(service obs.Service) *coral.Command {
 			if err != nil {
 				return err
 			}
-			fmt.Printf("Studio Mode: %s\n", strconv.FormatBool(enabled))
+			fmt.Fprintf(cmd.OutOrStdout(), "Studio Mode: %s\n", strconv.FormatBool(enabled))
 			return nil
 		},
 	})

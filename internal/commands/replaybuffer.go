@@ -44,7 +44,7 @@ func newReplayBufferCommand(service obs.Service) *coral.Command {
 			if err != nil {
 				return err
 			}
-			fmt.Printf("Replay Buffer active: %s\n", strconv.FormatBool(active))
+			fmt.Fprintf(cmd.OutOrStdout(), "Replay Buffer active: %s\n", strconv.FormatBool(active))
 			return nil
 		},
 	})

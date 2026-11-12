@@ -28,6 +28,7 @@ func NewRoot(cfg *config.Config, service obs.Service, buildVersion string) *cora
 	base := *cfg
 	var configPath, connectionProfile, passwordFile string
 	var resolved config.Resolved
+	var display presentation
 	rootCmd.PersistentPreRunE = func(cmd *coral.Command, _ []string) error {
 		// Deck's isolated credentials/configuration are independent of the generic
 		// remote-OBS CLI. Recovery and offline help must not depend on this file.
@@ -35,9 +36,12 @@ func NewRoot(cfg *config.Config, service obs.Service, buildVersion string) *cora
 		for branch.Parent() != nil && branch.Parent() != rootCmd {
 			branch = branch.Parent()
 		}
-		if branch.Name() == "deck" || branch.Name() == "completion" || branch.Name() == "version" || branch.Name() == coral.ShellCompRequestCmd || branch.Name() == coral.ShellCompNoDescRequestCmd || (branch.Name() == "config" && (cmd.Name() == "path" || cmd.Name() == "profiles")) {
+		dryRun, _ := cmd.Flags().GetBool("dry-run")
+		if branch.Name() == "deck" || branch.Name() == "doctor" || branch.Name() == "completion" || branch.Name() == "reference" || branch.Name() == "version" || branch.Name() == coral.ShellCompRequestCmd || branch.Name() == coral.ShellCompNoDescRequestCmd || (branch.Name() == "config" && (cmd.Name() == "path" || cmd.Name() == "profiles")) || (branch.Name() == "workflow" && (cmd.Name() != "apply" || dryRun)) {
+			diagnosticMetadata(cmd, display, "independent_configuration")
 			return nil
 		}
+		diagnosticMetadata(cmd, display, "checking_configuration")
 		if rootCmd.PersistentFlags().Changed("password") && rootCmd.PersistentFlags().Changed("password-file") {
 			return errors.New("choose --password-file or --password, not both")
 		}
@@ -64,6 +68,8 @@ func NewRoot(cfg *config.Config, service obs.Service, buildVersion string) *cora
 	}
 
 	rootCmd.PersistentFlags().StringVar(&configPath, "config", "", "OBS connection config file (env: OBSGOD_CONFIG; default: XDG obsgod/config.json)")
+	rootCmd.PersistentFlags().BoolVar(&display.verbose, "verbose", false, "Write credential-free command/stage diagnostics to stderr")
+	rootCmd.PersistentFlags().BoolVar(&display.noColor, "no-color", false, "Disable optional terminal color in verbose diagnostics (also respects NO_COLOR/TERM)")
 	rootCmd.PersistentFlags().StringVar(&connectionProfile, "connection-profile", "", "Named connection profile (env: OBSGOD_CONNECTION_PROFILE)")
 	rootCmd.PersistentFlags().StringVar(&passwordFile, "password-file", "", "Private single-line OBS password file; avoids secret command arguments")
 	rootCmd.PersistentFlags().StringVar(&cfg.Host, "host", cfg.Host, "OBS host (env: OBSGOD_HOST or legacy OBS_HOST)")
@@ -72,9 +78,15 @@ func NewRoot(cfg *config.Config, service obs.Service, buildVersion string) *cora
 	// are configuration values, never help text.
 	rootCmd.PersistentFlags().Lookup("password").DefValue = ""
 	rootCmd.PersistentFlags().Uint32VarP(&cfg.Port, "port", "p", cfg.Port, "OBS port (env: OBSGOD_PORT or legacy OBS_PORT)")
+	// Generated help/reference/completions must be independent of the invoking
+	// user's environment. Actual effective values remain available in config show.
+	rootCmd.PersistentFlags().Lookup("host").DefValue = "localhost"
+	rootCmd.PersistentFlags().Lookup("port").DefValue = "4455"
 	rootCmd.AddCommand(newConfigCommand(func() config.Resolved { return resolved }, &configPath))
 	rootCmd.AddCommand(newVersionCommand(buildVersion))
 	rootCmd.AddCommand(newCompletionCommand())
+	rootCmd.AddCommand(newReferenceCommand())
+	rootCmd.AddCommand(newWorkflowCommand(cfg, &configPath, nil))
 
 	rootCmd.AddCommand(newLabelCommand(service))
 	rootCmd.AddCommand(newProfileCommand(service))
@@ -88,6 +100,16 @@ func NewRoot(cfg *config.Config, service obs.Service, buildVersion string) *cora
 	rootCmd.AddCommand(newStudioModeCommand(service))
 	rootCmd.AddCommand(newVirtualCamCommand(service))
 	rootCmd.AddCommand(newDeckCommand())
+	// Construct a separate command instance so both entrypoints retain the same
+	// managed implementation, context, timeout and JSON contract.
+	for _, managed := range newDeckCommand().Commands() {
+		if managed.Name() == "doctor" {
+			managed.Short = "Diagnose managed Steam Deck installation, OBS and capture (JSON)"
+			rootCmd.AddCommand(managed)
+			break
+		}
+	}
+	auditCommandUsage(rootCmd)
 
 	return rootCmd
 }

@@ -25,7 +25,7 @@ func newProfileCommand(service obs.Service) *coral.Command {
 				return err
 			}
 			for _, profile := range profiles {
-				fmt.Println(profile)
+				fmt.Fprintln(cmd.OutOrStdout(), profile)
 			}
 			return nil
 		},
@@ -38,7 +38,7 @@ func newProfileCommand(service obs.Service) *coral.Command {
 			if err != nil {
 				return err
 			}
-			fmt.Println(profile)
+			fmt.Fprintln(cmd.OutOrStdout(), profile)
 			return nil
 		},
 	})

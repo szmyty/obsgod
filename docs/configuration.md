@@ -120,8 +120,8 @@ obsgod --password-file /private/path/obs-password stream status
 Connection profiles choose the target connection. The existing `profile list`,
 `profile get` and `profile set NAME` commands refer to **OBS's own profiles** and
 keep their existing behavior. Selecting a connection profile does not silently
-apply OBS settings or start a high-level workflow. Automatic workflow profiles
-remain separate work under issue #11; they are not implied by connection reuse.
+apply OBS settings or start a high-level workflow. Declarative workflow profiles
+use the separate explicit `workflow` commands described below.
 
 `config path` works even when the file is malformed. `config profiles` works
 with an unavailable selected profile or password file, so it can help recover
@@ -130,7 +130,8 @@ connection and credential reference without checking OBS connectivity.
 `config validate` also accepts the alias `config check`.
 
 For managed Steam Deck installation/OBS/capture diagnostics, use
-`obsgod deck doctor`; it uses the managed settings and returns JSON. A broken
+`obsgod doctor` (equivalently `obsgod deck doctor`); it uses the managed settings
+and returns JSON. A broken
 generic connection file does not block Deck status, Stop or recovery commands.
 
 ## Stable machine output
@@ -172,6 +173,101 @@ the Bash file from your shell configuration. For Fish the usual user directory
 is `~/.config/fish/completions/`; for Zsh put `_obsgod` on `fpath` before `compinit`.
 `obsgod --help` and `obsgod COMMAND --help` provide the offline command reference.
 `obsgod version` and the existing `--version` include supplied build metadata.
+
+`obsgod reference > obsgod-reference.md` generates a deterministic Markdown
+reference from the complete command tree without connecting or loading secrets.
+See the checked-in [command reference](cli-reference.md).
+
+## Declarative workflow profiles
+
+Workflow profiles describe existing OBS resources and optional local outputs.
+Add `workflow_profiles` to the same version 1 configuration file:
+
+```json
+{
+  "version": 1,
+  "default_workflow": "studio",
+  "workflow_profiles": {
+    "studio": {
+      "obs_profile": "Studio",
+      "scene_collection": "Studio",
+      "starting_scene": "Starting",
+      "live_scene": "Game",
+      "recording_enabled": false,
+      "replay_buffer_enabled": false,
+      "readiness_timeout": "3s",
+      "post_start_delay": "0s"
+    }
+  }
+}
+```
+
+```sh
+obsgod workflow list
+obsgod workflow plan studio
+obsgod workflow apply studio --dry-run
+obsgod workflow apply studio --approve
+```
+
+List, plan and dry-run are offline JSON operations. They do not resolve password
+references, connect to OBS, switch settings or start output. Selection order is
+the explicit name, `OBSGOD_WORKFLOW`, then `default_workflow`.
+
+Apply requires `--approve` for that invocation. A plan with local recording or
+replay enabled additionally requires `--allow-recording` or
+`--allow-replay-buffer`, respectively. Approvals cannot be supplied by the
+configuration file or environment. `false` leaves a local output inactive;
+applying a workflow never stops an existing output and **never starts streaming**.
+The term `live_scene` names the final program scene, not permission to broadcast.
+
+The CLI first confirms stream, recording, replay and virtual-camera output are
+idle. Active or unknown output blocks settings changes. OBS reports unavailable
+optional replay/virtual-camera outputs as inactive only for the documented
+`InvalidResourceState` (604) status on those two exact read requests; other errors
+remain unknown. Requesting an unconfigured replay output still fails at start.
+Successful status responses must include explicit boolean output fields; missing
+or null fields remain unconfirmed and block workflow changes.
+
+Apply chooses an existing OBS profile, chooses an existing scene collection,
+sets the starting scene, waits the optional delay, selects the final scene, then
+starts only separately approved local outputs. Each structural stage is checked
+before the next change. Existing scenes are checked in the selected collection;
+the CLI does not create or import resources. Readiness is bounded to 100ms–30s
+(default 3s), and the delay to 0s–10s. Connection readiness and the subsequent
+application each have bounded contexts; cancellation stops later stages.
+
+Failures return a JSON result with `ok: false`, `applied` stages, and an
+`attempted` stage when its outcome is uncertain. Earlier changes may remain,
+especially if a scene is absent after switching collections. Inspect OBS before
+retrying: automatic rollback could overwrite another client's work or stop
+someone else's recording. State checks are best effort across separate OBS
+requests; they do not lock out other OBS clients.
+
+Known optional environment overrides are:
+
+- `OBSGOD_WORKFLOW_OBS_PROFILE`
+- `OBSGOD_WORKFLOW_SCENE_COLLECTION`
+- `OBSGOD_WORKFLOW_STARTING_SCENE`
+- `OBSGOD_WORKFLOW_LIVE_SCENE`
+- `OBSGOD_WORKFLOW_RECORDING_ENABLED` (`true`/`false`)
+- `OBSGOD_WORKFLOW_REPLAY_BUFFER_ENABLED` (`true`/`false`)
+- `OBSGOD_WORKFLOW_READINESS_TIMEOUT`
+- `OBSGOD_WORKFLOW_POST_START_DELAY`
+
+Nonempty values override the selected file profile; names, booleans and duration
+bounds are validated without echoing invalid data. Unknown file fields such as
+`approve` or `start_stream` are rejected. Provider URLs, stream keys, arbitrary
+commands and shell expressions are outside this schema.
+
+## Verbose diagnostics and color
+
+`--verbose` writes static command names and execution stages to stderr. It does
+not emit arguments, effective hostnames, paths, profile values, credential
+sources, protocol payloads or the process environment. JSON stdout remains a
+single machine-readable result. Normal human output and errors remain plain.
+Verbose diagnostic prefixes may use color on terminal stderr when `TERM` is
+set. `--no-color`, nonempty `NO_COLOR`, `TERM=dumb` and redirected output suppress
+that color. These flags do not enable an unfiltered WebSocket debug log.
 
 ## Troubleshooting
 
