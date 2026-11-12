@@ -1,0 +1,30 @@
+Input #0, matroska,webm, from '/work/home/Videos/OBSGod/2026-11-12 05-09-20.mkv':
+  Metadata:
+    ENCODER         : Lavf61.7.103
+  Duration: 00:00:10.77, start: 0.000000, bitrate: 3135 kb/s
+  Stream #0:0: Video: h264 (High), yuv420p(tv, bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 30 fps, 30 tbr, 1k tbn
+      Metadata:
+        DURATION        : 00:00:10.766000000
+  Stream #0:1: Audio: aac (LC), 48000 Hz, stereo, fltp
+      Metadata:
+        title           : Track1
+        DURATION        : 00:00:10.773000000
+[Parsed_volumedetect_0 @ 0x558865ea7600] n_samples: 0
+Stream mapping:
+  Stream #0:1 -> #0:0 (aac (native) -> pcm_s16le (native))
+Press [q] to stop, [?] for help
+Output #0, null, to 'pipe:':
+  Metadata:
+    encoder         : Lavf61.7.103
+  Stream #0:0: Audio: pcm_s16le, 48000 Hz, stereo, s16, 1536 kb/s
+      Metadata:
+        title           : Track1
+        DURATION        : 00:00:10.773000000
+        encoder         : Lavc61.19.101 pcm_s16le
+[Parsed_volumedetect_0 @ 0x7fee8c002400] n_samples: 1034240
+[Parsed_volumedetect_0 @ 0x7fee8c002400] mean_volume: -5.0 dB
+[Parsed_volumedetect_0 @ 0x7fee8c002400] max_volume: -1.0 dB
+[Parsed_volumedetect_0 @ 0x7fee8c002400] histogram_0db: 1
+[Parsed_volumedetect_0 @ 0x7fee8c002400] histogram_1db: 75160
+[out#0/null @ 0x558865fac380] video:0KiB audio:2020KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+size=N/A time=00:00:10.77 bitrate=N/A speed= 907x    

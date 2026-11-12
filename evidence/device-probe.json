@@ -1,0 +1,9 @@
+{
+  "scope": "Owner-supplied Desktop read-only Flatpak shell probe",
+  "requested_config": "$HOME/.var/app/com.obsproject.Studio/config/obsgod",
+  "effective_config": "$HOME/.var/app/com.obsproject.Studio/config",
+  "result": "Confirmed CLI XDG_CONFIG_HOME override was replaced by Flatpak default",
+  "additional_output": "/run/user/1000/.flatpak/com.obsproject.Studio/xdg-run/pulse not expected symlink; readlinkat Invalid argument",
+  "audio_status": "unqualified; retain warning for follow-up, no socket deletion or audio fix attempted",
+  "actual_streaming": "not established"
+}

@@ -1,0 +1,15 @@
+
+> obsgod-decky@0.1.0-deck.5.2 typecheck
+> tsc --noEmit
+
+
+> obsgod-decky@0.1.0-deck.5.2 build
+> rollup -c
+
+
+src/index.tsx → dist...
+created dist in 123ms
+fc543b789e2faa491556b4cb0efc7a1fe66ebc397408765997ba13d5177279d9  obsgod-deck_0.1.0-deck.5.2_linux_amd64.tar.gz
+bc933a60af403335d01a5df1ae2d922200bda55396d53cf8b63c36445de1c24b  obsgod-decky.zip
+6d925b15a4bb017639b9a3201b3ab20e1e69c7be3fe3c9cfd9dafa7bd9239dff  manifest.json
+
