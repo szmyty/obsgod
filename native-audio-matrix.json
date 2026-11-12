@@ -1,0 +1,29 @@
+{
+  "source_revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+  "command": [
+    "docker",
+    "run",
+    "--rm",
+    "--user",
+    "1000:1000",
+    "-e",
+    "OBSGOD_QUALIFIED_REVISION=33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+    "--mount",
+    "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+    "--mount",
+    "type=bind,src=/workspace/.obsgod-tools/audio-game-upgrade/final/native-audio,dst=/work",
+    "obsgod-obs-smoke:audio-game",
+    "dbus-run-session",
+    "--",
+    "bash",
+    "/src/steamdeck/tests/native-obs-smoke.sh"
+  ],
+  "status": "passed",
+  "exit_code": 0,
+  "platform": "linux/amd64 disposable Docker; synthetic Gamescope/Pulse devices",
+  "image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+  "log": "native-audio.log",
+  "log_sha256": "1a0775b39c462547905e287bfb44e786284e1f7c802ce0a4281a41ca142d6331",
+  "input_runtime_sha256": "23cc2c484b7524756a3b632bf8a8e7231ac7c515c06a08183422ed91b7e82650",
+  "outcome": "Real OBS30.2.3/WebSocket5.5.2/GStreamer1.26.2/Pulse/PipeWire/x264+AAC: game tone over decoy output, stale mixer repair/readback, audible decoded clip/RTMP, game-exit/default-route changes, digital-silence negative control, moving frames, repeated lifecycle, failed-start cleanup/no late connection, ordinary config preservation"
+}

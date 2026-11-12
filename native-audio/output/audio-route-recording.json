@@ -1,0 +1,1 @@
+{"device_id": "obsgod_game.monitor", "input": "OBSGod Game Audio", "monitor_type": "OBS_MONITORING_TYPE_NONE", "muted": false, "status": "passed", "tracks": {"1": true, "2": false, "3": false, "4": false, "5": false, "6": false}, "volume_mul": 1.0}

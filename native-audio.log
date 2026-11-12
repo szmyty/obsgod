@@ -1,0 +1,2 @@
+dbus-run-session: ignoring unknown child process 135
+PASS: real OBS / GStreamer / synthetic PipeWire / PulseAudio: measured recording+RTMP game tone over default decoy, stale mixer repair, game-exit default fallback, changed default on next start, silence negative control, moving video, repeated lifecycle, failed-start cleanup and no late connection. Real Flatpak audio mapping, SteamOS hardware and Kick remain untested.

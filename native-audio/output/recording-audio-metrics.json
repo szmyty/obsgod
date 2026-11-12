@@ -1,0 +1,1 @@
+{"audible": true, "expected_hz": 440, "expected_power": 0.009970755562481781, "expected_tone": true, "other_hz": 880, "other_power": 5.681637490458066e-13, "peak_dbfs": -13.746116553118634, "rate": 48000, "rms_dbfs": -17.002730071475472, "samples": 96000, "status": "passed"}

@@ -1,0 +1,406 @@
+{
+  "revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+  "command": [
+    "go",
+    "test",
+    "-race",
+    "-json",
+    "-count=1",
+    "./..."
+  ],
+  "log": "go-tests.json",
+  "exit_code": 0,
+  "outcome": "passed",
+  "seconds": 4.949,
+  "source_clean_before": true,
+  "source_clean_after": true,
+  "revision_after": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "toolchain": "go version go1.27.4 linux/amd64",
+  "cache": "disabled with -count=1",
+  "passed_test_cases": [
+    {
+      "package": "github.com/szmyty/obsgod/internal/commands",
+      "test": "TestHelpDoesNotConnectToOBS"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/commands",
+      "test": "TestVersionDoesNotConnectToOBS"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/commands",
+      "test": "TestHelpNeverPrintsConfiguredPassword"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/commands",
+      "test": "TestOperationalCommandConnectsLazily"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestAudioDiscoveryUsesActualMonitorAndKeepsMicrophoneOptIn"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestAudioDiscoveryPrefersOnlyOneOwnedGameOutput/one-game"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestAudioDiscoveryPrefersOnlyOneOwnedGameOutput/same-game-multiple-streams"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestAudioDiscoveryPrefersOnlyOneOwnedGameOutput/paused-game"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestAudioDiscoveryPrefersOnlyOneOwnedGameOutput/unknown-owner"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestAudioDiscoveryPrefersOnlyOneOwnedGameOutput/ambiguous"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestAudioDiscoveryPrefersOnlyOneOwnedGameOutput"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestAudioDiscoveryReresolvesChangedDefaultAndRefusesMissingMonitor"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestAudioDiscoveryRefusesLoopbackAsMicrophoneAndReportsMute"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestAudioDiagnosticsExcludePrivateDeviceAndServerData"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/pkg/automation",
+      "test": "TestManagedAudioRepairsPersistedMixerAndVerifiesRouting"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/pkg/automation",
+      "test": "TestManagedAudioRefusesHostDeviceAbsentFromOBS"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deckyinstall",
+      "test": "TestInvalidArchivesNeverReachDecky/traversal"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deckyinstall",
+      "test": "TestInvalidArchivesNeverReachDecky/root_flag"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deckyinstall",
+      "test": "TestInvalidArchivesNeverReachDecky/other_plugin"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestAudioCommandIsBoundedAndDoesNotExposeSubprocessOutput"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestAudioGameSelectionRequiresOwnedTaggedLiveProcess"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestAudioDiscoveryDoesNotReportReadyAfterCancellation"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestLegacySettingsHashSurvivesNewOptionalPreferences"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deckyinstall",
+      "test": "TestInvalidArchivesNeverReachDecky/remote_binary"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deckyinstall",
+      "test": "TestInvalidArchivesNeverReachDecky/wrong_version"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deckyinstall",
+      "test": "TestInvalidArchivesNeverReachDecky"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deckyinstall",
+      "test": "TestAuthenticatedFrontendTransportNeverOpensSecondWebSocket/installed"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/pkg/automation",
+      "test": "TestAudioSignalObservationDistinguishesSignalSilenceAndNoMeter/signal"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deckyinstall",
+      "test": "TestAuthenticatedFrontendTransportNeverOpensSecondWebSocket/rejected"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deckyinstall",
+      "test": "TestAuthenticatedFrontendTransportNeverOpensSecondWebSocket"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deckyinstall",
+      "test": "TestProbeAndInvalidOperation"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deckyinstall",
+      "test": "TestMissingFrontendAndAuthenticationErrorsAreActionableAndRedacted"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestGameVideoNeverFallsBackToDisplayAndExcludesUnknownSources/game"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestGameVideoNeverFallsBackToDisplayAndExcludesUnknownSources/no-game"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestGameVideoNeverFallsBackToDisplayAndExcludesUnknownSources/ambiguous"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/pkg/automation",
+      "test": "TestAudioSignalObservationDistinguishesSignalSilenceAndNoMeter/silence"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestGameVideoNeverFallsBackToDisplayAndExcludesUnknownSources/steam-ui"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestGameVideoNeverFallsBackToDisplayAndExcludesUnknownSources/blank-game"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestGameVideoNeverFallsBackToDisplayAndExcludesUnknownSources"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/pkg/automation",
+      "test": "TestAudioSignalObservationDistinguishesSignalSilenceAndNoMeter/other-input"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/pkg/automation",
+      "test": "TestAudioSignalObservationDistinguishesSignalSilenceAndNoMeter"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestIdlePlaceholderIsOpaquePlainTextAndCanReturnToBlack"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestCaptureStatusRejectsStaleOrUntrustedFields"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestCaptureWatchTransitionsRerouteAudioWithoutStartingOrStoppingOutput"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestCaptureWatchRefusesDifferentCollectionWithoutMutation"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/pkg/automation",
+      "test": "TestAuthenticatedIdempotentStreamLifecycle"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/pkg/automation",
+      "test": "TestServerErrorsCannotEchoCredentials"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestCaptureWatchRetriesAudioAndResetsTargetAfterConnectionFailure"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestCaptureWatchUsesSeparateLifetimeLockFromOutputControl"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestPrivateConfigAndSecretPreservation"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestRejectInvalidSettingsAndSecretPaths"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestCaptureRejectsBlankButAcceptsRealPixels"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestPreparePreservesOtherOBSConfig"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestMissingCredentialsCannotHideAnOccupiedOBSPort"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deckyinstall",
+      "test": "TestFrontendInstallerBehavior"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/pkg/automation",
+      "test": "TestCancellationAndAuthenticationFailure"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestDiagnosticsAreBoundedPrivateAndExcludeUntrustedErrors"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestDiagnosticsCanBeReadAndClearedDuringAnOperation"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestDiagnosticsDoNotFollowSymlinksOrDisplayUnknownRecords"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/pkg/automation",
+      "test": "TestSilentAuthenticationIsBoundedAndClosesTheTransport"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/pkg/automation",
+      "test": "TestConnectionCancellationClosesAnUpgradedTransport"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestEarlyOBSExitIsReportedBeforeStartupTimeout"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestGameIdentityIsOwnedUnambiguousAndNeverSteam"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/pkg/automation",
+      "test": "TestStopRecordingWaitsForConfirmedMuxerShutdown"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestCaptureModeWaitsForPreviousObserverWithoutStoppingOutput"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/pkg/automation",
+      "test": "TestStopRecordingCannotClaimSuccessWhenShutdownIsUnconfirmed"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/pkg/automation",
+      "test": "TestConnectionTimeoutClassificationDoesNotDependOnTimerScheduling"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestCaptureModeChangePreservesCredentialsAndRejectsUnsafeOutput"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestLaunchUsesSessionBackendAndOnlyManagedConfiguration"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestRecoveryMarkersAreDetectedWithoutDeletion/safe_mode"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestRecoveryMarkersAreDetectedWithoutDeletion/.sentinel/run_fixture"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestRecoveryMarkersAreDetectedWithoutDeletion"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestStatusKeepsRecordingAndCaptureIndependentOfStreaming"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestReadyAuthenticationFailureDoesNotLaunchAnotherOBS"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestNoGameRecordingStillAttemptsOBSReadinessBeforeCapture"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestStartupBudgetIsIndependentAndCancellationIsPreserved"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestStartDoesNotReconfigureAnExistingLocalRecording"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestRepeatedStartFailurePreservesTheExistingStream"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestCaptureCleanupPreservesRecordingOrUnknownOutput"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestFrameHealthUsesTheCurrentProgramScene"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestUnreadableOwnedOBSIsNotConfirmedAbsent"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestVisibleRecoveryPreservesSafetyAndRefusesDuplicateOBS"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestOnlyConfirmedTerminalOBSProcessesAreIgnored/state_Z"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestOnlyConfirmedTerminalOBSProcessesAreIgnored/state_X"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestOnlyConfirmedTerminalOBSProcessesAreIgnored/state_R"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestOnlyConfirmedTerminalOBSProcessesAreIgnored/state_S"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestOnlyConfirmedTerminalOBSProcessesAreIgnored/state_T"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestOnlyConfirmedTerminalOBSProcessesAreIgnored/state_"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestOnlyConfirmedTerminalOBSProcessesAreIgnored"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestRealZombieDoesNotPreventConfirmedOBSAbsence"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestManagedShutdownWaitsForKnownProcessAfterDiscoveryChanges"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestFlatpakResetCannotEscapeManagedConfiguration/background"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestFlatpakResetCannotEscapeManagedConfiguration/visible_recovery"
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "test": "TestFlatpakResetCannotEscapeManagedConfiguration"
+    }
+  ],
+  "failed_test_cases": [],
+  "skipped_test_cases": [
+    {
+      "package": "github.com/szmyty/obsgod/pkg/automation",
+      "test": "TestRealOBSReadOnly"
+    }
+  ]
+}

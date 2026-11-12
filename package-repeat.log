@@ -1,0 +1,40 @@
+
+> obsgod-decky@0.1.0-deck.6 typecheck
+> tsc --noEmit
+
+
+> obsgod-decky@0.1.0-deck.6 build
+> rollup -c
+
+
+src/index.tsx → dist...
+created dist in 115ms
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from build.Dockerfile
+#1 transferring dockerfile: 643B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/debian:bookworm-slim@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [stage-0 1/2] FROM docker.io/library/debian:bookworm-slim@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc
+#4 DONE 0.0s
+
+#5 [stage-0 2/2] RUN --mount=type=secret,id=proxy_ca,required=true apt-get -o Acquire::https::CaInfo=/run/secrets/proxy_ca update && apt-get -o Acquire::https::CaInfo=/run/secrets/proxy_ca install -y --no-install-recommends gcc make pkg-config binutils libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libpipewire-0.3-dev && rm -rf /var/lib/apt/lists/*
+#5 CACHED
+
+#6 exporting to image
+#6 exporting layers done
+#6 writing image sha256:6c3ec703e4d22b777f53e75ec33a2639ac060a81e97cd4a48da4e7e412127f78 done
+#6 naming to docker.io/library/obsgod-capture-builder:2a5907d466970115 done
+#6 DONE 0.0s
+{"library": "/workspace/obsgod/dist/libgstobsgodcapture.so", "sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68", "builder_image": "sha256:6c3ec703e4d22b777f53e75ec33a2639ac060a81e97cd4a48da4e7e412127f78", "receipt": "/workspace/obsgod/dist/capture-build.json"}
+23cc2c484b7524756a3b632bf8a8e7231ac7c515c06a08183422ed91b7e82650  obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz
+afecf86fd878f579b2bc5b806e858df2d85dd232ecfa7f3dcacfc2804df42ef2  obsgod-decky.zip
+62fd9db318878fd9437d0ab747f81c45538dc8ac175c22eb906bb5a4ab9ae2be  manifest.json
+

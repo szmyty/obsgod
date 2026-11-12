@@ -1,0 +1,423 @@
+{
+  "scope": "Real OBS/GStreamer/PipeWire/PulseAudio/software encoding and local RTMP with synthetic app identities/producer; not actual Gamescope/SteamOS/Flatpak/Kick",
+  "phases": {
+    "game-a": {
+      "scene": "OBSGod Game",
+      "output_bytes": 636909,
+      "at_ms": 1699,
+      "pixels": {
+        "channel_means": [
+          210.27777777777777,
+          21.59722222222222,
+          11.666666666666666
+        ],
+        "expected": "red"
+      },
+      "items": [
+        {
+          "source": "Legacy private display sentinel",
+          "enabled": false
+        },
+        {
+          "source": "OBSGod Gamescope",
+          "enabled": false
+        },
+        {
+          "source": "OBSGod Game Window",
+          "enabled": true
+        },
+        {
+          "source": "OBSGod Game Audio",
+          "enabled": true
+        }
+      ],
+      "end_ms": 4766
+    },
+    "between-games": {
+      "scene": "OBSGod Idle",
+      "output_bytes": 2156711,
+      "at_ms": 5533,
+      "pixels": {
+        "channel_means": [
+          3.372916666666667,
+          3.372916666666667,
+          3.372916666666667
+        ],
+        "expected": "placeholder"
+      },
+      "items": [
+        {
+          "source": "Legacy private display sentinel",
+          "enabled": false
+        },
+        {
+          "source": "OBSGod Gamescope",
+          "enabled": false
+        },
+        {
+          "source": "OBSGod Idle Message",
+          "enabled": true
+        },
+        {
+          "source": "OBSGod Game Audio",
+          "enabled": true
+        }
+      ],
+      "end_ms": 8633
+    },
+    "game-b": {
+      "scene": "OBSGod Game",
+      "output_bytes": 4178436,
+      "at_ms": 10633,
+      "pixels": {
+        "channel_means": [
+          11.741666666666667,
+          210.27916666666667,
+          11.741666666666667
+        ],
+        "expected": "green"
+      },
+      "items": [
+        {
+          "source": "Legacy private display sentinel",
+          "enabled": false
+        },
+        {
+          "source": "OBSGod Gamescope",
+          "enabled": false
+        },
+        {
+          "source": "OBSGod Game Window",
+          "enabled": true
+        },
+        {
+          "source": "OBSGod Game Audio",
+          "enabled": true
+        }
+      ],
+      "end_ms": 13766
+    },
+    "unsupported-source": {
+      "scene": "OBSGod Idle",
+      "output_bytes": 5830074,
+      "at_ms": 14799,
+      "pixels": {
+        "channel_means": [
+          3.372916666666667,
+          3.372916666666667,
+          3.372916666666667
+        ],
+        "expected": "placeholder"
+      },
+      "items": [
+        {
+          "source": "Legacy private display sentinel",
+          "enabled": false
+        },
+        {
+          "source": "OBSGod Gamescope",
+          "enabled": false
+        },
+        {
+          "source": "OBSGod Idle Message",
+          "enabled": true
+        },
+        {
+          "source": "OBSGod Game Audio",
+          "enabled": true
+        }
+      ],
+      "end_ms": 17866
+    }
+  },
+  "clip_game": {
+    "scene": "OBSGod Game",
+    "output_bytes": 165754,
+    "at_ms": 533,
+    "pixels": {
+      "channel_means": [
+        210.27916666666667,
+        21.665277777777778,
+        11.741666666666667
+      ],
+      "expected": "red"
+    },
+    "items": [
+      {
+        "source": "Legacy private display sentinel",
+        "enabled": false
+      },
+      {
+        "source": "OBSGod Gamescope",
+        "enabled": false
+      },
+      {
+        "source": "OBSGod Game Window",
+        "enabled": true
+      },
+      {
+        "source": "OBSGod Game Audio",
+        "enabled": true
+      }
+    ]
+  },
+  "clip_idle": {
+    "scene": "OBSGod Idle",
+    "output_bytes": 468550,
+    "at_ms": 1299,
+    "pixels": {
+      "channel_means": [
+        3.372916666666667,
+        3.372916666666667,
+        3.372916666666667
+      ],
+      "expected": "placeholder"
+    },
+    "items": [
+      {
+        "source": "Legacy private display sentinel",
+        "enabled": false
+      },
+      {
+        "source": "OBSGod Gamescope",
+        "enabled": false
+      },
+      {
+        "source": "OBSGod Idle Message",
+        "enabled": true
+      },
+      {
+        "source": "OBSGod Game Audio",
+        "enabled": true
+      }
+    ]
+  },
+  "first_stream_events": [
+    {
+      "event": "RecordStateChanged",
+      "state": "OBS_WEBSOCKET_OUTPUT_STARTING",
+      "active": false
+    },
+    {
+      "event": "RecordStateChanged",
+      "state": "OBS_WEBSOCKET_OUTPUT_STARTED",
+      "active": true
+    },
+    {
+      "event": "RecordStateChanged",
+      "state": "OBS_WEBSOCKET_OUTPUT_STOPPING",
+      "active": false
+    },
+    {
+      "event": "RecordStateChanged",
+      "state": "OBS_WEBSOCKET_OUTPUT_STOPPED",
+      "active": false
+    },
+    {
+      "event": "StreamStateChanged",
+      "state": "OBS_WEBSOCKET_OUTPUT_STARTING",
+      "active": false
+    },
+    {
+      "event": "StreamStateChanged",
+      "state": "OBS_WEBSOCKET_OUTPUT_STARTED",
+      "active": true
+    },
+    {
+      "event": "StreamStateChanged",
+      "state": "OBS_WEBSOCKET_OUTPUT_STOPPING",
+      "active": false
+    },
+    {
+      "event": "StreamStateChanged",
+      "state": "OBS_WEBSOCKET_OUTPUT_STOPPED",
+      "active": false
+    }
+  ],
+  "black_fallback": {
+    "scene": "OBSGod Idle",
+    "output_bytes": 621467,
+    "at_ms": 1666,
+    "pixels": {
+      "channel_means": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected": "black"
+    },
+    "items": [
+      {
+        "source": "Legacy private display sentinel",
+        "enabled": false
+      },
+      {
+        "source": "OBSGod Gamescope",
+        "enabled": false
+      },
+      {
+        "source": "OBSGod Idle Message",
+        "enabled": false
+      },
+      {
+        "source": "OBSGod Game Audio",
+        "enabled": true
+      }
+    ],
+    "end_ms": 4699
+  },
+  "final_status": {
+    "state": "stopped",
+    "recording": false,
+    "output_known": true,
+    "video": {
+      "mode": "game",
+      "state": "stopped",
+      "idle_style": "black",
+      "frames": "unknown",
+      "watching": false,
+      "updated": "2026-11-12T07:26:24.062685787Z",
+      "message": "The capture observer is stopped; it never starts output"
+    }
+  },
+  "state": "passed",
+  "decoded_media": {
+    "game-a": {
+      "viewer_pixels": {
+        "channel_means": [
+          208.2075,
+          18.676388888888887,
+          7.751388888888889
+        ],
+        "expected": "red"
+      },
+      "viewer_audio": {
+        "audible": true,
+        "expected_hz": 440,
+        "expected_power": 0.022496547358317506,
+        "expected_tone": true,
+        "other_hz": 880,
+        "other_power": 2.4446573586777316e-14,
+        "peak_dbfs": -10.230314575720191,
+        "rate": 48000,
+        "rms_dbfs": -13.467703294905512,
+        "samples": 48000,
+        "status": "passed"
+      },
+      "sample_at_seconds": 3.2325
+    },
+    "between-games": {
+      "viewer_pixels": {
+        "channel_means": [
+          3.801875,
+          3.801875,
+          3.801875
+        ],
+        "expected": "placeholder"
+      },
+      "viewer_audio": {
+        "audible": true,
+        "expected_hz": 440,
+        "expected_power": 0.022475355577705636,
+        "expected_tone": true,
+        "other_hz": 880,
+        "other_power": 1.1431144051631006e-13,
+        "peak_dbfs": -10.342939897223536,
+        "rate": 48000,
+        "rms_dbfs": -13.472584758002046,
+        "samples": 48000,
+        "status": "passed"
+      },
+      "sample_at_seconds": 7.083
+    },
+    "game-b": {
+      "viewer_pixels": {
+        "channel_means": [
+          7.751388888888889,
+          209.26083333333332,
+          7.7501388888888885
+        ],
+        "expected": "green"
+      },
+      "viewer_audio": {
+        "audible": true,
+        "expected_hz": 440,
+        "expected_power": 0.0224880610483653,
+        "expected_tone": true,
+        "other_hz": 880,
+        "other_power": 1.2641683667519234e-14,
+        "peak_dbfs": -10.448214063056167,
+        "rate": 48000,
+        "rms_dbfs": -13.470178204147786,
+        "samples": 48000,
+        "status": "passed"
+      },
+      "sample_at_seconds": 12.1995
+    },
+    "unsupported-source": {
+      "viewer_pixels": {
+        "channel_means": [
+          3.8018055555555557,
+          3.8018055555555557,
+          3.8018055555555557
+        ],
+        "expected": "placeholder"
+      },
+      "viewer_audio": {
+        "audible": true,
+        "expected_hz": 440,
+        "expected_power": 0.02249376028172506,
+        "expected_tone": true,
+        "other_hz": 880,
+        "other_power": 6.491225077192592e-16,
+        "peak_dbfs": -10.447331485233118,
+        "rate": 48000,
+        "rms_dbfs": -13.46907763260788,
+        "samples": 48000,
+        "status": "passed"
+      },
+      "sample_at_seconds": 16.3325
+    },
+    "black-fallback": {
+      "viewer_pixels": {
+        "channel_means": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "expected": "black"
+      },
+      "viewer_audio": {
+        "audible": true,
+        "expected_hz": 440,
+        "expected_power": 0.022492531604428673,
+        "expected_tone": true,
+        "other_hz": 880,
+        "other_power": 9.536201625554903e-16,
+        "peak_dbfs": -10.448214063056167,
+        "rate": 48000,
+        "rms_dbfs": -13.469314876724912,
+        "samples": 48000,
+        "status": "passed"
+      },
+      "sample_at_seconds": 3.1825
+    },
+    "local-clip-audio": {
+      "audible": true,
+      "expected_hz": 440,
+      "expected_power": 0.02248955503161748,
+      "expected_tone": true,
+      "other_hz": 880,
+      "other_power": 2.5681248502608104e-15,
+      "peak_dbfs": -10.446448997080156,
+      "rate": 48000,
+      "rms_dbfs": -13.46988965484416,
+      "samples": 48000,
+      "status": "passed"
+    }
+  },
+  "ordinary_obs": "unchanged",
+  "source_revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+  "binary_sha256": "f2ebb738e89b1aa3b6693f03422b6ebc34844b930d69f5699ec609eb2d4e2c36",
+  "capture_library_sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68"
+}

@@ -1,0 +1,186 @@
+{
+  "schema": 1,
+  "candidate": "0.1.0-deck.6",
+  "source_revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+  "state": "Available local matrix passed; actual Deck audio/game-only acceptance and CI execution remain gates",
+  "source_clean": true,
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "draft_pr": "https://github.com/szmyty/obsgod/pull/34",
+  "stack": [
+    "https://github.com/szmyty/obsgod/pull/32",
+    "https://github.com/szmyty/obsgod/pull/33",
+    "https://github.com/szmyty/obsgod/pull/34"
+  ],
+  "merged": false,
+  "published_release": false,
+  "deployed": false,
+  "issues_closed": [],
+  "artifacts": {
+    "obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz": {
+      "sha256": "23cc2c484b7524756a3b632bf8a8e7231ac7c515c06a08183422ed91b7e82650",
+      "size": 11229097
+    },
+    "obsgod-decky.zip": {
+      "sha256": "afecf86fd878f579b2bc5b806e858df2d85dd232ecfa7f3dcacfc2804df42ef2",
+      "size": 4123091
+    },
+    "obsgod-one-click-update_0.1.0-deck.6_linux_amd64.zip": {
+      "sha256": "c196947ca1cd34a01caccff7755b62de61d77531f39ac63922b570eed329420d",
+      "size": 3069400
+    },
+    "manifest.json": {
+      "sha256": "62fd9db318878fd9437d0ab747f81c45538dc8ac175c22eb906bb5a4ab9ae2be",
+      "size": 2120
+    },
+    "updater-manifest.json": {
+      "sha256": "ef0514c7a2171047742c090ad9e999f3d93879237f272d3d19aaadbbce623b87",
+      "size": 975
+    },
+    "SHA256SUMS": {
+      "sha256": "d1d7b5d3deecb10539747ff562f58bf9b300f53a37a6ec87491a3c89af23efc0",
+      "size": 273
+    },
+    "UPDATER-SHA256SUMS": {
+      "sha256": "c12f4c8aee40e8ab028eb038300962a1092859a33cc0a0d0ae6b50b919f2cc98",
+      "size": 119
+    }
+  },
+  "matrices": {
+    "go-matrix.json": {
+      "sha256": "dbccfa344010cf91058fccad5290d0850858627f7be4acfb564654d1258690a2",
+      "source_revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7"
+    },
+    "ui-unit-matrix.json": {
+      "sha256": "6e366f43ccb3fbbb6891e26380bcff7f396868cc82543c7f7dc036fc78dc51c1",
+      "source_revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7"
+    },
+    "package-matrix.json": {
+      "sha256": "11ffcae95f9566ba0bf36c061f6552c44d235647d3dd744b83123d0d3afb4226",
+      "source_revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7"
+    },
+    "browser-matrix.json": {
+      "sha256": "f145a5998f0e7671e46dde11a461d633c1d68136c8bef830354d0204dc749d58",
+      "source_revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7"
+    },
+    "native-matrix.json": {
+      "sha256": "e5973cc8549b44335ad47de6acb5d3d04a9bb2a32331c964dfd5528a0fc19b5b",
+      "source_revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7"
+    }
+  },
+  "native_audio": {
+    "source_revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+    "command": [
+      "docker",
+      "run",
+      "--rm",
+      "--user",
+      "1000:1000",
+      "-e",
+      "OBSGOD_QUALIFIED_REVISION=33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+      "--mount",
+      "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+      "--mount",
+      "type=bind,src=/workspace/.obsgod-tools/audio-game-upgrade/final/native-audio,dst=/work",
+      "obsgod-obs-smoke:audio-game",
+      "dbus-run-session",
+      "--",
+      "bash",
+      "/src/steamdeck/tests/native-obs-smoke.sh"
+    ],
+    "status": "passed",
+    "exit_code": 0,
+    "platform": "linux/amd64 disposable Docker; synthetic Gamescope/Pulse devices",
+    "image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+    "log": "native-audio.log",
+    "log_sha256": "1a0775b39c462547905e287bfb44e786284e1f7c802ce0a4281a41ca142d6331",
+    "input_runtime_sha256": "23cc2c484b7524756a3b632bf8a8e7231ac7c515c06a08183422ed91b7e82650",
+    "outcome": "Real OBS30.2.3/WebSocket5.5.2/GStreamer1.26.2/Pulse/PipeWire/x264+AAC: game tone over decoy output, stale mixer repair/readback, audible decoded clip/RTMP, game-exit/default-route changes, digital-silence negative control, moving frames, repeated lifecycle, failed-start cleanup/no late connection, ordinary config preservation"
+  },
+  "summary": {
+    "go_top_level_passes": 64,
+    "go_pass_events_including_subtests": 94,
+    "go_optional_skips": 1,
+    "python_passed": 70,
+    "node_passed": 9,
+    "capture_protocol_cases_passed": 13,
+    "vet": "passed",
+    "go_vulnerabilities": 0,
+    "npm_vulnerabilities": 0,
+    "typecheck_frontend_build": "passed",
+    "runtime_updater_reproducibility": "two builds identical",
+    "actual_package_browsers": "fresh,5.2 upgrade,panel passed",
+    "decky_updater": "pinned3.3.1 real routers/default installer+Desktop updater fixtures passed",
+    "native_audio": "passed",
+    "native_game_obs": "decoded video/audio all5phases+clip, continuous output, exactly1Start/Stop, no implicit restart, black fallback and scene isolation passed",
+    "cross_builds": 6,
+    "cross_build_execution": "unrun"
+  },
+  "owner_report": {
+    "baseline": "After5.2instructions",
+    "result": "Owner reports local video and live video working, stream audio silent",
+    "exact_installed_revision_versions": "not supplied",
+    "new_candidate_retry": "unrun"
+  },
+  "preservation": {
+    "legacy_settings_hash": "optional fields preserve pre-upgrade serialization/binding",
+    "credentials_media_other_plugins": "actual archive repeated upgrade/install tests passed with fixtures",
+    "ordinary_obs_config": "native marker and installer fixtures unchanged",
+    "output_authorization": "explicitStart/Stop only; watcher never starts/stops output",
+    "audio_policy": "system-output monitor plus opt-in mic; game-only selection filters video only",
+    "permissions": "no new Flatpak/host permission or Pulse socket/system-volume changes",
+    "assets": "black or owner-entered plain text; no external image/video assets"
+  },
+  "skipped": [
+    {
+      "check": "TestRealOBSReadOnly",
+      "reason": "Opt-in existing OBS endpoint not supplied; separate real native OBS harnesses executed"
+    }
+  ],
+  "unavailable": [
+    {
+      "check": "Actual Steam Deck/SteamOS/Gamescope/Flatpak/hardware encoder/controller/session/performance",
+      "reason": "No actual target hardware attached; synthetic native tests do not substitute for device evidence"
+    },
+    {
+      "check": "GitHub Actions execution",
+      "reason": "Fresh candidate job failed before any steps: account locked due to billing issue",
+      "evidence": "github-final-state.json"
+    }
+  ],
+  "unrun": [
+    {
+      "check": "New6 Deck audio, selected-output/microphone, game-only Steam-menu exclusion, switching games and Kick viewer playback",
+      "action": "Owner installs candidate, plays audible game, checks local clip, game/menu/transition behavior and unmuted Kick viewer"
+    },
+    {
+      "check": "PR review/merge and release publication",
+      "action": "Review newdraft and remaining gates; no new merge or release authorized/performed"
+    }
+  ],
+  "historical_candidate_findings": [
+    {
+      "source": "29d7193cfe4c363a4ddb182896aa5464f8218e93",
+      "finding": "CI runner/container UID difference made private dist native inputs unreadable; test workflow corrected"
+    },
+    {
+      "source": "c39203338b01dc1d71fa9a71a2b66fd52adf71b0",
+      "status": "failed",
+      "finding": "Native game fixture authenticated before initial scene collection ready (OBS207); bounded207-only frontend wait added; product readiness unchanged"
+    },
+    {
+      "source": "d80e3083132693b32a628169ce69a5d8b11c6376",
+      "status": "failed",
+      "finding": "Go fixture assumed immediate child/proc environment publication; bounded test readiness poll added, unchanged ownership predicate;100forcedrace repetitions passed"
+    }
+  ],
+  "limitations": [
+    "Native tests replace actual Gamescope producer/game identity and Flatpak execution; use real OBS/protocol/media",
+    "Capture client requires producer-advertised privateGamescopeapp-IDformat and exact echo; unsupported/ambiguous capture stays fallback",
+    "Source allows game-owned decorations/injected in-game overlays; not all-media privacy isolation",
+    "A static game with no new commits can trigger conservative stale fallback",
+    "Live headphone/device hot-plug remains unqualified; game identity changes reroute audio, stop/start resolves output again",
+    "Mic policy/protocol tested, physical microphone and actual Kick sound unrun",
+    "Checksums/HTTPS are integrity controls, not code signing",
+    "Roadmap24 arbitraryimage/video assets and25password controls remain outside this bounded upgrade; no acceptance issue closed"
+  ]
+}

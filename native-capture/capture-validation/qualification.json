@@ -1,0 +1,75 @@
+{
+  "state": "passed",
+  "scope": "Synthetic PipeWire custom-SPA negotiation and supplied GStreamer source CPU media; not real Gamescope, SteamOS, Flatpak or OBS scene transitions",
+  "source_revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+  "plugin_path": "/src/dist/libgstobsgodcapture.so",
+  "plugin_sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+  "fixture_source_sha256": "47baee49ce57f09ef6c32bcc97703385d198b0a71775d8da3d8eee98e429be7c",
+  "test_source_sha256": "1a18dcb9e0e2e340af255efb18f62c7136f1e202232563736c5d7c6167173c85",
+  "platform": [
+    "Linux",
+    "91e176646ed6",
+    "6.18.57",
+    "#1 SMP Tue Oct 20 21:56:04 UTC 2026",
+    "x86_64"
+  ],
+  "pipewire": "pw-cli\nCompiled with libpipewire 1.4.2\nLinked with libpipewire 1.4.2",
+  "gstreamer": "gst-launch-1.0 version 1.26.2\nGStreamer 1.26.2\nhttps://tracker.debian.org/pkg/gstreamer1.0",
+  "cases": {
+    "game-a": {
+      "frames": 30,
+      "moving_game_frames": 29,
+      "blue_compositor_frames": 0
+    },
+    "game-b": {
+      "frames": 30,
+      "moving_game_frames": 29,
+      "blue_compositor_frames": 0
+    },
+    "corrupt": {
+      "frames": 30,
+      "result": "invalid chunks excluded; black or bounded error"
+    },
+    "empty": {
+      "frames": 30,
+      "result": "invalid chunks excluded; black or bounded error"
+    },
+    "short": {
+      "frames": 0,
+      "result": "invalid chunks excluded; black or bounded error"
+    },
+    "stale": {
+      "frames": 60,
+      "last_ten_frames": "black"
+    },
+    "late-duplicate": {
+      "frames_before_failure": 2,
+      "exit_code": 1,
+      "blue_compositor_frames": 0
+    },
+    "reject-missing": {
+      "exit_code": 255,
+      "media_bytes": 0
+    },
+    "reject-wrong": {
+      "exit_code": 255,
+      "media_bytes": 0
+    },
+    "reject-zero": {
+      "exit_code": 255,
+      "media_bytes": 0
+    },
+    "reject-mixed-dma": {
+      "exit_code": 255,
+      "media_bytes": 0
+    },
+    "reject-id-0": {
+      "exit_code": 255,
+      "media_bytes": 0
+    },
+    "reject-id-769": {
+      "exit_code": 255,
+      "media_bytes": 0
+    }
+  }
+}

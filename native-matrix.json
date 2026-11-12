@@ -1,0 +1,77 @@
+{
+  "state": "passed",
+  "source_revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+  "candidate": "0.1.0-deck.6",
+  "source_clean_before": true,
+  "manifest_clean": true,
+  "input_sha256": {
+    "obsgod": "f2ebb738e89b1aa3b6693f03422b6ebc34844b930d69f5699ec609eb2d4e2c36",
+    "libgstobsgodcapture.so": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+    "obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz": "23cc2c484b7524756a3b632bf8a8e7231ac7c515c06a08183422ed91b7e82650"
+  },
+  "image_tag": "obsgod-obs-smoke:audio-game",
+  "image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+  "platform": "linux/amd64",
+  "commands": {
+    "native-capture": [
+      "docker",
+      "--host=unix:///var/run/docker.sock",
+      "run",
+      "--rm",
+      "--user",
+      "1000:1000",
+      "-e",
+      "OBSGOD_QUALIFIED_REVISION=33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+      "--mount",
+      "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+      "--mount",
+      "type=bind,src=/workspace/.obsgod-tools/audio-game-upgrade/final/native-capture,dst=/work",
+      "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+      "dbus-run-session",
+      "--",
+      "bash",
+      "/src/steamdeck/tests/native-capture-smoke.sh",
+      "/src/dist"
+    ],
+    "native-game": [
+      "docker",
+      "--host=unix:///var/run/docker.sock",
+      "run",
+      "--rm",
+      "--user",
+      "1000:1000",
+      "-e",
+      "OBSGOD_QUALIFIED_REVISION=33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+      "--mount",
+      "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+      "--mount",
+      "type=bind,src=/workspace/.obsgod-tools/audio-game-upgrade/final/native-game,dst=/work",
+      "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+      "dbus-run-session",
+      "--",
+      "bash",
+      "/src/steamdeck/tests/native-game-obs-smoke.sh"
+    ]
+  },
+  "checks": {
+    "native-capture": {
+      "exit_code": 0,
+      "state": "passed",
+      "log": "native-capture.log",
+      "log_sha256": "4bfe67e970711708b15a5d6ded0a1ee60fac2356d4663e0ec5842daddc68df29"
+    },
+    "native-game": {
+      "exit_code": 0,
+      "state": "passed",
+      "log": "native-game.log",
+      "log_sha256": "84b4b791e41565fbf0b8f35dc903a1a2c15bd6e6bba60e8d1b3c313498f2ed6b"
+    }
+  },
+  "source_clean_after": true,
+  "source_revision_after": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+  "inputs_unchanged_after": {
+    "obsgod": true,
+    "libgstobsgodcapture.so": true,
+    "obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz": true
+  }
+}

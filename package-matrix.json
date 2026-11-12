@@ -1,0 +1,43 @@
+{
+  "source_revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+  "version": "0.1.0-deck.6",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "checks": [
+    {
+      "name": "package-first",
+      "command": "python3 scripts/package-deck.py --version 0.1.0-deck.6",
+      "exit_code": 0,
+      "status": "passed",
+      "seconds": 10.69,
+      "log": "package-first.log",
+      "log_sha256": "70ac57aedb0437c3ef884e5c06714e2bf5e89642c8e85b09abdbd26d548d644f"
+    },
+    {
+      "name": "updater-first",
+      "command": "python3 scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz",
+      "exit_code": 0,
+      "status": "passed",
+      "seconds": 0.573,
+      "log": "updater-first.log",
+      "log_sha256": "c12f4c8aee40e8ab028eb038300962a1092859a33cc0a0d0ae6b50b919f2cc98"
+    },
+    {
+      "name": "package-repeat",
+      "command": "python3 scripts/package-deck.py --version 0.1.0-deck.6",
+      "exit_code": 0,
+      "status": "passed",
+      "seconds": 10.091,
+      "log": "package-repeat.log",
+      "log_sha256": "818ea0842f68596f6ee9256b1469eea8a5cba2bf01105a433145f0cfebdde7fa"
+    },
+    {
+      "name": "updater-repeat",
+      "command": "python3 scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz",
+      "exit_code": 0,
+      "status": "passed",
+      "seconds": 0.926,
+      "log": "updater-repeat.log",
+      "log_sha256": "c12f4c8aee40e8ab028eb038300962a1092859a33cc0a0d0ae6b50b919f2cc98"
+    }
+  ]
+}

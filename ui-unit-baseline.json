@@ -1,0 +1,8 @@
+{
+  "source_revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+  "source_clean_before": true,
+  "python": "3.12.14",
+  "node": "v24.19.0",
+  "npm": "11.9.0",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41"
+}

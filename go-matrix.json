@@ -1,0 +1,253 @@
+{
+  "schema": 1,
+  "candidate": "0.1.0-deck.6",
+  "source_revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+  "source_clean_before": true,
+  "source_clean_after": true,
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "go": "go version go1.27.4 linux/amd64",
+  "outcome": "passed",
+  "checks": [
+    {
+      "name": "go-race-tests",
+      "command": [
+        "go",
+        "test",
+        "-race",
+        "-json",
+        "-count=1",
+        "./..."
+      ],
+      "log": "go-tests.json",
+      "exit_code": 0,
+      "outcome": "passed",
+      "cache": "disabled with -count=1",
+      "passed_top_level_cases": 64,
+      "passed_test_case_events_including_subtests": 94,
+      "failed_test_cases": [],
+      "skipped_test_cases": [
+        {
+          "package": "github.com/szmyty/obsgod/pkg/automation",
+          "test": "TestRealOBSReadOnly",
+          "reason": "real_obs_test.go:14: set OBSGOD_TEST_OBS_ADDRESS for opt-in real OBS reads"
+        }
+      ]
+    },
+    {
+      "revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+      "command": [
+        "go",
+        "vet",
+        "./..."
+      ],
+      "log": "go-vet.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 0.493,
+      "name": "go-vet"
+    },
+    {
+      "revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+      "command": [
+        "/workspace/.obsgod-tools/pkg/bin/govulncheck",
+        "-json",
+        "./..."
+      ],
+      "log": "go-vuln.json",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 5.569,
+      "name": "go-vulnerability-scan",
+      "scanner": {
+        "protocol_version": "v1.0.0",
+        "scanner_name": "govulncheck",
+        "scanner_version": "v1.9.0",
+        "db": "https://vuln.go.dev",
+        "db_last_modified": "2026-11-11T02:51:11Z",
+        "go_version": "go1.27.4",
+        "scan_level": "symbol",
+        "scan_mode": "source"
+      },
+      "finding_count": 0
+    },
+    {
+      "revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+      "command": [
+        "go",
+        "build",
+        "-trimpath",
+        "-buildvcs=false",
+        "-o",
+        "/workspace/.obsgod-tools/audio-game-upgrade/final/cross/obsgod-linux-arm64",
+        "."
+      ],
+      "log": "cross/obsgod-linux-arm64.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 0.972,
+      "target": "linux-arm64",
+      "package": ".",
+      "environment": {
+        "CGO_ENABLED": "0",
+        "GOOS": "linux",
+        "GOARCH": "arm64"
+      },
+      "execution": "unrun; compilation only",
+      "sha256": "da317be58c861f776d02b55f590e513e1d6c5fb37e1fadb51622c4aa2ab5fee0",
+      "bytes": 13728017,
+      "artifact_format": "/workspace/.obsgod-tools/audio-game-upgrade/final/cross/obsgod-linux-arm64: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically linked, Go BuildID=4hUgfCOrboPU1ye_KE5H/sXcf7DBWu2s_w-oNKkro/d_STLWrcoGYSlyKub__R/F6P-3QPHeyKPxPj8KJj5, BuildID[sha1]=bb48c6392766d74dd1daaf08d295418542c4c60d, with debug_info, not stripped",
+      "name": "cross-build"
+    },
+    {
+      "revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+      "command": [
+        "go",
+        "build",
+        "-trimpath",
+        "-buildvcs=false",
+        "-o",
+        "/workspace/.obsgod-tools/audio-game-upgrade/final/cross/obsgod-decky-install-linux-arm64",
+        "./cmd/obsgod-decky-install"
+      ],
+      "log": "cross/obsgod-decky-install-linux-arm64.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 0.776,
+      "target": "linux-arm64",
+      "package": "./cmd/obsgod-decky-install",
+      "environment": {
+        "CGO_ENABLED": "0",
+        "GOOS": "linux",
+        "GOARCH": "arm64"
+      },
+      "execution": "unrun; compilation only",
+      "sha256": "1a02a4dda414643d3cb37fd6abc3306949111e779096cefc095d32e73540b0b9",
+      "bytes": 9672080,
+      "artifact_format": "/workspace/.obsgod-tools/audio-game-upgrade/final/cross/obsgod-decky-install-linux-arm64: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically linked, Go BuildID=0nMq4ylHm8MHOcW_ra2n/9rlkE2j4vBQndx7wCfyK/hScJrfulNSpuo49bXYwH/Ycp_wMDORQL7bxed2x5b, BuildID[sha1]=6ce0b66dbacac7936f01b6f1f24e3bc18eb9d159, with debug_info, not stripped",
+      "name": "cross-build"
+    },
+    {
+      "revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+      "command": [
+        "go",
+        "build",
+        "-trimpath",
+        "-buildvcs=false",
+        "-o",
+        "/workspace/.obsgod-tools/audio-game-upgrade/final/cross/obsgod-windows-amd64.exe",
+        "."
+      ],
+      "log": "cross/obsgod-windows-amd64.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 1.059,
+      "target": "windows-amd64",
+      "package": ".",
+      "environment": {
+        "CGO_ENABLED": "0",
+        "GOOS": "windows",
+        "GOARCH": "amd64"
+      },
+      "execution": "unrun; compilation only",
+      "sha256": "3511341c3b9139d9ad07ef4d29991c192ab5922cf4d01d0beb59a999c47abd49",
+      "bytes": 14523904,
+      "artifact_format": "/workspace/.obsgod-tools/audio-game-upgrade/final/cross/obsgod-windows-amd64.exe: PE32+ executable for MS Windows 10.00 (console), x86-64, 16 sections",
+      "name": "cross-build"
+    },
+    {
+      "revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+      "command": [
+        "go",
+        "build",
+        "-trimpath",
+        "-buildvcs=false",
+        "-o",
+        "/workspace/.obsgod-tools/audio-game-upgrade/final/cross/obsgod-decky-install-windows-amd64.exe",
+        "./cmd/obsgod-decky-install"
+      ],
+      "log": "cross/obsgod-decky-install-windows-amd64.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 0.763,
+      "target": "windows-amd64",
+      "package": "./cmd/obsgod-decky-install",
+      "environment": {
+        "CGO_ENABLED": "0",
+        "GOOS": "windows",
+        "GOARCH": "amd64"
+      },
+      "execution": "unrun; compilation only",
+      "sha256": "b99f7a4ea853fe0e8242b750fa3fab5ec957f92d2e3b11dca024763b03f84141",
+      "bytes": 10656768,
+      "artifact_format": "/workspace/.obsgod-tools/audio-game-upgrade/final/cross/obsgod-decky-install-windows-amd64.exe: PE32+ executable for MS Windows 10.00 (console), x86-64, 16 sections",
+      "name": "cross-build"
+    },
+    {
+      "revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+      "command": [
+        "go",
+        "build",
+        "-trimpath",
+        "-buildvcs=false",
+        "-o",
+        "/workspace/.obsgod-tools/audio-game-upgrade/final/cross/obsgod-darwin-arm64",
+        "."
+      ],
+      "log": "cross/obsgod-darwin-arm64.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 1.245,
+      "target": "darwin-arm64",
+      "package": ".",
+      "environment": {
+        "CGO_ENABLED": "0",
+        "GOOS": "darwin",
+        "GOARCH": "arm64"
+      },
+      "execution": "unrun; compilation only",
+      "sha256": "26e08bb71bc42d2442419beec4ad701700841245b919712d7bf36619fccaa96a",
+      "bytes": 13728882,
+      "artifact_format": "/workspace/.obsgod-tools/audio-game-upgrade/final/cross/obsgod-darwin-arm64: Mach-O 64-bit arm64 executable, flags:<|DYLDLINK|PIE>",
+      "name": "cross-build"
+    },
+    {
+      "revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+      "command": [
+        "go",
+        "build",
+        "-trimpath",
+        "-buildvcs=false",
+        "-o",
+        "/workspace/.obsgod-tools/audio-game-upgrade/final/cross/obsgod-decky-install-darwin-arm64",
+        "./cmd/obsgod-decky-install"
+      ],
+      "log": "cross/obsgod-decky-install-darwin-arm64.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 0.771,
+      "target": "darwin-arm64",
+      "package": "./cmd/obsgod-decky-install",
+      "environment": {
+        "CGO_ENABLED": "0",
+        "GOOS": "darwin",
+        "GOARCH": "arm64"
+      },
+      "execution": "unrun; compilation only",
+      "sha256": "d36ab8ea751c0bb977bc104b250178233d81c3e7dd12682b301c8c0b2e49a32b",
+      "bytes": 10032114,
+      "artifact_format": "/workspace/.obsgod-tools/audio-game-upgrade/final/cross/obsgod-decky-install-darwin-arm64: Mach-O 64-bit arm64 executable, flags:<|DYLDLINK|PIE>",
+      "name": "cross-build"
+    }
+  ],
+  "actual_skipped_test_cases": [
+    {
+      "package": "github.com/szmyty/obsgod/pkg/automation",
+      "test": "TestRealOBSReadOnly",
+      "reason": "real_obs_test.go:14: set OBSGOD_TEST_OBS_ADDRESS for opt-in real OBS reads"
+    }
+  ],
+  "limitations": [
+    "Cross-platform binaries were compiled, not executed.",
+    "Optional existing-OBS read-only test skipped; native OBS and device qualification are separate parent-owned matrix entries."
+  ]
+}

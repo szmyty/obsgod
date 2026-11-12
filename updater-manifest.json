@@ -1,0 +1,18 @@
+{
+  "files": {
+    "LICENSE": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af",
+    "THIRD_PARTY_NOTICES.md": "001a9daffccd8c53603dca451e97aa95eb742f7e7e197688a223cbda8c7c0904",
+    "Update OBSGod.desktop": "5253995de90dcf3943d4fcf7dbba029d5b50cc4bc3463910c8a20c818b5cb059",
+    "Update OBSGod.sh": "b7f587b83634a2c95ca03c2b95a80d76d9e261a77c24b5d88f5d329888749089",
+    "decky-install": "153c3629074af93392e4f62d0d40b757c1bf8d345448d541270833e5b5a69d03",
+    "decky.py": "bf26462ca2fc84ac2c98cc79c430a7279ae6321cf5a600051e83708c6da91588",
+    "releases.py": "1be99ecfa9f64ae083cb2a3d6d34e326346c38fdbcd98984f1efad88b2a09370",
+    "update.py": "4d90cb632ab50229d81f4b52563bb3cea60468b3c75aaa0a52ba5e60421bb966"
+  },
+  "kind": "updater",
+  "platform": "linux/amd64",
+  "revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+  "runtime_revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+  "updater_version": "0.1.0-deck.6",
+  "version": "0.1.0-deck.6"
+}

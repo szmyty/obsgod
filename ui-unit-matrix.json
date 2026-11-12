@@ -1,0 +1,68 @@
+{
+  "source_revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+  "source_clean_before": true,
+  "python": "3.12.14",
+  "node": "v24.19.0",
+  "npm": "11.9.0",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "recorded_at_utc": "2026-11-12T07:24:03.180536+00:00",
+  "source_clean_after": true,
+  "status": "passed",
+  "checks": [
+    {
+      "name": "python",
+      "command": "python3 -m unittest discover -s steamdeck/tests -p 'test_*.py' -v",
+      "log": "python-tests.log",
+      "log_sha256": "05f224f6ba9027ad2e948e767dc87931f06c8dc720c3bac8d3193c085ae49e3d",
+      "exit_code": 0,
+      "status": "passed",
+      "total": 70,
+      "outcome": "Ran 70 tests in 2.514s\n\nOK"
+    },
+    {
+      "name": "node",
+      "command": "npm --prefix steamdeck/decky test",
+      "log": "node-tests.log",
+      "log_sha256": "e20388553c89b17dc16e82f35f4ae96881607f3273e45c1ec6dd544a6cf66127",
+      "exit_code": 0,
+      "status": "passed",
+      "tests": 9,
+      "pass": 9,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "name": "typecheck",
+      "command": "npm --prefix steamdeck/decky run typecheck",
+      "log": "typecheck.log",
+      "log_sha256": "f8405013650f503a1c8f211e9c9fff017fdaf3fee3e259a6078043cd1e13a0de",
+      "exit_code": 0,
+      "status": "passed"
+    },
+    {
+      "name": "npm_audit",
+      "command": "npm --prefix steamdeck/decky audit --json",
+      "log": "npm-audit.json",
+      "log_sha256": "6022173ad0822c9267d6a06ecdc7ce21ad667feac945d229c83b9d796c8ac326",
+      "exit_code": 0,
+      "status": "passed",
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      }
+    }
+  ],
+  "native_notices": {
+    "status": "passed",
+    "sha256": "e279892a8749fa94c2a3f1fa402cd5580815e874f42b343b65c265086c42cd1d",
+    "own_license_sha256": "258b73263e16be217d5b8120e700feceb0957e4573ca1f06d1a0885eb35ce01e",
+    "scope": "Source notice inclusion rechecked only; packaged/sourcearchive byte verification belongs to actual package/public download checks"
+  },
+  "limitations": [
+    "No browser, transport, build, native OBS or device tests run by this unit check job."
+  ]
+}

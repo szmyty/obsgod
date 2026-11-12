@@ -1,0 +1,43 @@
+{
+  "source_revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+  "version": "0.1.0-deck.6",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "checks": [
+    {
+      "name": "browser-fresh",
+      "command": "python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz --screenshots /workspace/.obsgod-tools/audio-game-upgrade/final/browser-fresh",
+      "exit_code": 0,
+      "status": "passed",
+      "seconds": 2.939,
+      "log": "browser-fresh.log",
+      "log_sha256": "392e863a30c12417cb1e160dad9d8eefc820b4db5e8066177daafcc371c3a3fc"
+    },
+    {
+      "name": "browser-upgrade",
+      "command": "python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz --upgrade-from dist/obsgod-deck_0.1.0-deck.5.2_linux_amd64.tar.gz --screenshots /workspace/.obsgod-tools/audio-game-upgrade/final/browser-upgrade",
+      "exit_code": 0,
+      "status": "passed",
+      "seconds": 2.413,
+      "log": "browser-upgrade.log",
+      "log_sha256": "fb5a7bc1b8b25af580aa4cf1caba2ba7736bf088b481bff57e31c720d92b3d49"
+    },
+    {
+      "name": "browser-panel",
+      "command": "python3 steamdeck/tests/browser-panel.py dist/obsgod-decky.zip --screenshots /workspace/.obsgod-tools/audio-game-upgrade/final/browser-panel",
+      "exit_code": 0,
+      "status": "passed",
+      "seconds": 12.565,
+      "log": "browser-panel.log",
+      "log_sha256": "c114413100aea5344807b42b914ac0d7244dc64ae30eec7578cba7684eb50421"
+    },
+    {
+      "name": "decky-updater",
+      "command": "python3 steamdeck/tests/decky-transport-smoke.py dist/decky-install dist/obsgod-decky.zip --upstream /workspace/.obsgod-tools/decky-upstream-v3.3.1 --runtime-archive dist/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz --previous-archive dist/obsgod-deck_0.1.0-deck.5.2_linux_amd64.tar.gz --updater-zip dist/obsgod-one-click-update_0.1.0-deck.6_linux_amd64.zip",
+      "exit_code": 0,
+      "status": "passed",
+      "seconds": 9.35,
+      "log": "decky-updater.log",
+      "log_sha256": "906a0f94ea408d3af61817824f3e05d95fbf58755d4c438e9b71f119b77e7a12"
+    }
+  ]
+}

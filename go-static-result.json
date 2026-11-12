@@ -1,0 +1,26 @@
+[
+  {
+    "revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+    "command": [
+      "go",
+      "vet",
+      "./..."
+    ],
+    "log": "go-vet.log",
+    "exit_code": 0,
+    "outcome": "passed",
+    "seconds": 0.493
+  },
+  {
+    "revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+    "command": [
+      "/workspace/.obsgod-tools/pkg/bin/govulncheck",
+      "-json",
+      "./..."
+    ],
+    "log": "go-vuln.json",
+    "exit_code": 0,
+    "outcome": "passed",
+    "seconds": 5.569
+  }
+]

@@ -1,0 +1,8 @@
+/work/gstreamer-source.tar.gz: OK
+dbus-run-session: ignoring unknown child process 197
+dbus-run-session: ignoring unknown child process 350
+dbus-run-session: ignoring unknown child process 106
+dbus-run-session: ignoring unknown child process 613
+dbus-run-session: ignoring unknown child process 538
+PASS native OBS game A / fallback / game B / unsupported source / black fallback; explicit local clip and stream lifecycle; observer runs during local control lock; continuous audio still requires decoded-media check
+PASS: actual OBS game/idle/game/unsupported/black scenes and advancing local RTMP; decoded scene pixels and440Hz audible at every phase; local10sclip; no implicit output restart; legacy sources hidden; ordinary OBS preserved. Synthetic game producer, not Steam Deck qualification.
