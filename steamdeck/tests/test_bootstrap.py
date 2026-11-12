@@ -16,6 +16,15 @@ import urllib.request
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def previous_app_install_command(package):
+    """Seed old app files; the transport fixture seeds/verifies plugins itself."""
+    command = [sys.executable, str(package / "install.py"), "--no-launch"]
+    manifest = json.loads((package / "manifest.json").read_text())
+    if "decky.py" in manifest.get("files", {}):
+        command.append("--app-only")
+    return command
+
+
 def desktop_command(path, as_uri=False):
     line = next(line[5:] for line in path.read_text().splitlines() if line.startswith("Exec="))
     return [

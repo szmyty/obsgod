@@ -1,5 +1,28 @@
 # Current work
 
+Current launch/isolation repair: the owner successfully installed 5.1, then
+supplied a Gaming Mode photo showing a 20-second wait ending before the OBS
+control listener appeared. The read-only effective-path probe CONFIRMED Flatpak
+replaces the old CLI `--env=XDG_CONFIG_HOME` override with the ordinary app path.
+The repair applies the private path through `/usr/bin/env` inside the sandbox,
+for background and visible launches, without altering ordinary OBS configuration
+or output authorization. Draft PR #33 builds on draft #32. Candidate 5.2 exact
+qualified source is `e10383598a01b7bfab946735d4187a458a5177e5`; immutable artifact
+commit `414480b8cdc23f0eb5e0ea209f45f98adcddaebd` on
+`artifacts/deck5-config-isolation`. Never merge this orphan artifact branch.
+Fresh local matrix passed: 59 Go (one optional skip), 60 Python, 8 Node, static/
+security/frontend/package/repro/browser/Decky/updater and real native OBS media/
+lifecycle checks with modeled Flatpak reset. Ordinary OBS configuration remained
+untouched. Public downloads, internal payload hashes and source/version metadata
+were independently verified. Cross-builds compiled only; fresh CI jobs did not start due to the
+account billing lock. Actual corrected Deck startup/capture/audio/Kick retry is
+unrun; the probe's PulseAudio symlink warning remains audio follow-up evidence.
+Do not delete sockets or claim device recovery. Read [the isolation evidence](docs/flatpak-config-isolation.md)
+for exact commands/platforms/hashes and persistent filtered-log retrieval. PRs
+#32/#33 remain drafts, master remains `4a8a38a839a259e14a19ff003e6a9d71e719ef1d`,
+and the prior seven merges/administrative milestone closure do not close missing
+acceptance issues. No new merge, release/tag publication or deployment occurred.
+
 Current installer repair: the owner reported Decky ready, followed by an OBS 28+
 rejection while Discover showed OBS 33.0.1. Confirmed defect: `flatpak info
 --show-version` is not supported by Flatpak; the installer mislabeled its command

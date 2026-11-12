@@ -74,8 +74,9 @@ pactl set-default-sink obsgod_test
 ) &
 gst-launch-1.0 -q audiotestsrc is-live=true wave=sine ! audioconvert ! pulsesink device=obsgod_test >/work/audio-producer.log 2>&1 &
 
-# Replace only the Flatpak invocation in this disposable container. Capture,
-# PulseAudio, encoding, OBS and authenticated WebSocket traffic remain real.
+# Replace only the Flatpak invocation in this disposable container. Model its
+# post-option XDG reset so a pre-sandbox --env override cannot falsely qualify
+# managed configuration. Capture, audio, OBS and WebSocket traffic remain real.
 cat > /work/bin/flatpak <<'PY'
 #!/usr/bin/env python3
 import os,sys
@@ -86,9 +87,14 @@ for arg in args[1:]:
  if arg.startswith('--env='):
   key,value=arg[6:].split('=',1);os.environ[key]=value
 index=args.index('com.obsproject.Studio')
-os.execvp('obs',['obs']+args[index+1:])
+os.environ['XDG_CONFIG_HOME']=os.path.join(os.environ['HOME'],'.var/app/com.obsproject.Studio/config')
+command=next((arg.split('=',1)[1] for arg in args[1:index] if arg.startswith('--command=')),'obs')
+os.execvp(command,[command]+args[index+1:])
 PY
 chmod 700 /work/bin/flatpak
+ordinary="$HOME/.var/app/com.obsproject.Studio/config/obs-studio"
+mkdir -p "$ordinary"
+printf '%s\n' 'ordinary OBS configuration must remain unchanged' > "$ordinary/preserve.txt"
 
 # Build upstream's exact Flathub source revision, kept outside the product.
 mkdir -p /work/plugin-src
@@ -152,6 +158,9 @@ clip=json.loads((p/'test-recording.json').read_text())
 assert clip['recording'] is False and clip['runtime']['recording'] is False,'clip completion preceded confirmed recording stop'
 restart=json.loads((p/'restart.json').read_text())
 assert restart['process']=='absent' and restart['output_known'] is True,'managed OBS shutdown was not confirmed'
+ordinary=Path('/work/home/.var/app/com.obsproject.Studio/config/obs-studio')
+assert sorted(f.name for f in ordinary.iterdir())==['preserve.txt'],'ordinary OBS configuration was used'
+assert (ordinary/'preserve.txt').read_text()=='ordinary OBS configuration must remain unchanged\n'
 for name in ['recording-probe','stream-probe']:
  r=json.loads((p/(name+'.json')).read_text());streams=r['streams']
  video=next(s for s in streams if s['codec_type']=='video');audio=next(s for s in streams if s['codec_type']=='audio')

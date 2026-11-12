@@ -197,7 +197,11 @@ func gamescopeReady(ctx context.Context) bool { return captureAvailability(ctx) 
 // the current session; forcing xcb conflicts with Flatpak's fallback-x11 when
 // a Wayland socket is available.
 func obsLaunchArgs(p Paths) []string {
-	return []string{"run", "--user", "--env=XDG_CONFIG_HOME=" + p.OBSConfig, "com.obsproject.Studio", "--profile", "OBSGod", "--collection", "OBSGod", "--multi", "--minimize-to-tray", "--disable-missing-files-check"}
+	// Flatpak resets XDG_CONFIG_HOME after applying its --env overrides.
+	// Apply this non-secret path inside the sandbox, after that reset, so OBS
+	// reads only its prepared private profile and WebSocket configuration. env
+	// execs OBS directly; no shell interpolation or automatic output is involved.
+	return []string{"run", "--user", "--command=/usr/bin/env", "com.obsproject.Studio", "XDG_CONFIG_HOME=" + p.OBSConfig, "obs", "--profile", "OBSGod", "--collection", "OBSGod", "--multi", "--minimize-to-tray", "--disable-missing-files-check"}
 }
 
 func graphicalSession(env []string) bool {
