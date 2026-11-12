@@ -1,0 +1,85 @@
+{
+  "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+  "outcome": "passed",
+  "binary_sha256": "525e533ae4ed806559cdffffd865f1f01582cbdd3a746c73a50a0c01912dea6f",
+  "checks": [
+    {
+      "command": [
+        "dist/obsgod",
+        "--help"
+      ],
+      "exit_code": 0,
+      "expected_success": true,
+      "outcome": "passed",
+      "stdout_sha256": "41e4b954ae2bf27af4adfde25314b849bb7a9de76967eb5c1c6f6f1aa8029a7d"
+    },
+    {
+      "command": [
+        "dist/obsgod",
+        "version",
+        "--json"
+      ],
+      "exit_code": 0,
+      "expected_success": true,
+      "outcome": "passed",
+      "stdout_sha256": "7300804aa5b8fbbedbd1a4353c78b4d0fb37e5820d0473ae5122637fc4c38857"
+    },
+    {
+      "command": [
+        "dist/obsgod",
+        "completion",
+        "fish"
+      ],
+      "exit_code": 0,
+      "expected_success": true,
+      "outcome": "passed",
+      "stdout_sha256": "6c0ffc1c76f36eb509b7079f8b5265c36925d6609115ce78f9aeca7636fba889"
+    },
+    {
+      "command": [
+        "dist/obsgod",
+        "reference"
+      ],
+      "exit_code": 0,
+      "expected_success": true,
+      "outcome": "passed",
+      "stdout_sha256": "3fe10c52dd58a6fea79423d1a005d538663d43e3c39347160cd6d071a74ccf82"
+    },
+    {
+      "command": [
+        "dist/obsgod",
+        "doctor",
+        "--help"
+      ],
+      "exit_code": 0,
+      "expected_success": true,
+      "outcome": "passed",
+      "stdout_sha256": "a5f3ab2a8d7237f294fdb67b5e6efb90c085029b7f7b69980b60184465132e1f"
+    },
+    {
+      "command": [
+        "dist/obsgod",
+        "deck",
+        "support-bundle"
+      ],
+      "exit_code": 0,
+      "expected_success": true,
+      "outcome": "passed",
+      "stdout_sha256": "bf588177c82b4917542262618179c363785f45b38bb13fdd1d69b232b1e591d0"
+    },
+    {
+      "command": [
+        "dist/obsgod",
+        "doctor"
+      ],
+      "exit_code": 1,
+      "expected_success": false,
+      "outcome": "passed",
+      "stdout_sha256": "eb9400b7e4d07f94c5073233878023c1581ae7cb7c243c146423bd75783790fa"
+    }
+  ],
+  "limitations": [
+    "Doctor correctly reports missing cloud/Steam Deck dependencies; this is not actual Deck diagnosis acceptance.",
+    "No OBS endpoint, broadcast, recording or payment was initiated."
+  ]
+}

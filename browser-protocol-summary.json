@@ -1,0 +1,46 @@
+{
+  "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+  "browser_cases": [
+    {
+      "name": "setup-fresh",
+      "outcome": "passed"
+    },
+    {
+      "name": "setup-upgrade4",
+      "outcome": "passed"
+    },
+    {
+      "name": "setup-upgrade6",
+      "outcome": "passed"
+    },
+    {
+      "name": "panel",
+      "outcome": "passed"
+    },
+    {
+      "name": "support-receive",
+      "outcome": "passed"
+    }
+  ],
+  "transport_cases": [
+    {
+      "name": "decky-upgrade4-current7-and-dynamic6",
+      "outcome": "passed"
+    },
+    {
+      "name": "decky-upgrade6-current7",
+      "outcome": "passed"
+    }
+  ],
+  "runtime_sha256": "4205e4725fd432ea99a59fe8c1a78f0f7b29c7ddbd6c79e3cf4afd8c2c67c9c3",
+  "site_receipt": "site-matrix.json",
+  "source_clean_before_after": true,
+  "input_hashes_unchanged": true,
+  "limitations": [
+    "Actual Steam/Decky service permissions/lifecycle/controller/Flatpak and provider viewers remain unrun.",
+    "Crypto tests use public protocol test inputs; production wallets are null; real wallet scan/receipt unrun.",
+    "file:// site navigation unavailable by administrator policy; local HTTP offline preview passed.",
+    "Fixed published updater4.1 remains fixed to4; dynamic6 and current7 paths are distinct."
+  ],
+  "historical_attempt": "attempts/459d0fe574c7 preserves original ambiguous-selector failure and unrun upgrade cases; no old receipt relabelled."
+}

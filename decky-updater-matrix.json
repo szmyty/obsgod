@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "candidate": "0.1.0-deck.7",
+  "source_revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+  "source_clean_before": true,
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "playwright": "1.62.0",
+  "browser": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+  "node": "v24.19.0",
+  "inputs": {
+    "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz": {
+      "sha256": "4205e4725fd432ea99a59fe8c1a78f0f7b29c7ddbd6c79e3cf4afd8c2c67c9c3",
+      "bytes": 11369529
+    },
+    "/workspace/obsgod/dist/obsgod-one-click-update_0.1.0-deck.7_linux_amd64.zip": {
+      "sha256": "5227e541e3c07cc9214e67f4400dda14065520789ebdecfdeca15b6c4152c68d",
+      "bytes": 3073420
+    },
+    "/workspace/obsgod/dist/obsgod-decky.zip": {
+      "sha256": "0a4d8afefa0f149cb053cddc988fa0cc46992602b73b73b581deab4414abf5c4",
+      "bytes": 4197393
+    },
+    "/workspace/obsgod/dist/decky-install": {
+      "sha256": "81e0f2a4e09641df55869bb00b1cdcc31dc539d3037904945c3e64a05d4d2be0",
+      "bytes": 7155836
+    },
+    "/workspace/obsgod/dist/manifest.json": {
+      "sha256": "dfb184468e1aca9f9316a16f3530d0daac2cc75bdafb880472489a640451496a",
+      "bytes": 2390
+    },
+    "/workspace/.obsgod-tools/m2/legacy-download/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz": {
+      "sha256": "c584c04ed3c79a01f1b846adc4f8bbe86c8132a4bca2cf6ba60cc557eba39ce1",
+      "bytes": 7935355
+    },
+    "/workspace/.obsgod-tools/audio-game-upgrade/final/public-download/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz": {
+      "sha256": "23cc2c484b7524756a3b632bf8a8e7231ac7c515c06a08183422ed91b7e82650",
+      "bytes": 11229097
+    },
+    "/workspace/.obsgod-tools/m2/legacy-download/obsgod-one-click-update_0.1.0-deck.6_linux_amd64.zip": {
+      "sha256": "c196947ca1cd34a01caccff7755b62de61d77531f39ac63922b570eed329420d",
+      "bytes": 3069400
+    }
+  },
+  "source_files_sha256": {
+    "steamdeck/tests/browser-setup.py": "fe4374941457334fd155404a2846b9551fabd4348d0e40ed9be6be896801a9b7",
+    "steamdeck/tests/browser-panel.py": "83040a4343436ba399898babfa5d7afd0ce8c8f1953fb6817dab047c6d5e4d59",
+    "steamdeck/tests/browser-support.py": "eb8af6d817c9a92a087bad7a5ea63691d97c1bea908f8a1adce53b688f54dbcd",
+    "steamdeck/tests/decky-transport-smoke.py": "7ba121f89ccff257bbfb0e4da1421e6b49bad439ccf8a3b0a7a1e4704d91e499",
+    "steamdeck/tests/updater-smoke.py": "54f8b83432c575a3b582f9437b56b6427e9ee90ceccffaf33457c25bd706da3a",
+    "steamdeck/tests/test_bootstrap.py": "1250855acade87931b71c263ec49c5077b207e249c370190fd417402064e6c86",
+    "steamdeck/decky/tests/fixture.html": "0fbb781d835e7afce4346f7866dfe94c8030db0bca1288d18bafe3f16aa9a111",
+    "steamdeck/decky/tests/build-fixture.mjs": "77ef761327f9a3e264d0ca7aad06b7ff64dba056963ef40745d5bacf1306318c",
+    "steamdeck/decky/tests/build-support-fixture.mjs": "65d695f8f31b57b656fa11313fdc2d68bef1b3cc51f9724235cbe9538dac8b75"
+  },
+  "checks": [
+    {
+      "name": "decky-upgrade4-current7-and-dynamic6",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "steamdeck/tests/decky-transport-smoke.py",
+        "/workspace/obsgod/dist/decky-install",
+        "/workspace/obsgod/dist/obsgod-decky.zip",
+        "--upstream",
+        "/workspace/.obsgod-tools/decky-upstream-v3.3.1",
+        "--runtime-archive",
+        "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz",
+        "--updater-zip",
+        "/workspace/obsgod/dist/obsgod-one-click-update_0.1.0-deck.7_linux_amd64.zip",
+        "--previous-archive",
+        "/workspace/.obsgod-tools/m2/legacy-download/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz",
+        "--bootstrap-updater-zip",
+        "/workspace/.obsgod-tools/m2/legacy-download/obsgod-one-click-update_0.1.0-deck.6_linux_amd64.zip"
+      ],
+      "log": "decky-upgrade4-current7-and-dynamic6.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 14.2
+    },
+    {
+      "name": "decky-upgrade6-current7",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "steamdeck/tests/decky-transport-smoke.py",
+        "/workspace/obsgod/dist/decky-install",
+        "/workspace/obsgod/dist/obsgod-decky.zip",
+        "--upstream",
+        "/workspace/.obsgod-tools/decky-upstream-v3.3.1",
+        "--runtime-archive",
+        "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz",
+        "--updater-zip",
+        "/workspace/obsgod/dist/obsgod-one-click-update_0.1.0-deck.7_linux_amd64.zip",
+        "--previous-archive",
+        "/workspace/.obsgod-tools/audio-game-upgrade/final/public-download/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz"
+      ],
+      "log": "decky-upgrade6-current7.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 10.298
+    }
+  ],
+  "upstream_files": {
+    "browser.py": "cfbc0e29778d2428e6aea6e03fb17f45eee7b7829a5bf9a2abea05bb2415d968",
+    "helpers.py": "1380d802d6fd8bd8e803f5e634b8c74446c9b52bc26c3a21585ba2e15fa1a271",
+    "wsrouter.py": "5ec6eb2acfa152c80b04d1a677113ddbf492747e0467dec72362b3406cc49b8d",
+    "wsrouter.ts": "b44ed2c93ad4a2e6c1af3ef7ca2fae26f8ed085b28306f805964da52b636fe0a"
+  },
+  "limitations": [
+    "Pinned Decky3.3.1 WSRouter/frontend/PluginBrowser execute real protocol requests; Steam/CDP/service lifecycle/ownership/Flatpak and HTTPS release responses are fixtures.",
+    "Published fixed updater4.1 cannot discover runtime7; no contrary compatibility claim. Maintained dynamic updater6 is byte-identical in its bootstrap case.",
+    "Actual Deck install/update/remove and required independent platform/CI/review proof remain unrun."
+  ],
+  "outcome": "passed",
+  "source_clean_after": true,
+  "revision_after": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+  "input_hashes_unchanged": true
+}

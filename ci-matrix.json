@@ -1,0 +1,229 @@
+{
+  "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+  "outcome": "unavailable",
+  "reason": "GitHub account billing lock prevents jobs starting",
+  "workflows": [
+    {
+      "workflow": "build",
+      "id": 43290162817,
+      "url": "https://github.com/szmyty/obsgod/actions/runs/43290162817",
+      "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "status": "completed",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "name": "build (^1, windows-latest)",
+          "conclusion": "cancelled",
+          "step_count": 0,
+          "messages": [
+            "The strategy configuration was canceled because \"build._1_ubuntu-latest\" failed"
+          ]
+        },
+        {
+          "name": "build (^1, ubuntu-latest)",
+          "conclusion": "failure",
+          "step_count": 0,
+          "messages": [
+            "The job was not started because your account is locked due to a billing issue.",
+            "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+          ]
+        },
+        {
+          "name": "build (^1, macos-latest)",
+          "conclusion": "cancelled",
+          "step_count": 0,
+          "messages": [
+            "The strategy configuration was canceled because \"build._1_ubuntu-latest\" failed",
+            "Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times."
+          ]
+        }
+      ]
+    },
+    {
+      "workflow": "Steam Deck candidate",
+      "id": 43290162680,
+      "url": "https://github.com/szmyty/obsgod/actions/runs/43290162680",
+      "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "status": "completed",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "name": "candidate",
+          "conclusion": "failure",
+          "step_count": 0,
+          "messages": [
+            "The job was not started because your account is locked due to a billing issue."
+          ]
+        }
+      ]
+    },
+    {
+      "workflow": "Documentation preview",
+      "id": 43290162949,
+      "url": "https://github.com/szmyty/obsgod/actions/runs/43290162949",
+      "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "status": "completed",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "name": "build-preview",
+          "conclusion": "failure",
+          "step_count": 0,
+          "messages": [
+            "The job was not started because your account is locked due to a billing issue."
+          ]
+        }
+      ]
+    },
+    {
+      "workflow": "lint",
+      "id": 43290162693,
+      "url": "https://github.com/szmyty/obsgod/actions/runs/43290162693",
+      "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "status": "completed",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "name": "lint",
+          "conclusion": "failure",
+          "step_count": 0,
+          "messages": [
+            "The job was not started because your account is locked due to a billing issue.",
+            "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+          ]
+        }
+      ]
+    },
+    {
+      "workflow": "goreleaser",
+      "id": 43290162695,
+      "url": "https://github.com/szmyty/obsgod/actions/runs/43290162695",
+      "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "status": "completed",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "name": "goreleaser",
+          "conclusion": "failure",
+          "step_count": 0,
+          "messages": [
+            "The job was not started because your account is locked due to a billing issue.",
+            "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+          ]
+        }
+      ]
+    },
+    {
+      "workflow": "coverage",
+      "id": 43290162780,
+      "url": "https://github.com/szmyty/obsgod/actions/runs/43290162780",
+      "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "status": "completed",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "name": "coverage (^1, ubuntu-latest)",
+          "conclusion": "failure",
+          "step_count": 0,
+          "messages": [
+            "The job was not started because your account is locked due to a billing issue.",
+            "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+          ]
+        }
+      ]
+    },
+    {
+      "workflow": "build",
+      "id": 43290149353,
+      "url": "https://github.com/szmyty/obsgod/actions/runs/43290149353",
+      "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "status": "completed",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "name": "build (^1, ubuntu-latest)",
+          "conclusion": "failure",
+          "step_count": 0,
+          "messages": [
+            "The job was not started because your account is locked due to a billing issue.",
+            "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+          ]
+        },
+        {
+          "name": "build (^1, windows-latest)",
+          "conclusion": "cancelled",
+          "step_count": 0,
+          "messages": [
+            "The strategy configuration was canceled because \"build._1_ubuntu-latest\" failed"
+          ]
+        },
+        {
+          "name": "build (^1, macos-latest)",
+          "conclusion": "cancelled",
+          "step_count": 0,
+          "messages": [
+            "The strategy configuration was canceled because \"build._1_ubuntu-latest\" failed",
+            "Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times."
+          ]
+        }
+      ]
+    },
+    {
+      "workflow": "coverage",
+      "id": 43290149401,
+      "url": "https://github.com/szmyty/obsgod/actions/runs/43290149401",
+      "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "status": "completed",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "name": "coverage (^1, ubuntu-latest)",
+          "conclusion": "failure",
+          "step_count": 0,
+          "messages": [
+            "The job was not started because your account is locked due to a billing issue.",
+            "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+          ]
+        }
+      ]
+    },
+    {
+      "workflow": "goreleaser",
+      "id": 43290149465,
+      "url": "https://github.com/szmyty/obsgod/actions/runs/43290149465",
+      "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "status": "completed",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "name": "goreleaser",
+          "conclusion": "failure",
+          "step_count": 0,
+          "messages": [
+            "The job was not started because your account is locked due to a billing issue.",
+            "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+          ]
+        }
+      ]
+    },
+    {
+      "workflow": "lint",
+      "id": 43290149378,
+      "url": "https://github.com/szmyty/obsgod/actions/runs/43290149378",
+      "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "status": "completed",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "name": "lint",
+          "conclusion": "failure",
+          "step_count": 0,
+          "messages": [
+            "The job was not started because your account is locked due to a billing issue.",
+            "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+          ]
+        }
+      ]
+    }
+  ]
+}
