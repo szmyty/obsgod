@@ -25,6 +25,10 @@ SENTINEL = "Legacy private display sentinel"
 OUT = Path("/work/output")
 
 
+class OBSNotReady(AssertionError):
+    """OBS explicitly rejected a request before its frontend was ready."""
+
+
 async def cli(action, settings=None, timeout=100):
     process = await asyncio.create_subprocess_exec(
         "/src/dist/obsgod", "deck", action,
@@ -87,8 +91,26 @@ class OBS:
                     self.events.append({"event": event["eventType"], "state": facts.get("outputState"), "active": facts.get("outputActive")})
             elif message.get("op") == 7 and message["d"].get("requestId") == identifier:
                 response = message["d"]
-                assert response["requestStatus"]["result"], (kind, response["requestStatus"].get("code"))
+                if not response["requestStatus"]["result"]:
+                    if response["requestStatus"].get("code") == 207:
+                        raise OBSNotReady(kind, 207)
+                    raise AssertionError((kind, response["requestStatus"].get("code")))
                 return response.get("responseData", {})
+
+    async def wait_frontend(self):
+        # Authentication can precede initial scene creation. Retry only OBS's
+        # explicit NotReady response, with one deadline for this bootstrap step;
+        # authentication, transport and all other protocol failures remain hard.
+        deadline = time.monotonic() + 10
+        while True:
+            remaining = deadline - time.monotonic()
+            assert remaining > 0, "Native OBS frontend readiness exceeded 10 seconds"
+            try:
+                return await asyncio.wait_for(self.request("GetSceneCollectionList"), remaining)
+            except OBSNotReady:
+                remaining = deadline - time.monotonic()
+                assert remaining > 0, "Native OBS frontend readiness exceeded 10 seconds"
+                await asyncio.sleep(min(.1, remaining))
 
     async def close(self):
         await self.socket.close()
@@ -121,12 +143,13 @@ async def screenshot(obs, label, scene, expected):
 
 
 async def seed_old_items(obs):
-    collections = await obs.request("GetSceneCollectionList")
+    collections = await obs.wait_frontend()
     if collections["currentSceneCollectionName"] != "OBSGod":
         if "OBSGod" in collections["sceneCollections"]:
             await obs.request("SetCurrentSceneCollection", {"sceneCollectionName": "OBSGod"})
         else:
             await obs.request("CreateSceneCollection", {"sceneCollectionName": "OBSGod"})
+        await obs.wait_frontend()
     names = {x["sceneName"] for x in (await obs.request("GetSceneList"))["scenes"]}
     for scene in (IDLE, GAME, LIVE):
         if scene not in names:

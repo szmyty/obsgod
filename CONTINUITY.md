@@ -10,7 +10,12 @@ assets remain deferred. Work is stacked on draft #33 in
 `codex/deck-audio-capture-modes`; read [the upgrade plan](docs/audio-capture-upgrade.md).
 Candidate6 implementation is prepared in draftPR34; developmentGo94/Python70/
 Node9, native audio, app-filtered protocol and real OBS game/idle/RTMP transition
-checks passed. Final exact-source package/repro/matrix qualification is next;
+checks passed. Final qualification caught two test setup gaps: workflow input permissions for
+runner/container UID differences, then the new native game fixture raced scene
+initialization after authentication (OBS207). Only that fixture now waits for
+frontend readiness under a bounded deadline; other errors still fail. Historical
+source29/c392receipts are retained separately and cannot qualify the new revision.
+Final exact-source package/repro/matrix qualification is next;
 record its clean revision and artifacts before delivery. SourceC/Go/tests are
 now stable; do not modify code while final packages/tests run. Existing explicit
 CLI GitHub credentials began returning401, but normal HTTPS API requests with
