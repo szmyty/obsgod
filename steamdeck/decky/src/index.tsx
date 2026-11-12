@@ -1,12 +1,15 @@
 import { ButtonItem, PanelSection, PanelSectionRow, staticClasses } from "@decky/ui";
 import { callable, definePlugin, toaster } from "@decky/api";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { health } from "./health.mjs";
 import { createView, currentResult, observe, controls } from "./state.mjs";
+import { product } from "./product";
+import { Support } from "./Support";
 
 type Diagnostic = {time:string; level:string; message:string};
 type Outcome = {id?:number; action?:string; ok:boolean; message:string; recording_path?:string};
-type Result = {ok:boolean; state:string; message:string; configured?:boolean; output_known?:boolean; process?:string; connection?:string; recording?:boolean; capture?:string; frames?:string; game?:string; backend_id?:string; snapshot_id?:number; operation?:{id:number; action:string; state:string}|null; action_result?:Outcome; last_action?:Outcome; stream?:{active:boolean; reconnecting:boolean; bytes:number; duration_ms:number}; recording_path?:string; diagnostics?:Diagnostic[]; plugin_version?:string; settings?:{capture_mode?:"screen"|"game";idle_style?:"black"|"placeholder"};audio?:{state:string;message?:string};video?:{state:string;message?:string;watching?:boolean}};
+type Result = {ok:boolean; state:string; message:string; configured?:boolean; output_known?:boolean; process?:string; connection?:string; recording?:boolean; capture?:string; frames?:string; game?:string; backend_id?:string; snapshot_id?:number; operation?:{id:number; action:string; state:string}|null; action_result?:Outcome; last_action?:Outcome; stream?:{active:boolean; reconnecting:boolean; bytes:number; duration_ms:number}; recording_path?:string; diagnostics?:Diagnostic[]; plugin_version?:string; settings?:{capture_mode?:"screen"|"game";idle_style?:"black"|"placeholder";microphone?:boolean};audio?:AudioStatus;video?:{state:string;message?:string;watching?:boolean}};
+type AudioStatus = {state:string;message?:string;output_available?:boolean;output_muted?:boolean;microphone_requested?:boolean;microphone_available?:boolean;microphone_muted?:boolean;signal?:string};
 type UpdateResult = {ok:boolean; state:string; message:string; current_version?:string; latest_version?:string; available?:boolean; current_app_version?:string; current_plugin_version?:string; current_updater_version?:string; mismatch?:boolean; channel?:string};
 const readStatus=callable<[],Result>("status");
 const start=callable<[],Result>("start");
@@ -15,7 +18,6 @@ const test=callable<[],Result>("test_recording");
 const setCaptureMode=callable<[mode:string],Result>("set_capture_mode");
 const clearLogs=callable<[],Result>("clear_logs");
 const checkUpdates=callable<[],UpdateResult>("check_for_updates");
-let result:Result|undefined;
 const view=createView();
 let pollTask:Promise<void>|undefined;
 let requestSerial=0;
@@ -51,12 +53,11 @@ function refresh():Promise<void>{
     if(!active||instance!==generation)return;
     const update=observe(view,next,Date.now(),request,epoch);
     if(!update.accepted)return;
-    result=next;
     if(next.diagnostics)diagnostics=next.diagnostics;
     if(next.plugin_version)pluginVersion=next.plugin_version;
     // Only a confirmed output transition produces a streaming success toast.
     // An action reply, repeated click or temporary disconnect cannot do so.
-    if(update.transition)toaster.toast({title:"OBSGod",body:update.transition==="streaming"?"OBS is streaming. Verify picture and sound on your channel.":"OBS confirms streaming has stopped."});
+    if(update.transition)toaster.toast({title:product.displayName,body:update.transition==="streaming"?"OBS is streaming. Verify picture and sound on your channel.":"OBS confirms streaming has stopped."});
     changed();
   })();
   pollTask=task;
@@ -75,7 +76,7 @@ function Dot(){const state=useStateView();return <span role="img" aria-label={st
 
 async function clearConsole(){
   try{
-    const next=await clearLogs();
+    const next=await bounded(clearLogs(),7500);
     if(next.diagnostics)diagnostics=next.diagnostics;
     if(!next.ok){notice=next.message;actionNoticeAt=Date.now();}
   }catch{notice="Could not clear the console. Refresh status and try again.";actionNoticeAt=Date.now();}
@@ -114,7 +115,7 @@ function Console(){
     // Copy only the already-filtered event history, never the status/settings
     // object or free-form operation results. Include every retained page.
     const entries=[...diagnostics].reverse();
-    const payload=`OBSGod plugin ${pluginVersion||"unknown"}\n${entries.length} diagnostic events (newest first)\n\n`+entries.map(entry=>`${entry.time} [${entry.level.toUpperCase()}] ${entry.message}`).join("\n\n");
+    const payload=`${product.compatibility.plugin} plugin ${pluginVersion||"unknown"}\n${entries.length} diagnostic events (newest first)\n\n`+entries.map(entry=>`${entry.time} [${entry.level.toUpperCase()}] ${entry.message}`).join("\n\n");
     setCopying(true);setCopyNotice("");
     try{
       await copyText(payload);
@@ -125,7 +126,7 @@ function Console(){
   }
   return <>
     <PanelSectionRow><div style={{fontWeight:700,marginTop:8}}>Diagnostic console{pluginVersion&&<small style={{display:"block",fontWeight:400,opacity:.7}}>Plugin {pluginVersion}</small>}</div></PanelSectionRow>
-    <PanelSectionRow><div role="log" aria-label="OBSGod diagnostic console" aria-live="off" style={{background:"#111923",border:"1px solid #536274",borderRadius:4,padding:10,fontSize:12,lineHeight:1.5,whiteSpace:"pre-wrap",overflowWrap:"anywhere",userSelect:"text"}}>{text||"No diagnostic events yet. Make a local test clip to check capture. The streaming dot stays red during a local recording."}</div></PanelSectionRow>
+    <PanelSectionRow><div role="log" aria-label={`${product.compatibility.plugin} diagnostic console`} aria-live="off" style={{background:"#111923",border:"1px solid #536274",borderRadius:4,padding:10,fontSize:12,lineHeight:1.5,whiteSpace:"pre-wrap",overflowWrap:"anywhere",userSelect:"text"}}>{text||"No diagnostic events yet. Make a local test clip to check capture. The streaming dot stays red during a local recording."}</div></PanelSectionRow>
     <PanelSectionRow><div style={{fontSize:12,opacity:.75}}>Newest first · {diagnostics.length} / 100 events saved on this Deck across reloads and updates. Keys, URLs and raw OBS output are excluded.</div></PanelSectionRow>
     {/* Keep the focused button enabled while copying; the handler rejects a
         duplicate click. Disabling it would discard Steam/browser focus. */}
@@ -155,8 +156,8 @@ async function act(action:"start"|"stop"|"test"){
     const key=`${next.backend_id??"local"}:${next.action_result?.id??token}`;
     if(!seenOutcomes.has(key)){
       seenOutcomes.add(key);
-      if(!outcome.ok)toaster.toast({title:"OBSGod needs attention",body:outcome.message});
-      else if(action==="test"&&outcome.recording_path)toaster.toast({title:"OBSGod",body:"Local test clip saved. Nothing was broadcast."});
+      if(!outcome.ok)toaster.toast({title:`${product.displayName} needs attention`,body:outcome.message});
+      else if(action==="test"&&outcome.recording_path)toaster.toast({title:product.displayName,body:"Local test clip saved. Nothing was broadcast."});
     }
   }catch{
     if(active&&instance===generation&&currentAction===token){notice="Operation could not be confirmed. Use Stop streaming / recover and check OBS.";actionNoticeAt=Date.now();}
@@ -182,7 +183,7 @@ async function changeCaptureMode(){
     if(!active||instance!==generation||currentAction!==token)return;
     const outcome=next.action_result??next;
     notice=outcome.message;actionNoticeAt=Date.now();
-    if(!outcome.ok)toaster.toast({title:"OBSGod needs attention",body:outcome.message});
+    if(!outcome.ok)toaster.toast({title:`${product.displayName} needs attention`,body:outcome.message});
   }catch{
     if(active&&instance===generation&&currentAction===token){notice="Capture mode could not be confirmed. Refresh status before starting.";actionNoticeAt=Date.now();}
   }finally{
@@ -202,46 +203,76 @@ async function checkForUpdates(){
   }finally{if(active&&generation===instance){updateChecking=false;changed();}}
 }
 
+function Hint({children}:{children:ReactNode}){
+  return <div style={{fontSize:13,lineHeight:1.5,opacity:.85,overflowWrap:"anywhere"}}>{children}</div>;
+}
+
 function Content(){
   const state=useStateView();
   const current=currentResult(view,Date.now()) as Result|undefined;
   const available=controls(current,busy);
-  const captureMode=current?.settings?.capture_mode==="game"?"game":"screen";
-  const seconds=Math.floor((result?.stream?.duration_ms??0)/1000);
+  const [captureHelp,setCaptureHelp]=useState(false);
+  const [setupHelp,setSetupHelp]=useState(false);
+  const captureMode=current?.settings?.capture_mode;
+  const captureLabel=captureMode==="game"?"Game only":captureMode==="screen"?"Entire screen":"Not confirmed";
+  const seconds=Math.floor((current?.stream?.duration_ms??0)/1000);
   const duration=Math.floor(seconds/60)+":"+String(seconds%60).padStart(2,"0");
+  const statusMessage=busy&&notice?notice:current?.message||"Checking the local OBS connection…";
+  const audio=current?.audio;
+  const outputLabel=audio?.output_available===true?(audio.output_muted?"Muted":"Available"):audio?.state==="unavailable"?"Unavailable":"Not confirmed";
+  const signalLabel=audio?.signal==="signal"?"Detected in last check":audio?.signal==="silent"?"No signal in last check":"Not measured or unconfirmed";
+  const microphoneLabel=current?.settings?.microphone===false?"Off":current?.settings?.microphone===true?(audio?.microphone_available?(audio.microphone_muted?"Muted":"Enabled"):"Enabled · device not confirmed"):"Not confirmed";
   return <>
-    <PanelSection title="STREAM CONTROL">
-      <PanelSectionRow><div role="status" aria-live="polite" style={{display:"flex",gap:12,alignItems:"center",padding:"8px 0",fontSize:20,fontWeight:700}}><span style={{color:state.color}}>●</span>{state.label}</div></PanelSectionRow>
-      {result?.stream?.active&&<PanelSectionRow><div style={{fontSize:14,opacity:.8}}>Last reported output · {duration}</div></PanelSectionRow>}
+    <PanelSection title="YOUR STREAM">
+      <PanelSectionRow>
+        <div style={{background:"#111923",border:"1px solid #536274",borderRadius:8,padding:14}}>
+          <div role="status" aria-live="polite" style={{display:"flex",gap:10,alignItems:"center",fontSize:20,fontWeight:700,lineHeight:1.35}}>
+            <span aria-hidden="true" style={{color:state.color}}>●</span>{state.label}
+          </div>
+          <div style={{marginTop:6,fontSize:12,opacity:.75}}>Status updates automatically</div>
+          {current?.stream?.active&&<div style={{marginTop:8,fontSize:14}}>Last reported output · {duration}</div>}
+          {current?.recording&&<div style={{marginTop:8,fontSize:14}}>Local recording active</div>}
+          {current?.configured&&<div style={{marginTop:8,fontSize:12,opacity:.8}}>Destination configured in Desktop Setup</div>}
+        </div>
+      </PanelSectionRow>
       <PanelSectionRow><ButtonItem layout="below" disabled={available.startDisabled} onClick={()=>act("start")}>Start streaming</ButtonItem></PanelSectionRow>
       <PanelSectionRow><ButtonItem layout="below" disabled={available.stopDisabled} onClick={()=>act("stop")}>{available.stopLabel}</ButtonItem></PanelSectionRow>
-      <PanelSectionRow><div style={{fontSize:13,lineHeight:1.5,opacity:.8}}>Green means OBS is sending output. Check your Kick channel on another device for picture and sound.</div></PanelSectionRow>
-      <PanelSectionRow><div aria-live="polite" style={{fontSize:14,lineHeight:1.5,whiteSpace:"pre-wrap",overflowWrap:"anywhere"}}>{busy&&notice?notice:result?.message||"Checking the local OBS connection…"}</div></PanelSectionRow>
-      {!busy&&notice&&actionNoticeAt>0&&<PanelSectionRow><div style={{fontSize:12,lineHeight:1.5,opacity:.8,whiteSpace:"pre-wrap",overflowWrap:"anywhere"}}>Last action · {new Date(actionNoticeAt).toLocaleTimeString()}: {notice}</div></PanelSectionRow>}
+      <PanelSectionRow><div aria-live="polite" style={{fontSize:14,lineHeight:1.5,whiteSpace:"pre-wrap",overflowWrap:"anywhere"}}>{statusMessage}</div></PanelSectionRow>
+      {!busy&&notice&&actionNoticeAt>0&&<PanelSectionRow><Hint>Last action · {new Date(actionNoticeAt).toLocaleTimeString()}: {notice}</Hint></PanelSectionRow>}
+      {current?.configured===false&&<PanelSectionRow><Hint>Finish Desktop Setup, then make a local test clip before your first stream.</Hint></PanelSectionRow>}
+      <PanelSectionRow><Hint>Green confirms OBS is sending output. Verify picture and sound on your channel using another device.</Hint></PanelSectionRow>
     </PanelSection>
-    <PanelSection title="CAPTURE">
-      <PanelSectionRow><div style={{fontSize:15,fontWeight:700}}>Capture mode: {captureMode==="game"?"Game only":"Entire screen"}</div></PanelSectionRow>
+    <PanelSection title="PICTURE & SOUND">
+      <PanelSectionRow><div style={{fontSize:15,fontWeight:700}}>Capture mode: {captureLabel}</div></PanelSectionRow>
       <PanelSectionRow><ButtonItem layout="below" disabled={!canChangeCaptureMode(current)} onClick={()=>void changeCaptureMode()}>{busy==="capture-mode"?"Saving capture mode…":captureMode==="game"?"Switch to entire screen":"Switch to game only"}</ButtonItem></PanelSectionRow>
-      <PanelSectionRow><div style={{fontSize:13,lineHeight:1.5,opacity:.8}}>Change modes while streaming and recording are stopped. Entire screen includes Steam menus. Game only uses the between-game screen when a compatible game source is unavailable; it never falls back to sharing the entire screen. Customize that screen in Desktop Setup. This selects video; audio follows the system output and may include other apps.</div></PanelSectionRow>
-      {captureMode==="game"&&current?.video&&<PanelSectionRow><div style={{fontSize:13,lineHeight:1.5}}>{current.video.message||"Waiting for verified game capture"}</div></PanelSectionRow>}
-      {current?.audio&&<PanelSectionRow><div style={{fontSize:13,lineHeight:1.5}}>Game audio: {current.audio.message||current.audio.state}. Check a local clip and your channel for sound.</div></PanelSectionRow>}
+      <PanelSectionRow><Hint>{captureMode==="game"?"Shows the game or your between-game screen. Steam menus stay out of the picture.":captureMode==="screen"?"Includes Steam menus and anything visible on the screen.":"Waiting for confirmed capture settings."}</Hint></PanelSectionRow>
+      {captureMode==="game"&&current?.video&&<PanelSectionRow><Hint>{current.video.message||"Waiting for verified game capture"}</Hint></PanelSectionRow>}
+      <PanelSectionRow><div aria-label="Audio status" style={{fontSize:13,lineHeight:1.6}}><div>System audio: {outputLabel}</div><div>Signal: {signalLabel}</div><div>Microphone: {microphoneLabel}</div></div></PanelSectionRow>
+      {audio?.message&&audio.state!=="ready"&&<PanelSectionRow><Hint>{audio.message}</Hint></PanelSectionRow>}
+      <PanelSectionRow><ButtonItem layout="below" onClick={()=>setCaptureHelp(value=>!value)}>{captureHelp?"Hide capture help":"Capture help"}</ButtonItem></PanelSectionRow>
+      {captureHelp&&<PanelSectionRow><Hint>Change modes while streaming and recording are confirmed stopped. Game only uses your between-game screen when compatible game capture is unavailable; it never switches to the entire screen automatically. Customize that screen in Desktop Setup. Video selection does not isolate audio: system audio may include other apps. Microphone capture is off unless enabled in Setup.</Hint></PanelSectionRow>}
     </PanelSection>
-    <PanelSection title="FIRST STREAM CHECK">
+    <PanelSection title="LOCAL TEST">
+      <PanelSectionRow><Hint>Check picture and sound before going live. This saves a clip without broadcasting.</Hint></PanelSectionRow>
       <PanelSectionRow><ButtonItem layout="below" disabled={available.testDisabled} onClick={()=>act("test")}>Make 10-second test clip</ButtonItem></PanelSectionRow>
-      <PanelSectionRow><div style={{fontSize:13,lineHeight:1.5,opacity:.8}}>Game only shows your between-game screen until compatible game capture is available. Entire screen must provide usable frames before a test or broadcast starts. Test clips save to Videos/OBSGod. Enter your URL and key in OBSGod Setup in Desktop Mode. Microphone is off unless enabled there.</div></PanelSectionRow>
+      <PanelSectionRow><ButtonItem layout="below" onClick={()=>setSetupHelp(value=>!value)}>{setupHelp?"Hide setup help":"Setup and recording help"}</ButtonItem></PanelSectionRow>
+      {setupHelp&&<PanelSectionRow><Hint>Open Desktop Setup to configure your destination, audio and between-game screen. Test clips save to Videos/{product.compatibility.plugin}. Game only can record the between-game screen without a game; entire screen needs usable frames. Play the saved clip to check picture and sound, then verify your first live stream on another device.</Hint></PanelSectionRow>}
+    </PanelSection>
+    <PanelSection title="STATUS & DIAGNOSTICS">
       <PanelSectionRow><ButtonItem layout="below" onClick={()=>refresh()}>Refresh status</ButtonItem></PanelSectionRow>
       <Console/>
     </PanelSection>
     <PanelSection title="UPDATES">
       <PanelSectionRow><ButtonItem layout="below" disabled={updateChecking} onClick={()=>void checkForUpdates()}>{updateChecking?"Checking for updates…":"Check for updates"}</ButtonItem></PanelSectionRow>
       <PanelSectionRow><div aria-live="polite" style={{fontSize:13,lineHeight:1.5,whiteSpace:"pre-wrap",overflowWrap:"anywhere"}}>{updateInfo?`${updateInfo.message}\nApp: ${updateInfo.current_app_version??updateInfo.current_version??"unknown"} · Plugin: ${updateInfo.current_plugin_version??pluginVersion??"unknown"} · Updater: ${updateInfo.current_updater_version??"unknown"}${updateInfo.latest_version?`\nLatest: ${updateInfo.latest_version}`:""}`:`Installed plugin: ${pluginVersion||"checking…"}`}</div></PanelSectionRow>
-      <PanelSectionRow><div style={{fontSize:13,lineHeight:1.5,opacity:.8}}>Checking does not install anything or interrupt a stream. Apply updates in Desktop Mode with the bundled Update OBSGod launcher after streaming and recording are confirmed stopped.</div></PanelSectionRow>
+      <PanelSectionRow><Hint>Apply updates in Desktop Mode with the bundled updater after streaming and recording stop. Checking here does not install an update or interrupt a stream.</Hint></PanelSectionRow>
     </PanelSection>
+    <Support/>
   </>;
 }
 
 export default definePlugin(()=>{
   active=true;instance++;view.epoch++;pollTask=undefined;
   void refresh();const timer=setInterval(()=>{void refresh();changed();},1500);
-  return {name:"OBSGod",titleView:<div className={staticClasses.Title}>OBSGod <small style={{fontWeight:400,opacity:.7}}>preview</small></div>,content:<Content/>,icon:<Dot/>,onDismount(){active=false;instance++;view.epoch++;clearInterval(timer);listeners.clear();busy="";updateChecking=false;}};
+  return {name:product.compatibility.plugin,titleView:<div className={staticClasses.Title}>{product.displayName} <small style={{fontWeight:400,opacity:.7}}>preview</small></div>,content:<Content/>,icon:<Dot/>,onDismount(){active=false;instance++;view.epoch++;clearInterval(timer);listeners.clear();busy="";updateChecking=false;}};
 });

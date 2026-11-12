@@ -46,19 +46,20 @@ jobs:
           npm --prefix steamdeck/decky audit
       - name: Package exact candidate twice
         run: |
-          python scripts/package-deck.py --version 0.1.0-deck.6
-          python scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz
+          python scripts/package-deck.py --version 0.1.0-deck.7
+          python scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz
           cp dist/SHA256SUMS /tmp/first-runtime-sums
           cp dist/UPDATER-SHA256SUMS /tmp/first-updater-sums
-          python scripts/package-deck.py --version 0.1.0-deck.6
-          python scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz
+          python scripts/package-deck.py --version 0.1.0-deck.7
+          python scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz
           diff -u /tmp/first-runtime-sums dist/SHA256SUMS
           diff -u /tmp/first-updater-sums dist/UPDATER-SHA256SUMS
       - name: Actual package browser checks
         run: |
           browser=$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')
-          python steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz --browser "$browser"
+          python steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz --browser "$browser"
           python steamdeck/tests/browser-panel.py dist/obsgod-decky.zip --browser "$browser"
+          python steamdeck/tests/browser-support.py --browser "$browser"
       - name: Native audio and app-filtered capture checks
         run: |
           # These public test inputs may be owned by runner UID1001 while the

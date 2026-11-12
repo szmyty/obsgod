@@ -1,0 +1,11 @@
+---
+# This file supplies GitHub's Sponsor menu and the packaged support buttons.
+# Run `node scripts/generate-support.mjs` after changing a handle.
+buy_me_a_coffee: szmyty
+github: szmyty
+ko_fi: szmyty
+open_collective: szmyty
+thanks_dev: u/gh/szmyty
+
+# Patreon is intentionally inactive: the owner configuration in Akashic records
+# a broken creator page. Restore only after the owner verifies that destination.

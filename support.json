@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "wallets": {
+    "bitcoin": {"network": "bitcoin-mainnet", "address": null},
+    "ethereum": {"network": "ethereum-mainnet", "address": null},
+    "solana": {"network": "solana-mainnet-beta", "address": null}
+  }
+}
