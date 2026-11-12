@@ -1,5 +1,16 @@
 # Current work
 
+Current launch/isolation investigation: the owner successfully reinstalled 5.1,
+then supplied a Gaming Mode console photo showing a 20-second wait ending before
+the OBS control listener appeared. A read-only effective-config-path probe was
+requested; its result is not yet available. Independent upstream inspection
+found Flatpak resets a CLI `--env=XDG_CONFIG_HOME` override during sandbox setup.
+A bounded repair applies it through `/usr/bin/env` inside the sandbox before OBS
+starts; ordinary configuration and output authorization must stay untouched.
+Read [the isolation investigation](docs/flatpak-config-isolation.md). Source branch
+`codex/fix-flatpak-config-isolation` builds on draft PR #32. Candidate 5.2 needs
+fresh qualification; do not reuse 5.1 receipts or claim actual Deck recovery.
+
 Current installer repair: the owner reported Decky ready, followed by an OBS 28+
 rejection while Discover showed OBS 33.0.1. Confirmed defect: `flatpak info
 --show-version` is not supported by Flatpak; the installer mislabeled its command

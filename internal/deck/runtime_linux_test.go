@@ -10,6 +10,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"reflect"
 	"strconv"
 	"strings"
 	"testing"
@@ -26,7 +27,7 @@ func TestLaunchUsesSessionBackendAndOnlyManagedConfiguration(t *testing.T) {
 			t.Fatalf("unsupported or unsafe launch argument: %s", forbidden)
 		}
 	}
-	if !strings.Contains(args, "--env=XDG_CONFIG_HOME="+p.OBSConfig) || !strings.Contains(args, "--profile OBSGod --collection OBSGod") {
+	if !strings.Contains(args, "--command=/usr/bin/env com.obsproject.Studio XDG_CONFIG_HOME="+p.OBSConfig+" obs") || !strings.Contains(args, "--profile OBSGod --collection OBSGod") {
 		t.Fatal("launch escapes managed configuration", args)
 	}
 	if !graphicalSession([]string{"WAYLAND_DISPLAY=wayland-0"}) || !graphicalSession([]string{"DISPLAY=:1"}) {
@@ -476,5 +477,121 @@ while True: signal.pause()
 	}
 	if !processExited(filepath.Join("/proc", strconv.Itoa(cmd.Process.Pid))) {
 		t.Fatal("helper exit was not confirmed")
+	}
+}
+
+func TestFlatpakResetCannotEscapeManagedConfiguration(t *testing.T) {
+	python, err := exec.LookPath("python3")
+	if err != nil {
+		t.Skip("Python fixture unavailable")
+	}
+	for _, visible := range []bool{false, true} {
+		name := "background"
+		if visible {
+			name = "visible_recovery"
+		}
+		t.Run(name, func(t *testing.T) {
+			p := testPaths(t)
+			p.OBSConfig = filepath.Join(filepath.Dir(p.OBSConfig), "managed config with spaces")
+			ordinary := filepath.Join(t.TempDir(), "ordinary config with spaces")
+			marker := filepath.Join(ordinary, "obs-studio", "user.ini")
+			if err := os.MkdirAll(filepath.Dir(marker), 0700); err != nil {
+				t.Fatal(err)
+			}
+			if err := os.WriteFile(marker, []byte("ordinary OBS settings must survive"), 0600); err != nil {
+				t.Fatal(err)
+			}
+			settings, err := Configure(p, strings.NewReader(fixtureSettings))
+			if err != nil {
+				t.Fatal(err)
+			}
+			_, secret, err := Load(p)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if err := prepare(p, settings, secret, visible); err != nil {
+				t.Fatal(err)
+			}
+			bin := t.TempDir()
+			report := filepath.Join(t.TempDir(), "observed.json")
+			// Model Flatpak's real ordering: parse requested environment, then reset
+			// XDG_CONFIG_HOME to the app's normal directory before executing command.
+			flatpak := "#!" + python + "\n" + `import os, sys
+args = sys.argv[1:]
+command = "obs"
+while args:
+    value = args.pop(0)
+    if value == "com.obsproject.Studio": break
+    if value in ("run", "--user"): continue
+    if value.startswith("--command="): command = value.split("=", 1)[1]
+    elif value.startswith("--env="):
+        key, value = value[6:].split("=", 1)
+        os.environ[key] = value
+    else: raise SystemExit("unsupported fixture Flatpak argument")
+os.environ["XDG_CONFIG_HOME"] = ` + strconv.Quote(ordinary) + `
+os.execvp(command, [command] + args)
+`
+			// The stand-in OBS makes a config write just as OBS startup does. It must
+			// land in the private directory, never the ordinary OBS configuration.
+			obs := "#!" + python + "\n" + `import json, os, pathlib, sys
+config = pathlib.Path(os.environ["XDG_CONFIG_HOME"])
+(config / "obs-studio/user.ini").write_text("private OBS runtime write")
+with (config / "obs-studio/plugin_config/obs-websocket/config.json").open() as stream:
+    ws = json.load(stream)
+report = {"config": str(config), "args": sys.argv[1:], "websocket_ready": ws.get("server_enabled") is True and ws.get("auth_required") is True and ws.get("server_port") == 4457 and len(ws.get("server_password", "")) == 64}
+pathlib.Path(` + strconv.Quote(report) + `).write_text(json.dumps(report))
+`
+			for executable, source := range map[string]string{"flatpak": flatpak, "obs": obs} {
+				if err := os.WriteFile(filepath.Join(bin, executable), []byte(source), 0700); err != nil {
+					t.Fatal(err)
+				}
+			}
+			t.Setenv("PATH", bin+string(os.PathListSeparator)+os.Getenv("PATH"))
+			t.Setenv("DISPLAY", ":99")
+			var exited <-chan int
+			if visible {
+				exited, err = launchVisibleOBS(p)
+			} else {
+				exited, err = launchOBS(p)
+			}
+			if err != nil {
+				t.Fatal(err)
+			}
+			select {
+			case code := <-exited:
+				if code != 0 {
+					t.Fatalf("sandbox launch exited %d instead of reaching private configuration", code)
+				}
+			case <-time.After(3 * time.Second):
+				t.Fatal("sandbox launch fixture did not finish")
+			}
+			var observed struct {
+				Config         string   `json:"config"`
+				Args           []string `json:"args"`
+				WebSocketReady bool     `json:"websocket_ready"`
+			}
+			data, err := os.ReadFile(report)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if err := json.Unmarshal(data, &observed); err != nil {
+				t.Fatal(err)
+			}
+			if observed.Config != p.OBSConfig || !observed.WebSocketReady {
+				t.Fatalf("OBS did not receive prepared private configuration: %+v", observed)
+			}
+			expected := []string{"--profile", "OBSGod", "--collection", "OBSGod", "--multi"}
+			if !visible {
+				expected = append(expected, "--minimize-to-tray")
+			}
+			expected = append(expected, "--disable-missing-files-check")
+			if !reflect.DeepEqual(observed.Args, expected) {
+				t.Fatalf("OBS flags changed: got %v want %v", observed.Args, expected)
+			}
+			data, err = os.ReadFile(marker)
+			if err != nil || string(data) != "ordinary OBS settings must survive" {
+				t.Fatal("ordinary OBS configuration was modified", err)
+			}
+		})
 	}
 }

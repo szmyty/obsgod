@@ -64,7 +64,7 @@ def zip_payload(files, epoch):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--version", default="0.1.0-deck.5.1")
+    parser.add_argument("--version", default="0.1.0-deck.5.2")
     parser.add_argument("--revision", default=None)
     parser.add_argument("--allow-dirty", action="store_true", help="Local test packages only; manifest is marked dirty")
     args = parser.parse_args()
