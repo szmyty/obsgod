@@ -150,7 +150,7 @@ Path(os.environ['OBSGOD_TEST_BROWSER_URL']).write_text(sys.argv[1])
                 page.locator("#confirm-control-password").check()
                 expect(page.locator("#reset-control-password")).to_be_enabled()
                 page.locator("#reset-control-password").click()
-                page.get_by_text("Local control password saved privately for managed OBS.",exact=False).wait_for()
+                page.locator("#control-password-status").filter(has_text="Local control password saved privately for managed OBS.").wait_for()
                 updated_secret=json.loads(secret.read_text())
                 assert updated_secret["obs_password"] != previous_secret["obs_password"]
                 assert updated_secret["stream_key"] == previous_secret["stream_key"]
