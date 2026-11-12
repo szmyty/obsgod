@@ -25,6 +25,11 @@ type Settings struct {
 	FPS        int    `json:"fps"`
 	Microphone bool   `json:"microphone"`
 	Encoder    string `json:"encoder"`
+	// Empty values retain the pre-capture-mode JSON representation and settings
+	// hash. Existing installations must load without resetting their stream key.
+	CaptureMode string `json:"capture_mode,omitempty"`
+	IdleStyle   string `json:"idle_style,omitempty"`
+	IdleText    string `json:"idle_text,omitempty"`
 }
 
 type Secrets struct {
@@ -55,6 +60,27 @@ func DefaultSettings() Settings {
 	return Settings{Version: 1, Bitrate: 4500, FPS: 30, Encoder: "vaapi"}
 }
 
+func (s Settings) CaptureModeName() string {
+	if s.CaptureMode == "game" {
+		return "game"
+	}
+	return "screen"
+}
+
+func (s Settings) IdleStyleName() string {
+	if s.IdleStyle == "placeholder" {
+		return "placeholder"
+	}
+	return "black"
+}
+
+func (s Settings) IdleMessage() string {
+	if strings.TrimSpace(s.IdleText) != "" {
+		return s.IdleText
+	}
+	return "Game starting soon"
+}
+
 func (s Settings) Validate() error {
 	u, e := url.Parse(s.Server)
 	if e != nil || u.Hostname() == "" || (u.Scheme != "rtmp" && u.Scheme != "rtmps") || u.User != nil || u.RawQuery != "" || u.Fragment != "" || strings.ContainsAny(s.Server, "\r\n\x00") {
@@ -71,6 +97,15 @@ func (s Settings) Validate() error {
 	}
 	if s.Encoder != "vaapi" && s.Encoder != "x264" {
 		return errors.New("encoder must be vaapi or x264")
+	}
+	if s.CaptureMode != "" && s.CaptureMode != "screen" && s.CaptureMode != "game" {
+		return errors.New("capture mode must be screen or game")
+	}
+	if s.IdleStyle != "" && s.IdleStyle != "black" && s.IdleStyle != "placeholder" {
+		return errors.New("between-game screen must be black or placeholder")
+	}
+	if len([]rune(s.IdleText)) > 200 || strings.ContainsAny(s.IdleText, "\x00\r") {
+		return errors.New("between-game message must be at most 200 characters without control characters")
 	}
 	return nil
 }

@@ -1,5 +1,18 @@
 # Current work
 
+Active owner-authorized upgrade: after 5.2 instructions the owner reports local
+video recording and live stream video WORK, but audio is silent. Exact installed
+versions/routes and audio/microphone media evidence remain missing. They request
+audio repair, full-screen/game-only selection and black/custom-message fallback
+between games while the stream stays active. This explicitly activates the
+bounded idle/transition part of #24/#23; #25 password controls and arbitrary video
+assets remain deferred. Work is stacked on draft #33 in
+`codex/deck-audio-capture-modes`; read [the upgrade plan](docs/audio-capture-upgrade.md).
+No new merge, release publication, deployment or spending is authorized. Keep
+actual Deck audio/game-only/privacy/session acceptance open and preserve settings,
+credentials and ordinary OBS configuration. The older records below are history.
+
+
 Current launch/isolation repair: the owner successfully installed 5.1, then
 supplied a Gaming Mode photo showing a 20-second wait ending before the OBS
 control listener appeared. The read-only effective-path probe CONFIRMED Flatpak
