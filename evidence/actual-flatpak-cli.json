@@ -1,0 +1,27 @@
+{
+  "platform": "disposable Debian Docker / normal deck uid1000",
+  "flatpak": "Flatpak 1.16.6",
+  "invalid_show_version_status": "1",
+  "invalid_show_version_error": "error: Unknown option --show-version",
+  "valid_missing_show_ref_status": "1",
+  "valid_empty_list": "''",
+  "synthetic_export_status": "0",
+  "synthetic_install_status": "unavailable: install exited1, Could not connect: No such file or directory, also under dbus-run-session",
+  "installed_ref": null,
+  "installed_list_ref_version": "None",
+  "installed_list_application_version": "None",
+  "scope": "Actual Flatpak1.16.6 CLI option handling and empty user list verified; synthetic local export succeeded but installation blocked; no actualOBS/SteamDeck or installed-row format proof",
+  "ref_format_source_inspection": {
+    "version": "1.16.6",
+    "show_ref": "app/com.obsproject.Studio/x86_64/stable",
+    "list_ref": "com.obsproject.Studio/x86_64/stable",
+    "evidence_kind": "matching upstream source inspection, not installed-row execution",
+    "source_urls": [
+      "https://github.com/flatpak/flatpak/blob/1.16.6/app/flatpak-builtins-info.c#L335",
+      "https://github.com/flatpak/flatpak/blob/1.16.6/app/flatpak-builtins-list.c",
+      "https://github.com/flatpak/flatpak/blob/1.16.6/common/flatpak-ref-utils.c#L1222",
+      "https://github.com/flatpak/flatpak/blob/1.16.6/app/flatpak-table-printer.c#L706"
+    ],
+    "non_tty_separator": "TAB (source-inspected table-printer; no actual installed nonempty row)"
+  }
+}

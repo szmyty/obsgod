@@ -1,0 +1,22 @@
+[
+  {
+    "run_url": "https://github.com/szmyty/obsgod/actions/runs/43154737102",
+    "name": "candidate",
+    "conclusion": "failure",
+    "steps": [],
+    "annotations": [
+      {
+        "path": ".github",
+        "blob_href": "https://github.com/szmyty/obsgod/blob/f43e5b53b473c35dfe3facec114d28cbeff6c35d/.github",
+        "start_line": 1,
+        "start_column": null,
+        "end_line": 1,
+        "end_column": null,
+        "annotation_level": "failure",
+        "title": "",
+        "message": "The job was not started because your account is locked due to a billing issue.",
+        "raw_details": ""
+      }
+    ]
+  }
+]

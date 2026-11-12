@@ -1,0 +1,299 @@
+{
+  "schema": 1,
+  "candidate": "0.1.0-deck.5.1",
+  "source_revision": "f43e5b53b473c35dfe3facec114d28cbeff6c35d",
+  "state": "Installer hotfix review candidate; local qualification passed; actual Deck retry and CI acceptance remain open",
+  "published_release": false,
+  "merged": false,
+  "issues_closed": [],
+  "platform": "Linux x86_64 cloud",
+  "environment": {
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "python": "3.12.14",
+    "node": "v24.19.0",
+    "npm": "11.9.0",
+    "chromium": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+    "playwright": "Version 1.62.0",
+    "docker": "28.4.0",
+    "native_image_id": "sha256:9ad9c28bfe007871956666f0df6c75b515b1f276531671e7a8402803a344f9d2",
+    "go": "go1.27.4",
+    "govulncheck": "v1.9.0",
+    "native_obs": "30.2.3",
+    "obs_websocket": "5.5.2",
+    "gstreamer": "1.26.2",
+    "native_gstreamer_plugin_source": "b60942f8cd9d788c95ef7dee256f52e14bdf023e",
+    "decky_reference": "3.3.1 ffd103b9c1a4ce5bf305e7c0998eda6e05457dad"
+  },
+  "artifacts": {
+    "obsgod-deck_0.1.0-deck.5.1_linux_amd64.tar.gz": {
+      "sha256": "dd86c830b260d765101d9819e95170c64e8980caaf60f54ebe9a120a4b6b1b5e",
+      "size": 10995302
+    },
+    "obsgod-decky.zip": {
+      "sha256": "0c6da842984869bcce412711b221490863e53637face963341573fb53a3e1c6f",
+      "size": 4007053
+    },
+    "obsgod-one-click-update_0.1.0-deck.5.1_linux_amd64.zip": {
+      "sha256": "69fe7f747e73d65862b18a5cb77b841788fd9dd24643516621a5ffeddced7b27",
+      "size": 3050702
+    },
+    "manifest.json": {
+      "sha256": "c297a06ff05eac98a30ddddcbf7dff1f84e6e8101c45821abe1402c735cb3360",
+      "size": 1929
+    },
+    "updater-manifest.json": {
+      "sha256": "1ab78c35c017cdaa9145aa0f5755ac985f13b62279953b6fbd68e1e4c15bd0f7",
+      "size": 979
+    },
+    "SHA256SUMS": {
+      "sha256": "e08dc1b1d4f1e0b546dbd5f0b1867f5739a28a8bfa2b10f8fb398a8ea0c05663",
+      "size": 275
+    },
+    "UPDATER-SHA256SUMS": {
+      "sha256": "4dbbe2f4e3d63082f1d77f6a313465e06d1255dccfa5d9b4b141a9c885309093",
+      "size": 121
+    }
+  },
+  "checks": [
+    {
+      "name": "go",
+      "status": "passed",
+      "command": "go test -race -json ./...",
+      "outcome": "56 passed, 1 skipped",
+      "log": "go-tests.json",
+      "log_sha256": "2396c229381c840bf4a44c21c0c5c3abb549dcd372a486b97c2fbfa2b7d4a639"
+    },
+    {
+      "name": "vet",
+      "status": "passed",
+      "command": "go vet ./...",
+      "outcome": "No diagnostics",
+      "log": "go-vet.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "vulnerability",
+      "status": "passed",
+      "command": "$GOPATH/bin/govulncheck -json ./...",
+      "outcome": "No vulnerability findings; pinned tool v1.9.0",
+      "log": "go-vuln.json",
+      "log_sha256": "c165d01333c0d98bedabbaefeb2536a9a8314bee1e044f55274757f75e1aea24"
+    },
+    {
+      "name": "python",
+      "status": "passed",
+      "command": "python3 -m unittest discover -s steamdeck/tests -p 'test_*.py' -v",
+      "outcome": "60 passed, including 33.0.1/current/boundary/ref-prefix/query-failure regressions",
+      "log": "python-tests.log",
+      "log_sha256": "caf048a9255a36a32b07a94973cddd689320da77e4bca577e99ffac994f2830e"
+    },
+    {
+      "name": "typescript",
+      "status": "passed",
+      "command": "npm --prefix steamdeck/decky run typecheck",
+      "outcome": "No type errors",
+      "log": "typecheck.log",
+      "log_sha256": "c209f03cf08291d967514267e7298baafb1e2a5491eba51a83971d64515c3f0b"
+    },
+    {
+      "name": "node",
+      "status": "passed",
+      "command": "npm --prefix steamdeck/decky test",
+      "outcome": "8 passed",
+      "log": "node-tests.log",
+      "log_sha256": "b9c2ba5334b74aa414f1eb92cb820854a5793a8b5930f94f9094258a7ec738fd"
+    },
+    {
+      "name": "frontend",
+      "status": "passed",
+      "command": "npm --prefix steamdeck/decky run build",
+      "outcome": "Built actual SDK/frontend modules",
+      "log": "frontend-build.log",
+      "log_sha256": "c0a1f58f6e8f7e22f508f45a254943d5e95849ced419380eb9e0b994aeac7799"
+    },
+    {
+      "name": "npm_audit",
+      "status": "passed",
+      "command": "npm --prefix steamdeck/decky audit --json",
+      "outcome": "0 vulnerabilities",
+      "log": "npm-audit.json",
+      "log_sha256": "6022173ad0822c9267d6a06ecdc7ce21ad667feac945d229c83b9d796c8ac326"
+    },
+    {
+      "name": "package",
+      "status": "passed",
+      "command": "python3 scripts/package-deck.py --version 0.1.0-deck.5.1",
+      "outcome": "Two clean builds have identical SHA256SUMS",
+      "log": "package-repeat.log",
+      "log_sha256": "62bc0cb7aebf0917b250df9a1a85b52905c259f5ae99afce24029e8b842c3428"
+    },
+    {
+      "name": "updater_package",
+      "status": "passed",
+      "command": "python3 scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.5.1_linux_amd64.tar.gz",
+      "outcome": "Two builds extracted from the exact runtime archive have identical UPDATER-SHA256SUMS",
+      "log": "updater-package-repeat.log",
+      "log_sha256": "4dbbe2f4e3d63082f1d77f6a313465e06d1255dccfa5d9b4b141a9c885309093"
+    },
+    {
+      "name": "browser_fresh",
+      "status": "passed",
+      "command": "python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.5.1_linux_amd64.tar.gz --screenshots /workspace/.obsgod-tools/installer-flatpak-fix/browser-setup",
+      "outcome": "Actual Desktop launcher in explicit app-only mode, setup/reload/private settings, terminal hold/repeat/uninstall",
+      "log": "browser-setup.log",
+      "log_sha256": "d98c6b0ac61207fd10b1632446e3fc23b284f16700703cf87f1f9aaa3e106d11"
+    },
+    {
+      "name": "browser_upgrade",
+      "status": "passed",
+      "command": "python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.5.1_linux_amd64.tar.gz --upgrade-from dist/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz --screenshots /workspace/.obsgod-tools/installer-flatpak-fix/browser-upgrade",
+      "outcome": "Actual preview4 archive upgrade preserves all configured user data; explicit app-only browser path",
+      "log": "browser-upgrade.log",
+      "log_sha256": "910ab976efa0dafd73c47aa4204950f10b73917fe17eb67e1da4083ab83d031a"
+    },
+    {
+      "name": "browser_panel",
+      "status": "passed",
+      "command": "python3 steamdeck/tests/browser-panel.py dist/obsgod-decky.zip --screenshots /workspace/.obsgod-tools/installer-flatpak-fix/browser-panel",
+      "outcome": "Actual ZIP: live polls, stale/duplicate handling, controls, transition notifications, logs/copy/redaction and check-only update UI; simulated Steam components",
+      "log": "browser-panel.log",
+      "log_sha256": "f19f12e0ea09fa1c7018a9aa0fc7afeadcc8cb49aa9ef511d01a9762c778c069"
+    },
+    {
+      "name": "decky_updater",
+      "status": "passed",
+      "command": "python3 steamdeck/tests/decky-transport-smoke.py dist/decky-install dist/obsgod-decky.zip --upstream /workspace/.obsgod-tools/decky-upstream-v3.3.1 --runtime-archive dist/obsgod-deck_0.1.0-deck.5.1_linux_amd64.tar.gz --previous-archive dist/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz --updater-zip dist/obsgod-one-click-update_0.1.0-deck.5.1_linux_amd64.zip",
+      "outcome": "Actual pinned Decky frontend/backend/router/installer, one preserved frontend, real default archive install twice, actual Desktop updater with canonical network fixture: upgrade/no-update/repair/bad hash; preservation verified",
+      "log": "transport-updater-smoke.log",
+      "log_sha256": "0ffb939ca5d994509285b06a51b91fa746e3ed2080e023fa5660fff71772d3eb"
+    },
+    {
+      "name": "native_obs",
+      "status": "passed",
+      "command": "docker run --rm --user 1000:1000 --mount type=bind,src=/workspace/obsgod,dst=/src,readonly --mount type=bind,src=/workspace/.obsgod-tools/installer-flatpak-fix/native,dst=/work obsgod-obs-smoke:local dbus-run-session -- bash /src/steamdeck/tests/native-obs-smoke.sh",
+      "outcome": "Real OBS30.2.3/WebSocket5.5.2/GStreamer1.26.2/PipeWire/PulseAudio/softwareH264+Aac: moving720p recording, audio, localRTMP, repeatedStart/Stop, failedstartcleanup/no late connection, confirmedrecordstop and managedshutdown. Flatpak launcher and Gamescope producer are substituted",
+      "log": "native-smoke.log",
+      "log_sha256": "230b6d73619e4cf03386f2a1607b118c427146ff74f192954b1f423e863217a6"
+    },
+    {
+      "name": "cross_linux_arm64",
+      "status": "passed",
+      "command": "CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -trimpath -buildvcs=false -o /workspace/.obsgod-tools/installer-flatpak-fix/cross/obsgod-linux-arm64 .",
+      "outcome": "Compilation only; not executed",
+      "binary_sha256": "6dfd9c660f798de5e034d877b090bcfc3c0bdca02373008cdd55c9fd0985214f"
+    },
+    {
+      "name": "cross_windows_amd64",
+      "status": "passed",
+      "command": "CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -trimpath -buildvcs=false -o /workspace/.obsgod-tools/installer-flatpak-fix/cross/obsgod-windows-amd64 .",
+      "outcome": "Compilation only; not executed",
+      "binary_sha256": "4758962afa676d107451119f6b0cffd07705d28dc6a4bc42b5f273d284be17e6"
+    },
+    {
+      "name": "cross_darwin_arm64",
+      "status": "passed",
+      "command": "CGO_ENABLED=0 GOOS=darwin GOARCH=arm64 go build -trimpath -buildvcs=false -o /workspace/.obsgod-tools/installer-flatpak-fix/cross/obsgod-darwin-arm64 .",
+      "outcome": "Compilation only; not executed",
+      "binary_sha256": "318afc9e8da7132de262fb0b6178d373914c0d5c46943e6fe2d808bb2f0c4ee6"
+    },
+    {
+      "name": "real_flatpak_cli",
+      "status": "passed",
+      "outcome": "Actual Flatpak1.16.6 rejects invalid info --show-version and accepts info --show-ref / list --columns=ref,version on empty user installation; matching source confirms bare ref and TSV format",
+      "evidence": "actual-flatpak-cli.json",
+      "limits": "Synthetic export succeeded but installation failed on service connection; no executed nonempty installed row or actual Steam Deck OBS installation claimed"
+    }
+  ],
+  "skipped": [
+    {
+      "package": "github.com/szmyty/obsgod",
+      "test": null
+    },
+    {
+      "package": "github.com/szmyty/obsgod/cmd/obsgod-decky-install",
+      "test": null
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/config",
+      "test": null
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/obs",
+      "test": null
+    },
+    {
+      "package": "github.com/szmyty/obsgod/internal/version",
+      "test": null
+    },
+    {
+      "package": "github.com/szmyty/obsgod/pkg/automation",
+      "test": "TestRealOBSReadOnly"
+    }
+  ],
+  "unavailable": [
+    {
+      "check": "Actual SteamOS/Flatpak/Gamescope/VAAPI/audio/controller/session/performance",
+      "reason": "No actual Steam Deck attached; native and protocol fixtures do not qualify these criteria"
+    },
+    {
+      "check": "GitHub Actions execution",
+      "reason": "Fresh hotfix jobs not started: GitHub account billing issue",
+      "evidence": "ci-annotations.json"
+    }
+  ],
+  "unrun": [
+    {
+      "check": "Actual Steam Deck installation/capture/streaming retry and Kick reception",
+      "reason": "Requires owner device; corrected installer cannot be declared successful on Deck until retried"
+    },
+    {
+      "check": "Review/merge of hotfix PR32 and release publication",
+      "reason": "Review artifacts prepared; no automatic release or deployment"
+    }
+  ],
+  "historical_failures": [
+    {
+      "source": "e90a6a1f904fadedb932e08f2aaa131c4540ff7d",
+      "check": "native OBS",
+      "outcome": "Failed final shutdown confirmation after media/lifecycle checks. Fixed terminal-process handling and bounded known-PID shutdown wait."
+    },
+    {
+      "source": "fe6bbd874e749ea07ec5179189dc3b8b4d6692a7",
+      "check": "Go authentication timeout",
+      "outcome": "Failed timeout classification race; fixed monotonic deadline handling with regression."
+    },
+    {
+      "source": "fe6bbd874e749ea07ec5179189dc3b8b4d6692a7",
+      "check": "native OBS",
+      "outcome": "Failed blank synthetic feed; observed WirePlumber startup exit. Fixed ordered service startup/readiness; source of individual link teardown errors remains unproven."
+    },
+    {
+      "source": "5183f8479add4120d78e01942c4953de624b8add",
+      "check": "browser setup and updater fixture",
+      "outcome": "Old browser waiter violated real CSP; changed test to locator expectation. Concurrent repeat packaging made a fixture checksum inconsistent; reran frozen artifacts sequentially."
+    },
+    {
+      "source": "2287ed4c2f3fcc9b8ec42bbd68ac531063b5d578",
+      "check": "Owner Deck installer preflight",
+      "outcome": "User reported Decky ready then OBS28+ rejection while Discover showed33.0.1; invalid Flatpakoption confirmed with realCLI. Oldapp/pluginactivationnotreplaced byfailedpreflight."
+    }
+  ],
+  "roadmap2": "Deferred idle visual transitions and user-facing WebSocket password controls (#23/#24/#25) untouched",
+  "backlog": "#7/#9/#11/#12/#13/#14 remain open in deferred milestone",
+  "limitations": [
+    "Synthetic GStreamer producer teardown remains a documented fixture limitation; a later pass does not establish real Gamescope or no-game Steam UI frames",
+    "Authenticated GUI OBS is managed, not headless; session continuity unproven",
+    "Checksums and HTTPS/repository/tag validation are not code signing; broader stable-v1 supply-chain scope remains #12",
+    "AppStream installed-row formatting is source-inspected and fixture-tested; real CLI option surfaces were executed but synthetic installed-app setup was unavailable",
+    "Initial concurrent browser/transport run passed but emitted fixture proxy500 traces; final isolated transport run passed without those traces",
+    "Current published runtime remains4; candidate5.1 is not a published release. Milestone1 remains administratively closed; existing acceptance issues remain open."
+  ],
+  "fix": {
+    "problem": "OBS33.0.1 Discover version rejected as below28 because unsupported Flatpakoption failed",
+    "old_affected_source": "2287ed4c2f3fcc9b8ec42bbd68ac531063b5d578",
+    "owner_affected_master": "4a8a38a839a259e14a19ff003e6a9d71e719ef1d",
+    "repair_source": "f43e5b53b473c35dfe3facec114d28cbeff6c35d",
+    "scope": "Supported installed-version metadata query, exact user ref matching and diagnostics; app/plugin/updater rebuilt with matching versions",
+    "pr": "https://github.com/szmyty/obsgod/pull/32"
+  }
+}

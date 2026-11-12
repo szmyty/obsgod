@@ -1,0 +1,20 @@
+
+> obsgod-decky@0.1.0-deck.5.1 test
+> node --test tests/*.test.mjs
+
+✔ green requires reported output and recent byte progress (0.648095ms)
+✔ unknown never looks stopped; offline and setup are distinct (0.089895ms)
+✔ unconfirmed or blank capture cannot show healthy green (0.103195ms)
+✔ controls use confirmed stream/operation state; unknown output keeps recovery Stop (0.579351ms)
+✔ old polls cannot overwrite an action generation or newer backend snapshot (0.178999ms)
+✔ only confirmed transitions notify, repeated replies and disconnects do not (0.116836ms)
+✔ stale status ages to unknown and cannot enable Start (0.077196ms)
+✔ unknown replies and counter resets cannot rejuvenate a stalled stream (0.156585ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 46.208786
