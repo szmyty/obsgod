@@ -40,6 +40,31 @@ required gate even if all available local checks pass.
 
 ## Current status
 
-Implementation and qualification are in progress on
-`codex/deck-audio-capture-modes`. Do not use older candidate receipts to qualify
+Implementation is prepared as candidate `0.1.0-deck.6` in draft
+[PR #34](https://github.com/szmyty/obsgod/pull/34), stacked on #33/#32, on
+`codex/deck-audio-capture-modes`. Final clean-source qualification is in progress.
+Development tests passed actual OBS audio routing/media and continuous game/idle
+transitions, plus the portable plugin's app selection/unsupported/buffer/producer
+identity cases. These development receipts do not qualify the final package.
+
+The app-filtered source first verifies a producer-advertised non-modifier BGRx
+format with Gamescope's app-ID parameter, pins that producer's object serial,
+and verifies negotiated selection before accepting frames. Late duplicate or
+removed producers, unsupported selection and malformed buffers fail closed.
+Corrupt/empty buffers are dropped; stale frames become black. The observer only
+selects Game/Idle scenes while an existing output is confirmed, and reroutes
+audio once per game identity change without starting/stopping output. Mode
+changes wait for the previous observer to release ownership before saving.
+
+The default legacy capture remains the compositor feed. Game-only video and
+black/custom-message fallback are explicit choices. Audio remains the selected
+system output plus opt-in microphone; viewer mute/volume and actual Deck sound
+must be checked separately. A real game's static/no-new-commit picture may
+trigger the conservative stale-frame fallback. Capture-plugin ABI/loading,
+Gamescope semantics, graphics/performance and actual Kick reception still need
+recorded device qualification. No external custom assets are included.
+
+The portable builder and full native dependency notices/source descriptors are
+included with preferred capture source. No new Flatpak filesystem permission,
+Pulse socket cleanup or host volume changes are applied. Do not use older candidate receipts to qualify
 newer source. No acceptance issue is closed by code or a saved clip notification.

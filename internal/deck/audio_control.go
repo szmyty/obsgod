@@ -71,6 +71,11 @@ func ensureAudio(ctx context.Context, c *automation.Client, p Paths, s Settings)
 		keep[source.name] = true
 	}
 	if err = c.MuteOtherAudio(ctx, keep); err != nil {
+		status.State = "unavailable"
+		status.Signal = "unknown"
+		status.Message = "The managed audio policy could not be confirmed; audio setup is incomplete"
+		saveAudioStatus(p, status)
+		logEvent(p, "audio.unavailable")
 		return err
 	}
 	if status.OutputMuted {

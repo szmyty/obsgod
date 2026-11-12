@@ -41,7 +41,11 @@ negotiated echo alone is insufficient: PipeWire may reflect an unknown client
 key even when an older compositor ignores it. Missing advertisement therefore
 fails before any consumer stream is created. App selection advertised only on a
 DMA-BUF/modifier format does not qualify the separate CPU/MemFd variant used
-here. Ambiguous source names are refused.
+here. The first validated producer's object serial is required and pins the
+consumer target; the mutable node name is never used to retarget after probing.
+Any additional matching node makes capture fail closed, including after
+negotiation or while active. Removal of the original producer also invalidates
+capture rather than selecting its replacement. Ambiguous source names are refused.
 
 The element requests SPA Format key `0x70001` as a64-bit Long containing the
 nonzero game ID, plus requested size1280x720 (`0x70000`). A format must explicitly

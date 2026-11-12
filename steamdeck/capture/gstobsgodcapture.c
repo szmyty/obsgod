@@ -13,6 +13,7 @@
 #include <spa/param/video/format-utils.h>
 #include <spa/pod/builder.h>
 #include <spa/pod/parser.h>
+#include <errno.h>
 #include <string.h>
 
 #ifndef PACKAGE
@@ -31,6 +32,7 @@ typedef struct _GstObsGodCapture {
   GCond changed;
   guint64 app_id;
   gchar *target;
+  gchar *producer_serial;
   guint stale_ms;
   struct pw_thread_loop *loop;
   struct pw_context *context;
@@ -175,10 +177,23 @@ static void registry_global(void *data, uint32_t id, uint32_t permissions,
   if (!media_class || strcmp(media_class, "Video/Source"))
     return;
   g_mutex_lock(&self->mutex);
-  if (self->producer_id != PW_ID_ANY && self->producer_id != id)
+  if (self->producer_id != PW_ID_ANY && self->producer_id != id) {
     self->ambiguous = TRUE;
-  self->producer_id = id;
-  self->producer_version = MIN(version, PW_VERSION_NODE);
+    fail_locked(self);
+  } else if (self->producer_id == PW_ID_ANY) {
+    gboolean numeric = serial && *serial && strlen(serial) <= 20;
+    for (const char *p = serial; numeric && *p; p++)
+      numeric = g_ascii_isdigit(*p);
+    errno = 0;
+    guint64 number = numeric ? g_ascii_strtoull(serial, NULL, 10) : 0;
+    if (!numeric || number == 0 || errno == ERANGE) {
+      fail_locked(self);
+    } else {
+      self->producer_id = id;
+      self->producer_version = MIN(version, PW_VERSION_NODE);
+      self->producer_serial = g_strdup(serial);
+    }
+  }
   g_mutex_unlock(&self->mutex);
 }
 
@@ -410,6 +425,7 @@ static void disconnect_capture(GstObsGodCapture *self)
   gst_clear_buffer(&self->latest);
   self->negotiated = FALSE;
   self->received_us = 0;
+  g_clear_pointer(&self->producer_serial, g_free);
   g_mutex_unlock(&self->mutex);
 }
 
@@ -463,6 +479,7 @@ static gboolean capture_start(GstBaseSrc *base)
     if (!g_cond_wait_until(&self->changed, &self->mutex, deadline))
       break;
   gboolean found = self->registry_done && self->producer_id != PW_ID_ANY &&
+                   self->producer_serial != NULL &&
                    !self->ambiguous && !self->failed && !self->flushing;
   g_mutex_unlock(&self->mutex);
   if (!found)
@@ -491,7 +508,7 @@ static gboolean capture_start(GstBaseSrc *base)
   pw_thread_loop_lock(self->loop);
   self->stream = pw_stream_new(self->core, "OBSGod app-scoped capture",
     pw_properties_new(PW_KEY_MEDIA_TYPE, "Video", PW_KEY_MEDIA_CATEGORY, "Capture",
-      PW_KEY_MEDIA_ROLE, "Screen", PW_KEY_TARGET_OBJECT, self->target, NULL));
+      PW_KEY_MEDIA_ROLE, "Screen", PW_KEY_TARGET_OBJECT, self->producer_serial, NULL));
   if (!self->stream) {
     pw_thread_loop_unlock(self->loop);
     goto failed;

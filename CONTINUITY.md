@@ -8,6 +8,16 @@ between games while the stream stays active. This explicitly activates the
 bounded idle/transition part of #24/#23; #25 password controls and arbitrary video
 assets remain deferred. Work is stacked on draft #33 in
 `codex/deck-audio-capture-modes`; read [the upgrade plan](docs/audio-capture-upgrade.md).
+Candidate6 implementation is prepared in draftPR34; developmentGo94/Python70/
+Node9, native audio, app-filtered protocol and real OBS game/idle/RTMP transition
+checks passed. Final exact-source package/repro/matrix qualification is next;
+record its clean revision and artifacts before delivery. SourceC/Go/tests are
+now stable; do not modify code while final packages/tests run. Existing explicit
+CLI GitHub credentials began returning401, but normal HTTPS API requests with
+inherited proxy/CA and NO explicit Authorization header successfully use injected
+authentication. Private checkpoint helper under `.obsgod-tools/audio-game-upgrade/`
+preserves exact git commit SHAs via Git data API and normal fast-forward; no
+credentials were read/changed. GitHub plugin writes and public git fetch work.
 No new merge, release publication, deployment or spending is authorized. Keep
 actual Deck audio/game-only/privacy/session acceptance open and preserve settings,
 credentials and ordinary OBS configuration. The older records below are history.

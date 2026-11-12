@@ -18,10 +18,11 @@ chmod 700 "$XDG_RUNTIME_DIR"
 export GST_PLUGIN_PATH="$plugin_dir"
 export GST_REGISTRY="$out/gst-registry.bin"
 fixture_pid=''
+duplicate_pid=''
 pipewire_pid=''
 wireplumber_pid=''
 cleanup() {
-  for pid in "$fixture_pid" "$wireplumber_pid" "$pipewire_pid"; do
+  for pid in "$duplicate_pid" "$fixture_pid" "$wireplumber_pid" "$pipewire_pid"; do
     if test -n "$pid"; then kill "$pid" 2>/dev/null || true; wait "$pid" 2>/dev/null || true; fi
   done
 }
@@ -97,6 +98,8 @@ start_fixture stale stale
 capture stale 4242 60
 start_fixture corrupt corrupt
 capture corrupt 4242 30
+start_fixture empty empty
+capture empty 4242 30
 start_fixture short short
 set +e
 capture short 4242 30
@@ -105,7 +108,7 @@ set -e
 printf '%s\n' "$short_result" > "$out/short-exit.txt"
 test "$short_result" -ne 124 && test "$short_result" -ne 137
 
-for mode in missing wrong zero; do
+for mode in missing wrong zero mixed-dma; do
   start_fixture "$mode" "reject-$mode"
   set +e
   capture "reject-$mode" 4242 5
@@ -126,6 +129,31 @@ for appid in 0 769; do
   test ! -s "$out/reject-id-$appid.bgrx"
 done
 
+# The target name is not an identity. After valid media is flowing, a second
+# source with the same name must invalidate capture rather than retarget it.
+start_fixture good late-duplicate
+set +e
+capture late-duplicate 4242 150 &
+consumer_pid=$!
+set -e
+for n in {1..50}; do
+  if test -s "$out/late-duplicate.bgrx"; then break; fi
+  kill -0 "$consumer_pid"
+  sleep .05
+done
+test -s "$out/late-duplicate.bgrx"
+"$out/capture-fixture" "$target" missing > "$out/duplicate-producer.stdout" 2> "$out/duplicate-producer.log" &
+duplicate_pid=$!
+set +e
+wait "$consumer_pid"
+duplicate_result=$?
+set -e
+printf '%s\n' "$duplicate_result" > "$out/late-duplicate-exit.txt"
+test "$duplicate_result" -ne 0 && test "$duplicate_result" -ne 124 && test "$duplicate_result" -ne 137
+kill "$duplicate_pid" 2>/dev/null || true
+wait "$duplicate_pid" || true
+duplicate_pid=''
+
 python3 - "$out" "$plugin_dir/libgstobsgodcapture.so" <<'PY'
 import hashlib,json,os,pathlib,subprocess,sys
 p=pathlib.Path(sys.argv[1]);size=320*180*4
@@ -143,10 +171,10 @@ for name,channel in [('game-a',2),('game-b',1)]:
  log=(p/f'{name}-producer.log').read_text()
  assert f'"appid":{4242 if name=="game-a" else 4243}' in log,(name,log)
  results[name]={'frames':len(frames),'moving_game_frames':len(colored),'blue_compositor_frames':0}
-for name in ['corrupt','short']:
+for name in ['corrupt','empty','short']:
  data=(p/f'{name}.bgrx').read_bytes()
  assert len(data)%size==0,(name,len(data))
- if name=='corrupt':assert data,(name,'source emitted no valid fallback frames')
+ if name in ['corrupt','empty']:assert data,(name,'source emitted no valid fallback frames')
  assert not any(data[c::4].strip(b'\0') for c in range(3)),(name,'invalid media copied')
  results[name]={'frames':len(data)//size,'result':'invalid chunks excluded; black or bounded error'}
 data=(p/'stale.bgrx').read_bytes();assert len(data)>=30*size and len(data)%size==0
@@ -154,7 +182,14 @@ frames=[data[i:i+size] for i in range(0,len(data),size)]
 assert any(max(f[2::4])>150 for f in frames[:15]),'stale case never received a game frame'
 assert all(not any(f[c::4].strip(b'\0') for c in range(3)) for f in frames[-10:]),'stale game frame was retained'
 results['stale']={'frames':len(frames),'last_ten_frames':'black'}
-for name in ['missing','wrong','zero','id-0','id-769']:
+data=(p/'late-duplicate.bgrx').read_bytes();assert data and len(data)%size==0
+frames=[data[i:i+size] for i in range(0,len(data),size)]
+assert any(max(f[2::4])>150 for f in frames),'duplicate case did not begin with actual game media'
+for frame in frames:
+ means=[sum(frame[c::4])/(320*180) for c in range(3)]
+ assert means[0]<40,('late duplicate exposed blue compositor',means)
+results['late-duplicate']={'frames_before_failure':len(frames),'exit_code':int((p/'late-duplicate-exit.txt').read_text()),'blue_compositor_frames':0}
+for name in ['missing','wrong','zero','mixed-dma','id-0','id-769']:
  code=int((p/f'reject-{name}-exit.txt').read_text())
  assert code not in (0,124),(name,code)
  results[f'reject-{name}']={'exit_code':code,'media_bytes':0}
@@ -168,5 +203,5 @@ proof={'state':'passed','scope':'Synthetic PipeWire custom-SPA negotiation and s
  'gstreamer':subprocess.check_output(['gst-launch-1.0','--version'],text=True).strip(),
  'cases':results}
 (p/'qualification.json').write_text(json.dumps(proof,indent=2)+'\n')
-print('PASS: custom-appid source negotiation; different moving game patterns; no compositor frames; stale/corrupt/short black; unsupported/wrong/zero/Steam appid fail closed. Synthetic producer only.')
+print('PASS: app-scoped negotiation/media; distinct moving game patterns; no compositor frames; stale/corrupt/EMPTY black; malformed chunk, unsupported/wrong/zero/Steam appid, mixed-DMA capability and late duplicate fail closed. Synthetic producer only.')
 PY

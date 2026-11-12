@@ -73,7 +73,7 @@ static void process(void *opaque)
     /* Whole-compositor marker is blue. A and B game-only frames are red and
      * green. Any source accidentally defaulting to appid=0 is distinguishable.
      */
-    uint8_t b = f->appid == 0 ? 220 : 10;
+    uint8_t b = f->appid == 0 || !strcmp(f->mode, "empty") ? 220 : 10;
     uint8_t g = f->appid == 4243 ? 210 : 20;
     uint8_t r = f->appid == 4242 ? 210 : 10;
     for (unsigned y = 0; y < HEIGHT; ++y) {
@@ -91,14 +91,15 @@ static void process(void *opaque)
     data->chunk->offset = 0;
     data->chunk->size = !strcmp(f->mode, "short") ? 1 : FRAME_BYTES;
     data->chunk->stride = WIDTH * 4;
-    data->chunk->flags = !strcmp(f->mode, "corrupt") ? SPA_CHUNK_FLAG_CORRUPTED : 0;
+    data->chunk->flags = !strcmp(f->mode, "corrupt") ? SPA_CHUNK_FLAG_CORRUPTED :
+        !strcmp(f->mode, "empty") ? SPA_CHUNK_FLAG_EMPTY : 0;
     struct spa_meta_header *header = spa_buffer_find_meta_data(
         pwbuf->buffer, SPA_META_Header, sizeof(*header));
     if (header) {
         header->pts = -1;
         header->seq = f->frames;
         header->dts_offset = 0;
-        header->flags = data->chunk->flags ? SPA_META_HEADER_FLAG_CORRUPTED : 0;
+        header->flags = !strcmp(f->mode, "corrupt") ? SPA_META_HEADER_FLAG_CORRUPTED : 0;
     }
     ++f->frames;
     pw_stream_queue_buffer(f->stream, pwbuf);
@@ -172,7 +173,7 @@ static void format_changed(void *opaque, uint32_t id, const struct spa_pod *form
      * format intersection happens to retain it from the consumer. Deliberately
      * ignore it in this mode, then emit the blue whole-compositor marker.
      */
-    f->appid = !strcmp(f->mode, "missing") ? 0 : appid;
+    f->appid = !strcmp(f->mode, "missing") || !strcmp(f->mode, "mixed-dma") ? 0 : appid;
     fprintf(stderr, "{\"fixture\":\"negotiated\",\"appid\":%" PRId64
                     ",\"effective_appid\":%" PRId64 "}\n", appid, f->appid);
     fflush(stderr);
@@ -211,15 +212,16 @@ int main(int argc, char **argv)
     uint8_t storage[1024];
     struct spa_pod_builder b = SPA_POD_BUILDER_INIT(storage, sizeof(storage));
     struct spa_pod_frame object;
-    const struct spa_pod *format;
+    const struct spa_pod *formats[2];
+    unsigned n_formats = 1;
     if (argc != 3) {
-        fprintf(stderr, "usage: capture-fixture NODE good|missing|wrong|zero|corrupt|short|stale\n");
+        fprintf(stderr, "usage: capture-fixture NODE good|missing|wrong|zero|corrupt|empty|mixed-dma|short|stale\n");
         return 2;
     }
     f.mode = argv[2];
     if (strcmp(f.mode, "good") && strcmp(f.mode, "missing") &&
         strcmp(f.mode, "wrong") && strcmp(f.mode, "zero") &&
-        strcmp(f.mode, "corrupt") && strcmp(f.mode, "short") && strcmp(f.mode, "stale"))
+        strcmp(f.mode, "corrupt") && strcmp(f.mode, "empty") && strcmp(f.mode, "mixed-dma") && strcmp(f.mode, "short") && strcmp(f.mode, "stale"))
         return 2;
     pw_init(NULL, NULL);
     f.loop = pw_main_loop_new(NULL);
@@ -258,13 +260,32 @@ int main(int argc, char **argv)
         spa_pod_builder_add(&b, FOCUS_APPID, SPA_POD_Long((int64_t)4243), 0);
     } else if (!strcmp(f.mode, "zero")) {
         spa_pod_builder_add(&b, FOCUS_APPID, SPA_POD_Long((int64_t)0), 0);
-    } else if (strcmp(f.mode, "missing")) {
+    } else if (strcmp(f.mode, "missing") && strcmp(f.mode, "mixed-dma")) {
         spa_pod_builder_add(&b, FOCUS_APPID,
             SPA_POD_CHOICE_RANGE_Long((int64_t)0, (int64_t)0, (int64_t)UINT32_MAX), 0);
     }
-    format = spa_pod_builder_pop(&b, &object);
+    formats[0] = spa_pod_builder_pop(&b, &object);
+    if (!strcmp(f.mode, "mixed-dma")) {
+        /* Only the DMA format supports the app selector. The non-modifier CPU
+         * format deliberately does not. A per-node-any-format capability check
+         * would be insufficient and could capture its blue compositor feed.
+         */
+        spa_pod_builder_push_object(&b, &object, SPA_TYPE_OBJECT_Format, SPA_PARAM_EnumFormat);
+        spa_pod_builder_add(&b,
+            SPA_FORMAT_mediaType, SPA_POD_Id(SPA_MEDIA_TYPE_video),
+            SPA_FORMAT_mediaSubtype, SPA_POD_Id(SPA_MEDIA_SUBTYPE_raw),
+            SPA_FORMAT_VIDEO_format, SPA_POD_Id(SPA_VIDEO_FORMAT_BGRx),
+            SPA_FORMAT_VIDEO_size, SPA_POD_Rectangle(&SPA_RECTANGLE(WIDTH, HEIGHT)),
+            SPA_FORMAT_VIDEO_framerate, SPA_POD_Fraction(&SPA_FRACTION(30, 1)),
+            SPA_FORMAT_VIDEO_modifier, SPA_POD_Long((int64_t)0),
+            REQUESTED_SIZE, SPA_POD_CHOICE_RANGE_Rectangle(
+                &SPA_RECTANGLE(0, 0), &SPA_RECTANGLE(0, 0), &SPA_RECTANGLE(UINT32_MAX, UINT32_MAX)),
+            FOCUS_APPID, SPA_POD_CHOICE_RANGE_Long((int64_t)0, (int64_t)0, (int64_t)UINT32_MAX), 0);
+        formats[1] = spa_pod_builder_pop(&b, &object);
+        n_formats = 2;
+    }
     int result = pw_stream_connect(f.stream, PW_DIRECTION_OUTPUT, PW_ID_ANY,
-        PW_STREAM_FLAG_DRIVER | PW_STREAM_FLAG_MAP_BUFFERS, &format, 1);
+        PW_STREAM_FLAG_DRIVER | PW_STREAM_FLAG_MAP_BUFFERS, formats, n_formats);
     if (result < 0) {
         fprintf(stderr, "fixture connect failed\n");
         f.result = 1;

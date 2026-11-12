@@ -45,7 +45,7 @@ func videoStatus(record captureVideoRecord) CaptureVideoStatus {
 	case "screen":
 		status.Message = "Full display capture is selected"
 	case "game":
-		status.Message = "Filtered game frames are selected; Steam UI is excluded"
+		status.Message = "App-filtered game video is selected"
 	case "idle":
 		status.Message = "No usable unambiguous game capture is available; showing the selected idle fallback"
 	case "stopped":
@@ -117,7 +117,7 @@ func ensureIdleVideo(ctx context.Context, c *automation.Client, s Settings) erro
 	}
 	keep := sceneVideoWhitelist(s, "")
 	if s.IdleStyleName() == "placeholder" {
-		settings := map[string]any{"text": s.IdleMessage(), "font": map[string]any{"face": "Sans Serif", "size": 64, "style": "Regular", "flags": 0}, "color1": 0xFFFFFF, "color2": 0xFFFFFF, "outline": false, "drop_shadow": false, "word_wrap": true, "custom_width": 1100}
+		settings := map[string]any{"text": s.IdleMessage(), "font": map[string]any{"face": "Sans Serif", "size": 64, "style": "Regular", "flags": 0}, "color1": uint32(0xFFFFFFFF), "color2": uint32(0xFFFFFFFF), "from_file": false, "text_file": "", "log_mode": false, "outline": false, "drop_shadow": false, "word_wrap": true, "custom_width": 1100}
 		if err := c.EnsureInput(ctx, IdleScene, IdlePlaceholderInput, "text_ft2_source_v2", settings); err != nil {
 			return err
 		}

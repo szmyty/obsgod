@@ -222,7 +222,7 @@ function Content(){
     <PanelSection title="CAPTURE">
       <PanelSectionRow><div style={{fontSize:15,fontWeight:700}}>Capture mode: {captureMode==="game"?"Game only":"Entire screen"}</div></PanelSectionRow>
       <PanelSectionRow><ButtonItem layout="below" disabled={!canChangeCaptureMode(current)} onClick={()=>void changeCaptureMode()}>{busy==="capture-mode"?"Saving capture mode…":captureMode==="game"?"Switch to entire screen":"Switch to game only"}</ButtonItem></PanelSectionRow>
-      <PanelSectionRow><div style={{fontSize:13,lineHeight:1.5,opacity:.8}}>Change modes while streaming and recording are stopped. Entire screen includes Steam menus. Game only uses the between-game screen when a compatible game source is unavailable; it never falls back to sharing the entire screen. Customize that screen in Desktop Setup.</div></PanelSectionRow>
+      <PanelSectionRow><div style={{fontSize:13,lineHeight:1.5,opacity:.8}}>Change modes while streaming and recording are stopped. Entire screen includes Steam menus. Game only uses the between-game screen when a compatible game source is unavailable; it never falls back to sharing the entire screen. Customize that screen in Desktop Setup. This selects video; audio follows the system output and may include other apps.</div></PanelSectionRow>
       {captureMode==="game"&&current?.video&&<PanelSectionRow><div style={{fontSize:13,lineHeight:1.5}}>{current.video.message||"Waiting for verified game capture"}</div></PanelSectionRow>}
       {current?.audio&&<PanelSectionRow><div style={{fontSize:13,lineHeight:1.5}}>Game audio: {current.audio.message||current.audio.state}. Check a local clip and your channel for sound.</div></PanelSectionRow>}
     </PanelSection>

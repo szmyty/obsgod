@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 )
 
 func TestGameIdentityIsOwnedUnambiguousAndNeverSteam(t *testing.T) {
@@ -62,6 +63,46 @@ func TestGameIdentityIsOwnedUnambiguousAndNeverSteam(t *testing.T) {
 	}
 	if parseGraphicsApp([]byte("GAMESCOPE_FOCUSED_APP_GFX(CARDINAL) = 4242\n")) != 4242 {
 		t.Fatal("valid graphics focus not parsed")
+	}
+}
+
+func TestCaptureModeWaitsForPreviousObserverWithoutStoppingOutput(t *testing.T) {
+	p := testPaths(t)
+	if _, err := Configure(p, strings.NewReader(fixtureSettings)); err != nil {
+		t.Fatal(err)
+	}
+	unlock, err := Lock(context.Background(), captureWatchPaths(p))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer func() {
+		if unlock != nil {
+			unlock()
+		}
+	}()
+	done := make(chan error, 1)
+	go func() {
+		_, err := SetCaptureMode(context.Background(), p, strings.NewReader(`{"capture_mode":"game"}`))
+		done <- err
+	}()
+	select {
+	case err := <-done:
+		t.Fatalf("mode changed before old observer released ownership: %v", err)
+	case <-time.After(100 * time.Millisecond):
+	}
+	s, _, err := Load(p)
+	if err != nil || s.CaptureModeName() != "screen" {
+		t.Fatal("preferences changed while observer still owned capture")
+	}
+	unlock()
+	unlock = nil
+	select {
+	case err := <-done:
+		if err != nil {
+			t.Fatal(err)
+		}
+	case <-time.After(2 * time.Second):
+		t.Fatal("mode did not finish after old observer stopped")
 	}
 }
 

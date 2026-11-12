@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"io"
+	"time"
 )
 
 // SetCaptureMode changes only local capture preferences. It never starts or
@@ -31,6 +32,20 @@ func SetCaptureMode(ctx context.Context, p Paths, reader io.Reader) (Result, err
 	state := Status(ctx, p)
 	if !state.OutputKnown || state.Stream.Active || state.Recording {
 		return Result{}, errors.New("stop streaming and recording and confirm idle status before changing capture mode")
+	}
+	// A just-stopped observer may still be completing its last scene operation.
+	// Wait for its lifetime lease before changing mode, so an old game cycle
+	// cannot overwrite the next explicit full-screen start. Never kill it or OBS.
+	leaseCtx, cancel := context.WithTimeout(ctx, 6*time.Second)
+	unlock, err := Lock(leaseCtx, captureWatchPaths(p))
+	cancel()
+	if err != nil {
+		return Result{}, errors.New("the previous game capture observer is finishing; wait for idle status and retry")
+	}
+	defer unlock()
+	state = Status(ctx, p)
+	if !state.OutputKnown || state.Stream.Active || state.Recording {
+		return Result{}, errors.New("output changed while waiting; capture mode was not changed")
 	}
 	s.CaptureMode = input.Mode
 	data, err := json.Marshal(s)

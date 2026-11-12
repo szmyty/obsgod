@@ -16,10 +16,11 @@ import (
 )
 
 type captureWatchDeps struct {
-	load     func(Paths) (Settings, Secrets, error)
-	connect  func(context.Context, Secrets) (*automation.Client, error)
-	discover func(context.Context) GameIdentity
-	interval time.Duration
+	load       func(Paths) (Settings, Secrets, error)
+	connect    func(context.Context, Secrets) (*automation.Client, error)
+	discover   func(context.Context) GameIdentity
+	routeAudio func(context.Context, *automation.Client, Paths, Settings) error
+	interval   time.Duration
 }
 
 // WatchCapture only maintains the selected game/idle scene while output already
@@ -27,7 +28,7 @@ type captureWatchDeps struct {
 func WatchCapture(ctx context.Context, p Paths) error {
 	return watchCaptureWith(ctx, p, captureWatchDeps{load: Load, connect: func(ctx context.Context, secret Secrets) (*automation.Client, error) {
 		return connect(ctx, secret, 600*time.Millisecond)
-	}, discover: DiscoverGame, interval: time.Second})
+	}, discover: DiscoverGame, routeAudio: ensureAudio, interval: time.Second})
 }
 func watchCaptureWith(ctx context.Context, p Paths, deps captureWatchDeps) error {
 	lockCtx, done := context.WithTimeout(ctx, 100*time.Millisecond)
@@ -42,6 +43,8 @@ func watchCaptureWith(ctx context.Context, p Paths, deps captureWatchDeps) error
 	}
 	defer unlock()
 	var target uint32
+	var audioIdentity uint32
+	audioReady := false
 	failures := 0
 	idleKey := ""
 	for {
@@ -55,7 +58,7 @@ func watchCaptureWith(ctx context.Context, p Paths, deps captureWatchDeps) error
 		if settings.CaptureModeName() != "game" {
 			return writeCaptureVideoStatus(p, settings, "stopped", "unknown", false, os.Getpid())
 		}
-		cycle, cancel := context.WithTimeout(ctx, 3*time.Second)
+		cycle, cancel := context.WithTimeout(ctx, 4*time.Second)
 		c, connectErr := deps.connect(cycle, secret)
 		state, frames := "unknown", "unknown"
 		outputIdle := false
@@ -77,7 +80,24 @@ func watchCaptureWith(ctx context.Context, p Paths, deps captureWatchDeps) error
 						}
 					}
 					if connectErr == nil {
-						state, frames, connectErr = gameVideoStep(cycle, c, settings, deps.discover(cycle), runtime.Scene, &target)
+						game := deps.discover(cycle)
+						identity := uint32(0)
+						if game.State == "running" && game.AppID != 769 {
+							identity = game.AppID
+						}
+						if deps.routeAudio != nil && (!audioReady || audioIdentity != identity) {
+							// Audio recovery must leave time for the privacy-preserving video step.
+							audioCtx, audioDone := context.WithTimeout(cycle, time.Second)
+							audioErr := deps.routeAudio(audioCtx, c, p, settings)
+							audioDone()
+							if audioErr == nil {
+								audioIdentity = identity
+								audioReady = true
+							} else {
+								logEvent(p, "audio.unavailable")
+							}
+						}
+						state, frames, connectErr = gameVideoStep(cycle, c, settings, game, runtime.Scene, &target)
 					}
 				}
 			} else {
@@ -97,6 +117,7 @@ func watchCaptureWith(ctx context.Context, p Paths, deps captureWatchDeps) error
 		}
 		if connectErr != nil {
 			target = 0
+			audioReady = false
 			idleKey = ""
 			failures++
 			state, frames = "unknown", "unknown"
@@ -180,7 +201,7 @@ func StartCaptureWatch(p Paths) error {
 	}
 	exited := make(chan int, 1)
 	go func() { _ = command.Wait(); exited <- command.ProcessState.ExitCode() }()
-	deadline := time.NewTimer(4 * time.Second)
+	deadline := time.NewTimer(5 * time.Second)
 	defer deadline.Stop()
 	ticker := time.NewTicker(50 * time.Millisecond)
 	defer ticker.Stop()
