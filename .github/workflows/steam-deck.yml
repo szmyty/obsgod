@@ -46,18 +46,18 @@ jobs:
           npm --prefix steamdeck/decky audit
       - name: Package exact candidate twice
         run: |
-          python scripts/package-deck.py --version 0.1.0-deck.5
-          python scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.5_linux_amd64.tar.gz
+          python scripts/package-deck.py --version 0.1.0-deck.5.1
+          python scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.5.1_linux_amd64.tar.gz
           cp dist/SHA256SUMS /tmp/first-runtime-sums
           cp dist/UPDATER-SHA256SUMS /tmp/first-updater-sums
-          python scripts/package-deck.py --version 0.1.0-deck.5
-          python scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.5_linux_amd64.tar.gz
+          python scripts/package-deck.py --version 0.1.0-deck.5.1
+          python scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.5.1_linux_amd64.tar.gz
           diff -u /tmp/first-runtime-sums dist/SHA256SUMS
           diff -u /tmp/first-updater-sums dist/UPDATER-SHA256SUMS
       - name: Actual package browser checks
         run: |
           browser=$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')
-          python steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.5_linux_amd64.tar.gz --browser "$browser"
+          python steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.5.1_linux_amd64.tar.gz --browser "$browser"
           python steamdeck/tests/browser-panel.py dist/obsgod-decky.zip --browser "$browser"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:

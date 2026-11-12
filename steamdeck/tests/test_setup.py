@@ -333,28 +333,76 @@ class UnifiedInstallerSafety(unittest.TestCase):
 
 
 class DependencyCompatibility(unittest.TestCase):
+    OBS_REF = "app/com.obsproject.Studio/x86_64/stable"
+    LIST_REF = "com.obsproject.Studio/x86_64/stable"
+
+    @staticmethod
+    def result(stdout="", code=0):
+        return Mock(returncode=code, stdout=stdout)
+
+    def responses(self, version="33.0.1"):
+        return [self.result(), self.result(), self.result(self.OBS_REF + "\n"),
+                self.result(self.LIST_REF + "\t" + version + "\n")]
+
     def test_installed_modern_obs_does_not_reinstall_or_change_remotes(self):
-        with patch.object(install.shutil, "which", return_value="/usr/bin/flatpak"), patch.object(install.subprocess, "run", side_effect=[Mock(returncode=0), Mock(returncode=0), Mock(returncode=0, stdout="33.0.0\n")]) as run:
+        with patch.object(install.shutil, "which", return_value="/usr/bin/flatpak"), patch.object(install.subprocess, "run", side_effect=self.responses()) as run:
             install.ensure_dependencies()
         self.assertEqual([call.args[0] for call in run.call_args_list], [
             ["flatpak", "info", "--user", "com.obsproject.Studio"],
             ["flatpak", "info", "--user", "com.obsproject.Studio.Plugin.Gstreamer"],
-            ["flatpak", "info", "--user", "--show-version", "com.obsproject.Studio"],
+            ["flatpak", "info", "--user", "--show-ref", "com.obsproject.Studio"],
+            ["flatpak", "list", "--user", "--app", "--columns=ref,version"],
         ])
 
     def test_obs_before_bundled_websocket_is_rejected(self):
-        with patch.object(install.shutil, "which", return_value="/usr/bin/flatpak"), patch.object(install.subprocess, "run", side_effect=[Mock(returncode=0), Mock(returncode=0), Mock(returncode=0, stdout="27.2.0\n")]):
-            with self.assertRaisesRegex(RuntimeError, "OBS 28 or newer"):
+        with patch.object(install.shutil, "which", return_value="/usr/bin/flatpak"), patch.object(install.subprocess, "run", side_effect=self.responses("27.2.0")):
+            with self.assertRaisesRegex(RuntimeError, "User-installed OBS 27.2.0.*older than OBS 28"):
                 install.ensure_dependencies()
 
+    def test_boundary_and_current_versions_are_supported(self):
+        for version in ["28.0.0", "33.0.1", "33.0.1-rc1"]:
+            with self.subTest(version=version), patch.object(install.subprocess, "run", side_effect=self.responses(version)[2:]):
+                self.assertEqual(install.installed_obs_version(), version)
+
+    def test_list_ref_with_optional_app_prefix_is_normalized(self):
+        for listed in [self.LIST_REF, self.OBS_REF]:
+            with self.subTest(listed=listed), patch.object(install.subprocess, "run", side_effect=[self.result(self.OBS_REF), self.result(listed + "\t33.0.1\n")]):
+                self.assertEqual(install.installed_obs_version(), "33.0.1")
+
+    def test_query_failures_are_not_reported_as_old_obs(self):
+        cases = [
+            [self.result("", 1)],
+            [self.result("not-an-app-ref")],
+            [self.result(self.OBS_REF), self.result("", 1)],
+            [self.result(self.OBS_REF), self.result("")],
+            [self.result(self.OBS_REF), self.result(self.OBS_REF + "\t\n")],
+            [self.result(self.OBS_REF), self.result(self.OBS_REF + "\t33.invalid\n")],
+            [self.result(self.OBS_REF), self.result((self.OBS_REF + "\t33.0.1\n") * 2)],
+        ]
+        for responses in cases:
+            with self.subTest(responses=responses), patch.object(install.subprocess, "run", side_effect=responses):
+                with self.assertRaises(RuntimeError) as error:
+                    install.installed_obs_version()
+                self.assertNotIn("older than OBS 28", str(error.exception))
+                self.assertNotIn("second WebSocket", str(error.exception))
+
+    def test_resolved_ref_selects_launched_branch_not_unrelated_app_or_highest_version(self):
+        rows = "app/com.other.App/x86_64/stable\t99.0.0\n" + \
+               "app/com.obsproject.Studio/x86_64/beta\t35.0.0\n" + \
+               self.OBS_REF + "\t27.2.0\n"
+        with patch.object(install.subprocess, "run", side_effect=[self.result(self.OBS_REF), self.result(rows)]):
+            self.assertEqual(install.installed_obs_version(), "27.2.0")
+
     def test_missing_dependencies_use_user_flatpak_then_verify_version(self):
-        with patch.object(install.shutil, "which", return_value="/usr/bin/flatpak"), patch.object(install.subprocess, "run", side_effect=[Mock(returncode=1), Mock(returncode=0), Mock(returncode=0), Mock(returncode=0, stdout="33.0.0\n")]) as run:
+        responses = [self.result(code=1), self.result(), self.result(),
+                     self.result(self.OBS_REF), self.result(self.OBS_REF + "\t33.0.1\n")]
+        with patch.object(install.shutil, "which", return_value="/usr/bin/flatpak"), patch.object(install.subprocess, "run", side_effect=responses) as run:
             install.ensure_dependencies()
         for call in run.call_args_list:
             command = call.args[0]
             self.assertEqual(command[0], "flatpak")
             self.assertIn("--user", command)
-        self.assertEqual(run.call_args_list[-1].args[0][1:4], ["info", "--user", "--show-version"])
+        self.assertEqual(run.call_args_list[-1].args[0], ["flatpak", "list", "--user", "--app", "--columns=ref,version"])
 
 
 if __name__ == "__main__":

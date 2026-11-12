@@ -1,5 +1,26 @@
 # Current work
 
+Current installer repair: the owner reported Decky ready, followed by an OBS 28+
+rejection while Discover showed OBS 33.0.1. Confirmed defect: `flatpak info
+--show-version` is not supported by Flatpak; the installer mislabeled its command
+failure as an old OBS version. The repair uses supported `info --show-ref` and
+`list --columns=ref,version`, matches the launched user ref, and reports query/
+metadata failures separately from a confirmed version below 28. Tests and the
+installer protocol fixture must reject unsupported flags. Candidate 5.1 rebuilds
+the CLI/plugin/updater with matching versions; do not use old runtime-5 receipts
+to qualify its new artifacts. Actual owner-device acceptance remains open.
+
+Prepared installer repair: draft PR #32, exact qualified source
+`f43e5b53b473c35dfe3facec114d28cbeff6c35d`, version `0.1.0-deck.5.1`, immutable
+artifact commit `afec6263fc43369917cd54b80a58055d5c00f0e6` on
+`artifacts/deck5-flatpak-fix`. Read [the repair evidence](docs/installer-flatpak-fix.md).
+Fresh local matrix and public file/hash verification passed; one optional test
+was skipped, cross-builds compiled only, actual Deck retry and successful CI are
+still missing. Do not merge the artifact branch or call this a release. The
+earlier milestone closure and seven merges remain unchanged; PR #32 is a new
+draft follow-up, not an already-merged fix. Reinstall in place; preserve keys and
+rollback copies. The source branch is `codex/fix-flatpak-version-probe`.
+
 Repository: `szmyty/obsgod`. Active campaign:
 [Roadmap 1 / #8](https://github.com/szmyty/obsgod/issues/8).
 

@@ -151,7 +151,22 @@ async def runtime_installer_upgrade(fixture, args, work, plugins, loader, settin
     manifest = json.loads((package / "manifest.json").read_text())
     commands = work / "fixture-bin"
     commands.mkdir()
-    (commands / "flatpak").write_text("#!/bin/sh\nif [ \"$1\" != info ]; then exit 1; fi\nfor arg in \"$@\"; do if [ \"$arg\" = --show-version ]; then echo 33.0.0; fi; done\n")
+    # Reject unsupported CLI options, including the old invented --show-version.
+    (commands / "flatpak").write_text("#!" + sys.executable + "\n" + """
+import sys
+args = sys.argv[1:]
+obs = 'com.obsproject.Studio'
+ref = 'app/' + obs + '/x86_64/stable'
+if args in [['info', '--user', obs], ['info', '--user', obs + '.Plugin.Gstreamer']]:
+    pass
+elif args == ['info', '--user', '--show-ref', obs]:
+    print(ref)
+elif args == ['list', '--user', '--app', '--columns=ref,version']:
+    print(ref.removeprefix('app/') + '\\t33.0.1')
+else:
+    print('Unsupported Flatpak fixture command', file=sys.stderr)
+    raise SystemExit(2)
+""")
     (commands / "flatpak").chmod(0o700)
     env["PATH"] = str(commands) + os.pathsep + os.environ["PATH"]
     for _ in range(2):
