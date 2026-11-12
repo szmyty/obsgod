@@ -21,6 +21,7 @@ import zipfile
 
 import aiohttp
 from aiohttp import web
+from test_bootstrap import previous_app_install_command
 
 REPO = Path(__file__).resolve().parents[2]
 
@@ -115,7 +116,7 @@ async def runtime_installer_upgrade(fixture, args, work, plugins, loader, settin
     with tarfile.open(args.previous_archive) as archive:
         archive.extractall(previous, filter="data")
     previous_package = next(previous.glob("OBSGod-*"))
-    await fixture.execute([sys.executable, str(previous_package / "install.py"), "--no-launch"], env)
+    await fixture.execute(previous_app_install_command(previous_package), env)
     current = home / ".local/share/obsgod/current"
     previous_release = current.resolve()
     configured = subprocess.run([str(current / "obsgod"), "deck", "configure"],
@@ -260,7 +261,7 @@ async def desktop_updater_upgrade(fixture, args, work, env, previous_package, pa
 
     # Start from the actual legacy app and plugin again; preserve its real key
     # and user data while exercising all current updater stages.
-    await fixture.execute([sys.executable, str(previous_package / "install.py"), "--no-launch"], env)
+    await fixture.execute(previous_app_install_command(previous_package), env)
     with zipfile.ZipFile(previous_package / "obsgod-decky.zip") as archive:
         shutil.rmtree(plugins / "obsgod")  # Disposable fixture only.
         archive.extractall(plugins)

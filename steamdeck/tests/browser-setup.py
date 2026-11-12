@@ -12,7 +12,7 @@ import tempfile
 import time
 
 from playwright.sync_api import expect, sync_playwright
-from test_bootstrap import desktop_command, read_until
+from test_bootstrap import desktop_command, previous_app_install_command, read_until
 
 
 def main():
@@ -39,7 +39,7 @@ def main():
             with tarfile.open(args.upgrade_from) as archive:
                 archive.extractall(older, filter="data")
             old_package = next(older.glob("OBSGod-*"))
-            subprocess.run([sys.executable, str(old_package / "install.py"), "--no-launch"], env=env, check=True)
+            subprocess.run(previous_app_install_command(old_package), env=env, check=True)
             fixture = {"server":"rtmps://example.invalid/app","stream_key":"browser-fixture-never-real"}
             subprocess.run([str(current / "obsgod"), "deck", "configure"], input=json.dumps(fixture), env=env, capture_output=True, text=True, check=True)
             for path in [home / "Videos/OBSGod/keep.mkv", home / ".var/app/com.obsproject.Studio/config/obsgod/obs-studio/global.ini"]:
