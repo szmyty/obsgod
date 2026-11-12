@@ -205,6 +205,28 @@ def control_lock(home):
         yield
 
 
+def installed_obs_version():
+    # `info --show-version` is not a Flatpak option. Resolve the same user
+    # application/ref that `flatpak run --user` uses, then query machine-readable
+    # installed AppStream metadata. Do not infer it from another branch or the
+    # system installation that Discover may also display.
+    reference = subprocess.run(["flatpak", "info", "--user", "--show-ref", "com.obsproject.Studio"], capture_output=True, text=True, timeout=15)
+    obs_ref = reference.stdout.strip()
+    if reference.returncode or not re.fullmatch(r"app/com\.obsproject\.Studio/[A-Za-z0-9_-]+/[A-Za-z0-9._-]+", obs_ref):
+        raise RuntimeError("Could not identify the user-installed OBS Studio ref. Check OBS Studio's user installation in Discover, then retry.")
+    result = subprocess.run(["flatpak", "list", "--user", "--app", "--columns=ref,version"], capture_output=True, text=True, timeout=15)
+    if result.returncode:
+        raise RuntimeError("Flatpak could not report the installed OBS version. Check Flatpak/SteamOS updates and retry.")
+    versions = []
+    for line in result.stdout.splitlines():
+        ref, separator, version = line.partition("\t")
+        if ref.strip() == obs_ref:
+            versions.append(version.strip() if separator else "")
+    if len(versions) != 1 or not re.fullmatch(r"[0-9]+(?:\.[0-9]+)*(?:[-+][A-Za-z0-9.-]+)?", versions[0]):
+        raise RuntimeError("OBS Studio is installed, but Flatpak did not report one usable version for its active user ref. Check the OBS Studio entry in Discover and retry.")
+    return versions[0]
+
+
 def ensure_dependencies():
     if not shutil.which("flatpak"):
         raise RuntimeError("Flatpak is unavailable. Install on your Steam Deck in Desktop Mode.")
@@ -219,10 +241,9 @@ def ensure_dependencies():
         for command in commands:
             if subprocess.run(command, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=1200).returncode:
                 raise RuntimeError("OBS/capture installation failed. Check Discover, disk space and your connection, then rerun this installer.")
-    result = subprocess.run(["flatpak", "info", "--user", "--show-version", "com.obsproject.Studio"], capture_output=True, text=True, timeout=15)
-    version = result.stdout.strip()
-    if result.returncode or not re.fullmatch(r"[0-9]+(?:\.[0-9]+)*(?:[-+][A-Za-z0-9.-]+)?", version) or int(re.match(r"[0-9]+", version).group()) < 28:
-        raise RuntimeError("OBS 28 or newer is required for its bundled obs-websocket. Update OBS Studio in Discover, then retry; do not install a second WebSocket plugin.")
+    version = installed_obs_version()
+    if int(re.match(r"[0-9]+", version).group()) < 28:
+        raise RuntimeError("User-installed OBS " + version + " is older than OBS 28, which is required for bundled obs-websocket. Update that user installation in Discover, then retry; do not install a second WebSocket plugin.")
     print("OBS " + version + " includes obs-websocket; authenticated readiness will be checked on startup.", flush=True)
 
 

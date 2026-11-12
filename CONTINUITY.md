@@ -1,5 +1,15 @@
 # Current work
 
+Current installer repair: the owner reported Decky ready, followed by an OBS 28+
+rejection while Discover showed OBS 33.0.1. Confirmed defect: `flatpak info
+--show-version` is not supported by Flatpak; the installer mislabeled its command
+failure as an old OBS version. The repair uses supported `info --show-ref` and
+`list --columns=ref,version`, matches the launched user ref, and reports query/
+metadata failures separately from a confirmed version below 28. Tests and the
+installer protocol fixture must reject unsupported flags. Candidate 5.1 rebuilds
+the CLI/plugin/updater with matching versions; do not use old runtime-5 receipts
+to qualify its new artifacts. Actual owner-device acceptance remains open.
+
 Repository: `szmyty/obsgod`. Active campaign:
 [Roadmap 1 / #8](https://github.com/szmyty/obsgod/issues/8).
 
