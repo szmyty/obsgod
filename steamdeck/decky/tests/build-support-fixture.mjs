@@ -28,7 +28,7 @@ await build({
         import {createRoot} from "react-dom/client";
         export const PanelSection=({title,children})=>React.createElement("section",null,React.createElement("h2",null,title),children);
         export const PanelSectionRow=({children})=>React.createElement("div",{className:"row"},children);
-        export const ButtonItem=({children,onClick,disabled})=>React.createElement("button",{onClick,disabled},children);
+        export const ButtonItem=({children,onClick,disabled,icon,description})=>React.createElement("div",null,React.createElement("button",{onClick,disabled},icon&&React.createElement("span",{"aria-hidden":true},icon),React.createElement("span",null,children)),description&&React.createElement("div",{style:{fontSize:12,opacity:.75}},description));
         export const Navigation={NavigateToExternalWeb:url=>window.supportFixture.externalLinks.push(url)};
         export function showModal(content){
           const mount=document.createElement("div");document.body.appendChild(mount);

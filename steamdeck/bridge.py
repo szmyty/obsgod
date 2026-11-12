@@ -11,7 +11,7 @@ def cli_path():
 
 
 def run_cli(action, settings=None, timeout=85):
-    if action not in {"status", "doctor", "configure", "start", "stop", "test-recording", "restart", "open-obs"}:
+    if action not in {"status", "doctor", "configure", "start", "stop", "test-recording", "restart", "open-obs", "connection-info", "test-connection", "change-obs-password"}:
         return {"ok": False, "state": "error", "message": "Unknown operation"}
     payload = json.dumps(settings).encode() if settings is not None else b""
     process = subprocess.Popen(

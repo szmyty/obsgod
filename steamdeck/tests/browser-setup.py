@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import signal
+import socket
 import subprocess
 import sys
 import tarfile
@@ -30,7 +31,7 @@ def main():
         package = next(base.glob("OBSGod-*"))
         home = base / "home with spaces"
         home.mkdir()
-        env = dict(os.environ, HOME=str(home), XDG_CONFIG_HOME=str(home / ".config"), XDG_STATE_HOME=str(home / ".local/state"))
+        env = dict(os.environ, HOME=str(home), XDG_CONFIG_HOME=str(home / ".config"), XDG_DATA_HOME=str(home / ".local/share"), XDG_STATE_HOME=str(home / ".local/state"), XDG_CACHE_HOME=str(home / ".cache"))
         current = home / ".local/share/obsgod/current"
         snapshots = {}
         if args.upgrade_from:
@@ -78,6 +79,30 @@ Path(os.environ['OBSGOD_TEST_BROWSER_URL']).write_text(sys.argv[1])
                 page.on("pageerror", lambda error: errors.append(str(error)))
                 page.goto(ready.read_text())
                 page.get_by_role("heading", name="Connect your stream").wait_for()
+                expect(page.locator("#product-name")).to_contain_text("Decky Stream")
+                assert "#" not in page.url, "Private setup token remained visible in URL"
+                # Guides are explicit hints; selecting another provider cannot
+                # silently change either a server or a key already being typed.
+                page.locator("#server").fill("rtmps://example.invalid/app")
+                page.locator("#key").fill("browser-fixture-never-real")
+                for provider,docs in [
+                    ("kick","https://help.kick.com/en/articles/7066931-how-to-stream-on-kick-com"),
+                    ("youtube","https://support.google.com/youtube/answer/10364924?hl=en"),
+                    ("custom","https://obsproject.com/kb/quick-start-guide"),
+                ]:
+                    page.locator("#provider").select_option(provider)
+                    expect(page.locator("#provider-docs")).to_have_attribute("href",docs)
+                    expect(page.locator("#server")).to_have_value("rtmps://example.invalid/app")
+                    expect(page.locator("#key")).to_have_value("browser-fixture-never-real")
+                    assert page.locator("#provider-preset").is_disabled()
+                page.locator("#provider").select_option("twitch")
+                assert page.locator("#provider-preset").is_enabled()
+                page.once("dialog",lambda dialog:dialog.accept())
+                page.locator("#provider-preset").click()
+                expect(page.locator("#server")).to_have_value("rtmps://ingest.global-contribute.live-video.net/app")
+                expect(page.locator("#key")).to_have_value("browser-fixture-never-real")
+                page.locator("#provider").select_option("custom")
+                page.locator("#server").fill("rtmps://example.invalid/app")
                 assert not page.locator("#microphone").is_checked()
                 expect(page.locator("#capture_mode")).to_have_value("screen")
                 assert page.locator("#idle_style").is_disabled()
@@ -109,6 +134,32 @@ Path(os.environ['OBSGOD_TEST_BROWSER_URL']).write_text(sys.argv[1])
                 secret = home / ".config/obsgod/secrets.json"
                 assert secret.stat().st_mode & 0o777 == 0o600
                 assert json.loads(secret.read_text())["stream_key"] == "browser-fixture-never-real"
+                # A changed destination requires its own explicit key; choosing
+                # a guide alone still does not change the saved destination.
+                page.locator("#server").fill("rtmps://different.invalid/app")
+                assert page.locator("#key").evaluate("field=>field.required")
+                page.get_by_text("Server changed: enter the key for this destination.",exact=False).wait_for()
+                page.locator("#server").fill("rtmps://example.invalid/app")
+                assert not page.locator("#key").evaluate("field=>field.required")
+                # Exercise the actual private Go rotation through Desktop UI.
+                # No OBS listener/process exists in this fixture, so this is
+                # credential/configuration proof, not an authentication receipt.
+                previous_secret=json.loads(secret.read_text())
+                page.get_by_text("Change or recover the local control password",exact=True).click()
+                assert page.locator("#reset-control-password").is_disabled()
+                page.locator("#confirm-control-password").check()
+                expect(page.locator("#reset-control-password")).to_be_enabled()
+                page.locator("#reset-control-password").click()
+                page.get_by_text("Local control password saved privately for managed OBS.",exact=False).wait_for()
+                updated_secret=json.loads(secret.read_text())
+                assert updated_secret["obs_password"] != previous_secret["obs_password"]
+                assert updated_secret["stream_key"] == previous_secret["stream_key"]
+                assert updated_secret["settings_hash"] == previous_secret["settings_hash"]
+                assert page.locator("#control-password").input_value()==""
+                assert not page.locator("#confirm-control-password").is_checked()
+                assert page.locator("#reset-control-password").is_disabled()
+                assert updated_secret["obs_password"] not in page.locator("body").inner_text()
+                assert secret.stat().st_mode & 0o777 == 0o600
                 # Explicitly saving new capture/fallback settings changes the
                 # app settings/hash pair; repeat install must preserve that new
                 # pair as well as the original OBS preferences and media.
@@ -129,10 +180,30 @@ Path(os.environ['OBSGOD_TEST_BROWSER_URL']).write_text(sys.argv[1])
             assert process.returncode==0
             subprocess.run([sys.executable, str(package / "install.py"), "--no-launch", "--app-only"], env=env, check=True)
             assert all(path.read_bytes()==data for path,data in snapshots.items()), "Repeat install altered user data"
-            subprocess.run(["python3", str(current / "uninstall.py"), "--purge-settings"], env=env, check=True)
-            assert not (home / ".local/bin/obsgod").exists()
-            assert not secret.exists()
-            print("PASS: actual desktop launcher in explicit app-only test mode, foreground startup, browser setup/reload with preserved game-only/fallback settings, private credentials, terminal hold, repeat install, clean uninstall; Decky installation qualified separately; fixture credentials only" + ("; actual earlier-preview upgrade preserves all user data" if snapshots else ""))
+            # App-only setup deliberately has no running Decky frontend. Review
+            # inventory without effects, then prove actual removal refuses to
+            # orphan its plugin. Successful removal is exercised through the
+            # real pinned Decky uninstall route in decky-transport-smoke.py.
+            uninstall=[sys.executable,str(current / "uninstall.py"),"--purge-settings"]
+            inventory=subprocess.run(uninstall+["--dry-run","--json"],env=env,capture_output=True,text=True,check=True)
+            plan=json.loads(inventory.stdout)
+            assert plan["ok"] and plan["dry_run"] and plan["remove_plugin"]
+            assert str(secret.parent) in [entry["path"] for entry in plan["entries"]]
+            before_secret=secret.read_bytes()
+            # Reserve the fixed port without listening. This both models an
+            # unavailable service and prevents this negative test contacting a
+            # real Decky installation on the host. An occupied port aborts the
+            # fixture before any removal command rather than touching its user.
+            with socket.socket(socket.AF_INET,socket.SOCK_STREAM) as unavailable:
+                unavailable.bind(("127.0.0.1",1337))
+                removal=subprocess.run(uninstall+["--yes","--json"],env=env,capture_output=True,text=True,timeout=35)
+            assert removal.returncode!=0, "App-only fixture unexpectedly removed files without a verified Decky frontend"
+            failed=json.loads(removal.stdout)
+            assert not failed["ok"] and "Decky" in failed["message"]
+            assert current.is_dir() and (home / ".local/bin/obsgod").exists()
+            assert secret.read_bytes()==before_secret
+            assert "browser-fixture-never-real" not in inventory.stdout+inventory.stderr+removal.stdout+removal.stderr
+            print("PASS: actual desktop launcher in explicit app-only test mode, foreground startup, browser provider guides with explicit server/key binding, private control-password rotation with no broadcast, setup/reload with preserved game-only/fallback settings, private credentials, terminal hold, repeat install, removal inventory and fail-closed preservation without Decky; actual Decky installation/removal qualified separately; fixture credentials only" + ("; actual earlier-preview upgrade preserves all user data" if snapshots else ""))
         finally:
             if process.poll() is None:
                 os.killpg(process.pid,signal.SIGTERM)
