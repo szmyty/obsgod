@@ -16,6 +16,7 @@ import webbrowser
 from bridge import private_process, run_cli
 import decky
 import install as installer
+from product import DISPLAY_NAME
 
 ROOT = Path(__file__).resolve().parent
 MAX_BODY = 16384
@@ -116,7 +117,10 @@ class Handler(BaseHTTPRequestHandler):
             result["decky_status"] = decky.status()
             result["decky"] = result["decky_status"]["ok"]
             result["plugin_zip"] = str(ROOT / "obsgod-decky.zip")
+            result["product_name"] = DISPLAY_NAME
             self.send_data(200, result)
+        elif path == "/api/connection":
+            self.send_data(200, run_cli("connection-info", timeout=5))
         elif path == "/api/job":
             with self.server.job_lock:
                 result = dict(self.server.job)
@@ -149,6 +153,13 @@ class Handler(BaseHTTPRequestHandler):
                 if not isinstance(settings, dict):
                     raise ValueError()
                 self.send_data(200, run_cli("configure", settings))
+            elif action == "change-obs-password":
+                settings = request.get("settings")
+                if not isinstance(settings, dict):
+                    raise ValueError()
+                self.send_data(200, run_cli(action, settings, timeout=7))
+            elif action == "test-connection":
+                self.send_data(200, run_cli(action, timeout=5))
             elif action in {"doctor", "stop", "restart", "open-obs"}:
                 self.send_data(200, run_cli(action))
             elif action == "close":

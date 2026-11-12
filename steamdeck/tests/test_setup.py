@@ -5,6 +5,7 @@ import importlib.util
 import json
 import os
 import shlex
+import shutil
 import subprocess
 from pathlib import Path
 import sys
@@ -71,6 +72,74 @@ class LocalSetupSecurity(unittest.TestCase):
         self.assertIn(b'src="/setup.js"', body)
         self.assertEqual(self.request("GET", "/api/action")[0], 404)
         self.assertEqual(self.request("POST", "/api/action", {"action": "start"})[0], 400)
+
+    def test_connection_details_and_password_changes_require_local_authorization(self):
+        for path, body in [("/api/connection", None), ("/api/action", {"action": "change-obs-password", "settings": {"confirm": True, "password": "local-fixture-not-real"}})]:
+            method = "GET" if body is None else "POST"
+            self.assertEqual(self.request(method, path, body, auth=False)[0], 403)
+            self.assertEqual(self.request(method, path, body, origin="https://attacker.invalid")[0], 403)
+        self.mock.assert_not_called()
+
+    def test_password_action_passes_secret_only_to_stdin_bridge(self):
+        settings = {"confirm": True, "password": "local-fixture-not-real", "generate": False}
+        status, headers, body = self.request("POST", "/api/action", {"action": "change-obs-password", "settings": settings})
+        self.assertEqual(status, 200)
+        self.mock.assert_called_once_with("change-obs-password", settings, timeout=7)
+        self.assertNotIn(b"local-fixture-not-real", body)
+        self.assertEqual(headers["Cache-Control"], "no-store")
+        self.assertEqual(self.request("GET", "/api/change-obs-password")[0], 404)
+
+    def test_connection_details_and_test_use_only_read_only_actions(self):
+        self.assertEqual(self.request("GET", "/api/connection")[0], 200)
+        self.mock.assert_called_once_with("connection-info", timeout=5)
+        self.mock.reset_mock()
+        self.assertEqual(self.request("POST", "/api/action", {"action": "test-connection"})[0], 200)
+        self.mock.assert_called_once_with("test-connection", timeout=5)
+
+
+class DesktopProviderControls(unittest.TestCase):
+    def test_password_bridge_uses_stdin_and_discards_stderr(self):
+        import bridge
+        settings = {"confirm": True, "password": "owner-fixture-not-real"}
+        child = Mock()
+        child.communicate.return_value = (b'{"ok":true,"message":"Saved privately"}', None)
+        with patch.object(bridge, "cli_path", return_value=Path("/private/obsgod")), patch.object(bridge.subprocess, "Popen", return_value=child) as spawn:
+            result = bridge.run_cli("change-obs-password", settings, timeout=7)
+        self.assertTrue(result["ok"])
+        self.assertEqual(spawn.call_args.args[0], ["/private/obsgod", "deck", "change-obs-password"])
+        self.assertEqual(spawn.call_args.kwargs["stderr"], subprocess.DEVNULL)
+        self.assertNotIn("owner-fixture-not-real", repr(spawn.call_args))
+        child.communicate.assert_called_once_with(json.dumps(settings).encode(), timeout=7)
+
+    def test_guides_preserve_destination_and_key_and_controls_follow_safe_idle(self):
+        node = shutil.which("node")
+        if not node:
+            self.skipTest("Node is unavailable for the setup interaction model")
+        code = r'''
+const fs=require("node:fs"),vm=require("node:vm"),assert=require("node:assert/strict");
+const nodes=new Map();
+function element(id){if(!nodes.has(id))nodes.set(id,{value:"",checked:false,disabled:false,required:false,handlers:{},addEventListener(type,fn){this.handlers[type]=fn;}});return nodes.get(id);}
+element("provider").value="custom";
+const context={console,URL,setTimeout,fetch:()=>new Promise(()=>{}),document:{getElementById:element},window:{location:{hash:""},sessionStorage:{setItem(){},getItem(){return null;}},history:{replaceState(){}},confirm:()=>true}};
+vm.createContext(context);vm.runInContext(fs.readFileSync(process.argv[1],"utf8"),context);
+vm.runInContext(`
+el("server").value="rtmps://my-own-server.invalid/path";el("key").value="typed-fixture-key";
+el("provider").value="twitch";updateProviderGuide();
+if(el("server").value!=="rtmps://my-own-server.invalid/path"||el("key").value!=="typed-fixture-key")throw Error("guide overwrote user input");
+if(el("provider-preset").disabled)throw Error("secure Twitch preset missing");
+if(!providers.twitch.preset.startsWith("rtmps://")||providers.twitch.preset.includes("{stream_key}"))throw Error("unsafe preset");
+el("provider").value="kick";updateProviderGuide();if(!el("provider-preset").disabled)throw Error("invented account-specific Kick URL");
+el("provider").value="youtube";updateProviderGuide();if(!el("provider-preset").disabled)throw Error("invented event-specific YouTube URL");
+savedKey=true;savedServer="rtmps://my-own-server.invalid/path";updateDestination();if(el("key").required)throw Error("same-server blank key no longer preserves saved credentials");
+el("server").value="rtmps://another-destination.invalid/app";updateDestination();if(!el("key").required)throw Error("new destination did not require its own key");
+el("confirm-control-password").checked=true;renderConnection({process:"running",output_known:true});if(!el("save-control-password").disabled)throw Error("running OBS offered password change");
+renderConnection({process:"unknown",output_known:false});if(!el("reset-control-password").disabled)throw Error("unknown OBS offered reset");
+renderConnection({process:"absent",output_known:true});if(el("reset-control-password").disabled)throw Error("confirmed closed OBS cannot reset");
+controlBusy=true;updateControlButtons();if(!el("reset-control-password").disabled)throw Error("duplicate password action allowed");
+`,context);
+'''
+        result = subprocess.run([node, "-e", code, str(ROOT / "setup.js")], capture_output=True, text=True, timeout=10)
+        self.assertEqual(result.returncode, 0, result.stderr)
 
 
 class InstallerSafety(unittest.TestCase):
