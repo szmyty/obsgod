@@ -43,6 +43,28 @@ drafts do not close original criteria. The exact final source/artifact matrix
 will be attached here after source freeze, distinguishing unavailable device/
 CI checks from passed local checks.
 
+## Local qualification prepared
+
+The complete available matrix passed at exact clean source
+`0eac1ed9746e6a5999a196777bde5455222f46eb`, candidate `0.1.0-deck.7`.
+See [the commands/results/hash packet](evidence/m2-qualification.json),
+[criterion-level ledger](evidence/m2-criteria.json) and
+[consolidated owner packet](release-readiness.md). The six draft PRs are
+#52 -> #53 -> #54 -> #55 -> #56 -> #57. No new issue or milestone was closed.
+
+Available checks passed:110 Go top-level tests (206 events,1 optional skip),
+111 Python,16 Node, static/security/build, reproducible packages, actual archive
+browsers and old4/6 upgrades, pinned Decky install/update/uninstall/repair,
+native13 capture cases and real OBS audio/video/game transitions/passwords/
+settings-only workflow, plus11 site safety/40 viewport cases. Six additional
+binaries compiled only. The publisher packet records unavailable/unrun checks
+and actual native/browser platforms; cloud OBS30.2.3 is not Deck OBS33 proof.
+
+[Review downloads and owner actions](release-readiness.md) ·
+[Desktop install command](candidate-7-install.md).
+The orphan review-artifact commit is
+`e202f34070ef6174fbf86b75f9cc87ace74d6a14`; never merge it into source.
+
 ## Remaining owner and external gates
 
 Organization/repository transfer and final Identity asset approval await owner

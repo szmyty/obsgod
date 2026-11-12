@@ -1,0 +1,2796 @@
+{
+  "schema_version": 1,
+  "candidate": "0.1.0-deck.7",
+  "qualified_source_revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+  "qualification_scope": "Available local Linux/cloud, native OBS and protocol/browser checks only",
+  "local_matrix_outcome": "passed",
+  "closure_status": "blocked_by_explicit_owner_device_CI_review_and_publication_gates",
+  "source_clean_before": true,
+  "source_clean_after": true,
+  "source_tree": "87f1e3e54db6949691c58953106504fbdc8cf6dd",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "tools": {
+    "go": "go1.27.4",
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "python": "3.12.14",
+    "chromium": "151.0.7922.173",
+    "playwright": "1.62.0",
+    "docker": "28.4.0",
+    "native_obs": "30.2.3+dfsg-3",
+    "decky_protocol": "3.3.1"
+  },
+  "counts": {
+    "go_top_level_passed": 110,
+    "go_pass_events_including_subtests": 206,
+    "python_passed": 111,
+    "node_passed": 16,
+    "site_safety_passed": 11,
+    "site_page_viewports_passed": 40,
+    "capture_protocol_cases_passed": 13,
+    "cross_builds_compiled_only": 6
+  },
+  "available_matrix": {
+    "go": {
+      "outcome": "passed",
+      "receipt": "go-matrix.json",
+      "sha256": "eac34f75c0373df8c50097da8afdef7da8a26efaddaaf46a11f3c644cc1e0d8f"
+    },
+    "python": {
+      "outcome": "passed",
+      "receipt": "python-matrix.json",
+      "sha256": "20c38149cdcf2654db4d9058d98b66483aa0f8c3c0e6d3d20767080aecda1bba"
+    },
+    "frontend": {
+      "outcome": "passed",
+      "receipt": "frontend-matrix.json",
+      "sha256": "d6172e4d63ccb7b5423f84f576d30e9d61b661126074cd5ad5fb1384d0b3e453"
+    },
+    "package": {
+      "outcome": "passed",
+      "receipt": "package-matrix.json",
+      "sha256": "2a1219bbfc8a78aee55c74b60cf050ad34da0a4cebd5a2f96b88a4ebdbeadfe4"
+    },
+    "browser": {
+      "outcome": "passed",
+      "receipt": "browser-matrix.json",
+      "sha256": "79c085160699a2ab1b683b9ac1c8a1cb881cbdd401ffb2c182d26d4af870ff5c"
+    },
+    "decky-updater": {
+      "outcome": "passed",
+      "receipt": "decky-updater-matrix.json",
+      "sha256": "26863dfbd590f3a71a0f73370b2afdaa6e1d90a2be8742c7ddc81ae5304c427c"
+    },
+    "site": {
+      "outcome": "passed",
+      "receipt": "site-matrix.json",
+      "sha256": "beb6a303e54d1e8026605ca59465b2fb2e9f0ad39a67ad2ac556a13f24f43dcd"
+    },
+    "native": {
+      "outcome": "passed",
+      "receipt": "native-matrix.json",
+      "sha256": "4815ed49f7b1fd9e6619fce37ac794ae2f6f227f2bfc55b89775a24bb8ce8311"
+    },
+    "cli": {
+      "outcome": "passed",
+      "receipt": "cli-matrix.json",
+      "sha256": "e511fdc4f4f461dc824bc6b808044af7d5271bd87478feb8f48ab47bf82746f2"
+    },
+    "ci": {
+      "outcome": "unavailable",
+      "receipt": "ci-matrix.json",
+      "sha256": "6fc13321e428777bf305dee2820024b9a517ced17632f1bace713eea621a8d3d"
+    }
+  },
+  "artifacts": {
+    "obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz": {
+      "bytes": 11369529,
+      "sha256": "4205e4725fd432ea99a59fe8c1a78f0f7b29c7ddbd6c79e3cf4afd8c2c67c9c3"
+    },
+    "obsgod-decky.zip": {
+      "bytes": 4197393,
+      "sha256": "0a4d8afefa0f149cb053cddc988fa0cc46992602b73b73b581deab4414abf5c4"
+    },
+    "manifest.json": {
+      "bytes": 2390,
+      "sha256": "dfb184468e1aca9f9316a16f3530d0daac2cc75bdafb880472489a640451496a"
+    },
+    "obsgod-one-click-update_0.1.0-deck.7_linux_amd64.zip": {
+      "bytes": 3073420,
+      "sha256": "5227e541e3c07cc9214e67f4400dda14065520789ebdecfdeca15b6c4152c68d"
+    },
+    "updater-manifest.json": {
+      "bytes": 1145,
+      "sha256": "e809fca6a6891e538467c26cbb72af99aeb42809448e9d8a0aef61e6197da86f"
+    },
+    "SHA256SUMS": {
+      "bytes": 273,
+      "sha256": "9134dd9ed51077eba457b784bae73b58442e246a12d255e7cbbf9e1512e7cb68"
+    },
+    "UPDATER-SHA256SUMS": {
+      "bytes": 119,
+      "sha256": "5b643c1ec349cc1062ac760beed3f394b4da1442fc0ec69261deb2e9b65fb5d2"
+    },
+    "obsgod": {
+      "bytes": 10301564,
+      "sha256": "525e533ae4ed806559cdffffd865f1f01582cbdd3a746c73a50a0c01912dea6f"
+    },
+    "decky-install": {
+      "bytes": 7155836,
+      "sha256": "81e0f2a4e09641df55869bb00b1cdcc31dc539d3037904945c3e64a05d4d2be0"
+    },
+    "libgstobsgodcapture.so": {
+      "bytes": 54384,
+      "sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68"
+    }
+  },
+  "checks": {
+    "go": {
+      "schema": 1,
+      "candidate": "0.1.0-deck.7",
+      "source_revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "source_clean_before": true,
+      "source_clean_after": true,
+      "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+      "go": "go version go1.27.4 linux/amd64",
+      "outcome": "passed",
+      "checks": [
+        {
+          "name": "go-race-tests",
+          "command": [
+            "go",
+            "test",
+            "-race",
+            "-json",
+            "-count=1",
+            "./..."
+          ],
+          "log": "go-tests.json",
+          "exit_code": 0,
+          "outcome": "passed",
+          "cache": "disabled with -count=1",
+          "passed_top_level_cases": 110,
+          "passed_test_case_events_including_subtests": 206,
+          "failed_test_cases": [],
+          "skipped_test_cases": [
+            {
+              "package": "github.com/szmyty/obsgod/pkg/automation",
+              "test": "TestRealOBSReadOnly",
+              "reason": "real_obs_test.go:14: set OBSGOD_TEST_OBS_ADDRESS for opt-in real OBS reads"
+            }
+          ]
+        },
+        {
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "command": [
+            "go",
+            "vet",
+            "./..."
+          ],
+          "log": "go-vet.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 0.578,
+          "name": "go-vet"
+        },
+        {
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "command": [
+            "/workspace/.obsgod-tools/pkg/bin/govulncheck",
+            "-json",
+            "./..."
+          ],
+          "log": "go-vuln.json",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 8.028,
+          "name": "go-vulnerability-scan",
+          "scanner": {
+            "protocol_version": "v1.0.0",
+            "scanner_name": "govulncheck",
+            "scanner_version": "v1.9.0",
+            "db": "https://vuln.go.dev",
+            "db_last_modified": "2026-11-11T02:51:11Z",
+            "go_version": "go1.27.4",
+            "scan_level": "symbol",
+            "scan_mode": "source"
+          },
+          "finding_count": 0
+        },
+        {
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "command": [
+            "go",
+            "build",
+            "-trimpath",
+            "-buildvcs=false",
+            "-o",
+            "/workspace/.obsgod-tools/m2/final/cross/obsgod-linux-arm64",
+            "."
+          ],
+          "log": "cross/obsgod-linux-arm64.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 2.244,
+          "target": "linux-arm64",
+          "package": ".",
+          "environment": {
+            "CGO_ENABLED": "0",
+            "GOOS": "linux",
+            "GOARCH": "arm64"
+          },
+          "execution": "unrun; compilation only",
+          "sha256": "b53ac2cc641065b45984080db22634955c211a2d7a41127705a0088fdc31b6e1",
+          "bytes": 13908911,
+          "artifact_format": "/workspace/.obsgod-tools/m2/final/cross/obsgod-linux-arm64: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically linked, Go BuildID=5QiOmdPklEVKgOtGF8Ff/adSouOitcw06N3nEVOur/sqcHj0ZqU6ZGQ_Nc31Bi/cjYxpqPQ4zmPZRScqLYA, BuildID[sha1]=c901af818fee7ff5e8496346cb2afe8b136b9615, with debug_info, not stripped",
+          "name": "cross-build"
+        },
+        {
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "command": [
+            "go",
+            "build",
+            "-trimpath",
+            "-buildvcs=false",
+            "-o",
+            "/workspace/.obsgod-tools/m2/final/cross/obsgod-decky-install-linux-arm64",
+            "./cmd/obsgod-decky-install"
+          ],
+          "log": "cross/obsgod-decky-install-linux-arm64.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 1.146,
+          "target": "linux-arm64",
+          "package": "./cmd/obsgod-decky-install",
+          "environment": {
+            "CGO_ENABLED": "0",
+            "GOOS": "linux",
+            "GOARCH": "arm64"
+          },
+          "execution": "unrun; compilation only",
+          "sha256": "6d7aa1785df97681e11ba4027e4e6c9b8cafd9b20537a05e8ef2537482012409",
+          "bytes": 9737594,
+          "artifact_format": "/workspace/.obsgod-tools/m2/final/cross/obsgod-decky-install-linux-arm64: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically linked, Go BuildID=4t-Wgxs3PkKtagDJUlMD/tjRKBS4b1ZFDWkclw7_L/l43D3LDL207py8-KQiYD/O17otqdWHu4kI8Bjdu8b, BuildID[sha1]=7a43be1af6a8d128ad9c2d863054b2f686726adb, with debug_info, not stripped",
+          "name": "cross-build"
+        },
+        {
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "command": [
+            "go",
+            "build",
+            "-trimpath",
+            "-buildvcs=false",
+            "-o",
+            "/workspace/.obsgod-tools/m2/final/cross/obsgod-windows-amd64.exe",
+            "."
+          ],
+          "log": "cross/obsgod-windows-amd64.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 1.752,
+          "target": "windows-amd64",
+          "package": ".",
+          "environment": {
+            "CGO_ENABLED": "0",
+            "GOOS": "windows",
+            "GOARCH": "amd64"
+          },
+          "execution": "unrun; compilation only",
+          "sha256": "34312008c5250b8837a537a1882548ec3ca5400b76701f00002b41e4c1422fb6",
+          "bytes": 14816768,
+          "artifact_format": "/workspace/.obsgod-tools/m2/final/cross/obsgod-windows-amd64.exe: PE32+ executable for MS Windows 10.00 (console), x86-64, 16 sections",
+          "name": "cross-build"
+        },
+        {
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "command": [
+            "go",
+            "build",
+            "-trimpath",
+            "-buildvcs=false",
+            "-o",
+            "/workspace/.obsgod-tools/m2/final/cross/obsgod-decky-install-windows-amd64.exe",
+            "./cmd/obsgod-decky-install"
+          ],
+          "log": "cross/obsgod-decky-install-windows-amd64.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 1.291,
+          "target": "windows-amd64",
+          "package": "./cmd/obsgod-decky-install",
+          "environment": {
+            "CGO_ENABLED": "0",
+            "GOOS": "windows",
+            "GOARCH": "amd64"
+          },
+          "execution": "unrun; compilation only",
+          "sha256": "dee1c395ac01add26a1dd2e9aecb70b490934f479b0e614d8c7bef5cf2ef61e8",
+          "bytes": 10658304,
+          "artifact_format": "/workspace/.obsgod-tools/m2/final/cross/obsgod-decky-install-windows-amd64.exe: PE32+ executable for MS Windows 10.00 (console), x86-64, 16 sections",
+          "name": "cross-build"
+        },
+        {
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "command": [
+            "go",
+            "build",
+            "-trimpath",
+            "-buildvcs=false",
+            "-o",
+            "/workspace/.obsgod-tools/m2/final/cross/obsgod-darwin-arm64",
+            "."
+          ],
+          "log": "cross/obsgod-darwin-arm64.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 2.44,
+          "target": "darwin-arm64",
+          "package": ".",
+          "environment": {
+            "CGO_ENABLED": "0",
+            "GOOS": "darwin",
+            "GOARCH": "arm64"
+          },
+          "execution": "unrun; compilation only",
+          "sha256": "2ba05e39ca0104b4d128835e92439110aba828493e311d72ed094bad2972ecd0",
+          "bytes": 14020194,
+          "artifact_format": "/workspace/.obsgod-tools/m2/final/cross/obsgod-darwin-arm64: Mach-O 64-bit arm64 executable, flags:<|DYLDLINK|PIE>",
+          "name": "cross-build"
+        },
+        {
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "command": [
+            "go",
+            "build",
+            "-trimpath",
+            "-buildvcs=false",
+            "-o",
+            "/workspace/.obsgod-tools/m2/final/cross/obsgod-decky-install-darwin-arm64",
+            "./cmd/obsgod-decky-install"
+          ],
+          "log": "cross/obsgod-decky-install-darwin-arm64.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 1.001,
+          "target": "darwin-arm64",
+          "package": "./cmd/obsgod-decky-install",
+          "environment": {
+            "CGO_ENABLED": "0",
+            "GOOS": "darwin",
+            "GOARCH": "arm64"
+          },
+          "execution": "unrun; compilation only",
+          "sha256": "d79e0a37d7f972b42b2030cc90360b1259a1e4fecb51bf59e505412d5639c282",
+          "bytes": 10032130,
+          "artifact_format": "/workspace/.obsgod-tools/m2/final/cross/obsgod-decky-install-darwin-arm64: Mach-O 64-bit arm64 executable, flags:<|DYLDLINK|PIE>",
+          "name": "cross-build"
+        }
+      ],
+      "actual_skipped_test_cases": [
+        {
+          "package": "github.com/szmyty/obsgod/pkg/automation",
+          "test": "TestRealOBSReadOnly",
+          "reason": "real_obs_test.go:14: set OBSGOD_TEST_OBS_ADDRESS for opt-in real OBS reads"
+        }
+      ],
+      "limitations": [
+        "Cross-platform binaries were compiled, not executed.",
+        "Optional existing-OBS read-only test skipped; native OBS and device qualification are separate parent-owned matrix entries."
+      ]
+    },
+    "python": {
+      "schema_version": 1,
+      "candidate": "0.1.0-deck.7",
+      "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+      "source_clean_before": true,
+      "source_clean_after": true,
+      "outcome": "passed",
+      "checks": [
+        {
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "command": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "steamdeck/tests",
+            "-p",
+            "test_*.py",
+            "-v"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "log": "python-tests.log",
+          "seconds": 5.745
+        }
+      ],
+      "tests_passed": 111
+    },
+    "frontend": {
+      "schema_version": 1,
+      "candidate": "0.1.0-deck.7",
+      "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+      "source_clean_before": true,
+      "source_clean_after": true,
+      "outcome": "passed",
+      "checks": [
+        {
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "command": [
+            "python3",
+            "scripts/generate-product.py",
+            "--check"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "log": "product-check.log",
+          "seconds": 0.079
+        },
+        {
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "command": [
+            "node",
+            "scripts/generate-support.mjs",
+            "--check"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "log": "support-check.log",
+          "seconds": 0.077
+        },
+        {
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "command": [
+            "npm",
+            "--prefix",
+            "steamdeck/decky",
+            "test"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "log": "node-tests.log",
+          "seconds": 0.714
+        },
+        {
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "command": [
+            "npm",
+            "--prefix",
+            "steamdeck/decky",
+            "run",
+            "typecheck"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "log": "typecheck.log",
+          "seconds": 2.979
+        },
+        {
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "command": [
+            "npm",
+            "--prefix",
+            "steamdeck/decky",
+            "run",
+            "build"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "log": "frontend-build.log",
+          "seconds": 0.838
+        },
+        {
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "command": [
+            "npm",
+            "--prefix",
+            "steamdeck/decky",
+            "audit",
+            "--json"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "log": "npm-audit.json",
+          "seconds": 0.456
+        }
+      ]
+    },
+    "package": {
+      "schema_version": 1,
+      "candidate": "0.1.0-deck.7",
+      "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "clean": true,
+      "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+      "outcome": "passed",
+      "reproducible_runtime_and_updater": true,
+      "checks": [
+        {
+          "command": [
+            "python3",
+            "scripts/package-deck.py",
+            "--version",
+            "0.1.0-deck.7"
+          ],
+          "log": "package-first.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 12.198
+        },
+        {
+          "command": [
+            "python3",
+            "scripts/package-updater.py",
+            "dist/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz"
+          ],
+          "log": "updater-first.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 0.632
+        },
+        {
+          "command": [
+            "python3",
+            "scripts/package-deck.py",
+            "--version",
+            "0.1.0-deck.7"
+          ],
+          "log": "package-repeat.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 9.368
+        },
+        {
+          "command": [
+            "python3",
+            "scripts/package-updater.py",
+            "dist/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz"
+          ],
+          "log": "updater-repeat.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 0.691
+        }
+      ],
+      "internal_payload_hashes_verified": true,
+      "files": {
+        "obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz": {
+          "bytes": 11369529,
+          "sha256": "4205e4725fd432ea99a59fe8c1a78f0f7b29c7ddbd6c79e3cf4afd8c2c67c9c3"
+        },
+        "obsgod-decky.zip": {
+          "bytes": 4197393,
+          "sha256": "0a4d8afefa0f149cb053cddc988fa0cc46992602b73b73b581deab4414abf5c4"
+        },
+        "manifest.json": {
+          "bytes": 2390,
+          "sha256": "dfb184468e1aca9f9316a16f3530d0daac2cc75bdafb880472489a640451496a"
+        },
+        "obsgod-one-click-update_0.1.0-deck.7_linux_amd64.zip": {
+          "bytes": 3073420,
+          "sha256": "5227e541e3c07cc9214e67f4400dda14065520789ebdecfdeca15b6c4152c68d"
+        },
+        "updater-manifest.json": {
+          "bytes": 1145,
+          "sha256": "e809fca6a6891e538467c26cbb72af99aeb42809448e9d8a0aef61e6197da86f"
+        },
+        "SHA256SUMS": {
+          "bytes": 273,
+          "sha256": "9134dd9ed51077eba457b784bae73b58442e246a12d255e7cbbf9e1512e7cb68"
+        },
+        "UPDATER-SHA256SUMS": {
+          "bytes": 119,
+          "sha256": "5b643c1ec349cc1062ac760beed3f394b4da1442fc0ec69261deb2e9b65fb5d2"
+        },
+        "obsgod": {
+          "bytes": 10301564,
+          "sha256": "525e533ae4ed806559cdffffd865f1f01582cbdd3a746c73a50a0c01912dea6f"
+        },
+        "decky-install": {
+          "bytes": 7155836,
+          "sha256": "81e0f2a4e09641df55869bb00b1cdcc31dc539d3037904945c3e64a05d4d2be0"
+        },
+        "libgstobsgodcapture.so": {
+          "bytes": 54384,
+          "sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68"
+        }
+      },
+      "capture_build": {
+        "compiler": "cc (Debian 12.2.0-14+deb12u1) 12.2.0\nCopyright (C) 2022 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+        "dockerfile_sha256": "2a5907d46697011510482aed251209f83a79a2b0aa3a0cea1ced9cd3b8b74905",
+        "dynamic": "\nDynamic section at offset 0xad88 contains 30 entries:\n  Tag        Type                         Name/Value\n 0x0000000000000001 (NEEDED)             Shared library: [libgstvideo-1.0.so.0]\n 0x0000000000000001 (NEEDED)             Shared library: [libgstbase-1.0.so.0]\n 0x0000000000000001 (NEEDED)             Shared library: [libgstreamer-1.0.so.0]\n 0x0000000000000001 (NEEDED)             Shared library: [libgobject-2.0.so.0]\n 0x0000000000000001 (NEEDED)             Shared library: [libglib-2.0.so.0]\n 0x0000000000000001 (NEEDED)             Shared library: [libpipewire-0.3.so.0]\n 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]\n 0x000000000000000c (INIT)               0x2000\n 0x000000000000000d (FINI)               0x8db4\n 0x0000000000000019 (INIT_ARRAY)         0xbc10\n 0x000000000000001b (INIT_ARRAYSZ)       8 (bytes)\n 0x000000000000001a (FINI_ARRAY)         0xbc18\n 0x000000000000001c (FINI_ARRAYSZ)       8 (bytes)\n 0x000000006ffffef5 (GNU_HASH)           0x200\n 0x0000000000000005 (STRTAB)             0xb18\n 0x0000000000000006 (SYMTAB)             0x230\n 0x000000000000000a (STRSZ)              2034 (bytes)\n 0x000000000000000b (SYMENT)             24 (bytes)\n 0x0000000000000003 (PLTGOT)             0xbfe8\n 0x0000000000000002 (PLTRELSZ)           2016 (bytes)\n 0x0000000000000014 (PLTREL)             RELA\n 0x0000000000000017 (JMPREL)             0x16b0\n 0x0000000000000007 (RELA)               0x13f8\n 0x0000000000000008 (RELASZ)             696 (bytes)\n 0x0000000000000009 (RELAENT)            24 (bytes)\n 0x000000006ffffffe (VERNEED)            0x13c8\n 0x000000006fffffff (VERNEEDNUM)         1\n 0x000000006ffffff0 (VERSYM)             0x130a\n 0x000000006ffffff9 (RELACOUNT)          21\n 0x0000000000000000 (NULL)               0x0\n",
+        "image": "obsgod-capture-builder:2a5907d466970115",
+        "image_id": "sha256:6c3ec703e4d22b777f53e75ec33a2639ac060a81e97cd4a48da4e7e412127f78",
+        "library": "libgstobsgodcapture.so",
+        "network_during_compile": false,
+        "packages": [
+          "adduser=3.134",
+          "apt=2.6.2",
+          "base-files=12.4+deb12u15",
+          "base-passwd=3.6.1",
+          "bash=5.2.15-2+b13",
+          "binutils=2.40-2",
+          "binutils-common:amd64=2.40-2",
+          "binutils-x86-64-linux-gnu=2.40-2",
+          "bsdutils=1:2.38.1-5+deb12u3",
+          "coreutils=9.1-1",
+          "cpp=4:12.2.0-3",
+          "cpp-12=12.2.0-14+deb12u1",
+          "dash=0.5.12-2",
+          "debconf=1.5.82",
+          "debian-archive-keyring=2023.3+deb12u2",
+          "debianutils=5.7-0.5~deb12u1",
+          "diffutils=1:3.8-4",
+          "dpkg=1.21.23",
+          "e2fsprogs=1.47.0-2+b2",
+          "findutils=4.9.0-4",
+          "gcc=4:12.2.0-3",
+          "gcc-12=12.2.0-14+deb12u1",
+          "gcc-12-base:amd64=12.2.0-14+deb12u1",
+          "gir1.2-glib-2.0:amd64=1.74.0-3",
+          "gir1.2-gst-plugins-base-1.0:amd64=1.22.0-3+deb12u7",
+          "gir1.2-gstreamer-1.0:amd64=1.22.0-2+deb12u1",
+          "gir1.2-gudev-1.0:amd64=237-2",
+          "gpgv=2.2.40-1.1+deb12u2",
+          "grep=3.8-5",
+          "gzip=1.12-1",
+          "hostname=3.23+nmu1",
+          "init-system-helpers=1.65.2+deb12u1",
+          "iso-codes=4.15.0-1",
+          "libacl1:amd64=2.3.1-3",
+          "libapt-pkg6.0:amd64=2.6.2",
+          "libasan8:amd64=12.2.0-14+deb12u1",
+          "libasound2:amd64=1.2.8-1+b1",
+          "libasound2-data=1.2.8-1",
+          "libatomic1:amd64=12.2.0-14+deb12u1",
+          "libattr1:amd64=1:2.5.1-4",
+          "libaudit-common=1:3.0.9-1",
+          "libaudit1:amd64=1:3.0.9-1",
+          "libbinutils:amd64=2.40-2",
+          "libblkid-dev:amd64=2.38.1-5+deb12u3",
+          "libblkid1:amd64=2.38.1-5+deb12u3",
+          "libbsd0:amd64=0.11.7-2",
+          "libbz2-1.0:amd64=1.0.8-5+b1",
+          "libc-bin=2.36-9+deb12u14",
+          "libc-dev-bin=2.36-9+deb12u14",
+          "libc6:amd64=2.36-9+deb12u14",
+          "libc6-dev:amd64=2.36-9+deb12u14",
+          "libcap-ng0:amd64=0.8.3-1+b3",
+          "libcap2:amd64=1:2.66-4+deb12u3+b1",
+          "libcap2-bin=1:2.66-4+deb12u3+b1",
+          "libcc1-0:amd64=12.2.0-14+deb12u1",
+          "libcom-err2:amd64=1.47.0-2+b2",
+          "libcrypt-dev:amd64=1:4.4.33-2",
+          "libcrypt1:amd64=1:4.4.33-2",
+          "libctf-nobfd0:amd64=2.40-2",
+          "libctf0:amd64=2.40-2",
+          "libdb5.3:amd64=5.3.28+dfsg2-1",
+          "libdbus-1-3:amd64=1.14.10-1~deb12u1",
+          "libdebconfclient0:amd64=0.270",
+          "libdrm-amdgpu1:amd64=2.4.114-1+b1",
+          "libdrm-common=2.4.114-1",
+          "libdrm-dev:amd64=2.4.114-1+b1",
+          "libdrm-intel1:amd64=2.4.114-1+b1",
+          "libdrm-nouveau2:amd64=2.4.114-1+b1",
+          "libdrm-radeon1:amd64=2.4.114-1+b1",
+          "libdrm2:amd64=2.4.114-1+b1",
+          "libdw-dev:amd64=0.188-2.1",
+          "libdw1:amd64=0.188-2.1",
+          "libedit2:amd64=3.1-20221030-2",
+          "libegl-dev:amd64=1.6.0-1",
+          "libegl-mesa0:amd64=22.3.6-1+deb12u2",
+          "libegl1:amd64=1.6.0-1",
+          "libelf-dev:amd64=0.188-2.1",
+          "libelf1:amd64=0.188-2.1",
+          "libexpat1:amd64=2.5.0-1+deb12u5",
+          "libext2fs2:amd64=1.47.0-2+b2",
+          "libffi-dev:amd64=3.4.4-1",
+          "libffi8:amd64=3.4.4-1",
+          "libgbm-dev:amd64=22.3.6-1+deb12u2",
+          "libgbm1:amd64=22.3.6-1+deb12u2",
+          "libgcc-12-dev:amd64=12.2.0-14+deb12u1",
+          "libgcc-s1:amd64=12.2.0-14+deb12u1",
+          "libgcrypt20:amd64=1.10.1-3+deb12u1",
+          "libgirepository-1.0-1:amd64=1.74.0-3",
+          "libgl-dev:amd64=1.6.0-1",
+          "libgl1:amd64=1.6.0-1",
+          "libgl1-mesa-dri:amd64=22.3.6-1+deb12u2",
+          "libglapi-mesa:amd64=22.3.6-1+deb12u2",
+          "libgles-dev:amd64=1.6.0-1",
+          "libgles1:amd64=1.6.0-1",
+          "libgles2:amd64=1.6.0-1",
+          "libglib2.0-0:amd64=2.74.6-2+deb12u9",
+          "libglib2.0-bin=2.74.6-2+deb12u9",
+          "libglib2.0-data=2.74.6-2+deb12u9",
+          "libglib2.0-dev:amd64=2.74.6-2+deb12u9",
+          "libglib2.0-dev-bin=2.74.6-2+deb12u9",
+          "libglvnd0:amd64=1.6.0-1",
+          "libglx-dev:amd64=1.6.0-1",
+          "libglx-mesa0:amd64=22.3.6-1+deb12u2",
+          "libglx0:amd64=1.6.0-1",
+          "libgmp10:amd64=2:6.2.1+dfsg1-1.1",
+          "libgnutls30:amd64=3.7.9-2+deb12u7",
+          "libgomp1:amd64=12.2.0-14+deb12u1",
+          "libgpg-error0:amd64=1.46-1",
+          "libgprofng0:amd64=2.40-2",
+          "libgssapi-krb5-2:amd64=1.20.1-2+deb12u5",
+          "libgstreamer-gl1.0-0:amd64=1.22.0-3+deb12u7",
+          "libgstreamer-plugins-base1.0-0:amd64=1.22.0-3+deb12u7",
+          "libgstreamer-plugins-base1.0-dev=1.22.0-3+deb12u7",
+          "libgstreamer1.0-0:amd64=1.22.0-2+deb12u1",
+          "libgstreamer1.0-dev:amd64=1.22.0-2+deb12u1",
+          "libgudev-1.0-0:amd64=237-2",
+          "libgudev-1.0-dev:amd64=237-2",
+          "libhogweed6:amd64=3.8.1-2",
+          "libicu72:amd64=72.1-3+deb12u1",
+          "libidn2-0:amd64=2.3.3-1+b1",
+          "libisl23:amd64=0.25-1.1",
+          "libitm1:amd64=12.2.0-14+deb12u1",
+          "libjansson4:amd64=2.14-2",
+          "libk5crypto3:amd64=1.20.1-2+deb12u5",
+          "libkeyutils1:amd64=1.6.3-2",
+          "libkrb5-3:amd64=1.20.1-2+deb12u5",
+          "libkrb5support0:amd64=1.20.1-2+deb12u5",
+          "libllvm15:amd64=1:15.0.6-4+b1",
+          "liblsan0:amd64=12.2.0-14+deb12u1",
+          "liblz4-1:amd64=1.9.4-1",
+          "liblzma-dev:amd64=5.4.1-1+deb12u2",
+          "liblzma5:amd64=5.4.1-1+deb12u2",
+          "libmd0:amd64=1.0.4-2",
+          "libmount-dev:amd64=2.38.1-5+deb12u3",
+          "libmount1:amd64=2.38.1-5+deb12u3",
+          "libmpc3:amd64=1.3.1-1",
+          "libmpfr6:amd64=4.2.0-1",
+          "libncursesw6:amd64=6.4-4",
+          "libnettle8:amd64=3.8.1-2",
+          "libnsl-dev:amd64=1.3.0-2",
+          "libnsl2:amd64=1.3.0-2",
+          "liborc-0.4-0:amd64=1:0.4.33-2",
+          "liborc-0.4-dev:amd64=1:0.4.33-2",
+          "liborc-0.4-dev-bin=1:0.4.33-2",
+          "libp11-kit0:amd64=0.24.1-2",
+          "libpam-modules:amd64=1.5.2-6+deb12u2",
+          "libpam-modules-bin=1.5.2-6+deb12u2",
+          "libpam-runtime=1.5.2-6+deb12u2",
+          "libpam0g:amd64=1.5.2-6+deb12u2",
+          "libpciaccess-dev:amd64=0.17-2",
+          "libpciaccess0:amd64=0.17-2",
+          "libpcre2-16-0:amd64=10.42-1+deb12u2",
+          "libpcre2-32-0:amd64=10.42-1+deb12u2",
+          "libpcre2-8-0:amd64=10.42-1+deb12u2",
+          "libpcre2-dev:amd64=10.42-1+deb12u2",
+          "libpcre2-posix3:amd64=10.42-1+deb12u2",
+          "libpipewire-0.3-0:amd64=0.3.65-3+deb12u1",
+          "libpipewire-0.3-dev:amd64=0.3.65-3+deb12u1",
+          "libpkgconf3:amd64=1.8.1-1",
+          "libpthread-stubs0-dev:amd64=0.4-1",
+          "libpython3-stdlib:amd64=3.11.2-1+b1",
+          "libpython3.11-minimal:amd64=3.11.2-6+deb12u9",
+          "libpython3.11-stdlib:amd64=3.11.2-6+deb12u9",
+          "libquadmath0:amd64=12.2.0-14+deb12u1",
+          "libreadline8:amd64=8.2-1.3",
+          "libseccomp2:amd64=2.5.4-1+deb12u1",
+          "libselinux1:amd64=3.4-1+b6",
+          "libselinux1-dev:amd64=3.4-1+b6",
+          "libsemanage-common=3.4-1",
+          "libsemanage2:amd64=3.4-1+b5",
+          "libsensors-config=1:3.6.0-7.1",
+          "libsensors5:amd64=1:3.6.0-7.1",
+          "libsepol-dev:amd64=3.4-2.1",
+          "libsepol2:amd64=3.4-2.1",
+          "libsmartcols1:amd64=2.38.1-5+deb12u3",
+          "libspa-0.2-dev:amd64=0.3.65-3+deb12u1",
+          "libspa-0.2-modules:amd64=0.3.65-3+deb12u1",
+          "libsqlite3-0:amd64=3.40.1-2+deb12u2",
+          "libss2:amd64=1.47.0-2+b2",
+          "libssl3:amd64=3.0.22-1~deb12u2",
+          "libstdc++6:amd64=12.2.0-14+deb12u1",
+          "libsystemd0:amd64=252.39-1~deb12u2",
+          "libtasn1-6:amd64=4.19.0-2+deb12u1",
+          "libtinfo6:amd64=6.4-4",
+          "libtirpc-common=1.3.3+ds-1",
+          "libtirpc-dev:amd64=1.3.3+ds-1",
+          "libtirpc3:amd64=1.3.3+ds-1",
+          "libtsan2:amd64=12.2.0-14+deb12u1",
+          "libubsan1:amd64=12.2.0-14+deb12u1",
+          "libudev-dev:amd64=252.39-1~deb12u2",
+          "libudev1:amd64=252.39-1~deb12u2",
+          "libunistring2:amd64=1.0-2",
+          "libunwind-dev:amd64=1.6.2-3",
+          "libunwind8:amd64=1.6.2-3",
+          "libuuid1:amd64=2.38.1-5+deb12u3",
+          "libwayland-bin=1.21.0-1",
+          "libwayland-client0:amd64=1.21.0-1",
+          "libwayland-cursor0:amd64=1.21.0-1",
+          "libwayland-dev:amd64=1.21.0-1",
+          "libwayland-egl1:amd64=1.21.0-1",
+          "libwayland-server0:amd64=1.21.0-1",
+          "libwebrtc-audio-processing1:amd64=0.3-1+b1",
+          "libx11-6:amd64=2:1.8.4-2+deb12u2",
+          "libx11-data=2:1.8.4-2+deb12u2",
+          "libx11-dev:amd64=2:1.8.4-2+deb12u2",
+          "libx11-xcb-dev:amd64=2:1.8.4-2+deb12u2",
+          "libx11-xcb1:amd64=2:1.8.4-2+deb12u2",
+          "libxau-dev:amd64=1:1.0.9-1",
+          "libxau6:amd64=1:1.0.9-1",
+          "libxcb-dri2-0:amd64=1.15-1",
+          "libxcb-dri3-0:amd64=1.15-1",
+          "libxcb-glx0:amd64=1.15-1",
+          "libxcb-present0:amd64=1.15-1",
+          "libxcb-randr0:amd64=1.15-1",
+          "libxcb-shm0:amd64=1.15-1",
+          "libxcb-sync1:amd64=1.15-1",
+          "libxcb-xfixes0:amd64=1.15-1",
+          "libxcb1:amd64=1.15-1",
+          "libxcb1-dev:amd64=1.15-1",
+          "libxdmcp-dev:amd64=1:1.1.2-3",
+          "libxdmcp6:amd64=1:1.1.2-3",
+          "libxext6:amd64=2:1.3.4-1+b1",
+          "libxfixes3:amd64=1:6.0.0-2",
+          "libxml2:amd64=2.9.14+dfsg-1.3~deb12u6",
+          "libxshmfence1:amd64=1.3-1",
+          "libxxf86vm1:amd64=1:1.1.4-1+b2",
+          "libxxhash0:amd64=0.8.1-1",
+          "libz3-4:amd64=4.8.12-3.1",
+          "libzstd1:amd64=1.5.4+dfsg2-5",
+          "linux-libc-dev:amd64=6.1.190-1",
+          "login=1:4.13+dfsg1-1+deb12u2",
+          "logsave=1.47.0-2+b2",
+          "make=4.3-4.1",
+          "mawk=1.3.4.20200120-3.1",
+          "media-types=10.0.0",
+          "mount=2.38.1-5+deb12u3",
+          "ncurses-base=6.4-4",
+          "ncurses-bin=6.4-4",
+          "passwd=1:4.13+dfsg1-1+deb12u2",
+          "perl-base=5.36.0-7+deb12u4",
+          "pkg-config:amd64=1.8.1-1",
+          "pkgconf:amd64=1.8.1-1",
+          "pkgconf-bin=1.8.1-1",
+          "python3=3.11.2-1+b1",
+          "python3-distutils=3.11.2-3",
+          "python3-lib2to3=3.11.2-3",
+          "python3-minimal=3.11.2-1+b1",
+          "python3.11=3.11.2-6+deb12u9",
+          "python3.11-minimal=3.11.2-6+deb12u9",
+          "readline-common=8.2-1.3",
+          "rpcsvc-proto=1.4.3-1",
+          "sed=4.9-1+deb12u1",
+          "sysvinit-utils=3.06-4",
+          "tar=1.34+dfsg-1.2+deb12u1",
+          "tzdata=2026f-0+deb12u1",
+          "usr-is-merged=37~deb12u1",
+          "util-linux=2.38.1-5+deb12u3",
+          "util-linux-extra=2.38.1-5+deb12u3",
+          "uuid-dev:amd64=2.38.1-5+deb12u3",
+          "x11proto-dev=2022.1-1",
+          "xorg-sgml-doctools=1:1.11-1.1",
+          "xtrans-dev=1.4.0-1",
+          "zlib1g:amd64=1:1.2.13.dfsg-1",
+          "zlib1g-dev:amd64=1:1.2.13.dfsg-1"
+        ],
+        "platform": "linux/amd64",
+        "sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+        "source_sha256": "1cefd90dc7a306ac993366fa0e18573202e6ba4a13590999065c3c80018a6c5d",
+        "symbol_versions": "\nVersion symbols section '.gnu.version' contains 95 entries:\n Addr: 0x000000000000130a  Offset: 0x0000130a  Link: 2 (.dynsym)\n  000:   0 (*local*)       1 (*global*)      1 (*global*)      1 (*global*)   \n  004:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   \n  008:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   \n  00c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   \n  010:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   \n  014:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   \n  018:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   \n  01c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   \n  020:   2 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   \n  024:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   \n  028:   2 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   \n  02c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   \n  030:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   \n  034:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   \n  038:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   \n  03c:   1 (*global*)      1 (*global*)      1 (*global*)      2 (GLIBC_2.2.5)\n  040:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   \n  044:   2 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   \n  048:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   \n  04c:   1 (*global*)      2 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   \n  050:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   \n  054:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   \n  058:   1 (*global*)      1 (*global*)      3 (GLIBC_2.14)    1 (*global*)   \n  05c:   1 (*global*)      1 (*global*)      1 (*global*)   \n\nVersion needs section '.gnu.version_r' contains 1 entry:\n Addr: 0x00000000000013c8  Offset: 0x000013c8  Link: 3 (.dynstr)\n  000000: Version: 1  File: libc.so.6  Cnt: 2\n  0x0010:   Name: GLIBC_2.14  Flags: none  Version: 3\n  0x0020:   Name: GLIBC_2.2.5  Flags: none  Version: 2\n"
+      }
+    },
+    "browser": {
+      "schema_version": 1,
+      "candidate": "0.1.0-deck.7",
+      "source_revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "source_clean_before": true,
+      "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+      "playwright": "1.62.0",
+      "browser": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+      "node": "v24.19.0",
+      "inputs": {
+        "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz": {
+          "sha256": "4205e4725fd432ea99a59fe8c1a78f0f7b29c7ddbd6c79e3cf4afd8c2c67c9c3",
+          "bytes": 11369529
+        },
+        "/workspace/obsgod/dist/obsgod-one-click-update_0.1.0-deck.7_linux_amd64.zip": {
+          "sha256": "5227e541e3c07cc9214e67f4400dda14065520789ebdecfdeca15b6c4152c68d",
+          "bytes": 3073420
+        },
+        "/workspace/obsgod/dist/obsgod-decky.zip": {
+          "sha256": "0a4d8afefa0f149cb053cddc988fa0cc46992602b73b73b581deab4414abf5c4",
+          "bytes": 4197393
+        },
+        "/workspace/obsgod/dist/decky-install": {
+          "sha256": "81e0f2a4e09641df55869bb00b1cdcc31dc539d3037904945c3e64a05d4d2be0",
+          "bytes": 7155836
+        },
+        "/workspace/obsgod/dist/manifest.json": {
+          "sha256": "dfb184468e1aca9f9316a16f3530d0daac2cc75bdafb880472489a640451496a",
+          "bytes": 2390
+        },
+        "/workspace/.obsgod-tools/m2/legacy-download/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz": {
+          "sha256": "c584c04ed3c79a01f1b846adc4f8bbe86c8132a4bca2cf6ba60cc557eba39ce1",
+          "bytes": 7935355
+        },
+        "/workspace/.obsgod-tools/audio-game-upgrade/final/public-download/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz": {
+          "sha256": "23cc2c484b7524756a3b632bf8a8e7231ac7c515c06a08183422ed91b7e82650",
+          "bytes": 11229097
+        },
+        "/workspace/.obsgod-tools/m2/legacy-download/obsgod-one-click-update_0.1.0-deck.6_linux_amd64.zip": {
+          "sha256": "c196947ca1cd34a01caccff7755b62de61d77531f39ac63922b570eed329420d",
+          "bytes": 3069400
+        }
+      },
+      "source_files_sha256": {
+        "steamdeck/tests/browser-setup.py": "fe4374941457334fd155404a2846b9551fabd4348d0e40ed9be6be896801a9b7",
+        "steamdeck/tests/browser-panel.py": "83040a4343436ba399898babfa5d7afd0ce8c8f1953fb6817dab047c6d5e4d59",
+        "steamdeck/tests/browser-support.py": "eb8af6d817c9a92a087bad7a5ea63691d97c1bea908f8a1adce53b688f54dbcd",
+        "steamdeck/tests/decky-transport-smoke.py": "7ba121f89ccff257bbfb0e4da1421e6b49bad439ccf8a3b0a7a1e4704d91e499",
+        "steamdeck/tests/updater-smoke.py": "54f8b83432c575a3b582f9437b56b6427e9ee90ceccffaf33457c25bd706da3a",
+        "steamdeck/tests/test_bootstrap.py": "1250855acade87931b71c263ec49c5077b207e249c370190fd417402064e6c86",
+        "steamdeck/decky/tests/fixture.html": "0fbb781d835e7afce4346f7866dfe94c8030db0bca1288d18bafe3f16aa9a111",
+        "steamdeck/decky/tests/build-fixture.mjs": "77ef761327f9a3e264d0ca7aad06b7ff64dba056963ef40745d5bacf1306318c",
+        "steamdeck/decky/tests/build-support-fixture.mjs": "65d695f8f31b57b656fa11313fdc2d68bef1b3cc51f9724235cbe9538dac8b75"
+      },
+      "checks": [
+        {
+          "name": "setup-fresh",
+          "command": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "steamdeck/tests/browser-setup.py",
+            "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz",
+            "--browser",
+            "/usr/bin/chromium",
+            "--screenshots",
+            "/workspace/.obsgod-tools/m2/final/browser-fresh"
+          ],
+          "log": "setup-fresh.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 3.039
+        },
+        {
+          "name": "setup-upgrade4",
+          "command": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "steamdeck/tests/browser-setup.py",
+            "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz",
+            "--upgrade-from",
+            "/workspace/.obsgod-tools/m2/legacy-download/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz",
+            "--browser",
+            "/usr/bin/chromium",
+            "--screenshots",
+            "/workspace/.obsgod-tools/m2/final/browser-upgrade4"
+          ],
+          "log": "setup-upgrade4.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 2.598
+        },
+        {
+          "name": "setup-upgrade6",
+          "command": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "steamdeck/tests/browser-setup.py",
+            "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz",
+            "--upgrade-from",
+            "/workspace/.obsgod-tools/audio-game-upgrade/final/public-download/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz",
+            "--browser",
+            "/usr/bin/chromium",
+            "--screenshots",
+            "/workspace/.obsgod-tools/m2/final/browser-upgrade6"
+          ],
+          "log": "setup-upgrade6.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 3.084
+        },
+        {
+          "name": "panel",
+          "command": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "steamdeck/tests/browser-panel.py",
+            "/workspace/obsgod/dist/obsgod-decky.zip",
+            "--browser",
+            "/usr/bin/chromium",
+            "--screenshots",
+            "/workspace/.obsgod-tools/m2/final/browser-panel"
+          ],
+          "log": "panel.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 15.68
+        },
+        {
+          "name": "support-receive",
+          "command": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "steamdeck/tests/browser-support.py",
+            "--browser",
+            "/usr/bin/chromium",
+            "--screenshots",
+            "/workspace/.obsgod-tools/m2/final/browser-support"
+          ],
+          "log": "support-receive.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 2.556
+        }
+      ],
+      "limitations": [
+        "Steam/Decky host APIs and installed Flatpak/Steam service behavior are fixtures, not real Deck/controller proof.",
+        "Configured receive dialogs use public protocol-test addresses; production receiving addresses remain unconfigured.",
+        "No live provider payments, wallet scanning/receipt or external broadcast performed."
+      ],
+      "outcome": "passed",
+      "source_clean_after": true,
+      "revision_after": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "input_hashes_unchanged": true
+    },
+    "decky-updater": {
+      "schema_version": 1,
+      "candidate": "0.1.0-deck.7",
+      "source_revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "source_clean_before": true,
+      "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+      "playwright": "1.62.0",
+      "browser": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+      "node": "v24.19.0",
+      "inputs": {
+        "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz": {
+          "sha256": "4205e4725fd432ea99a59fe8c1a78f0f7b29c7ddbd6c79e3cf4afd8c2c67c9c3",
+          "bytes": 11369529
+        },
+        "/workspace/obsgod/dist/obsgod-one-click-update_0.1.0-deck.7_linux_amd64.zip": {
+          "sha256": "5227e541e3c07cc9214e67f4400dda14065520789ebdecfdeca15b6c4152c68d",
+          "bytes": 3073420
+        },
+        "/workspace/obsgod/dist/obsgod-decky.zip": {
+          "sha256": "0a4d8afefa0f149cb053cddc988fa0cc46992602b73b73b581deab4414abf5c4",
+          "bytes": 4197393
+        },
+        "/workspace/obsgod/dist/decky-install": {
+          "sha256": "81e0f2a4e09641df55869bb00b1cdcc31dc539d3037904945c3e64a05d4d2be0",
+          "bytes": 7155836
+        },
+        "/workspace/obsgod/dist/manifest.json": {
+          "sha256": "dfb184468e1aca9f9316a16f3530d0daac2cc75bdafb880472489a640451496a",
+          "bytes": 2390
+        },
+        "/workspace/.obsgod-tools/m2/legacy-download/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz": {
+          "sha256": "c584c04ed3c79a01f1b846adc4f8bbe86c8132a4bca2cf6ba60cc557eba39ce1",
+          "bytes": 7935355
+        },
+        "/workspace/.obsgod-tools/audio-game-upgrade/final/public-download/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz": {
+          "sha256": "23cc2c484b7524756a3b632bf8a8e7231ac7c515c06a08183422ed91b7e82650",
+          "bytes": 11229097
+        },
+        "/workspace/.obsgod-tools/m2/legacy-download/obsgod-one-click-update_0.1.0-deck.6_linux_amd64.zip": {
+          "sha256": "c196947ca1cd34a01caccff7755b62de61d77531f39ac63922b570eed329420d",
+          "bytes": 3069400
+        }
+      },
+      "source_files_sha256": {
+        "steamdeck/tests/browser-setup.py": "fe4374941457334fd155404a2846b9551fabd4348d0e40ed9be6be896801a9b7",
+        "steamdeck/tests/browser-panel.py": "83040a4343436ba399898babfa5d7afd0ce8c8f1953fb6817dab047c6d5e4d59",
+        "steamdeck/tests/browser-support.py": "eb8af6d817c9a92a087bad7a5ea63691d97c1bea908f8a1adce53b688f54dbcd",
+        "steamdeck/tests/decky-transport-smoke.py": "7ba121f89ccff257bbfb0e4da1421e6b49bad439ccf8a3b0a7a1e4704d91e499",
+        "steamdeck/tests/updater-smoke.py": "54f8b83432c575a3b582f9437b56b6427e9ee90ceccffaf33457c25bd706da3a",
+        "steamdeck/tests/test_bootstrap.py": "1250855acade87931b71c263ec49c5077b207e249c370190fd417402064e6c86",
+        "steamdeck/decky/tests/fixture.html": "0fbb781d835e7afce4346f7866dfe94c8030db0bca1288d18bafe3f16aa9a111",
+        "steamdeck/decky/tests/build-fixture.mjs": "77ef761327f9a3e264d0ca7aad06b7ff64dba056963ef40745d5bacf1306318c",
+        "steamdeck/decky/tests/build-support-fixture.mjs": "65d695f8f31b57b656fa11313fdc2d68bef1b3cc51f9724235cbe9538dac8b75"
+      },
+      "checks": [
+        {
+          "name": "decky-upgrade4-current7-and-dynamic6",
+          "command": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "steamdeck/tests/decky-transport-smoke.py",
+            "/workspace/obsgod/dist/decky-install",
+            "/workspace/obsgod/dist/obsgod-decky.zip",
+            "--upstream",
+            "/workspace/.obsgod-tools/decky-upstream-v3.3.1",
+            "--runtime-archive",
+            "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz",
+            "--updater-zip",
+            "/workspace/obsgod/dist/obsgod-one-click-update_0.1.0-deck.7_linux_amd64.zip",
+            "--previous-archive",
+            "/workspace/.obsgod-tools/m2/legacy-download/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz",
+            "--bootstrap-updater-zip",
+            "/workspace/.obsgod-tools/m2/legacy-download/obsgod-one-click-update_0.1.0-deck.6_linux_amd64.zip"
+          ],
+          "log": "decky-upgrade4-current7-and-dynamic6.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 14.2
+        },
+        {
+          "name": "decky-upgrade6-current7",
+          "command": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "steamdeck/tests/decky-transport-smoke.py",
+            "/workspace/obsgod/dist/decky-install",
+            "/workspace/obsgod/dist/obsgod-decky.zip",
+            "--upstream",
+            "/workspace/.obsgod-tools/decky-upstream-v3.3.1",
+            "--runtime-archive",
+            "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz",
+            "--updater-zip",
+            "/workspace/obsgod/dist/obsgod-one-click-update_0.1.0-deck.7_linux_amd64.zip",
+            "--previous-archive",
+            "/workspace/.obsgod-tools/audio-game-upgrade/final/public-download/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz"
+          ],
+          "log": "decky-upgrade6-current7.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 10.298
+        }
+      ],
+      "upstream_files": {
+        "browser.py": "cfbc0e29778d2428e6aea6e03fb17f45eee7b7829a5bf9a2abea05bb2415d968",
+        "helpers.py": "1380d802d6fd8bd8e803f5e634b8c74446c9b52bc26c3a21585ba2e15fa1a271",
+        "wsrouter.py": "5ec6eb2acfa152c80b04d1a677113ddbf492747e0467dec72362b3406cc49b8d",
+        "wsrouter.ts": "b44ed2c93ad4a2e6c1af3ef7ca2fae26f8ed085b28306f805964da52b636fe0a"
+      },
+      "limitations": [
+        "Pinned Decky3.3.1 WSRouter/frontend/PluginBrowser execute real protocol requests; Steam/CDP/service lifecycle/ownership/Flatpak and HTTPS release responses are fixtures.",
+        "Published fixed updater4.1 cannot discover runtime7; no contrary compatibility claim. Maintained dynamic updater6 is byte-identical in its bootstrap case.",
+        "Actual Deck install/update/remove and required independent platform/CI/review proof remain unrun."
+      ],
+      "outcome": "passed",
+      "source_clean_after": true,
+      "revision_after": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "input_hashes_unchanged": true
+    },
+    "site": {
+      "schema_version": 1,
+      "candidate": "0.1.0-deck.7",
+      "source_revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "source_tree": "87f1e3e54db6949691c58953106504fbdc8cf6dd",
+      "clean_before": true,
+      "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+      "playwright": "1.62.0",
+      "chromium": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+      "source_inputs": {
+        ".github/FUNDING.yml": "04f14099064745d28711e94bf4b0fd785d62fc185117c69307951039b82b1037",
+        "product.json": "c2adf20387a5c3e8610b9927666d60ed67fa461f7111d4beae43e4e713d27d5c",
+        "scripts/build-site.py": "58e6598bf2fe17649188bf59b6751b76b649f40c23df34a811f21efaed545596",
+        "site/assets/site.css": "3c6a11e208905897d989925e60148efcd26088cc7b8a4d8e11652307e8e35a35",
+        "site/assets/site.js": "db7fb2f04cbf57f464a9a91edf6ec32f5e1732d277e4a2561458892f28d932e2",
+        "site/content/configuration.html": "abe72f295f78677b55f29096bbc126408dd1b9f6a17b789ec5d0a92c64cbfa83",
+        "site/content/index.html": "afe85377fb5a17f1369001723c6c74006d257402942091bc2f0a90d6f06d9c8e",
+        "site/content/install.html": "810763c8492f9d1bd12e930bce46bf144e5ccd45192ccc9664ec892adc5ab5c3",
+        "site/content/privacy.html": "8ce0eb1c09c181f55a3795144b718aca89d6edb833769de3ae1a138942f28369",
+        "site/content/providers.html": "c56ef6363740bd512cd6aeaad294b9c5540ba158ea804a3d02aed80c0c31b839",
+        "site/content/troubleshooting.html": "f8ea536c231103a71575b59e6615b71002cf32c1971df5d9501b122fe0408c37",
+        "site/content/uninstall.html": "a8880cdcb8680a83002db4b3e72a79a46fd5a1660a36a1fc6d4d2dbb77f2183b",
+        "site/content/updates.html": "e6b5dd63d431eef29488e72090d2b08d491b4c6612885e8864b6f98e3ce2e980",
+        "site/pages.json": "b67c1af08b0a874287118fc18ccbed8cb3a228388f8a5007f1d2072ac4507f7b",
+        "site/template.html": "2f0f1deffb70f6b384238b79e8bd33954412f0e274022cf4a15121761bca1a4f",
+        "site/tests/browser.py": "bf7d48543a7d637c805ab351aa0a07ef59263a92c1896fb4f53d8eb6cfe7c1e0",
+        "site/tests/test_build.py": "8e6fe64f5aefa5f842a11a5bd901a935e7d50c1f6df935c7957871dd71405a9a",
+        "steamdeck/decky/src/support-data.mjs": "72759bcee3aebe4f9ad82f6b1273d91feb623771bd3a219567120d3296015c3d",
+        "support.json": "73d06d7d6663c47637b9f080dd6aa1360a38a566a06d1becb3bbb7194fec8eb1"
+      },
+      "checks": [
+        {
+          "command": [
+            "python3",
+            "-B",
+            "site/tests/test_build.py",
+            "--output",
+            "/workspace/.obsgod-tools/m2/final/site-build"
+          ],
+          "log": "site-build.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 0.199,
+          "result": "site-build/safety.json",
+          "report": {
+            "status": "passed",
+            "source": {
+              "dirty": false,
+              "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb"
+            },
+            "case_count": 11,
+            "passed_cases": [
+              "__main__.BuildSiteSafety.test_broken_local_anchor_is_rejected",
+              "__main__.BuildSiteSafety.test_broken_local_link_is_rejected",
+              "__main__.BuildSiteSafety.test_display_metadata_is_html_escaped",
+              "__main__.BuildSiteSafety.test_identical_inputs_produce_identical_bytes",
+              "__main__.BuildSiteSafety.test_invalid_repository_is_rejected",
+              "__main__.BuildSiteSafety.test_non_https_support_url_is_rejected",
+              "__main__.BuildSiteSafety.test_python_bytecode_cache_does_not_change_outputs",
+              "__main__.BuildSiteSafety.test_remote_css_import_is_rejected",
+              "__main__.BuildSiteSafety.test_stale_output_check_is_rejected",
+              "__main__.BuildSiteSafety.test_symlink_output_refuses_without_modifying_target",
+              "__main__.BuildSiteSafety.test_unrelated_output_is_preserved"
+            ],
+            "failed_cases": [],
+            "error_cases": [],
+            "skipped_cases": [],
+            "scope": "Site build/fixture checks only; no device, hosting or publication qualification."
+          }
+        },
+        {
+          "command": [
+            "python3",
+            "-B",
+            "site/tests/browser.py",
+            "--browser",
+            "/usr/bin/chromium",
+            "--output",
+            "/workspace/.obsgod-tools/m2/final/site-browser",
+            "--screenshots",
+            "/workspace/.obsgod-tools/m2/final/site-browser/screenshots"
+          ],
+          "log": "site-browser.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 5.941,
+          "result": "site-browser/matrix.json",
+          "report": {
+            "status": "passed-with-explicit-unavailable",
+            "source": {
+              "dirty": false,
+              "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb"
+            },
+            "cases": [
+              {
+                "viewport": "mobile",
+                "width": 390,
+                "height": 844,
+                "page": "configuration.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "mobile",
+                "width": 390,
+                "height": 844,
+                "page": "index.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "mobile",
+                "width": 390,
+                "height": 844,
+                "page": "install.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "mobile",
+                "width": 390,
+                "height": 844,
+                "page": "privacy.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "mobile",
+                "width": 390,
+                "height": 844,
+                "page": "providers.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "mobile",
+                "width": 390,
+                "height": 844,
+                "page": "troubleshooting.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "mobile",
+                "width": 390,
+                "height": 844,
+                "page": "uninstall.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "mobile",
+                "width": 390,
+                "height": 844,
+                "page": "updates.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "small-mobile",
+                "width": 320,
+                "height": 780,
+                "page": "configuration.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "small-mobile",
+                "width": 320,
+                "height": 780,
+                "page": "index.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "small-mobile",
+                "width": 320,
+                "height": 780,
+                "page": "install.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "small-mobile",
+                "width": 320,
+                "height": 780,
+                "page": "privacy.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "small-mobile",
+                "width": 320,
+                "height": 780,
+                "page": "providers.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "small-mobile",
+                "width": 320,
+                "height": 780,
+                "page": "troubleshooting.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "small-mobile",
+                "width": 320,
+                "height": 780,
+                "page": "uninstall.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "small-mobile",
+                "width": 320,
+                "height": 780,
+                "page": "updates.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "deck",
+                "width": 1280,
+                "height": 800,
+                "page": "configuration.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "deck",
+                "width": 1280,
+                "height": 800,
+                "page": "index.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "deck",
+                "width": 1280,
+                "height": 800,
+                "page": "install.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "deck",
+                "width": 1280,
+                "height": 800,
+                "page": "privacy.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "deck",
+                "width": 1280,
+                "height": 800,
+                "page": "providers.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "deck",
+                "width": 1280,
+                "height": 800,
+                "page": "troubleshooting.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "deck",
+                "width": 1280,
+                "height": 800,
+                "page": "uninstall.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "deck",
+                "width": 1280,
+                "height": 800,
+                "page": "updates.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "deck-portrait",
+                "width": 800,
+                "height": 1280,
+                "page": "configuration.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "deck-portrait",
+                "width": 800,
+                "height": 1280,
+                "page": "index.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "deck-portrait",
+                "width": 800,
+                "height": 1280,
+                "page": "install.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "deck-portrait",
+                "width": 800,
+                "height": 1280,
+                "page": "privacy.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "deck-portrait",
+                "width": 800,
+                "height": 1280,
+                "page": "providers.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "deck-portrait",
+                "width": 800,
+                "height": 1280,
+                "page": "troubleshooting.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "deck-portrait",
+                "width": 800,
+                "height": 1280,
+                "page": "uninstall.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "deck-portrait",
+                "width": 800,
+                "height": 1280,
+                "page": "updates.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "desktop",
+                "width": 1440,
+                "height": 1000,
+                "page": "configuration.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "desktop",
+                "width": 1440,
+                "height": 1000,
+                "page": "index.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "desktop",
+                "width": 1440,
+                "height": 1000,
+                "page": "install.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "desktop",
+                "width": 1440,
+                "height": 1000,
+                "page": "privacy.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "desktop",
+                "width": 1440,
+                "height": 1000,
+                "page": "providers.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "desktop",
+                "width": 1440,
+                "height": 1000,
+                "page": "troubleshooting.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "desktop",
+                "width": 1440,
+                "height": 1000,
+                "page": "uninstall.html",
+                "status": "passed"
+              },
+              {
+                "viewport": "desktop",
+                "width": 1440,
+                "height": 1000,
+                "page": "updates.html",
+                "status": "passed"
+              },
+              {
+                "mode": "file-offline",
+                "status": "unavailable",
+                "reason": "Managed Chromium policy blocks file:// navigation; offline loopback HTTP is checked separately."
+              }
+            ],
+            "console_errors": [],
+            "external_requests": [],
+            "python": "3.12.14",
+            "playwright": "1.62.0",
+            "browser_executable": "/usr/bin/chromium",
+            "screenshots": {
+              "configuration-mobile.png": "981c7bad20877a6ce9d45b58c88c6137f0d1e3e3ea6bcf6301c607058fe2242d",
+              "landing-mobile.png": "aead1213b946f37577188723e42e0a3beeefaea0db8037097f19d88a0645a615",
+              "landing-deck.png": "b91c862a46b29ddf3f68b1632d13cedba2d10f1d556bfe1926c1600aaa578553",
+              "landing-deck-portrait.png": "5b75289c546643f77297f3998c9c72781a3bc646cf3ee125d00dcf0ebe4d593f",
+              "landing-desktop.png": "8ea3353687571ec1d3e185ec143a8d1c03898a88c3595ee65b39d03b1f83e58e"
+            },
+            "limitations": "Chromium viewport/offline navigation only; no real Deck/controller, hosted-site, payment or wallet acceptance.",
+            "browser_version": "151.0.7922.173"
+          }
+        }
+      ],
+      "revision_after": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "clean_after": true,
+      "input_hashes_unchanged": true,
+      "outcome": "passed",
+      "limitations": [
+        "Browser viewport and loopback HTTP checks do not establish real Steam Deck/controller/screen-reader acceptance.",
+        "Direct file:// navigation is unavailable under managed Chromium administrator policy; loopback HTTP offline preview is checked separately.",
+        "Hosted site, provider/payment availability, wallet receiving and deployment checks remain unrun."
+      ]
+    },
+    "native": {
+      "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "tree": "87f1e3e54db6949691c58953106504fbdc8cf6dd",
+      "clean_before": true,
+      "input_sha256": {
+        "dist/obsgod": "525e533ae4ed806559cdffffd865f1f01582cbdd3a746c73a50a0c01912dea6f",
+        "dist/libgstobsgodcapture.so": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+        "steamdeck/tests/obs-smoke.Dockerfile": "60211bc5eb18efa4367107ab56c01d11ba7919f89c5d99d374ecab78451748d3",
+        "steamdeck/tests/native-obs-smoke.sh": "6d8eee2367a52db769d7f4e617f04180d6cf90abe017b2e4e18fa9612358857e",
+        "steamdeck/tests/native-capture-smoke.sh": "1a18dcb9e0e2e340af255efb18f62c7136f1e202232563736c5d7c6167173c85",
+        "steamdeck/tests/native-game-obs-smoke.sh": "896fcd700d34d9390d476ae2b67cd11e4ffd3ddc61256447d29c89757c809792",
+        "steamdeck/tests/native-control-password.py": "aac7bdbbd2ed47da5dc27b26856c83006de91471c0b94cbe381478274b1c13de",
+        "steamdeck/tests/native-game-obs.py": "36c1035eb0b73a189694c523069e943a4c65b62a93fdb4e2ea950a78f5102784",
+        "steamdeck/tests/native-audio.py": "656c0e8ff2d415310562bc7f16ee163bf6152f6af222813dd678c3043c84e1db",
+        "steamdeck/tests/capture-fixture.c": "47baee49ce57f09ef6c32bcc97703385d198b0a71775d8da3d8eee98e429be7c"
+      },
+      "image": "obsgod-obs-smoke:audio-game",
+      "image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+      "host_platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+      "container_uid": "1000:1000",
+      "docker_version": "28.4.0",
+      "dockerfile_sha256": "60211bc5eb18efa4367107ab56c01d11ba7919f89c5d99d374ecab78451748d3",
+      "container_tools": [
+        "ffmpeg=7:7.1.5-0+deb13u1",
+        "libgstreamer1.0-0:amd64=1.26.2-2",
+        "libobs-dev=30.2.3+dfsg-3",
+        "libobs0=",
+        "libobs0t64:amd64=30.2.3+dfsg-3",
+        "libpipewire-0.3-0=",
+        "libpipewire-0.3-0t64:amd64=1.4.2-1",
+        "libpipewire-0.3-common=",
+        "libpipewire-0.3-dev:amd64=1.4.2-1",
+        "libpipewire-0.3-modules:amd64=1.4.2-1",
+        "obs-studio=30.2.3+dfsg-3",
+        "pipewire:amd64=1.4.2-1",
+        "pulseaudio=17.0+dfsg1-2+b1",
+        "wireplumber=0.5.8-2"
+      ],
+      "clean_after": true,
+      "revision_after": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "source_and_inputs_unchanged": true,
+      "outcome": "passed",
+      "suites": [
+        {
+          "name": "native-audio",
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "command": [
+            "docker",
+            "--host=unix:///var/run/docker.sock",
+            "run",
+            "--rm",
+            "--network",
+            "none",
+            "--user",
+            "1000:1000",
+            "-e",
+            "OBSGOD_QUALIFIED_REVISION=0eac1ed9746e6a5999a196777bde5455222f46eb",
+            "--mount",
+            "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+            "--mount",
+            "type=bind,src=/workspace/.obsgod-tools/m2/final/native-audio,dst=/work",
+            "obsgod-obs-smoke:audio-game",
+            "dbus-run-session",
+            "--",
+            "bash",
+            "/src/steamdeck/tests/native-obs-smoke.sh"
+          ],
+          "work_directory": "/workspace/.obsgod-tools/m2/final/native-audio",
+          "log": "native-audio.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 106.152,
+          "image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5"
+        },
+        {
+          "name": "native-capture",
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "command": [
+            "docker",
+            "--host=unix:///var/run/docker.sock",
+            "run",
+            "--rm",
+            "--network",
+            "none",
+            "--user",
+            "1000:1000",
+            "-e",
+            "OBSGOD_QUALIFIED_REVISION=0eac1ed9746e6a5999a196777bde5455222f46eb",
+            "--mount",
+            "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+            "--mount",
+            "type=bind,src=/workspace/.obsgod-tools/m2/final/native-capture,dst=/work",
+            "obsgod-obs-smoke:audio-game",
+            "dbus-run-session",
+            "--",
+            "bash",
+            "/src/steamdeck/tests/native-capture-smoke.sh",
+            "/src/dist"
+          ],
+          "work_directory": "/workspace/.obsgod-tools/m2/final/native-capture",
+          "log": "native-capture.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 16.454,
+          "image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5"
+        },
+        {
+          "name": "native-game",
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "command": [
+            "docker",
+            "--host=unix:///var/run/docker.sock",
+            "run",
+            "--rm",
+            "--network",
+            "none",
+            "--user",
+            "1000:1000",
+            "-e",
+            "OBSGOD_QUALIFIED_REVISION=0eac1ed9746e6a5999a196777bde5455222f46eb",
+            "--mount",
+            "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+            "--mount",
+            "type=bind,src=/workspace/.obsgod-tools/m2/final/native-game,dst=/work",
+            "obsgod-obs-smoke:audio-game",
+            "dbus-run-session",
+            "--",
+            "bash",
+            "/src/steamdeck/tests/native-game-obs-smoke.sh"
+          ],
+          "work_directory": "/workspace/.obsgod-tools/m2/final/native-game",
+          "log": "native-game.log",
+          "exit_code": 0,
+          "outcome": "passed",
+          "seconds": 57.094,
+          "image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5"
+        }
+      ],
+      "proofs": {
+        "capture": {
+          "path": "native-capture/capture-validation/qualification.json",
+          "sha256": "4c462f0125a0e25681507d7c9a1ed83f9e20f2faeeec3618207fb2e63737344e",
+          "content": {
+            "state": "passed",
+            "scope": "Synthetic PipeWire custom-SPA negotiation and supplied GStreamer source CPU media; not real Gamescope, SteamOS, Flatpak or OBS scene transitions",
+            "source_revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+            "plugin_path": "/src/dist/libgstobsgodcapture.so",
+            "plugin_sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+            "fixture_source_sha256": "47baee49ce57f09ef6c32bcc97703385d198b0a71775d8da3d8eee98e429be7c",
+            "test_source_sha256": "1a18dcb9e0e2e340af255efb18f62c7136f1e202232563736c5d7c6167173c85",
+            "platform": [
+              "Linux",
+              "e883e270f5c0",
+              "6.18.57",
+              "#1 SMP Tue Oct 20 21:56:04 UTC 2026",
+              "x86_64"
+            ],
+            "pipewire": "pw-cli\nCompiled with libpipewire 1.4.2\nLinked with libpipewire 1.4.2",
+            "gstreamer": "gst-launch-1.0 version 1.26.2\nGStreamer 1.26.2\nhttps://tracker.debian.org/pkg/gstreamer1.0",
+            "cases": {
+              "game-a": {
+                "frames": 30,
+                "moving_game_frames": 29,
+                "blue_compositor_frames": 0
+              },
+              "game-b": {
+                "frames": 30,
+                "moving_game_frames": 29,
+                "blue_compositor_frames": 0
+              },
+              "corrupt": {
+                "frames": 30,
+                "result": "invalid chunks excluded; black or bounded error"
+              },
+              "empty": {
+                "frames": 30,
+                "result": "invalid chunks excluded; black or bounded error"
+              },
+              "short": {
+                "frames": 0,
+                "result": "invalid chunks excluded; black or bounded error"
+              },
+              "stale": {
+                "frames": 60,
+                "last_ten_frames": "black"
+              },
+              "late-duplicate": {
+                "frames_before_failure": 2,
+                "exit_code": 1,
+                "blue_compositor_frames": 0
+              },
+              "reject-missing": {
+                "exit_code": 255,
+                "media_bytes": 0
+              },
+              "reject-wrong": {
+                "exit_code": 255,
+                "media_bytes": 0
+              },
+              "reject-zero": {
+                "exit_code": 255,
+                "media_bytes": 0
+              },
+              "reject-mixed-dma": {
+                "exit_code": 255,
+                "media_bytes": 0
+              },
+              "reject-id-0": {
+                "exit_code": 255,
+                "media_bytes": 0
+              },
+              "reject-id-769": {
+                "exit_code": 255,
+                "media_bytes": 0
+              }
+            }
+          }
+        },
+        "password": {
+          "path": "native-audio/output/control-password-qualification.json",
+          "sha256": "138cb6e9967cafff4a616761f160ed170779cb2d08538439d183dca46abde792",
+          "content": {
+            "binary_sha256": "525e533ae4ed806559cdffffd865f1f01582cbdd3a746c73a50a0c01912dea6f",
+            "cases": [
+              {
+                "actual_obs_new_password_authenticated": true,
+                "file_update_awaited_verification": true,
+                "final_managed_shutdown_confirmed": true,
+                "mode": "generated",
+                "old_password_rejected_code": 4009,
+                "output_stayed_stopped": true,
+                "private_pair_synchronized": true,
+                "rotation_while_present_refused_without_change": true,
+                "settings_only_workflow": {
+                  "actual_applied_stages": [
+                    "starting_scene"
+                  ],
+                  "all_output_remained_inactive": true,
+                  "managed_settings_and_credentials_preserved": true,
+                  "private_generic_configuration_removed": true,
+                  "status": "passed",
+                  "target_collection": "OBSGod",
+                  "target_profile": "OBSGod",
+                  "target_scene": "OBSGod Idle"
+                },
+                "status": "passed",
+                "stream_key_and_settings_binding_preserved": true
+              },
+              {
+                "actual_obs_new_password_authenticated": true,
+                "file_update_awaited_verification": true,
+                "final_managed_shutdown_confirmed": true,
+                "mode": "manual",
+                "old_password_rejected_code": 4009,
+                "output_stayed_stopped": true,
+                "private_pair_synchronized": true,
+                "rotation_while_present_refused_without_change": true,
+                "settings_only_workflow": null,
+                "status": "passed",
+                "stream_key_and_settings_binding_preserved": true
+              }
+            ],
+            "limitations": [
+              "Actual Steam Deck/SteamOS/Gamescope/Flatpak password recovery remains unrun",
+              "No external provider account or broadcast was used"
+            ],
+            "ordinary_obs_preserved": true,
+            "platform": "Linux disposable container, real OBS; modeled Flatpak invocation",
+            "secret_values_exported": false,
+            "status": "passed"
+          }
+        },
+        "workflow": {
+          "path": "native-audio/output/control-workflow-qualification.json",
+          "sha256": "a5af5296a2e7ef5ca055d1c84da8d8c8a66bb8add25fa5b05a9b579bc2c4bf58",
+          "content": {
+            "actual_applied_stages": [
+              "starting_scene"
+            ],
+            "all_output_remained_inactive": true,
+            "managed_settings_and_credentials_preserved": true,
+            "private_generic_configuration_removed": true,
+            "status": "passed",
+            "target_collection": "OBSGod",
+            "target_profile": "OBSGod",
+            "target_scene": "OBSGod Idle"
+          }
+        },
+        "game": {
+          "path": "native-game/output/game-obs-qualification.json",
+          "sha256": "8f0dfa3828cd13641b415994dce0d1116cfabd5c30fb923079f5e93a283e3bce",
+          "content": {
+            "scope": "Real OBS/GStreamer/PipeWire/PulseAudio/software encoding and local RTMP with synthetic app identities/producer; not actual Gamescope/SteamOS/Flatpak/Kick",
+            "phases": {
+              "game-a": {
+                "scene": "OBSGod Game",
+                "output_bytes": 649882,
+                "at_ms": 1733,
+                "pixels": {
+                  "channel_means": [
+                    210.27777777777777,
+                    21.59722222222222,
+                    11.666666666666666
+                  ],
+                  "expected": "red"
+                },
+                "items": [
+                  {
+                    "source": "Legacy private display sentinel",
+                    "enabled": false
+                  },
+                  {
+                    "source": "OBSGod Gamescope",
+                    "enabled": false
+                  },
+                  {
+                    "source": "OBSGod Game Window",
+                    "enabled": true
+                  },
+                  {
+                    "source": "OBSGod Game Audio",
+                    "enabled": true
+                  }
+                ],
+                "end_ms": 4833
+              },
+              "between-games": {
+                "scene": "OBSGod Idle",
+                "output_bytes": 2183116,
+                "at_ms": 5599,
+                "pixels": {
+                  "channel_means": [
+                    3.372916666666667,
+                    3.372916666666667,
+                    3.372916666666667
+                  ],
+                  "expected": "placeholder"
+                },
+                "items": [
+                  {
+                    "source": "Legacy private display sentinel",
+                    "enabled": false
+                  },
+                  {
+                    "source": "OBSGod Gamescope",
+                    "enabled": false
+                  },
+                  {
+                    "source": "OBSGod Idle Message",
+                    "enabled": true
+                  },
+                  {
+                    "source": "OBSGod Game Audio",
+                    "enabled": true
+                  }
+                ],
+                "end_ms": 8699
+              },
+              "game-b": {
+                "scene": "OBSGod Game",
+                "output_bytes": 4204815,
+                "at_ms": 10699,
+                "pixels": {
+                  "channel_means": [
+                    11.741666666666667,
+                    210.27916666666667,
+                    11.741666666666667
+                  ],
+                  "expected": "green"
+                },
+                "items": [
+                  {
+                    "source": "Legacy private display sentinel",
+                    "enabled": false
+                  },
+                  {
+                    "source": "OBSGod Gamescope",
+                    "enabled": false
+                  },
+                  {
+                    "source": "OBSGod Game Window",
+                    "enabled": true
+                  },
+                  {
+                    "source": "OBSGod Game Audio",
+                    "enabled": true
+                  }
+                ],
+                "end_ms": 13933
+              },
+              "unsupported-source": {
+                "scene": "OBSGod Idle",
+                "output_bytes": 5896238,
+                "at_ms": 14966,
+                "pixels": {
+                  "channel_means": [
+                    3.372916666666667,
+                    3.372916666666667,
+                    3.372916666666667
+                  ],
+                  "expected": "placeholder"
+                },
+                "items": [
+                  {
+                    "source": "Legacy private display sentinel",
+                    "enabled": false
+                  },
+                  {
+                    "source": "OBSGod Gamescope",
+                    "enabled": false
+                  },
+                  {
+                    "source": "OBSGod Idle Message",
+                    "enabled": true
+                  },
+                  {
+                    "source": "OBSGod Game Audio",
+                    "enabled": true
+                  }
+                ],
+                "end_ms": 18166
+              }
+            },
+            "clip_game": {
+              "scene": "OBSGod Game",
+              "output_bytes": 140348,
+              "at_ms": 466,
+              "pixels": {
+                "channel_means": [
+                  210.27777777777777,
+                  21.59722222222222,
+                  11.666666666666666
+                ],
+                "expected": "red"
+              },
+              "items": [
+                {
+                  "source": "Legacy private display sentinel",
+                  "enabled": false
+                },
+                {
+                  "source": "OBSGod Gamescope",
+                  "enabled": false
+                },
+                {
+                  "source": "OBSGod Game Window",
+                  "enabled": true
+                },
+                {
+                  "source": "OBSGod Game Audio",
+                  "enabled": true
+                }
+              ]
+            },
+            "clip_idle": {
+              "scene": "OBSGod Idle",
+              "output_bytes": 456263,
+              "at_ms": 1266,
+              "pixels": {
+                "channel_means": [
+                  3.372916666666667,
+                  3.372916666666667,
+                  3.372916666666667
+                ],
+                "expected": "placeholder"
+              },
+              "items": [
+                {
+                  "source": "Legacy private display sentinel",
+                  "enabled": false
+                },
+                {
+                  "source": "OBSGod Gamescope",
+                  "enabled": false
+                },
+                {
+                  "source": "OBSGod Idle Message",
+                  "enabled": true
+                },
+                {
+                  "source": "OBSGod Game Audio",
+                  "enabled": true
+                }
+              ]
+            },
+            "first_stream_events": [
+              {
+                "event": "RecordStateChanged",
+                "state": "OBS_WEBSOCKET_OUTPUT_STARTING",
+                "active": false
+              },
+              {
+                "event": "RecordStateChanged",
+                "state": "OBS_WEBSOCKET_OUTPUT_STARTED",
+                "active": true
+              },
+              {
+                "event": "RecordStateChanged",
+                "state": "OBS_WEBSOCKET_OUTPUT_STOPPING",
+                "active": false
+              },
+              {
+                "event": "RecordStateChanged",
+                "state": "OBS_WEBSOCKET_OUTPUT_STOPPED",
+                "active": false
+              },
+              {
+                "event": "StreamStateChanged",
+                "state": "OBS_WEBSOCKET_OUTPUT_STARTING",
+                "active": false
+              },
+              {
+                "event": "StreamStateChanged",
+                "state": "OBS_WEBSOCKET_OUTPUT_STARTED",
+                "active": true
+              },
+              {
+                "event": "StreamStateChanged",
+                "state": "OBS_WEBSOCKET_OUTPUT_STOPPING",
+                "active": false
+              },
+              {
+                "event": "StreamStateChanged",
+                "state": "OBS_WEBSOCKET_OUTPUT_STOPPED",
+                "active": false
+              }
+            ],
+            "black_fallback": {
+              "scene": "OBSGod Idle",
+              "output_bytes": 636165,
+              "at_ms": 1699,
+              "pixels": {
+                "channel_means": [
+                  0.0,
+                  0.0,
+                  0.0
+                ],
+                "expected": "black"
+              },
+              "items": [
+                {
+                  "source": "Legacy private display sentinel",
+                  "enabled": false
+                },
+                {
+                  "source": "OBSGod Gamescope",
+                  "enabled": false
+                },
+                {
+                  "source": "OBSGod Idle Message",
+                  "enabled": false
+                },
+                {
+                  "source": "OBSGod Game Audio",
+                  "enabled": true
+                }
+              ],
+              "end_ms": 4766
+            },
+            "final_status": {
+              "state": "stopped",
+              "recording": false,
+              "output_known": true,
+              "video": {
+                "mode": "game",
+                "state": "stopped",
+                "idle_style": "black",
+                "frames": "unknown",
+                "watching": false,
+                "updated": "2026-11-12T19:30:41.937049543Z",
+                "message": "The capture observer is stopped; it never starts output"
+              }
+            },
+            "state": "passed",
+            "decoded_media": {
+              "game-a": {
+                "viewer_pixels": {
+                  "channel_means": [
+                    208.2423611111111,
+                    18.672777777777778,
+                    7.748611111111111
+                  ],
+                  "expected": "red"
+                },
+                "viewer_audio": {
+                  "audible": true,
+                  "expected_hz": 440,
+                  "expected_power": 0.022532267643759648,
+                  "expected_tone": true,
+                  "other_hz": 880,
+                  "other_power": 2.369096083306204e-13,
+                  "peak_dbfs": -10.214834768307632,
+                  "rate": 48000,
+                  "rms_dbfs": -13.460989246036794,
+                  "samples": 48000,
+                  "status": "passed"
+                },
+                "sample_at_seconds": 3.283
+              },
+              "between-games": {
+                "viewer_pixels": {
+                  "channel_means": [
+                    3.8013194444444443,
+                    3.8013194444444443,
+                    3.8013194444444443
+                  ],
+                  "expected": "placeholder"
+                },
+                "viewer_audio": {
+                  "audible": true,
+                  "expected_hz": 440,
+                  "expected_power": 0.022487341300754082,
+                  "expected_tone": true,
+                  "other_hz": 880,
+                  "other_power": 2.0882090636468308e-14,
+                  "peak_dbfs": -10.381392434526155,
+                  "rate": 48000,
+                  "rms_dbfs": -13.470299614696778,
+                  "samples": 48000,
+                  "status": "passed"
+                },
+                "sample_at_seconds": 7.149
+              },
+              "game-b": {
+                "viewer_pixels": {
+                  "channel_means": [
+                    7.750972222222222,
+                    209.26125,
+                    7.750277777777778
+                  ],
+                  "expected": "green"
+                },
+                "viewer_audio": {
+                  "audible": true,
+                  "expected_hz": 440,
+                  "expected_power": 0.02249442186116841,
+                  "expected_tone": true,
+                  "other_hz": 880,
+                  "other_power": 1.8815158820842737e-14,
+                  "peak_dbfs": -10.449096730567526,
+                  "rate": 48000,
+                  "rms_dbfs": -13.46894996052885,
+                  "samples": 48000,
+                  "status": "passed"
+                },
+                "sample_at_seconds": 12.316
+              },
+              "unsupported-source": {
+                "viewer_pixels": {
+                  "channel_means": [
+                    3.801388888888889,
+                    3.801388888888889,
+                    3.801388888888889
+                  ],
+                  "expected": "placeholder"
+                },
+                "viewer_audio": {
+                  "audible": true,
+                  "expected_hz": 440,
+                  "expected_power": 0.02249441956610812,
+                  "expected_tone": true,
+                  "other_hz": 880,
+                  "other_power": 2.16508845920909e-14,
+                  "peak_dbfs": -10.449979487785427,
+                  "rate": 48000,
+                  "rms_dbfs": -13.468950430352653,
+                  "samples": 48000,
+                  "status": "passed"
+                },
+                "sample_at_seconds": 16.566
+              },
+              "black-fallback": {
+                "viewer_pixels": {
+                  "channel_means": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "expected": "black"
+                },
+                "viewer_audio": {
+                  "audible": true,
+                  "expected_hz": 440,
+                  "expected_power": 0.02248972551798254,
+                  "expected_tone": true,
+                  "other_hz": 880,
+                  "other_power": 2.191490418727312e-14,
+                  "peak_dbfs": -10.449979487785427,
+                  "rate": 48000,
+                  "rms_dbfs": -13.469856725083933,
+                  "samples": 48000,
+                  "status": "passed"
+                },
+                "sample_at_seconds": 3.2325
+              },
+              "local-clip-audio": {
+                "audible": true,
+                "expected_hz": 440,
+                "expected_power": 0.02249376262872749,
+                "expected_tone": true,
+                "other_hz": 880,
+                "other_power": 9.448112939585899e-15,
+                "peak_dbfs": -10.449096730567526,
+                "rate": 48000,
+                "rms_dbfs": -13.469077163646908,
+                "samples": 48000,
+                "status": "passed"
+              }
+            },
+            "ordinary_obs": "unchanged",
+            "source_revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+            "binary_sha256": "525e533ae4ed806559cdffffd865f1f01582cbdd3a746c73a50a0c01912dea6f",
+            "capture_library_sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68"
+          }
+        },
+        "audio": {
+          "outcome": "passed",
+          "metrics": {
+            "recording-audio": {
+              "path": "native-audio/output/recording-audio-metrics.json",
+              "sha256": "5becd1fafb170059f3c04a420364cbca85e389e014c9275ac0e85a3c8aa28ff9",
+              "content": {
+                "audible": true,
+                "expected_hz": 440,
+                "expected_power": 0.0017675530433014241,
+                "expected_tone": true,
+                "other_hz": 880,
+                "other_power": 2.6117680773929642e-09,
+                "peak_dbfs": -13.923385759744736,
+                "rate": 48000,
+                "rms_dbfs": -16.99090326901085,
+                "samples": 96000,
+                "status": "passed"
+              }
+            },
+            "stream-audio": {
+              "path": "native-audio/output/stream-audio-metrics.json",
+              "sha256": "78ee140235b384300ccf93dbc4e83cec4aa0aa344d1f3eb59a5bff50bb23c215",
+              "content": {
+                "audible": true,
+                "expected_hz": 440,
+                "expected_power": 0.010015343471263845,
+                "expected_tone": true,
+                "other_hz": 880,
+                "other_power": 4.0964181420732855e-13,
+                "peak_dbfs": -13.65498927998301,
+                "rate": 48000,
+                "rms_dbfs": -16.987589465533834,
+                "samples": 96000,
+                "status": "passed"
+              }
+            },
+            "audio-default-fallback-audio": {
+              "path": "native-audio/output/audio-default-fallback-audio-metrics.json",
+              "sha256": "30d6b2a830c0a0cf4fb8a2975b7941e29878a6b6dc2a59e500e4aaf256d29e92",
+              "content": {
+                "audible": true,
+                "expected_hz": 880,
+                "expected_power": 0.009948855550042816,
+                "expected_tone": true,
+                "other_hz": 440,
+                "other_power": 1.714225394887702e-12,
+                "peak_dbfs": -13.778432572381327,
+                "rate": 48000,
+                "rms_dbfs": -17.010038081191116,
+                "samples": 96000,
+                "status": "passed"
+              }
+            },
+            "audio-default-changed-audio": {
+              "path": "native-audio/output/audio-default-changed-audio-metrics.json",
+              "sha256": "efc544e9501b5e16ab1d9d7546c7743df79593d42ba12a921bb9dd6231d88c27",
+              "content": {
+                "audible": true,
+                "expected_hz": 440,
+                "expected_power": 0.005639480808025797,
+                "expected_tone": true,
+                "other_hz": 880,
+                "other_power": 1.6840027228853434e-09,
+                "peak_dbfs": -13.926019843051677,
+                "rate": 48000,
+                "rms_dbfs": -16.993702090404444,
+                "samples": 96000,
+                "status": "passed"
+              }
+            },
+            "silence-negative-control": {
+              "path": "native-audio/output/silence-negative-control.json",
+              "sha256": "5a37e66d12c607bb1149f9821a2c8c8ddc5231a762778668c112d53f63eb9763",
+              "content": {
+                "audible": false,
+                "expected_hz": 440,
+                "expected_power": 0.0,
+                "expected_tone": false,
+                "other_hz": 880,
+                "other_power": 0.0,
+                "peak_dbfs": null,
+                "rate": 48000,
+                "rms_dbfs": null,
+                "samples": 48000,
+                "status": "silence-rejected-as-expected"
+              }
+            }
+          }
+        }
+      },
+      "scope_note": "These receipts qualify only the recorded source revision and candidate bytes.",
+      "limitations": [
+        "Native OBS30.2.3 is distinct from the owner Discover OBS33.0.1 target; actual target-version/device evidence is unrun.",
+        "Synthetic Linux native OBS/PipeWire/audio fixtures; not actual Steam Deck, SteamOS, Gamescope or Flatpak evidence.",
+        "No real provider viewer, hardware encoder, controller, wallet/payment or production broadcast was tested.",
+        "RTMP test traffic stays on disposable container loopback; containers have network disabled."
+      ],
+      "artifacts": {
+        "native-audio.log": {
+          "bytes": 1171,
+          "sha256": "862a3483bec373410a69d3f2abbbb1c57505b9e2dec39070f13cea13112c4b30"
+        },
+        "native-capture.log": {
+          "bytes": 247,
+          "sha256": "4bfe67e970711708b15a5d6ded0a1ee60fac2356d4663e0ec5842daddc68df29"
+        },
+        "native-game.log": {
+          "bytes": 744,
+          "sha256": "783e3e4101b98d6e0173dcf2be6a47dbde96165daf1f0db5fb94da8a43a0a1e7"
+        },
+        "native-inputs.json": {
+          "bytes": 2086,
+          "sha256": "22e25e1159cf9f620c3011ce89f45400750bece51d6fc7fdc58c3e37ad359794"
+        },
+        "native-preflight.json": {
+          "bytes": 1351,
+          "sha256": "62a9f14fd0d5bcc618c4ab844269d899993ef401105f237fc7831aa0651941a6"
+        },
+        "native-package-inputs.json": {
+          "bytes": 644,
+          "sha256": "0fd91c10544b700e9ac012ad8f1e49eb7bd9f5793b21138ead317c9ce6c54d0b"
+        }
+      },
+      "schema_version": 1,
+      "candidate": "0.1.0-deck.7",
+      "packaged_inputs": {
+        "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+        "version": "0.1.0-deck.7",
+        "archive": "obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz",
+        "archive_sha256": "4205e4725fd432ea99a59fe8c1a78f0f7b29c7ddbd6c79e3cf4afd8c2c67c9c3",
+        "inputs": {
+          "obsgod": {
+            "sha256": "525e533ae4ed806559cdffffd865f1f01582cbdd3a746c73a50a0c01912dea6f",
+            "bytes": 10301564,
+            "matches_actual_packaged_entry": true
+          },
+          "libgstobsgodcapture.so": {
+            "sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+            "bytes": 54384,
+            "matches_actual_packaged_entry": true
+          }
+        },
+        "outcome": "passed"
+      }
+    },
+    "cli": {
+      "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "outcome": "passed",
+      "binary_sha256": "525e533ae4ed806559cdffffd865f1f01582cbdd3a746c73a50a0c01912dea6f",
+      "checks": [
+        {
+          "command": [
+            "dist/obsgod",
+            "--help"
+          ],
+          "exit_code": 0,
+          "expected_success": true,
+          "outcome": "passed",
+          "stdout_sha256": "41e4b954ae2bf27af4adfde25314b849bb7a9de76967eb5c1c6f6f1aa8029a7d"
+        },
+        {
+          "command": [
+            "dist/obsgod",
+            "version",
+            "--json"
+          ],
+          "exit_code": 0,
+          "expected_success": true,
+          "outcome": "passed",
+          "stdout_sha256": "7300804aa5b8fbbedbd1a4353c78b4d0fb37e5820d0473ae5122637fc4c38857"
+        },
+        {
+          "command": [
+            "dist/obsgod",
+            "completion",
+            "fish"
+          ],
+          "exit_code": 0,
+          "expected_success": true,
+          "outcome": "passed",
+          "stdout_sha256": "6c0ffc1c76f36eb509b7079f8b5265c36925d6609115ce78f9aeca7636fba889"
+        },
+        {
+          "command": [
+            "dist/obsgod",
+            "reference"
+          ],
+          "exit_code": 0,
+          "expected_success": true,
+          "outcome": "passed",
+          "stdout_sha256": "3fe10c52dd58a6fea79423d1a005d538663d43e3c39347160cd6d071a74ccf82"
+        },
+        {
+          "command": [
+            "dist/obsgod",
+            "doctor",
+            "--help"
+          ],
+          "exit_code": 0,
+          "expected_success": true,
+          "outcome": "passed",
+          "stdout_sha256": "a5f3ab2a8d7237f294fdb67b5e6efb90c085029b7f7b69980b60184465132e1f"
+        },
+        {
+          "command": [
+            "dist/obsgod",
+            "deck",
+            "support-bundle"
+          ],
+          "exit_code": 0,
+          "expected_success": true,
+          "outcome": "passed",
+          "stdout_sha256": "bf588177c82b4917542262618179c363785f45b38bb13fdd1d69b232b1e591d0"
+        },
+        {
+          "command": [
+            "dist/obsgod",
+            "doctor"
+          ],
+          "exit_code": 1,
+          "expected_success": false,
+          "outcome": "passed",
+          "stdout_sha256": "eb9400b7e4d07f94c5073233878023c1581ae7cb7c243c146423bd75783790fa"
+        }
+      ],
+      "limitations": [
+        "Doctor correctly reports missing cloud/Steam Deck dependencies; this is not actual Deck diagnosis acceptance.",
+        "No OBS endpoint, broadcast, recording or payment was initiated."
+      ]
+    },
+    "ci": {
+      "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "outcome": "unavailable",
+      "reason": "GitHub account billing lock prevents jobs starting",
+      "workflows": [
+        {
+          "workflow": "build",
+          "id": 43290162817,
+          "url": "https://github.com/szmyty/obsgod/actions/runs/43290162817",
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "status": "completed",
+          "conclusion": "failure",
+          "jobs": [
+            {
+              "name": "build (^1, windows-latest)",
+              "conclusion": "cancelled",
+              "step_count": 0,
+              "messages": [
+                "The strategy configuration was canceled because \"build._1_ubuntu-latest\" failed"
+              ]
+            },
+            {
+              "name": "build (^1, ubuntu-latest)",
+              "conclusion": "failure",
+              "step_count": 0,
+              "messages": [
+                "The job was not started because your account is locked due to a billing issue.",
+                "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+              ]
+            },
+            {
+              "name": "build (^1, macos-latest)",
+              "conclusion": "cancelled",
+              "step_count": 0,
+              "messages": [
+                "The strategy configuration was canceled because \"build._1_ubuntu-latest\" failed",
+                "Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times."
+              ]
+            }
+          ]
+        },
+        {
+          "workflow": "Steam Deck candidate",
+          "id": 43290162680,
+          "url": "https://github.com/szmyty/obsgod/actions/runs/43290162680",
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "status": "completed",
+          "conclusion": "failure",
+          "jobs": [
+            {
+              "name": "candidate",
+              "conclusion": "failure",
+              "step_count": 0,
+              "messages": [
+                "The job was not started because your account is locked due to a billing issue."
+              ]
+            }
+          ]
+        },
+        {
+          "workflow": "Documentation preview",
+          "id": 43290162949,
+          "url": "https://github.com/szmyty/obsgod/actions/runs/43290162949",
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "status": "completed",
+          "conclusion": "failure",
+          "jobs": [
+            {
+              "name": "build-preview",
+              "conclusion": "failure",
+              "step_count": 0,
+              "messages": [
+                "The job was not started because your account is locked due to a billing issue."
+              ]
+            }
+          ]
+        },
+        {
+          "workflow": "lint",
+          "id": 43290162693,
+          "url": "https://github.com/szmyty/obsgod/actions/runs/43290162693",
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "status": "completed",
+          "conclusion": "failure",
+          "jobs": [
+            {
+              "name": "lint",
+              "conclusion": "failure",
+              "step_count": 0,
+              "messages": [
+                "The job was not started because your account is locked due to a billing issue.",
+                "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+              ]
+            }
+          ]
+        },
+        {
+          "workflow": "goreleaser",
+          "id": 43290162695,
+          "url": "https://github.com/szmyty/obsgod/actions/runs/43290162695",
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "status": "completed",
+          "conclusion": "failure",
+          "jobs": [
+            {
+              "name": "goreleaser",
+              "conclusion": "failure",
+              "step_count": 0,
+              "messages": [
+                "The job was not started because your account is locked due to a billing issue.",
+                "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+              ]
+            }
+          ]
+        },
+        {
+          "workflow": "coverage",
+          "id": 43290162780,
+          "url": "https://github.com/szmyty/obsgod/actions/runs/43290162780",
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "status": "completed",
+          "conclusion": "failure",
+          "jobs": [
+            {
+              "name": "coverage (^1, ubuntu-latest)",
+              "conclusion": "failure",
+              "step_count": 0,
+              "messages": [
+                "The job was not started because your account is locked due to a billing issue.",
+                "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+              ]
+            }
+          ]
+        },
+        {
+          "workflow": "build",
+          "id": 43290149353,
+          "url": "https://github.com/szmyty/obsgod/actions/runs/43290149353",
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "status": "completed",
+          "conclusion": "failure",
+          "jobs": [
+            {
+              "name": "build (^1, ubuntu-latest)",
+              "conclusion": "failure",
+              "step_count": 0,
+              "messages": [
+                "The job was not started because your account is locked due to a billing issue.",
+                "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+              ]
+            },
+            {
+              "name": "build (^1, windows-latest)",
+              "conclusion": "cancelled",
+              "step_count": 0,
+              "messages": [
+                "The strategy configuration was canceled because \"build._1_ubuntu-latest\" failed"
+              ]
+            },
+            {
+              "name": "build (^1, macos-latest)",
+              "conclusion": "cancelled",
+              "step_count": 0,
+              "messages": [
+                "The strategy configuration was canceled because \"build._1_ubuntu-latest\" failed",
+                "Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times."
+              ]
+            }
+          ]
+        },
+        {
+          "workflow": "coverage",
+          "id": 43290149401,
+          "url": "https://github.com/szmyty/obsgod/actions/runs/43290149401",
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "status": "completed",
+          "conclusion": "failure",
+          "jobs": [
+            {
+              "name": "coverage (^1, ubuntu-latest)",
+              "conclusion": "failure",
+              "step_count": 0,
+              "messages": [
+                "The job was not started because your account is locked due to a billing issue.",
+                "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+              ]
+            }
+          ]
+        },
+        {
+          "workflow": "goreleaser",
+          "id": 43290149465,
+          "url": "https://github.com/szmyty/obsgod/actions/runs/43290149465",
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "status": "completed",
+          "conclusion": "failure",
+          "jobs": [
+            {
+              "name": "goreleaser",
+              "conclusion": "failure",
+              "step_count": 0,
+              "messages": [
+                "The job was not started because your account is locked due to a billing issue.",
+                "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+              ]
+            }
+          ]
+        },
+        {
+          "workflow": "lint",
+          "id": 43290149378,
+          "url": "https://github.com/szmyty/obsgod/actions/runs/43290149378",
+          "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+          "status": "completed",
+          "conclusion": "failure",
+          "jobs": [
+            {
+              "name": "lint",
+              "conclusion": "failure",
+              "step_count": 0,
+              "messages": [
+                "The job was not started because your account is locked due to a billing issue.",
+                "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "limitations": [
+    {
+      "check": "existing OBS read-only opt-in Go test",
+      "outcome": "skipped",
+      "reason": "No existing endpoint supplied; independent disposable real OBS harnesses passed."
+    },
+    {
+      "check": "GitHub CI",
+      "outcome": "unavailable",
+      "reason": "Fresh jobs executed zero steps because GitHub account is billing-locked."
+    },
+    {
+      "check": "site direct file://",
+      "outcome": "unavailable",
+      "reason": "Managed browser policy blocks local-file navigation; offline loopback HTTP passed."
+    },
+    {
+      "check": "actual Steam Deck/SteamOS/Flatpak/OBS33/Decky/Steam/Gamescope/AMD/controller/session/performance",
+      "outcome": "unrun",
+      "reason": "No actual target device attached."
+    },
+    {
+      "check": "Kick/Twitch/YouTube/custom provider viewer/adoption proof",
+      "outcome": "unrun",
+      "reason": "No external broadcast/account/viewer was used; local RTMP native media passed."
+    },
+    {
+      "check": "real payment/payout/crypto receiving",
+      "outcome": "unrun",
+      "reason": "No funds/accounts changed, owner wallet addresses remain null."
+    },
+    {
+      "check": "cross-built linuxarm64/windowsamd64/darwinarm64 execution",
+      "outcome": "unrun",
+      "reason": "Six binaries compiled only."
+    },
+    {
+      "check": "required owner/human review, final organization/Identity assets/rights, migration/publication",
+      "outcome": "pending",
+      "reason": "Owner/external gates remain separate; no release/deploy/Store submission."
+    }
+  ],
+  "historical_attempts": [
+    {
+      "source_revision": "459d0fe574c74edb1c2c96049c0281ddbad1ef56",
+      "outcome": "failed",
+      "failed_check": "Setup browser ambiguous confirmation selector",
+      "repair": "One locator scoped to control-password-status; complete matrix rerun at qualified revision",
+      "other_checks": "Previously passed at459 only; not reused as qualification for0eac",
+      "receipt": "attempts/459d0fe574c7/attempt-disposition.json"
+    }
+  ],
+  "release_published": false,
+  "deployment_published": false,
+  "store_submitted": false,
+  "payments_performed": false,
+  "issues_closed": false,
+  "draft_pr_stack": [
+    52,
+    53,
+    54,
+    55,
+    56,
+    57
+  ]
+}

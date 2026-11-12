@@ -1,9 +1,51 @@
 # Milestone 2 owner and publisher packet
 
-Status: implementation and qualification in progress. This is not a release
-approval request yet. Candidate **0.1.0-deck.7** requires a clean exact source,
-fresh artifacts and complete available checks before final review. Preview6
-receipts qualify only preview6's recorded source.
+Status: independent implementation and all available local qualification are
+prepared for review. Candidate **0.1.0-deck.7** was built and checked at clean
+source `0eac1ed9746e6a5999a196777bde5455222f46eb`. Required target, CI, owner
+review and publication gates below remain open. No release is published.
+Preview6 receipts qualify only preview6's recorded source.
+
+## Exact review candidate
+
+| Artifact | SHA256 |
+| --- | --- |
+| Runtime `obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz` | `4205e4725fd432ea99a59fe8c1a78f0f7b29c7ddbd6c79e3cf4afd8c2c67c9c3` |
+| Plugin `obsgod-decky.zip` | `0a4d8afefa0f149cb053cddc988fa0cc46992602b73b73b581deab4414abf5c4` |
+| Updater `obsgod-one-click-update_0.1.0-deck.7_linux_amd64.zip` | `5227e541e3c07cc9214e67f4400dda14065520789ebdecfdeca15b6c4152c68d` |
+
+The complete commands/platforms/images/input and output hashes are in
+[qualification JSON](evidence/m2-qualification.json); individual criteria and
+remaining gates are in [the acceptance ledger](evidence/m2-criteria.json).
+The artifact checkpoint is a review download, not a GitHub release or site
+deployment. Later evidence-only commits do not change or requalify these bytes.
+
+[Immutable review packet](https://github.com/szmyty/obsgod/tree/e202f34070ef6174fbf86b75f9cc87ace74d6a14)
+contains the runtime, plugin, updater, checksums, full evidence and offline site
+preview. [Download the full runtime](https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz)
+or [offline documentation preview](https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/decky-stream-site-preview.zip).
+See [the checksum-verifying install command](candidate-7-install.md).
+The [independent public-download proof](evidence/m2-public-download.json)
+verifies every review file, internal payload, source/license and command URL/hash
+after upload. The installer was not executed on this cloud host.
+
+Passed freshly: Go110 top-level/206 pass events, Python111, Node16, vet and zero
+Go/npm vulnerability findings; six cross-builds compiled only; deterministic
+metadata, repeated runtime/updater builds and internal payload hashes; fresh/
+preview4/preview6 package browsers, panel and three receiving dialogs; pinned
+Decky3.3.1 install/update/uninstall/repair and dynamic6 bootstrap; site11 safety
+cases/40 viewports; native13 capture cases, decoded OBS audio/video/game/idle,
+generated/manual password rotation/old-password rejection and an actual
+settings-only workflow. Native OBS was30.2.3, not the owner's OBS33 device.
+
+One optional existing-OBS test skipped. Direct file:// site navigation was
+unavailable under browser policy; offline loopback HTTP passed. Fresh GitHub CI
+executed zero steps because of the billing lock. Actual Deck/provider viewers,
+independent review, funding receipt and adoption remain unrun/pending.
+
+An earlier459d0fe qualification attempt failed on an ambiguous browser-test
+selector. The assertion was scoped, the source was recommitted and the complete
+matrix rerun at0eac1ed. Earlier passing receipts were not relabelled.
 
 ## Verified facts and ownership
 
@@ -20,6 +62,9 @@ receipts qualify only preview6's recorded source.
   common providers and Patreon excluded pending its broken-link conflict.
   Public profiles/configuration do not establish payout or tax readiness.
   All cryptocurrency addresses remain unconfigured; no funds were moved.
+  Null/hidden wallets are the accepted M2 preparation requested by the owner;
+  supplying addresses is a later optional activation, not a new prerequisite
+  for finishing the prepared crypto UI.
 - Source history includes substantial AI-assisted implementation. Store
   eligibility remains unresolved; no contrary authorship declaration is made.
 

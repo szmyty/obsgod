@@ -1,5 +1,49 @@
 # Current work
 
+## Milestone 2 review candidate: all available checks passed
+
+Candidate `0.1.0-deck.7` is locally qualified at exact clean source
+`0eac1ed9746e6a5999a196777bde5455222f46eb`. RuntimeSHA256
+`4205e4725fd432ea99a59fe8c1a78f0f7b29c7ddbd6c79e3cf4afd8c2c67c9c3`.
+Read [the owner packet](docs/release-readiness.md),
+[full matrix](docs/evidence/m2-qualification.json) and
+[criterion ledger](docs/evidence/m2-criteria.json).
+Draft stack #52 -> #53 -> #54 -> #55 -> #56 -> #57 remains for owner review.
+Current branch `codex/m2-launch-preparation`; later evidence-only commits must
+not rebuild/relabel the qualified candidate or claim tests at their newer SHA.
+
+Fresh available checks passed: 110 Go top-level tests/206 events (one optional
+existing-OBS skip), 111 Python, 16 Node, vet, zero Go/npm findings, metadata,
+reproducible packages/payloads, actual-package browsers, old4/6 upgrades, current
+updater/dynamic6 bootstrap, pinned Decky3.3.1 uninstall, 11 site safety cases/
+40 viewports, 13 native capture cases and real OBS30.2.3 audible media/game
+fallback/password rotation/old-password rejection/settings-only workflow.
+Six cross-builds compiled only. Direct file:// was unavailable by browser policy;
+offline loopback HTTP passed. Fresh CI executed zero steps due to the billing lock.
+
+Actual Deck/Flatpak/OBS33/Gamescope/AMD/controller/session/performance/provider
+viewer/adoption, required human review, final organization/Identity creative/
+rights assets, real funding/wallet readiness and release/site/Store publication
+remain explicit gates. No issues were closed, new PRs merged, GitHub release
+published, sites deployed, ownership transferred, payments made or money spent.
+Crypto addresses remain null/hidden.
+
+Historical459d0fe failed on an ambiguous browser-test locator; one selector was
+scoped and the entire matrix rerun at0eac. Earlier passing receipts remain tied
+to their historical source. Product source is stable; only evidence, continuity
+and owner-packet updates follow qualification.
+
+Review artifacts were pushed to orphan commit
+`e202f34070ef6174fbf86b75f9cc87ace74d6a14` on
+`artifacts/m2-deck7-review`; never merge its artifact tree into source. All33
+public files were independently downloaded and matched, including internal
+runtime/updater manifests, capture preferred sources, versions and licenses.
+The checksum-verifying [Desktop install command](docs/candidate-7-install.md)
+passed syntax/order/URL/hash review without installing on this cloud host.
+This is a review checkpoint, not a release or website deployment. Optional
+crypto activation was explicitly deferred by the owner; null/hidden wallets
+are accepted preparation, not an invented prerequisite to source completion.
+
 ## Active: authorized Milestone 2 implementation
 
 After the pre-implementation sync the owner explicitly said to proceed with

@@ -1,0 +1,112 @@
+{
+  "scope": "Independent read-only M2 security/integration review; mutable working tree, not final qualification",
+  "head": "4cce54501bf24035010fbced469495b56bdaab7a",
+  "source_hashes": {
+    "internal/config/config.go": "714f9ddbaa560de9b6eb6e7e95a46e0852cbba6eb411c9d89b2a2b93e711b613",
+    "internal/config/file.go": "f5b70425532fe2e960c4558795bd9850e3dfb407d932081c9f94c5c99cc1e1d2",
+    "internal/config/workflow.go": "a7ede1ad0b5579a541d1623bafe0cdd7a7bfaea714575ce44fc5c1e260e57149",
+    "internal/commands/root.go": "c934f5889e466cfa3eeb93e75595a446068d17ef807536bb0e8d00d67e043c8d",
+    "internal/commands/workflow.go": "5c0225f3489b1eceda9a0688d33d6264f4bd9dc54bd1241783d1029d245b6211",
+    "internal/commands/reference.go": "5d48bc90b445e77a977059f9c0494a3a5e70d82a4017f30018a61cc03ece7dac",
+    "internal/commands/usage.go": "bcb58a42a254ea4b8b9102f21388c83b51d08f6cbc30eb69be55056c1fad61fa",
+    "pkg/automation/workflow.go": "d5c7e2f1e30092b297e4351f32048b2e0bad9c279af4c9f7258a66aa17c27368",
+    "steamdeck/install.py": "f363924fb9d1d91b37fb6534a5261b79d6c0c5d1cf6235966ce256c7a3255a04",
+    "steamdeck/update.py": "17aee9e4e957e1cbdaf56cbf8b5fb10a57b02457537a13722d4da6a07d05e14a",
+    "steamdeck/uninstall.py": "e3b964f3364cb63886a91cd4f06b615e7a27f0ad0d313eb4c21e2226617e44dd",
+    "steamdeck/paths.py": "436f589b4130ac00bf60dcf5773b30caa56c8cea437fe5715c1af1f92a405f44",
+    "steamdeck/decky.py": "96c3aa094fa8a44939a870cbba45f62296ce9314a1dfdf6e68e03347814e4816",
+    "steamdeck/releases.py": "ee3a107c962a9babf0942013d13f6bad453aa02899fb9aa7c86f1a69905ac8c8",
+    "steamdeck/decky/main.py": "61a7f1edd5c69a179dfdf44d8a9acce0da67752ab88d27624ff075ed0de46bcb",
+    "internal/deckyinstall/frontend-install.js": "47cd6bd3b22caf0b38788299b47242ff88a3bc61c92864f7cfbdff53c8ef9538",
+    "internal/deckyinstall/install.go": "b682963e9e146a9bef16e4ea6c48957a3c4220ed63902171c8bd6ec7e9583e71",
+    "internal/deck/support.go": "45527255c8f84719100f98126599035a7ff8060a2a1e970715375812623f5125",
+    "internal/deck/config.go": "9b74b3b42cc847d0fcc1a0887028a2129f1dc32c026a83d049d007369e006383",
+    "internal/deck/connection.go": "56280e20021b83a33d04b23defbfe592fb5aee96130c1f6e9328d4584af2c1c5",
+    "steamdeck/setup.py": "1faaf83c014903e1e164c9b1e3182d5fda4aa7f412220b8f219ef4be208d8a74",
+    "steamdeck/bridge.py": "e3d292b7c59e031aef16a1b16d63613cccb1dcca3a7cbddd64af8afead40f857",
+    "steamdeck/setup.js": "683a09a24b021ac74151e23d4986dcc043626d26ea182cfbbb27e7652bf68fd3",
+    "steamdeck/decky/src/support.mjs": "7aa2028f2dfc10a1e1537c3fe910cccc55de1840b6a93daa8ee4fb68905ba6ce",
+    "steamdeck/decky/src/support-qr.mjs": "0a3f69ab0fe08640a421735727319799bdc6a687809ee311afd681e3502af456",
+    "steamdeck/decky/src/Support.tsx": "bbaa74a7334f8663400c4c12af08fe36ef0693ffe05d8bafc4a8e18261bbcdbc"
+  },
+  "checks": [
+    {
+      "command": "python3 -m unittest discover -s steamdeck/tests -p test_uninstall.py -v",
+      "status": "passed",
+      "count": 17
+    },
+    {
+      "command": "source /workspace/.obsgod-tools/activate; go test -race -count=1 ./pkg/automation ./internal/config ./internal/commands -run 'TestWorkflow|TestVerbose|TestNoColor|TestReference|TestCountdown|TestManagedDoctor'",
+      "status": "passed",
+      "log": "security-workflow-tests.log"
+    },
+    {
+      "command": "private mocked busy-lock reproducer, before and after owner fix",
+      "status": "passed after fix",
+      "before_plugin_mutations": 1,
+      "after_plugin_mutations": 0
+    }
+  ],
+  "delegate_report": "security-receive-control.md",
+  "remaining_scope_note": "Known-root guard resolved; final review closed at exact clean local qualified source 0eac1ed9746e6a5999a196777bde5455222f46eb",
+  "finite_delta_review_hashes": {
+    "pkg/automation/workflow.go": "d5c7e2f1e30092b297e4351f32048b2e0bad9c279af4c9f7258a66aa17c27368",
+    "steamdeck/tests/native-control-password.py": "aac7bdbbd2ed47da5dc27b26856c83006de91471c0b94cbe381478274b1c13de",
+    "steamdeck/uninstall.py": "35ba3ac96d945c957293f7fb64311e2ccb7b7f9137dc2a7ca5732143fe9e651f",
+    "steamdeck/paths.py": "436f589b4130ac00bf60dcf5773b30caa56c8cea437fe5715c1af1f92a405f44",
+    "internal/deckyinstall/frontend-install.js": "92a675593806c64898c6d652398ba9dce34a565806aa227938ef070f90613ba6",
+    "internal/deckyinstall/install.go": "f140277eb95e2ba81bfbb8f3404a19bfd4e95f1c4ee4bf248daa700bb6004af5"
+  },
+  "final_review": {
+    "source_revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+    "source_clean": true,
+    "local_qualification_only": true,
+    "reviewed_code_hashes": {
+      "internal/commands/reference.go": "f6b8d76710fa79cfd3b7f3fb057b7c805c3b67fe9e419818ae9bc21828004ddb",
+      "internal/commands/root.go": "c934f5889e466cfa3eeb93e75595a446068d17ef807536bb0e8d00d67e043c8d",
+      "internal/commands/usage.go": "bcb58a42a254ea4b8b9102f21388c83b51d08f6cbc30eb69be55056c1fad61fa",
+      "internal/commands/workflow.go": "5c0225f3489b1eceda9a0688d33d6264f4bd9dc54bd1241783d1029d245b6211",
+      "internal/config/config.go": "714f9ddbaa560de9b6eb6e7e95a46e0852cbba6eb411c9d89b2a2b93e711b613",
+      "internal/config/file.go": "f5b70425532fe2e960c4558795bd9850e3dfb407d932081c9f94c5c99cc1e1d2",
+      "internal/config/workflow.go": "a7ede1ad0b5579a541d1623bafe0cdd7a7bfaea714575ce44fc5c1e260e57149",
+      "internal/deck/config.go": "9b74b3b42cc847d0fcc1a0887028a2129f1dc32c026a83d049d007369e006383",
+      "internal/deck/connection.go": "56280e20021b83a33d04b23defbfe592fb5aee96130c1f6e9328d4584af2c1c5",
+      "internal/deck/support.go": "45527255c8f84719100f98126599035a7ff8060a2a1e970715375812623f5125",
+      "internal/deckyinstall/frontend-install.js": "92a675593806c64898c6d652398ba9dce34a565806aa227938ef070f90613ba6",
+      "internal/deckyinstall/install.go": "f140277eb95e2ba81bfbb8f3404a19bfd4e95f1c4ee4bf248daa700bb6004af5",
+      "pkg/automation/workflow.go": "d5c7e2f1e30092b297e4351f32048b2e0bad9c279af4c9f7258a66aa17c27368",
+      "steamdeck/bridge.py": "e3d292b7c59e031aef16a1b16d63613cccb1dcca3a7cbddd64af8afead40f857",
+      "steamdeck/decky.py": "96c3aa094fa8a44939a870cbba45f62296ce9314a1dfdf6e68e03347814e4816",
+      "steamdeck/decky/main.py": "61a7f1edd5c69a179dfdf44d8a9acce0da67752ab88d27624ff075ed0de46bcb",
+      "steamdeck/decky/src/Support.tsx": "bbaa74a7334f8663400c4c12af08fe36ef0693ffe05d8bafc4a8e18261bbcdbc",
+      "steamdeck/decky/src/support-qr.mjs": "0a3f69ab0fe08640a421735727319799bdc6a687809ee311afd681e3502af456",
+      "steamdeck/decky/src/support.mjs": "7aa2028f2dfc10a1e1537c3fe910cccc55de1840b6a93daa8ee4fb68905ba6ce",
+      "steamdeck/install.py": "f363924fb9d1d91b37fb6534a5261b79d6c0c5d1cf6235966ce256c7a3255a04",
+      "steamdeck/paths.py": "436f589b4130ac00bf60dcf5773b30caa56c8cea437fe5715c1af1f92a405f44",
+      "steamdeck/releases.py": "ee3a107c962a9babf0942013d13f6bad453aa02899fb9aa7c86f1a69905ac8c8",
+      "steamdeck/setup.js": "683a09a24b021ac74151e23d4986dcc043626d26ea182cfbbb27e7652bf68fd3",
+      "steamdeck/setup.py": "1faaf83c014903e1e164c9b1e3182d5fda4aa7f412220b8f219ef4be208d8a74",
+      "steamdeck/tests/native-control-password.py": "aac7bdbbd2ed47da5dc27b26856c83006de91471c0b94cbe381478274b1c13de",
+      "steamdeck/uninstall.py": "35ba3ac96d945c957293f7fb64311e2ccb7b7f9137dc2a7ca5732143fe9e651f",
+      "steamdeck/update.py": "17aee9e4e957e1cbdaf56cbf8b5fb10a57b02457537a13722d4da6a07d05e14a"
+    },
+    "delta_since_finite_review": [
+      "internal/commands/reference.go was reread: static offline reference/help rendering, no user data or new network/mutation path"
+    ],
+    "root_reported_matrix": {
+      "outcome": "passed for complete available local matrix",
+      "includes": [
+        "actual native OBS generated/manual password rotation and settings-only workflow",
+        "actual-package browsers and installer/updater/uninstall transport",
+        "13 native capture protocol cases"
+      ],
+      "qualification_receipts": "root-owned final matrix; no broad checks repeated by this reviewer"
+    },
+    "gates_remaining": [
+      "actual Steam Deck/device/provider viewer acceptance",
+      "successful required CI and external/owner reviews",
+      "final creative/rights/organization inputs",
+      "release publication, deployment and other-repository authorization"
+    ]
+  }
+}
