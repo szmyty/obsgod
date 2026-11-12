@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Name=Update OBSGod
+Name=Update Decky Stream
 Comment=Install the verified OBSGod app and Decky plugin while keeping settings
 Exec=python3 -c "import os,sys,subprocess; from urllib.parse import unquote,urlparse; p=sys.argv[1]; p=unquote(urlparse(p).path) if p.startswith('file:') else p; p=os.path.dirname(os.path.abspath(p)); sys.exit(subprocess.call([sys.executable,os.path.join(p,'update.py')],cwd=p))" %k
 Icon=system-software-update

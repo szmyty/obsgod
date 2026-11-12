@@ -117,10 +117,12 @@ class Loader:
         return [{"name": plugin.name, "version": plugin.version, "load_type": plugin.load_type, "disabled": plugin.disabled} for plugin in self.plugins.values()]
 
 
-async def execute(command, env, timeout=90, **kwargs):
+async def execute(command, env, timeout=90, input_data=None, **kwargs):
+    if input_data is not None:
+        kwargs["stdin"] = asyncio.subprocess.PIPE
     process = await asyncio.create_subprocess_exec(*command, env=env, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.STDOUT, **kwargs)
     try:
-        output, _ = await asyncio.wait_for(process.communicate(), timeout)
+        output, _ = await asyncio.wait_for(process.communicate(input_data), timeout)
     except BaseException:
         if process.returncode is None:
             process.kill()

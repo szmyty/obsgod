@@ -10,14 +10,18 @@ ROOT = Path(__file__).resolve().parent
 OFFICIAL_DECKY = "https://decky.xyz/"
 
 
-def helper_request(operation, package=ROOT, manifest=None):
-    if operation not in {"probe", "install"}:
+def helper_request(operation, package=ROOT, manifest=None, uninstall_existing=False):
+    if operation not in {"probe", "install", "uninstall"}:
         raise RuntimeError("Unknown Decky operation")
     helper = ROOT / "decky-install"
     if helper.is_symlink() or not helper.is_file():
         raise RuntimeError("The verified Decky installer is missing. Extract the complete OBSGod release and retry.")
     helper.chmod(0o700)
     request = {"operation": operation}
+    if uninstall_existing:
+        if operation != "uninstall":
+            raise RuntimeError("Existing plugin removal is only valid for uninstall")
+        request["uninstall_existing"] = True
     temporary = None
     if operation == "install":
         if not manifest or not re.fullmatch(r"[0-9][A-Za-z0-9.-]{0,79}", manifest.get("version", "")):
@@ -37,7 +41,7 @@ def helper_request(operation, package=ROOT, manifest=None):
         private_zip.chmod(0o600)
         request.update(zip_path=str(private_zip), sha256=expected, version=manifest["version"])
     try:
-        process = subprocess.run([str(helper)], input=json.dumps(request), capture_output=True, text=True, timeout=100 if operation == "install" else 25)
+        process = subprocess.run([str(helper)], input=json.dumps(request), capture_output=True, text=True, timeout=100 if operation in {"install", "uninstall"} else 25)
         result = json.loads(process.stdout)
         if not isinstance(result, dict) or not isinstance(result.get("ok"), bool) or (result.get("ok") and process.returncode != 0):
             raise ValueError()
@@ -48,6 +52,8 @@ def helper_request(operation, package=ROOT, manifest=None):
             raise RuntimeError(message)
         if operation == "install" and result.get("version") != manifest["version"]:
             raise RuntimeError("Decky did not confirm the requested OBSGod version. Rerun this installer to repair both copies.")
+        if operation == "uninstall" and result.get("removed") is not True:
+            raise RuntimeError("Decky did not confirm plugin removal. Inspect Decky before deleting application files.")
         return result
     except (OSError, subprocess.SubprocessError, ValueError):
         raise RuntimeError("Decky's installer could not be verified. Keep Steam and Decky running in Desktop Mode, check the visible installer log and retry. Your saved settings were preserved.") from None

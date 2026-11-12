@@ -31,9 +31,82 @@ class Plugin:
         return bool((self._control_task and not self._control_task.done()) or
                     (self._stop_task and not self._stop_task.done()))
 
-    def _version(self):
+    @staticmethod
+    def _provided(name):
+        """Read only the documented loader context, with old-loader fallback."""
+        if name in os.environ:
+            return os.environ[name] or None
         try:
-            value = json.loads((Path(__file__).resolve().parent / "package.json").read_text())["version"]
+            import decky
+            return getattr(decky, name, None) or None
+        except ImportError:
+            return None
+
+    @staticmethod
+    def _directory(value, description):
+        if (not isinstance(value, str) or not value or
+                any(ord(char) < 32 for char in value) or not Path(value).is_absolute()):
+            raise OSError("The loader supplied an invalid " + description + ". Reload or repair the plugin.")
+        try:
+            path = Path(value).resolve(strict=True)
+            if not path.is_dir():
+                raise OSError()
+            return path
+        except (OSError, ValueError, RuntimeError):
+            raise OSError("The loader supplied an unavailable " + description + ". Reload or repair the plugin.") from None
+
+    def _plugin_root(self):
+        value = self._provided("DECKY_PLUGIN_DIR")
+        if value is not None:
+            return self._directory(value, "plugin directory")
+        # Standalone use and older loaders may not inject the documented path.
+        return Path(__file__).resolve().parent
+
+    def _child_environment(self):
+        """Use the player's context without changing the loader process HOME.
+
+        Shared Desktop/CLI settings remain in the user's XDG store. Decky's
+        plugin settings and persistent runtime-data directory are deliberately
+        not substituted for those paths or the ephemeral XDG_RUNTIME_DIR.
+        """
+        child = os.environ.copy()
+        home = self._provided("DECKY_USER_HOME")
+        if home is not None:
+            home = self._directory(home, "user home")
+            old_home = child.get("HOME")
+            child["HOME"] = str(home)
+            # A service HOME can bring its own default XDG roots along. Do not
+            # accidentally read root/service credentials as the real player.
+            # Explicit absolute roots elsewhere remain valid shared overrides.
+            for name in ("XDG_CONFIG_HOME", "XDG_STATE_HOME", "XDG_DATA_HOME", "XDG_CACHE_HOME"):
+                value = child.get(name)
+                if not value:
+                    continue
+                if not Path(value).is_absolute() or any(ord(char) < 32 for char in value):
+                    child.pop(name, None)
+                elif (old_home and old_home != "/" and Path(old_home).is_absolute() and
+                      Path(old_home) != home and Path(value).is_relative_to(old_home)):
+                    child.pop(name, None)
+        user = self._provided("DECKY_USER")
+        if isinstance(user, str) and re.fullmatch(r"[A-Za-z_][A-Za-z0-9_.-]{0,63}", user):
+            child["USER"] = child["LOGNAME"] = user
+        return child
+
+    def _loader_metadata(self):
+        result = {}
+        for key, name in (("version", "DECKY_VERSION"), ("plugin_name", "DECKY_PLUGIN_NAME"),
+                          ("plugin_author", "DECKY_PLUGIN_AUTHOR")):
+            value = self._provided(name)
+            if isinstance(value, str) and 0 < len(value) <= 80 and value.isprintable():
+                result[key] = value
+        return result
+
+    def _version(self):
+        value = self._provided("DECKY_PLUGIN_VERSION")
+        if isinstance(value, str) and re.fullmatch(r"[A-Za-z0-9.-]{1,80}", value):
+            return value
+        try:
+            value = json.loads((self._plugin_root() / "package.json").read_text())["version"]
             return value if isinstance(value, str) and re.fullmatch(r"[A-Za-z0-9.-]{1,80}", value) else "unknown"
         except (OSError, ValueError, KeyError, TypeError):
             return "unknown"
@@ -41,6 +114,7 @@ class Plugin:
     def _decorate(self, result):
         result = dict(result)
         result["plugin_version"] = self._version()
+        result["loader"] = self._loader_metadata()
         result["backend_id"] = self._backend_id
         if self.busy:
             stopping = self.cancel_requested or (self._stop_task and not self._stop_task.done())
@@ -55,13 +129,6 @@ class Plugin:
 
     async def _main(self):
         os.umask(0o077)
-        # The loader supplies the real user's home even when its service has a
-        # different environment. The plugin requests no _root flag.
-        try:
-            import decky
-            os.environ["HOME"] = decky.DECKY_USER_HOME
-        except ImportError:
-            pass
 
     @staticmethod
     def _unknown(message):
@@ -69,12 +136,13 @@ class Plugin:
                 "process": "unknown", "connection": "unavailable", "message": message}
 
     async def _run(self, action, payload=None):
-        binary = Path(__file__).resolve().parent / "bin/obsgod"
+        binary = self._plugin_root() / "bin/obsgod"
         if not os.access(binary, os.X_OK):
             binary.chmod(0o700)
         spawning = asyncio.create_task(asyncio.create_subprocess_exec(
             str(binary), "deck", action, stdin=asyncio.subprocess.PIPE if payload is not None else asyncio.subprocess.DEVNULL,
             stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.DEVNULL,
+            env=self._child_environment(),
         ))
         try:
             process = await asyncio.shield(spawning)
@@ -256,11 +324,11 @@ class Plugin:
 
         async def check():
             try:
-                path = Path(__file__).resolve().parent / "releases.py"
+                path = self._plugin_root() / "releases.py"
                 spec = importlib.util.spec_from_file_location("obsgod_releases", path)
                 module = importlib.util.module_from_spec(spec)
                 spec.loader.exec_module(module)
-                versions = module.current_versions(self._version())
+                versions = module.current_versions(self._version(), environ=self._child_environment())
                 current = versions["app"] if versions["app"] != "unknown" else versions["plugin"]
                 result = await asyncio.to_thread(module.check_updates, current, channel="preview")
                 result.update(current_app_version=versions["app"], current_plugin_version=versions["plugin"],

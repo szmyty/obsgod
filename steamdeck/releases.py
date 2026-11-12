@@ -4,7 +4,9 @@ Only this repository's GitHub releases and immutable same-repository artifact
 commits are accepted. This is transport/checksum verification, not code signing.
 """
 import hashlib
+import importlib.util
 import json
+import os
 from pathlib import Path
 import re
 import time
@@ -227,7 +229,7 @@ def check_updates(installed_version, channel="preview"):
     return inspect_updates(installed_version, channel)[0]
 
 
-def current_versions(plugin_version="unknown"):
+def current_versions(plugin_version="unknown", *, environ=None):
     """Read version identifiers only; never settings or stream credentials.
 
     The backend supplies the loaded plugin version. An unknown/unsafe app path
@@ -238,10 +240,20 @@ def current_versions(plugin_version="unknown"):
         version_key(plugin_version)
     except ReleaseError:
         values["plugin"] = "unknown"
-    home = Path.home().resolve()
-    current = home / ".local/share/obsgod/current"
     try:
-        if not current.is_symlink() or current.resolve().parent != (home / ".local/share/obsgod/releases").resolve() or not current.resolve().is_relative_to(home):
+        environment = os.environ if environ is None else environ
+        raw_home = environment.get("HOME", str(Path.home()))
+        if not isinstance(raw_home, str) or not Path(raw_home).is_absolute() or any(ord(c) < 32 for c in raw_home):
+            return values
+        home = Path(raw_home).resolve()
+        # Load the bundled helper by its exact sibling path. Other Decky
+        # plugins may have a different module called `paths` on sys.path.
+        spec = importlib.util.spec_from_file_location("_obsgod_release_paths", Path(__file__).with_name("paths.py"))
+        paths = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(paths)
+        base, _ = paths.app_directories(home, environment)
+        current = base / "current"
+        if not current.is_symlink() or current.resolve().parent != (base / "releases").resolve() or not current.resolve().is_relative_to(home):
             return values
         saved = current / "manifest.json"
         if saved.is_symlink() or not saved.is_file() or saved.stat().st_size > 64 * 1024:
@@ -256,7 +268,7 @@ def current_versions(plugin_version="unknown"):
         if isinstance(manifest.get("revision"), str) and _SHA.fullmatch(manifest["revision"]):
             values["revision"] = manifest["revision"]
         values["mismatch"] = values["plugin"] != "unknown" and values["app"] != values["plugin"]
-    except (OSError, ValueError, TypeError, AttributeError, ReleaseError):
+    except (OSError, ValueError, TypeError, AttributeError, RuntimeError, ReleaseError):
         pass
     return values
 

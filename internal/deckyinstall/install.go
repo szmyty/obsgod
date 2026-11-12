@@ -23,10 +23,11 @@ import (
 )
 
 type Input struct {
-	Operation string `json:"operation,omitempty"`
-	ZIPPath   string `json:"zip_path"`
-	SHA256    string `json:"sha256"`
-	Version   string `json:"version"`
+	Operation         string `json:"operation,omitempty"`
+	ZIPPath           string `json:"zip_path"`
+	SHA256            string `json:"sha256"`
+	Version           string `json:"version"`
+	UninstallExisting bool   `json:"uninstall_existing,omitempty"`
 }
 
 var hashPattern = regexp.MustCompile(`^[a-f0-9]{64}$`)
@@ -105,6 +106,7 @@ type Report struct {
 	Version           string `json:"version,omitempty"`
 	DeckyVersion      string `json:"decky_version"`
 	FrontendConnected bool   `json:"frontend_connected"`
+	Removed           bool   `json:"removed,omitempty"`
 }
 
 //go:embed frontend-install.js
@@ -116,6 +118,7 @@ type frontendResult struct {
 	Version           string `json:"version"`
 	DeckyVersion      string `json:"decky_version"`
 	FrontendConnected bool   `json:"frontend_connected"`
+	Removed           bool   `json:"removed"`
 }
 
 func httpClient() *http.Client {
@@ -176,12 +179,15 @@ var deckyVersionPattern = regexp.MustCompile(`^v?3\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9
 
 func runAt(ctx context.Context, input Input, endpoint string) (Report, error) {
 	var report Report
-	if input.Operation != "" && input.Operation != "install" && input.Operation != "probe" {
+	if input.Operation != "" && input.Operation != "install" && input.Operation != "probe" && input.Operation != "uninstall" {
 		return report, errors.New("invalid OBSGod installer operation")
 	}
-	if input.Operation == "probe" {
+	if input.UninstallExisting && input.Operation != "uninstall" {
+		return report, errors.New("existing-folder removal is only valid for uninstall")
+	}
+	if input.Operation == "probe" || input.Operation == "uninstall" {
 		if input.ZIPPath != "" || input.SHA256 != "" || input.Version != "" {
-			return report, errors.New("probe cannot include an installation request")
+			return report, errors.New("probe/uninstall cannot include an installation request")
 		}
 	} else {
 		resolved, err := validate(input)
@@ -207,20 +213,21 @@ func runAt(ctx context.Context, input Input, endpoint string) (Report, error) {
 		}
 		if !result.OK {
 			messages := map[string]string{
-				"unsupported":         "Decky's frontend is incompatible with this installer. Update Decky Loader using its official instructions and retry",
-				"busy":                "Another OBSGod Decky installation is running. Let it finish, then retry",
-				"install-unconfirmed": "Decky did not confirm the requested OBSGod installation. Saved settings were preserved; inspect Decky and retry to verify or repair",
-				"probe-failed":        "Decky's version or plugin service could not be verified. Keep Steam open in Desktop Mode, check Decky and retry",
+				"unsupported":           "Decky's frontend is incompatible with this installer. Update Decky Loader using its official instructions and retry",
+				"busy":                  "Another OBSGod Decky installation is running. Let it finish, then retry",
+				"install-unconfirmed":   "Decky did not confirm the requested OBSGod installation. Saved settings were preserved; inspect Decky and retry to verify or repair",
+				"probe-failed":          "Decky's version or plugin service could not be verified. Keep Steam open in Desktop Mode, check Decky and retry",
+				"uninstall-unconfirmed": "Decky did not confirm OBSGod removal. Existing app/settings were preserved; inspect Decky and retry",
 			}
 			if message, ok := messages[result.Code]; ok {
 				return report, errors.New(message)
 			}
 			return report, errors.New("Decky's installation state could not be verified. Keep Steam open, inspect Decky and retry")
 		}
-		if !result.FrontendConnected || !deckyVersionPattern.MatchString(result.DeckyVersion) || (input.Operation != "probe" && result.Version != input.Version) {
+		if !result.FrontendConnected || !deckyVersionPattern.MatchString(result.DeckyVersion) || (input.Operation == "install" && result.Version != input.Version) || (input.Operation == "uninstall" && !result.Removed) {
 			return report, errors.New("Decky returned an unexpected version or readiness result; installation is unconfirmed")
 		}
-		return Report{Version: result.Version, DeckyVersion: result.DeckyVersion, FrontendConnected: true}, nil
+		return Report{Version: result.Version, DeckyVersion: result.DeckyVersion, FrontendConnected: true, Removed: result.Removed}, nil
 	}
 	return report, errors.New("Decky is running, but its Steam frontend is unavailable. Keep the normal Steam client open in Desktop Mode, wait for Decky to load, and retry; do not uninstall your plugin")
 }

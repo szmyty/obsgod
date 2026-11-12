@@ -162,13 +162,34 @@ func TestProbeAndInvalidOperation(t *testing.T) {
 	if err != nil || report.DeckyVersion != "v3.3.1" || !report.FrontendConnected || report.Version != "" {
 		t.Fatal(report, err)
 	}
-	for _, input := range []Input{{Operation: "other"}, {Operation: "probe", ZIPPath: "/must-not-read"}} {
+	for _, input := range []Input{{Operation: "other"}, {Operation: "probe", ZIPPath: "/must-not-read"}, {Operation: "probe", UninstallExisting: true}, {Operation: "uninstall", Version: "not-allowed"}} {
 		if _, err := runAt(ctx, input, server.URL); err == nil {
 			t.Fatal("accepted invalid operation")
 		}
 	}
 	if calls != 2 {
 		t.Fatal("invalid input reached Decky", calls)
+	}
+}
+
+func TestUninstallRequiresExplicitRemovalConfirmation(t *testing.T) {
+	for _, removed := range []bool{false, true} {
+		server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			if r.URL.Path == "/auth/token" {
+				_, _ = w.Write([]byte("12345678-1234-1234-1234-123456789012"))
+				return
+			}
+			value, _ := json.Marshal(map[string]any{"ok": true, "removed": removed, "decky_version": "v3.3.1", "frontend_connected": true})
+			_ = json.NewEncoder(w).Encode(map[string]any{"success": true, "result": map[string]any{"success": true, "result": string(value)}})
+		}))
+		report, err := runAt(context.Background(), Input{Operation: "uninstall", UninstallExisting: true}, server.URL)
+		server.Close()
+		if removed && (err != nil || !report.Removed) {
+			t.Fatalf("verified removal failed: %#v %v", report, err)
+		}
+		if !removed && err == nil {
+			t.Fatal("accepted an unconfirmed removal")
+		}
 	}
 }
 
@@ -202,9 +223,12 @@ func TestFrontendInstallerBehavior(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	for _, mode := range []string{"install", "reject", "missing-prompt", "no-frontend", "probe", "confirm-timeout", "confirm-timeout-reject"} {
+	for _, mode := range []string{"install", "reject", "missing-prompt", "no-frontend", "probe", "confirm-timeout", "confirm-timeout-reject", "uninstall", "uninstall-empty", "uninstall-reject", "uninstall-retained", "uninstall-timeout", "uninstall-orphan"} {
 		command := exec.Command(node, "--input-type=commonjs", "-e", string(script))
 		request, _ := json.Marshal(Input{Operation: map[bool]string{true: "probe", false: "install"}[mode == "probe"], ZIPPath: "/home/deck/space and %20/plugin.zip", SHA256: strings.Repeat("a", 64), Version: "0.1.0-test"})
+		if strings.HasPrefix(mode, "uninstall") {
+			request, _ = json.Marshal(Input{Operation: "uninstall", UninstallExisting: mode == "uninstall-orphan"})
+		}
 		command.Stdin = strings.NewReader(strings.Replace(frontendScript, "__OBSGOD_REQUEST__", string(request), 1))
 		command.Env = append(os.Environ(), "OBSGOD_TRANSPORT_TEST_MODE="+mode)
 		output, err := command.CombinedOutput()

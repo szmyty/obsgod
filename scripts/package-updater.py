@@ -11,7 +11,7 @@ import tarfile
 import zipfile
 
 REPO = Path(__file__).resolve().parents[1]
-FILES = ("update.py", "releases.py", "decky.py", "decky-install", "Update OBSGod.desktop", "Update OBSGod.sh", "LICENSE", "THIRD_PARTY_NOTICES.md")
+FILES = ("update.py", "releases.py", "paths.py", "product.py", "decky.py", "decky-install", "Update OBSGod.desktop", "Update OBSGod.sh", "LICENSE", "THIRD_PARTY_NOTICES.md")
 EXECUTABLES = {"decky-install", "Update OBSGod.desktop", "Update OBSGod.sh"}
 
 

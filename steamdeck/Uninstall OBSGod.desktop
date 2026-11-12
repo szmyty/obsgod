@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Uninstall Decky Stream
+Comment=Review removal of Decky Stream and its optional saved data
+Exec=python3 -c "import os,sys,subprocess; from urllib.parse import unquote,urlparse; p=sys.argv[1]; p=unquote(urlparse(p).path) if p.startswith('file:') else p; p=os.path.dirname(os.path.abspath(p)); result=subprocess.run([sys.executable,os.path.join(p,'uninstall.py')]+sys.argv[2:],cwd=p); input('Press Enter to close this window.'); sys.exit(result.returncode)" %k
+Icon=edit-delete
+Terminal=true
+Categories=AudioVideo;

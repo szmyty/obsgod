@@ -252,7 +252,7 @@ class UnifiedInstallerSafety(unittest.TestCase):
         self.decky = Mock()
         self.decky.status.return_value = {"ok": True, "version": "v3.3.1"}
         self.bridge = Mock()
-        self.bridge.run_cli.return_value = {"ok": True, "state": "stopped", "configured": False}
+        self.bridge.run_cli.return_value = {"ok": True, "state": "stopped", "configured": False, "stream": {"active": False}, "recording": False, "output_known": True, "process": "absent"}
         self.loader = patch.object(install, "load_module", side_effect=lambda name, path: self.decky if name == "obsgod_install_decky" else self.bridge)
         self.loader.start()
         self.dependencies = patch.object(install, "ensure_dependencies")
@@ -303,7 +303,7 @@ class UnifiedInstallerSafety(unittest.TestCase):
         with contextlib.redirect_stdout(__import__("io").StringIO()):
             installed = install.install(launch=False)
         self.assertEqual(installed.resolve().name, "0.1.0-test")
-        self.assertIn("Update OBSGod", (self.home / ".local/share/applications/obsgod-update.desktop").read_text())
+        self.assertIn("Update " + install.DISPLAY_NAME, (self.home / ".local/share/applications/obsgod-update.desktop").read_text())
         self.decky.status.assert_called_once()
         self.decky.helper_request.assert_called_once()
         self.assertEqual([call.args[0] for call in self.bridge.run_cli.call_args_list], ["status", "status"])

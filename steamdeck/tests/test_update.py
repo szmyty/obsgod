@@ -159,7 +159,7 @@ class UpdateSafety(unittest.TestCase):
         media.write_bytes(b"existing recording")
         installer = Mock()
         bridge = Mock()
-        bridge.run_cli.return_value = {"ok": True, "state": "stopped", "output_known": True, "recording": False}
+        bridge.run_cli.return_value = {"ok": True, "state": "stopped", "output_known": True, "recording": False, "stream": {"active": False}, "process": "absent"}
 
         def install(launch):
             self.assertFalse(launch)
@@ -192,7 +192,7 @@ class UpdateSafety(unittest.TestCase):
         installer = Mock()
         installer.install.side_effect = KeyboardInterrupt()
         bridge = Mock()
-        bridge.run_cli.return_value = {"ok": True, "state": "stopped", "output_known": True}
+        bridge.run_cli.return_value = {"ok": True, "state": "stopped", "output_known": True, "recording": False, "stream": {"active": False}, "process": "absent"}
         with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release), patch.object(updater, "load_module", side_effect=lambda name, path: installer if name == "obsgod_payload_installer" else bridge):
             with contextlib.redirect_stdout(io.StringIO()), self.assertRaises(KeyboardInterrupt):
                 updater.run_update()
@@ -222,6 +222,36 @@ class UpdateSafety(unittest.TestCase):
         with self.assertRaisesRegex(updater.UpdateError, "unsafe"):
             updater.save_progress(self.base, {"state": "downloading"})
         self.assertEqual(protected.read_bytes(), b"unchanged")
+
+    def test_legacy_preflight_never_authorizes_applying_a_malformed_new_payload_status(self):
+        release, _, _ = self.fixture()
+        old = self.base / "releases/old"
+        old.mkdir(parents=True)
+        (old / "manifest.json").write_text(json.dumps({"version": "0.1.0-deck.4"}))
+        (old / "bridge.py").write_text("legacy bridge fixture")
+        (self.base / "current").symlink_to(old)
+        legacy_bridge = Mock()
+        # This is the real published4 shape: no recording/output_known/process.
+        legacy_bridge.run_cli.return_value = {"ok": True, "state": "stopped", "stream": {"active": False}}
+        updater.require_idle(legacy_bridge, allow_legacy=True)
+        legacy_bridge.run_cli.return_value = {**legacy_bridge.run_cli.return_value, "process": "unknown"}
+        with self.assertRaises(updater.UpdateError):
+            updater.require_idle(legacy_bridge, allow_legacy=True)
+        del legacy_bridge.run_cli.return_value["process"]
+        with self.assertRaises(updater.UpdateError):
+            updater.require_idle(legacy_bridge)
+        malformed_new_bridge = Mock()
+        malformed_new_bridge.run_cli.return_value = legacy_bridge.run_cli.return_value
+        installer = Mock()
+        def module(name, path):
+            return installer if name == "obsgod_payload_installer" else legacy_bridge if name == "obsgod_installed_bridge" else malformed_new_bridge
+        with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release), patch.object(updater, "load_module", side_effect=module), patch.object(updater, "backup_settings") as backup:
+            with contextlib.redirect_stdout(io.StringIO()), self.assertRaisesRegex(updater.UpdateError, "Update blocked"):
+                updater.run_update()
+        release.download_archive.assert_called_once()
+        backup.assert_not_called()
+        installer.install.assert_not_called()
+        self.assertEqual((self.base / "current").resolve(), old)
 
 
 if __name__ == "__main__":

@@ -110,7 +110,8 @@ async def runtime_installer_upgrade(fixture, args, work, plugins, loader, settin
     home = work / "home with spaces %20"
     home.mkdir()
     env = dict(os.environ, HOME=str(home), XDG_CONFIG_HOME=str(home / ".config"),
-               XDG_STATE_HOME=str(home / ".local/state"), XDG_CURRENT_DESKTOP="KDE", DESKTOP_SESSION="plasma")
+               XDG_STATE_HOME=str(home / ".local/state"), XDG_DATA_HOME=str(home / ".local/share"),
+               XDG_CACHE_HOME=str(home / ".cache"), XDG_CURRENT_DESKTOP="KDE", DESKTOP_SESSION="plasma")
     previous = work / "previous runtime"
     previous.mkdir()
     with tarfile.open(args.previous_archive) as archive:
@@ -183,21 +184,65 @@ else:
         assert all((plugins/name/"keep").read_text() == "unrelated plugin data" for name in ["alpha","beta"])
         assert (home / ".local/share/applications/obsgod-update.desktop").is_file()
         assert (current / "update.py").is_file() and (current / "releases.py").is_file()
+        assert all((current / name).is_file() for name in ["paths.py","product.py","Uninstall OBSGod.desktop"])
+        assert (home / ".local/share/applications/obsgod-uninstall.desktop").is_file()
+        with zipfile.ZipFile(package / "obsgod-decky.zip") as shipped:
+            for name in ["obsgod/LICENSE.qrcode-generator.txt","obsgod/dist/LICENSE.qrcode-generator.txt"]:
+                assert "MIT" in shipped.read(name).decode(), "QR dependency license missing"
         assert not (current.parent / "installation-recovery.json").exists()
     assert previous_release.is_dir(), "previous runtime was removed"
     assert current.resolve() != previous_release, "candidate app was not activated"
     assert not list(current.parent.glob(".install-*"))
     print("PASS: actual runtime archive default unified install.py --no-launch upgraded " + old_metadata["version"] +
           " to " + manifest["version"] + " and repeated same-version installation; authenticated active-frontend plugin replacement, app/plugin pair, bundled updater/menu entry, private settings/key, recordings, ordinary/managed OBS files, diagnostic data, prior release and unrelated plugins/order preserved. Flatpak installation/version, Steam/CDP and loader ownership/lifecycle are fixtures.")
+    if args.bootstrap_updater_zip:
+        await desktop_updater_upgrade(fixture, args, work, env, previous_package, package,
+                                      current, plugins, loader, settings, snapshots,
+                                      history, saved_event, manifest,
+                                      updater_zip=args.bootstrap_updater_zip,fixture_name="bootstrap")
     if args.updater_zip:
         await desktop_updater_upgrade(fixture, args, work, env, previous_package, package,
                                       current, plugins, loader, settings, snapshots,
                                       history, saved_event, manifest)
+    await desktop_uninstall(fixture, env, home, current, plugins, loader, settings, snapshots,
+                            history, saved_event)
+
+
+async def desktop_uninstall(fixture, env, home, current, plugins, loader, settings, snapshots,
+                            history, saved_event):
+    """Exercise the shipped launcher and real authenticated Decky removal path."""
+    command=fixture.desktop_command(current / "Uninstall OBSGod.desktop",as_uri=True)
+    inventory=await fixture.execute(command+["--purge-settings","--dry-run","--json"],env,
+                                    input_data=b"\n",cwd=home)
+    # The Desktop wrapper adds its terminal-hold prompt after the JSON line.
+    plan=json.loads(inventory.splitlines()[0])
+    assert plan["ok"] and plan["dry_run"] and plan["remove_plugin"]
+    assert "OBSGod" in loader.plugins and (plugins / "obsgod").is_dir()
+    assert current.is_dir() and all(path.read_bytes()==data for path,data in snapshots.items())
+    output=await fixture.execute(command+["--purge-settings","--yes","--json"],env,
+                                 input_data=b"\n",cwd=home)
+    result=json.loads(output.splitlines()[0])
+    assert result["ok"] and result["mode"]=="uninstall",output
+    assert "OBSGod" not in loader.plugins and not (plugins / "obsgod").exists()
+    assert settings.getSetting("pluginOrder")==["Alpha","Beta"]
+    assert settings.getSetting("frozenPlugins")==["Alpha"]
+    assert settings.getSetting("hiddenPlugins")==["Beta"]
+    assert all((plugins/name/"keep").read_text()=="unrelated plugin data" for name in ["alpha","beta"])
+    assert not current.exists() and not (home / ".local/bin/obsgod").exists()
+    assert not (home / ".config/obsgod").exists()
+    assert not (home / ".var/app/com.obsproject.Studio/config/obsgod").exists()
+    assert not (home / ".local/share/applications/obsgod-uninstall.desktop").exists()
+    preserved=[home / "Videos/OBSGod/keep.mkv",
+               home / ".local/state/obsgod/diagnostics/keep.json",
+               home / ".var/app/com.obsproject.Studio/config/obs-studio/global.ini"]
+    assert all(path.read_bytes()==snapshots[path] for path in preserved)
+    assert saved_event in json.loads(history.read_text())
+    print("PASS: actual shipped Uninstall Desktop/file-URI launcher reviewed inventory and explicit --yes; pinned authenticated Decky uninstall removed only OBSGod files/registry/order entry, selected app/settings/managed OBS; unselected recordings, diagnostics, ordinary OBS and unrelated plugins/order/frozen/hidden entries preserved. Confirmation input is explicit fixture consent; ownership/Steam/CDP/process lifecycle remain fixtures.")
 
 
 async def desktop_updater_upgrade(fixture, args, work, env, previous_package, package,
                                   current, plugins, loader, settings, snapshots,
-                                  history, saved_event, manifest):
+                                  history, saved_event, manifest, *, updater_zip=None,fixture_name="modern"):
     """Run the unmodified extracted Desktop updater with network responses staged.
 
     sitecustomize exists only in this disposable fixture. It substitutes HTTPS
@@ -205,13 +250,16 @@ async def desktop_updater_upgrade(fixture, args, work, env, previous_package, pa
     archive download/verification/extraction and unified installer all execute.
     No product environment variable or arbitrary runtime URL bypass is added.
     """
-    extracted = work / "updater package with spaces %20"
+    extracted = work / (fixture_name + " updater package with spaces %20")
     extracted.mkdir()
-    with zipfile.ZipFile(args.updater_zip) as archive:
+    selected_updater=updater_zip or args.updater_zip
+    with zipfile.ZipFile(selected_updater) as archive:
         archive.extractall(extracted)
     updater = extracted / "OBSGod-Updater"
     assert (updater / "update.py").is_file()
-    network = work / "updater-network-fixture"
+    original_updater={file.name:hashlib.sha256(file.read_bytes()).hexdigest() for file in updater.iterdir() if file.is_file()}
+    initial_backups=list((current.parent / "backups").glob("updater-*/secrets.json"))
+    network = work / (fixture_name + "-updater-network-fixture")
     network.mkdir()
     version = manifest["version"]
     archive_name = "obsgod-deck_" + version + "_linux_amd64.tar.gz"
@@ -305,8 +353,9 @@ async def desktop_updater_upgrade(fixture, args, work, env, previous_package, pa
     assert json.loads((current.parent / "update-status.json").read_text())["state"] == "interrupted-or-failed"
     assert not list(current.parent.glob(".update-*"))
     backups = list((current.parent / "backups").glob("updater-*/secrets.json"))
-    assert len(backups) == 2 and all(path.stat().st_mode & 0o777 == 0o600 for path in backups)
-    print("PASS: actual extracted updater ZIP and Desktop/file-URI entry perform official-shape release discovery (skipping updater-only), exact tag/manifest/archive verification, legacy-to-candidate unified app/plugin upgrade, repeat no-update, explicit same-version repair, and checksum-failure preservation/recovery. HTTPS responses, Flatpak installation/version, dialogs, Steam/CDP and service ownership/lifecycle are fixtures; the product source and all verification/installer paths are unmodified.")
+    assert len(backups) == len(initial_backups)+2 and all(path.stat().st_mode & 0o777 == 0o600 for path in backups)
+    assert {file.name:hashlib.sha256(file.read_bytes()).hexdigest() for file in updater.iterdir() if file.is_file()}==original_updater, "Updater fixture modified the immutable input bundle"
+    print("PASS: " + fixture_name + " actual extracted updater ZIP and Desktop/file-URI entry perform official-shape release discovery (skipping updater-only), exact tag/manifest/archive verification, legacy-to-candidate unified app/plugin upgrade, repeat no-update, explicit same-version repair, and checksum-failure preservation/recovery. HTTPS responses, Flatpak installation/version, dialogs, Steam/CDP and service ownership/lifecycle are fixtures; the product source and all verification/installer paths are unmodified.")
 
 
 async def run(args):
@@ -386,6 +435,7 @@ async def run(args):
         ws.add_route("updater/get_version_info",version)
         ws.add_route("utilities/install_plugin",request_install)
         ws.add_route("utilities/confirm_plugin_install",installer.confirm_plugin_install)
+        ws.add_route("utilities/uninstall_plugin",installer.uninstall_plugin)
         ws.add_route("utilities/settings/get",get_setting)
         ws.add_route("utilities/settings/set",set_setting)
         ws.add_route("loader/get_plugins",loader.get_plugins)
@@ -418,8 +468,31 @@ async def run(args):
             if args.runtime_archive:
                 await runtime_installer_upgrade(fixture,args,work,plugins,loader,settings)
                 assert connection_count == 1, "unified installer opened a competing frontend connection"
-                assert prompt_count == (6 if args.updater_zip else 4), "unified installation changed unrelated prompt behavior"
+                assert prompt_count == 4+2*bool(args.updater_zip)+2*bool(args.bootstrap_updater_zip), "unified installation changed unrelated prompt behavior"
                 assert not installer.install_requests
+            # Idempotent removal of an absent plugin still uses one existing
+            # authenticated frontend; a filesystem-only legacy copy must also
+            # be removed when its identity is known but its registry is absent.
+            if not args.runtime_archive:
+                await fixture.execute([str(args.helper.resolve())],os.environ,
+                    input_data=json.dumps({"operation":"uninstall"}).encode())
+            assert "OBSGod" not in loader.plugins and not (plugins / "obsgod").exists()
+            absent=await fixture.execute([str(args.helper.resolve())],os.environ,
+                input_data=json.dumps({"operation":"uninstall"}).encode())
+            assert json.loads(absent)["removed"] is True
+            with zipfile.ZipFile(args.plugin_zip) as archive:
+                archive.extractall(plugins)
+            settings.setSetting("pluginOrder",["Alpha","OBSGod","Beta"])
+            legacy=await fixture.execute([str(args.helper.resolve())],os.environ,
+                input_data=json.dumps({"operation":"uninstall","uninstall_existing":True}).encode())
+            assert json.loads(legacy)["removed"] is True
+            assert "OBSGod" not in loader.plugins and not (plugins / "obsgod").exists()
+            assert settings.getSetting("pluginOrder")==["Alpha","Beta"]
+            assert settings.getSetting("frozenPlugins")==["Alpha"]
+            assert settings.getSetting("hiddenPlugins")==["Beta"]
+            assert all((plugins/name/"keep").read_text()=="unrelated plugin data" for name in ["alpha","beta"])
+            assert connection_count==1 and not installer.install_requests
+            print("PASS: compiled uninstall helper is idempotent for absent plugin and removes a filesystem-only compatibility copy through pinned Decky with unchanged frontend connection, unrelated plugin files/order/settings and prompt behavior.")
         finally:
             if frontend is not None and frontend.returncode is None:
                 frontend.terminate()
@@ -435,11 +508,14 @@ def main():
     parser.add_argument("--runtime-archive",type=Path,help="Also execute the packaged default unified installer twice")
     parser.add_argument("--previous-archive",type=Path,help="Legacy runtime archive to upgrade in the unified-installer test")
     parser.add_argument("--updater-zip",type=Path,help="Also execute the extracted maintained Desktop updater with fixture release responses")
+    parser.add_argument("--bootstrap-updater-zip",type=Path,help="Also run an earlier unmodified maintained dynamic updater against the new candidate; fixed-version updater4 cannot select new releases")
     args=parser.parse_args()
     if bool(args.runtime_archive) != bool(args.previous_archive):
         parser.error("--runtime-archive and --previous-archive must be provided together")
     if args.updater_zip and not args.runtime_archive:
         parser.error("--updater-zip requires --runtime-archive and --previous-archive")
+    if args.bootstrap_updater_zip and not args.updater_zip:
+        parser.error("--bootstrap-updater-zip requires --updater-zip, --runtime-archive and --previous-archive")
     asyncio.run(run(args))
 
 

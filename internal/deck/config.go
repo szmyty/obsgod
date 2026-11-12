@@ -47,13 +47,22 @@ func UserPaths() (Paths, error) {
 	if e != nil {
 		return Paths{}, e
 	}
+	if !filepath.IsAbs(home) || strings.ContainsAny(home, "\r\n\x00") {
+		return Paths{}, errors.New("HOME must be an absolute directory without control characters")
+	}
 	root, e := os.UserConfigDir()
 	if e != nil {
 		return Paths{}, e
 	}
+	if !filepath.IsAbs(root) || strings.ContainsAny(root, "\r\n\x00") {
+		return Paths{}, errors.New("the configuration directory must be absolute without control characters")
+	}
 	data := os.Getenv("XDG_STATE_HOME")
 	if data == "" {
 		data = filepath.Join(home, ".local/state")
+	}
+	if !filepath.IsAbs(data) || strings.ContainsAny(data, "\r\n\x00") {
+		return Paths{}, errors.New("XDG_STATE_HOME must be an absolute directory without control characters")
 	}
 	return Paths{Config: filepath.Join(root, "obsgod/deck.json"), Secrets: filepath.Join(root, "obsgod/secrets.json"), OBSConfig: filepath.Join(home, ".var/app/com.obsproject.Studio/config/obsgod"), State: filepath.Join(data, "obsgod"), Videos: filepath.Join(home, "Videos/OBSGod")}, nil
 }
@@ -180,6 +189,14 @@ func Configure(p Paths, r io.Reader) (Settings, error) {
 	}
 	if input.StreamKey != "" {
 		secret.StreamKey = input.StreamKey
+	} else if secret.StreamKey != "" {
+		// A saved key belongs to its saved destination. Reusing it for another
+		// server can disclose it to an unrelated provider. Same-server edits
+		// retain the established blank-means-keep behavior.
+		var previous Settings
+		if readJSON(p.Config, &previous) != nil || previous.Server != input.Server || secret.SettingsHash != settingsHash(previous) {
+			return Settings{}, errors.New("enter the key for this server; a saved key cannot be reused when its destination or settings binding changed")
+		}
 	}
 	if secret.StreamKey == "" || len(secret.StreamKey) > 4096 || strings.ContainsAny(secret.StreamKey, "\r\n\x00") {
 		return Settings{}, errors.New("enter a valid stream key in the password field")

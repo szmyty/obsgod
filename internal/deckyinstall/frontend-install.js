@@ -13,14 +13,14 @@
     return Promise.race([promise, new Promise((_, reject) => {timer = setTimeout(() => reject(new Error("timeout")), milliseconds);})])
       .finally(() => clearTimeout(timer));
   };
-  let version;
+  let version, plugins;
   try {
     const info = await bounded(backend.call("updater/get_version_info"));
     version = info?.current;
     if (typeof version !== "string" || !/^v?3\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.-]+)?$/.test(version)) {
       return answer({ok:false,code:"unsupported"});
     }
-    const plugins = await bounded(backend.call("loader/get_plugins"));
+    plugins = await bounded(backend.call("loader/get_plugins"));
     if (!Array.isArray(plugins)) return answer({ok:false,code:"probe-failed"});
     if (request.operation === "probe") return answer({ok:true,decky_version:version,frontend_connected:true});
   } catch (_) { return answer({ok:false,code:"probe-failed"}); }
@@ -46,6 +46,25 @@
     pending.then(settled, settled);
     return pending;
   };
+  if (request.operation === "uninstall") {
+    try {
+      // Fixed compatibility identity; no caller-supplied plugin name or path.
+      // Decky 3.3.1 may swallow filesystem errors, so verify resulting state.
+      if (request.uninstall_existing === true || plugins.some(plugin => plugin?.name === "OBSGod")) {
+        await bounded(mutate("utilities/uninstall_plugin", "OBSGod"), 60000);
+      }
+      const remaining = await bounded(backend.call("loader/get_plugins"));
+      if (!Array.isArray(remaining) || remaining.some(plugin => plugin?.name === "OBSGod")) throw new Error("still-installed");
+      const order = await bounded(backend.call("utilities/settings/get", "pluginOrder", []));
+      if (!Array.isArray(order) || !order.every(name => typeof name === "string")) throw new Error("order");
+      const updated = order.filter(name => name !== "OBSGod");
+      if (JSON.stringify(updated) !== JSON.stringify(order)) {
+        await bounded(mutate("utilities/settings/set", "pluginOrder", updated));
+      }
+      return answer({ok:true,removed:true,decky_version:version,frontend_connected:backend.ws?.readyState === 1});
+    } catch (_) { return answer({ok:false,code:"uninstall-unconfirmed"}); }
+    finally { finished = true; release(); }
+  }
   const event = "loader/add_plugin_install_prompt";
   const original = Array.from(backend.eventListeners.get(event) || []);
   let prompt = "";

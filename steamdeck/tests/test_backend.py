@@ -3,6 +3,7 @@ import importlib.util
 import json
 from pathlib import Path
 import signal
+import tempfile
 from types import SimpleNamespace
 import unittest
 from unittest.mock import AsyncMock, Mock, patch
@@ -273,7 +274,7 @@ class BackendState(unittest.IsolatedAsyncioTestCase):
             calls.append((version, channel))
             return {"ok": True, "available": True, "state": "update-available", "message": "Update available"}
 
-        module = SimpleNamespace(check_updates=check, current_versions=lambda _: {
+        module = SimpleNamespace(check_updates=check, current_versions=lambda _, **_kwargs: {
             "app": "0.1.0-deck.1", "plugin": "0.1.0-deck.4", "updater": "not-bundled", "mismatch": True})
         fake_spec = SimpleNamespace(loader=SimpleNamespace(exec_module=Mock()))
         with patch.object(backend.importlib.util, "spec_from_file_location", return_value=fake_spec), patch.object(backend.importlib.util, "module_from_spec", return_value=module):
@@ -302,6 +303,132 @@ class BackendState(unittest.IsolatedAsyncioTestCase):
             result = await plugin.stop()
         self.assertFalse(result["output_known"])
         self.assertIn("stop", [call.args[0] for call in run.call_args_list])
+
+
+class BackendContext(unittest.IsolatedAsyncioTestCase):
+    def setUp(self):
+        self.enterContext(patch.dict(backend.os.environ, {}, clear=True))
+        self.enterContext(patch.dict("sys.modules", {"decky": None}))
+        self.temp = self.enterContext(tempfile.TemporaryDirectory())
+        self.root = Path(self.temp)
+
+    async def test_loader_paths_and_player_context_are_applied_only_to_child(self):
+        plugin_dir = self.root / "custom-homebrew/plugins/OBSGod"
+        plugin_dir.mkdir(parents=True)
+        (plugin_dir / "package.json").write_text('{"version":"0.1.0-deck.6"}')
+        home = self.root / "player"
+        home.mkdir()
+        service = self.root / "service"
+        service.mkdir()
+        runtime = str(self.root / "run/user/1000")
+        values = {"HOME": str(service), "DECKY_PLUGIN_DIR": str(plugin_dir),
+                  "DECKY_PLUGIN_VERSION": "0.1.0-deck.7", "DECKY_USER_HOME": str(home),
+                  "DECKY_USER": "player", "XDG_CONFIG_HOME": str(service / ".config"),
+                  "XDG_DATA_HOME": str(service / ".local/share"),
+                  "XDG_STATE_HOME": str(self.root / "shared-state"),
+                  "XDG_RUNTIME_DIR": runtime,
+                  "DECKY_PLUGIN_SETTINGS_DIR": str(self.root / "loader-settings"),
+                  "DECKY_PLUGIN_RUNTIME_DIR": str(self.root / "persistent-data")}
+        with patch.dict(backend.os.environ, values), patch.object(backend.os, "umask") as umask:
+            plugin = backend.Plugin()
+            await plugin._main()
+            process = FakeProcess()
+            with patch.object(backend.os, "access", return_value=True), patch.object(
+                    backend.asyncio, "create_subprocess_exec", return_value=process) as spawn:
+                result = await plugin._run("status")
+            self.assertTrue(result["ok"])
+            self.assertEqual(spawn.call_args.args[0], str(plugin_dir / "bin/obsgod"))
+            child = spawn.call_args.kwargs["env"]
+            self.assertEqual(child["HOME"], str(home))
+            self.assertEqual(child["USER"], "player")
+            self.assertEqual(child["LOGNAME"], "player")
+            self.assertNotIn("XDG_CONFIG_HOME", child)
+            self.assertNotIn("XDG_DATA_HOME", child)
+            self.assertEqual(child["XDG_STATE_HOME"], str(self.root / "shared-state"))
+            self.assertEqual(child["XDG_RUNTIME_DIR"], runtime)
+            self.assertEqual(backend.os.environ["HOME"], str(service))
+            self.assertEqual(backend.os.environ["XDG_CONFIG_HOME"], str(service / ".config"))
+            self.assertEqual(plugin._version(), "0.1.0-deck.7")
+            umask.assert_called_once_with(0o077)
+
+    async def test_invalid_plugin_directory_refuses_execution(self):
+        ordinary_file = self.root / "not-a-directory"
+        ordinary_file.write_text("fixture")
+        for directory in ["relative/plugins", str(self.root / "missing"), str(ordinary_file), "/bad\npath"]:
+            with self.subTest(directory=directory), patch.dict(backend.os.environ, {"DECKY_PLUGIN_DIR": directory}), patch.object(
+                    backend.asyncio, "create_subprocess_exec") as spawn:
+                result = await backend.Plugin().status()
+                self.assertFalse(result["ok"])
+                self.assertFalse(result["output_known"])
+                spawn.assert_not_called()
+
+    async def test_invalid_player_home_refuses_execution(self):
+        for home in ["relative", str(self.root / "missing"), "\nunsafe"]:
+            with self.subTest(home=home), patch.dict(backend.os.environ, {"DECKY_USER_HOME": home}), patch.object(
+                    backend.os, "access", return_value=True), patch.object(
+                    backend.asyncio, "create_subprocess_exec") as spawn:
+                result = await backend.Plugin().status()
+                self.assertFalse(result["output_known"])
+                spawn.assert_not_called()
+
+    def test_missing_variables_fall_back_to_bundle_and_preserve_standalone_environment(self):
+        plugin = backend.Plugin()
+        with patch.dict(backend.os.environ, {"HOME": str(self.root), "XDG_CONFIG_HOME": str(self.root / "config")}):
+            self.assertEqual(plugin._plugin_root(), Path(backend.__file__).resolve().parent)
+            self.assertEqual(plugin._child_environment()["XDG_CONFIG_HOME"], str(self.root / "config"))
+            expected = json.loads((plugin._plugin_root() / "package.json").read_text())["version"]
+            self.assertEqual(plugin._version(), expected)
+
+    def test_old_loader_python_interface_is_feature_detected_without_optional_uid(self):
+        module = SimpleNamespace(DECKY_USER_HOME=str(self.root), DECKY_USER="deck",
+                                 DECKY_PLUGIN_DIR=str(self.root), DECKY_PLUGIN_VERSION="1.2.3")
+        with patch.dict("sys.modules", {"decky": module}):
+            plugin = backend.Plugin()
+            self.assertEqual(plugin._plugin_root(), self.root)
+            self.assertEqual(plugin._version(), "1.2.3")
+            self.assertEqual(plugin._child_environment()["HOME"], str(self.root))
+            self.assertEqual(plugin._child_environment()["USER"], "deck")
+
+    def test_older_python_interface_empty_defaults_use_standalone_fallback(self):
+        module = SimpleNamespace(DECKY_PLUGIN_DIR="", DECKY_USER_HOME="", DECKY_PLUGIN_VERSION="")
+        with patch.dict("sys.modules", {"decky": module}), patch.dict(backend.os.environ, {"HOME": str(self.root)}):
+            plugin = backend.Plugin()
+            self.assertEqual(plugin._plugin_root(), Path(backend.__file__).resolve().parent)
+            self.assertEqual(plugin._child_environment()["HOME"], str(self.root))
+            self.assertNotEqual(plugin._version(), "unknown")
+
+    def test_invalid_version_falls_back_and_metadata_is_bounded(self):
+        (self.root / "package.json").write_text('{"version":"1.2.3"}')
+        values = {"DECKY_PLUGIN_DIR": str(self.root), "DECKY_PLUGIN_VERSION": "bad\nversion",
+                  "DECKY_VERSION": "v3.3.1", "DECKY_PLUGIN_NAME": "OBSGod",
+                  "DECKY_PLUGIN_AUTHOR": "unsafe\nauthor", "UNRELATED_SECRET": "not-for-diagnostics"}
+        with patch.dict(backend.os.environ, values):
+            plugin = backend.Plugin()
+            self.assertEqual(plugin._version(), "1.2.3")
+            self.assertEqual(plugin._loader_metadata(), {"version": "v3.3.1", "plugin_name": "OBSGod"})
+            decorated = plugin._decorate(IDLE)
+            self.assertNotIn("not-for-diagnostics", json.dumps(decorated))
+        with patch.dict(backend.os.environ, {"DECKY_PLUGIN_AUTHOR": "x" * 81}):
+            self.assertNotIn("plugin_author", backend.Plugin()._loader_metadata())
+
+    async def test_update_inventory_uses_same_explicit_player_context(self):
+        home = self.root / "player"
+        home.mkdir()
+        current_versions = Mock(return_value={"app": "1.2.3", "plugin": "1.2.3",
+                                             "updater": "1.2.3", "mismatch": False})
+        module = SimpleNamespace(current_versions=current_versions,
+                                 check_updates=lambda *_args, **_kwargs: {"ok": True, "message": "No update"})
+        fake_spec = SimpleNamespace(loader=SimpleNamespace(exec_module=Mock()))
+        values = {"HOME": str(self.root), "DECKY_USER_HOME": str(home),
+                  "DECKY_PLUGIN_DIR": str(self.root), "DECKY_PLUGIN_VERSION": "1.2.3"}
+        with patch.dict(backend.os.environ, values), patch.object(
+                backend.importlib.util, "spec_from_file_location", return_value=fake_spec) as load, patch.object(
+                backend.importlib.util, "module_from_spec", return_value=module):
+            result = await backend.Plugin().check_for_updates()
+            self.assertTrue(result["ok"])
+            self.assertEqual(current_versions.call_args.kwargs["environ"]["HOME"], str(home))
+            self.assertEqual(backend.os.environ["HOME"], str(self.root))
+            self.assertEqual(load.call_args.args[1], self.root / "releases.py")
 
 
 if __name__ == "__main__":
