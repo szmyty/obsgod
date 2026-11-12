@@ -334,6 +334,7 @@ class UnifiedInstallerSafety(unittest.TestCase):
 
 class DependencyCompatibility(unittest.TestCase):
     OBS_REF = "app/com.obsproject.Studio/x86_64/stable"
+    LIST_REF = "com.obsproject.Studio/x86_64/stable"
 
     @staticmethod
     def result(stdout="", code=0):
@@ -341,7 +342,7 @@ class DependencyCompatibility(unittest.TestCase):
 
     def responses(self, version="33.0.1"):
         return [self.result(), self.result(), self.result(self.OBS_REF + "\n"),
-                self.result(self.OBS_REF + "\t" + version + "\n")]
+                self.result(self.LIST_REF + "\t" + version + "\n")]
 
     def test_installed_modern_obs_does_not_reinstall_or_change_remotes(self):
         with patch.object(install.shutil, "which", return_value="/usr/bin/flatpak"), patch.object(install.subprocess, "run", side_effect=self.responses()) as run:
@@ -362,6 +363,11 @@ class DependencyCompatibility(unittest.TestCase):
         for version in ["28.0.0", "33.0.1", "33.0.1-rc1"]:
             with self.subTest(version=version), patch.object(install.subprocess, "run", side_effect=self.responses(version)[2:]):
                 self.assertEqual(install.installed_obs_version(), version)
+
+    def test_list_ref_with_optional_app_prefix_is_normalized(self):
+        for listed in [self.LIST_REF, self.OBS_REF]:
+            with self.subTest(listed=listed), patch.object(install.subprocess, "run", side_effect=[self.result(self.OBS_REF), self.result(listed + "\t33.0.1\n")]):
+                self.assertEqual(install.installed_obs_version(), "33.0.1")
 
     def test_query_failures_are_not_reported_as_old_obs(self):
         cases = [

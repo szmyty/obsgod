@@ -16,6 +16,10 @@ tab-separated. Matching the exact ref avoids another application's version,
 another branch, or a Discover system installation being mistaken for the OBS
 instance launched with `--user`.
 
+The info command includes the `app/` kind prefix; the list ref column normally
+omits it. Normalize only that prefix before comparing the full application,
+architecture and branch; do not compare only the application name.
+
 OBS 33.0.1 and the OBS 28 boundary are accepted. A valid version below 28 gets an
 accurate compatibility error including that version. Query failures and absent,
 empty, malformed or duplicated metadata get a version-detection error. The

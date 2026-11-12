@@ -220,7 +220,9 @@ def installed_obs_version():
     versions = []
     for line in result.stdout.splitlines():
         ref, separator, version = line.partition("\t")
-        if ref.strip() == obs_ref:
+        # `info --show-ref` includes app/; `list`'s ref column omits that
+        # kind prefix. Preserve the exact application, architecture and branch.
+        if ref.strip().removeprefix("app/") == obs_ref.removeprefix("app/"):
             versions.append(version.strip() if separator else "")
     if len(versions) != 1 or not re.fullmatch(r"[0-9]+(?:\.[0-9]+)*(?:[-+][A-Za-z0-9.-]+)?", versions[0]):
         raise RuntimeError("OBS Studio is installed, but Flatpak did not report one usable version for its active user ref. Check the OBS Studio entry in Discover and retry.")

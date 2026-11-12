@@ -162,7 +162,7 @@ if args in [['info', '--user', obs], ['info', '--user', obs + '.Plugin.Gstreamer
 elif args == ['info', '--user', '--show-ref', obs]:
     print(ref)
 elif args == ['list', '--user', '--app', '--columns=ref,version']:
-    print(ref + '\\t33.0.1')
+    print(ref.removeprefix('app/') + '\\t33.0.1')
 else:
     print('Unsupported Flatpak fixture command', file=sys.stderr)
     raise SystemExit(2)
