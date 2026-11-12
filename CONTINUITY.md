@@ -1,5 +1,26 @@
 # Current work
 
+Prepared preview6, final exact qualified source
+`33dcd8476606a1ed7a3bbca06e81fb156dfebcc7`, draftPR34 (base33, base32).
+All available local checks passed FRESH:94Go including subtests(64top-level),
+70Python,9Node,static/security/frontend/repro packages, actual archive browsers,
+pinnedDecky/default installer/Desktop updater fixtures, real native OBS audio/
+media/lifecycle,13app-filter protocol cases and actual OBS continuous game/idle/
+RTMP transitions with decoded video+audio. One optional existing-OBS test skipped;
+six cross-builds compiled only. Read [the criterion/evidence packet](docs/audio-capture-upgrade.md).
+Immutable review artifacts: `71143dce72654bae2ad76ebe382dd810990c2c85` on
+`artifacts/deck6-audio-game`; never merge that orphan branch into source. Full
+runtime SHA256 `23cc2c484b7524756a3b632bf8a8e7231ac7c515c06a08183422ed91b7e82650`.
+Actual Deck audio/Flatpak load/game-only privacy/transitions/performance/Kick and
+required review/CI remain gates. Fresh CI jobs executed zero steps due to account
+billing lock. No new merge/release/tag/deploy/issue closure. Master still4a8a38a.
+Historical failed fixture runs c392/d80 are retained separately, not relabeled.
+All seven public downloads, internal payloads, component versions, native
+library/preferred source/licenses and the Desktop install command were independently
+verified after upload; see docs/evidence/deck6-public-download.json. Later evidence-only
+commits must not change the exact packaged revision above.
+
+
 Active owner-authorized upgrade: after 5.2 instructions the owner reports local
 video recording and live stream video WORK, but audio is silent. Exact installed
 versions/routes and audio/microphone media evidence remain missing. They request
