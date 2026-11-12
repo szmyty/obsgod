@@ -1,5 +1,36 @@
 # Current work
 
+## Milestone 2 source merged; Milestone 3 is proposed
+
+The owner explicitly requested merging all six prepared PRs and listing the
+next milestone. PRs #52 -> #53 -> #54 -> #55 -> #56 -> #57 are now merged normally
+into default `master`; final merge is `df89e8bf3038b43c181e32e09f91e85c8a97e9e2`.
+The merged tree exactly equals reviewed head
+`48712a1687b0ac907090a6fcea8b6c22c38e6043`. Fresh post-merge Go race checks
+passed 110 top-level/206 events (one optional existing-OBS skip), 111 Python and
+16 Node tests. No protection/admin bypass was used: branch protection and required
+status enforcement were off, rulesets empty. Fresh CI still ran zero steps due
+to the account billing lock. Owner source-merge approval does not waive target,
+CI, issue-closure or publication requirements.
+
+Working checkout returns to `master`; merged source branches are removed only
+after exact-head and reachability verification. The separate immutable review
+artifact history remains on `artifacts/m2-deck7-review` and must not be merged.
+Candidate7 remains tied to exact source
+`0eac1ed9746e6a5999a196777bde5455222f46eb` and unchanged artifacts/evidence below;
+merging/evidence-only commits do not qualify a newly rebuilt package. No release,
+deployment, Store submission, transfer, payment or issue closure occurred.
+
+Milestone3/parent#46 is still proposed, not implementation-authorized by this
+merge/list request. Recommended first feature batch: #47 easy stream/profile
+editor + #24 rich custom idle/BRB media. Then #48 audio/runtime resilience,
+#49 recording/replay/clips, #50 measured stream health and #51 validation of one
+optional paid offering. Broader #7/#9/#12/#13/#14 ledgers remain separately
+bounded; do not create a StreamGod repository without the owner's boundary
+decision and approval. M2 real Deck/provider/adoption, CI, final identity/assets
+and release/site decisions remain open. Crypto activation is intentionally
+deferred and is not a prerequisite to the prepared UI.
+
 ## Milestone 2 review candidate: all available checks passed
 
 Candidate `0.1.0-deck.7` is locally qualified at exact clean source

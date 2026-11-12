@@ -1,5 +1,19 @@
 # Milestone 2 implementation
 
+## Source merge status
+
+At the owner's explicit request, PRs #52 -> #53 -> #54 -> #55 -> #56 -> #57
+merged into default `master`, final merge
+`df89e8bf3038b43c181e32e09f91e85c8a97e9e2`. Its complete tree equals reviewed
+head `48712a1687b0ac907090a6fcea8b6c22c38e6043`. Fresh merged-tree Go race checks
+passed 110 top-level/206 events (one optional skip), 111 Python and 16 Node tests. These
+are additional merge checks; candidate7's complete qualification remains at
+its recorded source0eac1ed and immutable bytes. No release/deployment occurred.
+
+Source approval/merge does not close original acceptance. Actual Deck/provider/
+adoption, CI and final owner identity/publication gates remain. The older draft
+checkpoint records below describe the preparation history.
+
 The owner authorized implementation after reviewing the roadmap and support
 design. **Decky Stream** is the working display name. The organization and final
 brand remain undecided. Read [the roadmap](../ROADMAP.md) and live parent

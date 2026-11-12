@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "owner_authorized_source_merges": true,
+  "order": [
+    52,
+    53,
+    54,
+    55,
+    56,
+    57
+  ],
+  "pull_requests": [
+    {
+      "number": 52,
+      "url": "https://github.com/szmyty/obsgod/pull/52",
+      "head": "6fc7d0fb95eb1f93b256089af0301bea9fffc5f5",
+      "merge_commit": "8a036fcf41cf177b1b1f0c227f8936c15a4c9830"
+    },
+    {
+      "number": 53,
+      "url": "https://github.com/szmyty/obsgod/pull/53",
+      "head": "2628ef5925bd6d6e5aa3eb31d4bf6f090a62ebeb",
+      "merge_commit": "219aee0613126fa48cff89808c517854a917fc3f"
+    },
+    {
+      "number": 54,
+      "url": "https://github.com/szmyty/obsgod/pull/54",
+      "head": "903863095d53e638572f4b38e8a4553220f293a7",
+      "merge_commit": "6de71cb1c054a5bee9ea581a75013e03c27978b7"
+    },
+    {
+      "number": 55,
+      "url": "https://github.com/szmyty/obsgod/pull/55",
+      "head": "a778b5c4d38a62de942b4c6b82f8ca8f7fcfadf0",
+      "merge_commit": "7f97bf13b27d7f02c3a0b99226f24ca80c8ed0f9"
+    },
+    {
+      "number": 56,
+      "url": "https://github.com/szmyty/obsgod/pull/56",
+      "head": "fa74359eb06e90d470b3418f31b06e33ad400468",
+      "merge_commit": "7d9f00a4ef9b68eb6be39bb032ff7d8ddac74afc"
+    },
+    {
+      "number": 57,
+      "url": "https://github.com/szmyty/obsgod/pull/57",
+      "head": "48712a1687b0ac907090a6fcea8b6c22c38e6043",
+      "merge_commit": "df89e8bf3038b43c181e32e09f91e85c8a97e9e2"
+    }
+  ],
+  "merged_revision": "df89e8bf3038b43c181e32e09f91e85c8a97e9e2",
+  "tree_identical_to_reviewed_head": "48712a1687b0ac907090a6fcea8b6c22c38e6043",
+  "qualified_candidate_source": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+  "post_merge_checks": [
+    {
+      "command": "go test -race -json -count=1 ./...",
+      "outcome": "passed",
+      "top_level_passed": 110,
+      "pass_events": 206,
+      "skips": [
+        {
+          "package": "github.com/szmyty/obsgod/pkg/automation",
+          "test": "TestRealOBSReadOnly"
+        }
+      ]
+    },
+    {
+      "command": "python3 -m unittest discover -s steamdeck/tests -p 'test_*.py' -v",
+      "outcome": "passed",
+      "tests_passed": 111
+    },
+    {
+      "command": "npm --prefix steamdeck/decky test",
+      "outcome": "passed",
+      "tests_passed": 16
+    }
+  ],
+  "ci": "Fresh inspected candidate job executed zero steps because of the GitHub account billing lock",
+  "branch_rules": "protected=false, no required status/review rules, rulesets=[]; no admin bypass or force merge",
+  "merged_source_branches_deleted": [
+    {
+      "branch": "codex/m2-product-foundation",
+      "exact_head": "6fc7d0fb95eb1f93b256089af0301bea9fffc5f5",
+      "merged_pr": 52,
+      "merge_commit": "8a036fcf41cf177b1b1f0c227f8936c15a4c9830",
+      "source_reachable_from_primary": true,
+      "remote_deleted": true
+    },
+    {
+      "branch": "codex/m2-support-panel",
+      "exact_head": "2628ef5925bd6d6e5aa3eb31d4bf6f090a62ebeb",
+      "merged_pr": 53,
+      "merge_commit": "219aee0613126fa48cff89808c517854a917fc3f",
+      "source_reachable_from_primary": true,
+      "remote_deleted": true
+    },
+    {
+      "branch": "codex/m2-installation-lifecycle",
+      "exact_head": "903863095d53e638572f4b38e8a4553220f293a7",
+      "merged_pr": 54,
+      "merge_commit": "6de71cb1c054a5bee9ea581a75013e03c27978b7",
+      "source_reachable_from_primary": true,
+      "remote_deleted": true
+    },
+    {
+      "branch": "codex/m2-destinations-control",
+      "exact_head": "a778b5c4d38a62de942b4c6b82f8ca8f7fcfadf0",
+      "merged_pr": 55,
+      "merge_commit": "7f97bf13b27d7f02c3a0b99226f24ca80c8ed0f9",
+      "source_reachable_from_primary": true,
+      "remote_deleted": true
+    },
+    {
+      "branch": "codex/m2-cli-workflows",
+      "exact_head": "fa74359eb06e90d470b3418f31b06e33ad400468",
+      "merged_pr": 56,
+      "merge_commit": "7d9f00a4ef9b68eb6be39bb032ff7d8ddac74afc",
+      "source_reachable_from_primary": true,
+      "remote_deleted": true
+    },
+    {
+      "branch": "codex/m2-launch-preparation",
+      "exact_head": "48712a1687b0ac907090a6fcea8b6c22c38e6043",
+      "merged_pr": 57,
+      "merge_commit": "df89e8bf3038b43c181e32e09f91e85c8a97e9e2",
+      "source_reachable_from_primary": true,
+      "remote_deleted": true
+    }
+  ],
+  "artifact_commit_preserved": "e202f34070ef6174fbf86b75f9cc87ace74d6a14",
+  "release_published": false,
+  "site_deployed": false,
+  "issues_closed": false,
+  "next_milestone_parent": 46,
+  "recommended_first_feature_batch": [
+    47,
+    24
+  ],
+  "remaining_m2_acceptance": "Real Deck/provider/adoption, CI, final identity/assets, release/site decisions remain explicit; optional wallet activation is deferred."
+}

@@ -6,6 +6,11 @@ source `0eac1ed9746e6a5999a196777bde5455222f46eb`. Required target, CI, owner
 review and publication gates below remain open. No release is published.
 Preview6 receipts qualify only preview6's recorded source.
 
+The owner subsequently approved source merges: PRs #52–#57 are merged in order,
+final merge `df89e8bf3038b43c181e32e09f91e85c8a97e9e2`. The merged tree equals
+reviewed48712a1, with fresh Go/Python/Node checks passed. This approval does not
+publish a release/site or close missing target, CI or final-owner acceptance.
+
 ## Exact review candidate
 
 | Artifact | SHA256 |

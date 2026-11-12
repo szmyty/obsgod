@@ -1,7 +1,7 @@
 # Product roadmap
 
-Updated 2026-11-12. **Milestone 2 implementation is authorized and underway;
-Milestone 3 remains proposed.**
+Updated 2026-11-12. **Milestone 2 source PRs #52–#57 are merged; target/CI and
+owner publication acceptance remain open. Milestone 3 remains proposed.**
 The organization, final product name, domain and payment destination remain TBD.
 **Decky Stream** is the owner-selected working display name. Final identity and
 name/mark review remain pending. The goal is
