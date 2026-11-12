@@ -1,0 +1,450 @@
+{
+  "schema_version": 1,
+  "scope": "Independent public delivery audit; no installer, OBS, broadcast, wallet, payment, release or deployment executed.",
+  "artifact_commit": "e202f34070ef6174fbf86b75f9cc87ace74d6a14",
+  "artifact_branch": "artifacts/m2-deck7-review",
+  "qualified_source": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+  "candidate": "0.1.0-deck.7",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "checks": [
+    {
+      "name": "public_files_and_review_checksums",
+      "status": "passed",
+      "count": 33,
+      "checksum_entries": 32,
+      "checksum_file_stage_sha256": "4305f7c0702ca18cc7badbda07d96f35da61327bfbc1641100cb48b3adc0129b",
+      "all_fresh_https_requests": true,
+      "explicit_authorization_header": false
+    },
+    {
+      "name": "runtime_and_updater_public_checksum_lists",
+      "status": "passed",
+      "runtime_entries": 3,
+      "updater_entries": 1
+    },
+    {
+      "name": "runtime_manifest_and_internal_payload",
+      "status": "passed",
+      "files_verified": 24,
+      "version": "0.1.0-deck.7",
+      "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "safe_regular_single_root": true,
+      "embedded_plugin_matches_public_zip": true
+    },
+    {
+      "name": "updater_manifest_and_internal_payload",
+      "status": "passed",
+      "files_verified": 10,
+      "version": "0.1.0-deck.7",
+      "revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "same_helpers_as_runtime": true
+    },
+    {
+      "name": "plugin_metadata_helpers_native_payload_and_notices",
+      "status": "passed",
+      "plugin_files": 23,
+      "version": "0.1.0-deck.7",
+      "loader_identity": "OBSGod",
+      "root_privilege_flags": false,
+      "local_qr_license_copies_identical": true,
+      "native_library_sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+      "cli_sha256": "525e533ae4ed806559cdffffd865f1f01582cbdd3a746c73a50a0c01912dea6f"
+    },
+    {
+      "name": "exact_qualified_source_helpers_and_preferred_capture_source",
+      "status": "passed",
+      "qualified_revision": "0eac1ed9746e6a5999a196777bde5455222f46eb",
+      "source_files_verified": 25,
+      "sha256": {
+        "steamdeck/setup.py": "1faaf83c014903e1e164c9b1e3182d5fda4aa7f412220b8f219ef4be208d8a74",
+        "steamdeck/bridge.py": "e3d292b7c59e031aef16a1b16d63613cccb1dcca3a7cbddd64af8afead40f857",
+        "steamdeck/setup.html": "5b87caa8f299455820f0e21208536ff5bf8c88b823381bfc497d41a38ff1bf25",
+        "steamdeck/setup.js": "683a09a24b021ac74151e23d4986dcc043626d26ea182cfbbb27e7652bf68fd3",
+        "steamdeck/setup.css": "d5e04282f8283801ac10367af9a41eccde26f299852f94ca23b74940cbdf6850",
+        "steamdeck/uninstall.py": "35ba3ac96d945c957293f7fb64311e2ccb7b7f9137dc2a7ca5732143fe9e651f",
+        "steamdeck/install.py": "f363924fb9d1d91b37fb6534a5261b79d6c0c5d1cf6235966ce256c7a3255a04",
+        "steamdeck/decky.py": "96c3aa094fa8a44939a870cbba45f62296ce9314a1dfdf6e68e03347814e4816",
+        "steamdeck/update.py": "17aee9e4e957e1cbdaf56cbf8b5fb10a57b02457537a13722d4da6a07d05e14a",
+        "steamdeck/releases.py": "ee3a107c962a9babf0942013d13f6bad453aa02899fb9aa7c86f1a69905ac8c8",
+        "steamdeck/paths.py": "436f589b4130ac00bf60dcf5773b30caa56c8cea437fe5715c1af1f92a405f44",
+        "steamdeck/product.py": "ed28c12ff8587b1d0d51a4e6472caef97430cb001c0467c09f74ca0e5cf68401",
+        "steamdeck/Install OBSGod.desktop": "945aa356f1651cf93ff8b5acadd64aec2abdf18614b2fc86e024d3d52a0f561d",
+        "steamdeck/Update OBSGod.desktop": "07c1cab1e05c83ac3cce85a03b00ad8d8ed1955ce60bfc9d7fee985a18ef30b7",
+        "steamdeck/Update OBSGod.sh": "b7f587b83634a2c95ca03c2b95a80d76d9e261a77c24b5d88f5d329888749089",
+        "steamdeck/Uninstall OBSGod.desktop": "c357d1ff7583d3cdd09bf5b223e0d5f1d29ef8ec6ea2041e65a336de0c27423c",
+        "steamdeck/capture/gstobsgodcapture.c": "1cefd90dc7a306ac993366fa0e18573202e6ba4a13590999065c3c80018a6c5d",
+        "steamdeck/capture/Makefile": "c2acf2286e3c5c907b591e5fcd17e4adebb245995d1f5bae98af8ef4dcdf8c7d",
+        "steamdeck/capture/README.md": "9db32e042bf354460974f29e4726b4a26109e3968c171b8662cf3ec329d3319c",
+        "steamdeck/capture/LICENSE": "258b73263e16be217d5b8120e700feceb0957e4573ca1f06d1a0885eb35ce01e",
+        "steamdeck/capture/THIRD_PARTY_NOTICES.md": "e279892a8749fa94c2a3f1fa402cd5580815e874f42b343b65c265086c42cd1d",
+        "steamdeck/capture/build.Dockerfile": "2a5907d46697011510482aed251209f83a79a2b0aa3a0cea1ced9cd3b8b74905"
+      }
+    },
+    {
+      "name": "native_qualified_binary_and_artifact_binding",
+      "status": "passed",
+      "actual_native_cli_sha256": "525e533ae4ed806559cdffffd865f1f01582cbdd3a746c73a50a0c01912dea6f",
+      "actual_native_capture_sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+      "reproducibility_receipt_matches_public_downloads": true
+    },
+    {
+      "name": "desktop_install_command_review",
+      "status": "passed",
+      "command_file": "/workspace/.obsgod-tools/m2/final/install-candidate7.sh",
+      "sha256": "7f54e80aa44ccaee0563e17b6bf76ac6034cb3bba285a3832bba04dc383efae4",
+      "bash_n": "passed",
+      "exact_immutable_url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz",
+      "exact_runtime_sha256": "4205e4725fd432ea99a59fe8c1a78f0f7b29c7ddbd6c79e3cf4afd8c2c67c9c3",
+      "verified_order": [
+        "mktemp",
+        "HTTPS-only curl",
+        "sha256sum --check",
+        "extract into temporary staging",
+        "python3 extracted install.py"
+      ],
+      "installer_executed": false,
+      "destructive_cleanup": false
+    }
+  ],
+  "files": [
+    {
+      "name": "DRAFT-RELEASE-NOTES.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/DRAFT-RELEASE-NOTES.md",
+      "bytes": 4110,
+      "sha256": "bf17fada2f8582cb92f0f60dcdf298eccdda5f8b1b724fb4eb3be96d108cbda9",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.674
+    },
+    {
+      "name": "IDENTITY-MIGRATION.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/IDENTITY-MIGRATION.md",
+      "bytes": 3327,
+      "sha256": "f513a21ad259968a2a2570f8a170e629b2fe5f8ccff54b9a931699cb069cb425",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.821
+    },
+    {
+      "name": "LICENSE",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/LICENSE",
+      "bytes": 1079,
+      "sha256": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.67
+    },
+    {
+      "name": "OWNER-PACKET.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/OWNER-PACKET.md",
+      "bytes": 8979,
+      "sha256": "b19237b986eece8b4d83cb948282850365144490cc28159addb2f8d8053ca191",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 1.036
+    },
+    {
+      "name": "README.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/README.md",
+      "bytes": 1853,
+      "sha256": "c0257644325fe90ef900e525af07cea957b9fa8d151665e6f19ea48b21df9144",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.7
+    },
+    {
+      "name": "REVIEW-SHA256SUMS",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/REVIEW-SHA256SUMS",
+      "bytes": 2773,
+      "sha256": "4305f7c0702ca18cc7badbda07d96f35da61327bfbc1641100cb48b3adc0129b",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 1.001
+    },
+    {
+      "name": "SECURITY-REVIEW.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/SECURITY-REVIEW.md",
+      "bytes": 9392,
+      "sha256": "8da5535f2a626e6a509942faf166de8969f40b430585801422e01a6e2925ce2e",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.324
+    },
+    {
+      "name": "SECURITY.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/SECURITY.md",
+      "bytes": 1407,
+      "sha256": "7137cc8d47d22ea8501e34cf80cf313b7cbc16676a4a970ecf66df09cd49de5b",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.672
+    },
+    {
+      "name": "SHA256SUMS",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/SHA256SUMS",
+      "bytes": 273,
+      "sha256": "9134dd9ed51077eba457b784bae73b58442e246a12d255e7cbbf9e1512e7cb68",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.715
+    },
+    {
+      "name": "STEAM-DECK.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/STEAM-DECK.md",
+      "bytes": 16625,
+      "sha256": "3a1099521ac834eb0950a87d3bc9e22900263e416b687fea49f4f568c3433c34",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.517
+    },
+    {
+      "name": "SUPPORT.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/SUPPORT.md",
+      "bytes": 2311,
+      "sha256": "25ec86159188e028783ecde6d265f01c49f729cd2cd646ace5fe0227bf1c3381",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.634
+    },
+    {
+      "name": "UPDATER-SHA256SUMS",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/UPDATER-SHA256SUMS",
+      "bytes": 119,
+      "sha256": "5b643c1ec349cc1062ac760beed3f394b4da1442fc0ec69261deb2e9b65fb5d2",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.636
+    },
+    {
+      "name": "browser-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/browser-matrix.json",
+      "bytes": 6272,
+      "sha256": "79c085160699a2ab1b683b9ac1c8a1cb881cbdd401ffb2c182d26d4af870ff5c",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.633
+    },
+    {
+      "name": "browser-protocol-summary.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/browser-protocol-summary.json",
+      "bytes": 1419,
+      "sha256": "6f18f98d93e379f16f8555bac044863b3ef77e89a45e06d267f5445e51f7c2ed",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 1.034
+    },
+    {
+      "name": "ci-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/ci-matrix.json",
+      "bytes": 8257,
+      "sha256": "6fc13321e428777bf305dee2820024b9a517ced17632f1bace713eea621a8d3d",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.299
+    },
+    {
+      "name": "cli-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/cli-matrix.json",
+      "bytes": 2249,
+      "sha256": "e511fdc4f4f461dc824bc6b808044af7d5271bd87478feb8f48ab47bf82746f2",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.372
+    },
+    {
+      "name": "criterion-ledger.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/criterion-ledger.json",
+      "bytes": 484609,
+      "sha256": "5a8201565ccf24aae671e0d1c0c9e798791c31582e0e2bc33bde049d44ed94a6",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.815
+    },
+    {
+      "name": "decky-stream-site-preview.zip",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/decky-stream-site-preview.zip",
+      "bytes": 25385,
+      "sha256": "6c55fa4ceb1ee757b2bfafc853bd8c7d531925e132aca7c70abe66e2313ba9fa",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.653
+    },
+    {
+      "name": "decky-updater-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/decky-updater-matrix.json",
+      "bytes": 5913,
+      "sha256": "26863dfbd590f3a71a0f73370b2afdaa6e1d90a2be8742c7ddc81ae5304c427c",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.341
+    },
+    {
+      "name": "frontend-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/frontend-matrix.json",
+      "bytes": 2028,
+      "sha256": "d6172e4d63ccb7b5423f84f576d30e9d61b661126074cd5ad5fb1384d0b3e453",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.346
+    },
+    {
+      "name": "go-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/go-matrix.json",
+      "bytes": 8469,
+      "sha256": "eac34f75c0373df8c50097da8afdef7da8a26efaddaaf46a11f3c644cc1e0d8f",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.313
+    },
+    {
+      "name": "manifest.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/manifest.json",
+      "bytes": 2390,
+      "sha256": "dfb184468e1aca9f9316a16f3530d0daac2cc75bdafb880472489a640451496a",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.305
+    },
+    {
+      "name": "native-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/native-matrix.json",
+      "bytes": 29222,
+      "sha256": "4815ed49f7b1fd9e6619fce37ac794ae2f6f227f2bfc55b89775a24bb8ce8311",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.432
+    },
+    {
+      "name": "native-result-summary.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/native-result-summary.json",
+      "bytes": 4125,
+      "sha256": "a79578ebec66b22b9e249cccd984a2916c488cd0fdea57d027d798930a348124",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.36
+    },
+    {
+      "name": "obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz",
+      "bytes": 11369529,
+      "sha256": "4205e4725fd432ea99a59fe8c1a78f0f7b29c7ddbd6c79e3cf4afd8c2c67c9c3",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 3.171
+    },
+    {
+      "name": "obsgod-decky.zip",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/obsgod-decky.zip",
+      "bytes": 4197393,
+      "sha256": "0a4d8afefa0f149cb053cddc988fa0cc46992602b73b73b581deab4414abf5c4",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 2.065
+    },
+    {
+      "name": "obsgod-one-click-update_0.1.0-deck.7_linux_amd64.zip",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/obsgod-one-click-update_0.1.0-deck.7_linux_amd64.zip",
+      "bytes": 3073420,
+      "sha256": "5227e541e3c07cc9214e67f4400dda14065520789ebdecfdeca15b6c4152c68d",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 1.869
+    },
+    {
+      "name": "package-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/package-matrix.json",
+      "bytes": 17784,
+      "sha256": "2a1219bbfc8a78aee55c74b60cf050ad34da0a4cebd5a2f96b88a4ebdbeadfe4",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.43
+    },
+    {
+      "name": "python-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/python-matrix.json",
+      "bytes": 663,
+      "sha256": "20c38149cdcf2654db4d9058d98b66483aa0f8c3c0e6d3d20767080aecda1bba",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.314
+    },
+    {
+      "name": "qualification.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/qualification.json",
+      "bytes": 111651,
+      "sha256": "41cc9d13d483a7996deac1a031b14e7ffe7d7af08302208cf3aaf53d7191a838",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.878
+    },
+    {
+      "name": "security-review-evidence.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/security-review-evidence.json",
+      "bytes": 8270,
+      "sha256": "888c9d65fdd3edc40f3bfdafd699ce551cdfaa18b730aaa72d5260a8eec06379",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.306
+    },
+    {
+      "name": "site-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/site-matrix.json",
+      "bytes": 13701,
+      "sha256": "beb6a303e54d1e8026605ca59465b2fb2e9f0ad39a67ad2ac556a13f24f43dcd",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.342
+    },
+    {
+      "name": "updater-manifest.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/e202f34070ef6174fbf86b75f9cc87ace74d6a14/updater-manifest.json",
+      "bytes": 1145,
+      "sha256": "e809fca6a6891e538467c26cbb72af99aeb42809448e9d8a0aef61e6197da86f",
+      "status": "passed",
+      "stage_bytes_equal": true,
+      "http_status": 200,
+      "seconds": 0.338
+    }
+  ],
+  "status": "passed",
+  "release_published": false,
+  "site_deployed": false,
+  "outcome": "passed",
+  "file_count": 33,
+  "every_stage_byte_equal": true,
+  "every_review_checksum_verified": true,
+  "installer_executed": false
+}

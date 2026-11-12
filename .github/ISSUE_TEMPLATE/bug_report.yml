@@ -1,0 +1,35 @@
+name: Steam Deck bug
+description: Report a reproducible preview problem without credentials
+body:
+  - type: markdown
+    attributes:
+      value: "Never include stream keys, passwords, private setup links, wallet seeds or raw OBS profiles/logs. Use SECURITY.md for sensitive security reports."
+  - type: textarea
+    id: versions
+    attributes:
+      label: Exact versions and platform
+      description: App, plugin, updater, SteamOS channel/version, Decky, OBS and Deck model.
+    validations:
+      required: true
+  - type: dropdown
+    id: session
+    attributes:
+      label: Session
+      options:
+        - Gaming Mode
+        - Desktop Mode
+        - Other / not sure
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps, expected result and actual result
+      description: Include the action, video mode, audio route and destination name only. Leave out the server URL and key.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Local clip, separate viewer and filtered diagnostics
+      description: Say which checks passed, failed or were unrun. Paste only reviewed Diagnostic console output.

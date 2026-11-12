@@ -1,0 +1,19 @@
+<header class="doc-header"><p class="eyebrow">Sensible defaults, explicit control</p><h1>Keep configuration predictable.</h1><p class="lead">The working display name is @@DISPLAY_NAME@@. Existing CLI, storage and plugin identities remain compatible.</p></header><div class="prose">
+<section><h2>Two configuration purposes</h2><p><strong>Managed Deck setup</strong> stores stream/capture settings in <code>$XDG_CONFIG_HOME/obsgod/deck.json</code> and private credentials in <code>secrets.json</code>. The default config root is <code>~/.config</code>. Desktop setup and the Decky adapter share this store.</p>
+<p><strong>The reusable OBS CLI</strong> uses a separate versioned <code>obsgod/config.json</code> connection file. Milestone 2 precedence is <strong>flags → OBSGOD_* environment variables → legacy OBS_* aliases → selected connection profile → file connection → defaults</strong>. A connection profile is not an OBS scene/profile selection.</p>
+<pre><code>obsgod --help
+obsgod config path
+obsgod config show --json
+obsgod config validate --json
+obsgod config profiles --json
+obsgod version --json
+obsgod completion bash</code></pre>
+<p>Choose connection configuration with <code>--config</code> and <code>--connection-profile</code>. Use <code>--password-file</code> or a documented private secret reference instead of putting credentials in command history. Inspect the source-specific command help before scripting.</p></section>
+<section><h2>Directories and Decky context</h2><p>Config, data, state and cache follow their respective XDG roots. Temporary IPC uses <code>XDG_RUNTIME_DIR</code>. The private OBS Flatpak profile stays under its sandbox-accessible application tree; ordinary OBS profiles remain separate.</p>
+<p>The adapter uses Decky's supplied plugin/user context. Its persistent <code>DECKY_PLUGIN_RUNTIME_DIR</code> is <strong>not</strong> the temporary XDG runtime directory. Shared application settings do not move into a second, disconnected Decky-only credential store.</p>
+<p>Existing identifiers such as <code>obsgod</code>, <code>OBSGod</code> and <code>Videos/OBSGod</code> are intentional compatibility names while migration is reviewed.</p></section>
+<section id="capture"><h2>Capture modes and audio</h2><p><strong>Entire screen</strong> includes visible Steam menus and other screen content. <strong>Game only</strong> requests compatible app-filtered Gamescope capture; when no game can be verified, it uses the selected black or plain-text between-game screen. It never silently substitutes full-screen capture.</p>
+<p>Change capture mode only while streaming and recording are confirmed stopped. A game is not required for the OBS control connection. Game-only capture still depends on the compositor exposing and honoring the required app-filter format.</p>
+<p>Audio uses the selected system output monitor and may include other applications. Game-only video is <strong>not per-application audio isolation</strong>. Microphone is opt-in. Check an audible local clip and a live viewer; a moving meter alone is not proof.</p></section>
+<section><h2>Private connection recovery</h2><p>OBS 28+ bundles WebSocket support. Managed setup uses a local authenticated listener. Milestone 2 connection/password recovery is intended for stopped, confirmed output; it must not start a broadcast or alter ordinary OBS. Follow current setup prompts and source-specific diagnostics rather than exposing the listener publicly.</p></section>
+</div>

@@ -1,8 +1,10 @@
-# Proposed product roadmap
+# Product roadmap
 
-Updated 2026-11-12. **For owner review; future implementation is not yet approved.**
+Updated 2026-11-12. **Milestone 2 implementation is authorized and underway;
+Milestone 3 remains proposed.**
 The organization, final product name, domain and payment destination remain TBD.
-`decky-obs` is a naming candidate, not an adopted or cleared name. The goal is
+**Decky Stream** is the owner-selected working display name. Final identity and
+name/mark review remain pending. The goal is
 simple, reliable OBS streaming from Steam Deck, with a free local core and an
 optional way to support its development.
 
@@ -13,9 +15,10 @@ PRs [#32](https://github.com/szmyty/obsgod/pull/32),
 [#34](https://github.com/szmyty/obsgod/pull/34) merged in that order. Their combined
 source is on the default branch. All 22 nonprimary remote branches were archived
 at their exact tips and deleted; see [the archive record](docs/branch-archive.md).
-The sole branch remains `master`: the integration cannot perform the requested
+The default branch remains `master`: the integration cannot perform the requested
 rename to `main` (HTTP 403). The owner can rename it on GitHub's Branches page;
-the candidate workflow accepts either name.
+the candidate workflow accepts either name. New M2 draft branches are review
+checkpoints after that consolidation; see [the implementation ledger](docs/milestone-2.md).
 
 Preview6 has substantial local qualification, including real native OBS audio
 and game/fallback transitions. Actual Steam Deck audio, Flatpak/Gamescope privacy,
