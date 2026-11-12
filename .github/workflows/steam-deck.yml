@@ -61,6 +61,10 @@ jobs:
           python steamdeck/tests/browser-panel.py dist/obsgod-decky.zip --browser "$browser"
       - name: Native audio and app-filtered capture checks
         run: |
+          # These public test inputs may be owned by runner UID1001 while the
+          # disposable image uses UID1000. Installed app permissions remain private.
+          chmod a+rx dist/obsgod
+          chmod a+r dist/libgstobsgodcapture.so
           docker build --secret id=proxy_ca,src=/etc/ssl/certs/ca-certificates.crt -f steamdeck/tests/obs-smoke.Dockerfile -t obsgod-obs-smoke:qualification .
           mkdir -p "$RUNNER_TEMP/obsgod-audio" "$RUNNER_TEMP/obsgod-capture" "$RUNNER_TEMP/obsgod-game-obs"
           curl --fail --location --show-error --proto '=https' --proto-redir '=https' https://codeload.github.com/fzwoch/obs-gstreamer/tar.gz/b60942f8cd9d788c95ef7dee256f52e14bdf023e -o "$RUNNER_TEMP/obsgod-audio/gstreamer-source.tar.gz"
