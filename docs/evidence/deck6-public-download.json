@@ -1,0 +1,79 @@
+{
+  "status": "passed",
+  "version": "0.1.0-deck.6",
+  "source_revision": "33dcd8476606a1ed7a3bbca06e81fb156dfebcc7",
+  "artifact_commit": "71143dce72654bae2ad76ebe382dd810990c2c85",
+  "downloads": [
+    {
+      "name": "obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/71143dce72654bae2ad76ebe382dd810990c2c85/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz",
+      "bytes": 11229097,
+      "sha256": "23cc2c484b7524756a3b632bf8a8e7231ac7c515c06a08183422ed91b7e82650",
+      "status": "passed"
+    },
+    {
+      "name": "obsgod-decky.zip",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/71143dce72654bae2ad76ebe382dd810990c2c85/obsgod-decky.zip",
+      "bytes": 4123091,
+      "sha256": "afecf86fd878f579b2bc5b806e858df2d85dd232ecfa7f3dcacfc2804df42ef2",
+      "status": "passed"
+    },
+    {
+      "name": "obsgod-one-click-update_0.1.0-deck.6_linux_amd64.zip",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/71143dce72654bae2ad76ebe382dd810990c2c85/obsgod-one-click-update_0.1.0-deck.6_linux_amd64.zip",
+      "bytes": 3069400,
+      "sha256": "c196947ca1cd34a01caccff7755b62de61d77531f39ac63922b570eed329420d",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/71143dce72654bae2ad76ebe382dd810990c2c85/manifest.json",
+      "bytes": 2120,
+      "sha256": "62fd9db318878fd9437d0ab747f81c45538dc8ac175c22eb906bb5a4ab9ae2be",
+      "status": "passed"
+    },
+    {
+      "name": "updater-manifest.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/71143dce72654bae2ad76ebe382dd810990c2c85/updater-manifest.json",
+      "bytes": 975,
+      "sha256": "ef0514c7a2171047742c090ad9e999f3d93879237f272d3d19aaadbbce623b87",
+      "status": "passed"
+    },
+    {
+      "name": "SHA256SUMS",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/71143dce72654bae2ad76ebe382dd810990c2c85/SHA256SUMS",
+      "bytes": 273,
+      "sha256": "d1d7b5d3deecb10539747ff562f58bf9b300f53a37a6ec87491a3c89af23efc0",
+      "status": "passed"
+    },
+    {
+      "name": "UPDATER-SHA256SUMS",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/71143dce72654bae2ad76ebe382dd810990c2c85/UPDATER-SHA256SUMS",
+      "bytes": 119,
+      "sha256": "c12f4c8aee40e8ab028eb038300962a1092859a33cc0a0d0ae6b50b919f2cc98",
+      "status": "passed"
+    }
+  ],
+  "runtime_manifest": "public/embedded byte-identical; clean linux/amd64; exact version/updater/source",
+  "runtime_payload": "every internal file hash verified; exact regular-file inventory",
+  "plugin": "public/runtime ZIP identical; exact CLI/library/preferred-source/license/notices; version6 API1 unprivileged",
+  "capture_library": {
+    "sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+    "build_receipt_sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+    "source_sha256": "1cefd90dc7a306ac993366fa0e18573202e6ba4a13590999065c3c80018a6c5d",
+    "platform": "ELF64 little-endian AMD64 shared object",
+    "runtime_and_plugin_identical": true
+  },
+  "preferred_source": "all six files byte-identical to qualified Git commit; C hash equals build receipt; MIT/dependency notices included",
+  "updater": "public/internal manifest identical; every payload hash and shared runtime file exact; version/source/runtime_revision match",
+  "checksum_lists": "runtime/updater entries independently verified",
+  "install_command": {
+    "path": "/workspace/.obsgod-tools/audio-game-upgrade/final/desktop-install-6.sh",
+    "sha256": "266866ed1a8ec2accda13b3829f27f797bfaa203939f2c12b8d4b769013df04f",
+    "status": "passed bash -n and static/manual audit",
+    "behavior": "Immutable runtime6 URL/hash/root; verification before extract/execute; private quoted staging; unified installer; no destructive cleanup/sudo/settings purge",
+    "prerequisites": "Normal Deck user; Desktop Mode; normal Steam/Decky frontend open; outputs stopped",
+    "device_execution": "unrun"
+  },
+  "scope": "Public-byte metadata review only; no product execution, matrix rerun, GitHub mutation or actual Deck acceptance; candidate unpublished."
+}

@@ -21,7 +21,7 @@ var sessionKeys = map[string]bool{"DISPLAY": true, "WAYLAND_DISPLAY": true, "XAU
 
 func sessionEnvironment() []string {
 	m := map[string]string{}
-	for _, k := range []string{"PATH", "HOME", "USER", "LOGNAME", "LANG", "LC_ALL", "DISPLAY", "WAYLAND_DISPLAY", "XAUTHORITY", "DBUS_SESSION_BUS_ADDRESS", "XDG_RUNTIME_DIR", "XDG_CURRENT_DESKTOP", "PULSE_SERVER", "HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY", "NO_PROXY", "http_proxy", "https_proxy", "all_proxy", "no_proxy", "SSL_CERT_FILE", "SSL_CERT_DIR", "CURL_CA_BUNDLE"} {
+	for _, k := range []string{"PATH", "HOME", "USER", "LOGNAME", "LANG", "LC_ALL", "DISPLAY", "WAYLAND_DISPLAY", "XAUTHORITY", "DBUS_SESSION_BUS_ADDRESS", "XDG_RUNTIME_DIR", "XDG_CONFIG_HOME", "XDG_STATE_HOME", "XDG_CURRENT_DESKTOP", "PULSE_SERVER", "HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY", "NO_PROXY", "http_proxy", "https_proxy", "all_proxy", "no_proxy", "SSL_CERT_FILE", "SSL_CERT_DIR", "CURL_CA_BUNDLE"} {
 		if v := os.Getenv(k); v != "" {
 			m[k] = v
 		}
@@ -201,7 +201,18 @@ func obsLaunchArgs(p Paths) []string {
 	// Apply this non-secret path inside the sandbox, after that reset, so OBS
 	// reads only its prepared private profile and WebSocket configuration. env
 	// execs OBS directly; no shell interpolation or automatic output is involved.
-	return []string{"run", "--user", "--command=/usr/bin/env", "com.obsproject.Studio", "XDG_CONFIG_HOME=" + p.OBSConfig, "obs", "--profile", "OBSGod", "--collection", "OBSGod", "--multi", "--minimize-to-tray", "--disable-missing-files-check"}
+	return []string{"run", "--user", "--command=/usr/bin/env", "com.obsproject.Studio", "XDG_CONFIG_HOME=" + p.OBSConfig, "GST_PLUGIN_PATH_1_0=" + capturePluginDirectory(), "obs", "--profile", "OBSGod", "--collection", "OBSGod", "--multi", "--minimize-to-tray", "--disable-missing-files-check"}
+}
+
+func capturePluginDirectory() string {
+	executable, err := os.Executable()
+	if err != nil {
+		return ""
+	}
+	if resolved, err := filepath.EvalSymlinks(executable); err == nil {
+		executable = resolved
+	}
+	return filepath.Dir(executable)
 }
 
 func graphicalSession(env []string) bool {

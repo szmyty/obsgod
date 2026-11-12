@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 import tarfile
 import tempfile
 import zipfile
@@ -32,6 +33,8 @@ def modules_json(data):
 def notices():
     text = "# Third-party notices\n\nOBSGod's CLI and application code retain the repository MIT license.\n\n"
     text += "OBS Studio and obs-gstreamer are separately installed GPL software from Flathub; their binaries are not included in this package.\n\n"
+    text += "OBSGod's independent capture implementation is MIT licensed. Its preferred source, native SDK header notices and full LGPL-2.1 text are included in CAPTURE-SOURCE.tar.gz and below. Separately installed GStreamer/GLib/PipeWire library binaries are not redistributed here.\n\n"
+    text += (REPO / "steamdeck/capture/THIRD_PARTY_NOTICES.md").read_text() + "\n\n"
     text += "The Decky plugin imports @decky/api 1.1.3 as a separate, replaceable LGPL-2.1 module in dist/decky-api.js, with its license included. Modifications change the manifest import to ./manifest.js and add the .js suffix to the types import for native browser modules. The original source is at https://github.com/SteamDeckHomebrew/loader-api. React and @decky/ui are supplied by Steam/Decky and are not bundled. Build inputs are pinned in steamdeck/decky/package-lock.json.\n\n"
     text += "## Go standard library\n\n" + (Path(command("go", "env", "GOROOT")) / "LICENSE").read_text() + "\n"
     linked = {}
@@ -49,6 +52,18 @@ def notices():
     return text
 
 
+def capture_source(epoch):
+    output = io.BytesIO()
+    with gzip.GzipFile(filename="", mode="wb", fileobj=output, mtime=0) as compressed:
+        with tarfile.open(fileobj=compressed, mode="w") as archive:
+            for name in sorted(["gstobsgodcapture.c", "Makefile", "README.md", "LICENSE", "THIRD_PARTY_NOTICES.md", "build.Dockerfile"]):
+                data = (REPO / "steamdeck/capture" / name).read_bytes()
+                info = tarfile.TarInfo("OBSGod-Capture/" + name)
+                info.size, info.mtime, info.mode = len(data), epoch, 0o644
+                archive.addfile(info, io.BytesIO(data))
+    return output.getvalue()
+
+
 def zip_payload(files, epoch):
     output = io.BytesIO()
     timestamp = datetime.fromtimestamp(max(epoch, 315532800), tz=timezone.utc).timetuple()[:6]
@@ -64,7 +79,7 @@ def zip_payload(files, epoch):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--version", default="0.1.0-deck.5.2")
+    parser.add_argument("--version", default="0.1.0-deck.6")
     parser.add_argument("--revision", default=None)
     parser.add_argument("--allow-dirty", action="store_true", help="Local test packages only; manifest is marked dirty")
     args = parser.parse_args()
@@ -87,6 +102,9 @@ def main():
     subprocess.run(["npm", "run", "build"], cwd=REPO / "steamdeck/decky", check=True)
     dist = REPO / "dist"
     dist.mkdir(exist_ok=True)
+    subprocess.run([sys.executable, str(REPO / "scripts/build-deck-capture.py"), "--output", str(dist / "libgstobsgodcapture.so"), "--receipt", str(dist / "capture-build.json")], check=True)
+    capture_library = (dist / "libgstobsgodcapture.so").read_bytes()
+    capture_preferred_source = capture_source(epoch)
     binary = dist / "obsgod"
     env = dict(os.environ, CGO_ENABLED="0", GOOS="linux", GOARCH="amd64")
     subprocess.run(["go", "build", "-trimpath", "-buildvcs=false", "-ldflags", "-s -w -buildid= -X main.version=" + args.version + " -X main.commitSHA=" + revision, "-o", str(binary), "."], cwd=REPO, env=env, check=True)
@@ -99,6 +117,8 @@ def main():
         "plugin.json": (REPO / "steamdeck/decky/plugin.json").read_bytes(),
         "package.json": json.dumps({"name": "obsgod", "version": args.version, "license": "MIT", "type":"module"}, sort_keys=True).encode(),
         "bin/obsgod": binary.read_bytes(),
+        "bin/libgstobsgodcapture.so": capture_library,
+        "CAPTURE-SOURCE.tar.gz": capture_preferred_source,
         "LICENSE": (REPO / "LICENSE").read_bytes(),
         "LICENSE.LGPL-2.1": (REPO / "steamdeck/decky/LICENSE.LGPL-2.1").read_bytes(),
         "THIRD_PARTY_NOTICES.md": third_party,
@@ -116,7 +136,7 @@ def main():
     plugin_zip = zip_payload(plugin, epoch)
     (dist / "obsgod-decky.zip").write_bytes(plugin_zip)
     files = {name: (REPO / "steamdeck" / name).read_bytes() for name in ["setup.py", "bridge.py", "setup.html", "setup.js", "setup.css", "uninstall.py", "install.py", "Install OBSGod.desktop", "decky.py", "update.py", "releases.py", "Update OBSGod.desktop", "Update OBSGod.sh"]}
-    files.update({"obsgod": binary.read_bytes(), "decky-install": helper.read_bytes(), "LICENSE": (REPO / "LICENSE").read_bytes(), "THIRD_PARTY_NOTICES.md": third_party, "STEAM-DECK.md": (REPO / "docs/steam-deck.md").read_bytes(), "obsgod-decky.zip": plugin_zip})
+    files.update({"obsgod": binary.read_bytes(), "decky-install": helper.read_bytes(), "LICENSE": (REPO / "LICENSE").read_bytes(), "THIRD_PARTY_NOTICES.md": third_party, "STEAM-DECK.md": (REPO / "docs/steam-deck.md").read_bytes(), "obsgod-decky.zip": plugin_zip, "libgstobsgodcapture.so": capture_library, "CAPTURE-SOURCE.tar.gz": capture_preferred_source})
     manifest = {"version": args.version, "updater_version": args.version, "revision": revision, "dirty": dirty, "go": "go1.27.4", "node": "24.19.0", "npm": "11.9.0", "platform": "linux/amd64", "files": {name: hashlib.sha256(data).hexdigest() for name, data in sorted(files.items())}}
     files["manifest.json"] = (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode()
     files["install.py"] = (REPO / "steamdeck/install.py").read_bytes()

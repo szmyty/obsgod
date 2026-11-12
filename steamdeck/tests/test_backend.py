@@ -22,10 +22,12 @@ class FakeProcess:
         self.returncode = None
         self.done = asyncio.Event()
         self.signals = []
+        self.input = None
         if not wait:
             self.done.set()
 
-    async def communicate(self):
+    async def communicate(self, input=None):
+        self.input = input
         await self.done.wait()
         self.returncode = self.returncode or 0
         return json.dumps({**IDLE, "ok": self.returncode == 0}).encode(), b""
@@ -40,6 +42,73 @@ class FakeProcess:
 
 
 class BackendState(unittest.IsolatedAsyncioTestCase):
+    async def test_capture_mode_uses_json_stdin_without_shell_or_settings_in_argv(self):
+        plugin = backend.Plugin()
+        process = FakeProcess()
+        with patch.object(backend.os, "access", return_value=True), patch.object(
+                backend.asyncio, "create_subprocess_exec", return_value=process) as spawn:
+            result = await plugin._run("set-capture-mode", {"capture_mode": "game"})
+        self.assertTrue(result["ok"])
+        self.assertEqual(json.loads(process.input), {"capture_mode": "game"})
+        self.assertEqual(spawn.call_args.args[-2:], ("deck", "set-capture-mode"))
+        self.assertEqual(spawn.call_args.kwargs["stdin"], asyncio.subprocess.PIPE)
+        self.assertNotIn("game", spawn.call_args.args)
+
+    async def test_capture_mode_rechecks_real_output_and_refuses_live_unknown_or_recording(self):
+        for current in [LIVE, {**IDLE, "output_known": False}, {**IDLE, "recording": True}]:
+            with self.subTest(current=current):
+                plugin = backend.Plugin()
+                calls = []
+                async def run(action, payload=None):
+                    calls.append((action, payload))
+                    return current
+                with patch.object(plugin, "_run", side_effect=run):
+                    result = await plugin.set_capture_mode("game")
+                self.assertFalse(result["action_result"]["ok"])
+                self.assertIn("confirmed status", result["action_result"]["message"])
+                self.assertTrue(all(action == "status" for action, _ in calls))
+                self.assertEqual(result.get("output_known"), current.get("output_known"))
+                self.assertEqual(result.get("stream"), current.get("stream"))
+
+    async def test_capture_mode_reserves_control_and_coalesces_only_matching_mode(self):
+        plugin = backend.Plugin()
+        entered = asyncio.Event()
+        finish = asyncio.Event()
+        calls = []
+        mode = "screen"
+        async def run(action, payload=None):
+            nonlocal mode
+            calls.append((action, payload))
+            if action == "set-capture-mode":
+                entered.set()
+                await finish.wait()
+                mode = payload["capture_mode"]
+            return {**IDLE, "configured": True, "settings": {"capture_mode": mode}}
+        with patch.object(plugin, "_run", side_effect=run):
+            first = asyncio.create_task(plugin.set_capture_mode("game"))
+            await entered.wait()
+            same = asyncio.create_task(plugin.set_capture_mode("game"))
+            different = await plugin.set_capture_mode("screen")
+            start = await plugin.start()
+            self.assertFalse(different["action_result"]["ok"])
+            self.assertFalse(start["action_result"]["ok"])
+            self.assertEqual(different["operation"]["action"], "set-capture-mode")
+            finish.set()
+            changed, duplicate = await asyncio.gather(first, same)
+        self.assertTrue(changed["action_result"]["ok"])
+        self.assertEqual(changed["action_result"]["id"], duplicate["action_result"]["id"])
+        self.assertEqual(changed["settings"]["capture_mode"], "game")
+        self.assertEqual(sum(action == "set-capture-mode" for action, _ in calls), 1)
+        self.assertNotIn("start", [action for action, _ in calls])
+
+    async def test_invalid_capture_mode_never_reaches_cli_mutation(self):
+        plugin = backend.Plugin()
+        with patch.object(plugin, "_run", AsyncMock(return_value=IDLE)) as run:
+            for mode in ["desktop", "game; unexpected", None, ["game"]]:
+                result = await plugin.set_capture_mode(mode)
+                self.assertFalse(result["action_result"]["ok"])
+        self.assertTrue(all(call.args == ("status",) for call in run.call_args_list))
+
     async def test_stop_cancels_start_even_before_process_is_attached(self):
         plugin = backend.Plugin()
         entered = asyncio.Event()

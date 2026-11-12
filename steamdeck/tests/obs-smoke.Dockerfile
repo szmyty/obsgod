@@ -5,3 +5,7 @@ ENV LIBGL_ALWAYS_SOFTWARE=1 QT_X11_NO_MITSHM=1
 RUN --mount=type=secret,id=proxy_ca,required=true apt-get -o Acquire::https::CaInfo=/run/secrets/proxy_ca update && apt-get -o Acquire::https::CaInfo=/run/secrets/proxy_ca install -y --no-install-recommends pipewire pipewire-bin wireplumber gstreamer1.0-tools && rm -rf /var/lib/apt/lists/*
 
 RUN useradd --uid 1000 --create-home deck
+
+# Development headers for the app-filtered PipeWire source and its independent
+# native producer fixture. Runtime audio/video libraries remain system packages.
+RUN --mount=type=secret,id=proxy_ca,required=true apt-get -o Acquire::https::CaInfo=/run/secrets/proxy_ca update && apt-get -o Acquire::https::CaInfo=/run/secrets/proxy_ca install -y --no-install-recommends libpipewire-0.3-dev && rm -rf /var/lib/apt/lists/*

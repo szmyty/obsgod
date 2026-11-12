@@ -2,12 +2,18 @@
 <style>body{margin:0;background:#0b1019;color:#f0f3fc;font:15px system-ui}#root{width:330px;margin:0 auto;padding:14px}section{padding:8px 0;border-top:1px solid #425067}h2{font-size:12px;letter-spacing:1px;color:#a8b7ce}button{width:100%;background:#354765;color:#fff;padding:12px;margin:5px 0;border:0;border-radius:4px;font:inherit}button:disabled{opacity:.45}button:focus{outline:3px solid #86d5ff}.row{margin:9px 0}</style></head><body><div id="root"></div><script src="runtime.js"></script><script type="module">
 const h=SP_REACT.createElement;
 window.DFL={staticClasses:{Title:"title"},PanelSection:({title,children})=>h("section",null,h("h2",null,title),children),PanelSectionRow:({children})=>h("div",{className:"row"},children),ButtonItem:({children,onClick,disabled})=>h("button",{onClick,disabled},children)};
-window.fixture={active:false,bytes:0,stalled:false,failure:false,sequence:0,operation:null,calls:{},toasts:[],events:JSON.parse(sessionStorage.getItem("fixtureEvents")||"[]"),testFailure:false};
+window.fixture={active:false,recording:false,mode:"screen",unknown:false,bytes:0,stalled:false,failure:false,sequence:0,operation:null,calls:{},toasts:[],events:JSON.parse(sessionStorage.getItem("fixtureEvents")||"[]"),testFailure:false};
 function event(message,level="info"){fixture.events.push({time:new Date().toISOString(),level,message});}
-function status(){if(fixture.failure)throw Error("simulated backend unavailable");sessionStorage.setItem("fixtureEvents",JSON.stringify(fixture.events));if(fixture.active&&!fixture.stalled)fixture.bytes+=2048;return {ok:true,configured:true,output_known:true,process:"running",connection:"ready",recording:false,capture:"available",frames:"visible",game:"unknown",backend_id:"fixture-backend",snapshot_id:++fixture.sequence,operation:fixture.operation,state:fixture.active?"streaming":"stopped",message:fixture.active?"OBS streaming":"Not streaming",stream:{active:fixture.active,reconnecting:false,bytes:fixture.bytes,duration_ms:fixture.bytes},diagnostics:fixture.events,plugin_version:"0.1.0-console-fixture",settings:{server:"rtmps://must-not-copy.invalid/app",stream_key:"must-not-copy"}};}
-window.__DECKY_SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED_deckyLoaderAPIInit={connect:()=>({_version:2,callable:(method)=>async()=>{
+function status(){if(fixture.failure)throw Error("simulated backend unavailable");sessionStorage.setItem("fixtureEvents",JSON.stringify(fixture.events));if(fixture.active&&!fixture.stalled)fixture.bytes+=2048;return {ok:true,configured:true,output_known:!fixture.unknown,process:"running",connection:"ready",recording:fixture.recording,capture:"available",frames:"visible",game:"unknown",backend_id:"fixture-backend",snapshot_id:++fixture.sequence,operation:fixture.operation,state:fixture.active?"streaming":"stopped",message:fixture.active?"OBS streaming":"Not streaming",stream:{active:fixture.active,reconnecting:false,bytes:fixture.bytes,duration_ms:fixture.bytes},diagnostics:fixture.events,plugin_version:"0.1.0-console-fixture",settings:{capture_mode:fixture.mode,idle_style:"black",server:"rtmps://must-not-copy.invalid/app",stream_key:"must-not-copy"}};}
+window.__DECKY_SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED_deckyLoaderAPIInit={connect:()=>({_version:2,callable:(method)=>async(...args)=>{
  fixture.calls[method]=(fixture.calls[method]||0)+1;
  if(method==="check_for_updates")return {ok:true,state:"update-available",current_version:"0.1.0-console-fixture",latest_version:"0.1.0-deck.5",available:true,message:"A preview update is available."};
+ if(method==="set_capture_mode"){
+  fixture.modeArgs=args;
+  if(fixture.active||fixture.recording||fixture.unknown||fixture.operation)return {...status(),action_result:{ok:false,message:"Fixture refuses unsafe capture mode change"}};
+  fixture.mode=args[0];
+  return {...status(),action_result:{ok:true,message:"Capture mode saved; applies on next start"}};
+ }
  if(method==="start"){fixture.active=true;fixture.bytes=2048;event("Streaming fixture started");}
  if(method==="stop"){fixture.active=false;fixture.bytes=0;fixture.failure=false;event("Streaming fixture stopped");}
  if(method==="clear_logs"){fixture.events=[];}

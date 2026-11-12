@@ -46,19 +46,34 @@ jobs:
           npm --prefix steamdeck/decky audit
       - name: Package exact candidate twice
         run: |
-          python scripts/package-deck.py --version 0.1.0-deck.5.2
-          python scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.5.2_linux_amd64.tar.gz
+          python scripts/package-deck.py --version 0.1.0-deck.6
+          python scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz
           cp dist/SHA256SUMS /tmp/first-runtime-sums
           cp dist/UPDATER-SHA256SUMS /tmp/first-updater-sums
-          python scripts/package-deck.py --version 0.1.0-deck.5.2
-          python scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.5.2_linux_amd64.tar.gz
+          python scripts/package-deck.py --version 0.1.0-deck.6
+          python scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz
           diff -u /tmp/first-runtime-sums dist/SHA256SUMS
           diff -u /tmp/first-updater-sums dist/UPDATER-SHA256SUMS
       - name: Actual package browser checks
         run: |
           browser=$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')
-          python steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.5.2_linux_amd64.tar.gz --browser "$browser"
+          python steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz --browser "$browser"
           python steamdeck/tests/browser-panel.py dist/obsgod-decky.zip --browser "$browser"
+      - name: Native audio and app-filtered capture checks
+        run: |
+          # These public test inputs may be owned by runner UID1001 while the
+          # disposable image uses UID1000. Installed app permissions remain private.
+          chmod a+rx dist/obsgod
+          chmod a+r dist/libgstobsgodcapture.so
+          docker build --secret id=proxy_ca,src=/etc/ssl/certs/ca-certificates.crt -f steamdeck/tests/obs-smoke.Dockerfile -t obsgod-obs-smoke:qualification .
+          mkdir -p "$RUNNER_TEMP/obsgod-audio" "$RUNNER_TEMP/obsgod-capture" "$RUNNER_TEMP/obsgod-game-obs"
+          curl --fail --location --show-error --proto '=https' --proto-redir '=https' https://codeload.github.com/fzwoch/obs-gstreamer/tar.gz/b60942f8cd9d788c95ef7dee256f52e14bdf023e -o "$RUNNER_TEMP/obsgod-audio/gstreamer-source.tar.gz"
+          printf '%s  %s\n' 566d547e83140d53a0aa22ed152cebc436725b47e4ead452e79cf250da531268 "$RUNNER_TEMP/obsgod-audio/gstreamer-source.tar.gz" | sha256sum --check -
+          cp "$RUNNER_TEMP/obsgod-audio/gstreamer-source.tar.gz" "$RUNNER_TEMP/obsgod-game-obs/gstreamer-source.tar.gz"
+          sudo chown -R 1000:1000 "$RUNNER_TEMP/obsgod-audio" "$RUNNER_TEMP/obsgod-capture" "$RUNNER_TEMP/obsgod-game-obs"
+          docker run --rm --user 1000:1000 --mount "type=bind,src=$GITHUB_WORKSPACE,dst=/src,readonly" --mount "type=bind,src=$RUNNER_TEMP/obsgod-audio,dst=/work" obsgod-obs-smoke:qualification dbus-run-session -- bash /src/steamdeck/tests/native-obs-smoke.sh
+          docker run --rm --user 1000:1000 -e "OBSGOD_QUALIFIED_REVISION=$GITHUB_SHA" --mount "type=bind,src=$GITHUB_WORKSPACE,dst=/src,readonly" --mount "type=bind,src=$RUNNER_TEMP/obsgod-capture,dst=/work" obsgod-obs-smoke:qualification dbus-run-session -- bash /src/steamdeck/tests/native-capture-smoke.sh /src/dist
+          docker run --rm --user 1000:1000 -e "OBSGOD_QUALIFIED_REVISION=$GITHUB_SHA" --mount "type=bind,src=$GITHUB_WORKSPACE,dst=/src,readonly" --mount "type=bind,src=$RUNNER_TEMP/obsgod-game-obs,dst=/work" obsgod-obs-smoke:qualification dbus-run-session -- bash /src/steamdeck/tests/native-game-obs-smoke.sh
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: obsgod-candidate-${{ github.sha }}
@@ -67,5 +82,6 @@ jobs:
             dist/*.zip
             dist/*manifest.json
             dist/*SHA256SUMS
+            dist/capture-build.json
           if-no-files-found: error
           retention-days: 14

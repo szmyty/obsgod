@@ -57,6 +57,26 @@ def main():
                 assert page.get_by_role("button",name="Copy console log").is_disabled()
                 assert page.get_by_role("button",name="Refresh status").bounding_box()["y"] < console.bounding_box()["y"]
                 assert page.get_by_role("button",name="Stop streaming",exact=True).is_disabled()
+                mode_button=page.get_by_role("button",name="Switch to game only",exact=True)
+                assert mode_button.is_enabled()
+                mode_button.evaluate("button=>{button.click();button.click();button.click();}")
+                page.get_by_text("Capture mode: Game only",exact=True).wait_for()
+                assert page.evaluate("fixture.calls.set_capture_mode") == 1
+                assert page.evaluate("fixture.modeArgs") == ["game"]
+                assert not page.evaluate("fixture.active")
+                assert page.evaluate("fixture.toasts.length") == 0
+                page.get_by_role("button",name="Switch to entire screen",exact=True).click()
+                page.get_by_text("Capture mode: Entire screen",exact=True).wait_for()
+                # A recording or unconfirmed output must disable mode changes.
+                page.evaluate("fixture.recording=true")
+                page.get_by_role("button",name="Refresh status").click()
+                assert page.get_by_role("button",name="Switch to game only",exact=True).is_disabled()
+                page.evaluate("fixture.recording=false;fixture.unknown=true")
+                page.get_by_role("button",name="Refresh status").click()
+                assert page.get_by_role("button",name="Switch to game only",exact=True).is_disabled()
+                page.evaluate("fixture.unknown=false")
+                page.get_by_role("button",name="Refresh status").click()
+                page.wait_for_function("[...document.querySelectorAll('button')].some(button=>button.textContent==='Switch to game only'&&!button.disabled)")
                 page.screenshot(path=str(args.screenshots / "panel-stopped.png"))
                 # Rapid clicks must produce one request even before React paints
                 # the disabled state. The success toast comes from a status poll.
@@ -66,6 +86,7 @@ def main():
                 console.get_by_text("Streaming fixture started",exact=False).wait_for()
                 assert page.evaluate("fixture.calls.start") == 1
                 assert page.get_by_role("button",name="Start streaming",exact=True).is_disabled()
+                assert page.get_by_role("button",name="Switch to game only",exact=True).is_disabled()
                 assert page.evaluate("fixture.toasts.filter(t=>t.body.includes('OBS is streaming.')).length") == 1
                 page.get_by_role("button",name="Copy console log").click()
                 page.get_by_text("Copied 1 diagnostic event.",exact=False).wait_for()
@@ -80,6 +101,7 @@ def main():
                 page.evaluate("fixture.failure=true")
                 page.get_by_role("button", name="Refresh status").click()
                 page.get_by_role("status").filter(has_text="Check OBS").wait_for()
+                assert page.get_by_role("button",name="Switch to game only",exact=True).is_disabled()
                 page.screenshot(path=str(args.screenshots / "panel-unconfirmed.png"))
                 page.get_by_role("button", name="Stop streaming / recover").click()
                 page.get_by_role("status").filter(has_text="Stopped").wait_for()
@@ -89,6 +111,7 @@ def main():
                 page.get_by_role("button", name="Make 10-second test clip").click()
                 console.get_by_text("Waiting for fixture OBS",exact=False).wait_for()
                 assert page.get_by_role("button",name="Make 10-second test clip").is_disabled()
+                assert page.get_by_role("button",name="Switch to game only",exact=True).is_disabled()
                 assert page.get_by_role("button",name="Cancel operation").is_enabled()
                 page.get_by_role("status").filter(has_text="Stopped").wait_for()
                 page.evaluate("fixture.finishTest()")
@@ -138,7 +161,7 @@ def main():
                 page.evaluate("plugin.onDismount()")
                 assert not errors, errors
                 browser.close()
-            print("PASS: release ZIP frontend; automatic polls/confirmed transition toasts, duplicate Start coalescing, idle Stop disabled, pending Cancel, check-only updates, colors/lifecycle, full timeout, history paging/clear/reload; actual clipboard copies all history and version, excludes settings, works during streaming, legacy fallback preserves focus and denial reports failure. Real controller/Decky runtime untested.")
+            print("PASS: release ZIP frontend; automatic polls/confirmed transition toasts, duplicate Start coalescing, idle Stop disabled, pending Cancel, guarded capture-mode switch with JSON RPC args/no streaming toast/no duplicate action, check-only updates, colors/lifecycle, full timeout, history paging/clear/reload; actual clipboard copies all history and version, excludes settings, works during streaming, legacy fallback preserves focus and denial reports failure. Real controller/Decky runtime untested.")
         finally:
             server.shutdown()
             server.server_close()

@@ -5,7 +5,7 @@ Decky's Quick Access panel. Stock OBS still needs a graphical session; this is
 managed background OBS, not a headless OBS server. SteamOS/Linux x86_64 is the
 supported target. Normal use does not disable SteamOS read-only protection.
 
-**Roadmap 1 is under draft review.** Use the candidate and checksums identified
+**The audio/capture upgrade is under draft review.** Use the candidate and checksums identified
 in its draft PRs, not an older published preview as evidence of these fixes.
 Cloud tests do not establish actual Steam Deck, Flatpak, Gamescope, AMD encoder,
 controller, audio or Kick compatibility. Required device checks remain open.
@@ -40,8 +40,9 @@ controller, audio or Kick compatibility. Required device checks remain open.
    Stop action; inspect OBS and the channel if stopping cannot be confirmed.
 
 A game is not required for OBS lifecycle or its control connection. Actual
-capture must still deliver usable nonblank frames before a test or broadcast
-starts. Some Gamescope versions cannot capture the Steam UI with no game; a
+full-screen capture must still deliver usable nonblank frames before a test or
+broadcast starts. Game-only mode permits the explicitly selected between-game
+screen when no verified game capture is available. Some Gamescope versions cannot capture the Steam UI with no game; a
 blank/unavailable feed is an explicit platform blocker, not proof that OBS
 failed to launch. Custom idle images/videos belong to Roadmap 2.
 
@@ -104,8 +105,57 @@ Gamescope feeds the separately installed obs-gstreamer plugin. Video, game audio
 and microphone are independent checks. Upstream black-frame limitations include
 [Gamescope #2508](https://github.com/ValveSoftware/gamescope/issues/2508) and
 [#1898](https://github.com/ValveSoftware/gamescope/issues/1898). OBSGod must refuse
-a new broadcast from blank capture; it cannot declare unsupported Steam UI
-capture working by changing a message.
+a new full-screen broadcast from blank capture; game-only mode uses its explicit
+between-game screen instead of substituting the compositor.
+
+## Capture modes and between-game screen
+
+**Entire screen** preserves the existing Gamescope feed, including Steam UI and
+other visible content. **Game only** requests a nonzero game app ID through
+Gamescope's app-filtered PipeWire format. It does not silently fall back to the
+whole screen. Select the mode in Desktop Setup or use the mode button in Decky
+while streaming and recording are confirmed stopped. A mode change applies to
+the next explicit Start or local test; it does not start a broadcast.
+
+Game-only mode shows **black** or a **custom placeholder message** when no game
+is identified, more than one game is ambiguous, the compositor lacks the required
+format, or captured game frames cannot be verified. The default message is
+“Game starting soon”; edit it in Desktop Setup. No external artwork is bundled.
+Arbitrary image/video backgrounds and password controls remain separate work.
+An already started stream stays live while game capture and fallback alternate.
+The green indicator follows OBS output progress even during an intentional
+between-game screen. Opening Steam menus should not change the app-filtered
+source to a compositor feed; overlays drawn inside a game cannot be separated.
+
+This source requires Gamescope to advertise and honor its custom app-ID format;
+older or incompatible versions show fallback. Stock PipeWire/GStreamer capture
+cannot provide the same filter. Steam-tagged processes identify the game; if
+multiple games overlap, an available graphics-focus query can select one,
+otherwise the fallback remains. Actual Deck/SteamOS builds, native Wayland
+applications and transition performance still require device qualification.
+
+## Audio checks
+
+The upgrade resolves a unique active Steam game's output monitor when possible,
+otherwise the current system default output monitor. It verifies that the same
+device exists inside OBS, attaches the managed source to output/fallback scenes,
+and reapplies volume, unmute, audio track 1 and monitoring-off settings. Other
+applications playing through that output may also be heard: game-only video is
+not per-application audio isolation. Microphone remains off unless explicitly
+selected, and an output-monitor loopback cannot be selected as microphone.
+
+The panel reports routed audio and short **signal / silent / unknown** meter
+observations separately from the streaming dot. Silence during a quiet moment
+does not stop streaming. Play game sound during the local clip, then listen to
+the saved clip and a Kick viewer on another device. A meter or AAC track alone
+is not proof of audible viewer output. If changing headphones/output routes,
+stop and start again so discovery selects the new output; live hot-plug routing
+is not yet qualified. System mute/zero volume is reported, never silently changed.
+
+If OBS cannot see the selected monitor, the action explains that the
+Steam/Flatpak audio connection needs attention. The earlier PulseAudio symlink
+warning remains evidence to investigate on the actual Deck; no sockets or Pulse
+configuration are deleted or replaced by the installer.
 
 ## Updates and recovery
 
