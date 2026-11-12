@@ -13,7 +13,7 @@ const (
 type Config struct {
 	Host     string
 	Port     uint32
-	Password string
+	Password string `json:"-"`
 }
 
 func Default() Config {

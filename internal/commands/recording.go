@@ -1,6 +1,8 @@
 package commands
 
 import (
+	"encoding/json"
+	"errors"
 	"fmt"
 	"strconv"
 
@@ -74,23 +76,43 @@ func newRecordingCommand(service obs.Service) *coral.Command {
 		},
 	})
 	recordingCmd.AddCommand(pauseRecordingCmd)
-	recordingCmd.AddCommand(&coral.Command{
+	var asJSON, quiet bool
+	statusCmd := &coral.Command{
 		Use:   "status",
 		Short: "Reports recording status",
+		Args:  coral.NoArgs,
 		RunE: func(cmd *coral.Command, args []string) error {
+			if asJSON && quiet {
+				return errors.New("choose --json or --quiet, not both")
+			}
 			status, err := service.GetRecordingStatus()
 			if err != nil {
 				return err
 			}
-			fmt.Printf("Recording: %s\n", strconv.FormatBool(status.Active))
+			if asJSON {
+				return json.NewEncoder(cmd.OutOrStdout()).Encode(struct {
+					SchemaVersion int    `json:"schema_version"`
+					Kind          string `json:"kind"`
+					Active        bool   `json:"active"`
+					Paused        bool   `json:"paused"`
+					Timecode      string `json:"timecode,omitempty"`
+				}{1, "recording", status.Active, status.Paused, status.Timecode})
+			}
+			if quiet {
+				return nil
+			}
+			fmt.Fprintf(cmd.OutOrStdout(), "Recording: %s\n", strconv.FormatBool(status.Active))
 			if !status.Active {
 				return nil
 			}
-			fmt.Printf("Paused: %s\n", strconv.FormatBool(status.Paused))
-			fmt.Printf("Timecode: %s\n", status.Timecode)
+			fmt.Fprintf(cmd.OutOrStdout(), "Paused: %s\n", strconv.FormatBool(status.Paused))
+			fmt.Fprintf(cmd.OutOrStdout(), "Timecode: %s\n", status.Timecode)
 			return nil
 		},
-	})
+	}
+	statusCmd.Flags().BoolVar(&asJSON, "json", false, "Print versioned recording status JSON")
+	statusCmd.Flags().BoolVar(&quiet, "quiet", false, "Suppress successful status output; errors still fail")
+	recordingCmd.AddCommand(statusCmd)
 
 	return recordingCmd
 }

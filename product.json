@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "display_name": "Decky Stream",
+  "description": "Stream from Steam Deck with OBS",
+  "repository": "szmyty/obsgod",
+  "compatibility": {
+    "cli": "obsgod",
+    "plugin": "OBSGod",
+    "plugin_directory": "obsgod",
+    "storage_namespace": "obsgod"
+  }
+}
