@@ -118,6 +118,8 @@ def main():
     plugin = {
         "main.py": (REPO / "steamdeck/decky/main.py").read_bytes(),
         "releases.py": (REPO / "steamdeck/releases.py").read_bytes(),
+        "paths.py": (REPO / "steamdeck/paths.py").read_bytes(),
+        "product.py": (REPO / "steamdeck/product.py").read_bytes(),
         "plugin.json": (REPO / "steamdeck/decky/plugin.json").read_bytes(),
         "package.json": json.dumps({"name": "obsgod", "version": args.version, "license": "MIT", "type":"module"}, sort_keys=True).encode(),
         "bin/obsgod": binary.read_bytes(),
@@ -128,7 +130,7 @@ def main():
         "LICENSE.qrcode-generator.txt": (REPO / "steamdeck/decky/LICENSE.qrcode-generator.txt").read_bytes(),
         "THIRD_PARTY_NOTICES.md": third_party,
     }
-    for name in ["index.js", "decky-api.js", "manifest.js", "types.js"]:
+    for name in ["index.js", "decky-api.js", "manifest.js", "types.js", "LICENSE.qrcode-generator.txt"]:
         plugin["dist/" + name] = (REPO / "steamdeck/decky/dist" / name).read_bytes()
     # Include the SDK's preferred source form as well as its replaceable runtime
     # module, so the LGPL dependency can be rebuilt and modified independently.
@@ -140,7 +142,7 @@ def main():
     plugin["source/decky-api/BUILDING.md"] = b"The unmodified preferred TypeScript source of @decky/api 1.1.3 is included here. OBSGod's pinned TypeScript build and rollup.config.js are in the release's corresponding GitHub source archive. The runtime dist/decky-api.js is a separate replaceable module. Its build changes only the manifest import to ./manifest.js and the types export to ./types.js; dist/manifest.js supplies the OBSGod name. The complete LGPL-2.1 license is at the plugin root.\n"
     plugin_zip = zip_payload(plugin, epoch)
     (dist / "obsgod-decky.zip").write_bytes(plugin_zip)
-    files = {name: (REPO / "steamdeck" / name).read_bytes() for name in ["setup.py", "bridge.py", "setup.html", "setup.js", "setup.css", "uninstall.py", "install.py", "Install OBSGod.desktop", "decky.py", "update.py", "releases.py", "Update OBSGod.desktop", "Update OBSGod.sh"]}
+    files = {name: (REPO / "steamdeck" / name).read_bytes() for name in ["setup.py", "bridge.py", "setup.html", "setup.js", "setup.css", "uninstall.py", "install.py", "Install OBSGod.desktop", "decky.py", "update.py", "releases.py", "Update OBSGod.desktop", "Update OBSGod.sh", "paths.py", "product.py", "Uninstall OBSGod.desktop"]}
     files.update({"obsgod": binary.read_bytes(), "decky-install": helper.read_bytes(), "LICENSE": (REPO / "LICENSE").read_bytes(), "THIRD_PARTY_NOTICES.md": third_party, "STEAM-DECK.md": (REPO / "docs/steam-deck.md").read_bytes(), "obsgod-decky.zip": plugin_zip, "libgstobsgodcapture.so": capture_library, "CAPTURE-SOURCE.tar.gz": capture_preferred_source})
     manifest = {"version": args.version, "updater_version": args.version, "revision": revision, "dirty": dirty, "go": "go1.27.4", "node": "24.19.0", "npm": "11.9.0", "platform": "linux/amd64", "files": {name: hashlib.sha256(data).hexdigest() for name, data in sorted(files.items())}}
     files["manifest.json"] = (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode()
@@ -154,7 +156,7 @@ def main():
                     info = tarfile.TarInfo("OBSGod-" + args.version + "/" + name)
                     info.size = len(data)
                     info.mtime = epoch
-                    info.mode = 0o755 if name in {"obsgod", "decky-install", "install.py", "Install OBSGod.desktop", "Update OBSGod.desktop", "Update OBSGod.sh"} else 0o644
+                    info.mode = 0o755 if name in {"obsgod", "decky-install", "install.py", "Install OBSGod.desktop", "Update OBSGod.desktop", "Update OBSGod.sh", "Uninstall OBSGod.desktop"} else 0o644
                     archive.addfile(info, io.BytesIO(data))
     (dist / "manifest.json").write_bytes(files["manifest.json"])
     artifacts = [archive_path, dist / "obsgod-decky.zip", dist / "manifest.json"]

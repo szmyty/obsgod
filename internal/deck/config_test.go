@@ -23,6 +23,65 @@ func testPaths(t *testing.T) Paths {
 
 const fixtureSettings = `{"version":1,"server":"rtmps://example.invalid/app","bitrate":4500,"fps":30,"encoder":"vaapi","microphone":false,"stream_key":"fixture-never-real"}`
 
+func TestChangingDestinationRequiresItsOwnExplicitKey(t *testing.T) {
+	p := testPaths(t)
+	if _, err := Configure(p, strings.NewReader(fixtureSettings)); err != nil {
+		t.Fatal(err)
+	}
+	beforeSettings, _ := os.ReadFile(p.Config)
+	beforeSecrets, _ := os.ReadFile(p.Secrets)
+	changed := strings.Replace(fixtureSettings, "example.invalid", "other.invalid", 1)
+	if _, err := Configure(p, strings.NewReader(strings.Replace(changed, "fixture-never-real", "", 1))); err == nil {
+		t.Fatal("silently sent the saved key to another destination")
+	}
+	afterSettings, _ := os.ReadFile(p.Config)
+	afterSecrets, _ := os.ReadFile(p.Secrets)
+	if !bytes.Equal(beforeSettings, afterSettings) || !bytes.Equal(beforeSecrets, afterSecrets) {
+		t.Fatal("refused destination change modified saved configuration")
+	}
+	if _, err := Configure(p, strings.NewReader(strings.Replace(changed, "fixture-never-real", "second-fixture-not-real", 1))); err != nil {
+		t.Fatal(err)
+	}
+	settings, secret, err := Load(p)
+	if err != nil || settings.Server != "rtmps://other.invalid/app" || secret.StreamKey != "second-fixture-not-real" {
+		t.Fatal("explicit new destination/key did not bind together", err)
+	}
+}
+
+func TestBlankKeyCannotRepairAMismatchedPairIntoAnotherDestination(t *testing.T) {
+	p := testPaths(t)
+	if _, err := Configure(p, strings.NewReader(fixtureSettings)); err != nil {
+		t.Fatal(err)
+	}
+	originalSettings, _ := os.ReadFile(p.Config)
+	other := strings.Replace(strings.Replace(fixtureSettings, "example.invalid", "other.invalid", 1), "fixture-never-real", "other-destination-fixture-key", 1)
+	if _, err := Configure(p, strings.NewReader(other)); err != nil {
+		t.Fatal(err)
+	}
+	// Model the documented second-write failure: new server B credentials were
+	// committed but server A's old settings remained on disk.
+	if err := atomicWrite(p.Config, originalSettings); err != nil {
+		t.Fatal(err)
+	}
+	beforeSecret, _ := os.ReadFile(p.Secrets)
+	blank := strings.Replace(fixtureSettings, "fixture-never-real", "", 1)
+	if _, err := Configure(p, strings.NewReader(blank)); err == nil {
+		t.Fatal("rebound destination B's secret to old destination A")
+	}
+	afterSettings, _ := os.ReadFile(p.Config)
+	afterSecret, _ := os.ReadFile(p.Secrets)
+	if !bytes.Equal(originalSettings, afterSettings) || !bytes.Equal(beforeSecret, afterSecret) {
+		t.Fatal("mismatched binding refusal changed the saved pair")
+	}
+	if _, err := Configure(p, strings.NewReader(fixtureSettings)); err != nil {
+		t.Fatal("explicit owner-entered key could not repair the mismatched pair", err)
+	}
+	_, secret, err := Load(p)
+	if err != nil || secret.StreamKey != "fixture-never-real" {
+		t.Fatal("repair did not bind the intended destination/key", err)
+	}
+}
+
 func TestPrivateConfigAndSecretPreservation(t *testing.T) {
 	p := testPaths(t)
 	s, e := Configure(p, strings.NewReader(fixtureSettings))

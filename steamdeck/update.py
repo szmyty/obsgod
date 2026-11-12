@@ -15,6 +15,15 @@ import sys
 import tarfile
 import tempfile
 import time
+def _sibling(name):
+    spec = importlib.util.spec_from_file_location("obsgod_update_" + name, Path(__file__).resolve().parent / (name + ".py"))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+_paths = _sibling("paths")
+app_directories, xdg_root, validate_owned_root = _paths.app_directories, _paths.xdg_root, _paths.validate_owned_root
 
 ROOT = Path(__file__).resolve().parent
 MAX_ARCHIVE = 64 * 1024 * 1024
@@ -25,8 +34,10 @@ class UpdateError(RuntimeError):
 
 
 def private_directory(path, home):
-    if not path.resolve().is_relative_to(home.resolve()):
-        raise UpdateError("An install directory points outside your home. Existing files were preserved.")
+    try:
+        validate_owned_root(path, home)
+    except ValueError as error:
+        raise UpdateError(str(error) + ". Existing files were preserved.") from None
     path.mkdir(parents=True, exist_ok=True, mode=0o700)
     if path.is_symlink() or not path.is_dir():
         raise UpdateError("An install directory is unsafe. Existing files were preserved.")
@@ -64,7 +75,7 @@ def release_module():
 
 
 def installed_release(home):
-    base = home / ".local/share/obsgod"
+    base, _ = app_directories(home)
     current = base / "current"
     if not current.exists() and not current.is_symlink():
         return None, {"version": "0.0.0", "updater_version": "not-installed"}
@@ -117,15 +128,32 @@ def unpack_payload(archive, destination, version):
     return destination / prefix
 
 
-def require_idle(bridge):
+def require_idle(bridge, allow_legacy=False):
+    """Modern evidence authorizes apply; legacy evidence only gates a download.
+
+    Published previews1–4 lack output_known/recording/process. Their old check
+    cannot establish recording safety. A verified new payload performs this
+    strict check again before settings backup, plugin replacement or activation.
+    """
     state = bridge.run_cli("status", timeout=6)
-    if not isinstance(state, dict) or not state.get("ok") or state.get("state") not in ("stopped", "setup") or not isinstance(state.get("stream", {}), dict) or state.get("stream", {}).get("active") or state.get("recording") or state.get("output_known") is False or state.get("operation") not in (None, "", "idle"):
+    if not isinstance(state, dict):
+        raise UpdateError("Update blocked: OBS output state could not be read.")
+    recording = state.get("recording", False if allow_legacy else None)
+    recording_active = recording.get("active") if isinstance(recording, dict) else recording
+    stream = state.get("stream")
+    known = state.get("output_known", True if allow_legacy else None)
+    if (state.get("ok") is not True or state.get("state") not in ("stopped", "setup")
+            or not isinstance(stream, dict) or stream.get("active") is not False
+            or not isinstance(recording_active, bool) or recording_active
+            or known is not True
+            or (not allow_legacy or "process" in state) and state.get("process") not in ("absent", "running")
+            or state.get("operation") not in (None, "", "idle")):
         raise UpdateError("Update blocked: OBS output is active, starting, recording or unconfirmed. Use Stop/cancel, wait for confirmed idle, then run Update OBSGod in Desktop Mode.")
     # No implicit Stop: the installer rechecks and closes only verified idle OBS.
 
 
 def backup_settings(base, home):
-    config = Path(os.environ.get("XDG_CONFIG_HOME", str(home / ".config"))) / "obsgod"
+    config = xdg_root("XDG_CONFIG_HOME", home) / "obsgod"
     if not config.resolve().is_relative_to(home.resolve()):
         raise UpdateError("The settings directory points outside your home. Existing files were preserved.")
     backup = base / "backups" / ("updater-" + str(time.time_ns()))
@@ -164,7 +192,7 @@ def run_update(channel="preview", repair=False):
     verify_bundle()
     releases = release_module()
     home = Path.home()
-    base = home / ".local/share/obsgod"
+    base, _ = app_directories(home)
     private_directory(base, home)
     descriptor = os.open(base / "update.lock", os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
     with os.fdopen(descriptor, "w") as lock:
@@ -174,7 +202,8 @@ def run_update(channel="preview", repair=False):
             raise UpdateError("Another OBSGod updater is running. Let it finish, then retry.") from None
         current, installed = installed_release(home)
         if current and (current / "bridge.py").is_file():
-            require_idle(load_module("obsgod_installed_bridge", current / "bridge.py"))
+            legacy = installed.get("version") in {"0.1.0-deck.1", "0.1.0-deck.2", "0.1.0-deck.3", "0.1.0-deck.4"}
+            require_idle(load_module("obsgod_installed_bridge", current / "bridge.py"), allow_legacy=legacy)
         print("1/4 Checking the official " + channel + " runtime releases…", flush=True)
         result, candidate = releases.inspect_updates(installed.get("version", "unknown"), channel)
         if not result.get("ok") or candidate is None:

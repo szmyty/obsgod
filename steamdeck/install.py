@@ -14,14 +14,29 @@ import sys
 import tempfile
 import time
 import fcntl
+import webbrowser
 from contextlib import contextmanager
+def _sibling(name):
+    # Published older updaters load a downloaded installer with importlib while
+    # sys.path still points at the old package. Never import its old helpers.
+    spec = importlib.util.spec_from_file_location("obsgod_install_" + name, Path(__file__).resolve().parent / (name + ".py"))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+_paths = _sibling("paths")
+app_directories, xdg_root, validate_owned_root = _paths.app_directories, _paths.xdg_root, _paths.validate_owned_root
+DISPLAY_NAME = _sibling("product").DISPLAY_NAME if (Path(__file__).resolve().parent / "product.py").is_file() else "OBSGod"
 
 ROOT = Path(__file__).resolve().parent
 
 
 def owned_directory(path, home):
-    if not path.resolve().is_relative_to(home.resolve()):
-        raise RuntimeError("Install paths must stay inside your home directory")
+    try:
+        validate_owned_root(path, home)
+    except ValueError as error:
+        raise RuntimeError(str(error)) from None
     path.mkdir(parents=True, exist_ok=True, mode=0o700)
     if path.is_symlink() or not path.is_dir():
         raise RuntimeError("Refusing a symlinked install directory: " + str(path))
@@ -50,10 +65,11 @@ def verify_payload():
     required = {"obsgod", "setup.py", "bridge.py", "setup.html", "setup.js", "setup.css", "uninstall.py", "obsgod-decky.zip", "LICENSE", "THIRD_PARTY_NOTICES.md", "STEAM-DECK.md"}
     unified = {"decky-install", "decky.py", "install.py", "Install OBSGod.desktop", "update.py", "releases.py", "Update OBSGod.desktop", "Update OBSGod.sh"}
     capture = {"libgstobsgodcapture.so", "CAPTURE-SOURCE.tar.gz"}
+    product = {"paths.py", "product.py", "Uninstall OBSGod.desktop"}
     # Historical archives remain repairable. New native-capture archives must
     # contain the complete unified payload and both binary and preferred source;
     # accepting a single arbitrary extra file would weaken the exact schema.
-    if set(manifest["files"]) not in (required, required | unified, required | unified | capture):
+    if set(manifest["files"]) not in (required, required | unified, required | unified | capture, required | unified | capture | product):
         raise RuntimeError("Unexpected package manifest")
     return manifest
 
@@ -78,12 +94,22 @@ def matching_release(release, manifest):
     )
 
 
+def require_space(base, manifest):
+    # Reserve room for staging and repair; Flatpak checks its own runtime space.
+    needed = sum((ROOT / name).stat().st_size for name in manifest["files"]) * 2 + 16 * 1024 * 1024
+    existing = base
+    while not existing.exists():
+        existing = existing.parent
+    if shutil.disk_usage(existing).free < needed:
+        raise RuntimeError("Not enough free space for a verified installation and repair copy. Free space in your home directory and retry; no application was replaced.")
+
+
 def prepare_release(releases, manifest):
     current = releases.parent / "current"
     if current.is_symlink() and current.resolve().parent == releases:
         if matching_release(current.resolve(), manifest):
             for name in manifest["files"]:
-                (current / name).chmod(0o700 if name in {"obsgod", "decky-install", "Install OBSGod.desktop", "Update OBSGod.desktop", "Update OBSGod.sh"} else 0o600)
+                (current / name).chmod(0o700 if name in {"obsgod", "decky-install", "Install OBSGod.desktop", "Update OBSGod.desktop", "Update OBSGod.sh", "Uninstall OBSGod.desktop"} else 0o600)
             return current.resolve()
     release = releases / manifest["version"]
     if release.exists() or release.is_symlink():
@@ -92,7 +118,7 @@ def prepare_release(releases, manifest):
         if matching_release(release, manifest):
             # ZIP/filesystem tools can drop mode bits. Repair a verified copy.
             for name in manifest["files"]:
-                (release / name).chmod(0o700 if name in {"obsgod", "decky-install", "Install OBSGod.desktop", "Update OBSGod.desktop", "Update OBSGod.sh"} else 0o600)
+                (release / name).chmod(0o700 if name in {"obsgod", "decky-install", "Install OBSGod.desktop", "Update OBSGod.desktop", "Update OBSGod.sh", "Uninstall OBSGod.desktop"} else 0o600)
             return release
         # Preserve an older/damaged copy, including files mapped by a running
         # process. A fresh directory allows repair and same-version replacement.
@@ -101,7 +127,7 @@ def prepare_release(releases, manifest):
     try:
         for name in manifest["files"]:
             shutil.copyfile(ROOT / name, staging / name)
-            (staging / name).chmod(0o700 if name in {"obsgod", "decky-install", "Install OBSGod.desktop", "Update OBSGod.desktop", "Update OBSGod.sh"} else 0o600)
+            (staging / name).chmod(0o700 if name in {"obsgod", "decky-install", "Install OBSGod.desktop", "Update OBSGod.desktop", "Update OBSGod.sh", "Uninstall OBSGod.desktop"} else 0o600)
         shutil.copyfile(ROOT / "manifest.json", staging / "manifest.json")
         staging.rename(release)
     finally:
@@ -118,7 +144,8 @@ def validate_activation_paths(base, releases, bin_dir, apps, manifest):
     executable = bin_dir / "obsgod"
     desktop = apps / "obsgod-setup.desktop"
     updater_desktop = apps / "obsgod-update.desktop" if "update.py" in manifest["files"] else None
-    for path in [executable, desktop] + ([updater_desktop] if updater_desktop else []):
+    uninstaller_desktop = apps / "obsgod-uninstall.desktop" if "Uninstall OBSGod.desktop" in manifest["files"] else None
+    for path in [executable, desktop] + [item for item in [updater_desktop, uninstaller_desktop] if item]:
         if path.exists() and not (path.is_file() or path.is_symlink()):
             raise RuntimeError("Refusing to replace a non-file application entry")
 
@@ -129,9 +156,10 @@ def activate_release(base, releases, bin_dir, apps, home, manifest):
     executable = bin_dir / "obsgod"
     desktop = apps / "obsgod-setup.desktop"
     updater_desktop = apps / "obsgod-update.desktop" if "update.py" in manifest["files"] else None
+    uninstaller_desktop = apps / "obsgod-uninstall.desktop" if "Uninstall OBSGod.desktop" in manifest["files"] else None
     release = prepare_release(releases, manifest)
     launch_code = "import subprocess,sys; result=subprocess.run([sys.executable,sys.argv[1]]); input('Press Enter to close this window.'); sys.exit(result.returncode)"
-    content = "[Desktop Entry]\nType=Application\nName=OBSGod Setup\nComment=Configure Steam Deck streaming locally\nExec=python3 -c " + quote_exec(launch_code) + " " + quote_exec(str(current / "setup.py")) + "\nIcon=video-display\nTerminal=true\nCategories=AudioVideo;\nX-OBSGod-Managed=true\n"
+    content = "[Desktop Entry]\nType=Application\nName=" + DISPLAY_NAME + " Setup\nComment=Configure Steam Deck streaming locally\nExec=python3 -c " + quote_exec(launch_code) + " " + quote_exec(str(current / "setup.py")) + "\nIcon=video-display\nTerminal=true\nCategories=AudioVideo;\nX-OBSGod-Managed=true\n"
     backup = base / "backups" / str(time.time_ns())
     changes = []
     # Each entry is replaced atomically. Switch current last: any failure before
@@ -144,10 +172,15 @@ def activate_release(base, releases, bin_dir, apps, home, manifest):
         (staging / "current").symlink_to(release)
         entries = [(staging / "executable", executable), (staging / "desktop", desktop)]
         if updater_desktop:
-            updater_content = "[Desktop Entry]\nType=Application\nName=Update OBSGod\nComment=Check and apply verified OBSGod updates\nExec=python3 -c " + quote_exec(launch_code) + " " + quote_exec(str(current / "update.py")) + "\nIcon=system-software-update\nTerminal=true\nCategories=AudioVideo;\nX-OBSGod-Managed=true\n"
+            updater_content = "[Desktop Entry]\nType=Application\nName=Update " + DISPLAY_NAME + "\nComment=Check and apply verified updates\nExec=python3 -c " + quote_exec(launch_code) + " " + quote_exec(str(current / "update.py")) + "\nIcon=system-software-update\nTerminal=true\nCategories=AudioVideo;\nX-OBSGod-Managed=true\n"
             (staging / "updater-desktop").write_text(updater_content)
             (staging / "updater-desktop").chmod(0o600)
             entries.append((staging / "updater-desktop", updater_desktop))
+        if uninstaller_desktop:
+            uninstall_content = "[Desktop Entry]\nType=Application\nName=Uninstall " + DISPLAY_NAME + "\nComment=Review removal, reset and owned-data wipe\nExec=python3 -c " + quote_exec(launch_code) + " " + quote_exec(str(current / "uninstall.py")) + "\nIcon=edit-delete\nTerminal=true\nCategories=AudioVideo;\nX-OBSGod-Managed=true\n"
+            (staging / "uninstaller-desktop").write_text(uninstall_content)
+            (staging / "uninstaller-desktop").chmod(0o600)
+            entries.append((staging / "uninstaller-desktop", uninstaller_desktop))
         try:
             for source, destination in entries:
                 if destination == executable and destination.is_symlink() and destination.readlink() == current / "obsgod":
@@ -183,22 +216,27 @@ def load_module(name, path):
 
 def require_idle(bridge, close=False):
     state = bridge.run_cli("status", timeout=6)
-    recording = state.get("recording", {})
-    if (not state.get("ok") or state.get("state") not in {"stopped", "setup"}
-            or state.get("stream", {}).get("active")
-            or recording is True or isinstance(recording, dict) and recording.get("active")
-            or state.get("output_known") is False
+    if not isinstance(state, dict):
+        raise RuntimeError("OBS output state could not be read. Inspect OBS before changing the installation.")
+    recording = state.get("recording")
+    recording_active = recording.get("active") if isinstance(recording, dict) else recording
+    stream = state.get("stream")
+    if (state.get("ok") is not True or state.get("state") not in ("stopped", "setup")
+            or not isinstance(stream, dict) or stream.get("active") is not False
+            or not isinstance(recording_active, bool) or recording_active
+            or state.get("output_known") is not True
+            or state.get("process") not in ("absent", "running")
             or state.get("operation") not in (None, "", "idle")):
         raise RuntimeError("OBS output is active, busy or unconfirmed. Stop streaming/recording in OBSGod first, then retry. The installer will not stop a broadcast for you.")
     if close and state.get("configured"):
         result = bridge.run_cli("restart", timeout=20)
-        if not result.get("ok"):
+        if not isinstance(result, dict) or not result.get("ok"):
             raise RuntimeError("Idle managed OBS could not be closed safely. Inspect OBS in Desktop Mode and retry; nothing was force-killed.")
 
 
 @contextmanager
 def control_lock(home):
-    state = Path(os.environ.get("XDG_STATE_HOME", str(home / ".local/state"))) / "obsgod"
+    state = xdg_root("XDG_STATE_HOME", home) / "obsgod"
     owned_directory(state, home)
     descriptor = os.open(state / "control.lock", os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
     with os.fdopen(descriptor, "w") as lock:
@@ -267,6 +305,21 @@ def recover_previous_plugin(decky, previous):
         return False
 
 
+def offer_decky_guide(url):
+    """Offer official instructions, never download or execute a privileged installer."""
+    question = "Decky is not ready. Open its official installation and troubleshooting instructions? Finish that setup, then rerun this installer."
+    accepted = False
+    if shutil.which("kdialog"):
+        accepted = subprocess.run(["kdialog", "--title", DISPLAY_NAME, "--yesno", question], check=False).returncode == 0
+    elif shutil.which("zenity"):
+        accepted = subprocess.run(["zenity", "--question", "--title=" + DISPLAY_NAME, "--text=" + question], check=False).returncode == 0
+    elif sys.stdin.isatty():
+        accepted = input(question + " [y/N] ").strip().lower() in {"y", "yes"}
+    if accepted:
+        return webbrowser.open(url)
+    return False
+
+
 def install(launch=True, with_decky=True):
     if platform.system() != "Linux" or platform.machine() not in {"x86_64", "amd64"}:
         raise RuntimeError("This preview package requires Linux x86_64 (Steam Deck)")
@@ -282,17 +335,19 @@ def install(launch=True, with_decky=True):
         print("Checking Decky's authenticated service and existing Steam connection…", flush=True)
         report = decky.status()
         if not report["ok"]:
+            if launch:
+                offer_decky_guide("https://decky.xyz/")
             raise RuntimeError(report["message"] + " No app or plugin was replaced. Install/start Decky using its official instructions, keep normal Steam open in Desktop Mode, and rerun this installer.")
         print("Decky " + report["version"] + " is ready.", flush=True)
         ensure_dependencies()
         bridge = load_module("obsgod_install_bridge", ROOT / "bridge.py")
     home = Path.home()
-    base = home / ".local/share/obsgod"
+    base, apps = app_directories(home)
     releases = base / "releases"
     bin_dir = home / ".local/bin"
-    apps = home / ".local/share/applications"
     for path in [base, releases, bin_dir, apps]:
         owned_directory(path, home)
+    require_space(base, manifest)
     with installation_lock(base):
         if with_decky:
             require_idle(bridge, close=True)
@@ -326,10 +381,10 @@ def install(launch=True, with_decky=True):
                     recovery_path.unlink()
         else:
             current = activate_release(base, releases, bin_dir, apps, home, manifest)
-    print("Installed OBSGod " + manifest["version"] + (" in the app and Decky." if with_decky else " app files only; Decky was not installed or verified."))
-    print("Reopen setup from Applications → Multimedia → OBSGod Setup.")
+    print("Installed " + DISPLAY_NAME + " " + manifest["version"] + (" in the app and Decky." if with_decky else " app files only; Decky was not installed or verified."))
+    print("Reopen setup from Applications → Multimedia → " + DISPLAY_NAME + " Setup.")
     if "update.py" in manifest["files"]:
-        print("Check and apply updates from Applications → Multimedia → Update OBSGod.")
+        print("Check and apply updates from Applications → Multimedia → Update " + DISPLAY_NAME + ".")
     print("Settings, keys, recordings, diagnostic history and unrelated plugins are preserved.")
     if not with_decky:
         print("Manual Decky ZIP: " + str(current / "obsgod-decky.zip"))
@@ -348,5 +403,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
     try:
         install(launch=not args.no_launch, with_decky=not args.app_only)
+    except subprocess.TimeoutExpired:
+        raise SystemExit("Install timed out while checking or installing a dependency. Inspect Decky/Discover and rerun the same installer to verify or repair the app/plugin pair; settings and recordings are preserved.") from None
+    except KeyboardInterrupt:
+        raise SystemExit("Installation was interrupted. Rerun this same installer to verify or repair both copies; do not delete your settings or stream key.") from None
     except (OSError, RuntimeError, ValueError, KeyError) as error:
         raise SystemExit("Install failed: " + str(error))

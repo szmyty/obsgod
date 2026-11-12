@@ -33,6 +33,9 @@ func main() {
 		if input.Operation == "probe" {
 			message = "Decky service and its connected Steam frontend are ready"
 		}
+		if input.Operation == "uninstall" {
+			message = "Decky confirms OBSGod is absent from its loaded plugins"
+		}
 		if err != nil {
 			message = err.Error()
 		}
@@ -41,6 +44,9 @@ func main() {
 	if err == nil {
 		result["decky_version"] = report.DeckyVersion
 		result["frontend_connected"] = report.FrontendConnected
+		if report.Removed {
+			result["removed"] = true
+		}
 		if report.Version != "" {
 			result["version"] = report.Version
 		}

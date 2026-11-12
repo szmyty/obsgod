@@ -55,7 +55,7 @@ class DesktopBootstrap(unittest.TestCase):
         self.package.mkdir()
         self.home = self.base / "home"
         self.home.mkdir()
-        for name in ["install.py", "Install OBSGod.desktop"]:
+        for name in ["install.py", "paths.py", "Install OBSGod.desktop"]:
             shutil.copyfile(ROOT / name, self.package / name)
         self.env = dict(os.environ, HOME=str(self.home), XDG_CONFIG_HOME=str(self.home / ".config"))
 

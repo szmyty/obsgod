@@ -147,6 +147,21 @@ class ReleaseChecks(unittest.TestCase):
             (release / "manifest.json").symlink_to(home / "private-secrets")
             self.assertEqual(releases.current_versions("0.1.0-deck.9")["app"], "unknown")
 
+    def test_decky_explicit_user_context_finds_xdg_install_without_global_home_change(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            home = Path(temporary) / "deck"
+            release = home / "data/obsgod/releases/0.1.0-deck.7"
+            release.mkdir(parents=True)
+            (release.parent.parent / "current").symlink_to(release)
+            (release / "manifest.json").write_text(json.dumps({"version": "0.1.0-deck.7", "revision": "1" * 40}))
+            previous_home = os.environ.get("HOME")
+            context = {"HOME": str(home), "XDG_DATA_HOME": str(home / "data")}
+            self.assertEqual(releases.current_versions("0.1.0-deck.7", environ=context)["app"], "0.1.0-deck.7")
+            self.assertEqual(os.environ.get("HOME"), previous_home)
+            for invalid in ["relative", "/tmp/invalid\npath"]:
+                context["XDG_DATA_HOME"] = invalid
+                self.assertEqual(releases.current_versions("0.1.0-deck.7", environ=context)["app"], "unknown")
+
 
 if __name__ == "__main__":
     unittest.main()
