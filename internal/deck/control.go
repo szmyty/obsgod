@@ -46,6 +46,7 @@ type Result struct {
 	Game          string                    `json:"game"`
 	Frames        string                    `json:"frames"`
 	Audio         *AudioStatus              `json:"audio,omitempty"`
+	Video         *CaptureVideoStatus       `json:"video,omitempty"`
 }
 
 func connect(ctx context.Context, secret Secrets, timeout time.Duration) (*automation.Client, error) {
@@ -116,6 +117,8 @@ func Status(ctx context.Context, p Paths) Result {
 	}
 	r.OutputKnown = true
 	r.Audio = readAudioStatus(p)
+	video := ReadCaptureVideoStatus(p)
+	r.Video = &video
 	captureCtx, captureCancel := context.WithTimeout(ctx, 400*time.Millisecond)
 	r.Capture = captureAvailability(captureCtx)
 	captureCancel()

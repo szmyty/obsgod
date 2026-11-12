@@ -6,7 +6,7 @@ import { createView, currentResult, observe, controls } from "./state.mjs";
 
 type Diagnostic = {time:string; level:string; message:string};
 type Outcome = {id?:number; action?:string; ok:boolean; message:string; recording_path?:string};
-type Result = {ok:boolean; state:string; message:string; configured?:boolean; output_known?:boolean; process?:string; connection?:string; recording?:boolean; capture?:string; frames?:string; game?:string; backend_id?:string; snapshot_id?:number; operation?:{id:number; action:string; state:string}|null; action_result?:Outcome; last_action?:Outcome; stream?:{active:boolean; reconnecting:boolean; bytes:number; duration_ms:number}; recording_path?:string; diagnostics?:Diagnostic[]; plugin_version?:string; settings?:{capture_mode?:"screen"|"game";idle_style?:"black"|"placeholder"};audio?:{state:string;message?:string}};
+type Result = {ok:boolean; state:string; message:string; configured?:boolean; output_known?:boolean; process?:string; connection?:string; recording?:boolean; capture?:string; frames?:string; game?:string; backend_id?:string; snapshot_id?:number; operation?:{id:number; action:string; state:string}|null; action_result?:Outcome; last_action?:Outcome; stream?:{active:boolean; reconnecting:boolean; bytes:number; duration_ms:number}; recording_path?:string; diagnostics?:Diagnostic[]; plugin_version?:string; settings?:{capture_mode?:"screen"|"game";idle_style?:"black"|"placeholder"};audio?:{state:string;message?:string};video?:{state:string;message?:string;watching?:boolean}};
 type UpdateResult = {ok:boolean; state:string; message:string; current_version?:string; latest_version?:string; available?:boolean; current_app_version?:string; current_plugin_version?:string; current_updater_version?:string; mismatch?:boolean; channel?:string};
 const readStatus=callable<[],Result>("status");
 const start=callable<[],Result>("start");
@@ -223,6 +223,7 @@ function Content(){
       <PanelSectionRow><div style={{fontSize:15,fontWeight:700}}>Capture mode: {captureMode==="game"?"Game only":"Entire screen"}</div></PanelSectionRow>
       <PanelSectionRow><ButtonItem layout="below" disabled={!canChangeCaptureMode(current)} onClick={()=>void changeCaptureMode()}>{busy==="capture-mode"?"Saving capture mode…":captureMode==="game"?"Switch to entire screen":"Switch to game only"}</ButtonItem></PanelSectionRow>
       <PanelSectionRow><div style={{fontSize:13,lineHeight:1.5,opacity:.8}}>Change modes while streaming and recording are stopped. Entire screen includes Steam menus. Game only uses the between-game screen when a compatible game source is unavailable; it never falls back to sharing the entire screen. Customize that screen in Desktop Setup.</div></PanelSectionRow>
+      {captureMode==="game"&&current?.video&&<PanelSectionRow><div style={{fontSize:13,lineHeight:1.5}}>{current.video.message||"Waiting for verified game capture"}</div></PanelSectionRow>}
       {current?.audio&&<PanelSectionRow><div style={{fontSize:13,lineHeight:1.5}}>Game audio: {current.audio.message||current.audio.state}. Check a local clip and your channel for sound.</div></PanelSectionRow>}
     </PanelSection>
     <PanelSection title="FIRST STREAM CHECK">

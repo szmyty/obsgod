@@ -33,7 +33,8 @@ def modules_json(data):
 def notices():
     text = "# Third-party notices\n\nOBSGod's CLI and application code retain the repository MIT license.\n\n"
     text += "OBS Studio and obs-gstreamer are separately installed GPL software from Flathub; their binaries are not included in this package.\n\n"
-    text += "OBSGod's bundled libgstobsgodcapture.so and its preferred source in CAPTURE-SOURCE.tar.gz are MIT licensed. It dynamically links separately installed GStreamer (LGPL-2.1-or-later) and PipeWire (MIT); those library binaries are not redistributed in this archive. The complete plugin source and MIT license are included.\n\n"
+    text += "OBSGod's independent capture implementation is MIT licensed. Its preferred source, native SDK header notices and full LGPL-2.1 text are included in CAPTURE-SOURCE.tar.gz and below. Separately installed GStreamer/GLib/PipeWire library binaries are not redistributed here.\n\n"
+    text += (REPO / "steamdeck/capture/THIRD_PARTY_NOTICES.md").read_text() + "\n\n"
     text += "The Decky plugin imports @decky/api 1.1.3 as a separate, replaceable LGPL-2.1 module in dist/decky-api.js, with its license included. Modifications change the manifest import to ./manifest.js and add the .js suffix to the types import for native browser modules. The original source is at https://github.com/SteamDeckHomebrew/loader-api. React and @decky/ui are supplied by Steam/Decky and are not bundled. Build inputs are pinned in steamdeck/decky/package-lock.json.\n\n"
     text += "## Go standard library\n\n" + (Path(command("go", "env", "GOROOT")) / "LICENSE").read_text() + "\n"
     linked = {}
@@ -55,7 +56,7 @@ def capture_source(epoch):
     output = io.BytesIO()
     with gzip.GzipFile(filename="", mode="wb", fileobj=output, mtime=0) as compressed:
         with tarfile.open(fileobj=compressed, mode="w") as archive:
-            for name in sorted(["gstobsgodcapture.c", "Makefile", "README.md", "LICENSE", "build.Dockerfile"]):
+            for name in sorted(["gstobsgodcapture.c", "Makefile", "README.md", "LICENSE", "THIRD_PARTY_NOTICES.md", "build.Dockerfile"]):
                 data = (REPO / "steamdeck/capture" / name).read_bytes()
                 info = tarfile.TarInfo("OBSGod-Capture/" + name)
                 info.size, info.mtime, info.mode = len(data), epoch, 0o644

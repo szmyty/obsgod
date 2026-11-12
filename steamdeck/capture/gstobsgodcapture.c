@@ -143,7 +143,9 @@ static void node_param(void *data, int seq, uint32_t id, uint32_t index,
   const struct spa_pod_prop *selection = spa_pod_find_prop(param, NULL, GAME_SCOPE_APP_ID);
   const struct spa_pod_prop *format = spa_pod_find_prop(param, NULL, SPA_FORMAT_VIDEO_format);
   uint32_t media_type = 0, subtype = 0, pixel_format = 0;
-  if (!selection || !format || spa_format_parse(param, &media_type, &subtype) < 0 ||
+  if (!selection || !format ||
+      spa_pod_find_prop(param, NULL, SPA_FORMAT_VIDEO_modifier) != NULL ||
+      spa_format_parse(param, &media_type, &subtype) < 0 ||
       media_type != SPA_MEDIA_TYPE_video || subtype != SPA_MEDIA_SUBTYPE_raw ||
       spa_pod_get_id(&format->value, &pixel_format) < 0 ||
       pixel_format != SPA_VIDEO_FORMAT_BGRx || !selection_allows(&selection->value, self->app_id))
@@ -321,7 +323,7 @@ static void stream_process(void *data)
       guint height = GST_VIDEO_INFO_HEIGHT(&self->info);
       guint64 row = (guint64)width * 4;
       gboolean corrupted = chunk &&
-        ((chunk->flags & SPA_CHUNK_FLAG_CORRUPTED) ||
+        ((chunk->flags & (SPA_CHUNK_FLAG_CORRUPTED | SPA_CHUNK_FLAG_EMPTY)) ||
          (header && (header->flags & SPA_META_HEADER_FLAG_CORRUPTED)));
       if (!corrupted && chunk && chunk->size > 0) {
         guint64 extent = chunk->stride > 0
