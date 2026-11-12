@@ -31,6 +31,37 @@ transport fixture now rejects unsupported Flatpak arguments. Actual CLI checks
 use a disposable official Debian Flatpak installation separately from product
 artifacts; actual Steam Deck/Discover behavior still requires the owner's retry.
 
+## Prepared candidate and evidence
+
+Draft [PR #32](https://github.com/szmyty/obsgod/pull/32) contains the repair.
+Candidate `0.1.0-deck.5.1` was built from exact source
+`f43e5b53b473c35dfe3facec114d28cbeff6c35d`. Its immutable review artifact commit is
+`afec6263fc43369917cd54b80a58055d5c00f0e6`:
+
+- [Complete corrected installer](https://raw.githubusercontent.com/szmyty/obsgod/afec6263fc43369917cd54b80a58055d5c00f0e6/obsgod-deck_0.1.0-deck.5.1_linux_amd64.tar.gz)
+- [Fresh exact-source qualification](https://raw.githubusercontent.com/szmyty/obsgod/afec6263fc43369917cd54b80a58055d5c00f0e6/installer-flatpak-qualification.json)
+- [Checksums](https://raw.githubusercontent.com/szmyty/obsgod/afec6263fc43369917cd54b80a58055d5c00f0e6/CANDIDATE-SHA256SUMS)
+
+Runtime archive SHA256:
+`dd86c830b260d765101d9819e95170c64e8980caaf60f54ebe9a120a4b6b1b5e`.
+All seven core public files, every internal runtime payload hash and the public
+fixed installer/plugin version were downloaded and verified.
+
+At that source: 56 Go cases passed (one optional existing-OBS test skipped),
+60 Python and eight Node cases passed, along with vet/vulnerability scan,
+typecheck/build/audit, repeated identical packages, actual package browsers,
+isolated pinned Decky/unified-installer/Desktop-updater fixtures and native OBS
+media/lifecycle/shutdown. Three targets compiled only. Real Flatpak 1.16.6
+reproduced the unsupported flag and accepted the corrected CLI surfaces; matching
+upstream source confirms row formatting. Synthetic metadata export succeeded but
+installation could not connect to its service, so a real nonempty installed row
+was not exercised. Actual owner-device retry and CI remain acceptance gates;
+current GitHub jobs did not start because of the account billing lock.
+
+Keep the existing installation and run the complete installer again. No separate
+uninstall, password reset or second WebSocket plugin is needed. Later
+evidence-only documentation commits do not relabel the qualified candidate.
+
 Official Flatpak references:
 
 - [1.16.1 info options](https://github.com/flatpak/flatpak/blob/1.16.1/app/flatpak-builtins-info.c#L54)
