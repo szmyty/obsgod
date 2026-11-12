@@ -27,7 +27,7 @@ func newSceneItemCommand(service obs.Service) *coral.Command {
 				return err
 			}
 			for _, item := range items {
-				fmt.Println(item)
+				fmt.Fprintln(cmd.OutOrStdout(), item)
 			}
 			return nil
 		},
@@ -74,7 +74,7 @@ func newSceneItemCommand(service obs.Service) *coral.Command {
 				return err
 			}
 			for _, item := range visibility {
-				fmt.Printf("%s: %t\n", item.Name, item.Visible)
+				fmt.Fprintf(cmd.OutOrStdout(), "%s: %t\n", item.Name, item.Visible)
 			}
 			return nil
 		},

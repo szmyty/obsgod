@@ -44,7 +44,7 @@ func newVirtualCamCommand(service obs.Service) *coral.Command {
 			if err != nil {
 				return err
 			}
-			fmt.Printf("Virtual camera: %s\n", strconv.FormatBool(active))
+			fmt.Fprintf(cmd.OutOrStdout(), "Virtual camera: %s\n", strconv.FormatBool(active))
 			return nil
 		},
 	})

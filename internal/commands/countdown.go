@@ -1,6 +1,8 @@
 package commands
 
 import (
+	"context"
+	"errors"
 	"fmt"
 	"time"
 
@@ -8,14 +10,30 @@ import (
 )
 
 func parseCountdownDuration(value string) (time.Duration, error) {
-	return time.ParseDuration(value)
+	duration, err := time.ParseDuration(value)
+	if err != nil || duration <= 0 || duration > 24*time.Hour {
+		return 0, errors.New("countdown duration must be positive, at most 24h, with units such as 30s or 2m")
+	}
+	return duration, nil
 }
 
-func countdown(service obs.Service, label string, duration time.Duration) error {
+func countdown(ctx context.Context, service obs.Service, label string, duration time.Duration) error {
+	if err := ctx.Err(); err != nil {
+		return err
+	}
 	until := time.Now().Add(duration).Add(time.Second)
 
-	c := time.Tick(time.Second)
-	for range c {
+	c := time.NewTicker(time.Second)
+	defer c.Stop()
+	for {
+		select {
+		case <-ctx.Done():
+			return ctx.Err()
+		case <-c.C:
+		}
+		if err := ctx.Err(); err != nil {
+			return err
+		}
 		remaining := time.Until(until)
 		if remaining < 0 {
 			remaining = 0

@@ -35,7 +35,7 @@ func newSceneCommand(service obs.Service) *coral.Command {
 				return err
 			}
 			for _, scene := range scenes {
-				fmt.Println(scene)
+				fmt.Fprintln(cmd.OutOrStdout(), scene)
 			}
 			return nil
 		},
@@ -48,7 +48,7 @@ func newSceneCommand(service obs.Service) *coral.Command {
 			if err != nil {
 				return err
 			}
-			fmt.Println(scene)
+			fmt.Fprintln(cmd.OutOrStdout(), scene)
 			return nil
 		},
 	})

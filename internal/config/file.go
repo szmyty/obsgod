@@ -12,6 +12,8 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+
+	"github.com/szmyty/obsgod/pkg/automation"
 )
 
 // Connection contains references to credentials, never inline credentials.
@@ -24,10 +26,12 @@ type Connection struct {
 }
 
 type File struct {
-	Version        int                   `json:"version"`
-	Connection     Connection            `json:"connection"`
-	DefaultProfile string                `json:"default_profile,omitempty"`
-	Profiles       map[string]Connection `json:"profiles,omitempty"`
+	Version          int                                `json:"version"`
+	Connection       Connection                         `json:"connection"`
+	DefaultProfile   string                             `json:"default_profile,omitempty"`
+	Profiles         map[string]Connection              `json:"profiles,omitempty"`
+	DefaultWorkflow  string                             `json:"default_workflow,omitempty"`
+	WorkflowProfiles map[string]automation.WorkflowPlan `json:"workflow_profiles,omitempty"`
 }
 
 type Options struct {
@@ -249,6 +253,17 @@ func loadFile(path string, required bool) (File, bool, error) {
 			return File{}, false, errors.New("connection profile names must use 1–64 letters, digits, periods, underscores or hyphens")
 		}
 		if err := validateConnection(connection); err != nil {
+			return File{}, false, err
+		}
+	}
+	if document.DefaultWorkflow != "" && !profileName.MatchString(document.DefaultWorkflow) {
+		return File{}, false, errors.New("default workflow profile has an invalid name")
+	}
+	for name, workflow := range document.WorkflowProfiles {
+		if !profileName.MatchString(name) {
+			return File{}, false, errors.New("workflow profile names must use 1–64 letters, digits, periods, underscores or hyphens")
+		}
+		if err := workflow.Validate(); err != nil {
 			return File{}, false, err
 		}
 	}

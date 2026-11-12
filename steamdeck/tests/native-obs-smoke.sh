@@ -206,6 +206,10 @@ json.dump({'unexpected_connection':connected},open('/work/output/no-late-start.j
 assert not connected,'OBS attempted an unexpected late stream connection'
 PY
 /src/dist/obsgod deck restart > /work/output/restart.json
+# Qualify the new local credential controls only after the preceding real OBS
+# lifecycle has positively closed the managed instance. This helper uses the
+# newly packaged candidate binary and never exports passwords or starts output.
+python3 /src/steamdeck/tests/native-control-password.py
 python3 - <<'PY'
 import json
 from pathlib import Path
@@ -220,6 +224,12 @@ clip=json.loads((p/'test-recording.json').read_text())
 assert clip['recording'] is False and clip['runtime']['recording'] is False,'clip completion preceded confirmed recording stop'
 restart=json.loads((p/'restart.json').read_text())
 assert restart['process']=='absent' and restart['output_known'] is True,'managed OBS shutdown was not confirmed'
+control=json.loads((p/'control-password-qualification.json').read_text())
+assert control['status']=='passed' and control['ordinary_obs_preserved'] and control['secret_values_exported'] is False
+assert [case['mode'] for case in control['cases']]==['generated','manual']
+assert all(case['actual_obs_new_password_authenticated'] and case['old_password_rejected_code']==4009 and case['output_stayed_stopped'] and case['final_managed_shutdown_confirmed'] for case in control['cases'])
+workflow=control['cases'][0]['settings_only_workflow']
+assert workflow['status']=='passed' and workflow['all_output_remained_inactive'] and workflow['managed_settings_and_credentials_preserved'] and workflow['private_generic_configuration_removed']
 ordinary=Path('/work/home/.var/app/com.obsproject.Studio/config/obs-studio')
 assert sorted(f.name for f in ordinary.iterdir())==['preserve.txt'],'ordinary OBS configuration was used'
 assert (ordinary/'preserve.txt').read_text()=='ordinary OBS configuration must remain unchanged\n'
@@ -241,5 +251,5 @@ assert not json.loads((p/'start-failure.json').read_text())['ok']
 assert not json.loads((p/'status-after-failure.json').read_text())['stream']['active']
 for name in ['configure','test-recording','start','status-live','stop']:
  assert 'fixture-key' not in (p/(name+'.json')).read_text(),name
-print('PASS: real OBS / GStreamer / synthetic PipeWire / PulseAudio: measured recording+RTMP game tone over default decoy, stale mixer repair, game-exit default fallback, changed default on next start, silence negative control, moving video, repeated lifecycle, failed-start cleanup and no late connection. Real Flatpak audio mapping, SteamOS hardware and Kick remain untested.')
+print('PASS: real OBS / GStreamer / synthetic PipeWire / PulseAudio: measured recording+RTMP game tone over default decoy, stale mixer repair, game-exit default fallback, changed default on next start, silence negative control, moving video, repeated lifecycle, failed-start cleanup, no late connection, generated/manual local control password recovery and old-password rejection. Real Flatpak audio mapping, SteamOS hardware and external providers remain untested.')
 PY
