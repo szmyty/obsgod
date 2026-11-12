@@ -135,6 +135,13 @@ func TestAudioGameSelectionRequiresOwnedTaggedLiveProcess(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer func() { _ = cmd.Process.Kill(); _ = cmd.Wait() }()
+	// Start does not guarantee that the child's exec environment is already
+	// visible through /proc. Wait for the same owned/tagged/live predicate used
+	// in production; do not relax its conservative checks during publication.
+	deadline := time.Now().Add(time.Second)
+	for !ownedSteamAudioProcess(cmd.Process.Pid) && time.Now().Before(deadline) {
+		time.Sleep(time.Millisecond)
+	}
 	if !ownedSteamAudioProcess(cmd.Process.Pid) {
 		t.Fatal("owned live Steam-tagged process was not identified")
 	}
