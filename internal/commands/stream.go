@@ -1,6 +1,8 @@
 package commands
 
 import (
+	"encoding/json"
+	"errors"
 	"fmt"
 	"strconv"
 
@@ -36,22 +38,41 @@ func newStreamCommand(service obs.Service) *coral.Command {
 			return service.StopStream()
 		},
 	})
-	streamCmd.AddCommand(&coral.Command{
+	var asJSON, quiet bool
+	statusCmd := &coral.Command{
 		Use:   "status",
 		Short: "Reports streaming status",
+		Args:  coral.NoArgs,
 		RunE: func(cmd *coral.Command, args []string) error {
+			if asJSON && quiet {
+				return errors.New("choose --json or --quiet, not both")
+			}
 			status, err := service.GetStreamStatus()
 			if err != nil {
 				return err
 			}
-			fmt.Printf("Streaming: %s\n", strconv.FormatBool(status.Active))
+			if asJSON {
+				return json.NewEncoder(cmd.OutOrStdout()).Encode(struct {
+					SchemaVersion int    `json:"schema_version"`
+					Kind          string `json:"kind"`
+					Active        bool   `json:"active"`
+					Timecode      string `json:"timecode,omitempty"`
+				}{1, "stream", status.Active, status.Timecode})
+			}
+			if quiet {
+				return nil
+			}
+			fmt.Fprintf(cmd.OutOrStdout(), "Streaming: %s\n", strconv.FormatBool(status.Active))
 			if !status.Active {
 				return nil
 			}
-			fmt.Printf("Timecode: %s\n", status.Timecode)
+			fmt.Fprintf(cmd.OutOrStdout(), "Timecode: %s\n", status.Timecode)
 			return nil
 		},
-	})
+	}
+	statusCmd.Flags().BoolVar(&asJSON, "json", false, "Print versioned stream status JSON")
+	statusCmd.Flags().BoolVar(&quiet, "quiet", false, "Suppress successful status output; errors still fail")
+	streamCmd.AddCommand(statusCmd)
 
 	return streamCmd
 }
