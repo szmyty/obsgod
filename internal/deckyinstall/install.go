@@ -213,11 +213,12 @@ func runAt(ctx context.Context, input Input, endpoint string) (Report, error) {
 		}
 		if !result.OK {
 			messages := map[string]string{
-				"unsupported":           "Decky's frontend is incompatible with this installer. Update Decky Loader using its official instructions and retry",
-				"busy":                  "Another OBSGod Decky installation is running. Let it finish, then retry",
-				"install-unconfirmed":   "Decky did not confirm the requested OBSGod installation. Saved settings were preserved; inspect Decky and retry to verify or repair",
-				"probe-failed":          "Decky's version or plugin service could not be verified. Keep Steam open in Desktop Mode, check Decky and retry",
-				"uninstall-unconfirmed": "Decky did not confirm OBSGod removal. Existing app/settings were preserved; inspect Decky and retry",
+				"unsupported":                    "Decky's frontend is incompatible with this installer. Update Decky Loader using its official instructions and retry",
+				"busy":                           "Another OBSGod Decky installation is running. Let it finish, then retry",
+				"install-unconfirmed":            "Decky did not confirm the requested OBSGod installation. Saved settings were preserved; inspect Decky and retry to verify or repair",
+				"probe-failed":                   "Decky's version or plugin service could not be verified. Keep Steam open in Desktop Mode, check Decky and retry",
+				"uninstall-unconfirmed":          "Decky did not confirm OBSGod removal. Existing app/settings were preserved; inspect Decky and retry",
+				"uninstall-location-unconfirmed": "The loaded OBSGod plugin is outside the verified Decky location. Set DECKY_HOME to your actual Decky root, review the removal inventory and retry; existing files were preserved",
 			}
 			if message, ok := messages[result.Code]; ok {
 				return report, errors.New(message)

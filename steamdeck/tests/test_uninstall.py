@@ -278,6 +278,18 @@ class RemovalSafety(unittest.TestCase):
         self.assertFalse(self.base.exists())
         self.assertFalse(self.state.exists())
 
+    def test_wipe_unknown_decky_root_has_visible_gate_and_never_mutates(self):
+        self.write(".config/obsgod/secrets.json", "preserved private fixture")
+        plan = uninstall.build_plan(self.home, "wipe")
+        self.assertEqual(plan["decky_root"], str(self.home / "homebrew"))
+        self.assertTrue(plan["pending_gates"])
+        self.assertIn("DECKY_HOME", uninstall.describe(plan))
+        with self.assertRaisesRegex(uninstall.RemovalError, "DECKY_HOME"):
+            uninstall.apply_plan(plan, self.home)
+        self.run_cli.assert_not_called()
+        self.remove_plugin.assert_not_called()
+        self.assertTrue((self.config / "secrets.json").exists())
+
     def test_custom_decky_roots_and_inconsistent_plugin_paths(self):
         root = self.home / "custom Decky"
         for kind in ["settings", "data", "logs"]:

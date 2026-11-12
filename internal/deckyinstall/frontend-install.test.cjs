@@ -67,6 +67,13 @@ process.stdin.on("end", async () => {
     assert.equal(confirms,0,"removal attempted an installation");
     assert.deepEqual(prompts,[],"removal changed unrelated prompts");
     assert(!JSON.stringify(result).includes("fixture-secret"));
+    if (mode === "uninstall-unknown-root") {
+      assert.deepEqual(result,{ok:false,code:"uninstall-location-unconfirmed"});
+      assert.equal(uninstalls,0,"unknown installation root mutated the loaded plugin");
+      assert.deepEqual(order,["Alpha","OBSGod","Beta"]);
+      assert.equal(window.__obsgodInstallerRunning,undefined);
+      return;
+    }
     if (mode === "uninstall-orphan") {
       assert.equal(result.ok,true,"loader absence is separate from filesystem proof");
       assert.equal(orphanFolder,true,"fixture did not model swallowed rmtree failure");
@@ -83,6 +90,8 @@ process.stdin.on("end", async () => {
       settleConfirmation();
       await new Promise(resolve=>setImmediate(resolve));
       assert.equal(window.__obsgodInstallerRunning,undefined);
+      // A new operator retry re-inventories the now-absent directory.
+      source=source.replace('"uninstall_existing":true','"uninstall_existing":false');
       assert.equal(JSON.parse(await eval(source)).ok,true);
       assert.equal(uninstalls,1,"already removed plugin was removed again");
       return;

@@ -50,7 +50,11 @@
     try {
       // Fixed compatibility identity; no caller-supplied plugin name or path.
       // Decky 3.3.1 may swallow filesystem errors, so verify resulting state.
-      if (request.uninstall_existing === true || plugins.some(plugin => plugin?.name === "OBSGod")) {
+      const loaded = plugins.some(plugin => plugin?.name === "OBSGod");
+      if (loaded && request.uninstall_existing !== true) {
+        return answer({ok:false,code:"uninstall-location-unconfirmed"});
+      }
+      if (request.uninstall_existing === true) {
         await bounded(mutate("utilities/uninstall_plugin", "OBSGod"), 60000);
       }
       const remaining = await bounded(backend.call("loader/get_plugins"));

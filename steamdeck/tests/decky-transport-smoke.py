@@ -108,10 +108,11 @@ server.listen(0,'127.0.0.1',()=>process.stdout.write(JSON.stringify({port:server
 async def runtime_installer_upgrade(fixture, args, work, plugins, loader, settings):
     """Run the packaged default unified installer; preserve actual user files."""
     home = work / "home with spaces %20"
-    home.mkdir()
+    home.mkdir(exist_ok=True)
     env = dict(os.environ, HOME=str(home), XDG_CONFIG_HOME=str(home / ".config"),
                XDG_STATE_HOME=str(home / ".local/state"), XDG_DATA_HOME=str(home / ".local/share"),
-               XDG_CACHE_HOME=str(home / ".cache"), XDG_CURRENT_DESKTOP="KDE", DESKTOP_SESSION="plasma")
+               XDG_CACHE_HOME=str(home / ".cache"), DECKY_HOME=str(plugins.parent),
+               XDG_CURRENT_DESKTOP="KDE", DESKTOP_SESSION="plasma")
     previous = work / "previous runtime"
     previous.mkdir()
     with tarfile.open(args.previous_archive) as archive:
@@ -364,8 +365,10 @@ async def run(args):
     await old_transport_reproduction(router, helpers)
     with tempfile.TemporaryDirectory(prefix="obsgod-decky-transport-") as temporary:
         work = Path(temporary)
-        plugins = work / "plugins"
-        plugins.mkdir()
+        home = work / "home with spaces %20"
+        home.mkdir()
+        plugins = home / "custom Decky root/plugins"
+        plugins.mkdir(parents=True)
         for name in ["Alpha", "Beta"]:
             folder = plugins / name.lower()
             folder.mkdir()
@@ -474,8 +477,14 @@ async def run(args):
             # authenticated frontend; a filesystem-only legacy copy must also
             # be removed when its identity is known but its registry is absent.
             if not args.runtime_archive:
+                blocked = await asyncio.create_subprocess_exec(str(args.helper.resolve()),
+                    stdin=asyncio.subprocess.PIPE, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.STDOUT)
+                output, _ = await asyncio.wait_for(blocked.communicate(json.dumps({"operation":"uninstall"}).encode()),30)
+                refusal = json.loads(output)
+                assert blocked.returncode == 1 and not refusal["ok"] and "DECKY_HOME" in refusal["message"]
+                assert "OBSGod" in loader.plugins and (plugins / "obsgod").is_dir()
                 await fixture.execute([str(args.helper.resolve())],os.environ,
-                    input_data=json.dumps({"operation":"uninstall"}).encode())
+                    input_data=json.dumps({"operation":"uninstall","uninstall_existing":True}).encode())
             assert "OBSGod" not in loader.plugins and not (plugins / "obsgod").exists()
             absent=await fixture.execute([str(args.helper.resolve())],os.environ,
                 input_data=json.dumps({"operation":"uninstall"}).encode())

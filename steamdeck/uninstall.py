@@ -81,6 +81,10 @@ def build_plan(home, mode="uninstall", purge=False, delete_recordings=False, rec
     # unrelated XDG Videos location during a product rename.
     videos = home / "Videos/OBSGod"
     decky = decky_locations(home, environ)
+    decky_root = decky["plugin"].parent.parent
+    pending_gates = []
+    if mode == "wipe" and not decky_root.is_dir():
+        pending_gates.append("Decky's root is unconfirmed. Set DECKY_HOME to the actual Decky directory, then review this inventory again before wiping adapter data.")
     entries = []
     preserved = [str(videos) + " (unselected files)", "Decky Loader", "ordinary OBS profiles", "OBS/GStreamer shared Flatpaks"]
     if mode == "reset":
@@ -149,7 +153,8 @@ def build_plan(home, mode="uninstall", purge=False, delete_recordings=False, rec
             raise RemovalError("A selected recording is not a regular file")
         add(path, "Explicitly selected recording", "file")
     return {"mode": mode, "remove_plugin": mode != "reset", "entries": entries,
-            "preserved": preserved, "base": str(base), "state": str(state), "plugin_directory": str(decky["plugin"])}
+            "preserved": preserved, "base": str(base), "state": str(state), "plugin_directory": str(decky["plugin"]),
+            "decky_root": str(decky_root), "pending_gates": pending_gates}
 
 
 def require_idle():
@@ -204,6 +209,8 @@ def remove_plugin(home, directory=None):
 
 
 def apply_plan(plan, home):
+    if plan.get("pending_gates"):
+        raise RemovalError(" ".join(plan["pending_gates"]))
     state = require_idle()
     if state.get("configured") or state.get("process") not in (None, "absent"):
         closed = run_cli("restart", timeout=20)
@@ -259,11 +266,14 @@ def apply_plan(plan, home):
 def describe(plan):
     lines = [DISPLAY_NAME + " — " + plan["mode"] + " inventory", ""]
     if plan["remove_plugin"]:
-        lines.append("Remove the OBSGod compatibility plugin through Decky.")
+        lines.append("Remove the OBSGod compatibility plugin through Decky at " + plan["plugin_directory"] + ".")
+    lines.append("Decky adapter inventory root: " + plan["decky_root"] + ". For a nonstandard installation, set DECKY_HOME before reviewing this plan.")
     lines.extend(entry["label"] + ": " + entry["path"] for entry in plan["entries"])
     if not plan["entries"]:
         lines.append("No selected application/data paths currently exist.")
     lines.extend(["", "Preserve:"] + plan["preserved"])
+    if plan.get("pending_gates"):
+        lines.extend(["", "Resolve before removal:"] + plan["pending_gates"])
     lines.append("\nSelected deletions cannot be undone. OBS / GStreamer and Decky remain installed.")
     return "\n".join(lines)
 

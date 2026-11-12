@@ -223,11 +223,11 @@ func TestFrontendInstallerBehavior(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	for _, mode := range []string{"install", "reject", "missing-prompt", "no-frontend", "probe", "confirm-timeout", "confirm-timeout-reject", "uninstall", "uninstall-empty", "uninstall-reject", "uninstall-retained", "uninstall-timeout", "uninstall-orphan"} {
+	for _, mode := range []string{"install", "reject", "missing-prompt", "no-frontend", "probe", "confirm-timeout", "confirm-timeout-reject", "uninstall", "uninstall-empty", "uninstall-reject", "uninstall-retained", "uninstall-timeout", "uninstall-orphan", "uninstall-unknown-root"} {
 		command := exec.Command(node, "--input-type=commonjs", "-e", string(script))
 		request, _ := json.Marshal(Input{Operation: map[bool]string{true: "probe", false: "install"}[mode == "probe"], ZIPPath: "/home/deck/space and %20/plugin.zip", SHA256: strings.Repeat("a", 64), Version: "0.1.0-test"})
 		if strings.HasPrefix(mode, "uninstall") {
-			request, _ = json.Marshal(Input{Operation: "uninstall", UninstallExisting: mode == "uninstall-orphan"})
+			request, _ = json.Marshal(Input{Operation: "uninstall", UninstallExisting: mode != "uninstall-empty" && mode != "uninstall-unknown-root"})
 		}
 		command.Stdin = strings.NewReader(strings.Replace(frontendScript, "__OBSGOD_REQUEST__", string(request), 1))
 		command.Env = append(os.Environ(), "OBSGOD_TRANSPORT_TEST_MODE="+mode)
