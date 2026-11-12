@@ -1,5 +1,26 @@
 # Current work
 
+## Active: authorized Milestone 2 implementation
+
+After the pre-implementation sync the owner explicitly said to proceed with
+Milestone2. Working display name: **Decky Stream**. Organization/final brand and
+wallet addresses remain pending. This authorization supersedes the older
+proposal-only status below. Read [the implementation ledger](docs/milestone-2.md).
+Use one versioned product metadata source; retain current compatibility IDs and
+the exact trusted update repository until an approved migration is qualified.
+Use Decky-provided environment metadata/paths where applicable, and one shared
+Desktop/CLI XDG configuration. Decky's persistent runtime-data directory is not
+`XDG_RUNTIME_DIR`. Bottom support buttons use the owner's five common funding
+destinations; Bitcoin/Ethereum/Solana receive UI is hidden until public addresses
+and explicit networks are configured. No wallet/account/transaction facts invented.
+
+Work is on `codex/m2-product-foundation`, based on clean default `master`
+`539bb54a7a6796558c396ef21b6a72c3aeb03ce5`. The main rename remains403-blocked.
+Keep bounded draft checkpoints and current acceptance evidence. No release,
+deployment, organization transfer, other-repository submission or spending is
+authorized by implementation approval alone. Actual Deck and successful CI/review
+gates remain open. Do not apply old preview6 receipts to newer source.
+
 ## 2026-11-12 consolidation and proposed product plan
 
 The latest owner request authorizes merging all open PRs, deleting nonprimary
