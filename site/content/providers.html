@@ -1,0 +1,12 @@
+<header class="doc-header"><p class="eyebrow">Your destination</p><h1>Bring your own channel.</h1><p class="lead">Keep the server URL and stream key separate. Your provider dashboard is the source of truth.</p></header><div class="prose">
+<section><h2>Provider setup</h2><div class="table-scroll"><table><thead><tr><th scope="col">Destination</th><th scope="col">What to obtain</th></tr></thead><tbody>
+<tr><td>Kick</td><td>Server URL and stream key from your creator dashboard.</td></tr>
+<tr><td>Twitch</td><td>An appropriate ingest server and your channel's stream key.</td></tr>
+<tr><td>YouTube</td><td>The server and key for the intended live event or reusable stream configuration.</td></tr>
+<tr><td>Custom RTMP(S)</td><td>A compatible ingest server URL and separate key from your service administrator.</td></tr>
+</tbody></table></div>
+<p>The Milestone 2 setup work adds guided destination choices. A preset is a configuration aid: it is not OAuth, automatic account creation or proof of provider acceptance. Use <code>rtmps://</code> when your provider supports it.</p></section>
+<section><h2>Save privately, then verify</h2><ol><li>Open Desktop setup and choose the intended destination.</li><li>Copy the server URL without embedding the key, username or a credential-bearing query string. Enter the key only in its private field.</li><li>Save settings, make a local audio/video clip, then start one deliberate broadcast.</li><li>Confirm the intended channel or event on another device. Check audible sound and picture, then stop and verify output ends.</li></ol>
+<p>Provider eligibility, event visibility and ingest requirements can change. Consult the provider's dashboard rather than treating an old example URL as permanent.</p></section>
+<section><h2>Current boundaries</h2><p>One configured destination is used at a time. These choices do not establish simultaneous multistreaming, browser-source integration, chat features or per-provider hardware qualification. Record exact source, device, provider and viewer outcomes for each claimed supported path.</p></section>
+</div>

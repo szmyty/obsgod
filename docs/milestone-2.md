@@ -34,6 +34,15 @@ Each batch is checked and checkpointed in reviewable draft PRs. Source-changing
 repairs precede final candidate qualification. A package is not called qualified
 by receipts from a different revision.
 
+Current stack starts with [#52](https://github.com/szmyty/obsgod/pull/52), then
+[#53](https://github.com/szmyty/obsgod/pull/53),
+[#54](https://github.com/szmyty/obsgod/pull/54), and
+[#55](https://github.com/szmyty/obsgod/pull/55), followed by CLI/workflow and
+documentation/qualification drafts. Review/merge in dependency order; these
+drafts do not close original criteria. The exact final source/artifact matrix
+will be attached here after source freeze, distinguishing unavailable device/
+CI checks from passed local checks.
+
 ## Remaining owner and external gates
 
 Organization/repository transfer and final Identity asset approval await owner

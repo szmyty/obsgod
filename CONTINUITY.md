@@ -14,12 +14,24 @@ Desktop/CLI XDG configuration. Decky's persistent runtime-data directory is not
 destinations; Bitcoin/Ethereum/Solana receive UI is hidden until public addresses
 and explicit networks are configured. No wallet/account/transaction facts invented.
 
-Work is on `codex/m2-product-foundation`, based on clean default `master`
+Work is stacked in draft #52 (`codex/m2-product-foundation`) then #53
+(`codex/m2-support-panel`), #54 (`codex/m2-installation-lifecycle`),
+#55 (`codex/m2-destinations-control`), and the CLI/workflow follow-on,
+based on clean default `master`
 `539bb54a7a6796558c396ef21b6a72c3aeb03ce5`. The main rename remains403-blocked.
 Keep bounded draft checkpoints and current acceptance evidence. No release,
 deployment, organization transfer, other-repository submission or spending is
 authorized by implementation approval alone. Actual Deck and successful CI/review
 gates remain open. Do not apply old preview6 receipts to newer source.
+
+All independent M2 implementation is prepared: metadata/Decky paths, layered
+configuration and explicit workflow profiles, funding/local crypto receive UI,
+controller panel, provider guides, local password recovery, XDG install/update
+and reviewed reset/uninstall/wipe. Remaining docs/site/release preparation is
+being checkpointed before a clean-source **0.1.0-deck.7** matrix. Custom Decky
+roots require verified DECKY_HOME; unknown-root removal/wipe fails closed.
+Published updater4.1 is fixed to runtime4; maintained dynamic6 bootstrap is a
+separate tested path, never rewrite old immutable updater bytes.
 
 ## 2026-11-12 consolidation and proposed product plan
 

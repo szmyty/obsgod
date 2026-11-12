@@ -1,0 +1,42 @@
+{
+  "index.html": {
+    "title": "OBS streaming from Steam Deck",
+    "description": "OBS streaming source preview for Steam Deck, with explicit capture choices and optional support.",
+    "navigation": "Home"
+  },
+  "install.html": {
+    "title": "Installation and first stream",
+    "description": "Install a reviewed candidate, verify an audible local clip and confirm a live viewer stream.",
+    "navigation": "Install"
+  },
+  "providers.html": {
+    "title": "Streaming destinations",
+    "description": "Configure Kick, Twitch, YouTube or custom RTMP(S) with separate server and private key fields.",
+    "navigation": "Providers"
+  },
+  "configuration.html": {
+    "title": "Configuration and capture",
+    "description": "CLI precedence, stable compatibility identifiers, XDG paths, capture modes and audio limits.",
+    "navigation": "Configuration"
+  },
+  "updates.html": {
+    "title": "Updates and repair",
+    "description": "Deliberate version checks, verified stopped-state updates, settings preservation and explicit repair and rollback.",
+    "navigation": "Updates"
+  },
+  "uninstall.html": {
+    "title": "Uninstall, reset and wipe",
+    "description": "Inspect owned-data inventory and deliberately uninstall, reset or wipe without removing unrelated applications.",
+    "navigation": "Uninstall"
+  },
+  "troubleshooting.html": {
+    "title": "Troubleshooting and compatibility",
+    "description": "Observed output state, startup failures, audio checks, capture fallback and useful problem reports.",
+    "navigation": "Help"
+  },
+  "privacy.html": {
+    "title": "Privacy, security and support",
+    "description": "Local credentials, deliberate network actions, filtered diagnostics and optional funding links.",
+    "navigation": "Privacy"
+  }
+}

@@ -1,11 +1,11 @@
-# OBSGod Steam Deck reliability candidate
+# Decky Stream Steam Deck guide
 
 OBSGod runs an isolated OBS Studio Flatpak and exposes streaming controls in
 Decky's Quick Access panel. Stock OBS still needs a graphical session; this is
 managed background OBS, not a headless OBS server. SteamOS/Linux x86_64 is the
 supported target. Normal use does not disable SteamOS read-only protection.
 
-**The audio/capture upgrade is under draft review.** Use the candidate and checksums identified
+**The Milestone 2 candidate is under draft review.** Use the candidate and checksums identified
 in its draft PRs, not an older published preview as evidence of these fixes.
 Cloud tests do not establish actual Steam Deck, Flatpak, Gamescope, AMD encoder,
 controller, audio or Kick compatibility. Required device checks remain open.
@@ -25,16 +25,16 @@ controller, audio or Kick compatibility. Required device checks remain open.
    if asked. Keep the terminal open. The installer checks dependencies, verifies
    its files and installs both the app and the exact bundled OBSGod Decky plugin.
    Its final result stays visible; errors must not disappear with the terminal.
-4. In **OBSGod Setup**, enter the server URL and secret key from your Kick
-   dashboard. For the initial test use 4500 kbps, 30 fps and AMD H.264; switch to
+4. In **Decky Stream Setup**, choose Kick, Twitch, YouTube or custom RTMP(S),
+   then enter the server URL and secret key from that destination’s dashboard. For the initial test use 4500 kbps, 30 fps and AMD H.264; switch to
    software H.264 if hardware encoding fails. Microphone is off unless selected.
    Save and choose **Finish and close setup**. Existing settings do not require
    key re-entry. Never share the private setup link or the key.
-5. Return to **Gaming Mode**, then open **••• → Decky → OBSGod**. Make a
+5. Return to **Gaming Mode**, then open **••• → Decky → Decky Stream** (the installed compatibility ID remains OBSGod). Make a
    **10-second test clip** first. This never broadcasts, so a red streaming dot
    during the clip is normal. The clip is saved in **Videos/OBSGod**; check its
    video and sound in Desktop Mode before broadcasting.
-6. Choose **Start streaming**, then watch the Kick channel on another device.
+6. Choose **Start streaming**, then watch your destination channel on another device.
    Confirm both picture and sound. Use **Cancel operation** while starting or
    **Stop streaming** when output is active. Unknown output retains a recovery
    Stop action; inspect OBS and the channel if stopping cannot be confirmed.
@@ -44,7 +44,7 @@ full-screen capture must still deliver usable nonblank frames before a test or
 broadcast starts. Game-only mode permits the explicitly selected between-game
 screen when no verified game capture is available. Some Gamescope versions cannot capture the Steam UI with no game; a
 blank/unavailable feed is an explicit platform blocker, not proof that OBS
-failed to launch. Custom idle images/videos belong to Roadmap 2.
+failed to launch. Custom idle images/videos belong to Milestone 3.
 
 If the launcher is opened as text, open Konsole in the extracted folder and run
 `python3 install.py`. `--no-launch` installs without opening setup. Use the normal
@@ -67,7 +67,7 @@ resynchronization. The icon and panel use the same observations:
 A click is not proof of a stream transition. Controls follow current state;
 repeated requests are coalesced and successful stream notifications follow
 confirmed transitions. Action errors do not overwrite a still-live stream.
-Green describes OBS output health, not what a Kick viewer receives.
+Green describes OBS output health, not what a viewer receives.
 
 The **Diagnostic console** below Refresh shows startup stages and persists the
 latest 100 filtered events. **Copy console log** copies all retained pages,
@@ -89,7 +89,9 @@ second unmanaged OBS instance to work around an occupied control port.
 Compatible OBS 28+ includes **obs-websocket**. OBSGod verifies the installed OBS
 and capture dependencies and maintains an enabled local WebSocket listener with
 a random password; a separate WebSocket plugin download is normally unnecessary.
-User-facing password change/reset controls are deferred to Roadmap 2.
+Desktop Setup now offers credential-free local connection information, an explicit
+read-only connection test, and password change/reset while managed OBS is fully
+closed. See [destinations and control recovery](stream-destinations.md).
 
 Configure in Desktop Mode and start inside Gaming Mode. Session switching may
 terminate OBS; Desktop-to-Gaming stream continuity is not promised without
@@ -121,7 +123,7 @@ Game-only mode shows **black** or a **custom placeholder message** when no game
 is identified, more than one game is ambiguous, the compositor lacks the required
 format, or captured game frames cannot be verified. The default message is
 “Game starting soon”; edit it in Desktop Setup. No external artwork is bundled.
-Arbitrary image/video backgrounds and password controls remain separate work.
+Arbitrary image/video backgrounds remain Milestone 3 work.
 An already started stream stays live while game capture and fallback alternate.
 The green indicator follows OBS output progress even during an intentional
 between-game screen. Opening Steam menus should not change the app-filtered
@@ -147,7 +149,7 @@ selected, and an output-monitor loopback cannot be selected as microphone.
 The panel reports routed audio and short **signal / silent / unknown** meter
 observations separately from the streaming dot. Silence during a quiet moment
 does not stop streaming. Play game sound during the local clip, then listen to
-the saved clip and a Kick viewer on another device. A meter or AAC track alone
+the saved clip and a separate viewer on another device. A meter or AAC track alone
 is not proof of audible viewer output. If changing headphones/output routes,
 stop and start again so discovery selects the new output; live hot-plug routing
 is not yet qualified. System mute/zero volume is reported, never silently changed.
@@ -159,7 +161,7 @@ configuration are deleted or replaced by the installer.
 
 ## Updates and recovery
 
-**Check for updates** is at the bottom of the panel. It shows the installed and
+**Check for updates** appears near the bottom of the panel, above optional support. It shows the installed and
 latest compatible runtime versions, no-update, offline or failure results. A
 check never replaces files or interrupts output. Updater-only releases are not
 mistaken for new streaming runtimes. Historical immutable same-repository
@@ -175,17 +177,67 @@ repair are supported; a partial failure must show what changed and how to retry
 or recover. Do not assume Decky's own Reinstall button fetches a newer OBSGod
 runtime.
 
+The historical preview4.1 updater is a fixed preview4 bootstrap, not a dynamic
+latest-version updater. Download the current reviewed installer/updater to
+leave that generation; its immutable verification cannot be repointed to newer
+bytes. The maintained preview6 updater can verify a new unified candidate,
+while publication and actual-device upgrade acceptance remain separate gates.
+
 Keep Steam's normal Desktop frontend available for Decky's supported installer
 bridge. The earlier generic instruction to close Big Picture was not a proven
 cause of the owner's failure. The new transport preserves the frontend's
 WebSocket instead of taking its single connection. Cloud protocol fixtures do
 not prove the actual Steam frontend works; that remains a device check.
 
-To uninstall, remove OBSGod through Decky and run
-`python3 ~/.local/share/obsgod/current/uninstall.py`.
-Add `--purge-settings` only to delete OBSGod credentials and isolated OBS settings.
-Recordings and executable backups remain. OBS/capture Flatpaks remain separately
-installed and can be removed through Discover if no longer wanted.
+## Uninstall, reset and wipe
+
+Open **Uninstall Decky Stream** in Desktop Mode, or run the bundled
+`uninstall.py`. Review its inventory before confirmation. For the default
+installation location:
+
+```sh
+python3 ~/.local/share/obsgod/current/uninstall.py --dry-run --json
+python3 ~/.local/share/obsgod/current/uninstall.py
+```
+
+If you selected `XDG_DATA_HOME`, use the `current/uninstall.py` path shown by your
+installer. The tool preserves an existing legacy installation location until a
+deliberate migration; it refuses conflicting installations instead of guessing.
+
+- Default uninstall removes the app/plugin and owned shortcuts, retaining
+  settings, credentials, history and recordings.
+- `--reset` resets owned settings, credentials, isolated OBS, state and cache
+  while retaining the installed app/plugin.
+- `--wipe` removes owned app/data/rollback copies as well. Recordings remain a
+  separate explicit choice.
+- `--delete-recordings` additionally selects standard OBS date-named MKVs in
+  `Videos/OBSGod`; use repeatable `--recording PATH` for an explicitly selected
+  other MKV there. Review the exact dry-run inventory first.
+- `--yes` is the noninteractive equivalent of confirming the displayed plan.
+
+Removal requires idle, known output and a supported Decky removal path; missing
+or malformed status is not permission to delete. A partial failure stops with
+an honest recovery result. Ordinary OBS, other plugins and shared OBS/GStreamer
+Flatpaks remain separate. The legacy `--purge-settings` option remains supported.
+
+For a nonstandard Decky installation, supply its verified root through
+`DECKY_HOME` before planning removal. The tool lists the exact plugin/settings/
+data/log paths it knows. An unknown loaded-plugin root blocks removal, and an
+unknown wipe root remains an explicit pending gate; it is never guessed or
+reported as a complete wipe.
+
+## Funding and configuration
+
+The optional Support section opens the five configured external funding pages
+only after a click. It does not affect streaming or offline use. Cryptocurrency
+receive controls remain hidden until public receiving addresses and explicit
+networks are configured. See [support configuration](support.md).
+
+The versioned [CLI configuration reference](configuration.md) documents flags,
+`OBSGOD_*`/legacy `OBS_*` variables, private secret references, XDG connection
+profiles and offline shell help. Managed Deck settings stay separate from a
+remote-OBS connection profile. The adapter uses Decky's supplied plugin/user
+paths when present; Desktop and CLI share the same managed settings.
 
 ## Required device acceptance
 
@@ -202,7 +254,8 @@ OBS/GStreamer/Decky/Steam versions, encoder settings and exact outcomes:
   reboot and the supported session topology. Record unsupported cases explicitly.
 - Start, repeated clicks, Stop and Cancel; red only after confirmed stop, amber
   for unknown/reconnecting/stalled output, no duplicate success notifications.
-- Actual Kick viewer picture/sound on a second device, plus game FPS/encoder load.
+- Actual viewer picture/sound on a second device for each claimed destination,
+  plus game FPS/encoder load. Provider presets alone are not viewer qualification.
 - Update checks while streaming do not mutate files; applying while active,
   recording or unconfirmed is blocked. Verify no-update, offline, bad checksum,
   interrupted apply, same-version repair and recovery.

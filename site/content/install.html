@@ -1,0 +1,20 @@
+<header class="doc-header"><p class="eyebrow">Start here</p><h1>Install, check, then stream.</h1><p class="lead">Use Desktop Mode for installation and private setup. Use Gaming Mode for the stream test.</p></header><div class="prose">
+<section><h2>Preview availability</h2>
+<div class="callout warning"><p><strong>This is a source and documentation preview.</strong> A reviewed Milestone 2 binary download is not available from this page. Follow the <a href="@@SOURCE_URL@@">review PR</a> for exact source, package revisions and checksums when a candidate is prepared. Older archives do not contain these new changes.</p></div>
+<p>The supported target is SteamOS/Linux x86_64 on Steam Deck. Other platforms may compile, but compilation does not establish support. OBS is a managed graphical application, not a headless server.</p></section>
+<section><h2>Before installing</h2><ul>
+<li>Install <a href="https://decky.xyz/">Decky Loader from its official project</a>. In Gaming Mode, Decky appears in the <strong>••• Quick Access panel</strong>, not as a normal Desktop application.</li>
+<li>Use OBS Studio <strong>28 or newer</strong>. Its WebSocket control server is bundled; do not add a second obs-websocket plugin.</li>
+<li>The installer checks supported OBS and GStreamer capture dependencies, local Decky availability and the installation path. Read any failure and repair the named prerequisite before retrying.</li>
+<li>Keep your existing installation and settings during an upgrade. Stop streaming and recording before changing application files.</li></ul></section>
+<section><h2>Install a reviewed package</h2><ol>
+<li>Download the exact reviewed <code>_linux_amd64.tar.gz</code> candidate and verify its published checksum. Extract the <strong>whole archive</strong>.</li>
+<li>In the extracted directory, run the Desktop installer. Use a terminal if the launcher closes or opens as text:
+<pre><code>python3 install.py --no-launch</code></pre>
+Run as your normal Deck user, without sudo. This installs the app and matching bundled plugin; it does not start a broadcast.</li>
+<li>Open the installed setup launcher. Enter the RTMP(S) server and key from your streaming provider, save, then finish setup. Keep the private setup URL and key out of screenshots and logs.</li>
+<li>Return to Gaming Mode and open <strong>••• → Decky → @@DISPLAY_NAME@@</strong>. Some installation identifiers still say <strong>OBSGod</strong> during the compatibility transition.</li></ol></section>
+<section><h2>Make the first audible clip</h2><p>Choose <strong>Make 10-second test clip</strong> while playing game sound. This records locally and never broadcasts, so the streaming indicator may stay red. Inspect the clip in <code>Videos/OBSGod</code> in Desktop Mode and listen for sound. Confirm your microphone choice separately; it is off by default.</p>
+<p>Then explicitly start streaming in Gaming Mode. On another device, open your channel and confirm picture <strong>and sound</strong>. A successful OBS command or green dot is not a viewer receipt. Use Stop and confirm the channel stops.</p></section>
+<section><h2>Continue</h2><p><a href="providers.html">Set up a provider</a> · <a href="configuration.html">Configure capture and connection</a> · <a href="troubleshooting.html">Recover from a problem</a></p><p><a href="@@DECK_GUIDE_URL@@">Detailed Steam Deck source guide</a></p></section>
+</div>

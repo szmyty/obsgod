@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="@@DESCRIPTION@@">
+  <meta name="color-scheme" content="dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'; img-src 'self' data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>@@TITLE@@ · @@DISPLAY_NAME@@</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header wrap">
+    <a class="wordmark" href="index.html">@@DISPLAY_NAME@@<span class="preview-label">preview</span></a>
+    <nav aria-label="Main navigation">@@NAVIGATION@@</nav>
+  </header>
+  <div class="preview-notice"><div class="wrap"><strong>Development preview.</strong> Milestone 2 is under review. Actual Steam Deck qualification and a new published release are pending.</div></div>
+  <main id="main" class="wrap" tabindex="-1">@@MAIN@@</main>
+  <aside class="support-section wrap" aria-labelledby="support-heading">
+    <div><p class="eyebrow">Optional support</p><h2 id="support-heading">Help keep development moving.</h2><p>The local streaming tools remain usable without payment. These links open external funding services.</p></div>
+    <div class="support-actions">@@SUPPORT@@</div>
+  </aside>
+  <footer class="site-footer wrap">
+    <p>@@DISPLAY_NAME@@ is an independent project. It is not an official Valve, Decky or OBS product. Final organization, branding, domain and hosting are undecided.</p>
+    <div class="footer-links"><a href="@@SOURCE_URL@@">Source and review</a><a href="@@LICENSE_URL@@">License</a><a href="privacy.html">Privacy and security</a><a href="@@ISSUES_URL@@">Report a problem</a></div>
+    <p class="build-note">Source preview <code>@@REVISION@@</code>@@DIRTY_NOTE@@ · This site build is not a release or hardware qualification receipt.</p>
+  </footer>
+</body>
+</html>

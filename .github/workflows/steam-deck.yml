@@ -60,6 +60,7 @@ jobs:
           python steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz --browser "$browser"
           python steamdeck/tests/browser-panel.py dist/obsgod-decky.zip --browser "$browser"
           python steamdeck/tests/browser-support.py --browser "$browser"
+          python -B site/tests/browser.py --browser "$browser"
       - name: Native audio and app-filtered capture checks
         run: |
           # These public test inputs may be owned by runner UID1001 while the
