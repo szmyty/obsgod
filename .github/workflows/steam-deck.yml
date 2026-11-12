@@ -1,7 +1,7 @@
 name: Steam Deck candidate
 on:
   push:
-    branches: [master, 'codex/roadmap1-*']
+    branches: [master, main, 'codex/roadmap1-*']
   pull_request:
   workflow_dispatch:
 permissions:

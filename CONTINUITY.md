@@ -1,5 +1,65 @@
 # Current work
 
+## 2026-11-12 consolidation and proposed product plan
+
+The latest owner request authorizes merging all open PRs, deleting nonprimary
+branches, and preparing a proposed monetizable-product roadmap. PRs #32, #33,
+#34 are now MERGED in order; final merge is
+`cc5e5b6b6d4c18c54b1040722924c6b68e5c4ccd`. Its tree equals prior PR34 head
+`5f2e1816285c55e3e1d879998d3fc46bba7ce5a7`; fresh merged-tree Go race checks
+(94 pass events/64 top-level; one optional existing-OBS skip), Python70 and
+Node9 passed. No device/CI acceptance issue was closed from merging. Fresh CI
+executed zero steps because of the existing account billing lock.
+
+All22 nonprimary remote branches and13 existing local branches were deleted
+AFTER exact tip verification against non-release recovery tags
+`archive/2026-11-12/<old-branch-name>`. See [the archive record](docs/branch-archive.md).
+This preserves orphan artifact commits and immutable download URLs; never merge
+artifact histories into source. Only `master` remains. The owner-requested rename
+to `main` returned403 `Resource not accessible by integration`; the owner must
+rename it on GitHub's Branches page. Do not create a duplicate main branch.
+The Steam Deck workflow accepts both branch names. No protection bypass occurred.
+
+Read [ROADMAP.md](ROADMAP.md) and the live issue bodies before new work.
+Milestone2/parent#23 now propose a supported public launch and optional funding:
+#35–#45 plus original#11/#25 and foundation acceptance#8/#10/#16–#22.
+Milestone3/parent#46 propose advanced streaming/validated paid offerings:
+#47–#51 plus richer media#24 and preserved broad#7/#9/#12/#13/#14 ledgers.
+All original criteria/history/dependencies were retained. M1's administrative
+closure does not pass its outstanding acceptance. No existing issue was closed.
+Organization/name/domain/recipient remain TBD; `decky-obs` is only a candidate.
+Identity was inspected read-only at main `401b2f1de298a171fbb5bf4ee6b510e0cf12c301`
+(stable v1.0.0); choose compatible tooling during implementation, author supported
+manual v1 consumer source, and approve real SVG masters/rights after naming.
+Do not produce final assets twice or modify the Identity repository.
+
+Store eligibility is unresolved: current Decky policy and submission templates
+restrict AI-authored source; no majority audit or maintainer decision exists.
+Never make an unsupported provenance attestation. Direct distribution and an
+optional owner-verified support destination remain independently proposed.
+Required real Stable/Beta and independent Preview testing is not supplied by
+cloud OBS tests. Account/payment facts and revenue are not invented.
+
+Preview6 stays tied to exact packaged source
+`33dcd8476606a1ed7a3bbca06e81fb156dfebcc7`, version `0.1.0-deck.6`, immutable
+artifact `71143dce72654bae2ad76ebe382dd810990c2c85`, now retained by archive tag
+`archive/2026-11-12/artifacts/deck6-audio-game`. RuntimeSHA256
+`23cc2c484b7524756a3b632bf8a8e7231ac7c515c06a08183422ed91b7e82650` is unchanged.
+Actual new6 Deck audio/Flatpak/Gamescope privacy/game changes/hardware/controller/
+session/performance/Kick sound remain open. Owner reported5.2 video success and
+silent audio, not complete6 acceptance. Read the exact evidence packet below.
+
+This turn is planning and branch consolidation, not authorization to implement
+the proposed M2/M3 work, create/transfer organizations/repositories, publish an
+Identity/product release, deploy sites, submit to another repository, create
+payment accounts or spend money. No new product release/deployment occurred.
+Normal injected HTTPS GitHub authentication works without explicit Authorization
+headers; stale CLI credential401 does not mean all authentication is absent.
+Existing private checkpoint helper hardcodes a NOW-DELETED feature branch:
+never use it unchanged. Verify the current default/ref before a fast-forward.
+
+## Historical records (superseded by the status above)
+
 Prepared preview6, final exact qualified source
 `33dcd8476606a1ed7a3bbca06e81fb156dfebcc7`, draftPR34 (base33, base32).
 All available local checks passed FRESH:94Go including subtests(64top-level),

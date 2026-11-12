@@ -8,6 +8,10 @@
 obsgod is a command-line remote control for OBS. It requires OBS Studio 28+ with the built-in
 [OBS WebSocket v5](https://github.com/obsproject/obs-websocket) support.
 
+The [proposed product roadmap](ROADMAP.md) covers a supported Steam Deck launch,
+organization/name migration, optional funding and later advanced features.
+It is awaiting owner review; proposed features are not availability claims.
+
 ## Steam Deck streaming preview
 
 The [Steam Deck guide](docs/steam-deck.md) covers installing the preview in Desktop
