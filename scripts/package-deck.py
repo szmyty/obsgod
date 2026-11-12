@@ -36,6 +36,8 @@ def notices():
     text += "OBSGod's independent capture implementation is MIT licensed. Its preferred source, native SDK header notices and full LGPL-2.1 text are included in CAPTURE-SOURCE.tar.gz and below. Separately installed GStreamer/GLib/PipeWire library binaries are not redistributed here.\n\n"
     text += (REPO / "steamdeck/capture/THIRD_PARTY_NOTICES.md").read_text() + "\n\n"
     text += "The Decky plugin imports @decky/api 1.1.3 as a separate, replaceable LGPL-2.1 module in dist/decky-api.js, with its license included. Modifications change the manifest import to ./manifest.js and add the .js suffix to the types import for native browser modules. The original source is at https://github.com/SteamDeckHomebrew/loader-api. React and @decky/ui are supplied by Steam/Decky and are not bundled. Build inputs are pinned in steamdeck/decky/package-lock.json.\n\n"
+    text += "## qrcode-generator 2.0.4\n\nLocal support QR generation uses the MIT-licensed qrcode-generator implementation. The pinned source package and lockfile identify the build input; the matching upstream license is also shipped as LICENSE.qrcode-generator.txt. No remote QR service receives a support address.\n\n"
+    text += (REPO / "steamdeck/decky/LICENSE.qrcode-generator.txt").read_text() + "\n\n"
     text += "## Go standard library\n\n" + (Path(command("go", "env", "GOROOT")) / "LICENSE").read_text() + "\n"
     linked = {}
     for package in modules_json(command("go", "list", "-deps", "-json", ".")):
@@ -79,7 +81,7 @@ def zip_payload(files, epoch):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--version", default="0.1.0-deck.6")
+    parser.add_argument("--version", default="0.1.0-deck.7")
     parser.add_argument("--revision", default=None)
     parser.add_argument("--allow-dirty", action="store_true", help="Local test packages only; manifest is marked dirty")
     args = parser.parse_args()
@@ -98,6 +100,8 @@ def main():
         raise SystemExit("Use the pinned Go 1.27.4 toolchain")
     if command("node", "--version") != "v24.19.0" or command("npm", "--version") != "11.9.0":
         raise SystemExit("Use the pinned Node 24.19.0 and npm 11.9.0 tools")
+    subprocess.run([sys.executable, str(REPO / "scripts/generate-product.py"), "--check"], check=True)
+    subprocess.run(["node", str(REPO / "scripts/generate-support.mjs"), "--check"], check=True)
     subprocess.run(["npm", "run", "typecheck"], cwd=REPO / "steamdeck/decky", check=True)
     subprocess.run(["npm", "run", "build"], cwd=REPO / "steamdeck/decky", check=True)
     dist = REPO / "dist"
@@ -121,6 +125,7 @@ def main():
         "CAPTURE-SOURCE.tar.gz": capture_preferred_source,
         "LICENSE": (REPO / "LICENSE").read_bytes(),
         "LICENSE.LGPL-2.1": (REPO / "steamdeck/decky/LICENSE.LGPL-2.1").read_bytes(),
+        "LICENSE.qrcode-generator.txt": (REPO / "steamdeck/decky/LICENSE.qrcode-generator.txt").read_bytes(),
         "THIRD_PARTY_NOTICES.md": third_party,
     }
     for name in ["index.js", "decky-api.js", "manifest.js", "types.js"]:

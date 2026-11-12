@@ -52,6 +52,39 @@ def main():
                 page.on("pageerror", lambda error: errors.append(str(error)))
                 page.goto("http://127.0.0.1:" + str(server.server_port))
                 page.get_by_role("status").filter(has_text="Stopped").wait_for()
+                page.get_by_text("Decky Stream",exact=False).wait_for()
+                assert page.evaluate("plugin.name") == "OBSGod", "display-name change must preserve loader identity"
+                page.get_by_text("Status updates automatically",exact=True).wait_for()
+                page.get_by_text("System audio: Not confirmed",exact=True).wait_for()
+                page.get_by_text("Microphone: Off",exact=True).wait_for()
+                page.evaluate("fixture.microphone=true;fixture.audio={state:'muted',message:'Fixture output muted',output_available:true,output_muted:true,microphone_available:true,microphone_muted:true,signal:'silent'}")
+                page.get_by_role("button",name="Refresh status").click()
+                page.get_by_text("System audio: Muted",exact=True).wait_for()
+                page.get_by_text("Signal: No signal in last check",exact=True).wait_for()
+                page.get_by_text("Microphone: Muted",exact=True).wait_for()
+                page.get_by_role("status").filter(has_text="Stopped").wait_for()
+                page.evaluate("fixture.microphone=false;fixture.audio=null")
+                page.get_by_role("button",name="Refresh status").click()
+                page.get_by_text("Microphone: Off",exact=True).wait_for()
+                page.evaluate("fixture.configured=false")
+                page.get_by_role("button",name="Refresh status").click()
+                page.get_by_role("status").filter(has_text="Setup required").wait_for()
+                page.get_by_text("Finish Desktop Setup, then make a local test clip before your first stream.",exact=True).wait_for()
+                assert page.get_by_role("button",name="Start streaming",exact=True).is_disabled()
+                assert page.get_by_role("button",name="Make 10-second test clip",exact=True).is_disabled()
+                page.evaluate("window.scrollTo(0,0)")
+                page.screenshot(path=str(args.screenshots / "panel-setup.png"))
+                page.evaluate("fixture.configured=true")
+                page.get_by_role("button",name="Refresh status").click()
+                page.get_by_role("status").filter(has_text="Stopped").wait_for()
+                assert page.get_by_text("system audio may include other apps",exact=False).count() == 0
+                page.get_by_role("button",name="Capture help",exact=True).click()
+                page.get_by_text("system audio may include other apps",exact=False).wait_for()
+                page.get_by_role("button",name="Hide capture help",exact=True).click()
+                assert page.get_by_text("system audio may include other apps",exact=False).count() == 0
+                page.get_by_role("button",name="Setup and recording help",exact=True).click()
+                page.get_by_text("Test clips save to Videos/OBSGod",exact=False).wait_for()
+                page.get_by_role("button",name="Hide setup help",exact=True).click()
                 console=page.get_by_role("log",name="OBSGod diagnostic console")
                 console.get_by_text("No diagnostic events yet.",exact=False).wait_for()
                 assert page.get_by_role("button",name="Copy console log").is_disabled()
@@ -77,6 +110,7 @@ def main():
                 page.evaluate("fixture.unknown=false")
                 page.get_by_role("button",name="Refresh status").click()
                 page.wait_for_function("[...document.querySelectorAll('button')].some(button=>button.textContent==='Switch to game only'&&!button.disabled)")
+                page.evaluate("window.scrollTo(0,0)")
                 page.screenshot(path=str(args.screenshots / "panel-stopped.png"))
                 # Rapid clicks must produce one request even before React paints
                 # the disabled state. The success toast comes from a status poll.
@@ -95,13 +129,16 @@ def main():
                 page.get_by_role("button",name="Clear console").click()
                 console.get_by_text("No diagnostic events yet.",exact=False).wait_for()
                 page.get_by_role("status").filter(has_text="OBS streaming").wait_for()
+                page.evaluate("window.scrollTo(0,0)")
                 page.screenshot(path=str(args.screenshots / "panel-live.png"))
                 page.evaluate("fixture.stalled=true")
                 page.get_by_role("status").filter(has_text="Connecting / stalled").wait_for(timeout=15000)
                 page.evaluate("fixture.failure=true")
                 page.get_by_role("button", name="Refresh status").click()
                 page.get_by_role("status").filter(has_text="Check OBS").wait_for()
+                page.get_by_text("Capture mode: Not confirmed",exact=True).wait_for()
                 assert page.get_by_role("button",name="Switch to game only",exact=True).is_disabled()
+                page.evaluate("window.scrollTo(0,0)")
                 page.screenshot(path=str(args.screenshots / "panel-unconfirmed.png"))
                 page.get_by_role("button", name="Stop streaming / recover").click()
                 page.get_by_role("status").filter(has_text="Stopped").wait_for()
@@ -158,10 +195,43 @@ def main():
                 assert page.evaluate("fixture.calls.check_for_updates") == 1
                 assert not page.evaluate("fixture.active")
                 assert page.get_by_role("button",name="Check for updates",exact=True).bounding_box()["y"] > console.bounding_box()["y"]
+                support=page.get_by_role("heading",name="SUPPORT DEVELOPMENT",exact=True)
+                assert support.bounding_box()["y"] > page.get_by_role("button",name="Check for updates",exact=True).bounding_box()["y"]
+                destinations=[
+                    ("GitHub Sponsors","https://github.com/sponsors/szmyty"),
+                    ("Buy Me a Coffee","https://www.buymeacoffee.com/szmyty"),
+                    ("Ko-fi","https://ko-fi.com/szmyty"),
+                    ("Open Collective","https://opencollective.com/szmyty"),
+                    ("thanks.dev","https://thanks.dev/u/gh/szmyty"),
+                ]
+                for label,url in destinations:
+                    page.get_by_role("button",name=label,exact=True).click()
+                    page.wait_for_function("url=>fixture.externalLinks.at(-1)===url",arg=url)
+                assert page.evaluate("fixture.externalLinks") == [url for _,url in destinations]
+                assert page.get_by_role("button",name="Patreon",exact=True).count()==0
+                for coin in ["Bitcoin","Ethereum","Solana"]:
+                    assert page.get_by_role("button",name="Support with "+coin,exact=True).count()==0
+                # Support navigation and errors must not control OBS output or
+                # steal the selected control when automatic status polls repaint.
+                calls=page.evaluate("({...fixture.calls})")
+                selected=page.get_by_role("button",name="GitHub Sponsors",exact=True)
+                selected.focus()
+                page.wait_for_timeout(1800)
+                assert selected.evaluate("button=>document.activeElement===button")
+                page.evaluate("fixture.linkFailure=true")
+                selected.click()
+                page.get_by_text("Could not open GitHub Sponsors.",exact=False).wait_for()
+                page.get_by_role("status").filter(has_text="Stopped").wait_for()
+                assert not page.evaluate("fixture.active")
+                for method in ["start","stop","test_recording"]:
+                    assert page.evaluate("fixture.calls").get(method,0)==calls.get(method,0)
+                assert "must-not-copy" not in page.locator("body").inner_text()
+                assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
+                page.screenshot(path=str(args.screenshots / "panel-support.png"),full_page=True)
                 page.evaluate("plugin.onDismount()")
                 assert not errors, errors
                 browser.close()
-            print("PASS: release ZIP frontend; automatic polls/confirmed transition toasts, duplicate Start coalescing, idle Stop disabled, pending Cancel, guarded capture-mode switch with JSON RPC args/no streaming toast/no duplicate action, check-only updates, colors/lifecycle, full timeout, history paging/clear/reload; actual clipboard copies all history and version, excludes settings, works during streaming, legacy fallback preserves focus and denial reports failure. Real controller/Decky runtime untested.")
+            print("PASS: release ZIP frontend; metadata display name with stable loader identity, progressive capture/setup help, explicit system audio, partial setup with guarded actions, unknown capture label; automatic polls/confirmed transition toasts, duplicate Start coalescing, idle Stop disabled, pending Cancel, guarded capture-mode switch with JSON RPC args/no streaming toast/no duplicate action, check-only updates, colors/lifecycle, full timeout, history paging/clear/reload; actual clipboard copies all history and version, excludes settings, works during streaming, legacy fallback preserves focus and denial reports failure; five exact support destinations, hidden unconfigured wallets, navigation failure isolation and focus across polls. Real controller/Decky runtime untested.")
         finally:
             server.shutdown()
             server.server_close()
