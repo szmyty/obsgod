@@ -1,10 +1,10 @@
-# Proposed post-review issue consolidation
+# Issue consolidation and remaining checklist
 
-This is the reviewable body proposed for existing #46 after accepted source merges. No issue is closed or replaced by this document. Preserve #51 separately.
+Applied to [#46](https://github.com/szmyty/obsgod/issues/46) after owner-approved merges. The 34 superseded issues preserve all 230 criteria; #51 remains separate. See [actual transfer/merge evidence](evidence/completion-merge.json).
 
 # Final boss — finish and qualify Decky Stream
 
-**Draft body; apply to existing #46 only after owner review and source merges. No issue mutation is performed by this file.**
+**The live #46 is authoritative. Source-merge approval and administrative transfers are complete; unrun acceptance and publication remain open.**
 
 The implementation campaign prepared candidate 9 while preserving compatible obsgod/OBSGod installations. This is the consolidated pair-work checklist; #51 remains separate monetization/Decky Store research. No missing criterion passed merely because its original issue was superseded.
 
@@ -22,7 +22,7 @@ The implementation campaign prepared candidate 9 while preserving compatible obs
 - [ ] Record actual Deck model/SteamOS/Steam/Decky/OBS Flatpak/bundled WebSocket/GStreamer versions; qualify install/repair/upgrade/rollback/removal and preservation.
 - [ ] Verify local moving audible clip, mic/device/mute/gain/PTT/control-loss behavior, game-only/menu privacy, no-game/idle/game changes, session/sleep/controller/performance.
 - [ ] Obtain separate-provider-viewer picture/audio and actual new-user install→clip→viewer→update/recovery→uninstall proof for supported claims.
-- [ ] Owner resolves fresh Actions account/billing lock (nine runs, zero steps), and inspects Dependency graph/review availability after actual real-ref provider unsupported error/API 403. Obtain successful required hosted CI/real dependency review and complete owner PR review. Prepare concrete current-compatible-preview publication packet; publish only with explicit applicable approval.
+- [ ] Owner resolves fresh Actions account/billing lock (nine runs, zero steps), and inspects Dependency graph/review availability after actual real-ref provider unsupported error/API 403. Obtain successful required hosted CI/real dependency review and any required independent review. Source-merge approval is already recorded. Prepare concrete current-compatible-preview publication packet; publish only with explicit applicable approval.
 
 ## Remaining implementation and scope decisions
 

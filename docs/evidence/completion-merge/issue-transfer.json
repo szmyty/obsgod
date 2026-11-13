@@ -1,0 +1,646 @@
+{
+  "verified_at_utc": "2026-11-13T15:54:11.444699+00:00",
+  "closed_as_superseded": [
+    {
+      "number": 7,
+      "url": "https://github.com/szmyty/obsgod/issues/7",
+      "closed_at": "2026-11-13T15:47:44Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "f94dfc364d4bd31a6ae52505a20af49b756c57edca600ed95f90f137c10743ca",
+      "criterion_ids": [
+        "7.AC1",
+        "7.AC2",
+        "7.AC3",
+        "7.AC4",
+        "7.AC5",
+        "7.AC6",
+        "7.AC7",
+        "7.AC8",
+        "7.AC9"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/7#issuecomment-6857837500",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 8,
+      "url": "https://github.com/szmyty/obsgod/issues/8",
+      "closed_at": "2026-11-13T15:47:49Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "859e0021eba283fd872465976d1a2a5fe4115ef0d36e698f137590f5737f2ce3",
+      "criterion_ids": [
+        "8.AC1",
+        "8.AC2",
+        "8.AC3",
+        "8.AC4",
+        "8.AC5",
+        "8.AC6",
+        "8.AC7"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/8#issuecomment-6857852633",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 9,
+      "url": "https://github.com/szmyty/obsgod/issues/9",
+      "closed_at": "2026-11-13T15:47:54Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "f3abd3b8aaf89b6d6c7bf1c474791036cfb90fc053b4526fc2dcef7aef65b20e",
+      "criterion_ids": [
+        "9.AC1",
+        "9.AC2",
+        "9.AC3",
+        "9.AC4",
+        "9.AC5",
+        "9.AC6",
+        "9.AC7"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/9#issuecomment-6857854766",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 10,
+      "url": "https://github.com/szmyty/obsgod/issues/10",
+      "closed_at": "2026-11-13T15:47:59Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "29e62dbdcb2542d45d89bbbdf9af1c2edc1ed3c66156638754fc9bdcaf91d2f3",
+      "criterion_ids": [
+        "10.SR1",
+        "10.SR2",
+        "10.SR3",
+        "10.SR4",
+        "10.SR5",
+        "10.SR6",
+        "10.SR7",
+        "10.AC1",
+        "10.AC2",
+        "10.AC3",
+        "10.AC4",
+        "10.AC5",
+        "10.AC6",
+        "10.AC7"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/10#issuecomment-6857856809",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 11,
+      "url": "https://github.com/szmyty/obsgod/issues/11",
+      "closed_at": "2026-11-13T15:48:04Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "9a0066ec6bce20a5b52d4dcd42c925b56210af7843737c0cd3436a5a7737aa1f",
+      "criterion_ids": [
+        "11.AC1",
+        "11.AC2",
+        "11.AC3",
+        "11.AC4",
+        "11.AC5",
+        "11.AC6",
+        "11.AC7",
+        "11.AC8",
+        "11.AC9"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/11#issuecomment-6857858824",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 12,
+      "url": "https://github.com/szmyty/obsgod/issues/12",
+      "closed_at": "2026-11-13T15:48:10Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "c65abd6bbaef4a29f8c12dd151e8c0e4b538d3a1712eb9742e6c186617b712e6",
+      "criterion_ids": [
+        "12.QG1",
+        "12.QG2",
+        "12.QG3",
+        "12.QG4",
+        "12.QG5",
+        "12.QG6",
+        "12.QG7",
+        "12.QG8",
+        "12.AC1",
+        "12.AC2",
+        "12.AC3",
+        "12.AC4",
+        "12.AC5",
+        "12.AC6",
+        "12.AC7",
+        "12.AC8"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/12#issuecomment-6857860973",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 13,
+      "url": "https://github.com/szmyty/obsgod/issues/13",
+      "closed_at": "2026-11-13T15:48:14Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "6683886884a499462c1b2d2b473f6a7e91da7ba4023647aac49ac3c987bf8b89",
+      "criterion_ids": [
+        "13.AC1",
+        "13.AC2",
+        "13.AC3",
+        "13.AC4",
+        "13.AC5",
+        "13.AC6",
+        "13.AC7",
+        "13.AC8"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/13#issuecomment-6857862903",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 14,
+      "url": "https://github.com/szmyty/obsgod/issues/14",
+      "closed_at": "2026-11-13T15:48:20Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "4481aa5df58db71c6c4e218bb42b614e28e5b2a0cde9166d684699a3a9836f8c",
+      "criterion_ids": [
+        "14.AC1",
+        "14.AC2",
+        "14.AC3",
+        "14.AC4",
+        "14.AC5",
+        "14.AC6"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/14#issuecomment-6857864971",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 16,
+      "url": "https://github.com/szmyty/obsgod/issues/16",
+      "closed_at": "2026-11-13T15:48:25Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "17155f50eac4d5ef7a86a8d0e5a813d3a670efb18e779f779998223dbe527ef9",
+      "criterion_ids": [
+        "16.AC1",
+        "16.AC2",
+        "16.AC3",
+        "16.AC4",
+        "16.AC5",
+        "16.AC6",
+        "16.AC7"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/16#issuecomment-6857867164",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 17,
+      "url": "https://github.com/szmyty/obsgod/issues/17",
+      "closed_at": "2026-11-13T15:48:30Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "9255d3f8d6b43381b88c8a4bd5ff6ad41241dc831f5cdfaac71a52d36a34d6dc",
+      "criterion_ids": [
+        "17.AC1",
+        "17.AC2",
+        "17.AC3",
+        "17.AC4",
+        "17.AC5",
+        "17.AC6",
+        "17.AC7"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/17#issuecomment-6857869138",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 18,
+      "url": "https://github.com/szmyty/obsgod/issues/18",
+      "closed_at": "2026-11-13T15:48:35Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "fa0efe2597358fb2d785abb0c8609bb0aa955a0d5de5b283482f97292cf889c7",
+      "criterion_ids": [
+        "18.AC1",
+        "18.AC2",
+        "18.AC3",
+        "18.AC4",
+        "18.AC5",
+        "18.AC6"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/18#issuecomment-6857871047",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 19,
+      "url": "https://github.com/szmyty/obsgod/issues/19",
+      "closed_at": "2026-11-13T15:48:40Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "330fe75fc2f9167af1f316b95d472711be87a5318a92e248d15087c66341cdb7",
+      "criterion_ids": [
+        "19.AC1",
+        "19.AC2",
+        "19.AC3",
+        "19.AC4",
+        "19.AC5",
+        "19.AC6",
+        "19.AC7",
+        "19.AC8",
+        "19.AC9"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/19#issuecomment-6857873093",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 20,
+      "url": "https://github.com/szmyty/obsgod/issues/20",
+      "closed_at": "2026-11-13T15:48:45Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "0eaa1ef875b75369b931f85e8075f4925946913ac876cdb5ea685e5ad1edfc69",
+      "criterion_ids": [
+        "20.AC1",
+        "20.AC2",
+        "20.AC3",
+        "20.AC4",
+        "20.AC5",
+        "20.AC6",
+        "20.AC7",
+        "20.AC8"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/20#issuecomment-6857875159",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 21,
+      "url": "https://github.com/szmyty/obsgod/issues/21",
+      "closed_at": "2026-11-13T15:48:50Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "b25212f94141b1ffc5a88c3f55a79fd1f650a601cc08df2e449d823da395f2f4",
+      "criterion_ids": [
+        "21.AC1",
+        "21.AC2",
+        "21.AC3",
+        "21.AC4",
+        "21.AC5",
+        "21.AC6",
+        "21.AC7"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/21#issuecomment-6857877273",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 22,
+      "url": "https://github.com/szmyty/obsgod/issues/22",
+      "closed_at": "2026-11-13T15:48:55Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "bf5c363750b7cd7f4466a9cddb9ff1e78f6d1ee6915f6347ccc09e5800a11cab",
+      "criterion_ids": [
+        "22.AC1",
+        "22.AC2",
+        "22.AC3",
+        "22.AC4",
+        "22.AC5",
+        "22.AC6",
+        "22.AC7",
+        "22.AC8",
+        "22.AC9",
+        "22.AC10"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/22#issuecomment-6857879445",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 23,
+      "url": "https://github.com/szmyty/obsgod/issues/23",
+      "closed_at": "2026-11-13T15:49:00Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "a058c940c6ca54ae91f0e8de2d0baae55ddb996af362efbadfeefb9cf211442b",
+      "criterion_ids": [
+        "23.DD1",
+        "23.DD2",
+        "23.DD3",
+        "23.DD4",
+        "23.DD5",
+        "23.DD6"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/23#issuecomment-6857881523",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 24,
+      "url": "https://github.com/szmyty/obsgod/issues/24",
+      "closed_at": "2026-11-13T15:49:05Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "dc8ca2d34e0c92ebdd4d643228947a272f20c73d303e44e287f7ac27841cd840",
+      "criterion_ids": [
+        "24.AC1",
+        "24.AC2",
+        "24.AC3",
+        "24.AC4",
+        "24.AC5",
+        "24.AC6"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/24#issuecomment-6857883733",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 25,
+      "url": "https://github.com/szmyty/obsgod/issues/25",
+      "closed_at": "2026-11-13T15:49:10Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "e835d105f6fbfc96a0913d76d6084e1bc5fc2025f5b3046f3c9dfd8dbbdf0bbc",
+      "criterion_ids": [
+        "25.AC1",
+        "25.AC2",
+        "25.AC3",
+        "25.AC4",
+        "25.AC5",
+        "25.AC6"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/25#issuecomment-6857885838",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 35,
+      "url": "https://github.com/szmyty/obsgod/issues/35",
+      "closed_at": "2026-11-13T15:49:15Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "de3217e97b88fe55a8a32891551a8eb121836ceacb4cf6617b94dfbdd67fba04",
+      "criterion_ids": [
+        "35.AC1",
+        "35.AC2",
+        "35.AC3",
+        "35.AC4"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/35#issuecomment-6857887856",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 36,
+      "url": "https://github.com/szmyty/obsgod/issues/36",
+      "closed_at": "2026-11-13T15:49:20Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "5faa9ba225c44dcf3a547eacbdb804771acbdad64efdb776a5616fcce5b17352",
+      "criterion_ids": [
+        "36.AC1",
+        "36.AC2",
+        "36.AC3",
+        "36.AC4",
+        "36.AC5"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/36#issuecomment-6857889762",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 37,
+      "url": "https://github.com/szmyty/obsgod/issues/37",
+      "closed_at": "2026-11-13T15:49:25Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "9cf7c5bfa6ac9a6697c4e49f57f29df206e0a2945993c12cc80db816670ad04d",
+      "criterion_ids": [
+        "37.AC1",
+        "37.AC2",
+        "37.AC3",
+        "37.AC4",
+        "37.AC5"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/37#issuecomment-6857891688",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 38,
+      "url": "https://github.com/szmyty/obsgod/issues/38",
+      "closed_at": "2026-11-13T15:49:29Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "6b0ff37c6a8ecb025d0462f1fa5e338d3264310e9be2acc5196d25d0357df0f4",
+      "criterion_ids": [
+        "38.AC1",
+        "38.AC2",
+        "38.AC3",
+        "38.AC4",
+        "38.AC5"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/38#issuecomment-6857893616",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 39,
+      "url": "https://github.com/szmyty/obsgod/issues/39",
+      "closed_at": "2026-11-13T15:49:34Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "d6d0d69620e13b3f73d202496bddbda217cb13abf9d249f76559cef395dff42f",
+      "criterion_ids": [
+        "39.AC1",
+        "39.AC2",
+        "39.AC3",
+        "39.AC4",
+        "39.AC5"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/39#issuecomment-6857895436",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 40,
+      "url": "https://github.com/szmyty/obsgod/issues/40",
+      "closed_at": "2026-11-13T15:49:39Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "cedf6bee9d8e03e15520b4dcecd1880dc90d64f6c794e3359813fb6d2b14dcc2",
+      "criterion_ids": [
+        "40.AC1",
+        "40.AC2",
+        "40.AC3",
+        "40.AC4",
+        "40.AC5"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/40#issuecomment-6857897437",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 41,
+      "url": "https://github.com/szmyty/obsgod/issues/41",
+      "closed_at": "2026-11-13T15:49:44Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "0c5256ffb70395d45c33db96f396e029187763ea49eab091dd7eb20c981e427e",
+      "criterion_ids": [
+        "41.AC1",
+        "41.AC2",
+        "41.AC3",
+        "41.AC4",
+        "41.AC5"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/41#issuecomment-6857899453",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 42,
+      "url": "https://github.com/szmyty/obsgod/issues/42",
+      "closed_at": "2026-11-13T15:49:49Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "f4a089d8b15fd1ce320abd83f7df3e1ae3926557ef917911304478894e138777",
+      "criterion_ids": [
+        "42.AC1",
+        "42.AC2",
+        "42.AC3",
+        "42.AC4",
+        "42.AC5"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/42#issuecomment-6857901503",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 43,
+      "url": "https://github.com/szmyty/obsgod/issues/43",
+      "closed_at": "2026-11-13T15:49:54Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "e121e91c8f2c22e52f21f9f2d6bce9ef9f9e5a55277879e211532778bd364d48",
+      "criterion_ids": [
+        "43.AC1",
+        "43.AC2",
+        "43.AC3",
+        "43.AC4",
+        "43.AC5"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/43#issuecomment-6857903417",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 44,
+      "url": "https://github.com/szmyty/obsgod/issues/44",
+      "closed_at": "2026-11-13T15:49:59Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "63c43fee2ca0d9d685ef2e12c824bfe9960b417aad45b5ee8d864a8a248d2113",
+      "criterion_ids": [
+        "44.AC1",
+        "44.AC2",
+        "44.AC3",
+        "44.AC4",
+        "44.AC5"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/44#issuecomment-6857905386",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 45,
+      "url": "https://github.com/szmyty/obsgod/issues/45",
+      "closed_at": "2026-11-13T15:50:04Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "27654f9991ce5ca06f29c0f376ad9d8e2d3b5faf567d3ffdced30ee198bd78bb",
+      "criterion_ids": [
+        "45.AC1",
+        "45.AC2",
+        "45.AC3",
+        "45.AC4",
+        "45.AC5",
+        "45.AC6"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/45#issuecomment-6857907325",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 47,
+      "url": "https://github.com/szmyty/obsgod/issues/47",
+      "closed_at": "2026-11-13T15:50:09Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "52aec488b2c16110b3655d1dcddde3eb729fe65667e40c36d340d7773d5b58ad",
+      "criterion_ids": [
+        "47.AC1",
+        "47.AC2",
+        "47.AC3",
+        "47.AC4"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/47#issuecomment-6857909249",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 48,
+      "url": "https://github.com/szmyty/obsgod/issues/48",
+      "closed_at": "2026-11-13T15:50:14Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "180467e826f072f788b17fbbd036bc6255889c3f5ca706c26ca3332ba9676e13",
+      "criterion_ids": [
+        "48.AC1",
+        "48.AC2",
+        "48.AC3",
+        "48.AC4"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/48#issuecomment-6857911301",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 49,
+      "url": "https://github.com/szmyty/obsgod/issues/49",
+      "closed_at": "2026-11-13T15:50:19Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "653f75c8c29cd9b90f75a656130918244bb8cff3c9a9ffbf448f44945ad7fbda",
+      "criterion_ids": [
+        "49.AC1",
+        "49.AC2",
+        "49.AC3",
+        "49.AC4"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/49#issuecomment-6857913381",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 50,
+      "url": "https://github.com/szmyty/obsgod/issues/50",
+      "closed_at": "2026-11-13T15:50:24Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "84caa2cb7645e14a156f0adc5cf09acc43e9bd5876d14923d70fd2c998c01411",
+      "criterion_ids": [
+        "50.AC1",
+        "50.AC2",
+        "50.AC3",
+        "50.AC4"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/50#issuecomment-6857915277",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    },
+    {
+      "number": 61,
+      "url": "https://github.com/szmyty/obsgod/issues/61",
+      "closed_at": "2026-11-13T15:50:29Z",
+      "state_reason": "not_planned",
+      "original_body_sha256": "a0cc9d806a05e336eee6d5bf07ddcca8f2c7589d7da596688b3526f633125890",
+      "criterion_ids": [
+        "61.AC1",
+        "61.AC2",
+        "61.AC3",
+        "61.AC4",
+        "61.AC5",
+        "61.AC6"
+      ],
+      "comment_url": "https://github.com/szmyty/obsgod/issues/61#issuecomment-6857917028",
+      "acceptance_claimed": false,
+      "consolidated_into": 46
+    }
+  ],
+  "count": 34,
+  "parent_issue": 46,
+  "parent_body_sha256": "d90be83ae0c911539fa4909e25254ecfb4fbbbb4fa13a00649c848e3d9cfdc4c",
+  "original_criteria_preserved": 230,
+  "research_issue": 51,
+  "research_body_unchanged": true,
+  "research_body_sha256": "d2318ffaa48eecda4b25b5291c92568acad4d9a96549459c97db60b8fc8812ee",
+  "acceptance_not_claimed": true
+}

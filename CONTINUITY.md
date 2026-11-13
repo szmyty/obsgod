@@ -1,6 +1,40 @@
 # Current work
 
-## Completion candidate9 qualified; owner review and target gates remain
+## Owner-approved merges and issue consolidation completed
+
+On 2026-11-13 the owner instructed “Ok merge them !” after the candidate/evidence
+and known gates were disclosed. PRs #58 → #59 → #60 → #62 → #63 → #64 → #65
+merged through ordinary APIs with expected-head checks. Feature merge source
+`a8b19b3f20d5cf358b6250e120b74b3e63848803` has exact reviewed tree `261aa3f8406d4afed0c68aeada1aecd0a425130c`
+from b7013a64; no protection change or bypass was used. This later follow-up is
+documentation/evidence only, not a newly qualified runtime build.
+
+Fresh merged-source Go race/count1 (213 top-level/386 events, one optional test
+skip), vet/staticcheck/gofmt/vulnerability scan, Python 127, tooling 23, Node 30,
+typecheck/build/audit, generated files and site 11/reproducibility passed. The
+ignored root-owned frontend output was preserved and rebuilt as UID1000;
+source and root dist stayed unchanged. Hosted CI has 5 runs/0 steps and the actual
+billing-lock annotation. [Merge evidence](docs/evidence/completion-merge.json).
+
+All 230 original criteria/dependencies are retained in open
+[#46](https://github.com/szmyty/obsgod/issues/46). The 34 transferred issues were
+closed as not_planned/superseded, not as accepted. Open
+[#51](https://github.com/szmyty/obsgod/issues/51) remains unchanged independent
+research. No open source PR remained after feature merges. Seven merged source
+branches were removed normally; the three artifact branches were preserved.
+All 47 candidate 9 public files and internal inventories were reverified after
+cleanup. Source 1a482808 remains reachable from default history; candidate bytes,
+full qualification and immutable artifact d0a4973f are unchanged and are not
+relabeled as the merge SHA. [Install](docs/candidate-9-install.md).
+
+Actual target/provider/adoption, required hosted/independent review and broader
+API/companion/provider/generic distribution work remain in #46. Source merge does
+not approve proposed ADRs, brand rights/creative decisions or publication. No
+release/deployment/Store submission/other-repo change/spending occurred. Default
+is still master; requested main rename remains an owner UI action after 403.
+Earlier sections below are historical checkpoints, not current open-PR state.
+
+## Completion candidate 9 qualified; owner review and target gates remain
 
 Exact packaged source `1a482808a8281c8bce092cea057df758836b34e9`, tree `fba5cfaed616313e2a6b679a55ff234d21a21538`,
 passed both complete local act sequences and the fresh standalone matrix.
@@ -75,7 +109,7 @@ issue plus #51**. Preserve each original acceptance criterion, dependency,
 evidence and pending owner action; close superseded tickets as consolidated,
 without presenting unrun acceptance as passed. Prepare this mapping now; do not
 close the pre-merge issue graph prematurely. Candidate8 remains immutable at
-its recorded exact source. New source requires fresh candidate9 qualification.
+its recorded exact source. New source requires fresh candidate 9 qualification.
 
 
 ## Final upgrade fixture checkpoint
@@ -200,7 +234,7 @@ after the existing #58 -> #59 -> #60 stack. Foundation head is
 `b1ee00d58227b5a0d41fa5df03a5ccc5700f8ebe`; audio head is
 `fcfa0c2577b5260e1b7036d83daece4a9452e41c`. The next qualification branch
 records demonstrated integration repairs, actual clean-source matrix results
-and candidate9 review downloads. No implementation issue or PR is closed/merged.
+and candidate 9 review downloads. No implementation issue or PR is closed/merged.
 
 New source includes persisted stream-only microphone controls, observed inputs/
 meters/gains, mute-preserving recovery and independent hold-to-talk guarding;

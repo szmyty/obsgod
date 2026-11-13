@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-11-13T15:53:24.898619+00:00",
+  "repository": "szmyty/obsgod",
+  "default_branch": "master",
+  "default_revision": "a8b19b3f20d5cf358b6250e120b74b3e63848803",
+  "branch_protected_metadata": false,
+  "main": {
+    "http_error": 404,
+    "message": "Branch not found"
+  },
+  "detailed_protection": {
+    "http_error": 403,
+    "message": "Resource not accessible by integration"
+  },
+  "rulesets": [],
+  "open_issue_count": 2,
+  "open_issues": [
+    {
+      "number": 51,
+      "title": "Research journeys \u2014 monetization and Decky Store distribution",
+      "url": "https://github.com/szmyty/obsgod/issues/51",
+      "updated_at": "2026-11-13T09:09:15Z",
+      "milestone": 3,
+      "body_sha256": "d2318ffaa48eecda4b25b5291c92568acad4d9a96549459c97db60b8fc8812ee"
+    },
+    {
+      "number": 46,
+      "title": "Final boss \u2014 remaining Decky Stream qualification and product work",
+      "url": "https://github.com/szmyty/obsgod/issues/46",
+      "updated_at": "2026-11-13T15:46:01Z",
+      "milestone": 3,
+      "body_sha256": "d90be83ae0c911539fa4909e25254ecfb4fbbbb4fa13a00649c848e3d9cfdc4c"
+    }
+  ],
+  "open_pr_count": 0,
+  "pulls": [],
+  "releases": [
+    {
+      "tag": "v0.1.0-deck.4-updater.1",
+      "url": "https://github.com/szmyty/obsgod/releases/tag/v0.1.0-deck.4-updater.1",
+      "prerelease": true,
+      "draft": false,
+      "target_commitish": "0eb8324c2b1f23fea069570eded1cd0c75d99274",
+      "published_at": "2026-11-11T17:15:52Z",
+      "assets": []
+    },
+    {
+      "tag": "v0.1.0-deck.4",
+      "url": "https://github.com/szmyty/obsgod/releases/tag/v0.1.0-deck.4",
+      "prerelease": true,
+      "draft": false,
+      "target_commitish": "55c03dd4160e6f6b517e778cf99a755801eb0a28",
+      "published_at": "2026-11-11T16:42:27Z",
+      "assets": []
+    },
+    {
+      "tag": "v0.1.0-deck.3",
+      "url": "https://github.com/szmyty/obsgod/releases/tag/v0.1.0-deck.3",
+      "prerelease": true,
+      "draft": false,
+      "target_commitish": "32160e1f54f074df178add393b605ff8f89dad51",
+      "published_at": "2026-11-11T16:28:06Z",
+      "assets": []
+    },
+    {
+      "tag": "v0.1.0-deck.2",
+      "url": "https://github.com/szmyty/obsgod/releases/tag/v0.1.0-deck.2",
+      "prerelease": true,
+      "draft": false,
+      "target_commitish": "4e68518d4ed6b6732ec17f64e11d09782359ec13",
+      "published_at": "2026-11-11T16:03:00Z",
+      "assets": []
+    },
+    {
+      "tag": "v0.1.0-deck.1",
+      "url": "https://github.com/szmyty/obsgod/releases/tag/v0.1.0-deck.1",
+      "prerelease": true,
+      "draft": false,
+      "target_commitish": "77b6378fa1ab06ccef0bd0240564ac97e81d2144",
+      "published_at": "2026-11-11T07:34:58Z",
+      "assets": []
+    }
+  ],
+  "milestones": [
+    {
+      "number": 1,
+      "title": "Roadmap 1 \u2014 Reliable Steam Deck streaming",
+      "state": "closed",
+      "open_issues": 9,
+      "closed_issues": 7
+    },
+    {
+      "number": 2,
+      "title": "Roadmap 2 \u2014 Supported public launch and optional funding",
+      "state": "open",
+      "open_issues": 0,
+      "closed_issues": 23
+    },
+    {
+      "number": 3,
+      "title": "Roadmap 3 \u2014 Advanced streaming and validated paid offerings",
+      "state": "open",
+      "open_issues": 2,
+      "closed_issues": 10
+    }
+  ]
+}
