@@ -239,10 +239,13 @@ class Plugin:
                     # Never use a pre-click cached panel snapshot to authorize
                     # changing capture, and keep the CLI's own lock/state gate.
                     current = await self._run("status")
+                    media = current.get("media")
+                    media_idle = (isinstance(media, dict) and media.get("known") is True and
+                                  media.get("replay_active") is False)
+                    legacy_absent = media is None and current.get("process") == "absent"
                     if (current.get("output_known") is not True or
                             current.get("stream", {}).get("active") or current.get("recording") or
-                            current.get("media", {}).get("replay_active") is True or
-                            (current.get("media") is not None and current["media"].get("known") is not True)):
+                            not (media_idle or legacy_absent)):
                         command = {"ok": False, "message": "Stop streaming and recording, then wait for confirmed status before changing capture mode."}
                 if command is None:
                     command = await self._run(action, payload) if payload is not None else await self._run(action)
@@ -355,9 +358,12 @@ class Plugin:
             await asyncio.shield(task)
             self._status_task = None
             result = await self.status()
-            media = result.get("media", {})
+            media = result.get("media")
+            media = media if isinstance(media, dict) else {}
+            recording = media.get("recording")
+            recording = recording if isinstance(recording, dict) else {}
             stopped = (media.get("known") is True and
-                       (media.get("recording", {}).get("active") is False if kind == "record-start" else
+                       (recording.get("active") is False if kind == "record-start" else
                         media.get("replay_active") is False))
             result["action_result"] = {"ok": stopped, "action": "cancel-media",
                                        "message": "Local startup cancelled; any partial recording was preserved. Streaming was not changed." if stopped else

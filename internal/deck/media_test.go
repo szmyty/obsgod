@@ -197,12 +197,13 @@ func TestClipLibraryOwnsOnlyConfirmedUnchangedMedia(t *testing.T) {
 	p := testPaths(t)
 	confirmed := mediaFixtureFile(t, p, "DeckyStream-confirmed.mkv", 0)
 	_ = mediaFixtureFile(t, p, "DeckyStream-interrupted.mkv", 0)
+	_ = mediaFixtureFile(t, p, "Replay DeckyStream-unindexed.mkv", 0)
 	_ = mediaFixtureFile(t, p, "unrelated.mkv", 0)
 	if e := RegisterMediaFile(p, confirmed, "recording"); e != nil {
 		t.Fatal(e)
 	}
 	library, e := MediaLibrary(p)
-	if e != nil || len(library.Clips) != 1 || len(library.Recoverable) != 1 || library.Recoverable[0].Finalized {
+	if e != nil || len(library.Clips) != 1 || len(library.Recoverable) != 2 || library.Recoverable[0].Finalized || library.Recoverable[1].Finalized {
 		t.Fatal(library, e)
 	}
 	if e = os.WriteFile(confirmed, []byte("changed-local-file"), 0600); e != nil {

@@ -95,9 +95,9 @@ class AdvancedAdapter(IsolatedAsyncioTestCase):
         run.assert_not_called()
 
     async def test_replay_or_unknown_media_blocks_capture_edit(self):
-        for media in [{"known": True, "replay_active": True}, {"known": False, "replay_active": False}]:
+        for media in [None, [], {}, {"known": True, "replay_active": True}, {"known": False, "replay_active": False}]:
             plugin = backend.Plugin()
-            with patch.object(plugin, "_run", AsyncMock(return_value={**IDLE, "media": media})) as run:
+            with patch.object(plugin, "_run", AsyncMock(return_value={**IDLE, "process": "running", "media": media})) as run:
                 result = await plugin.set_capture_mode("game")
             self.assertFalse(result["action_result"]["ok"])
             self.assertTrue(all(call.args == ("status",) for call in run.call_args_list))

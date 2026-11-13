@@ -1,7 +1,7 @@
 # Decky Stream
 
 Stream from Steam Deck through a managed OBS Studio instance and a Decky Quick
-Access panel. **Milestone 2 is a development candidate**, with actual Deck,
+Access panel. **Milestone 3 streaming features are a development candidate**, with actual Deck,
 provider-viewer, required CI and review acceptance still open. The executable,
 plugin and storage compatibility IDs remain `obsgod` / `OBSGod`.
 
@@ -11,6 +11,10 @@ plugin and storage compatibility IDs remain `obsgod` / `OBSGod`.
 - Guided Kick, Twitch, YouTube and custom RTMP(S) setup.
 - Verified installer/update paths, repair and reviewed uninstall/reset/wipe.
 - Optional funding buttons; cryptocurrency controls stay hidden without configured addresses.
+- Versioned quality presets and advanced profiles, with portable settings-only export.
+- Custom local image/video between-game media, with rights acknowledgement and muted video soundtrack.
+- Local recording/replay controls, finalized clip export and explicit storage/cleanup choices.
+- Bounded audio recovery and measured stream health; provider/viewer reception remains separate.
 
 ## Install and first stream
 
@@ -42,6 +46,9 @@ Help/version/completions work offline. OBS commands require the intended OBS
 instance; inspection or profile selection does not implicitly broadcast.
 
 - [Configuration, profiles, environment and completions](docs/configuration.md)
+- [Advanced stream profiles](docs/advanced-profiles.md), [idle media](docs/idle-media.md),
+  [recording/replay](docs/recording-replay.md), [runtime recovery](docs/runtime-resilience.md)
+  and [stream health](docs/stream-health.md)
 - [Remote OBS commands](docs/cli-usage.md) and [architecture](docs/architecture.md)
 - [Destinations and local connection recovery](docs/stream-destinations.md)
 - [Support buttons and public wallet configuration](docs/support.md)

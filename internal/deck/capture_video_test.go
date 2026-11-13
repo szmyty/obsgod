@@ -118,6 +118,7 @@ func (f *videoFixture) handle(q fixtureRequest) map[string]any {
 		data["outputActive"] = false
 	case "GetStreamStatus":
 		data["outputActive"] = f.active
+		data["outputReconnecting"] = false
 		data["outputBytes"] = 4096
 	case "GetSceneList":
 		list := []map[string]any{}

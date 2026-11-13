@@ -166,7 +166,7 @@ func MediaLibrary(p Paths) (MediaLibraryResult, error) {
 				if len(result.Recoverable) >= 1000 {
 					break
 				}
-				if !strings.HasPrefix(file.Name(), "DeckyStream-") || !safeMediaName(file.Name()) || known[mediaID(directory, file.Name())] {
+				if !(strings.HasPrefix(file.Name(), "DeckyStream-") || strings.HasPrefix(file.Name(), "Replay DeckyStream-")) || !safeMediaName(file.Name()) || known[mediaID(directory, file.Name())] {
 					continue
 				}
 				info, infoErr := file.Info()

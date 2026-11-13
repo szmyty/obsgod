@@ -39,7 +39,7 @@ Unknown/unreadable storage does not become a false ready state. An unreachable
 OBS output remains unknown; inspect its window before leaving it unattended.
 
 Finalized files returned by managed OBS are indexed privately under the XDG
-state directory. The library separates them from unindexed `DeckyStream-*.mkv`
+state directory. The library separates them from unindexed `DeckyStream-*.mkv` / `Replay DeckyStream-*.mkv`
 files that may still be active or may have survived an interruption. Unindexed,
 changed, empty or symbolic-link files are preserved and are never eligible for
 automatic cleanup. After confirming output is idle, inspect interrupted MKV in

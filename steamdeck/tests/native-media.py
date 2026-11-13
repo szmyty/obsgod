@@ -167,6 +167,17 @@ def run_live():
         time.sleep(4)
         during = main_status()
         assert during["stream"]["active"] and during["media"]["recording"]["active"] and during["media"]["replay_active"], "Real stream/record/replay coexistence failed"
+        health_result = subprocess.run([str(BINARY), "deck", "stream-health"],
+                                       capture_output=True, timeout=10)
+        health = json.loads(health_result.stdout)
+        health_encoded = json.dumps(health)
+        assert not any(secret and secret in health_encoded for secret in SENSITIVE), "A credential reached native health proof"
+        assert health_result.returncode == 0 and health.get("ok") is True and health.get("output_known") is True and health.get("streaming") is True, "Native health failed to confirm the active local OBS output"
+        metrics = health.get("metrics", {})
+        assert isinstance(metrics.get("bitrate_kbps"), (int, float)) and metrics["bitrate_kbps"] > 0, "Native health did not measure positive advancing bitrate"
+        assert isinstance(metrics.get("fps"), (int, float)) and metrics["fps"] > 0, "Native health did not measure positive FPS"
+        assert health.get("provider_reception") == "unknown", "Local metrics incorrectly claimed provider/viewer reception"
+        health_projection = {key: health[key] for key in ["schema_version", "state", "observed_at", "expires_at", "sample_ms", "output_known", "streaming", "metrics", "audio", "capture", "provider_reception"]}
         replay = command("replay-save")
         recording = command("record-stop")
         command("replay-stop")
@@ -175,6 +186,7 @@ def run_live():
         assert not final["media"]["recording"]["active"] and not final["media"]["replay_active"], "Local output stop was not confirmed"
         proof = {"status": "passed", "platform": "synthetic Linux OBS", "real_steam_deck": "unrun",
                  "stream_advanced_while_recording_and_replay": True, "local_stop_preserved_stream": True,
+                 "health": health_projection,
                  "recording": check_output(recording["recording_path"], "media-live-recording"),
                  "replay": check_output(replay["recording_path"], "media-live-replay")}
         encoded = json.dumps(proof, sort_keys=True)
