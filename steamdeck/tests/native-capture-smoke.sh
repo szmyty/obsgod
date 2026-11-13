@@ -132,6 +132,8 @@ done
 # The target name is not an identity. After valid media is flowing, a second
 # source with the same name must invalidate capture rather than retarget it.
 start_fixture good late-duplicate
+# Discard the previous run before the asynchronous producer can be polled.
+rm -f "$out/late-duplicate.bgrx"
 set +e
 capture late-duplicate 4242 150 &
 consumer_pid=$!
