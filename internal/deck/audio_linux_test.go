@@ -83,6 +83,34 @@ func TestAudioDiscoveryRefusesLoopbackAsMicrophoneAndReportsMute(t *testing.T) {
 	}
 }
 
+func TestAudioDiscoveryRejectsMonitorAliasesAndVersionedPulseMetadata(t *testing.T) {
+	for _, source := range []string{
+		`{"name":"microphone","monitor_of_sink":0}`,
+		`{"name":"microphone","monitor_of_sink_name":"headphones"}`,
+		`{"name":"microphone","monitor_of_sink":"headphones"}`,
+		`{"name":"microphone","monitor_of_sink":{}}`,
+	} {
+		query := audioFixtureQuery(map[string]string{"list sources": `[{"name":"speakers.monitor"},` + source + `]`})
+		if _, err := discoverAudio(context.Background(), true, query, func(int) bool { return false }); err == nil {
+			t.Fatalf("monitor alias accepted as microphone: %s", source)
+		}
+	}
+	query := audioFixtureQuery(map[string]string{
+		"info":         `{"default_sink_name":"speakers","default_source_name":"loopback-alias"}`,
+		"list sinks":   `[{"name":"speakers","monitor_source":"loopback-alias"}]`,
+		"list sources": `[{"name":"loopback-alias","monitor_source":"n/a"}]`,
+	})
+	if _, err := discoverAudio(context.Background(), true, query, func(int) bool { return false }); err == nil {
+		t.Fatal("sink-linked monitor without .monitor suffix was accepted as microphone")
+	}
+	for _, relationship := range []string{`null`, `4294967295`, `"n/a"`} {
+		query := audioFixtureQuery(map[string]string{"list sources": `[{"name":"speakers.monitor"},{"name":"microphone","monitor_of_sink":` + relationship + `}]`})
+		if _, err := discoverAudio(context.Background(), true, query, func(int) bool { return false }); err != nil {
+			t.Fatalf("real input with invalid-index/null relationship refused: %s %v", relationship, err)
+		}
+	}
+}
+
 func TestAudioDiagnosticsExcludePrivateDeviceAndServerData(t *testing.T) {
 	route := AudioRouting{OutputMonitor: "private-device-id", MicrophoneDevice: "private-mic-id", RouteReason: "default_output"}
 	status := safeAudioStatus(route, errors.New("private-server-do-not-export"))

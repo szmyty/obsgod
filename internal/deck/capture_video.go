@@ -14,6 +14,8 @@ import (
 const GameScene = "OBSGod Game"
 const GameCaptureInput = "OBSGod Game Window"
 const IdlePlaceholderInput = "OBSGod Idle Message"
+const IdleImageInput = "OBSGod Idle Image"
+const IdleVideoInput = "OBSGod Idle Video"
 
 // CaptureVideoStatus contains fixed safe facts, never game IDs or custom text.
 type CaptureVideoStatus struct {
@@ -67,7 +69,7 @@ func readCaptureVideoRecord(p Paths) (captureVideoRecord, bool) {
 	if record.Mode != "screen" && record.Mode != "game" {
 		return record, false
 	}
-	if record.IdleStyle != "black" && record.IdleStyle != "placeholder" {
+	if record.IdleStyle != "black" && record.IdleStyle != "placeholder" && record.IdleStyle != "image" && record.IdleStyle != "video" {
 		return record, false
 	}
 	switch record.State {
@@ -109,7 +111,7 @@ func sceneVideoWhitelist(s Settings, source string) map[string]bool {
 	}
 	return keep
 }
-func ensureIdleVideo(ctx context.Context, c *automation.Client, s Settings) error {
+func ensureIdleVideo(ctx context.Context, c *automation.Client, p Paths, s Settings) error {
 	for _, scene := range []string{IdleScene, LiveScene, GameScene} {
 		if err := c.EnsureScene(ctx, scene); err != nil {
 			return err
@@ -128,6 +130,39 @@ func ensureIdleVideo(ctx context.Context, c *automation.Client, s Settings) erro
 			return err
 		}
 		keep[IdlePlaceholderInput] = true
+	}
+	if s.IdleStyleName() == "image" || s.IdleStyleName() == "video" {
+		// Disable stale video before checking/reloading the asset. Missing, changed
+		// or unsupported media yields opaque black, never a display capture.
+		if err := c.EnableOnlySceneItems(ctx, IdleScene, keep); err != nil {
+			return err
+		}
+		path, err := idleMediaFile(p, s)
+		if err == nil {
+			name := IdleImageInput
+			if s.IdleStyleName() == "image" {
+				err = c.EnsureInput(ctx, IdleScene, name, "image_source", map[string]any{"file": path, "unload": true, "linear_alpha": true})
+			} else {
+				name = IdleVideoInput
+				err = c.EnsureMutedMediaInput(ctx, IdleScene, name, map[string]any{"local_file": path, "is_local_file": true, "looping": true, "restart_on_activate": true, "close_when_inactive": true, "clear_on_media_end": true, "hw_decode": false, "buffering_mb": 8, "input_format": ""})
+			}
+			if err == nil {
+				err = c.EnsureSceneItem(ctx, IdleScene, name)
+			}
+			if err == nil {
+				err = c.FitInput(ctx, IdleScene, name)
+			}
+			if err == nil {
+				keep[name] = true
+			}
+		}
+		if err != nil {
+			logEvent(p, "idle.media-unavailable")
+		} else {
+			logEvent(p, "idle.media-ready")
+		}
+		// Errors loading custom media must not interrupt an already authorized
+		// stream. Black remains visible and the next observer cycle may repair it.
 	}
 	// Disable unexpected video items too: a black fallback must not accidentally
 	// reveal a prior manually added display source. Sources are preserved.
@@ -213,7 +248,7 @@ func ensureVideo(ctx context.Context, c *automation.Client, p Paths, s Settings)
 	return ensureVideoForGame(ctx, c, p, s, game)
 }
 func ensureVideoForGame(ctx context.Context, c *automation.Client, p Paths, s Settings, game GameIdentity) error {
-	if err := ensureIdleVideo(ctx, c, s); err != nil {
+	if err := ensureIdleVideo(ctx, c, p, s); err != nil {
 		return err
 	}
 	if s.CaptureModeName() == "screen" {

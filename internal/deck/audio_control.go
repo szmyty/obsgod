@@ -25,7 +25,11 @@ func readAudioStatus(p Paths) *AudioStatus {
 	if err != nil || !info.Mode().IsRegular() || info.Mode().Perm()&0077 != 0 || info.Size() > 4096 || readJSON(path, &receipt) != nil || receipt.Observed.IsZero() {
 		return nil
 	}
-	if time.Since(receipt.Observed) > 5*time.Second {
+	age := time.Since(receipt.Observed)
+	if age > 5*time.Second || age < -time.Second {
+		receipt.Status.State = "unknown"
+		receipt.Status.OutputAvailable = false
+		receipt.Status.MicrophoneAvailable = false
 		receipt.Status.Signal = "unmeasured"
 		receipt.Status.Message = "Last configured audio route; current sound is unmeasured. Make a local test clip or run diagnostics to check audio"
 	}

@@ -112,6 +112,8 @@ func (f *videoFixture) handle(q fixtureRequest) map[string]any {
 		data["currentSceneCollectionName"] = f.collection
 	case "GetCurrentProgramScene":
 		data["sceneName"] = f.scene
+	case "GetReplayBufferStatus":
+		data["outputActive"] = false
 	case "GetRecordStatus":
 		data["outputActive"] = false
 	case "GetStreamStatus":
@@ -128,7 +130,7 @@ func (f *videoFixture) handle(q fixtureRequest) map[string]any {
 	case "SetCurrentProgramScene":
 		f.scene = scene
 	case "GetInputKindList":
-		data["inputKinds"] = []string{"gstreamer-source", "text_ft2_source_v2", "pulse_output_capture", "pulse_input_capture"}
+		data["inputKinds"] = []string{"gstreamer-source", "text_ft2_source_v2", "image_source", "ffmpeg_source", "pulse_output_capture", "pulse_input_capture"}
 	case "GetInputList":
 		list := []map[string]any{}
 		for name, input := range f.inputs {
@@ -143,7 +145,8 @@ func (f *videoFixture) handle(q fixtureRequest) map[string]any {
 		}
 		f.inputs[name] = &videoInput{kind: kind, settings: settings}
 		f.next++
-		f.scenes[scene][name] = &videoItem{id: f.next, enabled: true}
+		enabled, _ := q.Data["sceneItemEnabled"].(bool)
+		f.scenes[scene][name] = &videoItem{id: f.next, enabled: enabled}
 	case "SetInputSettings":
 		if input := f.inputs[name]; input != nil {
 			for key, value := range q.Data["inputSettings"].(map[string]any) {

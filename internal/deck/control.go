@@ -47,6 +47,8 @@ type Result struct {
 	Frames        string                    `json:"frames"`
 	Audio         *AudioStatus              `json:"audio,omitempty"`
 	Video         *CaptureVideoStatus       `json:"video,omitempty"`
+	Media         *MediaSnapshot            `json:"media"`
+	Resilience    *ResilienceStatus         `json:"resilience,omitempty"`
 }
 
 func connect(ctx context.Context, secret Secrets, timeout time.Duration) (*automation.Client, error) {
@@ -71,6 +73,10 @@ func Status(ctx context.Context, p Paths) Result {
 	s, secret, loadErr := Load(p)
 	process, listener := presence(p)
 	r := Result{OK: true, Configured: loadErr == nil, State: "stopped", Message: "Not streaming", Process: process, Connection: "disconnected", Capture: "unknown", Game: "unknown", Frames: "unknown"}
+	pref, _ := RecordingSettings(p)
+	r.Media = &MediaSnapshot{Preferences: pref, Message: "Local output state is unconfirmed"}
+	resilience := ReadResilienceStatus(p)
+	r.Resilience = &resilience
 	if loadErr == nil {
 		r.Settings = &s
 	} else {
@@ -80,6 +86,8 @@ func Status(ctx context.Context, p Paths) Result {
 	if process == "absent" && !listener {
 		r.OutputKnown = true
 		r.Connection = "unavailable"
+		r.Media.Known = true
+		r.Media.Message = "No managed OBS output is running"
 	}
 	if loadErr != nil {
 		if !r.OutputKnown {
@@ -103,7 +111,7 @@ func Status(ctx context.Context, p Paths) Result {
 	defer c.Close()
 	r.Connected, r.Connection = true, "ready"
 	runtime, err := c.RuntimeStatus(ctx)
-	if err != nil || runtime.Profile != "OBSGod" {
+	if err != nil || runtime.Profile != "OBSGod" || runtime.Collection != "OBSGod" {
 		r.OK, r.State, r.OutputKnown = false, "unknown", false
 		r.Message = "The managed OBS profile and output state could not be verified"
 		return r
@@ -115,6 +123,14 @@ func Status(ctx context.Context, p Paths) Result {
 		r.Message = "OBS status unavailable; check the connection"
 		return r
 	}
+	media := ObserveMedia(ctx, p, c)
+	r.Media = &media
+	if !media.Known {
+		r.OK, r.State, r.OutputKnown = false, "unknown", false
+		r.Message = "OBS is connected but recording/replay state could not be confirmed; inspect local output before changing settings"
+		return r
+	}
+	r.Recording = media.Recording.Active
 	r.OutputKnown = true
 	r.Audio = readAudioStatus(p)
 	video := ReadCaptureVideoStatus(p)
@@ -122,7 +138,7 @@ func Status(ctx context.Context, p Paths) Result {
 	captureCtx, captureCancel := context.WithTimeout(ctx, 400*time.Millisecond)
 	r.Capture = captureAvailability(captureCtx)
 	captureCancel()
-	if r.Stream.Active || r.Recording {
+	if r.Stream.Active || r.Recording || media.ReplayActive {
 		data, frameErr := c.Screenshot(ctx, runtime.Scene)
 		if frameErr == nil {
 			r.Frames = "blank"
@@ -131,7 +147,7 @@ func Status(ctx context.Context, p Paths) Result {
 			}
 		}
 	}
-	if (r.Stream.Active || r.Recording) && ctx.Err() == nil {
+	if (r.Stream.Active || r.Recording || media.ReplayActive) && ctx.Err() == nil {
 		audioCtx, audioCancel := context.WithTimeout(ctx, 450*time.Millisecond)
 		r.Audio = measureAudio(audioCtx, p, secret, 180*time.Millisecond, false)
 		audioCancel()
@@ -157,6 +173,8 @@ func Status(ctx context.Context, p Paths) Result {
 		r.State, r.Message = "stopped", "Not streaming"
 		if r.Recording {
 			r.Message = "Recording locally; not streaming"
+		} else if media.ReplayActive {
+			r.Message = "Replay buffer is active locally; not streaming"
 		}
 	}
 	return r
@@ -291,7 +309,7 @@ func verifyManaged(ctx context.Context, c *automation.Client) (*automation.Clien
 		_ = c.Close()
 		return nil, e
 	}
-	if r.Profile != "OBSGod" {
+	if r.Profile != "OBSGod" || r.Collection != "OBSGod" {
 		_ = c.Close()
 		return nil, errUnmanaged
 	}
@@ -391,10 +409,19 @@ func haltCaptureIfIdle(ctx context.Context, c *automation.Client) {
 	if err != nil || runtime.Recording {
 		return
 	}
+	replay, err := c.ReplayActive(ctx)
+	if err != nil || replay {
+		return
+	}
 	haltCapture(ctx, c)
 }
 
 func Start(ctx context.Context, p Paths) (Result, error) {
+	if process, listener := presence(p); process == "absent" && !listener {
+		if _, err := ApplyBoundGameProfile(ctx, p); err != nil {
+			return Result{}, err
+		}
+	}
 	s, secret, e := Load(p)
 	if e != nil {
 		return Result{}, e
@@ -420,6 +447,13 @@ func Start(ctx context.Context, p Paths) (Result, error) {
 	}
 	if !wasActive && runtime.Recording {
 		return Result{}, errors.New("a local recording is already active; stop it before changing capture or starting a new stream")
+	}
+	replay, err := c.ReplayActive(ctx)
+	if err != nil {
+		return Result{}, err
+	}
+	if !wasActive && replay {
+		return Result{}, errors.New("a replay buffer is already active; stop it before changing capture or starting a new stream")
 	}
 
 	succeeded := false
@@ -474,6 +508,7 @@ func Start(ctx context.Context, p Paths) (Result, error) {
 		return Result{}, errors.New("stream start could not be confirmed and stop could not be confirmed. Use Stop streaming or inspect OBS immediately")
 	}
 	succeeded = true
+	_ = StartResilienceWatch(p)
 	if s.CaptureModeName() == "game" {
 		if err := StartCaptureWatch(p); err != nil {
 			logEvent(p, "game.watch-unavailable")
@@ -511,15 +546,19 @@ func Stop(ctx context.Context, p Paths) (Result, error) {
 	if e != nil {
 		return Result{}, e
 	}
-	if !r.Recording {
-		haltCapture(ctx, c)
-	}
+	_ = r // Capture cleanup independently confirms recording and replay again.
+	haltCaptureIfIdle(ctx, c)
 	logEvent(p, "stream.stopped")
 	return Result{OK: true, Configured: true, Connected: true, State: "stopped", Message: "Streaming stopped", Stream: state}, nil
 }
 
 // TestRecording captures ten seconds locally and never configures/starts RTMP.
 func TestRecording(ctx context.Context, p Paths) (Result, error) {
+	if process, listener := presence(p); process == "absent" && !listener {
+		if _, err := ApplyBoundGameProfile(ctx, p); err != nil {
+			return Result{}, err
+		}
+	}
 	s, secret, e := Load(p)
 	if e != nil {
 		return Result{}, e
@@ -542,8 +581,22 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 	if e != nil {
 		return Result{}, e
 	}
-	if r.Recording || st.Active {
-		return Result{}, errors.New("stop the existing stream or recording before making a test clip")
+	replay, replayErr := c.ReplayActive(ctx)
+	if replayErr != nil {
+		return Result{}, replayErr
+	}
+	if r.Recording || st.Active || replay {
+		return Result{}, errors.New("stop the existing stream, recording or replay before making a test clip")
+	}
+	if _, e = MediaStorageStatus(p, true); e != nil {
+		return Result{}, e
+	}
+	directory, seconds, memoryMB, mediaErr := MediaProfileValues(p)
+	if mediaErr != nil {
+		return Result{}, mediaErr
+	}
+	if e = c.ConfigureMediaProfile(ctx, directory, seconds, memoryMB); e != nil {
+		return Result{}, e
 	}
 	logEvent(p, "capture.checking")
 	if s.CaptureModeName() == "screen" && !waitGamescope(ctx) {
@@ -575,6 +628,7 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 	if e != nil {
 		return Result{}, e
 	}
+	_ = StartResilienceWatch(p)
 	if s.CaptureModeName() == "game" {
 		if err := StartCaptureWatch(p); err != nil {
 			logEvent(p, "game.watch-unavailable")
@@ -593,6 +647,9 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 	}
 	if info, err := os.Stat(path); path == "" || err != nil || !info.Mode().IsRegular() || info.Size() == 0 {
 		return Result{}, errors.New("OBS did not produce a test recording; no successful clip can be confirmed")
+	}
+	if e = RegisterMediaFile(p, path, "recording"); e != nil {
+		return Result{}, e
 	}
 	logEvent(p, "recording.saved")
 	return Result{OK: true, Configured: true, Connected: true, State: "stopped", Message: "Local test saved; watch it in Desktop Mode to check picture, game audio and microphone before broadcasting", RecordingPath: path}, nil
@@ -648,12 +705,17 @@ func Restart(ctx context.Context, p Paths) (Result, error) {
 			return Result{}, err
 		}
 		s, err := c.StreamStatus(ctx)
-		_ = c.Close()
 		if err != nil {
+			_ = c.Close()
 			return Result{}, err
 		}
-		if r.Recording || s.Active {
-			return Result{}, errors.New("stop streaming and recording before restarting OBSGod")
+		replay, replayErr := c.ReplayActive(ctx)
+		_ = c.Close()
+		if replayErr != nil {
+			return Result{}, replayErr
+		}
+		if r.Recording || s.Active || replay {
+			return Result{}, errors.New("stop streaming, recording and replay before restarting OBSGod")
 		}
 	} else if process, listener := presence(p); process != "absent" || listener {
 		return Result{}, errors.New("cannot safely restart an unreachable OBS instance; inspect it in Desktop Mode first")

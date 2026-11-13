@@ -74,11 +74,40 @@ type pulseSink struct {
 	Volume  map[string]pulseVolume `json:"volume"`
 }
 type pulseSource struct {
-	Name      string                 `json:"name"`
-	MonitorOf string                 `json:"monitor_source"`
-	Muted     bool                   `json:"mute"`
-	Volume    map[string]pulseVolume `json:"volume"`
+	Name      string `json:"name"`
+	MonitorOf string `json:"monitor_source"`
+	// pactl versions expose the relationship through different fields. A
+	// monitor's display name need not end in .monitor, so names alone are not
+	// sufficient to keep loopback audio out of the microphone path.
+	MonitorOfSink     json.RawMessage        `json:"monitor_of_sink"`
+	MonitorOfSinkName string                 `json:"monitor_of_sink_name"`
+	Muted             bool                   `json:"mute"`
+	Volume            map[string]pulseVolume `json:"volume"`
 }
+
+func sourceIsMonitor(source pulseSource, sinks []pulseSink) bool {
+	if strings.HasSuffix(source.Name, ".monitor") || (source.MonitorOf != "" && source.MonitorOf != "n/a") || (source.MonitorOfSinkName != "" && source.MonitorOfSinkName != "n/a") {
+		return true
+	}
+	for _, sink := range sinks {
+		if source.Name == sink.Monitor {
+			return true
+		}
+	}
+	if len(source.MonitorOfSink) > 0 && string(source.MonitorOfSink) != "null" {
+		var index uint64
+		if json.Unmarshal(source.MonitorOfSink, &index) == nil {
+			return index != 4294967295 // PA_INVALID_INDEX means a real input.
+		}
+		var text string
+		if json.Unmarshal(source.MonitorOfSink, &text) == nil {
+			return text != "" && text != "n/a" && text != "4294967295"
+		}
+		return true // An unrecognized relationship is not a proven microphone.
+	}
+	return false
+}
+
 type pulseInput struct {
 	Corked     bool           `json:"corked"`
 	Sink       uint64         `json:"sink"`
@@ -226,7 +255,7 @@ func discoverAudio(ctx context.Context, microphone bool, query func(context.Cont
 			if source.Name != info.DefaultSource {
 				continue
 			}
-			if !validAudioID(source.Name) || strings.HasSuffix(source.Name, ".monitor") || (source.MonitorOf != "" && source.MonitorOf != "n/a") {
+			if !validAudioID(source.Name) || sourceIsMonitor(source, sinks) {
 				return route, &audioDiscoveryError{code: "microphone"}
 			}
 			if route.MicrophoneDevice != "" {

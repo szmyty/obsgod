@@ -12,8 +12,9 @@ import (
 
 func newDeckCommand() *coral.Command {
 	root := &coral.Command{Use: "deck", Short: "Manage the optional Steam Deck streaming preview (JSON output)"}
+	addDeckAdvancedCommands(root)
 	root.AddCommand(&coral.Command{Use: "support-bundle", Short: "Export filtered diagnostic facts without credentials, URLs or private paths", Args: coral.NoArgs, RunE: func(cmd *coral.Command, _ []string) error {
-		ctx, cancel := context.WithTimeout(cmd.Context(), 3*time.Second)
+		ctx, cancel := context.WithTimeout(cmd.Context(), 6*time.Second)
 		defer cancel()
 		paths, err := deck.UserPaths()
 		if err != nil {

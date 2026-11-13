@@ -101,7 +101,7 @@ func TestCaptureWatchRetriesAudioAndResetsTargetAfterConnectionFailure(t *testin
 	loads, connections, routes := 0, 0, 0
 	deps := captureWatchDeps{load: func(Paths) (Settings, Secrets, error) {
 		loads++
-		if loads > 4 {
+		if loads > 5 {
 			f.mu.Lock()
 			f.active = false
 			f.mu.Unlock()
@@ -109,7 +109,7 @@ func TestCaptureWatchRetriesAudioAndResetsTargetAfterConnectionFailure(t *testin
 		return s, Secrets{}, nil
 	}, connect: func(ctx context.Context, secret Secrets) (*automation.Client, error) {
 		connections++
-		if connections == 2 {
+		if connections == 3 {
 			return nil, errors.New("fixture disconnect")
 		}
 		return dial(ctx, secret)
@@ -125,7 +125,7 @@ func TestCaptureWatchRetriesAudioAndResetsTargetAfterConnectionFailure(t *testin
 	if err := watchCaptureWith(ctx, p, deps); err != nil {
 		t.Fatal(err)
 	}
-	if routes != 2 {
+	if routes != 3 {
 		t.Fatalf("audio failure or reconnect was not retried: %d", routes)
 	}
 	f.mu.Lock()
