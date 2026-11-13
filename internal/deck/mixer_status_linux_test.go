@@ -99,7 +99,7 @@ func TestStatusReconcilesCachedMixerWithManagedConnection(t *testing.T) {
 				t.Fatal("main status queried Pulse instead of using its cache")
 			}
 			count := 0
-			for requests != nil && len(requests) > 0 {
+			for len(requests) > 0 {
 				request := <-requests
 				count++
 				switch request.Type {
