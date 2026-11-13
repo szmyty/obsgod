@@ -2,11 +2,44 @@
 <style>body{margin:0;background:#0b1019;color:#f0f3fc;font:15px system-ui}#root{width:330px;margin:0 auto;padding:14px}section{padding:8px 0;border-top:1px solid #425067}h2{font-size:12px;letter-spacing:1px;color:#a8b7ce}button{display:flex;gap:10px;align-items:center;justify-content:center;width:100%;background:#354765;color:#fff;padding:12px;margin:5px 0;border:0;border-radius:4px;font:inherit}button:disabled{opacity:.45}button:focus{outline:3px solid #86d5ff}.row{margin:9px 0}</style></head><body><div id="root"></div><script src="runtime.js"></script><script type="module">
 const h=SP_REACT.createElement;
 window.DFL={staticClasses:{Title:"title"},PanelSection:({title,children})=>h("section",null,h("h2",null,title),children),PanelSectionRow:({children})=>h("div",{className:"row"},children),ButtonItem:({children,onClick,disabled,icon,description})=>h("div",null,h("button",{onClick,disabled},icon&&h("span",{"aria-hidden":true},icon),h("span",null,children)),description&&h("div",{style:{fontSize:12,opacity:.75,lineHeight:1.4}},description)),Navigation:{NavigateToExternalWeb:url=>{fixture.externalLinks.push(url);if(fixture.linkFailure)throw Error("fixture external navigation denied");}},showModal:content=>{const mount=document.createElement("div");document.body.appendChild(mount);const root=fixtureRoot(mount);root.render(content);return {Close:()=>{root.unmount();mount.remove();}};},ConfirmModal:({strTitle,strDescription,strOKButtonText,onOK,onCancel})=>h("div",{role:"dialog","aria-label":strTitle},h("h2",null,strTitle),strDescription,h("button",{onClick:onOK},strOKButtonText||"Done"),onCancel&&h("button",{onClick:onCancel},"Cancel"))};
-window.fixture={active:false,configured:true,recording:false,microphone:false,audio:null,mode:"screen",unknown:false,bytes:0,stalled:false,failure:false,sequence:0,operation:null,calls:{},toasts:[],externalLinks:[],linkFailure:false,events:JSON.parse(sessionStorage.getItem("fixtureEvents")||"[]"),testFailure:false};
+window.fixture={active:false,configured:true,recording:false,microphone:false,audio:null,mode:"screen",replay:false,unknown:false,bytes:0,stalled:false,failure:false,sequence:0,operation:null,calls:{},toasts:[],externalLinks:[],linkFailure:false,events:JSON.parse(sessionStorage.getItem("fixtureEvents")||"[]"),testFailure:false};
 function event(message,level="info"){fixture.events.push({time:new Date().toISOString(),level,message});}
-function status(){if(fixture.failure)throw Error("simulated backend unavailable");sessionStorage.setItem("fixtureEvents",JSON.stringify(fixture.events));if(fixture.active&&!fixture.stalled)fixture.bytes+=2048;return {ok:true,configured:fixture.configured,output_known:!fixture.unknown,process:"running",connection:"ready",recording:fixture.recording,capture:"available",frames:"visible",game:"unknown",backend_id:"fixture-backend",snapshot_id:++fixture.sequence,operation:fixture.operation,state:!fixture.configured?"setup":fixture.active?"streaming":"stopped",message:!fixture.configured?"Complete Desktop Setup":fixture.active?"OBS streaming":"Not streaming",stream:{active:fixture.active,reconnecting:false,bytes:fixture.bytes,duration_ms:fixture.bytes},diagnostics:fixture.events,plugin_version:"0.1.0-console-fixture",audio:fixture.audio,settings:{microphone:fixture.microphone,capture_mode:fixture.mode,idle_style:"black",server:"rtmps://must-not-copy.invalid/app",stream_key:"must-not-copy"}};}
+function status(){if(fixture.failure)throw Error("simulated backend unavailable");sessionStorage.setItem("fixtureEvents",JSON.stringify(fixture.events));if(fixture.active&&!fixture.stalled)fixture.bytes+=2048;return {ok:true,configured:fixture.configured,output_known:!fixture.unknown,process:"running",connection:"ready",recording:fixture.recording,media:{known:!fixture.unknown,recording:{active:fixture.recording},replay_active:fixture.replay,storage:{directory:"/fixture/Videos/OBSGod",available_bytes:12884901888}},capture:"available",frames:"visible",game:"unknown",backend_id:"fixture-backend",snapshot_id:++fixture.sequence,operation:fixture.operation,state:!fixture.configured?"setup":fixture.active?"streaming":"stopped",message:!fixture.configured?"Complete Desktop Setup":fixture.active?"OBS streaming":"Not streaming",stream:{active:fixture.active,reconnecting:false,bytes:fixture.bytes,duration_ms:fixture.bytes},diagnostics:fixture.events,plugin_version:"0.1.0-console-fixture",audio:fixture.audio,settings:{microphone:fixture.microphone,capture_mode:fixture.mode,idle_style:"black",server:"rtmps://must-not-copy.invalid/app",stream_key:"must-not-copy"}};}
 window.__DECKY_SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED_deckyLoaderAPIInit={connect:()=>({_version:2,callable:(method)=>async(...args)=>{
  fixture.calls[method]=(fixture.calls[method]||0)+1;
+ if(method==="stream_profiles"){
+  const payload=args[0],profile={version:1,width:1280,height:720,fps:30,bitrate:4500,encoder:"vaapi",microphone:false,capture_mode:"game"};
+  fixture.profileArgs=payload;(fixture.profileActions??=[]).push(payload.action);
+  if(payload.action==="list")return {ok:true,message:"Profiles loaded",current:profile,profiles:[{name:"my-game",profile}],presets:[{name:"balanced-720p30",label:"Balanced 720p30",description:"Starting point, not hardware qualified",profile}]};
+  if(["apply","reset"].includes(payload.action)&&(fixture.active||fixture.recording||fixture.replay||fixture.unknown))return {ok:false,message:"Stop all output before applying profiles"};
+  if(payload.action==="export")return {ok:true,message:"Settings exported",document:{version:1,profile}};
+  return {data:{ok:true,message:"Profile action saved; nothing broadcast",profile},action_result:{ok:true,message:"Profile action saved; nothing broadcast"}};
+ }
+ if(method==="set_idle_media"){
+  fixture.idleArgs=args[0];
+  return {ok:!fixture.active&&!fixture.recording&&!fixture.replay&&!fixture.unknown,message:"Between-game screen saved; no broadcast"};
+ }
+ if(method==="media_action"){
+  const payload=args[0];fixture.mediaArgs=payload;
+  if(payload.action==="list")return {ok:true,message:"Clips loaded",clips:[{id:"fixture",name:"clip.mkv",kind:"recording",bytes:1048576,modified_utc:"2026-11-13T12:00:00Z"}]};
+  if(fixture.unknown)return {ok:false,message:"Media state unconfirmed"};
+  if(["record-start","replay-start"].includes(payload.action)&&fixture.mediaStartPending){
+   fixture.operation={id:fixture.sequence+1,action:"media",media_action:payload.action,state:"running"};
+   await new Promise(resolve=>{fixture.finishMedia=resolve;});delete fixture.finishMedia;fixture.operation=null;
+   if(fixture.mediaCancelled)return {ok:false,message:"Local media startup cancelled"};
+  }
+  if(payload.action==="record-start")fixture.recording=true;
+  if(payload.action==="record-stop")fixture.recording=false;
+  if(payload.action==="replay-start")fixture.replay=true;
+  if(payload.action==="replay-stop")fixture.replay=false;
+  return {data:{ok:true,message:"Confirmed local media action",...(["record-stop","replay-save"].includes(payload.action)?{recording_path:"/fixture/Videos/OBSGod/clip.mkv"}:{})},action_result:{ok:true,message:"Confirmed local media action"}};
+ }
+ if(method==="cancel_media_operation"){
+  fixture.mediaCancelled=true;if(fixture.finishMedia)fixture.finishMedia();
+  return {data:{ok:true,message:"Local media startup cancelled; stream unchanged"},action_result:{ok:true,message:"Local media startup cancelled; stream unchanged"}};
+ }
+ if(method==="retry_recovery")return {ok:true,message:"Bounded recovery requested; no stopped output restarted"};
+ if(method==="stream_health"){if(fixture.healthFailure)throw Error("Health observation unavailable");return {schema_version:1,ok:true,state:"degraded",message:"Network dropped frames observed",observed_at:new Date().toISOString(),expires_at:new Date(Date.now()+8000).toISOString(),output_known:true,streaming:fixture.active,metrics:{bitrate_kbps:4500,stream_dropped_percent:5,cpu_percent:12,fps:30},audio:"signal",capture:"visible",provider_reception:"unknown",advice:[{code:"network",message:"Check your connection; quality was not changed automatically."}]};}
  if(method==="check_for_updates")return {ok:true,state:"update-available",current_version:"0.1.0-console-fixture",latest_version:"0.1.0-deck.5",available:true,message:"A preview update is available."};
  if(method==="set_capture_mode"){
   fixture.modeArgs=args;

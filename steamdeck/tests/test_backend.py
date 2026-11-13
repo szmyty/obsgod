@@ -13,7 +13,8 @@ backend = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(backend)
 
 IDLE = {"ok": True, "state": "stopped", "output_known": True,
-        "stream": {"active": False}, "message": "fixture idle"}
+        "stream": {"active": False}, "message": "fixture idle", "process": "absent",
+        "media": {"known": True, "replay_active": False}}
 LIVE = {"ok": True, "state": "streaming", "output_known": True,
         "stream": {"active": True, "bytes": 4096}, "message": "fixture live"}
 

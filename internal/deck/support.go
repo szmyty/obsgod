@@ -61,7 +61,8 @@ func supportStatus(r Result) SupportStatus {
 }
 
 // ExportSupportBundle reads local state without launching OBS, changing output,
-// writing files, or contacting a destination. Unknown remains explicit.
+// contacting a destination, or changing OBS settings/output. Filtered local
+// audio measurement receipts can refresh. Unknown remains explicit.
 func ExportSupportBundle(ctx context.Context, p Paths) SupportBundle {
 	r := Status(ctx, p)
 	health := ObserveStreamHealth(ctx, p)

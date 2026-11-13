@@ -5,7 +5,7 @@ Decky's Quick Access panel. Stock OBS still needs a graphical session; this is
 managed background OBS, not a headless OBS server. SteamOS/Linux x86_64 is the
 supported target. Normal use does not disable SteamOS read-only protection.
 
-**The Milestone 2 candidate is under draft review.** Use the candidate and checksums identified
+**The Milestone 3 streaming candidate is under draft review.** Use the candidate and checksums identified
 in its draft PRs, not an older published preview as evidence of these fixes.
 Cloud tests do not establish actual Steam Deck, Flatpak, Gamescope, AMD encoder,
 controller, audio or Kick compatibility. Required device checks remain open.
@@ -15,6 +15,9 @@ controller, audio or Kick compatibility. Required device checks remain open.
 1. In **Desktop Mode**, download the reviewed candidate archive ending in
    `_linux_amd64.tar.gz` and extract the entire archive. Leave an existing OBSGod
    installation in place; settings and the stream key should be preserved.
+   Stop streaming, local recording and replay first. Close idle managed OBS with
+   **Restart OBS** before upgrading from an older version that cannot report
+   replay state. The installer refuses active or unconfirmed output.
 2. Make sure **Decky Loader** is installed and Steam is running normally in
    Desktop Mode. Decky is part of the **••• Quick Access panel** in Gaming Mode;
    it is not a normal Desktop Applications entry. If Decky is missing or its
@@ -44,7 +47,8 @@ full-screen capture must still deliver usable nonblank frames before a test or
 broadcast starts. Game-only mode permits the explicitly selected between-game
 screen when no verified game capture is available. Some Gamescope versions cannot capture the Steam UI with no game; a
 blank/unavailable feed is an explicit platform blocker, not proof that OBS
-failed to launch. Custom idle images/videos belong to Milestone 3.
+failed to launch. The M3 candidate also supports imported local idle images/video;
+see [idle media](idle-media.md) for rights acknowledgement and muted soundtrack.
 
 If the launcher is opened as text, open Konsole in the extracted folder and run
 `python3 install.py`. `--no-launch` installs without opening setup. Use the normal
@@ -123,7 +127,16 @@ Game-only mode shows **black** or a **custom placeholder message** when no game
 is identified, more than one game is ambiguous, the compositor lacks the required
 format, or captured game frames cannot be verified. The default message is
 “Game starting soon”; edit it in Desktop Setup. No external artwork is bundled.
-Arbitrary image/video backgrounds remain Milestone 3 work.
+Desktop Setup can import a local PNG/JPEG image or MP4/WebM video after you
+confirm permission to use it. The managed copy is private, video sound stays
+muted, and a missing/invalid asset falls back to black. See [idle media](idle-media.md).
+
+The M3 candidate adds [quality profiles](advanced-profiles.md),
+[recording/replay and clips](recording-replay.md),
+[bounded recovery](runtime-resilience.md) and [measured health](stream-health.md).
+Profile settings apply only to an explicit new output; game detection and
+recovery never start broadcasting. Real Deck/controller qualification remains
+separate from the prepared controls and Linux/browser evidence.
 An already started stream stays live while game capture and fallback alternate.
 The green indicator follows OBS output progress even during an intentional
 between-game screen. Opening Steam menus should not change the app-filtered

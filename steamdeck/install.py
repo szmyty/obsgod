@@ -221,13 +221,21 @@ def require_idle(bridge, close=False):
     recording = state.get("recording")
     recording_active = recording.get("active") if isinstance(recording, dict) else recording
     stream = state.get("stream")
+    media = state.get("media")
+    # Pre-M3 executables have no replay observation. They may be upgraded only
+    # after OBS is absent; missing replay state from a running instance is not
+    # proof of idle output. New runtimes always report a media snapshot.
+    media_idle = (isinstance(media, dict) and media.get("known") is True
+                  and media.get("replay_active") is False)
+    legacy_absent = media is None and state.get("process") == "absent"
     if (state.get("ok") is not True or state.get("state") not in ("stopped", "setup")
             or not isinstance(stream, dict) or stream.get("active") is not False
             or not isinstance(recording_active, bool) or recording_active
+            or not (media_idle or legacy_absent)
             or state.get("output_known") is not True
             or state.get("process") not in ("absent", "running")
             or state.get("operation") not in (None, "", "idle")):
-        raise RuntimeError("OBS output is active, busy or unconfirmed. Stop streaming/recording in OBSGod first, then retry. The installer will not stop a broadcast for you.")
+        raise RuntimeError("OBS output is active, busy or unconfirmed. Stop streaming, recording and replay in OBSGod first, then retry. For an older app, close managed OBS before upgrading. The installer will not stop a broadcast or local output for you.")
     if close and state.get("configured"):
         result = bridge.run_cli("restart", timeout=20)
         if not isinstance(result, dict) or not result.get("ok"):

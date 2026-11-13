@@ -120,3 +120,6 @@ q['capture_library_sha256']=hashlib.sha256(pathlib.Path('/src/dist/libgstobsgodc
 (p/'game-obs-qualification.json').write_text(json.dumps(q,indent=2)+'\n')
 print('PASS: actual OBS game/idle/game/unsupported/black scenes and advancing local RTMP; decoded scene pixels and440Hz audible at every phase; local10sclip; no implicit output restart; legacy sources hidden; ordinary OBS preserved. Synthetic game producer, not Steam Deck qualification.')
 PY
+
+# Rich idle media uses the same still-live disposable display/audio session.
+python3 /src/steamdeck/tests/native-idle-media.py

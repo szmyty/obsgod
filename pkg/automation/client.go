@@ -229,6 +229,12 @@ func (c *Client) streamStatus() (*streamResponse, error) {
 	if e != nil {
 		return nil, e
 	}
+	// The generated response uses zero-valued booleans for missing/null fields
+	// and can coerce other JSON types. Neither establishes an idle stream.
+	// Validate the raw flags before status can authorize Start/Stop or settings.
+	if e = workflowKnownOutput(r.GetRaw(), "outputActive", "outputReconnecting"); e != nil {
+		return nil, e
+	}
 	return &StreamStatus{Active: r.OutputActive, Reconnecting: r.OutputReconnecting, Bytes: r.OutputBytes, Duration: r.OutputDuration, SkippedFrames: r.OutputSkippedFrames, TotalFrames: r.OutputTotalFrames}, nil
 }
 

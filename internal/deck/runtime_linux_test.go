@@ -117,7 +117,7 @@ func startManagedFixture(t *testing.T, rejectAuth bool, recording bool, active b
 			case "GetReplayBufferStatus":
 				data = map[string]any{"outputActive": false}
 			case "GetStreamStatus":
-				data = map[string]any{"outputActive": active, "outputBytes": 4096}
+				data = map[string]any{"outputActive": active, "outputReconnecting": false, "outputBytes": 4096}
 			case "GetSourceScreenshot":
 				data = map[string]any{"imageData": "not-an-image"}
 			}

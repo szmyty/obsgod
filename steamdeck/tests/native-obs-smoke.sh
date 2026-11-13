@@ -66,15 +66,13 @@ pactl load-module module-null-sink sink_name=obsgod_decoy >/dev/null
 # A tagged game's actual sink must win over an unrelated default sink. Distinct
 # tones make a wrong route detectable in the encoded recording/RTMP samples.
 pactl set-default-sink obsgod_decoy
-(
-  while true; do
-    # GStreamer 1.26's synthetic PipeWire sink can fault on consumer teardown.
-    # Disable its debugger spin so this disposable fixture actually exits and
-    # the supervisor can restart it. Gamescope itself is not this gst process.
-    gst-launch-1.0 --no-fault -q videotestsrc is-live=true pattern=ball ! video/x-raw,width=1280,height=800,framerate=30/1 ! pipewiresink mode=provide 'stream-properties=props,node.name=gamescope,media.class=Video/Source' >>/work/video-producer.log 2>&1 || true
-    sleep .2
-  done
-) &
+# Keep one synthetic producer node across consumer reconnects. The former test
+# pipewiresink could destroy its node or stall on teardown, making repeated local
+# output tests exercise that fixture race. This producer supplies moving screen
+# pixels without app filtering; production still uses the real OBS GStreamer
+# input and every Start keeps its actual rendered-frame gate.
+gcc -O2 -Wall -Wextra -Werror -o /work/video-fixture /src/steamdeck/tests/capture-fixture.c $(pkg-config --cflags --libs libpipewire-0.3)
+/work/video-fixture gamescope missing >/work/video-producer.log 2>&1 &
 env SteamAppId=424242 SteamGameId=424242 gst-launch-1.0 -q audiotestsrc is-live=true wave=sine freq=440 volume=0.2 ! audioconvert ! pulsesink device=obsgod_game >/work/audio-producer.log 2>&1 &
 game_audio_pid=$!
 gst-launch-1.0 -q audiotestsrc is-live=true wave=sine freq=880 volume=0.2 ! audioconvert ! pulsesink device=obsgod_decoy >/work/decoy-audio-producer.log 2>&1 &
@@ -140,6 +138,8 @@ ffmpeg -v error -ss 1 -i "$clip" -an -vf fps=1 -frames:v 3 -f framemd5 -y /work/
 ffmpeg -hide_banner -i "$clip" -af volumedetect -vn -f null - >/work/output/recording-audio.txt 2>&1
 ffmpeg -v error -ss 1 -i "$clip" -t 2 -vn -ar 48000 -ac 1 -c:a pcm_s16le -y /work/output/recording-audio.wav
 python3 /src/steamdeck/tests/native-audio.py measure /work/output/recording-audio.wav 440 >/work/output/recording-audio-metrics.json
+OBSGOD_DISPOSABLE_MEDIA_FIXTURE=1 python3 /src/steamdeck/tests/native-media.py > /work/output/native-media-summary.json
+python3 /src/steamdeck/tests/native-profiles.py > /work/output/native-profiles-summary.json
 # Repair cannot rely on a clean OBS profile: restore a muted, zero-gain input
 # whose output tracks were disabled and monitoring was accidentally enabled.
 python3 /src/steamdeck/tests/native-audio.py seed >/work/output/audio-stale-state-seeded.json
@@ -150,6 +150,8 @@ pw-dump >/work/output/nodes-before-stream.json
 /src/dist/obsgod deck start > /work/output/start.json
 python3 /src/steamdeck/tests/native-audio.py snapshot obsgod_game.monitor >/work/output/audio-route-stream.json
 /src/dist/obsgod deck start > /work/output/start-again.json
+python3 /src/steamdeck/tests/native-media.py --stream-active > /work/output/native-live-media-summary.json
+OBSGOD_DISPOSABLE_AUDIO_FIXTURE=1 python3 /src/steamdeck/tests/native-resilience.py --game-pid "$game_audio_pid" > /work/output/audio-hotplug.json
 sleep 4
 /src/dist/obsgod deck status > /work/output/status-live.json
 /src/dist/obsgod deck stop > /work/output/stop.json

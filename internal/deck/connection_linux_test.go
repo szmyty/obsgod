@@ -76,7 +76,7 @@ func startControlFixture(t *testing.T, password string, authentication, wrongPro
 			case "GetRecordStatus":
 				response = map[string]any{"outputActive": false}
 			case "GetStreamStatus":
-				response = map[string]any{"outputActive": active, "outputBytes": 4096}
+				response = map[string]any{"outputActive": active, "outputReconnecting": false, "outputBytes": 4096}
 			}
 			if c.WriteJSON(map[string]any{"op": 7, "d": map[string]any{"requestType": q.D.Type, "requestId": q.D.ID, "requestStatus": map[string]any{"result": true, "code": 100}, "responseData": response}}) != nil {
 				return

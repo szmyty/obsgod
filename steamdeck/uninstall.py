@@ -165,12 +165,17 @@ def require_idle():
     recording = result.get("recording")
     recording_active = recording.get("active") if isinstance(recording, dict) else recording
     recording_valid = isinstance(recording_active, bool)
+    media = result.get("media")
+    media_idle = (isinstance(media, dict) and media.get("known") is True
+                  and media.get("replay_active") is False)
+    legacy_absent = media is None and result.get("process") == "absent"
     if (result.get("ok") is not True or result.get("state") not in ("stopped", "setup")
             or not isinstance(stream, dict) or stream.get("active") is not False
             or not recording_valid or recording_active or result.get("output_known") is not True
+            or not (media_idle or legacy_absent)
             or result.get("process") not in ("absent", "running")
             or result.get("operation") not in (None, "", "idle")):
-        raise RemovalError("Removal blocked: OBS output is active, recording, busy or unconfirmed. Stop/cancel and confirm idle before retrying.")
+        raise RemovalError("Removal blocked: OBS output is active, recording, replaying, busy or unconfirmed. Stop/cancel and confirm idle before retrying; close managed OBS when upgrading from an older app.")
     return result
 
 

@@ -306,10 +306,12 @@ func TestResilienceReceiptRejectsStaleFutureUnsafeAndPrivateMessages(t *testing.
 	if status := ReadResilienceStatus(p); strings.Contains(status.Message, "private-") {
 		t.Fatal("status file injected private data")
 	}
-	if err := writeJSON(filepath.Join(p.State, "audio-status.json"), audioReceipt{Observed: time.Now().Add(-6 * time.Second), Status: AudioStatus{State: "ready", OutputAvailable: true, MicrophoneAvailable: true, Signal: "signal"}}); err != nil {
-		t.Fatal(err)
-	}
-	if status := readAudioStatus(p); status == nil || status.State != "unknown" || status.OutputAvailable || status.MicrophoneAvailable || status.Signal != "unmeasured" {
-		t.Fatalf("old audio route was presented as current: %+v", status)
+	for _, observed := range []time.Time{time.Now().Add(-6 * time.Second), time.Now().Add(5 * time.Second)} {
+		if err := writeJSON(filepath.Join(p.State, "audio-status.json"), audioReceipt{Observed: observed, Status: AudioStatus{State: "ready", OutputAvailable: true, MicrophoneAvailable: true, Signal: "signal"}}); err != nil {
+			t.Fatal(err)
+		}
+		if status := readAudioStatus(p); status == nil || status.State != "unknown" || status.OutputAvailable || status.MicrophoneAvailable || status.Signal != "unmeasured" {
+			t.Fatalf("old or future audio route was presented as current: %+v", status)
+		}
 	}
 }
