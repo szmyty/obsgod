@@ -1,5 +1,12 @@
 # Security reporting
 
+The [release engineering guide](docs/release-engineering.md) describes pinned
+checks, source/SBOM/provenance verification, update/rollback review and the
+unsigned-publisher trust boundary. Local integrity or act results do not replace
+required hosted review/CI or actual Steam Deck evidence. A stable support window
+and publisher/signing policy require an explicit owner decision before a stable
+release.
+
 Decky Stream is currently a development preview. The reviewed source and exact
 artifact revision determine what was checked; a passing older preview does not
 qualify a newer candidate. Supported device/version evidence remains recorded

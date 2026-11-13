@@ -24,6 +24,11 @@
     "description": "Deliberate version checks, verified stopped-state updates, settings preservation and explicit repair and rollback.",
     "navigation": "Updates"
   },
+  "controls.html": {
+    "title": "Profiles, clips and audio",
+    "description": "Candidate controls for output profiles, local recording, replay, microphone choices and observed stream health, with explicit device limits.",
+    "navigation": "Controls"
+  },
   "uninstall.html": {
     "title": "Uninstall, reset and wipe",
     "description": "Inspect owned-data inventory and deliberately uninstall, reset or wipe without removing unrelated applications.",

@@ -5,3 +5,4 @@ __pycache__/
 *.pyc
 *.cov
 steamdeck/decky/dist/
+.local-ci/

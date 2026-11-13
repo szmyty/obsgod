@@ -25,7 +25,7 @@ govulncheck ./...
 Commit source before making a release candidate:
 
 ```sh
-python3 scripts/package-deck.py --version 0.1.0-deck.5
+python3 scripts/package-deck.py --version 0.1.0-deck.9
 ```
 
 The script uses the current full commit SHA and refuses a dirty checkout. For
@@ -39,8 +39,8 @@ Browser tests use Playwright **1.62.0** and Chromium. They install into temporar
 homes, use fixture credentials and extract the actual archive/ZIP:
 
 ```sh
-python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.5_linux_amd64.tar.gz
-python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.5_linux_amd64.tar.gz --upgrade-from /path/to/obsgod-deck_0.1.0-deck.1_linux_amd64.tar.gz
+python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz
+python3 steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz --upgrade-from /path/to/obsgod-deck_0.1.0-deck.1_linux_amd64.tar.gz
 python3 steamdeck/tests/browser-panel.py dist/obsgod-decky.zip
 ```
 
@@ -81,8 +81,8 @@ docker run --rm --user 1000:1000 \
 
 It replaces the Flatpak invocation with a local OBS launcher but uses real OBS,
 WebSocket authentication, GStreamer, PipeWire, PulseAudio, x264/AAC, recording and
-loopback RTMP. A synthetic moving-video producer stands in for Gamescope and
-restarts after consumer disconnects. This does not test Flatpak sandbox behavior,
+loopback RTMP. A stable synthetic moving-video producer stands in for Gamescope across
+consumer reconnects. This does not test Flatpak sandbox behavior,
 SteamOS session changes, AMD hardware encoding, actual game capture or Kick.
 The video fixture keeps one synthetic PipeWire node across consumer reconnects.
 The former GStreamer 1.26 test producer could destroy its node or stall during
@@ -108,7 +108,7 @@ Decky helper, setup and updater Desktop launchers. Build the optional standalone
 updater from that exact clean runtime archive, without rebuilding the runtime:
 
 ```sh
-python3 scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.5_linux_amd64.tar.gz
+python3 scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz
 ```
 
 Check discovery without changing the installation:
@@ -138,9 +138,9 @@ and verifies the plugin and unrelated order/prompts:
 ```sh
 python3 steamdeck/tests/decky-transport-smoke.py dist/decky-install dist/obsgod-decky.zip \
   --upstream /path/to/pinned-decky-sources \
-  --runtime-archive dist/obsgod-deck_0.1.0-deck.5_linux_amd64.tar.gz \
+  --runtime-archive dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz \
   --previous-archive /path/to/obsgod-deck_0.1.0-deck.1_linux_amd64.tar.gz \
-  --updater-zip dist/obsgod-one-click-update_0.1.0-deck.5_linux_amd64.zip
+  --updater-zip dist/obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip
 ```
 
 The full-archive options execute the real unified installer twice and check
@@ -182,3 +182,21 @@ Draft PR checkpoints are review artifacts. Do not publish the candidate or
 merge/close its acceptance issues without owner review and required evidence.
 A release publication is a separate action from building or uploading a draft
 review artifact. All broader v1 and Roadmap 2 requirements remain separate.
+
+## Completion candidate checks
+
+Candidate 9 adds stream-only microphone controls and a versioned public API.
+Run both new browser harnesses against the packaged assets:
+
+```sh
+python3 steamdeck/tests/browser-mixer-panel.py dist/obsgod-decky.zip
+python3 steamdeck/tests/browser-mixer-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz
+python3 -m unittest discover -s scripts/tests -p 'test_*.py' -v
+python3 scripts/release-audit.py --revision "$(git rev-parse HEAD)" --output dist/supply-chain
+```
+
+See [local CI](local-ci.md) for pinned `act` jobs and limitations,
+[release engineering](release-engineering.md) for unsigned SBOM/provenance
+evidence, and the [completion review](completion-review.md) for the remaining
+owner and physical-device checks. Local jobs do not establish hosted CI or
+actual Steam Deck acceptance.

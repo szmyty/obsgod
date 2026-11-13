@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" role="img" aria-labelledby="title desc">
+  <title id="title">Decky Stream proposed monochrome icon</title>
+  <desc id="desc">A play triangle with a transmission arc. Use the native foreground color. Unapproved candidate.</desc>
+  <path d="M5 4L16 12L5 20Z" fill="currentColor"/>
+  <path d="M18 6Q23 12 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+</svg>

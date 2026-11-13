@@ -1,0 +1,12 @@
+{
+  "schema": "decky-stream.brand-candidates/v1",
+  "status": "proposed-unapproved",
+  "preparedAt": "2026-11-13",
+  "project": {"id": "decky-stream", "displayName": "Decky Stream", "repository": "https://github.com/szmyty/obsgod", "organization": null},
+  "assets": [
+    {"id": "mark", "path": ".identity/candidates/mark.svg", "creator": "OpenAI Codex, for the szmyty/obsgod project", "method": "AI-assisted original SVG geometry authored in this repository; not a copied third-party logo", "source": "local candidate source", "rightsStatus": "owner-review-required", "proposedLicense": "MIT, subject to owner approval", "humanApproval": null},
+    {"id": "decky-icon", "path": ".identity/candidates/decky-icon.svg", "creator": "OpenAI Codex, for the szmyty/obsgod project", "method": "AI-assisted original SVG geometry authored in this repository", "source": "local candidate source", "rightsStatus": "owner-review-required", "proposedLicense": "MIT, subject to owner approval", "humanApproval": null}
+  ],
+  "surfaces": {"core": "identity source and draft review metadata", "tokens": "candidate palette only; empty adopted layers", "metadata": "intended brand ID plus actual repository", "web": "draft 16/32 favicon SVG/PNG; no production application", "docs": "draft wordmark SVG/PNG", "github": "draft 1280x640 repository preview SVG/PNG", "decky": "custom monochrome SVG and 16/24/32 raster legibility sheet; live native icon unchanged"},
+  "limitations": ["No trademark clearance or ownership transfer is asserted", "Human creative and rights approval required", "No real Deck controller or color/legibility receipt", "No approved Identity production generation receipt"]
+}

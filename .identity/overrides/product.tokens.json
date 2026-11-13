@@ -1,0 +1,5 @@
+{
+  "$schema": "https://raw.githubusercontent.com/egohygiene/identity/cfb6c29bd02589a47fc48050ab02e7e0da359719/contracts/v1/tokens.schema.json",
+  "$description": "No token override or artwork is adopted. Proposed colors are separate candidate inputs awaiting owner review.",
+  "$extensions": {"org.egohygiene.identity": {"schema": "identity.tokens/v1", "layer": {"id": "decky-stream", "kind": "product-override", "priority": 10}}}
+}

@@ -1,5 +1,13 @@
 # Product roadmap
 
+The owner has now authorized the independent completion campaign for all open
+issues except #51, including partial preparation at genuine owner/external gates.
+See [the completion ledger](docs/completion-campaign.md). Intended slug:
+**decky-stream**; compatibility/migration and final branding review remain explicit.
+#51 now holds two separate research journeys (monetization and Decky Store).
+After source review/merges, remaining acceptance will be consolidated into one
+final-boss checklist plus #51, preserving original criteria and evidence.
+
 Updated 2026-11-13. **Milestone 2 source PRs #52–#57 are merged; target/CI and
 owner publication acceptance remain open. Milestone 3 features #47/#24/#48/#49/#50
 are prepared in draft PRs #58–#60 with available local checks passed; #51 is

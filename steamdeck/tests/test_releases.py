@@ -106,7 +106,7 @@ class ReleaseChecks(unittest.TestCase):
 
     def test_offline_and_rate_limit_are_not_up_to_date(self):
         for failure, state in [(urllib.error.URLError("fixture-private-details"), "offline"), (urllib.error.HTTPError(releases.RELEASES_URL, 429, "fixture-private-details", {}, None), "error")]:
-            with patch.object(releases.urllib.request, "urlopen", side_effect=failure):
+            with patch.object(releases, "_open_url", side_effect=failure):
                 result = releases.check_updates("0.1.0-deck.9")
             self.assertFalse(result["ok"])
             self.assertEqual(result["state"], state)
@@ -116,10 +116,10 @@ class ReleaseChecks(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             path = Path(temporary) / "archive"
             candidate = {"archive_url": "https://github.com/szmyty/obsgod/releases/download/v1.0.0/obsgod-deck_1.0.0_linux_amd64.tar.gz", "archive_sha256": hashlib.sha256(b"expected").hexdigest()}
-            with patch.object(releases.urllib.request, "urlopen", return_value=io.BytesIO(b"corrupted")):
+            with patch.object(releases, "_open_url", return_value=io.BytesIO(b"corrupted")):
                 with self.assertRaisesRegex(releases.ReleaseError, "checksum"):
                     releases.download_archive(candidate, path)
-            with patch.object(releases.urllib.request, "urlopen") as opened:
+            with patch.object(releases, "_open_url") as opened:
                 with self.assertRaisesRegex(releases.ReleaseError, "unsupported"):
                     releases.download_archive(dict(candidate, archive_url="https://example.invalid/installer"), Path(temporary) / "second")
                 opened.assert_not_called()
@@ -165,3 +165,30 @@ class ReleaseChecks(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class RedirectTrust(unittest.TestCase):
+    def redirect(self, source, target):
+        return releases._ProjectRedirects().redirect_request(
+            releases.urllib.request.Request(source), None, 302, "Found", {}, target)
+
+    def test_official_asset_redirect_is_allowed_once(self):
+        source = "https://github.com/szmyty/obsgod/releases/download/v1.0.0/archive.tar.gz"
+        target = "https://release-assets.githubusercontent.com/github-production-release-asset/1263344065/abcdef12-abcd-1234-abcd-123456abcdef?sig=fixture"
+        self.assertEqual(self.redirect(source, target).full_url, target)
+        with self.assertRaises(releases.ReleaseError):
+            self.redirect(target, target + "&extra=1")
+
+    def test_changed_owner_api_raw_or_untrusted_download_redirects_fail_closed(self):
+        approved = [releases.RELEASES_URL,
+                    "https://raw.githubusercontent.com/szmyty/obsgod/" + "1" * 40 + "/manifest.json",
+                    "https://github.com/szmyty/obsgod/releases/download/v1.0.0/archive.tar.gz"]
+        targets = ["https://api.github.com/repos/new-owner/decky-stream/releases?per_page=100",
+                   "https://github.com/new-owner/decky-stream/releases/download/v1.0.0/archive.tar.gz",
+                   "https://attacker.invalid/file", "http://release-assets.githubusercontent.com/file",
+                   "https://release-assets.githubusercontent.com.attacker.invalid/file",
+                   "https://release-assets.githubusercontent.com/github-production-release-asset/1/id#fragment"]
+        for source in approved:
+            for target in targets:
+                with self.subTest(source=source, target=target), self.assertRaises(releases.ReleaseError):
+                    self.redirect(source, target)

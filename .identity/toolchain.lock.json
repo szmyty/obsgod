@@ -1,0 +1,57 @@
+{
+  "schema": "decky-stream.identity-toolchain-lock/v1",
+  "repository": "egohygiene/identity",
+  "revision": "cfb6c29bd02589a47fc48050ab02e7e0da359719",
+  "status": "unreleased-additive-main-implementation",
+  "inspectedAt": "2026-11-13",
+  "publishedStable": "v1.0.0",
+  "files": {
+    "docs/consumers/AUTHORING.md": {
+      "url": "https://raw.githubusercontent.com/egohygiene/identity/cfb6c29bd02589a47fc48050ab02e7e0da359719/docs/consumers/AUTHORING.md",
+      "sha256": "61aace064546e53ca3ad4ac0c879c4dddd5c5291e3acd9dd485be56412f582d5"
+    },
+    "docs/consumers/ADOPTION.md": {
+      "url": "https://raw.githubusercontent.com/egohygiene/identity/cfb6c29bd02589a47fc48050ab02e7e0da359719/docs/consumers/ADOPTION.md",
+      "sha256": "1f8a175641f2312d4cd492f26c237179df67babe25d8ed81b2383c64fc746bf9"
+    },
+    "contracts/v1/project.schema.json": {
+      "url": "https://raw.githubusercontent.com/egohygiene/identity/cfb6c29bd02589a47fc48050ab02e7e0da359719/contracts/v1/project.schema.json",
+      "sha256": "2594d307fb644fe59b6dd06ef937872f0bc17a38536dcc4e1e0d452ad060015a"
+    },
+    "contracts/v1/tokens.schema.json": {
+      "url": "https://raw.githubusercontent.com/egohygiene/identity/cfb6c29bd02589a47fc48050ab02e7e0da359719/contracts/v1/tokens.schema.json",
+      "sha256": "07046647158b32cd77d003aa0e57d2874185b5484ad6c2db4a75c573ca429430"
+    },
+    "contracts/v1/provenance.schema.json": {
+      "url": "https://raw.githubusercontent.com/egohygiene/identity/cfb6c29bd02589a47fc48050ab02e7e0da359719/contracts/v1/provenance.schema.json",
+      "sha256": "a876fe775cf16382ae85c74f79a8849c69a71a61faefd84380ebaefd412ea03b"
+    },
+    "contracts/v1/approvals.schema.json": {
+      "url": "https://raw.githubusercontent.com/egohygiene/identity/cfb6c29bd02589a47fc48050ab02e7e0da359719/contracts/v1/approvals.schema.json",
+      "sha256": "bc958303fb359380d9042fc0e99949250d962e34c901307106f1f258bb67e301"
+    },
+    "contracts/v1/targets.schema.json": {
+      "url": "https://raw.githubusercontent.com/egohygiene/identity/cfb6c29bd02589a47fc48050ab02e7e0da359719/contracts/v1/targets.schema.json",
+      "sha256": "b2a89d761933b437fabd2ee4e099a223221f6cc835ae0979c00d7021faa8557a"
+    },
+    "scripts/validate_identity.py": {
+      "url": "https://raw.githubusercontent.com/egohygiene/identity/cfb6c29bd02589a47fc48050ab02e7e0da359719/scripts/validate_identity.py",
+      "sha256": "aea7ba3ff1f331acb0cf2d05501c56c4d89c15ad41c8c57b4fd7448b323175f5"
+    },
+    "LICENSE": {
+      "url": "https://raw.githubusercontent.com/egohygiene/identity/cfb6c29bd02589a47fc48050ab02e7e0da359719/LICENSE",
+      "sha256": "1deb55b00af813e1c8f086e851d0e1ed2084ea942a54996f069df05cd0561372"
+    }
+  },
+  "draftExporter": {
+    "python": "3.12 (stdlib; no pip installation required)",
+    "rasterizerVersion": "Inkscape 1.4 (e7c3feb100, 2024-10-09)",
+    "font": "DejaVu Sans",
+    "fontSha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e"
+  },
+  "notes": [
+    "No production brand approval is represented",
+    "Source contract validity is separate from creative approval and generated output qualification",
+    "Draft exporter is local tooling, not the upstream Identity compiler"
+  ]
+}

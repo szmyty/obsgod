@@ -1,0 +1,35 @@
+{
+  "command": "python3 VERIFIED_IDENTITY_VALIDATOR --repository-root . --format json --snapshot",
+  "exit_code": 0,
+  "identity_revision": "cfb6c29bd02589a47fc48050ab02e7e0da359719",
+  "limits": "Source contract only. Candidate art is unapproved; no Identity generation, device, release or publication qualification.",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "python": "3.12.14",
+  "schema": "decky-stream.identity-source-proof/v1",
+  "source_result": {
+    "diagnostics": [],
+    "repository": ".",
+    "schema": "identity.diagnostics/v1",
+    "snapshot": {
+      "directories": [
+        ".identity/candidates",
+        ".identity/references",
+        ".identity/sources"
+      ],
+      "files": {
+        ".identity/brief.md": "411d834b7694b39e7c8b577963eacc650907d8abf4c8f3272f3e65f29295ba47",
+        ".identity/defaults/organization.tokens.json": "e8f53747482aa8914fc3307fbf63295e45fb1ca59448c8e0435e1af8fce5eda5",
+        ".identity/governance/approvals.json": "e96c088f11ded1d42a60872e3de0384299615b778c4927f20f1b441bd9db7bc9",
+        ".identity/governance/provenance.json": "ce9c3a4e1c40d89bcc605b9bc287276a3211d444ee05c3a3471a2f15fab8bc4f",
+        ".identity/identity.json": "0a192e777313bb36eff735efe137f89f1258dc493ca27c2e9ee2b9f0bcc21a63",
+        ".identity/overrides/product.tokens.json": "c545dc44ed77337b41c7e4d1276907d1958583c3515dc1206cbcbdf479ec22d8",
+        ".identity/targets/profiles.json": "1f46cce8621175f1a9fe871e4c65ab214f6f161c43d649f1110c24b79db2b463"
+      }
+    },
+    "valid": true
+  },
+  "validator": {
+    "sha256": "aea7ba3ff1f331acb0cf2d05501c56c4d89c15ad41c8c57b4fd7448b323175f5",
+    "url": "https://raw.githubusercontent.com/egohygiene/identity/cfb6c29bd02589a47fc48050ab02e7e0da359719/scripts/validate_identity.py"
+  }
+}

@@ -169,7 +169,7 @@ def render(root=ROOT):
         "ISSUES_URL": base_url + "/issues",
         "LICENSE_URL": base_url + "/blob/" + ref + "/LICENSE",
         "DECK_GUIDE_URL": base_url + "/blob/" + ref + "/docs/steam-deck.md",
-        "QUALIFICATION_URL": base_url + "/issues/23",
+        "QUALIFICATION_URL": base_url + "/issues/46",
         "REVISION": html.escape(source["revision"]),
         "DIRTY_NOTE": " (working tree includes uncommitted files)" if source["dirty"] else "",
         "SUPPORT": support_html(root),

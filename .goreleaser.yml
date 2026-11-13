@@ -1,13 +1,15 @@
 version: 2
+dist: dist/snapshot
 
 before:
   hooks:
-    - go mod tidy
+    - go mod download
 builds:
   - binary: obsgod
     flags:
       - -trimpath
-    ldflags: -s -w -X main.version={{ .Version }} -X main.commitSHA={{ .Commit }}
+      - -buildvcs=false
+    ldflags: -s -w -buildid= -X main.version={{ .Version }} -X main.commitSHA={{ .Commit }}
     goos:
       - linux
       - freebsd

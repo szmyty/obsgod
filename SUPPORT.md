@@ -1,5 +1,11 @@
 # Getting help
 
+For contributor/CI problems, use [local CI](docs/local-ci.md) and record the exact
+revision, dirty state, command, job/matrix and failing step. A workflow setup or
+provider-service failure is distinct from a plugin defect. For archive/update
+integrity, use the offline audit in [release engineering](docs/release-engineering.md);
+never share private profiles or turn an unsigned checksum into a publisher claim.
+
 Use this repository's GitHub issues for reproducible bugs and feature requests.
 The free preview has no promised support response time. Voluntary funding does
 not purchase a service agreement or change streaming/recovery access.
