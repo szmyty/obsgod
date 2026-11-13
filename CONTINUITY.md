@@ -35,6 +35,26 @@ close the pre-merge issue graph prematurely. Candidate8 remains immutable at
 its recorded exact source. New source requires fresh candidate9 qualification.
 
 
+## Snapshot/npm integration repair; default-branch administration unavailable
+
+Lookahead at `548ae195b1ae087370a06da8c9de23c3a0acc6f3` passed the docs job
+(9pages/11tests/local artifact). GoReleaser compiled20unique targets but failed
+ARMv6/v7 archive-name collision; its old snapshot version also inherited a
+slash-containing archive tag. The candidate job stopped before tests because
+Node24.19.0 bundled npm11.17.0 rather than pinned11.9.0. This checkpoint gives
+ARM archives distinct names, uses commit-based snapshot SemVer/current fields
+and explicitly installs npm11.9.0 without changing registry/TLS presets.
+
+The already-requested `master`→`main` rename was inspected and attempted once:
+`main` absent, default `master` ated7d100, branchmetadata `protected:false`,
+rulesets empty, detailedprotection endpoint403. Repo metadata reports admin but
+rename API returned403 `Resource not accessible by integration` on2026-11-13.
+No repository branch/settings changed. Keep that concrete owner UI action in
+the handoff; do not infer access from coarse admin metadata or missing env vars.
+
+Snapshot and candidate preflight must pass before the two complete final localCI
+sequences. Older548/7173/8757 attempts remain explicit superseded evidence.
+
 ## Full-source lint repair; remaining CI preflight active
 
 At `7173ff91c599a37c8446048782098137b9e987b0`, tracked local artifact delivery

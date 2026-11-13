@@ -28,11 +28,11 @@ builds:
 archives:
   - format_overrides:
       - goos: windows
-        format: zip
-    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+        formats: [zip]
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
 
 nfpms:
-  - builds:
+  - ids:
       - obsgod
     homepage: "https://github.com/szmyty/obsgod"
     maintainer: "szmyty"
@@ -47,7 +47,7 @@ nfpms:
 checksum:
   name_template: "checksums.txt"
 snapshot:
-  version_template: "{{ .Tag }}-next"
+  version_template: "0.0.0-dev.g{{ .ShortCommit }}"
 changelog:
   sort: asc
   filters:

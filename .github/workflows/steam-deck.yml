@@ -26,6 +26,7 @@ jobs:
           python-version: '3.12'
       - name: Install pinned development dependencies
         run: |
+          npm install --global npm@11.9.0 --ignore-scripts
           test "$(npm --version)" = 11.9.0
           go mod download
           npm --prefix steamdeck/decky ci --ignore-scripts
