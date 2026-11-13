@@ -1,5 +1,52 @@
 # Current work
 
+## Completed audit: org-aligned ACT setup, reports and issue triage
+
+The owner requested following the egohygiene `.actrc` pattern, running ACT in the
+local workspace, collecting reports and turning new findings into issues for
+sync-up. This authorizes scoped new issue creation for demonstrated findings;
+known requirements already in #46 must not be duplicated. #51 remains separate.
+
+Start from clean merged master9d29a977 in the existing checkout. Read-only live
+org references are pinned in [local CI documentation](docs/local-ci.md):
+egohygiene/egohygiene060d15a790 and Reflector23f164cf89. Reflector now uses the same
+Ubuntu24 digest and JSON output; older local graph/Node16 examples are stale.
+Preserve the qualified runner/tool pins and existing host CA/proxy/socket/cache/
+artifact/native-fixture handling. Add structured logs and a bounded report command,
+then commit/freeze source before running serial workflow audit sequences.
+
+Reports must retain exact source/commands/configuration/client/image/workflow/
+log hashes, raw passed/failed outcomes and explicit skipped/unavailable/unrun
+matrix portions. Older1a candidate receipts remain historical for their exact
+bytes. Locally generated workflow packages do not replace the immutable published
+review-download checkpoint or authorize a release. No other-repo write, spending,
+deployment, Store research/contact or automatic publication is authorized.
+
+Draft [PR #67](https://github.com/szmyty/obsgod/pull/67) contains the setup and
+report tooling. Exact clean source `cf12abe6c620dcbea3b806d1aa63a4715adea26a`, tree
+`d24d5435af64400da8bb665714b908cbbe638f7c`, passed both six-job local sequences and
+PR static checks: 13 completed passes. The actual provider probe remains raw
+failed/exit1 and classified unavailable; comparison API403. Fresh hosted evidence
+records nine runs/15 jobs/zero steps and account billing-lock annotations.
+[Audit/report/evidence](audits/local-act-2026-11-13.md) records exact commands,
+hashes, native/browser limits and interrupted attempts. A cloud-interrupted
+candidate receipt stays unfinalized; its successful retry and full independent
+repeat qualify only cf12. All14 product/audit hashes matched. Later documentation
+does not relabel that source or replace the immutable public 1a/d0a candidate.
+
+The fresh-output ACT→normal-user frontend rebuild failed with EACCES. New scoped
+[#68](https://github.com/szmyty/obsgod/issues/68) contains reproduction and
+acceptance; known #46 gates were not duplicated and #51 was untouched. The
+root-owned ignored output was preserved by same-parent rename to the previously
+absent `steamdeck/decky/.local-ci`; normal UID1000 rebuild then passed without
+sudo/chown/chmod, source and all14 root candidate hashes unchanged. An earlier
+cross-parent preservation rename failed without changes. This is a recorded
+workaround, not an ownership fix. Fresh uncached Go race/count1 passed213 top-level
+tests/386 pass events with one optional skip. Source/tool setup is saved, applied
+and exercised; no environment snapshot, product release or deployment was
+published. Keep PR #67 draft for owner sync. Next bounded repair is #68, followed
+by real target/provider/review acceptance already in #46. Earlier entries follow.
+
 ## Owner-approved merges and issue consolidation completed
 
 On 2026-11-13 the owner instructed “Ok merge them !” after the candidate/evidence

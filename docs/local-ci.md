@@ -15,6 +15,61 @@ arm64 is pinned in the script. The published checksum was verified before local
 installation. The Ubuntu 24.04 runner is digest-pinned in `.actrc`, including
 both upstream amd64 and arm64 variants.
 
+## Organization conventions and retained reports
+
+The repository follows the current Ego Hygiene structured-output convention:
+`.actrc` enables `--json`, cleanup and the existing digest-pinned Ubuntu24 runner.
+The project launcher continues to select explicit state/cache/action-source paths,
+Docker socket, bridge-reachable artifact service and inherited CA/proxy trust.
+Those runtime bindings are necessary for nested native tests in Cloud.
+
+Read-only references inspected for this alignment:
+
+- [egohygiene/egohygiene `.actrc`](https://github.com/egohygiene/egohygiene/blob/060d15a790db9329cb226ecef1f0ae4112a11f3c/.actrc), source `060d15a790db9329cb226ecef1f0ae4112a11f3c`, file SHA256 `fdb2974b919c31d93578d19caef847362f8a290cf08c910eb8f1a6d6f78664f8`.
+- [egohygiene/reflector `.actrc`](https://github.com/egohygiene/reflector/blob/23f164cf898e092b62bbdddaf7616c4823208f9b/.actrc), source `23f164cf898e092b62bbdddaf7616c4823208f9b`, file SHA256 `b30f5abf09400884f7d0b41cb8e7b1b16251cf012e67299c41e210a743d1273e`.
+
+The root organization example also shows repository-relative action/cache paths
+and a moving runner tag. Reflector uses the exact reviewed digest retained here.
+The launcher provides the portable directory/cache intent through `--state` and
+explicit flags; it does not replace pinned tools or clear existing settings.
+No other repository or user-level `.actrc` is modified.
+
+The [2026-11-13 audit](../audits/local-act-2026-11-13.md) retains two complete
+local sequences and reports at exact source cf12abe6. It also demonstrates
+[#68](https://github.com/szmyty/obsgod/issues/68): ACT can create root-owned
+generated frontend output that blocks a later normal-user build. Keep that
+development postcondition separate from passing workflow jobs; do not repair it
+by recursively changing checkout ownership or disabling production root guards.
+
+Keep logs private while running jobs. Build a consolidated report for one exact
+source revision after execution:
+
+```sh
+python3 scripts/local-ci-report.py \
+  --state /absolute/private/local-ci-state \
+  --revision FULL_40_CHARACTER_SOURCE_SHA \
+  --output /absolute/private/local-ci-report
+```
+
+The report command verifies each receipt/log digest before summarizing results,
+reads structured ACT messages and legacy text, and writes `report.json` plus
+`report.md`. It preserves raw exit outcomes, source/configuration pins, command/
+event/matrix context, observed test results, attempts and explicit missing-platform
+or provider evidence. A failed integrity check is not converted into a passing
+workflow report. `local_result` covers the six supported jobs; `overall_result`
+remains partial while separate provider/platform/target gates are open. Exit0
+means verified clean local-job completion, not full hosted/device acceptance. A different revision's receipt cannot qualify the selected one.
+
+Failed runs are grouped into actionable findings with their evidence and failed
+step. Diagnostic error text from successful negative-control tests does not become
+a new defect. Reports do not create GitHub issues, contact services or publish
+artifacts. Review and sanitize logs before sharing; no generic filter establishes
+that all third-party text is safe. The maintainer then checks the live issue graph:
+link existing #46 blockers, and create a focused issue only for a new actionable
+finding, with exact reproduction, expected/observed behavior and acceptance.
+#51 remains independent monetization/Store research. Local reports do not qualify
+actual Steam Deck/hosted CI/provider-viewer/adoption or authorize release/deploy.
+
 ## Setup and explicit entry points
 
 Run from a checked-out repository with Python 3.12, a working local Docker socket,
