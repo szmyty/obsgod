@@ -1,6 +1,6 @@
 # CLI consistency audit
 
-This source audit covers the complete command tree in the Milestone 2 candidate.
+This source audit covers the current command tree, including the completion campaign.
 It is separate from real-device acceptance. Canonical command names, legacy OBS
 environment variables and existing human result formats remain compatible.
 
@@ -8,6 +8,8 @@ environment variables and existing human result formats remain compatible.
 | --- | --- |
 | `config`, `version`, `completion`, `reference` | Offline help, versioned config/build JSON, shell generation and Markdown reference; credential values excluded. |
 | `workflow` | Explicit plan/dry-run/apply; settings and local outputs have separate approvals; no broadcast action. |
+| `api` | Versioned public-facade JSON; typed safe errors, operation contexts/serialization and explicit output/settings approvals. Discovery remains offline. |
+| `creator` | Optional public-API consumer; offline reviewed plan/extensions, existing-OBS start/status/stop, environment-backed private RTMP credentials and partial-stage evidence. |
 | `stream`, `recording` | Existing start/stop/toggle; status has per-command JSON/quiet and unknown-query failure instead of false inactive results. |
 | `profile`, `scenecollection`, `scene` | Existing OBS nouns and operations retained; name arguments documented; `scene set` aliases `scene current`. |
 | `sceneitem`, `source` | Scene/item/source arguments checked before requests; readable query output goes through the command writer; spaced names/text handled consistently. |
@@ -36,6 +38,10 @@ partial failure and cancellation are covered by focused protocol/CLI tests.
 
 The executable's signal context reaches workflows and countdown loops. Existing
 single-request legacy service operations retain their transport behavior;
-context-aware automation owns the new bounded multi-stage workflow. This audit
+context-aware automation owns the new bounded multi-stage workflow. New `api`
+and `creator` commands consume the versioned public API; legacy requests retain
+their compatible acknowledgement behavior with safe error projection rather
+than claiming complete #9 migration. See [the API contract](api-v1.md) and
+[creator boundaries](creator-workflows.md). This audit
 does not establish whole-platform support, actual viewer output, Store admission,
 successful hosted CI or completion of the broader governance issue.

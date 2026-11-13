@@ -28,6 +28,328 @@ obsgod [flags]
       --verbose                     Write credential-free command/stage diagnostics to stderr
 ```
 
+## obsgod api
+
+Versioned public OBS API adapter; emits one JSON result, preserves legacy commands
+
+```text
+obsgod api
+```
+
+```sh
+  obsgod api capabilities
+  obsgod api snapshot
+  obsgod api stream start --approve
+```
+
+```text
+      --json   Emit versioned JSON (always enabled for this command family) (default true)
+```
+
+## obsgod api capabilities
+
+Discover the public contract offline
+
+```text
+obsgod api capabilities
+```
+
+## obsgod api collection
+
+List or select existing OBS collection settings
+
+```text
+obsgod api collection
+```
+
+## obsgod api collection list
+
+List existing collection names
+
+```text
+obsgod api collection list
+```
+
+## obsgod api collection select
+
+Select an existing collection (structural changes require idle outputs)
+
+```text
+obsgod api collection select NAME [flags]
+```
+
+```text
+      --approve   Approve this settings change for this invocation
+```
+
+## obsgod api profile
+
+List or select existing OBS profile settings
+
+```text
+obsgod api profile
+```
+
+## obsgod api profile list
+
+List existing profile names
+
+```text
+obsgod api profile list
+```
+
+## obsgod api profile select
+
+Select an existing profile (structural changes require idle outputs)
+
+```text
+obsgod api profile select NAME [flags]
+```
+
+```text
+      --approve   Approve this settings change for this invocation
+```
+
+## obsgod api recording
+
+Explicitly control local recording output
+
+```text
+obsgod api recording
+```
+
+## obsgod api recording start
+
+start recording with confirmation
+
+```text
+obsgod api recording start [flags]
+```
+
+```text
+      --approve   Approve this local output action for this invocation
+```
+
+## obsgod api recording stop
+
+stop recording with confirmation
+
+```text
+obsgod api recording stop [flags]
+```
+
+```text
+      --approve   Approve this local output action for this invocation
+```
+
+## obsgod api replay
+
+Explicitly control local replay output
+
+```text
+obsgod api replay
+```
+
+## obsgod api replay save
+
+save replay with confirmation
+
+```text
+obsgod api replay save [flags]
+```
+
+```text
+      --approve   Approve this local output action for this invocation
+```
+
+## obsgod api replay start
+
+start replay with confirmation
+
+```text
+obsgod api replay start [flags]
+```
+
+```text
+      --approve   Approve this local output action for this invocation
+```
+
+## obsgod api replay stop
+
+stop replay with confirmation
+
+```text
+obsgod api replay stop [flags]
+```
+
+```text
+      --approve   Approve this local output action for this invocation
+```
+
+## obsgod api scene
+
+List or select existing OBS scene settings
+
+```text
+obsgod api scene
+```
+
+## obsgod api scene list
+
+List existing scene names
+
+```text
+obsgod api scene list
+```
+
+## obsgod api scene select
+
+Select an existing scene (structural changes require idle outputs)
+
+```text
+obsgod api scene select NAME [flags]
+```
+
+```text
+      --approve   Approve this settings change for this invocation
+```
+
+## obsgod api scene-items
+
+Read or explicitly change a scene item's visibility
+
+```text
+obsgod api scene-items
+```
+
+## obsgod api scene-items hide
+
+hide a scene item by numeric ID
+
+```text
+obsgod api scene-items hide SCENE ID [flags]
+```
+
+```text
+      --approve   Approve this visibility change for this invocation
+```
+
+## obsgod api scene-items list
+
+List scene items with stable IDs
+
+```text
+obsgod api scene-items list SCENE
+```
+
+## obsgod api scene-items show
+
+show a scene item by numeric ID
+
+```text
+obsgod api scene-items show SCENE ID [flags]
+```
+
+```text
+      --approve   Approve this visibility change for this invocation
+```
+
+## obsgod api snapshot
+
+Observe outputs, profiles, collections and scenes
+
+```text
+obsgod api snapshot
+```
+
+Aliases: status.
+
+## obsgod api stream
+
+Query or explicitly change OBS streaming
+
+```text
+obsgod api stream
+```
+
+## obsgod api stream start
+
+Explicitly start streaming and confirm observed state
+
+```text
+obsgod api stream start [flags]
+```
+
+```text
+      --approve   Approve this output action for this invocation
+```
+
+## obsgod api stream status
+
+Observe OBS stream output; provider reception stays unknown
+
+```text
+obsgod api stream status
+```
+
+## obsgod api stream stop
+
+Explicitly stop streaming and confirm observed state
+
+```text
+obsgod api stream stop [flags]
+```
+
+```text
+      --approve   Approve this output action for this invocation
+```
+
+## obsgod api virtual-camera
+
+Explicitly control local virtual-camera output
+
+```text
+obsgod api virtual-camera
+```
+
+## obsgod api virtual-camera start
+
+start virtual-camera with confirmation
+
+```text
+obsgod api virtual-camera start [flags]
+```
+
+```text
+      --approve   Approve this local output action for this invocation
+```
+
+## obsgod api virtual-camera stop
+
+stop virtual-camera with confirmation
+
+```text
+obsgod api virtual-camera stop [flags]
+```
+
+```text
+      --approve   Approve this local output action for this invocation
+```
+
+## obsgod api workflow
+
+Apply an existing declarative workflow; never starts streaming
+
+```text
+obsgod api workflow NAME [flags]
+```
+
+```text
+      --allow-recording       Approve requested local recording
+      --allow-replay-buffer   Approve requested replay capture
+      --approve               Approve settings for this invocation
+```
+
 ## obsgod completion
 
 Generate offline shell completions to stdout
@@ -90,6 +412,79 @@ Aliases: check.
       --json   Print versioned redacted JSON
 ```
 
+## obsgod creator
+
+Optional local creator orchestration through the public OBS API
+
+```text
+obsgod creator
+```
+
+```sh
+  obsgod creator plan --profile creator.json
+  obsgod creator start --profile creator.json --approve --allow-streaming
+  obsgod creator status
+```
+
+```text
+      --json             Emit versioned JSON (always enabled for this command family) (default true)
+      --profile string   Creator profile file (env: OBSGOD_CREATOR_PROFILE; default: XDG obsgod/creator.json)
+```
+
+## obsgod creator extensions
+
+Discover local provider/event/content extension boundaries offline
+
+```text
+obsgod creator extensions
+```
+
+## obsgod creator plan
+
+Review resolved creator intent offline; no secrets are read
+
+```text
+obsgod creator plan
+```
+
+## obsgod creator start
+
+start the reviewed creator workflow; leaves OBS running
+
+```text
+obsgod creator start [flags]
+```
+
+```text
+      --allow-recording       Approve local recording actions for this invocation
+      --allow-replay-buffer   Approve local replay actions for this invocation
+      --allow-streaming       Approve streaming output for this invocation
+      --approve               Approve reviewed OBS settings for this invocation
+```
+
+## obsgod creator status
+
+Observe current OBS state without provider account access
+
+```text
+obsgod creator status
+```
+
+## obsgod creator stop
+
+stop the reviewed creator workflow; leaves OBS running
+
+```text
+obsgod creator stop [flags]
+```
+
+```text
+      --allow-recording       Approve local recording actions for this invocation
+      --allow-replay-buffer   Approve local replay actions for this invocation
+      --allow-streaming       Approve streaming output for this invocation
+      --approve               Approve reviewed OBS settings for this invocation
+```
+
 ## obsgod deck
 
 Manage the optional Steam Deck streaming preview (JSON output)
@@ -138,6 +533,22 @@ Diagnose installation, capture and OBS
 obsgod deck doctor
 ```
 
+## obsgod deck media
+
+Manage local recording, replay, clips and storage using JSON stdin; never broadcasts
+
+```text
+obsgod deck media
+```
+
+## obsgod deck mixer
+
+Control managed OBS audio, devices and optional hold-to-talk using JSON stdin
+
+```text
+obsgod deck mixer
+```
+
 ## obsgod deck open-obs
 
 Open the isolated OBS window visibly for Desktop recovery without starting output
@@ -154,12 +565,28 @@ Close idle managed OBS to apply saved settings
 obsgod deck restart
 ```
 
+## obsgod deck retry-recovery
+
+Retry bounded audio recovery for already-active managed output; never starts output
+
+```text
+obsgod deck retry-recovery
+```
+
 ## obsgod deck set-capture-mode
 
 Choose screen or game video for the next explicit output (JSON stdin)
 
 ```text
 obsgod deck set-capture-mode
+```
+
+## obsgod deck set-idle-media
+
+Import local between-game media with rights acknowledgement using JSON stdin
+
+```text
+obsgod deck set-idle-media
 ```
 
 ## obsgod deck start
@@ -184,6 +611,32 @@ Stop streaming and confirm it stopped
 
 ```text
 obsgod deck stop
+```
+
+## obsgod deck stream-health
+
+Read a bounded local OBS health sample; provider reception remains unknown
+
+```text
+obsgod deck stream-health
+```
+
+## obsgod deck stream-profiles
+
+Preview, validate, save, apply or export stream profiles using JSON stdin
+
+```text
+obsgod deck stream-profiles [flags]
+```
+
+```text
+      --bitrate int           Override JSON/environment profile bitrate for this action
+      --capture-mode string   Override JSON/environment profile capture-mode for this action
+      --encoder string        Override JSON/environment profile encoder for this action
+      --fps int               Override JSON/environment profile fps for this action
+      --height int            Override JSON/environment profile height for this action
+      --microphone            Override profile microphone preference; use --microphone=false to disable
+      --width int             Override JSON/environment profile width for this action
 ```
 
 ## obsgod deck support-bundle

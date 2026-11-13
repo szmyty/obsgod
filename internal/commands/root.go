@@ -10,6 +10,7 @@ import (
 	"github.com/szmyty/obsgod/internal/config"
 	"github.com/szmyty/obsgod/internal/obs"
 	appversion "github.com/szmyty/obsgod/internal/version"
+	api "github.com/szmyty/obsgod/pkg/api/v1"
 )
 
 func NewRoot(cfg *config.Config, service obs.Service, buildVersion string) *coral.Command {
@@ -37,7 +38,7 @@ func NewRoot(cfg *config.Config, service obs.Service, buildVersion string) *cora
 			branch = branch.Parent()
 		}
 		dryRun, _ := cmd.Flags().GetBool("dry-run")
-		if branch.Name() == "deck" || branch.Name() == "doctor" || branch.Name() == "completion" || branch.Name() == "reference" || branch.Name() == "version" || branch.Name() == coral.ShellCompRequestCmd || branch.Name() == coral.ShellCompNoDescRequestCmd || (branch.Name() == "config" && (cmd.Name() == "path" || cmd.Name() == "profiles")) || (branch.Name() == "workflow" && (cmd.Name() != "apply" || dryRun)) {
+		if branch.Name() == "deck" || branch.Name() == "doctor" || branch.Name() == "completion" || branch.Name() == "reference" || branch.Name() == "version" || branch.Name() == coral.ShellCompRequestCmd || branch.Name() == coral.ShellCompNoDescRequestCmd || (branch.Name() == "api" && cmd.Name() == "capabilities") || (branch.Name() == "creator" && (cmd.Name() == "plan" || cmd.Name() == "extensions")) || (branch.Name() == "config" && (cmd.Name() == "path" || cmd.Name() == "profiles")) || (branch.Name() == "workflow" && (cmd.Name() != "apply" || dryRun)) {
 			diagnosticMetadata(cmd, display, "independent_configuration")
 			return nil
 		}
@@ -61,6 +62,9 @@ func NewRoot(cfg *config.Config, service obs.Service, buildVersion string) *cora
 		var err error
 		resolved, err = config.Resolve(base, options)
 		if err != nil {
+			if branch.Name() == "api" || branch.Name() == "creator" {
+				return writeAPI(cmd, "connect", nil, &api.Error{Code: api.InvalidInput, Operation: "connect"})
+			}
 			return err
 		}
 		*cfg = resolved.Config
@@ -87,6 +91,8 @@ func NewRoot(cfg *config.Config, service obs.Service, buildVersion string) *cora
 	rootCmd.AddCommand(newCompletionCommand())
 	rootCmd.AddCommand(newReferenceCommand())
 	rootCmd.AddCommand(newWorkflowCommand(cfg, &configPath, nil))
+	rootCmd.AddCommand(newAPICommand(cfg, &configPath, nil))
+	rootCmd.AddCommand(newCreatorCommand(cfg, nil))
 
 	rootCmd.AddCommand(newLabelCommand(service))
 	rootCmd.AddCommand(newProfileCommand(service))

@@ -1,8 +1,14 @@
 package obs
 
 import (
+	"errors"
 	"fmt"
+	"io"
+	"log"
+	"net"
 	"net/http"
+	"strconv"
+	"strings"
 	"sync"
 
 	"github.com/andreykaipov/goobs"
@@ -13,6 +19,7 @@ import (
 	"github.com/andreykaipov/goobs/api/requests/ui"
 	"github.com/szmyty/obsgod/internal/config"
 	appversion "github.com/szmyty/obsgod/internal/version"
+	api "github.com/szmyty/obsgod/pkg/api/v1"
 )
 
 type OutputStatus struct {
@@ -109,7 +116,7 @@ func (s *service) Close() error {
 
 	err := s.client.Disconnect()
 	s.client = nil
-	return err
+	return legacyError(err)
 }
 
 func (s *service) clientOrConnect() (*goobs.Client, error) {
@@ -124,55 +131,74 @@ func (s *service) clientOrConnect() (*goobs.Client, error) {
 		return nil, fmt.Errorf("OBS configuration is not initialized")
 	}
 
-	address := fmt.Sprintf("%s:%d", s.cfg.Host, s.cfg.Port)
+	address := net.JoinHostPort(strings.Trim(s.cfg.Host, "[]"), strconv.FormatUint(uint64(s.cfg.Port), 10))
 	client, err := s.dialer(
 		address,
 		goobs.WithPassword(s.cfg.Password),
+		goobs.WithLogger(log.New(io.Discard, "", 0)),
 		goobs.WithRequestHeader(http.Header{"User-Agent": []string{appversion.UserAgent(s.buildVersion)}}),
 	)
 	if err != nil {
-		return nil, fmt.Errorf("connect to OBS at %s: %w", address, err)
+		// Keep the v0 contextual prefix while excluding arbitrary transport/server
+		// text. Do not echo malformed direct-caller host values as diagnostics.
+		if strings.ContainsAny(address, "@/\\\r\n\x00") {
+			address = "configured endpoint"
+		}
+		return nil, fmt.Errorf("connect to OBS at %s: %w", address, &api.Error{Code: api.Unavailable, Operation: "connect", Retryable: true})
 	}
 
 	s.client = client
 	return s.client, nil
 }
 
+// Legacy acknowledgement/output behavior remains compatible. Its failures use
+// the public safe domain contract rather than provider/server-supplied comments.
+func legacyError(err error) error {
+	if err == nil {
+		return nil
+	}
+	var safe *api.Error
+	if errors.As(err, &safe) {
+		return err
+	}
+	return api.Failure("request", err)
+}
+
 func (s *service) ToggleStream() error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	_, err = c.Stream.ToggleStream()
-	return err
+	return legacyError(err)
 }
 
 func (s *service) StartStream() error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	_, err = c.Stream.StartStream()
-	return err
+	return legacyError(err)
 }
 
 func (s *service) StopStream() error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	_, err = c.Stream.StopStream()
-	return err
+	return legacyError(err)
 }
 
 func (s *service) GetStreamStatus() (OutputStatus, error) {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return OutputStatus{}, err
+		return OutputStatus{}, legacyError(err)
 	}
 	r, err := c.Stream.GetStreamStatus()
 	if err != nil {
-		return OutputStatus{}, err
+		return OutputStatus{}, legacyError(err)
 	}
 	return OutputStatus{Active: r.OutputActive, Timecode: r.OutputTimecode}, nil
 }
@@ -180,56 +206,56 @@ func (s *service) GetStreamStatus() (OutputStatus, error) {
 func (s *service) ToggleRecording() error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	_, err = c.Record.ToggleRecord()
-	return err
+	return legacyError(err)
 }
 
 func (s *service) StartRecording() error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	_, err = c.Record.StartRecord()
-	return err
+	return legacyError(err)
 }
 
 func (s *service) StopRecording() error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	_, err = c.Record.StopRecord()
-	return err
+	return legacyError(err)
 }
 
 func (s *service) PauseRecording() error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	_, err = c.Record.PauseRecord()
-	return err
+	return legacyError(err)
 }
 
 func (s *service) ResumeRecording() error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	_, err = c.Record.ResumeRecord()
-	return err
+	return legacyError(err)
 }
 
 func (s *service) GetRecordingStatus() (OutputStatus, error) {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return OutputStatus{}, err
+		return OutputStatus{}, legacyError(err)
 	}
 	r, err := c.Record.GetRecordStatus()
 	if err != nil {
-		return OutputStatus{}, err
+		return OutputStatus{}, legacyError(err)
 	}
 	return OutputStatus{Active: r.OutputActive, Paused: r.OutputPaused, Timecode: r.OutputTimecode}, nil
 }
@@ -237,11 +263,11 @@ func (s *service) GetRecordingStatus() (OutputStatus, error) {
 func (s *service) ListScenes() ([]string, error) {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return nil, err
+		return nil, legacyError(err)
 	}
 	r, err := c.Scenes.GetSceneList()
 	if err != nil {
-		return nil, err
+		return nil, legacyError(err)
 	}
 
 	scenes := make([]string, 0, len(r.Scenes))
@@ -254,11 +280,11 @@ func (s *service) ListScenes() ([]string, error) {
 func (s *service) GetCurrentScene() (string, error) {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return "", err
+		return "", legacyError(err)
 	}
 	r, err := c.Scenes.GetCurrentProgramScene()
 	if err != nil {
-		return "", err
+		return "", legacyError(err)
 	}
 	return r.SceneName, nil
 }
@@ -266,47 +292,45 @@ func (s *service) GetCurrentScene() (string, error) {
 func (s *service) SetCurrentScene(scene string) error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	params := scenes.NewSetCurrentProgramSceneParams().WithSceneName(scene)
 	_, err = c.Scenes.SetCurrentProgramScene(params)
-	return err
+	return legacyError(err)
 }
 
 func (s *service) SetPreviewScene(scene string) error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	params := scenes.NewSetCurrentPreviewSceneParams().WithSceneName(scene)
 	_, err = c.Scenes.SetCurrentPreviewScene(params)
-	return err
+	return legacyError(err)
 }
 
 func (s *service) ListSceneCollections() ([]string, error) {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return nil, err
+		return nil, legacyError(err)
 	}
 	r, err := c.Config.GetSceneCollectionList()
 	if err != nil {
-		return nil, err
+		return nil, legacyError(err)
 	}
 	collections := make([]string, 0, len(r.SceneCollections))
-	for _, collection := range r.SceneCollections {
-		collections = append(collections, collection)
-	}
+	collections = append(collections, r.SceneCollections...)
 	return collections, nil
 }
 
 func (s *service) GetCurrentSceneCollection() (string, error) {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return "", err
+		return "", legacyError(err)
 	}
 	r, err := c.Config.GetSceneCollectionList()
 	if err != nil {
-		return "", err
+		return "", legacyError(err)
 	}
 	return r.CurrentSceneCollectionName, nil
 }
@@ -314,22 +338,22 @@ func (s *service) GetCurrentSceneCollection() (string, error) {
 func (s *service) SetCurrentSceneCollection(collection string) error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	params := configrequests.NewSetCurrentSceneCollectionParams().WithSceneCollectionName(collection)
 	_, err = c.Config.SetCurrentSceneCollection(params)
-	return err
+	return legacyError(err)
 }
 
 func (s *service) ListSceneItems(scene string) ([]string, error) {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return nil, err
+		return nil, legacyError(err)
 	}
 	params := sceneitems.NewGetSceneItemListParams().WithSceneName(scene)
 	resp, err := c.SceneItems.GetSceneItemList(params)
 	if err != nil {
-		return nil, err
+		return nil, legacyError(err)
 	}
 
 	items := make([]string, 0, len(resp.SceneItems))
@@ -343,7 +367,7 @@ func (s *service) getSceneItemID(c *goobs.Client, scene, item string) (int, erro
 	params := sceneitems.NewGetSceneItemIdParams().WithSceneName(scene).WithSourceName(item)
 	resp, err := c.SceneItems.GetSceneItemId(params)
 	if err != nil {
-		return 0, err
+		return 0, legacyError(err)
 	}
 	return resp.SceneItemId, nil
 }
@@ -351,12 +375,12 @@ func (s *service) getSceneItemID(c *goobs.Client, scene, item string) (int, erro
 func (s *service) SetSceneItemVisible(visible bool, scene string, items ...string) error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	for _, item := range items {
 		id, err := s.getSceneItemID(c, scene, item)
 		if err != nil {
-			return err
+			return legacyError(err)
 		}
 
 		params := sceneitems.NewSetSceneItemEnabledParams().
@@ -365,7 +389,7 @@ func (s *service) SetSceneItemVisible(visible bool, scene string, items ...strin
 			WithSceneItemEnabled(visible)
 		_, err = c.SceneItems.SetSceneItemEnabled(params)
 		if err != nil {
-			return err
+			return legacyError(err)
 		}
 	}
 	return nil
@@ -374,20 +398,20 @@ func (s *service) SetSceneItemVisible(visible bool, scene string, items ...strin
 func (s *service) ToggleSceneItem(scene string, items ...string) error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	for _, item := range items {
 		id, err := s.getSceneItemID(c, scene, item)
 		if err != nil {
-			return err
+			return legacyError(err)
 		}
 		params := sceneitems.NewGetSceneItemEnabledParams().WithSceneName(scene).WithSceneItemId(id)
 		resp, err := c.SceneItems.GetSceneItemEnabled(params)
 		if err != nil {
-			return err
+			return legacyError(err)
 		}
 		if err := s.SetSceneItemVisible(!resp.SceneItemEnabled, scene, item); err != nil {
-			return err
+			return legacyError(err)
 		}
 	}
 	return nil
@@ -396,18 +420,18 @@ func (s *service) ToggleSceneItem(scene string, items ...string) error {
 func (s *service) GetSceneItemVisibility(scene string, items ...string) ([]ItemVisibility, error) {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return nil, err
+		return nil, legacyError(err)
 	}
 	visibility := make([]ItemVisibility, 0, len(items))
 	for _, item := range items {
 		id, err := s.getSceneItemID(c, scene, item)
 		if err != nil {
-			return nil, err
+			return nil, legacyError(err)
 		}
 		params := sceneitems.NewGetSceneItemEnabledParams().WithSceneName(scene).WithSceneItemId(id)
 		resp, err := c.SceneItems.GetSceneItemEnabled(params)
 		if err != nil {
-			return nil, err
+			return nil, legacyError(err)
 		}
 		visibility = append(visibility, ItemVisibility{Name: item, Visible: resp.SceneItemEnabled})
 	}
@@ -417,21 +441,21 @@ func (s *service) GetSceneItemVisibility(scene string, items ...string) ([]ItemV
 func (s *service) CenterSceneItem(scene string, items ...string) error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	for _, item := range items {
 		id, err := s.getSceneItemID(c, scene, item)
 		if err != nil {
-			return err
+			return legacyError(err)
 		}
 		transformParams := sceneitems.NewGetSceneItemTransformParams().WithSceneName(scene).WithSceneItemId(id)
 		transformResp, err := c.SceneItems.GetSceneItemTransform(transformParams)
 		if err != nil {
-			return err
+			return legacyError(err)
 		}
 		videoResp, err := c.Config.GetVideoSettings()
 		if err != nil {
-			return err
+			return legacyError(err)
 		}
 
 		transform := transformResp.SceneItemTransform
@@ -443,7 +467,7 @@ func (s *service) CenterSceneItem(scene string, items ...string) error {
 			WithSceneItemTransform(transform)
 		_, err = c.SceneItems.SetSceneItemTransform(setParams)
 		if err != nil {
-			return err
+			return legacyError(err)
 		}
 	}
 	return nil
@@ -452,27 +476,25 @@ func (s *service) CenterSceneItem(scene string, items ...string) error {
 func (s *service) ListProfiles() ([]string, error) {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return nil, err
+		return nil, legacyError(err)
 	}
 	r, err := c.Config.GetProfileList()
 	if err != nil {
-		return nil, err
+		return nil, legacyError(err)
 	}
 	profiles := make([]string, 0, len(r.Profiles))
-	for _, profile := range r.Profiles {
-		profiles = append(profiles, profile)
-	}
+	profiles = append(profiles, r.Profiles...)
 	return profiles, nil
 }
 
 func (s *service) GetCurrentProfile() (string, error) {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return "", err
+		return "", legacyError(err)
 	}
 	r, err := c.Config.GetProfileList()
 	if err != nil {
-		return "", err
+		return "", legacyError(err)
 	}
 	return r.CurrentProfileName, nil
 }
@@ -480,61 +502,61 @@ func (s *service) GetCurrentProfile() (string, error) {
 func (s *service) SetCurrentProfile(profile string) error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	params := configrequests.NewSetCurrentProfileParams().WithProfileName(profile)
 	_, err = c.Config.SetCurrentProfile(params)
-	return err
+	return legacyError(err)
 }
 
 func (s *service) SetLabelText(source, text string) error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	params := inputs.NewSetInputSettingsParams().
 		WithInputName(source).
 		WithInputSettings(map[string]any{"text": text}).
 		WithOverlay(true)
 	_, err = c.Inputs.SetInputSettings(params)
-	return err
+	return legacyError(err)
 }
 
 func (s *service) StartReplayBuffer() error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	_, err = c.Outputs.StartReplayBuffer()
-	return err
+	return legacyError(err)
 }
 
 func (s *service) StopReplayBuffer() error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	_, err = c.Outputs.StopReplayBuffer()
-	return err
+	return legacyError(err)
 }
 
 func (s *service) SaveReplayBuffer() error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	_, err = c.Outputs.SaveReplayBuffer()
-	return err
+	return legacyError(err)
 }
 
 func (s *service) GetReplayBufferActive() (bool, error) {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return false, err
+		return false, legacyError(err)
 	}
 	r, err := c.Outputs.GetReplayBufferStatus()
 	if err != nil {
-		return false, err
+		return false, legacyError(err)
 	}
 	return r.OutputActive, nil
 }
@@ -542,38 +564,38 @@ func (s *service) GetReplayBufferActive() (bool, error) {
 func (s *service) ToggleVirtualCam() error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	_, err = c.Outputs.ToggleVirtualCam()
-	return err
+	return legacyError(err)
 }
 
 func (s *service) StartVirtualCam() error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	_, err = c.Outputs.StartVirtualCam()
-	return err
+	return legacyError(err)
 }
 
 func (s *service) StopVirtualCam() error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	_, err = c.Outputs.StopVirtualCam()
-	return err
+	return legacyError(err)
 }
 
 func (s *service) GetVirtualCamActive() (bool, error) {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return false, err
+		return false, legacyError(err)
 	}
 	r, err := c.Outputs.GetVirtualCamStatus()
 	if err != nil {
-		return false, err
+		return false, legacyError(err)
 	}
 	return r.OutputActive, nil
 }
@@ -581,11 +603,11 @@ func (s *service) GetVirtualCamActive() (bool, error) {
 func (s *service) GetSpecialSources() (SpecialSources, error) {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return SpecialSources{}, err
+		return SpecialSources{}, legacyError(err)
 	}
 	resp, err := c.Inputs.GetSpecialInputs()
 	if err != nil {
-		return SpecialSources{}, err
+		return SpecialSources{}, legacyError(err)
 	}
 	return SpecialSources{
 		Desktop1: resp.Desktop1,
@@ -599,30 +621,30 @@ func (s *service) GetSpecialSources() (SpecialSources, error) {
 func (s *service) ToggleMute(source string) error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	params := inputs.NewToggleInputMuteParams().WithInputName(source)
 	_, err = c.Inputs.ToggleInputMute(params)
-	return err
+	return legacyError(err)
 }
 
 func (s *service) SetStudioModeEnabled(enabled bool) error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	_, err = c.Ui.SetStudioModeEnabled(ui.NewSetStudioModeEnabledParams().WithStudioModeEnabled(enabled))
-	return err
+	return legacyError(err)
 }
 
 func (s *service) IsStudioModeEnabled() (bool, error) {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return false, err
+		return false, legacyError(err)
 	}
 	r, err := c.Ui.GetStudioModeEnabled()
 	if err != nil {
-		return false, err
+		return false, legacyError(err)
 	}
 	return r.StudioModeEnabled, nil
 }
@@ -630,8 +652,8 @@ func (s *service) IsStudioModeEnabled() (bool, error) {
 func (s *service) TriggerStudioModeTransition() error {
 	c, err := s.clientOrConnect()
 	if err != nil {
-		return err
+		return legacyError(err)
 	}
 	_, err = c.Transitions.TriggerStudioModeTransition()
-	return err
+	return legacyError(err)
 }
