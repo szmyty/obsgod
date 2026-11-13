@@ -1,0 +1,11 @@
+{
+  "observed_at": "2026-11-13T10:02:32.274400+00:00",
+  "action": "Previously owner-requested default branch rename master to main",
+  "source_sha": "ed7d100d356ce803d2cb1c1afef3836759deef10",
+  "scope": "Same repository only; no force, protection changes, source merges, release or deployment",
+  "status": 403,
+  "result": {
+    "message": "Resource not accessible by integration",
+    "documentation_url": "https://docs.github.com/rest/branches/branches#rename-a-branch"
+  }
+}

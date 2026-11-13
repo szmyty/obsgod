@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "candidate": "0.1.0-deck.9",
+  "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "source_clean_before": true,
+  "source_clean_after": true,
+  "outcome": "passed",
+  "checks": [
+    {
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "steamdeck/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "outcome": "passed",
+      "log": "python-tests.log",
+      "seconds": 5.479
+    }
+  ],
+  "tests_passed": 127
+}

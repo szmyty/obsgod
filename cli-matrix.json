@@ -1,0 +1,367 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-13T12:49:49.963246+00:00",
+  "purpose": "Final-revision offline CLI/JSON/reference/completion/example qualification; full race/vet owned by parent go-matrix",
+  "repository": "/workspace/obsgod",
+  "expected_revision": "1a482808a8281c8bce092cea057df758836b34e9",
+  "source_changed": false,
+  "status": "passed",
+  "platform": {
+    "system": "Linux",
+    "release": "6.18.57",
+    "machine": "x86_64",
+    "python": "3.12.14"
+  },
+  "tools": {
+    "go": {
+      "executable": "/workspace/.obsgod-tools/toolchains/go1.27.4/go/bin/go",
+      "version": "go version go1.27.4 linux/amd64",
+      "exit_code": 0
+    },
+    "python": {
+      "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "version": "Python 3.12.14",
+      "exit_code": 0
+    },
+    "bash": {
+      "executable": "/usr/bin/bash",
+      "version": "GNU bash, version 5.2.37(1)-release (x86_64-pc-linux-gnu)",
+      "exit_code": 0
+    },
+    "zsh": {
+      "executable": "/usr/bin/zsh",
+      "version": "zsh 5.9 (x86_64-debian-linux-gnu)",
+      "exit_code": 0
+    }
+  },
+  "checks": [
+    {
+      "id": "version",
+      "command": "go run . version --json",
+      "cwd": "/workspace/obsgod",
+      "exit_code": 0,
+      "duration_seconds": 0.538,
+      "stdout": "/workspace/.obsgod-tools/completion/final/cli-1a48280/version.stdout",
+      "stdout_bytes": 53,
+      "stdout_sha256": "08afeaa5ef4fab4cd7a8c1b740981dffe3e27b11da3ca048bc19a49fb7b35a49",
+      "stderr": "/workspace/.obsgod-tools/completion/final/cli-1a48280/version.stderr",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "passed",
+      "json_shape": {
+        "schema_version": "integer",
+        "name": "str",
+        "version": "str"
+      }
+    },
+    {
+      "id": "api-capabilities",
+      "command": "go run . api capabilities",
+      "cwd": "/workspace/obsgod",
+      "exit_code": 0,
+      "duration_seconds": 0.064,
+      "stdout": "/workspace/.obsgod-tools/completion/final/cli-1a48280/api-capabilities.stdout",
+      "stdout_bytes": 470,
+      "stdout_sha256": "a4a165f093523e99848db4df279b0d8df2b773f1cb7eb680f1fe3609bb3ae410",
+      "stderr": "/workspace/.obsgod-tools/completion/final/cli-1a48280/api-capabilities.stderr",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "passed",
+      "json_shape": {
+        "schema_version": "integer",
+        "ok": "boolean",
+        "operation": "str",
+        "result": {
+          "schema_version": "integer",
+          "api": "str",
+          "operations": {
+            "type": "array",
+            "length": 18,
+            "element_types": [
+              "str"
+            ]
+          },
+          "provider_reception": "str"
+        }
+      }
+    },
+    {
+      "id": "creator-plan",
+      "command": "go run . creator plan --profile examples/creator/gaming.json",
+      "cwd": "/workspace/obsgod",
+      "exit_code": 0,
+      "duration_seconds": 0.066,
+      "stdout": "/workspace/.obsgod-tools/completion/final/cli-1a48280/creator-plan.stdout",
+      "stdout_bytes": 510,
+      "stdout_sha256": "7babee8b380222d294885b8459b3fd1239cfdacbac23ecae102d6dee6d31fd3c",
+      "stderr": "/workspace/.obsgod-tools/completion/final/cli-1a48280/creator-plan.stderr",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "passed",
+      "json_shape": {
+        "schema_version": "integer",
+        "ok": "boolean",
+        "operation": "str",
+        "result": {
+          "schema_version": "integer",
+          "provider": "str",
+          "credential_source": "str",
+          "workflow": {
+            "obs_profile": "str",
+            "scene_collection": "str",
+            "starting_scene": "str",
+            "live_scene": "str",
+            "recording_enabled": "boolean",
+            "replay_buffer_enabled": "boolean",
+            "readiness_timeout": "str"
+          },
+          "ending_scene": "str",
+          "readiness_delay": "str",
+          "stop_recording": "boolean",
+          "stop_replay_buffer": "boolean",
+          "obs_lifecycle": "str",
+          "provider_reception": "str"
+        }
+      }
+    },
+    {
+      "id": "creator-extensions",
+      "command": "go run . creator extensions",
+      "cwd": "/workspace/obsgod",
+      "exit_code": 0,
+      "duration_seconds": 0.061,
+      "stdout": "/workspace/.obsgod-tools/completion/final/cli-1a48280/creator-extensions.stdout",
+      "stdout_bytes": 520,
+      "stdout_sha256": "03df29d9b270254bb84f656eab5c93c93fffaf66cf653024776f69f88d132316",
+      "stderr": "/workspace/.obsgod-tools/completion/final/cli-1a48280/creator-extensions.stderr",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "passed",
+      "json_shape": {
+        "schema_version": "integer",
+        "rtmp_providers": {
+          "type": "array",
+          "length": 4,
+          "element_types": [
+            "str"
+          ]
+        },
+        "lifecycle_events": {
+          "type": "array",
+          "length": 13,
+          "element_types": [
+            "str"
+          ]
+        },
+        "multi_output_policy": "str",
+        "external_hooks": "str",
+        "content_pipeline": "str"
+      }
+    },
+    {
+      "id": "completion-bash",
+      "command": "go run . completion bash",
+      "cwd": "/workspace/obsgod",
+      "exit_code": 0,
+      "duration_seconds": 0.058,
+      "stdout": "/workspace/.obsgod-tools/completion/final/cli-1a48280/completion-bash.stdout",
+      "stdout_bytes": 9680,
+      "stdout_sha256": "2f234e9cf8bba5c30435c608b51dce9f3fe67b11459e5f543c9c1cae01b28890",
+      "stderr": "/workspace/.obsgod-tools/completion/final/cli-1a48280/completion-bash.stderr",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "passed",
+      "validation": "Nonempty generated shell completion with canonical obsgod entrypoint"
+    },
+    {
+      "id": "completion-zsh",
+      "command": "go run . completion zsh",
+      "cwd": "/workspace/obsgod",
+      "exit_code": 0,
+      "duration_seconds": 0.07,
+      "stdout": "/workspace/.obsgod-tools/completion/final/cli-1a48280/completion-zsh.stdout",
+      "stdout_bytes": 6394,
+      "stdout_sha256": "c0df2939ab495a0419051fbd984861d7053f38ee75a429d22137da099f06b7ee",
+      "stderr": "/workspace/.obsgod-tools/completion/final/cli-1a48280/completion-zsh.stderr",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "passed",
+      "validation": "Nonempty generated shell completion with canonical obsgod entrypoint"
+    },
+    {
+      "id": "completion-fish",
+      "command": "go run . completion fish",
+      "cwd": "/workspace/obsgod",
+      "exit_code": 0,
+      "duration_seconds": 0.091,
+      "stdout": "/workspace/.obsgod-tools/completion/final/cli-1a48280/completion-fish.stdout",
+      "stdout_bytes": 6943,
+      "stdout_sha256": "6c0ffc1c76f36eb509b7079f8b5265c36925d6609115ce78f9aeca7636fba889",
+      "stderr": "/workspace/.obsgod-tools/completion/final/cli-1a48280/completion-fish.stderr",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "passed",
+      "validation": "Nonempty generated shell completion with canonical obsgod entrypoint"
+    },
+    {
+      "id": "completion-bash-syntax",
+      "command": "bash -n /workspace/.obsgod-tools/completion/final/cli-1a48280/completion-bash.stdout",
+      "cwd": "/workspace/obsgod",
+      "exit_code": 0,
+      "duration_seconds": 0.004,
+      "stdout": "/workspace/.obsgod-tools/completion/final/cli-1a48280/completion-bash-syntax.stdout",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "/workspace/.obsgod-tools/completion/final/cli-1a48280/completion-bash-syntax.stderr",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "passed"
+    },
+    {
+      "id": "completion-zsh-syntax",
+      "command": "zsh -n /workspace/.obsgod-tools/completion/final/cli-1a48280/completion-zsh.stdout",
+      "cwd": "/workspace/obsgod",
+      "exit_code": 0,
+      "duration_seconds": 0.003,
+      "stdout": "/workspace/.obsgod-tools/completion/final/cli-1a48280/completion-zsh-syntax.stdout",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "/workspace/.obsgod-tools/completion/final/cli-1a48280/completion-zsh-syntax.stderr",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "passed"
+    },
+    {
+      "id": "reference",
+      "command": "go run . reference",
+      "cwd": "/workspace/obsgod",
+      "exit_code": 0,
+      "duration_seconds": 0.174,
+      "stdout": "/workspace/.obsgod-tools/completion/final/cli-1a48280/reference.stdout",
+      "stdout_bytes": 19610,
+      "stdout_sha256": "d9f8df9f3242c3facca1426f5bc9acdbdded28258f9ac305304fb059a9aea4ca",
+      "stderr": "/workspace/.obsgod-tools/completion/final/cli-1a48280/reference.stderr",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "passed",
+      "checked_in_sha256": "d9f8df9f3242c3facca1426f5bc9acdbdded28258f9ac305304fb059a9aea4ca",
+      "byte_identical": true
+    },
+    {
+      "id": "example-build",
+      "command": "go build -o /workspace/.obsgod-tools/completion/final/cli-1a48280/api-client ./examples/api-client",
+      "cwd": "/workspace/obsgod",
+      "exit_code": 0,
+      "duration_seconds": 0.447,
+      "stdout": "/workspace/.obsgod-tools/completion/final/cli-1a48280/example-build.stdout",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "/workspace/.obsgod-tools/completion/final/cli-1a48280/example-build.stderr",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "passed",
+      "artifact": {
+        "path": "/workspace/.obsgod-tools/completion/final/cli-1a48280/api-client",
+        "bytes": 10658753,
+        "sha256": "ca27656b68422378d1ef7c4b3cf5c40be714223fbbc2ff1f2e72aef4a19a729c"
+      }
+    },
+    {
+      "id": "completion-fish-host-syntax",
+      "command": "fish --no-execute /workspace/.obsgod-tools/completion/final/cli-1a48280/completion-fish.stdout",
+      "cwd": "/workspace/obsgod",
+      "exit_code": null,
+      "status": "unavailable",
+      "required": false,
+      "reason": "Host Fish interpreter is not installed; generation passed and a real disposable-container check follows."
+    },
+    {
+      "id": "completion-fish-container",
+      "command": "env -u DOCKER_HOST -u DOCKER_CONTEXT -u DOCKER_TLS -u DOCKER_TLS_VERIFY -u DOCKER_CERT_PATH docker --host=unix:///var/run/docker.sock run --rm --mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/codex-system-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/final/cli-1a48280/completion-fish.stdout,dst=/validation/completion.fish,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/obsgod,dst=/usr/local/bin/obsgod,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container,dst=/evidence -e DEBIAN_FRONTEND=noninteractive -e SSL_CERT_FILE=/run/codex-system-ca.pem sha256:43f84a0b210f98845ef003912981774c95efe439eaa4b1cb62cf803fd46fc82a sh -eu -c '\ncat /etc/os-release > /evidence/os-release.txt\nfind /etc/apt/sources.list /etc/apt/sources.list.d -type f -print0 2>/dev/null | sort -z | xargs -0 sha256sum > /evidence/apt-sources.before.sha256\napt-get -o Acquire::https::CaInfo=/run/codex-system-ca.pem -o Acquire::Retries=0 update\napt-get -o Acquire::https::CaInfo=/run/codex-system-ca.pem -o Acquire::Retries=0 install -y --no-install-recommends fish\nfind /etc/apt/sources.list /etc/apt/sources.list.d -type f -print0 2>/dev/null | sort -z | xargs -0 sha256sum > /evidence/apt-sources.after.sha256\nfish --version > /evidence/fish-version.txt\napt-cache policy fish > /evidence/fish-package-policy.txt\nfish --no-execute /validation/completion.fish\nfish --no-config -c '\"'\"'source /validation/completion.fish; complete -C \"obsgod \"'\"'\"' > /evidence/dynamic-completions.txt\n'",
+      "cwd": "/workspace/obsgod",
+      "exit_code": 0,
+      "duration_seconds": 24.499,
+      "status": "passed",
+      "required": false,
+      "evidence_json": "/workspace/.obsgod-tools/completion/final/cli-fish-container.json",
+      "evidence_sha256": "819e61d3004907704b0a83a1f23dc86c3f6eba3a1939c829155505746acf257f",
+      "host_fish": "unavailable",
+      "container_fish_version": "fish, version 3.6.0",
+      "image": {
+        "id": "sha256:43f84a0b210f98845ef003912981774c95efe439eaa4b1cb62cf803fd46fc82a",
+        "repo_digest": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc"
+      },
+      "syntax": "passed",
+      "completion_loading": "passed",
+      "dynamic_completion": "passed",
+      "dynamic_root_commands": [
+        "api",
+        "completion",
+        "config",
+        "creator",
+        "deck",
+        "doctor",
+        "help",
+        "label",
+        "profile",
+        "recording",
+        "reference",
+        "replaybuffer",
+        "scene",
+        "scenecollection",
+        "sceneitem",
+        "source",
+        "stream",
+        "studiomode",
+        "version",
+        "virtualcam",
+        "workflow"
+      ],
+      "generated_completion_sha256": "6c0ffc1c76f36eb509b7079f8b5265c36925d6609115ce78f9aeca7636fba889",
+      "stdout": "/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/fish-container.stdout",
+      "stdout_sha256": "f008284ce7b52560182dff6e985e1d744fc46e5e964703c75aadc8150124990b",
+      "stderr": "/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/fish-container.stderr",
+      "stderr_sha256": "f77216c41aadf6c667ac1a602069951966cea350daab793ffe11ae0de1225ddc"
+    }
+  ],
+  "limitations": [
+    "This matrix executes offline CLI/reference/completion/example checks only; full Go race/vet/vulnerability checks belong to the separate final parent go-matrix. No prior race/vet passes are inherited here.",
+    "No provider account API, real stream, receiver/viewer, Steam Deck/Gamescope/Flatpak/controller or session transition was exercised.",
+    "These checks do not establish hosted CI, required human review, publication or release approval.",
+    "Host Fish interpreter unavailable. Generated completion syntax, loading and dynamic root completion passed in a disposable Debian12/Fish3.6.0 container; this does not qualify SteamOS Fish or an interactive target session. Bash/Zsh syntax passed; interactive target behavior was not exercised."
+  ],
+  "source_before": {
+    "head": "1a482808a8281c8bce092cea057df758836b34e9",
+    "git_status_porcelain": "",
+    "clean": true,
+    "tracked_files": 350,
+    "tracked_source_manifest": "/workspace/.obsgod-tools/completion/final/cli-1a48280/source-before.json",
+    "tracked_source_sha256": "a56e9b9a97c48d732323ff34a2cca5e8ffa19b488e921ea0558b727631eb371e"
+  },
+  "source_after": {
+    "head": "1a482808a8281c8bce092cea057df758836b34e9",
+    "git_status_porcelain": "",
+    "clean": true,
+    "tracked_files": 350,
+    "tracked_source_manifest": "/workspace/.obsgod-tools/completion/final/cli-1a48280/source-after.json",
+    "tracked_source_sha256": "a56e9b9a97c48d732323ff34a2cca5e8ffa19b488e921ea0558b727631eb371e"
+  },
+  "finished_at": "2026-11-13T12:50:17.274733+00:00",
+  "source_after_fish_container": {
+    "head": "1a482808a8281c8bce092cea057df758836b34e9",
+    "git_status_porcelain": "",
+    "clean": true,
+    "tracked_files": 350,
+    "tracked_source_manifest": "/workspace/.obsgod-tools/completion/final/cli-1a48280/source-after-fish-container.json",
+    "tracked_source_sha256": "a56e9b9a97c48d732323ff34a2cca5e8ffa19b488e921ea0558b727631eb371e"
+  },
+  "go_validation_scope": "Full final-revision race/vet/vulnerability/cross-build evidence is independently owned by the parent go-matrix; not rerun or inherited in this CLI matrix.",
+  "historical_receipts_directory": "/workspace/.obsgod-tools/completion/final/historical-e32e8a0-cli",
+  "no_prior_revision_passes_inherited": true,
+  "result_counts": {
+    "passed": 12,
+    "failed": 0,
+    "unavailable": 1,
+    "skipped": 0
+  }
+}

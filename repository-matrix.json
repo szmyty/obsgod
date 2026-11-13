@@ -1,0 +1,465 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-11-13T12:32:36.438517+00:00",
+  "repository": "szmyty/obsgod",
+  "default_branch": "master",
+  "default_revision": "ed7d100d356ce803d2cb1c1afef3836759deef10",
+  "branch_protected_metadata": false,
+  "main": {
+    "http_error": 404,
+    "message": "Branch not found"
+  },
+  "detailed_protection": {
+    "http_error": 403,
+    "message": "Resource not accessible by integration"
+  },
+  "rulesets": [],
+  "open_issue_count": 36,
+  "open_issues": [
+    {
+      "number": 61,
+      "title": "Run available GitHub Actions tests locally with act and fix reproducible failures",
+      "url": "https://github.com/szmyty/obsgod/issues/61",
+      "updated_at": "2026-11-13T08:11:55Z",
+      "milestone": null,
+      "body_sha256": "a0cc9d806a05e336eee6d5bf07ddcca8f2c7589d7da596688b3526f633125890"
+    },
+    {
+      "number": 51,
+      "title": "Research journeys \u2014 monetization and Decky Store distribution",
+      "url": "https://github.com/szmyty/obsgod/issues/51",
+      "updated_at": "2026-11-13T09:09:15Z",
+      "milestone": 3,
+      "body_sha256": "d2318ffaa48eecda4b25b5291c92568acad4d9a96549459c97db60b8fc8812ee"
+    },
+    {
+      "number": 50,
+      "title": "Expose stream health and measured quality recommendations",
+      "url": "https://github.com/szmyty/obsgod/issues/50",
+      "updated_at": "2026-11-13T06:09:51Z",
+      "milestone": 3,
+      "body_sha256": "84caa2cb7645e14a156f0adc5cf09acc43e9bd5876d14923d70fd2c998c01411"
+    },
+    {
+      "number": 49,
+      "title": "Add recording, replay-buffer and local clip workflows",
+      "url": "https://github.com/szmyty/obsgod/issues/49",
+      "updated_at": "2026-11-13T06:09:50Z",
+      "milestone": 3,
+      "body_sha256": "653f75c8c29cd9b90f75a656130918244bb8cff3c9a9ffbf448f44945ad7fbda"
+    },
+    {
+      "number": 48,
+      "title": "Improve live audio-device, capture and runtime resilience",
+      "url": "https://github.com/szmyty/obsgod/issues/48",
+      "updated_at": "2026-11-13T06:09:49Z",
+      "milestone": 3,
+      "body_sha256": "180467e826f072f788b17fbbd036bc6255889c3f5ca706c26ca3332ba9676e13"
+    },
+    {
+      "number": 47,
+      "title": "Add an easy advanced stream and profile editor",
+      "url": "https://github.com/szmyty/obsgod/issues/47",
+      "updated_at": "2026-11-13T06:09:47Z",
+      "milestone": 3,
+      "body_sha256": "52aec488b2c16110b3655d1dcddde3eb729fe65667e40c36d340d7773d5b58ad"
+    },
+    {
+      "number": 46,
+      "title": "Roadmap 3 \u2014 Advanced streaming and validated paid offerings",
+      "url": "https://github.com/szmyty/obsgod/issues/46",
+      "updated_at": "2026-11-13T06:09:46Z",
+      "milestone": 3,
+      "body_sha256": "cb1b333eb98d8862f85a2b62bdde52f48517d7c0c1b6ff9abab0d7b4f6b3f06d"
+    },
+    {
+      "number": 45,
+      "title": "Launch the verified direct channel and conditionally submit to Decky Store",
+      "url": "https://github.com/szmyty/obsgod/issues/45",
+      "updated_at": "2026-11-12T23:49:02Z",
+      "milestone": 2,
+      "body_sha256": "27654f9991ce5ca06f29c0f376ad9d8e2d3b5faf567d3ffdced30ee198bd78bb"
+    },
+    {
+      "number": 44,
+      "title": "Prepare supported Deck release, security and support operations",
+      "url": "https://github.com/szmyty/obsgod/issues/44",
+      "updated_at": "2026-11-12T23:49:01Z",
+      "milestone": 2,
+      "body_sha256": "63c43fee2ca0d9d685ef2e12c824bfe9960b417aad45b5ee8d864a8a248d2113"
+    },
+    {
+      "number": 43,
+      "title": "Prepare the branded documentation site and product landing page",
+      "url": "https://github.com/szmyty/obsgod/issues/43",
+      "updated_at": "2026-11-12T23:49:00Z",
+      "milestone": 2,
+      "body_sha256": "e121e91c8f2c22e52f21f9f2d6bce9ef9f9e5a55277879e211532778bd364d48"
+    },
+    {
+      "number": 42,
+      "title": "Add an optional owner-verified Support development button",
+      "url": "https://github.com/szmyty/obsgod/issues/42",
+      "updated_at": "2026-11-12T23:48:59Z",
+      "milestone": 2,
+      "body_sha256": "f4a089d8b15fd1ce320abd83f7df3e1ae3926557ef917911304478894e138777"
+    },
+    {
+      "number": 41,
+      "title": "Provide guided uninstall, reset and complete owned-data wipe",
+      "url": "https://github.com/szmyty/obsgod/issues/41",
+      "updated_at": "2026-11-12T23:48:58Z",
+      "milestone": 2,
+      "body_sha256": "0c5256ffb70395d45c33db96f396e029187763ea49eab091dd7eb20c981e427e"
+    },
+    {
+      "number": 40,
+      "title": "Add guided Kick, Twitch, YouTube and custom RTMP(S) destinations",
+      "url": "https://github.com/szmyty/obsgod/issues/40",
+      "updated_at": "2026-11-12T23:48:57Z",
+      "milestone": 2,
+      "body_sha256": "cedf6bee9d8e03e15520b4dcecd1880dc90d64f6c794e3359813fb6d2b14dcc2"
+    },
+    {
+      "number": 39,
+      "title": "Redesign the controller-first setup, streaming and recovery UI",
+      "url": "https://github.com/szmyty/obsgod/issues/39",
+      "updated_at": "2026-11-12T23:48:57Z",
+      "milestone": 2,
+      "body_sha256": "d6d0d69620e13b3f73d202496bddbda217cb13abf9d249f76559cef395dff42f"
+    },
+    {
+      "number": 38,
+      "title": "Create the accepted product brand through the Identity consumer framework",
+      "url": "https://github.com/szmyty/obsgod/issues/38",
+      "updated_at": "2026-11-12T23:48:55Z",
+      "milestone": 2,
+      "body_sha256": "6b0ff37c6a8ecb025d0462f1fa5e338d3264310e9be2acc5196d25d0357df0f4"
+    },
+    {
+      "number": 37,
+      "title": "Resolve Decky Store provenance eligibility and distribution policy early",
+      "url": "https://github.com/szmyty/obsgod/issues/37",
+      "updated_at": "2026-11-12T23:48:54Z",
+      "milestone": 2,
+      "body_sha256": "9cf7c5bfa6ac9a6697c4e49f57f29df206e0a2945993c12cc80db816670ad04d"
+    },
+    {
+      "number": 36,
+      "title": "Prepare the old-to-new repository, updater, plugin and XDG migration",
+      "url": "https://github.com/szmyty/obsgod/issues/36",
+      "updated_at": "2026-11-12T23:48:53Z",
+      "milestone": 2,
+      "body_sha256": "5faa9ba225c44dcf3a547eacbdb804771acbdad64efdb776a5616fcce5b17352"
+    },
+    {
+      "number": 35,
+      "title": "Choose the tools organization, product name and durable product boundary",
+      "url": "https://github.com/szmyty/obsgod/issues/35",
+      "updated_at": "2026-11-12T23:48:52Z",
+      "milestone": 2,
+      "body_sha256": "de3217e97b88fe55a8a32891551a8eb121836ceacb4cf6617b94dfbdd67fba04"
+    },
+    {
+      "number": 25,
+      "title": "Add OBS WebSocket connection/password setup, change and recovery controls",
+      "url": "https://github.com/szmyty/obsgod/issues/25",
+      "updated_at": "2026-11-12T23:48:51Z",
+      "milestone": 2,
+      "body_sha256": "e835d105f6fbfc96a0913d76d6084e1bc5fc2025f5b3046f3c9dfd8dbbdf0bbc"
+    },
+    {
+      "number": 24,
+      "title": "Add custom idle banner/video and game-aware scene transitions",
+      "url": "https://github.com/szmyty/obsgod/issues/24",
+      "updated_at": "2026-11-13T06:09:48Z",
+      "milestone": 3,
+      "body_sha256": "dc8ca2d34e0c92ebdd4d643228947a272f20c73d303e44e287f7ac27841cd840"
+    },
+    {
+      "number": 23,
+      "title": "Roadmap 2 \u2014 Supported public launch and optional funding",
+      "url": "https://github.com/szmyty/obsgod/issues/23",
+      "updated_at": "2026-11-12T23:48:50Z",
+      "milestone": 2,
+      "body_sha256": "a058c940c6ca54ae91f0e8de2d0baae55ddb996af362efbadfeefb9cf211442b"
+    },
+    {
+      "number": 22,
+      "title": "Qualify the complete Steam Deck workflow and prepare the reviewed release candidate",
+      "url": "https://github.com/szmyty/obsgod/issues/22",
+      "updated_at": "2026-11-12T23:48:49Z",
+      "milestone": 2,
+      "body_sha256": "bf5c363750b7cd7f4466a9cddb9ff1e78f6d1ee6915f6347ccc09e5800a11cab"
+    },
+    {
+      "number": 21,
+      "title": "Make OBS lifecycle and supported capture work without a running game",
+      "url": "https://github.com/szmyty/obsgod/issues/21",
+      "updated_at": "2026-11-12T23:48:48Z",
+      "milestone": 2,
+      "body_sha256": "b25212f94141b1ffc5a88c3f55a79fd1f650a601cc08df2e449d823da395f2f4"
+    },
+    {
+      "number": 20,
+      "title": "Bundle the updater and add Check for updates to the Decky panel",
+      "url": "https://github.com/szmyty/obsgod/issues/20",
+      "updated_at": "2026-11-12T23:48:47Z",
+      "milestone": 2,
+      "body_sha256": "0eaa1ef875b75369b931f85e8075f4925946913ac876cdb5ea685e5ad1edfc69"
+    },
+    {
+      "number": 19,
+      "title": "Install OBSGod directly into Decky with dependency checks and recovery",
+      "url": "https://github.com/szmyty/obsgod/issues/19",
+      "updated_at": "2026-11-12T23:48:46Z",
+      "milestone": 2,
+      "body_sha256": "330fe75fc2f9167af1f316b95d472711be87a5318a92e248d15087c66341cdb7"
+    },
+    {
+      "number": 18,
+      "title": "Tie Start, Stop, Cancel and notifications to confirmed OBS state",
+      "url": "https://github.com/szmyty/obsgod/issues/18",
+      "updated_at": "2026-11-12T23:48:45Z",
+      "milestone": 2,
+      "body_sha256": "fa0efe2597358fb2d785abb0c8609bb0aa955a0d5de5b283482f97292cf889c7"
+    },
+    {
+      "number": 17,
+      "title": "Make OBS state authoritative and update the Decky panel automatically",
+      "url": "https://github.com/szmyty/obsgod/issues/17",
+      "updated_at": "2026-11-12T23:48:43Z",
+      "milestone": 2,
+      "body_sha256": "9255d3f8d6b43381b88c8a4bd5ff6ad41241dc831f5cdfaac71a52d36a34d6dc"
+    },
+    {
+      "number": 16,
+      "title": "Reconcile preview provenance and reviewable draft PR boundaries",
+      "url": "https://github.com/szmyty/obsgod/issues/16",
+      "updated_at": "2026-11-12T23:48:42Z",
+      "milestone": 2,
+      "body_sha256": "17155f50eac4d5ef7a86a8d0e5a813d3a670efb18e779f779998223dbe527ef9"
+    },
+    {
+      "number": 14,
+      "title": "Post-v1 roadmap \u2014 multi-platform providers, multistream, and creator automation ecosystem",
+      "url": "https://github.com/szmyty/obsgod/issues/14",
+      "updated_at": "2026-11-12T11:50:04Z",
+      "milestone": 3,
+      "body_sha256": "4481aa5df58db71c6c4e218bb42b614e28e5b2a0cde9166d684699a3a9836f8c"
+    },
+    {
+      "number": 13,
+      "title": "Bootstrap the StreamGod companion CLI \u2014 one-command Kick streaming on Steam Deck",
+      "url": "https://github.com/szmyty/obsgod/issues/13",
+      "updated_at": "2026-11-12T11:50:03Z",
+      "milestone": 3,
+      "body_sha256": "6683886884a499462c1b2d2b473f6a7e91da7ba4023647aac49ac3c987bf8b89"
+    },
+    {
+      "number": 12,
+      "title": "Production hardening and v1.0 release readiness \u2014 tests, security, packaging, and supply chain",
+      "url": "https://github.com/szmyty/obsgod/issues/12",
+      "updated_at": "2026-11-12T11:50:02Z",
+      "milestone": 3,
+      "body_sha256": "c65abd6bbaef4a29f8c12dd151e8c0e4b538d3a1712eb9742e6c186617b712e6"
+    },
+    {
+      "number": 11,
+      "title": "Polish the CLI product experience \u2014 12-factor config, profiles, diagnostics, completions, and docs",
+      "url": "https://github.com/szmyty/obsgod/issues/11",
+      "updated_at": "2026-11-12T23:48:41Z",
+      "milestone": 2,
+      "body_sha256": "9a0066ec6bce20a5b52d4dcd42c925b56210af7843737c0cd3436a5a7737aa1f"
+    },
+    {
+      "number": 10,
+      "title": "Fix OBS startup, WebSocket readiness and Gaming Mode lifecycle",
+      "url": "https://github.com/szmyty/obsgod/issues/10",
+      "updated_at": "2026-11-12T23:48:40Z",
+      "milestone": 2,
+      "body_sha256": "29e62dbdcb2542d45d89bbbdf9af1c2edc1ed3c66156638754fc9bdcaf91d2f3"
+    },
+    {
+      "number": 9,
+      "title": "Define the reusable obsgod API and StreamGod integration contract",
+      "url": "https://github.com/szmyty/obsgod/issues/9",
+      "updated_at": "2026-11-12T11:50:00Z",
+      "milestone": 3,
+      "body_sha256": "f3abd3b8aaf89b6d6c7bf1c474791036cfb90fc053b4526fc2dcef7aef65b20e"
+    },
+    {
+      "number": 8,
+      "title": "Roadmap 1 \u2014 Reliable Steam Deck streaming, installation and updates",
+      "url": "https://github.com/szmyty/obsgod/issues/8",
+      "updated_at": "2026-11-12T23:48:39Z",
+      "milestone": 2,
+      "body_sha256": "859e0021eba283fd872465976d1a2a5fe4115ef0d36e698f137590f5737f2ce3"
+    },
+    {
+      "number": 7,
+      "title": "Adopt Ego Hygiene architecture, ontology, governance, and product documentation",
+      "url": "https://github.com/szmyty/obsgod/issues/7",
+      "updated_at": "2026-11-12T11:49:59Z",
+      "milestone": 3,
+      "body_sha256": "f94dfc364d4bd31a6ae52505a20af49b756c57edca600ed95f90f137c10743ca"
+    }
+  ],
+  "open_pr_count": 7,
+  "pulls": [
+    {
+      "number": 65,
+      "title": "Qualify the integrated completion candidate and prepare the owner handoff",
+      "url": "https://github.com/szmyty/obsgod/pull/65",
+      "draft": true,
+      "base": "codex/completion-api",
+      "base_sha": "92615f7085bc2329ff5b9dbc26cc0239b0ff7357",
+      "head": "codex/completion-qualification",
+      "head_sha": "1a482808a8281c8bce092cea057df758836b34e9",
+      "mergeable_state": "unstable",
+      "reviews": []
+    },
+    {
+      "number": 64,
+      "title": "Add versioned OBS API and safe local creator workflows",
+      "url": "https://github.com/szmyty/obsgod/pull/64",
+      "draft": true,
+      "base": "codex/completion-audio",
+      "base_sha": "fcfa0c2577b5260e1b7036d83daece4a9452e41c",
+      "head": "codex/completion-api",
+      "head_sha": "92615f7085bc2329ff5b9dbc26cc0239b0ff7357",
+      "mergeable_state": "unstable",
+      "reviews": []
+    },
+    {
+      "number": 63,
+      "title": "Add live microphone controls, safe input changes and guarded hold to talk",
+      "url": "https://github.com/szmyty/obsgod/pull/63",
+      "draft": true,
+      "base": "codex/completion-foundation",
+      "base_sha": "b1ee00d58227b5a0d41fa5df03a5ccc5700f8ebe",
+      "head": "codex/completion-audio",
+      "head_sha": "fcfa0c2577b5260e1b7036d83daece4a9452e41c",
+      "mergeable_state": "unstable",
+      "reviews": []
+    },
+    {
+      "number": 62,
+      "title": "Prepare governance, draft Decky Stream identity and pinned release/local-CI checks",
+      "url": "https://github.com/szmyty/obsgod/pull/62",
+      "draft": true,
+      "base": "codex/m3-output-confirmation",
+      "base_sha": "250b29b437c14429a3049f3f0206bd6f16e0253d",
+      "head": "codex/completion-foundation",
+      "head_sha": "b1ee00d58227b5a0d41fa5df03a5ccc5700f8ebe",
+      "mergeable_state": "unstable",
+      "reviews": []
+    },
+    {
+      "number": 60,
+      "title": "Confirm fresh stream progress after restarts and protect replay during updates",
+      "url": "https://github.com/szmyty/obsgod/pull/60",
+      "draft": true,
+      "base": "codex/m3-controller-workflows",
+      "base_sha": "1fe5ec1cf2fcbf2040a3804fd9f415eb87b62cf4",
+      "head": "codex/m3-output-confirmation",
+      "head_sha": "250b29b437c14429a3049f3f0206bd6f16e0253d",
+      "mergeable_state": "unstable",
+      "reviews": []
+    },
+    {
+      "number": 59,
+      "title": "Add controller/Desktop profiles, media controls and candidate 8 qualification",
+      "url": "https://github.com/szmyty/obsgod/pull/59",
+      "draft": true,
+      "base": "codex/m3-stream-workspace",
+      "base_sha": "8df2884deb0b89ba6e87caaf563aa28e4707bdf3",
+      "head": "codex/m3-controller-workflows",
+      "head_sha": "1fe5ec1cf2fcbf2040a3804fd9f415eb87b62cf4",
+      "mergeable_state": "unstable",
+      "reviews": []
+    },
+    {
+      "number": 58,
+      "title": "Milestone 3: profiles, idle media, recording and stream health",
+      "url": "https://github.com/szmyty/obsgod/pull/58",
+      "draft": true,
+      "base": "master",
+      "base_sha": "ed7d100d356ce803d2cb1c1afef3836759deef10",
+      "head": "codex/m3-stream-workspace",
+      "head_sha": "8df2884deb0b89ba6e87caaf563aa28e4707bdf3",
+      "mergeable_state": "unstable",
+      "reviews": []
+    }
+  ],
+  "releases": [
+    {
+      "tag": "v0.1.0-deck.4-updater.1",
+      "url": "https://github.com/szmyty/obsgod/releases/tag/v0.1.0-deck.4-updater.1",
+      "prerelease": true,
+      "draft": false,
+      "target_commitish": "0eb8324c2b1f23fea069570eded1cd0c75d99274",
+      "published_at": "2026-11-11T17:15:52Z",
+      "assets": []
+    },
+    {
+      "tag": "v0.1.0-deck.4",
+      "url": "https://github.com/szmyty/obsgod/releases/tag/v0.1.0-deck.4",
+      "prerelease": true,
+      "draft": false,
+      "target_commitish": "55c03dd4160e6f6b517e778cf99a755801eb0a28",
+      "published_at": "2026-11-11T16:42:27Z",
+      "assets": []
+    },
+    {
+      "tag": "v0.1.0-deck.3",
+      "url": "https://github.com/szmyty/obsgod/releases/tag/v0.1.0-deck.3",
+      "prerelease": true,
+      "draft": false,
+      "target_commitish": "32160e1f54f074df178add393b605ff8f89dad51",
+      "published_at": "2026-11-11T16:28:06Z",
+      "assets": []
+    },
+    {
+      "tag": "v0.1.0-deck.2",
+      "url": "https://github.com/szmyty/obsgod/releases/tag/v0.1.0-deck.2",
+      "prerelease": true,
+      "draft": false,
+      "target_commitish": "4e68518d4ed6b6732ec17f64e11d09782359ec13",
+      "published_at": "2026-11-11T16:03:00Z",
+      "assets": []
+    },
+    {
+      "tag": "v0.1.0-deck.1",
+      "url": "https://github.com/szmyty/obsgod/releases/tag/v0.1.0-deck.1",
+      "prerelease": true,
+      "draft": false,
+      "target_commitish": "77b6378fa1ab06ccef0bd0240564ac97e81d2144",
+      "published_at": "2026-11-11T07:34:58Z",
+      "assets": []
+    }
+  ],
+  "milestones": [
+    {
+      "number": 1,
+      "title": "Roadmap 1 \u2014 Reliable Steam Deck streaming",
+      "state": "closed",
+      "open_issues": 9,
+      "closed_issues": 7
+    },
+    {
+      "number": 2,
+      "title": "Roadmap 2 \u2014 Supported public launch and optional funding",
+      "state": "open",
+      "open_issues": 14,
+      "closed_issues": 0
+    },
+    {
+      "number": 3,
+      "title": "Roadmap 3 \u2014 Advanced streaming and validated paid offerings",
+      "state": "open",
+      "open_issues": 12,
+      "closed_issues": 0
+    }
+  ]
+}

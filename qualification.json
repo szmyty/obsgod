@@ -1,0 +1,692 @@
+{
+  "schema_version": 1,
+  "candidate": "0.1.0-deck.9",
+  "qualified_source_revision": "1a482808a8281c8bce092cea057df758836b34e9",
+  "qualified_source_tree": "fba5cfaed616313e2a6b679a55ff234d21a21538",
+  "qualified_at_utc": "2026-11-13T12:51:15.790283+00:00",
+  "source_clean": true,
+  "local_matrix_outcome": "passed",
+  "full_issue_acceptance": false,
+  "scope": "Current compatible Steam Deck microphone/API/completion review preview; all 230 original criteria remain individually mapped.",
+  "excluded": {
+    "research_issue": 51,
+    "research_performed": false,
+    "research_note": "Monetization/Store research stays separate; no #51 mutation."
+  },
+  "draft_stack": [
+    58,
+    59,
+    60,
+    62,
+    63,
+    64,
+    65
+  ],
+  "matrix": {
+    "go": {
+      "file": "go-matrix.json",
+      "source_file": "/workspace/.obsgod-tools/completion/final/go-matrix.json",
+      "sha256": "a0c2517d6c5b48de4b7a9ae3d853f4ccca41c203728e7e0b5bf1c0c3363421e5",
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "outcome": "passed",
+      "scope": null,
+      "limitations": [
+        "Cross-platform binaries were compiled, not executed.",
+        "Optional existing-OBS read-only test skipped; native OBS and device qualification are separate parent-owned matrix entries."
+      ],
+      "skipped": [
+        {
+          "package": "github.com/szmyty/obsgod/pkg/automation",
+          "test": "TestRealOBSReadOnly",
+          "reason": "real_obs_test.go:14: set OBSGOD_TEST_OBS_ADDRESS for opt-in real OBS reads"
+        }
+      ]
+    },
+    "python": {
+      "file": "python-matrix.json",
+      "source_file": "/workspace/.obsgod-tools/completion/final/python-matrix.json",
+      "sha256": "a7e21c030fbe20d2905c90a3f0c8f286fa0fbd3038717dee89417387a6bc8a80",
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "outcome": "passed",
+      "scope": null,
+      "limitations": [],
+      "skipped": []
+    },
+    "frontend": {
+      "file": "frontend-matrix.json",
+      "source_file": "/workspace/.obsgod-tools/completion/final/frontend-matrix.json",
+      "sha256": "9bd6f1f3032feb65a5d1c539c186d031b9381a10017cc0feb5e930e264822e68",
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "outcome": "passed",
+      "scope": null,
+      "limitations": [
+        "Go test result cache explicitly recorded; separate final-source -count=1 matrix is parent-owned",
+        "Vulnerability database results reflect observation time and are not a permanent security guarantee"
+      ],
+      "skipped": []
+    },
+    "package": {
+      "file": "package-matrix.json",
+      "source_file": "/workspace/.obsgod-tools/completion/final/package-matrix.json",
+      "sha256": "ea23cb0d6c34a83c6dc0969a5e326d8bfe7810bebb519bbea9ed81d9090b4be4",
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "outcome": "passed",
+      "scope": null,
+      "limitations": [],
+      "skipped": []
+    },
+    "native": {
+      "file": "native-matrix.json",
+      "source_file": "/workspace/.obsgod-tools/completion/final/native-matrix.json",
+      "sha256": "4500329897fbc678fd72c66a24a2be5dd32777ba81275a88006b57aa2b741c3d",
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "outcome": "passed",
+      "scope": null,
+      "limitations": [
+        "Actual Steam Deck LCD/OLED/Flatpak/Gamescope/AMD/controller/headsets and external providers remain unrun",
+        "Sanitized JSON omits any string credential fields and synthetic RTMP addresses; booleans recording privacy invariants remain intact",
+        "Parent act receipt binds summary files lacking their own source_revision marker to exact manifest/binary/source input hashes"
+      ],
+      "skipped": []
+    },
+    "browser": {
+      "file": "browser-matrix.json",
+      "source_file": "/workspace/.obsgod-tools/completion/final/browser-matrix.json",
+      "sha256": "bbc4c1d2c9d09f150d4b94c0d88d7800a191926795229401f95c574a0c0bb2dd",
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "outcome": "passed",
+      "scope": null,
+      "limitations": [
+        "Simulated Decky cannot prove real Gaming Mode/controller/modal/clipboard behavior",
+        "Desktop harness uses actual installed CLI/filesystem but fixture provider credentials and transport",
+        "Physical OBS/Steam Deck microphone/headset and provider-viewer proofs remain separate",
+        "Site explicitly reports 45 viewport/page cases and 0 console errors/0 external requests; generic zero-error claims are not inferred for other harnesses",
+        "The executable-path detector emitted nonfatal pending-task/TargetClosed shutdown diagnostics before successful harnesses; original logs retained"
+      ],
+      "skipped": []
+    },
+    "decky-updater": {
+      "file": "decky-updater-matrix.json",
+      "source_file": "/workspace/.obsgod-tools/completion/final/decky-updater-matrix.json",
+      "sha256": "c151eaad0eadfcb0280631b24d4b9405726010da91cd3d6ec352350257d949a0",
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "outcome": "passed",
+      "scope": null,
+      "limitations": [
+        "Pinned Decky3.3.1 WSRouter/frontend/PluginBrowser execute real protocol requests; Steam/CDP/service lifecycle/ownership/Flatpak and HTTPS release responses are fixtures.",
+        "Published fixed updater4.1 cannot discover runtime9; no contrary compatibility claim. Maintained dynamic updater6 is byte-identical in its bootstrap case.",
+        "Actual Deck install/update/remove and required independent platform/CI/review proof remain unrun."
+      ],
+      "skipped": []
+    },
+    "brand": {
+      "file": "brand-matrix.json",
+      "source_file": "/workspace/.obsgod-tools/completion/final/brand-matrix.json",
+      "sha256": "65e3ee69060eeecc2e1eb606d3bbb298ed0ebade5dd6b7575b08e4db029085fe",
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "outcome": "passed",
+      "scope": null,
+      "limitations": [
+        "Unapproved creative candidates only",
+        "No Identity production-generation/human rights approval",
+        "Native Deck/controller/legibility unrun",
+        "No release/publication/deployment"
+      ],
+      "skipped": []
+    },
+    "site": {
+      "file": "site-matrix.json",
+      "source_file": "/workspace/.obsgod-tools/completion/final/site-matrix.json",
+      "sha256": "c87ccafec007ef5503ad571609290fa301f45514de9927fbad960d6443715ef4",
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "outcome": "passed-with-explicit-unavailable",
+      "scope": null,
+      "limitations": [
+        "Static candidate site only",
+        "No hosted site/TLS/deployment/rollback evidence",
+        "No real Deck/controller or provider evidence",
+        "No publication/deployment"
+      ],
+      "skipped": []
+    },
+    "scripts": {
+      "file": "scripts-matrix.json",
+      "source_file": "/workspace/.obsgod-tools/completion/final/scripts-matrix.json",
+      "sha256": "e4285deb533376527d9896e16aae502d5bc97aeb9ba7a0da1f11001a272296ea",
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "outcome": "passed",
+      "scope": null,
+      "limitations": [],
+      "skipped": []
+    },
+    "cli": {
+      "file": "cli-matrix.json",
+      "source_file": "/workspace/.obsgod-tools/completion/final/cli-matrix.json",
+      "sha256": "ec7e50755dae737eddcf27e59a0919d65a9a22b61c9fc8709a9a4f483796b041",
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "outcome": "passed",
+      "scope": "Final-revision offline CLI/JSON/reference/completion/example qualification; full race/vet owned by parent go-matrix",
+      "limitations": [
+        "This matrix executes offline CLI/reference/completion/example checks only; full Go race/vet/vulnerability checks belong to the separate final parent go-matrix. No prior race/vet passes are inherited here.",
+        "No provider account API, real stream, receiver/viewer, Steam Deck/Gamescope/Flatpak/controller or session transition was exercised.",
+        "These checks do not establish hosted CI, required human review, publication or release approval.",
+        "Host Fish interpreter unavailable. Generated completion syntax, loading and dynamic root completion passed in a disposable Debian12/Fish3.6.0 container; this does not qualify SteamOS Fish or an interactive target session. Bash/Zsh syntax passed; interactive target behavior was not exercised."
+      ],
+      "skipped": []
+    },
+    "fish": {
+      "file": "cli-fish-container.json",
+      "source_file": "/workspace/.obsgod-tools/completion/final/cli-fish-container.json",
+      "sha256": "819e61d3004907704b0a83a1f23dc86c3f6eba3a1939c829155505746acf257f",
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "outcome": "passed",
+      "scope": "Disposable Debian container Fish completion validation only",
+      "limitations": [
+        "Container-only Debian12/Fish evidence; does not establish Fish on SteamOS or other target platforms.",
+        "No provider/OBS launch/broadcast, no host package/sudo/network/preset changes.",
+        "Docker proxy defaults and CA/TLS verification retained; only existing image APT repositories used."
+      ],
+      "skipped": []
+    },
+    "browser-upgrades": {
+      "file": "browser-upgrades-matrix.json",
+      "source_file": "/workspace/.obsgod-tools/completion/final/browser-upgrades-matrix.json",
+      "sha256": "1c0dce80bff26b032ac3d6fa854fe9a6eb47265d83060a8453568c89849b2d6b",
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "outcome": "passed",
+      "scope": null,
+      "limitations": [
+        "Steam/Decky host APIs and installed Flatpak/Steam service behavior are fixtures, not real Deck/controller proof.",
+        "Configured receive dialogs use public protocol-test addresses; production receiving addresses remain unconfigured.",
+        "No live provider payments, wallet scanning/receipt or external broadcast performed."
+      ],
+      "skipped": []
+    },
+    "hosted-ci": {
+      "file": "ci-matrix.json",
+      "source_file": "/workspace/.obsgod-tools/completion/final/ci-matrix.json",
+      "sha256": "0492a550eedc6eeac3f25073bf1f4ccbb5afc3c329324e3fa5c05b39f077aa6a",
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "outcome": "unavailable",
+      "scope": null,
+      "limitations": [
+        "Local act does not qualify Windows/macOS or hosted CI. No paid resources enabled."
+      ],
+      "skipped": []
+    }
+  },
+  "browser_mode_evidence": [
+    {
+      "receipt_id": "site",
+      "receipt_path": "$.browser.modes[0]",
+      "mode": "file-offline",
+      "outcome": "unavailable",
+      "reason": "Managed Chromium policy blocks file:// navigation; offline loopback HTTP is checked separately."
+    }
+  ],
+  "act_first": {
+    "file": "1a482808-first-index.json",
+    "source_file": "/workspace/.obsgod-tools/completion/act/1a482808-first-index.json",
+    "sha256": "cea6a32f6677ec6dd568873b84d7aa13e081c9cd9620b966a3b2d0d4023b7b5d",
+    "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+    "outcome": "passed",
+    "jobs": [
+      {
+        "job": "lint",
+        "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+        "phase": "first",
+        "command": [
+          "python3",
+          "scripts/local-ci.py",
+          "lint",
+          "--act",
+          "/workspace/.obsgod-tools/pkg/bin/act",
+          "--state",
+          "/workspace/.obsgod-tools/completion/act"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 46.52,
+        "source_clean_before": true,
+        "source_clean_after": true,
+        "same_revision_after": true,
+        "disk_free_before_bytes": 12279611392,
+        "disk_free_after_bytes": 11522756608,
+        "receipts": [
+          "20261113T122523Z-lint.json"
+        ]
+      },
+      {
+        "job": "build",
+        "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+        "phase": "first",
+        "command": [
+          "python3",
+          "scripts/local-ci.py",
+          "build",
+          "--act",
+          "/workspace/.obsgod-tools/pkg/bin/act",
+          "--state",
+          "/workspace/.obsgod-tools/completion/act"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 32.32,
+        "source_clean_before": true,
+        "source_clean_after": true,
+        "same_revision_after": true,
+        "disk_free_before_bytes": 12279554048,
+        "disk_free_after_bytes": 11522629632,
+        "receipts": [
+          "20261113T122611Z-build.json"
+        ]
+      },
+      {
+        "job": "coverage",
+        "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+        "phase": "first",
+        "command": [
+          "python3",
+          "scripts/local-ci.py",
+          "coverage",
+          "--act",
+          "/workspace/.obsgod-tools/pkg/bin/act",
+          "--state",
+          "/workspace/.obsgod-tools/completion/act"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 35.71,
+        "source_clean_before": true,
+        "source_clean_after": true,
+        "same_revision_after": true,
+        "disk_free_before_bytes": 12279410688,
+        "disk_free_after_bytes": 11522179072,
+        "receipts": [
+          "20261113T122643Z-coverage.json"
+        ]
+      },
+      {
+        "job": "snapshot",
+        "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+        "phase": "first",
+        "command": [
+          "python3",
+          "scripts/local-ci.py",
+          "snapshot",
+          "--act",
+          "/workspace/.obsgod-tools/pkg/bin/act",
+          "--state",
+          "/workspace/.obsgod-tools/completion/act"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 51.33,
+        "source_clean_before": true,
+        "source_clean_after": true,
+        "same_revision_after": true,
+        "disk_free_before_bytes": 12279062528,
+        "disk_free_after_bytes": 11521875968,
+        "receipts": [
+          "20261113T122720Z-snapshot.json"
+        ]
+      },
+      {
+        "job": "docs",
+        "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+        "phase": "first",
+        "command": [
+          "python3",
+          "scripts/local-ci.py",
+          "docs",
+          "--act",
+          "/workspace/.obsgod-tools/pkg/bin/act",
+          "--state",
+          "/workspace/.obsgod-tools/completion/act"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 16.22,
+        "source_clean_before": true,
+        "source_clean_after": true,
+        "same_revision_after": true,
+        "disk_free_before_bytes": 12278784000,
+        "disk_free_after_bytes": 12278743040,
+        "receipts": [
+          "20261113T122811Z-docs.json"
+        ]
+      },
+      {
+        "job": "candidate",
+        "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+        "phase": "first",
+        "command": [
+          "python3",
+          "scripts/local-ci.py",
+          "candidate",
+          "--act",
+          "/workspace/.obsgod-tools/pkg/bin/act",
+          "--state",
+          "/workspace/.obsgod-tools/completion/act"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 456.59,
+        "source_clean_before": true,
+        "source_clean_after": true,
+        "same_revision_after": true,
+        "disk_free_before_bytes": 12278738944,
+        "disk_free_after_bytes": 11374022656,
+        "receipts": [
+          "20261113T122827Z-candidate.json"
+        ]
+      }
+    ],
+    "limitations": [
+      "Supported Linux local act jobs only; hosted execution, native other-platform jobs, provider dependency-review and target hardware remain separate."
+    ]
+  },
+  "act_repeat": {
+    "file": "1a482808-repeat-index.json",
+    "source_file": "/workspace/.obsgod-tools/completion/act/1a482808-repeat-index.json",
+    "sha256": "be8c22e0472d9b57f0ec257d4c121c0de9e401a83fbb00cbd6a9bfd31eb1c312",
+    "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+    "outcome": "passed",
+    "jobs": [
+      {
+        "job": "lint",
+        "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+        "phase": "repeat",
+        "command": [
+          "python3",
+          "scripts/local-ci.py",
+          "lint",
+          "--act",
+          "/workspace/.obsgod-tools/pkg/bin/act",
+          "--state",
+          "/workspace/.obsgod-tools/completion/act"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 48.31,
+        "source_clean_before": true,
+        "source_clean_after": true,
+        "same_revision_after": true,
+        "disk_free_before_bytes": 11942633472,
+        "disk_free_after_bytes": 11185680384,
+        "receipts": [
+          "20261113T123754Z-lint.json"
+        ]
+      },
+      {
+        "job": "build",
+        "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+        "phase": "repeat",
+        "command": [
+          "python3",
+          "scripts/local-ci.py",
+          "build",
+          "--act",
+          "/workspace/.obsgod-tools/pkg/bin/act",
+          "--state",
+          "/workspace/.obsgod-tools/completion/act"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 37.68,
+        "source_clean_before": true,
+        "source_clean_after": true,
+        "same_revision_after": true,
+        "disk_free_before_bytes": 11942555648,
+        "disk_free_after_bytes": 11185623040,
+        "receipts": [
+          "20261113T123843Z-build.json"
+        ]
+      },
+      {
+        "job": "coverage",
+        "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+        "phase": "repeat",
+        "command": [
+          "python3",
+          "scripts/local-ci.py",
+          "coverage",
+          "--act",
+          "/workspace/.obsgod-tools/pkg/bin/act",
+          "--state",
+          "/workspace/.obsgod-tools/completion/act"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 37.43,
+        "source_clean_before": true,
+        "source_clean_after": true,
+        "same_revision_after": true,
+        "disk_free_before_bytes": 11942531072,
+        "disk_free_after_bytes": 11185467392,
+        "receipts": [
+          "20261113T123921Z-coverage.json"
+        ]
+      },
+      {
+        "job": "snapshot",
+        "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+        "phase": "repeat",
+        "command": [
+          "python3",
+          "scripts/local-ci.py",
+          "snapshot",
+          "--act",
+          "/workspace/.obsgod-tools/pkg/bin/act",
+          "--state",
+          "/workspace/.obsgod-tools/completion/act"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 51.4,
+        "source_clean_before": true,
+        "source_clean_after": true,
+        "same_revision_after": true,
+        "disk_free_before_bytes": 11942363136,
+        "disk_free_after_bytes": 11185098752,
+        "receipts": [
+          "20261113T123959Z-snapshot.json"
+        ]
+      },
+      {
+        "job": "docs",
+        "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+        "phase": "repeat",
+        "command": [
+          "python3",
+          "scripts/local-ci.py",
+          "docs",
+          "--act",
+          "/workspace/.obsgod-tools/pkg/bin/act",
+          "--state",
+          "/workspace/.obsgod-tools/completion/act"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 16.18,
+        "source_clean_before": true,
+        "source_clean_after": true,
+        "same_revision_after": true,
+        "disk_free_before_bytes": 11942002688,
+        "disk_free_after_bytes": 11941961728,
+        "receipts": [
+          "20261113T124052Z-docs.json"
+        ]
+      },
+      {
+        "job": "candidate",
+        "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+        "phase": "repeat",
+        "command": [
+          "python3",
+          "scripts/local-ci.py",
+          "candidate",
+          "--act",
+          "/workspace/.obsgod-tools/pkg/bin/act",
+          "--state",
+          "/workspace/.obsgod-tools/completion/act"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 460.32,
+        "source_clean_before": true,
+        "source_clean_after": true,
+        "same_revision_after": true,
+        "disk_free_before_bytes": 11941957632,
+        "disk_free_after_bytes": 11184545792,
+        "receipts": [
+          "20261113T124108Z-candidate.json"
+        ]
+      }
+    ],
+    "limitations": [
+      "Supported Linux local act jobs only; hosted execution, native other-platform jobs, provider dependency-review and target hardware remain separate."
+    ]
+  },
+  "artifacts": {
+    "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz": {
+      "bytes": 11872612,
+      "sha256": "879ad44ebb28fb695877c071d9708959a7afc39b7b2b9032421f117a267bf803"
+    },
+    "obsgod-decky.zip": {
+      "bytes": 4450709,
+      "sha256": "9e613d282d242d5be930af1beeb05a8724453ab971a59165c47e22204b296b57"
+    },
+    "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip": {
+      "bytes": 3073879,
+      "sha256": "e7d24d9860f2a207a130d9002c0e21f3f89c3221e352393b5e9b2b65da9bdc69"
+    },
+    "manifest.json": {
+      "bytes": 2390,
+      "sha256": "cd07f439f014914c28ac6a1690a6d23cbaf07bd2d2c23cb13e62e390ced629c5"
+    },
+    "updater-manifest.json": {
+      "bytes": 1145,
+      "sha256": "6ecc084f4fd8bd19b64f63e8024a11ebe4a85edd8fcbb2fdbfe4702b5bf9a821"
+    },
+    "SHA256SUMS": {
+      "bytes": 273,
+      "sha256": "275dc73251a398c17e01e5083d9db886d23ef2d37fb1ea6209e7631ed2075b34"
+    },
+    "UPDATER-SHA256SUMS": {
+      "bytes": 119,
+      "sha256": "cae8aea79da435bba95286f14ba767efcc91ac129cb6c4b0c6176bb87124bfb7"
+    },
+    "capture-build.json": {
+      "bytes": 14418,
+      "sha256": "5f401a620493b5fc282658c16530db6e87a70ad40b95bb88b0212f08417bbd16"
+    }
+  },
+  "release_audit": {
+    "file": "release-audit.json",
+    "source_file": "/workspace/.obsgod-tools/completion/act/retained-1a482808/first/artifacts/supply-chain/release-audit.json",
+    "sha256": "31fe79de45d5ae37e0f1a31156d466f9681e1b9a5a77a965c1198c6b2c7c7ad2",
+    "integrity": "passed",
+    "preferred_source": "passed",
+    "source_inventory": "passed",
+    "qualification": "This audit checks artifact/source integrity; whole local qualification comes from separate matrices."
+  },
+  "remaining_gates": [
+    "Only the exact selected source/artifact bytes and explicitly scoped local checks are qualified.",
+    "Physical Deck/SteamOS/OBS33/Flatpak/Gamescope/controller/microphone/headset/session/performance/provider-viewer and actual adoption remain unrun.",
+    "Hosted CI remains separate. Fresh selected-source runs executed zero steps due to account billing lock; no paid remediation is authorized.",
+    "Provider dependency-review actual real-ref attempt reported unsupported repository / ensure Dependency graph enabled; separate injected-auth graph comparison returned 403. Git/API auth itself works.",
+    "Native macOS/Windows and Linux arm64 runtime evidence are absent; compilation is not supported-platform proof.",
+    "Browser file/offline outcomes are environment-specific. Read the exact site/browser receipt modes: a managed host file:// policy limitation must not replace an ACT browser file-offline pass, and no environment result is inherited by another.",
+    "SPDX/provenance are unsigned self-reported inventories, not trusted publisher identity or SLSA level.",
+    "Generic 20-target snapshot archives need their own full notices/SBOM/install/native qualification before additional generic publication; selected Deck runtime/updater audit is separate.",
+    "API legacy CLI migration, separate companion/managed-launch scope and optional provider/creator ecosystem remain explicit implementation remainders.",
+    "Future identity/transfer/site/wallet activation is separate from the current compatible mic preview; publication still needs concrete owner authorization.",
+    "No source merge, issue closure/consolidation, release/deployment, Store submission, other-repository change or spending is implied by this review checkpoint."
+  ],
+  "limitations": [
+    "Only the exact selected source/artifact bytes and explicitly scoped local checks are qualified.",
+    "Physical Deck/SteamOS/OBS33/Flatpak/Gamescope/controller/microphone/headset/session/performance/provider-viewer and actual adoption remain unrun.",
+    "Hosted CI remains separate. Fresh selected-source runs executed zero steps due to account billing lock; no paid remediation is authorized.",
+    "Provider dependency-review actual real-ref attempt reported unsupported repository / ensure Dependency graph enabled; separate injected-auth graph comparison returned 403. Git/API auth itself works.",
+    "Native macOS/Windows and Linux arm64 runtime evidence are absent; compilation is not supported-platform proof.",
+    "Browser file/offline outcomes are environment-specific. Read the exact site/browser receipt modes: a managed host file:// policy limitation must not replace an ACT browser file-offline pass, and no environment result is inherited by another.",
+    "SPDX/provenance are unsigned self-reported inventories, not trusted publisher identity or SLSA level.",
+    "Generic 20-target snapshot archives need their own full notices/SBOM/install/native qualification before additional generic publication; selected Deck runtime/updater audit is separate.",
+    "API legacy CLI migration, separate companion/managed-launch scope and optional provider/creator ecosystem remain explicit implementation remainders.",
+    "Future identity/transfer/site/wallet activation is separate from the current compatible mic preview; publication still needs concrete owner authorization.",
+    "No source merge, issue closure/consolidation, release/deployment, Store submission, other-repository change or spending is implied by this review checkpoint."
+  ],
+  "review_artifact_revision": null,
+  "release_published": false,
+  "site_deployed": false,
+  "store_submitted": false,
+  "issues_closed": false,
+  "branches_merged": false,
+  "other_repositories_changed": false,
+  "money_spent": false,
+  "summary": {
+    "go_top_level_cases": 213,
+    "go_pass_events": 386,
+    "python_tests": 127,
+    "all_required_local_matrices_passed": true,
+    "hosted_device_owner_acceptance": false
+  },
+  "source_archive": {
+    "file": "obsgod-source-1a482808a8281c8bce092cea057df758836b34e9.tar.gz",
+    "bytes": 7368051,
+    "sha256": "4b6751acc9222996cb0205468d19ae941e756868da6aff908489738832713f1e",
+    "verified_tracked_files": 350,
+    "git_revision": "1a482808a8281c8bce092cea057df758836b34e9"
+  },
+  "local_act": {
+    "outcome": "passed-with-explicit-unavailable",
+    "core_jobs_passed": 12,
+    "pull_request_static_passed": 1,
+    "provider_dependency_review": "unavailable; actual action errors/API403 preserved",
+    "matrix": "act-matrix.json",
+    "matrix_sha256": "7cd43d0df152f6a571426d964d47478ac8ed16fd9e3e5013fe033403a29c461c"
+  },
+  "browser_modes": {
+    "managed_host_file_navigation": "unavailable by policy",
+    "managed_host_offline_loopback_http": "passed",
+    "act_file_offline_navigation": "passed in both full runs"
+  },
+  "publication_proposal": {
+    "product": "Decky Stream current compatible preview",
+    "version": "0.1.0-deck.9",
+    "source_revision": "1a482808a8281c8bce092cea057df758836b34e9",
+    "destination": "GitHub prerelease in szmyty/obsgod",
+    "tag_proposed": "v0.1.0-deck.9",
+    "responsible_owner": "szmyty repository owner; publisher approval and current rights/acceptance required",
+    "selected_assets": [
+      "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+      "obsgod-decky.zip",
+      "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip",
+      "SHA256SUMS",
+      "UPDATER-SHA256SUMS",
+      "manifest.json",
+      "updater-manifest.json",
+      "release-audit.json",
+      "sbom.spdx.json",
+      "provenance.unsigned.json"
+    ],
+    "approval_granted": false,
+    "release_published": false,
+    "website_deployment": "separate destination/domain/owner/approval not selected",
+    "future_namespace_migration": "separate owner decision; no transfer or new repository created"
+  },
+  "additional_review_payloads": {
+    "decky-stream-proposed.zip": {
+      "bytes": 113620,
+      "sha256": "a55eca114dde9aee2d949030de1aeebce32af3d4259a896b70c94bf5e379ec70"
+    },
+    "decky-stream-site-preview.zip": {
+      "bytes": 29871,
+      "sha256": "7380352377e5d42d863ba9ca814e95f0570d67080425fc8a464421ec8453b63a"
+    },
+    "decky-stream-root-evidence_1a482808.zip": {
+      "bytes": 246046,
+      "sha256": "1cec2effdf55d3d29454365704dffc2c0b704edb15a8fddb69fcc2518eddd4c4"
+    },
+    "decky-stream-qualification-evidence_0.1.0-deck.9_1a482808.zip": {
+      "bytes": 266916,
+      "sha256": "330517a20f8028ac383380d8aa0469d8b3ecc2bb91b533b554bfd70e8ee188bf"
+    },
+    "obsgod-source-1a482808a8281c8bce092cea057df758836b34e9.tar.gz": {
+      "bytes": 7368051,
+      "sha256": "4b6751acc9222996cb0205468d19ae941e756868da6aff908489738832713f1e"
+    }
+  },
+  "review_metadata_note": "This immutable metadata precedes its own Git commit and public-download check. The later source evidence-only follow-up records the artifact commit and independent downloaded-byte proof; neither changes the packaged source.",
+  "brand_approved": false,
+  "support_wallets_activated": false
+}

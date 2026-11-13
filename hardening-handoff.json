@@ -1,0 +1,82 @@
+{
+  "candidate": "0.1.0-deck.9",
+  "historical": "Raw prior attempts and E32 matrices retained with exact original outcomes; none qualify this revision",
+  "hold": "All ACT/native/dist holds released; no further heavy child jobs planned",
+  "matrix_files": {
+    "act-matrix.json": {
+      "bytes": 131004,
+      "sha256": "7cd43d0df152f6a571426d964d47478ac8ed16fd9e3e5013fe033403a29c461c"
+    },
+    "browser-matrix.json": {
+      "bytes": 14586,
+      "sha256": "bbc4c1d2c9d09f150d4b94c0d88d7800a191926795229401f95c574a0c0bb2dd"
+    },
+    "frontend-matrix.json": {
+      "bytes": 2114,
+      "sha256": "9bd6f1f3032feb65a5d1c539c186d031b9381a10017cc0feb5e930e264822e68"
+    },
+    "native-matrix.json": {
+      "bytes": 33322,
+      "sha256": "4500329897fbc678fd72c66a24a2be5dd32777ba81275a88006b57aa2b741c3d"
+    },
+    "package-matrix.json": {
+      "bytes": 37206,
+      "sha256": "ea23cb0d6c34a83c6dc0969a5e326d8bfe7810bebb519bbea9ed81d9090b4be4"
+    }
+  },
+  "product_audit_sha256": {
+    "SHA256SUMS": "275dc73251a398c17e01e5083d9db886d23ef2d37fb1ea6209e7631ed2075b34",
+    "UPDATER-SHA256SUMS": "cae8aea79da435bba95286f14ba767efcc91ac129cb6c4b0c6176bb87124bfb7",
+    "capture-build.json": "5f401a620493b5fc282658c16530db6e87a70ad40b95bb88b0212f08417bbd16",
+    "libgstobsgodcapture.so": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+    "manifest.json": "cd07f439f014914c28ac6a1690a6d23cbaf07bd2d2c23cb13e62e390ced629c5",
+    "obsgod": "03f7315f41f2c803a20592526d081b544d697005f24f952ed3442ba1cfb0fe77",
+    "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz": "879ad44ebb28fb695877c071d9708959a7afc39b7b2b9032421f117a267bf803",
+    "obsgod-decky.zip": "9e613d282d242d5be930af1beeb05a8724453ab971a59165c47e22204b296b57",
+    "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip": "e7d24d9860f2a207a130d9002c0e21f3f89c3221e352393b5e9b2b65da9bdc69",
+    "supply-chain/AUDIT-SHA256SUMS": "30c3985fd5d164031b6f318d180dcbf1837c5267f9ae9d2bfcbe06ab3af1fb59",
+    "supply-chain/provenance.unsigned.json": "7eaa6493ad5a97744fc17b9d547b7ad00483e488dbb62ce44e8a557a76c5a85e",
+    "supply-chain/release-audit.json": "31fe79de45d5ae37e0f1a31156d466f9681e1b9a5a77a965c1198c6b2c7c7ad2",
+    "supply-chain/sbom.spdx.json": "83b5ae044a582f9596e1be3c39c0568a61b01083ed68fdfd0fa151f3866da304",
+    "updater-manifest.json": "6ecc084f4fd8bd19b64f63e8024a11ebe4a85edd8fcbb2fdbfe4702b5bf9a821"
+  },
+  "public_evidence": {
+    "bytes": 266916,
+    "entry_count": 98,
+    "file": "decky-stream-qualification-evidence_0.1.0-deck.9_1a482808.zip",
+    "public_additional_redactions": 6,
+    "retained_inputs": 95,
+    "sha256": "330517a20f8028ac383380d8aa0469d8b3ecc2bb91b533b554bfd70e8ee188bf",
+    "source_revision": "1a482808a8281c8bce092cea057df758836b34e9"
+  },
+  "publication": "No release, deployment, signing key or signature created by this work",
+  "remaining_gates": [
+    "Fresh required hosted CI/reviews; account restriction is separate from local success",
+    "Real dependency graph/provider access and PR evidence",
+    "Native macOS/Windows and actual physical Steam Deck/Flatpak/OBS33/Gamescope/AMD/controller/audio/headset/provider-viewer proof",
+    "Owner publisher/signing/unsigned-preview policy and release/publication/deployment approvals",
+    "Stable support/rights/maintainer decisions, generic distribution readiness and actual consumer adoption proof"
+  ],
+  "results": {
+    "across_run_identical_product_audit_files": 14,
+    "browser_harnesses_per_candidate": 8,
+    "complete_core_sequences": 2,
+    "core_job_passes": 12,
+    "coverage_statement_percent": 58.1,
+    "dependency_review": "unavailable; actual pinned action reports unsupported dependency review; independent injected-auth API403",
+    "dependency_review_provider_attempts": 1,
+    "native_harnesses_per_candidate": 3,
+    "native_json_files_per_candidate": 18,
+    "native_unique_original_proof_hashes_per_candidate": 15,
+    "node_tests_per_candidate": 30,
+    "pull_request_static_passes": 1,
+    "python_application_per_candidate": 127,
+    "python_script_per_candidate": 23,
+    "site_file_offline_navigation_per_candidate": 1,
+    "site_viewport_cases_per_candidate": 45,
+    "snapshot_cross_targets_per_run": 20
+  },
+  "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+  "schema_version": 1,
+  "tree": "fba5cfaed616313e2a6b679a55ff234d21a21538"
+}
