@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-labelledby="title desc">
+  <title id="title">Decky Stream proposed mark</title>
+  <desc id="desc">A mint play triangle and transmission arc in a dark rounded square. Unapproved candidate.</desc>
+  <rect width="128" height="128" rx="28" fill="#0b111b"/>
+  <path d="M40 32L84 64L40 96Z" fill="#b2f2c7"/>
+  <path d="M91 43Q110 64 91 85" fill="none" stroke="#b2f2c7" stroke-width="8" stroke-linecap="round"/>
+</svg>

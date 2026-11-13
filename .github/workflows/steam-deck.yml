@@ -40,27 +40,34 @@ jobs:
       - name: Installer, backend and panel checks
         run: |
           python -m unittest discover -s steamdeck/tests -p 'test_*.py' -v
+          python -m unittest discover -s scripts/tests -p 'test_*.py' -v
           npm --prefix steamdeck/decky run typecheck
           npm --prefix steamdeck/decky test
           npm --prefix steamdeck/decky run build
           npm --prefix steamdeck/decky audit
       - name: Package exact candidate twice
         run: |
-          python scripts/package-deck.py --version 0.1.0-deck.8
-          python scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.8_linux_amd64.tar.gz
+          python scripts/package-deck.py --version 0.1.0-deck.9
+          python scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz
           cp dist/SHA256SUMS /tmp/first-runtime-sums
           cp dist/UPDATER-SHA256SUMS /tmp/first-updater-sums
-          python scripts/package-deck.py --version 0.1.0-deck.8
-          python scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.8_linux_amd64.tar.gz
+          python scripts/package-deck.py --version 0.1.0-deck.9
+          python scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz
           diff -u /tmp/first-runtime-sums dist/SHA256SUMS
           diff -u /tmp/first-updater-sums dist/UPDATER-SHA256SUMS
+      - name: Audit actual artifacts and reproduce unsigned supply-chain evidence
+        run: |
+          python scripts/release-audit.py --revision "$GITHUB_SHA" --output dist/supply-chain
+          cp dist/supply-chain/AUDIT-SHA256SUMS /tmp/first-audit-sums
+          python scripts/release-audit.py --revision "$GITHUB_SHA" --output dist/supply-chain
+          diff -u /tmp/first-audit-sums dist/supply-chain/AUDIT-SHA256SUMS
       - name: Actual package browser checks
         run: |
           browser=$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')
-          python steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.8_linux_amd64.tar.gz --browser "$browser"
+          python steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz --browser "$browser"
           python steamdeck/tests/browser-panel.py dist/obsgod-decky.zip --browser "$browser"
           python steamdeck/tests/browser-m3-panel.py dist/obsgod-decky.zip --browser "$browser"
-          python steamdeck/tests/browser-m3-setup.py dist/obsgod-deck_0.1.0-deck.8_linux_amd64.tar.gz --browser "$browser"
+          python steamdeck/tests/browser-m3-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz --browser "$browser"
           python steamdeck/tests/browser-support.py --browser "$browser"
           python -B site/tests/browser.py --browser "$browser"
       - name: Native audio and app-filtered capture checks
@@ -87,5 +94,6 @@ jobs:
             dist/*manifest.json
             dist/*SHA256SUMS
             dist/capture-build.json
+            dist/supply-chain/*
           if-no-files-found: error
           retention-days: 14

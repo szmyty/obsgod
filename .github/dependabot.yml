@@ -1,5 +1,11 @@
 version: 2
 updates:
+  - package-ecosystem: "npm"
+    directory: "/steamdeck/decky"
+    schedule:
+      interval: "daily"
+    labels:
+      - "dependencies"
   - package-ecosystem: "gomod"
     directory: "/"
     schedule:

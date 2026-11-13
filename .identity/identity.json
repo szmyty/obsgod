@@ -1,0 +1,46 @@
+{
+  "$schema": "https://raw.githubusercontent.com/egohygiene/identity/cfb6c29bd02589a47fc48050ab02e7e0da359719/contracts/v1/project.schema.json",
+  "schema": "identity.project/v1",
+  "project": {
+    "id": "decky-stream",
+    "displayName": "Decky Stream",
+    "repository": "https://github.com/szmyty/obsgod",
+    "tagline": "Stream from Steam Deck with OBS",
+    "kind": "product"
+  },
+  "layers": [
+    {
+      "id": "repository-baseline",
+      "kind": "organization-defaults",
+      "priority": 0,
+      "tokens": ".identity/defaults/organization.tokens.json",
+      "sha256": "e8f53747482aa8914fc3307fbf63295e45fb1ca59448c8e0435e1af8fce5eda5"
+    },
+    {
+      "id": "decky-stream",
+      "kind": "product-override",
+      "priority": 10,
+      "tokens": ".identity/overrides/product.tokens.json",
+      "sha256": "c545dc44ed77337b41c7e4d1276907d1958583c3515dc1206cbcbdf479ec22d8"
+    }
+  ],
+  "documents": {
+    "brief": ".identity/brief.md",
+    "targets": ".identity/targets/profiles.json",
+    "provenance": ".identity/governance/provenance.json",
+    "approvals": ".identity/governance/approvals.json",
+    "guidance": {
+      "voice": null,
+      "usage": null
+    }
+  },
+  "directories": {
+    "sources": ".identity/sources",
+    "candidates": ".identity/candidates",
+    "references": ".identity/references"
+  },
+  "compatibility": {
+    "acceptedSchemaMajor": 1,
+    "migrationFrom": []
+  }
+}

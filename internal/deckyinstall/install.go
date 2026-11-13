@@ -132,7 +132,7 @@ func authToken(ctx context.Context, endpoint string) (string, error) {
 	}
 	response, err := httpClient().Do(request)
 	if err != nil {
-		return "", errors.New("Decky Loader is not reachable. Install/start Decky using its official instructions, keep Steam open in Desktop Mode, and retry")
+		return "", errors.New("the Decky Loader is not reachable. Install/start Decky using its official instructions, keep Steam open in Desktop Mode, and retry")
 	}
 	defer response.Body.Close()
 	token, err := io.ReadAll(io.LimitReader(response.Body, 1025))
@@ -153,7 +153,7 @@ func evaluate(ctx context.Context, endpoint, token, tab, script string) (fronten
 	request.Header.Set("X-Decky-Auth", token)
 	response, err := httpClient().Do(request)
 	if err != nil {
-		return result, errors.New("Decky's frontend request ended or timed out. Installation state is unconfirmed; keep Steam open, inspect Decky and rerun to verify")
+		return result, errors.New("the Decky frontend request ended or timed out. Installation state is unconfirmed; keep Steam open, inspect Decky and rerun to verify")
 	}
 	defer response.Body.Close()
 	var outer struct {
@@ -223,14 +223,14 @@ func runAt(ctx context.Context, input Input, endpoint string) (Report, error) {
 			if message, ok := messages[result.Code]; ok {
 				return report, errors.New(message)
 			}
-			return report, errors.New("Decky's installation state could not be verified. Keep Steam open, inspect Decky and retry")
+			return report, errors.New("the Decky installation state could not be verified. Keep Steam open, inspect Decky and retry")
 		}
 		if !result.FrontendConnected || !deckyVersionPattern.MatchString(result.DeckyVersion) || (input.Operation == "install" && result.Version != input.Version) || (input.Operation == "uninstall" && !result.Removed) {
-			return report, errors.New("Decky returned an unexpected version or readiness result; installation is unconfirmed")
+			return report, errors.New("the Decky service returned an unexpected version or readiness result; installation is unconfirmed")
 		}
 		return Report{Version: result.Version, DeckyVersion: result.DeckyVersion, FrontendConnected: true, Removed: result.Removed}, nil
 	}
-	return report, errors.New("Decky is running, but its Steam frontend is unavailable. Keep the normal Steam client open in Desktop Mode, wait for Decky to load, and retry; do not uninstall your plugin")
+	return report, errors.New("the Decky service is running, but its Steam frontend is unavailable. Keep the normal Steam client open in Desktop Mode, wait for Decky to load, and retry; do not uninstall your plugin")
 }
 
 func Run(ctx context.Context, input Input) (Report, error) {

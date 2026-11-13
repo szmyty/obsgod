@@ -49,10 +49,13 @@ instance; inspection or profile selection does not implicitly broadcast.
 - [Advanced stream profiles](docs/advanced-profiles.md), [idle media](docs/idle-media.md),
   [recording/replay](docs/recording-replay.md), [runtime recovery](docs/runtime-resilience.md)
   and [stream health](docs/stream-health.md)
-- [Remote OBS commands](docs/cli-usage.md) and [architecture](docs/architecture.md)
+- [Remote OBS commands](docs/cli-usage.md) and [architecture](ARCHITECTURE.md)
+- [Vocabulary](ONTOLOGY.md), [decisions](DECISIONS.md) and [agent instructions](AGENTS.md)
 - [Destinations and local connection recovery](docs/stream-destinations.md)
 - [Support buttons and public wallet configuration](docs/support.md)
 - [Support](SUPPORT.md), [security](SECURITY.md) and [qualification](docs/steam-deck-qualification.md)
+- [Contributing](CONTRIBUTING.md), [local CI](docs/local-ci.md) and [release engineering](docs/release-engineering.md)
+- [Proposed branding](docs/branding-review.md) and [site preview](docs/branding-site-preview.md)
 - [Proposed roadmap](ROADMAP.md), [M2 implementation ledger](docs/milestone-2.md)
 - [Identity/migration decisions](docs/identity-migration.md)
 

@@ -1,0 +1,6 @@
+{
+  "$schema": "https://raw.githubusercontent.com/egohygiene/identity/cfb6c29bd02589a47fc48050ab02e7e0da359719/contracts/v1/targets.schema.json",
+  "schema": "identity.targets/v1",
+  "enabled": [{"id": "core", "version": "1.0.0"}, {"id": "tokens", "version": "1.0.0"}, {"id": "metadata", "version": "1.0.0"}, {"id": "web", "version": "1.0.0"}, {"id": "github", "version": "1.0.0"}, {"id": "docs", "version": "1.0.0"}],
+  "inapplicable": ["pwa", "social", "archive"]
+}

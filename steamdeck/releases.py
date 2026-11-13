@@ -76,7 +76,7 @@ def _read_url(url, limit=MAX_METADATA):
         raise ReleaseError("Release metadata contains an unsupported download address.")
     request = urllib.request.Request(url, headers={"User-Agent": "OBSGod-updater", "Accept": "application/vnd.github+json" if "api.github.com/" in url else "application/octet-stream"})
     try:
-        with urllib.request.urlopen(request, timeout=12) as response:
+        with _open_url(request, timeout=12) as response:
             data = response.read(limit + 1)
         if len(data) > limit:
             raise ReleaseError("Release metadata exceeded its size limit.")
@@ -87,6 +87,32 @@ def _read_url(url, limit=MAX_METADATA):
         raise ReleaseError("GitHub could not provide the release metadata. Try again later.") from None
     except (OSError, urllib.error.URLError):
         raise ReleaseError("Could not reach GitHub. Your installed version is unchanged; check your connection and retry.", "offline") from None
+
+
+class _ProjectRedirects(urllib.request.HTTPRedirectHandler):
+    """Reject moved-repository metadata before following an unapproved owner.
+
+    GitHub release downloads use a signed CDN redirect. That single official
+    asset hop is distinct from trusting another repository or arbitrary host.
+    """
+    def redirect_request(self, request, response, code, message, headers, url):
+        source = urllib.parse.urlsplit(request.full_url)
+        target = urllib.parse.urlsplit(url)
+        try:
+            allowed = (source.netloc == "github.com" and _safe_url(request.full_url) and
+                       target.scheme == "https" and target.netloc == "release-assets.githubusercontent.com" and
+                       target.username is None and target.password is None and target.port is None and
+                       not target.fragment and not any(c in url for c in "\r\n\x00") and
+                       bool(re.fullmatch(r"/github-production-release-asset/[0-9]+/[A-Za-z0-9-]+", target.path)))
+        except ValueError:
+            allowed = False
+        if not allowed:
+            raise ReleaseError("GitHub redirected outside the approved project update path. Your installation is unchanged; use a reviewed migration installer.", "unsupported")
+        return super().redirect_request(request, response, code, message, headers, url)
+
+
+def _open_url(request, timeout):
+    return urllib.request.build_opener(_ProjectRedirects()).open(request, timeout=timeout)
 
 
 def _json(url):
@@ -281,7 +307,7 @@ def download_archive(candidate, destination):
     total = 0
     request = urllib.request.Request(candidate["archive_url"], headers={"User-Agent": "OBSGod-updater"})
     try:
-        with urllib.request.urlopen(request, timeout=20) as source, destination.open("xb") as output:
+        with _open_url(request, timeout=20) as source, destination.open("xb") as output:
             while True:
                 chunk = source.read(64 * 1024)
                 if not chunk:
