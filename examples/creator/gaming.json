@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "provider": {
+    "id": "kick",
+    "server": "rtmps://example.invalid/app",
+    "key_env": "KICK_STREAM_KEY"
+  },
+  "workflow": {
+    "obs_profile": "Gaming",
+    "scene_collection": "Games",
+    "starting_scene": "Starting Soon",
+    "live_scene": "Live",
+    "recording_enabled": true,
+    "replay_buffer_enabled": true,
+    "readiness_timeout": "3s"
+  },
+  "ending_scene": "Ending",
+  "readiness_delay": "2s",
+  "stop_recording": true,
+  "stop_replay_buffer": true
+}

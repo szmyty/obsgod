@@ -3,6 +3,11 @@
 The stable executable remains `obsgod`. See [configuration](configuration.md)
 for the development candidate’s layered settings and machine output.
 
+New reusable automation should use the versioned [public API and JSON command
+family](api-v1.md). The compatible commands below retain their original
+acknowledgement/output behavior. Optional [creator workflows](creator-workflows.md)
+compose the public API without provider-specific behavior in the OBS core.
+
 ## Usage
 
 All commands support the following flags:
