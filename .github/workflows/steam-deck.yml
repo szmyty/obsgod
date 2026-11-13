@@ -76,15 +76,20 @@ jobs:
           # disposable image uses UID1000. Installed app permissions remain private.
           chmod a+rx dist/obsgod
           chmod a+r dist/libgstobsgodcapture.so
-          docker build --secret id=proxy_ca,src=/etc/ssl/certs/ca-certificates.crt -f steamdeck/tests/obs-smoke.Dockerfile -t obsgod-obs-smoke:qualification .
-          mkdir -p "$RUNNER_TEMP/obsgod-audio" "$RUNNER_TEMP/obsgod-capture" "$RUNNER_TEMP/obsgod-game-obs"
-          curl --fail --location --show-error --proto '=https' --proto-redir '=https' https://codeload.github.com/fzwoch/obs-gstreamer/tar.gz/b60942f8cd9d788c95ef7dee256f52e14bdf023e -o "$RUNNER_TEMP/obsgod-audio/gstreamer-source.tar.gz"
-          printf '%s  %s\n' 566d547e83140d53a0aa22ed152cebc436725b47e4ead452e79cf250da531268 "$RUNNER_TEMP/obsgod-audio/gstreamer-source.tar.gz" | sha256sum --check -
-          cp "$RUNNER_TEMP/obsgod-audio/gstreamer-source.tar.gz" "$RUNNER_TEMP/obsgod-game-obs/gstreamer-source.tar.gz"
-          sudo chown -R 1000:1000 "$RUNNER_TEMP/obsgod-audio" "$RUNNER_TEMP/obsgod-capture" "$RUNNER_TEMP/obsgod-game-obs"
-          docker run --rm --user 1000:1000 --mount "type=bind,src=$GITHUB_WORKSPACE,dst=/src,readonly" --mount "type=bind,src=$RUNNER_TEMP/obsgod-audio,dst=/work" obsgod-obs-smoke:qualification dbus-run-session -- bash /src/steamdeck/tests/native-obs-smoke.sh
-          docker run --rm --user 1000:1000 -e "OBSGOD_QUALIFIED_REVISION=$GITHUB_SHA" --mount "type=bind,src=$GITHUB_WORKSPACE,dst=/src,readonly" --mount "type=bind,src=$RUNNER_TEMP/obsgod-capture,dst=/work" obsgod-obs-smoke:qualification dbus-run-session -- bash /src/steamdeck/tests/native-capture-smoke.sh /src/dist
-          docker run --rm --user 1000:1000 -e "OBSGOD_QUALIFIED_REVISION=$GITHUB_SHA" --mount "type=bind,src=$GITHUB_WORKSPACE,dst=/src,readonly" --mount "type=bind,src=$RUNNER_TEMP/obsgod-game-obs,dst=/work" obsgod-obs-smoke:qualification dbus-run-session -- bash /src/steamdeck/tests/native-game-obs-smoke.sh
+          qualification_tmp="${OBSGOD_ACT_TEMP:-$RUNNER_TEMP}"
+          docker_proxy_args=()
+          for key in HTTP_PROXY HTTPS_PROXY NO_PROXY http_proxy https_proxy no_proxy; do
+            if [[ -v "$key" ]]; then docker_proxy_args+=(--build-arg "$key"); fi
+          done
+          docker build "${docker_proxy_args[@]}" --secret "id=proxy_ca,src=${CODEX_PROXY_CERT:-/etc/ssl/certs/ca-certificates.crt}" -f steamdeck/tests/obs-smoke.Dockerfile -t obsgod-obs-smoke:qualification .
+          mkdir -p "$qualification_tmp/obsgod-audio" "$qualification_tmp/obsgod-capture" "$qualification_tmp/obsgod-game-obs"
+          curl --fail --location --show-error --proto '=https' --proto-redir '=https' https://codeload.github.com/fzwoch/obs-gstreamer/tar.gz/b60942f8cd9d788c95ef7dee256f52e14bdf023e -o "$qualification_tmp/obsgod-audio/gstreamer-source.tar.gz"
+          printf '%s  %s\n' 566d547e83140d53a0aa22ed152cebc436725b47e4ead452e79cf250da531268 "$qualification_tmp/obsgod-audio/gstreamer-source.tar.gz" | sha256sum --check -
+          cp "$qualification_tmp/obsgod-audio/gstreamer-source.tar.gz" "$qualification_tmp/obsgod-game-obs/gstreamer-source.tar.gz"
+          sudo chown -R 1000:1000 "$qualification_tmp/obsgod-audio" "$qualification_tmp/obsgod-capture" "$qualification_tmp/obsgod-game-obs"
+          docker run --rm --user 1000:1000 --mount "type=bind,src=$GITHUB_WORKSPACE,dst=/src,readonly" --mount "type=bind,src=$qualification_tmp/obsgod-audio,dst=/work" obsgod-obs-smoke:qualification dbus-run-session -- bash /src/steamdeck/tests/native-obs-smoke.sh
+          docker run --rm --user 1000:1000 -e "OBSGOD_QUALIFIED_REVISION=$GITHUB_SHA" --mount "type=bind,src=$GITHUB_WORKSPACE,dst=/src,readonly" --mount "type=bind,src=$qualification_tmp/obsgod-capture,dst=/work" obsgod-obs-smoke:qualification dbus-run-session -- bash /src/steamdeck/tests/native-capture-smoke.sh /src/dist
+          docker run --rm --user 1000:1000 -e "OBSGOD_QUALIFIED_REVISION=$GITHUB_SHA" --mount "type=bind,src=$GITHUB_WORKSPACE,dst=/src,readonly" --mount "type=bind,src=$qualification_tmp/obsgod-game-obs,dst=/work" obsgod-obs-smoke:qualification dbus-run-session -- bash /src/steamdeck/tests/native-game-obs-smoke.sh
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: obsgod-candidate-${{ github.sha }}

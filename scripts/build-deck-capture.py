@@ -42,7 +42,10 @@ def main():
     certificate = Path(os.environ.get("CODEX_PROXY_CERT", "/etc/ssl/certs/ca-certificates.crt"))
     if not certificate.is_file():
         raise SystemExit("A trusted system/proxy CA bundle is required for the capture builder")
-    subprocess.run(docker + ["build", "--platform", "linux/amd64", "--secret", "id=proxy_ca,src=" + str(certificate), "-f", str(DOCKERFILE), "-t", image, str(SOURCE)], check=True, env=DOCKER_ENV)
+    # Forward only already configured proxy inputs. This also supports act's
+    # Engine client, which does not inherit the outer Docker client's presets.
+    proxy_args = [argument for key in ("HTTP_PROXY", "HTTPS_PROXY", "NO_PROXY", "http_proxy", "https_proxy", "no_proxy") if key in DOCKER_ENV for argument in ("--build-arg", key)]
+    subprocess.run(docker + ["build", *proxy_args, "--platform", "linux/amd64", "--secret", "id=proxy_ca,src=" + str(certificate), "-f", str(DOCKERFILE), "-t", image, str(SOURCE)], check=True, env=DOCKER_ENV)
     image_id = output(*(docker + ["image", "inspect", image, "--format", "{{.Id}}"] ))
     with tempfile.TemporaryDirectory(prefix="obsgod-capture-") as temporary:
         work = Path(temporary)

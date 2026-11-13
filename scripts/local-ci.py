@@ -66,12 +66,15 @@ def install(prefix):
     subprocess.run([str(target), "--version"], check=True)
 
 
-def network_options():
+def network_options(state):
     # Bind the combined public CA bundle, never credentials or Docker config.
     ca = Path("/etc/ssl/certs/ca-certificates.crt")
     if not ca.is_file():
         raise SystemExit("A trusted combined CA bundle is required")
-    options = ["--mount", f"type=bind,src={ca},dst=/run/obsgod-ca.pem,readonly"]
+    temporary = state / "tmp"
+    temporary.mkdir(parents=True, exist_ok=True)
+    options = ["--mount", f"type=bind,src={ca},dst=/run/obsgod-ca.pem,readonly",
+               "--mount", f"type=bind,src={temporary},dst={temporary}"]
     for key in ("HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY"):
         host = urllib.parse.urlsplit(os.environ.get(key, "")).hostname
         if host:
@@ -174,13 +177,15 @@ def main():
     command = [str(args.act), "--directory", str(ROOT), "--bind", "--env-file", os.devnull,
                "--secret-file", os.devnull, "--input-file", os.devnull,
                "--container-daemon-socket", "/var/run/docker.sock", "--network", "bridge",
-               "--concurrent-jobs", "1", "--container-options", network_options(),
+               "--concurrent-jobs", "1", "--container-options", network_options(state),
                "--action-cache-path", str(state / "actions"),
                "--artifact-server-path", str(state / "artifacts"),
                "--artifact-server-addr", "0.0.0.0", "--artifact-server-port", "34567",
                "--env", "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
                "--env", "NODE_USE_ENV_PROXY=1", "--env", "SSL_CERT_FILE=/run/obsgod-ca.pem",
-               "--env", "GIT_SSL_CAINFO=/run/obsgod-ca.pem", "--env", "PIP_CERT=/run/obsgod-ca.pem"]
+               "--env", "GIT_SSL_CAINFO=/run/obsgod-ca.pem", "--env", "PIP_CERT=/run/obsgod-ca.pem",
+               "--env", "CODEX_PROXY_CERT=/run/obsgod-ca.pem", "--env", "TMPDIR=" + str(state / "tmp"),
+               "--env", "OBSGOD_ACT_TEMP=" + str(state / "tmp")]
     command += mappings
     # act uses the Engine API rather than `docker run`, so Docker client's proxy
     # defaults are not automatically copied. Values reach only the child argv;

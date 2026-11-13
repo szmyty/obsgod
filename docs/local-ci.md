@@ -51,6 +51,11 @@ so nested Docker mounts can see the same files on the managed daemon. It always
 selects that local socket, retains existing registry/proxy settings, supplies a
 read-only trusted CA mount and resolves the existing proxy hostname in the inner
 container. TLS verification remains enabled; the bridge network is retained.
+The shared state `tmp` directory is mounted at the same absolute path on both
+sides, and `TMPDIR`/`OBSGOD_ACT_TEMP` select it for nested-Docker inputs/outputs.
+This avoids treating act's container-only `/tmp` as a daemon-visible host path.
+Native builders receive the existing proxy build arguments by name and the
+mounted combined CA as a BuildKit secret; credentials are not copied into images.
 
 The initial act setup-go clone failed because act's embedded go-git transport
 could not consume the runtime's injected Git authentication. `prepare-actions`

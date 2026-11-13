@@ -32,7 +32,9 @@ Its checks include archive path/link/duplicate/expansion safety, every manifest
 and outer checksum, matching CLI/capture bytes in the runtime and Decky ZIP,
 matching updater source, source text against the selected commit, capture
 preferred source/build receipt, Go dependencies against `go.mod`/`go.sum`, and
-shipped license/notices/LGPL preferred-source inventory. A relabelled manifest,
+shipped license/notices/LGPL preferred-source inventory. The exact complete
+SDK source and import-only runtime changes are checked against the reviewed
+upstream npm archive's lockfile integrity and pinned file hashes. A relabelled manifest,
 missing source or conflicting artifact fails the audit.
 
 `capture-build.json` records the actual native builder image ID, compiler,
@@ -83,7 +85,8 @@ The candidate workflow also runs pinned govulncheck and npm audit. Advisory
 results are time-dependent; preserve the timestamp, command and source revision.
 
 `goreleaser` pins GoReleaser 2.20.2 and always uses
-`release --snapshot --skip=publish,sign --clean`. Its configuration downloads
+`release --snapshot --skip=publish,sign --clean` into `dist/snapshot`, keeping its
+cleanup separate from immutable review/runtime artifacts. Its configuration downloads
 existing modules rather than modifying `go.mod`, strips host paths/build IDs and
 retains source/version metadata. Package formats and cross-build targets are
 configuration candidates until the corresponding snapshot has passed; they are

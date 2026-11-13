@@ -21,6 +21,17 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 MAX_FILE = 128 * 1024 * 1024
 MAX_TOTAL = 256 * 1024 * 1024
+# Verified against the registry tarball's SHA512 from package-lock.json. Keep
+# this reviewed inventory in step with any future SDK upgrade; an arbitrary
+# single .ts file does not establish complete preferred source.
+SDK_INTEGRITY = "sha512-XsPCZxfxk5I1UtylIUN3qaWQI31siQbKfbLIskkI5innEatY1m4NQqBv/6hwPaO9mKMbdqYpnh5PSJDeMEOOBA=="
+SDK_SOURCE = {
+    "package.json": "8be297dad38eefd6e80b3a6b3f5083e875a7dd1261f866c91efbf4e380867aa1",
+    "src/index.ts": "3193df7a9d563e1a7d65c3acd162e3b7357e47eb36862f2c1f3fc57134ed156d",
+    "src/types.d.ts": "77c2831b47a9b2ba944e4b97466f18dd92c03a9c0c1ead4818129a5153629103",
+    "src/types.ts": "93e5ecece4cde0d92bc2d2e77efcc5d4d9b1091211586aec83ce44d484daa51f"}
+SDK_RUNTIME_SHA256 = "9fdcc09e2a9596e05a71dd2ac758f1d0d9c69a18ff74a04862eac150312f3f17"
+SDK_TYPES_SHA256 = "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
 
 
 def sha(data):
@@ -144,6 +155,12 @@ def audit(directory, expected_revision):
     lock_bytes = git(revision, "steamdeck/decky/package-lock.json")
     lock = json.loads(lock_bytes)["packages"]
     require(json.loads(plugin["source/decky-api/package.json"])["version"] == lock["node_modules/@decky/api"]["version"], "LGPL source version mismatch")
+    require(lock["node_modules/@decky/api"].get("integrity") == SDK_INTEGRITY, "Unreviewed LGPL SDK archive integrity")
+    sdk_files = {name.removeprefix("source/decky-api/"): sha(content) for name, content in plugin.items()
+                 if name.startswith("source/decky-api/") and name != "source/decky-api/BUILDING.md"}
+    require(sdk_files == SDK_SOURCE, "LGPL preferred TypeScript source inventory/hash mismatch")
+    original_module = plugin["dist/decky-api.js"].replace(b"'./manifest.js'", b"'@decky/manifest'").replace(b'"./manifest.js"', b'"@decky/manifest"').replace(b'"./types.js"', b'"./types"')
+    require(sha(original_module) == SDK_RUNTIME_SHA256 and sha(plugin["dist/types.js"]) == SDK_TYPES_SHA256, "LGPL runtime differs from documented import-only modifications")
     _, capture = archive_files(payload["CAPTURE-SOURCE.tar.gz"], "tar")
     require(set(capture) == {"gstobsgodcapture.c", "Makefile", "README.md", "LICENSE", "THIRD_PARTY_NOTICES.md", "build.Dockerfile"}, "Capture preferred-source inventory mismatch")
     for name, content in capture.items():

@@ -84,7 +84,7 @@ class ReleaseAuditTests(unittest.TestCase):
         capture = {name: name.encode() for name in ("gstobsgodcapture.c", "Makefile", "README.md", "LICENSE", "THIRD_PARTY_NOTICES.md", "build.Dockerfile")}
         source = {"steamdeck/capture/" + name: data for name, data in capture.items()}
         source.update({"LICENSE": b"MIT license", "docs/steam-deck.md": b"guide"})
-        lock = {"packages": {"node_modules/@decky/api": {"version": "1.1.3", "license": "LGPL-2.1"},
+        lock = {"packages": {"node_modules/@decky/api": {"version": "1.1.3", "license": "LGPL-2.1", "integrity": AUDIT.SDK_INTEGRITY},
                              "node_modules/qrcode-generator": {"version": "2.0.4", "license": "MIT"}}}
         source["steamdeck/decky/package-lock.json"] = AUDIT.canonical(lock)
         plugin = {"bin/obsgod": b"go binary", "bin/libgstobsgodcapture.so": b"capture binary",
@@ -92,6 +92,7 @@ class ReleaseAuditTests(unittest.TestCase):
                   "CAPTURE-SOURCE.tar.gz": tar_bytes(capture), "LICENSE.LGPL-2.1": b"LGPL license",
                   "LICENSE.qrcode-generator.txt": b"MIT QR license", "source/decky-api/src/index.ts": b"preferred source",
                   "source/decky-api/BUILDING.md": b"rebuild instructions", "source/decky-api/package.json": b'{"version":"1.1.3"}',
+                  "dist/decky-api.js": b"original module", "dist/types.js": b"types module",
                   "package.json": AUDIT.canonical({"version": version})}
         source["steamdeck/decky/LICENSE.LGPL-2.1"] = plugin["LICENSE.LGPL-2.1"]
         source["steamdeck/decky/LICENSE.qrcode-generator.txt"] = plugin["LICENSE.qrcode-generator.txt"]
@@ -129,6 +130,9 @@ class ReleaseAuditTests(unittest.TestCase):
             directory = Path(temporary)
             source, revision = self.fixture(directory, mutate)
             with patch.object(AUDIT, "git", side_effect=lambda rev, path: source.get(path, b"build source")), \
+                    patch.object(AUDIT, "SDK_SOURCE", {"package.json": AUDIT.sha(b'{"version":"1.1.3"}'), "src/index.ts": AUDIT.sha(b"preferred source")}), \
+                    patch.object(AUDIT, "SDK_RUNTIME_SHA256", AUDIT.sha(b"original module")), \
+                    patch.object(AUDIT, "SDK_TYPES_SHA256", AUDIT.sha(b"types module")), \
                     patch.object(AUDIT, "go_inventory", return_value=[{"name": "example.test/module", "version": "v1.0.0", "go_sum": "h1:example"}]), \
                     patch.object(AUDIT.subprocess, "check_output", return_value=b"1700000000"):
                 return AUDIT.documents(AUDIT.audit(directory, revision))
@@ -150,6 +154,12 @@ class ReleaseAuditTests(unittest.TestCase):
     def test_missing_preferred_source_is_not_release_ready(self):
         with self.assertRaisesRegex(ValueError, "preferred TypeScript"):
             self.run_fixture(lambda runtime, plugin, source: plugin.pop("source/decky-api/src/index.ts"))
+
+    def test_tampered_lgpl_source_and_runtime_are_rejected_despite_valid_payload_checksums(self):
+        with self.assertRaisesRegex(ValueError, "source inventory/hash"):
+            self.run_fixture(lambda runtime, plugin, source: plugin.update({"source/decky-api/src/index.ts": b"altered source"}))
+        with self.assertRaisesRegex(ValueError, "documented import-only"):
+            self.run_fixture(lambda runtime, plugin, source: plugin.update({"dist/decky-api.js": b"hidden modification"}))
 
     def test_runtime_source_cannot_be_relabelled_with_another_revision(self):
         with self.assertRaisesRegex(ValueError, "Runtime source differs"):
