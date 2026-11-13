@@ -2,7 +2,11 @@
 
 The owner has now authorized the independent completion campaign for all open
 issues except #51, including partial preparation at genuine owner/external gates.
-See [the completion ledger](docs/completion-campaign.md). Intended slug:
+See [the completion ledger](docs/completion-campaign.md),
+[review checklist](docs/completion-review.md) and
+[all 230 original criteria](docs/evidence/completion-criteria.json).
+Prepared completion drafts: #62 foundation -> #63 mixer -> #64 API/creator; final
+clean-source qualification is active and no new merge/closure is claimed. Intended slug:
 **decky-stream**; compatibility/migration and final branding review remain explicit.
 #51 now holds two separate research journeys (monetization and Decky Store).
 After source review/merges, remaining acceptance will be consolidated into one

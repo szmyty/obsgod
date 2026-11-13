@@ -229,7 +229,7 @@ def documents(result):
     files = []
     for name, data in sorted({**{"artifacts/" + name: data for name, data in artifacts.items()}, **{"runtime/" + name: data for name, data in payload.items()}, **{"decky/" + name: data for name, data in plugin.items()}}.items()):
         identifier = "SPDXRef-File-" + sha(name.encode())[:20]
-        files.append({"SPDXID": identifier, "fileName": name, "checksums": [{"algorithm": "SHA256", "checksumValue": sha(data)}], "licenseConcluded": "NOASSERTION", "copyrightText": "NOASSERTION"})
+        files.append({"SPDXID": identifier, "fileName": name, "checksums": [{"algorithm": "SHA256", "checksumValue": sha(data)}], "licenseConcluded": "NOASSERTION", "licenseInfoInFiles": ["NOASSERTION"], "copyrightText": "NOASSERTION"})
         relationships.append({"spdxElementId": "SPDXRef-Application", "relationshipType": "CONTAINS", "relatedSpdxElement": identifier})
     sbom = {"spdxVersion": "SPDX-2.3", "dataLicense": "CC0-1.0", "SPDXID": "SPDXRef-DOCUMENT", "name": "OBSGod-" + version,
             "documentNamespace": "https://github.com/szmyty/obsgod/sbom/" + revision + "/" + identity,
@@ -241,7 +241,7 @@ def documents(result):
                     "internalParameters": {"go": manifest["go"], "node": manifest["node"], "npm": manifest["npm"], "capture_builder_image": capture["image_id"]},
                     "resolvedDependencies": materials},
                     "runDetails": {"builder": {"id": "urn:obsgod:local-self-reported-unsigned"}, "metadata": {"invocationId": "urn:sha256:" + identity},
-                     "byproducts": [{"name": "trust-boundary", "content": {"status": "UNSIGNED", "claim": "Offline self-reported inventory only; no authenticated publisher or trusted builder identity; source and build receipts require independent review."}}]}}}
+                     "byproducts": [{"name": "trust-boundary", "annotations": {"status": "UNSIGNED", "claim": "Offline self-reported inventory only; no authenticated publisher or trusted builder identity; source and build receipts require independent review."}}]}}}
     report = {"schema_version": 1, "revision": revision, "version": version, "artifact_identity_sha256": identity,
               "integrity": "passed", "source_inventory": "passed", "preferred_source": "passed", "unsigned_provenance": "generated",
               "qualification": "unrun-by-this-audit", "publication": "not-authorized-by-this-audit",

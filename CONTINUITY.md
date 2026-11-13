@@ -35,6 +35,34 @@ close the pre-merge issue graph prematurely. Candidate8 remains immutable at
 its recorded exact source. New source requires fresh candidate9 qualification.
 
 
+## Completion source prepared; candidate 9 qualification active
+
+Source checkpoints are pushed as #62 foundation, #63 live mixer and #64 API/creator,
+after the existing #58 -> #59 -> #60 stack. Foundation head is
+`b1ee00d58227b5a0d41fa5df03a5ccc5700f8ebe`; audio head is
+`fcfa0c2577b5260e1b7036d83daece4a9452e41c`. The next qualification branch
+records demonstrated integration repairs, actual clean-source matrix results
+and candidate9 review downloads. No implementation issue or PR is closed/merged.
+
+New source includes persisted stream-only microphone controls, observed inputs/
+meters/gains, mute-preserving recovery and independent hold-to-talk guarding;
+versioned public API and safe local creator orchestration; canonical governance;
+proposed pinned Identity source/creative kit and nine-page site; pinned local CI
+and offline unsigned artifact/SBOM/provenance audit. Independent review repaired
+three concrete PTT races/state bugs and renewal now checks guardian liveness.
+Focused tests pass; full clean-source qualification is still pending. The first
+working-tree act Linux build passed; it does not qualify final source.
+
+[Completion review](docs/completion-review.md) and its
+[230-criterion ledger](docs/evidence/completion-criteria.json) preserve all35
+implementation issues from the live36-issue inventory. #51 remains separate and
+unchanged. Finish all available final checks, retain failed attempts, then supply
+exact artifacts and smallest owner actions. Native OBS suites precede host
+transport, which precedes browser fixtures. Do not race act snapshot/candidate
+dist writers with root package/native evidence; execute local CI twice at final
+clean source. Required physical Deck/OBS33/provider/adoption, hostedCI/review,
+identity/rights/migration and publication gates remain explicit.
+
 ## Milestone 3 candidate 8: all available local checks passed
 
 Prepared in draft #58 -> #59 -> #60 for #47/#24/#48/#49/#50; #51 remains
