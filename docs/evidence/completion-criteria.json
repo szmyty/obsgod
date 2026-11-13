@@ -2,7 +2,7 @@
   "schema_version": 1,
   "draft": false,
   "generated_at_utc": "2026-11-13T13:02:14.167549+00:00",
-  "live_observed_at": "2026-11-13T09:11:40.538226+00:00",
+  "live_observed_at": "2026-11-13T15:53:24.898619+00:00",
   "repository": "szmyty/obsgod",
   "source_revision_at_audit": "1a482808a8281c8bce092cea057df758836b34e9",
   "source_dirty_at_audit": false,
@@ -418,7 +418,7 @@
       "number": 7,
       "url": "https://github.com/szmyty/obsgod/issues/7",
       "title": "Adopt Ego Hygiene architecture, ontology, governance, and product documentation",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T11:49:59Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/3",
@@ -680,13 +680,18 @@
         "cli"
       ],
       "latest_live_updated_at": "2026-11-12T11:49:59Z",
-      "remaining_scope_summary": "Review the customized canonical documents; no local documentation implementation gap remains."
+      "remaining_scope_summary": "Review the customized canonical documents; no local documentation implementation gap remains.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:47:44Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/7#issuecomment-6857837500"
     },
     {
       "number": 8,
       "url": "https://github.com/szmyty/obsgod/issues/8",
       "title": "Roadmap 1 — Reliable Steam Deck streaming, installation and updates",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:39Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -962,13 +967,18 @@
         "browser-upgrades"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:39Z",
-      "remaining_scope_summary": "Complete actual recorded Deck lifecycle/install/provider-viewer criteria and required hosted CI/source review; local foundation checks passed."
+      "remaining_scope_summary": "Complete actual recorded Deck lifecycle/install/provider-viewer criteria and required hosted CI/source review; local foundation checks passed.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:47:49Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/8#issuecomment-6857852633"
     },
     {
       "number": 9,
       "url": "https://github.com/szmyty/obsgod/issues/9",
       "title": "Define the reusable obsgod API and StreamGod integration contract",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T11:50:00Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/3",
@@ -1215,13 +1225,18 @@
         "cli"
       ],
       "latest_live_updated_at": "2026-11-12T11:50:00Z",
-      "remaining_scope_summary": "Review versioned candidate contract; complete compatible legacy CLI migration/deprecation without breaking v0; retain provider boundary."
+      "remaining_scope_summary": "Review versioned candidate contract; complete compatible legacy CLI migration/deprecation without breaking v0; retain provider boundary.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:47:54Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/9#issuecomment-6857854766"
     },
     {
       "number": 10,
       "url": "https://github.com/szmyty/obsgod/issues/10",
       "title": "Fix OBS startup, WebSocket readiness and Gaming Mode lifecycle",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:40Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -1629,13 +1644,18 @@
         "python"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:40Z",
-      "remaining_scope_summary": "Measure actual Deck startup budgets and qualify graphical/session/Flatpak/capture/audio topology with installed versions; local/native checks passed."
+      "remaining_scope_summary": "Measure actual Deck startup budgets and qualify graphical/session/Flatpak/capture/audio topology with installed versions; local/native checks passed.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:47:59Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/10#issuecomment-6857856809"
     },
     {
       "number": 11,
       "url": "https://github.com/szmyty/obsgod/issues/11",
       "title": "Polish the CLI product experience — 12-factor config, profiles, diagnostics, completions, and docs",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:41Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -1937,13 +1957,18 @@
         "browser"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:41Z",
-      "remaining_scope_summary": "Review CLI/config contract and actual new-user Deck path; all available precedence/help/JSON/completion/Fish checks passed."
+      "remaining_scope_summary": "Review CLI/config contract and actual new-user Deck path; all available precedence/help/JSON/completion/Fish checks passed.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:48:04Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/11#issuecomment-6857858824"
     },
     {
       "number": 12,
       "url": "https://github.com/szmyty/obsgod/issues/12",
       "title": "Production hardening and v1.0 release readiness — tests, security, packaging, and supply chain",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T11:50:02Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/3",
@@ -2473,13 +2498,18 @@
         "hosted-ci"
       ],
       "latest_live_updated_at": "2026-11-12T11:50:02Z",
-      "remaining_scope_summary": "Resolve required hosted CI/provider dependency review and review stable-v1 scope; generic archives still require their own notices/SBOM/install/native work before generic publication."
+      "remaining_scope_summary": "Resolve required hosted CI/provider dependency review and review stable-v1 scope; generic archives still require their own notices/SBOM/install/native work before generic publication.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:48:10Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/12#issuecomment-6857860973"
     },
     {
       "number": 13,
       "url": "https://github.com/szmyty/obsgod/issues/13",
       "title": "Bootstrap the StreamGod companion CLI — one-command Kick streaming on Steam Deck",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T11:50:03Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/3",
@@ -2748,13 +2778,18 @@
         "cli"
       ],
       "latest_live_updated_at": "2026-11-12T11:50:03Z",
-      "remaining_scope_summary": "Choose dedicated companion destination or explicit scope amendment, then implement/qualify managed-launch companion journey; current creator connects to existing OBS."
+      "remaining_scope_summary": "Choose dedicated companion destination or explicit scope amendment, then implement/qualify managed-launch companion journey; current creator connects to existing OBS.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:48:14Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/13#issuecomment-6857862903"
     },
     {
       "number": 14,
       "url": "https://github.com/szmyty/obsgod/issues/14",
       "title": "Post-v1 roadmap — multi-platform providers, multistream, and creator automation ecosystem",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T11:50:04Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/3",
@@ -2959,13 +2994,18 @@
         "cli"
       ],
       "latest_live_updated_at": "2026-11-12T11:50:04Z",
-      "remaining_scope_summary": "Validate real provider viewers and disposition focused optional provider/OAuth/multistream/creator-content followups; documented strategy is not ecosystem implementation."
+      "remaining_scope_summary": "Validate real provider viewers and disposition focused optional provider/OAuth/multistream/creator-content followups; documented strategy is not ecosystem implementation.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:48:20Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/14#issuecomment-6857864971"
     },
     {
       "number": 16,
       "url": "https://github.com/szmyty/obsgod/issues/16",
       "title": "Reconcile preview provenance and reviewable draft PR boundaries",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:42Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -3204,13 +3244,18 @@
         "act"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:42Z",
-      "remaining_scope_summary": "Review exact source/artifact/PR stack and installed device provenance; source authorization was already given, and new approval is not requested for completed work."
+      "remaining_scope_summary": "Review exact source/artifact/PR stack and installed device provenance; source authorization was already given, and new approval is not requested for completed work.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:48:25Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/16#issuecomment-6857867164"
     },
     {
       "number": 17,
       "url": "https://github.com/szmyty/obsgod/issues/17",
       "title": "Make OBS state authoritative and update the Decky panel automatically",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:43Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -3465,13 +3510,18 @@
         "native"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:43Z",
-      "remaining_scope_summary": "Verify actual Decky/Steam/QAM/controller/reconnect lifecycle; available realOBS and simulated UI/state tests passed."
+      "remaining_scope_summary": "Verify actual Decky/Steam/QAM/controller/reconnect lifecycle; available realOBS and simulated UI/state tests passed.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:48:30Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/17#issuecomment-6857869138"
     },
     {
       "number": 18,
       "url": "https://github.com/szmyty/obsgod/issues/18",
       "title": "Tie Start, Stop, Cancel and notifications to confirmed OBS state",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:45Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -3696,13 +3746,18 @@
         "native"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:45Z",
-      "remaining_scope_summary": "Verify actual Deck action/cancel/notification/failure recovery; state/cleanup/duplicate fixtures and native output checks passed."
+      "remaining_scope_summary": "Verify actual Deck action/cancel/notification/failure recovery; state/cleanup/duplicate fixtures and native output checks passed.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:48:35Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/18#issuecomment-6857871047"
     },
     {
       "number": 19,
       "url": "https://github.com/szmyty/obsgod/issues/19",
       "title": "Install OBSGod directly into Decky with dependency checks and recovery",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:46Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -4016,13 +4071,18 @@
         "decky-updater"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:46Z",
-      "remaining_scope_summary": "Reproduce/verify actual active-Steam unified install path and original automation failure on Deck; old4/6/current/reference transport tests passed."
+      "remaining_scope_summary": "Reproduce/verify actual active-Steam unified install path and original automation failure on Deck; old4/6/current/reference transport tests passed.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:48:40Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/19#issuecomment-6857873093"
     },
     {
       "number": 20,
       "url": "https://github.com/szmyty/obsgod/issues/20",
       "title": "Bundle the updater and add Check for updates to the Decky panel",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:47Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -4303,13 +4363,18 @@
         "package"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:47Z",
-      "remaining_scope_summary": "Verify actual installed safe updater/app/plugin handoff, rollback and partial recovery; complete publication/download step only after applicable approval."
+      "remaining_scope_summary": "Verify actual installed safe updater/app/plugin handoff, rollback and partial recovery; complete publication/download step only after applicable approval.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:48:45Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/20#issuecomment-6857875159"
     },
     {
       "number": 21,
       "url": "https://github.com/szmyty/obsgod/issues/21",
       "title": "Make OBS lifecycle and supported capture work without a running game",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:48Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -4562,13 +4627,18 @@
         "browser"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:48Z",
-      "remaining_scope_summary": "Verify actual no-game/SteamUI/game capture and session behavior; unsupported physical paths remain explicit, never silently accepted."
+      "remaining_scope_summary": "Verify actual no-game/SteamUI/game capture and session behavior; unsupported physical paths remain explicit, never silently accepted.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:48:50Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/21#issuecomment-6857877273"
     },
     {
       "number": 22,
       "url": "https://github.com/szmyty/obsgod/issues/22",
       "title": "Qualify the complete Steam Deck workflow and prepare the reviewed release candidate",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:49Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -4972,13 +5042,18 @@
         "hosted-ci"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:49Z",
-      "remaining_scope_summary": "Owner review and actual Deck/provider/hosted/adoption evidence remain; all required available local final-source checks passed."
+      "remaining_scope_summary": "Owner review and actual Deck/provider/hosted/adoption evidence remain; all required available local final-source checks passed.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:48:55Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/22#issuecomment-6857879445"
     },
     {
       "number": 23,
       "url": "https://github.com/szmyty/obsgod/issues/23",
       "title": "Roadmap 2 — Supported public launch and optional funding",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:50Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -5225,13 +5300,18 @@
         "hosted-ci"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:50Z",
-      "remaining_scope_summary": "Review current compatibility preview independently of future identity/site/wallet activation; complete actual target/CI/review/adoption and precise publication decisions."
+      "remaining_scope_summary": "Review current compatibility preview independently of future identity/site/wallet activation; complete actual target/CI/review/adoption and precise publication decisions.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:49:00Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/23#issuecomment-6857881523"
     },
     {
       "number": 24,
       "url": "https://github.com/szmyty/obsgod/issues/24",
       "title": "Add custom idle banner/video and game-aware scene transitions",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-13T06:09:48Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/3",
@@ -5526,13 +5606,18 @@
         "browser"
       ],
       "latest_live_updated_at": "2026-11-13T06:09:48Z",
-      "remaining_scope_summary": "Owner approves actual assets/rights/creative behavior; verify real Deck transitions/audio/privacy. Local media/import/transition tests passed."
+      "remaining_scope_summary": "Owner approves actual assets/rights/creative behavior; verify real Deck transitions/audio/privacy. Local media/import/transition tests passed.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:49:05Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/24#issuecomment-6857883733"
     },
     {
       "number": 25,
       "url": "https://github.com/szmyty/obsgod/issues/25",
       "title": "Add OBS WebSocket connection/password setup, change and recovery controls",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:51Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -5762,13 +5847,18 @@
         "python"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:51Z",
-      "remaining_scope_summary": "Verify real Deck idle password setup/rotation/mismatch/recovery; private protocol/native/UI cases passed."
+      "remaining_scope_summary": "Verify real Deck idle password setup/rotation/mismatch/recovery; private protocol/native/UI cases passed.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:49:10Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/25#issuecomment-6857885838"
     },
     {
       "number": 35,
       "url": "https://github.com/szmyty/obsgod/issues/35",
       "title": "Choose the tools organization, product name and durable product boundary",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:52Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -5942,13 +6032,18 @@
         "repository"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:52Z",
-      "remaining_scope_summary": "Owner chooses final org/repository/name/mark/contact/domain or explicitly retains current namespace; current working name/slug are recorded."
+      "remaining_scope_summary": "Owner chooses final org/repository/name/mark/contact/domain or explicitly retains current namespace; current working name/slug are recorded.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:49:15Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/35#issuecomment-6857887856"
     },
     {
       "number": 36,
       "url": "https://github.com/szmyty/obsgod/issues/36",
       "title": "Prepare the old-to-new repository, updater, plugin and XDG migration",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:53Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -6168,13 +6263,18 @@
         "decky-updater"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:53Z",
-      "remaining_scope_summary": "After approved destination, implement/activate/rehearse exact old→new trust/alias/duplicate-control/data/redirect transition; current compatibility/migration tools are qualified preparation."
+      "remaining_scope_summary": "After approved destination, implement/activate/rehearse exact old→new trust/alias/duplicate-control/data/redirect transition; current compatibility/migration tools are qualified preparation.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:49:20Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/36#issuecomment-6857889762"
     },
     {
       "number": 37,
       "url": "https://github.com/szmyty/obsgod/issues/37",
       "title": "Resolve Decky Store provenance eligibility and distribution policy early",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:54Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -6357,13 +6457,18 @@
       "current_source_is_not_old_candidate_qualification": true,
       "current_receipt_ids": [],
       "latest_live_updated_at": "2026-11-12T23:48:54Z",
-      "remaining_scope_summary": "Keep fresh Store/monetization research separate in unchanged #51; transfer preserved research references only after agreed review/merges."
+      "remaining_scope_summary": "Keep fresh Store/monetization research separate in unchanged #51; transfer preserved research references only after agreed review/merges.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:49:25Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/37#issuecomment-6857891688"
     },
     {
       "number": 38,
       "url": "https://github.com/szmyty/obsgod/issues/38",
       "title": "Create the accepted product brand through the Identity consumer framework",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:55Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -6575,13 +6680,18 @@
         "site"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:55Z",
-      "remaining_scope_summary": "Owner supplies actual creative/rights/license/name approval, then promote approved source through Identity compiler/verify/apply; actual Deck visual/controller evidence remains."
+      "remaining_scope_summary": "Owner supplies actual creative/rights/license/name approval, then promote approved source through Identity compiler/verify/apply; actual Deck visual/controller evidence remains.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:49:29Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/38#issuecomment-6857893616"
     },
     {
       "number": 39,
       "url": "https://github.com/szmyty/obsgod/issues/39",
       "title": "Redesign the controller-first setup, streaming and recovery UI",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:57Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -6787,13 +6897,18 @@
         "native"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:57Z",
-      "remaining_scope_summary": "Actual new-user/controller/QAM/modal/microphone/clipboard usability and device failures remain; product browser flows passed."
+      "remaining_scope_summary": "Actual new-user/controller/QAM/modal/microphone/clipboard usability and device failures remain; product browser flows passed.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:49:34Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/39#issuecomment-6857895436"
     },
     {
       "number": 40,
       "url": "https://github.com/szmyty/obsgod/issues/40",
       "title": "Add guided Kick, Twitch, YouTube and custom RTMP(S) destinations",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:57Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -7000,13 +7115,18 @@
         "browser"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:57Z",
-      "remaining_scope_summary": "Separate viewer proves audible picture for every supported provider claim; presets are not OAuth/account integration."
+      "remaining_scope_summary": "Separate viewer proves audible picture for every supported provider claim; presets are not OAuth/account integration.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:49:39Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/40#issuecomment-6857897437"
     },
     {
       "number": 41,
       "url": "https://github.com/szmyty/obsgod/issues/41",
       "title": "Provide guided uninstall, reset and complete owned-data wipe",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:58Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -7210,13 +7330,18 @@
         "decky-updater"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:58Z",
-      "remaining_scope_summary": "Verify actual old/new/partial/reset/wipe/reinstall path and approved future migrated names; owned-path/output/media/preservation fixtures passed."
+      "remaining_scope_summary": "Verify actual old/new/partial/reset/wipe/reinstall path and approved future migrated names; owned-path/output/media/preservation fixtures passed.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:49:44Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/41#issuecomment-6857899453"
     },
     {
       "number": 42,
       "url": "https://github.com/szmyty/obsgod/issues/42",
       "title": "Add an optional owner-verified Support development button",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:48:59Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -7422,13 +7547,18 @@
         "browser"
       ],
       "latest_live_updated_at": "2026-11-12T23:48:59Z",
-      "remaining_scope_summary": "Owner verifies real recipient/control/readiness and optional support outcomes; unconfigured wallets may stay hidden and are not a core-preview gate."
+      "remaining_scope_summary": "Owner verifies real recipient/control/readiness and optional support outcomes; unconfigured wallets may stay hidden and are not a core-preview gate.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:49:49Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/42#issuecomment-6857901503"
     },
     {
       "number": 43,
       "url": "https://github.com/szmyty/obsgod/issues/43",
       "title": "Prepare the branded documentation site and product landing page",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:49:00Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -7633,13 +7763,18 @@
         "browser"
       ],
       "latest_live_updated_at": "2026-11-12T23:49:00Z",
-      "remaining_scope_summary": "Owner chooses contact/domain/hosting and approved brand; review exact preview/deployment plan, then authorize and verify actual hosted TLS/links/rollback."
+      "remaining_scope_summary": "Owner chooses contact/domain/hosting and approved brand; review exact preview/deployment plan, then authorize and verify actual hosted TLS/links/rollback.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:49:54Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/43#issuecomment-6857903417"
     },
     {
       "number": 44,
       "url": "https://github.com/szmyty/obsgod/issues/44",
       "title": "Prepare supported Deck release, security and support operations",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:49:01Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -7858,13 +7993,18 @@
         "hosted-ci"
       ],
       "latest_live_updated_at": "2026-11-12T23:49:01Z",
-      "remaining_scope_summary": "Actual supported Deck claim, hosted CI/review and exact publisher/unsigned-preview decision/publication approval remain; selected runtime audit passed."
+      "remaining_scope_summary": "Actual supported Deck claim, hosted CI/review and exact publisher/unsigned-preview decision/publication approval remain; selected runtime audit passed.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:49:59Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/44#issuecomment-6857905386"
     },
     {
       "number": 45,
       "url": "https://github.com/szmyty/obsgod/issues/45",
       "title": "Launch the verified direct channel and conditionally submit to Decky Store",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-12T23:49:02Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/2",
@@ -8100,7 +8240,12 @@
         "decky-updater"
       ],
       "latest_live_updated_at": "2026-11-12T23:49:02Z",
-      "remaining_scope_summary": "Actual new-user journey and owner-approved direct release/adoption remain; conditional Store work is separate #51 research, not a direct prerequisite."
+      "remaining_scope_summary": "Actual new-user journey and owner-approved direct release/adoption remain; conditional Store work is separate #51 research, not a direct prerequisite.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:50:04Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/45#issuecomment-6857907325"
     },
     {
       "number": 46,
@@ -8380,13 +8525,14 @@
         "act"
       ],
       "latest_live_updated_at": "2026-11-13T06:09:46Z",
-      "remaining_scope_summary": "Review/merge prepared stack, then consolidate intact criteria into #46 plus separate #51; do not mark actual hardware/review/rights/adoption passed."
+      "remaining_scope_summary": "Review/merge prepared stack, then consolidate intact criteria into #46 plus separate #51; do not mark actual hardware/review/rights/adoption passed.",
+      "live_body_sha256": "d90be83ae0c911539fa4909e25254ecfb4fbbbb4fa13a00649c848e3d9cfdc4c"
     },
     {
       "number": 47,
       "url": "https://github.com/szmyty/obsgod/issues/47",
       "title": "Add an easy advanced stream and profile editor",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-13T06:09:47Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/3",
@@ -8609,13 +8755,18 @@
         "browser"
       ],
       "latest_live_updated_at": "2026-11-13T06:09:47Z",
-      "remaining_scope_summary": "Measure actual Deck presets/power/CPU/GPU/performance/audio/controller; keep hardware_qualified=false until actual evidence."
+      "remaining_scope_summary": "Measure actual Deck presets/power/CPU/GPU/performance/audio/controller; keep hardware_qualified=false until actual evidence.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:50:09Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/47#issuecomment-6857909249"
     },
     {
       "number": 48,
       "url": "https://github.com/szmyty/obsgod/issues/48",
       "title": "Improve live audio-device, capture and runtime resilience",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-13T06:09:49Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/3",
@@ -8844,13 +8995,18 @@
         "browser"
       ],
       "latest_live_updated_at": "2026-11-13T06:09:49Z",
-      "remaining_scope_summary": "Qualify actual LCD/OLED/3.5mm/USB/Bluetooth/device/default-route/session/PTT/controller behavior; local/native recovery and mixer tests passed."
+      "remaining_scope_summary": "Qualify actual LCD/OLED/3.5mm/USB/Bluetooth/device/default-route/session/PTT/controller behavior; local/native recovery and mixer tests passed.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:50:14Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/48#issuecomment-6857911301"
     },
     {
       "number": 49,
       "url": "https://github.com/szmyty/obsgod/issues/49",
       "title": "Add recording, replay-buffer and local clip workflows",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-13T06:09:50Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/3",
@@ -9074,13 +9230,18 @@
         "browser"
       ],
       "latest_live_updated_at": "2026-11-13T06:09:50Z",
-      "remaining_scope_summary": "Actual Deck audible recording/replay/finalization/controller/disk/recovery remains; available realOBS/local media fixtures passed."
+      "remaining_scope_summary": "Actual Deck audible recording/replay/finalization/controller/disk/recovery remains; available realOBS/local media fixtures passed.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:50:19Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/49#issuecomment-6857913381"
     },
     {
       "number": 50,
       "url": "https://github.com/szmyty/obsgod/issues/50",
       "title": "Expose stream health and measured quality recommendations",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-13T06:09:51Z",
       "milestone": {
         "url": "https://api.github.com/repos/szmyty/obsgod/milestones/3",
@@ -9303,13 +9464,18 @@
         "browser"
       ],
       "latest_live_updated_at": "2026-11-13T06:09:51Z",
-      "remaining_scope_summary": "Validate actual degraded hardware/network/encoder/device/load metrics and controller readability; no adaptive output changes are implemented."
+      "remaining_scope_summary": "Validate actual degraded hardware/network/encoder/device/load metrics and controller readability; no adaptive output changes are implemented.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:50:24Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/50#issuecomment-6857915277"
     },
     {
       "number": 61,
       "url": "https://github.com/szmyty/obsgod/issues/61",
       "title": "Run available GitHub Actions tests locally with act and fix reproducible failures",
-      "live_state": "open",
+      "live_state": "closed",
       "live_updated_at": "2026-11-13T08:11:55Z",
       "milestone": null,
       "original_body_sha256": "a0cc9d806a05e336eee6d5bf07ddcca8f2c7589d7da596688b3526f633125890",
@@ -9522,7 +9688,12 @@
         "hosted-ci"
       ],
       "latest_live_updated_at": "2026-11-13T08:11:55Z",
-      "remaining_scope_summary": "All available local workflow/matrix/second-run requirements are met with unsupported provider/native-platform reasons and fallbacks explicit. Remaining step is owner review/merge/bookkeeping, not another local run."
+      "remaining_scope_summary": "All available local workflow/matrix/second-run requirements are met with unsupported provider/native-platform reasons and fallbacks explicit. Remaining step is owner review/merge/bookkeeping, not another local run.",
+      "live_state_reason": "not_planned",
+      "closed_at": "2026-11-13T15:50:29Z",
+      "tracking_disposition": "Superseded into46 with intact requirements; full acceptance not asserted.",
+      "consolidated_into": 46,
+      "consolidation_comment": "https://github.com/szmyty/obsgod/issues/61#issuecomment-6857917028"
     }
   ],
   "source_tree": "fba5cfaed616313e2a6b679a55ff234d21a21538",
@@ -9702,7 +9873,6 @@
     "Separate-provider-viewer and actual new-user adoption proof",
     "Required hosted CI billing/account unlock and successful actual jobs/reviews",
     "Provider dependency review unsupported/Dependency graph availability; graph API403",
-    "Owner review and agreed source merges before consolidation",
     "Remaining compatible legacy API migration, companion repo/managed launch and optional creator ecosystem scope",
     "Generic snapshot archive notices/SBOM/install/native qualification before generic publication",
     "Future identity/rights/creative/migration/site/support activation facts and explicit applicable publication actions"
@@ -9722,5 +9892,18 @@
   },
   "public_download_receipt": "completion-public-download.json",
   "qualified_source_is_packaged_revision": true,
-  "evidence_commit_note": "This record is a later docs-only follow-up. It qualifies the exact earlier packaged source1a482808, not the later evidence HEAD."
+  "evidence_commit_note": "This record is a later docs-only follow-up. It qualifies the exact earlier packaged source1a482808, not the later evidence HEAD.",
+  "post_merge_tracking": {
+    "observed_at_utc": "2026-11-13T15:57:57.458040+00:00",
+    "source_revision": "a8b19b3f20d5cf358b6250e120b74b3e63848803",
+    "receipt": "completion-merge.json",
+    "remaining_open_issues": [
+      46,
+      51
+    ],
+    "closed_as_superseded": 34,
+    "criteria_preserved": 230,
+    "source_merge_approved_by_user": true,
+    "formal_GitHub_review_fabricated": false
+  }
 }

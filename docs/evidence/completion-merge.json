@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-11-13T15:57:57.458040+00:00",
+  "owner_authorization": "User: Ok merge them ! after disclosure of candidate, actual checks and outstanding gates. This is source-merge approval, not fabricated GitHub review, creative/rights, release/deploy or paid-resource approval.",
+  "merged_source_revision": "a8b19b3f20d5cf358b6250e120b74b3e63848803",
+  "merged_source_tree": "261aa3f8406d4afed0c68aeada1aecd0a425130c",
+  "reviewed_revision": "b7013a64a7c2242d5069a1062f292cbfbb41a78b",
+  "reviewed_tree_identical": true,
+  "merge_method": "ordinary merge commits with expected head checks; no bypass, force or protection change",
+  "merge_order": [
+    {
+      "number": 58,
+      "head": "8df2884deb0b89ba6e87caaf563aa28e4707bdf3",
+      "base": "master",
+      "sha": "76e66c7b6b09e10f0ae5b040af1fcd13017c5b81",
+      "merged": true,
+      "merged_at": "2026-11-13T15:35:10Z"
+    },
+    {
+      "number": 59,
+      "head": "1fe5ec1cf2fcbf2040a3804fd9f415eb87b62cf4",
+      "base": "master",
+      "sha": "8b10d985c94bf7754a98d371bcbf28633561c0d1",
+      "merged": true,
+      "merged_at": "2026-11-13T15:36:03Z"
+    },
+    {
+      "number": 60,
+      "head": "250b29b437c14429a3049f3f0206bd6f16e0253d",
+      "base": "master",
+      "base_before": "8b10d985c94bf7754a98d371bcbf28633561c0d1",
+      "sha": "62553788903ec1ff18334b40dc31193b8dad429e",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    },
+    {
+      "number": 62,
+      "head": "b1ee00d58227b5a0d41fa5df03a5ccc5700f8ebe",
+      "base": "master",
+      "base_before": "62553788903ec1ff18334b40dc31193b8dad429e",
+      "sha": "aae93a3273bc450752aa9d0e3275b5d454da3296",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    },
+    {
+      "number": 63,
+      "head": "fcfa0c2577b5260e1b7036d83daece4a9452e41c",
+      "base": "master",
+      "base_before": "aae93a3273bc450752aa9d0e3275b5d454da3296",
+      "sha": "eb51deef2cd9431c3ac737462fcf4b3d1fa84b3c",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    },
+    {
+      "number": 64,
+      "head": "92615f7085bc2329ff5b9dbc26cc0239b0ff7357",
+      "base": "master",
+      "base_before": "eb51deef2cd9431c3ac737462fcf4b3d1fa84b3c",
+      "sha": "e9c3cfff21ff024cfa985ca1ae8b264cab571a7d",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    },
+    {
+      "number": 65,
+      "head": "b7013a64a7c2242d5069a1062f292cbfbb41a78b",
+      "base": "master",
+      "base_before": "e9c3cfff21ff024cfa985ca1ae8b264cab571a7d",
+      "sha": "a8b19b3f20d5cf358b6250e120b74b3e63848803",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    }
+  ],
+  "applicable_rules_observed": [],
+  "detailed_protection_read": "403; metadata protected=false; branch rules and rulesets empty; ordinary API accepted merges",
+  "candidate_qualified_source": "1a482808a8281c8bce092cea057df758836b34e9",
+  "candidate_artifact_commit": "d0a4973f9b1835471e99b046d2d4313b042f9ae2",
+  "candidate_source_reachable_from_default": true,
+  "candidate_rebuilt_or_relabelled": false,
+  "postmerge_fresh_checks": {
+    "go": "completion-merge/go-matrix.json",
+    "frontend_python": "completion-merge/frontend-python-matrix.json",
+    "scope": "Actual fresh checks at merged a8b19b3; native/ACT/package qualification remains recorded at its actual1a source, not reattributed to this merge."
+  },
+  "environment_recovery": "Initial frontend build encountered root-owned ignored output. That directory was preserved externally and rebuilt as UID1000; source/root dist unchanged. Prior attempt and reporter correction retained in frontend receipt.",
+  "public_downloads_after_source_cleanup": {
+    "outcome": "passed",
+    "files": 47,
+    "receipt": "completion-merge/public-download-matrix.json"
+  },
+  "source_branches_deleted": 7,
+  "artifact_refs_preserved": true,
+  "tracking": {
+    "open_issues": [
+      46,
+      51
+    ],
+    "closed_as_superseded": 34,
+    "criteria_preserved": 230,
+    "acceptance_claimed_by_closure": false,
+    "research51_body_unchanged": true,
+    "receipt": "completion-merge/issue-transfer.json"
+  },
+  "hosted_ci": {
+    "outcome": "unavailable",
+    "actual_runs": 5,
+    "executed_steps": 0,
+    "reason": "The job was not started because your account is locked due to a billing issue.",
+    "receipt": "completion-merge/ci-matrix.json"
+  },
+  "remaining_gates": "Actual Deck/OBS33/Flatpak/Gamescope/controller/headset/provider/adoption, hosted and required independent review, legacy API/companion/provider/generic-distribution work and applicable rights/publisher/publication actions remain in46; monetization/Store research stays51.",
+  "release_published": false,
+  "site_deployed": false,
+  "money_spent": false,
+  "default_branch": "master",
+  "default_branch_rename": "Owner UI action still required after actual403; not attempted again."
+}

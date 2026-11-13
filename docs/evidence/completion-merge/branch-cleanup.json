@@ -1,0 +1,71 @@
+{
+  "checked_at_utc": "2026-11-13T15:52:22.797448+00:00",
+  "default_branch": "master",
+  "default_revision": "a8b19b3f20d5cf358b6250e120b74b3e63848803",
+  "rows": [
+    {
+      "pr": 58,
+      "branch": "codex/m3-stream-workspace",
+      "head": "8df2884deb0b89ba6e87caaf563aa28e4707bdf3",
+      "outcome": "deleted merged source branch",
+      "history_reachable_from_default": true
+    },
+    {
+      "pr": 59,
+      "branch": "codex/m3-controller-workflows",
+      "head": "1fe5ec1cf2fcbf2040a3804fd9f415eb87b62cf4",
+      "outcome": "deleted merged source branch",
+      "history_reachable_from_default": true
+    },
+    {
+      "pr": 60,
+      "branch": "codex/m3-output-confirmation",
+      "head": "250b29b437c14429a3049f3f0206bd6f16e0253d",
+      "outcome": "deleted merged source branch",
+      "history_reachable_from_default": true
+    },
+    {
+      "pr": 62,
+      "branch": "codex/completion-foundation",
+      "head": "b1ee00d58227b5a0d41fa5df03a5ccc5700f8ebe",
+      "outcome": "deleted merged source branch",
+      "history_reachable_from_default": true
+    },
+    {
+      "pr": 63,
+      "branch": "codex/completion-audio",
+      "head": "fcfa0c2577b5260e1b7036d83daece4a9452e41c",
+      "outcome": "deleted merged source branch",
+      "history_reachable_from_default": true
+    },
+    {
+      "pr": 64,
+      "branch": "codex/completion-api",
+      "head": "92615f7085bc2329ff5b9dbc26cc0239b0ff7357",
+      "outcome": "deleted merged source branch",
+      "history_reachable_from_default": true
+    },
+    {
+      "pr": 65,
+      "branch": "codex/completion-qualification",
+      "head": "b7013a64a7c2242d5069a1062f292cbfbb41a78b",
+      "outcome": "deleted merged source branch",
+      "history_reachable_from_default": true
+    }
+  ],
+  "preserved_refs": {
+    "refs/heads/artifacts/completion-deck9-review": "d0a4973f9b1835471e99b046d2d4313b042f9ae2",
+    "refs/heads/artifacts/m2-deck7-review": "e202f34070ef6174fbf86b75f9cc87ace74d6a14",
+    "refs/heads/artifacts/m3-deck8-review": "9ad051ecbb41df92c723a54bdfb6aaaeb1097898",
+    "refs/heads/master": "a8b19b3f20d5cf358b6250e120b74b3e63848803"
+  },
+  "remaining_refs": {
+    "refs/heads/artifacts/completion-deck9-review": "d0a4973f9b1835471e99b046d2d4313b042f9ae2",
+    "refs/heads/artifacts/m2-deck7-review": "e202f34070ef6174fbf86b75f9cc87ace74d6a14",
+    "refs/heads/artifacts/m3-deck8-review": "9ad051ecbb41df92c723a54bdfb6aaaeb1097898",
+    "refs/heads/master": "a8b19b3f20d5cf358b6250e120b74b3e63848803"
+  },
+  "artifact_refs_unchanged": true,
+  "local_merged_branches_deleted": 7,
+  "force_deletion_used": false
+}

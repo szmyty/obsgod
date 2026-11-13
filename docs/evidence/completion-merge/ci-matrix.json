@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "revision": "a8b19b3f20d5cf358b6250e120b74b3e63848803",
+  "observed_at": "2026-11-13T15:53:29.088112+00:00",
+  "platform": "GitHub-hosted runner scheduling",
+  "outcome": "unavailable",
+  "actual_run_conclusions": "See exact rows; no local pass substitutes for hosted execution",
+  "executed_steps": 0,
+  "runs": [
+    {
+      "id": 43454610792,
+      "name": "lint",
+      "event": "push",
+      "url": "https://github.com/szmyty/obsgod/actions/runs/43454610792",
+      "status": "completed",
+      "conclusion": "failure",
+      "head_sha": "a8b19b3f20d5cf358b6250e120b74b3e63848803",
+      "jobs": [
+        {
+          "name": "format, vet and staticcheck",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": 0,
+          "url": "https://github.com/szmyty/obsgod/actions/runs/43454610792/job/131985327697"
+        },
+        {
+          "name": "dependency-review",
+          "status": "completed",
+          "conclusion": "skipped",
+          "steps": 0,
+          "url": "https://github.com/szmyty/obsgod/actions/runs/43454610792/job/131985330417"
+        }
+      ]
+    },
+    {
+      "id": 43454610002,
+      "name": "build",
+      "event": "push",
+      "url": "https://github.com/szmyty/obsgod/actions/runs/43454610002",
+      "status": "queued",
+      "conclusion": null,
+      "head_sha": "a8b19b3f20d5cf358b6250e120b74b3e63848803",
+      "jobs": [
+        {
+          "name": "build (macos-15)",
+          "status": "queued",
+          "conclusion": null,
+          "steps": 0,
+          "url": "https://github.com/szmyty/obsgod/actions/runs/43454610002/job/131985328669"
+        },
+        {
+          "name": "build (windows-2025)",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": 0,
+          "url": "https://github.com/szmyty/obsgod/actions/runs/43454610002/job/131985328935"
+        },
+        {
+          "name": "build (ubuntu-24.04)",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": 0,
+          "url": "https://github.com/szmyty/obsgod/actions/runs/43454610002/job/131985329227"
+        }
+      ]
+    },
+    {
+      "id": 43454609988,
+      "name": "Steam Deck candidate",
+      "event": "push",
+      "url": "https://github.com/szmyty/obsgod/actions/runs/43454609988",
+      "status": "completed",
+      "conclusion": "failure",
+      "head_sha": "a8b19b3f20d5cf358b6250e120b74b3e63848803",
+      "jobs": [
+        {
+          "name": "candidate",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": 0,
+          "url": "https://github.com/szmyty/obsgod/actions/runs/43454609988/job/131985323913"
+        }
+      ]
+    },
+    {
+      "id": 43454609920,
+      "name": "goreleaser",
+      "event": "push",
+      "url": "https://github.com/szmyty/obsgod/actions/runs/43454609920",
+      "status": "completed",
+      "conclusion": "failure",
+      "head_sha": "a8b19b3f20d5cf358b6250e120b74b3e63848803",
+      "jobs": [
+        {
+          "name": "goreleaser",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": 0,
+          "url": "https://github.com/szmyty/obsgod/actions/runs/43454609920/job/131985323063"
+        }
+      ]
+    },
+    {
+      "id": 43454609864,
+      "name": "coverage",
+      "event": "push",
+      "url": "https://github.com/szmyty/obsgod/actions/runs/43454609864",
+      "status": "completed",
+      "conclusion": "failure",
+      "head_sha": "a8b19b3f20d5cf358b6250e120b74b3e63848803",
+      "jobs": [
+        {
+          "name": "coverage",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": 0,
+          "url": "https://github.com/szmyty/obsgod/actions/runs/43454609864/job/131985327862"
+        }
+      ]
+    }
+  ],
+  "annotations": [
+    {
+      "job": "format, vet and staticcheck",
+      "message": "The job was not started because your account is locked due to a billing issue.",
+      "annotation_level": "failure"
+    },
+    {
+      "job": "build (windows-2025)",
+      "message": "The job was not started because your account is locked due to a billing issue.",
+      "annotation_level": "failure"
+    },
+    {
+      "job": "build (ubuntu-24.04)",
+      "message": "The job was not started because your account is locked due to a billing issue.",
+      "annotation_level": "failure"
+    },
+    {
+      "job": "candidate",
+      "message": "The job was not started because your account is locked due to a billing issue.",
+      "annotation_level": "failure"
+    },
+    {
+      "job": "goreleaser",
+      "message": "The job was not started because your account is locked due to a billing issue.",
+      "annotation_level": "failure"
+    },
+    {
+      "job": "coverage",
+      "message": "The job was not started because your account is locked due to a billing issue.",
+      "annotation_level": "failure"
+    }
+  ],
+  "limitations": [
+    "Local act does not qualify Windows/macOS or hosted CI. No paid resources enabled."
+  ]
+}

@@ -1,16 +1,17 @@
-# Candidate9 owner and publisher review
+# Candidate 9 owner and publisher review
 
 All required available local checks passed at exact clean source
 `1a482808a8281c8bce092cea057df758836b34e9` (350 tracked files). Candidate:
 **0.1.0-deck.9**. The compatible product remains Decky Stream display name,
 `obsgod` executable/module/storage and `OBSGod` installed Decky identity.
 
-The candidate is ready for source review and actual Steam Deck qualification.
-The immutable artifact commit is `d0a4973f9b1835471e99b046d2d4313b042f9ae2`. All47 public files, runtime/updater inventories and the full350-file source snapshot passed independent downloaded-byte verification. This is a review checkpoint, not a published
+The owner approved the seven source merges; actual Steam Deck qualification remains open.
+The immutable artifact commit is `d0a4973f9b1835471e99b046d2d4313b042f9ae2`. All 47 public files, runtime/updater inventories and the full350-file source snapshot passed independent downloaded-byte verification. This is a review checkpoint, not a published
 release, deployment, supported-hardware certification or completed stable-v1.
 
 Review/merge order is **#58 → #59 → #60 → #62 → #63 → #64 → #65**. The four
-new completion drafts are #62–#65. No source merge or issue closure occurred.
+completion drafts #62–#65 and earlier three are now merged. The 34 superseded
+issues moved intact to #46; no missing acceptance is claimed by that closure.
 
 ## Exact candidate and artifacts
 
@@ -136,7 +137,7 @@ capture/output/storage guards were unchanged. Final source reruns passed.
 Fresh 12:32:36 UTC query: **36 open issues, seven draft PRs**, `master` remains
 `ed7d100d356ce803d2cb1c1afef3836759deef10`; `main` 404, protection details 403,
 rulesets `[]`. Latest published tag is updater-only `v0.1.0-deck.4-updater.1`.
-Candidate9 is not published. Metadata `admin: true` did not provide usable branch
+Candidate 9 is not published. Metadata `admin: true` did not provide usable branch
 administration scope: one prior-authorized `master`→`main` rename returned 403
 “Resource not accessible by integration.” The owner can rename it in GitHub UI,
 separately from repository transfer/branding. No settings/protection changed.
@@ -158,3 +159,12 @@ performed by this review packet.
 [Checksum-verifying Desktop install command](candidate-9-install.md). [Immutable review packet](https://github.com/szmyty/obsgod/tree/d0a4973f9b1835471e99b046d2d4313b042f9ae2). [Qualification](evidence/completion-qualification.json), [230-criterion ledger](evidence/completion-criteria.json), [download proof](evidence/completion-public-download.json), [dated audit](../audits/audit-2026-11-13.md), and [proposed post-merge consolidation](finalboss-plan.md).
 
 The proposed current-compatible publication is GitHub prerelease `v0.1.0-deck.9` in `szmyty/obsgod`, from exact source `1a482808a8281c8bce092cea057df758836b34e9`, using the verified runtime/plugin/updater, manifests/checksums, source archive, SPDX/unsigned audit and qualification evidence above. Responsible publisher: repository owner `szmyty`, subject to actual rights/acceptance and explicit release approval. No release is published. The future organization/identity/site/wallet lanes remain separate; no website destination or deployment is approved by this packet.
+
+## Post-merge status
+
+[Merge/check/cleanup and issue-transfer evidence](evidence/completion-merge.json).
+The seven feature PRs are merged, source branches removed and all 47 downloads
+reverified. Only #46 implementation/acceptance and unchanged #51 research remain
+open. Full candidate qualification remains bound to1a482808; fresh scoped checks
+at merge a8b19b3 are separate. No release/deployment/creative approval follows
+from source merge or administrative supersession.

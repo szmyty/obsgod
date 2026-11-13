@@ -1,0 +1,463 @@
+{
+  "schema_version": 1,
+  "kind": "fresh-postmerge-frontend-python-qualification",
+  "revision": "a8b19b3f20d5cf358b6250e120b74b3e63848803",
+  "expected_tree": "261aa3f8406d4afed0c68aeada1aecd0a425130c",
+  "observed_at": "2026-11-13T15:44:02.337142+00:00",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "host_uid": 1000,
+  "tools": {
+    "python": {
+      "command": "python3 --version",
+      "version": "Python 3.12.14",
+      "exit_code": 0
+    },
+    "node": {
+      "command": "node --version",
+      "version": "v24.19.0",
+      "exit_code": 0
+    },
+    "npm": {
+      "command": "npm --version",
+      "version": "11.9.0",
+      "exit_code": 0
+    }
+  },
+  "checks": [
+    {
+      "id": "product-generated",
+      "command": "python3 scripts/generate-product.py --check",
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "seconds": 0.022,
+      "status": "passed",
+      "stdout": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/product-generated.stdout",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/product-generated.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "id": "support-generated",
+      "command": "node scripts/generate-support.mjs --check",
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "seconds": 0.052,
+      "status": "passed",
+      "stdout": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/support-generated.stdout",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/support-generated.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "id": "python-user-fixtures",
+      "command": "python3 -B -m unittest discover -s steamdeck/tests -p 'test_*.py' -v",
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "seconds": 5.75,
+      "status": "passed",
+      "stdout": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/python-user-fixtures.stdout",
+      "stdout_sha256": "a4a1a48cfab4f46f9a173dcf5fcb18251227da6a48a93695c8ad0fb2aa4d8525",
+      "stdout_bytes": 1299,
+      "stderr": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/python-user-fixtures.stderr",
+      "stderr_sha256": "da5e1b35b9436853550beb624c1bc30d49675fb25247a414715ed703f456d5f4",
+      "stderr_bytes": 20458,
+      "tests": 127,
+      "passed": 127,
+      "skipped": 0,
+      "failed": 0
+    },
+    {
+      "id": "script-fixtures",
+      "command": "python3 -B -m unittest discover -s scripts/tests -p 'test_*.py' -v",
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "seconds": 0.592,
+      "status": "passed",
+      "stdout": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/script-fixtures.stdout",
+      "stdout_sha256": "5255a2201ecf102d84eb3449443942fdecf599559c031e3dbbf28658a68fb8a4",
+      "stdout_bytes": 401,
+      "stderr": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/script-fixtures.stderr",
+      "stderr_sha256": "7b3b50928c1ccf8484e954dc3f73efdabf9bf7b411360990eef1cd312bd58413",
+      "stderr_bytes": 3729,
+      "tests": 23,
+      "passed": 23,
+      "skipped": 0,
+      "failed": 0
+    },
+    {
+      "id": "node-controller-state",
+      "command": "npm --prefix steamdeck/decky test",
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "seconds": 0.545,
+      "status": "passed",
+      "stdout": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/node-controller-state.stdout",
+      "stdout_sha256": "f0799f781f7dc096d49e1d701b90ac4c5fab58869a314f9c932ec02c7d44c7bb",
+      "stdout_bytes": 2885,
+      "stderr": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/node-controller-state.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "node_summary": {
+        "tests": 30,
+        "pass": 30,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "reporter": "Node24 spec reporter"
+    },
+    {
+      "id": "node-typecheck",
+      "command": "npm --prefix steamdeck/decky run typecheck",
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "seconds": 1.325,
+      "status": "passed",
+      "stdout": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/node-typecheck.stdout",
+      "stdout_sha256": "4c51a932c40c1dc7887fef7b6e3a4ef90e59dbb21158e1fe8e6c1567a99e4a0e",
+      "stdout_bytes": 55,
+      "stderr": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/node-typecheck.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "id": "node-build",
+      "command": "npm --prefix steamdeck/decky run build",
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "seconds": 0.849,
+      "status": "passed",
+      "stdout": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/node-build-retry.stdout",
+      "stdout_sha256": "dc611fa44b7963caaa5eebbbc6de4c8ef01c6a5ae9f4f7682caa21b46f14459b",
+      "stdout_bytes": 48,
+      "stderr": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/node-build-retry.stderr",
+      "stderr_sha256": "6c98e1b90346aa85ccaffbf51fcc19c836f7113780b834502de1db86660eab24",
+      "stderr_bytes": 49,
+      "attempt": 2,
+      "resolved_initial_permission_failure": true
+    },
+    {
+      "id": "support-generated-after-build",
+      "command": "node scripts/generate-support.mjs --check",
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "seconds": 0.027,
+      "status": "passed",
+      "stdout": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/support-generated-after-build-retry.stdout",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/support-generated-after-build-retry.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "id": "node-audit",
+      "command": "npm --prefix steamdeck/decky audit --json",
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "seconds": 0.517,
+      "status": "passed",
+      "stdout": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/node-audit.stdout",
+      "stdout_sha256": "9baca110f6906dbea78529c64b32cf240b2bb2e8515f4f21748c3dcba22226e8",
+      "stdout_bytes": 361,
+      "stderr": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/node-audit.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "audit_summary": {
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        },
+        "dependencies": {
+          "prod": 4,
+          "dev": 72,
+          "optional": 53,
+          "peer": 0,
+          "peerOptional": 0,
+          "total": 75
+        }
+      }
+    },
+    {
+      "id": "site-safety",
+      "command": "python3 -B site/tests/test_build.py --output /workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-safety",
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "seconds": 0.184,
+      "status": "passed",
+      "stdout": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-safety.stdout",
+      "stdout_sha256": "8fdc76a9670ba80f32adcc9bdd82d511b939c27a0da1f395bc9f4f4bcb246fad",
+      "stdout_bytes": 343,
+      "stderr": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-safety.stderr",
+      "stderr_sha256": "0486fe42ae0a786701b2bb8c5c3e3c4eddc68cd9b0e7bc845a72aed2d53f4820",
+      "stderr_bytes": 1355,
+      "safety_summary": {
+        "status": "passed",
+        "source": {
+          "dirty": false,
+          "revision": "a8b19b3f20d5cf358b6250e120b74b3e63848803"
+        },
+        "case_count": 11,
+        "passed_cases": [
+          "__main__.BuildSiteSafety.test_broken_local_anchor_is_rejected",
+          "__main__.BuildSiteSafety.test_broken_local_link_is_rejected",
+          "__main__.BuildSiteSafety.test_display_metadata_is_html_escaped",
+          "__main__.BuildSiteSafety.test_identical_inputs_produce_identical_bytes",
+          "__main__.BuildSiteSafety.test_invalid_repository_is_rejected",
+          "__main__.BuildSiteSafety.test_non_https_support_url_is_rejected",
+          "__main__.BuildSiteSafety.test_python_bytecode_cache_does_not_change_outputs",
+          "__main__.BuildSiteSafety.test_remote_css_import_is_rejected",
+          "__main__.BuildSiteSafety.test_stale_output_check_is_rejected",
+          "__main__.BuildSiteSafety.test_symlink_output_refuses_without_modifying_target",
+          "__main__.BuildSiteSafety.test_unrelated_output_is_preserved"
+        ],
+        "failed_cases": [],
+        "error_cases": [],
+        "skipped_cases": [],
+        "scope": "Site build/fixture checks only; no device, hosting or publication qualification."
+      }
+    },
+    {
+      "id": "site-build-a",
+      "command": "python3 -B scripts/build-site.py --output /workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-build-a",
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "seconds": 0.053,
+      "status": "passed",
+      "stdout": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-build-a.stdout",
+      "stdout_sha256": "cc2f9d928ed2eae39f388fbe61fbc1562a167ff68e32eb09a337958d1f38b56f",
+      "stdout_bytes": 194,
+      "stderr": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-build-a.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "site_summary": {
+        "external_links_syntax_checked": 85,
+        "files": 12,
+        "local_links": 136,
+        "output": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-build-a",
+        "pages": 9,
+        "status": "built"
+      }
+    },
+    {
+      "id": "site-build-b",
+      "command": "python3 -B scripts/build-site.py --output /workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-build-b",
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "seconds": 0.052,
+      "status": "passed",
+      "stdout": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-build-b.stdout",
+      "stdout_sha256": "e12edc95c168ac8a4502bb3031b428131c52157f8999980baa3dd76c60666b20",
+      "stdout_bytes": 194,
+      "stderr": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-build-b.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "site_summary": {
+        "external_links_syntax_checked": 85,
+        "files": 12,
+        "local_links": 136,
+        "output": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-build-b",
+        "pages": 9,
+        "status": "built"
+      }
+    },
+    {
+      "id": "site-check-a",
+      "command": "python3 -B scripts/build-site.py --output /workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-build-a --check",
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "seconds": 0.039,
+      "status": "passed",
+      "stdout": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-check-a.stdout",
+      "stdout_sha256": "bbb3168c50834c50c0e5dc223cb6b66ac4dd2f84fea2ec83cba6a70095ee1891",
+      "stdout_bytes": 196,
+      "stderr": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-check-a.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "site_summary": {
+        "external_links_syntax_checked": 85,
+        "files": 12,
+        "local_links": 136,
+        "output": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-build-a",
+        "pages": 9,
+        "status": "checked"
+      }
+    },
+    {
+      "id": "site-check-b",
+      "command": "python3 -B scripts/build-site.py --output /workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-build-b --check",
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "seconds": 0.035,
+      "status": "passed",
+      "stdout": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-check-b.stdout",
+      "stdout_sha256": "1fd0339188747c47899004bb585d1aa271ae72bdc517993734b8f31e236e846e",
+      "stdout_bytes": 196,
+      "stderr": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-check-b.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "site_summary": {
+        "external_links_syntax_checked": 85,
+        "files": 12,
+        "local_links": 136,
+        "output": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-build-b",
+        "pages": 9,
+        "status": "checked"
+      }
+    }
+  ],
+  "status": "passed",
+  "limitations": [
+    "These fresh post-merge checks cover Python/script fixtures, Node/controller state, generated sources, build outputs, dependency audit and offline site safety.",
+    "No Go/Docker/native/browser/actual Deck/provider/session test, release packaging or publication is performed by this receipt.",
+    "Ignored steamdeck/decky/dist rebuild is allowed; root dist candidate artifacts must remain untouched."
+  ],
+  "source_before": {
+    "revision": "a8b19b3f20d5cf358b6250e120b74b3e63848803",
+    "tree": "261aa3f8406d4afed0c68aeada1aecd0a425130c",
+    "branch": "master",
+    "clean": true,
+    "tracked_files": 374,
+    "manifest": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/source-before.json",
+    "manifest_sha256": "8732015c3e04fc783a5bb5456740ed225ae1b7ac6c26deb1d124e58ae01a9c9f"
+  },
+  "root_dist_before": {
+    "path": "/workspace/obsgod/dist",
+    "file_count": 186,
+    "manifest": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/root-dist-before.json",
+    "manifest_sha256": "34b0ac02a0252c5838a1fa4690af670a38f69fd2c5fd7f52a09270adc01bd5f2"
+  },
+  "decky_build_output": {
+    "path": "/workspace/obsgod/steamdeck/decky/dist",
+    "file_count": 5,
+    "manifest": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/decky-dist-built-final.json",
+    "manifest_sha256": "eab8554a553c9b8e3a2219b9f34f768ea28e2d29b4bd28e6be3d5197f949df56"
+  },
+  "site_reproducibility": {
+    "build_a": {
+      "path": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-build-a",
+      "file_count": 12,
+      "manifest": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-files-a.json",
+      "manifest_sha256": "f26d59936babd3dbf85810fe02af28d9db9182fe5c725275bd42336492d1c157"
+    },
+    "build_b": {
+      "path": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-build-b",
+      "file_count": 12,
+      "manifest": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/site-files-b.json",
+      "manifest_sha256": "f26d59936babd3dbf85810fe02af28d9db9182fe5c725275bd42336492d1c157"
+    },
+    "byte_identical": true
+  },
+  "source_after": {
+    "revision": "a8b19b3f20d5cf358b6250e120b74b3e63848803",
+    "tree": "261aa3f8406d4afed0c68aeada1aecd0a425130c",
+    "branch": "master",
+    "clean": true,
+    "tracked_files": 374,
+    "manifest": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/source-after-rebuild.json",
+    "manifest_sha256": "8732015c3e04fc783a5bb5456740ed225ae1b7ac6c26deb1d124e58ae01a9c9f"
+  },
+  "root_dist_after": {
+    "path": "/workspace/obsgod/dist",
+    "file_count": 186,
+    "manifest": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/root-dist-after-rebuild.json",
+    "manifest_sha256": "34b0ac02a0252c5838a1fa4690af670a38f69fd2c5fd7f52a09270adc01bd5f2"
+  },
+  "root_dist_unchanged": true,
+  "source_unchanged": true,
+  "finished_at": "2026-11-13T15:47:22.979369+00:00",
+  "counts": {
+    "passed": 14,
+    "failed": 0,
+    "skipped": 0,
+    "unavailable": 0
+  },
+  "prior_attempts": [
+    {
+      "receipt": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/frontend-python-matrix.initial-attempt.json",
+      "receipt_sha256": "7b2bc8ea252068c887ede72471bbe9e30976788231e68df675691b1041c122e3",
+      "initial_build": {
+        "id": "node-build",
+        "command": "npm --prefix steamdeck/decky run build",
+        "cwd": "/workspace/obsgod",
+        "environment_overrides": {
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "exit_code": 1,
+        "seconds": 0.462,
+        "status": "failed",
+        "stdout": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/node-build.stdout",
+        "stdout_sha256": "dc611fa44b7963caaa5eebbbc6de4c8ef01c6a5ae9f4f7682caa21b46f14459b",
+        "stdout_bytes": 48,
+        "stderr": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/node-build.stderr",
+        "stderr_sha256": "ce9a5873776d690412b01b1dba1a91df085940c990ec09912b9030c9f848e216",
+        "stderr_bytes": 831,
+        "validation_error": "Command returned nonzero status"
+      },
+      "classification": "failed_permission: pre-existing ignored Decky dist/types.js belonged to root; normal UID1000 copy failed. No source/root-dist mutation.",
+      "node_reporter_correction": "Node command exited0 and all30 passed; external validator incorrectly expected TAP # lines instead of Node24 spec \u2139 lines. Existing fresh output has now been correctly parsed."
+    }
+  ],
+  "ignored_build_recovery": {
+    "action": "Preserved and renamed only ignored steamdeck/decky/dist, then rebuilt as UID1000",
+    "backup": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/decky-dist-before-rebuild",
+    "backup_manifest": {
+      "path": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/decky-dist-before-rebuild",
+      "file_count": 6,
+      "manifest": "/workspace/.obsgod-tools/completion/merge/frontend-python-a8b19b3/decky-dist-preserved.json",
+      "manifest_sha256": "c08eb2cc87ba7fdf1637735a048ca1cc4938bccb432b9ffc3c93bb64c51b0b6e"
+    },
+    "host_sudo_chmod_chown_used": false
+  }
+}
