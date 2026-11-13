@@ -91,7 +91,7 @@ def verify_checksum_list(data, artifacts):
     require(all(sha(artifacts[name]) == checksum for name, checksum in values.items()), "Outer artifact checksum mismatch")
 
 
-def go_inventory(binary, revision):
+def go_inventory(binary, revision, allow_no_dependencies=False):
     # `go version -m` parses build metadata; it never executes the package.
     with tempfile.TemporaryDirectory(prefix="obsgod-audit-") as temporary:
         path = Path(temporary) / "obsgod"
@@ -108,10 +108,10 @@ def go_inventory(binary, revision):
         if parts[0] == "dep":
             require(len(parts) == 4, "Malformed Go build dependency")
             _, name, version, checksum = parts
-            require(f"{name} {version}" in source_mod and f"{name} {version} {checksum}" in source_sum,
+            require(re.search(r"(?m)^\s*(?:require\s+)?" + re.escape(name) + r"\s+" + re.escape(version) + r"(?:\s|$)", source_mod) and f"{name} {version} {checksum}" in source_sum,
                     "Binary dependency differs from pinned source: " + name)
             modules.append({"name": name, "version": version, "go_sum": checksum})
-    require(modules, "No Go dependency inventory found")
+    require(modules or allow_no_dependencies, "No Go dependency inventory found")
     return sorted(modules, key=lambda item: item["name"])
 
 
@@ -156,6 +156,8 @@ def audit(directory, expected_revision):
         source = "steamdeck/decky/" + name if name in ("main.py", "plugin.json") else "steamdeck/" + name
         require(plugin[name] == git(revision, source), "Decky source differs from revision: " + name)
     modules = go_inventory(payload["obsgod"], revision)
+    helper_modules = go_inventory(payload["decky-install"], revision, allow_no_dependencies=True)
+    modules = sorted({(module["name"], module["version"]): module for module in [*modules, *helper_modules]}.values(), key=lambda item: item["name"])
     notices = payload["THIRD_PARTY_NOTICES.md"].decode()
     require(all(module["name"] + " " + module["version"] in notices for module in modules), "Missing shipped Go dependency notices")
     updater_name = f"obsgod-one-click-update_{version}_linux_amd64.zip"

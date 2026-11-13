@@ -182,6 +182,12 @@ def main():
                "--env", "NODE_USE_ENV_PROXY=1", "--env", "SSL_CERT_FILE=/run/obsgod-ca.pem",
                "--env", "GIT_SSL_CAINFO=/run/obsgod-ca.pem", "--env", "PIP_CERT=/run/obsgod-ca.pem"]
     command += mappings
+    # act uses the Engine API rather than `docker run`, so Docker client's proxy
+    # defaults are not automatically copied. Values reach only the child argv;
+    # receipts retain their names only. Never change the proxy destination.
+    for key in ("HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY", "NO_PROXY", "http_proxy", "https_proxy", "all_proxy", "no_proxy"):
+        if key in env:
+            command += ["--env", key + "=" + env[key]]
     if args.action in ("list", "dry-run"):
         command += ["-W", ".github/workflows", "--list" if args.action == "list" else "--dryrun"]
     else:
@@ -201,7 +207,7 @@ def main():
                "workflow_sha256": {p.name: sha(p.read_bytes()) for p in sorted((ROOT / ".github/workflows").glob("*.yml"))},
                "started_utc": stamp, "result": "running"}
     # Commands contain session paths; they are local evidence, not release metadata.
-    receipt["command"] = command
+    receipt["command"] = [re.sub(r"^((?:HTTP_PROXY|HTTPS_PROXY|ALL_PROXY|NO_PROXY|http_proxy|https_proxy|all_proxy|no_proxy))=.*$", r"\1=[injected]", value) for value in command]
     prefix.with_suffix(".json").write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n")
     process = subprocess.Popen(command, cwd=ROOT, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
     with prefix.with_suffix(".log").open("w") as log:

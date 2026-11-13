@@ -98,7 +98,7 @@ class ReleaseAuditTests(unittest.TestCase):
         for name in ("main.py", "releases.py", "paths.py", "product.py", "plugin.json"):
             plugin[name] = name.encode()
             source[("steamdeck/decky/" if name in ("main.py", "plugin.json") else "steamdeck/") + name] = plugin[name]
-        runtime = {"obsgod": plugin["bin/obsgod"], "libgstobsgodcapture.so": plugin["bin/libgstobsgodcapture.so"],
+        runtime = {"obsgod": plugin["bin/obsgod"], "decky-install": b"helper binary", "libgstobsgodcapture.so": plugin["bin/libgstobsgodcapture.so"],
                    "CAPTURE-SOURCE.tar.gz": plugin["CAPTURE-SOURCE.tar.gz"], "LICENSE": plugin["LICENSE"],
                    "THIRD_PARTY_NOTICES.md": plugin["THIRD_PARTY_NOTICES.md"], "STEAM-DECK.md": b"guide", "update.py": b"updater"}
         source["steamdeck/update.py"] = b"updater"
