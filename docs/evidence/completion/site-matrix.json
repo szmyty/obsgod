@@ -1,0 +1,187 @@
+{
+  "browser": {
+    "console_errors": 0,
+    "external_requests": 0,
+    "modes": [
+      {
+        "mode": "file-offline",
+        "reason": "Managed Chromium policy blocks file:// navigation; offline loopback HTTP is checked separately.",
+        "status": "unavailable"
+      }
+    ],
+    "proof_sha256": "3a1ca4f2211d01cbfbdfd079de2ac8ece4d92cf59c9d9a8885d2a785b92021e2",
+    "screenshots": {
+      "configuration-mobile.png": "a580c8d59d1a723eb740618148bdc61a85fe17f591d545b3482c5ecc7e364b45",
+      "landing-deck-portrait.png": "5da818fff617d0594a5046702ef20a58b7962a4df60083bda6f172569ab75f76",
+      "landing-deck.png": "0d1b4c6488aab1aaf5d53e91f3f2cb6b77ff9e9b778d2a796b13c9ba1d7044d8",
+      "landing-desktop.png": "e95ef5669a144f90cceb78d42663a86c8965f4fb3b24f519da5746b364d74372",
+      "landing-mobile.png": "b0e21ad7610457456e3900688622b63d1eef5e29c5cb5a9d1fb93e2912ee6762"
+    },
+    "status": "passed-with-explicit-unavailable",
+    "viewport_cases": 45
+  },
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "site/tests/test_build.py",
+        "--output",
+        "/workspace/.obsgod-tools/completion/final/site/safety"
+      ],
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "log": "/workspace/.obsgod-tools/completion/final/site/safety-tests.log",
+      "log_sha256": "0a42562eddf45fcea75d86d90fc4c6fc638250bfea579dc4a769508f8943aee4",
+      "seconds": 0.181,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/build-site.py",
+        "--output",
+        "/workspace/.obsgod-tools/completion/final/site/build-a"
+      ],
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "log": "/workspace/.obsgod-tools/completion/final/site/build-a.log",
+      "log_sha256": "86d98be7a41062d7c23242a94bb5e2a74f57f806db66a3e509105dd142df4dd5",
+      "seconds": 0.037,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/build-site.py",
+        "--output",
+        "/workspace/.obsgod-tools/completion/final/site/build-a",
+        "--check"
+      ],
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "log": "/workspace/.obsgod-tools/completion/final/site/build-a-check.log",
+      "log_sha256": "e3cb78f7550b36f6363cff308d84f2d7dd9bb2f2b54006a95ba0c688e7072f79",
+      "seconds": 0.037,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/build-site.py",
+        "--output",
+        "/workspace/.obsgod-tools/completion/final/site/build-b"
+      ],
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "log": "/workspace/.obsgod-tools/completion/final/site/build-b.log",
+      "log_sha256": "c5988cecd960193d4b3f73eef00de32fb866c6b6a541751850aed417a7aafe9f",
+      "seconds": 0.038,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/build-site.py",
+        "--output",
+        "/workspace/.obsgod-tools/completion/final/site/build-b",
+        "--check"
+      ],
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "log": "/workspace/.obsgod-tools/completion/final/site/build-b-check.log",
+      "log_sha256": "c737d76d4b0d7c9366e7951aa3f62335111f5324fc09ad313396cb99a88498fe",
+      "seconds": 0.038,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "python3",
+        "site/tests/browser.py",
+        "--browser",
+        "/usr/bin/chromium",
+        "--site-dir",
+        "/workspace/.obsgod-tools/completion/final/site/browser-preview",
+        "--output",
+        "/workspace/.obsgod-tools/completion/final/site/browser-proof"
+      ],
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "log": "/workspace/.obsgod-tools/completion/final/site/browser-matrix.log",
+      "log_sha256": "c564cf50d106a8c9bf6c6c698782648f4baf875ce7ecb8d3fb88498ecb60ba93",
+      "seconds": 5.373,
+      "status": "passed"
+    }
+  ],
+  "completed_at_utc": "2026-11-13T12:25:10Z",
+  "limits": [
+    "Static candidate site only",
+    "No hosted site/TLS/deployment/rollback evidence",
+    "No real Deck/controller or provider evidence",
+    "No publication/deployment"
+  ],
+  "platform": {
+    "chromium": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+    "chromium_sha256": "2c8d32d29dc6781c35ae196ea83299d507ac88fc339301abe74672feda299779",
+    "font_sha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e",
+    "inkscape": "Inkscape 1.4 (e7c3feb100, 2024-10-09)",
+    "inkscape_sha256": "a1db427b1666d73e477a841b925f2bc44185623cd178cd007f6da3ca8ab4c873",
+    "os": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "playwright": "1.62.0",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "python_executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "uname": {
+      "machine": "x86_64",
+      "node": "c0405567fb23",
+      "processor": "",
+      "release": "6.18.57",
+      "system": "Linux",
+      "version": "#1 SMP Tue Oct 20 21:56:04 UTC 2026"
+    }
+  },
+  "reproducibility": {
+    "archive_sha256": "7380352377e5d42d863ba9ca814e95f0570d67080425fc8a464421ec8453b63a",
+    "files": 12,
+    "manifest_sha256": "e2a8756baf597e06cde7f4a12adf622bee4cfbf3a2954726146f4dedea43b95b",
+    "outputs": {
+      "assets/site.css": "3c6a11e208905897d989925e60148efcd26088cc7b8a4d8e11652307e8e35a35",
+      "assets/site.js": "db7fb2f04cbf57f464a9a91edf6ec32f5e1732d277e4a2561458892f28d932e2",
+      "configuration.html": "c3815b4f6c9af3564eb09b83e09c037249610ff6a4bdbc45c247e798dff0e413",
+      "controls.html": "17d9e6cff7d9b3679c66e9f0c49005bbb5b9aadc115533fb9d008f17f013c987",
+      "index.html": "7dd1ddbcd7579d370515056b7e52d85c3110519badf1da50d7b6f9df045e1a76",
+      "install.html": "6679e5ff26d872208176f4406bfd4e9bdc51feff2c3dfa39ddd08e5ab09a607c",
+      "privacy.html": "b71d9fbe19ce88273a684550c954e6e7435f258bb340557dd83a87f56f0e13a2",
+      "providers.html": "732fcc3b8cb561fbef455ebcfc3fcd52f27f7041aea613dc82fce43b5f52d227",
+      "site-manifest.json": "e2a8756baf597e06cde7f4a12adf622bee4cfbf3a2954726146f4dedea43b95b",
+      "troubleshooting.html": "e563010574db554352ae66aa0bbea6568947ce324e4cc61a1221b515e9eb2d3a",
+      "uninstall.html": "46e05b6fe3f9d765a7d6d353695cc3f7d15e921433c826b77487712ea8504ea7",
+      "updates.html": "cb2f9df20a13c7a7fad02b815a701297d3883648e9260aa50d0c63ad7eb537b6"
+    },
+    "pages": 9,
+    "status": "passed",
+    "zip_metadata": "fixed1980-01-01/0644/lexical-path-order/DEFLATE9"
+  },
+  "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+  "schema": "decky-stream.final-site-matrix/v1",
+  "source_after_sha256": "f46421d9afc5bf5e6d5d4e1987ea4f1d94bfbeee56ee80c9dbf4fbfd8c67778b",
+  "source_before_sha256": "f46421d9afc5bf5e6d5d4e1987ea4f1d94bfbeee56ee80c9dbf4fbfd8c67778b",
+  "source_unchanged": true,
+  "status": "passed-with-explicit-unavailable"
+}

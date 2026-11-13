@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+  "source_clean": true,
+  "outcome": "passed",
+  "command": [
+    "python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "scripts/tests",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "tests": 23,
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "log": "scripts-tests.log",
+  "log_sha256": "6ee1d34725982e23dd58d135721839eb4306591b1529a0259518030267a83fcc"
+}

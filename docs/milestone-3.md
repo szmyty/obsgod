@@ -1,3 +1,9 @@
+Current completion review: [candidate9 owner packet](completion-review.md),
+[install guide](candidate-9-install.md), [230-criterion ledger](evidence/completion-criteria.json)
+and [post-review consolidation proposal](finalboss-plan.md). Exact qualified source
+1a482808 passed the full available local matrix; hardware/hosted/review gates remain.
+Candidate8 details below are historical. No issue is closed or release published.
+
 # Milestone 3 streaming implementation
 
 Owner authorized 2026-11-13: implement #47, #24, #48, #49 and #50. **#51 is

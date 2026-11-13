@@ -1,0 +1,562 @@
+{
+  "aliases": [
+    "media-qualification = native-media-summary",
+    "media-live-qualification = native-live-media-summary",
+    "profile-qualification = native-profiles-summary"
+  ],
+  "complete_runs": 2,
+  "exact_image_package_versions": {
+    "command": [
+      "docker",
+      "run",
+      "--rm",
+      "--network=none",
+      "obsgod-obs-smoke:qualification",
+      "dpkg-query",
+      "-W",
+      "-f=${Package}=${Version}\n",
+      "obs-studio",
+      "obs-plugins",
+      "pulseaudio",
+      "pipewire",
+      "wireplumber",
+      "gstreamer1.0-tools",
+      "python3",
+      "python3-websockets",
+      "ffmpeg",
+      "xvfb",
+      "libgl1-mesa-dri"
+    ],
+    "exit_code": 0,
+    "image": "obsgod-obs-smoke:qualification",
+    "image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+    "observed_utc": "2026-11-13T12:27:12Z",
+    "purpose": "Read-only offline package-version inventory of exact native fixture image; starts no OBS",
+    "receipt": {
+      "bytes": 1138,
+      "path": "act/1a482808-native-image-platform.json",
+      "sha256": "eb3f54d98a0bcb36456a52be56d832dd0903f63b40b6c18f87db84ba76c2ea76"
+    },
+    "source_revision": "1a482808a8281c8bce092cea057df758836b34e9",
+    "stdout": "ffmpeg=7:7.1.5-0+deb13u1\ngstreamer1.0-tools=1.26.2-2\nlibgl1-mesa-dri=25.0.7-2+deb13u1\nobs-plugins=30.2.3+dfsg-3\nobs-studio=30.2.3+dfsg-3\npipewire=1.4.2-1\npulseaudio=17.0+dfsg1-2+b1\npython3=3.13.5-1\npython3-websockets=15.0.1-1\nwireplumber=0.5.8-2\nxvfb=2:21.1.16-1.3+deb13u4\n",
+    "stdout_sha256": "847c0dee90defe4e834ba5f956b49d8b44a28264454fd22bbbbce4e5264e731d"
+  },
+  "harness_commands_per_run": 3,
+  "limits": [
+    "Actual Steam Deck LCD/OLED/Flatpak/Gamescope/AMD/controller/headsets and external providers remain unrun",
+    "Sanitized JSON omits any string credential fields and synthetic RTMP addresses; booleans recording privacy invariants remain intact",
+    "Parent act receipt binds summary files lacking their own source_revision marker to exact manifest/binary/source input hashes"
+  ],
+  "outcome": "passed",
+  "physical_platform_matrix": [
+    {
+      "outcome": "unrun",
+      "platform": "Steam Deck LCD",
+      "reason": "Physical hardware/session/provider access is required"
+    },
+    {
+      "outcome": "unrun",
+      "platform": "Steam Deck OLED",
+      "reason": "Physical hardware/session/provider access is required"
+    },
+    {
+      "outcome": "unrun",
+      "platform": "SteamOS Gaming Mode/Flatpak OBS33/Gamescope/AMD encoding",
+      "reason": "Physical hardware/session/provider access is required"
+    },
+    {
+      "outcome": "unrun",
+      "platform": "Built-in and 3.5 mm/USB/Bluetooth headset microphone/controller behavior",
+      "reason": "Physical hardware/session/provider access is required"
+    },
+    {
+      "outcome": "unrun",
+      "platform": "Kick/Twitch/YouTube/custom service external viewer reception",
+      "reason": "Physical hardware/session/provider access is required"
+    }
+  ],
+  "product_input_bytes_match_across_runs": true,
+  "proof_files_per_run": 18,
+  "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+  "runs": [
+    {
+      "act_log_sha256": "7160952c820a10df6923a9e440d0cc4ef5d32aff70ca416b2ee3f1ed12a2ee72",
+      "act_receipt": "20261113T122827Z-candidate.json",
+      "artifacts_sha256": {
+        "SHA256SUMS": "275dc73251a398c17e01e5083d9db886d23ef2d37fb1ea6209e7631ed2075b34",
+        "UPDATER-SHA256SUMS": "cae8aea79da435bba95286f14ba767efcc91ac129cb6c4b0c6176bb87124bfb7",
+        "capture-build.json": "5f401a620493b5fc282658c16530db6e87a70ad40b95bb88b0212f08417bbd16",
+        "libgstobsgodcapture.so": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+        "manifest.json": "cd07f439f014914c28ac6a1690a6d23cbaf07bd2d2c23cb13e62e390ced629c5",
+        "obsgod": "03f7315f41f2c803a20592526d081b544d697005f24f952ed3442ba1cfb0fe77",
+        "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz": "879ad44ebb28fb695877c071d9708959a7afc39b7b2b9032421f117a267bf803",
+        "obsgod-decky.zip": "9e613d282d242d5be930af1beeb05a8724453ab971a59165c47e22204b296b57",
+        "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip": "e7d24d9860f2a207a130d9002c0e21f3f89c3221e352393b5e9b2b65da9bdc69",
+        "supply-chain/AUDIT-SHA256SUMS": "30c3985fd5d164031b6f318d180dcbf1837c5267f9ae9d2bfcbe06ab3af1fb59",
+        "supply-chain/provenance.unsigned.json": "7eaa6493ad5a97744fc17b9d547b7ad00483e488dbb62ce44e8a557a76c5a85e",
+        "supply-chain/release-audit.json": "31fe79de45d5ae37e0f1a31156d466f9681e1b9a5a77a965c1198c6b2c7c7ad2",
+        "supply-chain/sbom.spdx.json": "83b5ae044a582f9596e1be3c39c0568a61b01083ed68fdfd0fa151f3866da304",
+        "updater-manifest.json": "6ecc084f4fd8bd19b64f63e8024a11ebe4a85edd8fcbb2fdbfe4702b5bf9a821"
+      },
+      "candidate_version": "0.1.0-deck.9",
+      "limits": [
+        "Actual Steam Deck LCD/OLED/Flatpak/Gamescope/AMD/controller/headsets and external providers remain unrun",
+        "Sanitized JSON omits any string credential fields and synthetic RTMP addresses; booleans recording privacy invariants remain intact",
+        "Parent act receipt binds summary files lacking their own source_revision marker to exact manifest/binary/source input hashes"
+      ],
+      "native_commands": [
+        [
+          "docker",
+          "run",
+          "--rm",
+          "--user",
+          "1000:1000",
+          "--mount",
+          "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+          "--mount",
+          "type=bind,src=/workspace/.obsgod-tools/completion/act/tmp/obsgod-audio,dst=/work",
+          "obsgod-obs-smoke:qualification",
+          "dbus-run-session",
+          "--",
+          "bash",
+          "/src/steamdeck/tests/native-obs-smoke.sh"
+        ],
+        [
+          "docker",
+          "run",
+          "--rm",
+          "--user",
+          "1000:1000",
+          "-e",
+          "OBSGOD_QUALIFIED_REVISION=1a482808a8281c8bce092cea057df758836b34e9",
+          "--mount",
+          "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+          "--mount",
+          "type=bind,src=/workspace/.obsgod-tools/completion/act/tmp/obsgod-capture,dst=/work",
+          "obsgod-obs-smoke:qualification",
+          "dbus-run-session",
+          "--",
+          "bash",
+          "/src/steamdeck/tests/native-capture-smoke.sh",
+          "/src/dist"
+        ],
+        [
+          "docker",
+          "run",
+          "--rm",
+          "--user",
+          "1000:1000",
+          "-e",
+          "OBSGOD_QUALIFIED_REVISION=1a482808a8281c8bce092cea057df758836b34e9",
+          "--mount",
+          "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+          "--mount",
+          "type=bind,src=/workspace/.obsgod-tools/completion/act/tmp/obsgod-game-obs,dst=/work",
+          "obsgod-obs-smoke:qualification",
+          "dbus-run-session",
+          "--",
+          "bash",
+          "/src/steamdeck/tests/native-game-obs-smoke.sh"
+        ]
+      ],
+      "native_image": "obsgod-obs-smoke:qualification",
+      "native_image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+      "native_source_inputs_sha256": {
+        "steamdeck/tests/native-audio.py": "656c0e8ff2d415310562bc7f16ee163bf6152f6af222813dd678c3043c84e1db",
+        "steamdeck/tests/native-capture-smoke.sh": "2bfa201dc43b02c72fceda8a3bfe3f53982460f55cff4e07a95e7fe47a09a015",
+        "steamdeck/tests/native-control-password.py": "aac7bdbbd2ed47da5dc27b26856c83006de91471c0b94cbe381478274b1c13de",
+        "steamdeck/tests/native-game-obs-smoke.sh": "64f95d37d84502fb4174caa4e95f5bb61a5a9671645a39f175b0161341e7a814",
+        "steamdeck/tests/native-game-obs.py": "36c1035eb0b73a189694c523069e943a4c65b62a93fdb4e2ea950a78f5102784",
+        "steamdeck/tests/native-idle-media.py": "cce725051b42277d08cbfcfa280e4532e4922a2b81fa04ee45cd5d7224c7af8a",
+        "steamdeck/tests/native-media.py": "343ab0e00a6961f8c4008c4fb9dcf2671004386a6a94d5eaa8657fb3989c3b25",
+        "steamdeck/tests/native-mixer.py": "98a3fc1ffdca6fdf41e412873c05d123bf5bddc2455d9fabdb0977e4f298f309",
+        "steamdeck/tests/native-obs-smoke.sh": "1ecad0c9ddf408ad84dbc461e99caaf390d9368c9d56b1a2b0d6edf087c86293",
+        "steamdeck/tests/native-profiles.py": "144371b3a7821e3815d233f0501ce566dd9e4d757b9cf69139f25a70c1e83b7e",
+        "steamdeck/tests/native-resilience.py": "3434157c44f08a403eb78d9a3aa865ca98dbc6b7aba3b8d023ef0115c0c2b81b"
+      },
+      "outcome": "passed",
+      "phase": "first",
+      "platform": "Linux amd64 Docker; Debian trixie OBS/PulseAudio/PipeWire with Xvfb and synthetic media/devices",
+      "proof_file_count": 18,
+      "proofs": [
+        {
+          "file": "native/obsgod-audio/output/audio-default-changed-audio-metrics.json",
+          "internal_revision": null,
+          "original_sha256": "028740ddc89b3e806a132d8788524af5f4bc2d341c6de0a45aec4bba7ac6f5fc",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "833d78cceaf956df43d84ef1dd87da728221ce977719b68ad22cb8b7beb551dc"
+        },
+        {
+          "file": "native/obsgod-audio/output/audio-default-fallback-audio-metrics.json",
+          "internal_revision": null,
+          "original_sha256": "b95a9b0a703ba0a21a38098b8cd23f4a7a0702607e56b223aa0ef93b0facbbd2",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "7f58a27db5f72e057f50e2f34f38774f862feb0d6ed5b1892faf132abc6dfce1"
+        },
+        {
+          "file": "native/obsgod-audio/output/audio-hotplug.json",
+          "internal_revision": null,
+          "original_sha256": "658121e11e200e99430f03d36a979042c9afcecedbd61da92eb727b7b0a2d863",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "e9730e3e001a34abb0201dd63b0bbbb99b7989c4ed82e75d48118c5b17778c35"
+        },
+        {
+          "file": "native/obsgod-audio/output/control-password-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "26cde11acd9d003e18ec4dd9aa65c879e099f871bd5971fc0ffa6b847d8665a9",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "358db0090a3609c805c104a6596da0b8119997b435c916f35767622cfd276c97"
+        },
+        {
+          "file": "native/obsgod-audio/output/control-workflow-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "a5af5296a2e7ef5ca055d1c84da8d8c8a66bb8add25fa5b05a9b579bc2c4bf58",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "9ce7c14fc1f00ba3d9a3026aef7fec42e2aa85f6027069a11bcc1effe5659ab9"
+        },
+        {
+          "file": "native/obsgod-audio/output/media-live-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "248a31031b0d5dd0f2b1c2298f01524b542e1bfacdad5e8341d80ec9e3702260",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "45a13d206390291290c12e9b9f46903f52ab927e226bcf9ea1227bab7d27033f"
+        },
+        {
+          "file": "native/obsgod-audio/output/media-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "4905d5d8e21da77467f6705970f72a01e54eda75884faeb3d1bb731b26c8e43d",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "7e637a90b4aecf1ed8689a755f150a94313ffe7bfb5cca9c59c45b0666ed2820"
+        },
+        {
+          "file": "native/obsgod-audio/output/native-live-media-summary.json",
+          "internal_revision": null,
+          "original_sha256": "248a31031b0d5dd0f2b1c2298f01524b542e1bfacdad5e8341d80ec9e3702260",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "45a13d206390291290c12e9b9f46903f52ab927e226bcf9ea1227bab7d27033f"
+        },
+        {
+          "file": "native/obsgod-audio/output/native-media-summary.json",
+          "internal_revision": null,
+          "original_sha256": "4905d5d8e21da77467f6705970f72a01e54eda75884faeb3d1bb731b26c8e43d",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "7e637a90b4aecf1ed8689a755f150a94313ffe7bfb5cca9c59c45b0666ed2820"
+        },
+        {
+          "file": "native/obsgod-audio/output/native-mixer-summary.json",
+          "internal_revision": null,
+          "original_sha256": "04f0d33e7e1bbf0998130fcf4aee64fee01aef7e2a2ceb579bb88f8132400e7c",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "c381a8008fd89e416ae746a5889e4d6afae35bf1f955584c27bb8b87cca7679b"
+        },
+        {
+          "file": "native/obsgod-audio/output/native-profiles-summary.json",
+          "internal_revision": null,
+          "original_sha256": "d134f5c8ad3ccc15bb48dd7291eadde140c267b23ba35815508aa75c732eadf1",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "1cbdd492cdf2e070b3fd18e72c89dce22b152c5716cce4490ba46f34ccf606bb"
+        },
+        {
+          "file": "native/obsgod-audio/output/profile-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "d134f5c8ad3ccc15bb48dd7291eadde140c267b23ba35815508aa75c732eadf1",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "1cbdd492cdf2e070b3fd18e72c89dce22b152c5716cce4490ba46f34ccf606bb"
+        },
+        {
+          "file": "native/obsgod-audio/output/recording-audio-metrics.json",
+          "internal_revision": null,
+          "original_sha256": "8c89543a74a8ecf294b8a650808ef9d16cb2ae03bdca54b56bc248ff02b771d6",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "f0c476e4a5b4671ad59dcfe0a2908435c6b27e7dc5a1af899e42cae1c6755613"
+        },
+        {
+          "file": "native/obsgod-audio/output/silence-negative-control.json",
+          "internal_revision": null,
+          "original_sha256": "5a37e66d12c607bb1149f9821a2c8c8ddc5231a762778668c112d53f63eb9763",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "a7faadde4f8b511f1d542c993e9e477f5c1f3cd30b397a941264e8ad42f91eb9"
+        },
+        {
+          "file": "native/obsgod-audio/output/stream-audio-metrics.json",
+          "internal_revision": null,
+          "original_sha256": "69e69402f9b478ced125d93f45d40442e2580426b1537591707421ba794fee83",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "e2913277671c365d1c5df81671a39b792afd2029d0468e160d5f9c2452600eb5"
+        },
+        {
+          "file": "native/obsgod-capture/capture-validation/qualification.json",
+          "internal_revision": "1a482808a8281c8bce092cea057df758836b34e9",
+          "original_sha256": "07b0b20c3e0fcbc5fb465433a3f90d57ed5d820f9678e1a47b08615b39173d5f",
+          "revision_binding": "internal source_revision plus parent manifest/binary/source inputs",
+          "sanitized_sha256": "7c947a69757c7a94a047157582d1bce02be823c77e8a3d27db7a944727e15a97"
+        },
+        {
+          "file": "native/obsgod-game-obs/output/game-obs-qualification.json",
+          "internal_revision": "1a482808a8281c8bce092cea057df758836b34e9",
+          "original_sha256": "9a8f201bc72ecff1e748c16f2751991e880a3ec8a2f20a0bd4e8539acb5fe75c",
+          "revision_binding": "internal source_revision plus parent manifest/binary/source inputs",
+          "sanitized_sha256": "224a843f560c33ad538d5ba8f6476a46dbde1932819cbcbe471e66d94d45e208"
+        },
+        {
+          "file": "native/obsgod-game-obs/output/idle-media-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "efce1ecb4f82bc68fad854e50a17f393a170229c5ef50304e1449377fecdc4a4",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "8a333161937ec49317ddcbe20d45896138da645152bd3b867c51cd5f5e0dbb59"
+        }
+      ],
+      "registry": {
+        "bytes": 13787,
+        "path": "act/retained-1a482808/first/candidate-native.json",
+        "sha256": "2084b87ebf2598d9a18884779d4c297349f75e6dd4f65ebb065292a54d5888fd"
+      },
+      "retained_directory": "act/retained-1a482808/first",
+      "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "source_revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "unique_original_proof_hashes": 15
+    },
+    {
+      "act_log_sha256": "965f52031f299216ceeb078644b951a0d1a3a61bb0164eeedc6107717248963b",
+      "act_receipt": "20261113T124108Z-candidate.json",
+      "artifacts_sha256": {
+        "SHA256SUMS": "275dc73251a398c17e01e5083d9db886d23ef2d37fb1ea6209e7631ed2075b34",
+        "UPDATER-SHA256SUMS": "cae8aea79da435bba95286f14ba767efcc91ac129cb6c4b0c6176bb87124bfb7",
+        "capture-build.json": "5f401a620493b5fc282658c16530db6e87a70ad40b95bb88b0212f08417bbd16",
+        "libgstobsgodcapture.so": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+        "manifest.json": "cd07f439f014914c28ac6a1690a6d23cbaf07bd2d2c23cb13e62e390ced629c5",
+        "obsgod": "03f7315f41f2c803a20592526d081b544d697005f24f952ed3442ba1cfb0fe77",
+        "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz": "879ad44ebb28fb695877c071d9708959a7afc39b7b2b9032421f117a267bf803",
+        "obsgod-decky.zip": "9e613d282d242d5be930af1beeb05a8724453ab971a59165c47e22204b296b57",
+        "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip": "e7d24d9860f2a207a130d9002c0e21f3f89c3221e352393b5e9b2b65da9bdc69",
+        "supply-chain/AUDIT-SHA256SUMS": "30c3985fd5d164031b6f318d180dcbf1837c5267f9ae9d2bfcbe06ab3af1fb59",
+        "supply-chain/provenance.unsigned.json": "7eaa6493ad5a97744fc17b9d547b7ad00483e488dbb62ce44e8a557a76c5a85e",
+        "supply-chain/release-audit.json": "31fe79de45d5ae37e0f1a31156d466f9681e1b9a5a77a965c1198c6b2c7c7ad2",
+        "supply-chain/sbom.spdx.json": "83b5ae044a582f9596e1be3c39c0568a61b01083ed68fdfd0fa151f3866da304",
+        "updater-manifest.json": "6ecc084f4fd8bd19b64f63e8024a11ebe4a85edd8fcbb2fdbfe4702b5bf9a821"
+      },
+      "candidate_version": "0.1.0-deck.9",
+      "limits": [
+        "Actual Steam Deck LCD/OLED/Flatpak/Gamescope/AMD/controller/headsets and external providers remain unrun",
+        "Sanitized JSON omits any string credential fields and synthetic RTMP addresses; booleans recording privacy invariants remain intact",
+        "Parent act receipt binds summary files lacking their own source_revision marker to exact manifest/binary/source input hashes"
+      ],
+      "native_commands": [
+        [
+          "docker",
+          "run",
+          "--rm",
+          "--user",
+          "1000:1000",
+          "--mount",
+          "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+          "--mount",
+          "type=bind,src=/workspace/.obsgod-tools/completion/act/tmp/obsgod-audio,dst=/work",
+          "obsgod-obs-smoke:qualification",
+          "dbus-run-session",
+          "--",
+          "bash",
+          "/src/steamdeck/tests/native-obs-smoke.sh"
+        ],
+        [
+          "docker",
+          "run",
+          "--rm",
+          "--user",
+          "1000:1000",
+          "-e",
+          "OBSGOD_QUALIFIED_REVISION=1a482808a8281c8bce092cea057df758836b34e9",
+          "--mount",
+          "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+          "--mount",
+          "type=bind,src=/workspace/.obsgod-tools/completion/act/tmp/obsgod-capture,dst=/work",
+          "obsgod-obs-smoke:qualification",
+          "dbus-run-session",
+          "--",
+          "bash",
+          "/src/steamdeck/tests/native-capture-smoke.sh",
+          "/src/dist"
+        ],
+        [
+          "docker",
+          "run",
+          "--rm",
+          "--user",
+          "1000:1000",
+          "-e",
+          "OBSGOD_QUALIFIED_REVISION=1a482808a8281c8bce092cea057df758836b34e9",
+          "--mount",
+          "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+          "--mount",
+          "type=bind,src=/workspace/.obsgod-tools/completion/act/tmp/obsgod-game-obs,dst=/work",
+          "obsgod-obs-smoke:qualification",
+          "dbus-run-session",
+          "--",
+          "bash",
+          "/src/steamdeck/tests/native-game-obs-smoke.sh"
+        ]
+      ],
+      "native_image": "obsgod-obs-smoke:qualification",
+      "native_image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+      "native_source_inputs_sha256": {
+        "steamdeck/tests/native-audio.py": "656c0e8ff2d415310562bc7f16ee163bf6152f6af222813dd678c3043c84e1db",
+        "steamdeck/tests/native-capture-smoke.sh": "2bfa201dc43b02c72fceda8a3bfe3f53982460f55cff4e07a95e7fe47a09a015",
+        "steamdeck/tests/native-control-password.py": "aac7bdbbd2ed47da5dc27b26856c83006de91471c0b94cbe381478274b1c13de",
+        "steamdeck/tests/native-game-obs-smoke.sh": "64f95d37d84502fb4174caa4e95f5bb61a5a9671645a39f175b0161341e7a814",
+        "steamdeck/tests/native-game-obs.py": "36c1035eb0b73a189694c523069e943a4c65b62a93fdb4e2ea950a78f5102784",
+        "steamdeck/tests/native-idle-media.py": "cce725051b42277d08cbfcfa280e4532e4922a2b81fa04ee45cd5d7224c7af8a",
+        "steamdeck/tests/native-media.py": "343ab0e00a6961f8c4008c4fb9dcf2671004386a6a94d5eaa8657fb3989c3b25",
+        "steamdeck/tests/native-mixer.py": "98a3fc1ffdca6fdf41e412873c05d123bf5bddc2455d9fabdb0977e4f298f309",
+        "steamdeck/tests/native-obs-smoke.sh": "1ecad0c9ddf408ad84dbc461e99caaf390d9368c9d56b1a2b0d6edf087c86293",
+        "steamdeck/tests/native-profiles.py": "144371b3a7821e3815d233f0501ce566dd9e4d757b9cf69139f25a70c1e83b7e",
+        "steamdeck/tests/native-resilience.py": "3434157c44f08a403eb78d9a3aa865ca98dbc6b7aba3b8d023ef0115c0c2b81b"
+      },
+      "outcome": "passed",
+      "phase": "repeat",
+      "platform": "Linux amd64 Docker; Debian trixie OBS/PulseAudio/PipeWire with Xvfb and synthetic media/devices",
+      "proof_file_count": 18,
+      "proofs": [
+        {
+          "file": "native/obsgod-audio/output/audio-default-changed-audio-metrics.json",
+          "internal_revision": null,
+          "original_sha256": "f1d41a01614b0c2cd6c61dd6a390b3f57f3bf5bcd0a3c96cf029d925378b344f",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "50e4d3f34140e7827cf4be6f51adcedb50cf6d9f1e39a8964c1091bad5ff6d52"
+        },
+        {
+          "file": "native/obsgod-audio/output/audio-default-fallback-audio-metrics.json",
+          "internal_revision": null,
+          "original_sha256": "becdde8c09ad6cbc43fddcc5991fe540a9ec0dd462bd7645fe4d0ef1ef8c66a8",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "7a52e3807db55a024e8ea8b5956af665e478c2e924559bd51145c71f794daafa"
+        },
+        {
+          "file": "native/obsgod-audio/output/audio-hotplug.json",
+          "internal_revision": null,
+          "original_sha256": "658121e11e200e99430f03d36a979042c9afcecedbd61da92eb727b7b0a2d863",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "e9730e3e001a34abb0201dd63b0bbbb99b7989c4ed82e75d48118c5b17778c35"
+        },
+        {
+          "file": "native/obsgod-audio/output/control-password-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "26cde11acd9d003e18ec4dd9aa65c879e099f871bd5971fc0ffa6b847d8665a9",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "358db0090a3609c805c104a6596da0b8119997b435c916f35767622cfd276c97"
+        },
+        {
+          "file": "native/obsgod-audio/output/control-workflow-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "a5af5296a2e7ef5ca055d1c84da8d8c8a66bb8add25fa5b05a9b579bc2c4bf58",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "9ce7c14fc1f00ba3d9a3026aef7fec42e2aa85f6027069a11bcc1effe5659ab9"
+        },
+        {
+          "file": "native/obsgod-audio/output/media-live-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "a7b95c34381540aef58e0b5be7964ed3325a4692a7824a997db7f66ba5a5dd53",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "7418f50c99a0a6aa3798f6729e8bef53b1608cabefac749b05785cb3a1e932d0"
+        },
+        {
+          "file": "native/obsgod-audio/output/media-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "788e2fa53fe01fa9f64cb82463e46fd00b951e0df0924c0e40e6fae4e5cf02dc",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "a1ba7516cd6ae5f0f725da2b22bf459982217e52f1473a119aae0e67f6152184"
+        },
+        {
+          "file": "native/obsgod-audio/output/native-live-media-summary.json",
+          "internal_revision": null,
+          "original_sha256": "a7b95c34381540aef58e0b5be7964ed3325a4692a7824a997db7f66ba5a5dd53",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "7418f50c99a0a6aa3798f6729e8bef53b1608cabefac749b05785cb3a1e932d0"
+        },
+        {
+          "file": "native/obsgod-audio/output/native-media-summary.json",
+          "internal_revision": null,
+          "original_sha256": "788e2fa53fe01fa9f64cb82463e46fd00b951e0df0924c0e40e6fae4e5cf02dc",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "a1ba7516cd6ae5f0f725da2b22bf459982217e52f1473a119aae0e67f6152184"
+        },
+        {
+          "file": "native/obsgod-audio/output/native-mixer-summary.json",
+          "internal_revision": null,
+          "original_sha256": "823b50c6159674f1b4a2e0ba95a78f390d3962fd9f07c036cd4cd5dfd692952d",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "e8a6367c65e62c6b35cb30bfd1456372bd9d2c87e47f12f2d417d3afd1f3c071"
+        },
+        {
+          "file": "native/obsgod-audio/output/native-profiles-summary.json",
+          "internal_revision": null,
+          "original_sha256": "4d207d9840d5eb65b3a0a9430dd2b08f2df832828b463c44ae4de233f2af11c0",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "fbf6d856a87d6c7ce997dd45c1fa1bffb34a35c5ff2c12a601039472dce815d1"
+        },
+        {
+          "file": "native/obsgod-audio/output/profile-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "4d207d9840d5eb65b3a0a9430dd2b08f2df832828b463c44ae4de233f2af11c0",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "fbf6d856a87d6c7ce997dd45c1fa1bffb34a35c5ff2c12a601039472dce815d1"
+        },
+        {
+          "file": "native/obsgod-audio/output/recording-audio-metrics.json",
+          "internal_revision": null,
+          "original_sha256": "aea5f5abae577732f7e7ed963aa55f98872e7ec85b60af974b4703fdd7a28436",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "342ab0c17d199f0be28b11ff2dfa64724b18fc133e742c8dc942daad6778fb93"
+        },
+        {
+          "file": "native/obsgod-audio/output/silence-negative-control.json",
+          "internal_revision": null,
+          "original_sha256": "5a37e66d12c607bb1149f9821a2c8c8ddc5231a762778668c112d53f63eb9763",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "a7faadde4f8b511f1d542c993e9e477f5c1f3cd30b397a941264e8ad42f91eb9"
+        },
+        {
+          "file": "native/obsgod-audio/output/stream-audio-metrics.json",
+          "internal_revision": null,
+          "original_sha256": "bd64ae459569deb26a3462b32b3b2f846b21032bbc41a06e3995fd23e7c6243a",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "d5ff14f061653039496ec4ad95a51c05e7faf4332f011ef027b92a8b3ff87923"
+        },
+        {
+          "file": "native/obsgod-capture/capture-validation/qualification.json",
+          "internal_revision": "1a482808a8281c8bce092cea057df758836b34e9",
+          "original_sha256": "2f58604a01822b113721917cf260ef4a627934f5dc85e7ecff173eb7d62b2abb",
+          "revision_binding": "internal source_revision plus parent manifest/binary/source inputs",
+          "sanitized_sha256": "05524b915e6e542523fd8442971e4b4954806611ec730d275c0a24ec252e0c52"
+        },
+        {
+          "file": "native/obsgod-game-obs/output/game-obs-qualification.json",
+          "internal_revision": "1a482808a8281c8bce092cea057df758836b34e9",
+          "original_sha256": "e3f8fc114711b6c7bdefb8f17d4ee321fb36a587338874cbcfe53aa55172afe1",
+          "revision_binding": "internal source_revision plus parent manifest/binary/source inputs",
+          "sanitized_sha256": "4624d354ba829d57ea3f13846f70830114928aa1034b1f0459dd8458845e593a"
+        },
+        {
+          "file": "native/obsgod-game-obs/output/idle-media-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "9b634af09d0c2685a626903684079043713a375a7ce8a32a3d715bb61b6a14ed",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "06cf71e5f4e6e805719418a2ba9be3fca66a963f8e6448c54dd836cf552ffd45"
+        }
+      ],
+      "registry": {
+        "bytes": 13788,
+        "path": "act/retained-1a482808/repeat/candidate-native.json",
+        "sha256": "f9587a1ac30527f5061419c1a3ab79a06675d23f1722d72f590dcac3a8aad2ff"
+      },
+      "retained_directory": "act/retained-1a482808/repeat",
+      "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "source_revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "unique_original_proof_hashes": 15
+    }
+  ],
+  "schema_version": 2,
+  "unique_original_hashes_per_run": [
+    15,
+    15
+  ]
+}

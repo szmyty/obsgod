@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-13T12:49:51.748442+00:00",
+  "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+  "status": "passed",
+  "scope": "Disposable Debian container Fish completion validation only",
+  "host_uid": 1000,
+  "host_fish": {
+    "status": "unavailable",
+    "executable": null
+  },
+  "source_before": {
+    "head": "1a482808a8281c8bce092cea057df758836b34e9",
+    "git_status_porcelain": "",
+    "clean": true,
+    "tracked_files": 350,
+    "tracked_source_manifest": "/workspace/.obsgod-tools/completion/final/cli-1a48280/source-before-fish-container.json",
+    "tracked_source_sha256": "a56e9b9a97c48d732323ff34a2cca5e8ffa19b488e921ea0558b727631eb371e"
+  },
+  "image": {
+    "id": "sha256:43f84a0b210f98845ef003912981774c95efe439eaa4b1cb62cf803fd46fc82a",
+    "repo_digest": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc"
+  },
+  "checks": [
+    {
+      "id": "same-revision-cli-build",
+      "command": "go build -o /workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/obsgod .",
+      "cwd": "/workspace/obsgod",
+      "exit_code": 0,
+      "duration_seconds": 0.887,
+      "status": "passed",
+      "stdout": "/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/same-revision-cli-build.stdout",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr": "/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/same-revision-cli-build.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0,
+      "artifact_sha256": "b5680e04b07d8eea972a532746676f5411a9bd85bf1740e948b9e04534eca813"
+    },
+    {
+      "id": "fish-container",
+      "command": "env -u DOCKER_HOST -u DOCKER_CONTEXT -u DOCKER_TLS -u DOCKER_TLS_VERIFY -u DOCKER_CERT_PATH docker --host=unix:///var/run/docker.sock run --rm --mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/codex-system-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/final/cli-1a48280/completion-fish.stdout,dst=/validation/completion.fish,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/obsgod,dst=/usr/local/bin/obsgod,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container,dst=/evidence -e DEBIAN_FRONTEND=noninteractive -e SSL_CERT_FILE=/run/codex-system-ca.pem sha256:43f84a0b210f98845ef003912981774c95efe439eaa4b1cb62cf803fd46fc82a sh -eu -c '\ncat /etc/os-release > /evidence/os-release.txt\nfind /etc/apt/sources.list /etc/apt/sources.list.d -type f -print0 2>/dev/null | sort -z | xargs -0 sha256sum > /evidence/apt-sources.before.sha256\napt-get -o Acquire::https::CaInfo=/run/codex-system-ca.pem -o Acquire::Retries=0 update\napt-get -o Acquire::https::CaInfo=/run/codex-system-ca.pem -o Acquire::Retries=0 install -y --no-install-recommends fish\nfind /etc/apt/sources.list /etc/apt/sources.list.d -type f -print0 2>/dev/null | sort -z | xargs -0 sha256sum > /evidence/apt-sources.after.sha256\nfish --version > /evidence/fish-version.txt\napt-cache policy fish > /evidence/fish-package-policy.txt\nfish --no-execute /validation/completion.fish\nfish --no-config -c '\"'\"'source /validation/completion.fish; complete -C \"obsgod \"'\"'\"' > /evidence/dynamic-completions.txt\n'",
+      "cwd": "/workspace/obsgod",
+      "exit_code": 0,
+      "duration_seconds": 24.499,
+      "status": "passed",
+      "stdout": "/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/fish-container.stdout",
+      "stdout_sha256": "f008284ce7b52560182dff6e985e1d744fc46e5e964703c75aadc8150124990b",
+      "stdout_bytes": 14510,
+      "stderr": "/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/fish-container.stderr",
+      "stderr_sha256": "f77216c41aadf6c667ac1a602069951966cea350daab793ffe11ae0de1225ddc",
+      "stderr_bytes": 74
+    }
+  ],
+  "limitations": [
+    "Container-only Debian12/Fish evidence; does not establish Fish on SteamOS or other target platforms.",
+    "No provider/OBS launch/broadcast, no host package/sudo/network/preset changes.",
+    "Docker proxy defaults and CA/TLS verification retained; only existing image APT repositories used."
+  ],
+  "container_fish_version": "fish, version 3.6.0",
+  "container_os_release": "PRETTY_NAME=\"Debian GNU/Linux 12 (bookworm)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"12\"\nVERSION=\"12 (bookworm)\"\nVERSION_CODENAME=bookworm\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n",
+  "container_apt_sources_unchanged": true,
+  "dynamic_root_commands": [
+    "api",
+    "completion",
+    "config",
+    "creator",
+    "deck",
+    "doctor",
+    "help",
+    "label",
+    "profile",
+    "recording",
+    "reference",
+    "replaybuffer",
+    "scene",
+    "scenecollection",
+    "sceneitem",
+    "source",
+    "stream",
+    "studiomode",
+    "version",
+    "virtualcam",
+    "workflow"
+  ],
+  "syntax": "passed",
+  "completion_loading": "passed",
+  "dynamic_completion": "passed",
+  "completion_sha256": "6c0ffc1c76f36eb509b7079f8b5265c36925d6609115ce78f9aeca7636fba889",
+  "evidence_files": {
+    "/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/fish-container.stderr": {
+      "bytes": 74,
+      "sha256": "f77216c41aadf6c667ac1a602069951966cea350daab793ffe11ae0de1225ddc"
+    },
+    "/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/fish-container.stdout": {
+      "bytes": 14510,
+      "sha256": "f008284ce7b52560182dff6e985e1d744fc46e5e964703c75aadc8150124990b"
+    },
+    "/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/dynamic-completions.txt": {
+      "bytes": 977,
+      "sha256": "1a0f5637b1aed4e2ae5a1379c5cc5962f1374a14b5b719759bca1cb81e8250b7"
+    },
+    "/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/same-revision-cli-build.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/run.py": {
+      "bytes": 6297,
+      "sha256": "ff8a2efe99861396bd7b1d111a614b3254ab48a4a940bf1c56eca985798d7eb9"
+    },
+    "/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/same-revision-cli-build.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/container-command.sh": {
+      "bytes": 816,
+      "sha256": "41e39af8df5e93f7fa12769c97381627b07f1d4c782d867e79fc7aa7f58425f6"
+    },
+    "/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/apt-sources.before.sha256": {
+      "bytes": 105,
+      "sha256": "b78ba76b87c5d25ed3c46f537641acab0d7eda4cad82443d4ae424c28425445f"
+    },
+    "/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/fish-version.txt": {
+      "bytes": 20,
+      "sha256": "1228c306bd674ef48ad2145d596d358ff4492193945dac84bfef30ee90b597b9"
+    },
+    "/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/os-release.txt": {
+      "bytes": 267,
+      "sha256": "59a77b5f2666d9c85c489bd1911a6eebbd91ef22fe48b90a3b75f1b21f3844d4"
+    },
+    "/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/fish-package-policy.txt": {
+      "bytes": 215,
+      "sha256": "382416f68d6f9dc88514e9a0b05e861ede28f3269df22b3d43d31250cd0523a5"
+    },
+    "/workspace/.obsgod-tools/completion/final/cli-1a48280/fish-container/apt-sources.after.sha256": {
+      "bytes": 105,
+      "sha256": "b78ba76b87c5d25ed3c46f537641acab0d7eda4cad82443d4ae424c28425445f"
+    }
+  },
+  "source_after": {
+    "head": "1a482808a8281c8bce092cea057df758836b34e9",
+    "git_status_porcelain": "",
+    "clean": true,
+    "tracked_files": 350,
+    "tracked_source_manifest": "/workspace/.obsgod-tools/completion/final/cli-1a48280/source-after-fish-container.json",
+    "tracked_source_sha256": "a56e9b9a97c48d732323ff34a2cca5e8ffa19b488e921ea0558b727631eb371e"
+  },
+  "source_changed": false,
+  "finished_at": "2026-11-13T12:50:17.236831+00:00"
+}

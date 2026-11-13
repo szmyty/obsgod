@@ -1,0 +1,183 @@
+{
+  "browser_harnesses_per_run": 8,
+  "limits": [
+    "Simulated Decky cannot prove real Gaming Mode/controller/modal/clipboard behavior",
+    "Desktop harness uses actual installed CLI/filesystem but fixture provider credentials and transport",
+    "Physical OBS/Steam Deck microphone/headset and provider-viewer proofs remain separate",
+    "Site explicitly reports 45 viewport/page cases and 0 console errors/0 external requests; generic zero-error claims are not inferred for other harnesses",
+    "The executable-path detector emitted nonfatal pending-task/TargetClosed shutdown diagnostics before successful harnesses; original logs retained"
+  ],
+  "outcome": "passed",
+  "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+  "runs": [
+    {
+      "actual_nonroot_uid_gid": "1000:1000",
+      "harnesses": [
+        {
+          "actual_summary": "PASS: actual desktop launcher in explicit app-only test mode, foreground startup, browser provider guides with explicit server/key binding, private control-password rotation with no broadcast, setup/reload with preserved game-only/fallback settings, private credentials, terminal hold, repeat install, removal inventory and fail-closed preservation without Decky; actual Decky installation/removal qualified separately; fixture credentials only",
+          "outcome": "passed",
+          "script": "steamdeck/tests/browser-setup.py"
+        },
+        {
+          "actual_summary": "PASS: release ZIP frontend; metadata display name with stable loader identity, progressive capture/setup help, explicit system audio, partial setup with guarded actions, unknown capture label; automatic polls/confirmed transition toasts, duplicate Start coalescing, idle Stop disabled, pending Cancel, guarded capture-mode switch with JSON RPC args/no streaming toast/no duplicate action, check-only updates, colors/lifecycle, full timeout, history paging/clear/reload; actual clipboard copies all history and version, excludes settings, works during streaming, legacy fallback preserves focus and denial reports failure; five exact support destinations, hidden unconfigured wallets, navigation failure isolation and focus across polls. Real controller/Decky runtime untested.",
+          "outcome": "passed",
+          "script": "steamdeck/tests/browser-panel.py"
+        },
+        {
+          "actual_summary": "PASS: compiled ZIP M3 profiles/presets/sanitized export, idle changes, cancellable local startup, confirmed recording+replay coexistence/save, owned clip list, unknown-state recovery gates, fresh/expired health and automatic health polls; no implicit broadcast. Simulated Decky, not actual Deck/controller proof.",
+          "outcome": "passed",
+          "script": "steamdeck/tests/browser-m3-panel.py"
+        },
+        {
+          "actual_summary": "PASS: installed-archive authenticated M3 Desktop UI; resolution/custom bitrate roundtrip, profile preview/save/export/import/game binding with no secrets, acknowledged local image import/preservation, storage preferences, empty owned-clip library, unknown provider reception and responsive widths. Real CLI/filesystem; no OBS output or actual Deck proof.",
+          "outcome": "passed",
+          "script": "steamdeck/tests/browser-m3-setup.py"
+        },
+        {
+          "actual_summary": "PASS: compiled mixer UI mute/unmute, truthful initial-default/reset wording, live audio preferences preserved through closed-OBS profile apply/reset and fresh observation after reopen, input changes start muted, zero/custom gains, live output preserved, unknown/lost input gates, notice dedupe, hold-to-talk keyboard renewal/release/blur, and no implicit broadcast. Simulated Decky; native devices/controller proof remains separate.",
+          "outcome": "passed",
+          "script": "steamdeck/tests/browser-mixer-panel.py"
+        },
+        {
+          "actual_summary": "PASS: Desktop mixer assets with authenticated fixture transport; mute/unmute, initial-default/profile/reset privacy wording, preserved live audio preferences through closed-OBS profile apply/reset and fresh observation after reopen, explicit muted input selection, zero/custom gains, unknown/lost input gates, transition notice dedupe, keyboard hold/release/blur, responsive widths and no implicit broadcast. OBS/native Deck proof remains separate.",
+          "outcome": "passed",
+          "script": "steamdeck/tests/browser-mixer-setup.py"
+        },
+        {
+          "actual_summary": "PASS: actual receiving component with Bitcoin/Ethereum/Solana public test inputs; explicit networks/full addresses, locally rendered QR images, exact clipboard contents, fallback/failure honesty, focus preservation, dialog close, zero external requests. Production recipients unchanged. Real Steam/Decky modal/controller and wallet scanning remain unrun.",
+          "outcome": "passed",
+          "script": "steamdeck/tests/browser-support.py"
+        },
+        {
+          "console_errors": 0,
+          "external_requests": 0,
+          "file_offline_navigation_cases": 1,
+          "outcome": "passed",
+          "page_viewport_cases": 45,
+          "report": {
+            "bytes": 7569,
+            "path": "act/retained-1a482808/first/browser/site/matrix.json",
+            "sha256": "f5bc6de66e08ceae3c4306f5c26bc852c900d8a3b72aafc26baddb3152145eab"
+          },
+          "script": "site/tests/browser.py",
+          "total_case_entries": 46
+        }
+      ],
+      "outcome": "passed",
+      "parent_receipt": {
+        "bytes": 6648,
+        "path": "act/20261113T122827Z-candidate.json",
+        "sha256": "2b214fa1e04b8b1b6ece9079e81733733fa29c661be8b39c7e9b51f60af0b9ef"
+      },
+      "phase": "first",
+      "platform": "Chromium151.0.7922.34/Playwright1.62.0 on Linux, simulated Decky transport/authenticated installed-archive Desktop UI; synthetic settings/devices",
+      "product_inputs_sha256": {
+        "SHA256SUMS": "275dc73251a398c17e01e5083d9db886d23ef2d37fb1ea6209e7631ed2075b34",
+        "UPDATER-SHA256SUMS": "cae8aea79da435bba95286f14ba767efcc91ac129cb6c4b0c6176bb87124bfb7",
+        "capture-build.json": "5f401a620493b5fc282658c16530db6e87a70ad40b95bb88b0212f08417bbd16",
+        "libgstobsgodcapture.so": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+        "manifest.json": "cd07f439f014914c28ac6a1690a6d23cbaf07bd2d2c23cb13e62e390ced629c5",
+        "obsgod": "03f7315f41f2c803a20592526d081b544d697005f24f952ed3442ba1cfb0fe77",
+        "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz": "879ad44ebb28fb695877c071d9708959a7afc39b7b2b9032421f117a267bf803",
+        "obsgod-decky.zip": "9e613d282d242d5be930af1beeb05a8724453ab971a59165c47e22204b296b57",
+        "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip": "e7d24d9860f2a207a130d9002c0e21f3f89c3221e352393b5e9b2b65da9bdc69",
+        "supply-chain/AUDIT-SHA256SUMS": "30c3985fd5d164031b6f318d180dcbf1837c5267f9ae9d2bfcbe06ab3af1fb59",
+        "supply-chain/provenance.unsigned.json": "7eaa6493ad5a97744fc17b9d547b7ad00483e488dbb62ce44e8a557a76c5a85e",
+        "supply-chain/release-audit.json": "31fe79de45d5ae37e0f1a31156d466f9681e1b9a5a77a965c1198c6b2c7c7ad2",
+        "supply-chain/sbom.spdx.json": "83b5ae044a582f9596e1be3c39c0568a61b01083ed68fdfd0fa151f3866da304",
+        "updater-manifest.json": "6ecc084f4fd8bd19b64f63e8024a11ebe4a85edd8fcbb2fdbfe4702b5bf9a821"
+      },
+      "retained_files": {
+        "bytes": 6235,
+        "path": "act/retained-1a482808/first/browser-files.json",
+        "sha256": "8436f37f55c31ebdab326a20e1e982d71fe0d8aebacf69dceaefb3581d2122c6"
+      },
+      "source_revision": "1a482808a8281c8bce092cea057df758836b34e9"
+    },
+    {
+      "actual_nonroot_uid_gid": "1000:1000",
+      "harnesses": [
+        {
+          "actual_summary": "PASS: actual desktop launcher in explicit app-only test mode, foreground startup, browser provider guides with explicit server/key binding, private control-password rotation with no broadcast, setup/reload with preserved game-only/fallback settings, private credentials, terminal hold, repeat install, removal inventory and fail-closed preservation without Decky; actual Decky installation/removal qualified separately; fixture credentials only",
+          "outcome": "passed",
+          "script": "steamdeck/tests/browser-setup.py"
+        },
+        {
+          "actual_summary": "PASS: release ZIP frontend; metadata display name with stable loader identity, progressive capture/setup help, explicit system audio, partial setup with guarded actions, unknown capture label; automatic polls/confirmed transition toasts, duplicate Start coalescing, idle Stop disabled, pending Cancel, guarded capture-mode switch with JSON RPC args/no streaming toast/no duplicate action, check-only updates, colors/lifecycle, full timeout, history paging/clear/reload; actual clipboard copies all history and version, excludes settings, works during streaming, legacy fallback preserves focus and denial reports failure; five exact support destinations, hidden unconfigured wallets, navigation failure isolation and focus across polls. Real controller/Decky runtime untested.",
+          "outcome": "passed",
+          "script": "steamdeck/tests/browser-panel.py"
+        },
+        {
+          "actual_summary": "PASS: compiled ZIP M3 profiles/presets/sanitized export, idle changes, cancellable local startup, confirmed recording+replay coexistence/save, owned clip list, unknown-state recovery gates, fresh/expired health and automatic health polls; no implicit broadcast. Simulated Decky, not actual Deck/controller proof.",
+          "outcome": "passed",
+          "script": "steamdeck/tests/browser-m3-panel.py"
+        },
+        {
+          "actual_summary": "PASS: installed-archive authenticated M3 Desktop UI; resolution/custom bitrate roundtrip, profile preview/save/export/import/game binding with no secrets, acknowledged local image import/preservation, storage preferences, empty owned-clip library, unknown provider reception and responsive widths. Real CLI/filesystem; no OBS output or actual Deck proof.",
+          "outcome": "passed",
+          "script": "steamdeck/tests/browser-m3-setup.py"
+        },
+        {
+          "actual_summary": "PASS: compiled mixer UI mute/unmute, truthful initial-default/reset wording, live audio preferences preserved through closed-OBS profile apply/reset and fresh observation after reopen, input changes start muted, zero/custom gains, live output preserved, unknown/lost input gates, notice dedupe, hold-to-talk keyboard renewal/release/blur, and no implicit broadcast. Simulated Decky; native devices/controller proof remains separate.",
+          "outcome": "passed",
+          "script": "steamdeck/tests/browser-mixer-panel.py"
+        },
+        {
+          "actual_summary": "PASS: Desktop mixer assets with authenticated fixture transport; mute/unmute, initial-default/profile/reset privacy wording, preserved live audio preferences through closed-OBS profile apply/reset and fresh observation after reopen, explicit muted input selection, zero/custom gains, unknown/lost input gates, transition notice dedupe, keyboard hold/release/blur, responsive widths and no implicit broadcast. OBS/native Deck proof remains separate.",
+          "outcome": "passed",
+          "script": "steamdeck/tests/browser-mixer-setup.py"
+        },
+        {
+          "actual_summary": "PASS: actual receiving component with Bitcoin/Ethereum/Solana public test inputs; explicit networks/full addresses, locally rendered QR images, exact clipboard contents, fallback/failure honesty, focus preservation, dialog close, zero external requests. Production recipients unchanged. Real Steam/Decky modal/controller and wallet scanning remain unrun.",
+          "outcome": "passed",
+          "script": "steamdeck/tests/browser-support.py"
+        },
+        {
+          "console_errors": 0,
+          "external_requests": 0,
+          "file_offline_navigation_cases": 1,
+          "outcome": "passed",
+          "page_viewport_cases": 45,
+          "report": {
+            "bytes": 7569,
+            "path": "act/retained-1a482808/repeat/browser/site/matrix.json",
+            "sha256": "f5bc6de66e08ceae3c4306f5c26bc852c900d8a3b72aafc26baddb3152145eab"
+          },
+          "script": "site/tests/browser.py",
+          "total_case_entries": 46
+        }
+      ],
+      "outcome": "passed",
+      "parent_receipt": {
+        "bytes": 6648,
+        "path": "act/20261113T124108Z-candidate.json",
+        "sha256": "c06575bbe326ed62039487f054762523ac030ec790e42331c2510024b934b176"
+      },
+      "phase": "repeat",
+      "platform": "Chromium151.0.7922.34/Playwright1.62.0 on Linux, simulated Decky transport/authenticated installed-archive Desktop UI; synthetic settings/devices",
+      "product_inputs_sha256": {
+        "SHA256SUMS": "275dc73251a398c17e01e5083d9db886d23ef2d37fb1ea6209e7631ed2075b34",
+        "UPDATER-SHA256SUMS": "cae8aea79da435bba95286f14ba767efcc91ac129cb6c4b0c6176bb87124bfb7",
+        "capture-build.json": "5f401a620493b5fc282658c16530db6e87a70ad40b95bb88b0212f08417bbd16",
+        "libgstobsgodcapture.so": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+        "manifest.json": "cd07f439f014914c28ac6a1690a6d23cbaf07bd2d2c23cb13e62e390ced629c5",
+        "obsgod": "03f7315f41f2c803a20592526d081b544d697005f24f952ed3442ba1cfb0fe77",
+        "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz": "879ad44ebb28fb695877c071d9708959a7afc39b7b2b9032421f117a267bf803",
+        "obsgod-decky.zip": "9e613d282d242d5be930af1beeb05a8724453ab971a59165c47e22204b296b57",
+        "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip": "e7d24d9860f2a207a130d9002c0e21f3f89c3221e352393b5e9b2b65da9bdc69",
+        "supply-chain/AUDIT-SHA256SUMS": "30c3985fd5d164031b6f318d180dcbf1837c5267f9ae9d2bfcbe06ab3af1fb59",
+        "supply-chain/provenance.unsigned.json": "7eaa6493ad5a97744fc17b9d547b7ad00483e488dbb62ce44e8a557a76c5a85e",
+        "supply-chain/release-audit.json": "31fe79de45d5ae37e0f1a31156d466f9681e1b9a5a77a965c1198c6b2c7c7ad2",
+        "supply-chain/sbom.spdx.json": "83b5ae044a582f9596e1be3c39c0568a61b01083ed68fdfd0fa151f3866da304",
+        "updater-manifest.json": "6ecc084f4fd8bd19b64f63e8024a11ebe4a85edd8fcbb2fdbfe4702b5bf9a821"
+      },
+      "retained_files": {
+        "bytes": 6234,
+        "path": "act/retained-1a482808/repeat/browser-files.json",
+        "sha256": "d3b995a2edaf9957946c94b7114d3d2bb1d85fe7a9fcd3490989c6fffd8b33e1"
+      },
+      "source_revision": "1a482808a8281c8bce092cea057df758836b34e9"
+    }
+  ],
+  "schema_version": 2
+}

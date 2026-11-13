@@ -1,5 +1,48 @@
 # Current work
 
+## Completion candidate9 qualified; owner review and target gates remain
+
+Exact packaged source `1a482808a8281c8bce092cea057df758836b34e9`, tree `fba5cfaed616313e2a6b679a55ff234d21a21538`,
+passed both complete local act sequences and the fresh standalone matrix.
+Seven drafts remain open in order **#58 → #59 → #60 → #62 → #63 → #64 → #65**.
+No merge or issue closure occurred. This is a later docs-only evidence follow-up;
+the packaged source remains the revision above, not the evidence commit HEAD.
+
+[Owner packet](docs/completion-review.md), [install command](docs/candidate-9-install.md),
+[qualification](docs/evidence/completion-qualification.json),
+[230 original criteria](docs/evidence/completion-criteria.json),
+[dated audit](audits/audit-2026-11-13.md),
+[public-byte proof](docs/evidence/completion-public-download.json) and
+[proposed final-boss consolidation](docs/finalboss-plan.md) are current.
+Artifact checkpoint `d0a4973f9b1835471e99b046d2d4313b042f9ae2` on
+`artifacts/completion-deck9-review` contains47 verified public files and full
+350-file source. Runtime SHA256 `879ad44ebb28fb695877c071d9708959a7afc39b7b2b9032421f117a267bf803`.
+Never merge artifact trees; retain reachable exact source/artifact refs/URLs when
+source branches are eventually cleaned, then verify downloads again.
+
+Passed:213 Go top-level/386 pass events with race/count1,127 Python,23 tooling,
+30 Node;12 CLI checks plus container Fish; formatting/vet/staticcheck and zero
+reported Go/npm findings;6 compile targets;20 generic snapshot targets compiled;
+13 local jobs including two full six-job sequences and PR static;58.1% coverage;
+14/14 product/audit files identical across complete runs; two full native OBS30
+suites, actual-package browsers, legacy4/6 transport and browser upgrades; pinned
+Identity source/draft brand/site determinism and45 host viewport cases. One opt-in
+existing-OBS test skipped; host Fish/file navigation unavailable but container
+Fish and ACT file-offline cases passed. Exact commands/platforms/limits are linked.
+
+Actual Deck/OBS33/Flatpak/Gamescope/AMD/controller/headset/provider/adoption remain
+unrun. Hosted CI ran zero steps due to the account billing lock; provider
+Dependency graph review is unsupported/API403. Human reviews and applicable
+rights/publisher/publication actions remain. Master→main rename requires owner
+GitHub UI after actual403. Broader9/13/14 and generic distribution implementation
+remainders remain explicit. No release/deployment/Store submission/transfer,
+other-repo write, wallet activation or spending. #51 is unchanged research.
+
+After review/merges, consolidate intact remaining criteria/dependencies into #46
+and retain #51; administrative supersession is not acceptance. Refresh live
+issues/PRs/releases/default/protections before that step. Older progress below
+is historical and does not supersede this completed local qualification record.
+
 ## Active: finish independent product work; keep #51 research separate
 
 On 2026-11-13 the owner authorized working through **every open issue except

@@ -1,3 +1,8 @@
+Current completion candidate: [owner packet](completion-review.md), version
+**0.1.0-deck.9**, exact qualified source1a482808; [verified install command](candidate-9-install.md).
+Available local qualification passed; target/hosted/review/publication gates remain.
+Older milestone packets below are historical and retain their exact source boundaries.
+
 Current streaming-feature candidate: [Milestone 3 owner packet](m3-review.md),
 version **0.1.0-deck.8**. The Milestone 2 packet below remains historical and its
 identity/publication/device/CI gates remain open.

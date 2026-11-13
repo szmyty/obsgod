@@ -5,8 +5,10 @@ issues except #51, including partial preparation at genuine owner/external gates
 See [the completion ledger](docs/completion-campaign.md),
 [review checklist](docs/completion-review.md) and
 [all 230 original criteria](docs/evidence/completion-criteria.json).
-Prepared completion drafts: #62 foundation -> #63 mixer -> #64 API/creator; final
-clean-source qualification is active and no new merge/closure is claimed. Intended slug:
+Prepared completion drafts: #62 foundation -> #63 mixer -> #64 API/creator -> #65
+qualification. Exact source1a482808 passed the complete available local matrix and
+both full act sequences; [install candidate9](docs/candidate-9-install.md) and
+[review the audit](audits/audit-2026-11-13.md). No new merge/closure is claimed. Intended slug:
 **decky-stream**; compatibility/migration and final branding review remain explicit.
 #51 now holds two separate research journeys (monetization and Decky Store).
 After source review/merges, remaining acceptance will be consolidated into one

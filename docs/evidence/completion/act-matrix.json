@@ -1,0 +1,3215 @@
+{
+  "acquisition_and_runtime_boundaries": {
+    "action_acquisition": "ACT embedded go-git could not consume injected Git auth. prepare-actions verified exact pinned commit/tree using working authenticated GitHub HTTPS API, downloaded same commit codeload archive, verified per-file/link inventory, and mapped unchanged action sources via --local-repository.",
+    "apt_ca_configuration": {
+      "content": "Acquire::https::CaInfo \"/run/obsgod-ca.pem\";\n",
+      "sha256": "a47a40309ae38e9d6cb7eaaea9aeb06af5091bcf095d1c697eb034e8f73e46e5"
+    },
+    "artifacts": "Local ACT service only. Uploaded64-file candidate ZIP contains selected product outputs and browser screenshots/site reports. Native JSON proofs are separately retained. Reproduction compares 14 explicit product/audit hash entries; generated GitHub artifact URLs/IDs are synthetic.",
+    "checkout": "ACT --bind used the actual clean source checkout at the daemon-visible absolute path; local actions/checkout optimization is not evidence of a fresh remote clone per job. Exact revision and clean status were recorded before and after every job.",
+    "network": "Existing proxy/package mirrors/registry/TLS policy preserved; read-only combined CA and APT CaInfo snippet; exact bridge-reachable artifact/cache address appended to existing no-proxy lists.",
+    "publisher_authentication": "No GITHUB_TOKEN fabricated; working injected Git/API auth is independent of unsupported dependency graph endpoint/provider action."
+  },
+  "cache_and_storage": {
+    "cleanup_receipts": [
+      {
+        "bytes": 3605,
+        "path": "act/cache-cleanup-1.json",
+        "sha256": "467adb0bfe528565f120d013df3af3657b694eb540fed0e34973ab405c60e599"
+      },
+      {
+        "bytes": 1145,
+        "path": "act/cache-cleanup-20261113T113720Z.json",
+        "sha256": "0e1f5cb9024265f5406c7dee599f06fed274d6a2c4993fe6b2bcb742fc482d2f"
+      },
+      {
+        "bytes": 1139,
+        "path": "act/cache-cleanup-20261113T113758Z.json",
+        "sha256": "01122413df2b105b07098fb92e5ea00055bda7495178a8b3ab6ab94469864a10"
+      },
+      {
+        "bytes": 1147,
+        "path": "act/cache-cleanup-20261113T113835Z.json",
+        "sha256": "f00baa2a3ad1977f70095515bcf8653267f0d0f1c98832c39dd8df11d65c7b3e"
+      },
+      {
+        "bytes": 1153,
+        "path": "act/cache-cleanup-20261113T113940Z.json",
+        "sha256": "64d11e9a22c6bd5c737c87be764e28dbb96bb37716c65fcc60f4c27867f41565"
+      },
+      {
+        "bytes": 633,
+        "path": "act/cache-cleanup-20261113T113958Z.json",
+        "sha256": "a315b65cab8d07d9530a09f05d7267f803063f727ad3c065e587f554c6b57efc"
+      },
+      {
+        "bytes": 1155,
+        "path": "act/cache-cleanup-20261113T114739Z.json",
+        "sha256": "cca388f175a6bf2a5176fe311002948a85b9756fc1ce99f9a17a9b6a507adf2b"
+      },
+      {
+        "bytes": 1147,
+        "path": "act/cache-cleanup-20261113T114953Z.json",
+        "sha256": "136e0f98b086d8606b306a5c7a1f86fa0e748471888ae75a65068e2f93a44ae4"
+      },
+      {
+        "bytes": 1137,
+        "path": "act/cache-cleanup-20261113T115607Z.json",
+        "sha256": "d842552c4a4fde1a3098b898780eb51116aa27d9d9b23620cfa3b077706cee80"
+      },
+      {
+        "bytes": 1139,
+        "path": "act/cache-cleanup-20261113T115645Z.json",
+        "sha256": "52ce28f5bde0001e45538be9396ecad3bc5bec3ab5c4c612253e9c279abc08b8"
+      },
+      {
+        "bytes": 1147,
+        "path": "act/cache-cleanup-20261113T115724Z.json",
+        "sha256": "5c2cc995b844fa76f9bd481d9792a198c9060d5131faf0d7991f6f9290cccf64"
+      },
+      {
+        "bytes": 1153,
+        "path": "act/cache-cleanup-20261113T115818Z.json",
+        "sha256": "55afe4948916e9b8a0e6ca05656e84822f4d49cc0d9568351d1b30342d8b3c9f"
+      },
+      {
+        "bytes": 633,
+        "path": "act/cache-cleanup-20261113T115836Z.json",
+        "sha256": "4d0791563ae5c361ac919b9f7365dff244adf04c8a78586336d9152522352b72"
+      },
+      {
+        "bytes": 1155,
+        "path": "act/cache-cleanup-20261113T120635Z.json",
+        "sha256": "fa16df8cd2b20ccfac25f14fbc9f6f34917bb1b3a536b0d5993f3f619f5c61df"
+      },
+      {
+        "bytes": 1147,
+        "path": "act/cache-cleanup-20261113T122610Z.json",
+        "sha256": "9f3678ebb3d25bf769b3abf310163ca12117b34094f14d1a0113250a02f7d086"
+      },
+      {
+        "bytes": 1139,
+        "path": "act/cache-cleanup-20261113T122643Z.json",
+        "sha256": "9f56dd73e8a0043f25da0b64024b29e544b541f2db92f8276e84fb27afeb7159"
+      },
+      {
+        "bytes": 1147,
+        "path": "act/cache-cleanup-20261113T122719Z.json",
+        "sha256": "e00d4808670b1e25b2be5d2465edf9984e9f5cfa20dfafec7e6c8c5d9b23293d"
+      },
+      {
+        "bytes": 1153,
+        "path": "act/cache-cleanup-20261113T122811Z.json",
+        "sha256": "438bb360578f8110b2af96cc681cb95bebb4bf2d0e0a4423cdd0e3dde35a9c0b"
+      },
+      {
+        "bytes": 633,
+        "path": "act/cache-cleanup-20261113T122827Z.json",
+        "sha256": "68688aadd3b244560191054dc84f2544de0cf53d2c3c59e8964f2c92ae36d667"
+      },
+      {
+        "bytes": 1155,
+        "path": "act/cache-cleanup-20261113T123607Z.json",
+        "sha256": "71ca3c088ff5614e711a3365ea523858019ef2a74296e1d01061ab62ca906715"
+      },
+      {
+        "bytes": 1147,
+        "path": "act/cache-cleanup-20261113T123734Z.json",
+        "sha256": "109513d732893c32c89b983018d45e6edc1dc1fd617eea8c6375df7d6a0bc144"
+      },
+      {
+        "bytes": 1137,
+        "path": "act/cache-cleanup-20261113T123843Z.json",
+        "sha256": "0340a995317308361e9eb2ec3298154043a6318e23a346acac6c865c95c194db"
+      },
+      {
+        "bytes": 1139,
+        "path": "act/cache-cleanup-20261113T123921Z.json",
+        "sha256": "59948e126f50d3a976c34dd4d2fe81886d625e6f8afe80b2db6ad3c109dc7ab9"
+      },
+      {
+        "bytes": 1147,
+        "path": "act/cache-cleanup-20261113T123959Z.json",
+        "sha256": "963ffcd0f5c73b4a1a1690c8bf935818ade4899c476f9b16c056a16967b544d8"
+      },
+      {
+        "bytes": 1153,
+        "path": "act/cache-cleanup-20261113T124051Z.json",
+        "sha256": "9e14af0516d8746450158eb0b67b6f7b292386877e09f6d0f65be20106696287"
+      },
+      {
+        "bytes": 633,
+        "path": "act/cache-cleanup-20261113T124108Z.json",
+        "sha256": "da8dd43f8fe145127069713ddf8e8628c3519be9143bb0dd6eaa05c08fd312c8"
+      },
+      {
+        "bytes": 1155,
+        "path": "act/cache-cleanup-20261113T124851Z.json",
+        "sha256": "f54b38e24e678a46fc136de8710375a040e4601e83ab54ff80f68a38b081bc40"
+      },
+      {
+        "bytes": 1530817,
+        "path": "act/host-go-cache-cleanup-20261113T122417Z.json",
+        "sha256": "75d335d420c508a316d7ab9f8765745bb6826368c1549249e1ff2fd01c73c4fa"
+      },
+      {
+        "bytes": 5284519,
+        "path": "act/host-go-cache-cleanup.json",
+        "sha256": "b0d1d2244de187f335e419fd5652377d72282dd491d7e7e9fa7cc57baece2bc6"
+      }
+    ],
+    "policy": "Production/browser reserve 2048 MiB and native fixture reserve 1024 MiB retained. Only exact-key regenerable ACT cache blobs and the explicitly approved host compiled Go cache were inventoried and removed; source/module caches/toolchains/images/review artifacts retained."
+  },
+  "complete_sequences": {
+    "combined_invocation": "Each complete sequence used one external Python driver to call the six documented scripts/local-ci.py commands serially. Exact driver subprocess argv, timings and per-job source checks are retained in each index.",
+    "first": {
+      "index": {
+        "bytes": 3718,
+        "path": "act/1a482808-first-index.json",
+        "sha256": "cea6a32f6677ec6dd568873b84d7aa13e081c9cd9620b966a3b2d0d4023b7b5d"
+      },
+      "jobs": 6,
+      "outcome": "passed"
+    },
+    "job_order": [
+      "lint",
+      "build",
+      "coverage",
+      "snapshot",
+      "docs",
+      "candidate"
+    ],
+    "repeat": {
+      "index": {
+        "bytes": 3723,
+        "path": "act/1a482808-repeat-index.json",
+        "sha256": "be8c22e0472d9b57f0ec257d4c121c0de9e401a83fbb00cbd6a9bfd31eb1c312"
+      },
+      "jobs": 6,
+      "outcome": "passed"
+    }
+  },
+  "coverage_baseline": {
+    "cached_go_results": "Cached results explicitly present. A separate parent-owned final-source -race -count=1 execution is recorded independently.",
+    "outcome": "passed",
+    "statement_percent": [
+      58.1,
+      58.1
+    ],
+    "threshold": "Observed baseline/trend; no arbitrary percentage target"
+  },
+  "generated_utc": "2026-11-13T12:49:03Z",
+  "hosted_ci": {
+    "outcome": "unavailable",
+    "reason": "Account-level Actions restriction previously observed; hosted jobs have zero executed steps. Local ACT does not replace required hosted checks/reviews.",
+    "receipt": "final/ci-matrix.json; parent refreshes live final revision separately"
+  },
+  "limits": [
+    "Actual Steam Deck LCD/OLED, SteamOS/Flatpak/OBS33/Gamescope/AMD/controller/headsets and external provider-viewer acceptance remain unrun",
+    "GoReleaser snapshot targets are cross compiled, not natively executed; generic snapshots do not inherit product installation/preferred-source/SBOM evidence",
+    "Actual GitHub artifact hosting/cache and required hosted review/check evidence remain unavailable",
+    "Only selected exact source is qualified; all older source receipts remain historical with their actual outcomes"
+  ],
+  "provider_dependency_review": {
+    "attempts": [
+      {
+        "base_revision": "ed7d100d356ce803d2cb1c1afef3836759deef10",
+        "command": [
+          "/workspace/.obsgod-tools/pkg/bin/act",
+          "--directory",
+          "/workspace/obsgod",
+          "--bind",
+          "--env-file",
+          "/dev/null",
+          "--secret-file",
+          "/dev/null",
+          "--input-file",
+          "/dev/null",
+          "--container-daemon-socket",
+          "/var/run/docker.sock",
+          "--network",
+          "bridge",
+          "--concurrent-jobs",
+          "1",
+          "--container-options",
+          "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+          "--action-cache-path",
+          "/workspace/.obsgod-tools/completion/act/actions",
+          "--artifact-server-path",
+          "/workspace/.obsgod-tools/completion/act/artifacts",
+          "--artifact-server-addr",
+          "172.26.91.249",
+          "--artifact-server-port",
+          "34567",
+          "--env",
+          "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+          "--env",
+          "NODE_USE_ENV_PROXY=1",
+          "--env",
+          "SSL_CERT_FILE=/run/obsgod-ca.pem",
+          "--env",
+          "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+          "--env",
+          "PIP_CERT=/run/obsgod-ca.pem",
+          "--env",
+          "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+          "--env",
+          "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+          "--env",
+          "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+          "--local-repository",
+          "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+          "--local-repository",
+          "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+          "--local-repository",
+          "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+          "--local-repository",
+          "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "--local-repository",
+          "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+          "--local-repository",
+          "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "--local-repository",
+          "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+          "--env",
+          "HTTP_PROXY=[injected]",
+          "--env",
+          "HTTPS_PROXY=[injected]",
+          "--env",
+          "NO_PROXY=[injected]",
+          "--env",
+          "http_proxy=[injected]",
+          "--env",
+          "https_proxy=[injected]",
+          "--env",
+          "no_proxy=[injected]",
+          "pull_request",
+          "-W",
+          ".github/workflows/lint.yml",
+          "-j",
+          "dependency-review",
+          "--eventpath",
+          "/workspace/.obsgod-tools/completion/act/1a482808-live-commit-pr-fixture.json"
+        ],
+        "elapsed_seconds": 16.64,
+        "event": "pull_request",
+        "exit_code": 1,
+        "fixture": "1a482808-live-commit-pr-fixture.json",
+        "fixture_sha256": "523c8087e3bde814d6fc687a7a5d95f24446ef07a6ee7a384830fe7abc0d5bb6",
+        "job": "dependency-review",
+        "log": {
+          "bytes": 3298,
+          "path": "act/20261113T123738Z-dependency-review-live-refs.log",
+          "sha256": "2c272981efc79f94854c69843c7bbc27078a3135e0e53153d29d52eeccc4b5bb"
+        },
+        "log_sha256": "2c272981efc79f94854c69843c7bbc27078a3135e0e53153d29d52eeccc4b5bb",
+        "not_a_source_test_pass": true,
+        "observed_error": "Dependency review is not supported on this repository. Please ensure that Dependency graph is enabled",
+        "outcome": "unavailable",
+        "reason": "Synthetic read-only PR event uses verified actual base/head commits; no fabricated token and no comment writes. Separate dependency graph API outcome is retained.",
+        "receipt": {
+          "bytes": 4197,
+          "path": "act/20261113T123738Z-dependency-review-live-refs.json",
+          "sha256": "734735c2f1ff1e1030271256d39ef443b88987344b515c50615a20a0b15984ef"
+        },
+        "source_clean_after": true,
+        "source_clean_before": true,
+        "source_revision": "1a482808a8281c8bce092cea057df758836b34e9"
+      }
+    ],
+    "injected_auth_api_fallback": {
+      "base_branch": "master",
+      "base_revision": "ed7d100d356ce803d2cb1c1afef3836759deef10",
+      "endpoint": "https://api.github.com/repos/szmyty/obsgod/dependency-graph/compare/ed7d100d356ce803d2cb1c1afef3836759deef10...1a482808a8281c8bce092cea057df758836b34e9",
+      "http_status": 403,
+      "kind": "Read-only injected-auth dependency graph API fallback; independent of provider action result",
+      "outcome": "unavailable",
+      "receipt": {
+        "bytes": 689,
+        "path": "act/1a482808-dependency-api-fallback.json",
+        "sha256": "9db76184a153a5699202fd04859135ee577c9c24bc537b36728a02a84d083560"
+      },
+      "response_body": "{\"message\":\"Forbidden\",\"documentation_url\":\"https://docs.github.com/rest/dependency-graph/dependency-review#get-a-diff-of-the-dependencies-between-commits\",\"status\":\"403\"}",
+      "source_revision": "1a482808a8281c8bce092cea057df758836b34e9"
+    },
+    "outcome": "unavailable",
+    "owner_action": "Inspect/enable repository Dependency graph and service access, then obtain real PR dependency review after Actions account restriction is resolved. No fabricated token or provider success."
+  },
+  "publication": {
+    "deployment": "unrun",
+    "release": "unrun; no release approval granted by local checks",
+    "signing": "unsigned self-reported evidence; no publisher key or trusted-builder claim"
+  },
+  "pull_request_static": [
+    {
+      "command": [
+        "python3",
+        "scripts/local-ci.py",
+        "lint",
+        "--pull-request",
+        "--act",
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--state",
+        "/workspace/.obsgod-tools/completion/act"
+      ],
+      "elapsed_seconds": 49.16,
+      "event": "pull_request",
+      "exact_act_argv": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "pull_request",
+        "-W",
+        ".github/workflows/lint.yml",
+        "-j",
+        "golangci",
+        "--eventpath",
+        ".github/act/pull-request.json"
+      ],
+      "exit_code": 0,
+      "fixture": ".github/act/pull-request.json",
+      "job": "golangci",
+      "log": {
+        "bytes": 12457,
+        "path": "act/20261113T123644Z-lint.log",
+        "sha256": "2a7d545960d39680aeef494de4c07042673d64925d63d6d7cd8b499e2f35075e"
+      },
+      "outcome": "passed",
+      "receipt": {
+        "bytes": 6686,
+        "path": "act/20261113T123644Z-lint.json",
+        "sha256": "6160d308498617a31c09a33746914bba41dd8ae7b75d52fc88ea2f45ba95f9d8"
+      },
+      "receipts": [
+        "20261113T123644Z-lint.json"
+      ],
+      "source_clean_after": true,
+      "source_clean_before": true,
+      "source_revision": "1a482808a8281c8bce092cea057df758836b34e9"
+    }
+  ],
+  "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+  "runs": [
+    {
+      "command": [
+        "python3",
+        "scripts/local-ci.py",
+        "lint",
+        "--act",
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--state",
+        "/workspace/.obsgod-tools/completion/act"
+      ],
+      "coverage_statement_percent": null,
+      "cross_build_targets": [],
+      "disk_free_after_bytes": 11522756608,
+      "disk_free_before_bytes": 12279611392,
+      "elapsed_seconds": 46.52,
+      "event": "push",
+      "exact_act_argv": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "push",
+        "-W",
+        ".github/workflows/lint.yml",
+        "-j",
+        "golangci"
+      ],
+      "exit_code": 0,
+      "go_cached_package_result_lines": 0,
+      "job": "lint",
+      "local_artifact_uploads": [],
+      "log": {
+        "bytes": 12456,
+        "path": "act/20261113T122523Z-lint.log",
+        "sha256": "24173ac6ffed4b8c2a20bbd66056d5b78320450c8fd42c3edf5b776fdd541603"
+      },
+      "main_steps_failed": [],
+      "main_steps_passed": [
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff",
+        "Install pinned staticcheck",
+        "Formatting",
+        "go vet ./...",
+        "staticcheck ./..."
+      ],
+      "nonfatal_diagnostics": [
+        {
+          "kind": "upstream-node-punycode-deprecation",
+          "log": "20261113T122523Z-lint.log",
+          "occurrences": 2,
+          "outcome": "nonfatal-observed"
+        }
+      ],
+      "outcome": "passed",
+      "phase": "first",
+      "platform": "Linux amd64; Ubuntu24.04 ACT container on local Docker",
+      "receipt": {
+        "bytes": 6623,
+        "path": "act/20261113T122523Z-lint.json",
+        "sha256": "92eb49dd8ef7c52c11ca1c06cc0bdfe2dd3df9cf621456740f0ba1dfbfe38267"
+      },
+      "receipts": [
+        "20261113T122523Z-lint.json"
+      ],
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "same_revision_after": true,
+      "source_clean_after": true,
+      "source_clean_before": true,
+      "workflow_sha256": {
+        "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+        "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+        "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+        "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+        "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+        "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/local-ci.py",
+        "build",
+        "--act",
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--state",
+        "/workspace/.obsgod-tools/completion/act"
+      ],
+      "coverage_statement_percent": null,
+      "cross_build_targets": [],
+      "disk_free_after_bytes": 11522629632,
+      "disk_free_before_bytes": 12279554048,
+      "elapsed_seconds": 32.32,
+      "event": "push",
+      "exact_act_argv": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "push",
+        "-W",
+        ".github/workflows/build.yml",
+        "-j",
+        "build",
+        "--matrix",
+        "os:ubuntu-24.04"
+      ],
+      "exit_code": 0,
+      "go_cached_package_result_lines": 8,
+      "job": "build",
+      "local_artifact_uploads": [],
+      "log": {
+        "bytes": 9242,
+        "path": "act/20261113T122611Z-build.log",
+        "sha256": "7d4aa4f7189fd76c20fefb23523607f858ae7d7a796897a557f3d54abb0391ee"
+      },
+      "main_steps_failed": [],
+      "main_steps_passed": [
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff",
+        "go mod download",
+        "go build -trimpath -v ./...",
+        "go test ./..."
+      ],
+      "nonfatal_diagnostics": [
+        {
+          "kind": "upstream-node-punycode-deprecation",
+          "log": "20261113T122611Z-build.log",
+          "occurrences": 2,
+          "outcome": "nonfatal-observed"
+        }
+      ],
+      "outcome": "passed",
+      "phase": "first",
+      "platform": "Linux amd64; Ubuntu24.04 ACT container on local Docker",
+      "receipt": {
+        "bytes": 6661,
+        "path": "act/20261113T122611Z-build.json",
+        "sha256": "4fe1f66741463a741a3d70b4bd8e5473345b3b2a46e6ef18d90bc8be8ba4c186"
+      },
+      "receipts": [
+        "20261113T122611Z-build.json"
+      ],
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "same_revision_after": true,
+      "source_clean_after": true,
+      "source_clean_before": true,
+      "workflow_sha256": {
+        "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+        "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+        "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+        "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+        "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+        "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/local-ci.py",
+        "coverage",
+        "--act",
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--state",
+        "/workspace/.obsgod-tools/completion/act"
+      ],
+      "coverage_statement_percent": 58.1,
+      "cross_build_targets": [],
+      "disk_free_after_bytes": 11522179072,
+      "disk_free_before_bytes": 12279410688,
+      "elapsed_seconds": 35.71,
+      "event": "push",
+      "exact_act_argv": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "push",
+        "-W",
+        ".github/workflows/coverage.yml",
+        "-j",
+        "coverage"
+      ],
+      "exit_code": 0,
+      "go_cached_package_result_lines": 8,
+      "job": "coverage",
+      "local_artifact_uploads": [
+        {
+          "delivery": "local ACT artifact service only; generated GitHub URL/ID is synthetic",
+          "zip_sha256": "92970d7a330a9898d73c0d11c2548e10c7394c74ccf75fdcf960d971711c2625"
+        }
+      ],
+      "log": {
+        "bytes": 65892,
+        "path": "act/20261113T122643Z-coverage.log",
+        "sha256": "81633cbbde5da7cabb5d2252e97457819451bacd6b9c3d87ba562b6e981a1251"
+      },
+      "main_steps_failed": [],
+      "main_steps_passed": [
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff",
+        "Race and coverage",
+        "Retain coverage baseline for review"
+      ],
+      "nonfatal_diagnostics": [
+        {
+          "kind": "upstream-node-punycode-deprecation",
+          "log": "20261113T122643Z-coverage.log",
+          "occurrences": 3,
+          "outcome": "nonfatal-observed"
+        },
+        {
+          "kind": "upstream-node-url-parse-deprecation",
+          "log": "20261113T122643Z-coverage.log",
+          "occurrences": 1,
+          "outcome": "nonfatal-observed"
+        }
+      ],
+      "outcome": "passed",
+      "phase": "first",
+      "platform": "Linux amd64; Ubuntu24.04 ACT container on local Docker",
+      "receipt": {
+        "bytes": 6631,
+        "path": "act/20261113T122643Z-coverage.json",
+        "sha256": "11596a49ef2d991ae1450a76939434ea4c7ec481145704819d7777f4e6fdb143"
+      },
+      "receipts": [
+        "20261113T122643Z-coverage.json"
+      ],
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "same_revision_after": true,
+      "source_clean_after": true,
+      "source_clean_before": true,
+      "workflow_sha256": {
+        "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+        "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+        "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+        "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+        "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+        "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/local-ci.py",
+        "snapshot",
+        "--act",
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--state",
+        "/workspace/.obsgod-tools/completion/act"
+      ],
+      "coverage_statement_percent": null,
+      "cross_build_targets": [
+        "darwin_amd64_v1",
+        "darwin_arm64_v8.0",
+        "freebsd_386_sse2",
+        "freebsd_amd64_v1",
+        "freebsd_arm64_v8.0",
+        "freebsd_arm_6",
+        "freebsd_arm_7",
+        "linux_386_sse2",
+        "linux_amd64_v1",
+        "linux_arm64_v8.0",
+        "linux_arm_6",
+        "linux_arm_7",
+        "openbsd_386_sse2",
+        "openbsd_amd64_v1",
+        "openbsd_arm64_v8.0",
+        "openbsd_arm_6",
+        "openbsd_arm_7",
+        "windows_386_sse2",
+        "windows_amd64_v1",
+        "windows_arm64_v8.0"
+      ],
+      "disk_free_after_bytes": 11521875968,
+      "disk_free_before_bytes": 12279062528,
+      "elapsed_seconds": 51.33,
+      "event": "push",
+      "exact_act_argv": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "push",
+        "-W",
+        ".github/workflows/goreleaser.yml",
+        "-j",
+        "goreleaser"
+      ],
+      "exit_code": 0,
+      "go_cached_package_result_lines": 0,
+      "job": "snapshot",
+      "local_artifact_uploads": [],
+      "log": {
+        "bytes": 67319,
+        "path": "act/20261113T122720Z-snapshot.log",
+        "sha256": "b2e44b28fb27c3fe40c030aeba14da3b62ead17df697c20d57535d87b8de24fe"
+      },
+      "main_steps_failed": [],
+      "main_steps_passed": [
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff",
+        "Non-publishing release configuration and snapshot"
+      ],
+      "nonfatal_diagnostics": [
+        {
+          "kind": "upstream-node-punycode-deprecation",
+          "log": "20261113T122720Z-snapshot.log",
+          "occurrences": 2,
+          "outcome": "nonfatal-observed"
+        }
+      ],
+      "outcome": "passed",
+      "phase": "first",
+      "platform": "Linux amd64; Ubuntu24.04 ACT container on local Docker",
+      "receipt": {
+        "bytes": 6635,
+        "path": "act/20261113T122720Z-snapshot.json",
+        "sha256": "5679535d393bb029df0e8b382bd0bbc63462f0aaa6f1e3876c38603023dedb8d"
+      },
+      "receipts": [
+        "20261113T122720Z-snapshot.json"
+      ],
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "same_revision_after": true,
+      "source_clean_after": true,
+      "source_clean_before": true,
+      "workflow_sha256": {
+        "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+        "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+        "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+        "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+        "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+        "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/local-ci.py",
+        "docs",
+        "--act",
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--state",
+        "/workspace/.obsgod-tools/completion/act"
+      ],
+      "coverage_statement_percent": null,
+      "cross_build_targets": [],
+      "disk_free_after_bytes": 12278743040,
+      "disk_free_before_bytes": 12278784000,
+      "elapsed_seconds": 16.22,
+      "event": "push",
+      "exact_act_argv": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "workflow_dispatch",
+        "-W",
+        ".github/workflows/docs-preview.yml",
+        "-j",
+        "build-preview"
+      ],
+      "exit_code": 0,
+      "go_cached_package_result_lines": 0,
+      "job": "docs",
+      "local_artifact_uploads": [
+        {
+          "delivery": "local ACT artifact service only; generated GitHub URL/ID is synthetic",
+          "zip_sha256": "c0908fe7f43de16cc73805c31ab620a2eb5f1aea61a6a728be1d6f746e5c2db4"
+        }
+      ],
+      "log": {
+        "bytes": 15486,
+        "path": "act/20261113T122811Z-docs.log",
+        "sha256": "5fdb3844897127bb91bb69e336ed15d615c0bda5f1561cf0b3826ef6660e9efd"
+      },
+      "main_steps_failed": [],
+      "main_steps_passed": [
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "Check shared funding metadata and build offline preview",
+        "Retain preview for review"
+      ],
+      "nonfatal_diagnostics": [
+        {
+          "kind": "upstream-node-punycode-deprecation",
+          "log": "20261113T122811Z-docs.log",
+          "occurrences": 5,
+          "outcome": "nonfatal-observed"
+        },
+        {
+          "kind": "upstream-node-url-parse-deprecation",
+          "log": "20261113T122811Z-docs.log",
+          "occurrences": 1,
+          "outcome": "nonfatal-observed"
+        }
+      ],
+      "outcome": "passed",
+      "phase": "first",
+      "platform": "Linux amd64; Ubuntu24.04 ACT container on local Docker",
+      "receipt": {
+        "bytes": 6649,
+        "path": "act/20261113T122811Z-docs.json",
+        "sha256": "de95106379e7188796f2d2566a6e6ad1ebe16affe3becfe5cb687fc128c72b51"
+      },
+      "receipts": [
+        "20261113T122811Z-docs.json"
+      ],
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "same_revision_after": true,
+      "source_clean_after": true,
+      "source_clean_before": true,
+      "workflow_sha256": {
+        "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+        "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+        "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+        "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+        "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+        "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/local-ci.py",
+        "candidate",
+        "--act",
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--state",
+        "/workspace/.obsgod-tools/completion/act"
+      ],
+      "coverage_statement_percent": null,
+      "cross_build_targets": [],
+      "disk_free_after_bytes": 11374022656,
+      "disk_free_before_bytes": 12278738944,
+      "elapsed_seconds": 456.59,
+      "event": "workflow_dispatch",
+      "exact_act_argv": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "workflow_dispatch",
+        "-W",
+        ".github/workflows/steam-deck.yml",
+        "-j",
+        "candidate"
+      ],
+      "exit_code": 0,
+      "go_cached_package_result_lines": 8,
+      "job": "candidate",
+      "local_artifact_uploads": [
+        {
+          "delivery": "local ACT artifact service only; generated GitHub URL/ID is synthetic",
+          "zip_sha256": "85d3a628a0aa69c923173a10b40152e164446d02afa4065f0191df04a9162fd7"
+        }
+      ],
+      "log": {
+        "bytes": 130594,
+        "path": "act/20261113T122827Z-candidate.log",
+        "sha256": "7160952c820a10df6923a9e440d0cc4ef5d32aff70ca416b2ee3f1ed12a2ee72"
+      },
+      "main_steps_failed": [],
+      "main_steps_passed": [
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+        "Install pinned development dependencies",
+        "Go protocol, race, static and vulnerability checks",
+        "Installer, backend and panel checks",
+        "Package exact candidate twice",
+        "Audit actual artifacts and reproduce unsigned supply-chain evidence",
+        "Actual package browser checks",
+        "Native audio and app-filtered capture checks",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02"
+      ],
+      "nonfatal_diagnostics": [
+        {
+          "kind": "upstream-node-punycode-deprecation",
+          "log": "20261113T122827Z-candidate.log",
+          "occurrences": 7,
+          "outcome": "nonfatal-observed"
+        },
+        {
+          "kind": "upstream-node-url-parse-deprecation",
+          "log": "20261113T122827Z-candidate.log",
+          "occurrences": 1,
+          "outcome": "nonfatal-observed"
+        },
+        {
+          "kind": "disposable-bootstrap-pip-root-warning",
+          "log": "20261113T122827Z-candidate.log",
+          "occurrences": 1,
+          "outcome": "nonfatal-observed"
+        },
+        {
+          "kind": "browser-executable-detector-pending-task",
+          "log": "20261113T122827Z-candidate.log",
+          "occurrences": 1,
+          "outcome": "nonfatal-observed"
+        },
+        {
+          "kind": "browser-executable-detector-unretrieved-future",
+          "log": "20261113T122827Z-candidate.log",
+          "occurrences": 1,
+          "outcome": "nonfatal-observed"
+        },
+        {
+          "kind": "browser-executable-detector-targetclosed",
+          "log": "20261113T122827Z-candidate.log",
+          "occurrences": 2,
+          "outcome": "nonfatal-observed"
+        }
+      ],
+      "outcome": "passed",
+      "phase": "first",
+      "platform": "Linux amd64; Ubuntu24.04 ACT container on local Docker",
+      "receipt": {
+        "bytes": 6648,
+        "path": "act/20261113T122827Z-candidate.json",
+        "sha256": "2b214fa1e04b8b1b6ece9079e81733733fa29c661be8b39c7e9b51f60af0b9ef"
+      },
+      "receipts": [
+        "20261113T122827Z-candidate.json"
+      ],
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "same_revision_after": true,
+      "source_clean_after": true,
+      "source_clean_before": true,
+      "workflow_sha256": {
+        "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+        "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+        "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+        "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+        "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+        "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/local-ci.py",
+        "lint",
+        "--act",
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--state",
+        "/workspace/.obsgod-tools/completion/act"
+      ],
+      "coverage_statement_percent": null,
+      "cross_build_targets": [],
+      "disk_free_after_bytes": 11185680384,
+      "disk_free_before_bytes": 11942633472,
+      "elapsed_seconds": 48.31,
+      "event": "push",
+      "exact_act_argv": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "push",
+        "-W",
+        ".github/workflows/lint.yml",
+        "-j",
+        "golangci"
+      ],
+      "exit_code": 0,
+      "go_cached_package_result_lines": 0,
+      "job": "lint",
+      "local_artifact_uploads": [],
+      "log": {
+        "bytes": 10768,
+        "path": "act/20261113T123754Z-lint.log",
+        "sha256": "d0b98de82d7671dfda36c20ac8f016885f0bfd07c4d4431db3b8984b96a2946c"
+      },
+      "main_steps_failed": [],
+      "main_steps_passed": [
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff",
+        "Install pinned staticcheck",
+        "Formatting",
+        "go vet ./...",
+        "staticcheck ./..."
+      ],
+      "nonfatal_diagnostics": [
+        {
+          "kind": "upstream-node-punycode-deprecation",
+          "log": "20261113T123754Z-lint.log",
+          "occurrences": 2,
+          "outcome": "nonfatal-observed"
+        }
+      ],
+      "outcome": "passed",
+      "phase": "repeat",
+      "platform": "Linux amd64; Ubuntu24.04 ACT container on local Docker",
+      "receipt": {
+        "bytes": 6623,
+        "path": "act/20261113T123754Z-lint.json",
+        "sha256": "b1437cfdf085e6e5a8dee3dbc598b5c6f992239484ad81d024eedab611fe0fe1"
+      },
+      "receipts": [
+        "20261113T123754Z-lint.json"
+      ],
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "same_revision_after": true,
+      "source_clean_after": true,
+      "source_clean_before": true,
+      "workflow_sha256": {
+        "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+        "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+        "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+        "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+        "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+        "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/local-ci.py",
+        "build",
+        "--act",
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--state",
+        "/workspace/.obsgod-tools/completion/act"
+      ],
+      "coverage_statement_percent": null,
+      "cross_build_targets": [],
+      "disk_free_after_bytes": 11185623040,
+      "disk_free_before_bytes": 11942555648,
+      "elapsed_seconds": 37.68,
+      "event": "push",
+      "exact_act_argv": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "push",
+        "-W",
+        ".github/workflows/build.yml",
+        "-j",
+        "build",
+        "--matrix",
+        "os:ubuntu-24.04"
+      ],
+      "exit_code": 0,
+      "go_cached_package_result_lines": 8,
+      "job": "build",
+      "local_artifact_uploads": [],
+      "log": {
+        "bytes": 9070,
+        "path": "act/20261113T123843Z-build.log",
+        "sha256": "04f749c9ba363184cc009d4208eab0cb87b943127af3a64b43f6aabff4965e82"
+      },
+      "main_steps_failed": [],
+      "main_steps_passed": [
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff",
+        "go mod download",
+        "go build -trimpath -v ./...",
+        "go test ./..."
+      ],
+      "nonfatal_diagnostics": [
+        {
+          "kind": "upstream-node-punycode-deprecation",
+          "log": "20261113T123843Z-build.log",
+          "occurrences": 2,
+          "outcome": "nonfatal-observed"
+        }
+      ],
+      "outcome": "passed",
+      "phase": "repeat",
+      "platform": "Linux amd64; Ubuntu24.04 ACT container on local Docker",
+      "receipt": {
+        "bytes": 6661,
+        "path": "act/20261113T123843Z-build.json",
+        "sha256": "f98243c9ec245a7bb1c46e7ceda6035788556fa71b4e423c9c6c83e4c7e96e66"
+      },
+      "receipts": [
+        "20261113T123843Z-build.json"
+      ],
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "same_revision_after": true,
+      "source_clean_after": true,
+      "source_clean_before": true,
+      "workflow_sha256": {
+        "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+        "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+        "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+        "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+        "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+        "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/local-ci.py",
+        "coverage",
+        "--act",
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--state",
+        "/workspace/.obsgod-tools/completion/act"
+      ],
+      "coverage_statement_percent": 58.1,
+      "cross_build_targets": [],
+      "disk_free_after_bytes": 11185467392,
+      "disk_free_before_bytes": 11942531072,
+      "elapsed_seconds": 37.43,
+      "event": "push",
+      "exact_act_argv": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "push",
+        "-W",
+        ".github/workflows/coverage.yml",
+        "-j",
+        "coverage"
+      ],
+      "exit_code": 0,
+      "go_cached_package_result_lines": 8,
+      "job": "coverage",
+      "local_artifact_uploads": [
+        {
+          "delivery": "local ACT artifact service only; generated GitHub URL/ID is synthetic",
+          "zip_sha256": "3562cd5d51cd59710602dfbd3aafbfdc802e97709578aa8d8dfc17a629cae99d"
+        }
+      ],
+      "log": {
+        "bytes": 65891,
+        "path": "act/20261113T123921Z-coverage.log",
+        "sha256": "7dfac9e74b41b96a7470981975bc19d4c8c05922c232f5a99c3f3252495bd96f"
+      },
+      "main_steps_failed": [],
+      "main_steps_passed": [
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff",
+        "Race and coverage",
+        "Retain coverage baseline for review"
+      ],
+      "nonfatal_diagnostics": [
+        {
+          "kind": "upstream-node-punycode-deprecation",
+          "log": "20261113T123921Z-coverage.log",
+          "occurrences": 3,
+          "outcome": "nonfatal-observed"
+        },
+        {
+          "kind": "upstream-node-url-parse-deprecation",
+          "log": "20261113T123921Z-coverage.log",
+          "occurrences": 1,
+          "outcome": "nonfatal-observed"
+        }
+      ],
+      "outcome": "passed",
+      "phase": "repeat",
+      "platform": "Linux amd64; Ubuntu24.04 ACT container on local Docker",
+      "receipt": {
+        "bytes": 6631,
+        "path": "act/20261113T123921Z-coverage.json",
+        "sha256": "4e4ea9bb74d74a8465d7bf537b8610475c04f72312a7cf61bd21f962d74d85d6"
+      },
+      "receipts": [
+        "20261113T123921Z-coverage.json"
+      ],
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "same_revision_after": true,
+      "source_clean_after": true,
+      "source_clean_before": true,
+      "workflow_sha256": {
+        "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+        "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+        "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+        "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+        "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+        "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/local-ci.py",
+        "snapshot",
+        "--act",
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--state",
+        "/workspace/.obsgod-tools/completion/act"
+      ],
+      "coverage_statement_percent": null,
+      "cross_build_targets": [
+        "darwin_amd64_v1",
+        "darwin_arm64_v8.0",
+        "freebsd_386_sse2",
+        "freebsd_amd64_v1",
+        "freebsd_arm64_v8.0",
+        "freebsd_arm_6",
+        "freebsd_arm_7",
+        "linux_386_sse2",
+        "linux_amd64_v1",
+        "linux_arm64_v8.0",
+        "linux_arm_6",
+        "linux_arm_7",
+        "openbsd_386_sse2",
+        "openbsd_amd64_v1",
+        "openbsd_arm64_v8.0",
+        "openbsd_arm_6",
+        "openbsd_arm_7",
+        "windows_386_sse2",
+        "windows_amd64_v1",
+        "windows_arm64_v8.0"
+      ],
+      "disk_free_after_bytes": 11185098752,
+      "disk_free_before_bytes": 11942363136,
+      "elapsed_seconds": 51.4,
+      "event": "push",
+      "exact_act_argv": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "push",
+        "-W",
+        ".github/workflows/goreleaser.yml",
+        "-j",
+        "goreleaser"
+      ],
+      "exit_code": 0,
+      "go_cached_package_result_lines": 0,
+      "job": "snapshot",
+      "local_artifact_uploads": [],
+      "log": {
+        "bytes": 67320,
+        "path": "act/20261113T123959Z-snapshot.log",
+        "sha256": "98b1b286914a9d000adafe519ef0f0c6bdc3c9994b8dda792c69ac8a2c968569"
+      },
+      "main_steps_failed": [],
+      "main_steps_passed": [
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff",
+        "Non-publishing release configuration and snapshot"
+      ],
+      "nonfatal_diagnostics": [
+        {
+          "kind": "upstream-node-punycode-deprecation",
+          "log": "20261113T123959Z-snapshot.log",
+          "occurrences": 2,
+          "outcome": "nonfatal-observed"
+        }
+      ],
+      "outcome": "passed",
+      "phase": "repeat",
+      "platform": "Linux amd64; Ubuntu24.04 ACT container on local Docker",
+      "receipt": {
+        "bytes": 6635,
+        "path": "act/20261113T123959Z-snapshot.json",
+        "sha256": "93d25b4d338ca1d35178b2b052255e3cefc0d161f25e0632c43801e8dd08f4fd"
+      },
+      "receipts": [
+        "20261113T123959Z-snapshot.json"
+      ],
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "same_revision_after": true,
+      "source_clean_after": true,
+      "source_clean_before": true,
+      "workflow_sha256": {
+        "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+        "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+        "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+        "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+        "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+        "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/local-ci.py",
+        "docs",
+        "--act",
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--state",
+        "/workspace/.obsgod-tools/completion/act"
+      ],
+      "coverage_statement_percent": null,
+      "cross_build_targets": [],
+      "disk_free_after_bytes": 11941961728,
+      "disk_free_before_bytes": 11942002688,
+      "elapsed_seconds": 16.18,
+      "event": "push",
+      "exact_act_argv": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "workflow_dispatch",
+        "-W",
+        ".github/workflows/docs-preview.yml",
+        "-j",
+        "build-preview"
+      ],
+      "exit_code": 0,
+      "go_cached_package_result_lines": 0,
+      "job": "docs",
+      "local_artifact_uploads": [
+        {
+          "delivery": "local ACT artifact service only; generated GitHub URL/ID is synthetic",
+          "zip_sha256": "f8a844d18c09b8c9449d3ba7417301c8961959d51f3122f9f33c809d4c2739ab"
+        }
+      ],
+      "log": {
+        "bytes": 15486,
+        "path": "act/20261113T124052Z-docs.log",
+        "sha256": "9813cca32d8c9c8f4c4f84716be06f1f7a8a38c7dd02f85cccc67c01ced0bce6"
+      },
+      "main_steps_failed": [],
+      "main_steps_passed": [
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "Check shared funding metadata and build offline preview",
+        "Retain preview for review"
+      ],
+      "nonfatal_diagnostics": [
+        {
+          "kind": "upstream-node-punycode-deprecation",
+          "log": "20261113T124052Z-docs.log",
+          "occurrences": 5,
+          "outcome": "nonfatal-observed"
+        },
+        {
+          "kind": "upstream-node-url-parse-deprecation",
+          "log": "20261113T124052Z-docs.log",
+          "occurrences": 1,
+          "outcome": "nonfatal-observed"
+        }
+      ],
+      "outcome": "passed",
+      "phase": "repeat",
+      "platform": "Linux amd64; Ubuntu24.04 ACT container on local Docker",
+      "receipt": {
+        "bytes": 6649,
+        "path": "act/20261113T124052Z-docs.json",
+        "sha256": "bae0839c45b1ea04084344ab81ab7b180f7f5f8c4c9fee25f3f614d3070ae31a"
+      },
+      "receipts": [
+        "20261113T124052Z-docs.json"
+      ],
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "same_revision_after": true,
+      "source_clean_after": true,
+      "source_clean_before": true,
+      "workflow_sha256": {
+        "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+        "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+        "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+        "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+        "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+        "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+      }
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/local-ci.py",
+        "candidate",
+        "--act",
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--state",
+        "/workspace/.obsgod-tools/completion/act"
+      ],
+      "coverage_statement_percent": null,
+      "cross_build_targets": [],
+      "disk_free_after_bytes": 11184545792,
+      "disk_free_before_bytes": 11941957632,
+      "elapsed_seconds": 460.32,
+      "event": "workflow_dispatch",
+      "exact_act_argv": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "workflow_dispatch",
+        "-W",
+        ".github/workflows/steam-deck.yml",
+        "-j",
+        "candidate"
+      ],
+      "exit_code": 0,
+      "go_cached_package_result_lines": 8,
+      "job": "candidate",
+      "local_artifact_uploads": [
+        {
+          "delivery": "local ACT artifact service only; generated GitHub URL/ID is synthetic",
+          "zip_sha256": "98c31cfa32ab96307f256c38fb8c9265ad4160f87f1cbedd1f79bbadcadc2370"
+        }
+      ],
+      "log": {
+        "bytes": 130643,
+        "path": "act/20261113T124108Z-candidate.log",
+        "sha256": "965f52031f299216ceeb078644b951a0d1a3a61bb0164eeedc6107717248963b"
+      },
+      "main_steps_failed": [],
+      "main_steps_passed": [
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+        "Install pinned development dependencies",
+        "Go protocol, race, static and vulnerability checks",
+        "Installer, backend and panel checks",
+        "Package exact candidate twice",
+        "Audit actual artifacts and reproduce unsigned supply-chain evidence",
+        "Actual package browser checks",
+        "Native audio and app-filtered capture checks",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02"
+      ],
+      "nonfatal_diagnostics": [
+        {
+          "kind": "upstream-node-punycode-deprecation",
+          "log": "20261113T124108Z-candidate.log",
+          "occurrences": 7,
+          "outcome": "nonfatal-observed"
+        },
+        {
+          "kind": "upstream-node-url-parse-deprecation",
+          "log": "20261113T124108Z-candidate.log",
+          "occurrences": 1,
+          "outcome": "nonfatal-observed"
+        },
+        {
+          "kind": "disposable-bootstrap-pip-root-warning",
+          "log": "20261113T124108Z-candidate.log",
+          "occurrences": 1,
+          "outcome": "nonfatal-observed"
+        },
+        {
+          "kind": "browser-executable-detector-pending-task",
+          "log": "20261113T124108Z-candidate.log",
+          "occurrences": 1,
+          "outcome": "nonfatal-observed"
+        },
+        {
+          "kind": "browser-executable-detector-unretrieved-future",
+          "log": "20261113T124108Z-candidate.log",
+          "occurrences": 1,
+          "outcome": "nonfatal-observed"
+        },
+        {
+          "kind": "browser-executable-detector-targetclosed",
+          "log": "20261113T124108Z-candidate.log",
+          "occurrences": 2,
+          "outcome": "nonfatal-observed"
+        }
+      ],
+      "outcome": "passed",
+      "phase": "repeat",
+      "platform": "Linux amd64; Ubuntu24.04 ACT container on local Docker",
+      "receipt": {
+        "bytes": 6648,
+        "path": "act/20261113T124108Z-candidate.json",
+        "sha256": "c06575bbe326ed62039487f054762523ac030ec790e42331c2510024b934b176"
+      },
+      "receipts": [
+        "20261113T124108Z-candidate.json"
+      ],
+      "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "same_revision_after": true,
+      "source_clean_after": true,
+      "source_clean_before": true,
+      "workflow_sha256": {
+        "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+        "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+        "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+        "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+        "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+        "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+      }
+    }
+  ],
+  "schema_version": 2,
+  "source_clean_at_normalization": true,
+  "source_snapshot": {
+    "bytes": 36638,
+    "path": "final/source.json",
+    "sha256": "f42aae1779718883b461d3d64ef2ff94fcb74e625e7541a5c271a2df3501c640"
+  },
+  "superseded_or_environment_diagnostics": [
+    {
+      "action": "list",
+      "dirty": true,
+      "exit_code": 0,
+      "log": {
+        "bytes": 933,
+        "path": "act/20261113T091829Z-list.log",
+        "sha256": "06ec76cc18e98ce8499b3b31a889fa648a5243c438b3ff5e3421cc52eb8a0560"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 2188,
+        "path": "act/20261113T091829Z-list.json",
+        "sha256": "6c6bf16465420d5138d912ee1fa619c75b8d9d186588745e3531fe0edb151363"
+      },
+      "source_revision": "250b29b437c14429a3049f3f0206bd6f16e0253d"
+    },
+    {
+      "action": "build",
+      "dirty": true,
+      "exit_code": 1,
+      "log": {
+        "bytes": 1925,
+        "path": "act/20261113T092214Z-build.log",
+        "sha256": "fe7c87754fd8c741eba66b22aa9d3885d4c1520e238a9fd4c3c51772b7922755"
+      },
+      "outcome": "failed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 2259,
+        "path": "act/20261113T092214Z-build.json",
+        "sha256": "498b3aad1d7e019cf13f3d3b4cec0ed595fb5f67b9c7aa1697652d193582965f"
+      },
+      "source_revision": "544c1bad7e52a552b95503e5b916084ea6ee4a83"
+    },
+    {
+      "action": "build",
+      "dirty": true,
+      "exit_code": 1,
+      "log": {
+        "bytes": 3256,
+        "path": "act/20261113T092834Z-build.log",
+        "sha256": "41fc5ed41acb98dea9222b8e866ffce47ed7005d4800fc1e4ec7e34b7b3e14aa"
+      },
+      "outcome": "failed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 5726,
+        "path": "act/20261113T092834Z-build.json",
+        "sha256": "da29048b281571607783d94eafb599aab5fb11d803410a0badeb5d9c69eb759e"
+      },
+      "source_revision": "544c1bad7e52a552b95503e5b916084ea6ee4a83"
+    },
+    {
+      "action": "build",
+      "dirty": true,
+      "exit_code": 1,
+      "log": {
+        "bytes": 3256,
+        "path": "act/20261113T093003Z-build.log",
+        "sha256": "b5a8cc8a055c04ef3f133e05a01344f085f9c780b4182eae9f08d723e5659b5f"
+      },
+      "outcome": "failed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 5910,
+        "path": "act/20261113T093003Z-build.json",
+        "sha256": "0f89530ebc28430cc76dff8f62187b504f1328528aef24b7cb9f15883affc931"
+      },
+      "source_revision": "06df6fcbe68e6a0b92d322604a200659d784361a"
+    },
+    {
+      "action": "build",
+      "dirty": true,
+      "exit_code": 0,
+      "log": {
+        "bytes": 19747,
+        "path": "act/20261113T093100Z-build.log",
+        "sha256": "167c597f8eb2c6b0f92b3a8178caa3e034dd8f084326c8a8a88a34564a051478"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 5976,
+        "path": "act/20261113T093100Z-build.json",
+        "sha256": "0c1b148bab0a18307b408cc92242275fbbbf511cfbda7c420f637676e68960a2"
+      },
+      "source_revision": "06df6fcbe68e6a0b92d322604a200659d784361a"
+    },
+    {
+      "action": "dry-run",
+      "dirty": true,
+      "exit_code": 0,
+      "log": {
+        "bytes": 37370,
+        "path": "act/20261113T093628Z-dry-run.log",
+        "sha256": "f65bc3f46b411a0ac78aa7e2f5af649814eb1622408d3be8c5386c06bef599f2"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6231,
+        "path": "act/20261113T093628Z-dry-run.json",
+        "sha256": "5df4cfe5dc39e2c1f03d4a7635fd6a9988b3ce8e624f03294a10f12a7ec78525"
+      },
+      "source_revision": "d0869e84c56c15ae7453fbc3f092470c79c2c123"
+    },
+    {
+      "action": "build",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 19207,
+        "path": "act/20261113T094112Z-build.log",
+        "sha256": "e4f66ac2ce57ce77826aa992c4e2cc646ecaecf06238a12fb8dc92687c1c485e"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6298,
+        "path": "act/20261113T094112Z-build.json",
+        "sha256": "478e19b2cca5c8013e946550894ddf0be6fcfbdf0fe098c8e987820409a7001a"
+      },
+      "source_revision": "8757df4efd6a2723e0b83995140db5984b03f683"
+    },
+    {
+      "action": "coverage",
+      "dirty": false,
+      "exit_code": 1,
+      "log": {
+        "bytes": 63995,
+        "path": "act/20261113T094234Z-coverage.log",
+        "sha256": "b2e0b8f6f260ece7fb6e4094b4c55bd1b1c62a5e549ef00ee61299fd60722f97"
+      },
+      "outcome": "failed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6268,
+        "path": "act/20261113T094234Z-coverage.json",
+        "sha256": "5ff1b30b1a2778fbdbd11e12258f78907894b7cd17cbebabe85d5ec9e0b46522"
+      },
+      "source_revision": "8757df4efd6a2723e0b83995140db5984b03f683"
+    },
+    {
+      "action": "coverage",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 66178,
+        "path": "act/20261113T094615Z-coverage.log",
+        "sha256": "28bdb2a0646c55a4b00e363d72ec0eb3a2f18657ec9f95990dbcb375d17c15ad"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6268,
+        "path": "act/20261113T094615Z-coverage.json",
+        "sha256": "d1581eb3df8ad030458e91f9fdc2598b743ab9d239007ad6e8ce56b1cc88201b"
+      },
+      "source_revision": "8757df4efd6a2723e0b83995140db5984b03f683"
+    },
+    {
+      "action": "build",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 19659,
+        "path": "act/20261113T095135Z-build.log",
+        "sha256": "1cf02c40f621781f532dd43857439f44cbc6667b7029fd38437abee5a82176b1"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6348,
+        "path": "act/20261113T095135Z-build.json",
+        "sha256": "d55d069c3ed500079eeb2c64c102402236f8025699261c214d8f01cccc6e944f"
+      },
+      "source_revision": "7173ff91c599a37c8446048782098137b9e987b0"
+    },
+    {
+      "action": "coverage",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 65889,
+        "path": "act/20261113T095229Z-coverage.log",
+        "sha256": "1e7a58f6c9cba3e9c16286a05e0564ed5350d77d0a8e3a2a61e75ec0918b14b7"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6318,
+        "path": "act/20261113T095229Z-coverage.json",
+        "sha256": "2d9ca177c3ab33bddb94803cadb09a53dc986715609ee7568c09a29b6e35a8e3"
+      },
+      "source_revision": "7173ff91c599a37c8446048782098137b9e987b0"
+    },
+    {
+      "action": "lint",
+      "dirty": false,
+      "exit_code": 1,
+      "log": {
+        "bytes": 10478,
+        "path": "act/20261113T095245Z-lint.log",
+        "sha256": "5c91386f9815ea6e2e5c0a086423ccb5925acdf249fe0fd0aae9be7bb9c65690"
+      },
+      "outcome": "failed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6310,
+        "path": "act/20261113T095245Z-lint.json",
+        "sha256": "bb5606ba1b4e7d002b5bd41bcf0c709ddaa6a457afae199090551a4714dc8989"
+      },
+      "source_revision": "7173ff91c599a37c8446048782098137b9e987b0"
+    },
+    {
+      "action": "snapshot",
+      "dirty": false,
+      "exit_code": 1,
+      "log": {
+        "bytes": 19064,
+        "path": "act/20261113T095609Z-snapshot.log",
+        "sha256": "1f5f2e75a70655212f3605cae2adc40ce19f1fdac7019044db490f26ba33f1ec"
+      },
+      "outcome": "failed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6322,
+        "path": "act/20261113T095609Z-snapshot.json",
+        "sha256": "6bc0d3ebcff8c73bc45cd28510a6300456a6abcdb9a6b3ab714caddd5a8a2c48"
+      },
+      "source_revision": "548ae195b1ae087370a06da8c9de23c3a0acc6f3"
+    },
+    {
+      "action": "docs",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 18882,
+        "path": "act/20261113T100001Z-docs.log",
+        "sha256": "3dfbeee89d8ee61ab337cd374b9b930f0a2974beafc4ccde8863699c80e2a0a1"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6336,
+        "path": "act/20261113T100001Z-docs.json",
+        "sha256": "fb465c3a33118646fa3ec92d34f1cc1534d8936e2bb2bed85af1ee5a220b01e0"
+      },
+      "source_revision": "548ae195b1ae087370a06da8c9de23c3a0acc6f3"
+    },
+    {
+      "action": "candidate",
+      "dirty": false,
+      "exit_code": 1,
+      "log": {
+        "bytes": 14420,
+        "path": "act/20261113T100110Z-candidate.log",
+        "sha256": "722626e13d7822cee9dd4ad9479aaf1d543565db7ea126719b1bde74731b982f"
+      },
+      "outcome": "failed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6335,
+        "path": "act/20261113T100110Z-candidate.json",
+        "sha256": "70b936ba6853aa867b89882d583042282424ffd8e3e513c9b2074efdcbf1b8b3"
+      },
+      "source_revision": "548ae195b1ae087370a06da8c9de23c3a0acc6f3"
+    },
+    {
+      "action": "snapshot",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 67394,
+        "path": "act/20261113T100435Z-snapshot.log",
+        "sha256": "5046105381ec80af180f4eb9c3fa377960233cac807ad0fad7460123868de12c"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6322,
+        "path": "act/20261113T100435Z-snapshot.json",
+        "sha256": "29ce359bc1d9e6fb60b34c0b6cca2a758ee32347fb509f07fbf11a3b046d5896"
+      },
+      "source_revision": "218e26bfb5f31fb64e5327e9a82082fde4f25f47"
+    },
+    {
+      "action": "candidate",
+      "dirty": false,
+      "exit_code": 1,
+      "log": {
+        "bytes": 145030,
+        "path": "act/20261113T100733Z-candidate.log",
+        "sha256": "2ad6b84b374ba84fead6cc61d03d831965d6c4ed6648c52ce4cc65524e007115"
+      },
+      "outcome": "failed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6335,
+        "path": "act/20261113T100733Z-candidate.json",
+        "sha256": "14d044deda88bea6c4d7c5071a24e72dd2879a40473e93cfe764826dcd9ab0ea"
+      },
+      "source_revision": "218e26bfb5f31fb64e5327e9a82082fde4f25f47"
+    },
+    {
+      "action": "candidate",
+      "dirty": false,
+      "exit_code": 1,
+      "log": {
+        "bytes": 136409,
+        "path": "act/20261113T102610Z-candidate.log",
+        "sha256": "3f9f0fe8e6ffb7ceb860d12964adbe0b06ff669d653b196fff33fb7f81860326"
+      },
+      "outcome": "failed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6648,
+        "path": "act/20261113T102610Z-candidate.json",
+        "sha256": "9e0dabc3c2f7b8b1a7b3f833d6bb6e9f66572ce08dd55638e2bc36c468cde00b"
+      },
+      "source_revision": "e34892ee8f8b1add66a843ed4ab7f90e04dbc735"
+    },
+    {
+      "action": "candidate",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 131366,
+        "path": "act/20261113T104234Z-candidate.log",
+        "sha256": "1f566a09c5e50e3b2bd73d5dde9b5ff9dc34f92a85df2a9b7364e695455bbd31"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6648,
+        "path": "act/20261113T104234Z-candidate.json",
+        "sha256": "69da83872ad6b635ae9e49f94d96e9f21379f0d3d720f30fe033427b3b73578b"
+      },
+      "source_revision": "c8c3ff5d757f4e044f5431804bd2de29e1d3a5a1"
+    },
+    {
+      "action": "build",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 9695,
+        "path": "act/20261113T105135Z-build.log",
+        "sha256": "20e6b70bd4fc1e216717a322758600ec4fcf06ac46f68ce0a2ecb701fd291e72"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6661,
+        "path": "act/20261113T105135Z-build.json",
+        "sha256": "d091665f22cc5c64963f000e9996e3e6de7961037ff35ae9a3cdd65bb0d22b56"
+      },
+      "source_revision": "c8c3ff5d757f4e044f5431804bd2de29e1d3a5a1"
+    },
+    {
+      "action": "coverage",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 65887,
+        "path": "act/20261113T105218Z-coverage.log",
+        "sha256": "2e7b9753f7a7da7af34383212bd161b11ccba967c317522ad2dafa756aa22431"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6631,
+        "path": "act/20261113T105218Z-coverage.json",
+        "sha256": "0b6d1b5301ab327fb0b020d84b0784836cfe0a5f46940c3bb1240406e2b07f9c"
+      },
+      "source_revision": "c8c3ff5d757f4e044f5431804bd2de29e1d3a5a1"
+    },
+    {
+      "action": "lint",
+      "dirty": false,
+      "exit_code": 1,
+      "log": {
+        "bytes": 10151,
+        "path": "act/20261113T105301Z-lint.log",
+        "sha256": "79975d2d5726dad59da63821b888d5c11785215cbf4b5ea6c5a00b0ee88f3b15"
+      },
+      "outcome": "failed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6623,
+        "path": "act/20261113T105301Z-lint.json",
+        "sha256": "2f5d0522682b47340a0143f75e10a5e92a89b9e5d533b6cb5c87b69a43712a93"
+      },
+      "source_revision": "c8c3ff5d757f4e044f5431804bd2de29e1d3a5a1"
+    },
+    {
+      "action": "lint",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 12113,
+        "path": "act/20261113T105916Z-lint.log",
+        "sha256": "cc0f6cd6db023922190235ac6f5ad18ca4010d74c578f8a6dcd9631055f24af9"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6623,
+        "path": "act/20261113T105916Z-lint.json",
+        "sha256": "b5866f544368ba4d342b3ab8bc12d338bf7e3868c5ecbab4befca419a2cf1f8a"
+      },
+      "source_revision": "ef123d1601008bc4cf75d8b8be6041763179c7fa"
+    },
+    {
+      "action": "build",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 9241,
+        "path": "act/20261113T110028Z-build.log",
+        "sha256": "28cc4c6500dfb48c7ddd94d8be5e34889ccdf09a9c90d70586e16361927ce111"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6661,
+        "path": "act/20261113T110028Z-build.json",
+        "sha256": "bbf88a21bba047661ae95bf4b8d6f8f01b1b05b90faea856591da36b9797ce39"
+      },
+      "source_revision": "ef123d1601008bc4cf75d8b8be6041763179c7fa"
+    },
+    {
+      "action": "coverage",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 65884,
+        "path": "act/20261113T110104Z-coverage.log",
+        "sha256": "aebf2860fd91948363ce326251b34668b04122cf819146a3ad410f65a10f00d9"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6631,
+        "path": "act/20261113T110104Z-coverage.json",
+        "sha256": "7a3fa6999eef727b9646902651ff7b21d527220b0b42ca234b9517585cfe995d"
+      },
+      "source_revision": "ef123d1601008bc4cf75d8b8be6041763179c7fa"
+    },
+    {
+      "action": "snapshot",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 67551,
+        "path": "act/20261113T110147Z-snapshot.log",
+        "sha256": "043dd4c1ff68d32f35b997dfe469090d105399f8d5a33e7874e29d8466f6b001"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6635,
+        "path": "act/20261113T110147Z-snapshot.json",
+        "sha256": "a4b8b1221f005987a69a65c938d7d8860402f29931cdc9665b4cee5b930cb07e"
+      },
+      "source_revision": "ef123d1601008bc4cf75d8b8be6041763179c7fa"
+    },
+    {
+      "action": "docs",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 15487,
+        "path": "act/20261113T110240Z-docs.log",
+        "sha256": "4aa354ffcbf0b31381ed9d74c2f346db523254b7291eff11a027f44e1b8f5b95"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6649,
+        "path": "act/20261113T110240Z-docs.json",
+        "sha256": "56c87dca5a735f6b159bfece1b2f564e18d4481bb06ce5deb004b9f9fa22a6b2"
+      },
+      "source_revision": "ef123d1601008bc4cf75d8b8be6041763179c7fa"
+    },
+    {
+      "action": "candidate",
+      "dirty": false,
+      "exit_code": 1,
+      "log": {
+        "bytes": 116573,
+        "path": "act/20261113T110256Z-candidate.log",
+        "sha256": "f43346c4c5fefd1d5354e308faca3330a35c488e21750ab17608a99dbbb80282"
+      },
+      "outcome": "failed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6648,
+        "path": "act/20261113T110256Z-candidate.json",
+        "sha256": "e1ee2fb0fbec7ccb27371a3074c92dd6d851e6889fb3ed1a24bac4ce074e06a4"
+      },
+      "source_revision": "ef123d1601008bc4cf75d8b8be6041763179c7fa"
+    },
+    {
+      "action": "candidate",
+      "dirty": false,
+      "exit_code": 1,
+      "log": {
+        "bytes": 120924,
+        "path": "act/20261113T111148Z-candidate.log",
+        "sha256": "9276d4b9bded8ce0e9fa71bcb2b36ee01c3fca048eafb1c9df999edfd3ed9600"
+      },
+      "outcome": "failed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6648,
+        "path": "act/20261113T111148Z-candidate.json",
+        "sha256": "612ac951e60f91ebf54530c80433d964ceaf3cccc3f8ab8e7a860c199751b687"
+      },
+      "source_revision": "ef123d1601008bc4cf75d8b8be6041763179c7fa"
+    },
+    {
+      "action": "candidate",
+      "dirty": false,
+      "exit_code": 1,
+      "log": {
+        "bytes": 121652,
+        "path": "act/20261113T112133Z-candidate.log",
+        "sha256": "35109d32c021642a77ccca96d577b7319779ec1b54e0855a24f0d3020da64cd3"
+      },
+      "outcome": "failed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6648,
+        "path": "act/20261113T112133Z-candidate.json",
+        "sha256": "3a998ead23d4fdfaacb748a3718e3bd3ab924593489803dca47c01ca30ca28a6"
+      },
+      "source_revision": "ef123d1601008bc4cf75d8b8be6041763179c7fa"
+    },
+    {
+      "action": "lint",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 10769,
+        "path": "act/20261113T113627Z-lint.log",
+        "sha256": "7bbbe52ce55ab1e40c707446259045bba8866742324e029b82428d9f1ebef926"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6623,
+        "path": "act/20261113T113627Z-lint.json",
+        "sha256": "a51fc87ac53afaeafceb53f97824b60b7d5b5e1949d71af0d10cc6be8bc680d7"
+      },
+      "source_revision": "e32e8a05f2613702e0e513cd59f25d504e89c1d7"
+    },
+    {
+      "action": "build",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 9245,
+        "path": "act/20261113T113721Z-build.log",
+        "sha256": "f1c4985a5e294a93a2fa10ae3a4f67a56607d3009423cf94699631383dd75b27"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6661,
+        "path": "act/20261113T113721Z-build.json",
+        "sha256": "3924fa989f6878b3a26c30402214c03ce80815ec03136159436b4b9e89d67319"
+      },
+      "source_revision": "e32e8a05f2613702e0e513cd59f25d504e89c1d7"
+    },
+    {
+      "action": "coverage",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 65886,
+        "path": "act/20261113T113759Z-coverage.log",
+        "sha256": "c4d1c30390754d9243fd99083d2b3c6453d2a84d347d2063ddeda8b51f991f9d"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6631,
+        "path": "act/20261113T113759Z-coverage.json",
+        "sha256": "7e98605cd00248449172d76385d69c20171064841f4ec1bc85536b22dd947adb"
+      },
+      "source_revision": "e32e8a05f2613702e0e513cd59f25d504e89c1d7"
+    },
+    {
+      "action": "snapshot",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 67322,
+        "path": "act/20261113T113835Z-snapshot.log",
+        "sha256": "866f3058af74850952f0afc297cb3bc19afe964adab2073407d31ea068b095af"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6635,
+        "path": "act/20261113T113835Z-snapshot.json",
+        "sha256": "7572f955249becb78fff25f17d2b14e0b2e554d7b479a6703a0238ec7fb1f50c"
+      },
+      "source_revision": "e32e8a05f2613702e0e513cd59f25d504e89c1d7"
+    },
+    {
+      "action": "docs",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 15487,
+        "path": "act/20261113T113941Z-docs.log",
+        "sha256": "6e57effd98b76d16ae970c0de4271922a2fa45c1d835b7f7d2df51429d19bca1"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6649,
+        "path": "act/20261113T113941Z-docs.json",
+        "sha256": "f17b8a754afc5785ad7966a2c89cf998c5abe6587a02bfe608babc54105303b4"
+      },
+      "source_revision": "e32e8a05f2613702e0e513cd59f25d504e89c1d7"
+    },
+    {
+      "action": "candidate",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 130956,
+        "path": "act/20261113T113958Z-candidate.log",
+        "sha256": "f893f66fd0338f157646d84df8808e48ca86ede7915f3beb3cd1252a3cfde61e"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6648,
+        "path": "act/20261113T113958Z-candidate.json",
+        "sha256": "7456f2d9e581e96943ce75a18928dd55347f352e407dce8070ac9038af4a4731"
+      },
+      "source_revision": "e32e8a05f2613702e0e513cd59f25d504e89c1d7"
+    },
+    {
+      "action": "lint",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 12459,
+        "path": "act/20261113T114900Z-lint.log",
+        "sha256": "d592cc3977328788980aa4f593d97b62c449eca3565ddd0df243084545d9b780"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6686,
+        "path": "act/20261113T114900Z-lint.json",
+        "sha256": "e9d61c9e0229efdb06ee75098d4938ed67be57bb01e73f66c2865dd8c0579174"
+      },
+      "source_revision": "e32e8a05f2613702e0e513cd59f25d504e89c1d7"
+    },
+    {
+      "action": "lint",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 11107,
+        "path": "act/20261113T115518Z-lint.log",
+        "sha256": "68f93b2e7d952511fd9db1008d046113c7b4cfc3f759cc04b32fac0fad1b742d"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6623,
+        "path": "act/20261113T115518Z-lint.json",
+        "sha256": "668be7213b5b986da87e6702bece6a09dd9e3b26774d8e5ff2d1f48a07f8efe2"
+      },
+      "source_revision": "e32e8a05f2613702e0e513cd59f25d504e89c1d7"
+    },
+    {
+      "action": "build",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 9069,
+        "path": "act/20261113T115608Z-build.log",
+        "sha256": "e78bcef5cbf00ff79a8d81859b418c087a583f84212fcafce5c0a4f98c03a8d0"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6661,
+        "path": "act/20261113T115608Z-build.json",
+        "sha256": "efa94fd1c25c9f82d2d64f521c2055fa2feb159f0a526a0132f123c008edf037"
+      },
+      "source_revision": "e32e8a05f2613702e0e513cd59f25d504e89c1d7"
+    },
+    {
+      "action": "coverage",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 65887,
+        "path": "act/20261113T115645Z-coverage.log",
+        "sha256": "665ed618da92d31c735aaf28305656171c956df9c9edea61e6baf95441d93207"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6631,
+        "path": "act/20261113T115645Z-coverage.json",
+        "sha256": "cd6d60347a48523db53f51f7c3344580a8aaca2bd286e120bb7ae01474a03d19"
+      },
+      "source_revision": "e32e8a05f2613702e0e513cd59f25d504e89c1d7"
+    },
+    {
+      "action": "snapshot",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 67320,
+        "path": "act/20261113T115724Z-snapshot.log",
+        "sha256": "c804e9919cbb57d733b2a69f37bc45cac1d6e43ce432504a15f041ba041692ea"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6635,
+        "path": "act/20261113T115724Z-snapshot.json",
+        "sha256": "40949ef0fc85acd4e91ffcb2dae4a37f5caa290bdbf89c26d3c33e41629368ab"
+      },
+      "source_revision": "e32e8a05f2613702e0e513cd59f25d504e89c1d7"
+    },
+    {
+      "action": "docs",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 15486,
+        "path": "act/20261113T115818Z-docs.log",
+        "sha256": "4585f03139ab5e9bd6aa01feb059a9441dc6061f02d1bbfc5a08a6fab5eac639"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6649,
+        "path": "act/20261113T115818Z-docs.json",
+        "sha256": "2efbd003c746c91c67e06ffd2c97b8d95b7c4b89ba746c952064f24c3085e645"
+      },
+      "source_revision": "e32e8a05f2613702e0e513cd59f25d504e89c1d7"
+    },
+    {
+      "action": "candidate",
+      "dirty": false,
+      "exit_code": 0,
+      "log": {
+        "bytes": 130734,
+        "path": "act/20261113T115836Z-candidate.log",
+        "sha256": "6ac87357675c7bd7acc73db9ded136014b55d7be70195830f5a8c7c540659651"
+      },
+      "outcome": "passed",
+      "qualification_for_selected_source": false,
+      "receipt": {
+        "bytes": 6648,
+        "path": "act/20261113T115836Z-candidate.json",
+        "sha256": "3e3d465f5dc81ac8ef6127d72f61e350dcc13665f9d217966de6baf36e31a4c3"
+      },
+      "source_revision": "e32e8a05f2613702e0e513cd59f25d504e89c1d7"
+    }
+  ],
+  "tooling": {
+    "act": "act version 0.2.97",
+    "action_sources": [
+      {
+        "archive_sha256": "0f48a50cf2edeea3d6e270f8dae645529128ca8b2954993891a2fb8f7b16145a",
+        "git_tree": "f8a7b72dc00648d050099727d25ca92a43ad1162",
+        "repository": "actions/checkout",
+        "revision": "11d5960a326750d5838078e36cf38b85af677262"
+      },
+      {
+        "archive_sha256": "21dc27499512507113532bb567b3febc05616b1db099ffd3daa1fbc39843d88a",
+        "git_tree": "fe066c3996066f90baea9d43bfb45dc9eaa47cea",
+        "repository": "actions/dependency-review-action",
+        "revision": "a1d282b36b6f3519aa1f3fc636f609c47dddb294"
+      },
+      {
+        "archive_sha256": "30852e93cbdf87f3cecc3927dd658a750c7b0c285c1188962db29fc59431a2df",
+        "git_tree": "f094f548eefc307436b8d9373c45ce306837e0d5",
+        "repository": "actions/setup-go",
+        "revision": "40f1582b2485089dde7abd97c1529aa768e1baff"
+      },
+      {
+        "archive_sha256": "8897425776cbef7ddfca2275e536ecc0c26b313161de2235c5aa9fda8ce961fc",
+        "git_tree": "6e2fefae7f597aebce691c980b27ec6381e493e2",
+        "repository": "actions/setup-node",
+        "revision": "49933ea5288caeca8642d1e84afbd3f7d6820020"
+      },
+      {
+        "archive_sha256": "6318d936518770673c9d105bc2da2046fd7b7e49532ed8c2db14325465325a09",
+        "git_tree": "568c6310706725a8b725497dbe6b3b909cbcf6cd",
+        "repository": "actions/setup-python",
+        "revision": "a26af69be951a213d495a4c3e4e4022e16d87065"
+      },
+      {
+        "archive_sha256": "b7e8bdaab718e6bd4b78925b8880a96bfc0272338005017453e24ab3f83149d0",
+        "git_tree": "90fba5b2fb462e7dd5b3b810757b73327d2d66bc",
+        "repository": "actions/upload-artifact",
+        "revision": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+      },
+      {
+        "archive_sha256": "de1ec184f6c44509496eeb771c0dfb9e363e0cb2e64bd034deb36316f1704233",
+        "git_tree": "6ca237a43234c9d102a89c03f3c2d7857c2e1b0a",
+        "repository": "goreleaser/goreleaser-action",
+        "revision": "e435ccd777264be153ace6237001ef4d979d3a7a"
+      }
+    ],
+    "chromium_actual": "151.0.7922.34",
+    "go": "1.27.4",
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "playwright": "1.62.0",
+    "python_actual": "3.12.16",
+    "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270"
+  },
+  "tree": "fba5cfaed616313e2a6b679a55ff234d21a21538",
+  "workflow_matrix": [
+    {
+      "completed_runs": 2,
+      "job": "build",
+      "matrix": {
+        "os": "ubuntu-24.04"
+      },
+      "outcome": "passed",
+      "workflow": "build.yml"
+    },
+    {
+      "completed_runs": 0,
+      "job": "build",
+      "matrix": {
+        "os": "macos-15"
+      },
+      "outcome": "unavailable",
+      "reason": "No native runner on this Linux cloud host; cross compilation and label-to-Linux remapping cannot qualify native execution",
+      "workflow": "build.yml"
+    },
+    {
+      "completed_runs": 0,
+      "job": "build",
+      "matrix": {
+        "os": "windows-2025"
+      },
+      "outcome": "unavailable",
+      "reason": "No native runner on this Linux cloud host; cross compilation and label-to-Linux remapping cannot qualify native execution",
+      "workflow": "build.yml"
+    },
+    {
+      "completed_runs": 2,
+      "job": "coverage",
+      "outcome": "passed",
+      "workflow": "coverage.yml"
+    },
+    {
+      "completed_runs": 2,
+      "job": "golangci",
+      "outcome": "passed",
+      "workflow": "lint.yml"
+    },
+    {
+      "completed_runs": 2,
+      "job": "goreleaser",
+      "outcome": "passed",
+      "workflow": "goreleaser.yml"
+    },
+    {
+      "completed_runs": 2,
+      "job": "build-preview",
+      "outcome": "passed",
+      "workflow": "docs-preview.yml"
+    },
+    {
+      "completed_runs": 2,
+      "job": "candidate",
+      "outcome": "passed",
+      "workflow": "steam-deck.yml"
+    },
+    {
+      "actual_probe_attempts": 1,
+      "job": "dependency-review",
+      "outcome": "unavailable",
+      "reason": "Provider action reported dependency review unsupported; read-only injected-auth API fallback403",
+      "workflow": "lint.yml"
+    }
+  ]
+}

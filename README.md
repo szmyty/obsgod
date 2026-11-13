@@ -7,7 +7,7 @@ plugin and storage compatibility IDs remain `obsgod` / `OBSGod`.
 
 - Automatic streaming status, state-driven Start/Stop/Cancel and copyable diagnostics.
 - Entire-screen or game-only video, with black/plain-text between-game fallback.
-- System audio plus an optional microphone; game-only video does not isolate audio per app.
+- Stream-only microphone input/mute/gain/meters and optional focused-panel hold-to-talk; game-only video does not isolate audio per app.
 - Guided Kick, Twitch, YouTube and custom RTMP(S) setup.
 - Verified installer/update paths, repair and reviewed uninstall/reset/wipe.
 - Optional funding buttons; cryptocurrency controls stay hidden without configured addresses.
@@ -18,7 +18,8 @@ plugin and storage compatibility IDs remain `obsgod` / `OBSGod`.
 
 ## Install and first stream
 
-Follow the [Steam Deck guide](docs/steam-deck.md) in Desktop Mode. Extract the
+Use the [checksum-verifying candidate9 installer](docs/candidate-9-install.md)
+in Desktop Mode and follow the [Steam Deck guide](docs/steam-deck.md). Extract the
 whole reviewed candidate, run its installer and configure your destination/key
 locally. Return to Gaming Mode, make a local clip and verify its picture/sound,
 then explicitly start streaming and check a separate viewer.
