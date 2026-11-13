@@ -1,5 +1,40 @@
 # Current work
 
+## Active: finish independent product work; keep #51 research separate
+
+On 2026-11-13 the owner authorized working through **every open issue except
+#51**, including partial implementation/preparation wherever owner or external
+facts remain. #51 has separately been rescoped into monetization and Decky Store
+research journeys; do not perform those journeys during this implementation
+campaign. This supersedes the older five-feature-only scope below.
+
+Start from clean draft-stack head `250b29b437c14429a3049f3f0206bd6f16e0253d`;
+default `master` remains `ed7d100d356ce803d2cb1c1afef3836759deef10` and drafts
+#58 -> #59 -> #60 remain open. Use the existing shared isolated checkout without
+additional worktrees. Keep early/meaningful draft checkpoints pushed.
+
+The owner selected intended slug **decky-stream** and wants practical Identity
+framework bootstrapping, not strict adoption of an evolving standards library.
+Prepare branding/rename/migration source; final creative, organization/domain,
+publisher and real target evidence remain owner inputs. Preserve installed
+`obsgod`/`OBSGod` compatibility and current update trust until the approved
+transition is actually qualified. No other-repository write, release, deployment,
+paid resource or payment is authorized by this implementation request.
+
+Read [the completion ledger](docs/completion-campaign.md). Work includes live
+stream-only microphone controls, truthful device/LCD-jack observation, useful
+API/CLI/creator contracts, practical architecture/governance, supply-chain/CI
+preparation and local act execution under newly discovered #61. Real device,
+provider, CI billing, owner reviews and publication facts cannot be invented.
+
+After review/merges, consolidate all remaining criteria into **one final-boss
+issue plus #51**. Preserve each original acceptance criterion, dependency,
+evidence and pending owner action; close superseded tickets as consolidated,
+without presenting unrun acceptance as passed. Prepare this mapping now; do not
+close the pre-merge issue graph prematurely. Candidate8 remains immutable at
+its recorded exact source. New source requires fresh candidate9 qualification.
+
+
 ## Milestone 3 candidate 8: all available local checks passed
 
 Prepared in draft #58 -> #59 -> #60 for #47/#24/#48/#49/#50; #51 remains
