@@ -17,6 +17,12 @@ guard so settings, update/removal and capture cleanup cannot disrupt local outpu
 Keep exact-source qualification and actual Deck/CI evidence distinct. Existing
 M2 target/adoption, CI billing, final identity and publication gates remain open.
 
+Core API checkpoint is draft #58 (`codex/m3-stream-workspace`) at `8df2884`.
+Controller/Desktop integration, lifecycle guards, candidate8 packaging and new
+native/browser qualification stack on `codex/m3-controller-workflows`. No source
+merge is performed by this implementation turn. Candidate8 qualification must
+use its own final exact revision; historical candidate7 remains immutable.
+
 
 ## Milestone 2 source merged; Milestone 3 is proposed
 

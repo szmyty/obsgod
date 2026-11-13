@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"unicode"
 )
 
 // RecordingPreferences are local-only preferences, separate from destination
@@ -112,7 +113,7 @@ func MediaProfileValues(p Paths) (string, int, int, error) {
 	return dir, r.ReplaySeconds, r.ReplayMemoryMB, nil
 }
 func validateMediaDirectory(dir string) error {
-	if !filepath.IsAbs(dir) || filepath.Clean(dir) != dir || dir == string(filepath.Separator) || strings.IndexFunc(dir, func(r rune) bool { return r < 32 || r == 127 }) >= 0 {
+	if !filepath.IsAbs(dir) || filepath.Clean(dir) != dir || dir == string(filepath.Separator) || strings.IndexFunc(dir, func(r rune) bool { return unicode.IsControl(r) }) >= 0 {
 		return errors.New("choose an absolute recording directory without control characters, dot segments or trailing separators")
 	}
 	return nil

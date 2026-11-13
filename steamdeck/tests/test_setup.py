@@ -96,6 +96,25 @@ class LocalSetupSecurity(unittest.TestCase):
         self.assertEqual(self.request("POST", "/api/action", {"action": "test-connection"})[0], 200)
         self.mock.assert_called_once_with("test-connection", timeout=5)
 
+    def test_advanced_tools_require_local_authorization_and_json_settings(self):
+        for action in ["stream-profiles", "set-idle-media", "media"]:
+            payload = {"action": action, "settings": {"action": "preview"}}
+            for extra in [{"auth": False}, {"origin": "https://attacker.invalid"}, {"host": "attacker.invalid"}]:
+                self.assertEqual(self.request("POST", "/api/action", payload, **extra)[0], 403)
+            self.assertEqual(self.request("POST", "/api/action", {"action": action, "settings": []})[0], 400)
+        self.mock.assert_not_called()
+        for action in ["stream-profiles", "set-idle-media", "media"]:
+            self.mock.reset_mock()
+            payload = {"action": "preview"}
+            self.assertEqual(self.request("POST", "/api/action", {"action": action, "settings": payload})[0], 200)
+            self.mock.assert_called_once_with(action, payload)
+
+    def test_health_is_authenticated_and_read_only(self):
+        self.assertEqual(self.request("GET", "/api/stream-health", auth=False)[0], 403)
+        self.mock.assert_not_called()
+        self.assertEqual(self.request("GET", "/api/stream-health")[0], 200)
+        self.mock.assert_called_once_with("stream-health", timeout=6)
+
 
 class DesktopProviderControls(unittest.TestCase):
     def test_password_bridge_uses_stdin_and_discards_stderr(self):
@@ -120,7 +139,7 @@ const fs=require("node:fs"),vm=require("node:vm"),assert=require("node:assert/st
 const nodes=new Map();
 function element(id){if(!nodes.has(id))nodes.set(id,{value:"",checked:false,disabled:false,required:false,handlers:{},addEventListener(type,fn){this.handlers[type]=fn;}});return nodes.get(id);}
 element("provider").value="custom";
-const context={console,URL,setTimeout,fetch:()=>new Promise(()=>{}),document:{getElementById:element},window:{location:{hash:""},sessionStorage:{setItem(){},getItem(){return null;}},history:{replaceState(){}},confirm:()=>true}};
+const context={console,URL,setTimeout,setInterval:()=>0,fetch:()=>new Promise(()=>{}),document:{getElementById:element},window:{location:{hash:""},sessionStorage:{setItem(){},getItem(){return null;}},history:{replaceState(){}},confirm:()=>true}};
 vm.createContext(context);vm.runInContext(fs.readFileSync(process.argv[1],"utf8"),context);
 vm.runInContext(`
 el("server").value="rtmps://my-own-server.invalid/path";el("key").value="typed-fixture-key";

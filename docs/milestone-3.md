@@ -11,11 +11,11 @@ Work proceeds in a shared isolated checkout with draft PR checkpoints.
 
 | Issue | Source work | Qualification and remaining evidence |
 | --- | --- | --- |
-| #47 | Versioned profiles, validated advanced video/audio settings, presets, preview/reset and secret-free export | Implementation pending. Presets are starting points; no measured Deck hardware promise. Actual picture/audio/performance/controller evidence required. |
-| #24 | Local image/video idle media, rights acknowledgement, game-aware safe transitions | Implementation pending. Preserve original #10/#17/#21 dependencies and actual Deck transition/privacy evidence. |
-| #48 | Bounded audio-device/session observation and recovery without output starts | Implementation pending. Named headset/Bluetooth/session/Deck failure cases must be qualified on device. |
-| #49 | Confirmed local recording/replay controls, safe clip/storage/export choices | Implementation pending. Actual moving video/audio, file finalization and controller operation required. |
-| #50 | Measured fresh/unknown health, useful advice and redacted diagnostics | Implementation pending. Device/network/load degradation acceptance remains required. |
+| #47 | [Profiles](advanced-profiles.md): versioned profiles, validated advanced video/audio settings, presets, preview/reset and secret-free export | Source implemented; final qualification pending. Presets are starting points; no measured Deck hardware promise. Actual picture/audio/performance/controller evidence required. |
+| #24 | [Idle media](idle-media.md): local image/video, rights acknowledgement and safe game transitions | Source implemented; final qualification pending. Preserve original #10/#17/#21 dependencies and actual Deck transition/privacy evidence. |
+| #48 | [Recovery](runtime-resilience.md): bounded audio-device/session observation without output starts | Source implemented; final qualification pending. Named headset/Bluetooth/session/Deck failure cases must be qualified on device. |
+| #49 | [Recording/replay](recording-replay.md): confirmed controls, clip/storage/export choices | Source implemented; final qualification pending. Actual moving video/audio, file finalization and controller operation required. |
+| #50 | [Health](stream-health.md): measured fresh/unknown metrics, useful advice and redacted diagnostics | Source implemented; final qualification pending. Device/network/load degradation acceptance remains required. |
 
 ## Invariants
 

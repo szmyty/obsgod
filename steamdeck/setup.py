@@ -121,6 +121,8 @@ class Handler(BaseHTTPRequestHandler):
             self.send_data(200, result)
         elif path == "/api/connection":
             self.send_data(200, run_cli("connection-info", timeout=5))
+        elif path == "/api/stream-health":
+            self.send_data(200, run_cli("stream-health", timeout=6))
         elif path == "/api/job":
             with self.server.job_lock:
                 result = dict(self.server.job)
@@ -153,6 +155,15 @@ class Handler(BaseHTTPRequestHandler):
                 if not isinstance(settings, dict):
                     raise ValueError()
                 self.send_data(200, run_cli("configure", settings))
+            elif action in {"stream-profiles", "set-idle-media", "media"}:
+                settings = request.get("settings")
+                if not isinstance(settings, dict):
+                    raise ValueError()
+                self.send_data(200, run_cli(action, settings))
+            elif action == "stream-health":
+                self.send_data(200, run_cli(action, timeout=6))
+            elif action == "retry-recovery":
+                self.send_data(200, run_cli(action, timeout=18))
             elif action == "change-obs-password":
                 settings = request.get("settings")
                 if not isinstance(settings, dict):

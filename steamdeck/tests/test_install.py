@@ -84,6 +84,19 @@ class ProductInstallBoundaries(unittest.TestCase):
                 install.require_idle(bridge, close=True)
             self.assertEqual([x.args[0] for x in bridge.run_cli.call_args_list], ["status"])
 
+    def test_replay_and_missing_legacy_replay_state_block_running_obs_update(self):
+        idle = {"ok": True, "state": "stopped", "stream": {"active": False},
+                "recording": False, "output_known": True, "process": "running"}
+        for media in [None, [], {}, {"known": False, "replay_active": False}, {"known": True, "replay_active": True}]:
+            bridge = Mock()
+            bridge.run_cli.return_value = {**idle, **({"media": media} if media is not None else {})}
+            with self.subTest(media=media), self.assertRaises(RuntimeError):
+                install.require_idle(bridge, close=True)
+            self.assertEqual([x.args[0] for x in bridge.run_cli.call_args_list], ["status"])
+        bridge = Mock()
+        bridge.run_cli.return_value = {**idle, "media": {"known": True, "replay_active": False}}
+        install.require_idle(bridge)
+
     def test_old_updater_imports_new_modules_without_sys_path_or_stale_helpers(self):
         # Reproduce importlib loading from a published updater directory. The
         # downloaded installer must bind its OWN helper modules, not sys.path.

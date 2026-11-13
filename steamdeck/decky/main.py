@@ -25,6 +25,7 @@ class Plugin:
         self._update_task = None
         self._closing = False
         self._cleanup_tasks = set()
+        self._cancel_media_task = None
 
     @property
     def busy(self):
@@ -121,6 +122,8 @@ class Plugin:
             result["operation"] = {"id": self._operation_id,
                                    "action": "stop" if stopping else self._control_action,
                                    "state": "cancelling" if stopping else "running"}
+            if self._control_action == "media" and isinstance(self._control_payload, dict):
+                result["operation"]["media_action"] = self._control_payload.get("action")
         else:
             result["operation"] = None
         if self._last_action:
@@ -159,7 +162,7 @@ class Plugin:
             self._cleanup_tasks.add(cleanup)
             cleanup.add_done_callback(self._cleanup_tasks.discard)
             raise
-        if action in {"start", "test-recording"}:
+        if action in {"start", "test-recording"} or (action == "media" and isinstance(payload, dict) and payload.get("action") in {"record-start", "replay-start"}):
             self.pending = process
             if self.cancel_requested and process.returncode is None:
                 self._signal_pending()
@@ -237,7 +240,9 @@ class Plugin:
                     # changing capture, and keep the CLI's own lock/state gate.
                     current = await self._run("status")
                     if (current.get("output_known") is not True or
-                            current.get("stream", {}).get("active") or current.get("recording")):
+                            current.get("stream", {}).get("active") or current.get("recording") or
+                            current.get("media", {}).get("replay_active") is True or
+                            (current.get("media") is not None and current["media"].get("known") is not True)):
                         command = {"ok": False, "message": "Stop streaming and recording, then wait for confirmed status before changing capture mode."}
                 if command is None:
                     command = await self._run(action, payload) if payload is not None else await self._run(action)
@@ -259,6 +264,10 @@ class Plugin:
         self._status_task = None
         observed = await self.status()
         observed["action_result"] = outcome
+        if action in {"stream-profiles", "set-idle-media", "media", "retry-recovery"}:
+            # Rich action data is separate from the newly observed output.
+            # A failed Save/Start can never replace the actual stream state.
+            observed["data"] = command
         return observed
 
     async def _begin(self, action, payload=None):
@@ -291,6 +300,72 @@ class Plugin:
 
     async def test_recording(self):
         return await self._begin("test-recording")
+
+    async def _advanced(self, action, payload):
+        if not isinstance(payload, dict):
+            return {"ok": False, "message": "Send one settings object."}
+        try:
+            encoded = json.dumps(payload, allow_nan=False).encode()
+        except (ValueError, TypeError):
+            return {"ok": False, "message": "Settings must contain valid JSON values."}
+        if len(encoded) > 16384:
+            return {"ok": False, "message": "Settings are too large; choose a smaller profile."}
+        # Serialize all mutations with normal stream control. CLI read actions
+        # remain bounded and have no side effects, but use the same adapter so
+        # the panel receives a fresh authoritative status after every action.
+        return await self._begin(action, payload)
+
+    async def stream_profiles(self, payload):
+        return await self._advanced("stream-profiles", payload)
+
+    async def set_idle_media(self, payload):
+        return await self._advanced("set-idle-media", payload)
+
+    async def media_action(self, payload):
+        return await self._advanced("media", payload)
+
+    async def stream_health(self):
+        try:
+            return await self._run("stream-health")
+        except OSError:
+            return {"ok": False, "state": "unknown", "message": "Stream health is unavailable. Inspect OBS and refresh status."}
+
+    async def retry_recovery(self):
+        return await self._begin("retry-recovery")
+
+    async def cancel_media_operation(self):
+        # Local startup cancellation must never invoke StopStream: the user may
+        # be recording while an unrelated, explicitly started broadcast is live.
+        if self._cancel_media_task and not self._cancel_media_task.done():
+            return await asyncio.shield(self._cancel_media_task)
+
+        async def cancel():
+            task = self._control_task
+            payload = self._control_payload
+            kind = payload.get("action") if isinstance(payload, dict) else None
+            if (not task or task.done() or self._control_action != "media" or
+                    kind not in {"record-start", "replay-start"}):
+                result = await self.status()
+                result["action_result"] = {"ok": True, "action": "cancel-media", "message": "No local startup is pending; existing output was not changed."}
+                return result
+            self.cancel_requested = True
+            self._signal_pending()
+            # The CLI owns rollback/finalization of a newly started local output.
+            # Draining it also covers cancellation before its child is attached.
+            await asyncio.shield(task)
+            self._status_task = None
+            result = await self.status()
+            media = result.get("media", {})
+            stopped = (media.get("known") is True and
+                       (media.get("recording", {}).get("active") is False if kind == "record-start" else
+                        media.get("replay_active") is False))
+            result["action_result"] = {"ok": stopped, "action": "cancel-media",
+                                       "message": "Local startup cancelled; any partial recording was preserved. Streaming was not changed." if stopped else
+                                       "Local startup cancellation could not confirm shutdown. Inspect recording/replay in managed OBS; streaming was not changed."}
+            return result
+
+        self._cancel_media_task = asyncio.create_task(cancel())
+        return await asyncio.shield(self._cancel_media_task)
 
     async def set_capture_mode(self, mode):
         if not isinstance(mode, str) or mode not in {"screen", "game"}:

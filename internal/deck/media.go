@@ -362,7 +362,15 @@ func MediaStorageGuard(ctx context.Context, p Paths, c *automation.Client) error
 		return nil
 	}
 	defer unlock()
-	// Re-read under the control lease; an external/user stop may have completed.
+	// Re-read ownership under the lease as well: external OBS interaction may
+	// switch the profile/collection while the disk query or lease is pending.
+	runtime, e = c.RuntimeStatus(ctx)
+	if e != nil {
+		return e
+	}
+	if runtime.Profile != "OBSGod" || runtime.Collection != "OBSGod" {
+		return errUnmanaged
+	}
 	media, e = c.MediaStatus(ctx)
 	if e != nil {
 		return e

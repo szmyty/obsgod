@@ -49,8 +49,7 @@ func addDeckAdvancedCommands(root *coral.Command) {
 			if name == "stream-health" {
 				result = deck.ObserveStreamHealth(ctx, p)
 			} else if name == "retry-recovery" {
-				err = deck.StartResilienceWatch(p)
-				result = map[string]any{"ok": err == nil, "message": "Bounded recovery requested for existing output; inspect fresh recovery status", "resilience": deck.ReadResilienceStatus(p)}
+				result, err = deck.RetryRecovery(ctx, p)
 			} else {
 				unlock, lockErr := deck.Lock(ctx, p)
 				if lockErr != nil {

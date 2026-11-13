@@ -730,6 +730,30 @@ func Restart(ctx context.Context, p Paths) (Result, error) {
 	return Result{OK: true, Configured: true, State: "stopped", Message: "Managed OBS closed; saved settings will apply on the next start"}, nil
 }
 
+// RetryRecovery reattaches bounded observers to existing output. It never opens
+// OBS or starts any output, and game-only privacy remains enforced by its watcher.
+func RetryRecovery(ctx context.Context, p Paths) (Result, error) {
+	state := Status(ctx, p)
+	if !state.OutputKnown || state.Media == nil || !state.Media.Known {
+		return state, errors.New("confirm managed OBS output before retrying recovery; inspect OBS when its state is unknown")
+	}
+	if !state.Stream.Active && !state.Recording && !state.Media.ReplayActive {
+		state.Message = "No output is active; recovery did not launch OBS or start output"
+		return state, nil
+	}
+	if state.Settings != nil && state.Settings.CaptureModeName() == "game" {
+		if err := StartCaptureWatch(p); err != nil {
+			return state, err
+		}
+	}
+	if err := StartResilienceWatch(p); err != nil {
+		return state, err
+	}
+	state = Status(ctx, p)
+	state.Message = "Bounded audio and selected capture observation requested for existing output; verify picture and sound"
+	return state, nil
+}
+
 func wait(ctx context.Context, d time.Duration) error {
 	t := time.NewTimer(d)
 	defer t.Stop()

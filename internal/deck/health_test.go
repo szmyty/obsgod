@@ -179,3 +179,16 @@ func TestHealthNoCredentialsReturnsUnknownWithoutStartingAnything(t *testing.T) 
 		t.Fatalf("missing setup became stopped/healthy: %+v", r)
 	}
 }
+
+func TestHealthDoesNotReuseStaleAudioMuteFacts(t *testing.T) {
+	stale := &AudioStatus{State: "unknown", OutputAvailable: false, OutputMuted: true, Signal: "unmeasured"}
+	if signal := healthAudio(stale); signal != "unknown" {
+		t.Fatal("stale route became current audio health", signal)
+	}
+	// A fresh meter can observe signal even when route metadata is unavailable;
+	// it confirms only the meter, never the destination or microphone.
+	stale.Signal = "signal"
+	if signal := healthAudio(stale); signal != "signal" {
+		t.Fatal("stale mute fact hid a new meter observation", signal)
+	}
+}

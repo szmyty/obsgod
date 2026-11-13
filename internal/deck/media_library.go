@@ -12,6 +12,7 @@ import (
 	"sort"
 	"strings"
 	"time"
+	"unicode"
 )
 
 type MediaClip struct {
@@ -48,7 +49,7 @@ func mediaID(directory, name string) string {
 	return hex.EncodeToString(sum[:12])
 }
 func safeMediaName(name string) bool {
-	return name != "" && name == filepath.Base(name) && name != "." && name != ".." && !strings.ContainsAny(name, "/\\") && strings.IndexFunc(name, func(r rune) bool { return r < 32 || r == 127 }) < 0 && strings.EqualFold(filepath.Ext(name), ".mkv")
+	return name != "" && name == filepath.Base(name) && name != "." && name != ".." && !strings.ContainsAny(name, "/\\") && strings.IndexFunc(name, func(r rune) bool { return unicode.IsControl(r) }) < 0 && strings.EqualFold(filepath.Ext(name), ".mkv")
 }
 func readMediaIndex(p Paths) (mediaIndex, error) {
 	index := mediaIndex{Version: 1, Entries: []mediaEntry{}}

@@ -140,6 +140,15 @@ class RemovalSafety(unittest.TestCase):
             self.assertTrue((self.config / "secrets.json").exists())
         self.remove_plugin.assert_not_called()
 
+    def test_replay_and_unknown_legacy_media_block_removal_without_file_changes(self):
+        self.fixture()
+        for media in [None, [], {}, {"known": False, "replay_active": False}, {"known": True, "replay_active": True}]:
+            self.run_cli.return_value = {**self.idle, "process": "running", **({"media": media} if media is not None else {})}
+            with self.subTest(media=media), self.assertRaises(uninstall.RemovalError):
+                uninstall.apply_plan(uninstall.build_plan(self.home, "wipe"), self.home)
+            self.assertTrue((self.config / "secrets.json").exists())
+        self.remove_plugin.assert_not_called()
+
     def test_dry_run_is_offline_nonmutating_machine_readable_and_includes_selection(self):
         self.fixture()
         output = io.StringIO()

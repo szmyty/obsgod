@@ -5,10 +5,12 @@ import { health } from "./health.mjs";
 import { createView, currentResult, observe, controls } from "./state.mjs";
 import { product } from "./product";
 import { Support } from "./Support";
+import { StreamTools, MediaTools, HealthTools, invokeTool, type ToolCommand } from "./Advanced";
+import {mediaControls} from "./advanced-state.mjs";
 
 type Diagnostic = {time:string; level:string; message:string};
 type Outcome = {id?:number; action?:string; ok:boolean; message:string; recording_path?:string};
-type Result = {ok:boolean; state:string; message:string; configured?:boolean; output_known?:boolean; process?:string; connection?:string; recording?:boolean; capture?:string; frames?:string; game?:string; backend_id?:string; snapshot_id?:number; operation?:{id:number; action:string; state:string}|null; action_result?:Outcome; last_action?:Outcome; stream?:{active:boolean; reconnecting:boolean; bytes:number; duration_ms:number}; recording_path?:string; diagnostics?:Diagnostic[]; plugin_version?:string; settings?:{capture_mode?:"screen"|"game";idle_style?:"black"|"placeholder";microphone?:boolean};audio?:AudioStatus;video?:{state:string;message?:string;watching?:boolean}};
+type Result = {ok:boolean; state:string; message:string; configured?:boolean; output_known?:boolean; process?:string; connection?:string; recording?:boolean; capture?:string; frames?:string; game?:string; backend_id?:string; snapshot_id?:number; operation?:{id:number; action:string; state:string;media_action?:string}|null; action_result?:Outcome; last_action?:Outcome; stream?:{active:boolean; reconnecting:boolean; bytes:number; duration_ms:number}; recording_path?:string; diagnostics?:Diagnostic[]; plugin_version?:string; media?:any;stream_health?:any;resilience?:any;settings?:{capture_mode?:"screen"|"game";idle_style?:"black"|"placeholder"|"image"|"video";idle_text?:string;idle_media?:string;microphone?:boolean};audio?:AudioStatus;video?:{state:string;message?:string;watching?:boolean}};
 type AudioStatus = {state:string;message?:string;output_available?:boolean;output_muted?:boolean;microphone_requested?:boolean;microphone_available?:boolean;microphone_muted?:boolean;signal?:string};
 type UpdateResult = {ok:boolean; state:string; message:string; current_version?:string; latest_version?:string; available?:boolean; current_app_version?:string; current_plugin_version?:string; current_updater_version?:string; mismatch?:boolean; channel?:string};
 const readStatus=callable<[],Result>("status");
@@ -26,6 +28,7 @@ let currentAction=0;
 let instance=0;
 let active=false;
 let busy="";
+let mediaAction="";
 let notice="";
 let actionNoticeAt=0;
 let diagnostics:Diagnostic[]=[];
@@ -167,8 +170,7 @@ async function act(action:"start"|"stop"|"test"){
 }
 
 function canChangeCaptureMode(current:Result|undefined){
-  return !!current?.configured && current.output_known===true && !current.stream?.active &&
-    !current.recording && !current.operation && !busy;
+  return !!current?.configured && mediaControls(current,!!busy).idle;
 }
 
 async function changeCaptureMode(){
@@ -188,6 +190,24 @@ async function changeCaptureMode(){
     if(active&&instance===generation&&currentAction===token){notice="Capture mode could not be confirmed. Refresh status before starting.";actionNoticeAt=Date.now();}
   }finally{
     if(active&&instance===generation&&currentAction===token){busy="";await refresh();changed();}
+  }
+}
+
+async function toolAction(command:ToolCommand):Promise<any>{
+  if(command.kind!=="cancel-media"&&(busy||currentResult(view,Date.now())?.operation))throw new Error("Another operation is running. Wait or use Stop streaming / recover.");
+  const token=++actionSerial,generation=instance;
+  currentAction=token;busy=command.kind;mediaAction=command.kind==="media"?String(command.payload.action??""):"";view.epoch++;actionNoticeAt=0;
+  notice="Checking local settings and output…";changed();
+  try{
+    const raw=await bounded(invokeTool(command),95000);
+    if(!active||instance!==generation||currentAction!==token)throw new Error("The panel reloaded; refresh current status before retrying.");
+    const data=raw.data??raw;
+    const outcome=raw.action_result??data;
+    notice=outcome.message??"Action completed. Confirm current status.";actionNoticeAt=Date.now();
+    if(!outcome.ok)toaster.toast({title:`${product.displayName} needs attention`,body:notice});
+    return data;
+  }finally{
+    if(active&&instance===generation&&currentAction===token){busy="";mediaAction="";await refresh();changed();}
   }
 }
 
@@ -258,6 +278,9 @@ function Content(){
       <PanelSectionRow><ButtonItem layout="below" onClick={()=>setSetupHelp(value=>!value)}>{setupHelp?"Hide setup help":"Setup and recording help"}</ButtonItem></PanelSectionRow>
       {setupHelp&&<PanelSectionRow><Hint>Open Desktop Setup to configure your destination, audio and between-game screen. Test clips save to Videos/{product.compatibility.plugin}. Game only can record the between-game screen without a game; entire screen needs usable frames. Play the saved clip to check picture and sound, then verify your first live stream on another device.</Hint></PanelSectionRow>}
     </PanelSection>
+    <StreamTools current={current} busy={!!busy||!!current?.operation} run={toolAction} copy={copyText}/>
+    <MediaTools current={current} busy={!!busy||!!current?.operation} mediaPending={mediaAction||current?.operation?.media_action||""} run={toolAction}/>
+    <HealthTools current={current} busy={!!busy||!!current?.operation} run={toolAction}/>
     <PanelSection title="STATUS & DIAGNOSTICS">
       <PanelSectionRow><ButtonItem layout="below" onClick={()=>refresh()}>Refresh status</ButtonItem></PanelSectionRow>
       <Console/>

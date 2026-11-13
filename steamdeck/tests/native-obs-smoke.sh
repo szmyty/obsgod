@@ -140,6 +140,8 @@ ffmpeg -v error -ss 1 -i "$clip" -an -vf fps=1 -frames:v 3 -f framemd5 -y /work/
 ffmpeg -hide_banner -i "$clip" -af volumedetect -vn -f null - >/work/output/recording-audio.txt 2>&1
 ffmpeg -v error -ss 1 -i "$clip" -t 2 -vn -ar 48000 -ac 1 -c:a pcm_s16le -y /work/output/recording-audio.wav
 python3 /src/steamdeck/tests/native-audio.py measure /work/output/recording-audio.wav 440 >/work/output/recording-audio-metrics.json
+OBSGOD_DISPOSABLE_MEDIA_FIXTURE=1 python3 /src/steamdeck/tests/native-media.py > /work/output/native-media-summary.json
+python3 /src/steamdeck/tests/native-profiles.py > /work/output/native-profiles-summary.json
 # Repair cannot rely on a clean OBS profile: restore a muted, zero-gain input
 # whose output tracks were disabled and monitoring was accidentally enabled.
 python3 /src/steamdeck/tests/native-audio.py seed >/work/output/audio-stale-state-seeded.json
@@ -150,6 +152,8 @@ pw-dump >/work/output/nodes-before-stream.json
 /src/dist/obsgod deck start > /work/output/start.json
 python3 /src/steamdeck/tests/native-audio.py snapshot obsgod_game.monitor >/work/output/audio-route-stream.json
 /src/dist/obsgod deck start > /work/output/start-again.json
+python3 /src/steamdeck/tests/native-media.py --stream-active > /work/output/native-live-media-summary.json
+OBSGOD_DISPOSABLE_AUDIO_FIXTURE=1 python3 /src/steamdeck/tests/native-resilience.py --game-pid "$game_audio_pid" > /work/output/audio-hotplug.json
 sleep 4
 /src/dist/obsgod deck status > /work/output/status-live.json
 /src/dist/obsgod deck stop > /work/output/stop.json

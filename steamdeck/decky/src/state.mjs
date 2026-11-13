@@ -56,9 +56,10 @@ export function controls(result, localAction="") {
   const preparing=["start","test","test-recording"].includes(operation);
   const known=outputKnown(result);
   const idle=known && !result?.stream?.active;
+  const replayBlocked=result?.media ? result.media.known !== true || result.media.replay_active === true : result?.process === "running";
   return {
-    startDisabled:!!operation || !result?.configured || !idle || !!result?.recording,
-    testDisabled:!!operation || !result?.configured || !idle || !!result?.recording,
+    startDisabled:!!operation || !result?.configured || !idle || !!result?.recording || replayBlocked,
+    testDisabled:!!operation || !result?.configured || !idle || !!result?.recording || replayBlocked,
     stopDisabled:cancelling || (idle && !preparing),
     stopLabel:cancelling?"Stopping / cancelling…":preparing?"Cancel operation":idle?"Stop streaming":"Stop streaming / recover",
     operation,

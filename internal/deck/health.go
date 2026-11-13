@@ -89,7 +89,7 @@ func healthAudio(status *AudioStatus) string {
 	if status == nil {
 		return "unknown"
 	}
-	if status.State == "muted" || status.OutputMuted {
+	if status.State == "muted" || (status.OutputAvailable && status.OutputMuted) {
 		return "muted"
 	}
 	if status.State == "unavailable" {
