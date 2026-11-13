@@ -38,7 +38,20 @@ func readAudioStatus(p Paths) *AudioStatus {
 
 func ensureAudio(ctx context.Context, c *automation.Client, p Paths, s Settings) error {
 	logEvent(p, "audio.discovering")
-	route, err := DiscoverAudio(ctx, s.Microphone)
+	pref, err := MixerSettings(p, s)
+	if err != nil {
+		return err
+	}
+	route, err := discoverMixerAudio(ctx, p, s)
+	if err == nil && pref.MicrophoneEnabled && route.MicrophoneDevice != "" {
+		if actual, actualErr := c.AudioInputDevice(ctx, MicAudio, "pulse_input_capture"); actualErr == nil && actual != route.MicrophoneDevice {
+			if muteErr := c.MuteInputIfPresent(ctx, MicAudio, "pulse_input_capture"); muteErr != nil {
+				return muteErr
+			}
+			pref = latchMixerMute(p, pref, "microphone-changed")
+			route.MicrophoneStreamMuted = true
+		}
+	}
 	status := safeAudioStatus(route, err)
 	saveAudioStatus(p, status)
 	if err != nil {
@@ -46,12 +59,17 @@ func ensureAudio(ctx context.Context, c *automation.Client, p Paths, s Settings)
 		return err
 	}
 	sources := []struct{ name, kind, device string }{{GameAudio, "pulse_output_capture", route.OutputMonitor}}
-	if s.Microphone {
+	if pref.MicrophoneEnabled && route.MicrophoneDevice != "" {
 		sources = append(sources, struct{ name, kind, device string }{MicAudio, "pulse_input_capture", route.MicrophoneDevice})
 	}
 	keep := map[string]bool{}
 	for _, source := range sources {
-		if err = c.EnsureInput(ctx, LiveScene, source.name, source.kind, map[string]any{"device_id": source.device}); err == nil {
+		if source.name == MicAudio {
+			err = c.EnsureMutedPulseInput(ctx, LiveScene, source.name, source.device)
+		} else {
+			err = c.EnsureInput(ctx, LiveScene, source.name, source.kind, map[string]any{"device_id": source.device})
+		}
+		if err == nil {
 			for _, scene := range []string{LiveScene, GameScene, IdleScene} {
 				if err = c.EnsureSceneItem(ctx, scene, source.name); err != nil {
 					break
@@ -62,7 +80,11 @@ func ensureAudio(ctx context.Context, c *automation.Client, p Paths, s Settings)
 			}
 		}
 		if err == nil {
-			_, err = c.ConfigureAudioInput(ctx, source.name, source.device)
+			muted, gain := false, pref.GameGainPercent
+			if source.name == MicAudio {
+				muted, gain = pref.MicrophoneMuted || pref.PushToTalk, pref.MicrophoneGainPercent
+			}
+			_, err = c.ConfigureAudioInputPolicy(ctx, source.name, source.device, muted, gain)
 		}
 		if err != nil {
 			status.State = "unavailable"
@@ -73,6 +95,14 @@ func ensureAudio(ctx context.Context, c *automation.Client, p Paths, s Settings)
 			return err
 		}
 		keep[source.name] = true
+	}
+	if !keep[MicAudio] {
+		if err = c.MuteInputIfPresent(ctx, MicAudio, "pulse_input_capture"); err != nil {
+			return err
+		}
+		if pref.MicrophoneEnabled {
+			latchMixerMute(p, pref, "microphone-lost")
+		}
 	}
 	if err = c.MuteOtherAudio(ctx, keep); err != nil {
 		status.State = "unavailable"

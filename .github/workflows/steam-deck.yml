@@ -68,6 +68,8 @@ jobs:
           python steamdeck/tests/browser-panel.py dist/obsgod-decky.zip --browser "$browser"
           python steamdeck/tests/browser-m3-panel.py dist/obsgod-decky.zip --browser "$browser"
           python steamdeck/tests/browser-m3-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz --browser "$browser"
+          python steamdeck/tests/browser-mixer-panel.py dist/obsgod-decky.zip --browser "$browser"
+          python steamdeck/tests/browser-mixer-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz --browser "$browser"
           python steamdeck/tests/browser-support.py --browser "$browser"
           python -B site/tests/browser.py --browser "$browser"
       - name: Native audio and app-filtered capture checks

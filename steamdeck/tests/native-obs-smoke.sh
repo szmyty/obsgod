@@ -152,6 +152,7 @@ python3 /src/steamdeck/tests/native-audio.py snapshot obsgod_game.monitor >/work
 /src/dist/obsgod deck start > /work/output/start-again.json
 python3 /src/steamdeck/tests/native-media.py --stream-active > /work/output/native-live-media-summary.json
 OBSGOD_DISPOSABLE_AUDIO_FIXTURE=1 python3 /src/steamdeck/tests/native-resilience.py --game-pid "$game_audio_pid" > /work/output/audio-hotplug.json
+OBSGOD_DISPOSABLE_AUDIO_FIXTURE=1 python3 /src/steamdeck/tests/native-mixer.py > /work/output/native-mixer-summary.json
 sleep 4
 /src/dist/obsgod deck status > /work/output/status-live.json
 /src/dist/obsgod deck stop > /work/output/stop.json

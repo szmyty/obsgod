@@ -137,9 +137,10 @@ class DesktopProviderControls(unittest.TestCase):
         code = r'''
 const fs=require("node:fs"),vm=require("node:vm"),assert=require("node:assert/strict");
 const nodes=new Map();
-function element(id){if(!nodes.has(id))nodes.set(id,{value:"",checked:false,disabled:false,required:false,handlers:{},addEventListener(type,fn){this.handlers[type]=fn;}});return nodes.get(id);}
+function events(target){return Object.assign(target,{handlers:{},addEventListener(type,fn){(this.handlers[type]??=[]).push(fn);},dispatchEvent(event){for(const fn of this.handlers[event.type]||[])fn(event);}});}
+function element(id){if(!nodes.has(id))nodes.set(id,events({value:"",checked:false,disabled:false,required:false,options:[],attributes:{},replaceChildren(...children){this.options=children;},setAttribute(name,value){this.attributes[name]=value;}}));return nodes.get(id);}
 element("provider").value="custom";
-const context={console,URL,setTimeout,setInterval:()=>0,fetch:()=>new Promise(()=>{}),document:{getElementById:element},window:{location:{hash:""},sessionStorage:{setItem(){},getItem(){return null;}},history:{replaceState(){}},confirm:()=>true}};
+const context={console,URL,setTimeout,clearTimeout,setInterval:()=>0,Option:function(label,value){this.label=label;this.value=value;},fetch:()=>new Promise(()=>{}),document:events({getElementById:element,hidden:false}),window:events({location:{hash:""},sessionStorage:{setItem(){},getItem(){return null;}},history:{replaceState(){}},confirm:()=>true})};
 vm.createContext(context);vm.runInContext(fs.readFileSync(process.argv[1],"utf8"),context);
 vm.runInContext(`
 el("server").value="rtmps://my-own-server.invalid/path";el("key").value="typed-fixture-key";
@@ -155,6 +156,13 @@ el("confirm-control-password").checked=true;renderConnection({process:"running",
 renderConnection({process:"unknown",output_known:false});if(!el("reset-control-password").disabled)throw Error("unknown OBS offered reset");
 renderConnection({process:"absent",output_known:true});if(el("reset-control-password").disabled)throw Error("confirmed closed OBS cannot reset");
 controlBusy=true;updateControlButtons();if(!el("reset-control-password").disabled)throw Error("duplicate password action allowed");
+controlBusy=false;
+const talkCalls=[];fastMixer=async payload=>{talkCalls.push(payload);return {ok:true};};
+mixerHeld=true;mixerTalkToken="ephemeral-test-lease";
+window.dispatchEvent({type:"blur"});
+if(mixerHeld||mixerTalkToken!==undefined)throw Error("window focus loss retained a talking lease");
+if(!talkCalls.some(call=>call.action==="talk-release"&&call.token==="ephemeral-test-lease")||!talkCalls.some(call=>call.action==="talk-cancel"))throw Error("focus loss did not request fail-closed microphone release");
+if(!document.handlers.visibilitychange?.length||!window.handlers.pagehide?.length)throw Error("panel lifecycle release hooks are missing");
 `,context);
 '''
         result = subprocess.run([node, "-e", code, str(ROOT / "setup.js")], capture_output=True, text=True, timeout=10)

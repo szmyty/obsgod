@@ -20,7 +20,14 @@ func addDeckAdvancedCommands(root *coral.Command) {
 		}
 		return deck.WatchResilience(cmd.Context(), p)
 	}})
-	for _, name := range []string{"stream-profiles", "set-idle-media", "media", "stream-health", "retry-recovery"} {
+	root.AddCommand(&coral.Command{Use: "mixer-watch", Hidden: true, Args: coral.NoArgs, RunE: func(cmd *coral.Command, _ []string) error {
+		p, err := deck.UserPaths()
+		if err != nil {
+			return err
+		}
+		return deck.WatchMixer(cmd.Context(), p)
+	}})
+	for _, name := range []string{"stream-profiles", "set-idle-media", "media", "stream-health", "retry-recovery", "mixer"} {
 		name := name
 		command := &coral.Command{Use: name, Args: coral.NoArgs, Short: map[string]string{
 			"stream-profiles": "Preview, validate, save, apply or export stream profiles using JSON stdin",
@@ -28,6 +35,7 @@ func addDeckAdvancedCommands(root *coral.Command) {
 			"media":           "Manage local recording, replay, clips and storage using JSON stdin; never broadcasts",
 			"stream-health":   "Read a bounded local OBS health sample; provider reception remains unknown",
 			"retry-recovery":  "Retry bounded audio recovery for already-active managed output; never starts output",
+			"mixer":           "Control managed OBS audio, devices and optional hold-to-talk using JSON stdin",
 		}[name]}
 		if name == "stream-profiles" {
 			for _, field := range []string{"width", "height", "bitrate", "fps"} {
@@ -46,7 +54,9 @@ func addDeckAdvancedCommands(root *coral.Command) {
 				return err
 			}
 			var result any
-			if name == "stream-health" {
+			if name == "mixer" {
+				result, err = runDeckMixer(ctx, p, cmd.InOrStdin())
+			} else if name == "stream-health" {
 				result = deck.ObserveStreamHealth(ctx, p)
 			} else if name == "retry-recovery" {
 				result, err = deck.RetryRecovery(ctx, p)
@@ -94,6 +104,37 @@ func addDeckAdvancedCommands(root *coral.Command) {
 		}
 		root.AddCommand(command)
 	}
+}
+
+func runDeckMixer(ctx context.Context, p deck.Paths, reader io.Reader) (any, error) {
+	data, err := io.ReadAll(io.LimitReader(reader, 16385))
+	if err != nil || len(data) > 16384 {
+		return nil, errors.New("mixer request is too large")
+	}
+	var request deck.MixerRequest
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	if decoder.Decode(&request) != nil {
+		return nil, errors.New("provide one mixer JSON object")
+	}
+	var extra any
+	if decoder.Decode(&extra) != io.EOF {
+		return nil, errors.New("mixer requires exactly one JSON object")
+	}
+	if request.Action == "configure" {
+		unlock, err := deck.Lock(ctx, p)
+		if err != nil {
+			return nil, errors.New("another managed OBS operation is busy; wait or cancel it")
+		}
+		defer unlock()
+	} else {
+		// Read operations and the short privacy lease must not queue behind a
+		// stream startup or recording finalization holding the main control lock.
+		var cancel context.CancelFunc
+		ctx, cancel = context.WithTimeout(ctx, 3*time.Second)
+		defer cancel()
+	}
+	return deck.MixerAction(ctx, p, bytes.NewReader(data))
 }
 
 func streamProfileFlagInput(cmd *coral.Command) (io.Reader, error) {
