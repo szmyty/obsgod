@@ -91,6 +91,22 @@ class LocalCITests(unittest.TestCase):
         self.assertNotIn("private-fixture-password", filtered)
         self.assertEqual(filtered, r'legacy connect https:\/\/[redacted]@proxy.example' + "\n")
 
+    def test_redacted_dictionary_key_collisions_retain_every_value(self):
+        record = {"context": {
+            "https://fixture-a@proxy.example": {"frames": 1},
+            "https://fixture-b@proxy.example": ["second-output", False],
+            "https://[redacted]@proxy.example [redacted key 2]": None}}
+        line = json.dumps(record) + "\n"
+        filtered, structured = CI.sanitize_log_line(line)
+        self.assertTrue(structured)
+        context = json.loads(filtered)["context"]
+        self.assertEqual(len(context), 3)
+        self.assertEqual(list(context.values()), list(record["context"].values()))
+        self.assertNotIn("fixture-a", filtered)
+        self.assertNotIn("fixture-b", filtered)
+        self.assertEqual(CI.sanitize_log_line(line)[0], filtered)
+        self.assertEqual(CI.sanitize_log_line(filtered)[0], filtered)
+
     def test_tampered_pinned_action_cache_is_refused(self):
         with tempfile.TemporaryDirectory() as temporary:
             state = Path(temporary)

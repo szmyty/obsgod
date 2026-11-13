@@ -47,7 +47,18 @@ def redact_log_value(value):
     if isinstance(value, list):
         return [redact_log_value(item) for item in value]
     if isinstance(value, dict):
-        return {redact_log_value(key): redact_log_value(item) for key, item in value.items()}
+        filtered = {}
+        for key, item in value.items():
+            public_key = redact_log_value(key)
+            unique_key = public_key
+            duplicate = 2
+            # Distinct private URLs can redact to the same public key. Retain
+            # every value, including collisions with an existing suffix label.
+            while unique_key in filtered:
+                unique_key = f"{public_key} [redacted key {duplicate}]"
+                duplicate += 1
+            filtered[unique_key] = redact_log_value(item)
+        return filtered
     return value
 
 
