@@ -62,6 +62,21 @@ sides, and `TMPDIR`/`OBSGOD_ACT_TEMP` select it for nested-Docker inputs/outputs
 This avoids treating act's container-only `/tmp` as a daemon-visible host path.
 Native builders receive the existing proxy build arguments by name and the
 mounted combined CA as a BuildKit secret; credentials are not copied into images.
+APT receives only a read-only `Acquire::https::CaInfo` snippet pointing at the
+same combined bundle. The snippet/hash are recorded in the receipt. Preset
+repositories, proxies, registries and TLS verification remain intact; package
+post-install scripts can still update the ordinary OS certificate bundle.
+
+act starts actions and dependency installation as root. Production installers
+correctly refuse root, so `scripts/run-user-tests.py` runs installer/unit/browser
+fixtures with the checkout owner's actual non-root UID/GID (or the unprivileged
+65534 fallback), cleared supplementary groups when dropping root, and a private
+owned temporary HOME/TMPDIR. It never changes checkout ownership or disables
+production guards. Hosted non-root runners keep their identity. Browser binaries
+use the shared readable `PLAYWRIGHT_BROWSERS_PATH`; screenshot/site outputs go to
+an explicitly owned evidence directory outside the checkout and are retained by
+the artifact step. Package builds/audits and native containers keep their own
+existing execution identities.
 
 The initial act setup-go clone failed because act's embedded go-git transport
 could not consume the runtime's injected Git authentication. `prepare-actions`

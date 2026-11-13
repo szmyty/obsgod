@@ -35,6 +35,24 @@ close the pre-merge issue graph prematurely. Candidate8 remains immutable at
 its recorded exact source. New source requires fresh candidate9 qualification.
 
 
+## CI user-fixture identity and APT trust repair
+
+At `218e26bfb5f31fb64e5327e9a82082fde4f25f47`, the snapshot job passed all
+20 cross-build targets, unique archives and 15 Linux packages without publishing
+or signing. The candidate passed pinned npm/browser setup and Go race/static/
+vulnerability checks. Its Python installation tests then correctly refused the
+act runner's UID0. Production root guards remain enabled: a new test-only helper
+drops actual UID/GID/groups and uses private test HOME/TMPDIR. All installer and
+browser fixtures run through it with a readable shared browser cache and owned
+external evidence. Real Docker root→UID1000 diagnostics passed all127 existing
+Python tests, and22 helper/audit tests passed. No source tree permissions change.
+
+A read-only ephemeral APT CaInfo snippet uses the existing combined CA for HTTPS
+indices while preserving package repositories, proxy settings and TLS. Earlier
+218 results and warning/failure evidence are retained. Run the clean candidate
+preflight through all package/browser/native stages, then both complete final
+localCI sequences and the standalone matrix at the final exact source.
+
 ## Snapshot/npm integration repair; default-branch administration unavailable
 
 Lookahead at `548ae195b1ae087370a06da8c9de23c3a0acc6f3` passed the docs job
