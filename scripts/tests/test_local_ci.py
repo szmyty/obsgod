@@ -14,8 +14,7 @@ SPEC.loader.exec_module(CI)
 
 
 class LocalCITests(unittest.TestCase):
-    def test_child_gets_proxy_but_receipt_and_log_do_not_keep_its_password(self):
-        proxy = "http://user:private-fixture-password@proxy.example:8080"
+    def assert_proxy_is_private(self, proxy):
         with tempfile.TemporaryDirectory() as temporary:
             state = Path(temporary)
             child = SimpleNamespace(stdout=io.StringIO("connect " + proxy + "\n"), wait=lambda: 0)
@@ -37,6 +36,15 @@ class LocalCITests(unittest.TestCase):
             self.assertIn("HTTP_PROXY=[injected]", receipt["command"])
             self.assertNotIn("private-fixture-password", receipt_file.read_text())
             self.assertNotIn("private-fixture-password", next(state.glob("*.log")).read_text())
+
+    def test_proxy_password_is_not_kept_in_receipt_or_log(self):
+        self.assert_proxy_is_private("http://user:private-fixture-password@proxy.example:8080")
+
+    def test_proxy_token_only_userinfo_is_not_kept_in_receipt_or_log(self):
+        self.assert_proxy_is_private("https://private-fixture-password@proxy.example:8080")
+
+    def test_proxy_empty_password_userinfo_is_not_kept_in_receipt_or_log(self):
+        self.assert_proxy_is_private("https://private-fixture-password:@proxy.example:8080")
 
     def test_tampered_pinned_action_cache_is_refused(self):
         with tempfile.TemporaryDirectory() as temporary:

@@ -35,6 +35,26 @@ close the pre-merge issue graph prematurely. Candidate8 remains immutable at
 its recorded exact source. New source requires fresh candidate9 qualification.
 
 
+## Candidate 9 qualification repair checkpoint
+
+The first clean attempt at `8757df4efd6a2723e0b83995140db5984b03f683` passed
+212 Go top-level tests/382 events (one optional endpoint skip),127 Python tests,
+6 cross-builds, vet/vulnerability checks, brand/site determinism and45 site
+viewports. Its local act coverage test passed at58.0% statements but artifact
+delivery failed:0.0.0.0 was advertised into bridge containers and local requests
+used the inherited proxy. A demonstrated corrected local address/NO_PROXY
+exemption delivered the actual coverage artifact; hosted delivery is separate.
+
+This checkpoint repairs dynamic local service advertising while preserving
+network presets, token-only/blank-password log redaction, exact required audit
+payload inventories and streaming tar expansion bounds. Malformed updater
+redirects now produce fixed unsupported results. The new native mixer harness
+uses a1e-6 linear-gain tolerance for OBS float32 storage; strict mute assertions
+remain intact. Exploratory real OBS mixer/lease/input-loss checks passed without
+changing stream state or credentials. These are diagnostic results, not final
+candidate/package qualification. Retain both initial failures and run the entire
+required available matrix again on the next clean source revision.
+
 ## Completion source prepared; candidate 9 qualification active
 
 Source checkpoints are pushed as #62 foundation, #63 live mixer and #64 API/creator,

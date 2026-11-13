@@ -186,6 +186,7 @@ class RedirectTrust(unittest.TestCase):
         targets = ["https://api.github.com/repos/new-owner/decky-stream/releases?per_page=100",
                    "https://github.com/new-owner/decky-stream/releases/download/v1.0.0/archive.tar.gz",
                    "https://attacker.invalid/file", "http://release-assets.githubusercontent.com/file",
+                   "https://[invalid", "https://release-assets.githubusercontent.com:bad/file",
                    "https://release-assets.githubusercontent.com.attacker.invalid/file",
                    "https://release-assets.githubusercontent.com/github-production-release-asset/1/id#fragment"]
         for source in approved:

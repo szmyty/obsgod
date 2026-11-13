@@ -174,13 +174,24 @@ def main():
     env = {k: v for k, v in os.environ.items() if k not in {
         "DOCKER_HOST", "DOCKER_CONTEXT", "DOCKER_TLS", "DOCKER_TLS_VERIFY", "DOCKER_CERT_PATH"}}
     env["DOCKER_HOST"] = "unix:///var/run/docker.sock"
+    # act advertises this same address to its bridge containers. 0.0.0.0 would
+    # point the client at itself. Only this local service host bypasses the proxy;
+    # keep every pre-existing no-proxy entry and all internet proxy destinations.
+    service_address = socket.gethostbyname(socket.gethostname())
+    if service_address.startswith("127.") or service_address == "0.0.0.0":
+        raise SystemExit("A bridge-reachable local interface address is required for act artifact/cache services")
+    for key in ("NO_PROXY", "no_proxy"):
+        entries = env.get(key, "").split(",")
+        if service_address not in entries:
+            entries.append(service_address)
+        env[key] = ",".join(entry for entry in entries if entry)
     command = [str(args.act), "--directory", str(ROOT), "--bind", "--env-file", os.devnull,
                "--secret-file", os.devnull, "--input-file", os.devnull,
                "--container-daemon-socket", "/var/run/docker.sock", "--network", "bridge",
                "--concurrent-jobs", "1", "--container-options", network_options(state),
                "--action-cache-path", str(state / "actions"),
                "--artifact-server-path", str(state / "artifacts"),
-               "--artifact-server-addr", "0.0.0.0", "--artifact-server-port", "34567",
+               "--artifact-server-addr", service_address, "--artifact-server-port", "34567",
                "--env", "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
                "--env", "NODE_USE_ENV_PROXY=1", "--env", "SSL_CERT_FILE=/run/obsgod-ca.pem",
                "--env", "GIT_SSL_CAINFO=/run/obsgod-ca.pem", "--env", "PIP_CERT=/run/obsgod-ca.pem",
@@ -207,6 +218,7 @@ def main():
     receipt = {"revision": git("rev-parse", "HEAD"), "dirty": bool(git("status", "--porcelain")),
                "tracked_diff_sha256": sha(subprocess.check_output(["git", "-C", str(ROOT), "diff", "HEAD", "--binary"])),
                "act": actual, "runner_image": IMAGE, "action": args.action,
+               "local_service_address": service_address,
                "action_sources": action_receipts,
                "pull_request_fixture": args.pull_request,
                "workflow_sha256": {p.name: sha(p.read_bytes()) for p in sorted((ROOT / ".github/workflows").glob("*.yml"))},
@@ -217,7 +229,7 @@ def main():
     process = subprocess.Popen(command, cwd=ROOT, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
     with prefix.with_suffix(".log").open("w") as log:
         for line in process.stdout:
-            line = re.sub(r"(https?://)[^\s/@]+:[^\s/@]+@", r"\1[redacted]@", line)
+            line = re.sub(r"(https?://)[^\s/@]+@", r"\1[redacted]@", line)
             print(line, end="", flush=True)
             log.write(line)
     code = process.wait()

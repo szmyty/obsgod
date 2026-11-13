@@ -51,6 +51,12 @@ so nested Docker mounts can see the same files on the managed daemon. It always
 selects that local socket, retains existing registry/proxy settings, supplies a
 read-only trusted CA mount and resolves the existing proxy hostname in the inner
 container. TLS verification remains enabled; the bridge network is retained.
+The artifact/cache service uses the host's discovered bridge-reachable interface
+address for both binding and advertisement. Only that exact local address is
+appended to both existing no-proxy lists, preserving every existing entry. The
+receipt records the address. Action-generated GitHub artifact URLs are synthetic
+under act; verify the locally retained bytes rather than treating those links as
+hosted GitHub delivery.
 The shared state `tmp` directory is mounted at the same absolute path on both
 sides, and `TMPDIR`/`OBSGOD_ACT_TEMP` select it for nested-Docker inputs/outputs.
 This avoids treating act's container-only `/tmp` as a daemon-visible host path.

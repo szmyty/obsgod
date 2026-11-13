@@ -93,16 +93,22 @@ async def run():
                 inventory = (await cli({"action": "devices"}))["mixer"]
                 assert any(item["id"] == "obsgod_fixture_mic" and item["available"] for item in inventory["devices"]), "The real synthetic input was not discovered"
                 await cli({"action": "configure", "preferences": {"microphone_enabled": True, "microphone_device": "obsgod_fixture_mic", "microphone_muted": True, "microphone_gain_percent": 65, "game_gain_percent": 75, "push_to_talk": False}})
-                assert await input_state(MIC) == (True, .65), "Explicit microphone gain/mute was not applied"
+                mic_state = await input_state(MIC)
+                # Native OBS stores source gain as float32 (0.65 becomes
+                # 0.6499999761581421). Keep mute strict; compare linear gain.
+                assert mic_state[0] is True and abs(mic_state[1] - .65) <= 1e-6, "Explicit microphone gain/mute was not applied"
                 game_state = await input_state(GAME)
                 assert game_state[0] == previous_game[0] and abs(game_state[1] - .75) < .001, "Game gain changed game mute"
                 await cli({"action": "configure", "preferences": {"microphone_muted": False}})
-                assert await input_state(MIC) == (False, .65), "Explicit continuous microphone unmute failed"
+                mic_state = await input_state(MIC)
+                assert mic_state[0] is False and abs(mic_state[1] - .65) <= 1e-6, "Explicit continuous microphone unmute failed"
                 await cli({"action": "talk-cancel"})
-                assert await input_state(MIC) == (False, .65), "Closing the panel muted a continuous microphone without a talk lease"
+                mic_state = await input_state(MIC)
+                assert mic_state[0] is False and abs(mic_state[1] - .65) <= 1e-6, "Closing the panel muted a continuous microphone without a talk lease"
                 await cli({"action": "configure", "preferences": {"push_to_talk": True, "microphone_muted": True}})
                 await cli({"action": "configure", "preferences": {"microphone_muted": False}})
-                assert await input_state(MIC) == (True, .65), "Arming hold-to-talk left the actual input hot"
+                mic_state = await input_state(MIC)
+                assert mic_state[0] is True and abs(mic_state[1] - .65) <= 1e-6, "Arming hold-to-talk left the actual input hot"
                 first = await cli({"action": "talk-start"})
                 assert "talk_expires_at" in first, "Acquire omitted the backend's absolute deadline"
                 token = first["talk_token"]

@@ -59,6 +59,16 @@ class ReleaseAuditTests(unittest.TestCase):
         with patch.object(AUDIT, "MAX_TOTAL", 2), self.assertRaisesRegex(ValueError, "expansion"):
             AUDIT.archive_files(tar_bytes({"file": b"123"}), "tar")
 
+    def test_oversized_first_member_is_rejected_before_reading_its_body(self):
+        # A header claiming a huge body is sufficient to reject the archive.
+        # The missing body must not be traversed/decompressed first.
+        import gzip
+        member = tarfile.TarInfo("root/oversized")
+        member.size = AUDIT.MAX_FILE + 1
+        data = gzip.compress(member.tobuf() + b"truncated body")
+        with self.assertRaisesRegex(ValueError, "expansion limit"):
+            AUDIT.archive_files(data, "tar")
+
     def test_rejects_zip_symlink(self):
         out = io.BytesIO()
         with zipfile.ZipFile(out, "w") as archive:
@@ -99,10 +109,17 @@ class ReleaseAuditTests(unittest.TestCase):
         for name in ("main.py", "releases.py", "paths.py", "product.py", "plugin.json"):
             plugin[name] = name.encode()
             source[("steamdeck/decky/" if name in ("main.py", "plugin.json") else "steamdeck/") + name] = plugin[name]
+        for name in AUDIT.PLUGIN_FILES:
+            plugin.setdefault(name, name.encode())
+        plugin["dist/LICENSE.qrcode-generator.txt"] = plugin["LICENSE.qrcode-generator.txt"]
         runtime = {"obsgod": plugin["bin/obsgod"], "decky-install": b"helper binary", "libgstobsgodcapture.so": plugin["bin/libgstobsgodcapture.so"],
                    "CAPTURE-SOURCE.tar.gz": plugin["CAPTURE-SOURCE.tar.gz"], "LICENSE": plugin["LICENSE"],
                    "THIRD_PARTY_NOTICES.md": plugin["THIRD_PARTY_NOTICES.md"], "STEAM-DECK.md": b"guide", "update.py": b"updater"}
         source["steamdeck/update.py"] = b"updater"
+        for name in AUDIT.RUNTIME_FILES - {"obsgod-decky.zip"}:
+            runtime.setdefault(name, name.encode())
+            if name.endswith((".py", ".desktop", ".sh", ".html", ".js", ".css")):
+                source.setdefault("steamdeck/" + name, runtime[name])
         if mutate:
             mutate(runtime, plugin, source)
         runtime["obsgod-decky.zip"] = zip_bytes(plugin)
@@ -111,7 +128,7 @@ class ReleaseAuditTests(unittest.TestCase):
         runtime["manifest.json"] = AUDIT.canonical(manifest)
         artifacts = {f"obsgod-deck_{version}_linux_amd64.tar.gz": tar_bytes(runtime, "OBSGod-" + version),
                      "obsgod-decky.zip": runtime["obsgod-decky.zip"], "manifest.json": runtime["manifest.json"]}
-        updater = {"update.py": runtime["update.py"]}
+        updater = {name: runtime[name] for name in AUDIT.UPDATER_FILES}
         updater_manifest = {"kind": "updater", "version": version, "updater_version": version, "revision": revision, "runtime_revision": revision,
                             "platform": "linux/amd64", "files": {name: AUDIT.sha(data) for name, data in updater.items()}}
         updater["manifest.json"] = AUDIT.canonical(updater_manifest)
@@ -125,10 +142,12 @@ class ReleaseAuditTests(unittest.TestCase):
             (directory / name).write_bytes(data)
         return source, revision
 
-    def run_fixture(self, mutate=None):
+    def run_fixture(self, mutate=None, mutate_artifacts=None):
         with tempfile.TemporaryDirectory() as temporary:
             directory = Path(temporary)
             source, revision = self.fixture(directory, mutate)
+            if mutate_artifacts:
+                mutate_artifacts(directory)
             with patch.object(AUDIT, "git", side_effect=lambda rev, path: source.get(path, b"build source")), \
                     patch.object(AUDIT, "SDK_SOURCE", {"package.json": AUDIT.sha(b'{"version":"1.1.3"}'), "src/index.ts": AUDIT.sha(b"preferred source")}), \
                     patch.object(AUDIT, "SDK_RUNTIME_SHA256", AUDIT.sha(b"original module")), \
@@ -152,8 +171,31 @@ class ReleaseAuditTests(unittest.TestCase):
             self.run_fixture(lambda runtime, plugin, source: plugin.update({"bin/obsgod": b"different build"}))
 
     def test_missing_preferred_source_is_not_release_ready(self):
-        with self.assertRaisesRegex(ValueError, "preferred TypeScript"):
+        with self.assertRaisesRegex(ValueError, "Decky required payload"):
             self.run_fixture(lambda runtime, plugin, source: plugin.pop("source/decky-api/src/index.ts"))
+
+    def test_missing_installer_or_plugin_entrypoint_cannot_pass_recomputed_hashes(self):
+        with self.assertRaisesRegex(ValueError, "Runtime required payload"):
+            self.run_fixture(lambda runtime, plugin, source: runtime.pop("install.py"))
+        with self.assertRaisesRegex(ValueError, "Decky required payload"):
+            self.run_fixture(lambda runtime, plugin, source: plugin.pop("dist/index.js"))
+
+    def test_updater_missing_helper_cannot_pass_recomputed_manifest(self):
+        # First create a fully consistent candidate, then deliberately remove
+        # only the updater's helper and recompute its own manifest/checksums.
+        def remove_updater_helper(directory):
+            updater_name = "obsgod-one-click-update_0.1.0-test_linux_amd64.zip"
+            _, updater = AUDIT.archive_files((directory / updater_name).read_bytes(), "zip")
+            updater.pop("decky-install")
+            manifest = json.loads(updater["manifest.json"])
+            manifest["files"].pop("decky-install")
+            updater["manifest.json"] = AUDIT.canonical(manifest)
+            data = zip_bytes(updater, "OBSGod-Updater")
+            (directory / updater_name).write_bytes(data)
+            (directory / "updater-manifest.json").write_bytes(updater["manifest.json"])
+            (directory / "UPDATER-SHA256SUMS").write_text(AUDIT.sha(data) + "  " + updater_name + "\n")
+        with self.assertRaisesRegex(ValueError, "Updater required payload"):
+            self.run_fixture(mutate_artifacts=remove_updater_helper)
 
     def test_tampered_lgpl_source_and_runtime_are_rejected_despite_valid_payload_checksums(self):
         with self.assertRaisesRegex(ValueError, "source inventory/hash"):
