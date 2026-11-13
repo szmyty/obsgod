@@ -25,7 +25,16 @@ type InputAudioStatus struct {
 // input. The selected device must exist in OBS's own audio-server view. It does
 // not change system volume or enable local monitoring (which can cause feedback).
 func (c *Client) ConfigureAudioInput(ctx context.Context, name, device string) (InputAudioStatus, error) {
+	return c.ConfigureAudioInputPolicy(ctx, name, device, false, 100)
+}
+
+// ConfigureAudioInputPolicy configures the private output mix while preserving
+// an explicit application's mute/gain policy. It never changes system volume.
+func (c *Client) ConfigureAudioInputPolicy(ctx context.Context, name, device string, mutedPolicy bool, gainPercent float64) (InputAudioStatus, error) {
 	var status InputAudioStatus
+	if math.IsNaN(gainPercent) || math.IsInf(gainPercent, 0) || gainPercent < 0 || gainPercent > 200 {
+		return status, errors.New("input gain must be 0–200 percent")
+	}
 	properties, err := request(ctx, "GetInputPropertiesListPropertyItems", func() (*inputs.GetInputPropertiesListPropertyItemsResponse, error) {
 		return c.obs.Inputs.GetInputPropertiesListPropertyItems(inputs.NewGetInputPropertiesListPropertyItemsParams().WithInputName(name).WithPropertyName("device_id"))
 	})
@@ -50,11 +59,11 @@ func (c *Client) ConfigureAudioInput(ctx context.Context, name, device string) (
 	if settings.InputSettings["device_id"] != device {
 		return status, errors.New("OBS did not retain the selected audio device; audio routing is unconfirmed")
 	}
-	if err := c.SetInputMuted(ctx, name, false); err != nil {
+	if err := c.SetInputMuted(ctx, name, mutedPolicy); err != nil {
 		return status, err
 	}
 	_, err = request(ctx, "SetInputVolume", func() (*inputs.SetInputVolumeResponse, error) {
-		return c.obs.Inputs.SetInputVolume(inputs.NewSetInputVolumeParams().WithInputName(name).WithInputVolumeMul(1))
+		return c.obs.Inputs.SetInputVolume(inputs.NewSetInputVolumeParams().WithInputName(name).WithInputVolumeMul(gainPercent / 100))
 	})
 	if err != nil {
 		return status, err
@@ -102,8 +111,8 @@ func (c *Client) ConfigureAudioInput(ctx context.Context, name, device string) (
 		return status, err
 	}
 	status.Monitoring = monitoring.MonitorType
-	if status.Muted || math.Abs(status.Volume-1) > 0.001 || !status.Track1 || status.Monitoring != "OBS_MONITORING_TYPE_NONE" {
-		return status, errors.New("OBS audio mixer routing did not match the requested unmuted track 1 output; audio is unconfirmed")
+	if status.Muted != mutedPolicy || math.Abs(status.Volume-gainPercent/100) > 0.001 || !status.Track1 || status.Monitoring != "OBS_MONITORING_TYPE_NONE" {
+		return status, errors.New("OBS audio mixer routing did not match the requested track 1 mute/gain policy; audio is unconfirmed")
 	}
 	return status, nil
 }

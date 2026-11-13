@@ -49,6 +49,7 @@ instance; inspection or profile selection does not implicitly broadcast.
 - [Advanced stream profiles](docs/advanced-profiles.md), [idle media](docs/idle-media.md),
   [recording/replay](docs/recording-replay.md), [runtime recovery](docs/runtime-resilience.md)
   and [stream health](docs/stream-health.md)
+- [Microphone, headsets, mute and stream mixer](docs/microphone.md)
 - [Remote OBS commands](docs/cli-usage.md) and [architecture](ARCHITECTURE.md)
 - [Vocabulary](ONTOLOGY.md), [decisions](DECISIONS.md) and [agent instructions](AGENTS.md)
 - [Destinations and local connection recovery](docs/stream-destinations.md)

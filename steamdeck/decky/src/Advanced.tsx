@@ -8,7 +8,7 @@ type Preset={name:string;label:string;description:string;profile:Profile};
 type Profiles={ok:boolean;message:string;current?:Profile;profile?:Profile;profiles?:{name:string;profile:Profile}[];presets?:Preset[];warnings?:string[];document?:unknown};
 type Clip={name:string;kind:string;bytes:number;modified_utc:string};
 type Reply={ok:boolean;message:string;clips?:Clip[];recording_path?:string;[key:string]:unknown};
-type ToolKind="profiles"|"idle"|"media"|"health"|"cancel-media"|"recovery";
+type ToolKind="profiles"|"idle"|"media"|"health"|"cancel-media"|"recovery"|"mixer";
 export type ToolCommand={kind:ToolKind;payload:Record<string,unknown>};
 export type ToolRunner=(command:ToolCommand)=>Promise<any>;
 const profileCall=callable<[payload:Record<string,unknown>],Profiles>("stream_profiles");
@@ -17,8 +17,9 @@ const mediaCall=callable<[payload:Record<string,unknown>],Reply>("media_action")
 const healthCall=callable<[],any>("stream_health");
 const cancelMediaCall=callable<[],any>("cancel_media_operation");
 const recoveryCall=callable<[],any>("retry_recovery");
+const mixerCall=callable<[payload:Record<string,unknown>],any>("mixer_action");
 export function invokeTool(command:ToolCommand):Promise<any>{
-  return command.kind==="profiles"?profileCall(command.payload):command.kind==="idle"?idleCall(command.payload):command.kind==="media"?mediaCall(command.payload):command.kind==="cancel-media"?cancelMediaCall():command.kind==="recovery"?recoveryCall():healthCall();
+  return command.kind==="profiles"?profileCall(command.payload):command.kind==="idle"?idleCall(command.payload):command.kind==="media"?mediaCall(command.payload):command.kind==="cancel-media"?cancelMediaCall():command.kind==="recovery"?recoveryCall():command.kind==="mixer"?mixerCall(command.payload):healthCall();
 }
 function Hint({children}:{children:ReactNode}){return <div style={{fontSize:13,lineHeight:1.5,opacity:.85,overflowWrap:"anywhere",whiteSpace:"pre-wrap"}}>{children}</div>;}
 function RowButton({children,disabled,onClick}:{children:ReactNode;disabled?:boolean;onClick:()=>void}){return <PanelSectionRow><ButtonItem layout="below" disabled={disabled} onClick={onClick}>{children}</ButtonItem></PanelSectionRow>;}

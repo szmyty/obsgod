@@ -13,7 +13,10 @@ import (
 	"github.com/szmyty/obsgod/pkg/automation"
 )
 
-type resilienceOBS struct{ client *automation.Client }
+type resilienceOBS struct {
+	client *automation.Client
+	paths  Paths
+}
 
 func (c resilienceOBS) Close() error { return c.client.Close() }
 func (c resilienceOBS) GuardMedia(ctx context.Context, p Paths) error {
@@ -39,15 +42,48 @@ func (c resilienceOBS) Rebind(ctx context.Context, settings Settings, route Audi
 	if err != nil {
 		return changed, err
 	}
-	if settings.Microphone {
-		microphoneChanged, err := c.client.RebindAudioInput(ctx, MicAudio, "pulse_input_capture", route.MicrophoneDevice)
-		return changed || microphoneChanged, err
+	pref, prefErr := MixerSettings(c.paths, settings)
+	if prefErr != nil {
+		return changed, prefErr
 	}
-	return changed, nil
+	leaseUnlock, lockErr := talkLock(ctx, c.paths)
+	if lockErr != nil {
+		return changed, lockErr
+	}
+	defer leaseUnlock()
+	if !pref.MicrophoneEnabled {
+		return changed, c.client.MuteInputIfPresent(ctx, MicAudio, "pulse_input_capture")
+	}
+	if route.MicrophoneDevice == "" {
+		if err = c.client.MuteInputIfPresent(ctx, MicAudio, "pulse_input_capture"); err != nil {
+			noteMixer(c.paths, "control-unconfirmed", "")
+			return changed, err
+		}
+		_ = writeTalkLease(c.paths, talkLease{})
+		latchMixerMute(c.paths, pref, "microphone-lost")
+		return changed, nil
+	}
+	actual, err := c.client.AudioInputDevice(ctx, MicAudio, "pulse_input_capture")
+	if err != nil {
+		return changed, err
+	}
+	if actual != route.MicrophoneDevice {
+		if err = c.client.MuteInputIfPresent(ctx, MicAudio, "pulse_input_capture"); err != nil {
+			return changed, err
+		}
+		_ = writeTalkLease(c.paths, talkLease{})
+		latchMixerMute(c.paths, pref, "microphone-changed")
+	}
+	if route.MicrophoneMuted {
+		noteMixer(c.paths, "system-microphone-muted", route.MicrophoneDevice)
+	}
+	microphoneChanged, err := c.client.RebindAudioInput(ctx, MicAudio, "pulse_input_capture", route.MicrophoneDevice)
+	return changed || microphoneChanged, err
 }
 
 // WatchResilience maintains selected audio routes only; it never launches OBS,
-// changes video mode, alters gain/mute, or starts/restarts any output. The media
+// changes video mode or starts/restarts any output. Gain and mute are preserved
+// except that microphone loss or a changed input latches the stream mic muted. The media
 // guard may finalize recording/replay at their configured disk reserve, while
 // preserving a live broadcast and every existing clip.
 // A lost control connection is retried at most three times with bounded delays.
@@ -58,8 +94,10 @@ func WatchResilience(ctx context.Context, p Paths) error {
 			if err != nil {
 				return nil, err
 			}
-			return resilienceOBS{client: client}, nil
-		}, discover: DiscoverAudio, interval: resilienceInterval,
+			return resilienceOBS{client: client, paths: p}, nil
+		}, discover: func(ctx context.Context, _ bool) (AudioRouting, error) {
+			return discoverMixerAudio(ctx, p, mixerLegacySettings(p))
+		}, interval: resilienceInterval,
 	})
 }
 

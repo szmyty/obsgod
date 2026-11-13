@@ -168,7 +168,10 @@ class Plugin:
                 self._signal_pending()
         try:
             communication = process.communicate(json.dumps(payload).encode()) if payload is not None else process.communicate()
-            output, _ = await asyncio.wait_for(communication, 85 if action not in {"status", "clear-logs"} else 6)
+            timeout = 6 if action in {"status", "clear-logs"} else 85
+            if action == "mixer" and isinstance(payload, dict) and payload.get("action") != "configure":
+                timeout = 8
+            output, _ = await asyncio.wait_for(communication, timeout)
             result = json.loads(output)
             if not isinstance(result, dict) or not isinstance(result.get("ok"), bool):
                 raise ValueError()
@@ -267,7 +270,7 @@ class Plugin:
         self._status_task = None
         observed = await self.status()
         observed["action_result"] = outcome
-        if action in {"stream-profiles", "set-idle-media", "media", "retry-recovery"}:
+        if action in {"stream-profiles", "set-idle-media", "media", "retry-recovery", "mixer"}:
             # Rich action data is separate from the newly observed output.
             # A failed Save/Start can never replace the actual stream state.
             observed["data"] = command
@@ -326,6 +329,31 @@ class Plugin:
 
     async def media_action(self, payload):
         return await self._advanced("media", payload)
+
+    async def mixer_action(self, payload):
+        if not isinstance(payload, dict):
+            return {"ok": False, "message": "Send one mixer settings object."}
+        try:
+            encoded = json.dumps(payload, allow_nan=False).encode()
+        except (ValueError, TypeError):
+            return {"ok": False, "message": "Mixer settings must contain valid JSON values."}
+        if len(encoded) > 16384:
+            return {"ok": False, "message": "Mixer settings are too large."}
+        action = payload.get("action")
+        if action == "configure":
+            return await self._begin("mixer", payload)
+        if action not in {"status", "devices", "talk-start", "talk-release", "talk-cancel"}:
+            return {"ok": False, "message": "Choose a supported mixer action."}
+        # Lease renewal/release cannot wait for _perform's full output query.
+        # A release/cancel remains available during Stop and loader teardown.
+        if action == "talk-start" and (self._closing or self.cancel_requested or
+                (self._stop_task and not self._stop_task.done()) or
+                (not payload.get("token") and self.busy)):
+            return {"ok": False, "message": "Wait for the current operation before holding to talk."}
+        try:
+            return await self._run("mixer", payload)
+        except OSError:
+            return {"ok": False, "message": "Microphone control is unavailable; its actual mute state is unknown."}
 
     async def stream_health(self):
         try:
@@ -430,6 +458,7 @@ class Plugin:
         # A loader teardown acknowledgement must not precede a late Start.
         self._closing = True
         try:
+            await self.mixer_action({"action": "talk-cancel"})
             await asyncio.wait_for(asyncio.shield(self.stop()), 18)
             if self._control_task and not self._control_task.done():
                 await asyncio.wait_for(asyncio.shield(self._control_task), 12)

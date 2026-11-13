@@ -49,6 +49,7 @@ type Result struct {
 	Video         *CaptureVideoStatus       `json:"video,omitempty"`
 	Media         *MediaSnapshot            `json:"media"`
 	Resilience    *ResilienceStatus         `json:"resilience,omitempty"`
+	Mixer         *MixerSnapshot            `json:"mixer,omitempty"`
 }
 
 func connect(ctx context.Context, secret Secrets, timeout time.Duration) (*automation.Client, error) {
@@ -77,6 +78,8 @@ func Status(ctx context.Context, p Paths) Result {
 	r.Media = &MediaSnapshot{Preferences: pref, Message: "Local output state is unconfirmed"}
 	resilience := ReadResilienceStatus(p)
 	r.Resilience = &resilience
+	mixer := ReadMixerSnapshot(p)
+	r.Mixer = &mixer
 	if loadErr == nil {
 		r.Settings = &s
 	} else {

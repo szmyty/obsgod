@@ -45,6 +45,7 @@ async function api(path, body) {
 function message(id, data) { el(id).textContent = data.message; el(id).className = data.ok === false ? "error" : "success"; }
 async function refresh() {
   const data = await api("/api/status");
+  if(data.mixer)renderMixer(data.mixer);
   if (data.product_name) {el("product-name").textContent = "● " + data.product_name;document.title = data.product_name + " · Steam Deck setup";}
   if (data.settings) {
     for (const id of ["server", "bitrate", "fps", "encoder"]) el(id).value = data.settings[id];
@@ -155,11 +156,12 @@ refresh().catch(error=>{el("diagnostics").textContent=error.message;});
 // Advanced workspace commands use the same authenticated local CLI as Gaming
 // Mode. Command replies are never treated as proof of streaming/recording.
 let workspaceBusy=false,profileCatalog,mediaSnapshot,mediaObservedAt=0,prunePreview;
-const workspaceSections=["profiles-heading","idle-media-heading","media-heading","health-heading"];
+const workspaceSections=["mixer-heading","profiles-heading","idle-media-heading","media-heading","health-heading"];
 function workspaceMessage(id,data){el(id).textContent=typeof data.message==="string"?data.message:"Action completed; confirm actual output state.";el(id).className=data.ok===false?"error":"";}
 async function workspaceCall(action,settings,statusId){
   if(workspaceBusy)throw new Error("Another local operation is running. Wait before retrying.");
   workspaceBusy=true;
+  cancelMixerTalk();
   const buttons=workspaceSections.flatMap(id=>[...el(id).closest("section").querySelectorAll("button")]);
   const previous=buttons.map(button=>button.disabled);buttons.forEach(button=>button.disabled=true);
   if(statusId)el(statusId).textContent="Checking local settings and output…";
@@ -168,7 +170,7 @@ async function workspaceCall(action,settings,statusId){
     if(statusId)workspaceMessage(statusId,data);
     return data;
   }catch(error){if(statusId)workspaceMessage(statusId,{ok:false,message:error.message});throw error;}
-  finally{workspaceBusy=false;buttons.forEach((button,index)=>button.disabled=previous[index]);renderMediaButtons();}
+  finally{workspaceBusy=false;buttons.forEach((button,index)=>button.disabled=previous[index]);renderMediaButtons();renderMixer();}
 }
 function profileFromForm(){
   const [width,height]=el("resolution").value.split("x").map(Number);
@@ -312,3 +314,112 @@ setInterval(async()=>{
   catch{currentHealth={};renderHealth();}
   finally{healthPollPending=false;}
 },5000);
+
+// Audio preferences are separate from observed OBS state. This status path is
+// read-only: opening the page or reconnecting never enables an input or output.
+let mixerSnapshot,mixerPendingPreferences,mixerPolling=false,mixerLevelsDirty=false,mixerOptionsKey="";
+const mixerNotices=new Set();
+let mixerHeld=false,mixerTalkToken,mixerTalkTimer,mixerTalkWatch,mixerTalkPending=false,mixerTalkEpoch=0;
+function mixerFresh(){
+  const observed=Date.parse(mixerSnapshot?.observed_at||""),expires=Date.parse(mixerSnapshot?.expires_at||"");
+  return mixerSnapshot?.known===true&&mixerSnapshot?.microphone?.known===true&&Number.isFinite(observed)&&Number.isFinite(expires)&&observed<=Date.now()+1000&&expires>Date.now()&&expires>observed&&expires-observed<=15000;
+}
+function renderMixer(snapshot){
+  if(snapshot)mixerSnapshot=snapshot;
+  const fresh=mixerFresh(),pref={...(mixerSnapshot?.preferences||{}),...(mixerPendingPreferences||{})},mic=mixerSnapshot?.microphone||{};
+  const enabled=pref.microphone_enabled===true,available=mic.available===true,systemMuted=mic.system_muted===true;
+  let observed="Microphone state unconfirmed · saved preferences shown below";
+  if(fresh&&!enabled)observed="Microphone disabled";
+  else if(fresh&&!available)observed="Microphone unavailable · kept muted";
+  else if(fresh&&mic.muted===true)observed="Microphone muted on stream";
+  else if(fresh&&mic.muted===false)observed=systemMuted?"SteamOS microphone is muted":"Microphone live on stream";
+  el("mixer-observed").textContent=workspaceBusy?"Audio change or local operation pending…":observed;
+  el("mixer-preference").textContent=`Saved preference: ${pref.microphone_muted===true?"muted":pref.microphone_muted===false?"unmuted":"not loaded"}${pref.push_to_talk?" · hold-to-talk enabled":""}. Reconnecting does not clear a saved mute.`;
+  el("mixer-enabled").checked=enabled;el("mixer-ptt").checked=pref.push_to_talk===true;
+  const devices=mixerSnapshot?.devices||[],options=[{id:"default",label:"Follow system default · changes stay muted"},...devices.filter(device=>device.id!=="default").map(device=>({id:device.id,label:`${device.label}${device.default?" · current default":""}${device.available===false?" · unavailable":""}`}))];
+  if(pref.microphone_device&&pref.microphone_device!=="default"&&!options.some(device=>device.id===pref.microphone_device))options.push({id:pref.microphone_device,label:"Saved input · currently unavailable"});
+  const key=JSON.stringify(options);
+  if(key!==mixerOptionsKey){el("mixer-device").replaceChildren(...options.map(device=>new Option(device.label,device.id)));mixerOptionsKey=key;}
+  el("mixer-device").value=pref.microphone_device||"default";
+  if(!mixerLevelsDirty){for(const [id,value] of [["mixer-game-gain",pref.game_gain_percent],["mixer-mic-gain",pref.microphone_gain_percent]])el(id).value=typeof value==="number"&&Number.isFinite(value)&&value>=0&&value<=200?value:100;}
+  for(const kind of ["game","mic"])el(`mixer-${kind}-value`).textContent=el(`mixer-${kind}-gain`).value+"%";
+  const level=fresh&&available&&!systemMuted&&mic.muted===false&&typeof mic.peak_dbfs==="number"&&Number.isFinite(mic.peak_dbfs)?Math.max(-90,Math.min(0,mic.peak_dbfs)):null;
+  const levelText=level===null?"Voice level: not measured":`Voice level: ${level.toFixed(1)} dBFS${mic.signal==="silent"?" · no signal observed":""}`;
+  el("mixer-level").value=level??-90;el("mixer-level").setAttribute("aria-valuetext",levelText);el("mixer-level-text").textContent=levelText;
+  const blocked=workspaceBusy||controlBusy;
+  for(const id of ["mixer-enabled","mixer-device","mixer-game-gain","mixer-mic-gain","mixer-ptt","mixer-refresh"])el(id).disabled=blocked;
+  el("mixer-mute").disabled=blocked||!enabled;
+  el("mixer-unmute").disabled=blocked||!fresh||!enabled||!available||systemMuted||pref.push_to_talk===true;
+  el("mixer-levels").disabled=blocked||!mixerLevelsDirty;
+  el("mixer-talk-controls").hidden=!pref.push_to_talk;
+  el("mixer-arm").disabled=blocked||!fresh||!enabled||!available||systemMuted||pref.microphone_muted===false;
+  el("mixer-talk").disabled=blocked||!fresh||!enabled||!available||systemMuted||!pref.push_to_talk||pref.microphone_muted!==false;
+  el("mixer-talk").setAttribute("aria-pressed",String(mixerHeld&&!!mixerTalkToken));
+  el("mixer-talk").textContent=mixerHeld&&mixerTalkToken?"Talking lease active · release to mute":"Hold here to talk";
+  el("mixer-hardware").textContent=mixerSnapshot?.hardware?.guidance||"";
+  const notice=mixerSnapshot?.notice;
+  if(notice&&typeof notice.code==="string"&&typeof notice.revision==="string"&&notice.revision&&typeof notice.message==="string"){
+    const identity=notice.code+":"+notice.revision;
+    if(!mixerNotices.has(identity)){mixerNotices.add(identity);if(mixerNotices.size>100)mixerNotices.delete(mixerNotices.values().next().value);el("mixer-notice").textContent=notice.message;}
+  }
+  if(el("mixer-talk").disabled&&mixerHeld)cancelMixerTalk();
+}
+async function readMixer(){
+  if(mixerPolling||workspaceBusy)return;
+  mixerPolling=true;
+  try{const raw=await api("/api/action",{action:"mixer",settings:{action:"status"}}),data=raw.data??raw;renderMixer(data.mixer);}
+  catch{if(mixerSnapshot)mixerSnapshot={...mixerSnapshot,known:false};renderMixer();}
+  finally{mixerPolling=false;}
+}
+async function configureMixer(preferences){
+  if(workspaceBusy)return;
+  mixerPendingPreferences=preferences;
+  cancelMixerTalk();
+  try{const raw=await workspaceCall("mixer",{action:"configure",preferences},"mixer-status"),data=raw.data??raw;
+    if(data.ok&&("game_gain_percent" in preferences||"microphone_gain_percent" in preferences))mixerLevelsDirty=false;
+    // Only mixer observations may be taken from this reply. Stream output is
+    // never replaced by a preference mutation response.
+    if(data.mixer)renderMixer(data.mixer);await readMixer();
+  }catch{renderMixer();}
+  finally{mixerPendingPreferences=undefined;renderMixer();}
+}
+for(const kind of ["game","mic"])el(`mixer-${kind}-gain`).addEventListener("input",()=>{mixerLevelsDirty=true;renderMixer();});
+el("mixer-levels").addEventListener("click",()=>void configureMixer({game_gain_percent:Number(el("mixer-game-gain").value),microphone_gain_percent:Number(el("mixer-mic-gain").value)}));
+el("mixer-enabled").addEventListener("change",()=>void configureMixer({microphone_enabled:el("mixer-enabled").checked,microphone_muted:true}));
+el("mixer-device").addEventListener("change",()=>void configureMixer({microphone_device:el("mixer-device").value,microphone_muted:true}));
+el("mixer-mute").addEventListener("click",()=>void configureMixer({microphone_muted:true}));
+el("mixer-unmute").addEventListener("click",()=>void configureMixer({microphone_muted:false}));
+el("mixer-ptt").addEventListener("change",()=>void configureMixer({push_to_talk:el("mixer-ptt").checked,microphone_muted:true}));
+el("mixer-arm").addEventListener("click",()=>void configureMixer({microphone_muted:false}));
+el("mixer-refresh").addEventListener("click",()=>void readMixer());
+function fastMixer(payload,keepalive=false){return fetch("/api/action",{method:"POST",headers:{"Authorization":"Bearer "+token,"Content-Type":"application/json"},body:JSON.stringify({action:"mixer",settings:payload}),cache:"no-store",keepalive}).then(async response=>{const raw=await response.json();if(!response.ok)throw Error(raw.message||"Microphone hold could not be confirmed");return raw.data??raw;});}
+function releaseMixerTalk(){
+  mixerHeld=false;mixerTalkEpoch++;clearTimeout(mixerTalkTimer);clearTimeout(mixerTalkWatch);const previous=mixerTalkToken;mixerTalkToken=undefined;
+  if(previous)void fastMixer({action:"talk-release",token:previous},true).catch(()=>{});renderMixer();
+}
+function cancelMixerTalk(){const hadLease=mixerHeld||mixerTalkPending||!!mixerTalkToken;releaseMixerTalk();if(hadLease)void fastMixer({action:"talk-cancel"},true).catch(()=>{});}
+function watchMixerTalk(milliseconds=1100){clearTimeout(mixerTalkWatch);mixerTalkWatch=setTimeout(()=>{releaseMixerTalk();el("mixer-status").textContent="Talking lease expired or could not be renewed. Mute is unconfirmed until OBS responds.";},milliseconds);}
+async function renewMixerTalk(epoch){
+  if(!mixerHeld||mixerTalkPending||epoch!==mixerTalkEpoch)return;
+  mixerTalkPending=true;
+  try{const reply=await fastMixer({action:"talk-start",...(mixerTalkToken?{token:mixerTalkToken}:{})});
+    if(!reply.ok||typeof reply.talk_token!=="string"||!reply.talk_token)throw Error(reply.message||"Microphone hold could not be confirmed");
+    if(!mixerHeld||epoch!==mixerTalkEpoch){void fastMixer({action:"talk-release",token:reply.talk_token},true).catch(()=>{});return;}
+    mixerTalkToken=reply.talk_token;
+    const expiry=Date.parse(reply.talk_expires_at||reply.mixer?.talk_expires_at||""),remaining=Number.isFinite(expiry)?expiry-Date.now():(reply.lease_ms||1200);
+    if(remaining<=100)throw Error("Talking lease expired before OBS confirmation arrived. Release and try again.");
+    watchMixerTalk(Math.max(100,Math.min(1100,remaining-100)));renderMixer();
+    mixerTalkTimer=setTimeout(()=>void renewMixerTalk(epoch),Math.min(400,Math.max(100,(reply.lease_ms||1200)/3)));
+  }catch(error){if(epoch===mixerTalkEpoch){releaseMixerTalk();el("mixer-status").textContent=error.message;}}
+  finally{mixerTalkPending=false;}
+}
+function pressMixerTalk(){if(mixerHeld||mixerTalkPending||el("mixer-talk").disabled)return;mixerHeld=true;const epoch=++mixerTalkEpoch;watchMixerTalk();void renewMixerTalk(epoch);}
+el("mixer-talk").addEventListener("pointerdown",event=>{if(event.button===0){event.preventDefault();el("mixer-talk").setPointerCapture?.(event.pointerId);pressMixerTalk();}});
+el("mixer-talk").addEventListener("pointerup",releaseMixerTalk);el("mixer-talk").addEventListener("pointercancel",cancelMixerTalk);
+el("mixer-talk").addEventListener("keydown",event=>{if((event.key===" "||event.key==="Enter")&&!event.repeat){event.preventDefault();pressMixerTalk();}});
+el("mixer-talk").addEventListener("keyup",event=>{if(event.key===" "||event.key==="Enter"){event.preventDefault();releaseMixerTalk();}});
+el("mixer-talk").addEventListener("blur",cancelMixerTalk);window.addEventListener("blur",cancelMixerTalk);window.addEventListener("pagehide",cancelMixerTalk);
+document.addEventListener("visibilitychange",()=>{if(document.hidden)cancelMixerTalk();});
+el("stop").addEventListener("click",cancelMixerTalk);el("close").addEventListener("click",cancelMixerTalk);
+setInterval(()=>{renderMixer();if(!workspaceBusy&&visibleSection("mixer-heading"))void readMixer();},1000);
+void readMixer();

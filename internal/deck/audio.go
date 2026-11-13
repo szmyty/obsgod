@@ -5,12 +5,13 @@ import "errors"
 // AudioRouting contains identifiers only for local OBS configuration. Do not
 // serialize device names: Bluetooth/USB names can contain private identifiers.
 type AudioRouting struct {
-	OutputMonitor       string `json:"-"`
-	MicrophoneDevice    string `json:"-"`
-	OutputMuted         bool   `json:"-"`
-	MicrophoneMuted     bool   `json:"-"`
-	MicrophoneRequested bool   `json:"-"`
-	RouteReason         string `json:"-"`
+	OutputMonitor         string `json:"-"`
+	MicrophoneDevice      string `json:"-"`
+	OutputMuted           bool   `json:"-"`
+	MicrophoneMuted       bool   `json:"-"`
+	MicrophoneRequested   bool   `json:"-"`
+	MicrophoneStreamMuted bool   `json:"-"`
+	RouteReason           string `json:"-"`
 }
 
 // AudioStatus reports routing facts, not proof that a game or viewer heard sound.
@@ -64,6 +65,14 @@ func safeAudioStatus(route AudioRouting, err error) AudioStatus {
 	} else if route.OutputMuted {
 		status.State = "muted"
 		status.Message = "The selected system output or its monitor is muted or has zero volume. OBSGod does not change system volume"
+	} else if route.MicrophoneRequested && route.MicrophoneDevice == "" {
+		status.State = "microphone-unavailable"
+		status.MicrophoneMuted = true
+		status.Message = "The selected microphone is unavailable; stream microphone capture stays muted without selecting another input"
+	} else if route.MicrophoneRequested && route.MicrophoneStreamMuted {
+		status.State = "microphone-muted"
+		status.MicrophoneMuted = true
+		status.Message = "Stream microphone is muted by saved mixer preferences; game audio and system microphone settings are unchanged"
 	} else if route.MicrophoneRequested && route.MicrophoneMuted {
 		status.State = "microphone-muted"
 		status.Message = "System output is selected, but the requested microphone is muted or has zero volume in SteamOS"

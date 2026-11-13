@@ -160,6 +160,11 @@ class Handler(BaseHTTPRequestHandler):
                 if not isinstance(settings, dict):
                     raise ValueError()
                 self.send_data(200, run_cli(action, settings))
+            elif action == "mixer":
+                settings = request.get("settings")
+                if not isinstance(settings, dict):
+                    raise ValueError()
+                self.send_data(200, run_cli(action, settings, timeout=8 if settings.get("action") != "configure" else 85))
             elif action == "stream-health":
                 self.send_data(200, run_cli(action, timeout=6))
             elif action == "retry-recovery":

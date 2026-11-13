@@ -7,6 +7,8 @@ import { product } from "./product";
 import { Support } from "./Support";
 import { StreamTools, MediaTools, HealthTools, invokeTool, type ToolCommand } from "./Advanced";
 import {mediaControls} from "./advanced-state.mjs";
+import {MixerTools, cancelPanelTalk} from "./Mixer";
+import {mixerNotice, mixerView} from "./mixer-state.mjs";
 
 type Diagnostic = {time:string; level:string; message:string};
 type Outcome = {id?:number; action?:string; ok:boolean; message:string; recording_path?:string};
@@ -36,6 +38,7 @@ let pluginVersion="";
 let updateChecking=false;
 let updateInfo:UpdateResult|undefined;
 const seenOutcomes=new Set<string>();
+const seenMixerNotices=new Set<string>();
 const listeners=new Set<()=>void>();
 const changed=()=>listeners.forEach(listener=>listener());
 
@@ -58,6 +61,8 @@ function refresh():Promise<void>{
     if(!update.accepted)return;
     if(next.diagnostics)diagnostics=next.diagnostics;
     if(next.plugin_version)pluginVersion=next.plugin_version;
+    const microphoneNotice=mixerNotice((next as any).mixer,seenMixerNotices);
+    if(microphoneNotice)toaster.toast({title:`${product.displayName} microphone`,body:microphoneNotice.message});
     // Only a confirmed output transition produces a streaming success toast.
     // An action reply, repeated click or temporary disconnect cannot do so.
     if(update.transition)toaster.toast({title:product.displayName,body:update.transition==="streaming"?"OBS is streaming. Verify picture and sound on your channel.":"OBS confirms streaming has stopped."});
@@ -200,7 +205,7 @@ async function toolAction(command:ToolCommand):Promise<any>{
   notice="Checking local settings and output…";changed();
   try{
     const raw=await bounded(invokeTool(command),95000);
-    if(!active||instance!==generation||currentAction!==token)throw new Error("The panel reloaded; refresh current status before retrying.");
+    if(!active||instance!==generation||currentAction!==token)throw new Error("Another control action took priority or the panel reloaded. Confirm current status before retrying.");
     const data=raw.data??raw;
     const outcome=raw.action_result??data;
     notice=outcome.message??"Action completed. Confirm current status.";actionNoticeAt=Date.now();
@@ -241,7 +246,7 @@ function Content(){
   const audio=current?.audio;
   const outputLabel=audio?.output_available===true?(audio.output_muted?"Muted":"Available"):audio?.state==="unavailable"?"Unavailable":"Not confirmed";
   const signalLabel=audio?.signal==="signal"?"Detected in last check":audio?.signal==="silent"?"No signal in last check":"Not measured or unconfirmed";
-  const microphoneLabel=current?.settings?.microphone===false?"Off":current?.settings?.microphone===true?(audio?.microphone_available?(audio.microphone_muted?"Muted":"Enabled"):"Enabled · device not confirmed"):"Not confirmed";
+  const microphoneLabel=(current as any)?.mixer?mixerView((current as any).mixer).label.replace(/^Microphone /,""):current?.settings?.microphone===false?"Off":current?.settings?.microphone===true?(audio?.microphone_available?(audio.microphone_muted?"Muted":"Enabled"):"Enabled · device not confirmed"):"Not confirmed";
   return <>
     <PanelSection title="YOUR STREAM">
       <PanelSectionRow>
@@ -270,7 +275,7 @@ function Content(){
       <PanelSectionRow><div aria-label="Audio status" style={{fontSize:13,lineHeight:1.6}}><div>System audio: {outputLabel}</div><div>Signal: {signalLabel}</div><div>Microphone: {microphoneLabel}</div></div></PanelSectionRow>
       {audio?.message&&audio.state!=="ready"&&<PanelSectionRow><Hint>{audio.message}</Hint></PanelSectionRow>}
       <PanelSectionRow><ButtonItem layout="below" onClick={()=>setCaptureHelp(value=>!value)}>{captureHelp?"Hide capture help":"Capture help"}</ButtonItem></PanelSectionRow>
-      {captureHelp&&<PanelSectionRow><Hint>Change modes while streaming and recording are confirmed stopped. Game only uses your between-game screen when compatible game capture is unavailable; it never switches to the entire screen automatically. Customize that screen in Desktop Setup. Video selection does not isolate audio: system audio may include other apps. Microphone capture is off unless enabled in Setup.</Hint></PanelSectionRow>}
+      {captureHelp&&<PanelSectionRow><Hint>Change modes while streaming and recording are confirmed stopped. Game only uses your between-game screen when compatible game capture is unavailable; it never switches to the entire screen automatically. Customize that screen in Desktop Setup. Video selection does not isolate audio: system audio may include other apps. Microphone capture is opt-in; use the live audio controls below.</Hint></PanelSectionRow>}
     </PanelSection>
     <PanelSection title="LOCAL TEST">
       <PanelSectionRow><Hint>Check picture and sound before going live. This saves a clip without broadcasting.</Hint></PanelSectionRow>
@@ -278,6 +283,7 @@ function Content(){
       <PanelSectionRow><ButtonItem layout="below" onClick={()=>setSetupHelp(value=>!value)}>{setupHelp?"Hide setup help":"Setup and recording help"}</ButtonItem></PanelSectionRow>
       {setupHelp&&<PanelSectionRow><Hint>Open Desktop Setup to configure your destination, audio and between-game screen. Test clips save to Videos/{product.compatibility.plugin}. Game only can record the between-game screen without a game; entire screen needs usable frames. Play the saved clip to check picture and sound, then verify your first live stream on another device.</Hint></PanelSectionRow>}
     </PanelSection>
+    <MixerTools mixer={(current as any)?.mixer} busy={!!busy||!!current?.operation} run={toolAction}/>
     <StreamTools current={current} busy={!!busy||!!current?.operation} run={toolAction} copy={copyText}/>
     <MediaTools current={current} busy={!!busy||!!current?.operation} mediaPending={mediaAction||current?.operation?.media_action||""} run={toolAction}/>
     <HealthTools current={current} busy={!!busy||!!current?.operation} run={toolAction}/>
@@ -297,5 +303,5 @@ function Content(){
 export default definePlugin(()=>{
   active=true;instance++;view.epoch++;pollTask=undefined;
   void refresh();const timer=setInterval(()=>{void refresh();changed();},1500);
-  return {name:product.compatibility.plugin,titleView:<div className={staticClasses.Title}>{product.displayName} <small style={{fontWeight:400,opacity:.7}}>preview</small></div>,content:<Content/>,icon:<Dot/>,onDismount(){active=false;instance++;view.epoch++;clearInterval(timer);listeners.clear();busy="";updateChecking=false;}};
+  return {name:product.compatibility.plugin,titleView:<div className={staticClasses.Title}>{product.displayName} <small style={{fontWeight:400,opacity:.7}}>preview</small></div>,content:<Content/>,icon:<Dot/>,onDismount(){cancelPanelTalk();active=false;instance++;view.epoch++;clearInterval(timer);listeners.clear();busy="";updateChecking=false;}};
 });
