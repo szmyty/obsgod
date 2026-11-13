@@ -1,5 +1,35 @@
 # Current work
 
+## Milestone 3 candidate 8: all available local checks passed
+
+Prepared in draft #58 -> #59 -> #60 for #47/#24/#48/#49/#50; #51 remains
+excluded. Exact clean qualified source:
+`bf72ca4ae028f78895eadee6d3874734a1cccd05`. Runtime SHA256:
+`d33c976905e6cde8f7ab9491eef62a08a394c80b0c35d65a61bafa34a27dd9f2`.
+Review [the owner packet](docs/m3-review.md),
+[criterion ledger](docs/evidence/m3-criteria.json) and
+[checksum-verifying install command](docs/candidate-8-install.md).
+
+Fresh final checks passed: 175 Go top-level /338 events (one optional existing-OBS
+skip), 121 Python, 19 Node, vet/typecheck/build, zero Go/npm findings, reproducible
+runtime/updater and payload hashes; seven actual-package browser flows; pinned
+Decky 3.3.1 paired install/update/repair/uninstall and old4/6 bootstrap fixtures;
+11 site tests/40 viewports; three native OBS30.2.3 suites covering capture,
+actual moving/audible recording/replay/profiles/live health/hotplug/media/idle,
+repeated stream restarts and generated/manual password recovery. Six binaries
+compiled only. file:// was unavailable by browser policy; offline HTTP passed.
+CI executed zero steps due to billing lock. Real Deck/OBS33/Flatpak/Gamescope/
+AMD/controller/provider/adoption, human review and M2 identity/publication gates
+remain open. No source merges, issue closures, releases, deployments or spending.
+
+Immutable review artifacts are on orphan commit
+`9ad051ecbb41df92c723a54bdfb6aaaeb1097898` at
+`artifacts/m3-deck8-review`; never merge its tree into source. All36 public files
+were independently downloaded and matched, including internal runtime/updater
+payloads. Evidence-only follow-ups do not rebuild/relabel the qualified package
+or qualify their newer revisions. Historical candidate7 remains unchanged;
+failed deccefd/1fe5ec1 attempts are explicit superseded receipts, not passes.
+
 ## Active: authorized Milestone 3 streaming features, excluding #51
 
 On 2026-11-13 the owner explicitly requested implementation of #47, #24, #48,
@@ -22,6 +52,22 @@ Controller/Desktop integration, lifecycle guards, candidate8 packaging and new
 native/browser qualification stack on `codex/m3-controller-workflows`. No source
 merge is performed by this implementation turn. Candidate8 qualification must
 use its own final exact revision; historical candidate7 remains immutable.
+
+Qualification exposed a real retained-output-counter defect: OBS keeps the prior
+stopped stream's byte total, so a later stream could transmit successfully while
+Start waited to exceed that historical total. A bounded follow-up on
+`codex/m3-output-confirmation` establishes fresh advancing samples for new output
+and resets on counter/duration/reconnection changes. The updater's own preflight
+also guards replay before backup/download application. Do not weaken frame or
+output confirmation gates. Preserve failed receipts for `deccefd` and `1fe5ec1`;
+neither is a fully qualified candidate.
+
+Host browser/Decky transport/native tests must run in separate phases: they can
+contend for port1337 and the conservative same-UID OBS process inspection. Run
+native suites first, then transport, then browsers. This scheduling does not
+waive or relax process ownership checks. The synthetic video fixture now uses
+the existing stable C producer after a demonstrated gst-launch node-teardown
+race; production capture still requires verified rendered frames.
 
 
 ## Milestone 2 source merged; Milestone 3 is proposed

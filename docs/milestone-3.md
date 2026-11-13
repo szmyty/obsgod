@@ -7,15 +7,21 @@ remain intact; this batch does not expand into those projects.
 Base: `ed7d100d356ce803d2cb1c1afef3836759deef10` on default `master`.
 Work proceeds in a shared isolated checkout with draft PR checkpoints.
 
+Candidate **0.1.0-deck.8** is prepared at exact source
+`bf72ca4ae028f78895eadee6d3874734a1cccd05` in drafts #58 → #59 → #60.
+See [the owner packet](m3-review.md), [full matrix](evidence/m3-qualification.json),
+[criterion ledger](evidence/m3-criteria.json) and [install guide](candidate-8-install.md).
+Actual device/CI/review acceptance remains open; no source merge or issue closure.
+
 ## Acceptance ledger
 
 | Issue | Source work | Qualification and remaining evidence |
 | --- | --- | --- |
-| #47 | [Profiles](advanced-profiles.md): versioned profiles, validated advanced video/audio settings, presets, preview/reset and secret-free export | Source implemented; final qualification pending. Presets are starting points; no measured Deck hardware promise. Actual picture/audio/performance/controller evidence required. |
-| #24 | [Idle media](idle-media.md): local image/video, rights acknowledgement and safe game transitions | Source implemented; final qualification pending. Preserve original #10/#17/#21 dependencies and actual Deck transition/privacy evidence. |
-| #48 | [Recovery](runtime-resilience.md): bounded audio-device/session observation without output starts | Source implemented; final qualification pending. Named headset/Bluetooth/session/Deck failure cases must be qualified on device. |
-| #49 | [Recording/replay](recording-replay.md): confirmed controls, clip/storage/export choices | Source implemented; final qualification pending. Actual moving video/audio, file finalization and controller operation required. |
-| #50 | [Health](stream-health.md): measured fresh/unknown metrics, useful advice and redacted diagnostics | Source implemented; final qualification pending. Device/network/load degradation acceptance remains required. |
+| #47 | [Profiles](advanced-profiles.md): versioned profiles, validated advanced video/audio settings, presets, preview/reset and secret-free export | Source implemented; available local qualification passed at the exact candidate revision. Presets are starting points; no measured Deck hardware promise. Actual picture/audio/performance/controller evidence required. |
+| #24 | [Idle media](idle-media.md): local image/video, rights acknowledgement and safe game transitions | Source implemented; available local qualification passed at the exact candidate revision. Preserve original #10/#17/#21 dependencies and actual Deck transition/privacy evidence. |
+| #48 | [Recovery](runtime-resilience.md): bounded audio-device/session observation without output starts | Source implemented; available local qualification passed at the exact candidate revision. Named headset/Bluetooth/session/Deck failure cases must be qualified on device. |
+| #49 | [Recording/replay](recording-replay.md): confirmed controls, clip/storage/export choices | Source implemented; available local qualification passed at the exact candidate revision. Actual moving video/audio, file finalization and controller operation required. |
+| #50 | [Health](stream-health.md): measured fresh/unknown metrics, useful advice and redacted diagnostics | Source implemented; available local qualification passed at the exact candidate revision. Device/network/load degradation acceptance remains required. |
 
 ## Invariants
 

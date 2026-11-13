@@ -1,3 +1,7 @@
+Current streaming-feature candidate: [Milestone 3 owner packet](m3-review.md),
+version **0.1.0-deck.8**. The Milestone 2 packet below remains historical and its
+identity/publication/device/CI gates remain open.
+
 # Milestone 2 owner and publisher packet
 
 Status: independent implementation and all available local qualification are

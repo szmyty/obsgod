@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "candidate": "0.1.0-deck.8",
+  "qualified_source_revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+  "qualified_source_tree": "b66b749199928f79658abe5daeeb5bd26a65b6e7",
+  "qualified_at_utc": "2026-11-13T06:02:46.576938+00:00",
+  "source_clean": true,
+  "local_matrix_outcome": "passed",
+  "full_issue_acceptance": false,
+  "scope": [
+    47,
+    24,
+    48,
+    49,
+    50
+  ],
+  "excluded": [
+    51
+  ],
+  "draft_stack": [
+    58,
+    59,
+    60
+  ],
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "tools": {
+    "go": "1.27.4",
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "python": "3.12.14",
+    "playwright": "1.62.0",
+    "chromium": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+    "docker": "28.4.0 vfs",
+    "native_image": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+    "native_tools": [
+      "OBS Studio - 30.2.3.1-3",
+      "gst-launch-1.0 version 1.26.2",
+      "GStreamer 1.26.2",
+      "https://tracker.debian.org/pkg/gstreamer1.0",
+      "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+      "Python 3.13.5",
+      "DejaVuSans.ttf: \"DejaVu Sans\" \"Book\""
+    ]
+  },
+  "summary": {
+    "go_top_level_passes": 175,
+    "go_pass_events": 338,
+    "go_skipped": [
+      {
+        "package": "github.com/szmyty/obsgod/pkg/automation",
+        "test": "TestRealOBSReadOnly",
+        "reason": "real_obs_test.go:14: set OBSGOD_TEST_OBS_ADDRESS for opt-in real OBS reads"
+      }
+    ],
+    "python_tests": 121,
+    "node_tests": 19,
+    "site_tests": 11,
+    "site_viewport_cases": 40,
+    "browser_checks": 7,
+    "native_suites": 3,
+    "cross_builds": 6,
+    "cross_execution": "unrun; compilation only",
+    "go_and_npm_findings": 0,
+    "runtime_and_updater_reproducible": true,
+    "internal_payload_hashes_verified": true
+  },
+  "matrix": {
+    "go": {
+      "file": "go-matrix.json",
+      "sha256": "708b5577150265dea9f867986c0ea7d96db634d3bdb90a06b5c7e4aab77fa3d5",
+      "outcome": "passed",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05"
+    },
+    "python": {
+      "file": "python-matrix.json",
+      "sha256": "55c66f1b53cfbbc46c3788d011b177297800b4a23f14aa5adc39e377ef612448",
+      "outcome": "passed",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05"
+    },
+    "frontend": {
+      "file": "frontend-matrix.json",
+      "sha256": "fcf184538bc7b7ac5f0d54df62333223f0c1dcc9827303150b9942df639c4b3a",
+      "outcome": "passed",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05"
+    },
+    "package": {
+      "file": "package-matrix.json",
+      "sha256": "e841a8995d67715b5bd8fec0553db77b4b7cdce1727bb85758840efb18ae20d6",
+      "outcome": "passed",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05"
+    },
+    "browser": {
+      "file": "browser-matrix.json",
+      "sha256": "35b0a734d7ea471c6569f53bc3191ec94837c2d6d27f68d025f2bb7ef6fe00d8",
+      "outcome": "passed",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05"
+    },
+    "decky-updater": {
+      "file": "decky-updater-matrix.json",
+      "sha256": "78bc32ffd28f369d901445955b1702e0ca4eba310e6c2337b1c3d8ef79d3c66d",
+      "outcome": "passed",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05"
+    },
+    "native": {
+      "file": "native-matrix.json",
+      "sha256": "ffb3cf5dfe6a2fd0fa73bb506fc977cf6a418bbda8c8febe92f946c7fc42a7f9",
+      "outcome": "passed",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05"
+    },
+    "site": {
+      "file": "site-matrix.json",
+      "sha256": "059d1b55803afe2e9b8b637de9ca776cd963c4dff77571bc2b8098e678aa39fb",
+      "outcome": "passed",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05"
+    },
+    "ci": {
+      "file": "ci-matrix.json",
+      "sha256": "7829bc0097bb83c58a55827918fcb897c6adbaf72e69264e9946fec9cd1050f3",
+      "outcome": "unavailable",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05"
+    }
+  },
+  "artifacts": {
+    "obsgod-deck_0.1.0-deck.8_linux_amd64.tar.gz": {
+      "bytes": 11652475,
+      "sha256": "d33c976905e6cde8f7ab9491eef62a08a394c80b0c35d65a61bafa34a27dd9f2"
+    },
+    "obsgod-decky.zip": {
+      "bytes": 4339963,
+      "sha256": "c17cc96727c8f9aa2253dd7b31ee5be832fd2f904c46665d1389194fa2e9df29"
+    },
+    "manifest.json": {
+      "bytes": 2390,
+      "sha256": "a05d1348aff24b91ca81f73e81cbaa630314605ac532c017bde2f51020beeec3"
+    },
+    "obsgod-one-click-update_0.1.0-deck.8_linux_amd64.zip": {
+      "bytes": 3073556,
+      "sha256": "5ffc3b29de24ade5cef5159c5b141ac20cc904f150913d9e41f06aaa327afffe"
+    },
+    "updater-manifest.json": {
+      "bytes": 1145,
+      "sha256": "7b4cce776f246254230beca8eb7b765a572e4fcb49246f7b1993f4e9dde039ac"
+    },
+    "SHA256SUMS": {
+      "bytes": 273,
+      "sha256": "e868d9a3ab1fd9b0bbe54ea36555bc542b10368977bb137c4a83d2ffd3aba42d"
+    },
+    "UPDATER-SHA256SUMS": {
+      "bytes": 119,
+      "sha256": "228eefff0e94c436ca1e2005126b761b5db2578e783a8318a337d2ba3e868322"
+    }
+  },
+  "superseded_attempts": [
+    {
+      "file": "attempt-deccefd-summary.json",
+      "source": "deccefd3397fa43261f0c2d63afb3911d4f11c27",
+      "outcome": "failed qualification; not a qualified candidate",
+      "go": "passed171top/313events,one optionalskip",
+      "python": "passed120",
+      "node": "passed19",
+      "package": "passed reproducibility",
+      "browser": "initial port1337 collision with parallel Decky transport; same-source serialized rerun passed all7",
+      "native": "capture/game/idle-media passed; audio suite failed repeated capture at native-media line101",
+      "diagnosis": "Synthetic GStreamer PipeWire producer destroys/recreates node at consumer teardown; exact media workflow passed with existing stable C producer, no product framegate change. Source hardening and fixture repairs require full new-revision qualification.",
+      "ci": "zero steps; account billing lock"
+    },
+    {
+      "file": "attempt-1fe5ec1-summary.json",
+      "revision": "1fe5ec1cf2fcbf2040a3804fd9f415eb87b62cf4",
+      "outcome": "failed qualification; superseded source required",
+      "passed": [
+        "172 Go top-level/325 pass events, optional existingOBS skip",
+        "120 Python",
+        "19 Node, typecheck/build/vet, zero Go/npm findings",
+        "reproducible packages",
+        "all7 browser cases",
+        "nativecapture/game/image/video/black fallback",
+        "nativeprofiles540p30 and720p60 moving+audible",
+        "record/replay/coexistence/export/cancel/lowdisk",
+        "liveaudiohotplug preserves mixer",
+        "live measured bitrate/FPS/audio signal"
+      ],
+      "failed": [
+        {
+          "check": "native-audio final repeated stream",
+          "cause": "real StartStream baseline retained the previous stopped stream byte count; loopback viewer received24.8s output while confirmation timed out, cleanup stopped output"
+        },
+        {
+          "check": "first transport updater corruption check",
+          "cause": "updater conservatively saw unknown output during concurrent native OBS processes; rerun only after all native suites exit"
+        }
+      ],
+      "repairs": "Fresh advancing pair confirmation after new output/reset/reconnect; add updater replay guard; full new-revision matrix required."
+    }
+  ],
+  "remaining_gates": [
+    {
+      "id": "device",
+      "status": "unrun",
+      "smallest_action": "Install the exact checksum-verified candidate on the owner Steam Deck and record hardware/SteamOS/OBS33/Flatpak/Gamescope/Decky versions. Run the documented local/live picture+sound/menu-privacy/game-transition, profile, headset/Bluetooth/mic, record/replay/save/controller and sleep/wake/recovery checks; record performance and adverse-load cases rather than inferring support."
+    },
+    {
+      "id": "ci",
+      "status": "unavailable",
+      "reason": "Root reports GitHub account billing lock; zero-step job failures do not execute checks. Exact-source final annotations must be attached by root.",
+      "smallest_action": "Repository/account owner resolves the GitHub Actions billing restriction, then reruns the required workflow/checks on the exact reviewed source. No agent spend or account change is authorized."
+    },
+    {
+      "id": "source-review",
+      "status": "pending",
+      "smallest_action": "Owner reviews the concrete draft PR stack and exact-source evidence, including declared limitations. Code/source review does not waive device or CI criteria."
+    },
+    {
+      "id": "assets",
+      "status": "owner_facts_pending_if_used",
+      "smallest_action": "For actual custom media, select local assets the owner may use and retain rights/attribution acknowledgement; no production owner asset facts are supplied by generated test fixtures."
+    },
+    {
+      "id": "publication",
+      "status": "separate_approval_not_requested_by_implementation",
+      "smallest_action": "After candidate, review and acceptance evidence are ready, separately approve exact release/site destinations and responsible owners. Building/checkpointing a candidate is not publishing a release or deploying."
+    },
+    {
+      "id": "parent-scope",
+      "status": "open",
+      "smallest_action": "Keep #46 open for excluded #51 and preserved original #7/#9/#12/#13/#14 ledgers, without expanding this authorized five-feature implementation or inventing new hard dependencies."
+    }
+  ],
+  "limitations": [
+    "Real native Linux OBS30.2.3 with synthetic video/game/audio and loopback RTMP; not actual Steam Deck/SteamOS/OBS33/Flatpak/Gamescope/AMD/controller/provider/adoption proof.",
+    "file:// unavailable by browser policy; offline loopback HTTP passed.",
+    "No actual global controller chord is registered; focusable panel actions need device evidence.",
+    "No adaptive quality, hidden telemetry or paid offering is added.",
+    "GitHub CI ran zero steps due to account billing lock; this is unavailable evidence, not a pass."
+  ],
+  "release_published": false,
+  "site_deployed": false,
+  "store_submitted": false,
+  "issues_closed": false,
+  "branches_merged": false,
+  "other_repositories_changed": false,
+  "money_spent": false
+}

@@ -1,0 +1,263 @@
+{
+  "checked_at_utc": "2026-11-13T06:05:08.426727+00:00",
+  "outcome": "passed",
+  "candidate": "0.1.0-deck.8",
+  "source_revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+  "artifact_revision": "9ad051ecbb41df92c723a54bdfb6aaaeb1097898",
+  "files": [
+    {
+      "name": "README.md",
+      "bytes": 627,
+      "sha256": "27cb4863252938ec43bd35be98ac1078dea9ce545fcde94c881a207e021faa95",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/README.md",
+      "outcome": "passed"
+    },
+    {
+      "name": "SHA256SUMS",
+      "bytes": 273,
+      "sha256": "e868d9a3ab1fd9b0bbe54ea36555bc542b10368977bb137c4a83d2ffd3aba42d",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/SHA256SUMS",
+      "outcome": "passed"
+    },
+    {
+      "name": "UPDATER-SHA256SUMS",
+      "bytes": 119,
+      "sha256": "228eefff0e94c436ca1e2005126b761b5db2578e783a8318a337d2ba3e868322",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/UPDATER-SHA256SUMS",
+      "outcome": "passed"
+    },
+    {
+      "name": "attempt-1fe5ec1-summary.json",
+      "bytes": 1211,
+      "sha256": "42a7b23d17e06cf92e60cca6171c616bf7d3af7cd3095612f9a695c499e9fe5a",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/attempt-1fe5ec1-summary.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "attempt-deccefd-summary.json",
+      "bytes": 796,
+      "sha256": "61d9e6bf088f70e0850a605bf513fc69b055119ee0389fec6cc202268964acec",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/attempt-deccefd-summary.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "audio-proof.json",
+      "bytes": 2916,
+      "sha256": "6920a18b00b2c30f8f4b0dbd4efcfa57e5b3cc7dc7ce3694393817da6208752a",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/audio-proof.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "browser-matrix.json",
+      "bytes": 7274,
+      "sha256": "35b0a734d7ea471c6569f53bc3191ec94837c2d6d27f68d025f2bb7ef6fe00d8",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/browser-matrix.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "capture-proof.json",
+      "bytes": 2427,
+      "sha256": "773c51a7fad0068b3b5fb126d15a2d0c38978122aec61eb227ea2592ee43af16",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/capture-proof.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "ci-matrix.json",
+      "bytes": 534,
+      "sha256": "7829bc0097bb83c58a55827918fcb897c6adbaf72e69264e9946fec9cd1050f3",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/ci-matrix.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "criteria.json",
+      "bytes": 53927,
+      "sha256": "da7f642607a1f2754bb30545228fc288e4873460684b5708f6b484ad084ccc48",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/criteria.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "decky-updater-matrix.json",
+      "bytes": 5914,
+      "sha256": "78bc32ffd28f369d901445955b1702e0ca4eba310e6c2337b1c3d8ef79d3c66d",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/decky-updater-matrix.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "frontend-matrix.json",
+      "bytes": 2028,
+      "sha256": "fcf184538bc7b7ac5f0d54df62333223f0c1dcc9827303150b9942df639c4b3a",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/frontend-matrix.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "game-proof.json",
+      "bytes": 11100,
+      "sha256": "57d8c95a899352c5c39b86c8318555c1a438d0cc55d566bd97b6d663e101458a",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/game-proof.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "go-matrix.json",
+      "bytes": 8468,
+      "sha256": "708b5577150265dea9f867986c0ea7d96db634d3bdb90a06b5c7e4aab77fa3d5",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/go-matrix.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "go-tests.json",
+      "bytes": 335177,
+      "sha256": "ead8d7cd53f94baba46d0b90488fa9791fc18029d83398fa1a407e7e874d68c9",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/go-tests.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "hotplug-proof.json",
+      "bytes": 349,
+      "sha256": "17a54641d6f9dbd58900e8f480bf39abdfbd075a6c47a8c61b385ad9a271c391",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/hotplug-proof.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "idle_media-proof.json",
+      "bytes": 3591,
+      "sha256": "6f75362c2f283d39a00fddc9369b133b53857cc5c912df4f6a7f78ac0a1cc092",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/idle_media-proof.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "m3-panel-fixture.png",
+      "bytes": 409593,
+      "sha256": "6088edcfc10a35cce3cde8f96142d5e48d5f44aef34a47267ddec6b2d1876c0b",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/m3-panel-fixture.png",
+      "outcome": "passed"
+    },
+    {
+      "name": "manifest.json",
+      "bytes": 2390,
+      "sha256": "a05d1348aff24b91ca81f73e81cbaa630314605ac532c017bde2f51020beeec3",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/manifest.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "media-proof.json",
+      "bytes": 1893,
+      "sha256": "ba0f2ed515a918bebb3605520beb0c747ab7d911955d4b834bf8e03687d9fcef",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/media-proof.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "media_live-proof.json",
+      "bytes": 2183,
+      "sha256": "09aac38181cb9f98ac4ccdb750090fee8c4dfa56be01fcb806c8e2abc5080feb",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/media_live-proof.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "native-matrix.json",
+      "bytes": 40692,
+      "sha256": "ffb3cf5dfe6a2fd0fa73bb506fc977cf6a418bbda8c8febe92f946c7fc42a7f9",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/native-matrix.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "node-tests.log",
+      "bytes": 1923,
+      "sha256": "9c9db549059212f92349081132a57a0b51d83fb3349f443c49225320c2ef5037",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/node-tests.log",
+      "outcome": "passed"
+    },
+    {
+      "name": "obsgod-deck_0.1.0-deck.8_linux_amd64.tar.gz",
+      "bytes": 11652475,
+      "sha256": "d33c976905e6cde8f7ab9491eef62a08a394c80b0c35d65a61bafa34a27dd9f2",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/obsgod-deck_0.1.0-deck.8_linux_amd64.tar.gz",
+      "outcome": "passed"
+    },
+    {
+      "name": "obsgod-decky.zip",
+      "bytes": 4339963,
+      "sha256": "c17cc96727c8f9aa2253dd7b31ee5be832fd2f904c46665d1389194fa2e9df29",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/obsgod-decky.zip",
+      "outcome": "passed"
+    },
+    {
+      "name": "obsgod-one-click-update_0.1.0-deck.8_linux_amd64.zip",
+      "bytes": 3073556,
+      "sha256": "5ffc3b29de24ade5cef5159c5b141ac20cc904f150913d9e41f06aaa327afffe",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/obsgod-one-click-update_0.1.0-deck.8_linux_amd64.zip",
+      "outcome": "passed"
+    },
+    {
+      "name": "package-matrix.json",
+      "bytes": 17785,
+      "sha256": "e841a8995d67715b5bd8fec0553db77b4b7cdce1727bb85758840efb18ae20d6",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/package-matrix.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "password-proof.json",
+      "bytes": 2065,
+      "sha256": "51dd74c08c113bc29ce94c0de811ff7fc47c2a67170358a93f0c4adffdf2809b",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/password-proof.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "profiles-proof.json",
+      "bytes": 2592,
+      "sha256": "4610257daf157ce198f7cba0a7685202fa52584165743ed3b05277c32ee93436",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/profiles-proof.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "python-matrix.json",
+      "bytes": 663,
+      "sha256": "55c66f1b53cfbbc46c3788d011b177297800b4a23f14aa5adc39e377ef612448",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/python-matrix.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "python-tests.log",
+      "bytes": 20787,
+      "sha256": "4595b4ac427a7dabbd52c77c884b252a0f078701237b2ea1842ed467bac2f415",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/python-tests.log",
+      "outcome": "passed"
+    },
+    {
+      "name": "qualification.json",
+      "bytes": 10178,
+      "sha256": "b06223abe8f7b94cd6c5b5e85ca3f79d407e08973e13140515f6b2c0d1ee8d15",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/qualification.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "site-matrix.json",
+      "bytes": 8918,
+      "sha256": "059d1b55803afe2e9b8b637de9ca776cd963c4dff77571bc2b8098e678aa39fb",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/site-matrix.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "site-unit.log",
+      "bytes": 1377,
+      "sha256": "cffd116a211b2adb33ebf65f7c300a583c28cb13bad0b2bed581273589e75123",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/site-unit.log",
+      "outcome": "passed"
+    },
+    {
+      "name": "updater-manifest.json",
+      "bytes": 1145,
+      "sha256": "7b4cce776f246254230beca8eb7b765a572e4fcb49246f7b1993f4e9dde039ac",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/updater-manifest.json",
+      "outcome": "passed"
+    },
+    {
+      "name": "workflow-proof.json",
+      "bytes": 507,
+      "sha256": "49951863d3a105ae017ebe6c92c4943052047bd6787e0dcda6aded9723b5bacf",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/9ad051ecbb41df92c723a54bdfb6aaaeb1097898/workflow-proof.json",
+      "outcome": "passed"
+    }
+  ],
+  "internal_runtime_and_updater_payloads_verified": true,
+  "release_published": false
+}

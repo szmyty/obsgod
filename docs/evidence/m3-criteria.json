@@ -1,0 +1,1199 @@
+{
+  "schema_version": 1,
+  "draft": false,
+  "created_at_utc": "2026-11-13T06:01:01.556943+00:00",
+  "candidate": "0.1.0-deck.8",
+  "source_revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+  "source_tree": "b66b749199928f79658abe5daeeb5bd26a65b6e7",
+  "qualification_status": "All available local checks passed; actual device, CI and owner review remain closure gates",
+  "scope": {
+    "implemented_issue_numbers": [
+      47,
+      24,
+      48,
+      49,
+      50
+    ],
+    "parent": 46,
+    "excluded_issue_numbers": [
+      51
+    ],
+    "excluded_note": "#51 explicitly excluded by owner; do not mutate, close, implement or infer approval for it.",
+    "broader_open_ledgers": [
+      7,
+      9,
+      12,
+      13,
+      14
+    ],
+    "m2_carryover": "Actual Deck/provider/adoption, successful CI, final organization/Identity rights/assets, publication and conditional Store decisions remain distinct gates."
+  },
+  "evidence_rules": [
+    "Criterion source implementation is distinct from full issue acceptance. All issues stay open until their full original criteria and dependencies are satisfied.",
+    "Only a passed receipt at the exact candidate revision supports this source. The historical deccefd attempt and M2/candidate7 receipts are not inherited passes.",
+    "All final receipts below were read after completion; CI unavailable and actual device/review gates are explicit. Earlier passing receipts do not qualify this newer source.",
+    "Native OBS30.2.3 and synthetic PipeWire/PulseAudio/local-RTMP fixtures are actual software/media evidence on Linux, not Steam Deck/SteamOS/Flatpak/OBS33/Gamescope/AMD/controller/provider evidence.",
+    "Six cross-target builds are compilation only; one optional existing-OBS Go test skip is separate from native harness qualification.",
+    "Focused panel buttons are implemented controller-facing actions; actual physical controller proof and any global button-chord requirement remain explicitly unqualified.",
+    "No issue/milestone closure, merge acceptance, release, deployment, Store submission, repository transfer, payment or spending is implied by this ledger."
+  ],
+  "receipts": {
+    "go": {
+      "file": "go-matrix.json",
+      "sha256": "708b5577150265dea9f867986c0ea7d96db634d3bdb90a06b5c7e4aab77fa3d5",
+      "outcome": "passed",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05"
+    },
+    "python": {
+      "file": "python-matrix.json",
+      "sha256": "55c66f1b53cfbbc46c3788d011b177297800b4a23f14aa5adc39e377ef612448",
+      "outcome": "passed",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05"
+    },
+    "frontend": {
+      "file": "frontend-matrix.json",
+      "sha256": "fcf184538bc7b7ac5f0d54df62333223f0c1dcc9827303150b9942df639c4b3a",
+      "outcome": "passed",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05"
+    },
+    "package": {
+      "file": "package-matrix.json",
+      "sha256": "e841a8995d67715b5bd8fec0553db77b4b7cdce1727bb85758840efb18ae20d6",
+      "outcome": "passed",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05"
+    },
+    "browser": {
+      "file": "browser-matrix.json",
+      "sha256": "35b0a734d7ea471c6569f53bc3191ec94837c2d6d27f68d025f2bb7ef6fe00d8",
+      "outcome": "passed",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05"
+    },
+    "decky-updater": {
+      "file": "decky-updater-matrix.json",
+      "sha256": "78bc32ffd28f369d901445955b1702e0ca4eba310e6c2337b1c3d8ef79d3c66d",
+      "outcome": "passed",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05"
+    },
+    "native": {
+      "file": "native-matrix.json",
+      "sha256": "ffb3cf5dfe6a2fd0fa73bb506fc977cf6a418bbda8c8febe92f946c7fc42a7f9",
+      "outcome": "passed",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05"
+    },
+    "site": {
+      "file": "site-matrix.json",
+      "sha256": "059d1b55803afe2e9b8b637de9ca776cd963c4dff77571bc2b8098e678aa39fb",
+      "outcome": "passed",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05"
+    },
+    "ci": {
+      "file": "ci-matrix.json",
+      "sha256": "7829bc0097bb83c58a55827918fcb897c6adbaf72e69264e9946fec9cd1050f3",
+      "outcome": "unavailable",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05"
+    }
+  },
+  "issues": [
+    {
+      "number": 47,
+      "url": "https://github.com/szmyty/obsgod/issues/47",
+      "title": "Add an easy advanced stream and profile editor",
+      "live_state": "open",
+      "live_updated_at": "2026-11-12T11:45:33Z",
+      "owner_authorized_scope": true,
+      "close_eligible": false,
+      "original_dependencies": [],
+      "dependency_note": "Original dependencies retained exactly; priority order adds no hard dependencies.",
+      "related_preserved_ledgers": [
+        11,
+        12
+      ],
+      "criteria": [
+        {
+          "id": "47.AC1",
+          "criterion": "Measure practical Deck presets rather than hard-coding unsupported hardware promises; explain performance/battery tradeoffs.",
+          "source_status": "partial",
+          "overall_status": "partial",
+          "implementation_summary": "Three named starting presets and documented load/battery/encoder tradeoffs. Source explicitly marks hardware_qualified=false; practical Deck presets have not been measured.",
+          "implementation_files": [
+            "internal/deck/profiles.go",
+            "docs/advanced-profiles.md",
+            "steamdeck/decky/src/Advanced.tsx",
+            "steamdeck/setup.html"
+          ],
+          "tests": [
+            {
+              "file": "internal/deck/profiles_test.go",
+              "cases": [
+                "TestStreamPresetsNeverClaimDeviceQualification"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/native-profiles.py",
+              "cases": [
+                "three presets with actual OBS GetVideoSettings and decoded x264 outputs"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go",
+            "browser",
+            "native"
+          ],
+          "remaining": "Actual Deck presets must be measured with named games, SteamOS/OBS/Decky versions, VAAPI/x264 behavior and CPU/GPU/power/game FPS tradeoffs."
+        },
+        {
+          "id": "47.AC2",
+          "criterion": "Keep CLI/config/UI profiles synchronized, versioned and exportable without secret values; support validation, preview/reset and migration.",
+          "source_status": "implemented",
+          "overall_status": "partial",
+          "implementation_summary": "Shared versioned settings/profile API serves CLI flags/JSON, Desktop and Decky. Exports omit destinations, credentials, private paths and device IDs. Existing settings retain implicit 720p credential hash; preview/import/reset/game bindings and explicit precedence are implemented.",
+          "implementation_files": [
+            "internal/deck/config.go",
+            "internal/deck/profiles.go",
+            "internal/commands/deck_advanced.go",
+            "steamdeck/setup.js",
+            "steamdeck/decky/main.py",
+            "steamdeck/decky/src/Advanced.tsx"
+          ],
+          "tests": [
+            {
+              "file": "internal/deck/profiles_test.go",
+              "cases": [
+                "TestStreamProfilesExportImportPreservesPrivateStateAndIsOffline",
+                "TestOutputResolutionMigrationAndPrepareKeeps720pCanvas",
+                "TestStreamProfilePrecedenceExplicitOverridesEnvironmentAndSaved",
+                "TestStreamProfilesGameBindingIsExplicitAndAmbiguousGamesDoNothing"
+              ]
+            },
+            {
+              "file": "internal/commands/deck_advanced_test.go",
+              "cases": [
+                "TestDeckProfileCLIFlagsOverrideJSONAndMalformedEnvironment",
+                "TestDeckProfileCLIExportIsPortableAndDoesNotResolveCredentials"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/browser-m3-setup.py",
+              "cases": [
+                "real archive resolution/bitrate roundtrip, preview/save/export/import/game binding"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go",
+            "python",
+            "frontend",
+            "browser",
+            "native"
+          ],
+          "remaining": "Complete final browser/native receipts at this exact revision and required source review. Actual Steam/Deck integration remains separately unrun."
+        },
+        {
+          "id": "47.AC3",
+          "criterion": "Handle invalid/incompatible combinations and repeated actions with actionable errors; no implicit broadcast.",
+          "source_status": "implemented",
+          "overall_status": "partial",
+          "implementation_summary": "Invalid schemas, dimensions/rates/encoders, names, malformed environment and secret fields fail with fixed actionable errors. Applying requires closed/idle managed OBS; repeated operations cannot implicitly broadcast.",
+          "implementation_files": [
+            "internal/deck/profiles.go",
+            "internal/commands/deck_advanced.go",
+            "steamdeck/decky/main.py",
+            "pkg/automation/client.go"
+          ],
+          "tests": [
+            {
+              "file": "internal/deck/profiles_test.go",
+              "cases": [
+                "TestStreamProfilesRejectUnsafeNamesVersionsDimensionsAndSecretFields",
+                "TestStreamProfileChangesAreBlockedByUnknownListener",
+                "TestStreamProfileCancelledApplyDoesNotModifySettings",
+                "TestStreamProfileEnvironmentAppliesOnlyBeforeExplicitNewOutput"
+              ]
+            },
+            {
+              "file": "internal/commands/deck_advanced_test.go",
+              "cases": [
+                "TestDeckProfileCLIRejectsInvalidFlagsAndUnknownOrMultipleJSON"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/test_m3_adapters.py",
+              "cases": [
+                "test_duplicate_media_actions_coalesce_and_different_actions_wait",
+                "test_command_payload_never_replaces_actual_broadcast_snapshot"
+              ]
+            },
+            {
+              "file": "pkg/automation/stream_status_test.go",
+              "cases": [
+                "TestStreamUnknownFlagsCannotAuthorizeLifecycle"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go",
+            "python",
+            "frontend",
+            "browser",
+            "native"
+          ],
+          "remaining": "Final integration/browser/native qualification and source review; no actual hardware compatibility promise is made."
+        },
+        {
+          "id": "47.AC4",
+          "criterion": "Verify actual picture/audio/performance/controller behavior on the declared hardware and supported modes.",
+          "source_status": "partial",
+          "overall_status": "partial",
+          "implementation_summary": "Native fixture can verify actual encoded picture/audio and output settings; compiled controller UI is tested in simulated Decky. These do not establish declared Deck hardware behavior.",
+          "implementation_files": [
+            "steamdeck/tests/native-profiles.py",
+            "steamdeck/tests/browser-m3-panel.py",
+            "docs/advanced-profiles.md"
+          ],
+          "tests": [
+            {
+              "file": "steamdeck/tests/native-profiles.py",
+              "cases": [
+                "actual dimensions/FPS, moving frames, decoded audible media, credential preservation and no broadcast"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/browser-m3-panel.py",
+              "cases": [
+                "focusable profile/preset/export controls"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "native",
+            "browser"
+          ],
+          "remaining": "UNRUN: actual Deck picture/audio, controller navigation, supported capture modes, AMD/VAAPI and game/performance/battery measurements."
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "url": "https://github.com/szmyty/obsgod/issues/24",
+      "title": "Add custom idle banner/video and game-aware scene transitions",
+      "live_state": "open",
+      "live_updated_at": "2026-11-12T11:49:57Z",
+      "owner_authorized_scope": true,
+      "close_eligible": false,
+      "original_dependencies": [
+        10,
+        17,
+        21
+      ],
+      "dependency_note": "Original dependencies retained exactly; priority order adds no hard dependencies.",
+      "related_preserved_ledgers": [
+        13,
+        14
+      ],
+      "criteria": [
+        {
+          "id": "24.AC1",
+          "criterion": "Define owner-approved behavior and assets for idle/no-game, gameplay and transition states, with explicit rights/attribution where applicable.",
+          "source_status": "partial",
+          "overall_status": "partial",
+          "implementation_summary": "Black/message/imported image/muted looping video states, rights acknowledgement and attribution storage are implemented. Tests use generated fixtures; no actual owner asset rights or final creative approval is invented.",
+          "implementation_files": [
+            "internal/deck/idle_media.go",
+            "internal/deck/capture_video.go",
+            "steamdeck/setup.html",
+            "docs/idle-media.md"
+          ],
+          "tests": [
+            {
+              "file": "internal/deck/idle_media_test.go",
+              "cases": [
+                "TestConfigureIdleRequiresRightsAndPreservesCredentials"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/browser-m3-setup.py",
+              "cases": [
+                "unacknowledged import rejection and acknowledged local image copy"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go",
+            "python",
+            "browser"
+          ],
+          "remaining": "Owner/source review of state behavior; users must select assets they may use and acknowledge rights. Named production assets/attribution, if any, require their actual owner facts."
+        },
+        {
+          "id": "24.AC2",
+          "criterion": "Provide configurable local banner/image/video content without requiring a game to remain open.",
+          "source_status": "implemented",
+          "overall_status": "partial",
+          "implementation_summary": "Configurable PNG/JPEG and bounded local MP4/WebM are copied into an owned offline media directory. Arbitrary URLs/playlists, unsupported containers, unsafe/symlink paths and altered bytes are refused. A game is not needed for the selected idle scene.",
+          "implementation_files": [
+            "internal/deck/idle_media.go",
+            "internal/deck/capture_video.go",
+            "pkg/automation/idle_media.go",
+            "steamdeck/setup.js"
+          ],
+          "tests": [
+            {
+              "file": "internal/deck/idle_media_test.go",
+              "cases": [
+                "TestIdleImportCopiesOwnedBytesAndNeverStoresOriginalPath",
+                "TestIdleMediaRefusesUnsupportedUnsafeAndOversizedInputs",
+                "TestIdleImportDetectsAlteredOwnedFile",
+                "TestIdleImportRefusesSymlinkDestinationAncestorAndTruncatedImage"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/native-idle-media.py",
+              "cases": [
+                "encoded image pixels, moving video and missing-media black fallback"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go",
+            "browser",
+            "native"
+          ],
+          "remaining": "Final image/video/native/browser receipts and source review; actual Flatpak decoding/file access remains a device gate."
+        },
+        {
+          "id": "24.AC3",
+          "criterion": "Use game/capture hooks from Roadmap 1, handle ambiguous detection and rapid launch/exit transitions without scene flapping or false stream state.",
+          "source_status": "implemented",
+          "overall_status": "partial",
+          "implementation_summary": "Existing game/capture hooks remain; unstable/ambiguous/unsupported discovery selects idle immediately and requires a stable verified game before promotion. Output state is observed independently and game-only never changes to full-display capture.",
+          "implementation_files": [
+            "internal/deck/capture_watch_linux.go",
+            "internal/deck/capture_video.go",
+            "internal/deck/idle_media.go",
+            "internal/deck/control.go"
+          ],
+          "tests": [
+            {
+              "file": "internal/deck/idle_media_test.go",
+              "cases": [
+                "TestGameStabilityFailsClosedWithoutDelayingIdle"
+              ]
+            },
+            {
+              "file": "internal/deck/capture_video_test.go",
+              "cases": [
+                "TestGameVideoNeverFallsBackToDisplayAndExcludesUnknownSources"
+              ]
+            },
+            {
+              "file": "internal/deck/capture_watch_linux_test.go",
+              "cases": [
+                "TestCaptureWatchTransitionsRerouteAudioWithoutStartingOrStoppingOutput",
+                "TestCaptureWatchRefusesDifferentCollectionWithoutMutation",
+                "TestCaptureWatchRetriesAudioAndResetsTargetAfterConnectionFailure"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go",
+            "native",
+            "browser"
+          ],
+          "remaining": "Actual Gamescope game launch/exit/rapid transitions, unsupported and ambiguous capture, menu privacy and session versions are unrun."
+        },
+        {
+          "id": "24.AC4",
+          "criterion": "Preserve the user's selected microphone/audio policy, scene recovery and local/offline operation.",
+          "source_status": "implemented",
+          "overall_status": "partial",
+          "implementation_summary": "Idle video input is created disabled and muted before enable; soundtrack is excluded while system-output and opt-in microphone policy remain. Missing/changed media yields opaque black; owned copies work offline.",
+          "implementation_files": [
+            "pkg/automation/idle_media.go",
+            "internal/deck/capture_video.go",
+            "internal/deck/idle_media.go",
+            "internal/deck/audio_control.go"
+          ],
+          "tests": [
+            {
+              "file": "internal/deck/idle_media_linux_test.go",
+              "cases": [
+                "TestIdleImageAndMissingMediaRemainPrivateFallbacks",
+                "TestIdleVideoIsDisabledThenMutedBeforeBecomingVisible"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/native-idle-media.py",
+              "cases": [
+                "intentional 880Hz video soundtrack absent; decoded selected 440Hz output remains audible"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go",
+            "native"
+          ],
+          "remaining": "Final decoded local-RTMP image/video/audio/fallback evidence, actual Deck microphone/output and offline/Flatpak checks, source review."
+        },
+        {
+          "id": "24.AC5",
+          "criterion": "Keep Start/Stop authorization explicit: game detection or an idle transition must not silently begin broadcasting.",
+          "source_status": "implemented",
+          "overall_status": "partial",
+          "implementation_summary": "Only explicit output actions start broadcasting. Profile changes, media import, scene observation and restored connections expose no automatic stream start; stopped output remains stopped.",
+          "implementation_files": [
+            "internal/deck/capture_watch_linux.go",
+            "internal/deck/idle_media.go",
+            "internal/deck/resilience.go",
+            "internal/deck/control.go",
+            "steamdeck/decky/main.py"
+          ],
+          "tests": [
+            {
+              "file": "internal/deck/capture_watch_linux_test.go",
+              "cases": [
+                "TestCaptureWatchTransitionsRerouteAudioWithoutStartingOrStoppingOutput"
+              ]
+            },
+            {
+              "file": "internal/deck/resilience_linux_test.go",
+              "cases": [
+                "TestResilienceReconnectDoesNotRestartStoppedOutputAndResetsFailureBudget"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/native-idle-media.py",
+              "cases": [
+                "explicit Stop followed by media/game change does not restart output"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/browser-m3-panel.py",
+              "cases": [
+                "profile/media/health actions do not broadcast"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go",
+            "python",
+            "browser",
+            "native"
+          ],
+          "remaining": "Final native/browser protocol evidence and review; actual Deck output lifecycle acceptance remains unrun."
+        },
+        {
+          "id": "24.AC6",
+          "criterion": "Test transitions with live/local output and capture failures on the actual Deck, recording versions/revisions and limitations.",
+          "source_status": "partial",
+          "overall_status": "partial",
+          "implementation_summary": "Versioned synthetic native harness exercises actual OBS output, local RTMP viewer decode and failures; it is explicitly not the requested actual Deck receipt.",
+          "implementation_files": [
+            "steamdeck/tests/native-game-obs-smoke.sh",
+            "steamdeck/tests/native-game-obs.py",
+            "steamdeck/tests/native-idle-media.py",
+            "docs/idle-media.md"
+          ],
+          "tests": [
+            {
+              "file": "steamdeck/tests/native-idle-media.py",
+              "cases": [
+                "continuous explicit output through image/video and missing-media fallback"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/native-game-obs.py",
+              "cases": [
+                "game/idle transitions and stopped-state safety"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "native"
+          ],
+          "remaining": "UNRUN: actual Steam Deck live/local transitions and capture failures with exact hardware/SteamOS/OBS33/Decky/Gamescope versions, controller and privacy proof."
+        }
+      ]
+    },
+    {
+      "number": 48,
+      "url": "https://github.com/szmyty/obsgod/issues/48",
+      "title": "Improve live audio-device, capture and runtime resilience",
+      "live_state": "open",
+      "live_updated_at": "2026-11-12T11:45:34Z",
+      "owner_authorized_scope": true,
+      "close_eligible": false,
+      "original_dependencies": [],
+      "dependency_note": "Original dependencies retained exactly; priority order adds no hard dependencies.",
+      "related_preserved_ledgers": [
+        10,
+        17,
+        18,
+        21,
+        22,
+        24,
+        25
+      ],
+      "criteria": [
+        {
+          "id": "48.AC1",
+          "criterion": "Reproduce and qualify named device changes/failure recovery on actual Deck builds, including audio continuity and truthful unknown-state handling.",
+          "source_status": "partial",
+          "overall_status": "partial",
+          "implementation_summary": "Named fake device/control transitions and native PulseAudio/OBS recovery harness exist. Unknown/current/stale state is explicit; actual Deck headset/Bluetooth/device builds have not been qualified.",
+          "implementation_files": [
+            "internal/deck/audio_linux.go",
+            "internal/deck/audio_control.go",
+            "internal/deck/resilience.go",
+            "internal/deck/resilience_linux.go",
+            "steamdeck/tests/native-resilience.py"
+          ],
+          "tests": [
+            {
+              "file": "internal/deck/resilience_linux_test.go",
+              "cases": [
+                "TestResilienceFollowsHeadphoneMicrophoneChangesAcrossCaptureModes",
+                "TestResilienceReceiptRejectsStaleFutureUnsafeAndPrivateMessages"
+              ]
+            },
+            {
+              "file": "internal/deck/audio_linux_test.go",
+              "cases": [
+                "TestAudioDiscoveryReresolvesChangedDefaultAndRefusesMissingMonitor"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/native-resilience.py",
+              "cases": [
+                "real route/device/default changes, mixer preservation and stop/reconnect behavior"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go",
+            "native"
+          ],
+          "remaining": "UNRUN: actual Deck named speaker/wired headset/Bluetooth/microphone changes and continuity with exact device/build versions."
+        },
+        {
+          "id": "48.AC2",
+          "criterion": "Do not select a monitor as microphone, alter system volume silently, guess unverified capture or fall back from game-only to full display.",
+          "source_status": "implemented",
+          "overall_status": "partial",
+          "implementation_summary": "Strict real microphone selection rejects monitors/loopbacks. Recovery changes only existing input device IDs, preserving host volume/mute/gain/tracks/monitoring. Game-only requires verified capture and never selects full display.",
+          "implementation_files": [
+            "internal/deck/audio_linux.go",
+            "pkg/automation/audio_recovery.go",
+            "internal/deck/resilience_linux.go",
+            "internal/deck/capture_video.go"
+          ],
+          "tests": [
+            {
+              "file": "internal/deck/audio_linux_test.go",
+              "cases": [
+                "TestAudioDiscoveryRefusesLoopbackAsMicrophoneAndReportsMute",
+                "TestAudioDiscoveryRejectsMonitorAliasesAndVersionedPulseMetadata"
+              ]
+            },
+            {
+              "file": "pkg/automation/audio_recovery_test.go",
+              "cases": []
+            },
+            {
+              "file": "internal/deck/capture_video_test.go",
+              "cases": [
+                "TestGameVideoNeverFallsBackToDisplayAndExcludesUnknownSources"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/native-resilience.py",
+              "cases": [
+                "existing mixer/gain/mute/track/monitor preservation"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go",
+            "native"
+          ],
+          "remaining": "Final native fixture and source review, plus actual Deck/Flatpak/audio/capture privacy evidence."
+        },
+        {
+          "id": "48.AC3",
+          "criterion": "Define automatic recovery limits and escalation; a newly launched game or restored connection never restarts a stopped broadcast.",
+          "source_status": "implemented",
+          "overall_status": "partial",
+          "implementation_summary": "Three failed cycles with bounded backoff exhaust recovery and expose retry/escalation. Owned managed profile+collection and confirmed existing output are rechecked under control lease. No observer can start OBS or restart stopped output.",
+          "implementation_files": [
+            "internal/deck/resilience.go",
+            "internal/deck/resilience_linux.go",
+            "internal/commands/deck_advanced.go",
+            "steamdeck/decky/main.py",
+            "steamdeck/decky/src/Advanced.tsx"
+          ],
+          "tests": [
+            {
+              "file": "internal/deck/resilience_linux_test.go",
+              "cases": [
+                "TestResilienceStopsAtThreeFailuresWithBoundedBackoffAndPrivateErrors",
+                "TestResilienceDoesNotRecoverStoppedOrUnmanagedOutput",
+                "TestResilienceReconnectDoesNotRestartStoppedOutputAndResetsFailureBudget",
+                "TestResilienceExplicitControlLeaseWinsAndCancellationMakesNoDeviceChanges",
+                "TestResilienceUnsafeControlLeaseFailsBoundedlyInsteadOfClaimingBusy"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go",
+            "python",
+            "browser",
+            "native"
+          ],
+          "remaining": "Final recovery/reconnect/Stop fixture evidence and review; actual Deck sleep/wake and network/audio reconnection remain unrun."
+        },
+        {
+          "id": "48.AC4",
+          "criterion": "Record supported/unsupported session, native game/Wayland, controller, CPU/GPU/battery and audio behavior with rollback/recovery.",
+          "source_status": "partial",
+          "overall_status": "partial",
+          "implementation_summary": "Documented native Linux synthetic scope, explicit unsupported/unknown capture/session behavior, manual recovery and preserved local outputs. No cross-build is called runtime support or CPU/GPU/battery qualification.",
+          "implementation_files": [
+            "docs/runtime-resilience.md",
+            "docs/steam-deck-qualification.md",
+            "internal/deck/resilience_other.go",
+            "internal/deck/capture_watch_other.go"
+          ],
+          "tests": [
+            {
+              "file": "internal/deck/resilience_linux_test.go",
+              "cases": []
+            },
+            {
+              "file": "steamdeck/tests/native-resilience.py",
+              "cases": []
+            }
+          ],
+          "receipt_ids": [
+            "go",
+            "native"
+          ],
+          "remaining": "UNRUN: supported/unsupported Deck sessions, native game/Wayland cases, real controllers, CPU/GPU/battery/audio and rollback/recovery; six cross-target builds compile only."
+        }
+      ]
+    },
+    {
+      "number": 49,
+      "url": "https://github.com/szmyty/obsgod/issues/49",
+      "title": "Add recording, replay-buffer and local clip workflows",
+      "live_state": "open",
+      "live_updated_at": "2026-11-12T11:45:35Z",
+      "owner_authorized_scope": true,
+      "close_eligible": false,
+      "original_dependencies": [],
+      "dependency_note": "Original dependencies retained exactly; priority order adds no hard dependencies.",
+      "related_preserved_ledgers": [
+        9,
+        11,
+        14
+      ],
+      "criteria": [
+        {
+          "id": "49.AC1",
+          "criterion": "Expose confirmed recording/replay state and safe start/stop/save/cancel with correct output coexistence and no implicit broadcast.",
+          "source_status": "implemented",
+          "overall_status": "partial",
+          "implementation_summary": "Separate observed recording/replay state; start/stop/save/cancel verify actual output. Local outputs coexist with an already-active stream; stopping each preserves other active outputs. Cancellation finalizes partial media, and replay save waits for a new path. No implicit broadcast.",
+          "implementation_files": [
+            "pkg/automation/media.go",
+            "internal/deck/media.go",
+            "internal/deck/control.go",
+            "internal/commands/deck_advanced.go",
+            "steamdeck/decky/main.py",
+            "steamdeck/decky/src/Advanced.tsx"
+          ],
+          "tests": [
+            {
+              "file": "pkg/automation/media_test.go",
+              "cases": [
+                "TestReplayLifecycleWaitsAndNeverBroadcasts",
+                "TestReplaySaveRequiresActiveBuffer",
+                "TestMediaStatusRejectsMalformedSuccessfulBools"
+              ]
+            },
+            {
+              "file": "internal/deck/media_test.go",
+              "cases": [
+                "TestMediaStartCoexistsWithoutChangingLiveScene",
+                "TestReplayCoexistsWithRecordingAndDoesNotRewriteItsProfile",
+                "TestLocalStartPreparesCaptureAndCleansFailedStartOnly",
+                "TestLocalStopKeepsReplayAndPreservesPartialClip"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/test_m3_adapters.py",
+              "cases": [
+                "test_local_start_cancel_never_stops_live_stream_even_before_attach"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go",
+            "python",
+            "frontend",
+            "browser",
+            "native"
+          ],
+          "remaining": "Final local/live coexistence and file-finalization receipts, source review, actual Deck controller/output acceptance. Starting a new stream while local output is already active remains deliberately blocked; documented coexistence starts local output alongside an existing stream."
+        },
+        {
+          "id": "49.AC2",
+          "criterion": "Provide explicit storage/path/retention choices, low-disk/permission/interruption recovery and media preservation; honor XDG/user Videos preferences.",
+          "source_status": "implemented",
+          "overall_status": "partial",
+          "implementation_summary": "XDG Videos parsing without a shell; versioned directory/buffer/reserve/retention preferences; permission/space probes; observer reserve guard finalizes only local outputs. Indexed unchanged finalized media can export exclusively or prune only exact previewed IDs; interrupted/unindexed/changed media is preserved.",
+          "implementation_files": [
+            "internal/deck/media_storage.go",
+            "internal/deck/media_library.go",
+            "internal/deck/media_disk_linux.go",
+            "internal/deck/media_open_linux.go",
+            "internal/deck/resilience_linux.go",
+            "steamdeck/setup.js",
+            "docs/recording-replay.md"
+          ],
+          "tests": [
+            {
+              "file": "internal/deck/media_test.go",
+              "cases": [
+                "TestXDGVideoPreferenceIsParsedWithoutShell",
+                "TestRecordingStorageRejectsSymlinksAndInvalidLimits",
+                "TestClipLibraryOwnsOnlyConfirmedUnchangedMedia",
+                "TestClipExportCopiesExclusivelyAndPreservesOriginal",
+                "TestClipCleanupPreviewsAndConfirmsOnlyExactIDs"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/native-media.py",
+              "cases": [
+                "configured reserve crossing with a bounded filler; finalize local output without stopping broadcast"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go",
+            "python",
+            "browser",
+            "native",
+            "decky-updater"
+          ],
+          "remaining": "Final reserve/export/cancel and update-preservation evidence; actual Flatpak permission/removable-storage/disk interruption behavior is unrun. Retention is manual preview+confirmation; no background deletion or recursive custom-directory wipe."
+        },
+        {
+          "id": "49.AC3",
+          "criterion": "Verify moving video/audio, file finalization, replay saves and actual controller shortcuts on supported Deck versions.",
+          "source_status": "partial",
+          "overall_status": "partial",
+          "implementation_summary": "Native harness probes and decodes moving recorded/replay video plus audible tone, coexistence/finalization and clip export; compiled panel exercises focusable actions in simulated Decky. Focused panel buttons are the candidate controller actions; no global button chord is implemented or claimed.",
+          "implementation_files": [
+            "steamdeck/tests/native-media.py",
+            "steamdeck/tests/browser-m3-panel.py",
+            "steamdeck/decky/src/Advanced.tsx",
+            "docs/recording-replay.md"
+          ],
+          "tests": [
+            {
+              "file": "steamdeck/tests/native-media.py",
+              "cases": [
+                "moving frame hashes, decoded PCM, replay new-file finalization, local/live coexistence"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/browser-m3-panel.py",
+              "cases": [
+                "record/replay/save/cancel/unknown-state controls"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "native",
+            "browser"
+          ],
+          "remaining": "UNRUN: supported Deck video/audio/replay file-finalization and physical controller navigation/actions. Owner review must not interpret focusable panel actions as already-qualified global shortcuts."
+        },
+        {
+          "id": "49.AC4",
+          "criterion": "Keep provider/creator/content-pipeline boundaries clear and link broader #14 work rather than importing unrelated automation.",
+          "source_status": "implemented",
+          "overall_status": "source_prepared",
+          "implementation_summary": "Local-only media processing and documented boundaries; no provider/creator/cloud pipeline, new repository, paid service or monetization feature is introduced. Broader #14 acceptance remains open.",
+          "implementation_files": [
+            "docs/recording-replay.md",
+            "docs/milestone-3.md",
+            "ROADMAP.md",
+            "internal/deck/media.go"
+          ],
+          "tests": [
+            {
+              "file": "pkg/automation/media_test.go",
+              "cases": [
+                "TestReplayLifecycleWaitsAndNeverBroadcasts"
+              ]
+            },
+            {
+              "file": "internal/deck/media_test.go",
+              "cases": [
+                "TestMediaStartCoexistsWithoutChangingLiveScene"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go"
+          ],
+          "remaining": "Source review and retained #14 boundary; this bounded source criterion does not close the ecosystem ledger."
+        }
+      ]
+    },
+    {
+      "number": 50,
+      "url": "https://github.com/szmyty/obsgod/issues/50",
+      "title": "Expose stream health and measured quality recommendations",
+      "live_state": "open",
+      "live_updated_at": "2026-11-12T11:45:37Z",
+      "owner_authorized_scope": true,
+      "close_eligible": false,
+      "original_dependencies": [],
+      "dependency_note": "Original dependencies retained exactly; priority order adds no hard dependencies.",
+      "related_preserved_ledgers": [
+        17,
+        18,
+        22,
+        12
+      ],
+      "criteria": [
+        {
+          "id": "50.AC1",
+          "criterion": "Use bounded real observations with freshness/unknown semantics; do not expose credentials or require undisclosed telemetry.",
+          "source_status": "implemented",
+          "overall_status": "partial",
+          "implementation_summary": "Read-only numeric OBS samples with pointer/missing semantics, duration/counter reset checks and freshness expiration. Rate comes from advancing byte counters; missing GPU/reconnect totals/viewer reception remain unknown. Fixed/numeric reports contain no private endpoints/device/game/media fields and no telemetry.",
+          "implementation_files": [
+            "pkg/automation/health.go",
+            "pkg/automation/client.go",
+            "internal/deck/health.go",
+            "steamdeck/decky/src/advanced-state.mjs",
+            "docs/stream-health.md"
+          ],
+          "tests": [
+            {
+              "file": "pkg/automation/health_test.go",
+              "cases": [
+                "TestHealthRawFieldsPreserveUnknownAndMeasuredZero",
+                "TestHealthObservationProtocolReadOnlyAndSanitizedFailure"
+              ]
+            },
+            {
+              "file": "internal/deck/health_test.go",
+              "cases": [
+                "TestHealthRatesUseFreshAdvancingCountersAndRetainUnknownGPU",
+                "TestHealthStaleMissingAndCounterResetNeverBecomeFalseZero",
+                "TestHealthUntrustedEnumsAndImpossibleRatiosAreExcluded",
+                "TestHealthDoesNotReuseStaleAudioMuteFacts"
+              ]
+            },
+            {
+              "file": "pkg/automation/stream_status_test.go",
+              "cases": [
+                "TestStreamUnknownFlagsCannotAuthorizeLifecycle"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go",
+            "frontend",
+            "native"
+          ],
+          "remaining": "Final actual OBS stats/audio/capture and browser stale-state evidence, source review. No claim about actual provider/viewer or GPU health follows local OBS counters."
+        },
+        {
+          "id": "50.AC2",
+          "criterion": "Make health readable/focusable on the Deck and useful in the redacted support bundle.",
+          "source_status": "implemented",
+          "overall_status": "partial",
+          "implementation_summary": "Focusable panel health controls automatically refresh while details are visible; expired/failed values become unknown. Desktop offers the same numeric report. Redacted support projection includes health and recovery without exporting private settings.",
+          "implementation_files": [
+            "steamdeck/decky/src/Advanced.tsx",
+            "steamdeck/decky/src/advanced-state.mjs",
+            "steamdeck/setup.js",
+            "internal/deck/support.go"
+          ],
+          "tests": [
+            {
+              "file": "steamdeck/decky/tests/advanced-state.test.mjs",
+              "cases": [
+                "metrics become unknown on expiry, malformed values and future timestamps"
+              ]
+            },
+            {
+              "file": "internal/deck/support_test.go",
+              "cases": [
+                "TestSupportProjectionNeverExportsUntrustedFields"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/browser-m3-panel.py",
+              "cases": [
+                "fresh/expired health and automatic polls"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/browser-m3-setup.py",
+              "cases": [
+                "provider/viewer reception unknown in actual installed archive"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go",
+            "frontend",
+            "python",
+            "browser"
+          ],
+          "remaining": "Actual Deck readability, focus/controller navigation and source review; browser keyboard/fixture checks do not establish Steam controller behavior."
+        },
+        {
+          "id": "50.AC3",
+          "criterion": "Validate metrics/advice under degraded network/encoder/device/load conditions on actual hardware.",
+          "source_status": "partial",
+          "overall_status": "partial",
+          "implementation_summary": "Unit/protocol tests exercise dropped frames, render/encode lag, high CPU, muted/unavailable audio, stalls, reconnects and counter resets. Native harness can verify positive real OBS bitrate/FPS and unknown provider reception; adverse real hardware conditions remain unrun.",
+          "implementation_files": [
+            "internal/deck/health_test.go",
+            "steamdeck/tests/native-media.py",
+            "docs/stream-health.md"
+          ],
+          "tests": [
+            {
+              "file": "internal/deck/health_test.go",
+              "cases": [
+                "TestHealthDegradationProducesAdviceWithoutChangingSettings",
+                "TestHealthStoppedReconnectingAndSilentRemainDistinct"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/native-media.py",
+              "cases": [
+                "live OBS health projection during stream+recording+replay"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go",
+            "native"
+          ],
+          "remaining": "UNRUN: actual Deck degraded upload/network, encoder/device/load/power conditions and measured advice effectiveness, with rollback and supported hardware versions."
+        },
+        {
+          "id": "50.AC4",
+          "criterion": "If adaptive quality is proposed, define explicit user policy, safe bounds, provider limits and rollback before changing output settings.",
+          "source_status": "not_applicable",
+          "overall_status": "not_applicable",
+          "implementation_summary": "Adaptive quality is not proposed or implemented in this batch. Reports only advise; settings changes remain explicit idle-only profile actions, so no adaptive policy/provider bounds are invented.",
+          "implementation_files": [
+            "internal/deck/health.go",
+            "docs/stream-health.md",
+            "internal/deck/profiles.go"
+          ],
+          "tests": [
+            {
+              "file": "internal/deck/health_test.go",
+              "cases": [
+                "TestHealthDegradationProducesAdviceWithoutChangingSettings"
+              ]
+            },
+            {
+              "file": "pkg/automation/health_test.go",
+              "cases": [
+                "TestHealthObservationProtocolReadOnlyAndSanitizedFailure"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go"
+          ],
+          "remaining": "No adaptive-quality acceptance is claimed. Any future adaptation needs an independently scoped explicit user policy, bounds, provider limits and rollback."
+        }
+      ]
+    },
+    {
+      "number": 46,
+      "url": "https://github.com/szmyty/obsgod/issues/46",
+      "title": "Roadmap 3 \u2014 Advanced streaming and validated paid offerings",
+      "live_state": "open",
+      "live_updated_at": "2026-11-12T23:49:03Z",
+      "owner_authorized_scope": false,
+      "close_eligible": false,
+      "original_dependencies": [],
+      "dependency_note": "Original dependencies retained exactly; priority order adds no hard dependencies.",
+      "related_preserved_ledgers": [
+        7,
+        9,
+        12,
+        13,
+        14,
+        24
+      ],
+      "criteria": [
+        {
+          "id": "46.AC1",
+          "criterion": "Review and prioritize bounded advanced profiles, audio/runtime resilience, replay/recording/clips, stream health and one validated paid-offer experiment.",
+          "source_status": "partial",
+          "overall_status": "partial",
+          "implementation_summary": "Owner authorized the five listed streaming features now; #51 is explicitly excluded and is not implemented, closed or rewritten by this campaign.",
+          "implementation_files": [
+            "docs/milestone-3.md",
+            "ROADMAP.md"
+          ],
+          "tests": [],
+          "receipt_ids": [],
+          "remaining": "The full parent retains the excluded paid-offer experiment and broader ledgers; implementing these five children alone cannot close it."
+        },
+        {
+          "id": "46.AC2",
+          "criterion": "Reconcile and complete or explicitly disposition every original linked ledger; no acceptance disappears when scope is reclassified.",
+          "source_status": "partial",
+          "overall_status": "partial",
+          "implementation_summary": "Original child criteria and #24 dependencies #10/#17/#21 are retained. Broader #7/#9/#12/#13/#14 remain separately bounded/open; no new companion repository is created.",
+          "implementation_files": [
+            "docs/milestone-3.md",
+            "ROADMAP.md"
+          ],
+          "tests": [],
+          "receipt_ids": [],
+          "remaining": "Complete or explicitly disposition original broad ledgers through their own accepted evidence; no checkbox is removed by reclassification."
+        },
+        {
+          "id": "46.AC3",
+          "criterion": "Keep local core/Stop/recovery/security/accessibility/offline use available; optional services/assets respect rights/privacy and actual channel policy.",
+          "source_status": "implemented",
+          "overall_status": "partial",
+          "implementation_summary": "Local core, Stop/recovery, offline use, secret filtering and rights-aware local imports remain available without payment/login/cloud service. Unqualified Store provenance/paid-feature permissions are not asserted.",
+          "implementation_files": [
+            "internal/deck/control.go",
+            "internal/deck/idle_media.go",
+            "internal/deck/support.go",
+            "steamdeck/decky/src/Advanced.tsx",
+            "docs/milestone-3.md"
+          ],
+          "tests": [
+            {
+              "file": "pkg/automation/stream_status_test.go",
+              "cases": [
+                "TestStreamUnknownFlagsCannotAuthorizeLifecycle"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/test_m3_adapters.py",
+              "cases": [
+                "test_local_start_cancel_never_stops_live_stream_even_before_attach"
+              ]
+            },
+            {
+              "file": "steamdeck/tests/browser-m3-setup.py",
+              "cases": [
+                "rights acknowledgement and no secret export"
+              ]
+            }
+          ],
+          "receipt_ids": [
+            "go",
+            "python",
+            "frontend",
+            "browser",
+            "native",
+            "decky-updater"
+          ],
+          "remaining": "Final local/offline/lifecycle regression evidence, actual Deck accessibility/controller use and source review; any channel submission remains a separate authorized action."
+        },
+        {
+          "id": "46.AC4",
+          "criterion": "Require exact source/review/device/provider evidence for each claimed capability, and explicit authorization for other repositories, paid services, releases and deployments.",
+          "source_status": "partial",
+          "overall_status": "partial",
+          "implementation_summary": "All current qualification receipts are bound to exact clean source bf72ca4ae028f78895eadee6d3874734a1cccd05. Native/browser fixtures and cross-compilation are scoped honestly; old candidate receipts do not qualify this revision.",
+          "implementation_files": [
+            "docs/milestone-3.md",
+            "docs/steam-deck-building.md"
+          ],
+          "tests": [],
+          "receipt_ids": [
+            "go",
+            "python",
+            "frontend",
+            "package",
+            "browser",
+            "native",
+            "decky-updater",
+            "ci"
+          ],
+          "remaining": "Finish final matrix, exact-source successful CI and required source review, then actual device/provider/adoption evidence. Release/deployment/other-repo/paid actions remain separate approvals."
+        },
+        {
+          "id": "46.AC5",
+          "criterion": "Measure actual user value, support/operating costs and voluntary/paid uptake rather than promising revenue.",
+          "source_status": "deferred",
+          "overall_status": "deferred",
+          "implementation_summary": "No user-value/revenue/paid uptake facts are invented. #51 is outside the current owner-authorized batch; no tracking, payments, pricing or paid resources are added.",
+          "implementation_files": [
+            "docs/milestone-3.md",
+            "ROADMAP.md"
+          ],
+          "tests": [],
+          "receipt_ids": [],
+          "remaining": "Actual voluntary user/support/adoption observations remain future evidence; excluded paid-offer validation is not silently marked complete."
+        }
+      ]
+    }
+  ],
+  "remaining_gates": [
+    {
+      "id": "device",
+      "status": "unrun",
+      "smallest_action": "Install the exact checksum-verified candidate on the owner Steam Deck and record hardware/SteamOS/OBS33/Flatpak/Gamescope/Decky versions. Run the documented local/live picture+sound/menu-privacy/game-transition, profile, headset/Bluetooth/mic, record/replay/save/controller and sleep/wake/recovery checks; record performance and adverse-load cases rather than inferring support."
+    },
+    {
+      "id": "ci",
+      "status": "unavailable",
+      "reason": "Root reports GitHub account billing lock; zero-step job failures do not execute checks. Exact-source final annotations must be attached by root.",
+      "smallest_action": "Repository/account owner resolves the GitHub Actions billing restriction, then reruns the required workflow/checks on the exact reviewed source. No agent spend or account change is authorized."
+    },
+    {
+      "id": "source-review",
+      "status": "pending",
+      "smallest_action": "Owner reviews the concrete draft PR stack and exact-source evidence, including declared limitations. Code/source review does not waive device or CI criteria."
+    },
+    {
+      "id": "assets",
+      "status": "owner_facts_pending_if_used",
+      "smallest_action": "For actual custom media, select local assets the owner may use and retain rights/attribution acknowledgement; no production owner asset facts are supplied by generated test fixtures."
+    },
+    {
+      "id": "publication",
+      "status": "separate_approval_not_requested_by_implementation",
+      "smallest_action": "After candidate, review and acceptance evidence are ready, separately approve exact release/site destinations and responsible owners. Building/checkpointing a candidate is not publishing a release or deploying."
+    },
+    {
+      "id": "parent-scope",
+      "status": "open",
+      "smallest_action": "Keep #46 open for excluded #51 and preserved original #7/#9/#12/#13/#14 ledgers, without expanding this authorized five-feature implementation or inventing new hard dependencies."
+    }
+  ],
+  "publication": {
+    "release": "not published by this ledger",
+    "deployment": "not performed",
+    "store_submission": "not performed",
+    "other_repository_changes": "not performed",
+    "spending": "not performed"
+  },
+  "completed_source_repairs": [
+    "Strict unknown stream flags; fresh advancing-pair confirmation after restart/counter reset/reconnect; updater replay preflight; stable synthetic test producer"
+  ]
+}
