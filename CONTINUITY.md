@@ -1,5 +1,35 @@
 # Current work
 
+## Milestone 3 candidate 8: all available local checks passed
+
+Prepared in draft #58 -> #59 -> #60 for #47/#24/#48/#49/#50; #51 remains
+excluded. Exact clean qualified source:
+`bf72ca4ae028f78895eadee6d3874734a1cccd05`. Runtime SHA256:
+`d33c976905e6cde8f7ab9491eef62a08a394c80b0c35d65a61bafa34a27dd9f2`.
+Review [the owner packet](docs/m3-review.md),
+[criterion ledger](docs/evidence/m3-criteria.json) and
+[checksum-verifying install command](docs/candidate-8-install.md).
+
+Fresh final checks passed: 175 Go top-level /338 events (one optional existing-OBS
+skip), 121 Python, 19 Node, vet/typecheck/build, zero Go/npm findings, reproducible
+runtime/updater and payload hashes; seven actual-package browser flows; pinned
+Decky 3.3.1 paired install/update/repair/uninstall and old4/6 bootstrap fixtures;
+11 site tests/40 viewports; three native OBS30.2.3 suites covering capture,
+actual moving/audible recording/replay/profiles/live health/hotplug/media/idle,
+repeated stream restarts and generated/manual password recovery. Six binaries
+compiled only. file:// was unavailable by browser policy; offline HTTP passed.
+CI executed zero steps due to billing lock. Real Deck/OBS33/Flatpak/Gamescope/
+AMD/controller/provider/adoption, human review and M2 identity/publication gates
+remain open. No source merges, issue closures, releases, deployments or spending.
+
+Immutable review artifacts are on orphan commit
+`9ad051ecbb41df92c723a54bdfb6aaaeb1097898` at
+`artifacts/m3-deck8-review`; never merge its tree into source. All36 public files
+were independently downloaded and matched, including internal runtime/updater
+payloads. Evidence-only follow-ups do not rebuild/relabel the qualified package
+or qualify their newer revisions. Historical candidate7 remains unchanged;
+failed deccefd/1fe5ec1 attempts are explicit superseded receipts, not passes.
+
 ## Active: authorized Milestone 3 streaming features, excluding #51
 
 On 2026-11-13 the owner explicitly requested implementation of #47, #24, #48,

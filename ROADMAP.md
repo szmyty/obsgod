@@ -2,7 +2,8 @@
 
 Updated 2026-11-13. **Milestone 2 source PRs #52–#57 are merged; target/CI and
 owner publication acceptance remain open. Milestone 3 features #47/#24/#48/#49/#50
-are implementation-authorized; #51 is excluded.** See the
+are prepared in draft PRs #58–#60 with available local checks passed; #51 is
+excluded. Device/CI/review acceptance remains open.** See the
 [M3 implementation ledger](docs/milestone-3.md).
 The organization, final product name, domain and payment destination remain TBD.
 **Decky Stream** is the owner-selected working display name. Final identity and
