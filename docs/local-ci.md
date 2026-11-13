@@ -34,6 +34,13 @@ The launcher provides the portable directory/cache intent through `--state` and
 explicit flags; it does not replace pinned tools or clear existing settings.
 No other repository or user-level `.actrc` is modified.
 
+The [2026-11-13 audit](../audits/local-act-2026-11-13.md) retains two complete
+local sequences and reports at exact source cf12abe6. It also demonstrates
+[#68](https://github.com/szmyty/obsgod/issues/68): ACT can create root-owned
+generated frontend output that blocks a later normal-user build. Keep that
+development postcondition separate from passing workflow jobs; do not repair it
+by recursively changing checkout ownership or disabling production root guards.
+
 Keep logs private while running jobs. Build a consolidated report for one exact
 source revision after execution:
 

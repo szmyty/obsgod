@@ -1,0 +1,4405 @@
+{
+  "counts": {
+    "local_matrix": {
+      "passed": 6
+    },
+    "open_failure_groups": 1,
+    "raw_results": {
+      "failed": 1,
+      "passed": 13
+    },
+    "run_statuses": {
+      "passed": 13,
+      "unavailable": 1
+    }
+  },
+  "evidence_errors": [],
+  "excluded_other_revision_receipts": [],
+  "external_gates": [
+    {
+      "member": "dependency-review (real PR/provider)",
+      "raw_results": [
+        "failed"
+      ],
+      "reason": "PR static lint is separate; a local/synthetic event does not establish provider acceptance.",
+      "receipts": [
+        "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T233019Z-dependency-review-live-refs.json"
+      ],
+      "status": "unavailable"
+    },
+    {
+      "member": "native Windows 2025",
+      "reason": "Not established by these Linux ACT receipts.",
+      "status": "unrun"
+    },
+    {
+      "member": "native macOS 15",
+      "reason": "Not established by these Linux ACT receipts.",
+      "status": "unrun"
+    },
+    {
+      "member": "Linux arm64 runtime",
+      "reason": "Not established by these Linux ACT receipts.",
+      "status": "unrun"
+    },
+    {
+      "member": "actual Steam Deck/Flatpak/Gamescope/controller/audio",
+      "reason": "Not established by these Linux ACT receipts.",
+      "status": "unrun"
+    },
+    {
+      "member": "provider viewer reception",
+      "reason": "Not established by these Linux ACT receipts.",
+      "status": "unrun"
+    },
+    {
+      "member": "hosted GitHub CI/reviews/artifact delivery",
+      "reason": "Not established by these Linux ACT receipts.",
+      "status": "unrun"
+    }
+  ],
+  "failure_groups": [
+    {
+      "availability": "unavailable",
+      "category": "provider_gate",
+      "disposition": "open",
+      "evidence": [
+        {
+          "diagnostics": [
+            {
+              "line": 17,
+              "message": "\u2757  ::error::Dependency review is not supported on this repository. Please ensure that Dependency graph is enabled, see https://github.com/szmyty/obsgod/settings/security_analysis",
+              "step": "Review dependency changes against GitHub's advisory database"
+            }
+          ],
+          "line": 18,
+          "log": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T233019Z-dependency-review-live-refs.log",
+          "log_sha256": "e44830551402699dfaa3220c5bf1bdf40793dd71db8c984956bcc2a449acc723",
+          "receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T233019Z-dependency-review-live-refs.json"
+        }
+      ],
+      "fingerprint": "da372a74afa565da0325a3ef183041864b3f8648a584b402bfe79f7705f95da0",
+      "next_steps": [
+        "Confirm a clean checkout of cf12abe6c620dcbea3b806d1aa63a4715adea26a.",
+        "Restore the repository's real dependency-review/graph/API capability with its owner; rerun the real PR check. Synthetic act cannot replace it.",
+        "Compare new evidence without overwriting these receipts; review private logs before sharing."
+      ],
+      "occurrences": [
+        {
+          "exit_code": 1,
+          "line": 18,
+          "recorded_result": "unavailable",
+          "run": "20261113T233019Z-dependency-review-live-refs",
+          "step": "Main Review dependency changes against GitHub's advisory database"
+        }
+      ],
+      "raw_result": "failed",
+      "reproduction": {
+        "captured_command_requires_context_review": true,
+        "command": [
+          "/workspace/.obsgod-tools/pkg/bin/act",
+          "--directory",
+          "/workspace/obsgod",
+          "--bind",
+          "--env-file",
+          "/dev/null",
+          "--secret-file",
+          "/dev/null",
+          "--input-file",
+          "/dev/null",
+          "--container-daemon-socket",
+          "/var/run/docker.sock",
+          "--network",
+          "bridge",
+          "--concurrent-jobs",
+          "1",
+          "--container-options",
+          "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+          "--action-cache-path",
+          "/workspace/.obsgod-tools/completion/act/actions",
+          "--artifact-server-path",
+          "/workspace/.obsgod-tools/completion/act/artifacts",
+          "--artifact-server-addr",
+          "172.26.91.249",
+          "--artifact-server-port",
+          "34567",
+          "--env",
+          "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+          "--env",
+          "NODE_USE_ENV_PROXY=1",
+          "--env",
+          "SSL_CERT_FILE=/run/obsgod-ca.pem",
+          "--env",
+          "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+          "--env",
+          "PIP_CERT=/run/obsgod-ca.pem",
+          "--env",
+          "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+          "--env",
+          "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+          "--env",
+          "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+          "--local-repository",
+          "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+          "--local-repository",
+          "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+          "--local-repository",
+          "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+          "--local-repository",
+          "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+          "--local-repository",
+          "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+          "--local-repository",
+          "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "--local-repository",
+          "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+          "--env",
+          "HTTP_PROXY=[injected]",
+          "--env",
+          "HTTPS_PROXY=[injected]",
+          "--env",
+          "NO_PROXY=[injected]",
+          "--env",
+          "http_proxy=[injected]",
+          "--env",
+          "https_proxy=[injected]",
+          "--env",
+          "no_proxy=[injected]",
+          "pull_request",
+          "-W",
+          ".github/workflows/lint.yml",
+          "-j",
+          "dependency-review",
+          "--eventpath",
+          "/workspace/.obsgod-tools/completion/act/cf12abe6-live-commit-pr-fixture.json"
+        ],
+        "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a"
+      },
+      "title": "dependency-review: Main Review dependency changes against GitHub's advisory database"
+    }
+  ],
+  "limitations": [
+    "Only verified adjacent logs are parsed. Counts describe observed events/summaries, not unlogged tests.",
+    "Missing legacy provenance hashes remain null; current files do not reconstruct historical binaries/configuration.",
+    "Passed-job error text may be an expected negative control: it remains diagnostic, not a failure finding.",
+    "Private logs/reports require human review before sharing. No issue, provider action or publication is performed."
+  ],
+  "local_matrix": [
+    {
+      "action": "build",
+      "event": "push",
+      "job": "build",
+      "raw_result": "passed",
+      "reason": null,
+      "selected_receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T231857Z-build.json",
+      "status": "passed",
+      "workflow": "build.yml"
+    },
+    {
+      "action": "coverage",
+      "event": "push",
+      "job": "coverage",
+      "raw_result": "passed",
+      "reason": null,
+      "selected_receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T231935Z-coverage.json",
+      "status": "passed",
+      "workflow": "coverage.yml"
+    },
+    {
+      "action": "lint",
+      "event": "push",
+      "job": "golangci",
+      "raw_result": "passed",
+      "reason": null,
+      "selected_receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T231812Z-lint.json",
+      "status": "passed",
+      "workflow": "lint.yml"
+    },
+    {
+      "action": "snapshot",
+      "event": "push",
+      "job": "goreleaser",
+      "raw_result": "passed",
+      "reason": null,
+      "selected_receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T232013Z-snapshot.json",
+      "status": "passed",
+      "workflow": "goreleaser.yml"
+    },
+    {
+      "action": "docs",
+      "event": "workflow_dispatch",
+      "job": "build-preview",
+      "raw_result": "passed",
+      "reason": null,
+      "selected_receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T232106Z-docs.json",
+      "status": "passed",
+      "workflow": "docs-preview.yml"
+    },
+    {
+      "action": "candidate",
+      "event": "workflow_dispatch",
+      "job": "candidate",
+      "raw_result": "passed",
+      "reason": null,
+      "selected_receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T232124Z-candidate.json",
+      "status": "passed",
+      "workflow": "steam-deck.yml"
+    }
+  ],
+  "local_result": "passed",
+  "matrix_definition": {
+    "jobs": [
+      "build",
+      "coverage",
+      "lint",
+      "snapshot",
+      "docs",
+      "candidate"
+    ],
+    "path": "scripts/local-ci.py",
+    "sha256": "de344f1ecf8153b639f251895331a247efc6be4f8bd0d18a8192d9f2ff0ca659"
+  },
+  "overall_result": "partial",
+  "pr_static_runs": [
+    "20261113T232924Z-lint"
+  ],
+  "reporter_sha256": "8b15aeb327fddd1685864e664797bddef0568bcf4f3804dead935bc59ab3d02c",
+  "result": "partial",
+  "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+  "runs": [
+    {
+      "action": "lint",
+      "channel": "local",
+      "command": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "push",
+        "-W",
+        ".github/workflows/lint.yml",
+        "-j",
+        "golangci"
+      ],
+      "command_sha256": "9f77181a53169f001614279e686bcab9ebfb1328c14fa9f5f3dd1b4c53409e7a",
+      "event": "push",
+      "exit_code": 0,
+      "id": "20261113T223849Z-lint",
+      "integrity": "verified",
+      "log": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T223849Z-lint.log",
+      "log_sha256": "35ce4720dc25d6891561c54514b93c6c3dc9dd7da5c19ba2f396e8c835abeb7e",
+      "observations": {
+        "count_scope": "Observed log events/summaries only; missing test-level output is not a zero-test proof.",
+        "counts": {
+          "act_steps": {
+            "passed": 9
+          },
+          "go_package_events": {},
+          "go_test_events": {},
+          "records": {
+            "json": 122
+          }
+        },
+        "diagnostics": [],
+        "events": [
+          {
+            "kind": "act_step",
+            "line": 7,
+            "status": "started",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 13,
+            "status": "passed",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 16,
+            "status": "started",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 17,
+            "status": "passed",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 18,
+            "status": "started",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 89,
+            "status": "passed",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 94,
+            "status": "started",
+            "step": "Main Install pinned staticcheck"
+          },
+          {
+            "kind": "act_step",
+            "line": 96,
+            "status": "passed",
+            "step": "Main Install pinned staticcheck"
+          },
+          {
+            "kind": "act_step",
+            "line": 97,
+            "status": "started",
+            "step": "Main Formatting"
+          },
+          {
+            "kind": "act_step",
+            "line": 99,
+            "status": "passed",
+            "step": "Main Formatting"
+          },
+          {
+            "kind": "act_step",
+            "line": 100,
+            "status": "started",
+            "step": "Main go vet ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 102,
+            "status": "passed",
+            "step": "Main go vet ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 103,
+            "status": "started",
+            "step": "Main staticcheck ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 105,
+            "status": "passed",
+            "step": "Main staticcheck ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 106,
+            "status": "started",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 118,
+            "status": "passed",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 119,
+            "status": "started",
+            "step": "Complete job"
+          },
+          {
+            "kind": "act_step",
+            "line": 121,
+            "status": "passed",
+            "step": "Complete job"
+          }
+        ],
+        "events_truncated": 0,
+        "failed_steps": [],
+        "summaries": []
+      },
+      "provenance": {
+        "act": "act version 0.2.97",
+        "act_binary_sha256": "c4d4728b7375fad11980456249edeb3a4ca48ba4e785cb8100ad14bd53e77056",
+        "action_sources": [
+          {
+            "archive_sha256": "0f48a50cf2edeea3d6e270f8dae645529128ca8b2954993891a2fb8f7b16145a",
+            "git_tree": "f8a7b72dc00648d050099727d25ca92a43ad1162",
+            "repository": "actions/checkout",
+            "revision": "11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "archive_sha256": "21dc27499512507113532bb567b3febc05616b1db099ffd3daa1fbc39843d88a",
+            "git_tree": "fe066c3996066f90baea9d43bfb45dc9eaa47cea",
+            "repository": "actions/dependency-review-action",
+            "revision": "a1d282b36b6f3519aa1f3fc636f609c47dddb294"
+          },
+          {
+            "archive_sha256": "30852e93cbdf87f3cecc3927dd658a750c7b0c285c1188962db29fc59431a2df",
+            "git_tree": "f094f548eefc307436b8d9373c45ce306837e0d5",
+            "repository": "actions/setup-go",
+            "revision": "40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "archive_sha256": "8897425776cbef7ddfca2275e536ecc0c26b313161de2235c5aa9fda8ce961fc",
+            "git_tree": "6e2fefae7f597aebce691c980b27ec6381e493e2",
+            "repository": "actions/setup-node",
+            "revision": "49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "archive_sha256": "6318d936518770673c9d105bc2da2046fd7b7e49532ed8c2db14325465325a09",
+            "git_tree": "568c6310706725a8b725497dbe6b3b909cbcf6cd",
+            "repository": "actions/setup-python",
+            "revision": "a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "archive_sha256": "b7e8bdaab718e6bd4b78925b8880a96bfc0272338005017453e24ab3f83149d0",
+            "git_tree": "90fba5b2fb462e7dd5b3b810757b73327d2d66bc",
+            "repository": "actions/upload-artifact",
+            "revision": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+          },
+          {
+            "archive_sha256": "de1ec184f6c44509496eeb771c0dfb9e363e0cb2e64bd034deb36316f1704233",
+            "git_tree": "6ca237a43234c9d102a89c03f3c2d7857c2e1b0a",
+            "repository": "goreleaser/goreleaser-action",
+            "revision": "e435ccd777264be153ace6237001ef4d979d3a7a"
+          }
+        ],
+        "actrc_sha256": "66ca1584712ebc7f0ea9c02c9a5cec6f5bbd3f4dba2d150bdce982a0da2bb612",
+        "launcher_sha256": "de344f1ecf8153b639f251895331a247efc6be4f8bd0d18a8192d9f2ff0ca659",
+        "log_format": "jsonl-with-text-fallback",
+        "log_record_counts": {
+          "json": 122,
+          "text": 0
+        },
+        "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+        "source_tree": "d24d5435af64400da8bb665714b908cbbe638f7c",
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "workflow_sha256": {
+          "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+          "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+          "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+          "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+          "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+          "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+        }
+      },
+      "qualifies_clean_source": true,
+      "raw_result": "passed",
+      "receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T223849Z-lint.json",
+      "receipt_sha256": "d98a31cb3d334a3d79120e9f5832c427c0459bbc432c7263be866705f0af5bcf",
+      "recorded_result": "passed",
+      "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+      "runner_digest_sha256": "19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "source_clean": true,
+      "started_utc": "20261113T223849Z",
+      "status": "passed"
+    },
+    {
+      "action": "build",
+      "channel": "local",
+      "command": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "push",
+        "-W",
+        ".github/workflows/build.yml",
+        "-j",
+        "build",
+        "--matrix",
+        "os:ubuntu-24.04"
+      ],
+      "command_sha256": "7ee0d6b3d39acc2ba83560ea7041373b48322edd160ce1ae07a6ec277d42a6fa",
+      "event": "push",
+      "exit_code": 0,
+      "id": "20261113T223942Z-build",
+      "integrity": "verified",
+      "log": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T223942Z-build.log",
+      "log_sha256": "4581628ef6af76c203d7e74091ef32713e439f7909ac604cbc0cd0c53f42fd61",
+      "observations": {
+        "count_scope": "Observed log events/summaries only; missing test-level output is not a zero-test proof.",
+        "counts": {
+          "act_steps": {
+            "passed": 8
+          },
+          "go_package_events": {
+            "passed": 8
+          },
+          "go_test_events": {},
+          "records": {
+            "json": 131
+          }
+        },
+        "diagnostics": [],
+        "events": [
+          {
+            "kind": "act_step",
+            "line": 3,
+            "status": "started",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 9,
+            "status": "passed",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 13,
+            "status": "started",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 14,
+            "status": "passed",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 15,
+            "status": "started",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 86,
+            "status": "passed",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 91,
+            "status": "started",
+            "step": "Main go mod download"
+          },
+          {
+            "kind": "act_step",
+            "line": 93,
+            "status": "passed",
+            "step": "Main go mod download"
+          },
+          {
+            "kind": "act_step",
+            "line": 94,
+            "status": "started",
+            "step": "Main go build -trimpath -v ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 99,
+            "status": "passed",
+            "step": "Main go build -trimpath -v ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 100,
+            "status": "started",
+            "step": "Main go test ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 114,
+            "status": "passed",
+            "step": "Main go test ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 115,
+            "status": "started",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 127,
+            "status": "passed",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 128,
+            "status": "started",
+            "step": "Complete job"
+          },
+          {
+            "kind": "act_step",
+            "line": 130,
+            "status": "passed",
+            "step": "Complete job"
+          }
+        ],
+        "events_truncated": 0,
+        "failed_steps": [],
+        "summaries": []
+      },
+      "provenance": {
+        "act": "act version 0.2.97",
+        "act_binary_sha256": "c4d4728b7375fad11980456249edeb3a4ca48ba4e785cb8100ad14bd53e77056",
+        "action_sources": [
+          {
+            "archive_sha256": "0f48a50cf2edeea3d6e270f8dae645529128ca8b2954993891a2fb8f7b16145a",
+            "git_tree": "f8a7b72dc00648d050099727d25ca92a43ad1162",
+            "repository": "actions/checkout",
+            "revision": "11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "archive_sha256": "21dc27499512507113532bb567b3febc05616b1db099ffd3daa1fbc39843d88a",
+            "git_tree": "fe066c3996066f90baea9d43bfb45dc9eaa47cea",
+            "repository": "actions/dependency-review-action",
+            "revision": "a1d282b36b6f3519aa1f3fc636f609c47dddb294"
+          },
+          {
+            "archive_sha256": "30852e93cbdf87f3cecc3927dd658a750c7b0c285c1188962db29fc59431a2df",
+            "git_tree": "f094f548eefc307436b8d9373c45ce306837e0d5",
+            "repository": "actions/setup-go",
+            "revision": "40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "archive_sha256": "8897425776cbef7ddfca2275e536ecc0c26b313161de2235c5aa9fda8ce961fc",
+            "git_tree": "6e2fefae7f597aebce691c980b27ec6381e493e2",
+            "repository": "actions/setup-node",
+            "revision": "49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "archive_sha256": "6318d936518770673c9d105bc2da2046fd7b7e49532ed8c2db14325465325a09",
+            "git_tree": "568c6310706725a8b725497dbe6b3b909cbcf6cd",
+            "repository": "actions/setup-python",
+            "revision": "a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "archive_sha256": "b7e8bdaab718e6bd4b78925b8880a96bfc0272338005017453e24ab3f83149d0",
+            "git_tree": "90fba5b2fb462e7dd5b3b810757b73327d2d66bc",
+            "repository": "actions/upload-artifact",
+            "revision": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+          },
+          {
+            "archive_sha256": "de1ec184f6c44509496eeb771c0dfb9e363e0cb2e64bd034deb36316f1704233",
+            "git_tree": "6ca237a43234c9d102a89c03f3c2d7857c2e1b0a",
+            "repository": "goreleaser/goreleaser-action",
+            "revision": "e435ccd777264be153ace6237001ef4d979d3a7a"
+          }
+        ],
+        "actrc_sha256": "66ca1584712ebc7f0ea9c02c9a5cec6f5bbd3f4dba2d150bdce982a0da2bb612",
+        "launcher_sha256": "de344f1ecf8153b639f251895331a247efc6be4f8bd0d18a8192d9f2ff0ca659",
+        "log_format": "jsonl-with-text-fallback",
+        "log_record_counts": {
+          "json": 131,
+          "text": 0
+        },
+        "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+        "source_tree": "d24d5435af64400da8bb665714b908cbbe638f7c",
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "workflow_sha256": {
+          "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+          "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+          "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+          "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+          "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+          "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+        }
+      },
+      "qualifies_clean_source": true,
+      "raw_result": "passed",
+      "receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T223942Z-build.json",
+      "receipt_sha256": "9d381f337c317df1aac3273d507e2d5283e07c690244ec12a6f219bc067c32ab",
+      "recorded_result": "passed",
+      "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+      "runner_digest_sha256": "19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "source_clean": true,
+      "started_utc": "20261113T223942Z",
+      "status": "passed"
+    },
+    {
+      "action": "coverage",
+      "channel": "local",
+      "command": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "push",
+        "-W",
+        ".github/workflows/coverage.yml",
+        "-j",
+        "coverage"
+      ],
+      "command_sha256": "96bf3b88bb431b8bde96cb5534e396242784f075d6142c5b8f749c0b3bcc465b",
+      "event": "push",
+      "exit_code": 0,
+      "id": "20261113T224018Z-coverage",
+      "integrity": "verified",
+      "log": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T224018Z-coverage.log",
+      "log_sha256": "58d72e3c35332f1503477e934e7186915ba68d3f9b495d21bc753bef78a854e2",
+      "observations": {
+        "count_scope": "Observed log events/summaries only; missing test-level output is not a zero-test proof.",
+        "counts": {
+          "act_steps": {
+            "passed": 7
+          },
+          "go_package_events": {
+            "passed": 8
+          },
+          "go_test_events": {},
+          "records": {
+            "json": 656
+          }
+        },
+        "diagnostics": [],
+        "events": [
+          {
+            "kind": "act_step",
+            "line": 3,
+            "status": "started",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 9,
+            "status": "passed",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 14,
+            "status": "started",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 15,
+            "status": "passed",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 16,
+            "status": "started",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 87,
+            "status": "passed",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 92,
+            "status": "started",
+            "step": "Main Race and coverage"
+          },
+          {
+            "kind": "act_step",
+            "line": 616,
+            "status": "passed",
+            "step": "Main Race and coverage"
+          },
+          {
+            "kind": "act_step",
+            "line": 617,
+            "status": "started",
+            "step": "Main Retain coverage baseline for review"
+          },
+          {
+            "kind": "act_step",
+            "line": 636,
+            "status": "passed",
+            "step": "Main Retain coverage baseline for review"
+          },
+          {
+            "kind": "act_step",
+            "line": 640,
+            "status": "started",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 652,
+            "status": "passed",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 653,
+            "status": "started",
+            "step": "Complete job"
+          },
+          {
+            "kind": "act_step",
+            "line": 655,
+            "status": "passed",
+            "step": "Complete job"
+          }
+        ],
+        "events_truncated": 0,
+        "failed_steps": [],
+        "summaries": []
+      },
+      "provenance": {
+        "act": "act version 0.2.97",
+        "act_binary_sha256": "c4d4728b7375fad11980456249edeb3a4ca48ba4e785cb8100ad14bd53e77056",
+        "action_sources": [
+          {
+            "archive_sha256": "0f48a50cf2edeea3d6e270f8dae645529128ca8b2954993891a2fb8f7b16145a",
+            "git_tree": "f8a7b72dc00648d050099727d25ca92a43ad1162",
+            "repository": "actions/checkout",
+            "revision": "11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "archive_sha256": "21dc27499512507113532bb567b3febc05616b1db099ffd3daa1fbc39843d88a",
+            "git_tree": "fe066c3996066f90baea9d43bfb45dc9eaa47cea",
+            "repository": "actions/dependency-review-action",
+            "revision": "a1d282b36b6f3519aa1f3fc636f609c47dddb294"
+          },
+          {
+            "archive_sha256": "30852e93cbdf87f3cecc3927dd658a750c7b0c285c1188962db29fc59431a2df",
+            "git_tree": "f094f548eefc307436b8d9373c45ce306837e0d5",
+            "repository": "actions/setup-go",
+            "revision": "40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "archive_sha256": "8897425776cbef7ddfca2275e536ecc0c26b313161de2235c5aa9fda8ce961fc",
+            "git_tree": "6e2fefae7f597aebce691c980b27ec6381e493e2",
+            "repository": "actions/setup-node",
+            "revision": "49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "archive_sha256": "6318d936518770673c9d105bc2da2046fd7b7e49532ed8c2db14325465325a09",
+            "git_tree": "568c6310706725a8b725497dbe6b3b909cbcf6cd",
+            "repository": "actions/setup-python",
+            "revision": "a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "archive_sha256": "b7e8bdaab718e6bd4b78925b8880a96bfc0272338005017453e24ab3f83149d0",
+            "git_tree": "90fba5b2fb462e7dd5b3b810757b73327d2d66bc",
+            "repository": "actions/upload-artifact",
+            "revision": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+          },
+          {
+            "archive_sha256": "de1ec184f6c44509496eeb771c0dfb9e363e0cb2e64bd034deb36316f1704233",
+            "git_tree": "6ca237a43234c9d102a89c03f3c2d7857c2e1b0a",
+            "repository": "goreleaser/goreleaser-action",
+            "revision": "e435ccd777264be153ace6237001ef4d979d3a7a"
+          }
+        ],
+        "actrc_sha256": "66ca1584712ebc7f0ea9c02c9a5cec6f5bbd3f4dba2d150bdce982a0da2bb612",
+        "launcher_sha256": "de344f1ecf8153b639f251895331a247efc6be4f8bd0d18a8192d9f2ff0ca659",
+        "log_format": "jsonl-with-text-fallback",
+        "log_record_counts": {
+          "json": 656,
+          "text": 0
+        },
+        "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+        "source_tree": "d24d5435af64400da8bb665714b908cbbe638f7c",
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "workflow_sha256": {
+          "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+          "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+          "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+          "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+          "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+          "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+        }
+      },
+      "qualifies_clean_source": true,
+      "raw_result": "passed",
+      "receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T224018Z-coverage.json",
+      "receipt_sha256": "7940bd3397c3f1f38b941d1599dcd94be98361b42606a7e4d9bd27f7e260f92e",
+      "recorded_result": "passed",
+      "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+      "runner_digest_sha256": "19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "source_clean": true,
+      "started_utc": "20261113T224018Z",
+      "status": "passed"
+    },
+    {
+      "action": "snapshot",
+      "channel": "local",
+      "command": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "push",
+        "-W",
+        ".github/workflows/goreleaser.yml",
+        "-j",
+        "goreleaser"
+      ],
+      "command_sha256": "82abfec15e8355e12f78ed0266eb09594a0ba77d19d26764c278707b871480ef",
+      "event": "push",
+      "exit_code": 0,
+      "id": "20261113T224054Z-snapshot",
+      "integrity": "verified",
+      "log": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T224054Z-snapshot.log",
+      "log_sha256": "5c3919ac168cd1b366e0a698d17fdc497240d2af7703ffb70ef15cb28cd5a031",
+      "observations": {
+        "count_scope": "Observed log events/summaries only; missing test-level output is not a zero-test proof.",
+        "counts": {
+          "act_steps": {
+            "passed": 6
+          },
+          "go_package_events": {},
+          "go_test_events": {},
+          "records": {
+            "json": 207
+          }
+        },
+        "diagnostics": [],
+        "events": [
+          {
+            "kind": "act_step",
+            "line": 3,
+            "status": "started",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 9,
+            "status": "passed",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 14,
+            "status": "started",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 15,
+            "status": "passed",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 16,
+            "status": "started",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 87,
+            "status": "passed",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 92,
+            "status": "started",
+            "step": "Main Non-publishing release configuration and snapshot"
+          },
+          {
+            "kind": "act_step",
+            "line": 188,
+            "status": "passed",
+            "step": "Main Non-publishing release configuration and snapshot"
+          },
+          {
+            "kind": "act_step",
+            "line": 191,
+            "status": "started",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 203,
+            "status": "passed",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 204,
+            "status": "started",
+            "step": "Complete job"
+          },
+          {
+            "kind": "act_step",
+            "line": 206,
+            "status": "passed",
+            "step": "Complete job"
+          }
+        ],
+        "events_truncated": 0,
+        "failed_steps": [],
+        "summaries": []
+      },
+      "provenance": {
+        "act": "act version 0.2.97",
+        "act_binary_sha256": "c4d4728b7375fad11980456249edeb3a4ca48ba4e785cb8100ad14bd53e77056",
+        "action_sources": [
+          {
+            "archive_sha256": "0f48a50cf2edeea3d6e270f8dae645529128ca8b2954993891a2fb8f7b16145a",
+            "git_tree": "f8a7b72dc00648d050099727d25ca92a43ad1162",
+            "repository": "actions/checkout",
+            "revision": "11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "archive_sha256": "21dc27499512507113532bb567b3febc05616b1db099ffd3daa1fbc39843d88a",
+            "git_tree": "fe066c3996066f90baea9d43bfb45dc9eaa47cea",
+            "repository": "actions/dependency-review-action",
+            "revision": "a1d282b36b6f3519aa1f3fc636f609c47dddb294"
+          },
+          {
+            "archive_sha256": "30852e93cbdf87f3cecc3927dd658a750c7b0c285c1188962db29fc59431a2df",
+            "git_tree": "f094f548eefc307436b8d9373c45ce306837e0d5",
+            "repository": "actions/setup-go",
+            "revision": "40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "archive_sha256": "8897425776cbef7ddfca2275e536ecc0c26b313161de2235c5aa9fda8ce961fc",
+            "git_tree": "6e2fefae7f597aebce691c980b27ec6381e493e2",
+            "repository": "actions/setup-node",
+            "revision": "49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "archive_sha256": "6318d936518770673c9d105bc2da2046fd7b7e49532ed8c2db14325465325a09",
+            "git_tree": "568c6310706725a8b725497dbe6b3b909cbcf6cd",
+            "repository": "actions/setup-python",
+            "revision": "a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "archive_sha256": "b7e8bdaab718e6bd4b78925b8880a96bfc0272338005017453e24ab3f83149d0",
+            "git_tree": "90fba5b2fb462e7dd5b3b810757b73327d2d66bc",
+            "repository": "actions/upload-artifact",
+            "revision": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+          },
+          {
+            "archive_sha256": "de1ec184f6c44509496eeb771c0dfb9e363e0cb2e64bd034deb36316f1704233",
+            "git_tree": "6ca237a43234c9d102a89c03f3c2d7857c2e1b0a",
+            "repository": "goreleaser/goreleaser-action",
+            "revision": "e435ccd777264be153ace6237001ef4d979d3a7a"
+          }
+        ],
+        "actrc_sha256": "66ca1584712ebc7f0ea9c02c9a5cec6f5bbd3f4dba2d150bdce982a0da2bb612",
+        "launcher_sha256": "de344f1ecf8153b639f251895331a247efc6be4f8bd0d18a8192d9f2ff0ca659",
+        "log_format": "jsonl-with-text-fallback",
+        "log_record_counts": {
+          "json": 207,
+          "text": 0
+        },
+        "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+        "source_tree": "d24d5435af64400da8bb665714b908cbbe638f7c",
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "workflow_sha256": {
+          "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+          "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+          "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+          "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+          "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+          "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+        }
+      },
+      "qualifies_clean_source": true,
+      "raw_result": "passed",
+      "receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T224054Z-snapshot.json",
+      "receipt_sha256": "1613c81be8a4e4a0fbb952ada6d3c18942ed1a6ad84cb4252811bc2d89bbf470",
+      "recorded_result": "passed",
+      "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+      "runner_digest_sha256": "19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "source_clean": true,
+      "started_utc": "20261113T224054Z",
+      "status": "passed"
+    },
+    {
+      "action": "docs",
+      "channel": "local",
+      "command": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "workflow_dispatch",
+        "-W",
+        ".github/workflows/docs-preview.yml",
+        "-j",
+        "build-preview"
+      ],
+      "command_sha256": "a5ffafae54075c976435614dfd3a5607c2e17b47a125b4ed83b7d2d205a913c3",
+      "event": "workflow_dispatch",
+      "exit_code": 0,
+      "id": "20261113T224148Z-docs",
+      "integrity": "verified",
+      "log": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T224148Z-docs.log",
+      "log_sha256": "723a17f0941eaef33f06090b2f176176e58e6cd04194c9858e2c18fa44c167d4",
+      "observations": {
+        "count_scope": "Observed log events/summaries only; missing test-level output is not a zero-test proof.",
+        "counts": {
+          "act_steps": {
+            "passed": 9
+          },
+          "go_package_events": {},
+          "go_test_events": {},
+          "records": {
+            "json": 112
+          }
+        },
+        "diagnostics": [],
+        "events": [
+          {
+            "kind": "act_step",
+            "line": 3,
+            "status": "started",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 9,
+            "status": "passed",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 16,
+            "status": "started",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 17,
+            "status": "passed",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 18,
+            "status": "started",
+            "step": "Main actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "kind": "act_step",
+            "line": 27,
+            "status": "passed",
+            "step": "Main actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "kind": "act_step",
+            "line": 38,
+            "status": "started",
+            "step": "Main actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "kind": "act_step",
+            "line": 52,
+            "status": "passed",
+            "step": "Main actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "kind": "act_step",
+            "line": 55,
+            "status": "started",
+            "step": "Main Check shared funding metadata and build offline preview"
+          },
+          {
+            "kind": "act_step",
+            "line": 77,
+            "status": "passed",
+            "step": "Main Check shared funding metadata and build offline preview"
+          },
+          {
+            "kind": "act_step",
+            "line": 78,
+            "status": "started",
+            "step": "Main Retain preview for review"
+          },
+          {
+            "kind": "act_step",
+            "line": 95,
+            "status": "passed",
+            "step": "Main Retain preview for review"
+          },
+          {
+            "kind": "act_step",
+            "line": 99,
+            "status": "started",
+            "step": "Post actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "kind": "act_step",
+            "line": 103,
+            "status": "passed",
+            "step": "Post actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "kind": "act_step",
+            "line": 104,
+            "status": "started",
+            "step": "Post actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "kind": "act_step",
+            "line": 108,
+            "status": "passed",
+            "step": "Post actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "kind": "act_step",
+            "line": 109,
+            "status": "started",
+            "step": "Complete job"
+          },
+          {
+            "kind": "act_step",
+            "line": 111,
+            "status": "passed",
+            "step": "Complete job"
+          }
+        ],
+        "events_truncated": 0,
+        "failed_steps": [],
+        "summaries": [
+          {
+            "failed": 0,
+            "framework": "python-unittest",
+            "line": 73,
+            "passed": 11,
+            "skipped": 0,
+            "status": "passed",
+            "tests": 11
+          },
+          {
+            "case_count": 11,
+            "framework": "structured-output",
+            "line": 76,
+            "status": "passed"
+          }
+        ]
+      },
+      "provenance": {
+        "act": "act version 0.2.97",
+        "act_binary_sha256": "c4d4728b7375fad11980456249edeb3a4ca48ba4e785cb8100ad14bd53e77056",
+        "action_sources": [
+          {
+            "archive_sha256": "0f48a50cf2edeea3d6e270f8dae645529128ca8b2954993891a2fb8f7b16145a",
+            "git_tree": "f8a7b72dc00648d050099727d25ca92a43ad1162",
+            "repository": "actions/checkout",
+            "revision": "11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "archive_sha256": "21dc27499512507113532bb567b3febc05616b1db099ffd3daa1fbc39843d88a",
+            "git_tree": "fe066c3996066f90baea9d43bfb45dc9eaa47cea",
+            "repository": "actions/dependency-review-action",
+            "revision": "a1d282b36b6f3519aa1f3fc636f609c47dddb294"
+          },
+          {
+            "archive_sha256": "30852e93cbdf87f3cecc3927dd658a750c7b0c285c1188962db29fc59431a2df",
+            "git_tree": "f094f548eefc307436b8d9373c45ce306837e0d5",
+            "repository": "actions/setup-go",
+            "revision": "40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "archive_sha256": "8897425776cbef7ddfca2275e536ecc0c26b313161de2235c5aa9fda8ce961fc",
+            "git_tree": "6e2fefae7f597aebce691c980b27ec6381e493e2",
+            "repository": "actions/setup-node",
+            "revision": "49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "archive_sha256": "6318d936518770673c9d105bc2da2046fd7b7e49532ed8c2db14325465325a09",
+            "git_tree": "568c6310706725a8b725497dbe6b3b909cbcf6cd",
+            "repository": "actions/setup-python",
+            "revision": "a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "archive_sha256": "b7e8bdaab718e6bd4b78925b8880a96bfc0272338005017453e24ab3f83149d0",
+            "git_tree": "90fba5b2fb462e7dd5b3b810757b73327d2d66bc",
+            "repository": "actions/upload-artifact",
+            "revision": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+          },
+          {
+            "archive_sha256": "de1ec184f6c44509496eeb771c0dfb9e363e0cb2e64bd034deb36316f1704233",
+            "git_tree": "6ca237a43234c9d102a89c03f3c2d7857c2e1b0a",
+            "repository": "goreleaser/goreleaser-action",
+            "revision": "e435ccd777264be153ace6237001ef4d979d3a7a"
+          }
+        ],
+        "actrc_sha256": "66ca1584712ebc7f0ea9c02c9a5cec6f5bbd3f4dba2d150bdce982a0da2bb612",
+        "launcher_sha256": "de344f1ecf8153b639f251895331a247efc6be4f8bd0d18a8192d9f2ff0ca659",
+        "log_format": "jsonl-with-text-fallback",
+        "log_record_counts": {
+          "json": 112,
+          "text": 0
+        },
+        "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+        "source_tree": "d24d5435af64400da8bb665714b908cbbe638f7c",
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "workflow_sha256": {
+          "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+          "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+          "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+          "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+          "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+          "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+        }
+      },
+      "qualifies_clean_source": true,
+      "raw_result": "passed",
+      "receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T224148Z-docs.json",
+      "receipt_sha256": "f991ef49ccd9430ec87e34586c151c62c313270f2869bfc738e9d10c84733c33",
+      "recorded_result": "passed",
+      "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+      "runner_digest_sha256": "19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "source_clean": true,
+      "started_utc": "20261113T224148Z",
+      "status": "passed"
+    },
+    {
+      "action": "candidate",
+      "channel": "local",
+      "command": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "workflow_dispatch",
+        "-W",
+        ".github/workflows/steam-deck.yml",
+        "-j",
+        "candidate"
+      ],
+      "command_sha256": "a5da964f6a3dc4045fa36b6a7f8a5520b2a97f5bfbb9f446a2aca2971cc30a83",
+      "event": "workflow_dispatch",
+      "exit_code": 0,
+      "id": "20261113T230426Z-candidate",
+      "integrity": "verified",
+      "log": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T230426Z-candidate.log",
+      "log_sha256": "143da7781c2b4f6d19a3769e6969ccae999c1177f0770cb31ea195dcec283510",
+      "observations": {
+        "count_scope": "Observed log events/summaries only; missing test-level output is not a zero-test proof.",
+        "counts": {
+          "act_steps": {
+            "passed": 17
+          },
+          "go_package_events": {
+            "passed": 8
+          },
+          "go_test_events": {},
+          "records": {
+            "json": 1102
+          }
+        },
+        "diagnostics": [],
+        "events": [
+          {
+            "kind": "act_step",
+            "line": 7,
+            "status": "started",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 13,
+            "status": "passed",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 22,
+            "status": "started",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 23,
+            "status": "passed",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 24,
+            "status": "started",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 95,
+            "status": "passed",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 100,
+            "status": "started",
+            "step": "Main actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "kind": "act_step",
+            "line": 114,
+            "status": "passed",
+            "step": "Main actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "kind": "act_step",
+            "line": 117,
+            "status": "started",
+            "step": "Main actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "kind": "act_step",
+            "line": 126,
+            "status": "passed",
+            "step": "Main actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "kind": "act_step",
+            "line": 137,
+            "status": "started",
+            "step": "Main Install pinned development dependencies"
+          },
+          {
+            "kind": "act_step",
+            "line": 574,
+            "status": "passed",
+            "step": "Main Install pinned development dependencies"
+          },
+          {
+            "kind": "act_step",
+            "line": 576,
+            "status": "started",
+            "step": "Main Go protocol, race, static and vulnerability checks"
+          },
+          {
+            "kind": "act_step",
+            "line": 591,
+            "status": "passed",
+            "step": "Main Go protocol, race, static and vulnerability checks"
+          },
+          {
+            "kind": "act_step",
+            "line": 592,
+            "status": "started",
+            "step": "Main Installer, backend and panel checks"
+          },
+          {
+            "kind": "act_step",
+            "line": 842,
+            "status": "passed",
+            "step": "Main Installer, backend and panel checks"
+          },
+          {
+            "kind": "act_step",
+            "line": 843,
+            "status": "started",
+            "step": "Main Package exact candidate twice"
+          },
+          {
+            "kind": "act_step",
+            "line": 927,
+            "status": "passed",
+            "step": "Main Package exact candidate twice"
+          },
+          {
+            "kind": "act_step",
+            "line": 928,
+            "status": "started",
+            "step": "Main Audit actual artifacts and reproduce unsigned supply-chain evidence"
+          },
+          {
+            "kind": "act_step",
+            "line": 932,
+            "status": "passed",
+            "step": "Main Audit actual artifacts and reproduce unsigned supply-chain evidence"
+          },
+          {
+            "kind": "act_step",
+            "line": 933,
+            "status": "started",
+            "step": "Main Actual package browser checks"
+          },
+          {
+            "kind": "act_step",
+            "line": 962,
+            "status": "passed",
+            "step": "Main Actual package browser checks"
+          },
+          {
+            "kind": "act_step",
+            "line": 964,
+            "status": "started",
+            "step": "Main Native audio and app-filtered capture checks"
+          },
+          {
+            "kind": "act_step",
+            "line": 1035,
+            "status": "passed",
+            "step": "Main Native audio and app-filtered capture checks"
+          },
+          {
+            "kind": "act_step",
+            "line": 1036,
+            "status": "started",
+            "step": "Main actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02"
+          },
+          {
+            "kind": "act_step",
+            "line": 1072,
+            "status": "passed",
+            "step": "Main actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02"
+          },
+          {
+            "kind": "act_step",
+            "line": 1076,
+            "status": "started",
+            "step": "Post actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "kind": "act_step",
+            "line": 1080,
+            "status": "passed",
+            "step": "Post actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "kind": "act_step",
+            "line": 1081,
+            "status": "started",
+            "step": "Post actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "kind": "act_step",
+            "line": 1085,
+            "status": "passed",
+            "step": "Post actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "kind": "act_step",
+            "line": 1086,
+            "status": "started",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 1098,
+            "status": "passed",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 1099,
+            "status": "started",
+            "step": "Complete job"
+          },
+          {
+            "kind": "act_step",
+            "line": 1101,
+            "status": "passed",
+            "step": "Complete job"
+          }
+        ],
+        "events_truncated": 0,
+        "failed_steps": [],
+        "summaries": [
+          {
+            "failed": 0,
+            "framework": "python-unittest",
+            "line": 748,
+            "passed": 127,
+            "skipped": 0,
+            "status": "passed",
+            "tests": 127
+          },
+          {
+            "failed": 0,
+            "framework": "python-unittest",
+            "line": 785,
+            "passed": 32,
+            "skipped": 0,
+            "status": "passed",
+            "tests": 32
+          },
+          {
+            "cancelled": 0,
+            "failed": 0,
+            "framework": "node-test",
+            "line": 826,
+            "passed": 30,
+            "skipped": 0,
+            "tests": 30,
+            "todo": 0
+          }
+        ]
+      },
+      "provenance": {
+        "act": "act version 0.2.97",
+        "act_binary_sha256": "c4d4728b7375fad11980456249edeb3a4ca48ba4e785cb8100ad14bd53e77056",
+        "action_sources": [
+          {
+            "archive_sha256": "0f48a50cf2edeea3d6e270f8dae645529128ca8b2954993891a2fb8f7b16145a",
+            "git_tree": "f8a7b72dc00648d050099727d25ca92a43ad1162",
+            "repository": "actions/checkout",
+            "revision": "11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "archive_sha256": "21dc27499512507113532bb567b3febc05616b1db099ffd3daa1fbc39843d88a",
+            "git_tree": "fe066c3996066f90baea9d43bfb45dc9eaa47cea",
+            "repository": "actions/dependency-review-action",
+            "revision": "a1d282b36b6f3519aa1f3fc636f609c47dddb294"
+          },
+          {
+            "archive_sha256": "30852e93cbdf87f3cecc3927dd658a750c7b0c285c1188962db29fc59431a2df",
+            "git_tree": "f094f548eefc307436b8d9373c45ce306837e0d5",
+            "repository": "actions/setup-go",
+            "revision": "40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "archive_sha256": "8897425776cbef7ddfca2275e536ecc0c26b313161de2235c5aa9fda8ce961fc",
+            "git_tree": "6e2fefae7f597aebce691c980b27ec6381e493e2",
+            "repository": "actions/setup-node",
+            "revision": "49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "archive_sha256": "6318d936518770673c9d105bc2da2046fd7b7e49532ed8c2db14325465325a09",
+            "git_tree": "568c6310706725a8b725497dbe6b3b909cbcf6cd",
+            "repository": "actions/setup-python",
+            "revision": "a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "archive_sha256": "b7e8bdaab718e6bd4b78925b8880a96bfc0272338005017453e24ab3f83149d0",
+            "git_tree": "90fba5b2fb462e7dd5b3b810757b73327d2d66bc",
+            "repository": "actions/upload-artifact",
+            "revision": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+          },
+          {
+            "archive_sha256": "de1ec184f6c44509496eeb771c0dfb9e363e0cb2e64bd034deb36316f1704233",
+            "git_tree": "6ca237a43234c9d102a89c03f3c2d7857c2e1b0a",
+            "repository": "goreleaser/goreleaser-action",
+            "revision": "e435ccd777264be153ace6237001ef4d979d3a7a"
+          }
+        ],
+        "actrc_sha256": "66ca1584712ebc7f0ea9c02c9a5cec6f5bbd3f4dba2d150bdce982a0da2bb612",
+        "launcher_sha256": "de344f1ecf8153b639f251895331a247efc6be4f8bd0d18a8192d9f2ff0ca659",
+        "log_format": "jsonl-with-text-fallback",
+        "log_record_counts": {
+          "json": 1102,
+          "text": 0
+        },
+        "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+        "source_tree": "d24d5435af64400da8bb665714b908cbbe638f7c",
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "workflow_sha256": {
+          "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+          "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+          "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+          "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+          "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+          "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+        }
+      },
+      "qualifies_clean_source": true,
+      "raw_result": "passed",
+      "receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T230426Z-candidate.json",
+      "receipt_sha256": "b0bc275a11d963bb846d92c91404fcab6f6024b1d40a99a17819de4d7d739850",
+      "recorded_result": "passed",
+      "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+      "runner_digest_sha256": "19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "source_clean": true,
+      "started_utc": "20261113T230426Z",
+      "status": "passed"
+    },
+    {
+      "action": "lint",
+      "channel": "local",
+      "command": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "push",
+        "-W",
+        ".github/workflows/lint.yml",
+        "-j",
+        "golangci"
+      ],
+      "command_sha256": "9f77181a53169f001614279e686bcab9ebfb1328c14fa9f5f3dd1b4c53409e7a",
+      "event": "push",
+      "exit_code": 0,
+      "id": "20261113T231812Z-lint",
+      "integrity": "verified",
+      "log": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T231812Z-lint.log",
+      "log_sha256": "d07b94c5eec4ac6769476a70c4873a8944676a102954902e008540e5b4cebe50",
+      "observations": {
+        "count_scope": "Observed log events/summaries only; missing test-level output is not a zero-test proof.",
+        "counts": {
+          "act_steps": {
+            "passed": 9
+          },
+          "go_package_events": {},
+          "go_test_events": {},
+          "records": {
+            "json": 119
+          }
+        },
+        "diagnostics": [],
+        "events": [
+          {
+            "kind": "act_step",
+            "line": 4,
+            "status": "started",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 10,
+            "status": "passed",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 13,
+            "status": "started",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 14,
+            "status": "passed",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 15,
+            "status": "started",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 86,
+            "status": "passed",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 91,
+            "status": "started",
+            "step": "Main Install pinned staticcheck"
+          },
+          {
+            "kind": "act_step",
+            "line": 93,
+            "status": "passed",
+            "step": "Main Install pinned staticcheck"
+          },
+          {
+            "kind": "act_step",
+            "line": 94,
+            "status": "started",
+            "step": "Main Formatting"
+          },
+          {
+            "kind": "act_step",
+            "line": 96,
+            "status": "passed",
+            "step": "Main Formatting"
+          },
+          {
+            "kind": "act_step",
+            "line": 97,
+            "status": "started",
+            "step": "Main go vet ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 99,
+            "status": "passed",
+            "step": "Main go vet ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 100,
+            "status": "started",
+            "step": "Main staticcheck ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 102,
+            "status": "passed",
+            "step": "Main staticcheck ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 103,
+            "status": "started",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 115,
+            "status": "passed",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 116,
+            "status": "started",
+            "step": "Complete job"
+          },
+          {
+            "kind": "act_step",
+            "line": 118,
+            "status": "passed",
+            "step": "Complete job"
+          }
+        ],
+        "events_truncated": 0,
+        "failed_steps": [],
+        "summaries": []
+      },
+      "provenance": {
+        "act": "act version 0.2.97",
+        "act_binary_sha256": "c4d4728b7375fad11980456249edeb3a4ca48ba4e785cb8100ad14bd53e77056",
+        "action_sources": [
+          {
+            "archive_sha256": "0f48a50cf2edeea3d6e270f8dae645529128ca8b2954993891a2fb8f7b16145a",
+            "git_tree": "f8a7b72dc00648d050099727d25ca92a43ad1162",
+            "repository": "actions/checkout",
+            "revision": "11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "archive_sha256": "21dc27499512507113532bb567b3febc05616b1db099ffd3daa1fbc39843d88a",
+            "git_tree": "fe066c3996066f90baea9d43bfb45dc9eaa47cea",
+            "repository": "actions/dependency-review-action",
+            "revision": "a1d282b36b6f3519aa1f3fc636f609c47dddb294"
+          },
+          {
+            "archive_sha256": "30852e93cbdf87f3cecc3927dd658a750c7b0c285c1188962db29fc59431a2df",
+            "git_tree": "f094f548eefc307436b8d9373c45ce306837e0d5",
+            "repository": "actions/setup-go",
+            "revision": "40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "archive_sha256": "8897425776cbef7ddfca2275e536ecc0c26b313161de2235c5aa9fda8ce961fc",
+            "git_tree": "6e2fefae7f597aebce691c980b27ec6381e493e2",
+            "repository": "actions/setup-node",
+            "revision": "49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "archive_sha256": "6318d936518770673c9d105bc2da2046fd7b7e49532ed8c2db14325465325a09",
+            "git_tree": "568c6310706725a8b725497dbe6b3b909cbcf6cd",
+            "repository": "actions/setup-python",
+            "revision": "a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "archive_sha256": "b7e8bdaab718e6bd4b78925b8880a96bfc0272338005017453e24ab3f83149d0",
+            "git_tree": "90fba5b2fb462e7dd5b3b810757b73327d2d66bc",
+            "repository": "actions/upload-artifact",
+            "revision": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+          },
+          {
+            "archive_sha256": "de1ec184f6c44509496eeb771c0dfb9e363e0cb2e64bd034deb36316f1704233",
+            "git_tree": "6ca237a43234c9d102a89c03f3c2d7857c2e1b0a",
+            "repository": "goreleaser/goreleaser-action",
+            "revision": "e435ccd777264be153ace6237001ef4d979d3a7a"
+          }
+        ],
+        "actrc_sha256": "66ca1584712ebc7f0ea9c02c9a5cec6f5bbd3f4dba2d150bdce982a0da2bb612",
+        "launcher_sha256": "de344f1ecf8153b639f251895331a247efc6be4f8bd0d18a8192d9f2ff0ca659",
+        "log_format": "jsonl-with-text-fallback",
+        "log_record_counts": {
+          "json": 119,
+          "text": 0
+        },
+        "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+        "source_tree": "d24d5435af64400da8bb665714b908cbbe638f7c",
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "workflow_sha256": {
+          "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+          "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+          "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+          "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+          "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+          "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+        }
+      },
+      "qualifies_clean_source": true,
+      "raw_result": "passed",
+      "receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T231812Z-lint.json",
+      "receipt_sha256": "ae69c249426f15b74b30f9f46ae4196887b1cb14a1bbf3388ef834bc762ebfb8",
+      "recorded_result": "passed",
+      "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+      "runner_digest_sha256": "19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "source_clean": true,
+      "started_utc": "20261113T231812Z",
+      "status": "passed"
+    },
+    {
+      "action": "build",
+      "channel": "local",
+      "command": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "push",
+        "-W",
+        ".github/workflows/build.yml",
+        "-j",
+        "build",
+        "--matrix",
+        "os:ubuntu-24.04"
+      ],
+      "command_sha256": "7ee0d6b3d39acc2ba83560ea7041373b48322edd160ce1ae07a6ec277d42a6fa",
+      "event": "push",
+      "exit_code": 0,
+      "id": "20261113T231857Z-build",
+      "integrity": "verified",
+      "log": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T231857Z-build.log",
+      "log_sha256": "45fff1dcd74f8b47c35bc689cce1cc3feab7a957bd208503adf79a966b8e0be4",
+      "observations": {
+        "count_scope": "Observed log events/summaries only; missing test-level output is not a zero-test proof.",
+        "counts": {
+          "act_steps": {
+            "passed": 8
+          },
+          "go_package_events": {
+            "passed": 8
+          },
+          "go_test_events": {},
+          "records": {
+            "json": 128
+          }
+        },
+        "diagnostics": [],
+        "events": [
+          {
+            "kind": "act_step",
+            "line": 3,
+            "status": "started",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 9,
+            "status": "passed",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 13,
+            "status": "started",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 14,
+            "status": "passed",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 15,
+            "status": "started",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 86,
+            "status": "passed",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 91,
+            "status": "started",
+            "step": "Main go mod download"
+          },
+          {
+            "kind": "act_step",
+            "line": 93,
+            "status": "passed",
+            "step": "Main go mod download"
+          },
+          {
+            "kind": "act_step",
+            "line": 94,
+            "status": "started",
+            "step": "Main go build -trimpath -v ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 96,
+            "status": "passed",
+            "step": "Main go build -trimpath -v ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 97,
+            "status": "started",
+            "step": "Main go test ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 111,
+            "status": "passed",
+            "step": "Main go test ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 112,
+            "status": "started",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 124,
+            "status": "passed",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 125,
+            "status": "started",
+            "step": "Complete job"
+          },
+          {
+            "kind": "act_step",
+            "line": 127,
+            "status": "passed",
+            "step": "Complete job"
+          }
+        ],
+        "events_truncated": 0,
+        "failed_steps": [],
+        "summaries": []
+      },
+      "provenance": {
+        "act": "act version 0.2.97",
+        "act_binary_sha256": "c4d4728b7375fad11980456249edeb3a4ca48ba4e785cb8100ad14bd53e77056",
+        "action_sources": [
+          {
+            "archive_sha256": "0f48a50cf2edeea3d6e270f8dae645529128ca8b2954993891a2fb8f7b16145a",
+            "git_tree": "f8a7b72dc00648d050099727d25ca92a43ad1162",
+            "repository": "actions/checkout",
+            "revision": "11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "archive_sha256": "21dc27499512507113532bb567b3febc05616b1db099ffd3daa1fbc39843d88a",
+            "git_tree": "fe066c3996066f90baea9d43bfb45dc9eaa47cea",
+            "repository": "actions/dependency-review-action",
+            "revision": "a1d282b36b6f3519aa1f3fc636f609c47dddb294"
+          },
+          {
+            "archive_sha256": "30852e93cbdf87f3cecc3927dd658a750c7b0c285c1188962db29fc59431a2df",
+            "git_tree": "f094f548eefc307436b8d9373c45ce306837e0d5",
+            "repository": "actions/setup-go",
+            "revision": "40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "archive_sha256": "8897425776cbef7ddfca2275e536ecc0c26b313161de2235c5aa9fda8ce961fc",
+            "git_tree": "6e2fefae7f597aebce691c980b27ec6381e493e2",
+            "repository": "actions/setup-node",
+            "revision": "49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "archive_sha256": "6318d936518770673c9d105bc2da2046fd7b7e49532ed8c2db14325465325a09",
+            "git_tree": "568c6310706725a8b725497dbe6b3b909cbcf6cd",
+            "repository": "actions/setup-python",
+            "revision": "a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "archive_sha256": "b7e8bdaab718e6bd4b78925b8880a96bfc0272338005017453e24ab3f83149d0",
+            "git_tree": "90fba5b2fb462e7dd5b3b810757b73327d2d66bc",
+            "repository": "actions/upload-artifact",
+            "revision": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+          },
+          {
+            "archive_sha256": "de1ec184f6c44509496eeb771c0dfb9e363e0cb2e64bd034deb36316f1704233",
+            "git_tree": "6ca237a43234c9d102a89c03f3c2d7857c2e1b0a",
+            "repository": "goreleaser/goreleaser-action",
+            "revision": "e435ccd777264be153ace6237001ef4d979d3a7a"
+          }
+        ],
+        "actrc_sha256": "66ca1584712ebc7f0ea9c02c9a5cec6f5bbd3f4dba2d150bdce982a0da2bb612",
+        "launcher_sha256": "de344f1ecf8153b639f251895331a247efc6be4f8bd0d18a8192d9f2ff0ca659",
+        "log_format": "jsonl-with-text-fallback",
+        "log_record_counts": {
+          "json": 128,
+          "text": 0
+        },
+        "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+        "source_tree": "d24d5435af64400da8bb665714b908cbbe638f7c",
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "workflow_sha256": {
+          "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+          "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+          "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+          "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+          "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+          "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+        }
+      },
+      "qualifies_clean_source": true,
+      "raw_result": "passed",
+      "receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T231857Z-build.json",
+      "receipt_sha256": "1c0a12130d7ee0333b9daec7008bddd9411698cb94a5a6386143937a45335008",
+      "recorded_result": "passed",
+      "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+      "runner_digest_sha256": "19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "source_clean": true,
+      "started_utc": "20261113T231857Z",
+      "status": "passed"
+    },
+    {
+      "action": "coverage",
+      "channel": "local",
+      "command": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "push",
+        "-W",
+        ".github/workflows/coverage.yml",
+        "-j",
+        "coverage"
+      ],
+      "command_sha256": "96bf3b88bb431b8bde96cb5534e396242784f075d6142c5b8f749c0b3bcc465b",
+      "event": "push",
+      "exit_code": 0,
+      "id": "20261113T231935Z-coverage",
+      "integrity": "verified",
+      "log": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T231935Z-coverage.log",
+      "log_sha256": "f0899fcd59efe167f81ad3a27bd38221e0f65caa27688b477777a2c68eaa3a1c",
+      "observations": {
+        "count_scope": "Observed log events/summaries only; missing test-level output is not a zero-test proof.",
+        "counts": {
+          "act_steps": {
+            "passed": 7
+          },
+          "go_package_events": {
+            "passed": 8
+          },
+          "go_test_events": {},
+          "records": {
+            "json": 656
+          }
+        },
+        "diagnostics": [],
+        "events": [
+          {
+            "kind": "act_step",
+            "line": 3,
+            "status": "started",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 9,
+            "status": "passed",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 14,
+            "status": "started",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 15,
+            "status": "passed",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 16,
+            "status": "started",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 87,
+            "status": "passed",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 92,
+            "status": "started",
+            "step": "Main Race and coverage"
+          },
+          {
+            "kind": "act_step",
+            "line": 616,
+            "status": "passed",
+            "step": "Main Race and coverage"
+          },
+          {
+            "kind": "act_step",
+            "line": 617,
+            "status": "started",
+            "step": "Main Retain coverage baseline for review"
+          },
+          {
+            "kind": "act_step",
+            "line": 636,
+            "status": "passed",
+            "step": "Main Retain coverage baseline for review"
+          },
+          {
+            "kind": "act_step",
+            "line": 640,
+            "status": "started",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 652,
+            "status": "passed",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 653,
+            "status": "started",
+            "step": "Complete job"
+          },
+          {
+            "kind": "act_step",
+            "line": 655,
+            "status": "passed",
+            "step": "Complete job"
+          }
+        ],
+        "events_truncated": 0,
+        "failed_steps": [],
+        "summaries": []
+      },
+      "provenance": {
+        "act": "act version 0.2.97",
+        "act_binary_sha256": "c4d4728b7375fad11980456249edeb3a4ca48ba4e785cb8100ad14bd53e77056",
+        "action_sources": [
+          {
+            "archive_sha256": "0f48a50cf2edeea3d6e270f8dae645529128ca8b2954993891a2fb8f7b16145a",
+            "git_tree": "f8a7b72dc00648d050099727d25ca92a43ad1162",
+            "repository": "actions/checkout",
+            "revision": "11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "archive_sha256": "21dc27499512507113532bb567b3febc05616b1db099ffd3daa1fbc39843d88a",
+            "git_tree": "fe066c3996066f90baea9d43bfb45dc9eaa47cea",
+            "repository": "actions/dependency-review-action",
+            "revision": "a1d282b36b6f3519aa1f3fc636f609c47dddb294"
+          },
+          {
+            "archive_sha256": "30852e93cbdf87f3cecc3927dd658a750c7b0c285c1188962db29fc59431a2df",
+            "git_tree": "f094f548eefc307436b8d9373c45ce306837e0d5",
+            "repository": "actions/setup-go",
+            "revision": "40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "archive_sha256": "8897425776cbef7ddfca2275e536ecc0c26b313161de2235c5aa9fda8ce961fc",
+            "git_tree": "6e2fefae7f597aebce691c980b27ec6381e493e2",
+            "repository": "actions/setup-node",
+            "revision": "49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "archive_sha256": "6318d936518770673c9d105bc2da2046fd7b7e49532ed8c2db14325465325a09",
+            "git_tree": "568c6310706725a8b725497dbe6b3b909cbcf6cd",
+            "repository": "actions/setup-python",
+            "revision": "a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "archive_sha256": "b7e8bdaab718e6bd4b78925b8880a96bfc0272338005017453e24ab3f83149d0",
+            "git_tree": "90fba5b2fb462e7dd5b3b810757b73327d2d66bc",
+            "repository": "actions/upload-artifact",
+            "revision": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+          },
+          {
+            "archive_sha256": "de1ec184f6c44509496eeb771c0dfb9e363e0cb2e64bd034deb36316f1704233",
+            "git_tree": "6ca237a43234c9d102a89c03f3c2d7857c2e1b0a",
+            "repository": "goreleaser/goreleaser-action",
+            "revision": "e435ccd777264be153ace6237001ef4d979d3a7a"
+          }
+        ],
+        "actrc_sha256": "66ca1584712ebc7f0ea9c02c9a5cec6f5bbd3f4dba2d150bdce982a0da2bb612",
+        "launcher_sha256": "de344f1ecf8153b639f251895331a247efc6be4f8bd0d18a8192d9f2ff0ca659",
+        "log_format": "jsonl-with-text-fallback",
+        "log_record_counts": {
+          "json": 656,
+          "text": 0
+        },
+        "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+        "source_tree": "d24d5435af64400da8bb665714b908cbbe638f7c",
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "workflow_sha256": {
+          "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+          "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+          "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+          "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+          "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+          "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+        }
+      },
+      "qualifies_clean_source": true,
+      "raw_result": "passed",
+      "receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T231935Z-coverage.json",
+      "receipt_sha256": "cb2913572cfa1f081e01c5d628f2dd273daca50243a0d5dca216c86a4ce9cad3",
+      "recorded_result": "passed",
+      "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+      "runner_digest_sha256": "19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "source_clean": true,
+      "started_utc": "20261113T231935Z",
+      "status": "passed"
+    },
+    {
+      "action": "snapshot",
+      "channel": "local",
+      "command": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "push",
+        "-W",
+        ".github/workflows/goreleaser.yml",
+        "-j",
+        "goreleaser"
+      ],
+      "command_sha256": "82abfec15e8355e12f78ed0266eb09594a0ba77d19d26764c278707b871480ef",
+      "event": "push",
+      "exit_code": 0,
+      "id": "20261113T232013Z-snapshot",
+      "integrity": "verified",
+      "log": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T232013Z-snapshot.log",
+      "log_sha256": "03a8a3b4c185c47e696afd60aaa78d4093c401b0d1b4a6837fdc7aed1b56d4f0",
+      "observations": {
+        "count_scope": "Observed log events/summaries only; missing test-level output is not a zero-test proof.",
+        "counts": {
+          "act_steps": {
+            "passed": 6
+          },
+          "go_package_events": {},
+          "go_test_events": {},
+          "records": {
+            "json": 207
+          }
+        },
+        "diagnostics": [],
+        "events": [
+          {
+            "kind": "act_step",
+            "line": 3,
+            "status": "started",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 9,
+            "status": "passed",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 14,
+            "status": "started",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 15,
+            "status": "passed",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 16,
+            "status": "started",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 87,
+            "status": "passed",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 92,
+            "status": "started",
+            "step": "Main Non-publishing release configuration and snapshot"
+          },
+          {
+            "kind": "act_step",
+            "line": 188,
+            "status": "passed",
+            "step": "Main Non-publishing release configuration and snapshot"
+          },
+          {
+            "kind": "act_step",
+            "line": 191,
+            "status": "started",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 203,
+            "status": "passed",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 204,
+            "status": "started",
+            "step": "Complete job"
+          },
+          {
+            "kind": "act_step",
+            "line": 206,
+            "status": "passed",
+            "step": "Complete job"
+          }
+        ],
+        "events_truncated": 0,
+        "failed_steps": [],
+        "summaries": []
+      },
+      "provenance": {
+        "act": "act version 0.2.97",
+        "act_binary_sha256": "c4d4728b7375fad11980456249edeb3a4ca48ba4e785cb8100ad14bd53e77056",
+        "action_sources": [
+          {
+            "archive_sha256": "0f48a50cf2edeea3d6e270f8dae645529128ca8b2954993891a2fb8f7b16145a",
+            "git_tree": "f8a7b72dc00648d050099727d25ca92a43ad1162",
+            "repository": "actions/checkout",
+            "revision": "11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "archive_sha256": "21dc27499512507113532bb567b3febc05616b1db099ffd3daa1fbc39843d88a",
+            "git_tree": "fe066c3996066f90baea9d43bfb45dc9eaa47cea",
+            "repository": "actions/dependency-review-action",
+            "revision": "a1d282b36b6f3519aa1f3fc636f609c47dddb294"
+          },
+          {
+            "archive_sha256": "30852e93cbdf87f3cecc3927dd658a750c7b0c285c1188962db29fc59431a2df",
+            "git_tree": "f094f548eefc307436b8d9373c45ce306837e0d5",
+            "repository": "actions/setup-go",
+            "revision": "40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "archive_sha256": "8897425776cbef7ddfca2275e536ecc0c26b313161de2235c5aa9fda8ce961fc",
+            "git_tree": "6e2fefae7f597aebce691c980b27ec6381e493e2",
+            "repository": "actions/setup-node",
+            "revision": "49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "archive_sha256": "6318d936518770673c9d105bc2da2046fd7b7e49532ed8c2db14325465325a09",
+            "git_tree": "568c6310706725a8b725497dbe6b3b909cbcf6cd",
+            "repository": "actions/setup-python",
+            "revision": "a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "archive_sha256": "b7e8bdaab718e6bd4b78925b8880a96bfc0272338005017453e24ab3f83149d0",
+            "git_tree": "90fba5b2fb462e7dd5b3b810757b73327d2d66bc",
+            "repository": "actions/upload-artifact",
+            "revision": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+          },
+          {
+            "archive_sha256": "de1ec184f6c44509496eeb771c0dfb9e363e0cb2e64bd034deb36316f1704233",
+            "git_tree": "6ca237a43234c9d102a89c03f3c2d7857c2e1b0a",
+            "repository": "goreleaser/goreleaser-action",
+            "revision": "e435ccd777264be153ace6237001ef4d979d3a7a"
+          }
+        ],
+        "actrc_sha256": "66ca1584712ebc7f0ea9c02c9a5cec6f5bbd3f4dba2d150bdce982a0da2bb612",
+        "launcher_sha256": "de344f1ecf8153b639f251895331a247efc6be4f8bd0d18a8192d9f2ff0ca659",
+        "log_format": "jsonl-with-text-fallback",
+        "log_record_counts": {
+          "json": 207,
+          "text": 0
+        },
+        "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+        "source_tree": "d24d5435af64400da8bb665714b908cbbe638f7c",
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "workflow_sha256": {
+          "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+          "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+          "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+          "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+          "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+          "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+        }
+      },
+      "qualifies_clean_source": true,
+      "raw_result": "passed",
+      "receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T232013Z-snapshot.json",
+      "receipt_sha256": "ca4630f15d53420089736e302a7b6ceb4d0d8b1d3a04fdd54b752036194050cc",
+      "recorded_result": "passed",
+      "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+      "runner_digest_sha256": "19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "source_clean": true,
+      "started_utc": "20261113T232013Z",
+      "status": "passed"
+    },
+    {
+      "action": "docs",
+      "channel": "local",
+      "command": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "workflow_dispatch",
+        "-W",
+        ".github/workflows/docs-preview.yml",
+        "-j",
+        "build-preview"
+      ],
+      "command_sha256": "a5ffafae54075c976435614dfd3a5607c2e17b47a125b4ed83b7d2d205a913c3",
+      "event": "workflow_dispatch",
+      "exit_code": 0,
+      "id": "20261113T232106Z-docs",
+      "integrity": "verified",
+      "log": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T232106Z-docs.log",
+      "log_sha256": "d09cb0d5e3e6c05e4ad738bedbdf10e293ca56aab4c33ac609a3647bbeb6de80",
+      "observations": {
+        "count_scope": "Observed log events/summaries only; missing test-level output is not a zero-test proof.",
+        "counts": {
+          "act_steps": {
+            "passed": 9
+          },
+          "go_package_events": {},
+          "go_test_events": {},
+          "records": {
+            "json": 112
+          }
+        },
+        "diagnostics": [],
+        "events": [
+          {
+            "kind": "act_step",
+            "line": 3,
+            "status": "started",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 9,
+            "status": "passed",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 16,
+            "status": "started",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 17,
+            "status": "passed",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 18,
+            "status": "started",
+            "step": "Main actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "kind": "act_step",
+            "line": 27,
+            "status": "passed",
+            "step": "Main actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "kind": "act_step",
+            "line": 38,
+            "status": "started",
+            "step": "Main actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "kind": "act_step",
+            "line": 52,
+            "status": "passed",
+            "step": "Main actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "kind": "act_step",
+            "line": 55,
+            "status": "started",
+            "step": "Main Check shared funding metadata and build offline preview"
+          },
+          {
+            "kind": "act_step",
+            "line": 77,
+            "status": "passed",
+            "step": "Main Check shared funding metadata and build offline preview"
+          },
+          {
+            "kind": "act_step",
+            "line": 78,
+            "status": "started",
+            "step": "Main Retain preview for review"
+          },
+          {
+            "kind": "act_step",
+            "line": 95,
+            "status": "passed",
+            "step": "Main Retain preview for review"
+          },
+          {
+            "kind": "act_step",
+            "line": 99,
+            "status": "started",
+            "step": "Post actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "kind": "act_step",
+            "line": 103,
+            "status": "passed",
+            "step": "Post actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "kind": "act_step",
+            "line": 104,
+            "status": "started",
+            "step": "Post actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "kind": "act_step",
+            "line": 108,
+            "status": "passed",
+            "step": "Post actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "kind": "act_step",
+            "line": 109,
+            "status": "started",
+            "step": "Complete job"
+          },
+          {
+            "kind": "act_step",
+            "line": 111,
+            "status": "passed",
+            "step": "Complete job"
+          }
+        ],
+        "events_truncated": 0,
+        "failed_steps": [],
+        "summaries": [
+          {
+            "failed": 0,
+            "framework": "python-unittest",
+            "line": 73,
+            "passed": 11,
+            "skipped": 0,
+            "status": "passed",
+            "tests": 11
+          },
+          {
+            "case_count": 11,
+            "framework": "structured-output",
+            "line": 76,
+            "status": "passed"
+          }
+        ]
+      },
+      "provenance": {
+        "act": "act version 0.2.97",
+        "act_binary_sha256": "c4d4728b7375fad11980456249edeb3a4ca48ba4e785cb8100ad14bd53e77056",
+        "action_sources": [
+          {
+            "archive_sha256": "0f48a50cf2edeea3d6e270f8dae645529128ca8b2954993891a2fb8f7b16145a",
+            "git_tree": "f8a7b72dc00648d050099727d25ca92a43ad1162",
+            "repository": "actions/checkout",
+            "revision": "11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "archive_sha256": "21dc27499512507113532bb567b3febc05616b1db099ffd3daa1fbc39843d88a",
+            "git_tree": "fe066c3996066f90baea9d43bfb45dc9eaa47cea",
+            "repository": "actions/dependency-review-action",
+            "revision": "a1d282b36b6f3519aa1f3fc636f609c47dddb294"
+          },
+          {
+            "archive_sha256": "30852e93cbdf87f3cecc3927dd658a750c7b0c285c1188962db29fc59431a2df",
+            "git_tree": "f094f548eefc307436b8d9373c45ce306837e0d5",
+            "repository": "actions/setup-go",
+            "revision": "40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "archive_sha256": "8897425776cbef7ddfca2275e536ecc0c26b313161de2235c5aa9fda8ce961fc",
+            "git_tree": "6e2fefae7f597aebce691c980b27ec6381e493e2",
+            "repository": "actions/setup-node",
+            "revision": "49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "archive_sha256": "6318d936518770673c9d105bc2da2046fd7b7e49532ed8c2db14325465325a09",
+            "git_tree": "568c6310706725a8b725497dbe6b3b909cbcf6cd",
+            "repository": "actions/setup-python",
+            "revision": "a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "archive_sha256": "b7e8bdaab718e6bd4b78925b8880a96bfc0272338005017453e24ab3f83149d0",
+            "git_tree": "90fba5b2fb462e7dd5b3b810757b73327d2d66bc",
+            "repository": "actions/upload-artifact",
+            "revision": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+          },
+          {
+            "archive_sha256": "de1ec184f6c44509496eeb771c0dfb9e363e0cb2e64bd034deb36316f1704233",
+            "git_tree": "6ca237a43234c9d102a89c03f3c2d7857c2e1b0a",
+            "repository": "goreleaser/goreleaser-action",
+            "revision": "e435ccd777264be153ace6237001ef4d979d3a7a"
+          }
+        ],
+        "actrc_sha256": "66ca1584712ebc7f0ea9c02c9a5cec6f5bbd3f4dba2d150bdce982a0da2bb612",
+        "launcher_sha256": "de344f1ecf8153b639f251895331a247efc6be4f8bd0d18a8192d9f2ff0ca659",
+        "log_format": "jsonl-with-text-fallback",
+        "log_record_counts": {
+          "json": 112,
+          "text": 0
+        },
+        "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+        "source_tree": "d24d5435af64400da8bb665714b908cbbe638f7c",
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "workflow_sha256": {
+          "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+          "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+          "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+          "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+          "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+          "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+        }
+      },
+      "qualifies_clean_source": true,
+      "raw_result": "passed",
+      "receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T232106Z-docs.json",
+      "receipt_sha256": "7b25b73bd2e3dbd0564c7a0d0128282528ba26994bb7b347d4ca55329a639b65",
+      "recorded_result": "passed",
+      "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+      "runner_digest_sha256": "19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "source_clean": true,
+      "started_utc": "20261113T232106Z",
+      "status": "passed"
+    },
+    {
+      "action": "candidate",
+      "channel": "local",
+      "command": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "workflow_dispatch",
+        "-W",
+        ".github/workflows/steam-deck.yml",
+        "-j",
+        "candidate"
+      ],
+      "command_sha256": "a5da964f6a3dc4045fa36b6a7f8a5520b2a97f5bfbb9f446a2aca2971cc30a83",
+      "event": "workflow_dispatch",
+      "exit_code": 0,
+      "id": "20261113T232124Z-candidate",
+      "integrity": "verified",
+      "log": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T232124Z-candidate.log",
+      "log_sha256": "f58eab6bbc070d730bc00a2a2172dda22475899314239b726effd114c63dace0",
+      "observations": {
+        "count_scope": "Observed log events/summaries only; missing test-level output is not a zero-test proof.",
+        "counts": {
+          "act_steps": {
+            "passed": 17
+          },
+          "go_package_events": {
+            "passed": 8
+          },
+          "go_test_events": {},
+          "records": {
+            "json": 1103
+          }
+        },
+        "diagnostics": [],
+        "events": [
+          {
+            "kind": "act_step",
+            "line": 3,
+            "status": "started",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 9,
+            "status": "passed",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 18,
+            "status": "started",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 19,
+            "status": "passed",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 20,
+            "status": "started",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 91,
+            "status": "passed",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 96,
+            "status": "started",
+            "step": "Main actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "kind": "act_step",
+            "line": 110,
+            "status": "passed",
+            "step": "Main actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "kind": "act_step",
+            "line": 113,
+            "status": "started",
+            "step": "Main actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "kind": "act_step",
+            "line": 122,
+            "status": "passed",
+            "step": "Main actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "kind": "act_step",
+            "line": 133,
+            "status": "started",
+            "step": "Main Install pinned development dependencies"
+          },
+          {
+            "kind": "act_step",
+            "line": 571,
+            "status": "passed",
+            "step": "Main Install pinned development dependencies"
+          },
+          {
+            "kind": "act_step",
+            "line": 573,
+            "status": "started",
+            "step": "Main Go protocol, race, static and vulnerability checks"
+          },
+          {
+            "kind": "act_step",
+            "line": 588,
+            "status": "passed",
+            "step": "Main Go protocol, race, static and vulnerability checks"
+          },
+          {
+            "kind": "act_step",
+            "line": 589,
+            "status": "started",
+            "step": "Main Installer, backend and panel checks"
+          },
+          {
+            "kind": "act_step",
+            "line": 839,
+            "status": "passed",
+            "step": "Main Installer, backend and panel checks"
+          },
+          {
+            "kind": "act_step",
+            "line": 840,
+            "status": "started",
+            "step": "Main Package exact candidate twice"
+          },
+          {
+            "kind": "act_step",
+            "line": 927,
+            "status": "passed",
+            "step": "Main Package exact candidate twice"
+          },
+          {
+            "kind": "act_step",
+            "line": 928,
+            "status": "started",
+            "step": "Main Audit actual artifacts and reproduce unsigned supply-chain evidence"
+          },
+          {
+            "kind": "act_step",
+            "line": 932,
+            "status": "passed",
+            "step": "Main Audit actual artifacts and reproduce unsigned supply-chain evidence"
+          },
+          {
+            "kind": "act_step",
+            "line": 933,
+            "status": "started",
+            "step": "Main Actual package browser checks"
+          },
+          {
+            "kind": "act_step",
+            "line": 962,
+            "status": "passed",
+            "step": "Main Actual package browser checks"
+          },
+          {
+            "kind": "act_step",
+            "line": 964,
+            "status": "started",
+            "step": "Main Native audio and app-filtered capture checks"
+          },
+          {
+            "kind": "act_step",
+            "line": 1036,
+            "status": "passed",
+            "step": "Main Native audio and app-filtered capture checks"
+          },
+          {
+            "kind": "act_step",
+            "line": 1037,
+            "status": "started",
+            "step": "Main actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02"
+          },
+          {
+            "kind": "act_step",
+            "line": 1073,
+            "status": "passed",
+            "step": "Main actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02"
+          },
+          {
+            "kind": "act_step",
+            "line": 1077,
+            "status": "started",
+            "step": "Post actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "kind": "act_step",
+            "line": 1081,
+            "status": "passed",
+            "step": "Post actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "kind": "act_step",
+            "line": 1082,
+            "status": "started",
+            "step": "Post actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "kind": "act_step",
+            "line": 1086,
+            "status": "passed",
+            "step": "Post actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "kind": "act_step",
+            "line": 1087,
+            "status": "started",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 1099,
+            "status": "passed",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 1100,
+            "status": "started",
+            "step": "Complete job"
+          },
+          {
+            "kind": "act_step",
+            "line": 1102,
+            "status": "passed",
+            "step": "Complete job"
+          }
+        ],
+        "events_truncated": 0,
+        "failed_steps": [],
+        "summaries": [
+          {
+            "failed": 0,
+            "framework": "python-unittest",
+            "line": 745,
+            "passed": 127,
+            "skipped": 0,
+            "status": "passed",
+            "tests": 127
+          },
+          {
+            "failed": 0,
+            "framework": "python-unittest",
+            "line": 782,
+            "passed": 32,
+            "skipped": 0,
+            "status": "passed",
+            "tests": 32
+          },
+          {
+            "cancelled": 0,
+            "failed": 0,
+            "framework": "node-test",
+            "line": 823,
+            "passed": 30,
+            "skipped": 0,
+            "tests": 30,
+            "todo": 0
+          }
+        ]
+      },
+      "provenance": {
+        "act": "act version 0.2.97",
+        "act_binary_sha256": "c4d4728b7375fad11980456249edeb3a4ca48ba4e785cb8100ad14bd53e77056",
+        "action_sources": [
+          {
+            "archive_sha256": "0f48a50cf2edeea3d6e270f8dae645529128ca8b2954993891a2fb8f7b16145a",
+            "git_tree": "f8a7b72dc00648d050099727d25ca92a43ad1162",
+            "repository": "actions/checkout",
+            "revision": "11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "archive_sha256": "21dc27499512507113532bb567b3febc05616b1db099ffd3daa1fbc39843d88a",
+            "git_tree": "fe066c3996066f90baea9d43bfb45dc9eaa47cea",
+            "repository": "actions/dependency-review-action",
+            "revision": "a1d282b36b6f3519aa1f3fc636f609c47dddb294"
+          },
+          {
+            "archive_sha256": "30852e93cbdf87f3cecc3927dd658a750c7b0c285c1188962db29fc59431a2df",
+            "git_tree": "f094f548eefc307436b8d9373c45ce306837e0d5",
+            "repository": "actions/setup-go",
+            "revision": "40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "archive_sha256": "8897425776cbef7ddfca2275e536ecc0c26b313161de2235c5aa9fda8ce961fc",
+            "git_tree": "6e2fefae7f597aebce691c980b27ec6381e493e2",
+            "repository": "actions/setup-node",
+            "revision": "49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "archive_sha256": "6318d936518770673c9d105bc2da2046fd7b7e49532ed8c2db14325465325a09",
+            "git_tree": "568c6310706725a8b725497dbe6b3b909cbcf6cd",
+            "repository": "actions/setup-python",
+            "revision": "a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "archive_sha256": "b7e8bdaab718e6bd4b78925b8880a96bfc0272338005017453e24ab3f83149d0",
+            "git_tree": "90fba5b2fb462e7dd5b3b810757b73327d2d66bc",
+            "repository": "actions/upload-artifact",
+            "revision": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+          },
+          {
+            "archive_sha256": "de1ec184f6c44509496eeb771c0dfb9e363e0cb2e64bd034deb36316f1704233",
+            "git_tree": "6ca237a43234c9d102a89c03f3c2d7857c2e1b0a",
+            "repository": "goreleaser/goreleaser-action",
+            "revision": "e435ccd777264be153ace6237001ef4d979d3a7a"
+          }
+        ],
+        "actrc_sha256": "66ca1584712ebc7f0ea9c02c9a5cec6f5bbd3f4dba2d150bdce982a0da2bb612",
+        "launcher_sha256": "de344f1ecf8153b639f251895331a247efc6be4f8bd0d18a8192d9f2ff0ca659",
+        "log_format": "jsonl-with-text-fallback",
+        "log_record_counts": {
+          "json": 1103,
+          "text": 0
+        },
+        "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+        "source_tree": "d24d5435af64400da8bb665714b908cbbe638f7c",
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "workflow_sha256": {
+          "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+          "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+          "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+          "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+          "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+          "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+        }
+      },
+      "qualifies_clean_source": true,
+      "raw_result": "passed",
+      "receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T232124Z-candidate.json",
+      "receipt_sha256": "6cbbe4cd3339582baabe517edb0eda200f335643c9de069bdc004813866961e8",
+      "recorded_result": "passed",
+      "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+      "runner_digest_sha256": "19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "source_clean": true,
+      "started_utc": "20261113T232124Z",
+      "status": "passed"
+    },
+    {
+      "action": "lint",
+      "channel": "pr-static",
+      "command": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "pull_request",
+        "-W",
+        ".github/workflows/lint.yml",
+        "-j",
+        "golangci",
+        "--eventpath",
+        ".github/act/pull-request.json"
+      ],
+      "command_sha256": "658a8fa03f40db4096c954879a0e338ea4c26645e53515b367ac5f7d7e95ce8f",
+      "event": "pull_request",
+      "exit_code": 0,
+      "id": "20261113T232924Z-lint",
+      "integrity": "verified",
+      "log": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T232924Z-lint.log",
+      "log_sha256": "0f6db03f7f4ad9e51260c8f6963d65575a1033b9e9eff083397399b965aed886",
+      "observations": {
+        "count_scope": "Observed log events/summaries only; missing test-level output is not a zero-test proof.",
+        "counts": {
+          "act_steps": {
+            "passed": 9
+          },
+          "go_package_events": {},
+          "go_test_events": {},
+          "records": {
+            "json": 123
+          }
+        },
+        "diagnostics": [],
+        "events": [
+          {
+            "kind": "act_step",
+            "line": 8,
+            "status": "started",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 14,
+            "status": "passed",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 17,
+            "status": "started",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 18,
+            "status": "passed",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 19,
+            "status": "started",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 90,
+            "status": "passed",
+            "step": "Main actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 95,
+            "status": "started",
+            "step": "Main Install pinned staticcheck"
+          },
+          {
+            "kind": "act_step",
+            "line": 97,
+            "status": "passed",
+            "step": "Main Install pinned staticcheck"
+          },
+          {
+            "kind": "act_step",
+            "line": 98,
+            "status": "started",
+            "step": "Main Formatting"
+          },
+          {
+            "kind": "act_step",
+            "line": 100,
+            "status": "passed",
+            "step": "Main Formatting"
+          },
+          {
+            "kind": "act_step",
+            "line": 101,
+            "status": "started",
+            "step": "Main go vet ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 103,
+            "status": "passed",
+            "step": "Main go vet ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 104,
+            "status": "started",
+            "step": "Main staticcheck ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 106,
+            "status": "passed",
+            "step": "Main staticcheck ./..."
+          },
+          {
+            "kind": "act_step",
+            "line": 107,
+            "status": "started",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 119,
+            "status": "passed",
+            "step": "Post actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "kind": "act_step",
+            "line": 120,
+            "status": "started",
+            "step": "Complete job"
+          },
+          {
+            "kind": "act_step",
+            "line": 122,
+            "status": "passed",
+            "step": "Complete job"
+          }
+        ],
+        "events_truncated": 0,
+        "failed_steps": [],
+        "summaries": []
+      },
+      "provenance": {
+        "act": "act version 0.2.97",
+        "act_binary_sha256": "c4d4728b7375fad11980456249edeb3a4ca48ba4e785cb8100ad14bd53e77056",
+        "action_sources": [
+          {
+            "archive_sha256": "0f48a50cf2edeea3d6e270f8dae645529128ca8b2954993891a2fb8f7b16145a",
+            "git_tree": "f8a7b72dc00648d050099727d25ca92a43ad1162",
+            "repository": "actions/checkout",
+            "revision": "11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "archive_sha256": "21dc27499512507113532bb567b3febc05616b1db099ffd3daa1fbc39843d88a",
+            "git_tree": "fe066c3996066f90baea9d43bfb45dc9eaa47cea",
+            "repository": "actions/dependency-review-action",
+            "revision": "a1d282b36b6f3519aa1f3fc636f609c47dddb294"
+          },
+          {
+            "archive_sha256": "30852e93cbdf87f3cecc3927dd658a750c7b0c285c1188962db29fc59431a2df",
+            "git_tree": "f094f548eefc307436b8d9373c45ce306837e0d5",
+            "repository": "actions/setup-go",
+            "revision": "40f1582b2485089dde7abd97c1529aa768e1baff"
+          },
+          {
+            "archive_sha256": "8897425776cbef7ddfca2275e536ecc0c26b313161de2235c5aa9fda8ce961fc",
+            "git_tree": "6e2fefae7f597aebce691c980b27ec6381e493e2",
+            "repository": "actions/setup-node",
+            "revision": "49933ea5288caeca8642d1e84afbd3f7d6820020"
+          },
+          {
+            "archive_sha256": "6318d936518770673c9d105bc2da2046fd7b7e49532ed8c2db14325465325a09",
+            "git_tree": "568c6310706725a8b725497dbe6b3b909cbcf6cd",
+            "repository": "actions/setup-python",
+            "revision": "a26af69be951a213d495a4c3e4e4022e16d87065"
+          },
+          {
+            "archive_sha256": "b7e8bdaab718e6bd4b78925b8880a96bfc0272338005017453e24ab3f83149d0",
+            "git_tree": "90fba5b2fb462e7dd5b3b810757b73327d2d66bc",
+            "repository": "actions/upload-artifact",
+            "revision": "ea165f8d65b6e75b540449e92b4886f43607fa02"
+          },
+          {
+            "archive_sha256": "de1ec184f6c44509496eeb771c0dfb9e363e0cb2e64bd034deb36316f1704233",
+            "git_tree": "6ca237a43234c9d102a89c03f3c2d7857c2e1b0a",
+            "repository": "goreleaser/goreleaser-action",
+            "revision": "e435ccd777264be153ace6237001ef4d979d3a7a"
+          }
+        ],
+        "actrc_sha256": "66ca1584712ebc7f0ea9c02c9a5cec6f5bbd3f4dba2d150bdce982a0da2bb612",
+        "launcher_sha256": "de344f1ecf8153b639f251895331a247efc6be4f8bd0d18a8192d9f2ff0ca659",
+        "log_format": "jsonl-with-text-fallback",
+        "log_record_counts": {
+          "json": 123,
+          "text": 0
+        },
+        "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+        "source_tree": "d24d5435af64400da8bb665714b908cbbe638f7c",
+        "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "workflow_sha256": {
+          "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+          "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+          "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+          "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+          "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+          "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+        }
+      },
+      "qualifies_clean_source": true,
+      "raw_result": "passed",
+      "receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T232924Z-lint.json",
+      "receipt_sha256": "4b0410ea1609e6a6d1bdb4ef61112eec03abf02af9dd3442406075580560fb33",
+      "recorded_result": "passed",
+      "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+      "runner_digest_sha256": "19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "source_clean": true,
+      "started_utc": "20261113T232924Z",
+      "status": "passed"
+    },
+    {
+      "action": "dependency-review",
+      "channel": "provider",
+      "command": [
+        "/workspace/.obsgod-tools/pkg/bin/act",
+        "--directory",
+        "/workspace/obsgod",
+        "--bind",
+        "--env-file",
+        "/dev/null",
+        "--secret-file",
+        "/dev/null",
+        "--input-file",
+        "/dev/null",
+        "--container-daemon-socket",
+        "/var/run/docker.sock",
+        "--network",
+        "bridge",
+        "--concurrent-jobs",
+        "1",
+        "--container-options",
+        "--mount type=bind,src=/etc/ssl/certs/ca-certificates.crt,dst=/run/obsgod-ca.pem,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/apt-cloud-ca.conf,dst=/etc/apt/apt.conf.d/99-obsgod-cloud-ca,readonly --mount type=bind,src=/workspace/.obsgod-tools/completion/act/tmp,dst=/workspace/.obsgod-tools/completion/act/tmp --add-host proxy:172.31.2.77 --add-host proxy:172.31.2.77",
+        "--action-cache-path",
+        "/workspace/.obsgod-tools/completion/act/actions",
+        "--artifact-server-path",
+        "/workspace/.obsgod-tools/completion/act/artifacts",
+        "--artifact-server-addr",
+        "172.26.91.249",
+        "--artifact-server-port",
+        "34567",
+        "--env",
+        "NODE_EXTRA_CA_CERTS=/run/obsgod-ca.pem",
+        "--env",
+        "NODE_USE_ENV_PROXY=1",
+        "--env",
+        "SSL_CERT_FILE=/run/obsgod-ca.pem",
+        "--env",
+        "GIT_SSL_CAINFO=/run/obsgod-ca.pem",
+        "--env",
+        "PIP_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "CODEX_PROXY_CERT=/run/obsgod-ca.pem",
+        "--env",
+        "TMPDIR=/workspace/.obsgod-tools/completion/act/tmp",
+        "--env",
+        "OBSGOD_ACT_TEMP=/workspace/.obsgod-tools/completion/act/tmp",
+        "--local-repository",
+        "actions/checkout@11d5960a326750d5838078e36cf38b85af677262=/workspace/.obsgod-tools/completion/act/action-sources/actions-checkout-11d5960a326750d5838078e36cf38b85af677262",
+        "--local-repository",
+        "actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294=/workspace/.obsgod-tools/completion/act/action-sources/actions-dependency-review-action-a1d282b36b6f3519aa1f3fc636f609c47dddb294",
+        "--local-repository",
+        "actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-go-40f1582b2485089dde7abd97c1529aa768e1baff",
+        "--local-repository",
+        "actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-node-49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "--local-repository",
+        "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065=/workspace/.obsgod-tools/completion/act/action-sources/actions-setup-python-a26af69be951a213d495a4c3e4e4022e16d87065",
+        "--local-repository",
+        "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02=/workspace/.obsgod-tools/completion/act/action-sources/actions-upload-artifact-ea165f8d65b6e75b540449e92b4886f43607fa02",
+        "--local-repository",
+        "goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a=/workspace/.obsgod-tools/completion/act/action-sources/goreleaser-goreleaser-action-e435ccd777264be153ace6237001ef4d979d3a7a",
+        "--env",
+        "HTTP_PROXY=[injected]",
+        "--env",
+        "HTTPS_PROXY=[injected]",
+        "--env",
+        "NO_PROXY=[injected]",
+        "--env",
+        "http_proxy=[injected]",
+        "--env",
+        "https_proxy=[injected]",
+        "--env",
+        "no_proxy=[injected]",
+        "pull_request",
+        "-W",
+        ".github/workflows/lint.yml",
+        "-j",
+        "dependency-review",
+        "--eventpath",
+        "/workspace/.obsgod-tools/completion/act/cf12abe6-live-commit-pr-fixture.json"
+      ],
+      "command_sha256": "f162374908a6be1c5828e3bb873ca98d048f90766be11c35bfc4f1f1b1374663",
+      "event": "pull_request",
+      "exit_code": 1,
+      "id": "20261113T233019Z-dependency-review-live-refs",
+      "integrity": "verified",
+      "log": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T233019Z-dependency-review-live-refs.log",
+      "log_sha256": "e44830551402699dfaa3220c5bf1bdf40793dd71db8c984956bcc2a449acc723",
+      "observations": {
+        "count_scope": "Observed log events/summaries only; missing test-level output is not a zero-test proof.",
+        "counts": {
+          "act_steps": {
+            "failed": 1,
+            "passed": 3
+          },
+          "go_package_events": {},
+          "go_test_events": {},
+          "records": {
+            "json": 23,
+            "text": 1
+          }
+        },
+        "diagnostics": [
+          {
+            "line": 17,
+            "message": "\u2757  ::error::Dependency review is not supported on this repository. Please ensure that Dependency graph is enabled, see https://github.com/szmyty/obsgod/settings/security_analysis",
+            "step": "Review dependency changes against GitHub's advisory database"
+          },
+          {
+            "line": 19,
+            "message": "exitcode '1': failure",
+            "step": "Review dependency changes against GitHub's advisory database"
+          },
+          {
+            "line": 24,
+            "message": "Error: Job 'dependency-review' failed",
+            "step": "Complete job"
+          }
+        ],
+        "events": [
+          {
+            "kind": "act_step",
+            "line": 2,
+            "status": "started",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 9,
+            "status": "passed",
+            "step": "Set up job"
+          },
+          {
+            "kind": "act_step",
+            "line": 12,
+            "status": "started",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 13,
+            "status": "passed",
+            "step": "Main actions/checkout@11d5960a326750d5838078e36cf38b85af677262"
+          },
+          {
+            "kind": "act_step",
+            "line": 14,
+            "status": "started",
+            "step": "Main Review dependency changes against GitHub's advisory database"
+          },
+          {
+            "kind": "act_step",
+            "line": 18,
+            "status": "failed",
+            "step": "Main Review dependency changes against GitHub's advisory database"
+          },
+          {
+            "kind": "act_step",
+            "line": 20,
+            "status": "started",
+            "step": "Complete job"
+          },
+          {
+            "kind": "act_step",
+            "line": 22,
+            "status": "passed",
+            "step": "Complete job"
+          }
+        ],
+        "events_truncated": 0,
+        "failed_steps": [
+          {
+            "diagnostics": [
+              {
+                "line": 17,
+                "message": "\u2757  ::error::Dependency review is not supported on this repository. Please ensure that Dependency graph is enabled, see https://github.com/szmyty/obsgod/settings/security_analysis",
+                "step": "Review dependency changes against GitHub's advisory database"
+              }
+            ],
+            "line": 18,
+            "step": "Main Review dependency changes against GitHub's advisory database"
+          }
+        ],
+        "summaries": []
+      },
+      "provenance": {
+        "act": "act version 0.2.97",
+        "act_binary_sha256": "c4d4728b7375fad11980456249edeb3a4ca48ba4e785cb8100ad14bd53e77056",
+        "action_sources": null,
+        "actrc_sha256": "66ca1584712ebc7f0ea9c02c9a5cec6f5bbd3f4dba2d150bdce982a0da2bb612",
+        "launcher_sha256": "de344f1ecf8153b639f251895331a247efc6be4f8bd0d18a8192d9f2ff0ca659",
+        "log_format": "jsonl-with-text-fallback",
+        "log_record_counts": {
+          "json": 23,
+          "text": 1
+        },
+        "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+        "source_tree": "d24d5435af64400da8bb665714b908cbbe638f7c",
+        "tracked_diff_sha256": null,
+        "workflow_sha256": {
+          "build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+          "coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+          "docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+          "goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+          "lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+          "steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+        }
+      },
+      "qualifies_clean_source": true,
+      "raw_result": "failed",
+      "receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T233019Z-dependency-review-live-refs.json",
+      "receipt_sha256": "76662be6d6418633eb6a30756e1dbb2709d62558d963100c75f72c9d97bb22ad",
+      "recorded_result": "unavailable",
+      "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+      "runner_digest_sha256": "19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "source_clean": true,
+      "started_utc": "20261113T233019Z",
+      "status": "unavailable"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "six supported local ACT jobs only; external gates remain explicit",
+  "state": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state"
+}

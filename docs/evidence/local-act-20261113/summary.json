@@ -1,0 +1,536 @@
+{
+  "schema": 1,
+  "observed_utc": "2026-11-13T23:36:00.968525+00:00",
+  "source_revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+  "source_tree": "d24d5435af64400da8bb665714b908cbbe638f7c",
+  "evidence_only_followup": true,
+  "overall_result": "partial",
+  "local_workflow_result": "passed",
+  "completed_passed_executions": 13,
+  "provider_raw_result": "failed",
+  "provider_status": "unavailable",
+  "workflow_matrix": [
+    {
+      "action": "build",
+      "event": "push",
+      "job": "build",
+      "raw_result": "passed",
+      "reason": null,
+      "selected_receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T231857Z-build.json",
+      "status": "passed",
+      "workflow": "build.yml"
+    },
+    {
+      "action": "coverage",
+      "event": "push",
+      "job": "coverage",
+      "raw_result": "passed",
+      "reason": null,
+      "selected_receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T231935Z-coverage.json",
+      "status": "passed",
+      "workflow": "coverage.yml"
+    },
+    {
+      "action": "lint",
+      "event": "push",
+      "job": "golangci",
+      "raw_result": "passed",
+      "reason": null,
+      "selected_receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T231812Z-lint.json",
+      "status": "passed",
+      "workflow": "lint.yml"
+    },
+    {
+      "action": "snapshot",
+      "event": "push",
+      "job": "goreleaser",
+      "raw_result": "passed",
+      "reason": null,
+      "selected_receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T232013Z-snapshot.json",
+      "status": "passed",
+      "workflow": "goreleaser.yml"
+    },
+    {
+      "action": "docs",
+      "event": "workflow_dispatch",
+      "job": "build-preview",
+      "raw_result": "passed",
+      "reason": null,
+      "selected_receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T232106Z-docs.json",
+      "status": "passed",
+      "workflow": "docs-preview.yml"
+    },
+    {
+      "action": "candidate",
+      "event": "workflow_dispatch",
+      "job": "candidate",
+      "raw_result": "passed",
+      "reason": null,
+      "selected_receipt": "/workspace/.obsgod-tools/act-audit-20261113/completed-cf12-state/20261113T232124Z-candidate.json",
+      "status": "passed",
+      "workflow": "steam-deck.yml"
+    }
+  ],
+  "runtime": {
+    "observed_utc": "2026-11-13T23:21:01.376342+00:00",
+    "host": {
+      "uid": 1000,
+      "gid": 1000,
+      "system": "Linux",
+      "release": "6.18.57",
+      "machine": "x86_64"
+    },
+    "tools": [
+      {
+        "command": [
+          "go",
+          "version"
+        ],
+        "exit_code": 0,
+        "output": "go version go1.27.4 linux/amd64"
+      },
+      {
+        "command": [
+          "node",
+          "--version"
+        ],
+        "exit_code": 0,
+        "output": "v24.19.0"
+      },
+      {
+        "command": [
+          "npm",
+          "--version"
+        ],
+        "exit_code": 0,
+        "output": "11.9.0"
+      },
+      {
+        "command": [
+          "python3",
+          "--version"
+        ],
+        "exit_code": 0,
+        "output": "Python 3.12.14"
+      },
+      {
+        "command": [
+          "/workspace/.obsgod-tools/pkg/bin/act",
+          "--version"
+        ],
+        "exit_code": 0,
+        "output": "act version 0.2.97"
+      }
+    ],
+    "source_files_sha256": {
+      ".actrc": "66ca1584712ebc7f0ea9c02c9a5cec6f5bbd3f4dba2d150bdce982a0da2bb612",
+      "scripts/local-ci.py": "de344f1ecf8153b639f251895331a247efc6be4f8bd0d18a8192d9f2ff0ca659",
+      "scripts/local-ci-report.py": "8b15aeb327fddd1685864e664797bddef0568bcf4f3804dead935bc59ab3d02c",
+      ".github/workflows/build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+      ".github/workflows/coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+      ".github/workflows/lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+      ".github/workflows/goreleaser.yml": "51de4fe49904e7ed83575b584e7735bb88b0a92c19c870a36cbea98e9e83fab8",
+      ".github/workflows/docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+      ".github/workflows/steam-deck.yml": "79d3bbfeb52bc8ec2bacde62d43d839f8a5daa20927ec8d1aa76ee267d3cfa2b"
+    },
+    "act_binary_sha256": "c4d4728b7375fad11980456249edeb3a4ca48ba4e785cb8100ad14bd53e77056",
+    "source_revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+    "source_tree": "d24d5435af64400da8bb665714b908cbbe638f7c",
+    "source_clean": true
+  },
+  "org_references": {
+    "observed_at_utc": "2026-11-13T22:11:55.819864+00:00",
+    "references": [
+      {
+        "repository": "egohygiene/egohygiene",
+        "revision": "060d15a790db9329cb226ecef1f0ae4112a11f3c",
+        "path": ".actrc",
+        "blob": "ab4d0dc7845e14d7afd9cde3d6a9c5d278141f2e",
+        "sha256": "fdb2974b919c31d93578d19caef847362f8a290cf08c910eb8f1a6d6f78664f8",
+        "url": "https://github.com/egohygiene/egohygiene/blob/060d15a790db9329cb226ecef1f0ae4112a11f3c/.actrc",
+        "local_copy": "egohygiene-egohygiene.actrc",
+        "mode": "read-only reference; no edits to this repository"
+      },
+      {
+        "repository": "egohygiene/reflector",
+        "revision": "23f164cf898e092b62bbdddaf7616c4823208f9b",
+        "path": ".actrc",
+        "blob": "df6970c6ab3ec81b48889ca87130d94d0936d236",
+        "sha256": "b30f5abf09400884f7d0b41cb8e7b1b16251cf012e67299c41e210a743d1273e",
+        "url": "https://github.com/egohygiene/reflector/blob/23f164cf898e092b62bbdddaf7616c4823208f9b/.actrc",
+        "local_copy": "egohygiene-reflector.actrc",
+        "mode": "read-only reference; no edits to this repository"
+      }
+    ]
+  },
+  "go_uncached": {
+    "observed_utc": "2026-11-13T23:33:52.737269+00:00",
+    "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+    "command": [
+      "go",
+      "test",
+      "-race",
+      "-count=1",
+      "-json",
+      "./..."
+    ],
+    "exit_code": 0,
+    "result": "passed",
+    "seconds": 27.632,
+    "top_level_passed": 213,
+    "test_events": {
+      "pass": 386,
+      "fail": 0,
+      "skip": 1
+    },
+    "source_clean_after": true,
+    "log": "go-fresh.log",
+    "log_sha256": "24cd661a39b7fea84a385d5e06d12a669677ee3d6f0c1ff22cb25bcff8278e1e"
+  },
+  "host_build_postcondition": {
+    "observed_at_utc": "2026-11-13T23:31:22.554027+00:00",
+    "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+    "host_uid": 1000,
+    "node": "v24.19.0",
+    "npm": "11.9.0",
+    "paths_before": [
+      {
+        "path": "steamdeck/decky",
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o700",
+        "mtime_ns": 1794612226171104081,
+        "write_access": true,
+        "sha256": null
+      },
+      {
+        "path": "steamdeck/decky/node_modules",
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o700",
+        "mtime_ns": 1794612118979259702,
+        "write_access": true,
+        "sha256": null
+      },
+      {
+        "path": "steamdeck/decky/dist",
+        "uid": 0,
+        "gid": 0,
+        "mode": "0o755",
+        "mtime_ns": 1794612226619103430,
+        "write_access": false,
+        "sha256": null
+      },
+      {
+        "path": "steamdeck/decky/dist/decky-api.js",
+        "uid": 0,
+        "gid": 0,
+        "mode": "0o644",
+        "mtime_ns": 1794612242299078970,
+        "write_access": false,
+        "sha256": "1aa163d7f9890fa16e2bacd3d52d8b8775510bcbae4564f144e069ee8e9f368e"
+      },
+      {
+        "path": "steamdeck/decky/dist/types.js",
+        "uid": 0,
+        "gid": 0,
+        "mode": "0o644",
+        "mtime_ns": 1794612242299078970,
+        "write_access": false,
+        "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+      },
+      {
+        "path": "steamdeck/decky/dist/LICENSE.qrcode-generator.txt",
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600",
+        "mtime_ns": 1794612242299078970,
+        "write_access": true,
+        "sha256": "3a850fa5f08101db6f40676c2786e10bd2cd5fff7b12ffdf1e0c434d4e49d90c"
+      },
+      {
+        "path": "steamdeck/decky/dist/manifest.js",
+        "uid": 0,
+        "gid": 0,
+        "mode": "0o644",
+        "mtime_ns": 1794612242299078970,
+        "write_access": false,
+        "sha256": "f789ec51becbda8aa3f44787dc35be596419ff954ca263b3562190e5709f987c"
+      },
+      {
+        "path": "steamdeck/decky/dist/index.js",
+        "uid": 0,
+        "gid": 0,
+        "mode": "0o644",
+        "mtime_ns": 1794612242555078557,
+        "write_access": false,
+        "sha256": "1ddbf5c8a6315ef97fa930b32f1546eaabc13f168f50e1d4a35ec77d60932604"
+      }
+    ],
+    "command": [
+      "npm",
+      "--prefix",
+      "steamdeck/decky",
+      "run",
+      "build"
+    ],
+    "source_clean_before": true,
+    "exit_code": 1,
+    "seconds": 0.445,
+    "outcome": "failed",
+    "paths_after": [
+      {
+        "path": "steamdeck/decky",
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o700",
+        "mtime_ns": 1794612226171104081,
+        "write_access": true,
+        "sha256": null
+      },
+      {
+        "path": "steamdeck/decky/node_modules",
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o700",
+        "mtime_ns": 1794612118979259702,
+        "write_access": true,
+        "sha256": null
+      },
+      {
+        "path": "steamdeck/decky/dist",
+        "uid": 0,
+        "gid": 0,
+        "mode": "0o755",
+        "mtime_ns": 1794612226619103430,
+        "write_access": false,
+        "sha256": null
+      },
+      {
+        "path": "steamdeck/decky/dist/decky-api.js",
+        "uid": 0,
+        "gid": 0,
+        "mode": "0o644",
+        "mtime_ns": 1794612242299078970,
+        "write_access": false,
+        "sha256": "1aa163d7f9890fa16e2bacd3d52d8b8775510bcbae4564f144e069ee8e9f368e"
+      },
+      {
+        "path": "steamdeck/decky/dist/types.js",
+        "uid": 0,
+        "gid": 0,
+        "mode": "0o644",
+        "mtime_ns": 1794612242299078970,
+        "write_access": false,
+        "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+      },
+      {
+        "path": "steamdeck/decky/dist/LICENSE.qrcode-generator.txt",
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600",
+        "mtime_ns": 1794612242299078970,
+        "write_access": true,
+        "sha256": "3a850fa5f08101db6f40676c2786e10bd2cd5fff7b12ffdf1e0c434d4e49d90c"
+      },
+      {
+        "path": "steamdeck/decky/dist/manifest.js",
+        "uid": 0,
+        "gid": 0,
+        "mode": "0o644",
+        "mtime_ns": 1794612242299078970,
+        "write_access": false,
+        "sha256": "f789ec51becbda8aa3f44787dc35be596419ff954ca263b3562190e5709f987c"
+      },
+      {
+        "path": "steamdeck/decky/dist/index.js",
+        "uid": 0,
+        "gid": 0,
+        "mode": "0o644",
+        "mtime_ns": 1794612242555078557,
+        "write_access": false,
+        "sha256": "1ddbf5c8a6315ef97fa930b32f1546eaabc13f168f50e1d4a35ec77d60932604"
+      }
+    ],
+    "log": "host-build-after-act.log",
+    "log_sha256": "42135c973f91e058d1f9ad30cd86d97f7b587a7d1990c242ae5c1614dae17ea4",
+    "source_clean_after": true,
+    "source_unchanged": true,
+    "revision_after": "cf12abe6c620dcbea3b806d1aa63a4715adea26a"
+  },
+  "host_build_recovery": {
+    "observed_at_utc": "2026-11-13T23:33:12.593960+00:00",
+    "revision": "cf12abe6c620dcbea3b806d1aa63a4715adea26a",
+    "operation": "Same-parent atomically preserve only verified ignored frontend dist, then rebuild as host UID1000; no privileged ownership changes",
+    "backup": "/workspace/obsgod/steamdeck/decky/.local-ci",
+    "ignored_rule": ".gitignore:8:steamdeck/decky/dist/\tsteamdeck/decky/dist",
+    "backup_ignored_rule": ".gitignore:9:.local-ci/\tsteamdeck/decky/.local-ci/",
+    "before": [
+      {
+        "path": ".",
+        "uid": 0,
+        "gid": 0,
+        "mode": "0o755",
+        "sha256": null
+      },
+      {
+        "path": "LICENSE.qrcode-generator.txt",
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600",
+        "sha256": "3a850fa5f08101db6f40676c2786e10bd2cd5fff7b12ffdf1e0c434d4e49d90c"
+      },
+      {
+        "path": "decky-api.js",
+        "uid": 0,
+        "gid": 0,
+        "mode": "0o644",
+        "sha256": "1aa163d7f9890fa16e2bacd3d52d8b8775510bcbae4564f144e069ee8e9f368e"
+      },
+      {
+        "path": "index.js",
+        "uid": 0,
+        "gid": 0,
+        "mode": "0o644",
+        "sha256": "1ddbf5c8a6315ef97fa930b32f1546eaabc13f168f50e1d4a35ec77d60932604"
+      },
+      {
+        "path": "manifest.js",
+        "uid": 0,
+        "gid": 0,
+        "mode": "0o644",
+        "sha256": "f789ec51becbda8aa3f44787dc35be596419ff954ca263b3562190e5709f987c"
+      },
+      {
+        "path": "types.js",
+        "uid": 0,
+        "gid": 0,
+        "mode": "0o644",
+        "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+      }
+    ],
+    "after": [
+      {
+        "path": ".",
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o700",
+        "sha256": null
+      },
+      {
+        "path": "LICENSE.qrcode-generator.txt",
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600",
+        "sha256": "3a850fa5f08101db6f40676c2786e10bd2cd5fff7b12ffdf1e0c434d4e49d90c"
+      },
+      {
+        "path": "decky-api.js",
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600",
+        "sha256": "1aa163d7f9890fa16e2bacd3d52d8b8775510bcbae4564f144e069ee8e9f368e"
+      },
+      {
+        "path": "index.js",
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600",
+        "sha256": "1ddbf5c8a6315ef97fa930b32f1546eaabc13f168f50e1d4a35ec77d60932604"
+      },
+      {
+        "path": "manifest.js",
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o600",
+        "sha256": "f789ec51becbda8aa3f44787dc35be596419ff954ca263b3562190e5709f987c"
+      },
+      {
+        "path": "types.js",
+        "uid": 1000,
+        "gid": 1000,
+        "mode": "0o644",
+        "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+      }
+    ],
+    "command": [
+      "npm",
+      "--prefix",
+      "steamdeck/decky",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "seconds": 0.912,
+    "outcome": "passed",
+    "source_clean_after": true,
+    "root_dist_14_hashes_unchanged": true,
+    "log": "host-build-recovery.log",
+    "log_sha256": "4acc38a58dedf942fdbd0a0048052c6ee6fd9b4a4c5e1f9c4f798b6d7fe2eb2c",
+    "earlier_external_rename_attempt": {
+      "destination": "/workspace/.obsgod-tools/act-audit-20261113/triage/frontend-root-owned-after-act",
+      "outcome": "failed",
+      "errno": 13,
+      "message": "PermissionError EACCES; no rename occurred"
+    },
+    "limitation": "Safe recovery workaround; ACT output-ownership defect remains unfixed."
+  },
+  "findings": [
+    {
+      "issue": "https://github.com/szmyty/obsgod/issues/68",
+      "status": "open",
+      "kind": "new_confirmed_development_output_ownership_defect",
+      "fixed": false
+    },
+    {
+      "issue": "https://github.com/szmyty/obsgod/issues/46",
+      "status": "open",
+      "kind": "existing_hosted_dependency_review_device_review_and_product_gates",
+      "duplicated": false
+    }
+  ],
+  "hosted": {
+    "status": "unavailable",
+    "raw_result": "failed",
+    "workflow_runs": 9,
+    "jobs": 15,
+    "executed_steps": 0,
+    "reason": "The job was not started because your account is locked due to a billing issue."
+  },
+  "native_runtime": {
+    "image": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+    "obs": "30.2.3",
+    "status": "passed",
+    "runs": 2,
+    "proof_files_per_run": 18,
+    "unique_original_proof_hashes_per_run": 15,
+    "limitations": "Linux amd64/Xvfb/synthetic media and devices; does not prove actual Steam Deck/OBS33/Flatpak/Gamescope/AMD/controller/headsets/provider viewing."
+  },
+  "unrun": [
+    "native Windows2025",
+    "native macOS15",
+    "Linux arm64 runtime",
+    "actual Steam Deck/OBS33/Flatpak/Gamescope/AMD/controller/headset/provider-viewer/adoption",
+    "required independent human review"
+  ],
+  "interruptions": [
+    "Earlier6206468 candidate intentionally cancelled for logger repair; superseded source does not qualify cf12.",
+    "CF12 original224204Z candidate interrupted by cloud runtime transition: original receipt remains running/unfinalized; no exit fabricated. First logical sequence uses successful230426Z candidate retry; full repeat completed independently."
+  ],
+  "archive": {
+    "sha256": "a1e5ffb954344a009d610f53ea3eea35290b83c13078f03da8967b884f8aa0f2",
+    "bytes": 327338,
+    "files": 106
+  },
+  "report_sha256": "12f5d7ea243fd30aa802ee6467b5f700420a80be08bf985ba5cb05d524351255",
+  "public_candidate": {
+    "source_revision": "1a482808a8281c8bce092cea057df758836b34e9",
+    "artifact_revision": "d0a4973f9b1835471e99b046d2d4313b042f9ae2",
+    "unchanged": true
+  },
+  "release_published": false,
+  "deployed": false,
+  "environment_snapshot_published": false,
+  "other_repository_changed": false,
+  "spent_money": false
+}
