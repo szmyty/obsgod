@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import tempfile
 import unittest
 from unittest.mock import patch
 
@@ -31,6 +32,13 @@ class UserTestIdentity(unittest.TestCase):
     def test_child_failure_is_propagated(self):
         result = subprocess.run([sys.executable, str(HELPER), "--", "-c", "raise SystemExit(37)"], capture_output=True)
         self.assertEqual(result.returncode, 37)
+
+    def test_long_parent_tmpdir_does_not_break_actual_browser_style_unix_socket(self):
+        with tempfile.TemporaryDirectory(prefix="long-cloud-workspace-" + "x" * 50) as inherited:
+            code = "import os,pathlib,socket; directory=pathlib.Path(os.environ['TMPDIR'])/'org.chromium.Chromium.abcdef'; directory.mkdir(); stream=socket.socket(socket.AF_UNIX); stream.bind(str(directory/'SingletonSocket')); stream.close(); print('actual Unix socket bound')"
+            result = subprocess.run([sys.executable, str(HELPER), "--", "-c", code], env={**os.environ, "TMPDIR": inherited}, text=True, capture_output=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertIn("actual Unix socket bound", result.stdout)
 
     def test_source_tree_cannot_become_output_and_ownership_is_preserved(self):
         before = (ROOT.stat().st_uid, ROOT.stat().st_gid, ROOT.stat().st_mode)

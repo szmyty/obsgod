@@ -55,7 +55,7 @@ export function StreamTools({current,busy,run,copy}:{current:any;busy:boolean;ru
   }
   return <>
     <PanelSection title="STREAM PROFILES">
-      <PanelSectionRow><Hint>Saved settings apply only to your next explicit start. Presets are starting points, not measured Steam Deck performance guarantees.</Hint></PanelSectionRow>
+      <PanelSectionRow><Hint>Saved settings apply only to your next explicit start. Initial microphone defaults apply before live audio is configured. Existing live microphone, mute and gain preferences stay unchanged; use Live audio &amp; microphone to control them. Presets are starting points, not measured Steam Deck performance guarantees.</Hint></PanelSectionRow>
       <RowButton disabled={busy} onClick={()=>profilesOpen?setProfilesOpen(false):void loadProfiles()}>{profilesOpen?"Hide stream profiles":"Open stream profiles"}</RowButton>
       {profilesOpen&&<>
         <PanelSectionRow><Hint>Current: {profileSummary(profiles?.current)}</Hint></PanelSectionRow>
@@ -73,9 +73,10 @@ export function StreamTools({current,busy,run,copy}:{current:any;busy:boolean;ru
         </>}
         <RowButton disabled={busy||!profiles?.current} onClick={()=>void saveCurrent()}>Save current as deck-saved</RowButton>
         <RowButton disabled={busy} onClick={()=>void exportCurrent()}>Copy settings-only profile</RowButton>
-        <RowButton disabled={!media.idle} onClick={()=>{if(!resetConfirm)setResetConfirm(true);else{setResetConfirm(false);void applyProfile({action:"reset"});}}}>{resetConfirm?"Confirm reset: entire screen, microphone off":"Reset stream settings to defaults"}</RowButton>
+        <RowButton disabled={!media.idle} onClick={()=>{if(!resetConfirm)setResetConfirm(true);else{setResetConfirm(false);void applyProfile({action:"reset"});}}}>{resetConfirm?"Confirm reset: entire screen; live audio unchanged":"Reset stream settings to defaults"}</RowButton>
+        {resetConfirm&&<PanelSectionRow><Hint>Reset restores video defaults, entire-screen capture and the initial microphone default off. Existing live microphone, mute and gain preferences remain unchanged. Use Live audio &amp; microphone to mute or disable capture.</Hint></PanelSectionRow>}
         <RowButton disabled={busy} onClick={()=>void loadProfiles()}>Reload profiles</RowButton>
-        <PanelSectionRow><Hint>Use Desktop Setup for exact quality controls, profile names/import and game-profile bindings. A bound profile applies only during an explicit cold Start/Test/record/replay action; a game launch never starts output. Applying a profile preserves your destination and key. Stop all output before applying; a running managed OBS may need to be closed before new encoder settings take effect.</Hint></PanelSectionRow>
+        <PanelSectionRow><Hint>Use Desktop Setup for exact quality controls, profile names/import and game-profile bindings. A bound profile applies only during an explicit cold Start/Test/record/replay action; a game launch never starts output. Applying a profile preserves your destination and key. Stop every output and close managed OBS before applying profiles.</Hint></PanelSectionRow>
       </>}
       {message&&<PanelSectionRow><div role="status"><Hint>{message}</Hint></div></PanelSectionRow>}
     </PanelSection>

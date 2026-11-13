@@ -635,7 +635,7 @@ obsgod deck stream-profiles [flags]
       --encoder string        Override JSON/environment profile encoder for this action
       --fps int               Override JSON/environment profile fps for this action
       --height int            Override JSON/environment profile height for this action
-      --microphone            Override profile microphone preference; use --microphone=false to disable
+      --microphone            Override the initial profile microphone default; saved live mixer preferences take precedence
       --width int             Override JSON/environment profile width for this action
 ```
 

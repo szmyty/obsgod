@@ -176,7 +176,7 @@ function profileFromForm(){
   const [width,height]=el("resolution").value.split("x").map(Number);
   return {version:1,width,height,bitrate:Number(el("bitrate").value),fps:Number(el("fps").value),encoder:el("encoder").value,microphone:el("microphone").checked,capture_mode:el("capture_mode").value};
 }
-function profileDescription(profile){return profile?`${profile.width}×${profile.height} · ${profile.fps} fps · ${profile.bitrate} kbps · ${profile.encoder}\n${profile.capture_mode==="game"?"Game-only video":"Entire screen, including menus"} · microphone ${profile.microphone?"on":"off"}`:"Settings unavailable";}
+function profileDescription(profile){return profile?`${profile.width}×${profile.height} · ${profile.fps} fps · ${profile.bitrate} kbps · ${profile.encoder}\n${profile.capture_mode==="game"?"Game-only video":"Entire screen, including menus"} · initial microphone default ${profile.microphone?"on":"off"}`:"Settings unavailable";}
 function renderProfileCatalog(data){
   profileCatalog=data;
   for(const [id,items,label] of [["profile-preset",data.presets||[],item=>item.label],["profile-saved",data.profiles||[],item=>item.name]]){
@@ -209,7 +209,7 @@ el("profile-apply-saved").addEventListener("click",safeWorkspace(async()=>{const
 el("profile-validate").addEventListener("click",safeWorkspace(()=>profileAction({action:"validate",profile:profileFromForm()})));
 el("profile-save").addEventListener("click",safeWorkspace(async()=>{const data=await profileAction({action:"save",name:el("profile-name").value.trim(),profile:profileFromForm()});if(data.ok){const list=await profileAction({action:"list"});if(list.ok)el("profile-saved").value=el("profile-name").value.trim();}}));
 el("profile-export").addEventListener("click",safeWorkspace(()=>profileAction({action:"export"})));
-el("profile-reset").addEventListener("click",safeWorkspace(async()=>{if(!window.confirm("Reset stream quality, capture and microphone preferences? Your destination, key and media are preserved. This does not start output."))return;const data=await profileAction({action:"reset"});if(data.ok)await refresh();}));
+el("profile-reset").addEventListener("click",safeWorkspace(async()=>{if(!window.confirm("Reset video defaults, entire-screen capture and the initial microphone default off? Existing live microphone, mute and gain preferences remain unchanged; use Live audio & microphone to mute or disable capture. Your destination, key and media are preserved. This does not start output."))return;const data=await profileAction({action:"reset"});if(data.ok)await refresh();}));
 el("profile-import").addEventListener("click",safeWorkspace(async()=>{
   let document;try{document=JSON.parse(el("profile-json").value);}catch{workspaceMessage("profiles-status",{ok:false,message:"Enter valid settings-only JSON first."});return;}
   await profileAction({action:"import",name:el("profile-name").value.trim(),document});

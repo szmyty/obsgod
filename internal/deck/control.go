@@ -78,7 +78,18 @@ func Status(ctx context.Context, p Paths) Result {
 	r.Media = &MediaSnapshot{Preferences: pref, Message: "Local output state is unconfirmed"}
 	resilience := ReadResilienceStatus(p)
 	r.Resilience = &resilience
-	mixer := ReadMixerSnapshot(p)
+	cachedMixer := ReadMixerSnapshot(p)
+	mixer := cachedMixer
+	// A cached observation cannot confirm current mixer state when this same
+	// status cannot establish the managed connection and output ownership.
+	mixer.Known, mixer.State = false, "unknown"
+	mixer.Message = "Current managed OBS mixer state is unconfirmed; saved preferences are shown"
+	mixer.Microphone, mixer.Game = MixerInput{Signal: "unknown"}, MixerInput{Signal: "unknown"}
+	mixer.Talking, mixer.TalkExpiresAt = false, nil
+	if process == "absent" && !listener {
+		mixer.State = "offline"
+		mixer.Message = "OBS is offline; saved mixer preferences do not confirm an active microphone"
+	}
 	r.Mixer = &mixer
 	if loadErr == nil {
 		r.Settings = &s
@@ -135,6 +146,7 @@ func Status(ctx context.Context, p Paths) Result {
 	}
 	r.Recording = media.Recording.Active
 	r.OutputKnown = true
+	mixer = cachedMixer // Existing managed runtime/stream/media checks permit the bounded cache.
 	r.Audio = readAudioStatus(p)
 	video := ReadCaptureVideoStatus(p)
 	r.Video = &video

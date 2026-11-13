@@ -54,6 +54,35 @@ def main():
                 assert page.evaluate("fixture.mixerPreferences.game_gain_percent")==0
                 assert page.evaluate("fixture.mixerPreferences.microphone_gain_percent")==150
                 assert page.evaluate("fixture.calls.start||0")==0
+                # Initial profile defaults do not override saved live audio.
+                # OBS must be closed for profile writes: actual mic is unknown
+                # until a new managed-OBS observation after reopening.
+                button("Unmute microphone on stream").click()
+                expect(page.get_by_text("Microphone live on stream",exact=True)).to_be_visible()
+                mixer_preferences=page.evaluate("({...fixture.mixerPreferences})")
+                page.evaluate("fixture.obsAbsent=true")
+                button("Refresh status").click()
+                expect(page.get_by_text("Microphone state unconfirmed",exact=True)).to_be_visible()
+                button("Open stream profiles").click()
+                expect(page.get_by_text("Existing live microphone, mute and gain preferences stay unchanged",exact=False)).to_be_visible()
+                expect(page.get_by_text("initial microphone default off",exact=False).first).to_be_visible()
+                button("Apply selected preset").click()
+                expect(button("Apply selected preset")).to_be_enabled()
+                assert page.evaluate("fixture.mixerPreferences")==mixer_preferences
+                assert page.evaluate("fixture.microphone") is False
+                button("Reset stream settings to defaults").click()
+                confirm=button("Confirm reset: entire screen; live audio unchanged")
+                expect(confirm).to_be_visible()
+                expect(page.get_by_text("Existing live microphone, mute and gain preferences remain unchanged.",exact=False)).to_be_visible()
+                confirm.click()
+                expect(button("Reset stream settings to defaults")).to_be_enabled()
+                assert page.evaluate("fixture.mixerPreferences")==mixer_preferences
+                assert page.evaluate("fixture.mode")=="screen"
+                expect(page.get_by_text("Microphone state unconfirmed",exact=True)).to_be_visible()
+                page.evaluate("fixture.obsAbsent=false")
+                button("Refresh status").click()
+                expect(page.get_by_text("Microphone live on stream",exact=True)).to_be_visible()
+                assert page.evaluate("fixture.calls.start||0")==0
                 page.evaluate("fixture.active=true;fixture.bytes=2048")
                 button("Refresh status").click()
                 expect(page.get_by_role("button",name=re.compile(r"^Stop streaming"))).to_be_enabled()
@@ -113,7 +142,7 @@ def main():
                 assert not errors,errors
                 page.evaluate("plugin.onDismount()")
                 browser.close()
-            print("PASS: compiled mixer UI mute/unmute, input changes start muted, zero/custom gains, live output preserved, unknown/lost input gates, notice dedupe, hold-to-talk keyboard renewal/release/blur, and no implicit broadcast. Simulated Decky; native devices/controller proof remains separate.")
+            print("PASS: compiled mixer UI mute/unmute, truthful initial-default/reset wording, live audio preferences preserved through closed-OBS profile apply/reset and fresh observation after reopen, input changes start muted, zero/custom gains, live output preserved, unknown/lost input gates, notice dedupe, hold-to-talk keyboard renewal/release/blur, and no implicit broadcast. Simulated Decky; native devices/controller proof remains separate.")
         finally:server.shutdown();server.server_close();thread.join()
 
 if __name__=="__main__":main()

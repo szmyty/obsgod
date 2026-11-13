@@ -35,6 +35,30 @@ close the pre-merge issue graph prematurely. Candidate8 remains immutable at
 its recorded exact source. New source requires fresh candidate9 qualification.
 
 
+## Privacy-state reconciliation and short browser paths
+
+The e34892e candidate preflight passed pinned setup, managed APT trust for all
+configured repositories, Go checks,127 real nonroot Python fixtures,22 script
+tests, frontend/security checks and two reproducible runtime/updater/audit
+builds. Chromium then rejected an overlong Unix socket path. The test helper now
+uses short private `/tmp/ogt-*` HOME/TMPDIR paths; the daemon-visible build temp
+path and persistent evidence remain separate. A real socket-bind regression and
+23 script tests pass. Earlier partial artifacts/results are retained.
+
+Two demonstrated microphone-state gaps are repaired in the same checkpoint:
+profile/reset copy now describes the initial microphone default and explicitly
+preserves saved live audio preferences; browser cases verify actual unknown
+state while OBS is closed and fresh observation after reopening. Main Status
+invalidates cached mixer/input/meter/talking claims until its existing managed
+connection/runtime/output checks succeed. Saved preferences/cache/settings/
+credentials remain unchanged and no extra queries are added. Three connection
+integration cases and focused race checks pass;30 Node tests and focused UI
+browsers pass. The CLI reference reflects the same microphone precedence.
+
+Source is ready for another clean candidate preflight through all browser/native
+stages, followed by both full localCI sequences and final standalone matrix.
+These diagnostic results qualify only their recorded attempts, not a later SHA.
+
 ## CI user-fixture identity and APT trust repair
 
 At `218e26bfb5f31fb64e5327e9a82082fde4f25f47`, the snapshot job passed all

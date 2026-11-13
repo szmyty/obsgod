@@ -29,6 +29,14 @@ screen or game-only video. The base scene canvas remains 1280×720, preserving
 existing source placement while OBS scales the encoded output. A game-only
 video choice does not isolate system audio to a single application.
 
+The portable profile's `microphone` value is the **initial microphone default**.
+After live audio preferences are saved, [Live audio & microphone](microphone.md)
+governs the current microphone device, enable/mute state and gains. Saving setup
+settings, applying a profile or resetting stream defaults preserves those live audio
+preferences; an initial default of `false` does not mute an already configured
+microphone. OBS is closed during profile apply/reset, so its actual microphone
+state is unknown until a fresh observation after reopening.
+
 ## Preview, save and apply
 
 All requests use one JSON object on stdin. No credential belongs in an argument,

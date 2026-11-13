@@ -77,6 +77,9 @@ use the shared readable `PLAYWRIGHT_BROWSERS_PATH`; screenshot/site outputs go t
 an explicitly owned evidence directory outside the checkout and are retained by
 the artifact step. Package builds/audits and native containers keep their own
 existing execution identities.
+The helper's private `/tmp/ogt-*` path stays short enough for Chromium's actual
+Unix sockets. It does not replace the outer daemon-visible build TMPDIR or the
+persistent browser cache/evidence paths.
 
 The initial act setup-go clone failed because act's embedded go-git transport
 could not consume the runtime's injected Git authentication. `prepare-actions`

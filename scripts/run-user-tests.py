@@ -44,7 +44,9 @@ def main():
     env = os.environ.copy()
     for key in ("SUDO_UID", "SUDO_GID", "SUDO_USER", "SUDO_COMMAND", "XDG_CONFIG_HOME", "XDG_DATA_HOME", "XDG_STATE_HOME", "XDG_CACHE_HOME"):
         env.pop(key, None)
-    with tempfile.TemporaryDirectory(prefix="obsgod-user-tests-") as temporary:
+    # Browser Unix sockets have a short pathname limit. These private fixtures
+    # do not use nested Docker mounts; persistent evidence/cache stay outside.
+    with tempfile.TemporaryDirectory(prefix="ogt-", dir="/tmp") as temporary:
         work = Path(temporary)
         for path in (work, work / "home", work / "tmp"):
             path.mkdir(exist_ok=True, mode=0o700)
