@@ -35,6 +35,18 @@ close the pre-merge issue graph prematurely. Candidate8 remains immutable at
 its recorded exact source. New source requires fresh candidate9 qualification.
 
 
+## Full-source lint repair; remaining CI preflight active
+
+At `7173ff91c599a37c8446048782098137b9e987b0`, tracked local artifact delivery
+passed with the actual coverage artifact, and build/coverage passed at58.0%
+statements. Full-source staticcheck then reported four ST1005 initial-case errors
+for proper-name-prefixed messages. This checkpoint adds lowercase prefixes while
+preserving Steam Deck/Gamescope/Flatpak names and behavior. Pinned host staticcheck,
+formatting and vet pass. Prior7173 receipts are retained as superseded, not final.
+Run snapshot/docs/candidate preflight next to expose any remaining integration
+failures, then the complete available matrix and both full localCI sequences at
+the final exact clean source. All prepared drafts remain open for owner review.
+
 ## Candidate 9 qualification repair checkpoint
 
 The first clean attempt at `8757df4efd6a2723e0b83995140db5984b03f683` passed

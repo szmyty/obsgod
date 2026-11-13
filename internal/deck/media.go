@@ -118,7 +118,7 @@ func defaultMediaDeps() mediaActionDeps {
 		prepareCapture: func(ctx context.Context, c mediaClient, p Paths, s Settings) error {
 			client := c.(*automation.Client)
 			if s.CaptureModeName() == "screen" && !waitGamescope(ctx) {
-				return errors.New("Gamescope capture is unavailable; use game-only with its idle screen or return to Gaming Mode before recording")
+				return errors.New("the Gamescope capture is unavailable; use game-only with its idle screen or return to Gaming Mode before recording")
 			}
 			if e := ensureCapture(ctx, client, p, s); e != nil {
 				return e

@@ -154,7 +154,7 @@ func commandOutput(ctx context.Context, name string, args ...string) ([]byte, er
 
 func checkDependencies(ctx context.Context) error {
 	if _, e := exec.LookPath("flatpak"); e != nil {
-		return errors.New("Flatpak is missing; use OBSGod on SteamOS or install Flatpak first")
+		return errors.New("the Flatpak runtime is missing; use OBSGod on SteamOS or install Flatpak first")
 	}
 	for _, id := range []string{"com.obsproject.Studio", "com.obsproject.Studio.Plugin.Gstreamer"} {
 		dependencyCtx, cancel := context.WithTimeout(ctx, 3*time.Second)
