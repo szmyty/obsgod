@@ -23,6 +23,22 @@ native/browser qualification stack on `codex/m3-controller-workflows`. No source
 merge is performed by this implementation turn. Candidate8 qualification must
 use its own final exact revision; historical candidate7 remains immutable.
 
+Qualification exposed a real retained-output-counter defect: OBS keeps the prior
+stopped stream's byte total, so a later stream could transmit successfully while
+Start waited to exceed that historical total. A bounded follow-up on
+`codex/m3-output-confirmation` establishes fresh advancing samples for new output
+and resets on counter/duration/reconnection changes. The updater's own preflight
+also guards replay before backup/download application. Do not weaken frame or
+output confirmation gates. Preserve failed receipts for `deccefd` and `1fe5ec1`;
+neither is a fully qualified candidate.
+
+Host browser/Decky transport/native tests must run in separate phases: they can
+contend for port1337 and the conservative same-UID OBS process inspection. Run
+native suites first, then transport, then browsers. This scheduling does not
+waive or relax process ownership checks. The synthetic video fixture now uses
+the existing stable C producer after a demonstrated gst-launch node-teardown
+race; production capture still requires verified rendered frames.
+
 
 ## Milestone 2 source merged; Milestone 3 is proposed
 

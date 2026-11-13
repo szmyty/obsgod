@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"math"
 	"net"
 	"regexp"
 	"strconv"
@@ -238,30 +239,50 @@ func (c *Client) streamStatus() (*streamResponse, error) {
 	return &StreamStatus{Active: r.OutputActive, Reconnecting: r.OutputReconnecting, Bytes: r.OutputBytes, Duration: r.OutputDuration, SkippedFrames: r.OutputSkippedFrames, TotalFrames: r.OutputTotalFrames}, nil
 }
 
-// StartStream is idempotent and waits for advancing output bytes.
+// StartStream is idempotent and waits for an advancing pair of active,
+// non-reconnecting output samples. Stopped OBS outputs can retain counters from
+// the previous broadcast, so a new Start must establish its own baseline.
 func (c *Client) StartStream(ctx context.Context) (StreamStatus, error) {
 	s, err := c.StreamStatus(ctx)
 	if err != nil {
 		return s, err
 	}
+	baseline := s
+	haveBaseline := streamProgressSample(s)
 	if !s.Active {
 		if _, err := empty(ctx, "StartStream", c.obs.Stream.StartStream); err != nil {
 			return s, err
 		}
+		haveBaseline = false
 	}
-	baseline := s.Bytes
 	for {
 		s, err = c.StreamStatus(ctx)
 		if err != nil {
 			return s, err
 		}
-		if s.Active && !s.Reconnecting && s.Bytes > baseline {
-			return s, nil
+		if !streamProgressSample(s) {
+			// Reconnection and inactive output invalidate old progress. A
+			// restored connection must establish a fresh pair of observations.
+			haveBaseline = false
+		} else {
+			if haveBaseline && s.Bytes > baseline.Bytes && s.Duration >= baseline.Duration {
+				return s, nil
+			}
+			// Compare consecutive eligible samples, including when bytes have
+			// stalled. A decrease in either counter marks a new output epoch;
+			// this sample then becomes its baseline, never false advancement.
+			baseline = s
+			haveBaseline = true
 		}
 		if err := pause(ctx, 400*time.Millisecond); err != nil {
 			return s, err
 		}
 	}
+}
+
+func streamProgressSample(s StreamStatus) bool {
+	return s.Active && !s.Reconnecting && s.Bytes >= 0 && s.Duration >= 0 &&
+		!math.IsInf(s.Bytes, 0) && !math.IsNaN(s.Bytes) && !math.IsInf(s.Duration, 0) && !math.IsNaN(s.Duration)
 }
 
 // StopStream is safe to repeat and waits until the output has stopped.

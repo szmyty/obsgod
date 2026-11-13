@@ -142,10 +142,17 @@ def require_idle(bridge, allow_legacy=False):
     recording_active = recording.get("active") if isinstance(recording, dict) else recording
     stream = state.get("stream")
     known = state.get("output_known", True if allow_legacy else None)
+    media = state.get("media")
+    media_idle = (isinstance(media, dict) and media.get("known") is True
+                  and media.get("replay_active") is False)
+    # A historical status can gate a download, but the verified new payload
+    # repeats the strict check before any backup or installation mutation.
+    legacy_download_or_absent = media is None and (allow_legacy or state.get("process") == "absent")
     if (state.get("ok") is not True or state.get("state") not in ("stopped", "setup")
             or not isinstance(stream, dict) or stream.get("active") is not False
             or not isinstance(recording_active, bool) or recording_active
             or known is not True
+            or not (media_idle or legacy_download_or_absent)
             or (not allow_legacy or "process" in state) and state.get("process") not in ("absent", "running")
             or state.get("operation") not in (None, "", "idle")):
         raise UpdateError("Update blocked: OBS output is active, starting, recording or unconfirmed. Use Stop/cancel, wait for confirmed idle, then run Update OBSGod in Desktop Mode.")

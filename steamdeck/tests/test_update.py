@@ -102,6 +102,19 @@ class UpdateSafety(unittest.TestCase):
                 updater.require_idle(bridge)
             self.assertEqual([call.args[0] for call in bridge.run_cli.call_args_list], ["status"])
 
+    def test_replay_and_unknown_media_block_update_before_any_side_effect(self):
+        idle = {"ok": True, "state": "stopped", "output_known": True, "recording": False,
+                "stream": {"active": False}, "process": "running"}
+        for media in [None, [], {}, {"known": False, "replay_active": False}, {"known": True, "replay_active": True}]:
+            bridge = Mock()
+            bridge.run_cli.return_value = {**idle, "media": media}
+            with self.subTest(media=media), self.assertRaises(updater.UpdateError):
+                updater.require_idle(bridge)
+            self.assertEqual([call.args[0] for call in bridge.run_cli.call_args_list], ["status"])
+        bridge = Mock()
+        bridge.run_cli.return_value = {**idle, "media": {"known": True, "replay_active": False}}
+        updater.require_idle(bridge)
+
     def test_wrong_manifest_json_type_returns_machine_readable_error(self):
         old = self.base / "releases/old"
         old.mkdir(parents=True)
