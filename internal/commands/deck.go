@@ -142,10 +142,10 @@ func newDeckCommand() *coral.Command {
 				return err
 			}
 			if e != nil {
-				return errors.New("Steam Deck operation failed (see JSON result)")
+				return errors.New("the Steam Deck operation failed (see JSON result)")
 			}
 			if !result.OK {
-				return errors.New("Steam Deck diagnostic failed (see JSON result)")
+				return errors.New("the Steam Deck diagnostic failed (see JSON result)")
 			}
 			return nil
 		}

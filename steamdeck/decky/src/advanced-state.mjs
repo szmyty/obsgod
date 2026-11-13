@@ -33,5 +33,5 @@ export function metricText(report, key, unit, now = Date.now(), digits = 1) {
 
 export function profileSummary(profile) {
   if (!profile) return "Settings not loaded";
-  return `${profile.width}×${profile.height} · ${profile.fps} fps · ${profile.bitrate} kbps · ${profile.encoder === "vaapi" ? "hardware H.264" : "software H.264"}\n${profile.capture_mode === "game" ? "Game-only video" : "Entire screen, including menus"} · microphone ${profile.microphone ? "on" : "off"}`;
+  return `${profile.width}×${profile.height} · ${profile.fps} fps · ${profile.bitrate} kbps · ${profile.encoder === "vaapi" ? "hardware H.264" : "software H.264"}\n${profile.capture_mode === "game" ? "Game-only video" : "Entire screen, including menus"} · initial microphone default ${profile.microphone ? "on" : "off"}`;
 }

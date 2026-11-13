@@ -1,0 +1,146 @@
+[
+  {
+    "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+    "command": [
+      "go",
+      "build",
+      "-trimpath",
+      "-buildvcs=false",
+      "-o",
+      "/workspace/.obsgod-tools/completion/final/cross/obsgod-linux-arm64",
+      "."
+    ],
+    "log": "cross/obsgod-linux-arm64.log",
+    "exit_code": 0,
+    "outcome": "passed",
+    "seconds": 23.885,
+    "target": "linux-arm64",
+    "package": ".",
+    "environment": {
+      "CGO_ENABLED": "0",
+      "GOOS": "linux",
+      "GOARCH": "arm64"
+    },
+    "execution": "unrun; compilation only"
+  },
+  {
+    "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+    "command": [
+      "go",
+      "build",
+      "-trimpath",
+      "-buildvcs=false",
+      "-o",
+      "/workspace/.obsgod-tools/completion/final/cross/obsgod-decky-install-linux-arm64",
+      "./cmd/obsgod-decky-install"
+    ],
+    "log": "cross/obsgod-decky-install-linux-arm64.log",
+    "exit_code": 0,
+    "outcome": "passed",
+    "seconds": 0.628,
+    "target": "linux-arm64",
+    "package": "./cmd/obsgod-decky-install",
+    "environment": {
+      "CGO_ENABLED": "0",
+      "GOOS": "linux",
+      "GOARCH": "arm64"
+    },
+    "execution": "unrun; compilation only"
+  },
+  {
+    "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+    "command": [
+      "go",
+      "build",
+      "-trimpath",
+      "-buildvcs=false",
+      "-o",
+      "/workspace/.obsgod-tools/completion/final/cross/obsgod-windows-amd64.exe",
+      "."
+    ],
+    "log": "cross/obsgod-windows-amd64.log",
+    "exit_code": 0,
+    "outcome": "passed",
+    "seconds": 23.715,
+    "target": "windows-amd64",
+    "package": ".",
+    "environment": {
+      "CGO_ENABLED": "0",
+      "GOOS": "windows",
+      "GOARCH": "amd64"
+    },
+    "execution": "unrun; compilation only"
+  },
+  {
+    "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+    "command": [
+      "go",
+      "build",
+      "-trimpath",
+      "-buildvcs=false",
+      "-o",
+      "/workspace/.obsgod-tools/completion/final/cross/obsgod-decky-install-windows-amd64.exe",
+      "./cmd/obsgod-decky-install"
+    ],
+    "log": "cross/obsgod-decky-install-windows-amd64.log",
+    "exit_code": 0,
+    "outcome": "passed",
+    "seconds": 0.333,
+    "target": "windows-amd64",
+    "package": "./cmd/obsgod-decky-install",
+    "environment": {
+      "CGO_ENABLED": "0",
+      "GOOS": "windows",
+      "GOARCH": "amd64"
+    },
+    "execution": "unrun; compilation only"
+  },
+  {
+    "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+    "command": [
+      "go",
+      "build",
+      "-trimpath",
+      "-buildvcs=false",
+      "-o",
+      "/workspace/.obsgod-tools/completion/final/cross/obsgod-darwin-arm64",
+      "."
+    ],
+    "log": "cross/obsgod-darwin-arm64.log",
+    "exit_code": 0,
+    "outcome": "passed",
+    "seconds": 23.505,
+    "target": "darwin-arm64",
+    "package": ".",
+    "environment": {
+      "CGO_ENABLED": "0",
+      "GOOS": "darwin",
+      "GOARCH": "arm64"
+    },
+    "execution": "unrun; compilation only"
+  },
+  {
+    "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+    "command": [
+      "go",
+      "build",
+      "-trimpath",
+      "-buildvcs=false",
+      "-o",
+      "/workspace/.obsgod-tools/completion/final/cross/obsgod-decky-install-darwin-arm64",
+      "./cmd/obsgod-decky-install"
+    ],
+    "log": "cross/obsgod-decky-install-darwin-arm64.log",
+    "exit_code": 0,
+    "outcome": "passed",
+    "seconds": 0.444,
+    "target": "darwin-arm64",
+    "package": "./cmd/obsgod-decky-install",
+    "environment": {
+      "CGO_ENABLED": "0",
+      "GOOS": "darwin",
+      "GOARCH": "arm64"
+    },
+    "execution": "unrun; compilation only"
+  }
+]

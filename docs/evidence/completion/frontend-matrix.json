@@ -1,0 +1,58 @@
+{
+  "limits": [
+    "Go test result cache explicitly recorded; separate final-source -count=1 matrix is parent-owned",
+    "Vulnerability database results reflect observation time and are not a permanent security guarantee"
+  ],
+  "outcome": "passed",
+  "platform": "Ubuntu24.04 ACT/Docker Linux amd64; actual nonroot installer/browser tests and root helper-drop/refusal tests",
+  "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+  "runs": [
+    {
+      "application_python": 127,
+      "go_race": "passed; cached package results present",
+      "govulncheck": "No vulnerabilities found.",
+      "log": {
+        "bytes": 130594,
+        "path": "act/20261113T122827Z-candidate.log",
+        "sha256": "7160952c820a10df6923a9e440d0cc4ef5d32aff70ca416b2ee3f1ed12a2ee72"
+      },
+      "node_tests": 30,
+      "npm_audit": "found 0 vulnerabilities",
+      "outcome": "passed",
+      "parent_receipt": {
+        "bytes": 6648,
+        "path": "act/20261113T122827Z-candidate.json",
+        "sha256": "2b214fa1e04b8b1b6ece9079e81733733fa29c661be8b39c7e9b51f60af0b9ef"
+      },
+      "phase": "first",
+      "rollup_build": "passed",
+      "script_python": 23,
+      "source_revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "typecheck": "passed"
+    },
+    {
+      "application_python": 127,
+      "go_race": "passed; cached package results present",
+      "govulncheck": "No vulnerabilities found.",
+      "log": {
+        "bytes": 130643,
+        "path": "act/20261113T124108Z-candidate.log",
+        "sha256": "965f52031f299216ceeb078644b951a0d1a3a61bb0164eeedc6107717248963b"
+      },
+      "node_tests": 30,
+      "npm_audit": "found 0 vulnerabilities",
+      "outcome": "passed",
+      "parent_receipt": {
+        "bytes": 6648,
+        "path": "act/20261113T124108Z-candidate.json",
+        "sha256": "c06575bbe326ed62039487f054762523ac030ec790e42331c2510024b934b176"
+      },
+      "phase": "repeat",
+      "rollup_build": "passed",
+      "script_python": 23,
+      "source_revision": "1a482808a8281c8bce092cea057df758836b34e9",
+      "typecheck": "passed"
+    }
+  ],
+  "schema_version": 2
+}

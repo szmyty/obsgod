@@ -1,0 +1,498 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-13T12:59:46.636664+00:00",
+  "outcome": "passed",
+  "candidate": "0.1.0-deck.9",
+  "source_revision": "1a482808a8281c8bce092cea057df758836b34e9",
+  "artifact_revision": "d0a4973f9b1835471e99b046d2d4313b042f9ae2",
+  "branch": "artifacts/completion-deck9-review",
+  "files": [
+    {
+      "name": "AUDIT-SHA256SUMS",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/AUDIT-SHA256SUMS",
+      "bytes": 257,
+      "sha256": "30c3985fd5d164031b6f318d180dcbf1837c5267f9ae9d2bfcbe06ab3af1fb59",
+      "outcome": "passed"
+    },
+    {
+      "name": "README-review.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/README-review.md",
+      "bytes": 1969,
+      "sha256": "ed2a135b4c726f72773a2ff61a3256e6921ed564b5e444bfb1409d8992cdf50d",
+      "outcome": "passed"
+    },
+    {
+      "name": "README.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/README.md",
+      "bytes": 1969,
+      "sha256": "ed2a135b4c726f72773a2ff61a3256e6921ed564b5e444bfb1409d8992cdf50d",
+      "outcome": "passed"
+    },
+    {
+      "name": "REVIEW-SHA256SUMS",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/REVIEW-SHA256SUMS",
+      "bytes": 4096,
+      "sha256": "fcb9fb20fb05e19565cbd9dd2fad5482b11a88b477fe2b9f986e71a71149858b",
+      "outcome": "passed"
+    },
+    {
+      "name": "SHA256SUMS",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/SHA256SUMS",
+      "bytes": 273,
+      "sha256": "275dc73251a398c17e01e5083d9db886d23ef2d37fb1ea6209e7631ed2075b34",
+      "outcome": "passed"
+    },
+    {
+      "name": "UPDATER-SHA256SUMS",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/UPDATER-SHA256SUMS",
+      "bytes": 119,
+      "sha256": "cae8aea79da435bba95286f14ba767efcc91ac129cb6c4b0c6176bb87124bfb7",
+      "outcome": "passed"
+    },
+    {
+      "name": "act-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/act-matrix.json",
+      "bytes": 131004,
+      "sha256": "7cd43d0df152f6a571426d964d47478ac8ed16fd9e3e5013fe033403a29c461c",
+      "outcome": "passed"
+    },
+    {
+      "name": "audit-2026-11-13.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/audit-2026-11-13.md",
+      "bytes": 13033,
+      "sha256": "88af45cc0416965becc57235d943d7798deba30d8a9aef1a4fe85ef30b912b97",
+      "outcome": "passed"
+    },
+    {
+      "name": "branch-rename-attempt.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/branch-rename-attempt.json",
+      "bytes": 481,
+      "sha256": "e4406edb53d3d08ef5d11b7b27308eac2f1fb356e8f991e8c69987d5fff70bfd",
+      "outcome": "passed"
+    },
+    {
+      "name": "brand-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/brand-matrix.json",
+      "bytes": 9356,
+      "sha256": "65e3ee69060eeecc2e1eb606d3bbb298ed0ebade5dd6b7575b08e4db029085fe",
+      "outcome": "passed"
+    },
+    {
+      "name": "browser-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/browser-matrix.json",
+      "bytes": 14586,
+      "sha256": "bbc4c1d2c9d09f150d4b94c0d88d7800a191926795229401f95c574a0c0bb2dd",
+      "outcome": "passed"
+    },
+    {
+      "name": "browser-upgrades-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/browser-upgrades-matrix.json",
+      "bytes": 4851,
+      "sha256": "1c0dce80bff26b032ac3d6fa854fe9a6eb47265d83060a8453568c89849b2d6b",
+      "outcome": "passed"
+    },
+    {
+      "name": "capture-build.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/capture-build.json",
+      "bytes": 14418,
+      "sha256": "5f401a620493b5fc282658c16530db6e87a70ad40b95bb88b0212f08417bbd16",
+      "outcome": "passed"
+    },
+    {
+      "name": "ci-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/ci-matrix.json",
+      "bytes": 9866,
+      "sha256": "0492a550eedc6eeac3f25073bf1f4ccbb5afc3c329324e3fa5c05b39f077aa6a",
+      "outcome": "passed"
+    },
+    {
+      "name": "cli-fish-container.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/cli-fish-container.json",
+      "bytes": 8292,
+      "sha256": "819e61d3004907704b0a83a1f23dc86c3f6eba3a1939c829155505746acf257f",
+      "outcome": "passed"
+    },
+    {
+      "name": "cli-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/cli-matrix.json",
+      "bytes": 16867,
+      "sha256": "ec7e50755dae737eddcf27e59a0919d65a9a22b61c9fc8709a9a4f483796b041",
+      "outcome": "passed"
+    },
+    {
+      "name": "criteria.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/criteria.json",
+      "bytes": 719164,
+      "sha256": "177f1335ba0b4dbf9ea65bb519f4c5abffef8242d9d7ec7866ec2ec7be67c06b",
+      "outcome": "passed"
+    },
+    {
+      "name": "decky-stream-proposed.zip",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/decky-stream-proposed.zip",
+      "bytes": 113620,
+      "sha256": "a55eca114dde9aee2d949030de1aeebce32af3d4259a896b70c94bf5e379ec70",
+      "outcome": "passed"
+    },
+    {
+      "name": "decky-stream-qualification-evidence_0.1.0-deck.9_1a482808.zip",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/decky-stream-qualification-evidence_0.1.0-deck.9_1a482808.zip",
+      "bytes": 266916,
+      "sha256": "330517a20f8028ac383380d8aa0469d8b3ecc2bb91b533b554bfd70e8ee188bf",
+      "outcome": "passed"
+    },
+    {
+      "name": "decky-stream-root-evidence_1a482808.zip",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/decky-stream-root-evidence_1a482808.zip",
+      "bytes": 246046,
+      "sha256": "1cec2effdf55d3d29454365704dffc2c0b704edb15a8fddb69fcc2518eddd4c4",
+      "outcome": "passed"
+    },
+    {
+      "name": "decky-stream-site-preview.zip",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/decky-stream-site-preview.zip",
+      "bytes": 29871,
+      "sha256": "7380352377e5d42d863ba9ca814e95f0570d67080425fc8a464421ec8453b63a",
+      "outcome": "passed"
+    },
+    {
+      "name": "decky-updater-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/decky-updater-matrix.json",
+      "bytes": 5915,
+      "sha256": "c151eaad0eadfcb0280631b24d4b9405726010da91cd3d6ec352350257d949a0",
+      "outcome": "passed"
+    },
+    {
+      "name": "frontend-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/frontend-matrix.json",
+      "bytes": 2114,
+      "sha256": "9bd6f1f3032feb65a5d1c539c186d031b9381a10017cc0feb5e930e264822e68",
+      "outcome": "passed"
+    },
+    {
+      "name": "go-cross-result.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/go-cross-result.json",
+      "bytes": 3662,
+      "sha256": "6c8c06e3aa8dd12e72934a2699bbf73e7ff0acf479fa49b2a9fe22e76c48741f",
+      "outcome": "passed"
+    },
+    {
+      "name": "go-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/go-matrix.json",
+      "bytes": 8570,
+      "sha256": "a0c2517d6c5b48de4b7a9ae3d853f4ccca41c203728e7e0b5bf1c0c3363421e5",
+      "outcome": "passed"
+    },
+    {
+      "name": "go-static-result.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/go-static-result.json",
+      "bytes": 496,
+      "sha256": "0329b5573f21aa07ccd172a6ae84e7037c1231a3191eb6f6601939ddf3b71cec",
+      "outcome": "passed"
+    },
+    {
+      "name": "go-tests-result.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/go-tests-result.json",
+      "bytes": 59160,
+      "sha256": "66ac9033990683b66e51b12bf58107dbfc68e7183aeb9e3990e1c73033081f62",
+      "outcome": "passed"
+    },
+    {
+      "name": "hardening-handoff.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/hardening-handoff.json",
+      "bytes": 4359,
+      "sha256": "5c443614e40c0f88ae41ce205e81e7d927e0f16db82270559c578f4893c810d6",
+      "outcome": "passed"
+    },
+    {
+      "name": "manifest.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/manifest.json",
+      "bytes": 2390,
+      "sha256": "cd07f439f014914c28ac6a1690a6d23cbaf07bd2d2c23cb13e62e390ced629c5",
+      "outcome": "passed"
+    },
+    {
+      "name": "native-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/native-matrix.json",
+      "bytes": 33322,
+      "sha256": "4500329897fbc678fd72c66a24a2be5dd32777ba81275a88006b57aa2b741c3d",
+      "outcome": "passed"
+    },
+    {
+      "name": "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+      "bytes": 11872612,
+      "sha256": "879ad44ebb28fb695877c071d9708959a7afc39b7b2b9032421f117a267bf803",
+      "outcome": "passed"
+    },
+    {
+      "name": "obsgod-decky.zip",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/obsgod-decky.zip",
+      "bytes": 4450709,
+      "sha256": "9e613d282d242d5be930af1beeb05a8724453ab971a59165c47e22204b296b57",
+      "outcome": "passed"
+    },
+    {
+      "name": "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip",
+      "bytes": 3073879,
+      "sha256": "e7d24d9860f2a207a130d9002c0e21f3f89c3221e352393b5e9b2b65da9bdc69",
+      "outcome": "passed"
+    },
+    {
+      "name": "obsgod-source-1a482808a8281c8bce092cea057df758836b34e9.tar.gz",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/obsgod-source-1a482808a8281c8bce092cea057df758836b34e9.tar.gz",
+      "bytes": 7368051,
+      "sha256": "4b6751acc9222996cb0205468d19ae941e756868da6aff908489738832713f1e",
+      "outcome": "passed"
+    },
+    {
+      "name": "owner-review.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/owner-review.md",
+      "bytes": 11082,
+      "sha256": "23f2f1504c4ff63dbd3cf480b7020fb00a074301e9252dba791b412a092d0ec8",
+      "outcome": "passed"
+    },
+    {
+      "name": "package-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/package-matrix.json",
+      "bytes": 37206,
+      "sha256": "ea23cb0d6c34a83c6dc0969a5e326d8bfe7810bebb519bbea9ed81d9090b4be4",
+      "outcome": "passed"
+    },
+    {
+      "name": "proposed-finalboss-46.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/proposed-finalboss-46.md",
+      "bytes": 8390,
+      "sha256": "326815e353fc1da3c1bc0e9a6bff0305817bd9ea256a038b1d59779b65970de0",
+      "outcome": "passed"
+    },
+    {
+      "name": "provenance.unsigned.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/provenance.unsigned.json",
+      "bytes": 3852,
+      "sha256": "7eaa6493ad5a97744fc17b9d547b7ad00483e488dbb62ce44e8a557a76c5a85e",
+      "outcome": "passed"
+    },
+    {
+      "name": "python-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/python-matrix.json",
+      "bytes": 663,
+      "sha256": "a7e21c030fbe20d2905c90a3f0c8f286fa0fbd3038717dee89417387a6bc8a80",
+      "outcome": "passed"
+    },
+    {
+      "name": "qualification.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/qualification.json",
+      "bytes": 29106,
+      "sha256": "33dffabb595553b4d7d35ea78393b7ed6d22b3c1d64c13f2dbb107b8284db0d9",
+      "outcome": "passed"
+    },
+    {
+      "name": "release-audit.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/release-audit.json",
+      "bytes": 1915,
+      "sha256": "31fe79de45d5ae37e0f1a31156d466f9681e1b9a5a77a965c1198c6b2c7c7ad2",
+      "outcome": "passed"
+    },
+    {
+      "name": "repository-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/repository-matrix.json",
+      "bytes": 17946,
+      "sha256": "67e2935add1aba6d05c1c9e587e873bff3878b27f9457474d5329ec3631a34b2",
+      "outcome": "passed"
+    },
+    {
+      "name": "sbom.spdx.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/sbom.spdx.json",
+      "bytes": 84509,
+      "sha256": "83b5ae044a582f9596e1be3c39c0568a61b01083ed68fdfd0fa151f3866da304",
+      "outcome": "passed"
+    },
+    {
+      "name": "scripts-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/scripts-matrix.json",
+      "bytes": 457,
+      "sha256": "e4285deb533376527d9896e16aae502d5bc97aeb9ba7a0da1f11001a272296ea",
+      "outcome": "passed"
+    },
+    {
+      "name": "site-matrix.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/site-matrix.json",
+      "bytes": 7338,
+      "sha256": "c87ccafec007ef5503ad571609290fa301f45514de9927fbad960d6443715ef4",
+      "outcome": "passed"
+    },
+    {
+      "name": "source.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/source.json",
+      "bytes": 36638,
+      "sha256": "f42aae1779718883b461d3d64ef2ff94fcb74e625e7541a5c271a2df3501c640",
+      "outcome": "passed"
+    },
+    {
+      "name": "updater-manifest.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/d0a4973f9b1835471e99b046d2d4313b042f9ae2/updater-manifest.json",
+      "bytes": 1145,
+      "sha256": "6ecc084f4fd8bd19b64f63e8024a11ebe4a85edd8fcbb2fdbfe4702b5bf9a821",
+      "outcome": "passed"
+    }
+  ],
+  "runtime_internal_payloads": [
+    {
+      "file": "CAPTURE-SOURCE.tar.gz",
+      "sha256": "cdfb9d8cfa513b30df8ab8849dc48d687986e40708a3faff465f4cbe7d845e8f",
+      "bytes": 30989,
+      "outcome": "passed"
+    },
+    {
+      "file": "Install OBSGod.desktop",
+      "sha256": "945aa356f1651cf93ff8b5acadd64aec2abdf18614b2fc86e024d3d52a0f561d",
+      "bytes": 553,
+      "outcome": "passed"
+    },
+    {
+      "file": "LICENSE",
+      "sha256": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af",
+      "bytes": 1079,
+      "outcome": "passed"
+    },
+    {
+      "file": "STEAM-DECK.md",
+      "sha256": "68c949ee97afe35014bc539def37058b8bec575076b30f8c6f08b496af73c0fd",
+      "bytes": 17221,
+      "outcome": "passed"
+    },
+    {
+      "file": "THIRD_PARTY_NOTICES.md",
+      "sha256": "12aa24cabb6178e5e24eab71c5e23006c85ed2082b47b249610bcb720ee94bed",
+      "bytes": 247219,
+      "outcome": "passed"
+    },
+    {
+      "file": "Uninstall OBSGod.desktop",
+      "sha256": "c357d1ff7583d3cdd09bf5b223e0d5f1d29ef8ec6ea2041e65a336de0c27423c",
+      "bytes": 550,
+      "outcome": "passed"
+    },
+    {
+      "file": "Update OBSGod.desktop",
+      "sha256": "07c1cab1e05c83ac3cce85a03b00ad8d8ed1955ce60bfc9d7fee985a18ef30b7",
+      "bytes": 486,
+      "outcome": "passed"
+    },
+    {
+      "file": "Update OBSGod.sh",
+      "sha256": "b7f587b83634a2c95ca03c2b95a80d76d9e261a77c24b5d88f5d329888749089",
+      "bytes": 88,
+      "outcome": "passed"
+    },
+    {
+      "file": "bridge.py",
+      "sha256": "16d610bfb0985cd61227e99db026560aa38b7b8d3a2cdc2984239c5b17487ea2",
+      "bytes": 1739,
+      "outcome": "passed"
+    },
+    {
+      "file": "decky-install",
+      "sha256": "0bfd85edf9be05dbbee7252e7d64ff6776dd04d7b7b8bfdcb6d7492b7aa1d4d0",
+      "bytes": 7155836,
+      "outcome": "passed"
+    },
+    {
+      "file": "decky.py",
+      "sha256": "96c3aa094fa8a44939a870cbba45f62296ce9314a1dfdf6e68e03347814e4816",
+      "bytes": 4028,
+      "outcome": "passed"
+    },
+    {
+      "file": "install.py",
+      "sha256": "d7ba4e50f795af5e4f8860b3e3e368ae0bbf43a58fc1298815007c261505135e",
+      "bytes": 25186,
+      "outcome": "passed"
+    },
+    {
+      "file": "libgstobsgodcapture.so",
+      "sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+      "bytes": 54384,
+      "outcome": "passed"
+    },
+    {
+      "file": "obsgod",
+      "sha256": "03f7315f41f2c803a20592526d081b544d697005f24f952ed3442ba1cfb0fe77",
+      "bytes": 10965116,
+      "outcome": "passed"
+    },
+    {
+      "file": "obsgod-decky.zip",
+      "sha256": "9e613d282d242d5be930af1beeb05a8724453ab971a59165c47e22204b296b57",
+      "bytes": 4450709,
+      "outcome": "passed"
+    },
+    {
+      "file": "paths.py",
+      "sha256": "436f589b4130ac00bf60dcf5773b30caa56c8cea437fe5715c1af1f92a405f44",
+      "bytes": 4207,
+      "outcome": "passed"
+    },
+    {
+      "file": "product.py",
+      "sha256": "ed28c12ff8587b1d0d51a4e6472caef97430cb001c0467c09f74ca0e5cf68401",
+      "bytes": 214,
+      "outcome": "passed"
+    },
+    {
+      "file": "releases.py",
+      "sha256": "cc73f175f5dab78aa2c13320f4bc91d6a059f7ea2a082ba5f58ce3329e86fc39",
+      "bytes": 17153,
+      "outcome": "passed"
+    },
+    {
+      "file": "setup.css",
+      "sha256": "d678ff8f2266ceacf0306a11111452f424b741dc04801dac0932dd6d5dc84b52",
+      "bytes": 3099,
+      "outcome": "passed"
+    },
+    {
+      "file": "setup.html",
+      "sha256": "43a3485849325c0b6f13029386debe48c19cc4f5d6099d3f2ef3eac97db47f66",
+      "bytes": 20104,
+      "outcome": "passed"
+    },
+    {
+      "file": "setup.js",
+      "sha256": "03bed3eeadf475f74d828a5f7df30f8a9d106390914db0878f2beb55bbe0f609",
+      "bytes": 36388,
+      "outcome": "passed"
+    },
+    {
+      "file": "setup.py",
+      "sha256": "22db974ce260e04a93f1755d79c5b23b6bd50429e54521bcaf0bef7397d38958",
+      "bytes": 10102,
+      "outcome": "passed"
+    },
+    {
+      "file": "uninstall.py",
+      "sha256": "80a41dcf694259fd20a06ac20f8b7dc2af83229db2cde9ef051378cbee3e0072",
+      "bytes": 20164,
+      "outcome": "passed"
+    },
+    {
+      "file": "update.py",
+      "sha256": "a9f85227ce97e787f0db5a911871686615526b180aaa3dff69641e5008549917",
+      "bytes": 16981,
+      "outcome": "passed"
+    }
+  ],
+  "updater_internal_files_verified": 10,
+  "plugin_pair_identical": true,
+  "full_source_files_verified": 350,
+  "installer_executed": false,
+  "release_published": false,
+  "site_deployed": false,
+  "consumer_adoption_proof": false,
+  "limitations": [
+    "Cloud HTTP downloaded-byte/inventory proof only; not actual Steam Deck installation or consumer adoption.",
+    "Checksums/unsigned provenance establish consistency, not authenticated publisher identity.",
+    "The independent local source-bound installation/transport/browser/native checks are recorded separately."
+  ]
+}

@@ -1,0 +1,1002 @@
+{
+  "across_complete_runs": 2,
+  "across_run_comparison": [
+    {
+      "file": "SHA256SUMS",
+      "first_sha256": "275dc73251a398c17e01e5083d9db886d23ef2d37fb1ea6209e7631ed2075b34",
+      "identical": true,
+      "repeat_sha256": "275dc73251a398c17e01e5083d9db886d23ef2d37fb1ea6209e7631ed2075b34"
+    },
+    {
+      "file": "UPDATER-SHA256SUMS",
+      "first_sha256": "cae8aea79da435bba95286f14ba767efcc91ac129cb6c4b0c6176bb87124bfb7",
+      "identical": true,
+      "repeat_sha256": "cae8aea79da435bba95286f14ba767efcc91ac129cb6c4b0c6176bb87124bfb7"
+    },
+    {
+      "file": "capture-build.json",
+      "first_sha256": "5f401a620493b5fc282658c16530db6e87a70ad40b95bb88b0212f08417bbd16",
+      "identical": true,
+      "repeat_sha256": "5f401a620493b5fc282658c16530db6e87a70ad40b95bb88b0212f08417bbd16"
+    },
+    {
+      "file": "libgstobsgodcapture.so",
+      "first_sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+      "identical": true,
+      "repeat_sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68"
+    },
+    {
+      "file": "manifest.json",
+      "first_sha256": "cd07f439f014914c28ac6a1690a6d23cbaf07bd2d2c23cb13e62e390ced629c5",
+      "identical": true,
+      "repeat_sha256": "cd07f439f014914c28ac6a1690a6d23cbaf07bd2d2c23cb13e62e390ced629c5"
+    },
+    {
+      "file": "obsgod",
+      "first_sha256": "03f7315f41f2c803a20592526d081b544d697005f24f952ed3442ba1cfb0fe77",
+      "identical": true,
+      "repeat_sha256": "03f7315f41f2c803a20592526d081b544d697005f24f952ed3442ba1cfb0fe77"
+    },
+    {
+      "file": "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+      "first_sha256": "879ad44ebb28fb695877c071d9708959a7afc39b7b2b9032421f117a267bf803",
+      "identical": true,
+      "repeat_sha256": "879ad44ebb28fb695877c071d9708959a7afc39b7b2b9032421f117a267bf803"
+    },
+    {
+      "file": "obsgod-decky.zip",
+      "first_sha256": "9e613d282d242d5be930af1beeb05a8724453ab971a59165c47e22204b296b57",
+      "identical": true,
+      "repeat_sha256": "9e613d282d242d5be930af1beeb05a8724453ab971a59165c47e22204b296b57"
+    },
+    {
+      "file": "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip",
+      "first_sha256": "e7d24d9860f2a207a130d9002c0e21f3f89c3221e352393b5e9b2b65da9bdc69",
+      "identical": true,
+      "repeat_sha256": "e7d24d9860f2a207a130d9002c0e21f3f89c3221e352393b5e9b2b65da9bdc69"
+    },
+    {
+      "file": "supply-chain/AUDIT-SHA256SUMS",
+      "first_sha256": "30c3985fd5d164031b6f318d180dcbf1837c5267f9ae9d2bfcbe06ab3af1fb59",
+      "identical": true,
+      "repeat_sha256": "30c3985fd5d164031b6f318d180dcbf1837c5267f9ae9d2bfcbe06ab3af1fb59"
+    },
+    {
+      "file": "supply-chain/provenance.unsigned.json",
+      "first_sha256": "7eaa6493ad5a97744fc17b9d547b7ad00483e488dbb62ce44e8a557a76c5a85e",
+      "identical": true,
+      "repeat_sha256": "7eaa6493ad5a97744fc17b9d547b7ad00483e488dbb62ce44e8a557a76c5a85e"
+    },
+    {
+      "file": "supply-chain/release-audit.json",
+      "first_sha256": "31fe79de45d5ae37e0f1a31156d466f9681e1b9a5a77a965c1198c6b2c7c7ad2",
+      "identical": true,
+      "repeat_sha256": "31fe79de45d5ae37e0f1a31156d466f9681e1b9a5a77a965c1198c6b2c7c7ad2"
+    },
+    {
+      "file": "supply-chain/sbom.spdx.json",
+      "first_sha256": "83b5ae044a582f9596e1be3c39c0568a61b01083ed68fdfd0fa151f3866da304",
+      "identical": true,
+      "repeat_sha256": "83b5ae044a582f9596e1be3c39c0568a61b01083ed68fdfd0fa151f3866da304"
+    },
+    {
+      "file": "updater-manifest.json",
+      "first_sha256": "6ecc084f4fd8bd19b64f63e8024a11ebe4a85edd8fcbb2fdbfe4702b5bf9a821",
+      "identical": true,
+      "repeat_sha256": "6ecc084f4fd8bd19b64f63e8024a11ebe4a85edd8fcbb2fdbfe4702b5bf9a821"
+    }
+  ],
+  "actual_audit": {
+    "artifact_identity_sha256": "7a1b11229cc1df1fd892b7f25895e2879f1ad5b035493da9fcabf8a1036050d0",
+    "integrity": "passed",
+    "preferred_source": "passed",
+    "publication": "not-authorized-by-this-audit",
+    "qualification": "unrun-by-this-audit",
+    "remaining_gates": [
+      "Final-revision automated qualification and review receipts",
+      "Successful required hosted CI/review evidence; local act cannot prove GitHub services",
+      "Actual Steam Deck/Flatpak/Gamescope/controller/audio and provider-viewer evidence",
+      "Owner-controlled publisher/signing identity and signature verification policy",
+      "Owner approval for release/publication/deployment and final consumer adoption proof"
+    ],
+    "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+    "schema_version": 1,
+    "source_inventory": "passed",
+    "subjects": [
+      {
+        "digest": {
+          "sha256": "5f401a620493b5fc282658c16530db6e87a70ad40b95bb88b0212f08417bbd16"
+        },
+        "name": "capture-build.json"
+      },
+      {
+        "digest": {
+          "sha256": "cd07f439f014914c28ac6a1690a6d23cbaf07bd2d2c23cb13e62e390ced629c5"
+        },
+        "name": "manifest.json"
+      },
+      {
+        "digest": {
+          "sha256": "879ad44ebb28fb695877c071d9708959a7afc39b7b2b9032421f117a267bf803"
+        },
+        "name": "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz"
+      },
+      {
+        "digest": {
+          "sha256": "9e613d282d242d5be930af1beeb05a8724453ab971a59165c47e22204b296b57"
+        },
+        "name": "obsgod-decky.zip"
+      },
+      {
+        "digest": {
+          "sha256": "e7d24d9860f2a207a130d9002c0e21f3f89c3221e352393b5e9b2b65da9bdc69"
+        },
+        "name": "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip"
+      },
+      {
+        "digest": {
+          "sha256": "6ecc084f4fd8bd19b64f63e8024a11ebe4a85edd8fcbb2fdbfe4702b5bf9a821"
+        },
+        "name": "updater-manifest.json"
+      }
+    ],
+    "unsigned_provenance": "generated",
+    "version": "0.1.0-deck.9"
+  },
+  "artifact_delivery": [
+    {
+      "bytes": 148313365,
+      "delivery": "actual local ACT artifact service; no hosted GitHub upload",
+      "inventory": [
+        {
+          "bytes": 273,
+          "compressed_bytes": 192,
+          "crc32": "3864a090",
+          "file": "obsgod/dist/SHA256SUMS"
+        },
+        {
+          "bytes": 119,
+          "compressed_bytes": 103,
+          "crc32": "8fede91c",
+          "file": "obsgod/dist/UPDATER-SHA256SUMS"
+        },
+        {
+          "bytes": 14418,
+          "compressed_bytes": 3599,
+          "crc32": "3192cc21",
+          "file": "obsgod/dist/capture-build.json"
+        },
+        {
+          "bytes": 2390,
+          "compressed_bytes": 1297,
+          "crc32": "cb895ae8",
+          "file": "obsgod/dist/manifest.json"
+        },
+        {
+          "bytes": 7904685,
+          "compressed_bytes": 7900822,
+          "crc32": "a5d02094",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.1_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 7905307,
+          "compressed_bytes": 7901081,
+          "crc32": "47661115",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.2_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 7934573,
+          "compressed_bytes": 7930458,
+          "crc32": "79751fa0",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.3_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 7935355,
+          "compressed_bytes": 7931216,
+          "crc32": "8eddb59e",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 10995302,
+          "compressed_bytes": 10987728,
+          "crc32": "dbd6ff85",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.5.1_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 10995803,
+          "compressed_bytes": 10988271,
+          "crc32": "a2f5107b",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.5.2_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 10994693,
+          "compressed_bytes": 10987256,
+          "crc32": "26155153",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.5_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 11229097,
+          "compressed_bytes": 11221304,
+          "crc32": "4487af3c",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 11369529,
+          "compressed_bytes": 11362197,
+          "crc32": "4ee00cce",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 11652475,
+          "compressed_bytes": 11645553,
+          "crc32": "aacd613a",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.8_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 11872612,
+          "compressed_bytes": 11865328,
+          "crc32": "6e70b106",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 4450709,
+          "compressed_bytes": 4443028,
+          "crc32": "4aa35e66",
+          "file": "obsgod/dist/obsgod-decky.zip"
+        },
+        {
+          "bytes": 3090319,
+          "compressed_bytes": 3086320,
+          "crc32": "fa18292c",
+          "file": "obsgod/dist/obsgod-one-click-update_0.1.0-deck.4-updater.1_linux_amd64.zip"
+        },
+        {
+          "bytes": 3050702,
+          "compressed_bytes": 3046733,
+          "crc32": "9279fba2",
+          "file": "obsgod/dist/obsgod-one-click-update_0.1.0-deck.5.1_linux_amd64.zip"
+        },
+        {
+          "bytes": 3050704,
+          "compressed_bytes": 3046737,
+          "crc32": "f9a7e5c9",
+          "file": "obsgod/dist/obsgod-one-click-update_0.1.0-deck.5.2_linux_amd64.zip"
+        },
+        {
+          "bytes": 3050701,
+          "compressed_bytes": 3046734,
+          "crc32": "9aa57da5",
+          "file": "obsgod/dist/obsgod-one-click-update_0.1.0-deck.5_linux_amd64.zip"
+        },
+        {
+          "bytes": 3073420,
+          "compressed_bytes": 3069564,
+          "crc32": "92946378",
+          "file": "obsgod/dist/obsgod-one-click-update_0.1.0-deck.7_linux_amd64.zip"
+        },
+        {
+          "bytes": 3069400,
+          "compressed_bytes": 3065626,
+          "crc32": "ab9e5a9b",
+          "file": "obsgod/dist/obsgod-one-click-update_0.1.0-deck.6_linux_amd64.zip"
+        },
+        {
+          "bytes": 3073556,
+          "compressed_bytes": 3069706,
+          "crc32": "f3efe62c",
+          "file": "obsgod/dist/obsgod-one-click-update_0.1.0-deck.8_linux_amd64.zip"
+        },
+        {
+          "bytes": 3073879,
+          "compressed_bytes": 3070220,
+          "crc32": "f8e44383",
+          "file": "obsgod/dist/obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip"
+        },
+        {
+          "bytes": 257,
+          "compressed_bytes": 177,
+          "crc32": "1821aafd",
+          "file": "obsgod/dist/supply-chain/AUDIT-SHA256SUMS"
+        },
+        {
+          "bytes": 3852,
+          "compressed_bytes": 1410,
+          "crc32": "cbc3e16f",
+          "file": "obsgod/dist/supply-chain/provenance.unsigned.json"
+        },
+        {
+          "bytes": 1915,
+          "compressed_bytes": 898,
+          "crc32": "68a60b2d",
+          "file": "obsgod/dist/supply-chain/release-audit.json"
+        },
+        {
+          "bytes": 84509,
+          "compressed_bytes": 8202,
+          "crc32": "73d9fec7",
+          "file": "obsgod/dist/supply-chain/sbom.spdx.json"
+        },
+        {
+          "bytes": 552483,
+          "compressed_bytes": 516457,
+          "crc32": "26ffede4",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/m3-panel/m3-controls.png"
+        },
+        {
+          "bytes": 1145,
+          "compressed_bytes": 643,
+          "crc32": "76909f8e",
+          "file": "obsgod/dist/updater-manifest.json"
+        },
+        {
+          "bytes": 1061311,
+          "compressed_bytes": 997716,
+          "crc32": "e51f2d40",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/m3-setup/m3-setup-1280.png"
+        },
+        {
+          "bytes": 1009401,
+          "compressed_bytes": 964432,
+          "crc32": "d1b143f6",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/m3-setup/m3-setup-390.png"
+        },
+        {
+          "bytes": 1041048,
+          "compressed_bytes": 988893,
+          "crc32": "a6f41a63",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/m3-setup/m3-setup-800.png"
+        },
+        {
+          "bytes": 491184,
+          "compressed_bytes": 459880,
+          "crc32": "bf9ed27e",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/mixer-panel/mixer-live-controls.png"
+        },
+        {
+          "bytes": 81964,
+          "compressed_bytes": 78681,
+          "crc32": "637345c5",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/mixer-setup/mixer-setup-390.png"
+        },
+        {
+          "bytes": 123557,
+          "compressed_bytes": 116012,
+          "crc32": "513463ac",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/mixer-setup/mixer-setup-1280.png"
+        },
+        {
+          "bytes": 121467,
+          "compressed_bytes": 115201,
+          "crc32": "99ae271b",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/mixer-setup/mixer-setup-800.png"
+        },
+        {
+          "bytes": 386676,
+          "compressed_bytes": 355713,
+          "crc32": "d48e89aa",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/panel/panel-console.png"
+        },
+        {
+          "bytes": 77437,
+          "compressed_bytes": 73549,
+          "crc32": "3c443451",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/panel/panel-live.png"
+        },
+        {
+          "bytes": 72096,
+          "compressed_bytes": 68315,
+          "crc32": "5107c5b4",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/panel/panel-setup.png"
+        },
+        {
+          "bytes": 401096,
+          "compressed_bytes": 372248,
+          "crc32": "f3321abe",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/panel/panel-support.png"
+        },
+        {
+          "bytes": 78145,
+          "compressed_bytes": 74335,
+          "crc32": "51a65aea",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/panel/panel-unconfirmed.png"
+        },
+        {
+          "bytes": 1000103,
+          "compressed_bytes": 951554,
+          "crc32": "22d1a799",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/setup/desktop-setup-portrait.png"
+        },
+        {
+          "bytes": 74466,
+          "compressed_bytes": 70505,
+          "crc32": "49786fad",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/panel/panel-stopped.png"
+        },
+        {
+          "bytes": 915857,
+          "compressed_bytes": 864291,
+          "crc32": "ce334777",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/setup/desktop-setup.png"
+        },
+        {
+          "bytes": 7569,
+          "compressed_bytes": 997,
+          "crc32": "29fe694d",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site/matrix.json"
+        },
+        {
+          "bytes": 276152,
+          "compressed_bytes": 263576,
+          "crc32": "57bef371",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site/screenshots/landing-deck-portrait.png"
+        },
+        {
+          "bytes": 424774,
+          "compressed_bytes": 405125,
+          "crc32": "9de0f657",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site/screenshots/configuration-mobile.png"
+        },
+        {
+          "bytes": 276747,
+          "compressed_bytes": 262735,
+          "crc32": "8c0352b0",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site/screenshots/landing-deck.png"
+        },
+        {
+          "bytes": 279750,
+          "compressed_bytes": 264375,
+          "crc32": "e7578efa",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site/screenshots/landing-desktop.png"
+        },
+        {
+          "bytes": 262517,
+          "compressed_bytes": 250646,
+          "crc32": "ef2395e8",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site/screenshots/landing-mobile.png"
+        },
+        {
+          "bytes": 7015,
+          "compressed_bytes": 2247,
+          "crc32": "482942e1",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/assets/site.css"
+        },
+        {
+          "bytes": 568,
+          "compressed_bytes": 339,
+          "crc32": "38cbe447",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/assets/site.js"
+        },
+        {
+          "bytes": 7548,
+          "compressed_bytes": 3072,
+          "crc32": "6fa4702f",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/configuration.html"
+        },
+        {
+          "bytes": 8592,
+          "compressed_bytes": 3538,
+          "crc32": "7377ae11",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/controls.html"
+        },
+        {
+          "bytes": 6176,
+          "compressed_bytes": 2309,
+          "crc32": "006dcb21",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/index.html"
+        },
+        {
+          "bytes": 7038,
+          "compressed_bytes": 2795,
+          "crc32": "52b24bb0",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/install.html"
+        },
+        {
+          "bytes": 6442,
+          "compressed_bytes": 2539,
+          "crc32": "ded43c3a",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/privacy.html"
+        },
+        {
+          "bytes": 5436,
+          "compressed_bytes": 2227,
+          "crc32": "5ef3aedd",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/providers.html"
+        },
+        {
+          "bytes": 3330,
+          "compressed_bytes": 1599,
+          "crc32": "5f9ad947",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/site-manifest.json"
+        },
+        {
+          "bytes": 6176,
+          "compressed_bytes": 2548,
+          "crc32": "868f1198",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/troubleshooting.html"
+        },
+        {
+          "bytes": 5794,
+          "compressed_bytes": 2283,
+          "crc32": "d96c3ce0",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/uninstall.html"
+        },
+        {
+          "bytes": 5459,
+          "compressed_bytes": 2243,
+          "crc32": "b131303e",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/updates.html"
+        },
+        {
+          "bytes": 85775,
+          "compressed_bytes": 73227,
+          "crc32": "5918c422",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/support/ethereum-receive-test-input.png"
+        }
+      ],
+      "parent_act_receipt": "20261113T122827Z-candidate.json",
+      "phase": "first",
+      "registry": {
+        "bytes": 12040,
+        "path": "act/retained-1a482808/first/local-artifact-delivery.json",
+        "sha256": "aa77d5c6eeda15478ad86bb73535e745803c140f770baf7124563bfa99cf5bc9"
+      },
+      "retained_archive": "act/retained-1a482808/first/local-artifact.zip",
+      "sha256": "85d3a628a0aa69c923173a10b40152e164446d02afa4065f0191df04a9162fd7",
+      "source_revision": "1a482808a8281c8bce092cea057df758836b34e9"
+    },
+    {
+      "bytes": 148303141,
+      "delivery": "actual local ACT artifact service; no hosted GitHub upload",
+      "inventory": [
+        {
+          "bytes": 273,
+          "compressed_bytes": 192,
+          "crc32": "3864a090",
+          "file": "obsgod/dist/SHA256SUMS"
+        },
+        {
+          "bytes": 14418,
+          "compressed_bytes": 3599,
+          "crc32": "3192cc21",
+          "file": "obsgod/dist/capture-build.json"
+        },
+        {
+          "bytes": 119,
+          "compressed_bytes": 103,
+          "crc32": "8fede91c",
+          "file": "obsgod/dist/UPDATER-SHA256SUMS"
+        },
+        {
+          "bytes": 2390,
+          "compressed_bytes": 1297,
+          "crc32": "cb895ae8",
+          "file": "obsgod/dist/manifest.json"
+        },
+        {
+          "bytes": 7904685,
+          "compressed_bytes": 7900822,
+          "crc32": "a5d02094",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.1_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 7905307,
+          "compressed_bytes": 7901081,
+          "crc32": "47661115",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.2_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 7934573,
+          "compressed_bytes": 7930458,
+          "crc32": "79751fa0",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.3_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 7935355,
+          "compressed_bytes": 7931216,
+          "crc32": "8eddb59e",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 10995302,
+          "compressed_bytes": 10987728,
+          "crc32": "dbd6ff85",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.5.1_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 10995803,
+          "compressed_bytes": 10988271,
+          "crc32": "a2f5107b",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.5.2_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 10994693,
+          "compressed_bytes": 10987256,
+          "crc32": "26155153",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.5_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 11229097,
+          "compressed_bytes": 11221304,
+          "crc32": "4487af3c",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 11369529,
+          "compressed_bytes": 11362197,
+          "crc32": "4ee00cce",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.7_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 11652475,
+          "compressed_bytes": 11645553,
+          "crc32": "aacd613a",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.8_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 11872612,
+          "compressed_bytes": 11865328,
+          "crc32": "6e70b106",
+          "file": "obsgod/dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz"
+        },
+        {
+          "bytes": 4450709,
+          "compressed_bytes": 4443028,
+          "crc32": "4aa35e66",
+          "file": "obsgod/dist/obsgod-decky.zip"
+        },
+        {
+          "bytes": 3090319,
+          "compressed_bytes": 3086320,
+          "crc32": "fa18292c",
+          "file": "obsgod/dist/obsgod-one-click-update_0.1.0-deck.4-updater.1_linux_amd64.zip"
+        },
+        {
+          "bytes": 3050702,
+          "compressed_bytes": 3046733,
+          "crc32": "9279fba2",
+          "file": "obsgod/dist/obsgod-one-click-update_0.1.0-deck.5.1_linux_amd64.zip"
+        },
+        {
+          "bytes": 3050704,
+          "compressed_bytes": 3046737,
+          "crc32": "f9a7e5c9",
+          "file": "obsgod/dist/obsgod-one-click-update_0.1.0-deck.5.2_linux_amd64.zip"
+        },
+        {
+          "bytes": 3069400,
+          "compressed_bytes": 3065626,
+          "crc32": "ab9e5a9b",
+          "file": "obsgod/dist/obsgod-one-click-update_0.1.0-deck.6_linux_amd64.zip"
+        },
+        {
+          "bytes": 3050701,
+          "compressed_bytes": 3046734,
+          "crc32": "9aa57da5",
+          "file": "obsgod/dist/obsgod-one-click-update_0.1.0-deck.5_linux_amd64.zip"
+        },
+        {
+          "bytes": 3073420,
+          "compressed_bytes": 3069564,
+          "crc32": "92946378",
+          "file": "obsgod/dist/obsgod-one-click-update_0.1.0-deck.7_linux_amd64.zip"
+        },
+        {
+          "bytes": 3073556,
+          "compressed_bytes": 3069706,
+          "crc32": "f3efe62c",
+          "file": "obsgod/dist/obsgod-one-click-update_0.1.0-deck.8_linux_amd64.zip"
+        },
+        {
+          "bytes": 257,
+          "compressed_bytes": 177,
+          "crc32": "1821aafd",
+          "file": "obsgod/dist/supply-chain/AUDIT-SHA256SUMS"
+        },
+        {
+          "bytes": 3073879,
+          "compressed_bytes": 3070220,
+          "crc32": "f8e44383",
+          "file": "obsgod/dist/obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip"
+        },
+        {
+          "bytes": 3852,
+          "compressed_bytes": 1410,
+          "crc32": "cbc3e16f",
+          "file": "obsgod/dist/supply-chain/provenance.unsigned.json"
+        },
+        {
+          "bytes": 1915,
+          "compressed_bytes": 898,
+          "crc32": "68a60b2d",
+          "file": "obsgod/dist/supply-chain/release-audit.json"
+        },
+        {
+          "bytes": 1145,
+          "compressed_bytes": 643,
+          "crc32": "76909f8e",
+          "file": "obsgod/dist/updater-manifest.json"
+        },
+        {
+          "bytes": 84509,
+          "compressed_bytes": 8202,
+          "crc32": "73d9fec7",
+          "file": "obsgod/dist/supply-chain/sbom.spdx.json"
+        },
+        {
+          "bytes": 552471,
+          "compressed_bytes": 508451,
+          "crc32": "d8648e67",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/m3-panel/m3-controls.png"
+        },
+        {
+          "bytes": 1061483,
+          "compressed_bytes": 997446,
+          "crc32": "e5b15a36",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/m3-setup/m3-setup-1280.png"
+        },
+        {
+          "bytes": 1009154,
+          "compressed_bytes": 963749,
+          "crc32": "bf6cac28",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/m3-setup/m3-setup-390.png"
+        },
+        {
+          "bytes": 1040874,
+          "compressed_bytes": 988384,
+          "crc32": "864e1bd3",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/m3-setup/m3-setup-800.png"
+        },
+        {
+          "bytes": 491064,
+          "compressed_bytes": 460569,
+          "crc32": "3c051cc6",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/mixer-panel/mixer-live-controls.png"
+        },
+        {
+          "bytes": 123557,
+          "compressed_bytes": 116012,
+          "crc32": "513463ac",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/mixer-setup/mixer-setup-1280.png"
+        },
+        {
+          "bytes": 81964,
+          "compressed_bytes": 78681,
+          "crc32": "637345c5",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/mixer-setup/mixer-setup-390.png"
+        },
+        {
+          "bytes": 121467,
+          "compressed_bytes": 115201,
+          "crc32": "99ae271b",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/mixer-setup/mixer-setup-800.png"
+        },
+        {
+          "bytes": 388804,
+          "compressed_bytes": 355860,
+          "crc32": "a7505196",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/panel/panel-console.png"
+        },
+        {
+          "bytes": 77723,
+          "compressed_bytes": 73823,
+          "crc32": "264c9d24",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/panel/panel-live.png"
+        },
+        {
+          "bytes": 72096,
+          "compressed_bytes": 68315,
+          "crc32": "5107c5b4",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/panel/panel-setup.png"
+        },
+        {
+          "bytes": 74688,
+          "compressed_bytes": 70786,
+          "crc32": "b115a2ad",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/panel/panel-stopped.png"
+        },
+        {
+          "bytes": 403227,
+          "compressed_bytes": 370169,
+          "crc32": "bc2d880c",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/panel/panel-support.png"
+        },
+        {
+          "bytes": 78431,
+          "compressed_bytes": 74689,
+          "crc32": "d97bebae",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/panel/panel-unconfirmed.png"
+        },
+        {
+          "bytes": 999993,
+          "compressed_bytes": 951132,
+          "crc32": "49fa9ca7",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/setup/desktop-setup-portrait.png"
+        },
+        {
+          "bytes": 915857,
+          "compressed_bytes": 864291,
+          "crc32": "ce334777",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/setup/desktop-setup.png"
+        },
+        {
+          "bytes": 7569,
+          "compressed_bytes": 997,
+          "crc32": "29fe694d",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site/matrix.json"
+        },
+        {
+          "bytes": 424774,
+          "compressed_bytes": 405125,
+          "crc32": "9de0f657",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site/screenshots/configuration-mobile.png"
+        },
+        {
+          "bytes": 276152,
+          "compressed_bytes": 263576,
+          "crc32": "57bef371",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site/screenshots/landing-deck-portrait.png"
+        },
+        {
+          "bytes": 279750,
+          "compressed_bytes": 264375,
+          "crc32": "e7578efa",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site/screenshots/landing-desktop.png"
+        },
+        {
+          "bytes": 276747,
+          "compressed_bytes": 262735,
+          "crc32": "8c0352b0",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site/screenshots/landing-deck.png"
+        },
+        {
+          "bytes": 262517,
+          "compressed_bytes": 250646,
+          "crc32": "ef2395e8",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site/screenshots/landing-mobile.png"
+        },
+        {
+          "bytes": 7015,
+          "compressed_bytes": 2247,
+          "crc32": "482942e1",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/assets/site.css"
+        },
+        {
+          "bytes": 568,
+          "compressed_bytes": 339,
+          "crc32": "38cbe447",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/assets/site.js"
+        },
+        {
+          "bytes": 7548,
+          "compressed_bytes": 3072,
+          "crc32": "6fa4702f",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/configuration.html"
+        },
+        {
+          "bytes": 8592,
+          "compressed_bytes": 3538,
+          "crc32": "7377ae11",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/controls.html"
+        },
+        {
+          "bytes": 6176,
+          "compressed_bytes": 2309,
+          "crc32": "006dcb21",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/index.html"
+        },
+        {
+          "bytes": 6442,
+          "compressed_bytes": 2539,
+          "crc32": "ded43c3a",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/privacy.html"
+        },
+        {
+          "bytes": 7038,
+          "compressed_bytes": 2795,
+          "crc32": "52b24bb0",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/install.html"
+        },
+        {
+          "bytes": 5436,
+          "compressed_bytes": 2227,
+          "crc32": "5ef3aedd",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/providers.html"
+        },
+        {
+          "bytes": 3330,
+          "compressed_bytes": 1599,
+          "crc32": "5f9ad947",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/site-manifest.json"
+        },
+        {
+          "bytes": 6176,
+          "compressed_bytes": 2548,
+          "crc32": "868f1198",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/troubleshooting.html"
+        },
+        {
+          "bytes": 5794,
+          "compressed_bytes": 2283,
+          "crc32": "d96c3ce0",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/uninstall.html"
+        },
+        {
+          "bytes": 5459,
+          "compressed_bytes": 2243,
+          "crc32": "b131303e",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/site-html/updates.html"
+        },
+        {
+          "bytes": 85775,
+          "compressed_bytes": 73227,
+          "crc32": "5918c422",
+          "file": ".obsgod-tools/completion/act/tmp/obsgod-browser-evidence/support/ethereum-receive-test-input.png"
+        }
+      ],
+      "parent_act_receipt": "20261113T124108Z-candidate.json",
+      "phase": "repeat",
+      "registry": {
+        "bytes": 12039,
+        "path": "act/retained-1a482808/repeat/local-artifact-delivery.json",
+        "sha256": "a4f5353b191c22f122d10d325ba86b18bcc51f8ddb8eade3af5343bbc10cde0a"
+      },
+      "retained_archive": "act/retained-1a482808/repeat/local-artifact.zip",
+      "sha256": "98c31cfa32ab96307f256c38fb8c9265ad4160f87f1cbedd1f79bbadcadc2370",
+      "source_revision": "1a482808a8281c8bce092cea057df758836b34e9"
+    }
+  ],
+  "generic_snapshot_formats": "Cross-build/archive checks passed; generic archives do not inherit selected product runtime/updater/plugin license/source/SBOM/install/native qualification. Not selected for publication.",
+  "identical_product_audit_files": 14,
+  "manifest": {
+    "dirty": false,
+    "files": {
+      "CAPTURE-SOURCE.tar.gz": "cdfb9d8cfa513b30df8ab8849dc48d687986e40708a3faff465f4cbe7d845e8f",
+      "Install OBSGod.desktop": "945aa356f1651cf93ff8b5acadd64aec2abdf18614b2fc86e024d3d52a0f561d",
+      "LICENSE": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af",
+      "STEAM-DECK.md": "68c949ee97afe35014bc539def37058b8bec575076b30f8c6f08b496af73c0fd",
+      "THIRD_PARTY_NOTICES.md": "12aa24cabb6178e5e24eab71c5e23006c85ed2082b47b249610bcb720ee94bed",
+      "Uninstall OBSGod.desktop": "c357d1ff7583d3cdd09bf5b223e0d5f1d29ef8ec6ea2041e65a336de0c27423c",
+      "Update OBSGod.desktop": "07c1cab1e05c83ac3cce85a03b00ad8d8ed1955ce60bfc9d7fee985a18ef30b7",
+      "Update OBSGod.sh": "b7f587b83634a2c95ca03c2b95a80d76d9e261a77c24b5d88f5d329888749089",
+      "bridge.py": "16d610bfb0985cd61227e99db026560aa38b7b8d3a2cdc2984239c5b17487ea2",
+      "decky-install": "0bfd85edf9be05dbbee7252e7d64ff6776dd04d7b7b8bfdcb6d7492b7aa1d4d0",
+      "decky.py": "96c3aa094fa8a44939a870cbba45f62296ce9314a1dfdf6e68e03347814e4816",
+      "install.py": "d7ba4e50f795af5e4f8860b3e3e368ae0bbf43a58fc1298815007c261505135e",
+      "libgstobsgodcapture.so": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+      "obsgod": "03f7315f41f2c803a20592526d081b544d697005f24f952ed3442ba1cfb0fe77",
+      "obsgod-decky.zip": "9e613d282d242d5be930af1beeb05a8724453ab971a59165c47e22204b296b57",
+      "paths.py": "436f589b4130ac00bf60dcf5773b30caa56c8cea437fe5715c1af1f92a405f44",
+      "product.py": "ed28c12ff8587b1d0d51a4e6472caef97430cb001c0467c09f74ca0e5cf68401",
+      "releases.py": "cc73f175f5dab78aa2c13320f4bc91d6a059f7ea2a082ba5f58ce3329e86fc39",
+      "setup.css": "d678ff8f2266ceacf0306a11111452f424b741dc04801dac0932dd6d5dc84b52",
+      "setup.html": "43a3485849325c0b6f13029386debe48c19cc4f5d6099d3f2ef3eac97db47f66",
+      "setup.js": "03bed3eeadf475f74d828a5f7df30f8a9d106390914db0878f2beb55bbe0f609",
+      "setup.py": "22db974ce260e04a93f1755d79c5b23b6bd50429e54521bcaf0bef7397d38958",
+      "uninstall.py": "80a41dcf694259fd20a06ac20f8b7dc2af83229db2cde9ef051378cbee3e0072",
+      "update.py": "a9f85227ce97e787f0db5a911871686615526b180aaa3dff69641e5008549917"
+    },
+    "go": "go1.27.4",
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "platform": "linux/amd64",
+    "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+    "updater_version": "0.1.0-deck.9",
+    "version": "0.1.0-deck.9"
+  },
+  "outcome": "passed",
+  "owner_gates": [
+    "Actual physical/provider acceptance",
+    "Hosted CI and required review",
+    "Publisher/signing identity/policy",
+    "Explicit release/publication/deployment approval",
+    "Postpublication downloaded-byte verification and consumer adoption proof"
+  ],
+  "platform": "linux/amd64 Steam Deck preview candidate",
+  "release_status": "not published",
+  "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+  "schema_version": 2,
+  "trust": "Unsigned self-reported SPDX2.3/provenance/checksums and exact-source inventories. These establish byte/inventory consistency, not authenticated publisher or trusted-builder identity. The audit intentionally declares qualification unrun-by-this-audit; actual execution is joined through this matrix.",
+  "version": "0.1.0-deck.9",
+  "within_job_package_builds_per_run": 2,
+  "within_job_unsigned_audit_generations_per_run": 2
+}

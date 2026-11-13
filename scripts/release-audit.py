@@ -7,6 +7,7 @@ trusted builder attestation, license opinion or a production release approval.
 """
 import argparse
 from datetime import datetime, timezone
+import gzip
 import hashlib
 import io
 import json
@@ -32,6 +33,13 @@ SDK_SOURCE = {
     "src/types.ts": "93e5ecece4cde0d92bc2d2e77efcc5d4d9b1091211586aec83ce44d484daa51f"}
 SDK_RUNTIME_SHA256 = "9fdcc09e2a9596e05a71dd2ac758f1d0d9c69a18ff74a04862eac150312f3f17"
 SDK_TYPES_SHA256 = "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+RUNTIME_FILES = frozenset({"setup.py", "bridge.py", "setup.html", "setup.js", "setup.css", "uninstall.py", "install.py", "Install OBSGod.desktop",
+    "decky.py", "update.py", "releases.py", "Update OBSGod.desktop", "Update OBSGod.sh", "paths.py", "product.py", "Uninstall OBSGod.desktop",
+    "obsgod", "decky-install", "LICENSE", "THIRD_PARTY_NOTICES.md", "STEAM-DECK.md", "obsgod-decky.zip", "libgstobsgodcapture.so", "CAPTURE-SOURCE.tar.gz"})
+PLUGIN_FILES = frozenset({"main.py", "releases.py", "paths.py", "product.py", "plugin.json", "package.json", "bin/obsgod", "bin/libgstobsgodcapture.so",
+    "CAPTURE-SOURCE.tar.gz", "LICENSE", "LICENSE.LGPL-2.1", "LICENSE.qrcode-generator.txt", "THIRD_PARTY_NOTICES.md", "dist/index.js", "dist/decky-api.js",
+    "dist/manifest.js", "dist/types.js", "dist/LICENSE.qrcode-generator.txt", "source/decky-api/BUILDING.md"})
+UPDATER_FILES = frozenset({"update.py", "releases.py", "paths.py", "product.py", "decky.py", "decky-install", "Update OBSGod.desktop", "Update OBSGod.sh", "LICENSE", "THIRD_PARTY_NOTICES.md"})
 
 
 def sha(data):
@@ -54,14 +62,28 @@ def safe_name(name):
     return name
 
 
+class BoundedTarReader:
+    """Bound all decompressed bytes, including metadata before a file header."""
+    def __init__(self, data):
+        self.stream = gzip.GzipFile(fileobj=io.BytesIO(data), mode="rb")
+        self.remaining = MAX_TOTAL + 16 * 1024 * 1024
+
+    def read(self, size=-1):
+        requested = self.remaining + 1 if size < 0 else min(size, self.remaining + 1)
+        data = self.stream.read(requested)
+        self.remaining -= len(data)
+        require(self.remaining >= 0, "Archive expansion limit exceeded including tar metadata")
+        return data
+
+
 def archive_files(data, kind):
     """Accept regular, uniquely named files only, with bounded expansion."""
     files, total = {}, 0
-    archive = tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") if kind == "tar" else zipfile.ZipFile(io.BytesIO(data))
+    archive = tarfile.open(fileobj=BoundedTarReader(data), mode="r|") if kind == "tar" else zipfile.ZipFile(io.BytesIO(data))
     with archive:
-        entries = archive.getmembers() if kind == "tar" else archive.infolist()
-        require(len(entries) <= 2000, "Too many archive members")
-        for member in entries:
+        entries = archive if kind == "tar" else archive.infolist()
+        for count, member in enumerate(entries, start=1):
+            require(count <= 2000, "Too many archive members")
             name = safe_name(member.name if kind == "tar" else member.filename)
             size = member.size if kind == "tar" else member.file_size
             regular = member.isfile() if kind == "tar" else stat.S_ISREG(member.external_attr >> 16)
@@ -141,8 +163,10 @@ def audit(directory, expected_revision):
     root, payload = archive_files(artifacts[names[0]], "tar")
     require(root == "OBSGod-" + version and payload["manifest.json"] == manifest_bytes, "Runtime manifest/root mismatch")
     verify_manifest(payload, manifest)
+    require(set(payload) == RUNTIME_FILES | {"manifest.json"}, "Runtime required payload inventory mismatch")
     require(payload["obsgod-decky.zip"] == artifacts["obsgod-decky.zip"], "Nested Decky ZIP mismatch")
     _, plugin = archive_files(artifacts["obsgod-decky.zip"], "zip")
+    require(set(plugin) == PLUGIN_FILES | {"source/decky-api/" + name for name in SDK_SOURCE}, "Decky required payload inventory mismatch")
     for name in ("obsgod", "libgstobsgodcapture.so"):
         require(plugin["bin/" + name] == payload[name], "Decky runtime differs: " + name)
     for name in ("LICENSE", "THIRD_PARTY_NOTICES.md", "CAPTURE-SOURCE.tar.gz"):
@@ -150,6 +174,7 @@ def audit(directory, expected_revision):
     require(json.loads(plugin["package.json"])["version"] == version, "Decky version mismatch")
     for name in ("LICENSE.LGPL-2.1", "LICENSE.qrcode-generator.txt"):
         require(plugin[name] == git(revision, "steamdeck/decky/" + name), "Third-party license differs from source")
+    require(plugin["dist/LICENSE.qrcode-generator.txt"] == plugin["LICENSE.qrcode-generator.txt"], "Bundled QR license mismatch")
     require(any(name.startswith("source/decky-api/src/") and name.endswith(".ts") for name in plugin), "Missing LGPL preferred TypeScript source")
     require(plugin.get("source/decky-api/BUILDING.md"), "Missing LGPL rebuild instructions")
     lock_bytes = git(revision, "steamdeck/decky/package-lock.json")
@@ -185,6 +210,7 @@ def audit(directory, expected_revision):
     require(updater_root == "OBSGod-Updater" and updater["manifest.json"] == (directory / "updater-manifest.json").read_bytes(), "Updater manifest/root mismatch")
     require(all(updater_manifest.get(key) == value for key, value in {"kind": "updater", "revision": revision, "runtime_revision": revision, "version": version, "updater_version": version, "platform": "linux/amd64"}.items()), "Updater identity mismatch")
     verify_manifest(updater, updater_manifest)
+    require(set(updater) == UPDATER_FILES | {"manifest.json"}, "Updater required payload inventory mismatch")
     for name in updater_manifest["files"]:
         require(updater[name] == payload[name], "Updater source differs from runtime: " + name)
     artifacts.update({updater_name: updater_bytes, "updater-manifest.json": updater["manifest.json"]})
@@ -229,7 +255,7 @@ def documents(result):
     files = []
     for name, data in sorted({**{"artifacts/" + name: data for name, data in artifacts.items()}, **{"runtime/" + name: data for name, data in payload.items()}, **{"decky/" + name: data for name, data in plugin.items()}}.items()):
         identifier = "SPDXRef-File-" + sha(name.encode())[:20]
-        files.append({"SPDXID": identifier, "fileName": name, "checksums": [{"algorithm": "SHA256", "checksumValue": sha(data)}], "licenseConcluded": "NOASSERTION", "copyrightText": "NOASSERTION"})
+        files.append({"SPDXID": identifier, "fileName": name, "checksums": [{"algorithm": "SHA256", "checksumValue": sha(data)}], "licenseConcluded": "NOASSERTION", "licenseInfoInFiles": ["NOASSERTION"], "copyrightText": "NOASSERTION"})
         relationships.append({"spdxElementId": "SPDXRef-Application", "relationshipType": "CONTAINS", "relatedSpdxElement": identifier})
     sbom = {"spdxVersion": "SPDX-2.3", "dataLicense": "CC0-1.0", "SPDXID": "SPDXRef-DOCUMENT", "name": "OBSGod-" + version,
             "documentNamespace": "https://github.com/szmyty/obsgod/sbom/" + revision + "/" + identity,
@@ -241,7 +267,7 @@ def documents(result):
                     "internalParameters": {"go": manifest["go"], "node": manifest["node"], "npm": manifest["npm"], "capture_builder_image": capture["image_id"]},
                     "resolvedDependencies": materials},
                     "runDetails": {"builder": {"id": "urn:obsgod:local-self-reported-unsigned"}, "metadata": {"invocationId": "urn:sha256:" + identity},
-                     "byproducts": [{"name": "trust-boundary", "content": {"status": "UNSIGNED", "claim": "Offline self-reported inventory only; no authenticated publisher or trusted builder identity; source and build receipts require independent review."}}]}}}
+                     "byproducts": [{"name": "trust-boundary", "annotations": {"status": "UNSIGNED", "claim": "Offline self-reported inventory only; no authenticated publisher or trusted builder identity; source and build receipts require independent review."}}]}}}
     report = {"schema_version": 1, "revision": revision, "version": version, "artifact_identity_sha256": identity,
               "integrity": "passed", "source_inventory": "passed", "preferred_source": "passed", "unsigned_provenance": "generated",
               "qualification": "unrun-by-this-audit", "publication": "not-authorized-by-this-audit",

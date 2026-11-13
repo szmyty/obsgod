@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "candidate": "0.1.0-deck.9",
+  "source_revision": "1a482808a8281c8bce092cea057df758836b34e9",
+  "source_clean_before": true,
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "playwright": "1.62.0",
+  "browser": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+  "node": "v24.19.0",
+  "inputs": {
+    "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz": {
+      "sha256": "879ad44ebb28fb695877c071d9708959a7afc39b7b2b9032421f117a267bf803",
+      "bytes": 11872612
+    },
+    "/workspace/obsgod/dist/obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip": {
+      "sha256": "e7d24d9860f2a207a130d9002c0e21f3f89c3221e352393b5e9b2b65da9bdc69",
+      "bytes": 3073879
+    },
+    "/workspace/obsgod/dist/obsgod-decky.zip": {
+      "sha256": "9e613d282d242d5be930af1beeb05a8724453ab971a59165c47e22204b296b57",
+      "bytes": 4450709
+    },
+    "/workspace/obsgod/dist/decky-install": {
+      "sha256": "0bfd85edf9be05dbbee7252e7d64ff6776dd04d7b7b8bfdcb6d7492b7aa1d4d0",
+      "bytes": 7155836
+    },
+    "/workspace/obsgod/dist/manifest.json": {
+      "sha256": "cd07f439f014914c28ac6a1690a6d23cbaf07bd2d2c23cb13e62e390ced629c5",
+      "bytes": 2390
+    },
+    "/workspace/.obsgod-tools/m2/legacy-download/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz": {
+      "sha256": "c584c04ed3c79a01f1b846adc4f8bbe86c8132a4bca2cf6ba60cc557eba39ce1",
+      "bytes": 7935355
+    },
+    "/workspace/.obsgod-tools/audio-game-upgrade/final/public-download/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz": {
+      "sha256": "23cc2c484b7524756a3b632bf8a8e7231ac7c515c06a08183422ed91b7e82650",
+      "bytes": 11229097
+    },
+    "/workspace/.obsgod-tools/m2/legacy-download/obsgod-one-click-update_0.1.0-deck.6_linux_amd64.zip": {
+      "sha256": "c196947ca1cd34a01caccff7755b62de61d77531f39ac63922b570eed329420d",
+      "bytes": 3069400
+    }
+  },
+  "source_files_sha256": {
+    "steamdeck/tests/browser-setup.py": "fe4374941457334fd155404a2846b9551fabd4348d0e40ed9be6be896801a9b7",
+    "steamdeck/tests/browser-panel.py": "280d4b32f4bcc47e7126f5c32eab7144766ac94e5185e6211420ea2b08c5faf8",
+    "steamdeck/tests/browser-support.py": "eb8af6d817c9a92a087bad7a5ea63691d97c1bea908f8a1adce53b688f54dbcd",
+    "steamdeck/tests/decky-transport-smoke.py": "d2387b420ae0882673bbfd30c9e5cbf33108d621204f071c13e4bead62fcdaf6",
+    "steamdeck/tests/updater-smoke.py": "54f8b83432c575a3b582f9437b56b6427e9ee90ceccffaf33457c25bd706da3a",
+    "steamdeck/tests/test_bootstrap.py": "1250855acade87931b71c263ec49c5077b207e249c370190fd417402064e6c86",
+    "steamdeck/decky/tests/fixture.html": "6619a3c6f785f89bdebdceaa6fb01ead476b5428366825caf3079cdbbcdaeca3",
+    "steamdeck/decky/tests/build-fixture.mjs": "77ef761327f9a3e264d0ca7aad06b7ff64dba056963ef40745d5bacf1306318c",
+    "steamdeck/decky/tests/build-support-fixture.mjs": "65d695f8f31b57b656fa11313fdc2d68bef1b3cc51f9724235cbe9538dac8b75"
+  },
+  "checks": [
+    {
+      "name": "setup-upgrade4",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "steamdeck/tests/browser-setup.py",
+        "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+        "--upgrade-from",
+        "/workspace/.obsgod-tools/m2/legacy-download/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz",
+        "--browser",
+        "/usr/bin/chromium",
+        "--screenshots",
+        "/workspace/.obsgod-tools/completion/final/browser-upgrade4"
+      ],
+      "log": "setup-upgrade4.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 3.701
+    },
+    {
+      "name": "setup-upgrade6",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "steamdeck/tests/browser-setup.py",
+        "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+        "--upgrade-from",
+        "/workspace/.obsgod-tools/audio-game-upgrade/final/public-download/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz",
+        "--browser",
+        "/usr/bin/chromium",
+        "--screenshots",
+        "/workspace/.obsgod-tools/completion/final/browser-upgrade6"
+      ],
+      "log": "setup-upgrade6.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 3.058
+    }
+  ],
+  "limitations": [
+    "Steam/Decky host APIs and installed Flatpak/Steam service behavior are fixtures, not real Deck/controller proof.",
+    "Configured receive dialogs use public protocol-test addresses; production receiving addresses remain unconfigured.",
+    "No live provider payments, wallet scanning/receipt or external broadcast performed."
+  ],
+  "outcome": "passed",
+  "source_clean_after": true,
+  "revision_after": "1a482808a8281c8bce092cea057df758836b34e9",
+  "input_hashes_unchanged": true
+}

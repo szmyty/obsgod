@@ -1,0 +1,211 @@
+{
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "branding/tests/test_brand_kit.py"
+      ],
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "log": "/workspace/.obsgod-tools/completion/final/branding/unit-tests.log",
+      "log_sha256": "19b51271cf2a0e6dcfd40c5ce768736b32ffbc757d2a8454d1149dc6956affaa",
+      "seconds": 0.089,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate-brand-identity-proof.py",
+        "--validator",
+        "/workspace/.obsgod-tools/completion/identity-upstream/scripts/validate_identity.py"
+      ],
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "log": "/workspace/.obsgod-tools/completion/final/branding/identity-source-proof.log",
+      "log_sha256": "5b711eb45ef4c1b8dcb33475f0de3a511bdf4dd84f8d4d5cd8d5f49e8aab6adb",
+      "seconds": 0.073,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate-brand-kit.py",
+        "--raster",
+        "--output",
+        "/workspace/.obsgod-tools/completion/final/branding/build-a"
+      ],
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "log": "/workspace/.obsgod-tools/completion/final/branding/build-a.log",
+      "log_sha256": "e16918da209205f7b4df53db7acf98046e39f8abd909f6aef2a63d19ba2b4315",
+      "seconds": 1.209,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate-brand-kit.py",
+        "--raster",
+        "--output",
+        "/workspace/.obsgod-tools/completion/final/branding/build-a",
+        "--check"
+      ],
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "log": "/workspace/.obsgod-tools/completion/final/branding/build-a-check.log",
+      "log_sha256": "5a3ef6bbc3de5d80b8837744c8feb325b8cebb026a5af755725764da1ccbf491",
+      "seconds": 1.411,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate-brand-kit.py",
+        "--raster",
+        "--output",
+        "/workspace/.obsgod-tools/completion/final/branding/build-b"
+      ],
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "log": "/workspace/.obsgod-tools/completion/final/branding/build-b.log",
+      "log_sha256": "6d349f085c0a0530a2bb9add7aedba1d7447d973df6488b9787243f8eb65ae46",
+      "seconds": 1.093,
+      "status": "passed"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/generate-brand-kit.py",
+        "--raster",
+        "--output",
+        "/workspace/.obsgod-tools/completion/final/branding/build-b",
+        "--check"
+      ],
+      "cwd": "/workspace/obsgod",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "log": "/workspace/.obsgod-tools/completion/final/branding/build-b-check.log",
+      "log_sha256": "4c9902adc415dfb5b372e60ebe2b5d2ec4d96bd58b54487cf69be95cbf62cb10",
+      "seconds": 1.284,
+      "status": "passed"
+    }
+  ],
+  "completed_at_utc": "2026-11-13T12:25:10Z",
+  "contrast": {
+    "automated_status": "passed",
+    "human_legibility": "unrun; inspect 16/24/32px in native Decky at actual device size",
+    "method": "WCAG sRGB relative luminance",
+    "minimum_normal_text": 4.5,
+    "ratios": {
+      "accent_on_ink": 14.788,
+      "body_on_ink": 17.097,
+      "button_label_on_accent": 12.726,
+      "muted_on_ink": 10.801
+    },
+    "state": "Brand colors are decorative; status must use text plus observed state, not color alone"
+  },
+  "identity": {
+    "proof_sha256": "5b711eb45ef4c1b8dcb33475f0de3a511bdf4dd84f8d4d5cd8d5f49e8aab6adb",
+    "source_snapshot": {
+      "directories": [
+        ".identity/candidates",
+        ".identity/references",
+        ".identity/sources"
+      ],
+      "files": {
+        ".identity/brief.md": "411d834b7694b39e7c8b577963eacc650907d8abf4c8f3272f3e65f29295ba47",
+        ".identity/defaults/organization.tokens.json": "e8f53747482aa8914fc3307fbf63295e45fb1ca59448c8e0435e1af8fce5eda5",
+        ".identity/governance/approvals.json": "e96c088f11ded1d42a60872e3de0384299615b778c4927f20f1b441bd9db7bc9",
+        ".identity/governance/provenance.json": "ce9c3a4e1c40d89bcc605b9bc287276a3211d444ee05c3a3471a2f15fab8bc4f",
+        ".identity/identity.json": "0a192e777313bb36eff735efe137f89f1258dc493ca27c2e9ee2b9f0bcc21a63",
+        ".identity/overrides/product.tokens.json": "c545dc44ed77337b41c7e4d1276907d1958583c3515dc1206cbcbdf479ec22d8",
+        ".identity/targets/profiles.json": "1f46cce8621175f1a9fe871e4c65ab214f6f161c43d649f1110c24b79db2b463"
+      }
+    },
+    "status": "passed",
+    "upstream_revision": "cfb6c29bd02589a47fc48050ab02e7e0da359719",
+    "validator_sha256": "aea7ba3ff1f331acb0cf2d05501c56c4d89c15ad41c8c57b4fd7448b323175f5"
+  },
+  "limits": [
+    "Unapproved creative candidates only",
+    "No Identity production-generation/human rights approval",
+    "Native Deck/controller/legibility unrun",
+    "No release/publication/deployment"
+  ],
+  "platform": {
+    "chromium": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+    "chromium_sha256": "2c8d32d29dc6781c35ae196ea83299d507ac88fc339301abe74672feda299779",
+    "font_sha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e",
+    "inkscape": "Inkscape 1.4 (e7c3feb100, 2024-10-09)",
+    "inkscape_sha256": "a1db427b1666d73e477a841b925f2bc44185623cd178cd007f6da3ca8ab4c873",
+    "os": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "playwright": "1.62.0",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "python_executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "uname": {
+      "machine": "x86_64",
+      "node": "c0405567fb23",
+      "processor": "",
+      "release": "6.18.57",
+      "system": "Linux",
+      "version": "#1 SMP Tue Oct 20 21:56:04 UTC 2026"
+    }
+  },
+  "reproducibility": {
+    "archive_sha256": "a55eca114dde9aee2d949030de1aeebce32af3d4259a896b70c94bf5e379ec70",
+    "files": 25,
+    "manifest_sha256": "2f10c05cda5eb2d8834fb6215f5dbb45f4f009dd28c30d867efccbaedad6c724",
+    "outputs": {
+      "README.md": "ac2a726e47a267eebd5dc75a7ec0d09da4205a9bd11b56367a3e216818b2ddcd",
+      "decky-stream-proposed.zip": "a55eca114dde9aee2d949030de1aeebce32af3d4259a896b70c94bf5e379ec70",
+      "decky/icon-monochrome.svg": "fc9ae707d7b19d7c6a32fb92f9264eea71f2ff57e9e9205da7dbae057d784fbb",
+      "docs/mark-64.png": "de751ee638ebeb412161aa9c73ca71425689d5b009e44a50cd13de4c4ba96ed8",
+      "docs/wordmark.png": "8d0ce2072dba1c113344b79e3a42f384fc7af2e82f16cd01be7168b2a24e8361",
+      "docs/wordmark.svg": "60024fd8723d4472844d53f62ef3b0c6b7033f4342ee5f4689857726a2a0ad9c",
+      "draft-manifest.json": "2f10c05cda5eb2d8834fb6215f5dbb45f4f009dd28c30d867efccbaedad6c724",
+      "github/avatar-256.png": "3540a2862990364c83a86905eb0ec765fd4aac9288b2d396bea806951ef2d772",
+      "github/avatar-512.png": "8f252ae4dc7cb02aee377d29df481377969a73a666810a413694c8b53132c17c",
+      "github/social-preview.png": "5f3cc0930c0674c13b483da3a88e5e974ae68a40fbb0951bfe6341dc0445cd44",
+      "github/social-preview.svg": "71a5ff97f1e27526445878348177e6927e46c00990b486d4dc3eefba9a83616e",
+      "licenses/DejaVu.txt": "e180b3d65bf650dffffd71dd21b6180767b469a18dd87e1d8552be69bb9ecdf0",
+      "masters/mark.svg": "3c3514b3ca0a961a5333857434c0cd5a8dae2469c2b947ea1fa98e44d935ac9b",
+      "metadata/project.json": "729a5a072d4d48a2faa063d1902ece22597a9f2dc354a74ab9eb73da9ba80c04",
+      "metadata/rights-and-sources.json": "e541b34477a934388df02efe317978275d86a7e39da7b4ea692e9b55b08cdf02",
+      "review/contrast.json": "99c8e114b1ba209eaf340607888ac2292e6a1b59d1c96ed796ba66bd9f86d472",
+      "review/index.html": "da6787683d38d5a4ea2f8fdf6d3f8e724e9ab1c89b61ecc94a43203a0041e009",
+      "review/legibility-sheet.png": "a4b777d223f236ed701153a5c1a73054393daebf336d0bd008d332933461a046",
+      "review/legibility-sheet.svg": "1835b3949025359bcf8a5d8345175882c7afa65d7281f20de0424289e045ce77",
+      "review/review.css": "18f6a81d5982ef8ce473b649a340249f93a80fef1a3336694b36f414645e711b",
+      "tokens/palette.css": "8115e7e0f762427c286bcbfed51dd6534841911d6f218e2727f8a96a43bae238",
+      "tokens/palette.json": "669b26545d24d1d640a453c7d6bc6f865766e5979a0f2f95df58e95cbada7813",
+      "web/favicon-16.png": "c395d6fdda9e78ef89b704324383201c0594939b88347a24753531304eb9a6f4",
+      "web/favicon-32.png": "1f583f7a761026607087402c2496662b117496a5f0e604b4a6073fafa66b4740",
+      "web/favicon.svg": "3c3514b3ca0a961a5333857434c0cd5a8dae2469c2b947ea1fa98e44d935ac9b"
+    },
+    "raster_exports": 8,
+    "status": "passed"
+  },
+  "revision": "1a482808a8281c8bce092cea057df758836b34e9",
+  "schema": "decky-stream.final-brand-matrix/v1",
+  "source_after_sha256": "f46421d9afc5bf5e6d5d4e1987ea4f1d94bfbeee56ee80c9dbf4fbfd8c67778b",
+  "source_before_sha256": "f46421d9afc5bf5e6d5d4e1987ea4f1d94bfbeee56ee80c9dbf4fbfd8c67778b",
+  "source_unchanged": true,
+  "status": "passed"
+}

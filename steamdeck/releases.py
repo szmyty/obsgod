@@ -85,6 +85,8 @@ def _read_url(url, limit=MAX_METADATA):
         if error.code in {403, 429}:
             raise ReleaseError("GitHub refused the update check or its rate limit was reached. Try again later.") from None
         raise ReleaseError("GitHub could not provide the release metadata. Try again later.") from None
+    except ValueError:
+        raise ReleaseError("GitHub returned an unsupported download address. Your installation is unchanged.", "unsupported") from None
     except (OSError, urllib.error.URLError):
         raise ReleaseError("Could not reach GitHub. Your installed version is unchanged; check your connection and retry.", "offline") from None
 
@@ -96,9 +98,9 @@ class _ProjectRedirects(urllib.request.HTTPRedirectHandler):
     asset hop is distinct from trusting another repository or arbitrary host.
     """
     def redirect_request(self, request, response, code, message, headers, url):
-        source = urllib.parse.urlsplit(request.full_url)
-        target = urllib.parse.urlsplit(url)
         try:
+            source = urllib.parse.urlsplit(request.full_url)
+            target = urllib.parse.urlsplit(url)
             allowed = (source.netloc == "github.com" and _safe_url(request.full_url) and
                        target.scheme == "https" and target.netloc == "release-assets.githubusercontent.com" and
                        target.username is None and target.password is None and target.port is None and
@@ -317,6 +319,8 @@ def download_archive(candidate, destination):
                     raise ReleaseError("The release download exceeded its size/time limit. Existing files are unchanged.")
                 digest.update(chunk)
                 output.write(chunk)
+    except ValueError:
+        raise ReleaseError("GitHub returned an unsupported archive address. Existing files are unchanged.", "unsupported") from None
     except (OSError, urllib.error.URLError):
         raise ReleaseError("The release download failed. Existing files are unchanged; check your connection/free space and retry.", "offline") from None
     if digest.hexdigest() != candidate["archive_sha256"]:

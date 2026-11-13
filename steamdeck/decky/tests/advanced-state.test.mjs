@@ -1,8 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mediaControls, healthFresh, metricText} from '../src/advanced-state.mjs';
+import {mediaControls, healthFresh, metricText, profileSummary} from '../src/advanced-state.mjs';
 
 const idle={configured:true,output_known:true,process:'running',stream:{active:false},media:{known:true,recording:{active:false},replay_active:false}};
+test('portable profile microphone summaries describe an initial default, never current mute state',()=>{
+  const profile={width:1280,height:720,fps:30,bitrate:4500,encoder:'vaapi',capture_mode:'screen',microphone:false};
+  assert.match(profileSummary(profile),/initial microphone default off/);
+  assert.match(profileSummary({...profile,microphone:true}),/initial microphone default on/);
+  assert.doesNotMatch(profileSummary(profile),/microphone (?:muted|disabled|live)/);
+});
 test('replay and unknown output cannot authorize profile edits or another output',()=>{
   assert.equal(mediaControls(idle).idle,true);
   assert.equal(mediaControls({...idle,media:{...idle.media,replay_active:true}}).idle,false);

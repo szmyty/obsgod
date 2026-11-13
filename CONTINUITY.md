@@ -1,5 +1,48 @@
 # Current work
 
+## Completion candidate9 qualified; owner review and target gates remain
+
+Exact packaged source `1a482808a8281c8bce092cea057df758836b34e9`, tree `fba5cfaed616313e2a6b679a55ff234d21a21538`,
+passed both complete local act sequences and the fresh standalone matrix.
+Seven drafts remain open in order **#58 → #59 → #60 → #62 → #63 → #64 → #65**.
+No merge or issue closure occurred. This is a later docs-only evidence follow-up;
+the packaged source remains the revision above, not the evidence commit HEAD.
+
+[Owner packet](docs/completion-review.md), [install command](docs/candidate-9-install.md),
+[qualification](docs/evidence/completion-qualification.json),
+[230 original criteria](docs/evidence/completion-criteria.json),
+[dated audit](audits/audit-2026-11-13.md),
+[public-byte proof](docs/evidence/completion-public-download.json) and
+[proposed final-boss consolidation](docs/finalboss-plan.md) are current.
+Artifact checkpoint `d0a4973f9b1835471e99b046d2d4313b042f9ae2` on
+`artifacts/completion-deck9-review` contains47 verified public files and full
+350-file source. Runtime SHA256 `879ad44ebb28fb695877c071d9708959a7afc39b7b2b9032421f117a267bf803`.
+Never merge artifact trees; retain reachable exact source/artifact refs/URLs when
+source branches are eventually cleaned, then verify downloads again.
+
+Passed:213 Go top-level/386 pass events with race/count1,127 Python,23 tooling,
+30 Node;12 CLI checks plus container Fish; formatting/vet/staticcheck and zero
+reported Go/npm findings;6 compile targets;20 generic snapshot targets compiled;
+13 local jobs including two full six-job sequences and PR static;58.1% coverage;
+14/14 product/audit files identical across complete runs; two full native OBS30
+suites, actual-package browsers, legacy4/6 transport and browser upgrades; pinned
+Identity source/draft brand/site determinism and45 host viewport cases. One opt-in
+existing-OBS test skipped; host Fish/file navigation unavailable but container
+Fish and ACT file-offline cases passed. Exact commands/platforms/limits are linked.
+
+Actual Deck/OBS33/Flatpak/Gamescope/AMD/controller/headset/provider/adoption remain
+unrun. Hosted CI ran zero steps due to the account billing lock; provider
+Dependency graph review is unsupported/API403. Human reviews and applicable
+rights/publisher/publication actions remain. Master→main rename requires owner
+GitHub UI after actual403. Broader9/13/14 and generic distribution implementation
+remainders remain explicit. No release/deployment/Store submission/transfer,
+other-repo write, wallet activation or spending. #51 is unchanged research.
+
+After review/merges, consolidate intact remaining criteria/dependencies into #46
+and retain #51; administrative supersession is not acceptance. Refresh live
+issues/PRs/releases/default/protections before that step. Older progress below
+is historical and does not supersede this completed local qualification record.
+
 ## Active: finish independent product work; keep #51 research separate
 
 On 2026-11-13 the owner authorized working through **every open issue except
@@ -34,6 +77,149 @@ without presenting unrun acceptance as passed. Prepare this mapping now; do not
 close the pre-merge issue graph prematurely. Candidate8 remains immutable at
 its recorded exact source. New source requires fresh candidate9 qualification.
 
+
+## Final upgrade fixture checkpoint
+
+At `e32e8a05f2613702e0e513cd59f25d504e89c1d7`, both complete local act
+sequences passed lint/build/coverage/snapshot/docs/candidate, plus PR static
+checks. The actual dependency-review action is unavailable for this repository;
+its comparison API returned403. Hosted jobs executed zero steps. These remain
+explicit provider/owner gates, separate from local passes.
+
+Additional legacy transport qualification found that its staged-network fixture
+intercepted only `urlopen`, while the hardened production updater uses a custom
+opener. The fixture now maps both entry points to the same exact staged URL
+inventory and rejects unmapped requests. Production redirects/trust and version
+selection are unchanged. Exploratory preflights passed legacy4→9 installation,
+dynamic updater6, legacy6→9 installation and both browser upgrade paths. Their
+logs explicitly record dirty fixture provenance, not final qualification.
+
+Freeze this checkpoint, rerun both complete local act sequences and the fresh
+standalone matrix at its exact clean revision, then create the immutable review
+packet. Preserve earlier receipts as historical. No release, deployment, merge,
+issue closure, default-branch rename or research51 work has occurred.
+
+## Privacy-state reconciliation and short browser paths
+
+The e34892e candidate preflight passed pinned setup, managed APT trust for all
+configured repositories, Go checks,127 real nonroot Python fixtures,22 script
+tests, frontend/security checks and two reproducible runtime/updater/audit
+builds. Chromium then rejected an overlong Unix socket path. The test helper now
+uses short private `/tmp/ogt-*` HOME/TMPDIR paths; the daemon-visible build temp
+path and persistent evidence remain separate. A real socket-bind regression and
+23 script tests pass. Earlier partial artifacts/results are retained.
+
+Two demonstrated microphone-state gaps are repaired in the same checkpoint:
+profile/reset copy now describes the initial microphone default and explicitly
+preserves saved live audio preferences; browser cases verify actual unknown
+state while OBS is closed and fresh observation after reopening. Main Status
+invalidates cached mixer/input/meter/talking claims until its existing managed
+connection/runtime/output checks succeed. Saved preferences/cache/settings/
+credentials remain unchanged and no extra queries are added. Three connection
+integration cases and focused race checks pass;30 Node tests and focused UI
+browsers pass. The CLI reference reflects the same microphone precedence.
+
+Source is ready for another clean candidate preflight through all browser/native
+stages, followed by both full localCI sequences and final standalone matrix.
+These diagnostic results qualify only their recorded attempts, not a later SHA.
+
+## CI user-fixture identity and APT trust repair
+
+At `218e26bfb5f31fb64e5327e9a82082fde4f25f47`, the snapshot job passed all
+20 cross-build targets, unique archives and 15 Linux packages without publishing
+or signing. The candidate passed pinned npm/browser setup and Go race/static/
+vulnerability checks. Its Python installation tests then correctly refused the
+act runner's UID0. Production root guards remain enabled: a new test-only helper
+drops actual UID/GID/groups and uses private test HOME/TMPDIR. All installer and
+browser fixtures run through it with a readable shared browser cache and owned
+external evidence. Real Docker root→UID1000 diagnostics passed all127 existing
+Python tests, and22 helper/audit tests passed. No source tree permissions change.
+
+A read-only ephemeral APT CaInfo snippet uses the existing combined CA for HTTPS
+indices while preserving package repositories, proxy settings and TLS. Earlier
+218 results and warning/failure evidence are retained. Run the clean candidate
+preflight through all package/browser/native stages, then both complete final
+localCI sequences and the standalone matrix at the final exact source.
+
+## Snapshot/npm integration repair; default-branch administration unavailable
+
+Lookahead at `548ae195b1ae087370a06da8c9de23c3a0acc6f3` passed the docs job
+(9pages/11tests/local artifact). GoReleaser compiled20unique targets but failed
+ARMv6/v7 archive-name collision; its old snapshot version also inherited a
+slash-containing archive tag. The candidate job stopped before tests because
+Node24.19.0 bundled npm11.17.0 rather than pinned11.9.0. This checkpoint gives
+ARM archives distinct names, uses commit-based snapshot SemVer/current fields
+and explicitly installs npm11.9.0 without changing registry/TLS presets.
+
+The already-requested `master`→`main` rename was inspected and attempted once:
+`main` absent, default `master` ated7d100, branchmetadata `protected:false`,
+rulesets empty, detailedprotection endpoint403. Repo metadata reports admin but
+rename API returned403 `Resource not accessible by integration` on2026-11-13.
+No repository branch/settings changed. Keep that concrete owner UI action in
+the handoff; do not infer access from coarse admin metadata or missing env vars.
+
+Snapshot and candidate preflight must pass before the two complete final localCI
+sequences. Older548/7173/8757 attempts remain explicit superseded evidence.
+
+## Full-source lint repair; remaining CI preflight active
+
+At `7173ff91c599a37c8446048782098137b9e987b0`, tracked local artifact delivery
+passed with the actual coverage artifact, and build/coverage passed at58.0%
+statements. Full-source staticcheck then reported four ST1005 initial-case errors
+for proper-name-prefixed messages. This checkpoint adds lowercase prefixes while
+preserving Steam Deck/Gamescope/Flatpak names and behavior. Pinned host staticcheck,
+formatting and vet pass. Prior7173 receipts are retained as superseded, not final.
+Run snapshot/docs/candidate preflight next to expose any remaining integration
+failures, then the complete available matrix and both full localCI sequences at
+the final exact clean source. All prepared drafts remain open for owner review.
+
+## Candidate 9 qualification repair checkpoint
+
+The first clean attempt at `8757df4efd6a2723e0b83995140db5984b03f683` passed
+212 Go top-level tests/382 events (one optional endpoint skip),127 Python tests,
+6 cross-builds, vet/vulnerability checks, brand/site determinism and45 site
+viewports. Its local act coverage test passed at58.0% statements but artifact
+delivery failed:0.0.0.0 was advertised into bridge containers and local requests
+used the inherited proxy. A demonstrated corrected local address/NO_PROXY
+exemption delivered the actual coverage artifact; hosted delivery is separate.
+
+This checkpoint repairs dynamic local service advertising while preserving
+network presets, token-only/blank-password log redaction, exact required audit
+payload inventories and streaming tar expansion bounds. Malformed updater
+redirects now produce fixed unsupported results. The new native mixer harness
+uses a1e-6 linear-gain tolerance for OBS float32 storage; strict mute assertions
+remain intact. Exploratory real OBS mixer/lease/input-loss checks passed without
+changing stream state or credentials. These are diagnostic results, not final
+candidate/package qualification. Retain both initial failures and run the entire
+required available matrix again on the next clean source revision.
+
+## Completion source prepared; candidate 9 qualification active
+
+Source checkpoints are pushed as #62 foundation, #63 live mixer and #64 API/creator,
+after the existing #58 -> #59 -> #60 stack. Foundation head is
+`b1ee00d58227b5a0d41fa5df03a5ccc5700f8ebe`; audio head is
+`fcfa0c2577b5260e1b7036d83daece4a9452e41c`. The next qualification branch
+records demonstrated integration repairs, actual clean-source matrix results
+and candidate9 review downloads. No implementation issue or PR is closed/merged.
+
+New source includes persisted stream-only microphone controls, observed inputs/
+meters/gains, mute-preserving recovery and independent hold-to-talk guarding;
+versioned public API and safe local creator orchestration; canonical governance;
+proposed pinned Identity source/creative kit and nine-page site; pinned local CI
+and offline unsigned artifact/SBOM/provenance audit. Independent review repaired
+three concrete PTT races/state bugs and renewal now checks guardian liveness.
+Focused tests pass; full clean-source qualification is still pending. The first
+working-tree act Linux build passed; it does not qualify final source.
+
+[Completion review](docs/completion-review.md) and its
+[230-criterion ledger](docs/evidence/completion-criteria.json) preserve all35
+implementation issues from the live36-issue inventory. #51 remains separate and
+unchanged. Finish all available final checks, retain failed attempts, then supply
+exact artifacts and smallest owner actions. Native OBS suites precede host
+transport, which precedes browser fixtures. Do not race act snapshot/candidate
+dist writers with root package/native evidence; execute local CI twice at final
+clean source. Required physical Deck/OBS33/provider/adoption, hostedCI/review,
+identity/rights/migration and publication gates remain explicit.
 
 ## Milestone 3 candidate 8: all available local checks passed
 

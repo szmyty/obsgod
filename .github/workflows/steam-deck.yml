@@ -26,10 +26,14 @@ jobs:
           python-version: '3.12'
       - name: Install pinned development dependencies
         run: |
+          npm install --global npm@11.9.0 --ignore-scripts
           test "$(npm --version)" = 11.9.0
           go mod download
           npm --prefix steamdeck/decky ci --ignore-scripts
           python -m pip install playwright==1.62.0
+          export PLAYWRIGHT_BROWSERS_PATH="${OBSGOD_ACT_TEMP:-$RUNNER_TEMP}/obsgod-playwright"
+          mkdir -p "$PLAYWRIGHT_BROWSERS_PATH"
+          printf 'PLAYWRIGHT_BROWSERS_PATH=%s\n' "$PLAYWRIGHT_BROWSERS_PATH" >> "$GITHUB_ENV"
           python -m playwright install --with-deps chromium
           go install golang.org/x/vuln/cmd/govulncheck@v1.9.0
       - name: Go protocol, race, static and vulnerability checks
@@ -39,7 +43,7 @@ jobs:
           govulncheck ./...
       - name: Installer, backend and panel checks
         run: |
-          python -m unittest discover -s steamdeck/tests -p 'test_*.py' -v
+          python scripts/run-user-tests.py -- -m unittest discover -s steamdeck/tests -p 'test_*.py' -v
           python -m unittest discover -s scripts/tests -p 'test_*.py' -v
           npm --prefix steamdeck/decky run typecheck
           npm --prefix steamdeck/decky test
@@ -63,15 +67,17 @@ jobs:
           diff -u /tmp/first-audit-sums dist/supply-chain/AUDIT-SHA256SUMS
       - name: Actual package browser checks
         run: |
+          browser_output="${OBSGOD_ACT_TEMP:-$RUNNER_TEMP}/obsgod-browser-evidence"
+          printf 'OBSGOD_BROWSER_EVIDENCE=%s\n' "$browser_output" >> "$GITHUB_ENV"
           browser=$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')
-          python steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz --browser "$browser"
-          python steamdeck/tests/browser-panel.py dist/obsgod-decky.zip --browser "$browser"
-          python steamdeck/tests/browser-m3-panel.py dist/obsgod-decky.zip --browser "$browser"
-          python steamdeck/tests/browser-m3-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz --browser "$browser"
-          python steamdeck/tests/browser-mixer-panel.py dist/obsgod-decky.zip --browser "$browser"
-          python steamdeck/tests/browser-mixer-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz --browser "$browser"
-          python steamdeck/tests/browser-support.py --browser "$browser"
-          python -B site/tests/browser.py --browser "$browser"
+          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz --browser "$browser" --screenshots "$browser_output/setup"
+          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-panel.py dist/obsgod-decky.zip --browser "$browser" --screenshots "$browser_output/panel"
+          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-m3-panel.py dist/obsgod-decky.zip --browser "$browser" --screenshots "$browser_output/m3-panel"
+          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-m3-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz --browser "$browser" --screenshots "$browser_output/m3-setup"
+          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-mixer-panel.py dist/obsgod-decky.zip --browser "$browser" --screenshots "$browser_output/mixer-panel"
+          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-mixer-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz --browser "$browser" --screenshots "$browser_output/mixer-setup"
+          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-support.py --browser "$browser" --screenshots "$browser_output/support"
+          python scripts/run-user-tests.py --output-root "$browser_output" -- site/tests/browser.py --browser "$browser" --site-dir "$browser_output/site-html" --output "$browser_output/site"
       - name: Native audio and app-filtered capture checks
         run: |
           # These public test inputs may be owned by runner UID1001 while the
@@ -102,5 +108,6 @@ jobs:
             dist/*SHA256SUMS
             dist/capture-build.json
             dist/supply-chain/*
+            ${{ env.OBSGOD_BROWSER_EVIDENCE }}
           if-no-files-found: error
           retention-days: 14

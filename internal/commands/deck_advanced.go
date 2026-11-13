@@ -44,7 +44,7 @@ func addDeckAdvancedCommands(root *coral.Command) {
 			for _, field := range []string{"encoder", "capture-mode"} {
 				command.Flags().String(field, "", "Override JSON/environment profile "+field+" for this action")
 			}
-			command.Flags().Bool("microphone", false, "Override profile microphone preference; use --microphone=false to disable")
+			command.Flags().Bool("microphone", false, "Override the initial profile microphone default; saved live mixer preferences take precedence")
 		}
 		command.RunE = func(cmd *coral.Command, _ []string) error {
 			ctx, cancel := context.WithTimeout(cmd.Context(), 75*time.Second)

@@ -1,156 +1,160 @@
-# Completion review and remaining owner checklist
+# Candidate9 owner and publisher review
 
-Status: **prepared for review; final source qualification is pending**. This
-campaign implements feasible local work across the plugin backlog. It does not
-publish a release, deploy a site, move a repository, spend money or declare
-actual Steam Deck/CI/adoption acceptance.
+All required available local checks passed at exact clean source
+`1a482808a8281c8bce092cea057df758836b34e9` (350 tracked files). Candidate:
+**0.1.0-deck.9**. The compatible product remains Decky Stream display name,
+`obsgod` executable/module/storage and `OBSGod` installed Decky identity.
 
-The live inventory contained **36 open issues: 35 implementation/carryover
-issues and separate research #51**. The [criterion ledger](evidence/completion-criteria.json)
-preserves **230 original acceptance/quality requirements**, original issue/body
-digests, scope/gate prose, explicit dependencies, implementation references,
-historical assessments and a concrete remaining action per criterion. Historical
-passing receipts qualify only their recorded source. Its empty current-receipt
-registry deliberately awaits final source/artifact/command/platform evidence.
+The candidate is ready for source review and actual Steam Deck qualification.
+The immutable artifact commit is `d0a4973f9b1835471e99b046d2d4313b042f9ae2`. All47 public files, runtime/updater inventories and the full350-file source snapshot passed independent downloaded-byte verification. This is a review checkpoint, not a published
+release, deployment, supported-hardware certification or completed stable-v1.
 
-The owner's current direction is to review/merge prepared changes, then reuse
-[#46](https://github.com/szmyty/obsgod/issues/46) as the one consolidated
-implementation checklist and retain
-[#51](https://github.com/szmyty/obsgod/issues/51) as separate research. This
-document performs no closure. After those checkpoints, superseded tickets must
-link the intact ledger; administrative closure must not imply their unrun
-criteria passed. Priority adds no hard dependency, and original dependencies
-remain recorded verbatim.
+Review/merge order is **#58 → #59 → #60 → #62 → #63 → #64 → #65**. The four
+new completion drafts are #62–#65. No source merge or issue closure occurred.
 
-## What can be reviewed now
+## Exact candidate and artifacts
 
-- Canonical [architecture](../ARCHITECTURE.md), [vocabulary](../ONTOLOGY.md),
-  [decisions](../DECISIONS.md) and [agent guidance](../AGENTS.md) explain the
-  actual runtimes, safety rules and responsibility boundaries.
-- Existing managed streaming, state/notifications, installation/update/removal,
-  provider presets, profiles, idle media, local recording/replay and health
-  remain the starting source. This push adds API/creator, microphone/mixer/UI,
-  branding preparation and release/CI hardening; each needs fresh evidence at
-  the final integrated source.
-- The API facade and creator adapter are local candidates. Legacy commands
-  retain a compatibility path. Creator connects to existing OBS; it does not
-  create the originally requested separate StreamGod repository or establish
-  an actual one-command managed Steam Deck journey.
-- The [Identity brand review](branding-review.md),
-  [migration review](migration-review.md) and
-  [site preview](branding-site-preview.md) make the remaining identity choices
-  concrete. Draft source/assets are not approved creative work; the requested
-  `decky-stream` identity is not an executed repository/plugin/data migration.
-- [Local CI](local-ci.md) and [release engineering](release-engineering.md)
-  provide retained commands and artifact audits. An `act` run is local evidence;
-  it cannot substitute for a required successful hosted job.
+| Item | SHA256 |
+| --- | --- |
+| Runtime `obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz` | `879ad44ebb28fb695877c071d9708959a7afc39b7b2b9032421f117a267bf803` |
+| Plugin `obsgod-decky.zip` | `9e613d282d242d5be930af1beeb05a8724453ab971a59165c47e22204b296b57` |
+| Updater `obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip` | `e7d24d9860f2a207a130d9002c0e21f3f89c3221e352393b5e9b2b65da9bdc69` |
+| Exact 350-file source archive | `4b6751acc9222996cb0205468d19ae941e756868da6aff908489738832713f1e` |
 
-## Smallest owner-dependent steps
+All **14 selected product/audit entries match across the two complete runs**;
+each candidate job also builds runtime/updater and generates the audit twice.
+Actual notices/native preferred source/SDK source, SPDX and unsigned provenance
+passed the exact-source audit. Unsigned self-reported inventory establishes
+byte/source consistency, not authenticated publisher or trusted-builder identity.
 
-- **Review the pending PR stack.** Root's final continuity/PR list supplies exact
-  bases and merge order. Review current source, checks and open gates before
-  merging; then approve the administrative consolidation if still desired.
-- **Choose identity and companion disposition.** Confirm final organization/
-  canonical repository or explicitly retain the current namespace. Review the
-  Decky Stream name/mark, draft creative brief/SVG/rights facts, contact/domain
-  and publisher. For #13, choose an approved separate companion destination,
-  explicitly amend the original separate-repository scope, or keep it pending.
-  Preparation does not create or transfer another repository.
-- **Resolve required hosted CI access.** The existing GitHub account restriction
-  has prevented hosted steps. The account owner must restore permitted Actions
-  execution, then obtain fresh required CI and review results. No paid
-  remediation is authorized or presumed.
-- **Run the exact final candidate on the Steam Deck.** Record model, SteamOS
-  channel/build, Steam/Decky/OBS Flatpak/bundled WebSocket/GStreamer versions.
-  Execute the [device checklist](m3-device-acceptance.md), including the microphone
-  cases below. Do not use an older preview's video success as newer audio proof.
-- **Supply real provider/adoption proof.** A separate viewer verifies picture and
-  audible system/microphone audio for each destination claimed supported. A new
-  user's install → configure → audible local clip → viewer → update/recovery →
-  uninstall journey provides adoption proof. Account readiness and any actual
-  broadcast action remain under the responsible user's control.
-- **Verify optional support facts.** Confirm control of the existing recipient
-  links, contact wording and provider-approved link/payment path without agent
-  spending. Crypto addresses can remain null/hidden; activation needs the owner's
-  exact network/address facts. No contribution or payout readiness is invented.
-- **Decide publication only with the final packet.** Root must first supply exact
-  source/artifact revisions, hashes, qualified results, limitations, destination
-  and responsible publisher. Release publication, site deployment, transfers,
-  other-repository submissions and spending remain precise separate actions.
+The complete 230-criterion ledger preserves 35 original implementation issues,
+exact criterion text, original body hashes, dependencies, scoped evidence and
+remaining actions. Historical receipts remain historical. Local evidence does
+not pass physical target, hosted CI, review, rights or adoption requirements.
 
-## Microphone and hardware review
+## What changed
 
-Steam Deck has built-in microphones. On LCD hardware, plugging into the 3.5 mm
-jack can make the built-in microphone unavailable; software must report actual
-available sources rather than infer success from the model. Verify built-in,
-headset/USB/Bluetooth choices actually present on the test device, then test:
+- Stream-only microphone controls with observed input selection, separate gain/
+  mute/meters, safe explicit unmute, mute on route/device loss and a bounded
+  private hold-to-talk guardian. Host system volume/default input stay unchanged.
+- Importable `pkg/api/v1` and `obsgod api`: independent models/errors, bounded
+  context-aware serialized operations, invocation approvals and schema1 JSON.
+- `pkg/creator/v1` and creator plan/start/status/stop/extensions: strict non-secret
+  profiles, environment-backed RTMP transport adapters and safe partial-state
+  reporting, above the reusable OBS core.
+- Canonical architecture/vocabulary/decision/maintainer docs, generated CLI
+  reference, security/support/contributor/changelog/conduct/review guidance.
+- Reproducible unapproved Identity consumer kit and static site preview, explicit
+  migration inventory and fail-closed updater trust. Live approved visuals and
+  installed compatibility identifiers remain intact.
+- Pinned local act/action-source acquisition, complete static/security/coverage
+  workflow paths and deterministic artifact/source/license/SPDX/provenance audit.
 
-- System audio and speech are separately audible in a saved clip and viewer.
-  Selecting game-only video does not promise per-app audio isolation.
-- Per-source mute/gain and selected device persist without altering system
-  volume. Missing/changed devices are visible, and recovery preserves mute intent.
-- Hold/release push-to-talk, panel close, lost focus, reconnect and lost renewal
-  release safely. Actual controller controls must be demonstrated; a browser
-  fixture is not proof of the physical controller path.
-- Device changes, sleep/session changes and bounded retry escalation do not
-  start a stopped stream, expose the desktop or falsely claim output stopped.
+## Qualification results
 
-## Original issue-to-work map
+| Check | Result at the exact qualified source |
+| --- | --- |
+| Go | **213 top-level / 386 pass events**, race with `-count=1`; one optional existing-OBS read-only test skipped |
+| Python | **127** backend/installer/updater/removal tests passed |
+| Tooling | **23** script tests passed |
+| Frontend | **30** Node tests, typecheck/build passed; npm audit reported zero findings |
+| Static/security | Formatting, vet, pinned staticcheck passed; Go vulnerability scan reported zero findings |
+| Other targets | Six binaries compiled; native target execution unrun |
+| Local act | Both complete six-job sequences and PR static passed: **13 local job passes**; provider dependency-review unavailable with explicit reason/API fallback |
+| Coverage | **58.1%** statement baseline in both final runs; prior 58.0% is historical context. No arbitrary percentage gate |
+| Package/audit | Twice-built runtime/updater and audits per job; **14/14** selected entries identical across runs; full selected-runtime source/notices/SPDX/unsigned provenance passed |
+| Native OBS | Two complete Linux OBS30.2.3 runs of capture, actual moving/audible media, game/idle, live mixer/PTT/device-loss, password, recording/replay and recovery suites passed |
+| Product browser | Seven product flows plus site per act run; additional setup upgrades from previews 4/6 passed |
+| Legacy transport | Both old/current pinned Decky 3.3.1 install/update/repair/rollback/removal/bootstrap fixtures passed |
+| CLI/Fish | Twelve exact-source CLI/API/creator/help/reference/config/completion checks and disposable Fish-container validation passed; host Fish unavailable |
+| Draft brand/site | Eight brand and eleven site tests, deterministic 25-file kit/nine-page site and 45 host viewport cases passed |
+| File/offline browser | ACT site browser actual file-offline navigation passed. Managed host file:// was unavailable by policy; its loopback HTTP passed. These are separate environment results |
+| Hosted CI | **Unavailable:** nine exact-source runs, zero executed steps; actual annotation says account locked due to billing |
+| Actual Deck/viewer/adoption | **Unrun** for candidate 9; native/protocol/browser fixtures cannot supply this proof |
+| Human/creative/rights review | **Pending** where applicable |
 
-Every row's exact original criteria and remaining actions are in the ledger
-under that issue number (`AC`, startup/readiness `SR`, quality `QG`, or definition
-of done `DD` identifiers). A source reference describes implementation, not a
-criterion pass.
+Earlier failures are retained as history: artifact-service addressing, static
+error capitalization, generic snapshot archive/version collisions, npm pin,
+root fixture environment, resource headroom and stale generated capture output.
+The product correctly refused capture/storage when prerequisites were invalid.
+Only identified own act cache blobs and project host Go build cache were cleared
+with inventories. The browser reserve scenario was **2048 MiB**; the recorded
+native refusal was **1024 MiB**, with **894,406,656 bytes** available. Production
+capture/output/storage guards were unchanged. Final source reruns passed.
 
-| Original issue | Prepared source/evidence boundary | Remaining acceptance |
-| --- | --- | --- |
-| [#7](https://github.com/szmyty/obsgod/issues/7) | Canonical root docs and focused decision records | Final component/link review; README/roadmap integration |
-| [#8](https://github.com/szmyty/obsgod/issues/8) | Managed runtime and Roadmap 1 packet | Final child/device/viewer/CI/review evidence |
-| [#9](https://github.com/szmyty/obsgod/issues/9) | Public facade, API CLI and automation | Final contract tests; legacy commands still use compatibility service |
-| [#10](https://github.com/szmyty/obsgod/issues/10) | Flatpak isolation/readiness/diagnosis | Actual installed launch, measured budgets, graphical/session/audio/capture matrix |
-| [#11](https://github.com/szmyty/obsgod/issues/11) | Configuration, profiles, help/completions and JSON | Final integration/new-user/contract checks |
-| [#12](https://github.com/szmyty/obsgod/issues/12) | CI/security/build/audit/release operations | Fresh full matrix, required hosted CI/reviews and stable-v1 audit |
-| [#13](https://github.com/szmyty/obsgod/issues/13) | In-repo creator consumer over public API | Dedicated-project decision, managed launch scope and actual Deck journey |
-| [#14](https://github.com/szmyty/obsgod/issues/14) | Provider/creator/local-content boundaries | Actual provider validation, multistream strategy/follow-up disposition |
-| [#16](https://github.com/szmyty/obsgod/issues/16) | Historical provenance/PR/archive records | Exact current stack/artifacts/device provenance and owner review |
-| [#17](https://github.com/szmyty/obsgod/issues/17) | State reducer, automatic snapshots and filtered console | Real OBS plus actual Decky/QAM/reconnect lifecycle |
-| [#18](https://github.com/szmyty/obsgod/issues/18) | State-driven controls, cancel and safe cleanup | Actual repeated-action/notification/failure/cancel acceptance |
-| [#19](https://github.com/szmyty/obsgod/issues/19) | Unified Decky installer/dependency/repair flow | Actual active-Steam install failure regression and preservation matrix |
-| [#20](https://github.com/szmyty/obsgod/issues/20) | Bundled updater/checker and strict trust | Actual safe apply, interruption, rollback and final app/plugin verification |
-| [#21](https://github.com/szmyty/obsgod/issues/21) | Independent game/control/capture facts | Actual no-game/screen/game launch/exit frames and honest blockers |
-| [#22](https://github.com/szmyty/obsgod/issues/22) | Final-candidate/device procedures | Fresh all-criterion matrix, installed Deck/viewer evidence and review |
-| [#23](https://github.com/szmyty/obsgod/issues/23) | M2 source and owner packet | Identity/migration, target/CI/review, optional support and publication decisions |
-| [#24](https://github.com/szmyty/obsgod/issues/24) | Local hashed idle image/video and transitions | Owner rights/creative approval and actual Deck transition/audio tests |
-| [#25](https://github.com/szmyty/obsgod/issues/25) | Private connection/password test/rotate/recover | Actual safe idle rotation/mismatch recovery and final redaction |
-| [#35](https://github.com/szmyty/obsgod/issues/35) | Working name and explicit compatibility inventory | Final organization/repository/name/owner facts |
-| [#36](https://github.com/szmyty/obsgod/issues/36) | Migration/trust/alias/rollback review preparation | Approved identities and actual old→new/recovery/removal/redirect evidence |
-| [#37](https://github.com/szmyty/obsgod/issues/37) | Historical truthful provenance/policy inventory | Fresh Store research moves to separate #51; no new research here |
-| [#38](https://github.com/szmyty/obsgod/issues/38) | Manual Identity source and reproducible draft kit | Actual rights/creative approval, approved-source generation and target visual proof |
-| [#39](https://github.com/szmyty/obsgod/issues/39) | Controller-facing setup/state/recovery/mixer UI | Real controller/new-user/offline/error/privacy acceptance |
-| [#40](https://github.com/szmyty/obsgod/issues/40) | Kick/Twitch/YouTube/custom RTMP(S) configuration | Separate audible viewer proof for each supported claim |
-| [#41](https://github.com/szmyty/obsgod/issues/41) | Safe preview/reset/uninstall/wipe | Actual old/new/partial/interruption/removal/reinstall preservation |
-| [#42](https://github.com/szmyty/obsgod/issues/42) | Optional recipient buttons and hidden null wallets | Owner recipient/control/readiness verification; policy research stays #51 |
-| [#43](https://github.com/szmyty/obsgod/issues/43) | Offline documentation/landing preview | Final creative/contact/domain/host review, clean preview and deployment proof |
-| [#44](https://github.com/szmyty/obsgod/issues/44) | Release/security/support/audit operations | Actual supported Deck claim, final CI/reviews and publication packet |
-| [#45](https://github.com/szmyty/obsgod/issues/45) | Direct-download/candidate/adoption preparation | Real new-user journey and owner launch; conditional Store work stays #51 |
-| [#46](https://github.com/szmyty/obsgod/issues/46) | M3 parent proposed for final-boss reuse | Owner review/merges, intact consolidation, actual value/support observations |
-| [#47](https://github.com/szmyty/obsgod/issues/47) | Versioned quality profiles/editor | Measured Deck presets, picture/audio/performance/controller evidence |
-| [#48](https://github.com/szmyty/obsgod/issues/48) | Bounded recovery plus live mixer/microphone work | Actual routing/device/session/PTT/controller/performance cases |
-| [#49](https://github.com/szmyty/obsgod/issues/49) | Recording/replay/storage/retention | Actual audible media, finalization, disk/recovery and controller shortcuts |
-| [#50](https://github.com/szmyty/obsgod/issues/50) | Fresh bounded health and safe advice | Actual degraded hardware/network/load validation; no silent adaptive quality |
-| [#61](https://github.com/szmyty/obsgod/issues/61) | Retained `act` setup/job inventory/fixes | Every job/matrix outcome plus second final-source run and sanitized receipts |
+## First owner actions
 
-## Consolidation procedure after review and merges
+1. Review the seven drafts and exact evidence, then merge in the recorded order
+   when accepted and required checks/reviews are satisfied. Preserve branch protections and immutable artifact/download refs.
+2. Install the exact candidate on the real Deck without wiping existing private
+   settings/media. Record model, SteamOS/channel, Steam/Decky, OBS Flatpak/bundled
+   WebSocket and GStreamer versions. Verify an audible moving local clip first.
+3. Test built-in and actually available 3.5 mm/USB/Bluetooth inputs, gain/mute/
+   meters, device/default-route changes, system mute and hold/release/focus-loss/
+   close/reconnect/lease-expiry behavior. On LCD the jack can disable built-in mic;
+   actual device availability is authoritative. Lost OBS control cannot guarantee
+   physical mute and must remain visibly uncertain.
+4. Test game-only/menu privacy, idle/game switching, session/sleep/controller/
+   performance, install/update/rollback/uninstall. A separate viewer confirms
+   intended picture and audible system/mic sound per supported provider. Collect
+   a real new-user install→clip→viewer→update/recovery→uninstall journey.
+5. Resolve the Actions account/billing lock, then obtain required hosted runs and
+   reviews. The final real-ref provider action separately reported **“Dependency
+   review is not supported on this repository. Please ensure that Dependency
+   graph is enabled.”** The graph comparison API returned 403 with otherwise
+   working injected Git/API access. Inspect that repository feature/access and
+   rerun the real action. Earlier synthetic missing-context errors are historical.
+   macOS capacity notices are separate; local act is not hosted success.
+6. After target/CI/review gates, review exact publisher/destination and unsigned
+   verification policy before **publishing this product release**. Deployment,
+   transfer, other-repository changes and spending remain precise separate actions.
 
-1. Refresh live issues, PRs, default-branch revision/protections and release state.
-   Attach exact final matrix/artifacts and limitations to the criterion ledger.
-2. Rewrite #46 around the surviving owner/pair-work checklist and link this review
-   plus every original criterion/dependency. Record the separate-project and
-   conditional research dispositions explicitly.
-3. Close transferred issues as superseded only after the agreed review/merge
-   checkpoint. Use a note that says the criteria moved and unrun acceptance is
-   pending; do not label hardware/CI/rights/adoption complete.
-4. Keep #51 open as separate monetization and Decky Store research. This push
-   does not perform that research or imply store eligibility/submission.
-5. Query open issues again. The intended bookkeeping result is #46 and #51;
-   any newly discovered issue or unmet transfer must remain visible.
+## Implementation remainders and future activation
+
+- **#9:** legacy commands retain `internal/obs` ACK/output/approval semantics.
+  Full compatible CLI-to-facade migration/deprecation and tests remain work.
+- **#13:** the dedicated StreamGod project is uncreated and the current creator
+  connects to existing OBS without managed launch/exit. Choose an approved
+  destination or explicit scope amendment, then implement/qualify the intended
+  companion launch boundary. Owner approval alone does not implement it.
+- **#14:** optional provider APIs/OAuth/multistream and creator/content modules
+  remain focused follow-up work; interfaces/strategy are not their implementation.
+- **#12:** generic 20-target snapshot archives still need their own complete
+  notices/SBOM/install/native qualification before additional generic publication.
+  The selected Deck runtime/updater audit already includes its notices/preferred
+  source/SBOM. Generic distribution is not a new gate for the compatible mic preview.
+- Final organization/repository/name/mark/contact/domain, creative/rights/license
+  decisions, approved Identity production promotion, actual migration/redirect/
+  duplicate-plugin proof and hosted site activation remain separate future lanes.
+  Identity is a read-only pinned framework, not another release project here.
+- Optional support needs real owner recipient/control/readiness facts. Crypto
+  wallets may remain null/hidden. No wallet/payment activation or final branding/
+  transfer/site decision is invented as a prerequisite for this compatible preview.
+
+## Repository and post-review issue reconciliation
+
+Fresh 12:32:36 UTC query: **36 open issues, seven draft PRs**, `master` remains
+`ed7d100d356ce803d2cb1c1afef3836759deef10`; `main` 404, protection details 403,
+rulesets `[]`. Latest published tag is updater-only `v0.1.0-deck.4-updater.1`.
+Candidate9 is not published. Metadata `admin: true` did not provide usable branch
+administration scope: one prior-authorized `master`→`main` rename returned 403
+“Resource not accessible by integration.” The owner can rename it in GitHub UI,
+separately from repository transfer/branding. No settings/protection changed.
+
+After review/merges, reuse **#46** for surviving implementation/pair work and keep
+**#51** unchanged as monetization/Decky Store research. Close transferred issues
+as superseded with their intact criterion/dependency/evidence links, without
+calling unrun acceptance passed. #37/conditional Store research is preserved for
+that separate journey; no research/contact/submission was performed here.
+
+Preserve immutable artifact/download refs, source/artifact commits, hashes and
+URLs during later source-branch cleanup; never merge the orphan artifact tree.
+The artifact commit and public-byte proof are recorded above. Fresh repository inspection is recorded separately; refresh it again before any merge or consolidation.
+No release, deployment, transfer, spending, source merge or issue closure is
+performed by this review packet.
+
+## Downloads, installation and precise publication proposal
+
+[Checksum-verifying Desktop install command](candidate-9-install.md). [Immutable review packet](https://github.com/szmyty/obsgod/tree/d0a4973f9b1835471e99b046d2d4313b042f9ae2). [Qualification](evidence/completion-qualification.json), [230-criterion ledger](evidence/completion-criteria.json), [download proof](evidence/completion-public-download.json), [dated audit](../audits/audit-2026-11-13.md), and [proposed post-merge consolidation](finalboss-plan.md).
+
+The proposed current-compatible publication is GitHub prerelease `v0.1.0-deck.9` in `szmyty/obsgod`, from exact source `1a482808a8281c8bce092cea057df758836b34e9`, using the verified runtime/plugin/updater, manifests/checksums, source archive, SPDX/unsigned audit and qualification evidence above. Responsible publisher: repository owner `szmyty`, subject to actual rights/acceptance and explicit release approval. No release is published. The future organization/identity/site/wallet lanes remain separate; no website destination or deployment is approved by this packet.
