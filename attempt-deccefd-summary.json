@@ -1,0 +1,12 @@
+{
+  "source": "deccefd3397fa43261f0c2d63afb3911d4f11c27",
+  "outcome": "failed qualification; not a qualified candidate",
+  "go": "passed171top/313events,one optionalskip",
+  "python": "passed120",
+  "node": "passed19",
+  "package": "passed reproducibility",
+  "browser": "initial port1337 collision with parallel Decky transport; same-source serialized rerun passed all7",
+  "native": "capture/game/idle-media passed; audio suite failed repeated capture at native-media line101",
+  "diagnosis": "Synthetic GStreamer PipeWire producer destroys/recreates node at consumer teardown; exact media workflow passed with existing stable C producer, no product framegate change. Source hardening and fixture repairs require full new-revision qualification.",
+  "ci": "zero steps; account billing lock"
+}

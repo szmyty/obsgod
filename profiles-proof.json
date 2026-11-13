@@ -1,0 +1,85 @@
+{
+  "path": "native-audio/output/profile-qualification.json",
+  "sha256": "135d0e9f957c16e0ad27b24584b990f80616d20d1f151cd310c87ece917616fa",
+  "content": {
+    "checks": [
+      {
+        "encoded_height": 540,
+        "encoded_width": 960,
+        "fps": 30,
+        "implicit_broadcast": false,
+        "obs_video": {
+          "baseHeight": 720,
+          "baseWidth": 1280,
+          "fpsDenominator": 1,
+          "fpsNumerator": 30,
+          "outputHeight": 540,
+          "outputWidth": 960
+        },
+        "picture_audio": {
+          "audio": {
+            "audible": true,
+            "expected_hz": 440,
+            "expected_power": 0.00999556133039958,
+            "expected_tone": true,
+            "other_hz": 880,
+            "other_power": 4.6552847575285095e-14,
+            "peak_dbfs": -13.96827417819378,
+            "rate": 48000,
+            "rms_dbfs": -16.991519840413684,
+            "samples": 96000,
+            "status": "passed"
+          },
+          "bytes": 1605402,
+          "distinct_frames": 4,
+          "duration_seconds": 4.933,
+          "file": "DeckyStream-2026-11-13_05-57-40.mkv"
+        },
+        "portable_export_private": true,
+        "preset": "small-540p30",
+        "selection": "explicit-saved-profile-apply"
+      },
+      {
+        "encoded_height": 720,
+        "encoded_width": 1280,
+        "fps": 60,
+        "implicit_broadcast": false,
+        "obs_video": {
+          "baseHeight": 720,
+          "baseWidth": 1280,
+          "fpsDenominator": 1,
+          "fpsNumerator": 60,
+          "outputHeight": 720,
+          "outputWidth": 1280
+        },
+        "picture_audio": {
+          "audio": {
+            "audible": true,
+            "expected_hz": 440,
+            "expected_power": 0.009997849809728355,
+            "expected_tone": true,
+            "other_hz": 880,
+            "other_power": 9.243903033382654e-14,
+            "peak_dbfs": -13.965627251573247,
+            "rate": 48000,
+            "rms_dbfs": -16.991006614733234,
+            "samples": 96000,
+            "status": "passed"
+          },
+          "bytes": 3466739,
+          "distinct_frames": 4,
+          "duration_seconds": 4.608,
+          "file": "DeckyStream-2026-11-13_05-57-47.mkv"
+        },
+        "portable_export_private": true,
+        "preset": "smooth-720p60",
+        "selection": "verified-game-before-explicit-cold-recording"
+      }
+    ],
+    "credentials_unchanged": true,
+    "original_settings_restored": true,
+    "platform": "synthetic Linux OBS with x264",
+    "real_steam_deck": "unrun",
+    "status": "passed"
+  }
+}

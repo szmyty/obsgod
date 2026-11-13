@@ -1,0 +1,31 @@
+
+> obsgod-decky@0.1.0-deck.8 test
+> node --test tests/*.test.mjs
+
+✔ replay and unknown output cannot authorize profile edits or another output (0.831831ms)
+✔ Stop/recover remains possible for unknown recording/replay state (0.165557ms)
+✔ metrics become unknown on expiry, malformed values and future timestamps (0.210404ms)
+✔ green requires reported output and recent byte progress (0.993532ms)
+✔ unknown never looks stopped; offline and setup are distinct (0.209723ms)
+✔ unconfirmed or blank capture cannot show healthy green (0.216643ms)
+✔ intentional between-game screen requires matching mode, scene and advancing output (0.192678ms)
+✔ controls use confirmed stream/operation state; unknown output keeps recovery Stop (0.580215ms)
+✔ old polls cannot overwrite an action generation or newer backend snapshot (0.225968ms)
+✔ only confirmed transitions notify, repeated replies and disconnects do not (0.161111ms)
+✔ stale status ages to unknown and cannot enable Start (0.109323ms)
+✔ unknown replies and counter resets cannot rejuvenate a stalled stream (0.188131ms)
+✔ funding source yields the five explicit owner destinations without Patreon or tracking (1.74982ms)
+✔ funding accepts documented scalar/list forms and fails closed on ambiguity (0.635138ms)
+✔ external support navigation rejects altered hosts, schemes, recipients and hidden URL data (0.353297ms)
+✔ wallets remain hidden until an explicit supported network and public address are configured (0.337073ms)
+✔ copy sends only the receiving address and reports clipboard failure honestly (0.256092ms)
+✔ receiving QR generation is deterministic, local and refuses an invalid destination (36.516295ms)
+✔ build generation detects stale or malformed funding instead of silently shipping old links (0.930959ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 149.668248

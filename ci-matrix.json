@@ -1,0 +1,18 @@
+{
+  "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+  "checked_at_utc": "2026-11-13T05:58:02.944444+00:00",
+  "outcome": "unavailable",
+  "reason": "Account billing lock; zero executed steps",
+  "checks": [
+    {
+      "run": "https://github.com/szmyty/obsgod/actions/runs/43375325487",
+      "job": "candidate",
+      "steps": 0,
+      "conclusion": "failure",
+      "annotations": [
+        "The job was not started because your account is locked due to a billing issue."
+      ]
+    }
+  ],
+  "not_passing_evidence": true
+}

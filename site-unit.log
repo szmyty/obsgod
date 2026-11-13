@@ -1,0 +1,16 @@
+test_broken_local_anchor_is_rejected (test_build.BuildSiteSafety.test_broken_local_anchor_is_rejected) ... ok
+test_broken_local_link_is_rejected (test_build.BuildSiteSafety.test_broken_local_link_is_rejected) ... ok
+test_display_metadata_is_html_escaped (test_build.BuildSiteSafety.test_display_metadata_is_html_escaped) ... ok
+test_identical_inputs_produce_identical_bytes (test_build.BuildSiteSafety.test_identical_inputs_produce_identical_bytes) ... ok
+test_invalid_repository_is_rejected (test_build.BuildSiteSafety.test_invalid_repository_is_rejected) ... ok
+test_non_https_support_url_is_rejected (test_build.BuildSiteSafety.test_non_https_support_url_is_rejected) ... ok
+test_python_bytecode_cache_does_not_change_outputs (test_build.BuildSiteSafety.test_python_bytecode_cache_does_not_change_outputs) ... ok
+test_remote_css_import_is_rejected (test_build.BuildSiteSafety.test_remote_css_import_is_rejected) ... ok
+test_stale_output_check_is_rejected (test_build.BuildSiteSafety.test_stale_output_check_is_rejected) ... ok
+test_symlink_output_refuses_without_modifying_target (test_build.BuildSiteSafety.test_symlink_output_refuses_without_modifying_target) ... ok
+test_unrelated_output_is_preserved (test_build.BuildSiteSafety.test_unrelated_output_is_preserved) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.081s
+
+OK

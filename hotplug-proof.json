@@ -1,0 +1,12 @@
+{
+  "path": "native-audio/output/audio-hotplug.json",
+  "sha256": "658121e11e200e99430f03d36a979042c9afcecedbd61da92eb727b7b0a2d863",
+  "content": {
+    "mixer_policy_preserved": true,
+    "output_state_preserved": true,
+    "platform": "synthetic Linux OBS",
+    "real_steam_deck": "unrun",
+    "route_transitions": 2,
+    "status": "passed"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "path": "native-audio/output/media-live-qualification.json",
+  "sha256": "a6f5c22467371c0dd6a5c22f95a9ff222c8bda96d9a83661d76bfbd10e60f3c7",
+  "content": {
+    "health": {
+      "audio": "signal",
+      "capture": "visible",
+      "expires_at": "2026-11-13T05:58:13.205186971Z",
+      "metrics": {
+        "bitrate_kbps": 3298.419882545818,
+        "cpu_percent": 16.571428571428573,
+        "encode_skipped_percent": 0,
+        "fps": 30.000000300000007,
+        "frame_render_ms": 7.902157,
+        "free_disk_mb": 13691.16796875,
+        "memory_mb": 382.390625,
+        "render_missed_percent": 0,
+        "stream_dropped_percent": 0
+      },
+      "observed_at": "2026-11-13T05:58:05.205186971Z",
+      "output_known": true,
+      "provider_reception": "unknown",
+      "sample_ms": 351,
+      "schema_version": 1,
+      "state": "observed",
+      "streaming": true
+    },
+    "local_stop_preserved_stream": true,
+    "platform": "synthetic Linux OBS",
+    "real_steam_deck": "unrun",
+    "recording": {
+      "audio": {
+        "audible": true,
+        "expected_hz": 440,
+        "expected_power": 0.00997055295800128,
+        "expected_tone": true,
+        "other_hz": 880,
+        "other_power": 2.177344952994813e-14,
+        "peak_dbfs": -13.735800768487962,
+        "rate": 48000,
+        "rms_dbfs": -17.002690372757826,
+        "samples": 96000,
+        "status": "passed"
+      },
+      "bytes": 2599222,
+      "distinct_frames": 4,
+      "duration_seconds": 6.57,
+      "file": "DeckyStream-2026-11-13_05-57-58.mkv"
+    },
+    "replay": {
+      "audio": {
+        "audible": true,
+        "expected_hz": 440,
+        "expected_power": 0.010002274627731077,
+        "expected_tone": true,
+        "other_hz": 880,
+        "other_power": 3.2169217446021266e-13,
+        "peak_dbfs": -13.829086876075005,
+        "rate": 48000,
+        "rms_dbfs": -16.99185807369966,
+        "samples": 96000,
+        "status": "passed"
+      },
+      "bytes": 1531357,
+      "distinct_frames": 4,
+      "duration_seconds": 3.882,
+      "file": "Replay DeckyStream-2026-11-13_05-58-06.mkv"
+    },
+    "status": "passed",
+    "stream_advanced_while_recording_and_replay": true
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "candidate": "0.1.0-deck.8",
+  "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "source_clean_before": true,
+  "source_clean_after": true,
+  "outcome": "passed",
+  "checks": [
+    {
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+      "command": [
+        "python3",
+        "scripts/generate-product.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "outcome": "passed",
+      "log": "product-check.log",
+      "seconds": 0.018
+    },
+    {
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+      "command": [
+        "node",
+        "scripts/generate-support.mjs",
+        "--check"
+      ],
+      "exit_code": 0,
+      "outcome": "passed",
+      "log": "support-check.log",
+      "seconds": 0.065
+    },
+    {
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+      "command": [
+        "npm",
+        "--prefix",
+        "steamdeck/decky",
+        "test"
+      ],
+      "exit_code": 0,
+      "outcome": "passed",
+      "log": "node-tests.log",
+      "seconds": 0.332
+    },
+    {
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+      "command": [
+        "npm",
+        "--prefix",
+        "steamdeck/decky",
+        "run",
+        "typecheck"
+      ],
+      "exit_code": 0,
+      "outcome": "passed",
+      "log": "typecheck.log",
+      "seconds": 1.322
+    },
+    {
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+      "command": [
+        "npm",
+        "--prefix",
+        "steamdeck/decky",
+        "run",
+        "build"
+      ],
+      "exit_code": 0,
+      "outcome": "passed",
+      "log": "frontend-build.log",
+      "seconds": 0.888
+    },
+    {
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+      "command": [
+        "npm",
+        "--prefix",
+        "steamdeck/decky",
+        "audit",
+        "--json"
+      ],
+      "exit_code": 0,
+      "outcome": "passed",
+      "log": "npm-audit.json",
+      "seconds": 0.463
+    }
+  ]
+}

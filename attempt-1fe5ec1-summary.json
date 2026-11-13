@@ -1,0 +1,27 @@
+{
+  "revision": "1fe5ec1cf2fcbf2040a3804fd9f415eb87b62cf4",
+  "outcome": "failed qualification; superseded source required",
+  "passed": [
+    "172 Go top-level/325 pass events, optional existingOBS skip",
+    "120 Python",
+    "19 Node, typecheck/build/vet, zero Go/npm findings",
+    "reproducible packages",
+    "all7 browser cases",
+    "nativecapture/game/image/video/black fallback",
+    "nativeprofiles540p30 and720p60 moving+audible",
+    "record/replay/coexistence/export/cancel/lowdisk",
+    "liveaudiohotplug preserves mixer",
+    "live measured bitrate/FPS/audio signal"
+  ],
+  "failed": [
+    {
+      "check": "native-audio final repeated stream",
+      "cause": "real StartStream baseline retained the previous stopped stream byte count; loopback viewer received24.8s output while confirmation timed out, cleanup stopped output"
+    },
+    {
+      "check": "first transport updater corruption check",
+      "cause": "updater conservatively saw unknown output during concurrent native OBS processes; rerun only after all native suites exit"
+    }
+  ],
+  "repairs": "Fresh advancing pair confirmation after new output/reset/reconnect; add updater replay guard; full new-revision matrix required."
+}

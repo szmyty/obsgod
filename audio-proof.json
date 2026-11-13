@@ -1,0 +1,90 @@
+{
+  "outcome": "passed",
+  "metrics": {
+    "recording-audio": {
+      "path": "native-audio/output/recording-audio-metrics.json",
+      "sha256": "089c1fcdb4a267aee1ff1a155f70c255b4ba4e87be33226c2051ac105bd32829",
+      "content": {
+        "audible": true,
+        "expected_hz": 440,
+        "expected_power": 0.0070174221138714086,
+        "expected_tone": true,
+        "other_hz": 880,
+        "other_power": 6.307282930601874e-09,
+        "peak_dbfs": -13.947121316261642,
+        "rate": 48000,
+        "rms_dbfs": -16.991235168661973,
+        "samples": 96000,
+        "status": "passed"
+      }
+    },
+    "stream-audio": {
+      "path": "native-audio/output/stream-audio-metrics.json",
+      "sha256": "65c1374ec9e2f60b1ffb19c6ea11071cab4e54a5f140d345a6b0f5d8b668ce29",
+      "content": {
+        "audible": true,
+        "expected_hz": 440,
+        "expected_power": 0.009994298280261113,
+        "expected_tone": true,
+        "other_hz": 880,
+        "other_power": 4.492560613755564e-14,
+        "peak_dbfs": -13.966950614055895,
+        "rate": 48000,
+        "rms_dbfs": -16.991689209380617,
+        "samples": 96000,
+        "status": "passed"
+      }
+    },
+    "audio-default-fallback-audio": {
+      "path": "native-audio/output/audio-default-fallback-audio-metrics.json",
+      "sha256": "dec3fc6492946f64bac9ac45b2dcf88d466cf3f8c7a16791aeb1afac2109f483",
+      "content": {
+        "audible": true,
+        "expected_hz": 880,
+        "expected_power": 0.009927315857948942,
+        "expected_tone": true,
+        "other_hz": 440,
+        "other_power": 3.8408549661976526e-13,
+        "peak_dbfs": -13.730647466860638,
+        "rate": 48000,
+        "rms_dbfs": -17.062554871554227,
+        "samples": 96000,
+        "status": "passed"
+      }
+    },
+    "audio-default-changed-audio": {
+      "path": "native-audio/output/audio-default-changed-audio-metrics.json",
+      "sha256": "bc75127a633db6f173fd5dad371a4461981f877af5f3ef0aaf6e97d7d94d26eb",
+      "content": {
+        "audible": true,
+        "expected_hz": 440,
+        "expected_power": 0.0065563846800637746,
+        "expected_tone": true,
+        "other_hz": 880,
+        "other_power": 8.062405447570914e-09,
+        "peak_dbfs": -13.952404704282246,
+        "rate": 48000,
+        "rms_dbfs": -16.991385207132197,
+        "samples": 96000,
+        "status": "passed"
+      }
+    },
+    "silence-negative-control": {
+      "path": "native-audio/output/silence-negative-control.json",
+      "sha256": "5a37e66d12c607bb1149f9821a2c8c8ddc5231a762778668c112d53f63eb9763",
+      "content": {
+        "audible": false,
+        "expected_hz": 440,
+        "expected_power": 0.0,
+        "expected_tone": false,
+        "other_hz": 880,
+        "other_power": 0.0,
+        "peak_dbfs": null,
+        "rate": 48000,
+        "rms_dbfs": null,
+        "samples": 48000,
+        "status": "silence-rejected-as-expected"
+      }
+    }
+  }
+}

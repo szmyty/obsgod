@@ -1,0 +1,1187 @@
+{
+  "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+  "tree": "b66b749199928f79658abe5daeeb5bd26a65b6e7",
+  "clean_before": true,
+  "input_sha256": {
+    "dist/obsgod": "502bd48e07709a6f482ebfbb33fcdab531477e12db15cddf52aa787f53604386",
+    "dist/libgstobsgodcapture.so": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+    "steamdeck/tests/obs-smoke.Dockerfile": "60211bc5eb18efa4367107ab56c01d11ba7919f89c5d99d374ecab78451748d3",
+    "steamdeck/tests/native-obs-smoke.sh": "a390c5ea8382f776cfe8a0d6a0a9a3219b00849888a84c646bfac6a286419ae9",
+    "steamdeck/tests/native-capture-smoke.sh": "1a18dcb9e0e2e340af255efb18f62c7136f1e202232563736c5d7c6167173c85",
+    "steamdeck/tests/native-game-obs-smoke.sh": "64f95d37d84502fb4174caa4e95f5bb61a5a9671645a39f175b0161341e7a814",
+    "steamdeck/tests/native-control-password.py": "aac7bdbbd2ed47da5dc27b26856c83006de91471c0b94cbe381478274b1c13de",
+    "steamdeck/tests/native-game-obs.py": "36c1035eb0b73a189694c523069e943a4c65b62a93fdb4e2ea950a78f5102784",
+    "steamdeck/tests/native-audio.py": "656c0e8ff2d415310562bc7f16ee163bf6152f6af222813dd678c3043c84e1db",
+    "steamdeck/tests/native-media.py": "343ab0e00a6961f8c4008c4fb9dcf2671004386a6a94d5eaa8657fb3989c3b25",
+    "steamdeck/tests/native-profiles.py": "144371b3a7821e3815d233f0501ce566dd9e4d757b9cf69139f25a70c1e83b7e",
+    "steamdeck/tests/native-resilience.py": "3434157c44f08a403eb78d9a3aa865ca98dbc6b7aba3b8d023ef0115c0c2b81b",
+    "steamdeck/tests/native-idle-media.py": "cce725051b42277d08cbfcfa280e4532e4922a2b81fa04ee45cd5d7224c7af8a",
+    "steamdeck/tests/capture-fixture.c": "47baee49ce57f09ef6c32bcc97703385d198b0a71775d8da3d8eee98e429be7c"
+  },
+  "image": "obsgod-obs-smoke:audio-game",
+  "image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+  "host_platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "container_uid": "1000:1000",
+  "docker_version": "28.4.0 vfs",
+  "dockerfile_sha256": "60211bc5eb18efa4367107ab56c01d11ba7919f89c5d99d374ecab78451748d3",
+  "container_tools": [
+    "OBS Studio - 30.2.3.1-3",
+    "gst-launch-1.0 version 1.26.2",
+    "GStreamer 1.26.2",
+    "https://tracker.debian.org/pkg/gstreamer1.0",
+    "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "Python 3.13.5",
+    "DejaVuSans.ttf: \"DejaVu Sans\" \"Book\""
+  ],
+  "clean_after": true,
+  "revision_after": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+  "source_and_inputs_unchanged": true,
+  "outcome": "passed",
+  "suites": [
+    {
+      "name": "native-audio",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-e",
+        "OBSGOD_QUALIFIED_REVISION=bf72ca4ae028f78895eadee6d3874734a1cccd05",
+        "--mount",
+        "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+        "--mount",
+        "type=bind,src=/workspace/.obsgod-tools/m3/final/native-audio,dst=/work",
+        "obsgod-obs-smoke:audio-game",
+        "dbus-run-session",
+        "--",
+        "bash",
+        "/src/steamdeck/tests/native-obs-smoke.sh"
+      ],
+      "work_directory": "/workspace/.obsgod-tools/m3/final/native-audio",
+      "log": "native-audio.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 128.355,
+      "image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5"
+    },
+    {
+      "name": "native-capture",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-e",
+        "OBSGOD_QUALIFIED_REVISION=bf72ca4ae028f78895eadee6d3874734a1cccd05",
+        "--mount",
+        "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+        "--mount",
+        "type=bind,src=/workspace/.obsgod-tools/m3/final/native-capture,dst=/work",
+        "obsgod-obs-smoke:audio-game",
+        "dbus-run-session",
+        "--",
+        "bash",
+        "/src/steamdeck/tests/native-capture-smoke.sh",
+        "/src/dist"
+      ],
+      "work_directory": "/workspace/.obsgod-tools/m3/final/native-capture",
+      "log": "native-capture.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 17.482,
+      "image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5"
+    },
+    {
+      "name": "native-game",
+      "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--user",
+        "1000:1000",
+        "-e",
+        "OBSGOD_QUALIFIED_REVISION=bf72ca4ae028f78895eadee6d3874734a1cccd05",
+        "--mount",
+        "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+        "--mount",
+        "type=bind,src=/workspace/.obsgod-tools/m3/final/native-game,dst=/work",
+        "obsgod-obs-smoke:audio-game",
+        "dbus-run-session",
+        "--",
+        "bash",
+        "/src/steamdeck/tests/native-game-obs-smoke.sh"
+      ],
+      "work_directory": "/workspace/.obsgod-tools/m3/final/native-game",
+      "log": "native-game.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 81.104,
+      "image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5"
+    }
+  ],
+  "proofs": {
+    "capture": {
+      "path": "native-capture/capture-validation/qualification.json",
+      "sha256": "0b69fa88172cb807ffb533af4ea4195128f766048c110b8d70098bafc71a9869",
+      "content": {
+        "state": "passed",
+        "scope": "Synthetic PipeWire custom-SPA negotiation and supplied GStreamer source CPU media; not real Gamescope, SteamOS, Flatpak or OBS scene transitions",
+        "source_revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+        "plugin_path": "/src/dist/libgstobsgodcapture.so",
+        "plugin_sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+        "fixture_source_sha256": "47baee49ce57f09ef6c32bcc97703385d198b0a71775d8da3d8eee98e429be7c",
+        "test_source_sha256": "1a18dcb9e0e2e340af255efb18f62c7136f1e202232563736c5d7c6167173c85",
+        "platform": [
+          "Linux",
+          "f38d9518e2ed",
+          "6.18.57",
+          "#1 SMP Tue Oct 20 21:56:04 UTC 2026",
+          "x86_64"
+        ],
+        "pipewire": "pw-cli\nCompiled with libpipewire 1.4.2\nLinked with libpipewire 1.4.2",
+        "gstreamer": "gst-launch-1.0 version 1.26.2\nGStreamer 1.26.2\nhttps://tracker.debian.org/pkg/gstreamer1.0",
+        "cases": {
+          "game-a": {
+            "frames": 30,
+            "moving_game_frames": 29,
+            "blue_compositor_frames": 0
+          },
+          "game-b": {
+            "frames": 30,
+            "moving_game_frames": 29,
+            "blue_compositor_frames": 0
+          },
+          "corrupt": {
+            "frames": 30,
+            "result": "invalid chunks excluded; black or bounded error"
+          },
+          "empty": {
+            "frames": 30,
+            "result": "invalid chunks excluded; black or bounded error"
+          },
+          "short": {
+            "frames": 1,
+            "result": "invalid chunks excluded; black or bounded error"
+          },
+          "stale": {
+            "frames": 60,
+            "last_ten_frames": "black"
+          },
+          "late-duplicate": {
+            "frames_before_failure": 2,
+            "exit_code": 1,
+            "blue_compositor_frames": 0
+          },
+          "reject-missing": {
+            "exit_code": 255,
+            "media_bytes": 0
+          },
+          "reject-wrong": {
+            "exit_code": 255,
+            "media_bytes": 0
+          },
+          "reject-zero": {
+            "exit_code": 255,
+            "media_bytes": 0
+          },
+          "reject-mixed-dma": {
+            "exit_code": 255,
+            "media_bytes": 0
+          },
+          "reject-id-0": {
+            "exit_code": 255,
+            "media_bytes": 0
+          },
+          "reject-id-769": {
+            "exit_code": 255,
+            "media_bytes": 0
+          }
+        }
+      }
+    },
+    "password": {
+      "path": "native-audio/output/control-password-qualification.json",
+      "sha256": "d2eea6066bd612fc50765ae671f839ae199dde8acd2b6419f5aef37015d875c3",
+      "content": {
+        "binary_sha256": "502bd48e07709a6f482ebfbb33fcdab531477e12db15cddf52aa787f53604386",
+        "cases": [
+          {
+            "actual_obs_new_password_authenticated": true,
+            "file_update_awaited_verification": true,
+            "final_managed_shutdown_confirmed": true,
+            "mode": "generated",
+            "old_password_rejected_code": 4009,
+            "output_stayed_stopped": true,
+            "private_pair_synchronized": true,
+            "rotation_while_present_refused_without_change": true,
+            "settings_only_workflow": {
+              "actual_applied_stages": [
+                "starting_scene"
+              ],
+              "all_output_remained_inactive": true,
+              "managed_settings_and_credentials_preserved": true,
+              "private_generic_configuration_removed": true,
+              "status": "passed",
+              "target_collection": "OBSGod",
+              "target_profile": "OBSGod",
+              "target_scene": "OBSGod Idle"
+            },
+            "status": "passed",
+            "stream_key_and_settings_binding_preserved": true
+          },
+          {
+            "actual_obs_new_password_authenticated": true,
+            "file_update_awaited_verification": true,
+            "final_managed_shutdown_confirmed": true,
+            "mode": "manual",
+            "old_password_rejected_code": 4009,
+            "output_stayed_stopped": true,
+            "private_pair_synchronized": true,
+            "rotation_while_present_refused_without_change": true,
+            "settings_only_workflow": null,
+            "status": "passed",
+            "stream_key_and_settings_binding_preserved": true
+          }
+        ],
+        "limitations": [
+          "Actual Steam Deck/SteamOS/Gamescope/Flatpak password recovery remains unrun",
+          "No external provider account or broadcast was used"
+        ],
+        "ordinary_obs_preserved": true,
+        "platform": "Linux disposable container, real OBS; modeled Flatpak invocation",
+        "secret_values_exported": false,
+        "status": "passed"
+      }
+    },
+    "workflow": {
+      "path": "native-audio/output/control-workflow-qualification.json",
+      "sha256": "a5af5296a2e7ef5ca055d1c84da8d8c8a66bb8add25fa5b05a9b579bc2c4bf58",
+      "content": {
+        "actual_applied_stages": [
+          "starting_scene"
+        ],
+        "all_output_remained_inactive": true,
+        "managed_settings_and_credentials_preserved": true,
+        "private_generic_configuration_removed": true,
+        "status": "passed",
+        "target_collection": "OBSGod",
+        "target_profile": "OBSGod",
+        "target_scene": "OBSGod Idle"
+      }
+    },
+    "game": {
+      "path": "native-game/output/game-obs-qualification.json",
+      "sha256": "f13fb50054bf3ee5981c4d5e50cdaae451934be1b663add394da9f469a988694",
+      "content": {
+        "scope": "Real OBS/GStreamer/PipeWire/PulseAudio/software encoding and local RTMP with synthetic app identities/producer; not actual Gamescope/SteamOS/Flatpak/Kick",
+        "phases": {
+          "game-a": {
+            "scene": "OBSGod Game",
+            "output_bytes": 1086625,
+            "at_ms": 2833,
+            "pixels": {
+              "channel_means": [
+                210.27916666666667,
+                21.665277777777778,
+                11.741666666666667
+              ],
+              "expected": "red"
+            },
+            "items": [
+              {
+                "source": "Legacy private display sentinel",
+                "enabled": false
+              },
+              {
+                "source": "OBSGod Gamescope",
+                "enabled": false
+              },
+              {
+                "source": "OBSGod Game Window",
+                "enabled": true
+              },
+              {
+                "source": "OBSGod Game Audio",
+                "enabled": true
+              }
+            ],
+            "end_ms": 5966
+          },
+          "between-games": {
+            "scene": "OBSGod Idle",
+            "output_bytes": 2724856,
+            "at_ms": 6966,
+            "pixels": {
+              "channel_means": [
+                3.372916666666667,
+                3.372916666666667,
+                3.372916666666667
+              ],
+              "expected": "placeholder"
+            },
+            "items": [
+              {
+                "source": "Legacy private display sentinel",
+                "enabled": false
+              },
+              {
+                "source": "OBSGod Gamescope",
+                "enabled": false
+              },
+              {
+                "source": "OBSGod Idle Message",
+                "enabled": true
+              },
+              {
+                "source": "OBSGod Game Audio",
+                "enabled": true
+              }
+            ],
+            "end_ms": 10033
+          },
+          "game-b": {
+            "scene": "OBSGod Game",
+            "output_bytes": 5156034,
+            "at_ms": 13099,
+            "pixels": {
+              "channel_means": [
+                11.666666666666666,
+                210.27777777777777,
+                11.666666666666666
+              ],
+              "expected": "green"
+            },
+            "items": [
+              {
+                "source": "Legacy private display sentinel",
+                "enabled": false
+              },
+              {
+                "source": "OBSGod Gamescope",
+                "enabled": false
+              },
+              {
+                "source": "OBSGod Game Window",
+                "enabled": true
+              },
+              {
+                "source": "OBSGod Game Audio",
+                "enabled": true
+              }
+            ],
+            "end_ms": 16166
+          },
+          "unsupported-source": {
+            "scene": "OBSGod Idle",
+            "output_bytes": 6768347,
+            "at_ms": 17166,
+            "pixels": {
+              "channel_means": [
+                3.372916666666667,
+                3.372916666666667,
+                3.372916666666667
+              ],
+              "expected": "placeholder"
+            },
+            "items": [
+              {
+                "source": "Legacy private display sentinel",
+                "enabled": false
+              },
+              {
+                "source": "OBSGod Gamescope",
+                "enabled": false
+              },
+              {
+                "source": "OBSGod Idle Message",
+                "enabled": true
+              },
+              {
+                "source": "OBSGod Game Audio",
+                "enabled": true
+              }
+            ],
+            "end_ms": 20233
+          }
+        },
+        "clip_game": {
+          "scene": "OBSGod Game",
+          "output_bytes": 496009,
+          "at_ms": 1366,
+          "pixels": {
+            "channel_means": [
+              210.27916666666667,
+              21.665277777777778,
+              11.741666666666667
+            ],
+            "expected": "red"
+          },
+          "items": [
+            {
+              "source": "Legacy private display sentinel",
+              "enabled": false
+            },
+            {
+              "source": "OBSGod Gamescope",
+              "enabled": false
+            },
+            {
+              "source": "OBSGod Game Window",
+              "enabled": true
+            },
+            {
+              "source": "OBSGod Game Audio",
+              "enabled": true
+            }
+          ]
+        },
+        "clip_idle": {
+          "scene": "OBSGod Idle",
+          "output_bytes": 916488,
+          "at_ms": 2433,
+          "pixels": {
+            "channel_means": [
+              3.372916666666667,
+              3.372916666666667,
+              3.372916666666667
+            ],
+            "expected": "placeholder"
+          },
+          "items": [
+            {
+              "source": "Legacy private display sentinel",
+              "enabled": false
+            },
+            {
+              "source": "OBSGod Gamescope",
+              "enabled": false
+            },
+            {
+              "source": "OBSGod Idle Message",
+              "enabled": true
+            },
+            {
+              "source": "OBSGod Game Audio",
+              "enabled": true
+            }
+          ]
+        },
+        "first_stream_events": [
+          {
+            "event": "RecordStateChanged",
+            "state": "OBS_WEBSOCKET_OUTPUT_STARTING",
+            "active": false
+          },
+          {
+            "event": "RecordStateChanged",
+            "state": "OBS_WEBSOCKET_OUTPUT_STARTED",
+            "active": true
+          },
+          {
+            "event": "RecordStateChanged",
+            "state": "OBS_WEBSOCKET_OUTPUT_STOPPING",
+            "active": false
+          },
+          {
+            "event": "RecordStateChanged",
+            "state": "OBS_WEBSOCKET_OUTPUT_STOPPED",
+            "active": false
+          },
+          {
+            "event": "StreamStateChanged",
+            "state": "OBS_WEBSOCKET_OUTPUT_STARTING",
+            "active": false
+          },
+          {
+            "event": "StreamStateChanged",
+            "state": "OBS_WEBSOCKET_OUTPUT_STARTED",
+            "active": true
+          },
+          {
+            "event": "StreamStateChanged",
+            "state": "OBS_WEBSOCKET_OUTPUT_STOPPING",
+            "active": false
+          },
+          {
+            "event": "StreamStateChanged",
+            "state": "OBS_WEBSOCKET_OUTPUT_STOPPED",
+            "active": false
+          }
+        ],
+        "black_fallback": {
+          "scene": "OBSGod Idle",
+          "output_bytes": 488339,
+          "at_ms": 1333,
+          "pixels": {
+            "channel_means": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "expected": "black"
+          },
+          "items": [
+            {
+              "source": "Legacy private display sentinel",
+              "enabled": false
+            },
+            {
+              "source": "OBSGod Gamescope",
+              "enabled": false
+            },
+            {
+              "source": "OBSGod Idle Message",
+              "enabled": false
+            },
+            {
+              "source": "OBSGod Game Audio",
+              "enabled": true
+            }
+          ],
+          "end_ms": 4399
+        },
+        "final_status": {
+          "state": "stopped",
+          "recording": false,
+          "output_known": true,
+          "video": {
+            "mode": "game",
+            "state": "stopped",
+            "idle_style": "black",
+            "frames": "unknown",
+            "watching": false,
+            "updated": "2026-11-13T05:57:53.564060376Z",
+            "message": "The capture observer is stopped; it never starts output"
+          }
+        },
+        "state": "passed",
+        "decoded_media": {
+          "game-a": {
+            "viewer_pixels": {
+              "channel_means": [
+                208.2422222222222,
+                18.672777777777778,
+                7.748194444444445
+              ],
+              "expected": "red"
+            },
+            "viewer_audio": {
+              "audible": true,
+              "expected_hz": 440,
+              "expected_power": 0.022419333565894102,
+              "expected_tone": true,
+              "other_hz": 880,
+              "other_power": 4.2499359797582835e-13,
+              "peak_dbfs": -10.279516765359704,
+              "rate": 48000,
+              "rms_dbfs": -13.483129143333887,
+              "samples": 48000,
+              "status": "passed"
+            },
+            "sample_at_seconds": 4.3995
+          },
+          "between-games": {
+            "viewer_pixels": {
+              "channel_means": [
+                3.800972222222222,
+                3.800972222222222,
+                3.800972222222222
+              ],
+              "expected": "placeholder"
+            },
+            "viewer_audio": {
+              "audible": true,
+              "expected_hz": 440,
+              "expected_power": 0.02246861675572437,
+              "expected_tone": true,
+              "other_hz": 880,
+              "other_power": 2.2418264765074683e-14,
+              "peak_dbfs": -10.389278740918371,
+              "rate": 48000,
+              "rms_dbfs": -13.47389875241019,
+              "samples": 48000,
+              "status": "passed"
+            },
+            "sample_at_seconds": 8.4995
+          },
+          "game-b": {
+            "viewer_pixels": {
+              "channel_means": [
+                7.75,
+                209.26243055555557,
+                7.752361111111111
+              ],
+              "expected": "green"
+            },
+            "viewer_audio": {
+              "audible": true,
+              "expected_hz": 440,
+              "expected_power": 0.02249421636421813,
+              "expected_tone": true,
+              "other_hz": 880,
+              "other_power": 1.3653845717887442e-14,
+              "peak_dbfs": -10.448214063056167,
+              "rate": 48000,
+              "rms_dbfs": -13.468989589094098,
+              "samples": 48000,
+              "status": "passed"
+            },
+            "sample_at_seconds": 14.6325
+          },
+          "unsupported-source": {
+            "viewer_pixels": {
+              "channel_means": [
+                3.8011805555555553,
+                3.8011805555555553,
+                3.8011805555555553
+              ],
+              "expected": "placeholder"
+            },
+            "viewer_audio": {
+              "audible": true,
+              "expected_hz": 440,
+              "expected_power": 0.022495023627581694,
+              "expected_tone": true,
+              "other_hz": 880,
+              "other_power": 8.292736551325739e-15,
+              "peak_dbfs": -10.448214063056167,
+              "rate": 48000,
+              "rms_dbfs": -13.468833768869855,
+              "samples": 48000,
+              "status": "passed"
+            },
+            "sample_at_seconds": 18.6995
+          },
+          "black-fallback": {
+            "viewer_pixels": {
+              "channel_means": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected": "black"
+            },
+            "viewer_audio": {
+              "audible": true,
+              "expected_hz": 440,
+              "expected_power": 0.0224919107053818,
+              "expected_tone": true,
+              "other_hz": 880,
+              "other_power": 8.944101540842962e-15,
+              "peak_dbfs": -10.448214063056167,
+              "rate": 48000,
+              "rms_dbfs": -13.469434801075215,
+              "samples": 48000,
+              "status": "passed"
+            },
+            "sample_at_seconds": 2.866
+          },
+          "local-clip-audio": {
+            "audible": true,
+            "expected_hz": 440,
+            "expected_power": 0.022494593895821424,
+            "expected_tone": true,
+            "other_hz": 880,
+            "other_power": 3.4584538037601104e-15,
+            "peak_dbfs": -10.448214063056167,
+            "rate": 48000,
+            "rms_dbfs": -13.468916798987738,
+            "samples": 48000,
+            "status": "passed"
+          }
+        },
+        "ordinary_obs": "unchanged",
+        "source_revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+        "binary_sha256": "502bd48e07709a6f482ebfbb33fcdab531477e12db15cddf52aa787f53604386",
+        "capture_library_sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68"
+      }
+    },
+    "idle_media": {
+      "path": "native-game/output/idle-media-qualification.json",
+      "sha256": "5fdf72efb7074f15324b1f3c41451d905335e653a78c850a6076c9dcddf771be",
+      "content": {
+        "scope": "Real OBS native local media and local RTMP viewer audio/picture; synthetic Linux session, not Steam Deck",
+        "cases": {
+          "idle-image": {
+            "phases": {
+              "idle-image": {
+                "at_ms": 1299,
+                "end_ms": 4399,
+                "expected": "red",
+                "enabled_sources": [
+                  "OBSGod Game Audio",
+                  "OBSGod Idle Image"
+                ]
+              }
+            },
+            "decoded_viewer": {
+              "idle-image": {
+                "pixels": {
+                  "channel_means": [
+                    250.0,
+                    0.0,
+                    0.0
+                  ],
+                  "expected": "red"
+                },
+                "audio": {
+                  "audible": true,
+                  "expected_hz": 440,
+                  "expected_power": 0.022492194339700223,
+                  "expected_tone": true,
+                  "other_hz": 880,
+                  "other_power": 1.2274108126025101e-15,
+                  "peak_dbfs": -10.449096730567526,
+                  "rate": 48000,
+                  "rms_dbfs": -13.469380050937655,
+                  "samples": 48000,
+                  "status": "passed"
+                },
+                "at_seconds": 2.849
+              }
+            }
+          },
+          "idle-video": {
+            "phases": {
+              "idle-video": {
+                "at_ms": 1666,
+                "end_ms": 4766,
+                "expected": "moving",
+                "enabled_sources": [
+                  "OBSGod Game Audio",
+                  "OBSGod Idle Video"
+                ]
+              },
+              "idle-missing-media-black": {
+                "at_ms": 5533,
+                "end_ms": 8599,
+                "expected": "black",
+                "enabled_sources": [
+                  "OBSGod Game Audio"
+                ]
+              }
+            },
+            "decoded_viewer": {
+              "idle-video": {
+                "pixels": {
+                  "channel_means": [
+                    123.58020833333333,
+                    127.61270833333333,
+                    125.24798611111112
+                  ],
+                  "expected": "moving"
+                },
+                "audio": {
+                  "audible": true,
+                  "expected_hz": 440,
+                  "expected_power": 0.022493766932408014,
+                  "expected_tone": true,
+                  "other_hz": 880,
+                  "other_power": 8.141102420296917e-15,
+                  "peak_dbfs": -10.448214063056167,
+                  "rate": 48000,
+                  "rms_dbfs": -13.469076370002895,
+                  "samples": 48000,
+                  "status": "passed"
+                },
+                "at_seconds": 3.216,
+                "distinct_encoded_frames": 4
+              },
+              "idle-missing-media-black": {
+                "pixels": {
+                  "channel_means": [
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "expected": "black"
+                },
+                "audio": {
+                  "audible": true,
+                  "expected_hz": 440,
+                  "expected_power": 0.022489860710469385,
+                  "expected_tone": true,
+                  "other_hz": 880,
+                  "other_power": 2.7861294338480618e-15,
+                  "peak_dbfs": -10.448214063056167,
+                  "rate": 48000,
+                  "rms_dbfs": -13.469830691789433,
+                  "samples": 48000,
+                  "status": "passed"
+                },
+                "at_seconds": 7.066
+              }
+            }
+          }
+        },
+        "state": "passed",
+        "binary_sha256": "502bd48e07709a6f482ebfbb33fcdab531477e12db15cddf52aa787f53604386"
+      }
+    },
+    "media": {
+      "path": "native-audio/output/media-qualification.json",
+      "sha256": "4e0a03b422dc0645e51638a9ed55368fc9c1ceb3c17aa7d04b7b9e9c3ffaec29",
+      "content": {
+        "checks": {
+          "coexistence": {
+            "cancel_preserved_partial": true,
+            "export_preserved_source": true,
+            "implicit_broadcast": false,
+            "recording_and_replay": true,
+            "stop_recording_preserved_replay": true
+          },
+          "recording": {
+            "audio": {
+              "audible": true,
+              "expected_hz": 440,
+              "expected_power": 0.009995448080499967,
+              "expected_tone": true,
+              "other_hz": 880,
+              "other_power": 1.1291834826313042e-14,
+              "peak_dbfs": -13.692094853022127,
+              "rate": 48000,
+              "rms_dbfs": -16.99357634172474,
+              "samples": 96000,
+              "status": "passed"
+            },
+            "bytes": 2453830,
+            "distinct_frames": 4,
+            "duration_seconds": 6.2,
+            "file": "DeckyStream-2026-11-13_05-57-23.mkv"
+          },
+          "replay": {
+            "audio": {
+              "audible": true,
+              "expected_hz": 440,
+              "expected_power": 0.009985134562171167,
+              "expected_tone": true,
+              "other_hz": 880,
+              "other_power": 4.5545673507004074e-14,
+              "peak_dbfs": -13.74224669801427,
+              "rate": 48000,
+              "rms_dbfs": -17.00062664392989,
+              "samples": 96000,
+              "status": "passed"
+            },
+            "bytes": 2917664,
+            "distinct_frames": 4,
+            "duration_seconds": 7.466,
+            "file": "Replay DeckyStream-2026-11-13_05-57-30.mkv"
+          },
+          "reserve": {
+            "actual_disk_exhaustion": false,
+            "local_output_finalized": true,
+            "media_preserved": true,
+            "reserve_mib": 13705,
+            "status": "passed"
+          }
+        },
+        "platform": "synthetic Linux OBS",
+        "real_steam_deck": "unrun",
+        "status": "passed"
+      }
+    },
+    "media_live": {
+      "path": "native-audio/output/media-live-qualification.json",
+      "sha256": "a6f5c22467371c0dd6a5c22f95a9ff222c8bda96d9a83661d76bfbd10e60f3c7",
+      "content": {
+        "health": {
+          "audio": "signal",
+          "capture": "visible",
+          "expires_at": "2026-11-13T05:58:13.205186971Z",
+          "metrics": {
+            "bitrate_kbps": 3298.419882545818,
+            "cpu_percent": 16.571428571428573,
+            "encode_skipped_percent": 0,
+            "fps": 30.000000300000007,
+            "frame_render_ms": 7.902157,
+            "free_disk_mb": 13691.16796875,
+            "memory_mb": 382.390625,
+            "render_missed_percent": 0,
+            "stream_dropped_percent": 0
+          },
+          "observed_at": "2026-11-13T05:58:05.205186971Z",
+          "output_known": true,
+          "provider_reception": "unknown",
+          "sample_ms": 351,
+          "schema_version": 1,
+          "state": "observed",
+          "streaming": true
+        },
+        "local_stop_preserved_stream": true,
+        "platform": "synthetic Linux OBS",
+        "real_steam_deck": "unrun",
+        "recording": {
+          "audio": {
+            "audible": true,
+            "expected_hz": 440,
+            "expected_power": 0.00997055295800128,
+            "expected_tone": true,
+            "other_hz": 880,
+            "other_power": 2.177344952994813e-14,
+            "peak_dbfs": -13.735800768487962,
+            "rate": 48000,
+            "rms_dbfs": -17.002690372757826,
+            "samples": 96000,
+            "status": "passed"
+          },
+          "bytes": 2599222,
+          "distinct_frames": 4,
+          "duration_seconds": 6.57,
+          "file": "DeckyStream-2026-11-13_05-57-58.mkv"
+        },
+        "replay": {
+          "audio": {
+            "audible": true,
+            "expected_hz": 440,
+            "expected_power": 0.010002274627731077,
+            "expected_tone": true,
+            "other_hz": 880,
+            "other_power": 3.2169217446021266e-13,
+            "peak_dbfs": -13.829086876075005,
+            "rate": 48000,
+            "rms_dbfs": -16.99185807369966,
+            "samples": 96000,
+            "status": "passed"
+          },
+          "bytes": 1531357,
+          "distinct_frames": 4,
+          "duration_seconds": 3.882,
+          "file": "Replay DeckyStream-2026-11-13_05-58-06.mkv"
+        },
+        "status": "passed",
+        "stream_advanced_while_recording_and_replay": true
+      }
+    },
+    "profiles": {
+      "path": "native-audio/output/profile-qualification.json",
+      "sha256": "135d0e9f957c16e0ad27b24584b990f80616d20d1f151cd310c87ece917616fa",
+      "content": {
+        "checks": [
+          {
+            "encoded_height": 540,
+            "encoded_width": 960,
+            "fps": 30,
+            "implicit_broadcast": false,
+            "obs_video": {
+              "baseHeight": 720,
+              "baseWidth": 1280,
+              "fpsDenominator": 1,
+              "fpsNumerator": 30,
+              "outputHeight": 540,
+              "outputWidth": 960
+            },
+            "picture_audio": {
+              "audio": {
+                "audible": true,
+                "expected_hz": 440,
+                "expected_power": 0.00999556133039958,
+                "expected_tone": true,
+                "other_hz": 880,
+                "other_power": 4.6552847575285095e-14,
+                "peak_dbfs": -13.96827417819378,
+                "rate": 48000,
+                "rms_dbfs": -16.991519840413684,
+                "samples": 96000,
+                "status": "passed"
+              },
+              "bytes": 1605402,
+              "distinct_frames": 4,
+              "duration_seconds": 4.933,
+              "file": "DeckyStream-2026-11-13_05-57-40.mkv"
+            },
+            "portable_export_private": true,
+            "preset": "small-540p30",
+            "selection": "explicit-saved-profile-apply"
+          },
+          {
+            "encoded_height": 720,
+            "encoded_width": 1280,
+            "fps": 60,
+            "implicit_broadcast": false,
+            "obs_video": {
+              "baseHeight": 720,
+              "baseWidth": 1280,
+              "fpsDenominator": 1,
+              "fpsNumerator": 60,
+              "outputHeight": 720,
+              "outputWidth": 1280
+            },
+            "picture_audio": {
+              "audio": {
+                "audible": true,
+                "expected_hz": 440,
+                "expected_power": 0.009997849809728355,
+                "expected_tone": true,
+                "other_hz": 880,
+                "other_power": 9.243903033382654e-14,
+                "peak_dbfs": -13.965627251573247,
+                "rate": 48000,
+                "rms_dbfs": -16.991006614733234,
+                "samples": 96000,
+                "status": "passed"
+              },
+              "bytes": 3466739,
+              "distinct_frames": 4,
+              "duration_seconds": 4.608,
+              "file": "DeckyStream-2026-11-13_05-57-47.mkv"
+            },
+            "portable_export_private": true,
+            "preset": "smooth-720p60",
+            "selection": "verified-game-before-explicit-cold-recording"
+          }
+        ],
+        "credentials_unchanged": true,
+        "original_settings_restored": true,
+        "platform": "synthetic Linux OBS with x264",
+        "real_steam_deck": "unrun",
+        "status": "passed"
+      }
+    },
+    "hotplug": {
+      "path": "native-audio/output/audio-hotplug.json",
+      "sha256": "658121e11e200e99430f03d36a979042c9afcecedbd61da92eb727b7b0a2d863",
+      "content": {
+        "mixer_policy_preserved": true,
+        "output_state_preserved": true,
+        "platform": "synthetic Linux OBS",
+        "real_steam_deck": "unrun",
+        "route_transitions": 2,
+        "status": "passed"
+      }
+    },
+    "audio": {
+      "outcome": "passed",
+      "metrics": {
+        "recording-audio": {
+          "path": "native-audio/output/recording-audio-metrics.json",
+          "sha256": "089c1fcdb4a267aee1ff1a155f70c255b4ba4e87be33226c2051ac105bd32829",
+          "content": {
+            "audible": true,
+            "expected_hz": 440,
+            "expected_power": 0.0070174221138714086,
+            "expected_tone": true,
+            "other_hz": 880,
+            "other_power": 6.307282930601874e-09,
+            "peak_dbfs": -13.947121316261642,
+            "rate": 48000,
+            "rms_dbfs": -16.991235168661973,
+            "samples": 96000,
+            "status": "passed"
+          }
+        },
+        "stream-audio": {
+          "path": "native-audio/output/stream-audio-metrics.json",
+          "sha256": "65c1374ec9e2f60b1ffb19c6ea11071cab4e54a5f140d345a6b0f5d8b668ce29",
+          "content": {
+            "audible": true,
+            "expected_hz": 440,
+            "expected_power": 0.009994298280261113,
+            "expected_tone": true,
+            "other_hz": 880,
+            "other_power": 4.492560613755564e-14,
+            "peak_dbfs": -13.966950614055895,
+            "rate": 48000,
+            "rms_dbfs": -16.991689209380617,
+            "samples": 96000,
+            "status": "passed"
+          }
+        },
+        "audio-default-fallback-audio": {
+          "path": "native-audio/output/audio-default-fallback-audio-metrics.json",
+          "sha256": "dec3fc6492946f64bac9ac45b2dcf88d466cf3f8c7a16791aeb1afac2109f483",
+          "content": {
+            "audible": true,
+            "expected_hz": 880,
+            "expected_power": 0.009927315857948942,
+            "expected_tone": true,
+            "other_hz": 440,
+            "other_power": 3.8408549661976526e-13,
+            "peak_dbfs": -13.730647466860638,
+            "rate": 48000,
+            "rms_dbfs": -17.062554871554227,
+            "samples": 96000,
+            "status": "passed"
+          }
+        },
+        "audio-default-changed-audio": {
+          "path": "native-audio/output/audio-default-changed-audio-metrics.json",
+          "sha256": "bc75127a633db6f173fd5dad371a4461981f877af5f3ef0aaf6e97d7d94d26eb",
+          "content": {
+            "audible": true,
+            "expected_hz": 440,
+            "expected_power": 0.0065563846800637746,
+            "expected_tone": true,
+            "other_hz": 880,
+            "other_power": 8.062405447570914e-09,
+            "peak_dbfs": -13.952404704282246,
+            "rate": 48000,
+            "rms_dbfs": -16.991385207132197,
+            "samples": 96000,
+            "status": "passed"
+          }
+        },
+        "silence-negative-control": {
+          "path": "native-audio/output/silence-negative-control.json",
+          "sha256": "5a37e66d12c607bb1149f9821a2c8c8ddc5231a762778668c112d53f63eb9763",
+          "content": {
+            "audible": false,
+            "expected_hz": 440,
+            "expected_power": 0.0,
+            "expected_tone": false,
+            "other_hz": 880,
+            "other_power": 0.0,
+            "peak_dbfs": null,
+            "rate": 48000,
+            "rms_dbfs": null,
+            "samples": 48000,
+            "status": "silence-rejected-as-expected"
+          }
+        }
+      }
+    }
+  },
+  "scope_note": "These receipts qualify only the recorded source revision and candidate bytes.",
+  "limitations": [
+    "Native OBS30.2.3 is distinct from the owner Discover OBS33.0.1 target; actual target-version/device evidence is unrun.",
+    "Synthetic Linux native OBS/PipeWire/audio fixtures; not actual Steam Deck, SteamOS, Gamescope or Flatpak evidence.",
+    "No real provider viewer, hardware encoder, controller, wallet/payment or production broadcast was tested.",
+    "RTMP test traffic stays on disposable container loopback; containers have network disabled."
+  ],
+  "artifacts": {
+    "native-audio.log": {
+      "bytes": 1109,
+      "sha256": "3203fe76855d83e8c7b154d94ab376a8eb33681d810d2187e70fbf1cf52961db"
+    },
+    "native-capture.log": {
+      "bytes": 247,
+      "sha256": "4bfe67e970711708b15a5d6ded0a1ee60fac2356d4663e0ec5842daddc68df29"
+    },
+    "native-game.log": {
+      "bytes": 1383,
+      "sha256": "61ce2762bbd14b2021f5bba67c32a4349d9cab423d78be5f5bb142b7e2837c69"
+    },
+    "native-inputs.json": {
+      "bytes": 2361,
+      "sha256": "1b279ba7ed6747f7a731abeff3d60cf4f051e8ea182f6f73681f84875318ab7f"
+    },
+    "native-preflight.json": {
+      "bytes": 670,
+      "sha256": "7dd504a01854b651413c3810ff43ff64e4c8ba9f8598d6eae565876f428b7aef"
+    }
+  }
+}

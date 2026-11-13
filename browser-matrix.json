@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "candidate": "0.1.0-deck.8",
+  "source_revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+  "source_clean_before": true,
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "playwright": "1.62.0",
+  "browser": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+  "node": "v24.19.0",
+  "inputs": {
+    "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.8_linux_amd64.tar.gz": {
+      "sha256": "d33c976905e6cde8f7ab9491eef62a08a394c80b0c35d65a61bafa34a27dd9f2",
+      "bytes": 11652475
+    },
+    "/workspace/obsgod/dist/obsgod-one-click-update_0.1.0-deck.8_linux_amd64.zip": {
+      "sha256": "5ffc3b29de24ade5cef5159c5b141ac20cc904f150913d9e41f06aaa327afffe",
+      "bytes": 3073556
+    },
+    "/workspace/obsgod/dist/obsgod-decky.zip": {
+      "sha256": "c17cc96727c8f9aa2253dd7b31ee5be832fd2f904c46665d1389194fa2e9df29",
+      "bytes": 4339963
+    },
+    "/workspace/obsgod/dist/decky-install": {
+      "sha256": "81e0f2a4e09641df55869bb00b1cdcc31dc539d3037904945c3e64a05d4d2be0",
+      "bytes": 7155836
+    },
+    "/workspace/obsgod/dist/manifest.json": {
+      "sha256": "a05d1348aff24b91ca81f73e81cbaa630314605ac532c017bde2f51020beeec3",
+      "bytes": 2390
+    },
+    "/workspace/.obsgod-tools/m2/legacy-download/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz": {
+      "sha256": "c584c04ed3c79a01f1b846adc4f8bbe86c8132a4bca2cf6ba60cc557eba39ce1",
+      "bytes": 7935355
+    },
+    "/workspace/.obsgod-tools/audio-game-upgrade/final/public-download/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz": {
+      "sha256": "23cc2c484b7524756a3b632bf8a8e7231ac7c515c06a08183422ed91b7e82650",
+      "bytes": 11229097
+    },
+    "/workspace/.obsgod-tools/m2/legacy-download/obsgod-one-click-update_0.1.0-deck.6_linux_amd64.zip": {
+      "sha256": "c196947ca1cd34a01caccff7755b62de61d77531f39ac63922b570eed329420d",
+      "bytes": 3069400
+    }
+  },
+  "source_files_sha256": {
+    "steamdeck/tests/browser-setup.py": "fe4374941457334fd155404a2846b9551fabd4348d0e40ed9be6be896801a9b7",
+    "steamdeck/tests/browser-panel.py": "83040a4343436ba399898babfa5d7afd0ce8c8f1953fb6817dab047c6d5e4d59",
+    "steamdeck/tests/browser-support.py": "eb8af6d817c9a92a087bad7a5ea63691d97c1bea908f8a1adce53b688f54dbcd",
+    "steamdeck/tests/decky-transport-smoke.py": "7ba121f89ccff257bbfb0e4da1421e6b49bad439ccf8a3b0a7a1e4704d91e499",
+    "steamdeck/tests/updater-smoke.py": "54f8b83432c575a3b582f9437b56b6427e9ee90ceccffaf33457c25bd706da3a",
+    "steamdeck/tests/test_bootstrap.py": "1250855acade87931b71c263ec49c5077b207e249c370190fd417402064e6c86",
+    "steamdeck/decky/tests/fixture.html": "6cd9ec6fa43873322b10c2dc7a98594810b95a56244a1b654a010987cc628dbe",
+    "steamdeck/decky/tests/build-fixture.mjs": "77ef761327f9a3e264d0ca7aad06b7ff64dba056963ef40745d5bacf1306318c",
+    "steamdeck/decky/tests/build-support-fixture.mjs": "65d695f8f31b57b656fa11313fdc2d68bef1b3cc51f9724235cbe9538dac8b75"
+  },
+  "checks": [
+    {
+      "name": "setup-fresh",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "steamdeck/tests/browser-setup.py",
+        "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.8_linux_amd64.tar.gz",
+        "--browser",
+        "/usr/bin/chromium",
+        "--screenshots",
+        "/workspace/.obsgod-tools/m3/final/browser-fresh"
+      ],
+      "log": "setup-fresh.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 3.028
+    },
+    {
+      "name": "setup-upgrade4",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "steamdeck/tests/browser-setup.py",
+        "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.8_linux_amd64.tar.gz",
+        "--upgrade-from",
+        "/workspace/.obsgod-tools/m2/legacy-download/obsgod-deck_0.1.0-deck.4_linux_amd64.tar.gz",
+        "--browser",
+        "/usr/bin/chromium",
+        "--screenshots",
+        "/workspace/.obsgod-tools/m3/final/browser-upgrade4"
+      ],
+      "log": "setup-upgrade4.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 2.859
+    },
+    {
+      "name": "setup-upgrade6",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "steamdeck/tests/browser-setup.py",
+        "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.8_linux_amd64.tar.gz",
+        "--upgrade-from",
+        "/workspace/.obsgod-tools/audio-game-upgrade/final/public-download/obsgod-deck_0.1.0-deck.6_linux_amd64.tar.gz",
+        "--browser",
+        "/usr/bin/chromium",
+        "--screenshots",
+        "/workspace/.obsgod-tools/m3/final/browser-upgrade6"
+      ],
+      "log": "setup-upgrade6.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 2.935
+    },
+    {
+      "name": "panel",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "steamdeck/tests/browser-panel.py",
+        "/workspace/obsgod/dist/obsgod-decky.zip",
+        "--browser",
+        "/usr/bin/chromium",
+        "--screenshots",
+        "/workspace/.obsgod-tools/m3/final/browser-panel"
+      ],
+      "log": "panel.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 14.436
+    },
+    {
+      "name": "m3-panel",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "steamdeck/tests/browser-m3-panel.py",
+        "/workspace/obsgod/dist/obsgod-decky.zip",
+        "--browser",
+        "/usr/bin/chromium",
+        "--screenshots",
+        "/workspace/.obsgod-tools/m3/final/browser-m3-panel"
+      ],
+      "log": "m3-panel.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 12.703
+    },
+    {
+      "name": "m3-setup",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "steamdeck/tests/browser-m3-setup.py",
+        "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.8_linux_amd64.tar.gz",
+        "--browser",
+        "/usr/bin/chromium",
+        "--screenshots",
+        "/workspace/.obsgod-tools/m3/final/browser-m3-setup"
+      ],
+      "log": "m3-setup.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 3.696
+    },
+    {
+      "name": "support-receive",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "steamdeck/tests/browser-support.py",
+        "--browser",
+        "/usr/bin/chromium",
+        "--screenshots",
+        "/workspace/.obsgod-tools/m3/final/browser-support"
+      ],
+      "log": "support-receive.log",
+      "exit_code": 0,
+      "outcome": "passed",
+      "seconds": 1.75
+    }
+  ],
+  "limitations": [
+    "Steam/Decky host APIs and installed Flatpak/Steam service behavior are fixtures, not real Deck/controller proof.",
+    "Configured receive dialogs use public protocol-test addresses; production receiving addresses remain unconfigured.",
+    "No live provider payments, wallet scanning/receipt or external broadcast performed."
+  ],
+  "outcome": "passed",
+  "source_clean_after": true,
+  "revision_after": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+  "input_hashes_unchanged": true
+}

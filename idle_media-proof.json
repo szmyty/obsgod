@@ -1,0 +1,122 @@
+{
+  "path": "native-game/output/idle-media-qualification.json",
+  "sha256": "5fdf72efb7074f15324b1f3c41451d905335e653a78c850a6076c9dcddf771be",
+  "content": {
+    "scope": "Real OBS native local media and local RTMP viewer audio/picture; synthetic Linux session, not Steam Deck",
+    "cases": {
+      "idle-image": {
+        "phases": {
+          "idle-image": {
+            "at_ms": 1299,
+            "end_ms": 4399,
+            "expected": "red",
+            "enabled_sources": [
+              "OBSGod Game Audio",
+              "OBSGod Idle Image"
+            ]
+          }
+        },
+        "decoded_viewer": {
+          "idle-image": {
+            "pixels": {
+              "channel_means": [
+                250.0,
+                0.0,
+                0.0
+              ],
+              "expected": "red"
+            },
+            "audio": {
+              "audible": true,
+              "expected_hz": 440,
+              "expected_power": 0.022492194339700223,
+              "expected_tone": true,
+              "other_hz": 880,
+              "other_power": 1.2274108126025101e-15,
+              "peak_dbfs": -10.449096730567526,
+              "rate": 48000,
+              "rms_dbfs": -13.469380050937655,
+              "samples": 48000,
+              "status": "passed"
+            },
+            "at_seconds": 2.849
+          }
+        }
+      },
+      "idle-video": {
+        "phases": {
+          "idle-video": {
+            "at_ms": 1666,
+            "end_ms": 4766,
+            "expected": "moving",
+            "enabled_sources": [
+              "OBSGod Game Audio",
+              "OBSGod Idle Video"
+            ]
+          },
+          "idle-missing-media-black": {
+            "at_ms": 5533,
+            "end_ms": 8599,
+            "expected": "black",
+            "enabled_sources": [
+              "OBSGod Game Audio"
+            ]
+          }
+        },
+        "decoded_viewer": {
+          "idle-video": {
+            "pixels": {
+              "channel_means": [
+                123.58020833333333,
+                127.61270833333333,
+                125.24798611111112
+              ],
+              "expected": "moving"
+            },
+            "audio": {
+              "audible": true,
+              "expected_hz": 440,
+              "expected_power": 0.022493766932408014,
+              "expected_tone": true,
+              "other_hz": 880,
+              "other_power": 8.141102420296917e-15,
+              "peak_dbfs": -10.448214063056167,
+              "rate": 48000,
+              "rms_dbfs": -13.469076370002895,
+              "samples": 48000,
+              "status": "passed"
+            },
+            "at_seconds": 3.216,
+            "distinct_encoded_frames": 4
+          },
+          "idle-missing-media-black": {
+            "pixels": {
+              "channel_means": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected": "black"
+            },
+            "audio": {
+              "audible": true,
+              "expected_hz": 440,
+              "expected_power": 0.022489860710469385,
+              "expected_tone": true,
+              "other_hz": 880,
+              "other_power": 2.7861294338480618e-15,
+              "peak_dbfs": -10.448214063056167,
+              "rate": 48000,
+              "rms_dbfs": -13.469830691789433,
+              "samples": 48000,
+              "status": "passed"
+            },
+            "at_seconds": 7.066
+          }
+        }
+      }
+    },
+    "state": "passed",
+    "binary_sha256": "502bd48e07709a6f482ebfbb33fcdab531477e12db15cddf52aa787f53604386"
+  }
+}

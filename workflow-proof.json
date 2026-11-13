@@ -1,0 +1,16 @@
+{
+  "path": "native-audio/output/control-workflow-qualification.json",
+  "sha256": "a5af5296a2e7ef5ca055d1c84da8d8c8a66bb8add25fa5b05a9b579bc2c4bf58",
+  "content": {
+    "actual_applied_stages": [
+      "starting_scene"
+    ],
+    "all_output_remained_inactive": true,
+    "managed_settings_and_credentials_preserved": true,
+    "private_generic_configuration_removed": true,
+    "status": "passed",
+    "target_collection": "OBSGod",
+    "target_profile": "OBSGod",
+    "target_scene": "OBSGod Idle"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "path": "native-audio/output/media-qualification.json",
+  "sha256": "4e0a03b422dc0645e51638a9ed55368fc9c1ceb3c17aa7d04b7b9e9c3ffaec29",
+  "content": {
+    "checks": {
+      "coexistence": {
+        "cancel_preserved_partial": true,
+        "export_preserved_source": true,
+        "implicit_broadcast": false,
+        "recording_and_replay": true,
+        "stop_recording_preserved_replay": true
+      },
+      "recording": {
+        "audio": {
+          "audible": true,
+          "expected_hz": 440,
+          "expected_power": 0.009995448080499967,
+          "expected_tone": true,
+          "other_hz": 880,
+          "other_power": 1.1291834826313042e-14,
+          "peak_dbfs": -13.692094853022127,
+          "rate": 48000,
+          "rms_dbfs": -16.99357634172474,
+          "samples": 96000,
+          "status": "passed"
+        },
+        "bytes": 2453830,
+        "distinct_frames": 4,
+        "duration_seconds": 6.2,
+        "file": "DeckyStream-2026-11-13_05-57-23.mkv"
+      },
+      "replay": {
+        "audio": {
+          "audible": true,
+          "expected_hz": 440,
+          "expected_power": 0.009985134562171167,
+          "expected_tone": true,
+          "other_hz": 880,
+          "other_power": 4.5545673507004074e-14,
+          "peak_dbfs": -13.74224669801427,
+          "rate": 48000,
+          "rms_dbfs": -17.00062664392989,
+          "samples": 96000,
+          "status": "passed"
+        },
+        "bytes": 2917664,
+        "distinct_frames": 4,
+        "duration_seconds": 7.466,
+        "file": "Replay DeckyStream-2026-11-13_05-57-30.mkv"
+      },
+      "reserve": {
+        "actual_disk_exhaustion": false,
+        "local_output_finalized": true,
+        "media_preserved": true,
+        "reserve_mib": 13705,
+        "status": "passed"
+      }
+    },
+    "platform": "synthetic Linux OBS",
+    "real_steam_deck": "unrun",
+    "status": "passed"
+  }
+}

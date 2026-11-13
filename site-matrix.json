@@ -1,0 +1,365 @@
+{
+  "revision": "bf72ca4ae028f78895eadee6d3874734a1cccd05",
+  "outcome": "passed",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "site/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "outcome": "passed",
+      "test_count": 11,
+      "log": "site-unit.log"
+    },
+    {
+      "command": [
+        "python3",
+        "/workspace/.obsgod-tools/m3/site-safety-check.py"
+      ],
+      "outcome": "passed",
+      "case_count": 10
+    },
+    {
+      "command": [
+        "python3",
+        "/workspace/.obsgod-tools/m3/site-browser-check.py"
+      ],
+      "outcome": "passed",
+      "page_viewport_cases": 40,
+      "offline_file_case": "unavailable; managed browser policy",
+      "offline_loopback_http": "passed",
+      "console_errors": 0,
+      "external_requests": 0
+    }
+  ],
+  "site_browser": {
+    "status": "passed-with-explicit-unavailable",
+    "browser": "Chromium151.0.7922.173 / Playwright1.62.0",
+    "cases": [
+      {
+        "viewport": "mobile",
+        "width": 390,
+        "height": 844,
+        "page": "configuration.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "mobile",
+        "width": 390,
+        "height": 844,
+        "page": "index.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "mobile",
+        "width": 390,
+        "height": 844,
+        "page": "install.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "mobile",
+        "width": 390,
+        "height": 844,
+        "page": "privacy.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "mobile",
+        "width": 390,
+        "height": 844,
+        "page": "providers.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "mobile",
+        "width": 390,
+        "height": 844,
+        "page": "troubleshooting.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "mobile",
+        "width": 390,
+        "height": 844,
+        "page": "uninstall.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "mobile",
+        "width": 390,
+        "height": 844,
+        "page": "updates.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "small-mobile",
+        "width": 320,
+        "height": 780,
+        "page": "configuration.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "small-mobile",
+        "width": 320,
+        "height": 780,
+        "page": "index.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "small-mobile",
+        "width": 320,
+        "height": 780,
+        "page": "install.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "small-mobile",
+        "width": 320,
+        "height": 780,
+        "page": "privacy.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "small-mobile",
+        "width": 320,
+        "height": 780,
+        "page": "providers.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "small-mobile",
+        "width": 320,
+        "height": 780,
+        "page": "troubleshooting.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "small-mobile",
+        "width": 320,
+        "height": 780,
+        "page": "uninstall.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "small-mobile",
+        "width": 320,
+        "height": 780,
+        "page": "updates.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "deck",
+        "width": 1280,
+        "height": 800,
+        "page": "configuration.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "deck",
+        "width": 1280,
+        "height": 800,
+        "page": "index.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "deck",
+        "width": 1280,
+        "height": 800,
+        "page": "install.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "deck",
+        "width": 1280,
+        "height": 800,
+        "page": "privacy.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "deck",
+        "width": 1280,
+        "height": 800,
+        "page": "providers.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "deck",
+        "width": 1280,
+        "height": 800,
+        "page": "troubleshooting.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "deck",
+        "width": 1280,
+        "height": 800,
+        "page": "uninstall.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "deck",
+        "width": 1280,
+        "height": 800,
+        "page": "updates.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "deck-portrait",
+        "width": 800,
+        "height": 1280,
+        "page": "configuration.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "deck-portrait",
+        "width": 800,
+        "height": 1280,
+        "page": "index.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "deck-portrait",
+        "width": 800,
+        "height": 1280,
+        "page": "install.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "deck-portrait",
+        "width": 800,
+        "height": 1280,
+        "page": "privacy.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "deck-portrait",
+        "width": 800,
+        "height": 1280,
+        "page": "providers.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "deck-portrait",
+        "width": 800,
+        "height": 1280,
+        "page": "troubleshooting.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "deck-portrait",
+        "width": 800,
+        "height": 1280,
+        "page": "uninstall.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "deck-portrait",
+        "width": 800,
+        "height": 1280,
+        "page": "updates.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "desktop",
+        "width": 1440,
+        "height": 1000,
+        "page": "configuration.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "desktop",
+        "width": 1440,
+        "height": 1000,
+        "page": "index.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "desktop",
+        "width": 1440,
+        "height": 1000,
+        "page": "install.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "desktop",
+        "width": 1440,
+        "height": 1000,
+        "page": "privacy.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "desktop",
+        "width": 1440,
+        "height": 1000,
+        "page": "providers.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "desktop",
+        "width": 1440,
+        "height": 1000,
+        "page": "troubleshooting.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "desktop",
+        "width": 1440,
+        "height": 1000,
+        "page": "uninstall.html",
+        "status": "passed"
+      },
+      {
+        "viewport": "desktop",
+        "width": 1440,
+        "height": 1000,
+        "page": "updates.html",
+        "status": "passed"
+      },
+      {
+        "mode": "file-offline",
+        "status": "unavailable",
+        "reason": "Managed Chromium policy blocks file:// navigation. Loopback HTTP preview requires no external requests."
+      }
+    ],
+    "console_errors": [],
+    "external_requests": [],
+    "screenshots": {
+      "configuration-mobile.png": "981c7bad20877a6ce9d45b58c88c6137f0d1e3e3ea6bcf6301c607058fe2242d",
+      "landing-deck-portrait.png": "5b75289c546643f77297f3998c9c72781a3bc646cf3ee125d00dcf0ebe4d593f",
+      "landing-deck.png": "b91c862a46b29ddf3f68b1632d13cedba2d10f1d556bfe1926c1600aaa578553",
+      "landing-desktop.png": "8ea3353687571ec1d3e185ec143a8d1c03898a88c3595ee65b39d03b1f83e58e",
+      "landing-mobile.png": "aead1213b946f37577188723e42e0a3beeefaea0db8037097f19d88a0645a615"
+    },
+    "limitations": "Chromium viewport and file navigation only; no real Steam Deck/controller or hosted-site acceptance."
+  },
+  "additional_safety": {
+    "status": "passed",
+    "cases": [
+      "identical source builds identical bytes",
+      "display metadata is HTML escaped",
+      "invalid repository rejected",
+      "non-HTTPS support rejected",
+      "remote CSS import rejected",
+      "symlink output refused without modifying target",
+      "unrelated output preserved",
+      "stale output check rejected",
+      "broken local link rejected",
+      "broken local anchor rejected"
+    ],
+    "case_count": 10
+  },
+  "limitations": [
+    "Static local preview tested; no site deployment",
+    "file:// unavailable by browser policy; offline loopback HTTP tested"
+  ]
+}
