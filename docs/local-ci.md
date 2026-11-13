@@ -49,7 +49,9 @@ reads structured ACT messages and legacy text, and writes `report.json` plus
 `report.md`. It preserves raw exit outcomes, source/configuration pins, command/
 event/matrix context, observed test results, attempts and explicit missing-platform
 or provider evidence. A failed integrity check is not converted into a passing
-workflow report. A different revision's receipt cannot qualify the selected one.
+workflow report. `local_result` covers the six supported jobs; `overall_result`
+remains partial while separate provider/platform/target gates are open. Exit0
+means verified clean local-job completion, not full hosted/device acceptance. A different revision's receipt cannot qualify the selected one.
 
 Failed runs are grouped into actionable findings with their evidence and failed
 step. Diagnostic error text from successful negative-control tests does not become
