@@ -40,6 +40,27 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
+def redact_log_value(value):
+    """Filter decoded records, including URLs escaped by JSON log encoding."""
+    if isinstance(value, str):
+        return re.sub(r"(https?:(?:\\*/){2})[^\s/@]+@", r"\1[redacted]@", value, flags=re.IGNORECASE)
+    if isinstance(value, list):
+        return [redact_log_value(item) for item in value]
+    if isinstance(value, dict):
+        return {redact_log_value(key): redact_log_value(item) for key, item in value.items()}
+    return value
+
+
+def sanitize_log_line(line):
+    """Keep structured act records valid; retain legacy text as a fallback."""
+    try:
+        record = json.loads(line)
+    except ValueError:
+        return redact_log_value(line), False
+    newline = "\n" if line.endswith("\n") else ""
+    return json.dumps(redact_log_value(record), ensure_ascii=False, separators=(",", ":")) + newline, True
+
+
 def git(*args):
     return subprocess.check_output(["git", "-C", str(ROOT), *args], text=True).strip()
 
@@ -222,9 +243,15 @@ def main():
             command += ["--eventpath", ".github/act/pull-request.json"]
     stamp = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime())
     prefix = state / f"{stamp}-{args.action}"
+    actrc = ROOT / ".actrc"
     receipt = {"revision": git("rev-parse", "HEAD"), "dirty": bool(git("status", "--porcelain")),
+               "source_tree": git("rev-parse", "HEAD^{tree}"),
                "tracked_diff_sha256": sha(subprocess.check_output(["git", "-C", str(ROOT), "diff", "HEAD", "--binary"])),
                "act": actual, "runner_image": IMAGE, "action": args.action,
+               "act_binary_sha256": sha(args.act.read_bytes()),
+               "launcher_sha256": sha(Path(__file__).read_bytes()),
+               "actrc_sha256": sha(actrc.read_bytes()) if actrc.is_file() else None,
+               "log_format": "jsonl-with-text-fallback", "log_record_counts": {"json": 0, "text": 0},
                "local_service_address": service_address,
                "apt_ca_configuration": {"content": APT_CA_CONFIG.decode(), "sha256": sha(APT_CA_CONFIG)},
                "action_sources": action_receipts,
@@ -232,12 +259,13 @@ def main():
                "workflow_sha256": {p.name: sha(p.read_bytes()) for p in sorted((ROOT / ".github/workflows").glob("*.yml"))},
                "started_utc": stamp, "result": "running"}
     # Commands contain session paths; they are local evidence, not release metadata.
-    receipt["command"] = [re.sub(r"^((?:HTTP_PROXY|HTTPS_PROXY|ALL_PROXY|NO_PROXY|http_proxy|https_proxy|all_proxy|no_proxy))=.*$", r"\1=[injected]", value) for value in command]
+    receipt["command"] = redact_log_value([re.sub(r"^((?:HTTP_PROXY|HTTPS_PROXY|ALL_PROXY|NO_PROXY|http_proxy|https_proxy|all_proxy|no_proxy))=.*$", r"\1=[injected]", value) for value in command])
     prefix.with_suffix(".json").write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n")
     process = subprocess.Popen(command, cwd=ROOT, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
     with prefix.with_suffix(".log").open("w") as log:
         for line in process.stdout:
-            line = re.sub(r"(https?://)[^\s/@]+@", r"\1[redacted]@", line)
+            line, structured = sanitize_log_line(line)
+            receipt["log_record_counts"]["json" if structured else "text"] += 1
             print(line, end="", flush=True)
             log.write(line)
     code = process.wait()

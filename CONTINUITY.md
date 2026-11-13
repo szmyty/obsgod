@@ -1,5 +1,31 @@
 # Current work
 
+## Active: org-aligned local ACT reports and evidence-based issue triage
+
+The owner requested following the egohygiene `.actrc` pattern, running ACT in the
+local workspace, collecting reports and turning new findings into issues for
+sync-up. This authorizes scoped new issue creation for demonstrated findings;
+known requirements already in #46 must not be duplicated. #51 remains separate.
+
+Start from clean merged master9d29a977 in the existing checkout. Read-only live
+org references are pinned in [local CI documentation](docs/local-ci.md):
+egohygiene/egohygiene060d15a790 and Reflector23f164cf89. Reflector now uses the same
+Ubuntu24 digest and JSON output; older local graph/Node16 examples are stale.
+Preserve the qualified runner/tool pins and existing host CA/proxy/socket/cache/
+artifact/native-fixture handling. Add structured logs and a bounded report command,
+then commit/freeze source before running serial workflow audit sequences.
+
+Reports must retain exact source/commands/configuration/client/image/workflow/
+log hashes, raw passed/failed outcomes and explicit skipped/unavailable/unrun
+matrix portions. Older1a candidate receipts remain historical for their exact
+bytes. Locally generated workflow packages do not replace the immutable published
+review-download checkpoint or authorize a release. No other-repo write, spending,
+deployment, Store research/contact or automatic publication is authorized.
+
+Source setup and fresh execution/triage are in progress; do not treat this note as
+a passing receipt. Push a reviewable checkpoint and attach final sanitized report
+and issue disposition after actual execution. Earlier completion entries follow.
+
 ## Owner-approved merges and issue consolidation completed
 
 On 2026-11-13 the owner instructed “Ok merge them !” after the candidate/evidence
