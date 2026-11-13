@@ -29,9 +29,13 @@ type Settings struct {
 	Encoder    string `json:"encoder"`
 	// Empty values retain the pre-capture-mode JSON representation and settings
 	// hash. Existing installations must load without resetting their stream key.
-	CaptureMode string `json:"capture_mode,omitempty"`
-	IdleStyle   string `json:"idle_style,omitempty"`
-	IdleText    string `json:"idle_text,omitempty"`
+	CaptureMode     string `json:"capture_mode,omitempty"`
+	IdleStyle       string `json:"idle_style,omitempty"`
+	IdleText        string `json:"idle_text,omitempty"`
+	Width           int    `json:"width,omitempty"`
+	Height          int    `json:"height,omitempty"`
+	IdleMedia       string `json:"idle_media,omitempty"`
+	IdleMediaRights string `json:"idle_media_rights,omitempty"`
 }
 
 type Secrets struct {
@@ -64,7 +68,11 @@ func UserPaths() (Paths, error) {
 	if !filepath.IsAbs(data) || strings.ContainsAny(data, "\r\n\x00") {
 		return Paths{}, errors.New("XDG_STATE_HOME must be an absolute directory without control characters")
 	}
-	return Paths{Config: filepath.Join(root, "obsgod/deck.json"), Secrets: filepath.Join(root, "obsgod/secrets.json"), OBSConfig: filepath.Join(home, ".var/app/com.obsproject.Studio/config/obsgod"), State: filepath.Join(data, "obsgod"), Videos: filepath.Join(home, "Videos/OBSGod")}, nil
+	videos, e := DefaultVideosDirectory(home, root)
+	if e != nil {
+		return Paths{}, e
+	}
+	return Paths{Config: filepath.Join(root, "obsgod/deck.json"), Secrets: filepath.Join(root, "obsgod/secrets.json"), OBSConfig: filepath.Join(home, ".var/app/com.obsproject.Studio/config/obsgod"), State: filepath.Join(data, "obsgod"), Videos: videos}, nil
 }
 
 func DefaultSettings() Settings {
@@ -79,10 +87,27 @@ func (s Settings) CaptureModeName() string {
 }
 
 func (s Settings) IdleStyleName() string {
-	if s.IdleStyle == "placeholder" {
-		return "placeholder"
+	switch s.IdleStyle {
+	case "placeholder", "image", "video":
+		return s.IdleStyle
 	}
 	return "black"
+}
+
+// Zero dimensions preserve legacy settings hashes and retain 720p output.
+// The canvas stays 1280x720; these values control encoded output scaling only.
+func (s Settings) OutputWidth() int {
+	if s.Width == 0 && s.Height == 0 {
+		return 1280
+	}
+	return s.Width
+}
+
+func (s Settings) OutputHeight() int {
+	if s.Width == 0 && s.Height == 0 {
+		return 720
+	}
+	return s.Height
 }
 
 func (s Settings) IdleMessage() string {
@@ -109,11 +134,14 @@ func (s Settings) Validate() error {
 	if s.Encoder != "vaapi" && s.Encoder != "x264" {
 		return errors.New("encoder must be vaapi or x264")
 	}
+	if !validOutputDimensions(s.OutputWidth(), s.OutputHeight()) {
+		return errors.New("choose 960x540, 1280x720 or 1920x1080 output; width and height must be supplied together")
+	}
 	if s.CaptureMode != "" && s.CaptureMode != "screen" && s.CaptureMode != "game" {
 		return errors.New("capture mode must be screen or game")
 	}
-	if s.IdleStyle != "" && s.IdleStyle != "black" && s.IdleStyle != "placeholder" {
-		return errors.New("between-game screen must be black or placeholder")
+	if s.IdleStyle != "" && s.IdleStyle != "black" && s.IdleStyle != "placeholder" && s.IdleStyle != "image" && s.IdleStyle != "video" {
+		return errors.New("between-game screen must be black, placeholder, image or video")
 	}
 	if !utf8.ValidString(s.IdleText) || len([]rune(s.IdleText)) > 200 {
 		return errors.New("between-game message must be at most 200 characters without control characters")
@@ -123,7 +151,7 @@ func (s Settings) Validate() error {
 			return errors.New("between-game message contains an unsupported control character")
 		}
 	}
-	return nil
+	return validateIdleMediaSettings(s)
 }
 
 func Load(p Paths) (Settings, Secrets, error) {
@@ -296,7 +324,14 @@ func Prepare(p Paths, s Settings, secret Secrets) error { return prepare(p, s, s
 
 func prepare(p Paths, s Settings, secret Secrets, visible bool) error {
 	profile := filepath.Join(p.OBSConfig, "obs-studio/basic/profiles/OBSGod")
-	for _, dir := range []string{p.OBSConfig, p.State, p.Videos, profile} {
+	mediaDir, replaySeconds, replayMemoryMB, err := MediaProfileValues(p)
+	if err != nil {
+		return err
+	}
+	if err = checkedMediaDirectory(mediaDir, true); err != nil {
+		return err
+	}
+	for _, dir := range []string{p.OBSConfig, p.State, profile} {
 		if e := privateDir(dir); e != nil {
 			return e
 		}
@@ -316,8 +351,8 @@ func prepare(p Paths, s Settings, secret Secrets, visible bool) error {
 	if s.Encoder == "x264" {
 		encoder = "obs_x264"
 	}
-	ini := fmt.Sprintf("[General]\nName=OBSGod\n\n[Video]\nBaseCX=1280\nBaseCY=720\nOutputCX=1280\nOutputCY=720\nFPSType=0\nFPSCommon=%d\nScaleType=bicubic\nColorFormat=NV12\nColorSpace=709\nColorRange=Partial\n\n[Output]\nMode=Advanced\n\n[AdvOut]\nTrackIndex=1\nEncoder=%s\nApplyServiceSettings=true\nUseRescale=false\nRecType=Standard\nRecFilePath=%s\nRecFormat2=mkv\nRecEncoder=none\nRecTracks=1\nFFOutputToFile=true\n\n[Audio]\nSampleRate=48000\nChannelSetup=Stereo\n", s.FPS, encoder, filepath.ToSlash(p.Videos))
-	if strings.ContainsAny(p.Videos, "\r\n") {
+	ini := fmt.Sprintf("[General]\nName=OBSGod\n\n[Video]\nBaseCX=1280\nBaseCY=720\nOutputCX=%d\nOutputCY=%d\nFPSType=0\nFPSCommon=%d\nScaleType=bicubic\nColorFormat=NV12\nColorSpace=709\nColorRange=Partial\n\n[Output]\nMode=Advanced\n\n[AdvOut]\nTrackIndex=1\nEncoder=%s\nApplyServiceSettings=true\nUseRescale=false\nRecType=Standard\nRecFilePath=%s\nRecFormat2=mkv\nRecEncoder=none\nRecTracks=1\nRecRB=true\nRecRBTime=%d\nRecRBSize=%d\nFFOutputToFile=true\n\n[Audio]\nSampleRate=48000\nChannelSetup=Stereo\n", s.OutputWidth(), s.OutputHeight(), s.FPS, encoder, filepath.ToSlash(mediaDir), replaySeconds, replayMemoryMB)
+	if strings.ContainsAny(mediaDir, "\r\n") {
 		return errors.New("unsupported newline in home directory")
 	}
 	if e := atomicWrite(filepath.Join(profile, "basic.ini"), []byte(ini)); e != nil {
@@ -327,6 +362,9 @@ func prepare(p Paths, s Settings, secret Secrets, visible bool) error {
 	if s.Encoder == "vaapi" {
 		enc["profile"] = 100
 		enc["level"] = 41
+		if s.OutputWidth() == 1920 && s.FPS == 60 {
+			enc["level"] = 42
+		}
 	}
 	if e := writeJSON(filepath.Join(profile, "streamEncoder.json"), enc); e != nil {
 		return e

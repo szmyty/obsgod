@@ -14,6 +14,12 @@ import (
 // Only event identifiers and numeric OBS/exit codes reach disk. Never store
 // arbitrary errors, settings, subprocess output, URLs or authentication data.
 var diagnosticMessages = map[string]string{
+	"media.disk-limit":            "The configured free-space reserve was reached. Local recording/replay was finalized or stopped; saved media was preserved and streaming was not changed.",
+	"idle.media-unavailable":      "Custom between-game media is missing or unsupported. The safe black screen is selected; import the file again while output is idle.",
+	"idle.media-ready":            "Local between-game media is configured. Video soundtrack is muted; verify picture, system audio and microphone in a local clip.",
+	"stream-profiles.requested":   "Managing local stream profiles; this never starts output.",
+	"set-idle-media.requested":    "Editing the local between-game scene after confirming all output is idle.",
+	"media.requested":             "Local recording/replay action requested; this does not start broadcasting.",
 	"start.requested":             "Start streaming requested. OBS control does not require a running game.",
 	"stop.requested":              "Stop streaming / cancel requested.",
 	"test-recording.requested":    "Local test requested. This does not broadcast; the streaming dot stays red. Usable capture is checked after OBS readiness.",

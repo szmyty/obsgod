@@ -1,5 +1,23 @@
 # Current work
 
+## Active: authorized Milestone 3 streaming features, excluding #51
+
+On 2026-11-13 the owner explicitly requested implementation of #47, #24, #48,
+#49 and #50. This supersedes the proposal-only status for those five issues.
+#51 is expressly excluded; broader #7/#9/#12/#13/#14 ledgers remain separate.
+Start from clean default `master` at
+`ed7d100d356ce803d2cb1c1afef3836759deef10`. No additional worktree is needed.
+Use reviewable draft checkpoints; implementation approval is not release,
+deployment, spending, ownership-transfer or other-repository authorization.
+
+Read [the M3 implementation ledger](docs/milestone-3.md). Preserve explicit
+broadcast authorization, game-only capture privacy, v0 compatibility, offline
+operation and private configuration. Add recording/replay to every active-output
+guard so settings, update/removal and capture cleanup cannot disrupt local output.
+Keep exact-source qualification and actual Deck/CI evidence distinct. Existing
+M2 target/adoption, CI billing, final identity and publication gates remain open.
+
+
 ## Milestone 2 source merged; Milestone 3 is proposed
 
 The owner explicitly requested merging all six prepared PRs and listing the

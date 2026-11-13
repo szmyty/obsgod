@@ -28,7 +28,7 @@ type captureWatchDeps struct {
 func WatchCapture(ctx context.Context, p Paths) error {
 	return watchCaptureWith(ctx, p, captureWatchDeps{load: Load, connect: func(ctx context.Context, secret Secrets) (*automation.Client, error) {
 		return connect(ctx, secret, 600*time.Millisecond)
-	}, discover: DiscoverGame, routeAudio: ensureAudio, interval: time.Second})
+	}, discover: DiscoverGame, interval: time.Second})
 }
 func watchCaptureWith(ctx context.Context, p Paths, deps captureWatchDeps) error {
 	lockCtx, done := context.WithTimeout(ctx, 100*time.Millisecond)
@@ -47,6 +47,7 @@ func watchCaptureWith(ctx context.Context, p Paths, deps captureWatchDeps) error
 	audioReady := false
 	failures := 0
 	idleKey := ""
+	var stability gameStability
 	for {
 		if err := ctx.Err(); err != nil {
 			return err
@@ -65,25 +66,27 @@ func watchCaptureWith(ctx context.Context, p Paths, deps captureWatchDeps) error
 		if connectErr == nil {
 			runtime, runtimeErr := c.RuntimeStatus(cycle)
 			stream, streamErr := c.StreamStatus(cycle)
-			if runtimeErr == nil && streamErr == nil && runtime.Profile == "OBSGod" && runtime.Collection == "OBSGod" {
-				if !stream.Active && !runtime.Recording {
+			replay, replayErr := c.ReplayActive(cycle)
+			if runtimeErr == nil && streamErr == nil && replayErr == nil && runtime.Profile == "OBSGod" && runtime.Collection == "OBSGod" {
+				if !stream.Active && !runtime.Recording && !replay {
 					outputIdle = true
 					_ = c.SetScene(cycle, IdleScene)
 					_ = pauseGameCapture(cycle, c)
 					state = "stopped"
 				} else {
-					key := settings.IdleStyleName() + "\x00" + settings.IdleMessage()
+					key := idleMediaKey(p, settings)
 					if key != idleKey {
-						connectErr = ensureIdleVideo(cycle, c, settings)
+						connectErr = ensureIdleVideo(cycle, c, p, settings)
 						if connectErr == nil {
 							idleKey = key
 						}
 					}
 					if connectErr == nil {
-						game := deps.discover(cycle)
+						discovered := deps.discover(cycle)
+						game := stability.observe(discovered)
 						identity := uint32(0)
-						if game.State == "running" && game.AppID != 769 {
-							identity = game.AppID
+						if discovered.State == "running" && discovered.AppID != 769 {
+							identity = discovered.AppID
 						}
 						if deps.routeAudio != nil && (!audioReady || audioIdentity != identity) {
 							// Audio recovery must leave time for the privacy-preserving video step.
@@ -119,6 +122,7 @@ func watchCaptureWith(ctx context.Context, p Paths, deps captureWatchDeps) error
 			target = 0
 			audioReady = false
 			idleKey = ""
+			stability = gameStability{}
 			failures++
 			state, frames = "unknown", "unknown"
 		} else {

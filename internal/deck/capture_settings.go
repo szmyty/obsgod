@@ -30,7 +30,7 @@ func SetCaptureMode(ctx context.Context, p Paths, reader io.Reader) (Result, err
 		return Result{}, err
 	}
 	state := Status(ctx, p)
-	if !state.OutputKnown || state.Stream.Active || state.Recording {
+	if !state.OutputKnown || state.Stream.Active || state.Recording || state.Media == nil || !state.Media.Known || state.Media.ReplayActive {
 		return Result{}, errors.New("stop streaming and recording and confirm idle status before changing capture mode")
 	}
 	// A just-stopped observer may still be completing its last scene operation.
@@ -44,7 +44,7 @@ func SetCaptureMode(ctx context.Context, p Paths, reader io.Reader) (Result, err
 	}
 	defer unlock()
 	state = Status(ctx, p)
-	if !state.OutputKnown || state.Stream.Active || state.Recording {
+	if !state.OutputKnown || state.Stream.Active || state.Recording || state.Media == nil || !state.Media.Known || state.Media.ReplayActive {
 		return Result{}, errors.New("output changed while waiting; capture mode was not changed")
 	}
 	s.CaptureMode = input.Mode
