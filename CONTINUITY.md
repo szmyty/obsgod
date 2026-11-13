@@ -35,6 +35,27 @@ close the pre-merge issue graph prematurely. Candidate8 remains immutable at
 its recorded exact source. New source requires fresh candidate9 qualification.
 
 
+## Final upgrade fixture checkpoint
+
+At `e32e8a05f2613702e0e513cd59f25d504e89c1d7`, both complete local act
+sequences passed lint/build/coverage/snapshot/docs/candidate, plus PR static
+checks. The actual dependency-review action is unavailable for this repository;
+its comparison API returned403. Hosted jobs executed zero steps. These remain
+explicit provider/owner gates, separate from local passes.
+
+Additional legacy transport qualification found that its staged-network fixture
+intercepted only `urlopen`, while the hardened production updater uses a custom
+opener. The fixture now maps both entry points to the same exact staged URL
+inventory and rejects unmapped requests. Production redirects/trust and version
+selection are unchanged. Exploratory preflights passed legacy4→9 installation,
+dynamic updater6, legacy6→9 installation and both browser upgrade paths. Their
+logs explicitly record dirty fixture provenance, not final qualification.
+
+Freeze this checkpoint, rerun both complete local act sequences and the fresh
+standalone matrix at its exact clean revision, then create the immutable review
+packet. Preserve earlier receipts as historical. No release, deployment, merge,
+issue closure, default-branch rename or research51 work has occurred.
+
 ## Privacy-state reconciliation and short browser paths
 
 The e34892e candidate preflight passed pinned setup, managed APT trust for all

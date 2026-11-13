@@ -297,9 +297,31 @@ async def desktop_updater_upgrade(fixture, args, work, env, previous_package, pa
         "    url=request.full_url if isinstance(request,urllib.request.Request) else request\n"
         "    if url not in _responses: raise OSError('unexpected fixture network request')\n"
         "    return open(_responses[url],'rb')\n"
-        "urllib.request.urlopen=_fixture_open\n")
+        "def _fixture_opener_open(self,request,*args,**kwargs):\n"
+        "    return _fixture_open(request,*args,**kwargs)\n"
+        "urllib.request.urlopen=_fixture_open\n"
+        "urllib.request.OpenerDirector.open=_fixture_opener_open\n")
     test_env = dict(env, OBSGOD_UPDATE_TEST_RESPONSES=str(response_file),
                     PYTHONPATH=str(network) + os.pathsep + env.get("PYTHONPATH", ""))
+    # Legacy updaters use urlopen; current releases use a redirect-restricted
+    # custom opener. Both fixture boundaries must remain hermetic and deny any
+    # URL outside the exact staged response inventory.
+    await fixture.execute([sys.executable, "-c", """
+import json,os,urllib.request
+from pathlib import Path
+responses=json.loads(Path(os.environ['OBSGOD_UPDATE_TEST_RESPONSES']).read_text())
+for open_url in (urllib.request.urlopen,urllib.request.build_opener().open):
+    for url,path in responses.items():
+        for request in (url,urllib.request.Request(url)):
+            with open_url(request,timeout=1) as response, open(path,'rb') as expected:
+                assert response.read(32)==expected.read(32)
+    foreign='https://api.github.com/repos/unmapped/fixture/releases'
+    for request in (foreign,urllib.request.Request(foreign)):
+        try: open_url(request,timeout=1)
+        except OSError as error: assert str(error)=='unexpected fixture network request'
+        else: raise AssertionError('fixture allowed an unmapped network request')
+print('PASS: legacy urlopen and custom opener use only exact staged fixture URLs')
+"""], test_env)
     # Desktop result dialogs are substituted, avoiding a hidden modal in CI.
     dialog = network / "last-dialog"
     dialogs = network / "bin"
