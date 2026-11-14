@@ -45,19 +45,19 @@ def ar(members):
     return result
 
 
-def deb(files=None, scripts=None):
+def deb(files=None, scripts=None, architecture="amd64"):
     files = payload() if files is None else files
-    control = {"./control": f"Package: obsgod\nVersion: {VERSION.replace('-', '~', 1)}\nArchitecture: amd64\n".encode(),
+    control = {"./control": f"Package: obsgod\nVersion: {VERSION.replace('-', '~', 1)}\nArchitecture: {architecture}\n".encode(),
                "./md5sums": "".join(hashlib.md5(d).hexdigest() + "  " + n + "\n" for n, d in files.items()).encode()}
     control.update(scripts or {})
     return ar({"debian-binary": b"2.0\n", "control.tar.gz": gzip.compress(tar(control), mtime=0),
                "data.tar.gz": gzip.compress(tar(files), mtime=0)})
 
 
-def apk(files=None, scripts=None, mutate=None):
+def apk(files=None, scripts=None, mutate=None, architecture="x86_64"):
     files = payload() if files is None else files
     compressed = gzip.compress(tar(files, mutate), mtime=0)
-    control = {".PKGINFO": (f"pkgname = obsgod\npkgver = {VERSION.replace('-', '_', 1)}\narch = x86_64\n"
+    control = {".PKGINFO": (f"pkgname = obsgod\npkgver = {VERSION.replace('-', '_', 1)}\narch = {architecture}\n"
                             f"datahash = {hashlib.sha256(compressed).hexdigest()}\n").encode()}
     control.update(scripts or {})
     return gzip.compress(tar(control), mtime=0) + compressed
@@ -87,11 +87,11 @@ def cpio(files):
     return bytes(result)
 
 
-def rpm(files=None, updates=None):
+def rpm(files=None, updates=None, architecture="x86_64"):
     files = payload() if files is None else files
     names = list(files)
     values = {1000: (6, "obsgod"), 1001: (6, VERSION.replace("-", "~", 1)), 1002: (6, "1"),
-              1007: (6, "reproducible.obsgod.invalid"), 1022: (6, "x86_64"),
+              1007: (6, "reproducible.obsgod.invalid"), 1022: (6, architecture),
               1124: (6, "cpio"), 1125: (6, "gzip"), 1117: (8, names), 1118: (8, ["/"]), 1116: (4, [0] * len(names)),
               1030: (4, [stat.S_IFREG | (0o755 if n.endswith("/obsgod") else 0o644) for n in names]),
               1035: (8, [hashlib.sha256(data).hexdigest() for data in files.values()]), 1036: (8, [""] * len(names)),
@@ -133,6 +133,26 @@ class NFPMTests(unittest.TestCase):
                     N.audit_package("pkg", BUILD[kind](changed), ("linux", "amd64", ""), kind, VERSION, IDENTITY, DOCS)
                 with self.assertRaisesRegex(ValueError, "name/version/architecture"):
                     N.audit_package("pkg", BUILD[kind](), ("linux", "arm64", ""), kind, VERSION, IDENTITY, DOCS)
+
+    def test_all_five_linux_targets_use_exact_pinned_nfpm_architectures(self):
+        # NFPM v2.49.0's Debian table maps arm5 -> armel and both arm6/7 ->
+        # armhf. The original amd64-only fixtures missed the ARM6 mismatch.
+        targets = [("amd64", "", ("amd64", "x86_64", "x86_64")),
+                   ("arm64", "", ("arm64", "aarch64", "aarch64")),
+                   ("386", "", ("i386", "i386", "x86")),
+                   ("arm", "6", ("armhf", "armv6hl", "armhf")),
+                   ("arm", "7", ("armhf", "armv7hl", "armv7"))]
+        for arch, arm, labels in targets:
+            for kind, label in zip(N.FORMATS, labels):
+                with self.subTest(arch=arch, arm=arm, kind=kind), patch.object(N.G, "audit_payload", return_value={}):
+                    result = N.audit_package("fixture." + kind, BUILD[kind](architecture=label),
+                                             ("linux", arch, arm), kind, VERSION, IDENTITY, DOCS)
+                    self.assertEqual(result["package_metadata"]["Architecture"], label)
+                    with self.assertRaisesRegex(ValueError, "name/version/architecture"):
+                        N.audit_package("fixture." + kind, BUILD[kind](architecture="unexpected"),
+                                        ("linux", arch, arm), kind, VERSION, IDENTITY, DOCS)
+        with patch.object(N.G, "audit_payload", return_value={}), self.assertRaisesRegex(ValueError, "name/version/architecture"):
+            N.audit_package("arm6.deb", deb(architecture="armel"), ("linux", "arm", "6"), "deb", VERSION, IDENTITY, DOCS)
 
     def test_scripts_triggers_and_capabilities_are_rejected(self):
         for package in (deb(scripts={"postinst": b"danger"}), apk(scripts={".post-install": b"danger"}),

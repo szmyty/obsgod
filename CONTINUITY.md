@@ -41,6 +41,26 @@ space exhaustion; no candidate or pass was claimed. Inactive host Go/PNPM cache
 contents were preserved on the separate temporary filesystem, with logical cache
 paths retained. The corrected clean source needs a fresh complete six-job run.
 
+At **5935803b00fc62579e759c52b68fce24533c1dcb**, all six ACT jobs executed:
+lint/build/coverage/docs passed. Snapshot failed the strict NFPM audit because
+its ARMv6 Debian expectation was armel while pinned NFPM 2.49.0 emits armhf;
+[#94](https://github.com/szmyty/obsgod/issues/94) records the exact 15-package
+comparison, upstream rule and reviewed one-label correction. Candidate passed
+Go/race/vet/vulnerability and application Python checks, then failed two tooling
+fixtures for the same root/foreign-TMPDIR cause. #93's runner-local temp scope
+now also covers that test-only step; nested package/native builders retain the
+shared daemon-visible path. No guard weakening or test skip was introduced.
+New source must run the complete matrix again; 5935803's four passes do not qualify it.
+Some passed jobs warned that optional Go cache persistence ran out of disk space;
+their job outcomes are retained, and successful cache persistence is not claimed.
+
+The standard 5935803 package itself built successfully and matched all 33 payload files
+under pinned official CLI/default-builder assembly with networking disabled.
+Its actual Python adapter→bundled Go configuration integration passed 150 assertions
+without an OBS/Flatpak/desktop launch or broadcast. Native-config/dependency/panel
+packaged browsers passed, as did non-root full Go race: 259 top-level passes / 545 pass events with two
+explicit skips. These remain revision 5935803 receipts, not a new-source release.
+
 Focused Go/native, Python, Node/typecheck and simulated packaged browser checks
 passed during implementation, with independent review. These dirty-tree/diagnostic
 checks do not qualify a clean candidate. The next clean source checkpoint is
