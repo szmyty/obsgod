@@ -5,6 +5,7 @@ before:
   hooks:
     - go mod download
     - python3 scripts/generic-release.py prepare
+    - python3 scripts/nfpm-release.py prepare
 builds:
   - binary: obsgod
     env:
@@ -79,6 +80,27 @@ nfpms:
       - deb
       - rpm
     bindir: /usr/bin
+    mtime: "{{ .CommitDate }}"
+    rpm:
+      compression: gzip
+      buildhost: reproducible.obsgod.invalid
+    deb:
+      compression: gzip
+    contents:
+      - src: .local-ci/nfpm-release/LICENSE
+        dst: /usr/share/doc/obsgod/LICENSE
+      - src: .local-ci/nfpm-release/README.md
+        dst: /usr/share/doc/obsgod/README.md
+      - src: .local-ci/nfpm-release/CHANGELOG.md
+        dst: /usr/share/doc/obsgod/CHANGELOG.md
+      - src: .local-ci/nfpm-release/THIRD_PARTY_NOTICES.md
+        dst: /usr/share/doc/obsgod/THIRD_PARTY_NOTICES.md
+      - src: .local-ci/nfpm-release/GO-NOTICES.json
+        dst: /usr/share/doc/obsgod/GO-NOTICES.json
+      - src: .local-ci/nfpm-release/GENERIC-CLI.md
+        dst: /usr/share/doc/obsgod/GENERIC-CLI.md
+      - src: .local-ci/nfpm-release/SOURCE.json
+        dst: /usr/share/doc/obsgod/SOURCE.json
 
 checksum:
   name_template: "checksums.txt"
