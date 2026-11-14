@@ -4,6 +4,15 @@ The editable candidates and honest rights inventory are in
 [`.identity/candidates`](../.identity/candidates/). They are **unapproved** and do
 not replace the product's existing visual baseline or native Decky icon.
 
+The newer [orbital-stream concept board](../.identity/candidates/concepts/orbital-stream-board.png)
+explores the owner's Mindgarden/Identity banner aesthetic: near-black space,
+airy lowercase lettering, an aqua flowing signal within an open ring, subtle
+violet and reflections. Its [prompt and source record](../.identity/candidates/concepts/orbital-stream-board.json)
+are retained for review. It is unapproved and does not replace the earlier
+mint-signal concept, editable masters, generated exports or live plugin icon.
+The flat/monochrome examples on the board are concepts; production SVGs and
+actual small-size checks remain to be made after direction selection.
+
 The mint-signal concept was generated in chat on 2026-11-14. Its original PNG,
 full prompt, method and digest are retained in
 [the concept record](../.identity/candidates/concepts/mint-signal-board.json).

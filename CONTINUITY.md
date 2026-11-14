@@ -1,5 +1,25 @@
 # Current work
 
+## Branding discussion: orbital-stream concept, not adopted
+
+The owner confirmed the proposed normal Decky ZIP plus plugin-managed first-run
+OBS/GStreamer setup, with explicit consent, graceful decline, background progress,
+cancellation and retry. This remains upcoming implementation; current plugin
+onboarding has not changed or been qualified in Gaming Mode. Dependency setup
+is separate from Decky's plugin installation. OBS/extension come from Flathub;
+our release is a Decky plugin package. Keep manual Deck test cases before
+migration and repeat installation checks at the actual new destination.
+
+The immediate request is creative design before roadmap execution. A new
+[orbital-stream board](.identity/candidates/concepts/orbital-stream-board.png)
+was generated from the requested Mindgarden/Identity aesthetic and saved with
+the complete prompt, image digest and draft status. The owner has not selected
+this direction. Earlier art, selected masters, generated kit and runtime visuals
+are unchanged. Next is owner visual feedback, then the final roadmap discussion
+(including any key-configuration questions), branding exports and implementation.
+No final full matrix, migration, publication, issue closure or device acceptance
+is claimed by this image-only checkpoint.
+
 ## Current question: align the Steam Deck product with normal Decky conventions
 
 The owner narrowed the shipping focus to Steam Deck/SteamOS and asked whether
