@@ -148,23 +148,20 @@ Independent qualification and repairs can proceed while naming is pending.
 
 ### Decky Store constraint
 
-Checked 2026-11-12: the official
-[submission policy](https://wiki.deckbrew.xyz/en/plugin-dev/submitting-plugins#ai-llms-and-so-on)
-rejects LLM-based code. The official
-[addition template at `0fdb6a6`](https://github.com/SteamDeckHomebrew/decky-plugin-database/blob/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/.github/PULL_REQUEST_TEMPLATE/plugin_addition.md)
-also requires: “Generative AI was NOT used to write a majority of the code I am
-submitting.” This project has substantial AI-assisted implementation history;
-no majority audit or eligibility decision exists. Do not hide provenance or
-check that box without evidence. This is the Store's admission policy, not a
-legal conclusion about the project.
+The [2026-11-13 official-source research](docs/store-policy-research.md) supersedes
+the earlier categorical summary. The older submission guide says “any LLM based
+code”; newer official template/safety text says “majority”/“excessive.” Those
+published statements conflict. No majority audit or eligibility determination
+exists for this AI-assisted project. Preserve truthful provenance and seek
+owner-approved clarification before investing in Store submission.
 
-The current native `.so` submission path also requires developer Stable/Beta
-and independent SteamOS Preview testing. Cloud native OBS tests do not supply
-that proof. The official
-[monetization policy](https://wiki.deckbrew.xyz/en/plugin-dev/submitting-plugins#monetization)
-is restrictive about paid core/accessibility features. Neither a Store payment
-API nor blanket permission for a support link has been established. Recheck
-these policies before any submission; direct distribution remains independent.
+Additional work includes root-layout/Store build compatibility, real native
+Stable/Beta/third-party Preview testing and an approved update-channel boundary.
+The panel's check-only button is distinct from the paired Desktop updater;
+neither is silently declared approved or prohibited by this research. Voluntary
+support-link treatment remains unclear. The [two-journey recommendation](docs/research-51.md)
+is to finish the free direct product and defer paid/Store implementation pending
+demand evidence and owner/channel choices. No maintainer has been contacted.
 
 ## Milestone 3: advanced streaming and validated paid offerings
 
@@ -187,12 +184,13 @@ Prioritize from actual user needs after a supported launch.
 - **Useful stream health:** measured bitrate/dropped frames/audio/network and
   understandable recommendations with private diagnostics
   ([#50](https://github.com/szmyty/obsgod/issues/50)).
-- **Validate one optional paid offering before building it:** interview willing
-  users, test an owner-approved offer and measure conversion, net receipts,
-  fees, operating cost and support time
-  ([#51](https://github.com/szmyty/obsgod/issues/51)). Candidate experiments include
-  optional licensed scene packs, paid setup/support or a separately costed hosted
-  service. None is selected, promised or allowed to obstruct the local core.
+- **Separate monetization and Store research:** compare free/voluntary-support/
+  optional offerings and direct/Store paths, distinguish real observations from
+  unknown demand/capacity/rights, and prepare explicit recommendations/questions
+  ([#51](https://github.com/szmyty/obsgod/issues/51)). The bounded
+  [research packet](docs/research-51.md) recommends deferring paid offerings and
+  Store implementation for now. A future discovery/offer experiment requires its
+  own owner choice; no offer, price, provider or account is selected.
 - **Preserve the broader ledgers:** architecture/governance
   [#7](https://github.com/szmyty/obsgod/issues/7), reusable API
   [#9](https://github.com/szmyty/obsgod/issues/9), production v1

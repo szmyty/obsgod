@@ -26,6 +26,17 @@ all original criteria/dependencies and exact public candidate1a/d0a unchanged.
 Save draft checkpoints, then freeze source for full serial exact-revision checks.
 No new implementation is qualified by this in-progress entry.
 
+Checkpoints #69 (checkout-owner frontend commands), #70 (generic Go-only archive
+notices/SPDX/audit) and #71 (narrow public profile inventory) are pushed in that
+order. The API change preserves the new-family profile-list JSON and avoids
+unrelated OBS queries; legacy Service/Dialer remains byte-unchanged, with the
+transport-adoption gap documented. Focused meaningful tests passed; full ACT
+qualification still follows. The two-journey #51 research is prepared in
+docs/research-51.md plus policy/source/criterion companions. It records conflicting
+official AI wording and concrete Store layout/native/update questions, recommends
+free direct distribution and defers paid/Store work, without claiming eligibility,
+revenue, recipient readiness or owner adoption of the recommendation.
+
 ## Completed audit: org-aligned ACT setup, reports and issue triage
 
 The owner requested following the egohygiene `.actrc` pattern, running ACT in the
