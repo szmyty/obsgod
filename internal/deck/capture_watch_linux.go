@@ -80,6 +80,13 @@ func mutateCapture(ctx context.Context, p Paths, deps captureWatchDeps, c *autom
 		return result
 	}
 	defer unlock()
+	return mutateCaptureUnderLease(ctx, p, deps, c, settings, secret, discovered, cache, false)
+}
+
+// The caller owns the shared control lease. The local test parent uses this
+// same guarded mutation phase while its recording transaction retains ownership.
+func mutateCaptureUnderLease(ctx context.Context, p Paths, deps captureWatchDeps, c *automation.Client, settings Settings, secret Secrets, discovered GameIdentity, cache *captureWatchCache, requireRecording bool) captureWatchResult {
+	result := captureWatchResult{settings: settings, state: "unknown", frames: "unknown"}
 	fresh, freshSecret, err := deps.load(p)
 	if err != nil {
 		result.err = err
@@ -97,7 +104,7 @@ func mutateCapture(ctx context.Context, p Paths, deps captureWatchDeps, c *autom
 		return result
 	}
 	result.unmanaged = runtime.Profile != "OBSGod" || runtime.Collection != "OBSGod"
-	result.stopped = !result.unmanaged && !active
+	result.stopped = !result.unmanaged && (!active || requireRecording && !runtime.Recording)
 	if result.unmanaged || result.stopped {
 		return result
 	}
@@ -138,6 +145,75 @@ func mutateCapture(ctx context.Context, p Paths, deps captureWatchDeps, c *autom
 		}
 	}
 	return result
+}
+
+// waitTestCapture retains the initiating command's control lease. Servicing
+// game capture here lets the detached observer yield without freezing a local
+// clip on its initial idle frame or showing an exited game for ten seconds.
+func waitTestCapture(ctx context.Context, p Paths, c *automation.Client, settings Settings, secret Secrets, duration time.Duration) error {
+	return waitTestCaptureWith(ctx, p, c, settings, secret, duration, captureWatchDeps{load: Load, discover: DiscoverGame,
+		connect: func(ctx context.Context, secret Secrets) (*automation.Client, error) {
+			return connect(ctx, secret, 600*time.Millisecond)
+		}, interval: time.Second, discoveryTimeout: captureDiscoveryTimeout})
+}
+
+func waitTestCaptureWith(ctx context.Context, p Paths, c *automation.Client, settings Settings, secret Secrets, duration time.Duration, deps captureWatchDeps) error {
+	if settings.CaptureModeName() != "game" {
+		return wait(ctx, duration)
+	}
+	if deps.interval <= 0 {
+		deps.interval = time.Second
+	}
+	if deps.discoveryTimeout <= 0 {
+		deps.discoveryTimeout = captureDiscoveryTimeout
+	}
+	period, done := context.WithTimeout(ctx, duration)
+	defer done()
+	cache := captureWatchCache{}
+	for {
+		cycle, cycleDone := context.WithTimeout(period, 4*time.Second)
+		discovery, discoveryDone := context.WithTimeout(cycle, deps.discoveryTimeout)
+		game := deps.discover(discovery)
+		err := discovery.Err()
+		discoveryDone()
+		if err == nil {
+			// A tick ending at the clip deadline may invalidate its transport.
+			// Keep the transaction's original connection available for cleanup.
+			tickClient := c
+			if deps.connect != nil {
+				tickClient, err = deps.connect(cycle, secret)
+			}
+			if err == nil {
+				result := mutateCaptureUnderLease(cycle, p, deps, tickClient, settings, secret, game, &cache, true)
+				err = result.err
+				if result.unmanaged || result.stopped || result.busy {
+					err = errors.New("local test capture ownership or recording state changed; inspect managed OBS before retrying")
+				}
+				if deps.connect != nil {
+					_ = tickClient.Close()
+				}
+			}
+		}
+		cycleDone()
+		if period.Err() != nil {
+			if ctx.Err() != nil {
+				return ctx.Err()
+			}
+			if err != nil && !errors.Is(err, context.DeadlineExceeded) && !errors.Is(err, context.Canceled) {
+				return err
+			}
+			return nil // The original clip duration bounds all capture ticks.
+		}
+		if err != nil {
+			return err
+		}
+		if err = wait(period, deps.interval); err != nil {
+			if ctx.Err() != nil {
+				return ctx.Err()
+			}
+			return nil
+		}
+	}
 }
 
 func watchCaptureWith(ctx context.Context, p Paths, deps captureWatchDeps) error {

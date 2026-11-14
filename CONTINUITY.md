@@ -1,6 +1,23 @@
 # Current work
 
-## Final qualification exposed a local-test capture lease gap
+## Local-test integration follow-up implemented in #107
+
+The unchanged native game/OBS and idle-media fixtures now pass the previously
+failed clip path. The parent retains its initiating lease and drives the same
+guarded capture helper during the original bounded ten-second wait, using
+separate tick connections. Detached observers still acquire their short lease
+and yield. Fresh managed/output/recording checks gate each tick and final/deferred
+Stop, so ownership loss cannot fall through to unconditional cleanup.
+
+Focused race and independent review pass, including game/idle transition while
+holding the lease, detached-observer yield, malformed/stopped output, changed
+settings/ownership, cancellation and timer completion. Preserve the original
+4b3e0bf five-pass/one-fail matrix as historical evidence. Merge #107 after the
+integrated Go/cross-build checks, then build and qualify the new exact merged
+revision; no old receipt is promoted. Runtime issues remain open until that
+qualification is reconciled. No fixture assertions/timeouts were weakened.
+
+## Historical first qualification: local-test capture lease gap
 
 The seven requested PRs are merged into `master` at
 **4b3e0bf88411289178b9e6462bf2ad2fc8da8ce9**. Five local ACT jobs passed, but
