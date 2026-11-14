@@ -1,6 +1,35 @@
 # Current work
 
-## Proposed audit roadmap — wait for owner sync before implementation
+## Runtime correctness #96–#100 authorized; merge the open PR stack
+
+The owner explicitly approved the runtime-correctness stage and requested merging
+all open PRs. This supersedes the planning pause for **#96–#100** and the merges;
+#101–#104 and the remaining branding/UI work are not part of this implementation
+batch. Use the existing checkout on **feat/runtime-correctness**, from
+**8b18001a7fac8d82e17e620963c60c64da845db3**. No additional worktree is needed.
+
+Five implementation lanes cover effective microphone policy, capture-observer
+ownership/shared leases, strict recording observations, timeout/correlation
+connection invalidation and bounded backend/child teardown. Run focused checks
+and independent review before source integration; qualify the final exact source.
+Do not inherit the earlier 378b46c receipts for these changes.
+
+Live premerge stack is #73 → #74 → #75 → #90 → #92 → #105, then the runtime
+checkpoint. Retarget each dependent PR to the actual default `master` only after
+its predecessor is merged; merging a stack into its old feature base is not a
+default-branch integration. Current branch API says protected=false; active
+rulesets and branch rules return empty lists. Detailed protection read is 403;
+do not claim that capability succeeded. Existing submitted reviews are empty.
+Respect any live gate that appears before merging. User merge authority does not
+turn billing-blocked checks, missing device proof or reviews into passing checks.
+
+Inspected workflows have contents:read and snapshot publish/sign disabled; docs
+preview retains an artifact and does not deploy. No merge-authorized publication,
+deployment, transfer, other-repository change or spending is implied. Keep original
+criteria and remaining owner/target/service acceptance open as required, and
+requery actual PR/default/issue state after integration.
+
+## Prior proposed audit checkpoint (runtime stage now authorized above)
 
 The owner requested a full audit and proposed issues, explicitly followed by a
 sync before executing the audit roadmap. Current work is planning only; do not
@@ -235,7 +264,7 @@ All 230 original criteria/dependencies and #46's original details tail are
 preserved exactly; older checkpoint narrative is collapsed as historical.
 No issue is closed or marked implemented by planning. Drafts remain #73 → #74
 → #75; default master remains da89b9d. Latest release is unchanged prerelease
-v0.1.0-deck.4-updater.1. Protection detail read is403; no settings change.
+v0.1.0-deck.4-updater.1. Protection detail read is 403; no settings change.
 
 **#89** is separate OAuth/phone/QR research from preserved #14/#40, not a main
 implementation dependency. [Official-source findings](docs/authentication-options.md):
