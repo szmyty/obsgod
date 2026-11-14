@@ -306,6 +306,108 @@ class BackendState(unittest.IsolatedAsyncioTestCase):
         self.assertIn("stop", [call.args[0] for call in run.call_args_list])
 
 
+class DependencyAdapter(unittest.IsolatedAsyncioTestCase):
+    def controller(self):
+        pending = {"schema_version": 1, "ready": False, "state": "setup_required",
+                   "message": "Dependencies missing", "reason": None,
+                   "dependencies": [], "remote": {}, "operation": None,
+                   "can_install": True}
+        return SimpleNamespace(running=False, status=AsyncMock(return_value=pending),
+                               start=AsyncMock(return_value=pending),
+                               cancel=AsyncMock(return_value=pending), close=AsyncMock())
+
+    async def test_loading_and_observing_do_not_authorize_installation(self):
+        plugin = backend.Plugin()
+        controller = plugin._dependency_job = self.controller()
+        with patch.object(backend.os, "umask"):
+            await plugin._main()
+        controller.status.assert_not_called()
+        for consent in (False, None, "true", 1):
+            await plugin.install_dependencies(consent)
+        self.assertEqual(controller.status.await_count, 4)
+        controller.start.assert_not_called()
+        await plugin.install_dependencies(True)
+        controller.start.assert_awaited_once_with(consent=True)
+
+    async def test_install_reservation_prevents_a_late_stream_start(self):
+        plugin = backend.Plugin()
+        controller = plugin._dependency_job = self.controller()
+        entered, finish = asyncio.Event(), asyncio.Event()
+
+        async def install(**_):
+            entered.set()
+            await finish.wait()
+            controller.running = True
+            return await controller.status()
+
+        controller.start.side_effect = install
+        with patch.object(plugin, "_run", AsyncMock(return_value=IDLE)) as run:
+            installing = asyncio.create_task(plugin.install_dependencies(True))
+            await entered.wait()
+            result = await plugin.start()
+            self.assertFalse(result["action_result"]["ok"])
+            self.assertTrue(all(call.args == ("status",) for call in run.call_args_list))
+            finish.set()
+            await installing
+        self.assertFalse(plugin._setup_requested)
+        self.assertTrue(plugin._dependency_busy)
+
+    async def test_job_blocks_new_mutations_but_preserves_observed_stop(self):
+        plugin = backend.Plugin()
+        controller = plugin._dependency_job = self.controller()
+        controller.running = True
+        with patch.object(plugin, "_run", AsyncMock(return_value=LIVE)) as run:
+            for request in (plugin.start(), plugin.test_recording(), plugin.set_capture_mode("game")):
+                result = await request
+                self.assertFalse(result["action_result"]["ok"])
+                self.assertTrue(result["stream"]["active"])
+            await plugin.stop()
+        self.assertIn("stop", [call.args[0] for call in run.call_args_list])
+        self.assertNotIn("start", [call.args[0] for call in run.call_args_list])
+        self.assertNotIn("test-recording", [call.args[0] for call in run.call_args_list])
+
+    async def test_preflight_requires_confirmed_idle_for_every_output(self):
+        plugin = backend.Plugin()
+        for result in (LIVE, {**IDLE, "output_known": False},
+                       {**IDLE, "recording": True},
+                       {**IDLE, "media": {"known": True, "replay_active": True}},
+                       {**IDLE, "media": {"known": False, "replay_active": False}}):
+            with self.subTest(result=result), patch.object(plugin, "_run", AsyncMock(return_value=result)):
+                self.assertFalse(await plugin._dependency_preflight())
+        with patch.object(plugin, "_run", AsyncMock(return_value=IDLE)) as run:
+            self.assertTrue(await plugin._dependency_preflight())
+            run.assert_awaited_once_with("status")
+
+    async def test_unload_releases_setup_before_waiting_for_control_lock(self):
+        plugin = backend.Plugin()
+        controller = plugin._dependency_job = self.controller()
+        order = []
+
+        async def close():
+            order.append("setup-closed")
+
+        async def stop():
+            order.append("stop")
+            return IDLE
+
+        controller.close.side_effect = close
+        with patch.object(plugin, "stop", side_effect=stop), patch.object(plugin, "mixer_action", AsyncMock()):
+            await plugin._unload()
+        self.assertEqual(order[0], "setup-closed")
+        self.assertIn("stop", order)
+
+    async def test_invalid_native_context_cannot_start_a_download_or_leak_paths(self):
+        plugin = backend.Plugin()
+        with patch.object(backend.storage, "context", side_effect=OSError("private-player-path")), patch.object(
+                backend.dependency_setup, "DependencySetup") as constructor:
+            result = await plugin.install_dependencies(True)
+        self.assertFalse(result["ready"])
+        self.assertFalse(result["can_install"])
+        self.assertNotIn("private-player-path", json.dumps(result))
+        constructor.assert_not_called()
+        self.assertFalse(plugin._setup_requested)
+
+
 class BackendContext(unittest.IsolatedAsyncioTestCase):
     def setUp(self):
         self.enterContext(patch.dict(backend.os.environ, {}, clear=True))

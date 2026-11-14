@@ -166,6 +166,62 @@ class ReleaseAuditTests(unittest.TestCase):
         self.assertIn("unsigned", provenance["predicate"]["runDetails"]["builder"]["id"])
         self.assertEqual(report["subjects"], provenance["subject"])
 
+    @staticmethod
+    def standard_plugin(runtime, plugin, source, mutate=None):
+        """Current standard ZIP alongside the compatible Desktop archive."""
+        sdk = {name.removeprefix("source/decky-api/"): plugin.pop(name)
+               for name in list(plugin) if name.startswith("source/decky-api/src/")}
+        sdk["package.json"] = plugin["source/decky-api/package.json"]
+        plugin["source/decky-api/SOURCE.tar.gz"] = tar_bytes(sdk, "decky-api")
+        for name in ("bridge.py", "setup.py", "setup.html", "setup.js", "setup.css"):
+            plugin[name] = runtime[name]
+        for name in ("storage.py", "dependency_setup.py"):
+            plugin[name] = name.encode()
+            source["steamdeck/decky/" + name] = plugin[name]
+        plugin["README.md"] = b"standard package guide"
+        source["docs/decky-package.md"] = plugin["README.md"]
+        plugin["build/verify.mjs"], plugin["pnpm-lock.yaml"] = b"prepared build check", b"empty stage lock"
+        source["scripts/decky_package.py"] = b'STAGE_BUILD = b"prepared build check"\nSTAGE_LOCK = b"empty stage lock"\n'
+        plugin["package.json"] = AUDIT.canonical({"name": "obsgod", "version": "0.1.0-test", "license": "MIT",
+            "type": "module", "scripts": {"build": "node build/verify.mjs"}})
+        plugin["build/capture-build.json"] = AUDIT.canonical({"sha256": AUDIT.sha(runtime["libgstobsgodcapture.so"]),
+            "source_sha256": AUDIT.sha(source["steamdeck/capture/gstobsgodcapture.c"]),
+            "dockerfile_sha256": AUDIT.sha(source["steamdeck/capture/build.Dockerfile"]),
+            "network_during_compile": False, "image_id": "sha256:" + "b" * 64})
+        if mutate:
+            mutate(plugin)
+        plugin["manifest.json"] = AUDIT.canonical({"format": "decky-plugin", "revision": "a" * 40,
+            "version": "0.1.0-test", "dirty": False, "platform": "linux/amd64",
+            "source_tools": {"go": "go1.27.4", "node": "24.19.0", "npm": "11.9.0"},
+            "files": {name: AUDIT.sha(data) for name, data in plugin.items()}})
+
+    def test_standard_plugin_preserves_original_sdk_archive_and_exact_complete_payload(self):
+        first = self.run_fixture(self.standard_plugin)
+        self.assertEqual(first, self.run_fixture(self.standard_plugin))
+        self.assertEqual(json.loads(first["release-audit.json"])["preferred_source"], "passed")
+        for name in ("setup.py", "storage.py", "dependency_setup.py", "source/decky-api/SOURCE.tar.gz"):
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, "Decky required payload"):
+                self.run_fixture(lambda runtime, plugin, source: self.standard_plugin(runtime, plugin, source,
+                    lambda current: current.pop(name)))
+
+    def test_standard_plugin_rejects_unknown_module_and_tampered_archived_sdk_source(self):
+        with self.assertRaisesRegex(ValueError, "Decky required payload"):
+            self.run_fixture(lambda runtime, plugin, source: self.standard_plugin(runtime, plugin, source,
+                lambda current: current.update({"unexpected.py": b"unreviewed"})))
+        def tamper(current):
+            _, sdk = AUDIT.archive_files(current["source/decky-api/SOURCE.tar.gz"], "tar")
+            sdk["src/index.ts"] = b"altered preferred source"
+            current["source/decky-api/SOURCE.tar.gz"] = tar_bytes(sdk, "decky-api")
+        with self.assertRaisesRegex(ValueError, "source inventory/hash"):
+            self.run_fixture(lambda runtime, plugin, source: self.standard_plugin(runtime, plugin, source, tamper))
+
+    def test_standard_plugin_rejects_recomputed_hashes_for_changed_build_or_backend_source(self):
+        for name, message in (("storage.py", "Decky source differs"), ("build/verify.mjs", "staged build differs"),
+                              ("setup.py", "Decky setup differs")):
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, message):
+                self.run_fixture(lambda runtime, plugin, source: self.standard_plugin(runtime, plugin, source,
+                    lambda current: current.update({name: b"unreviewed source"})))
+
     def test_detects_disagreement_between_plugin_and_runtime(self):
         with self.assertRaisesRegex(ValueError, "Decky runtime differs"):
             self.run_fixture(lambda runtime, plugin, source: plugin.update({"bin/obsgod": b"different build"}))

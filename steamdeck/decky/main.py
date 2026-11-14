@@ -9,6 +9,19 @@ import signal
 import uuid
 
 
+def _bundled_module(name):
+    """Load only our fixed packaged modules, including in source-only tests."""
+    path = Path(__file__).resolve().parent / (name + ".py")
+    spec = importlib.util.spec_from_file_location("obsgod_plugin_" + name, path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+storage = _bundled_module("storage")
+dependency_setup = _bundled_module("dependency_setup")
+
+
 class Plugin:
     def __init__(self):
         self.pending = None
@@ -26,6 +39,8 @@ class Plugin:
         self._closing = False
         self._cleanup_tasks = set()
         self._cancel_media_task = None
+        self._dependency_job = None
+        self._setup_requested = False
 
     @property
     def busy(self):
@@ -64,34 +79,76 @@ class Plugin:
         return Path(__file__).resolve().parent
 
     def _child_environment(self):
-        """Use the player's context without changing the loader process HOME.
+        """Retain one managed store; prepare only Decky-owned metadata/jobs."""
+        return storage.child_environment(self._plugin_root(), self._provided)
 
-        Shared Desktop/CLI settings remain in the user's XDG store. Decky's
-        plugin settings and persistent runtime-data directory are deliberately
-        not substituted for those paths or the ephemeral XDG_RUNTIME_DIR.
-        """
-        child = os.environ.copy()
-        home = self._provided("DECKY_USER_HOME")
-        if home is not None:
-            home = self._directory(home, "user home")
-            old_home = child.get("HOME")
-            child["HOME"] = str(home)
-            # A service HOME can bring its own default XDG roots along. Do not
-            # accidentally read root/service credentials as the real player.
-            # Explicit absolute roots elsewhere remain valid shared overrides.
-            for name in ("XDG_CONFIG_HOME", "XDG_STATE_HOME", "XDG_DATA_HOME", "XDG_CACHE_HOME"):
-                value = child.get(name)
-                if not value:
-                    continue
-                if not Path(value).is_absolute() or any(ord(char) < 32 for char in value):
-                    child.pop(name, None)
-                elif (old_home and old_home != "/" and Path(old_home).is_absolute() and
-                      Path(old_home) != home and Path(value).is_relative_to(old_home)):
-                    child.pop(name, None)
-        user = self._provided("DECKY_USER")
-        if isinstance(user, str) and re.fullmatch(r"[A-Za-z_][A-Za-z0-9_.-]{0,63}", user):
-            child["USER"] = child["LOGNAME"] = user
-        return child
+    @property
+    def _dependency_busy(self):
+        return self._setup_requested or bool(self._dependency_job and self._dependency_job.running)
+
+    @staticmethod
+    def _setup_unavailable(code="context", message=None):
+        message = message or "Decky's player storage context is unavailable. Reload or update Decky, then retry setup. Existing settings are preserved."
+        return {"schema_version": 1, "ready": False, "state": "failed", "message": message,
+                "reason": {"code": code, "message": message}, "dependencies": [],
+                "remote": {"name": "flathub", "configured": False, "needs_add": False,
+                           "valid": False, "reason": "Not observed."},
+                "operation": None, "can_install": False, "can_cancel": False}
+
+    async def _dependency_preflight(self):
+        # The setup worker holds the SAME cross-process control.lock as the Go
+        # commands before calling this fresh read. An old CLI cannot Start in
+        # the gap between observing idle and installing dependencies.
+        if self.busy or self._closing:
+            return False
+        current = await self._run("status")
+        media = current.get("media")
+        recording = media.get("recording") if isinstance(media, dict) else None
+        media_idle = (isinstance(media, dict) and media.get("known") is True and
+                      media.get("replay_active") is False and
+                      (recording is None or isinstance(recording, dict) and recording.get("active") is False))
+        absent_legacy = media is None and current.get("process") == "absent"
+        return (current.get("output_known") is True and
+                current.get("stream", {}).get("active") is False and
+                not current.get("recording") and (media_idle or absent_legacy))
+
+    def _dependency_controller(self):
+        if self._dependency_job is None:
+            context = storage.context(self._plugin_root(), self._provided)
+            if context["mode"] != "decky":
+                raise OSError("The loader did not provide complete plugin storage context")
+            self._dependency_job = dependency_setup.DependencySetup(
+                Path(context["jobs_dir"]), self._child_environment(),
+                control_lock=Path(context["shared_state"]) / "control.lock",
+                preflight=self._dependency_preflight)
+        return self._dependency_job
+
+    async def dependency_status(self):
+        try:
+            return await self._dependency_controller().status()
+        except (OSError, ValueError):
+            return self._setup_unavailable()
+
+    async def install_dependencies(self, consent=False):
+        if consent is not True:
+            return await self.dependency_status()
+        if self._closing or self.busy:
+            return self._setup_unavailable("control_busy", "Wait for OBS control to finish before installing dependencies.")
+        # Reserve before the first await, so a competing panel Start cannot
+        # overtake the creation of the backend-owned setup job.
+        self._setup_requested = True
+        try:
+            return await self._dependency_controller().start(consent=True)
+        except (OSError, ValueError):
+            return self._setup_unavailable()
+        finally:
+            self._setup_requested = False
+
+    async def cancel_dependency_setup(self):
+        try:
+            return await self._dependency_controller().cancel()
+        except (OSError, ValueError):
+            return self._setup_unavailable()
 
     def _loader_metadata(self):
         result = {}
@@ -215,7 +272,7 @@ class Plugin:
         try:
             result = await self._run("status")
         except OSError:
-            result = self._unknown("OBSGod executable is unavailable. Reinstall OBSGod from its Desktop installer.")
+            result = self._unknown("OBSGod's backend or player storage is unavailable. Reload or repair the Decky plugin; existing settings were not reset.")
         result["snapshot_id"] = snapshot_id
         return result
 
@@ -253,7 +310,7 @@ class Plugin:
                 if command is None:
                     command = await self._run(action, payload) if payload is not None else await self._run(action)
             except OSError:
-                command = self._unknown("OBSGod executable is unavailable. Reinstall OBSGod from its Desktop installer.")
+                command = self._unknown("OBSGod's backend or player storage is unavailable. Reload or repair the Decky plugin; existing settings were not reset.")
         # Command success/error is not an output snapshot. Re-query actual OBS
         # rather than allowing a failed Start to replace an active stream with
         # an error/stopped state, or a click to declare a stream live.
@@ -277,6 +334,11 @@ class Plugin:
         return observed
 
     async def _begin(self, action, payload=None):
+        if self._dependency_busy:
+            result = await self.status()
+            result["action_result"] = {"ok": False, "action": action,
+                                       "message": "Dependency setup is running. Wait or cancel setup before starting another operation."}
+            return result
         if self._closing:
             result = await self.status()
             result["action_result"] = {"ok": False, "action": action,
@@ -458,6 +520,10 @@ class Plugin:
         # A loader teardown acknowledgement must not precede a late Start.
         self._closing = True
         try:
+            # Stop the owned installer before Stop needs the shared control
+            # lock. Closing a panel never reaches this backend lifecycle hook.
+            if self._dependency_job is not None:
+                await self._dependency_job.close()
             await self.mixer_action({"action": "talk-cancel"})
             await asyncio.wait_for(asyncio.shield(self.stop()), 18)
             if self._control_task and not self._control_task.done():

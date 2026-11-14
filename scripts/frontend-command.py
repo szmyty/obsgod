@@ -29,13 +29,28 @@ def checkout_identity(root):
     return (owner.st_uid, owner.st_gid) if os.getuid() == 0 else (os.getuid(), os.getgid())
 
 
-def validate_output(root, uid):
+def validate_output(root, uid, output=None):
     frontend = root / "steamdeck" / "decky"
     for path in (root / "steamdeck", frontend):
         info = path.lstat()
         if not stat.S_ISDIR(info.st_mode) or info.st_uid != uid:
             raise FrontendError(f"Refusing unsafe or foreign frontend directory: {path}")
-    output = frontend / "dist"
+    if output is None:
+        output = frontend / "dist"
+    else:
+        output = Path(output)
+        if not output.is_absolute() or ".." in output.parts:
+            raise FrontendError("Frontend output override must be an absolute path without traversal")
+        parent = output.parent
+        for ancestor in (parent, *parent.parents):
+            info = ancestor.lstat()
+            if not stat.S_ISDIR(info.st_mode) or stat.S_ISLNK(info.st_mode):
+                raise FrontendError(f"Refusing unsafe frontend output ancestor: {ancestor}")
+            if info.st_uid not in {0, uid} or info.st_mode & 0o022 and not info.st_mode & stat.S_ISVTX:
+                raise FrontendError(f"Refusing unprotected or foreign frontend output ancestor: {ancestor}")
+        info = parent.stat()
+        if info.st_uid != uid or stat.S_IMODE(info.st_mode) & 0o077:
+            raise FrontendError("Frontend output override requires a private checkout-owner parent directory")
     pending = [output]
     while pending:
         path = pending.pop()
@@ -55,10 +70,15 @@ def validate_output(root, uid):
             raise FrontendError(f"Refusing non-regular or linked frontend output: {path}")
 
 
-def run_frontend(action, *, root=ROOT, npm="npm"):
+def run_frontend(action, *, root=ROOT, npm="npm", output=None):
     uid, gid = checkout_identity(root)
-    validate_output(root, uid)
+    if output is not None and action != "build":
+        raise FrontendError("Frontend output override is only supported for build")
+    validate_output(root, uid, output)
     env = os.environ.copy()
+    env.pop("OBSGOD_FRONTEND_OUT", None)
+    if output is not None:
+        env["OBSGOD_FRONTEND_OUT"] = str(output)
     for key in ("SUDO_UID", "SUDO_GID", "SUDO_USER", "SUDO_COMMAND", "XDG_CONFIG_HOME",
                 "XDG_DATA_HOME", "XDG_STATE_HOME", "XDG_CACHE_HOME", "XDG_RUNTIME_DIR"):
         env.pop(key, None)
@@ -72,16 +92,17 @@ def run_frontend(action, *, root=ROOT, npm="npm"):
         identity = {"user": uid, "group": gid, "extra_groups": []} if os.getuid() == 0 else {}
         print(f"Frontend {action} runs as UID {uid}, GID {gid}", flush=True)
         result = subprocess.run([npm, *COMMANDS[action]], cwd=root / "steamdeck" / "decky", env=env, **identity)
-        validate_output(root, uid)
+        validate_output(root, uid, output)
         return result.returncode
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=COMMANDS)
+    parser.add_argument("--output", type=Path, help="Build into an absolute directory under an owned private parent")
     args = parser.parse_args()
     try:
-        return run_frontend(args.action)
+        return run_frontend(args.action, output=args.output)
     except (FrontendError, OSError) as error:
         parser.exit(1, f"Frontend command refused: {error}\n")
 

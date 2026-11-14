@@ -1,0 +1,528 @@
+{
+  "browsers": [
+    {
+      "command": [
+        "python3",
+        "steamdeck/tests/browser-dependency-setup.py",
+        "<canonical-plugin-zip>",
+        "--output",
+        "<private-evidence-dir>"
+      ],
+      "log_sha256": "e93209b67de456a4cf4a0fc8dcc255976487b3006111ec1a018a780f3573ba5a",
+      "name": "browser-dependency",
+      "status": "passed"
+    },
+    {
+      "command": [
+        "python3",
+        "steamdeck/tests/browser-panel.py",
+        "<canonical-plugin-zip>",
+        "--screenshots",
+        "<private-evidence-dir>"
+      ],
+      "log_sha256": "d7f17ae2c211f51917707e6a7bae4c7fd7eacf6ae825c02e061229d45713a20f",
+      "name": "browser-panel",
+      "status": "passed"
+    },
+    {
+      "command": [
+        "python3",
+        "steamdeck/tests/browser-mixer-panel.py",
+        "<canonical-plugin-zip>",
+        "--screenshots",
+        "<private-evidence-dir>"
+      ],
+      "log_sha256": "ca408304da8764a23202f7f1b45abece6a5563d998b18ea62922347916c8aedc",
+      "name": "browser-mixer",
+      "status": "passed"
+    },
+    {
+      "command": [
+        "python3",
+        "steamdeck/tests/browser-m3-panel.py",
+        "<canonical-plugin-zip>",
+        "--screenshots",
+        "<private-evidence-dir>"
+      ],
+      "log_sha256": "daa9d0d12e3501f55ca2fe02c207af06087231e80435ca1d2994df284bec8aca",
+      "name": "browser-advanced",
+      "status": "passed"
+    }
+  ],
+  "canonical_plugin_zip": {
+    "dirty": false,
+    "independent_builds_identical": true,
+    "path": "/workspace/.obsgod-tools/decky-native-candidate-3/obsgod-decky.zip",
+    "payload_files": 33,
+    "sha256": "80b956ea208b465626640a8ad432185aca5455192c367bd50e38d6608f90830c",
+    "version": "0.1.0-deck.9"
+  },
+  "checks": [
+    {
+      "command": [
+        "env",
+        "PATH=/workspace/.obsgod-tools/toolchains/go1.27.4/go/bin:/home/agent/.local/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/override:/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin:/opt/codex/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/agent/.local/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/fallback",
+        "GOMODCACHE=/workspace/.obsgod-tools/mod",
+        "GOTOOLCHAIN=local",
+        "go",
+        "test",
+        "-json",
+        "-race",
+        "-count=1",
+        "./internal/deck",
+        "./internal/commands"
+      ],
+      "exit_code": 0,
+      "log": "go-deck-final.log",
+      "log_sha256": "311f650b54c66c904b2dbae2bc71dccf5d1aa33a1520b3aafe93d12445c1aa53",
+      "name": "go-deck-final",
+      "seconds": 6.649
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "steamdeck/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "python-final.log",
+      "log_sha256": "684d7aa5f3a66ddaeb247b2710e8f58e86b9a90ae7d2b889f9c098c160f37b48",
+      "name": "python-final",
+      "seconds": 38.601
+    },
+    {
+      "command": [
+        "env",
+        "PATH=/workspace/.obsgod-tools/toolchains/go1.27.4/go/bin:/home/agent/.local/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/override:/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin:/opt/codex/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/agent/.local/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/fallback",
+        "GOMODCACHE=/workspace/.obsgod-tools/mod",
+        "GOTOOLCHAIN=local",
+        "go",
+        "vet",
+        "./internal/deck",
+        "./internal/commands"
+      ],
+      "exit_code": 0,
+      "log": "go-vet-final.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "go-vet-final",
+      "seconds": 0.654
+    },
+    {
+      "command": [
+        "npm",
+        "--prefix",
+        "steamdeck/decky",
+        "test"
+      ],
+      "exit_code": 0,
+      "log": "node-final.log",
+      "log_sha256": "57b5634e8115f9ad3e2348d77fe7236589a4e5606bead5ddfda3f847746e436a",
+      "name": "node-final",
+      "seconds": 0.257
+    },
+    {
+      "command": [
+        "npm",
+        "--prefix",
+        "steamdeck/decky",
+        "run",
+        "typecheck"
+      ],
+      "exit_code": 0,
+      "log": "typecheck-final.log",
+      "log_sha256": "4c51a932c40c1dc7887fef7b6e3a4ef90e59dbb21158e1fe8e6c1567a99e4a0e",
+      "name": "typecheck-final",
+      "seconds": 1.18
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts/tests",
+        "-p",
+        "test_decky_package.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "package-final.log",
+      "log_sha256": "fc9e740f08dcf6dbaff5841e72e11b79977287560153a095bb06a33028cf6ece",
+      "name": "package-final",
+      "seconds": 0.741
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts/tests",
+        "-p",
+        "test_release_audit.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "audit-final.log",
+      "log_sha256": "4d7b9da1a5b974800b4cd28accc5ac337dd032a274f71d849723aba149169284",
+      "name": "audit-final",
+      "seconds": 0.172
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts/tests",
+        "-p",
+        "test_frontend_command.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "frontend-ownership-final.log",
+      "log_sha256": "123aa97ef8493e4d1f6dfaf2ff85caa8d5ea6eb3e4c06c6a9fd968924d0aebd3",
+      "name": "frontend-ownership-final",
+      "seconds": 0.168
+    }
+  ],
+  "counts": {
+    "frontend_ownership_passed": 6,
+    "go_pass_events": 268,
+    "go_top_level_pass": 156,
+    "node_passed": 37,
+    "packaging_passed": 9,
+    "python_discovered": 171,
+    "python_passed": 170,
+    "python_skipped": 1,
+    "release_audit_passed": 16
+  },
+  "criterion_status": {
+    "76": [
+      {
+        "criterion": 1,
+        "outcome": "implemented; clean host build + actual official assembly passed",
+        "summary": "Supported standard build/CLI path"
+      },
+      {
+        "criterion": 2,
+        "outcome": "33 files/manifest/notices/source/native receipt verified",
+        "summary": "Complete safe ZIP payload"
+      },
+      {
+        "criterion": 3,
+        "outcome": "Actual packaged authenticated status/static checks and setup configuration fixtures passed; native key-entry UI remains #79",
+        "summary": "Plugin self-contained setup payload"
+      },
+      {
+        "criterion": 4,
+        "outcome": "Package metadata and actualUID1000 checks passed; root-only wrappers explicitly skipped",
+        "summary": "Ordinary privileges/no root flags"
+      },
+      {
+        "criterion": 5,
+        "outcome": "obsgod/OBSGod/current publisher retained; no migration",
+        "summary": "Current compatible identity"
+      },
+      {
+        "criterion": 6,
+        "outcome": "Pinned native capture build/receipt passed; actual OBS Flatpak load unrun",
+        "summary": "Native ABI boundary"
+      },
+      {
+        "criterion": 7,
+        "outcome": "Builds/metadata prepared; no publication/deployment; hosted job billing unavailable",
+        "summary": "Safe metadata/workflow side effects"
+      }
+    ],
+    "77": [
+      {
+        "criterion": 1,
+        "outcome": "Map/jobs/log context fixture tests passed",
+        "summary": "Decky injected state boundaries"
+      },
+      {
+        "criterion": 2,
+        "outcome": "No relocation; original XDG roots and native paths preserved",
+        "summary": "Native OBS/media/CLI paths retained"
+      },
+      {
+        "criterion": 3,
+        "outcome": "Exact-derived assertions; canonical credentials/state/lock retained",
+        "summary": "One versioned authoritative map/store"
+      },
+      {
+        "criterion": 4,
+        "outcome": "Actual packaged Go consumes Python map; repeat/repair/rollback and key/media/lock preservation tests passed",
+        "summary": "Repeat/repair/rollback/interoperability"
+      },
+      {
+        "criterion": 5,
+        "outcome": "Owner/link/private-mode/unsafe-ancestor and legacy held-lock regressions passed",
+        "summary": "Unsafe path/privacy rejection"
+      },
+      {
+        "criterion": 6,
+        "outcome": "No installed ID or publisher activation",
+        "summary": "Identity/trust separation"
+      }
+    ],
+    "78": [
+      {
+        "criterion": 1,
+        "outcome": "No lifecycle downloads; Install/Later/backend literal-true contract tested",
+        "summary": "Observe + explicit consent"
+      },
+      {
+        "criterion": 2,
+        "outcome": "Packaged browser checks passed; plugin retained and output starts gated",
+        "summary": "Decline/retry UX"
+      },
+      {
+        "criterion": 3,
+        "outcome": "Panel reload/duplicate/operation ID/stage/budget tests passed",
+        "summary": "Background owned persistent jobs"
+      },
+      {
+        "criterion": 4,
+        "outcome": "Real fake-Flatpak subprocess + inherited worker lease/reload/hardkill cases passed",
+        "summary": "Cancel/interruption/partial retry"
+      },
+      {
+        "criterion": 5,
+        "outcome": "Actual non-root UID/socket fixtures and scope/metadata/provenance rejection passed; actual Deck/Flathub unrun",
+        "summary": "Real user/scope/branch/remote checks"
+      },
+      {
+        "criterion": 6,
+        "outcome": "Network/disk/permission/timeout/redaction fixtures; no dependency cache/shared-app deletion",
+        "summary": "Actionable recovery/no shared removal"
+      },
+      {
+        "criterion": 7,
+        "outcome": "Actual packaged no-autospawn checks and explicit Stop preserved; no broadcaster invocation",
+        "summary": "Readiness/output separation"
+      }
+    ]
+  },
+  "cross_language": {
+    "binary_sha256": "069be87b771374a93e7e12e5d01c2e6a48ba1bb8adb1675da6ef41f348caa5c4",
+    "changed_store_rejected": true,
+    "ephemeral_runtime_not_replaced": true,
+    "python_map_consumed_by_go": true,
+    "revision": "7e539ca8bcf237e3da1d0c42c5045ea44d638973",
+    "schema": "decky-storage-cross-language-check/v1",
+    "scope": "Actual packaged 7e539ca interoperability; not physical Deck qualification",
+    "second_controller_created": false,
+    "source_sha256": {
+      "internal/deck/config.go": "e76bc2d2cfdac34129f636e294603c47fa811f5781f213208d17ff2a525c0bdb",
+      "internal/deck/storage_map_linux.go": "6bc262d3e0d110dcf344967c8a260fbe1e224a0d04644fa98b751ed193a1b196",
+      "internal/deck/storage_map_other.go": "ec3be70196d928975f59771c47eb9c9d21a08c039971fd748991ebd8b8aed4f7",
+      "steamdeck/decky/storage.py": "3a3e62ed814c64bf33e89f75c8eab645cab564fdd47476c7cbeabfff11714c5e"
+    },
+    "uid": 1000,
+    "valid_map_status": "setup",
+    "zip_sha256": "80b956ea208b465626640a8ad432185aca5455192c367bd50e38d6608f90830c"
+  },
+  "dependency_browser_cases": {
+    "limitations": "Simulated Decky/browser APIs; not Flatpak, actual controller, SteamOS or provider proof.",
+    "passed": [
+      "missing dependencies block new output without removing plugin",
+      "Later records preference only; no installer call",
+      "frontend reload recovers backend job without another Install",
+      "cancel preserves partial install; retry consent lists only missing extension",
+      "observed dependency readiness enables controls without broadcasting",
+      "failed dependency observation keeps explicit recovery Stop and excludes secrets"
+    ]
+  },
+  "draft_pr": 90,
+  "go_skips": [
+    {
+      "package": "github.com/szmyty/obsgod/internal/deck",
+      "reason": "Root-only negative case skipped under actual UID1000",
+      "test": "TestDeckyStorageMapDoesNotPermitRootBackend"
+    }
+  ],
+  "hosted_ci": {
+    "annotation": "The job was not started because your account is locked due to a billing issue.",
+    "candidate_run": "https://github.com/szmyty/obsgod/actions/runs/43633244537",
+    "job_id": 132564326974,
+    "retry_requested": false,
+    "state": "unavailable",
+    "steps_executed": 0
+  },
+  "issues": [
+    76,
+    77,
+    78
+  ],
+  "packaging": {
+    "actual_unpacked_smoke": {
+      "archive": "/workspace/.obsgod-tools/decky-native-candidate-3/obsgod-decky.zip",
+      "archive_sha256": "80b956ea208b465626640a8ad432185aca5455192c367bd50e38d6608f90830c",
+      "backend_http_smoke": {
+        "http_checks": [
+          "unauthenticated status rejected",
+          "authenticated status used actual bundled CLI",
+          "dependencies redirected without legacy installer",
+          "install-plugin redirected without legacy installer",
+          "browser cannot start broadcasting",
+          "bundled static assets served"
+        ],
+        "isolated_backend_import": "passed",
+        "legacy_installer_imported": false
+      },
+      "commands": [
+        [
+          "/tmp/obsgod-real-package-smoke-xkbb4spv/obsgod/bin/obsgod",
+          "--version"
+        ],
+        [
+          "/tmp/obsgod-real-package-smoke-xkbb4spv/obsgod/bin/obsgod",
+          "deck",
+          "status"
+        ],
+        [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "-I",
+          "-c",
+          "[isolated import/authenticated HTTP probe recorded in actual-package-smoke.py]",
+          "/tmp/obsgod-real-package-smoke-xkbb4spv/obsgod"
+        ]
+      ],
+      "device_installation": "unrun",
+      "external_boundary_commands": [],
+      "go_version_execution": "obsgod version 0.1.0-deck.9 (7e539ca8bcf237e3da1d0c42c5045ea44d638973)",
+      "manifest_hashes": "passed",
+      "native_receipt_matches": "passed",
+      "network_broadcast": "not attempted",
+      "no_automatic_obs_spawn": "passed",
+      "obs_startup_streaming": "unrun",
+      "payload_inventory": "passed",
+      "platform": "Linux x86_64 cloud; synthetic private HOME, no session bus",
+      "revision": "7e539ca8bcf237e3da1d0c42c5045ea44d638973",
+      "sdk_original_source_hashes": "passed",
+      "status_configured": false,
+      "status_exit_code": 0,
+      "status_state": "setup"
+    },
+    "builds": [
+      {
+        "command": "PATH=/workspace/.obsgod-tools/toolchains/go1.27.4/go/bin:$PATH GOMODCACHE=/workspace/.obsgod-tools/mod python3 scripts/package-decky.py --version 0.1.0-deck.9 --output /workspace/.obsgod-tools/decky-native-candidate-3 --verify-cli /workspace/.obsgod-tools/decky-package-cli/decky-0.0.7",
+        "directory": "/workspace/.obsgod-tools/decky-native-candidate-3",
+        "log": "/workspace/.obsgod-tools/decky-package-cli/primary-build-3.log",
+        "log_sha256": "788a4ad83911de2a52ae185f4d99b874ef9f2eda0601f2d10d9280198b92e2df",
+        "status": "passed"
+      },
+      {
+        "command": "PATH=/workspace/.obsgod-tools/toolchains/go1.27.4/go/bin:$PATH GOMODCACHE=/workspace/.obsgod-tools/mod python3 scripts/package-decky.py --version 0.1.0-deck.9 --output /workspace/.obsgod-tools/decky-native-candidate-4",
+        "directory": "/workspace/.obsgod-tools/decky-native-candidate-4",
+        "log": "/workspace/.obsgod-tools/decky-package-cli/primary-build-4.log",
+        "log_sha256": "b042e828844553a48ec74b9dafc70ca99145ded71838268cf9070abd31b78903",
+        "status": "passed"
+      }
+    ],
+    "byte_identical_repeat": "passed",
+    "canonical_zip_sha256": "80b956ea208b465626640a8ad432185aca5455192c367bd50e38d6608f90830c",
+    "dirty": false,
+    "limits": {
+      "actual_steam_deck_installation": "unrun",
+      "deployment": "not performed",
+      "physical_capture_audio_suspend_streaming": "unrun",
+      "real_flathub_transaction": "unrun",
+      "release_publication": "not performed"
+    },
+    "native_capture": {
+      "image_id": "sha256:6c3ec703e4d22b777f53e75ec33a2639ac060a81e97cd4a48da4e7e412127f78",
+      "network_during_compile": false,
+      "receipt": "/workspace/.obsgod-tools/decky-package-cli/capture-build-7e539ca.json",
+      "sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68"
+    },
+    "official_cli": {
+      "builder_image": "ghcr.io/steamdeckhomebrew/builder@sha256:e2616e391f3ae9a46c4cf906b1091220c2506e7fb1301e16a2a72409efbce7c5",
+      "builder_node": "26.12.1",
+      "builder_pnpm": "12.14.0",
+      "container_network": "none",
+      "payload_files_compared": 33,
+      "raw_zip_reproducible": false,
+      "raw_zip_sha256": "48f41cdbc2ac45fe61a88e23ccf4cb47d567d67fed19b3ceb9c4e7ed960677af",
+      "scope": "Unmodified official CLI and pinned default builder, assembling prepared bytes; not source compilation",
+      "sha256": "0d0f8c127cd3dba12b75f771c786194ca9f4f771b4787ae24de8b1af45af4294",
+      "status": "passed",
+      "version": "0.0.7"
+    },
+    "platform": {
+      "docker": "Docker version 28.4.0, build d8eb465",
+      "machine": "x86_64",
+      "python": "3.12.14",
+      "source_tools": {
+        "go": "go1.27.4",
+        "node": "24.19.0",
+        "npm": "11.9.0"
+      },
+      "system": "Linux-6.18.57-x86_64-with-glibc2.41"
+    },
+    "revision": "7e539ca8bcf237e3da1d0c42c5045ea44d638973",
+    "sdk_source_archive_sha256": "62fa829b5f997d6acd6685b54ac317ea28d3dbf7ab3a3eb1d31394f12287d53b",
+    "separate_sdk_runtime_sha256": "1aa163d7f9890fa16e2bacd3d52d8b8775510bcbae4564f144e069ee8e9f368e",
+    "source_snapshot_identical": "passed",
+    "version": "0.1.0-deck.9"
+  },
+  "parent": 46,
+  "platform": {
+    "chromium": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+    "docker": "28.4.0",
+    "go": "1.27.4",
+    "host": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "playwright": "1.62.0",
+    "python": "3.12.14",
+    "uid": 1000
+  },
+  "python_skip": "Root-only unprivileged wrapper is not needed under actual UID1000; actual non-root dependency fixtures executed.",
+  "qualification_scope": "Focused #76/#77/#78 source/package integration; final campaign matrix remains #85. No physical Steam Deck or provider proof.",
+  "qualified_revision": "7e539ca8bcf237e3da1d0c42c5045ea44d638973",
+  "raw_evidence": {
+    "members": 24,
+    "path": "docs/evidence/decky-foundation-7e539ca.zip",
+    "sha256": "a938845484d15a26393d740998aaed1f266dad5a14564b2a3966ffc7da79c254"
+  },
+  "release_migration_status": "No merge, issue closure, product release, site deployment, repository migration or spending.",
+  "repaired_findings": [
+    {
+      "finding": "Default Decky builder excludes nested src directories, removing preferred LGPL SDK source",
+      "repair": "Preserve untouched SDK package/src in deterministic SOURCE.tar.gz; actual default builder and exact source audit pass."
+    },
+    {
+      "finding": "Go Flatpak subprocess environment dropped XDG_DATA_HOME and XDG_CACHE_HOME",
+      "repair": "Preserve original player data/cache roots and shared storage context."
+    },
+    {
+      "finding": "Writable nonsticky output/storage ancestors permit path replacement and split control locks",
+      "repair": "Reject unsafe ancestors in build, Python/Go map/job paths and legacy Linux Lock; unsafe/sticky/held-lock rename regressions pass."
+    },
+    {
+      "finding": "New browser harness initially expected wrong existing Stop label, then malformed slash regex",
+      "repair": "Correct test locator; all six actual-package cases pass. No UI behavior change claimed for this harness repair."
+    }
+  ],
+  "review": "Independent agent code/fixture review; no GitHub human approval or hardware acceptance is claimed.",
+  "schema": "obsgod.decky-foundation-qualification/v1",
+  "unrun": [
+    "Actual Steam Deck normal Decky UI installation/replacement",
+    "Real Flathub dependency transactions, current SteamOS session bus and Gaming Mode",
+    "Actual OBS Flatpak capture-library loading, audio/controller/session/suspend/provider/viewer behavior",
+    "Full campaign local ACT/native/platform/security matrix #85",
+    "Independent required review, actual new publisher and migration/publication acceptance"
+  ]
+}

@@ -23,6 +23,8 @@ individual workflows; qualification records identify the exact tested revision.
 | `pkg/creator/v1` | Optional creator adapter consuming the public facade, with environment-backed RTMP providers; used by `obsgod creator` |
 | `internal/deck` | Managed Linux/Flatpak OBS lifecycle, serialized controls, private settings, capture, audio and local media; owns only its managed instance/data |
 | `steamdeck/bridge.py`, `steamdeck/decky/main.py` | Unprivileged JSON invocation of `obsgod deck`; no duplicate OBS WebSocket implementation |
+| `steamdeck/decky/storage.py` | Decky-owned map/receipt/job/log boundaries around the retained canonical XDG credentials and managed state/control lock |
+| `steamdeck/decky/dependency_setup.py` | Consented, asynchronous per-user Flatpak setup; bounded jobs and re-observation, never OBS launch or broadcasting |
 | `steamdeck/setup.*`, `steamdeck/decky/src` | Desktop setup and controller panel; project observed state rather than infer success from a click |
 | `steamdeck/install.py`, `update.py`, `uninstall.py` | Validated install/replacement/recovery/removal; preserve ordinary OBS, unrelated plugins and shared dependencies |
 | `steamdeck/capture` | Narrow app-filtered Gamescope/PipeWire source; unusable game selection cannot become desktop capture |
@@ -87,6 +89,29 @@ backlog rather than being marked implemented. The creator/StreamGod boundary in
 [the boundary decision](docs/decisions/0003-core-and-creator-boundary.md).
 
 ## Runtime and state ownership
+
+The primary package is a standard Decky ZIP built by
+[`scripts/package-decky.py`](scripts/package-decky.py). Its private staging
+contains the complete backend, native helpers, panel and optional loopback
+browser setup; a separately installed Desktop application is not required for
+those files. [Packaging](docs/decky-package.md) records the pinned source build
+and separately scoped official-CLI assembly check. The legacy runtime archive
+remains a compatibility path, not an additional normal-plugin requirement.
+
+The [storage bridge](docs/decky-storage.md) uses Decky's supplied metadata/job/log
+directories while retaining one canonical XDG settings/secrets/state and control
+lease for existing CLI/Desktop users. It does not copy keys or relocate OBS or
+recordings. The private map validates the derived paths instead of overriding
+them. Preserve the player XDG data/cache roots for the existing Flatpak install.
+
+First-run [dependency setup](docs/dependency-setup.md) is separate from Decky's
+plugin installation. No download occurs in lifecycle initialization. Explicit
+consent reserves a bounded backend-owned job; decline preserves the plugin and
+cancel/reload re-observes actual installed refs. Its shared control lease and
+fresh output preflight prevent a legacy Start racing the dependency transaction.
+Dependency installed, OBS launched, authenticated connection and streaming remain
+separate observed facts. Native destination/key configuration and final selected
+branding are subsequent roadmap work, not implied by dependency readiness.
 
 OBS is a graphical application controlled through its bundled WebSocket, not a
 headless renderer. Managed operation uses user-installed OBS 28+ and its

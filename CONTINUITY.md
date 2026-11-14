@@ -1,5 +1,74 @@
 # Current work
 
+## #76–#78 source implemented; qualified batch7e539ca in draft #90
+
+User-requested package/storage/dependency setup is implemented in draft
+[#90](https://github.com/szmyty/obsgod/pull/90), after #73 → #74 → #75.
+Exact source **7e539ca8bcf237e3da1d0c42c5045ea44d638973** produced two identical
+33-file ZIPs, SHA256 **80b956ea208b465626640a8ad432185aca5455192c367bd50e38d6608f90830c**.
+[The checkpoint](docs/decky-foundation-checkpoint.md),
+[criterion/matrix report](docs/evidence/decky-foundation-7e539ca.json) and raw
+24-file evidence ZIP retain exact commands, revisions, tool/platform/outcomes.
+Later documentation does not relabel this artifact or qualify newer code.
+
+At that clean source: Go race/count1 passed156top/268events (one root-only skip),
+vet passed; Python171discovered/170passed/one root-wrapper skip; Node37;
+packaging9/audit16/frontend-ownership6; four actual-ZIP browsers passed including
+six setup scenarios. Official CLI/default pinned builder matched all33 files.
+Actual unpacked Go/version/status/authenticated setup and Python-map→packaged-Go
+checks passed, with no OBS/Flatpak command or broadcast during setup/status.
+
+Review reproduced writable-ancestor directory replacement/split control locks;
+the bounded Python/Go/job/build repair and held-lock/sticky regressions pass.
+Primary setup now respects original XDG data/cache roots and retains one legacy
+credential/state/control store plus Decky-owned private metadata/jobs/logs.
+The untouched SDK source archive works with the default official builder.
+
+No merge/issue closure/release/deploy/migration/spending. #76–#78 stay open for
+review/recorded limits. Actual Deck/Flathub/session/controller/audio/viewer proof
+is unrun; hosted candidate job failed with zero steps and a billing-lock
+annotation. Full campaign ACT/native/platform/security matrix remains #85.
+Next implementation is #79 private in-panel configuration, #80 selected aurora
+exports and #81 UI adoption, then the remaining roadmap. Owner testing remains
+#86 after a final test-ready build; actual migration/new install are #87/#88.
+
+## Executing #76–#78: Decky package, storage compatibility and setup jobs
+
+The owner explicitly requested implementation of #76, #77 and #78. Work uses
+the existing isolated checkout on **feat/decky-native-foundation**, based on
+planning commit **6c01b93f18b471d7168ef192ca5ab8bae185e381**. The earlier draft
+stack #73 → #74 → #75 stays intact; the next draft is based on #75's branch.
+
+Chosen compatibility approach: retain one canonical XDG settings/secrets and
+managed state/control-lock store for current CLI/Desktop users. Decky's injected
+settings directory holds a versioned storage map/receipt, runtime-data holds
+plugin-owned persistent setup jobs, and logs holds plugin-owned logs. No secret
+copy, Flatpak config relocation or recording move. Preserve the actual player
+context and original XDG_DATA_HOME for user Flatpaks.
+
+Draft [#90](https://github.com/szmyty/obsgod/pull/90) is based on #75 and preserves
+the early frontend checkpoint d8412f0. The source now integrates the backend
+jobs/storage map, shared-lock preflight, guarded standard package builder,
+optional self-contained loopback setup, native Install/Later UI and regressions.
+Official CLI assembly exposed an SDK-source exclusion; a deterministic preferred
+source archive preserves the LGPL source with the default builder. Go Flatpak
+launches now retain the original XDG data/cache roots.
+
+The source is being frozen for a clean actual package build, repeated-byte and
+unpacked/browser checks. Focused tests have passed during implementation; exact
+final batch evidence follows after these checks. This is not final campaign
+qualification or actual Steam Deck acceptance. No issue is closed and no product
+release, migration or deployment occurs. #79 key-entry UI and #80/#81 selected
+branding adoption remain subsequent implementation, not part of this batch.
+
+Initial clean source480c477 produced two identical canonical ZIPs and passed
+pinned official CLI assembly, unpacked actual-Go/browser-setup smoke and the
+packaged panel checks. Independent review then reproduced unsafe writable
+ancestors for build output and managed state/control locks. The bounded repair
+rejects those ancestors in Python/Go/job/build paths, including legacy Go Lock
+without a map, with sticky-positive and held-lock rename/recreate regressions.
+Final corrected-source builds/checks must supersede480's artifact evidence.
+
 ## Active roadmap: implementation first, current Deck tests, then migration
 
 The owner locked **01 / aurora** and retained earlier artwork as concepts. The

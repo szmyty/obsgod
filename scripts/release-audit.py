@@ -6,6 +6,7 @@ available in this Git object database. This is review evidence, not a signature,
 trusted builder attestation, license opinion or a production release approval.
 """
 import argparse
+import ast
 from datetime import datetime, timezone
 import gzip
 import hashlib
@@ -39,6 +40,10 @@ RUNTIME_FILES = frozenset({"setup.py", "bridge.py", "setup.html", "setup.js", "s
 PLUGIN_FILES = frozenset({"main.py", "releases.py", "paths.py", "product.py", "plugin.json", "package.json", "bin/obsgod", "bin/libgstobsgodcapture.so",
     "CAPTURE-SOURCE.tar.gz", "LICENSE", "LICENSE.LGPL-2.1", "LICENSE.qrcode-generator.txt", "THIRD_PARTY_NOTICES.md", "dist/index.js", "dist/decky-api.js",
     "dist/manifest.js", "dist/types.js", "dist/LICENSE.qrcode-generator.txt", "source/decky-api/BUILDING.md"})
+STANDARD_PLUGIN_FILES = PLUGIN_FILES | frozenset({
+    "storage.py", "dependency_setup.py", "bridge.py", "setup.py", "setup.html", "setup.js", "setup.css",
+    "README.md", "pnpm-lock.yaml", "build/verify.mjs", "build/capture-build.json", "manifest.json",
+    "source/decky-api/package.json", "source/decky-api/SOURCE.tar.gz"})
 UPDATER_FILES = frozenset({"update.py", "releases.py", "paths.py", "product.py", "decky.py", "decky-install", "Update OBSGod.desktop", "Update OBSGod.sh", "LICENSE", "THIRD_PARTY_NOTICES.md"})
 
 
@@ -166,7 +171,24 @@ def audit(directory, expected_revision):
     require(set(payload) == RUNTIME_FILES | {"manifest.json"}, "Runtime required payload inventory mismatch")
     require(payload["obsgod-decky.zip"] == artifacts["obsgod-decky.zip"], "Nested Decky ZIP mismatch")
     _, plugin = archive_files(artifacts["obsgod-decky.zip"], "zip")
-    require(set(plugin) == PLUGIN_FILES | {"source/decky-api/" + name for name in SDK_SOURCE}, "Decky required payload inventory mismatch")
+    standard = "manifest.json" in plugin
+    required_plugin = STANDARD_PLUGIN_FILES if standard else PLUGIN_FILES | {"source/decky-api/" + name for name in SDK_SOURCE}
+    require(set(plugin) == required_plugin, "Decky required payload inventory mismatch")
+    if standard:
+        plugin_manifest = json.loads(plugin["manifest.json"])
+        verify_manifest(plugin, plugin_manifest)
+        require(all(plugin_manifest.get(key) == value for key, value in {
+            "format": "decky-plugin", "revision": revision, "version": version, "dirty": False,
+            "platform": "linux/amd64", "source_tools": {"go": "go1.27.4", "node": "24.19.0", "npm": "11.9.0"}}.items()),
+            "Decky manifest identity/toolchain mismatch")
+        require(json.loads(plugin["package.json"]) == {"name": "obsgod", "version": version, "license": "MIT",
+            "type": "module", "scripts": {"build": "node build/verify.mjs"}}, "Decky package metadata mismatch")
+        # Parse fixed literals without executing build code from the revision.
+        build_source = ast.parse(git(revision, "scripts/decky_package.py"))
+        literals = {target.id: ast.literal_eval(node.value) for node in build_source.body if isinstance(node, ast.Assign)
+                    for target in node.targets if isinstance(target, ast.Name) and target.id in {"STAGE_BUILD", "STAGE_LOCK"}}
+        require(plugin["build/verify.mjs"] == literals.get("STAGE_BUILD") and plugin["pnpm-lock.yaml"] == literals.get("STAGE_LOCK"),
+                "Decky staged build differs from source")
     for name in ("obsgod", "libgstobsgodcapture.so"):
         require(plugin["bin/" + name] == payload[name], "Decky runtime differs: " + name)
     for name in ("LICENSE", "THIRD_PARTY_NOTICES.md", "CAPTURE-SOURCE.tar.gz"):
@@ -175,14 +197,20 @@ def audit(directory, expected_revision):
     for name in ("LICENSE.LGPL-2.1", "LICENSE.qrcode-generator.txt"):
         require(plugin[name] == git(revision, "steamdeck/decky/" + name), "Third-party license differs from source")
     require(plugin["dist/LICENSE.qrcode-generator.txt"] == plugin["LICENSE.qrcode-generator.txt"], "Bundled QR license mismatch")
-    require(any(name.startswith("source/decky-api/src/") and name.endswith(".ts") for name in plugin), "Missing LGPL preferred TypeScript source")
+    if standard:
+        sdk_root, sdk_source = archive_files(plugin["source/decky-api/SOURCE.tar.gz"], "tar")
+        require(sdk_root == "decky-api", "LGPL preferred source archive root mismatch")
+        require(sdk_source.get("package.json") == plugin["source/decky-api/package.json"], "LGPL source package copy mismatch")
+    else:
+        sdk_source = {name.removeprefix("source/decky-api/"): content for name, content in plugin.items()
+                      if name.startswith("source/decky-api/") and name != "source/decky-api/BUILDING.md"}
+    require(any(name.startswith("src/") and name.endswith(".ts") for name in sdk_source), "Missing LGPL preferred TypeScript source")
     require(plugin.get("source/decky-api/BUILDING.md"), "Missing LGPL rebuild instructions")
     lock_bytes = git(revision, "steamdeck/decky/package-lock.json")
     lock = json.loads(lock_bytes)["packages"]
     require(json.loads(plugin["source/decky-api/package.json"])["version"] == lock["node_modules/@decky/api"]["version"], "LGPL source version mismatch")
     require(lock["node_modules/@decky/api"].get("integrity") == SDK_INTEGRITY, "Unreviewed LGPL SDK archive integrity")
-    sdk_files = {name.removeprefix("source/decky-api/"): sha(content) for name, content in plugin.items()
-                 if name.startswith("source/decky-api/") and name != "source/decky-api/BUILDING.md"}
+    sdk_files = {name: sha(content) for name, content in sdk_source.items()}
     require(sdk_files == SDK_SOURCE, "LGPL preferred TypeScript source inventory/hash mismatch")
     original_module = plugin["dist/decky-api.js"].replace(b"'./manifest.js'", b"'@decky/manifest'").replace(b'"./manifest.js"', b'"@decky/manifest"').replace(b'"./types.js"', b'"./types"')
     require(sha(original_module) == SDK_RUNTIME_SHA256 and sha(plugin["dist/types.js"]) == SDK_TYPES_SHA256, "LGPL runtime differs from documented import-only modifications")
@@ -197,6 +225,12 @@ def audit(directory, expected_revision):
     for name in ("main.py", "releases.py", "paths.py", "product.py", "plugin.json"):
         source = "steamdeck/decky/" + name if name in ("main.py", "plugin.json") else "steamdeck/" + name
         require(plugin[name] == git(revision, source), "Decky source differs from revision: " + name)
+    if standard:
+        for name in ("storage.py", "dependency_setup.py"):
+            require(plugin[name] == git(revision, "steamdeck/decky/" + name), "Decky source differs from revision: " + name)
+        for name in ("bridge.py", "setup.py", "setup.html", "setup.js", "setup.css"):
+            require(plugin[name] == payload[name], "Decky setup differs from runtime: " + name)
+        require(plugin["README.md"] == git(revision, "docs/decky-package.md"), "Decky package README differs from revision")
     modules = go_inventory(payload["obsgod"], revision)
     helper_modules = go_inventory(payload["decky-install"], revision, allow_no_dependencies=True)
     modules = sorted({(module["name"], module["version"]): module for module in [*modules, *helper_modules]}.values(), key=lambda item: item["name"])
@@ -216,9 +250,14 @@ def audit(directory, expected_revision):
     artifacts.update({updater_name: updater_bytes, "updater-manifest.json": updater["manifest.json"]})
     receipt = json.loads((directory / "capture-build.json").read_bytes())
     require(receipt["sha256"] == sha(payload["libgstobsgodcapture.so"]) and receipt["source_sha256"] == sha(capture["gstobsgodcapture.c"]) and receipt["dockerfile_sha256"] == sha(capture["build.Dockerfile"]) and receipt["network_during_compile"] is False, "Capture build receipt mismatch")
+    if standard:
+        require(json.loads(plugin["build/capture-build.json"]) == receipt, "Decky capture build receipt mismatch")
     artifacts["capture-build.json"] = (directory / "capture-build.json").read_bytes()
     materials = [{"uri": "git+https://github.com/szmyty/obsgod@" + revision, "digest": {"sha1": revision}}]
-    for name in ("go.mod", "go.sum", "steamdeck/decky/package-lock.json", "steamdeck/decky/rollup.config.js", "scripts/package-deck.py", "scripts/package-updater.py", "steamdeck/capture/build.Dockerfile"):
+    build_inputs = ["go.mod", "go.sum", "steamdeck/decky/package-lock.json", "steamdeck/decky/rollup.config.js", "scripts/package-deck.py", "scripts/package-updater.py", "steamdeck/capture/build.Dockerfile"]
+    if standard:
+        build_inputs += ["scripts/decky_package.py", "scripts/package-decky.py", "scripts/frontend-command.py", "docs/decky-package.md"]
+    for name in build_inputs:
         materials.append({"uri": name, "digest": {"sha256": sha(git(revision, name))}})
     timestamp = int(subprocess.check_output(["git", "-C", str(ROOT), "show", "-s", "--format=%ct", revision]))
     created = datetime.fromtimestamp(timestamp, timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
