@@ -1,5 +1,33 @@
 # Current work
 
+## Portable history before a possible fresh Decky Stream repository
+
+The owner prefers a fresh repository and requested a practical `MEMORIAL.md`
+history for future agents, rather than preserving Git/GitHub history for its own
+sake. Added [the short history](MEMORIAL.md), its new-agent pointer in AGENTS.md,
+and [a portable tracker snapshot](docs/history/obsgod-github.json). Read-only
+capture on 2026-11-14 UTC covers all 40 issues/32 PRs, 41 conversation comments,
+three submitted reviews and zero inline comments at default da89b9d. Only #46
+was open; no PR was open. The export predates this documentation PR and is not a
+final retirement snapshot. Its scope/exclusions and refresh-at-retirement plan
+are recorded in the memorial.
+
+Documentation checks passed: all 72 tracker IDs and 116 captured body hashes,
+41-comment completeness, 62 relative links, source revisions, remote immutable
+artifact ref, credential-pattern scan and diff whitespace. Independent read-only
+review found no remaining correction. Product checks were not rerun for this
+documentation-only change; existing qualification stays revision-bound.
+
+No runtime changes or new runtime qualification are part of this documentation.
+Exact qualified source4699235 and immutable artifact eb92598f remain unchanged.
+`egohygiene/decky-stream` is the working fresh-repository destination discussed;
+final creation/retirement and branding decisions/actions are not performed here.
+Private `szmyty/archive` exists, but a backup there alone cannot preserve public
+install/artifact URLs. Prepare a tested installer/updater/settings transition,
+carry every unfinished criterion into the new tracker, retain upstream notices,
+and refresh the memorial/export at actual retirement. Read earlier sections as
+historical checkpoints; use live state before continuing implementation.
+
 ## Qualified follow-up: source469, verified review checkpoint and remaining #46
 
 The owner instructed “okay merge everything and push forward with those few”.
