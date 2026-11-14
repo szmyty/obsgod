@@ -1,0 +1,215 @@
+{
+  "observed_at_utc": "2026-11-14T15:45:55.368925+00:00",
+  "purpose": "read-only Decky technical convention verification",
+  "pins": {
+    "decky-plugin-template": "90d0780e882a17f5714fc6de044c645f22608290",
+    "wiki": "ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4",
+    "decky-loader": "ffd103b9c1a4ce5bf305e7c0998eda6e05457dad",
+    "rollup-preset-decky": "5e861bcdfd6072bd98c4b9e403f547b35c31502e"
+  },
+  "sources": [
+    {
+      "repository": "SteamDeckHomebrew/decky-loader",
+      "revision": "ffd103b9c1a4ce5bf305e7c0998eda6e05457dad",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-loader/ffd103b9c1a4ce5bf305e7c0998eda6e05457dad/README.md",
+      "bytes": 10924,
+      "sha256": "cd899e0178792decdc80581c8eeefe32f2c5442c43dd3476edb7223e928bcc3e",
+      "git_blob_sha1": "82a9e309453d35d04adafb42e91f987bf50928f3"
+    },
+    {
+      "repository": "SteamDeckHomebrew/decky-loader",
+      "revision": "ffd103b9c1a4ce5bf305e7c0998eda6e05457dad",
+      "path": "backend/decky_loader/plugin/imports/decky.py",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-loader/ffd103b9c1a4ce5bf305e7c0998eda6e05457dad/backend/decky_loader/plugin/imports/decky.py",
+      "bytes": 7504,
+      "sha256": "6018d32ea8d82ba5b1104a914d98ffc0795ac7ec2f6c9c3613e0d8c7b5f7e11f",
+      "git_blob_sha1": "f49bad5c4bcf623acd03f0e706541b20578d0272"
+    },
+    {
+      "repository": "SteamDeckHomebrew/decky-loader",
+      "revision": "ffd103b9c1a4ce5bf305e7c0998eda6e05457dad",
+      "path": "backend/decky_loader/plugin/plugin.py",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-loader/ffd103b9c1a4ce5bf305e7c0998eda6e05457dad/backend/decky_loader/plugin/plugin.py",
+      "bytes": 8261,
+      "sha256": "a15487dabf4ac402c13b01c5673dc41ff7bef119103c2f7b21957eb1ab1e2214",
+      "git_blob_sha1": "bed92f3402262d3b7e40a7378e8fd79de32bf772"
+    },
+    {
+      "repository": "SteamDeckHomebrew/decky-loader",
+      "revision": "ffd103b9c1a4ce5bf305e7c0998eda6e05457dad",
+      "path": "backend/decky_loader/plugin/sandboxed_plugin.py",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-loader/ffd103b9c1a4ce5bf305e7c0998eda6e05457dad/backend/decky_loader/plugin/sandboxed_plugin.py",
+      "bytes": 9276,
+      "sha256": "84a8fe7697c1abbe13531cc72cff34a462b614bb1b25b30bff2d858d5316bbb8",
+      "git_blob_sha1": "668e1d25b6cb2ed8c8fdd74e841a1cc5fc73bfd5"
+    },
+    {
+      "repository": "SteamDeckHomebrew/decky-plugin-template",
+      "revision": "90d0780e882a17f5714fc6de044c645f22608290",
+      "path": ".vscode/build.sh",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-template/90d0780e882a17f5714fc6de044c645f22608290/.vscode/build.sh",
+      "bytes": 230,
+      "sha256": "0d6803b1fab07d16869baebcff6c1b679b24fbe2c7d1b6aba27a759e9ca0f1aa",
+      "git_blob_sha1": "2310ff04e29741199ec7ad4c580f1299420d3fd2"
+    },
+    {
+      "repository": "SteamDeckHomebrew/decky-plugin-template",
+      "revision": "90d0780e882a17f5714fc6de044c645f22608290",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-template/90d0780e882a17f5714fc6de044c645f22608290/README.md",
+      "bytes": 5716,
+      "sha256": "031a98c802664193dadfd66f45dded396d4572835d0ad20f01e75e89e6aa65ca",
+      "git_blob_sha1": "9ae496286100440ed40e801264dee4d4ae6c9ab3"
+    },
+    {
+      "repository": "SteamDeckHomebrew/decky-plugin-template",
+      "revision": "90d0780e882a17f5714fc6de044c645f22608290",
+      "path": "backend/Dockerfile",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-template/90d0780e882a17f5714fc6de044c645f22608290/backend/Dockerfile",
+      "bytes": 441,
+      "sha256": "acf30d39be2c785b9cba85f626e9878ade748f0156843b17604217be778fbb65",
+      "git_blob_sha1": "f46e170988f05056a44bdf9ea6e8fc71a03838f2"
+    },
+    {
+      "repository": "SteamDeckHomebrew/decky-plugin-template",
+      "revision": "90d0780e882a17f5714fc6de044c645f22608290",
+      "path": "backend/entrypoint.sh",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-template/90d0780e882a17f5714fc6de044c645f22608290/backend/entrypoint.sh",
+      "bytes": 100,
+      "sha256": "f1eeb0f9d3c926339a04efbb3aa6f73175edb2cdf53293e87c13939255ea2068",
+      "git_blob_sha1": "af04d23141a947b6ba400dc63a49abea3ea1020a"
+    },
+    {
+      "repository": "SteamDeckHomebrew/decky-plugin-template",
+      "revision": "90d0780e882a17f5714fc6de044c645f22608290",
+      "path": "main.py",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-template/90d0780e882a17f5714fc6de044c645f22608290/main.py",
+      "bytes": 2820,
+      "sha256": "741b4bb3cea0866898907cd9ab6a8be3f92baef1c9f8dd7c8f28e7c679883956",
+      "git_blob_sha1": "65a10da7a5bc369c27c599cdd8b145dba99f3b9e"
+    },
+    {
+      "repository": "SteamDeckHomebrew/decky-plugin-template",
+      "revision": "90d0780e882a17f5714fc6de044c645f22608290",
+      "path": "package.json",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-template/90d0780e882a17f5714fc6de044c645f22608290/package.json",
+      "bytes": 1295,
+      "sha256": "d9f11125b06f16d09d4b64ff1b658fbfd05929d5ee9df9562115abf7153e7449",
+      "git_blob_sha1": "88305809a1133389084d01052f69297982ffc5ff"
+    },
+    {
+      "repository": "SteamDeckHomebrew/decky-plugin-template",
+      "revision": "90d0780e882a17f5714fc6de044c645f22608290",
+      "path": "plugin.json",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-template/90d0780e882a17f5714fc6de044c645f22608290/plugin.json",
+      "bytes": 287,
+      "sha256": "12b774247405663a4c53eba49c8aaba47f5e27a05e9d1befc1bad4ba43385ac0",
+      "git_blob_sha1": "568bdedddf5751e0c26b48070297da2c6f153344"
+    },
+    {
+      "repository": "SteamDeckHomebrew/decky-plugin-template",
+      "revision": "90d0780e882a17f5714fc6de044c645f22608290",
+      "path": "pnpm-lock.yaml",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-template/90d0780e882a17f5714fc6de044c645f22608290/pnpm-lock.yaml",
+      "bytes": 59083,
+      "sha256": "217481f5d44b4969edbe669c6547c8b119493e3fdbb0b775745b65945fcbc0cb",
+      "git_blob_sha1": "64a1fbc8ab11a8859bb34971c76a366fb3400c5f"
+    },
+    {
+      "repository": "SteamDeckHomebrew/decky-plugin-template",
+      "revision": "90d0780e882a17f5714fc6de044c645f22608290",
+      "path": "rollup.config.js",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-template/90d0780e882a17f5714fc6de044c645f22608290/rollup.config.js",
+      "bytes": 113,
+      "sha256": "a8ea2d0ec4aa029bb2e674989e15645f93c550840ed2ebcd9ffc724dc82d5acb",
+      "git_blob_sha1": "17e71a775a097beff78e587507f289fe6e9ed9b3"
+    },
+    {
+      "repository": "SteamDeckHomebrew/decky-plugin-template",
+      "revision": "90d0780e882a17f5714fc6de044c645f22608290",
+      "path": "src/index.tsx",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-template/90d0780e882a17f5714fc6de044c645f22608290/src/index.tsx",
+      "bytes": 3309,
+      "sha256": "871417c6a0b9cc589f5d030b85aa87c2c36f33de61361d32f6c227b6dfbc8fa2",
+      "git_blob_sha1": "16cd6cbc395424056a5a01cb2b7006271f02af78"
+    },
+    {
+      "repository": "SteamDeckHomebrew/rollup-preset-decky",
+      "revision": "5e861bcdfd6072bd98c4b9e403f547b35c31502e",
+      "path": "src/index.js",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/rollup-preset-decky/5e861bcdfd6072bd98c4b9e403f547b35c31502e/src/index.js",
+      "bytes": 2845,
+      "sha256": "a19975c11860d3fff15e0ff5213ce84c9db0fae350ddab79fa0973d06e2655a2",
+      "git_blob_sha1": "602c6b3863af8fa7b5cebbb3cc2f5636cf8243ab"
+    },
+    {
+      "repository": "SteamDeckHomebrew/wiki",
+      "revision": "ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4",
+      "path": "plugin-dev/backend-frontend-communication.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/wiki/ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4/plugin-dev/backend-frontend-communication.md",
+      "bytes": 82683,
+      "sha256": "a9e3e2e812a334bfb6ae0e8f0f07ed4e1242ca1032eae480d16b5ebab81f9264",
+      "git_blob_sha1": "9dafc3edbcbe2c533890bd00dd1629c4a67afb4a"
+    },
+    {
+      "repository": "SteamDeckHomebrew/wiki",
+      "revision": "ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4",
+      "path": "plugin-dev/env-vars.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/wiki/ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4/plugin-dev/env-vars.md",
+      "bytes": 3837,
+      "sha256": "1c40634bf8cff0950e13f7c07d19a040085a8f0b7adf0254d6cf5bc0d668e2e9",
+      "git_blob_sha1": "302a4f74422c36da75a78d33fbbd6a095c8041de"
+    },
+    {
+      "repository": "SteamDeckHomebrew/wiki",
+      "revision": "ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4",
+      "path": "plugin-dev/getting-started.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/wiki/ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4/plugin-dev/getting-started.md",
+      "bytes": 8543,
+      "sha256": "8055933b827dbd33f2862f3e411bb08881e523fbff2a41b9ff8ac3007b65ca06",
+      "git_blob_sha1": "6bcffc401c919fca7a72dd5079aca7243ade0b19"
+    },
+    {
+      "repository": "SteamDeckHomebrew/wiki",
+      "revision": "ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4",
+      "path": "plugin-dev/new-api-migration.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/wiki/ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4/plugin-dev/new-api-migration.md",
+      "bytes": 3984,
+      "sha256": "5698050495b18d67084e6f255d1b567d22cb9410e60316b71e4321f8d6c902d6",
+      "git_blob_sha1": "e3bc05282490c25f7e297a9046d196ed1ca65fbf"
+    },
+    {
+      "repository": "SteamDeckHomebrew/wiki",
+      "revision": "ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4",
+      "path": "user-guide/plugin-safety.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/wiki/ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4/user-guide/plugin-safety.md",
+      "bytes": 5086,
+      "sha256": "12ee2a739a408fc539236f9c8fdb98abf1c7b87e1951cd0481fe4a73875d47a9",
+      "git_blob_sha1": "3ad378fdedd4eb47b6d93c80cf73d6e4e4f14dea"
+    },
+    {
+      "repository": "SteamDeckHomebrew/wiki",
+      "revision": "ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4",
+      "path": "user-guide/plugin-store.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/wiki/ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4/user-guide/plugin-store.md",
+      "bytes": 2076,
+      "sha256": "94943ae41336b0035fc8b3a05e61da833a9b45dc5f96e0676d11af19d5a34477",
+      "git_blob_sha1": "f4fc5a2f29a95272683d3fbb010ab1edc023bc67"
+    },
+    {
+      "repository": "SteamDeckHomebrew/wiki",
+      "revision": "ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4",
+      "path": "user-guide/settings.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/wiki/ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4/user-guide/settings.md",
+      "bytes": 2127,
+      "sha256": "c50eb3706c929c9fd7ed592c9a17e8727efde00e934061c393ad4b608750d847",
+      "git_blob_sha1": "3a14f3d409e70f2aeef3d1ba1dc828ed3dadf39c"
+    }
+  ],
+  "notes": [
+    "No code was executed from these sources.",
+    "Store policy eligibility is separate from technical packaging conventions.",
+    "Default refs freshly checked with git ls-remote; retained source URLs are immutable."
+  ]
+}

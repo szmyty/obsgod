@@ -1,5 +1,25 @@
 # Current work
 
+## Current question: align the Steam Deck product with normal Decky conventions
+
+The owner narrowed the shipping focus to Steam Deck/SteamOS and asked whether
+the plugin follows Decky's recommended approach before specifying new batches.
+[The live-source comparison](docs/decky-conventions-review.md) confirms the modern
+SDK/Python/native-bin runtime already matches the template. The main differences
+are nested/custom build, mandatory paired Desktop onboarding/updater and shared
+XDG state rather than Decky-only storage. Proposed next batch is a conventional
+plugin package with complete first-run setup, Decky-managed replacement and a
+safe storage compatibility plan. This is a recommendation, not an implemented
+rewrite or approval of every proposed change. Retain generic CLI capability as
+optional; it is not the primary Steam Deck installation method.
+
+Current official template90d0780/wiki ec9d4cf/loader ffd103b9/preset5e861bc pins
+and source hashes are saved. Actual Syncthing example confirms Flatpak dependency
+plus bundled native helper is normal. No runtime change, final matrix, Store
+submission, migration or external contact occurred. Wait for the owner's next
+batches/logo direction; any selected source-changing cleanup precedes final
+qualification. Engineering source4ac and previous receipts remain unchanged.
+
 ## Engineering pass complete; next owner step is the new logo
 
 Draft #75 now contains the nondeferred engineering, after #73/#74. Exact source
