@@ -51,6 +51,10 @@ def _checked(path, directory=True, private=False, missing=False):
             raise OSError(ERROR)
         if info.st_uid not in (0, os.getuid()):
             raise OSError(ERROR)
+        if stat.S_ISDIR(info.st_mode) and stat.S_IMODE(info.st_mode) & 0o022 and not info.st_mode & stat.S_ISVTX:
+            # A private leaf is insufficient: another user can rename it via
+            # a non-sticky writable ancestor and split the controller inode.
+            raise OSError(ERROR)
     info = path.lstat()
     if info.st_uid != os.getuid() or (directory and not stat.S_ISDIR(info.st_mode)):
         raise OSError(ERROR)

@@ -94,6 +94,22 @@ def _error_code(output):
     return "flatpak_failed"
 
 
+def _safe_directories(path, missing=False):
+    """A private leaf is unsafe when someone else can rename its ancestors."""
+    if not path.is_absolute() or ".." in path.parts:
+        raise OSError()
+    for component in tuple(reversed(path.parents)) + (path,):
+        try:
+            info = component.lstat()
+        except FileNotFoundError:
+            if missing:
+                return
+            raise
+        if (not stat.S_ISDIR(info.st_mode) or info.st_uid not in (0, os.geteuid()) or
+                (info.st_mode & 0o022 and not info.st_mode & stat.S_ISVTX)):
+            raise OSError()
+
+
 class DependencySetup:
     def __init__(self, storage_dir, environment, control_lock=None, preflight=None):
         self.directory = Path(storage_dir) / "dependencies"
@@ -134,17 +150,16 @@ class DependencySetup:
         return self.running
 
     def _initialize(self):
-        if self._initialized:
-            return
         try:
-            if not self.directory.is_absolute():
-                raise OSError()
-            # The containing jobs root is supplied/validated by storage.py.
-            self.directory.mkdir(mode=0o700, parents=True, exist_ok=True)
+            _safe_directories(self.directory, missing=not self._initialized)
+            if not self._initialized:
+                self.directory.mkdir(mode=0o700, parents=True, exist_ok=True)
+                _safe_directories(self.directory)
             info = self.directory.lstat()
             if not stat.S_ISDIR(info.st_mode) or info.st_uid != os.geteuid() or info.st_mode & 0o077:
                 raise OSError()
-            self._read_receipt()
+            if not self._initialized:
+                self._read_receipt()
             self._initialized = True
         except (OSError, ValueError, TypeError):
             raise SetupError("storage") from None
@@ -253,11 +268,13 @@ class DependencySetup:
             return
         path = self.control_lock
         try:
-            if not path.is_absolute() or any(parent.is_symlink() for parent in (path.parent,) + tuple(path.parent.parents)):
+            if not path.is_absolute():
                 raise OSError()
+            _safe_directories(path.parent, missing=True)
             # A new user has no managed state yet. Initialize only its private
             # namespace; never change permissions on existing shared state.
             path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+            _safe_directories(path.parent)
             parent = path.parent.lstat()
             if (not path.is_absolute() or not stat.S_ISDIR(parent.st_mode) or
                     parent.st_uid != os.geteuid() or parent.st_mode & 0o077):

@@ -148,6 +148,31 @@ print(json.dumps({"plugin_bundle":True,"backend_imported":True,"legacy_installer
             ENTRY.output_directory(link / "new")
         self.assertFalse((output / "new").exists())
 
+    def test_shared_writable_ancestors_cannot_redirect_reserved_output(self):
+        shared = self.work / "shared"
+        shared.mkdir()
+        shared.chmod(0o777)
+        private = shared / "private"
+        private.mkdir(mode=0o700)
+        for output in (shared / "candidate", private / "candidate"):
+            with self.subTest(output=output), self.assertRaisesRegex(ValueError, "Unprotected"):
+                ENTRY.output_directory(output)
+            self.assertFalse(output.exists())
+        uid = ROOT.stat().st_uid if os.getuid() == 0 else os.getuid()
+        if os.getuid() == 0:
+            for path in (self.work, shared, private):
+                os.chown(path, uid, ROOT.stat().st_gid)
+        with self.assertRaisesRegex(FRONTEND.FrontendError, "unprotected"):
+            FRONTEND.validate_output(ROOT, uid, private / "frontend")
+        # A trusted sticky parent prevents other UIDs replacing our entry.
+        # Primary output fixtures run under the current test UID.
+        if os.getuid() == 0:
+            os.chown(self.work, 0, 0)
+            os.chown(shared, 0, 0)
+        shared.chmod(0o1777)
+        ENTRY.output_directory(shared / "protected-candidate")
+        self.assertTrue((shared / "protected-candidate").is_dir())
+
     def test_bridge_keeps_legacy_layout_and_prefers_plugin_binary(self):
         root = self.work / "layout"
         root.mkdir()

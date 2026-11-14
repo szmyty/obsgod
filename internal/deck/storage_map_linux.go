@@ -60,6 +60,11 @@ func deckyOwnedPath(path string, directory, private, missing bool) error {
 		if !ok || int(owner.Uid) != os.Getuid() && owner.Uid != 0 {
 			return errDeckyStorageMap
 		}
+		if info.IsDir() && info.Mode().Perm()&0022 != 0 && info.Mode()&os.ModeSticky == 0 {
+			// A private child beneath a renameable ancestor can be replaced with
+			// a new controller lock inode. Trusted sticky /tmp remains valid.
+			return errDeckyStorageMap
+		}
 		final := index == len(parts)-1
 		if !final && !info.IsDir() {
 			return errDeckyStorageMap

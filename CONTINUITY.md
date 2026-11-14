@@ -29,6 +29,14 @@ qualification or actual Steam Deck acceptance. No issue is closed and no product
 release, migration or deployment occurs. #79 key-entry UI and #80/#81 selected
 branding adoption remain subsequent implementation, not part of this batch.
 
+Initial clean source480c477 produced two identical canonical ZIPs and passed
+pinned official CLI assembly, unpacked actual-Go/browser-setup smoke and the
+packaged panel checks. Independent review then reproduced unsafe writable
+ancestors for build output and managed state/control locks. The bounded repair
+rejects those ancestors in Python/Go/job/build paths, including legacy Go Lock
+without a map, with sticky-positive and held-lock rename/recreate regressions.
+Final corrected-source builds/checks must supersede480's artifact evidence.
+
 ## Active roadmap: implementation first, current Deck tests, then migration
 
 The owner locked **01 / aurora** and retained earlier artwork as concepts. The

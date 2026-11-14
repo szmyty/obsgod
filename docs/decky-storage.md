@@ -28,6 +28,11 @@ current UID/home. It does not override them. Both Python and Go reject altered
 paths, unsafe ownership/modes, symlinks, malformed/oversized maps and mismatched
 contexts. The original XDG data/cache roots remain in child environments so
 Flatpak sees the same player installation; neither is replaced with plugin data.
+Existing directory ancestors must also resist replacement by other users:
+group/other-writable nonsticky parents are refused, while trusted sticky
+directories such as `/tmp` remain supported. The Linux control lock applies this
+check even for older CLI clients without a storage map, preventing two lock
+inodes after a state-directory rename.
 
 ## Repeat, repair and rollback
 

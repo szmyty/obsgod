@@ -37,7 +37,9 @@ python3 scripts/package-decky.py --version 0.1.0-deck.9 \
 Create the existing parent directory first if necessary. The output argument is
 an absolute **new directory**, under a directory owned by the build user. The
 builder refuses existing output paths, links and traversal; it never removes an
-old candidate. The build compiles into private temporary directories without
+old candidate. Output ancestors must be owned by the build user or root and
+protected against replacement by other users; writable shared ancestors require
+the sticky bit (as on `/tmp`). The build compiles into private temporary directories without
 replacing the checkout's frontend output. `--allow-dirty` is only for unqualified
 development builds and marks the manifest/receipt as dirty. A different source
 revision cannot be supplied to relabel the checkout.

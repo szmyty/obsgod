@@ -13,6 +13,44 @@ import (
 	"time"
 )
 
+func TestLegacyControlLockRequiresProtectedAncestorsWithoutStorageMap(t *testing.T) {
+	t.Setenv("OBSGOD_DECKY_STORAGE_MAP", "")
+	for _, sticky := range []bool{false, true} {
+		t.Run(map[bool]string{false: "unsafe", true: "sticky"}[sticky], func(t *testing.T) {
+			parent := filepath.Join(t.TempDir(), "public-parent")
+			if err := os.Mkdir(parent, 0700); err != nil {
+				t.Fatal(err)
+			}
+			mode := os.FileMode(0777)
+			if sticky {
+				mode |= os.ModeSticky
+			}
+			if err := os.Chmod(parent, mode); err != nil {
+				t.Fatal(err)
+			}
+			paths := testPaths(t)
+			paths.State = filepath.Join(parent, "managed")
+			ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+			defer cancel()
+			release, err := Lock(ctx, paths)
+			if !sticky {
+				if err == nil {
+					release()
+					t.Fatal("legacy command acquired a control namespace under an unsafe parent")
+				}
+				if _, err := os.Lstat(paths.State); !os.IsNotExist(err) {
+					t.Fatal("unsafe legacy state directory was created")
+				}
+				return
+			}
+			if err != nil {
+				t.Fatal("trusted sticky parent was refused", err)
+			}
+			release()
+		})
+	}
+}
+
 func TestUserPathsRespectXDGAndRejectRelativeRoots(t *testing.T) {
 	home := t.TempDir()
 	t.Setenv("HOME", home)
@@ -187,5 +225,88 @@ func TestDeckyStorageMapDoesNotPermitRootBackend(t *testing.T) {
 	t.Setenv(deckyStorageMapEnv, filepath.Join(os.Getenv("HOME"), "map.json"))
 	if _, err := UserPaths(); err == nil {
 		t.Fatal("root backend accepted a native Decky storage map")
+	}
+}
+
+func TestDeckyStorageRejectsRenameableAncestorBeforeSecondController(t *testing.T) {
+	legacy, path, mapping := deckyPathsFixture(t)
+	ancestor := filepath.Join(mapping.Home, "shared-ancestor")
+	private := filepath.Join(ancestor, "private-grandchild")
+	legacy.State = filepath.Join(private, "obsgod")
+	if err := os.MkdirAll(legacy.State, 0700); err != nil {
+		t.Fatal(err)
+	}
+	mapping.Shared.State = legacy.State
+	writeDeckyMap(t, path, mapping)
+	t.Setenv("XDG_STATE_HOME", private)
+	t.Setenv(deckyStorageMapEnv, path)
+	if _, err := UserPaths(); err != nil {
+		t.Fatal("private baseline rejected", err)
+	}
+	release, err := Lock(context.Background(), legacy)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer release()
+	original, err := os.Stat(filepath.Join(legacy.State, "control.lock"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err = os.Chmod(ancestor, 0777); err != nil {
+		t.Fatal(err)
+	}
+	if _, err = UserPaths(); err == nil {
+		t.Fatal("private grandchild concealed a non-sticky writable ancestor")
+	}
+	moved := filepath.Join(private, "previous-obsgod")
+	if err = os.Rename(legacy.State, moved); err != nil {
+		t.Fatal(err)
+	}
+	if err = os.Mkdir(legacy.State, 0700); err != nil {
+		t.Fatal(err)
+	}
+	if _, err = UserPaths(); err == nil {
+		t.Fatal("replacement namespace accepted while old controller lease remains held")
+	}
+	if _, err = os.Stat(filepath.Join(legacy.State, "control.lock")); !os.IsNotExist(err) {
+		t.Fatal("second controller lock was created", err)
+	}
+	retained, err := os.Stat(filepath.Join(moved, "control.lock"))
+	if err != nil || !os.SameFile(original, retained) {
+		t.Fatal("original controller inode changed", err)
+	}
+}
+
+func TestDeckyStorageSupportsTrustedStickyAncestor(t *testing.T) {
+	legacy, path, mapping := deckyPathsFixture(t)
+	ancestor := filepath.Join(mapping.Home, "sticky-shared")
+	private := filepath.Join(ancestor, "private-grandchild")
+	legacy.State = filepath.Join(private, "obsgod")
+	if err := os.MkdirAll(legacy.State, 0700); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Chmod(ancestor, os.ModeSticky|0777); err != nil {
+		t.Fatal(err)
+	}
+	mapping.Shared.State = legacy.State
+	writeDeckyMap(t, path, mapping)
+	t.Setenv("XDG_STATE_HOME", private)
+	t.Setenv(deckyStorageMapEnv, path)
+	native, err := UserPaths()
+	if err != nil || native.State != legacy.State {
+		t.Fatal("legitimate sticky-root XDG override rejected", err)
+	}
+	release, err := Lock(context.Background(), legacy)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer release()
+	ctx, cancel := context.WithTimeout(context.Background(), 25*time.Millisecond)
+	defer cancel()
+	if unlock, err := Lock(ctx, native); !errors.Is(err, context.DeadlineExceeded) {
+		if unlock != nil {
+			unlock()
+		}
+		t.Fatal("sticky-root contexts did not retain one controller inode", err)
 	}
 }

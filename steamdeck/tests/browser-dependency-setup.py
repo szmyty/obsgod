@@ -5,6 +5,7 @@ from functools import partial
 from http.server import ThreadingHTTPServer
 import json
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import tempfile
@@ -101,7 +102,7 @@ def main():
                 page.get_by_role("button", name="Refresh status", exact=True).click()
                 check.click()
                 expect(start).to_be_disabled()
-                stop = page.get_by_role("button", name="Stop streaming", exact=True)
+                stop = page.get_by_role("button", name=re.compile(r"^Stop streaming"))
                 expect(stop).to_be_enabled()
                 stop.click()
                 page.wait_for_function("!fixture.active")

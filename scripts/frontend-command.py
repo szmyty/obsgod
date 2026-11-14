@@ -46,6 +46,8 @@ def validate_output(root, uid, output=None):
             info = ancestor.lstat()
             if not stat.S_ISDIR(info.st_mode) or stat.S_ISLNK(info.st_mode):
                 raise FrontendError(f"Refusing unsafe frontend output ancestor: {ancestor}")
+            if info.st_uid not in {0, uid} or info.st_mode & 0o022 and not info.st_mode & stat.S_ISVTX:
+                raise FrontendError(f"Refusing unprotected or foreign frontend output ancestor: {ancestor}")
         info = parent.stat()
         if info.st_uid != uid or stat.S_IMODE(info.st_mode) & 0o077:
             raise FrontendError("Frontend output override requires a private checkout-owner parent directory")

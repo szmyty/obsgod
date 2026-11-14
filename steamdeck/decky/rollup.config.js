@@ -19,6 +19,7 @@ if(process.env.OBSGOD_FRONTEND_OUT!==undefined){
   for(let path=parent;;path=dirname(path)){
     const info=lstatSync(path);
     if(!info.isDirectory()||info.isSymbolicLink())throw new Error("Unsafe frontend output ancestor");
+    if(![0,uid].includes(info.uid)||((info.mode&0o022)&&!(info.mode&0o1000)))throw new Error("Unprotected or foreign frontend output ancestor");
     if(path===parse(path).root)break;
   }
 }

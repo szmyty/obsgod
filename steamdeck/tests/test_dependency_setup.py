@@ -472,6 +472,38 @@ time.sleep(30)
         self.assertEqual(result["reason"]["code"], "storage")
         self.assertNotIn("secret-key", json.dumps(result))
 
+    async def test_private_leaves_under_unsafe_writable_ancestors_refuse_before_children(self):
+        public = self.root / "renameable"
+        public.mkdir(mode=0o777)
+        public.chmod(0o777)
+        private = public / "private"
+        private.mkdir(mode=0o700)
+        for scope in ("jobs", "control"):
+            with self.subTest(scope=scope):
+                jobs = private / "jobs" if scope == "jobs" else self.root / "safe-jobs"
+                control = private / "state/control.lock" if scope == "control" else None
+                job = setup.DependencySetup(jobs, self.env, control_lock=control)
+                self.jobs.append(job)
+                result = await job.start(True)
+                self.assertEqual(result["reason"]["code"], "storage")
+                self.assertFalse(result["can_install"])
+                self.assertEqual(self.commands(), [])
+        self.assertEqual(private.stat().st_mode & 0o777, 0o700)
+        self.assertFalse((private / "state").exists())
+
+    async def test_trusted_sticky_ancestors_allow_private_job_and_control_namespaces(self):
+        public = self.root / "sticky"
+        public.mkdir(mode=0o1777)
+        public.chmod(0o1777)
+        private = public / "private"
+        private.mkdir(mode=0o700)
+        job = setup.DependencySetup(private / "jobs", self.env, control_lock=private / "state/control.lock")
+        self.jobs.append(job)
+        await job.start(True)
+        result = await self.finished(job)
+        self.assertTrue(result["ready"])
+        self.assertEqual(public.stat().st_mode & 0o7777, 0o1777)
+
 
 @unittest.skipUnless(os.geteuid() == 0, "Only needed when the outer test runner is root.")
 class RootRunner(unittest.TestCase):

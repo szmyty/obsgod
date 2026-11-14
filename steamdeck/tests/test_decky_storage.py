@@ -1,5 +1,6 @@
 """Retained shared-store migration, native Decky paths and path safety."""
 import importlib.util
+import fcntl
 import json
 import os
 from pathlib import Path
@@ -200,6 +201,43 @@ class NativeStorage(unittest.TestCase):
         with self.assertRaises(OSError):
             S.context(self.plugin, {**self.provided, "DECKY_PLUGIN_RUNTIME_DIR": str(candidate)}, self.env)
         self.assertFalse(candidate.exists())
+
+    def test_private_state_below_nonsticky_writable_ancestor_cannot_fork_controller(self):
+        ancestor = self.root / "shared-ancestor"
+        private = ancestor / "private-grandchild"
+        private.mkdir(parents=True, mode=0o700)
+        ancestor.chmod(0o700)
+        state = private / "obsgod"
+        state.mkdir(mode=0o700)
+        lock = state / "control.lock"
+        lock.write_bytes(b"held-original-controller")
+        env = {**self.env, "XDG_STATE_HOME": str(private)}
+        S.context(self.plugin, self.provided, env)
+        with lock.open("r+b") as held:
+            fcntl.flock(held, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            original_inode = os.fstat(held.fileno()).st_ino
+            ancestor.chmod(0o777)
+            with self.assertRaises(OSError):
+                S.context(self.plugin, self.provided, env)
+            moved = private / "previous-obsgod"
+            state.rename(moved)
+            state.mkdir(mode=0o700)
+            with self.assertRaises(OSError):
+                S.child_environment(self.plugin, self.provided, env)
+            self.assertFalse((state / "control.lock").exists())
+            self.assertEqual((moved / "control.lock").stat().st_ino, original_inode)
+            self.assertEqual(os.fstat(held.fileno()).st_ino, original_inode)
+
+    def test_sticky_owned_ancestor_supports_legitimate_external_xdg_state(self):
+        ancestor = self.root / "sticky-shared"
+        private = ancestor / "private-grandchild"
+        private.mkdir(parents=True, mode=0o700)
+        ancestor.chmod(0o1777)
+        env = {**self.env, "XDG_STATE_HOME": str(private)}
+        native = S.context(self.plugin, self.provided, env)
+        self.assertEqual(native["shared_state"], str(private / "obsgod"))
+        self.assertEqual(stat.S_IMODE(ancestor.stat().st_mode), 0o1777)
+        self.assertEqual(S.context(self.plugin, self.provided, env), native)
 
 
 if __name__ == "__main__":

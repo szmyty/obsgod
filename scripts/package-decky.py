@@ -53,6 +53,9 @@ def output_directory(path):
         info = ancestor.lstat()
         if not stat.S_ISDIR(info.st_mode) or stat.S_ISLNK(info.st_mode):
             raise ValueError("Unsafe output ancestor: " + str(ancestor))
+        if (info.st_uid not in {0, os.getuid()}
+                or info.st_mode & 0o022 and not info.st_mode & stat.S_ISVTX):
+            raise ValueError("Unprotected or foreign output ancestor: " + str(ancestor))
     if path.parent.stat().st_uid != os.getuid():
         raise ValueError("Output parent must belong to the build user")
     path.mkdir(mode=0o700)
