@@ -3,8 +3,9 @@
 Audit baseline: **12ef52f9d22a7c1101f8743094325f66e3948270**,
 `szmyty/obsgod`, 2026-11-14 UTC. Parent: [#84](https://github.com/szmyty/obsgod/issues/84).
 
-**Current status: the owner authorized runtime stage #96–#100 and the open PR
-merges. Other stages remain proposed/separately scoped.** The original planning
+**Current status: runtime stage #96–#100 is implemented through merged #106/#107,
+with [exact-source qualification](../docs/runtime-correctness-checkpoint.md).
+The open source stack was merged. Other stages remain proposed/separately scoped.** The original planning
 checkpoint below is retained as history; see the
 [runtime contract](../docs/runtime-correctness.md) for the implemented stage.
 

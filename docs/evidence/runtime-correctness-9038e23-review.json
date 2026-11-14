@@ -1,0 +1,268 @@
+{
+  "archive": "/workspace/.obsgod-tools/runtime-correctness-20261114/public-evidence.zip",
+  "archive_bytes": 953242,
+  "archive_sha256": "fd07c055a61b2f1a788fedb5277f1b3c7413544bb66f77c61e1928548563af3d",
+  "blocking_findings": [],
+  "expected_archive_sha256": "fd07c055a61b2f1a788fedb5277f1b3c7413544bb66f77c61e1928548563af3d",
+  "integrity": {
+    "act_receipt_original_public_log_bindings": [
+      {
+        "private_original_log_hash_matches": true,
+        "public_log_hash_matches": true,
+        "receipt": "act/receipts/20261114T231345Z-lint.json",
+        "result": "passed",
+        "revision": "9038e23e1a7bfe79c0a5731546f1d3e1a1a74e41"
+      },
+      {
+        "private_original_log_hash_matches": true,
+        "public_log_hash_matches": true,
+        "receipt": "act/receipts/20261114T231436Z-build.json",
+        "result": "passed",
+        "revision": "9038e23e1a7bfe79c0a5731546f1d3e1a1a74e41"
+      },
+      {
+        "private_original_log_hash_matches": true,
+        "public_log_hash_matches": true,
+        "receipt": "act/receipts/20261114T231518Z-coverage.json",
+        "result": "passed",
+        "revision": "9038e23e1a7bfe79c0a5731546f1d3e1a1a74e41"
+      },
+      {
+        "private_original_log_hash_matches": true,
+        "public_log_hash_matches": true,
+        "receipt": "act/receipts/20261114T231609Z-snapshot.json",
+        "result": "passed",
+        "revision": "9038e23e1a7bfe79c0a5731546f1d3e1a1a74e41"
+      },
+      {
+        "private_original_log_hash_matches": true,
+        "public_log_hash_matches": true,
+        "receipt": "act/receipts/20261114T231739Z-docs.json",
+        "result": "passed",
+        "revision": "9038e23e1a7bfe79c0a5731546f1d3e1a1a74e41"
+      },
+      {
+        "private_original_log_hash_matches": true,
+        "public_log_hash_matches": true,
+        "receipt": "act/receipts/20261114T231756Z-candidate.json",
+        "result": "passed",
+        "revision": "9038e23e1a7bfe79c0a5731546f1d3e1a1a74e41"
+      },
+      {
+        "private_original_log_hash_matches": true,
+        "public_log_hash_matches": true,
+        "receipt": "historical/4b3e0bf/receipts/20261114T224732Z-lint.json",
+        "result": "passed",
+        "revision": "4b3e0bf88411289178b9e6462bf2ad2fc8da8ce9"
+      },
+      {
+        "private_original_log_hash_matches": true,
+        "public_log_hash_matches": true,
+        "receipt": "historical/4b3e0bf/receipts/20261114T224818Z-build.json",
+        "result": "passed",
+        "revision": "4b3e0bf88411289178b9e6462bf2ad2fc8da8ce9"
+      },
+      {
+        "private_original_log_hash_matches": true,
+        "public_log_hash_matches": true,
+        "receipt": "historical/4b3e0bf/receipts/20261114T224858Z-coverage.json",
+        "result": "passed",
+        "revision": "4b3e0bf88411289178b9e6462bf2ad2fc8da8ce9"
+      },
+      {
+        "private_original_log_hash_matches": true,
+        "public_log_hash_matches": true,
+        "receipt": "historical/4b3e0bf/receipts/20261114T224950Z-snapshot.json",
+        "result": "passed",
+        "revision": "4b3e0bf88411289178b9e6462bf2ad2fc8da8ce9"
+      },
+      {
+        "private_original_log_hash_matches": true,
+        "public_log_hash_matches": true,
+        "receipt": "historical/4b3e0bf/receipts/20261114T225341Z-docs.json",
+        "result": "passed",
+        "revision": "4b3e0bf88411289178b9e6462bf2ad2fc8da8ce9"
+      },
+      {
+        "private_original_log_hash_matches": true,
+        "public_log_hash_matches": true,
+        "receipt": "historical/4b3e0bf/receipts/20261114T225409Z-candidate.json",
+        "result": "failed",
+        "revision": "4b3e0bf88411289178b9e6462bf2ad2fc8da8ce9"
+      }
+    ],
+    "archive_hash_matches": true,
+    "archive_members": 214,
+    "fixture_tree_members": [],
+    "index_public_original_hash_size_mismatches": [],
+    "indexed_members_excluding_index": 213,
+    "native_distinct_public_hashes": 15,
+    "native_original_public_hash_mismatches": [],
+    "native_proof_count": 18,
+    "nonregular_entries": [],
+    "qualified_source_files": 521,
+    "qualified_source_hash_mismatches": [],
+    "redacted_members": 10,
+    "unindexed_members": [],
+    "unique_members": 214,
+    "unsafe_names": [],
+    "working_documentation_changes_verified_via_qualified_git_blob": [
+      "CONTINUITY.md",
+      "ROADMAP.md",
+      "audits/final-audit-2026-11-14.md",
+      "docs/implementation-roadmap.md"
+    ]
+  },
+  "nonblocking_notes": [
+    "Native index explicitly records18JSONfiles and15distinct digests, including duplicate summary representations and the expected silence-rejection negative control; no18independent-run claim.",
+    "CLI supplemental records13passes and optional Fish syntax unavailable; all required checks pass. Transport3and upgrades4checks pass.",
+    "Ten public ACTlog members are mask-redacted. The12original receipt hashes intentionally bind privately retained original bytes; INDEX provides distinct public hashes, all verified.",
+    "Old4b native candidate failure and original direct-argv packaged harness failure remain explicit historical failures.",
+    "Current source is qualified9038e23. Four later working changes are documentation-only and verified against original9038Gitblobs; they do not require or imply a new runtime build.",
+    "Physical Deck/provider/native non-Linux/hosted/review/adoption and publication remain unrun or unavailable as stated."
+  ],
+  "privacy": {
+    "actions_mask_values_checked": 10,
+    "actions_mask_values_remaining_raw_or_decoded": 0,
+    "candidate_disposition": "context/criteria-review.json authorization value is prose describing owner-authorized scope, not a credential.",
+    "credential_pattern_hits": 0,
+    "current_fixture_secret_source_files": 3,
+    "current_fixture_secret_values_checked": 34,
+    "current_fixture_secret_values_remaining_raw_or_decoded": 0,
+    "json_files_decoded": 116,
+    "json_log_records_decoded": 15021,
+    "limit": "Known-value and pattern scanning plus decoded content review apply to these exact bytes; they do not establish that arbitrary future third-party logs are safe.",
+    "patterns_reviewed": [
+      "GitHub token shapes",
+      "private key PEM",
+      "URL userinfo including websocket/RTMP",
+      "Authorization Bearer/token",
+      "AWS key shape"
+    ],
+    "private_fixture_home_work_source_trees_included": false,
+    "sensitive_exact_field_candidates": 1
+  },
+  "qualification": {
+    "cache_restoration": [
+      {
+        "attested_entries": 3350,
+        "attested_manifest_sha256": "8091bf60ba31c8a8256ad1ea30394f8fe6cb4bc0ee09e33ff1840ea331f71c60",
+        "cache": "/home/agent/.cache/pnpm",
+        "current_directory_present": true,
+        "current_path_not_symlink": true,
+        "fullfile_link_hash_restoration_attested": true,
+        "temporary_location_absent": true
+      },
+      {
+        "attested_entries": 10333,
+        "attested_manifest_sha256": "9dc874ddcd7f3c695f1f7bc2df51e5f8ef27bf982c563e415b6babf7c47dd95f",
+        "cache": "/home/agent/.cache/go-build",
+        "current_directory_present": true,
+        "current_path_not_symlink": true,
+        "fullfile_link_hash_restoration_attested": true,
+        "temporary_location_absent": true
+      },
+      {
+        "attested_entries": 7,
+        "attested_manifest_sha256": "d702e1fd4ca114ade308d7b5ea9770993fca79568336878802ecee65f639d034",
+        "cache": "/home/agent/.cache/actcache",
+        "current_directory_present": true,
+        "current_path_not_symlink": true,
+        "fullfile_link_hash_restoration_attested": true,
+        "temporary_location_absent": true
+      }
+    ],
+    "current20_matrix_fields_passed": true,
+    "current_evidence_errors": [],
+    "current_local_act": {
+      "passed": 6
+    },
+    "current_overall": "partial",
+    "final_qualification": {
+      "device_provider": "unrun under86",
+      "initial_4b3e0bf": "5passed1failed retained; corrected by107, not relabeled",
+      "matrix": "6/6 passed",
+      "qualified_revision": "9038e23e1a7bfe79c0a5731546f1d3e1a1a74e41",
+      "report": "/workspace/.obsgod-tools/runtime-correctness-20261114/act-report/report.json",
+      "report_sha256": "0cdd5ea7cfdf12ad0c842ec6270a87e2063b7cd3c39d0617ae9c358bdad54c67",
+      "supplemental": "cli/transport/upgrades passed at exact9038; source unchanged"
+    },
+    "frontend": {
+      "all_generated_files_owned_writable": true,
+      "checks": 6,
+      "log_mismatches": [],
+      "source_clean": true,
+      "uid": 1000,
+      "zero_exits": true
+    },
+    "historical4b_results": {
+      "failed": 1,
+      "passed": 5
+    },
+    "historical_failures_explicit": [
+      "First dirty integrated Go race: three fixtures omitted required outputPaused, then repaired and full rerun passed.",
+      "First complete ACT matrix at4b3e0bf: five passed, candidate failed local-test clip-game transition; bounded parent-owned capture repair merged#107, then all six rerun at new source.",
+      "Old outside-product packed harness expected direct Go argv; corrected exact guard/interpreter checks pass in both modes. Original failure retained."
+    ],
+    "official_cli_raw_zip_reproducible": false,
+    "primary_package_files": 33,
+    "primary_package_sha256": "8833c0a11db6bbc06f75dad931e9810e3513d491e904450774cf3edced766d33",
+    "remaining_limits": [
+      "Hosted billing-blocked jobs executed zero steps; not pass.",
+      "Real PR dependency comparison403 is unavailable; not pass.",
+      "Actual SteamOS/Decky/Flatpak/OBS33/Gamescope/AMD/controller/headset/provider and native non-Linux platforms remain unrun.",
+      "No release, deployment, migration, Store submission, spending or consumer adoption occurred.",
+      "The reviewed runtime source is9038e23; subsequent evidence-only commits are not relabeled as this qualified revision."
+    ],
+    "runtime_criteria": 20,
+    "supplemental": [
+      {
+        "log_mismatches": 0,
+        "logs_verified": 13,
+        "outcomes": {
+          "passed": 13,
+          "unavailable": 1
+        },
+        "phase": "cli",
+        "required_nonpasses": [],
+        "revision": "9038e23e1a7bfe79c0a5731546f1d3e1a1a74e41",
+        "source_before_after_equal": true,
+        "source_unchanged": true,
+        "status": "passed"
+      },
+      {
+        "log_mismatches": 0,
+        "logs_verified": 3,
+        "outcomes": {
+          "passed": 3
+        },
+        "phase": "transport",
+        "required_nonpasses": [],
+        "revision": "9038e23e1a7bfe79c0a5731546f1d3e1a1a74e41",
+        "source_before_after_equal": true,
+        "source_unchanged": true,
+        "status": "passed"
+      },
+      {
+        "log_mismatches": 0,
+        "logs_verified": 4,
+        "outcomes": {
+          "passed": 4
+        },
+        "phase": "upgrades",
+        "required_nonpasses": [],
+        "revision": "9038e23e1a7bfe79c0a5731546f1d3e1a1a74e41",
+        "source_before_after_equal": true,
+        "source_unchanged": true,
+        "status": "passed"
+      }
+    ]
+  },
+  "qualified_revision": "9038e23e1a7bfe79c0a5731546f1d3e1a1a74e41",
+  "qualified_tree": "47366b98531c97778976fe354ccdf7aa53a9bac6",
+  "result": "approved_for_reviewed_evidence_contents",
+  "reviewed_utc": "2026-11-14T23:35:18.420997+00:00",
+  "reviewer": "act_report_review",
+  "schema": "obsgod.runtime-correctness.public-evidence-review/v1",
+  "scope": "Independent read-only integrity, counts, raw/decodedJSON privacy and limits review of these exact evidence ZIP bytes. No test/ACT/Docker execution, product or GitHub writes. This approval is for evidence sharing and does not authorize a release or deployment."
+}

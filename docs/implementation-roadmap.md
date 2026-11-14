@@ -1,5 +1,12 @@
 # deckystream implementation and migration roadmap
 
+Current runtime checkpoint: **#96–#100** are implemented through merged
+#106/#107 and qualified at exact source **9038e23**. See the
+[20-criterion evidence and full local matrix](runtime-correctness-checkpoint.md).
+Other audit stages #101–#104, selected artwork/UI and final owner test/migration
+remain separate; this checkpoint does not replace their acceptance or the
+original 230 criteria/dependencies.
+
 Owner-directed plan, recorded 2026-11-14. Parent:
 [#46](https://github.com/szmyty/obsgod/issues/46). The owner selected
 **01 / aurora**, retained older artwork as concepts, and chose **deckystream**
