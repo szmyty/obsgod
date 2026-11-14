@@ -34,6 +34,7 @@ type videoFixture struct {
 	mu                         sync.Mutex
 	scene, profile, collection string
 	active, visible            bool
+	recording                  bool
 	recordMalformed            bool
 	scenes                     map[string]map[string]*videoItem
 	inputs                     map[string]*videoInput
@@ -117,7 +118,8 @@ func (f *videoFixture) handle(q fixtureRequest) map[string]any {
 		data["outputActive"] = false
 	case "GetRecordStatus":
 		if !f.recordMalformed {
-			data["outputActive"] = false
+			data["outputActive"] = f.recording
+			data["outputPaused"] = false
 		}
 	case "GetStreamStatus":
 		data["outputActive"] = f.active

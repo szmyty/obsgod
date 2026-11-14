@@ -1,5 +1,42 @@
 # Current work
 
+## Local-test integration follow-up implemented in #107
+
+The unchanged native game/OBS and idle-media fixtures now pass the previously
+failed clip path. The parent retains its initiating lease and drives the same
+guarded capture helper during the original bounded ten-second wait, using
+separate tick connections. Detached observers still acquire their short lease
+and yield. Fresh managed/output/recording checks gate each tick and final/deferred
+Stop, so ownership loss cannot fall through to unconditional cleanup.
+
+Focused race and independent review pass, including game/idle transition while
+holding the lease, detached-observer yield, malformed/stopped output, changed
+settings/ownership, cancellation and timer completion. Preserve the original
+4b3e0bf five-pass/one-fail matrix as historical evidence. Merge #107 after the
+integrated Go/cross-build checks, then build and qualify the new exact merged
+revision; no old receipt is promoted. Runtime issues remain open until that
+qualification is reconciled. No fixture assertions/timeouts were weakened.
+
+## Historical first qualification: local-test capture lease gap
+
+The seven requested PRs are merged into `master` at
+**4b3e0bf88411289178b9e6462bf2ad2fc8da8ce9**. Five local ACT jobs passed, but
+the candidate job failed the unchanged native game/OBS fixture: `clip-game`
+never selected the game scene during `TestRecording`. Native OBS/audio and
+app-scoped capture checks passed before that failure. Do not call this revision
+fully qualified or close #96–#100 yet.
+
+The initiating local-test command holds the shared control lease for the full
+ten-second clip; the corrected independent observer now properly yields. Repair
+this on **fix/local-clip-capture-lease** by reusing capture mutation under the
+initiating owner's lease during its bounded wait. Keep that lease rather than
+releasing it and risking finalization of a replacement recording. Independent
+observers still need their own short lease. Recheck managed ownership/output
+before every mutation and cleanup; preserve the unchanged native assertions and
+timeouts. Then review, merge the bounded repair and run the complete available
+matrix at the new exact merged source. Retain all first-attempt receipts and
+resource-assistance details. No release/deploy/migration/spending is authorized.
+
 ## Runtime source checkpoint in #106
 
 The five bounded runtime repairs are implemented on `feat/runtime-correctness`

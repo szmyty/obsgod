@@ -19,6 +19,13 @@ authorize changes after Stop, an ownership switch or a capture-mode change.
 The startup handshake is read-only: confirmed managed active output establishes
 observer readiness, while capture/frame health remains unknown until measured.
 
+The ten-second local test retains its initiating control lease through recording
+and finalization. During that bounded wait the parent drives game/idle capture
+through the same guarded mutation helper under its existing lease; the detached
+observer yields. Releasing the lease and later stopping an unidentifiable
+replacement recording would break output ownership. The unchanged native game
+fixture exposed this interaction during qualification and must pass the repair.
+
 Recording transitions and runtime snapshots require a canonical boolean
 `outputActive` from the raw OBS response. Public recording status also requires
 a canonical boolean `outputPaused`. Missing, null, wrongly typed or only

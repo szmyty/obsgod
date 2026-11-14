@@ -625,8 +625,7 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 	defer func() {
 		cleanup, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
-		_, _ = c.StopRecording(cleanup)
-		haltCaptureIfIdle(cleanup, c)
+		_, _ = stopTestRecording(cleanup, c)
 	}()
 	capCtx, cancel := context.WithTimeout(ctx, 12*time.Second)
 	if s.CaptureModeName() == "screen" {
@@ -653,10 +652,10 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 	_ = measureAudio(audioCtx, p, secret, time.Second, true)
 	audioCancel()
 	logEvent(p, "recording.running")
-	if e = wait(ctx, 10*time.Second); e != nil {
+	if e = waitTestCapture(ctx, p, c, s, secret, 10*time.Second); e != nil {
 		return Result{}, e
 	}
-	path, e := c.StopRecording(ctx)
+	path, e := stopTestRecording(ctx, c)
 	if e != nil {
 		return Result{}, e
 	}
@@ -668,6 +667,17 @@ func TestRecording(ctx context.Context, p Paths) (Result, error) {
 	}
 	logEvent(p, "recording.saved")
 	return Result{OK: true, Configured: true, Connected: true, State: "stopped", Message: "Local test saved; watch it in Desktop Mode to check picture, game audio and microphone before broadcasting", RecordingPath: path}, nil
+}
+
+func stopTestRecording(ctx context.Context, c *automation.Client) (string, error) {
+	if _, err := verifyManaged(ctx, c); err != nil {
+		return "", err
+	}
+	path, err := c.StopRecording(ctx)
+	if err == nil {
+		haltCaptureIfIdle(ctx, c)
+	}
+	return path, err
 }
 
 // OpenOBS is an explicit Desktop recovery action. It launches the isolated

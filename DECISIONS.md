@@ -26,6 +26,14 @@ docs and continuity when inaccurate. Code/merge alone cannot accept a proposal.
 The owner authorized these bounded correctness repairs and the existing PR
 merges. Capture changes now recheck current managed ownership/output under the
 shared control lease; microphone scene policy derives from saved mixer intent.
+
+Native qualification exposed the ten-second local test's existing long lease.
+That initiating command retains recording ownership and drives the same guarded
+capture helper while it waits; detached observers still yield. Short-lived tick
+connections preserve the finalizer's connection at timer expiry. Fresh managed
+ownership gates final/deferred Stop. This avoids releasing the lease and later
+stopping a replacement recording, without weakening the native fixture.
+
 Canonical raw recording flags prevent generated defaults from authorizing
 output changes. A lost SDK response boundary invalidates the owned API
 connection, including through workflow wrappers, without retrying mutations.
