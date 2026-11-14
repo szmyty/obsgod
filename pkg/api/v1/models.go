@@ -46,6 +46,13 @@ type RecordingState struct {
 	DurationMS float64 `json:"duration_ms"`
 }
 
+// ProfileInventory preserves OBS profile names and order without requiring
+// unrelated output/configuration observations. It does not select a profile.
+type ProfileInventory struct {
+	Current  string   `json:"current"`
+	Profiles []string `json:"profiles"`
+}
+
 // Snapshot is a sequential set of OBS observations, not an atomic transaction.
 // An error returns no snapshot: unknown output state never becomes idle.
 type Snapshot struct {
@@ -103,7 +110,7 @@ type Capabilities struct {
 }
 
 func Discover() Capabilities {
-	return Capabilities{SchemaVersion, "obsgod/v1", []string{"snapshot", "stream.start", "stream.stop", "recording.start", "recording.stop", "replay.start", "replay.stop", "replay.save", "virtual-camera.start", "virtual-camera.stop", "profile.select", "collection.select", "scene.select", "scene-items.list", "scene-item.enable", "service.configure-rtmp", "service.verify-rtmp", "workflow.apply"}, "unknown"}
+	return Capabilities{SchemaVersion, "obsgod/v1", []string{"snapshot", "stream.start", "stream.stop", "recording.start", "recording.stop", "replay.start", "replay.stop", "replay.save", "virtual-camera.start", "virtual-camera.stop", "profile.list", "profile.select", "collection.select", "scene.select", "scene-items.list", "scene-item.enable", "service.configure-rtmp", "service.verify-rtmp", "workflow.apply"}, "unknown"}
 }
 
 // Response is the JSON process boundary used by the api command family.

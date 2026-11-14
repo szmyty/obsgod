@@ -17,6 +17,38 @@ type SceneItemState struct {
 	Enabled bool
 }
 
+// ProfileInventory is a narrow read of OBS profiles. It does not query outputs,
+// collections or scenes, and cannot change the selected profile.
+type ProfileInventory struct {
+	Current  string
+	Profiles []string
+}
+
+func (c *Client) ProfileInventory(ctx context.Context) (ProfileInventory, error) {
+	r, err := empty(ctx, "GetProfileList", c.obs.Config.GetProfileList)
+	if err != nil {
+		return ProfileInventory{}, err
+	}
+	// Reject absent/null/coerced inventory fields rather than returning a
+	// successful empty list when OBS did not provide a usable observation.
+	var raw struct {
+		Current  *string           `json:"currentProfileName"`
+		Profiles []json.RawMessage `json:"profiles"`
+	}
+	if json.Unmarshal(r.GetRaw(), &raw) != nil || raw.Current == nil || raw.Profiles == nil {
+		return ProfileInventory{}, &RequestError{Operation: "GetProfileList"}
+	}
+	profiles := make([]string, 0, len(raw.Profiles))
+	for _, value := range raw.Profiles {
+		var name *string
+		if json.Unmarshal(value, &name) != nil || name == nil {
+			return ProfileInventory{}, &RequestError{Operation: "GetProfileList"}
+		}
+		profiles = append(profiles, *name)
+	}
+	return ProfileInventory{Current: *raw.Current, Profiles: profiles}, nil
+}
+
 // APIRecordingStatus distinguishes an unknown paused state from false.
 func (c *Client) APIRecordingStatus(ctx context.Context) (RecordingStatus, error) {
 	r, err := empty(ctx, "GetRecordStatus", c.obs.Record.GetRecordStatus)

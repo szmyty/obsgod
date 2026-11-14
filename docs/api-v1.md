@@ -55,6 +55,7 @@ output rollback or assumption of idleness.
 | Operation | Contract |
 | --- | --- |
 | `Snapshot`, `StreamStatus` | Typed output/configuration observations; no mutation |
+| `Profiles` | Narrow typed profile inventory (`current`, `profiles`) from one `GetProfileList` request; preserves names/order, returns an independent non-null list, and does not read unrelated output state |
 | `StartStream`, `StopStream` | Require `Streaming`; shared adapter confirms fresh advancing bytes on Start and inactive state on Stop |
 | `StartRecording`, `StopRecording` | Require `Recording`; preserve media and confirm recording/finalized output through shared adapter |
 | `StartReplayBuffer`, `StopReplayBuffer`, `SaveReplay` | Require `ReplayBuffer`; save waits for a new finalized path |
@@ -106,6 +107,13 @@ partial stage result; the error remains separately classified. A failure is not
 an empty successful result. Parsing/unknown-command/help errors are conventional
 CLI usage diagnostics; commands that run provide the JSON result contract.
 
+`obsgod api profile list` uses the narrow `Profiles` read. Its existing response
+remains `operation:"snapshot"` with a name-array result; the Go method also returns
+the current profile name. This avoids making profile listing depend on unrelated
+stream/recording/replay/camera/scene queries. `profile.list` is an additive offline
+capability identifier for the public read. Missing, null or wrongly typed inventory
+fields fail rather than becoming an empty successful observation.
+
 Exit status preserves **0 success / 1 failure**, including cancellation, matching
 the existing executable. Classify failures by JSON `error.code`, not text or a
 new incompatible exit-code taxonomy. Go callers use `errors.As(err, *api.Error)`
@@ -137,6 +145,10 @@ New importing applications and automation should use `pkg/api/v1` / `obsgod api`
 Complete legacy migration requires a separately reviewed deprecation plan;
 silently changing a v0 command's success/approval semantics would break scripts.
 The full #9 CLI migration criterion therefore remains a reconciliation item.
+[The migration map](legacy-api-migration.md) records every legacy group and its
+compatibility gaps. The new narrow profile read prepares shared implementation;
+legacy `profile list/get` still use their existing injected transport until the
+connection-ownership adapter is refactored and qualified.
 
 Once a qualified v1 contract is accepted, additive optional fields/operations
 may extend schema1; consumers must tolerate unknown JSON fields. Removal,
