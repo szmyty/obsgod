@@ -5,6 +5,12 @@ Original #9/#13/#14 criteria remain intact. Current authorization permits
 preparation here, without settling separate-project ownership or authorizing
 another repository's changes.
 
+Owner disposition on 2026-11-14 UTC: defer the separate companion and provider
+OAuth work while finishing the Steam Deck product. This is a scope deferral,
+not acceptance of the proposed companion project or proof that its original
+criteria were implemented. Retain the existing compatible creator/RTMP adapter;
+the future companion and OAuth criteria move to the focused future backlog.
+
 ## Context and choice
 
 The core owns reusable typed OBS control, cancellation/time budgets, observation
