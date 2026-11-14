@@ -1,6 +1,7 @@
 ---
 # This file supplies GitHub's Sponsor menu and the packaged support buttons.
 # Run `node scripts/generate-support.mjs` after changing a handle.
+# Handles match egohygiene/.github at 876bae3d92e3a28b6d3b4e9d4ef4a640cef0a44f.
 buy_me_a_coffee: szmyty
 github: szmyty
 ko_fi: szmyty
@@ -9,3 +10,5 @@ thanks_dev: u/gh/szmyty
 
 # Patreon is intentionally inactive: the owner configuration in Akashic records
 # a broken creator page. Restore only after the owner verifies that destination.
+# Org defaults also list this handle; leave it inactive here until then:
+# patreon: szmyty

@@ -3,7 +3,9 @@
 This is a manually authored `identity.project/v1` consumer source, following Ego
 Hygiene Identity's supported authoring path. `decky-stream` is the intended stable
 brand ID and **Decky Stream** is the user's selected display name. The actual
-repository remains `szmyty/obsgod`; the organization and transfer are undecided.
+repository remains `szmyty/obsgod`; the owner prefers a fresh repository, with
+`egohygiene/decky-stream` the working destination discussed. Creation and the
+installed identity transition have not happened.
 
 The governance arrays are deliberately empty. Nothing in `candidates/` is an
 approved source. Empty token layers reserve the structure without inventing an
@@ -26,3 +28,10 @@ generated Identity output conformance. `scripts/generate-brand-kit.py` is a loca
 **draft-kit preparer**, not Identity's compiler. See [review packet](../docs/branding-review.md)
 for its exact outputs, checks, tool pins and approval gates. No Identity release,
 environment snapshot, project release or public site is published by these commands.
+
+The generated mint-signal board in `candidates/concepts/` is a creative reference
+with its actual prompt, tool and digest. SVG masters are separately authored
+candidate geometry. `references/specification-review.json` records the current
+native v1 versus product-specific export distinction. Reviewable repository
+assets are staged under `branding/repository/`; that does not promote them into
+approved Identity sources or change the live plugin icon.

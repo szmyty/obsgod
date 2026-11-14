@@ -1,0 +1,67 @@
+{
+  "schema": "decky-stream.brand-specification-review/v1",
+  "inspectedAt": "2026-11-14",
+  "identityRevision": "cfb6c29bd02589a47fc48050ab02e7e0da359719",
+  "sources": [
+    {
+      "repository": "egohygiene/identity",
+      "revision": "cfb6c29bd02589a47fc48050ab02e7e0da359719",
+      "path": "docs/consumers/PRESENTATION_PROFILES.md",
+      "url": "https://raw.githubusercontent.com/egohygiene/identity/cfb6c29bd02589a47fc48050ab02e7e0da359719/docs/consumers/PRESENTATION_PROFILES.md",
+      "sha256": "71ad804eebdc51c0628e4dd75f4c2981568d655efef501d9e5342df13bda213f"
+    },
+    {
+      "repository": "egohygiene/identity",
+      "revision": "cfb6c29bd02589a47fc48050ab02e7e0da359719",
+      "path": "docs/contracts/REPOSITORY_PRESENTATION_V1.md",
+      "url": "https://raw.githubusercontent.com/egohygiene/identity/cfb6c29bd02589a47fc48050ab02e7e0da359719/docs/contracts/REPOSITORY_PRESENTATION_V1.md",
+      "sha256": "1183cc558b0d1cc10d9f13f494e76256044a2f9e8a3493a279673e6fb42b2c90"
+    },
+    {
+      "repository": "egohygiene/identity",
+      "revision": "cfb6c29bd02589a47fc48050ab02e7e0da359719",
+      "path": "src/brandkit/profiles.rs",
+      "url": "https://raw.githubusercontent.com/egohygiene/identity/cfb6c29bd02589a47fc48050ab02e7e0da359719/src/brandkit/profiles.rs",
+      "sha256": "07453a6687864f9a6dfe1fc5e8c03d331c5e2f261c2e77faaa10eec8800d6cff"
+    }
+  ],
+  "nativeV1": {
+    "core": "Approved SVG source and explicitly selected approved variants",
+    "web": {
+      "favicon": "SVG",
+      "pngSizes": [
+        32,
+        64
+      ]
+    },
+    "github": {
+      "width": 1280,
+      "height": 640,
+      "format": "PNG",
+      "maxBytes": 999999
+    },
+    "social": {
+      "width": 1200,
+      "height": 630,
+      "format": "PNG",
+      "maxBytes": 2000000
+    },
+    "docs": "document.css",
+    "pwa": "192/512 and maskable512; not needed for this plugin kit"
+  },
+  "customDraftExports": [
+    "README header",
+    "repository avatars",
+    "wordmark",
+    "light/transparent mark",
+    "native monochrome Decky projection",
+    "16px favicon",
+    "review board"
+  ],
+  "notes": [
+    "Legacy profiles/*.json is not the native v1 catalog",
+    "The 40pt GitHub template border is a reference recommendation, not a compiler guarantee",
+    "Candidate rendering is authorized; actual source/rights/creative decisions remain unrecorded",
+    "Local draft generator is not the approved Identity production compiler"
+  ]
+}

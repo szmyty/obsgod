@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 600" width="1600" height="600" role="img" aria-labelledby="title desc">
+<title id="title">Decky Stream proposed README header</title><desc id="desc">Proposed Decky Stream branding; human creative and rights approval pending.</desc>
+<rect width="1600" height="600" fill="#0b111b"/><path d="M1420 -60Q1780 300.0 1420 660" fill="none" stroke="#b2f2c7" stroke-opacity=".10" stroke-width="64"/><path d="M1530 -60Q1890 300.0 1530 660" fill="none" stroke="#b2f2c7" stroke-opacity=".07" stroke-width="64"/><g transform="translate(104 160) scale(2)"><rect xmlns="http://www.w3.org/2000/svg" width="128" height="128" rx="28" fill="#0b111b" />
+  <rect xmlns="http://www.w3.org/2000/svg" x="8" y="8" width="112" height="112" rx="28" fill="none" stroke="#b2f2c7" stroke-width="6" />
+  <path xmlns="http://www.w3.org/2000/svg" d="M35 42L68 64L35 86Z" fill="#b2f2c7" />
+  <path xmlns="http://www.w3.org/2000/svg" d="M78 47Q94 64 78 81" fill="none" stroke="#b2f2c7" stroke-width="7" stroke-linecap="round" />
+  <path xmlns="http://www.w3.org/2000/svg" d="M91 35Q117 64 91 93" fill="none" stroke="#b2f2c7" stroke-width="7" stroke-linecap="round" />
+</g><text x="416" y="260" font-family="DejaVu Sans,Arial,sans-serif" font-size="92" font-weight="bold" fill="#eef4fc">Decky Stream</text><text x="422" y="339" font-family="DejaVu Sans,Arial,sans-serif" font-size="38" fill="#b2f2c7">Your game. Your stream.</text><text x="422" y="398" font-family="DejaVu Sans,Arial,sans-serif" font-size="25" fill="#b7c5d8">Stream from Steam Deck with OBS</text><text x="108" y="530" font-family="DejaVu Sans,Arial,sans-serif" font-size="18" letter-spacing="3" fill="#b7c5d8">LOCAL OBS CONTROL · STEAM DECK</text>
+</svg>

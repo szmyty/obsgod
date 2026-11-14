@@ -1,0 +1,239 @@
+{
+  "schema": "decky-stream.presentation-review/v1",
+  "checked_at": "2026-11-14T04:13:46.161059+00:00",
+  "source_revision": "f3d2413b5f72aa858992996839aa8569ac5db331",
+  "source_tree": "162add737ce0d203041f8653d793310b178f0a60",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "python": "3.12.14",
+  "node": "v24.19.0",
+  "inkscape": "Inkscape 1.4 (e7c3feb100, 2024-10-09)",
+  "identity_revision": "cfb6c29bd02589a47fc48050ab02e7e0da359719",
+  "checks": [
+    {
+      "id": "draft-exporter-tests",
+      "command": [
+        "python3",
+        "branding/tests/test_brand_kit.py"
+      ],
+      "outcome": "passed",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_a_new_human_decision_requires_the_approved_pipeline (__main__.BrandKit.test_a_new_human_decision_requires_the_approved_pipeline) ... ok\ntest_active_svg_is_rejected (__main__.BrandKit.test_active_svg_is_rejected) ... ok\ntest_candidates_remain_unapproved (__main__.BrandKit.test_candidates_remain_unapproved) ... ok\ntest_drift_check_refuses_modified_export_without_writing (__main__.BrandKit.test_drift_check_refuses_modified_export_without_writing) ... ok\ntest_foreign_file_is_preserved (__main__.BrandKit.test_foreign_file_is_preserved) ... ok\ntest_identical_sources_yield_identical_archive (__main__.BrandKit.test_identical_sources_yield_identical_archive) ... ok\ntest_master_changes_project_into_every_geometry_surface (__main__.BrandKit.test_master_changes_project_into_every_geometry_surface) ... ok\ntest_output_symlink_is_preserved (__main__.BrandKit.test_output_symlink_is_preserved) ... ok\ntest_repository_projection_retains_sources_and_only_its_owned_outputs (__main__.BrandKit.test_repository_projection_retains_sources_and_only_its_owned_outputs) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.041s\n\nOK\n"
+    },
+    {
+      "id": "full-kit-drift",
+      "command": [
+        "python3",
+        "scripts/generate-brand-kit.py",
+        "--raster",
+        "--check"
+      ],
+      "outcome": "passed",
+      "exit_code": 0,
+      "stdout": "{\"status\": \"verified\", \"approval\": \"proposed-unapproved\", \"output\": \"/workspace/obsgod/dist/branding-draft\", \"files\": 33, \"manifest_sha256\": \"02b78384f59a2c8d21aa80da772b33f56916bf920dc7a0845569a25cd26c55ae\", \"archive_sha256\": \"fd92a99f1a0a09182a0f519a39f40847b378621b5a002a6c918f6236d68d7f36\"}\n",
+      "stderr": ""
+    },
+    {
+      "id": "repository-drift",
+      "command": [
+        "python3",
+        "scripts/generate-brand-kit.py",
+        "--raster",
+        "--repository-assets",
+        "--check"
+      ],
+      "outcome": "passed",
+      "exit_code": 0,
+      "stdout": "{\"status\": \"verified\", \"approval\": \"proposed-unapproved\", \"output\": \"/workspace/obsgod/branding/repository\", \"files\": 28, \"manifest_sha256\": \"ed486d3d51c8c3b39405412867ec10f6fa2860743096e0bff531c22dde2b4e8b\", \"archive_sha256\": null}\n",
+      "stderr": ""
+    },
+    {
+      "id": "identity-source-contract",
+      "command": [
+        "python3",
+        "scripts/generate-brand-identity-proof.py",
+        "--validator",
+        "/workspace/.obsgod-tools/completion/identity-upstream/scripts/validate_identity.py"
+      ],
+      "outcome": "passed",
+      "exit_code": 0,
+      "stdout": "{\n  \"command\": \"python3 VERIFIED_IDENTITY_VALIDATOR --repository-root . --format json --snapshot\",\n  \"exit_code\": 0,\n  \"identity_revision\": \"cfb6c29bd02589a47fc48050ab02e7e0da359719\",\n  \"limits\": \"Source contract only. Candidate art is unapproved; no Identity generation, device, release or publication qualification.\",\n  \"platform\": \"Linux-6.18.57-x86_64-with-glibc2.41\",\n  \"python\": \"3.12.14\",\n  \"schema\": \"decky-stream.identity-source-proof/v1\",\n  \"source_result\": {\n    \"diagnostics\": [],\n    \"repository\": \".\",\n    \"schema\": \"identity.diagnostics/v1\",\n    \"snapshot\": {\n      \"directories\": [\n        \".identity/candidates\",\n        \".identity/references\",\n        \".identity/sources\"\n      ],\n      \"files\": {\n        \".identity/brief.md\": \"eade665548f8e875c210fb5b097dba63cd41ce43e8a0026c3af4f72f5fb72a4a\",\n        \".identity/defaults/organization.tokens.json\": \"e8f53747482aa8914fc3307fbf63295e45fb1ca59448c8e0435e1af8fce5eda5\",\n        \".identity/governance/approvals.json\": \"e96c088f11ded1d42a60872e3de0384299615b778c4927f20f1b441bd9db7bc9\",\n        \".identity/governance/provenance.json\": \"ce9c3a4e1c40d89bcc605b9bc287276a3211d444ee05c3a3471a2f15fab8bc4f\",\n        \".identity/identity.json\": \"0a192e777313bb36eff735efe137f89f1258dc493ca27c2e9ee2b9f0bcc21a63\",\n        \".identity/overrides/product.tokens.json\": \"c545dc44ed77337b41c7e4d1276907d1958583c3515dc1206cbcbdf479ec22d8\",\n        \".identity/targets/profiles.json\": \"1f46cce8621175f1a9fe871e4c65ab214f6f161c43d649f1110c24b79db2b463\"\n      }\n    },\n    \"valid\": true\n  },\n  \"validator\": {\n    \"sha256\": \"aea7ba3ff1f331acb0cf2d05501c56c4d89c15ad41c8c57b4fd7448b323175f5\",\n    \"url\": \"https://raw.githubusercontent.com/egohygiene/identity/cfb6c29bd02589a47fc48050ab02e7e0da359719/scripts/validate_identity.py\"\n  }\n}\n",
+      "stderr": ""
+    },
+    {
+      "id": "support-metadata",
+      "command": [
+        "node",
+        "scripts/generate-support.mjs",
+        "--check"
+      ],
+      "outcome": "passed",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "id": "product-metadata",
+      "command": [
+        "python3",
+        "scripts/generate-product.py",
+        "--check"
+      ],
+      "outcome": "passed",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "id": "whitespace-except-exact-font-notice",
+      "command": [
+        "git",
+        "diff",
+        "1de7c66d658500f18bba6e6c02e125363c65e0be",
+        "HEAD",
+        "--check",
+        "--",
+        ".",
+        ":!branding/repository/font-LICENSE.txt"
+      ],
+      "outcome": "passed",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "id": "independent-full-kit-repeat",
+      "command": [
+        "python3",
+        "scripts/generate-brand-kit.py",
+        "--raster",
+        "--output",
+        "/workspace/.obsgod-tools/decky-stream-brand-repeat-qpv9h98f/kit"
+      ],
+      "outcome": "passed",
+      "exit_code": 0,
+      "stdout": "{\"status\": \"prepared\", \"approval\": \"proposed-unapproved\", \"output\": \"/workspace/.obsgod-tools/decky-stream-brand-repeat-qpv9h98f/kit\", \"files\": 33, \"manifest_sha256\": \"02b78384f59a2c8d21aa80da772b33f56916bf920dc7a0845569a25cd26c55ae\", \"archive_sha256\": \"fd92a99f1a0a09182a0f519a39f40847b378621b5a002a6c918f6236d68d7f36\"}\n",
+      "stderr": ""
+    }
+  ],
+  "inspection": {
+    "outcome": "passed",
+    "relative_links": 83,
+    "self_contained_svg_files": 10,
+    "source_hashes": 20,
+    "output_hashes": 27,
+    "pngs": {
+      "wordmark.png": {
+        "dimensions": [
+          720,
+          192
+        ],
+        "bytes": 18903,
+        "sha256": "d9ce019399492273c87520d1bc29ceb0f9fc6860a5f3ae8970b32e960c07105a"
+      },
+      "favicon-16.png": {
+        "dimensions": [
+          16,
+          16
+        ],
+        "bytes": 678,
+        "sha256": "c573baeda1ba0383faadcc9e25a56d6384dbcac5bb6d41c2e8e93520e24feba6"
+      },
+      "favicon-64.png": {
+        "dimensions": [
+          64,
+          64
+        ],
+        "bytes": 2945,
+        "sha256": "9842bd8083e849c9bb8dc333a7299dcc67ddd876d74e8573f9dc1f07f869fa7c"
+      },
+      "logo-transparent.png": {
+        "dimensions": [
+          512,
+          512
+        ],
+        "bytes": 19798,
+        "sha256": "a60011daf446b953a8d97d316c58805e0626338743f65b8c0ba91005f67a9643"
+      },
+      "avatar-256.png": {
+        "dimensions": [
+          256,
+          256
+        ],
+        "bytes": 11984,
+        "sha256": "4add4352dc675e01fad5923783526086528eb8a4cc632b7a42fec9442dd72b76"
+      },
+      "header-light.png": {
+        "dimensions": [
+          1600,
+          600
+        ],
+        "bytes": 66368,
+        "sha256": "0aa998b2d0c9f5b208d7471cbf3b6337330c69809bc696da64186014f963ca0f"
+      },
+      "legibility-sheet.png": {
+        "dimensions": [
+          720,
+          400
+        ],
+        "bytes": 35133,
+        "sha256": "6d1e55735306810655f672161384d09c6dae3e3ceaf952772e73859d36ce26f0"
+      },
+      "social-preview.png": {
+        "dimensions": [
+          1280,
+          640
+        ],
+        "bytes": 53297,
+        "sha256": "c280ff2384daae10f6e4137f1a8a15e73e315e159c7b01213c35067457911033"
+      },
+      "header.png": {
+        "dimensions": [
+          1600,
+          600
+        ],
+        "bytes": 66730,
+        "sha256": "1a406202c2838b34f8d2f781eb62b9852235a0a215e5a2caf4a5098762ee0eaa"
+      },
+      "favicon-32.png": {
+        "dimensions": [
+          32,
+          32
+        ],
+        "bytes": 1475,
+        "sha256": "e87aa6f8aa7fb6cda8c4366eb3edf6dafa1a09baa08105047acaeb7a39611475"
+      },
+      "avatar-512.png": {
+        "dimensions": [
+          512,
+          512
+        ],
+        "bytes": 25841,
+        "sha256": "2b086941be113721b3d4970cdd577a1af6575bb79d22225b4fa27e1b92529bc5"
+      }
+    },
+    "concept_hash": "passed",
+    "approval_status": "proposed-unapproved",
+    "governance_arrays": "empty",
+    "raster_repeat_files": 33,
+    "visual_review": [
+      "dark and light README headers",
+      "GitHub preview",
+      "small-size and native monochrome sheet"
+    ],
+    "font_notice_whitespace": "Upstream notice retained byte-identically; excluded only this new copy from whitespace lint",
+    "independent_review": "Identity specification/status/scope review passed; README/funding review passed"
+  },
+  "artifacts": {
+    "repository_manifest_sha256": "ed486d3d51c8c3b39405412867ec10f6fa2860743096e0bff531c22dde2b4e8b",
+    "full_kit_manifest_sha256": "02b78384f59a2c8d21aa80da772b33f56916bf920dc7a0845569a25cd26c55ae",
+    "full_kit_zip_sha256": "fd92a99f1a0a09182a0f519a39f40847b378621b5a002a6c918f6236d68d7f36"
+  },
+  "limits": {
+    "runtime_matrix": "unrun for this presentation-only revision; earlier runtime qualification remains at4699235",
+    "hosted_ci": "unavailable under existing billing lock; not retried as qualification",
+    "device_native_viewer_adoption": "unrun",
+    "human_creative_rights_approval": "pending; no decision invented",
+    "migration_release_deployment": "unperformed"
+  }
+}
