@@ -1,14 +1,66 @@
 # Proposed Decky Stream brand kit
 
+**Current selection:** the owner locked **01 / aurora** as the primary direction;
+see [the exact selection](../.identity/candidates/concepts/selection.json).
+Earlier boards and other palettes remain concepts. [#80](https://github.com/szmyty/obsgod/issues/80)
+tracks selected source/exports; [#81](https://github.com/szmyty/obsgod/issues/81)
+tracks UI adoption. The exporter/preview instructions below describe earlier
+draft outputs until those tasks update them; they are not the selected new kit.
+
 The editable candidates and honest rights inventory are in
 [`.identity/candidates`](../.identity/candidates/). They are **unapproved** and do
 not replace the product's existing visual baseline or native Decky icon.
+
+The newer [orbital-stream concept board](../.identity/candidates/concepts/orbital-stream-board.png)
+explores the owner's Mindgarden/Identity banner aesthetic: near-black space,
+airy lowercase lettering, an aqua flowing signal within an open ring, subtle
+violet and reflections. Its [prompt and source record](../.identity/candidates/concepts/orbital-stream-board.json)
+are retained for review. It is unapproved and does not replace the earlier
+mint-signal concept, editable masters, generated exports or live plugin icon.
+The flat/monochrome examples on the board are concepts; production SVGs and
+actual small-size checks remain to be made after direction selection.
+
+The owner likes that board and requested the hero's aqua/violet gradient, glow
+and depth for the primary icon. The [square gradient preview](../.identity/candidates/concepts/orbital-stream-gradient-icon.png)
+and its [reference/prompt record](../.identity/candidates/concepts/orbital-stream-gradient-icon.json)
+preserve this variant. Colorful icons are supported by Decky's JSX icon slot;
+monochrome is a legibility option, not an API requirement. This image has not
+been applied to the live plugin or qualified at its actual icon sizes.
+
+The [four-color comparison](../.identity/candidates/concepts/orbital-stream-color-alternatives.png)
+shows **01 aurora** (aqua/violet), **02 afterglow** (purple/pink), **03 solar**
+(coral/gold) and **04 pearl** (iridescent pale tones). Its
+[generation record](../.identity/candidates/concepts/orbital-stream-color-alternatives.json)
+preserves the prompt and reference digest. These are concept variations, not
+four production icon exports or a selected palette.
 
 The mint-signal concept was generated in chat on 2026-11-14. Its original PNG,
 full prompt, method and digest are retained in
 [the concept record](../.identity/candidates/concepts/mint-signal-board.json).
 The separately authored SVG master projects to the repository assets below;
 the concept board is not a screenshot or an approved compiler input.
+
+## Open the previews
+
+Use [the standalone gallery](repository/index.html) in a browser, or download
+and extract [the PNG previews](repository/decky-stream-png-previews.zip) for an
+ordinary photo viewer. The gallery embeds its images, styles and explanations
+in one HTML file, so it works offline without fonts or neighboring files.
+The simple ZIP has one folder containing normal PNG images and `START-HERE.txt`.
+Start with `readme-header.png` or `social-preview.png`.
+
+The complete developer kit deliberately includes more file types: SVG is editable
+vector artwork, JSON and CSS describe metadata/colors, and TXT/MD contain notices
+and guides. These are useful source records but many photo apps cannot display
+them. Transparent marks and pale wordmarks need an appropriate background;
+favicons are intentionally small. A phone app or chat preview can also restrict
+which downloaded formats it opens; the PNG-only bundle avoids requiring it to
+understand the source formats.
+
+The previous ZIP passed CRC checks and its PNGs had valid headers. That does not
+identify the user's particular phone/app failure. This delivery change improves
+access to the same draft artwork; it does not choose a new logo or replace live
+plugin visuals.
 
 The [tracked review assets](repository/README.md) include dark/light README
 headers, mark/transparent/light variants, monochrome icon, wordmark, avatars,
@@ -48,12 +100,13 @@ python3 scripts/generate-brand-kit.py --raster --repository-assets
 python3 scripts/generate-brand-kit.py --raster --repository-assets --check
 ```
 
-Its manifest binds all sources and 27 output files; the manifest itself is the
-28th staged file. The exporter preserves unrelated files and refuses unsafe or
+Its manifest binds all sources and generated output files; the manifest itself
+is staged alongside them. The exporter preserves unrelated files and refuses unsafe or
 symlinked destinations. Do not modify generated artwork or hashes by hand.
 
-Default output: `dist/branding-draft/`. Open `review/index.html` locally; the ZIP
-is `decky-stream-proposed.zip`. Both are preparation artifacts. The content-bound
+Default output: `dist/branding-draft/`. Open `index.html` locally; the simple ZIP
+is `decky-stream-png-previews.zip`, and the complete source/metadata ZIP is
+`decky-stream-proposed.zip`. These are preparation artifacts. The content-bound
 manifest records every source and export hash; identical inputs with the same
 pinned raster tools produce identical bytes. SHA-256 integrity is not a creator
 signature or human approval. The archive has fixed paths, timestamps and file

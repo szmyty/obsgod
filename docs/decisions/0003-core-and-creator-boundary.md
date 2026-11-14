@@ -5,6 +5,12 @@ Original #9/#13/#14 criteria remain intact. Current authorization permits
 preparation here, without settling separate-project ownership or authorizing
 another repository's changes.
 
+Owner disposition on 2026-11-14 UTC: defer the separate companion and provider
+OAuth work while finishing the Steam Deck product. This is a scope deferral,
+not acceptance of the proposed companion project or proof that its original
+criteria were implemented. Retain the existing compatible creator/RTMP adapter;
+the future companion and OAuth criteria move to the focused future backlog.
+
 ## Context and choice
 
 The core owns reusable typed OBS control, cancellation/time budgets, observation
@@ -21,9 +27,13 @@ The current implementation supplies `pkg/api/v1` and `obsgod api`, plus the
 optional `pkg/creator/v1` consumer and `obsgod creator`. The creator adapter
 connects to existing OBS and leaves it running. It resolves environment-backed
 RTMP provider configuration; it performs no provider-account API action. Legacy
-`internal/obs` commands retain their existing contract rather than silently
-changing their outputs; fully sharing the new facade remains a partial #9
-criterion. The facade/creator contracts need fresh final-source qualification.
+`internal/obs` commands now share `pkg/api/v1.Client.Legacy` and the automation
+transport while retaining their existing output and ACK contracts. The closed
+Go compatibility surface requires matching per-invocation approval, carries
+command cancellation and preserves the private lazy dialer; it does not expose
+raw protocol clients or weaken normal v1 confirmed-state operations. This source
+integration does not accept the full original #9 criteria. The facade/creator
+contracts and compatibility integration need fresh final-source qualification.
 
 ## Proposed companion disposition
 

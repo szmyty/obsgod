@@ -1,5 +1,166 @@
 # Current work
 
+## Active roadmap: implementation first, current Deck tests, then migration
+
+The owner locked **01 / aurora** and retained earlier artwork as concepts. The
+exact creative selection/reference hashes are in
+[selection.json](.identity/candidates/concepts/selection.json); source/exports,
+rights, live UI and target rendering are not thereby implemented or qualified.
+Future repository name is **deckystream**, with final owner still unresolved.
+
+Live parent #46 now links native sub-issues **#76–#88**. Implementation milestone
+4 has **#76–#85**: package, safe Decky state paths, recoverable dependency jobs,
+private manual-key setup, selected brand assets, native UI, lifecycle/cleanup,
+integration regressions, bounded audit and final local qualification/test build.
+Milestone 5 has **#86–#88**: owner current-install Deck test/fix loop; prepare then
+gate the actual migration; retest the official new install and prepare v1 facts.
+[The detailed plan](docs/implementation-roadmap.md) and
+[machine-readable issue snapshot](docs/evidence/implementation-roadmap.json)
+retain inputs, acceptance, original-scope links and exact live baseline.
+
+All 230 original criteria/dependencies and #46's original details tail are
+preserved exactly; older checkpoint narrative is collapsed as historical.
+No issue is closed or marked implemented by planning. Drafts remain #73 → #74
+→ #75; default master remains da89b9d. Latest release is unchanged prerelease
+v0.1.0-deck.4-updater.1. Protection detail read is403; no settings change.
+
+**#89** is separate OAuth/phone/QR research from preserved #14/#40, not a main
+implementation dependency. [Official-source findings](docs/authentication-options.md):
+Twitch documents public-client device authorization and user stream-key access;
+Kick documents PKCE plus a confidential client secret and key scopes/schema.
+Resolve its native-client/callback constraints before promising the same flow.
+OBS still needs ingest credentials internally. All real OAuth/phone/account
+tests are unrun; discuss the auth design before implementation. Companion stays
+deferred; #51 research is not reopened or turned into monetization/Store work.
+
+This checkpoint creates the roadmap and records branding selection/research;
+the new package/setup/UI code and final full matrix are not yet executed. Next
+execution uses the existing isolated checkout, preserves injected auth/network
+presets and pinned tools, and pushes reviewable checkpoints. No release, deploy,
+repository creation/retirement or spending occurred. This current sequence
+supersedes older notes that say to wait for a new-logo direction.
+
+## Intended repository name: deckystream
+
+On 2026-11-14 the owner preferred **deckystream** as the future repository name,
+matching the lowercase/single-word direction. This supersedes earlier planned
+`decky-stream` spellings in historical notes. Exact destination owner remains
+unresolved. Current `szmyty/obsgod`, remotes, release trust, installed IDs, private
+paths and published artifacts are unchanged. Naming is preparation; migration
+still follows implementation, checks and manual Deck testing. Older synthetic
+destination fixtures do not qualify the newly selected slug or actual publisher.
+
+## Branding discussion: orbital-stream and gradient primary icon
+
+The owner confirmed the proposed normal Decky ZIP plus plugin-managed first-run
+OBS/GStreamer setup, with explicit consent, graceful decline, background progress,
+cancellation and retry. This remains upcoming implementation; current plugin
+onboarding has not changed or been qualified in Gaming Mode. Dependency setup
+is separate from Decky's plugin installation. OBS/extension come from Flathub;
+our release is a Decky plugin package. Keep manual Deck test cases before
+migration and repeat installation checks at the actual new destination.
+
+The immediate request is creative design before roadmap execution. A new
+[orbital-stream board](.identity/candidates/concepts/orbital-stream-board.png)
+was generated from the requested Mindgarden/Identity aesthetic and saved with
+the complete prompt, image digest and draft status. The owner likes this direction
+and requested the banner's aqua/violet glow and depth for the primary icon;
+[the square preview](.identity/candidates/concepts/orbital-stream-gradient-icon.png)
+and its full reference/prompt record are saved. This new variant awaits feedback.
+The owner then asked to see alternatives. The saved
+[four-color comparison](.identity/candidates/concepts/orbital-stream-color-alternatives.png)
+shows 01 aurora (original aqua/violet), 02 afterglow (purple/pink), 03 solar
+(coral/gold) and 04 pearl (iridescent pale tones), with full prompt/reference
+metadata. No final palette choice is inferred from the request to compare them.
+Decky's JSX icon slot supports color/gradients; monochrome was a proposed
+legibility choice, not an API restriction. Actual small-size/on-Deck rendering
+remains unqualified, and observed stream-state cues must survive any icon change.
+Earlier art, selected masters, generated kit and runtime visuals are unchanged.
+Next is owner visual feedback, then the final roadmap discussion
+(including any key-configuration questions), branding exports and implementation.
+No final full matrix, migration, publication, issue closure or device acceptance
+is claimed by this image-only checkpoint.
+
+## Current question: align the Steam Deck product with normal Decky conventions
+
+The owner narrowed the shipping focus to Steam Deck/SteamOS and asked whether
+the plugin follows Decky's recommended approach before specifying new batches.
+[The live-source comparison](docs/decky-conventions-review.md) confirms the modern
+SDK/Python/native-bin runtime already matches the template. The main differences
+are nested/custom build, mandatory paired Desktop onboarding/updater and shared
+XDG state rather than Decky-only storage. Proposed next batch is a conventional
+plugin package with complete first-run setup, Decky-managed replacement and a
+safe storage compatibility plan. This is a recommendation, not an implemented
+rewrite or approval of every proposed change. Retain generic CLI capability as
+optional; it is not the primary Steam Deck installation method.
+
+Current official template90d0780/wiki ec9d4cf/loader ffd103b9/preset5e861bc pins
+and source hashes are saved. Actual Syncthing example confirms Flatpak dependency
+plus bundled native helper is normal. No runtime change, final matrix, Store
+submission, migration or external contact occurred. Wait for the owner's next
+batches/logo direction; any selected source-changing cleanup precedes final
+qualification. Engineering source4ac and previous receipts remain unchanged.
+
+## Engineering pass complete; next owner step is the new logo
+
+Draft #75 now contains the nondeferred engineering, after #73/#74. Exact source
+is4ac20bfd9e8b2fe17ab1942eeedd3fc78e38b6fb; [checkpoint](docs/pre-migration-completion.md)
+and [criterion/evidence map](docs/evidence/pre-migration-engineering.json).
+All39legacy operations share the typed API/application path with original ACK
+semantics and prompt owned-socket cancellation. Go regressions at59665ad (Go
+inputs unchanged at4ac) passed222top-level/456events across6affected packages
+with race/count1 and one optional existing-OBS skip; vet passed7packages.
+
+At clean4ac, actual Debian/Fedora/Alpine Linuxamd64 package lifecycle, filehash,
+UID65534 offlineCLI and data preservation checks passed. Three packages plus tar
+and8audit documents reproduced identically. Genuine A→B upward upgrade and A→C
+replacement/downgrade have separate exact-source receipts. RPM scripts/triggers,
+document modes, private staging and container fixture permissions were repaired;
+the existing root-owned catalog and original artifacts remained unchanged.
+
+Focused checks also passed64migration/release/install/update/uninstall cases,
+10NFPM/12generic/10history/11brand tests and actual offline image decoding.
+Publicly re-downloaded PNG-only ZIP is14ordinaryPNGs plus START-HERE; gallery is
+self-contained HTML. Current art is unchanged/proposed. New history tooling
+preserves all230criteria/dependencies and captures public tracker history without
+rewriting the frozen snapshot or performing retirement. Raw58-member evidence
+ZIP and compact package receipt are tracked beside the checkpoint.
+
+Next phase is the owner's new logo ideas, then final full qualification, bug
+repairs/retests and migration. The final full matrix is deliberately UNRUN now;
+old469 runtime receipts do not qualify this source. Companion/OAuth are deferred.
+Actual Deck/native/viewer/adoption, real destination/brand/rights/publisher and
+publication facts remain explicit. No issue was closed, source merged, repository
+created/archived/transferred, release/site deployed or money spent. Drafts remain
+in review order #73 → #74 → #75; use live state before the next phase.
+
+## Implementation-phase authorization (preserved)
+
+The owner reported that some brand-kit files could not be opened and authorized
+finishing all remaining feasible engineering. Current phase order is explicit:
+repair ordinary-viewer asset delivery; complete nondeferred source work with
+focused checks; receive the owner's new logo ideas; run the final full matrix on
+the resulting candidate; fix bugs/retest; then perform the agreed migration.
+The final full qualification is intentionally **not run before the new logo**.
+This latest sequencing supersedes older instructions to run it immediately.
+
+Companion/StreamGod and provider OAuth are deferred by the owner. Existing
+creator/RTMP behavior stays compatible; deferral is not implementation acceptance.
+Read-only review of all 230 original criteria found four current engineering
+lanes: legacy CLI/shared application integration (9.AC2), NFPM package audit and
+container lifecycle checks (12.AC4/5/7/8), installer identity/migration rehearsal
+(36.AC1/2/3), and usable brand-kit delivery (38.AC3/4). Final logo/rights adoption,
+actual device/native/viewer/adoption evidence and publication facts remain distinct.
+
+Continue in the existing checkout on `feat/pre-migration-completion`, based on
+presentation head08d5965. Memorial #73 and presentation #74 remain preceding
+drafts. Keep scoped source commits and draft checkpoints pushed; no repository
+creation/retirement, product release, deployment or spending occurs in this phase.
+Use pinned Go1.27.4 at `.obsgod-tools/toolchains/go1.27.4/go/bin/go` outside this
+checkout: `/usr/bin/go` here is a board game. Docker28.4, Node24.19 and Python3.12
+are available. Full runtime qualification remains historical at4699235 until the
+later approved final-test phase; focused results must identify their own source.
+
 ## Decky Stream draft artwork, README and pre-migration inventory
 
 The owner requested a fresh look at Identity specifications, asset generation

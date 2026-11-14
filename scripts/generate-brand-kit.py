@@ -8,6 +8,7 @@ not the Identity production compiler and never promotes candidates to approved.
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import html
 import io
@@ -91,6 +92,8 @@ def rasterize(files, lock):
                   "web/favicon-32.png": ("masters/mark.svg", 32),
                   "web/favicon-64.png": ("masters/mark.svg", 64),
                   "masters/mark-transparent.png": ("masters/mark-transparent.svg", 512),
+                  "masters/mark-on-light.png": ("masters/mark-on-light.svg", 512),
+                  "decky/icon-monochrome-preview.png": ("decky/icon-monochrome-preview.svg", 128),
                   "docs/mark-64.png": ("masters/mark.svg", 64),
                   "github/avatar-256.png": ("masters/mark.svg", 256),
                   "github/avatar-512.png": ("masters/mark.svg", 512),
@@ -109,6 +112,90 @@ def rasterize(files, lock):
             files[target] = output_path.read_bytes()
     validate_raster(files)
     return {"inkscape": version, "font_sha256": digest(font.read_bytes())}
+
+
+def deterministic_zip(files, directory):
+    archive = io.BytesIO()
+    with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as output:
+        for path, data in sorted(files.items()):
+            info = zipfile.ZipInfo(directory + "/" + path, (1980, 1, 1, 0, 0, 0))
+            info.external_attr = 0o100644 << 16
+            info.compress_type = zipfile.ZIP_DEFLATED
+            output.writestr(info, data)
+    return archive.getvalue()
+
+
+def png_previews(files):
+    """Flat, ordinary images for photo viewers; no source formats or installer."""
+    previews = {}
+    for path, data in sorted(files.items()):
+        if not path.endswith(".png"):
+            continue
+        name = Path(path).name
+        if name in previews:
+            raise ValueError("Duplicate PNG preview name: " + name)
+        previews[name] = data
+    previews["START-HERE.txt"] = (
+        "DECKY STREAM — PNG PREVIEWS\n\n"
+        "Extract this ZIP first. Every .png file is a normal image: open it in a browser, "
+        "Photos, Preview or your usual image viewer. Files are together in one folder.\n\n"
+        "Start with readme-header.png or social-preview.png. mark-transparent.png has a "
+        "transparent background; wordmark.png has pale letters intended for a dark field. "
+        "The monochrome icon preview shows the existing icon on dark; its editable SVG "
+        "uses the native Decky foreground color. Small favicons are intentionally tiny.\n\n"
+        "These are previews of the current draft direction, not a new logo choice, final "
+        "brand approval or a software installer. No fonts are embedded. The complete kit "
+        "also contains editable SVG, JSON/CSS metadata, notices and a standalone index.html "
+        "gallery; those source files are not ordinary photographs.\n"
+    ).encode()
+    return deterministic_zip(previews, "decky-stream-png-previews")
+
+
+def preview_gallery(files):
+    """One offline HTML file, with embedded images and no script/network/fonts."""
+    cards = []
+    for path, data in sorted(files.items()):
+        if not path.endswith(".png"):
+            continue
+        if data[:8] != b"\x89PNG\r\n\x1a\n" or len(data) < 24:
+            raise ValueError("Invalid gallery PNG: " + path)
+        width, height = struct.unpack(">II", data[16:24])
+        name = html.escape(Path(path).name)
+        source = "data:image/png;base64," + base64.b64encode(data).decode("ascii")
+        cards.append(f'<article><div class="preview"><img src="{source}" alt="{name}" '
+                     f'width="{width}" height="{height}"></div><h2>{name}</h2>'
+                     f'<p>PNG image · {width} × {height} · {len(data):,} bytes</p>'
+                     f'<a href="{source}" download="{name}">Save this PNG</a></article>')
+    if not cards:
+        cards.append('<p>PNG previews were not generated. Run the exporter with '
+                     '<code>--raster</code> using its pinned tools to add ordinary image previews.</p>')
+    return ('<!doctype html><html lang="en"><head><meta charset="utf-8">'
+            '<meta name="viewport" content="width=device-width, initial-scale=1">'
+            '<title>Decky Stream — open the artwork</title><style>'
+            ':root{color-scheme:dark;font-family:system-ui,sans-serif;background:#0b111b;color:#eef4fc}'
+            'body{margin:0;line-height:1.6}main{max-width:1180px;margin:auto;padding:24px}'
+            'h1{font-size:clamp(1.8rem,5vw,3rem);line-height:1.2}h2{font-size:1rem;overflow-wrap:anywhere}'
+            'p,li{max-width:78ch}a{color:#b2f2c7}code{overflow-wrap:anywhere}'
+            '.note{padding:16px;border:1px solid #37465a;border-radius:14px;background:#111c2a}'
+            '.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px}'
+            'article{min-width:0;padding:16px;border:1px solid #37465a;border-radius:14px;background:#111c2a}'
+            'article p{color:#b7c5d8;font-size:.9rem}.preview{display:flex;align-items:center;justify-content:center;'
+            'height:220px;overflow:hidden;background:#111c2a}.preview img{max-width:100%;max-height:100%;'
+            'height:auto;width:auto;object-fit:contain}li{margin-block:8px}</style></head><body><main>'
+            '<h1>Decky Stream artwork</h1><p>Start here: these are the viewable PNG previews of the '
+            'current draft artwork. This page works offline as a single file; the images are embedded.</p>'
+            '<p class="note">Draft review only. The current artwork is unchanged; final logo exploration '
+            'and approval are separate. This is not an installer or a live software screenshot.</p>'
+            '<h2>What to open</h2><ul><li><strong>PNG:</strong> ordinary images for a browser or photo viewer. '
+            'The separate <code>decky-stream-png-previews.zip</code> contains only PNGs and a plain-text guide; '
+            'extract it first.</li><li><strong>SVG:</strong> editable vector artwork; open in a browser or vector editor. '
+            'Some photo apps cannot display it.</li><li><strong>JSON / CSS:</strong> metadata and colors for tools; '
+            'open in a text editor, not a photo viewer.</li><li><strong>TXT / MD:</strong> guides and notices. '
+            'HTML is this gallery. Open these source files in their matching apps rather than a photo viewer.</li></ul>'
+            '<h2>Image previews</h2><div class="grid">' + ''.join(cards) + '</div>'
+            '<p>Transparent marks and pale wordmarks are shown on a dark field. Favicons are intentionally '
+            'small. SVG source and font notices remain in the complete kit. No remote assets, web fonts, '
+            'JavaScript or tracking are used.</p></main></body></html>\n').encode()
 
 
 def validate_raster(files):
@@ -198,6 +285,9 @@ def render(root=ROOT, raster=False):
         return svg_document(width, height, name + " proposed " + ("README header" if is_header else "repository preview"), body)
 
     files = {"masters/mark.svg": mark, "decky/icon-monochrome.svg": icon,
+             "decky/icon-monochrome-preview.svg": svg_document(128, 128, name + " existing monochrome icon preview",
+                 '<rect width="128" height="128" fill="#0b111b"/>'
+                 f'<g transform="translate(10 10) scale(4.5)">{icon_geometry}</g>'),
              "masters/mark-transparent.svg": svg_document(128, 128, name + " proposed transparent mark", geometry_from(mark, transparent=True)),
              "masters/mark-on-light.svg": svg_document(128, 128, name + " proposed mark on light", geometry_from(mark, light=True)),
              "web/favicon.svg": mark,
@@ -229,6 +319,9 @@ def render(root=ROOT, raster=False):
     if min(ratios.values()) < 4.5:
         raise ValueError("Candidate palette failed normal-text contrast")
     files["README.md"] = ("# Proposed Decky Stream kit\n\nHuman creative and rights approval is pending. Do not install as production branding.\n\n"
+        "Start with index.html: it is a single offline browser page with embedded PNG previews. "
+        "With --raster exports, decky-stream-png-previews.zip supplies ordinary PNGs plus a plain-text guide. "
+        "Extract that archive before opening the images. SVG/JSON/CSS files are editable source and metadata, not photographs.\n\n"
         "SVG masters are editable; PNGs, when present, use the locked Inkscape/font. Native Decky uses its theme and a monochrome icon. "
         "A quarter-mark clear space and 16px draft minimum are proposals requiring actual device review. "
         "No animation, third-party logos, final organization, trademark clearance or publication is implied. "
@@ -239,6 +332,9 @@ def render(root=ROOT, raster=False):
     files["review/index.html"] = b'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Proposed Decky Stream kit</title><link rel="stylesheet" href="review.css"></head><body><main><h1>Decky Stream: proposed brand</h1><p>Human creative and rights review pending. Live product icon and theme are unchanged.</p><img class="wordmark" src="../docs/wordmark.svg" alt="Proposed Decky Stream wordmark"><h2>Actual-size geometry</h2><img class="sheet" src="legibility-sheet.svg" alt="Proposed play-and-transmission mark at 16, 24, 32, 64 and 128 pixels"><h2>README header</h2><img class="social" src="../github/readme-header.svg" alt="Proposed Decky Stream README header"><h2>Light README header</h2><img class="social" src="../github/readme-header-light.svg" alt="Proposed Decky Stream README header on a light field"><h2>Repository preview</h2><img class="social" src="../github/social-preview.svg" alt="Proposed Decky Stream social preview"><p>These images are candidates, not approved product branding. Check the README, rights inventory, contrast report and manifest before review. SVG text uses DejaVu Sans. No animation or remote assets.</p></main></body></html>\n'
     files["review/review.css"] = b':root{color-scheme:dark;font-family:system-ui,sans-serif}body{margin:0;background:#111c2a;color:#eef4fc;line-height:1.6}main{max-width:1000px;margin:auto;padding:24px}img{max-width:100%;height:auto}.wordmark{width:480px}.sheet{width:720px}.social{width:800px}h1{font-size:2rem}p{max-width:70ch;color:#b7c5d8}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}\n'
     toolchain = rasterize(files, lock) if raster else {"raster": "unrun; pass --raster with the locked tools"}
+    files["index.html"] = preview_gallery(files)
+    if raster:
+        files["decky-stream-png-previews.zip"] = png_previews(files)
     sources = {p: digest(data) for p, data in inputs.items()}
     manifest = {"schema": "decky-stream.draft-brand-kit/v1", "approval": "proposed-unapproved",
         "identity_revision": lock["revision"], "generator": "local draft preparer; not Identity compiler",
@@ -246,14 +342,7 @@ def render(root=ROOT, raster=False):
         "outputs": {p: {"sha256": digest(data), "bytes": len(data)} for p, data in sorted(files.items())},
         "gates": ["owner creative/rights/license approval", "organization and repository decision", "native Deck legibility/controller receipt", "approved Identity production generation and drift check", "publication approval"]}
     files[MANIFEST] = encoded(manifest)
-    archive = io.BytesIO()
-    with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as output:
-        for path, data in sorted(files.items()):
-            info = zipfile.ZipInfo("decky-stream-proposed/" + path, (1980, 1, 1, 0, 0, 0))
-            info.external_attr = 0o100644 << 16
-            info.compress_type = zipfile.ZIP_DEFLATED
-            output.writestr(info, data)
-    files["decky-stream-proposed.zip"] = archive.getvalue()
+    files["decky-stream-proposed.zip"] = deterministic_zip(files, "decky-stream-proposed")
     return files
 
 
@@ -268,9 +357,11 @@ def repository_assets(files):
         "logo-transparent.svg": "masters/mark-transparent.svg",
         "logo-transparent.png": "masters/mark-transparent.png",
         "logo-light.svg": "masters/mark-on-light.svg",
+        "logo-light.png": "masters/mark-on-light.png",
         "wordmark.svg": "docs/wordmark.svg",
         "wordmark.png": "docs/wordmark.png",
         "icon-monochrome.svg": "decky/icon-monochrome.svg",
+        "icon-monochrome-preview.png": "decky/icon-monochrome-preview.png",
         "favicon.svg": "web/favicon.svg",
         "favicon-16.png": "web/favicon-16.png",
         "favicon-32.png": "web/favicon-32.png",
@@ -286,10 +377,14 @@ def repository_assets(files):
         "legibility-sheet.svg": "review/legibility-sheet.svg",
         "legibility-sheet.png": "review/legibility-sheet.png",
         "contrast.json": "review/contrast.json",
+        "decky-stream-png-previews.zip": "decky-stream-png-previews.zip",
     }
     selected = {target: files[source] for target, source in mapping.items() if source in files}
     selected["README.md"] = (
         "# Decky Stream repository artwork — draft\n\n"
+        "Start with index.html: it is one offline browser page with embedded PNG previews and file-type help. "
+        "For a photo viewer, extract decky-stream-png-previews.zip; it contains ordinary PNG files plus START-HERE.txt. "
+        "SVG, JSON and CSS files below are editable source/metadata, not photographs.\n\n"
         "These are review candidates, not approved production branding or a live plugin replacement. "
         "Editable masters, actual generation methods and unresolved rights facts live in `.identity/candidates/`. "
         "The image-generation concept board is a reference; these SVG/PNG exports are generated from the editable SVG master.\n\n"
@@ -302,6 +397,7 @@ def repository_assets(files):
         "are in `.identity/toolchain.lock.json`; the separate font notice is `font-LICENSE.txt`. "
         "No font binary is redistributed. The manifest binds source and output bytes but is not human approval or a signature.\n"
     ).encode()
+    selected["index.html"] = preview_gallery(selected)
     manifest = json.loads(files[MANIFEST])
     manifest["projection"] = "tracked repository review assets; not approved native Identity output"
     manifest["outputs"] = {p: {"sha256": digest(data), "bytes": len(data)} for p, data in sorted(selected.items())}
@@ -369,6 +465,7 @@ def main():
     print(json.dumps({"status": "verified" if args.check else "prepared", "approval": "proposed-unapproved",
                       "output": str(output), "files": len(files),
                       "manifest_sha256": digest(files[MANIFEST]),
+                      "png_preview_archive_sha256": digest(files["decky-stream-png-previews.zip"]) if "decky-stream-png-previews.zip" in files else None,
                       "archive_sha256": digest(files["decky-stream-proposed.zip"]) if "decky-stream-proposed.zip" in files else None}))
 
 

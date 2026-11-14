@@ -1,9 +1,37 @@
 # Before the fresh Decky Stream repository
 
+**Current execution plan:** [the implementation roadmap](implementation-roadmap.md),
+parent #46, supersedes the earlier lane ordering below. Owner selected
+01 / aurora. Complete #76–#85 under current OBSGod, deliver manual Deck tests
+and fix reports in #86, then execute the exact approved migration in #87 and
+repeat the actual new install in #88. OAuth/phone login is separate research #89.
+The following prepared engineering table remains history, not a request to
+repeat already completed legacy/API or NFPM source work.
+
 Prepared 2026-11-14 UTC from live #46 and the existing checkout. The owner prefers
 a fresh source snapshot and clean tracker rather than transferring the old fork's
-history. `egohygiene/decky-stream` is the working destination discussed; creation,
-retirement, publication and final creative adoption have not happened.
+history. Intended repository name is now `deckystream` (owner update 2026-11-14),
+with `egohygiene` the working owner discussed rather than a final destination.
+Creation, retirement, publication and final creative adoption have not happened.
+
+The nondeferred engineering pass has now been implemented and checked in draft
+#75. [The completion checkpoint](pre-migration-completion.md) records exact
+sources, focused passes, repaired failures and remaining gates. The table below
+preserves the original work plan; final full testing still follows the new logo.
+
+## Current owner-directed sequence
+
+1. Repair brand-kit opening/download compatibility and finish feasible engineering
+   here, using focused checks during implementation.
+2. Review the owner's new logo ideas and prepare that artwork.
+3. Freeze the resulting candidate and run the final full available test matrix.
+4. Repair demonstrated failures and rerun the affected/final checks as needed.
+5. Migrate only after that preparation and the applicable concrete owner actions.
+
+Companion/StreamGod and provider OAuth are explicitly deferred. Original criteria
+remain preserved with that disposition; no new project or sign-in integration is
+implemented in this phase. Final full qualification is held for step3 rather
+than relabeling old source receipts or testing the superseded logo as final.
 
 ## Work we can do here
 

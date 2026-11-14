@@ -1,11 +1,24 @@
 # Product roadmap
 
-Current repository-presentation preparation and useful remaining engineering
-lanes are in [the pre-migration plan](docs/pre-migration-plan.md). The owner
-prefers a fresh Decky Stream repository; draft art/README/funding preparation
-does not perform that migration or close remaining #46 acceptance.
+The owner locked **01 / aurora** and selected future repository name
+**deckystream**. The current [implementation roadmap](docs/implementation-roadmap.md)
+is parent [#46](https://github.com/szmyty/obsgod/issues/46):
+[#76–#85, implementation and a test-ready build](https://github.com/szmyty/obsgod/milestone/4),
+then [#86–#88, Deck validation and migration](https://github.com/szmyty/obsgod/milestone/5).
 
-## Current state — qualified follow-up and remaining acceptance
+Implement normal Decky packaging, recoverable in-plugin dependency setup, private
+manual-key configuration, safe state/lifecycle integration and the selected
+branding/UI under current **szmyty/obsgod** first. Reuse existing #73/#74/#75
+work. Audit, qualify the final source and give the owner numbered Deck tests;
+fix reported bugs before the actual move, then retest the new installation.
+
+[#89](https://github.com/szmyty/obsgod/issues/89) separately researches Twitch/Kick
+OAuth and phone/QR login. Discuss that design before authentication coding; it
+does not block manual-key streaming. The companion remains deferred. All 230
+original criteria/dependencies are preserved; earlier source receipts do not
+qualify new implementation, artwork, hardware or publication.
+
+## Historical qualified follow-up and remaining acceptance
 
 The owner authorized merging the prepared audit and progressing the remaining
 issues. #67 and follow-up source #69/#70/#71 are merged; #72 contains the final
@@ -40,7 +53,8 @@ Completion PRs #62 foundation -> #63 mixer -> #64 API/creator -> #65
 qualification are merged. Exact source 1a482808 passed the complete available local matrix and
 both full act sequences; [install candidate 9](docs/candidate-9-install.md) and
 [review the audit](audits/audit-2026-11-13.md). Intended slug:
-**decky-stream**; compatibility/migration and final branding review remain explicit.
+**deckystream** (owner naming update 2026-11-14); compatibility/migration and
+final branding review remain explicit.
 #51 now holds two separate research journeys (monetization and Decky Store).
 After source review/merges, remaining acceptance was consolidated into #46,
 preserving original criteria and evidence; #68 is a newly demonstrated scoped defect.

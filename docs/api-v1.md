@@ -67,6 +67,7 @@ output rollback or assumption of idleness.
 | `VerifyService` | Compare desired private RTMP settings without changes or returning the configured key |
 | `ApplyWorkflow` | Versioned OBS intent; `Settings` plus requested recording/replay approvals; never starts streaming |
 | `Discover` | Offline operation/capability contract, not a probe of installed OBS plugins |
+| `Legacy(ctx, LegacyRequest, Approval)` | Go-only typed allowlist for 39 existing v0 operations; mutation success means request acknowledgement, with the matching per-invocation approval; normal v1 confirmed-state methods are unchanged |
 
 Approval is a separate invocation-scoped value, excluded from JSON. A profile,
 environment variable, previous approval or successful connection cannot authorize
@@ -130,25 +131,56 @@ and usage should use the documented [private references](configuration.md).
 
 ## Compatibility and migration
 
-The dependency is `CLI api -> pkg/api/v1 -> pkg/automation -> pinned goobs -> OBS`.
-The optional [creator layer](creator-workflows.md) consumes the public API and
-owns provider meaning. No Kick/Twitch/YouTube account behavior belongs here.
+Both CLI families now use the facade:
+
+- `CLI api -> pkg/api/v1 -> pkg/automation -> pinned goobs -> OBS`.
+- `Legacy CLI -> internal/obs -> pkg/api/v1.Client.Legacy -> pkg/automation -> pinned goobs -> OBS`.
+
+The optional [creator layer](creator-workflows.md) also consumes the public API
+and owns provider meaning. Separate companion/OAuth work is explicitly deferred;
+no provider account behavior enters this OBS boundary.
+
+`Client.Legacy` is a Go-only compatibility entry point for 39 allowlisted v0
+operations. Independent `LegacyRequest`, `LegacyResult`, `LegacyOutputStatus`,
+`LegacySpecialSources` and `LegacyItemVisibility` types carry the documented
+inputs/results without exposing `goobs`, arbitrary OBS request names or raw
+protocol JSON. Unknown operations fail before reaching the backend. This method
+is not a new `obsgod api legacy` command or part of that family's JSON discovery
+surface. Prefer the normal typed v1 methods for new integrations.
 
 Existing legacy `stream`, `recording`, `profile`, `scene`, and related commands
-retain their original `internal/obs` service, flags, success acknowledgement and
-human/JSON outputs. Legacy failures now use the same safe domain error projection
-and silence transport logging. This intentionally does **not** claim every old
-command has been migrated to the new context/approval/confirmed-output contract.
-Existing `workflow` and managed `deck` contracts also remain compatible.
+keep their names, flags, output shapes and ACK-only mutation semantics. In
+particular, status retains the exact OBS timecode, narrow list reads do not add
+unrelated snapshot queries, and composite scene/item operations preserve request
+order and partial-action behavior. Successful legacy mutation acknowledges the
+request; it does not promise the confirmed output/readback of normal v1 methods.
+The existing `workflow` and managed `deck` contracts remain compatible.
 
-New importing applications and automation should use `pkg/api/v1` / `obsgod api`.
-Complete legacy migration requires a separately reviewed deprecation plan;
-silently changing a v0 command's success/approval semantics would break scripts.
-The full #9 CLI migration criterion therefore remains a reconciliation item.
-[The migration map](legacy-api-migration.md) records every legacy group and its
-compatibility gaps. The new narrow profile read prepares shared implementation;
-legacy `profile list/get` still use their existing injected transport until the
-connection-ownership adapter is refactored and qualified.
+Each legacy mutating verb supplies only its matching invocation-scoped approval
+(`Streaming`, `Recording`, `ReplayBuffer`, `VirtualCamera` or `Settings`). Reads
+need none. Context carries cancellation, not approval. Previous calls cannot
+supply later authority, and this compatibility method does not relax approval or
+observation requirements on `StartStream`, `SelectProfile` or other normal v1
+operations. Legacy errors use the same safe domain projection and suppressed
+transport logging.
+
+`internal/obs` resolves configuration before acquiring one lazily cached facade.
+Its injected dialer and User-Agent cross a private `internal/obstransport` seam;
+public constructors/models do not expose a raw protocol client. The command
+context reaches every legacy request, with 10-second legacy connection and
+operation budgets and a shorter caller deadline taking precedence. A cancelled
+waiter cannot close another acquired operation; acquired cancellation closes and
+invalidates its connection. Later work may acquire a new connection, but no
+interrupted mutation is automatically retried. Physical socket close is attempted
+promptly and once, while SDK Disconnect cleanup completes in the background.
+`Close` does not join every transport goroutine or establish idle OBS output;
+an unconfirmed shutdown is an explicit safe error.
+
+[The migration contract](legacy-api-migration.md) separates current integration,
+regression sources and remaining acceptance from its preserved historical gap
+map. No v0 removal/deprecation date or stable-v1 acceptance is introduced. The
+full original #9 criteria still require their own reconciliation and final-source
+qualification; implementation alone does not close #46.
 
 Once a qualified v1 contract is accepted, additive optional fields/operations
 may extend schema1; consumers must tolerate unknown JSON fields. Removal,
@@ -160,6 +192,8 @@ invented by adding the facade.
 
 Local protocol/fake tests cover the import boundary, advancing/idempotent
 streaming, unknown-state rejection, redaction, cancellation ownership, creator
-ordering/partial failures and offline CLI JSON. Exact final revision/matrix is
-recorded by the completion campaign. These tests do not replace Steam Deck,
+ordering/partial failures and offline CLI JSON. Compatibility regressions also
+exercise legacy ACKs/output/order, exact approvals, lazy private transport and
+command cancellation. Focused checks are not the complete final-source matrix;
+that matrix remains pending in the completion campaign. These tests do not replace Steam Deck,
 provider viewer, required review, hosted CI or publication qualification.

@@ -7,7 +7,7 @@ with every evolving framework document or start a standards migration.
 | Record | Status | Scope |
 | --- | --- | --- |
 | [0001: managed local control](docs/decisions/0001-managed-local-control.md) | Existing behavior, documented | Isolated graphical OBS, confirmed state and capture privacy |
-| [0002: product identity](docs/decisions/0002-product-identity.md) | Working name accepted; final identity/migration proposed | Decky Stream display, preserved compatibility identifiers |
+| [0002: product identity](docs/decisions/0002-product-identity.md) | Working name accepted; repository slug selected; final identity/migration proposed | Decky Stream display, intended `deckystream` repository, preserved compatibility identifiers |
 | [0003: core and creator](docs/decisions/0003-core-and-creator-boundary.md) | Existing separation documented; companion repository proposed | Provider-neutral core, optional orchestration |
 
 “Existing behavior, documented” records source; it is not a new owner approval

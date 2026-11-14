@@ -231,8 +231,13 @@ def target_name(version, target):
 
 
 def audit_archive(name, data, target, version, identity, prepared):
+    files = archive_files(data, "zip" if target[0] == "windows" else "tar.gz")
+    return audit_payload(name, data, files, target, version, identity, prepared)
+
+
+def audit_payload(name, data, files, target, version, identity, prepared):
+    """Verify the same executable/notices contract after a bounded format reader."""
     system, arch, arm = target
-    files = archive_files(data, "zip" if system == "windows" else "tar.gz")
     binary = "obsgod.exe" if system == "windows" else "obsgod"
     require(set(files) == BASE_FILES | {binary}, "Generic archive exact inventory mismatch")
     for filename in ("LICENSE", "README.md", "CHANGELOG.md"):

@@ -1,0 +1,76 @@
+{
+  "schema": "decky-stream.brand-concept/v1",
+  "id": "orbital-stream-color-alternatives",
+  "status": "proposed-unapproved",
+  "createdAt": "2026-11-14",
+  "tool": "image_gen.imagegen",
+  "method": "AI-generated four-up color/material comparison using the square orbital-stream gradient icon as the supplied local image reference. Requested consistent silhouette across all variants. Generated resemblance is not proof of identical vector geometry; no palette is selected by this comparison.",
+  "creator": "OpenAI image generation, requested by repository owner",
+  "path": ".identity/candidates/concepts/orbital-stream-color-alternatives.png",
+  "width": 1254,
+  "height": 1254,
+  "sha256": "4e2076ce7ba139a97d1ecf3b730de6db0cb15d9452cfcefbd8885b2af7b9c801",
+  "bytes": 1646377,
+  "prompt": "Make a beautiful FOUR-VARIANT COLOR COMPARISON SHEET for the \"deckystream\" app icon, using the attached original aqua/violet icon as the exact visual reference.\n\nVery important: preserve the SAME ORIGINAL SYMBOL in every variant and match the attached image. It is a rounded nearly circular open ribbon with a gap at the upper right and a continuous flowing S-shaped stream band crossing the center, with the same flowing joins, exact orientation, identical negative spaces and same thickness. This is a color/material exploration, NOT four different logo designs. No OBS swirl, no Steam symbol, no Decky logo, no new pictograms, no controller and no play buttons.\n\nLAYOUT: a beautifully aligned 2-by-2 grid on a near-black full canvas, approximately square overall. Each of the FOUR cells has the SAME large centered icon with generous equal padding, on a subtly different near-black background. Fine understated separators between cells. No fake devices, no UI screenshots, no marketing paragraphs, no palette swatches. Keep the comparison easy to read on a phone. Small, elegant lowercase labels below each icon, exact text as follows:\ntop left: \"01 / aurora\"\ntop right: \"02 / afterglow\"\nbottom left: \"03 / solar\"\nbottom right: \"04 / pearl\"\n\nCOLOR / MATERIAL VARIATIONS:\n01 / aurora: the original treatment, luminous frosted aqua glass, cool cyan highlights with lavender concentrated on the upper right and right side. Dark midnight-ink background. The reference identity, essentially unchanged.\n02 / afterglow: gorgeous violet-to-magenta-to-soft-pink gradient. Deep violet on the lower left, lilac and vivid fuchsia across the flowing band, rose-pink highlights on the upper right. Refined luminous frosted glass with soft controlled purple/pink halo. Dark violet-black background. Confident contemporary gamer aesthetic.\n03 / solar: luminous warm coral-to-peach-to-amber gradient, a subtle magenta tint in the darker side. Deep coral at the left and lower portion, soft peach and warm golden edges on the upper right. Same frosted sculptural glass and controlled restrained glow. Dark warm-black background. Premium sunset light, not fiery flames.\n04 / pearl: sophisticated pearlescent white glass with visible soft lilac, icy pale blue and blush-pink iridescence, deeper violet shading through one section to retain shape. Same icon geometry and dimensionality. Dark charcoal-black background. Clear luminous edges but do NOT blow it out to pure featureless white.\n\nAll variants use the SAME level of subtle depth, clean beveled glass surfaces, comfortable negative space, strong silhouette, and modest halo. They must feel like different finishes of the same approved design. The symbol itself should occupy about 68% of each cell width, leaving room for both halo and label. Excellent visual consistency. Crisp high-end polished icon presentation. No extra title or labels other than the four numbered names. No simulated in-app status indicators.",
+  "referencedImages": [
+    {
+      "path": ".identity/candidates/concepts/orbital-stream-gradient-icon.png",
+      "sha256": "4c59ae9c7716c3889bd837071b55cef0e8641419405ded250f8d73620eab5f49",
+      "use": "Retain the emblem and dimensional material while exploring alternate palettes."
+    }
+  ],
+  "variants": [
+    {
+      "number": "01",
+      "name": "aurora",
+      "position": "top-left",
+      "palette": "aqua/cyan with violet; original direction",
+      "currentCreativeRole": "selected-primary-direction"
+    },
+    {
+      "number": "02",
+      "name": "afterglow",
+      "position": "top-right",
+      "palette": "violet/magenta/pink",
+      "currentCreativeRole": "retained-alternative-concept"
+    },
+    {
+      "number": "03",
+      "name": "solar",
+      "position": "bottom-left",
+      "palette": "coral/peach/amber with magenta shading",
+      "currentCreativeRole": "retained-alternative-concept"
+    },
+    {
+      "number": "04",
+      "name": "pearl",
+      "position": "bottom-right",
+      "palette": "pearlescent ivory/lilac/icy blue/blush",
+      "currentCreativeRole": "retained-alternative-concept"
+    }
+  ],
+  "transparentBackground": false,
+  "humanApproval": null,
+  "rightsStatus": "owner-review-required; no trademark clearance, copyright eligibility or rights transfer asserted",
+  "usage": "Creative comparison sheet only. This is not four exported production icons, vector masters, a native Identity compiler output or a live Decky screenshot. Existing art and runtime are unchanged. Palette selection, final exports and actual-size checks remain.",
+  "creativeDirectionSelection": {
+    "record": ".identity/candidates/concepts/selection.json",
+    "recordedAt": "2026-11-14T18:31:52Z",
+    "selectedPrimary": "01 / aurora",
+    "artifactRole": "comparison-sheet-with-selected-primary-direction",
+    "scope": "Owner creative direction only. Original artifact remains proposed; no final rights/license, vector/export, production or device approval."
+  },
+  "statusHistory": [
+    {
+      "recordedAt": "2026-11-14",
+      "status": "proposed-unapproved",
+      "scope": "Original generated concept artifact"
+    },
+    {
+      "recordedAt": "2026-11-14T18:31:52Z",
+      "status": "proposed-unapproved",
+      "scope": "Artifact status retained; primary creative direction selected separately in selection.json"
+    }
+  ],
+  "selectionContext": "The original generation method above describes the comparison before selection. The owner subsequently chose 01 / aurora; this sheet is still a concept, not four final exported icons."
+}

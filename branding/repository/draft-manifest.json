@@ -11,8 +11,8 @@
   "identity_revision": "cfb6c29bd02589a47fc48050ab02e7e0da359719",
   "outputs": {
     "README.md": {
-      "bytes": 1143,
-      "sha256": "79f911f127b9432d3f567c635e4aa18de81738f7f0cec27b0aa61ff8cd768ff8"
+      "bytes": 1433,
+      "sha256": "fcc5bcafe3bb8788912d4e583e31015a14427b4203d179d8fa2b97a751930266"
     },
     "asset-sources.json": {
       "bytes": 2620,
@@ -29,6 +29,10 @@
     "contrast.json": {
       "bytes": 439,
       "sha256": "99c8e114b1ba209eaf340607888ac2292e6a1b59d1c96ed796ba66bd9f86d472"
+    },
+    "decky-stream-png-previews.zip": {
+      "bytes": 319337,
+      "sha256": "cd7a4c1f14500a9ab37f4ae6de80ae720d2d3cb3516ff1ba91d356a5198db8ad"
     },
     "favicon-16.png": {
       "bytes": 678,
@@ -66,9 +70,17 @@
       "bytes": 1745,
       "sha256": "a7918325f58815315d260ccde5ff73f3fedf96dbe3ee3f52d73d73d87765ebfb"
     },
+    "icon-monochrome-preview.png": {
+      "bytes": 3587,
+      "sha256": "d4501797e42954bc066e9fc286962baca95bf8733059cd5929b6445b217a0572"
+    },
     "icon-monochrome.svg": {
       "bytes": 588,
       "sha256": "7dc377ef8f2335014277925a6b0f5d3294bb4c680f208560691783eac747038f"
+    },
+    "index.html": {
+      "bytes": 892704,
+      "sha256": "252693e7aef5b5b0b90066017f0225db26b0dd240bbd3f2de30424836c21e26d"
     },
     "legibility-sheet.png": {
       "bytes": 35133,
@@ -77,6 +89,10 @@
     "legibility-sheet.svg": {
       "bytes": 5583,
       "sha256": "3fee0f5a59fb4f85205d9b42ce8888e1515ba3f25570b1d10ad2799416523ec3"
+    },
+    "logo-light.png": {
+      "bytes": 25797,
+      "sha256": "a3e1a9fb9d867eb63b12ea56f1423a13a39b23ecebbae6b0920786a1df3c8759"
     },
     "logo-light.svg": {
       "bytes": 887,
@@ -121,7 +137,7 @@
   },
   "projection": "tracked repository review assets; not approved native Identity output",
   "schema": "decky-stream.draft-brand-kit/v1",
-  "source_sha256": "518c7bb05b59514f6889ae448544b2bf1628be8a2db41db00007e8262d63d157",
+  "source_sha256": "7c07943ea45a019db3e79cb09d182300c68e405ec4af4022af17a60951da467b",
   "sources": {
     ".identity/README.md": "cf6c9237d65892dce56f25fa40d1838e3d6d60920de4db5a3f1471f3233016bd",
     ".identity/brief.md": "eade665548f8e875c210fb5b097dba63cd41ce43e8a0026c3af4f72f5fb72a4a",
@@ -142,7 +158,7 @@
     ".identity/targets/profiles.json": "1f46cce8621175f1a9fe871e4c65ab214f6f161c43d649f1110c24b79db2b463",
     ".identity/toolchain.lock.json": "15e37a8b4b1e10bab3414166e4a48fb6040543622d7a8a45270179d0d26416c6",
     "branding/licenses/DejaVu.txt": "e180b3d65bf650dffffd71dd21b6180767b469a18dd87e1d8552be69bb9ecdf0",
-    "scripts/generate-brand-kit.py": "95c1b6b9f5245f08bb8e8dc6de4d19450f07a0154ac3f1691ada47bc196cf5b6"
+    "scripts/generate-brand-kit.py": "7550197dd0adb409cb541d3725dfe1267570085d395e2b95cabc7ad35c725916"
   },
   "toolchain": {
     "font_sha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e",

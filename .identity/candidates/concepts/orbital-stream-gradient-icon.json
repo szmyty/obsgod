@@ -1,0 +1,56 @@
+{
+  "schema": "decky-stream.brand-concept/v1",
+  "id": "orbital-stream-gradient-icon",
+  "status": "proposed-unapproved",
+  "createdAt": "2026-11-14",
+  "tool": "image_gen.imagegen",
+  "method": "AI-generated square icon variant edited with the orbital-stream concept board as the supplied local image reference. The owner requested the hero banner's luminous aqua/violet gradient, glow and dimensional treatment for the primary icon. This PNG is a creative preview, not a vector master, compiler output or proof of live Decky rendering.",
+  "creator": "OpenAI image generation, requested by repository owner",
+  "path": ".identity/candidates/concepts/orbital-stream-gradient-icon.png",
+  "width": 1254,
+  "height": 1254,
+  "sha256": "4c59ae9c7716c3889bd837071b55cef0e8641419405ded250f8d73620eab5f49",
+  "bytes": 1488094,
+  "prompt": "Create a SINGLE polished square app icon for the independent Steam Deck plugin \"deckystream\", using the attached brand direction board as the exact reference. The owner loves the top banner's luminous sculptural aqua-to-violet logo and wants THAT appearance for the app icon, rather than the flat teal icon shown at the bottom of the board.\n\nUse ONLY the emblem from the TOP RIGHT HERO BANNER: the original circular orbital stream symbol, a nearly closed circular ribbon/ring with its intentional gap at the upper right and a flowing S-shaped band through its center. Preserve its exact silhouette, proportions, direction, negative space and smooth continuous anatomy as closely as possible. Do not redesign the symbol, add a play triangle, add a controller, change the shape into a letter typed with a font, or introduce any third-party logo.\n\nRender that same emblem centered and large, occupying about 72 percent of the square width, with ample comfortable padding. Use the gorgeous HERO BANNER material: luminous frosted aqua glass, subtle dimensional bevels, soft highlights, restrained turquoise glow, with the lavender/violet transition concentrated on the upper-right and right-hand portion. The luminous gradient must be visible across the symbol; it must not be a flat solid color. Avoid an overexposed white logo. Smooth professional premium app-icon finish, crisp silhouette, beautiful controlled light.\n\nBackground: full-bleed opaque midnight ink / near-black (#080E13) square, with a very quiet aqua/violet ambient halo behind the emblem. Background reaches every edge; do not bake rounded-square outer corners into the canvas. No separate app tile mockup, no outer frame, no device, no text, no tagline, no labels, no palette swatches, no multiple variants. No water, floor, horizon, orbit construction lines or tiny stars, because this must work as an actual app/avatar icon. The finished image must be one usable square icon, not a presentation sheet.\n\nRetain the identity and icy aqua/violet palette of the original banner, translated directly into a simple premium icon.",
+  "referencedImages": [
+    {
+      "path": ".identity/candidates/concepts/orbital-stream-board.png",
+      "sha256": "5301893b21e08872262cced4e6415e117ddf20900e0ee64e816f912b298c8a5e",
+      "use": "Preserve the top-right banner emblem and aqua/violet treatment; replace the board's flat teal icon treatment."
+    }
+  ],
+  "transparentBackground": false,
+  "ownerDirection": "Owner selected 01 / aurora aqua/violet as the primary creative direction. This original gradient icon remains a supporting concept; selection.json records the exact comparison image and limited approval scope.",
+  "humanApproval": null,
+  "rightsStatus": "owner-review-required; no trademark clearance, copyright eligibility or rights transfer asserted",
+  "usage": "Primary icon creative candidate. Do not replace current live plugin icon, observed streaming status, generated kit or approved masters without the corresponding implementation and checks. Small-size rendering remains unqualified.",
+  "creativeDirectionSelection": {
+    "record": ".identity/candidates/concepts/selection.json",
+    "recordedAt": "2026-11-14T18:31:52Z",
+    "selectedPrimary": "01 / aurora",
+    "artifactRole": "original-gradient-reference-retained",
+    "scope": "Owner creative direction only. Original artifact remains proposed; no final rights/license, vector/export, production or device approval."
+  },
+  "statusHistory": [
+    {
+      "recordedAt": "2026-11-14",
+      "status": "proposed-unapproved",
+      "scope": "Original generated concept artifact"
+    },
+    {
+      "recordedAt": "2026-11-14T18:31:52Z",
+      "status": "proposed-unapproved",
+      "scope": "Artifact status retained; primary creative direction selected separately in selection.json"
+    }
+  ],
+  "ownerDirectionHistory": [
+    {
+      "recordedAt": "2026-11-14",
+      "text": "Owner likes the orbital-stream board and requested the banner treatment for the primary icon. This new rendered variant awaits visual feedback."
+    },
+    {
+      "recordedAt": "2026-11-14T18:31:52Z",
+      "text": "Owner selected 01 / aurora aqua/violet as primary; retain this original gradient icon as a supporting concept, with final source/export decisions still pending."
+    }
+  ]
+}

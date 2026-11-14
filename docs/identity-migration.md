@@ -28,8 +28,9 @@ plugin runtime-data directory is persistent and is not `XDG_RUNTIME_DIR`.
 ## Preferred fresh-repository path
 
 The owner now prefers a clean independent Decky Stream repository, with a fresh
-initial commit and rewritten remaining issues. `egohygiene/decky-stream` is the
-working destination discussed; no new repository, retirement or final brand
+initial commit and rewritten remaining issues. The intended repository name is
+`deckystream` (owner preference updated 2026-11-14); `egohygiene` is the working
+owner discussed, not a finalized destination. No new repository, retirement or final brand
 adoption has occurred. Keep [the memorial](../MEMORIAL.md) and its portable
 tracker records with the new source; preserve attribution and every unfinished
 criterion. A private backup in `szmyty/archive` cannot by itself preserve public

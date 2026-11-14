@@ -2,7 +2,8 @@
 
 Issues #35/#36. This is a staged plan and local compatibility inventory. It does
 not transfer or rename a repository, create an organization, deploy a site, or
-publish a release. Intended slug: `decky-stream`; display: **Decky Stream**.
+publish a release. Intended repository slug: `deckystream` (owner update
+2026-11-14); current display: **Decky Stream**.
 Current source/release trust stays `szmyty/obsgod` until the new owner and exact
 repository are chosen, authorized and tested.
 
@@ -11,7 +12,7 @@ repository are chosen, authorized and tested.
 | Surface | Current / intended behavior |
 | --- | --- |
 | Human display | `Decky Stream`, centralized in `product.json` and generated projections. |
-| Current repository | `szmyty/obsgod`; owner of a future `<owner>/decky-stream` is unresolved. |
+| Current repository | `szmyty/obsgod`; owner of a future `<owner>/deckystream` is unresolved. |
 | CLI / package artifact names | `obsgod`, `obsgod-deck_VERSION_linux_amd64.tar.gz`, `obsgod-decky.zip`; preserve old entry points/artifacts during transition. |
 | Decky plugin | Plugin identity `OBSGod`, installed directory `obsgod`; preserve one instance controlling the managed endpoint. |
 | XDG application paths | `obsgod` under config/data/state/cache roots; retain existing private credentials, connection/profiles, receipts, clip index and history. |
@@ -27,9 +28,9 @@ environment variable must not silently change update trust or installed IDs.
 
 ## Narrow release trust contract
 
-Before any move, choose exactly one new canonical `OWNER/decky-stream`. A staged
+Before any move, choose exactly one new canonical `OWNER/deckystream`. A staged
 transition must enumerate the exact old and new owners/repos, supported release
-tags and bounded sunset policy. No `*/decky-stream`, arbitrary GitHub owner,
+tags and bounded sunset policy. No `*/deckystream`, arbitrary GitHub owner,
 user-supplied download URL, generic redirect trust or mutable branch artifact
 should become an accepted updater source.
 
@@ -92,6 +93,11 @@ Existing installer/updater/unit smoke checks can cover old-identity behavior.
 They are not a completed old→transition→new receipt until the actual new identity
 and candidate are supplied and exercised. Keep that criterion open.
 
+The earlier synthetic future-publisher fixture uses `egohygiene/decky-stream`.
+Preserve that fixture's exact historical receipts; they do not qualify the newly
+selected `deckystream` slug or an actual destination. Re-run destination-dependent
+checks against the chosen exact owner/repository during implementation.
+
 ## Exact owner checklist for the future move
 
 - Choose the organization, who can administer it, repository destination and
@@ -104,7 +110,7 @@ and candidate are supplied and exercised. Keep that criterion open.
 - Transfer/rename through GitHub only after the approved transition is available
   to existing users; record old/new repository IDs, redirects and exact time.
 - Update the remote only after verifying GitHub's new canonical repository ID:
-  `git remote set-url origin https://github.com/OWNER/decky-stream.git`.
+  `git remote set-url origin https://github.com/OWNER/deckystream.git`.
   `OWNER` is a deliberately unresolved value, not an executable recommendation.
 - Requery live APIs/refs/releases/protection and verify historical artifacts,
   fresh install, old updater transition, repair, rollback, uninstall and docs

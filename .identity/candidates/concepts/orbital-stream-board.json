@@ -1,0 +1,57 @@
+{
+  "schema": "decky-stream.brand-concept/v1",
+  "id": "orbital-stream",
+  "status": "proposed-unapproved",
+  "createdAt": "2026-11-14",
+  "tool": "image_gen.imagegen",
+  "method": "AI-generated creative direction board, prompted from the owner's Mindgarden and Identity README aesthetic references. No reference image was passed to the generation tool. This PNG is a review reference, not an editable vector master, a native Identity compiler input, or a product screenshot.",
+  "creator": "OpenAI image generation, requested by repository owner",
+  "path": ".identity/candidates/concepts/orbital-stream-board.png",
+  "sha256": "5301893b21e08872262cced4e6415e117ddf20900e0ee64e816f912b298c8a5e",
+  "width": 1536,
+  "height": 1024,
+  "prompt": "Create an exceptionally polished, original brand direction board for a Steam Deck streaming plugin named \"decky stream\". This is a first creative concept for its owner to review, NOT a screenshot and not a finished approved identity.\n\nAESTHETIC: meditative sci-fi, dark luminous precision, atmospheric but restrained, as if a quietly advanced personal tool. Near-black ink field (#080E13), cool ivory typography (#E8F1F3), glacial aqua accent (#83E8E0), very small touches of spectral lavender (#B6A5EF). The reference aesthetic is a wide black banner with very airy lowercase lettering on its left, a luminous circular sculptural object on its right, delicate technical geometry, dark reflective water or obsidian floor. Not generic loud gaming neon. Lots of breathing room. No stock photography, no app screenshots, no mascots.\n\nDESIGN A DISTINCT SIMPLE SYMBOL, CONSISTENT THROUGHOUT: an open circular orbital ring framing one bold, flowing S-shaped ribbon. The S is a single broad fluid shape, not a letter typed in a font. The ring has one intentional gap at the upper-right, suggesting an outgoing transmission. Two elements only: open ring and S ribbon, clear negative space, ownable silhouette, precise round geometry. The motif should suggest a stream flowing outward. NO OBS three-lobed swirl, NO Steam logo, NO Decky logo, NO Nintendo-like controller, NO play triangle, NO wifi arcs. Small-size mark must not rely on thin lines or glow. Ring plus ribbon should also be crisp in solid white.\n\nBOARD COMPOSITION, landscape approximately 3:2:\nTop about 63%: one beautiful panoramic README / launch banner. On the left, carefully typeset lowercase \"decky stream\", thin or regular modern geometric sans, pronounced tracking without making it unreadable. Underneath in much smaller type: \"your game. your stream.\" Leave abundant black space. On the right, one elegant luminous aqua orbital stream emblem, subtly sculptural like frosted light, suspended a little above a dark reflective plane. A faint wider halo, very delicate orbital construction lines, tiny sparse points of light. The S and ring themselves stay the primary design. Quiet violet on one edge only. Reflection subtle, not a busy landscape. Composition looks premium and personal, deeply atmospheric.\n\nBottom about 37%: clean near-black identity review strip with subtle dividers and precise alignment. Three modules:\n1. Small label \"MARK\" above a large crisp flat aqua version of the exact same ring/S symbol, with one smaller white monochrome version beside it. Present on plain dark field without glow.\n2. Small label \"APP ICON\" above the same crisp mark on a rounded near-black square, comfortably inset, and a tiny neighboring actual small version to communicate legibility. No UI status dots, no badges.\n3. Small label \"PALETTE\" above four neatly aligned color swatches: ink, ivory, aqua, lavender. Small tasteful names only below: \"ink\", \"ivory\", \"aqua\", \"violet\". No lengthy brand guidelines or extra prose.\n\nConsistent symbol anatomy across hero, mark and app icon. Editorial typography, superb negative space, immaculate finish. The image must feel like one coherent visual identity presentation, not a collage. Correct exact product spelling: decky stream.",
+  "references": [
+    {
+      "repository": "egohygiene/mindgarden",
+      "path": "docs/assets/mindgarden-banner.png",
+      "url": "https://github.com/egohygiene/mindgarden/blob/main/docs/assets/mindgarden-banner.png",
+      "use": "Owner-requested aesthetic reference; dark reflective environment, luminous circular composition and airy lowercase lettering. Mutable URL, not a pinned source revision."
+    },
+    {
+      "repository": "egohygiene/identity",
+      "path": "assets/identity/brand/banner-readme.svg",
+      "blobSha": "8ab46c4a63d0499163d66945630a320862923cd4",
+      "url": "https://github.com/egohygiene/identity/blob/main/assets/identity/brand/banner-readme.svg",
+      "use": "Owner-requested aesthetic reference; near-black ground, restrained orbital geometry and luminous spectral accents."
+    }
+  ],
+  "requestedPalette": {
+    "ink": "#080E13",
+    "ivory": "#E8F1F3",
+    "aqua": "#83E8E0",
+    "violet": "#B6A5EF"
+  },
+  "humanApproval": null,
+  "rightsStatus": "owner-review-required; no trademark clearance, copyright eligibility or rights transfer asserted",
+  "usage": "Creative review reference only. Does not replace the earlier mint-signal concept, current editable masters, generated kit, or live plugin visuals. Flat and monochrome examples are generated concepts; actual vector exports and small-size checks remain to be produced after direction selection.",
+  "creativeDirectionSelection": {
+    "record": ".identity/candidates/concepts/selection.json",
+    "recordedAt": "2026-11-14T18:31:52Z",
+    "selectedPrimary": "01 / aurora",
+    "artifactRole": "origin-reference-retained",
+    "scope": "Owner creative direction only. Original artifact remains proposed; no final rights/license, vector/export, production or device approval."
+  },
+  "statusHistory": [
+    {
+      "recordedAt": "2026-11-14",
+      "status": "proposed-unapproved",
+      "scope": "Original generated concept artifact"
+    },
+    {
+      "recordedAt": "2026-11-14T18:31:52Z",
+      "status": "proposed-unapproved",
+      "scope": "Artifact status retained; primary creative direction selected separately in selection.json"
+    }
+  ]
+}

@@ -11,6 +11,7 @@ import (
 	"log"
 	"math"
 	"net"
+	"net/http"
 	"regexp"
 	"strconv"
 	"sync"
@@ -18,6 +19,7 @@ import (
 
 	"github.com/andreykaipov/goobs"
 	"github.com/gorilla/websocket"
+	"github.com/szmyty/obsgod/internal/obstransport"
 )
 
 // Config describes an OBS connection. Password must come from a secret source.
@@ -31,7 +33,27 @@ type Config struct {
 }
 
 // Client owns one connection. Operations on a Client must be sequential.
-type Client struct{ obs *goobs.Client }
+type Client struct {
+	obs            *goobs.Client
+	closeTransport func() error
+	closeOnce      sync.Once
+	closeErr       error
+	cleanupDone    chan struct{}
+}
+
+// ownedConnection makes physical socket ownership independent of goobs cleanup.
+// Both WebSocket shutdown and cancellation may close it, but only one close is
+// issued to the underlying connection.
+type ownedConnection struct {
+	net.Conn
+	once sync.Once
+	err  error
+}
+
+func (c *ownedConnection) Close() error {
+	c.once.Do(func() { c.err = c.Conn.Close() })
+	return c.err
+}
 
 // RequestError exposes a protocol status code without the server's free-form
 // comment or response body. Those fields are deliberately excluded.
@@ -100,20 +122,22 @@ func Connect(ctx context.Context, cfg Config) (*Client, error) {
 	// Own the transport so cancellation and unsuccessful handshakes release it.
 	var mu sync.Mutex
 	var transport net.Conn
-	closeTransport := func() {
+	closeTransport := func() error {
 		mu.Lock()
 		defer mu.Unlock()
 		if transport != nil {
-			_ = transport.Close()
+			return transport.Close()
 		}
+		return nil
 	}
-	stopCancellation := context.AfterFunc(attempt, closeTransport)
+	stopCancellation := context.AfterFunc(attempt, func() { _ = closeTransport() })
 	defer stopCancellation()
 	dialer := &websocket.Dialer{HandshakeTimeout: cfg.Timeout, NetDialContext: func(_ context.Context, network, address string) (net.Conn, error) {
-		conn, err := (&net.Dialer{Timeout: cfg.Timeout}).DialContext(attempt, network, address)
+		raw, err := (&net.Dialer{Timeout: cfg.Timeout}).DialContext(attempt, network, address)
 		if err != nil {
 			return nil, err
 		}
+		conn := &ownedConnection{Conn: raw}
 		mu.Lock()
 		transport = conn
 		if attempt.Err() != nil {
@@ -128,8 +152,14 @@ func Connect(ctx context.Context, cfg Config) (*Client, error) {
 	}
 	ch := make(chan result)
 	go func() {
-		c, err := goobs.New(cfg.Address, goobs.WithPassword(cfg.Password), goobs.WithDialer(dialer),
-			goobs.WithResponseTimeoutDuration(cfg.Timeout), goobs.WithEventSubscriptions(cfg.EventSubscriptions), goobs.WithLogger(log.New(io.Discard, "", 0)))
+		construct := goobs.New
+		options := []goobs.Option{goobs.WithPassword(cfg.Password), goobs.WithDialer(dialer),
+			goobs.WithResponseTimeoutDuration(cfg.Timeout), goobs.WithEventSubscriptions(cfg.EventSubscriptions), goobs.WithLogger(log.New(io.Discard, "", 0))}
+		if injected, agent := obstransport.FromContext(ctx); injected != nil {
+			construct = injected
+			options = append(options, goobs.WithRequestHeader(http.Header{"User-Agent": []string{agent}}))
+		}
+		c, err := construct(cfg.Address, options...)
 		select {
 		case ch <- result{c, err}:
 		case <-attempt.Done():
@@ -168,12 +198,37 @@ func Connect(ctx context.Context, cfg Config) (*Client, error) {
 			}
 			return nil, &ConnectionError{Kind: "timeout"}
 		}
-		return &Client{obs: r.client}, nil
+		return &Client{obs: r.client, closeTransport: closeTransport, cleanupDone: make(chan struct{})}, nil
 	}
 }
 
-// Close releases the connection. Pending operations have a bounded timeout.
-func (c *Client) Close() error { return c.obs.Disconnect() }
+// Close attempts physical connection shutdown immediately and is idempotent.
+// goobs serializes Disconnect behind a pending request's response mutex. Do not
+// make cancellation wait for that request timeout: close our owned socket first,
+// then let goobs finish its bounded internal cleanup in the background.
+func (c *Client) Close() error {
+	if c == nil {
+		return nil
+	}
+	c.closeOnce.Do(func() {
+		if c.cleanupDone == nil {
+			c.cleanupDone = make(chan struct{})
+		}
+		if c.closeTransport != nil {
+			if err := c.closeTransport(); err != nil {
+				// A transport error may contain endpoint or credential material.
+				// Do not claim confirmed shutdown or expose the raw error.
+				c.closeErr = errors.New("OBS transport shutdown could not be confirmed; inspect OBS state before reconnecting")
+			}
+		}
+		if c.obs != nil {
+			go func() { defer close(c.cleanupDone); _ = c.obs.Disconnect() }()
+		} else {
+			close(c.cleanupDone)
+		}
+	})
+	return c.closeErr
+}
 
 func request[T any](ctx context.Context, name string, f func() (T, error)) (T, error) {
 	var zero T
