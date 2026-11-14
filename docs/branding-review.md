@@ -3,6 +3,13 @@
 Prepared 2026-11-13. Issues: #35 (owner/name), #38 (Identity kit), #43
 (site). This is reviewable preparation, not creative approval or publication.
 
+Refreshed 2026-11-14 UTC: the live Identity pin is unchanged. The owner requested
+asset generation in chat and repository presentation before a fresh Decky Stream
+repository. The new mint-signal board, prompt/method/hash record and separately
+authored editable SVG candidates are under `.identity/candidates/`. The README
+uses staged draft artwork; installed plugin visuals and empty approval arrays
+are unchanged. See [remaining work](pre-migration-plan.md).
+
 ## Verified facts and unresolved decisions
 
 | Item | Evidence / disposition |
@@ -48,13 +55,18 @@ campaigns and broad archives are not required for this bounded plugin kit.
 
 ## Proposed creative kit
 
-The candidate is original, simple SVG geometry: a mint play triangle and
-transmission arc inside a dark rounded field. The monochrome Decky projection
+The candidate is original, simple SVG geometry: a mint play triangle and two
+transmission arcs inside a rounded outline on deep ink. The monochrome Decky projection
 uses the native foreground color, with no colored square or theme override.
 Live product visuals remain unchanged while these candidates are reviewed.
 
 Source/rights inventory: `.identity/candidates/inventory.json`. The geometry was
-AI-assisted work authored by OpenAI Codex for this repository on 2026-11-13.
+AI-assisted work authored by OpenAI Codex for this repository and refined for
+the 2026-11-14 mint-signal concept. The generated PNG concept board has its own
+complete prompt, image-generation method and digest in
+`.identity/candidates/concepts/mint-signal-board.json`. It is a review reference,
+not an approved SVG source or a native Identity compiler output. Its status
+rows are design concepts, not product screenshots.
 There is no copied Valve/Decky/OBS/provider logo. This describes the actual
 method; it does not establish trademark clearance, human authorship, copyright
 eligibility or a transfer of rights. MIT is proposed for owner review; no source
@@ -65,6 +77,8 @@ binary is redistributed.
 ```sh
 python3 scripts/generate-brand-kit.py --raster
 python3 scripts/generate-brand-kit.py --raster --check
+python3 scripts/generate-brand-kit.py --raster --repository-assets
+python3 scripts/generate-brand-kit.py --raster --repository-assets --check
 python3 branding/tests/test_brand_kit.py
 ```
 
@@ -77,9 +91,20 @@ refuses foreign output files and symbolic links. Recovery is to rebuild the
 known generated directory from reviewed source, not to edit hashes manually.
 
 Review `dist/branding-draft/review/index.html` and the companion ZIP. Exports
-cover master mark, native monochrome Decky icon, favicon 16/32, documentation
-64, repository avatars 256/512, wordmark, GitHub 1280×640 preview, metadata,
-palette, rights inventory, font notice, contrast report and size sheet.
+cover master/transparent/light marks, native monochrome Decky icon, favicon
+16/32/64, documentation 64, repository avatars 256/512, wordmark, dark/light
+1600×600 README headers, GitHub 1280×640 preview, metadata, palette, rights
+inventory, font notice, contrast report and size sheet. The full raster kit has
+33 files; the tracked `branding/repository/` projection has 28 files including
+its manifest. GitHub PNG size is checked against the native v1 999,999-byte cap.
+
+The current [specification review](../.identity/references/specification-review.json)
+records immutable upstream sources. Native v1 `web` and `github` dimensions
+inform these draft projections; native `docs` produces document CSS. README
+headers, avatars, wordmark and Decky monochrome art are useful product-specific
+exports, not native compiler target claims. Generic social and PWA exports are
+not selected. The live Identity pin is unchanged; no Identity repository was
+modified or approval invented.
 
 ## Review checklist before adoption
 

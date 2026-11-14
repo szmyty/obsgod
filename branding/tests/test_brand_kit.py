@@ -6,6 +6,7 @@ from pathlib import Path
 import shutil
 import tempfile
 import unittest
+import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[2]
 spec = importlib.util.spec_from_file_location("brand_kit", ROOT / "scripts/generate-brand-kit.py")
@@ -42,10 +43,35 @@ class BrandKit(unittest.TestCase):
         root = self.copy_source()
         before = kit.render(root)
         path = root / ".identity/candidates/mark.svg"
-        path.write_text(path.read_text().replace("M40 32", "M41 32"))
+        document = ET.fromstring(path.read_bytes())
+        first_path = document.find("{http://www.w3.org/2000/svg}path")
+        self.assertIsNotNone(first_path)
+        first_path.set("transform", "translate(1 0)")
+        path.write_bytes(ET.tostring(document))
         after = kit.render(root)
-        for surface in ("masters/mark.svg", "docs/wordmark.svg", "github/social-preview.svg", "review/legibility-sheet.svg"):
+        for surface in ("masters/mark.svg", "masters/mark-transparent.svg", "masters/mark-on-light.svg",
+                        "docs/wordmark.svg", "github/social-preview.svg", "github/readme-header.svg",
+                        "github/readme-header-light.svg", "review/legibility-sheet.svg"):
             self.assertNotEqual(before[surface], after[surface], surface)
+
+    def test_repository_projection_retains_sources_and_only_its_owned_outputs(self):
+        full = kit.render()
+        projected = kit.repository_assets(full)
+        manifest = json.loads(projected[kit.MANIFEST])
+        self.assertEqual(manifest["approval"], "proposed-unapproved")
+        self.assertEqual(manifest["sources"], json.loads(full[kit.MANIFEST])["sources"])
+        self.assertEqual(set(manifest["outputs"]), set(projected) - {kit.MANIFEST})
+        self.assertEqual(projected["header.svg"], full["github/readme-header.svg"])
+        self.assertEqual(projected["icon-monochrome.svg"], full["decky/icon-monochrome.svg"])
+        self.assertNotIn("decky-stream-proposed.zip", projected)
+        output = self.base / "repository"
+        kit.write_or_check(projected, output)
+        kit.write_or_check(projected, output, check=True)
+        foreign = output / "hand-authored.svg"
+        foreign.write_text("preserve")
+        with self.assertRaises(ValueError):
+            kit.write_or_check(projected, output)
+        self.assertEqual(foreign.read_text(), "preserve")
 
     def test_active_svg_is_rejected(self):
         root = self.copy_source()

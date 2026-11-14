@@ -25,7 +25,18 @@ The Desktop installer and CLI share canonical XDG paths; they do not create a
 second settings/key store under Decky's own adapter settings directory. Decky's
 plugin runtime-data directory is persistent and is not `XDG_RUNTIME_DIR`.
 
-## Transfer preparation
+## Preferred fresh-repository path
+
+The owner now prefers a clean independent Decky Stream repository, with a fresh
+initial commit and rewritten remaining issues. `egohygiene/decky-stream` is the
+working destination discussed; no new repository, retirement or final brand
+adoption has occurred. Keep [the memorial](../MEMORIAL.md) and its portable
+tracker records with the new source; preserve attribution and every unfinished
+criterion. A private backup in `szmyty/archive` cannot by itself preserve public
+downloads. The old/new installer, settings and updater trust still need the
+same explicit rehearsal below. See [the actionable plan](pre-migration-plan.md).
+
+## Transfer or fresh-install transition preparation
 
 Before changing the canonical repository or an installed ID:
 

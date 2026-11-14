@@ -1,5 +1,35 @@
 # Current work
 
+## Decky Stream draft artwork, README and pre-migration inventory
+
+The owner requested a fresh look at Identity specifications, asset generation
+in chat, the Hygiene/Holon README baseline and matching funding. Identity live
+main remains cfb6c29bd02589a47fc48050ab02e7e0da359719; immutable specification
+sources and hashes are recorded in `.identity/references/specification-review.json`.
+The generated mint-signal board and its actual prompt/method/digest are retained
+under `.identity/candidates/concepts/`; editable SVG masters were separately
+authored. Empty approval/provenance arrays and proposed asset status remain.
+
+The draft exporter now prepares 33 full-kit files and a 28-file tracked
+`branding/repository/` projection: dark/light 1600×600 README headers, mark
+variants, monochrome Decky icon, avatars, favicon sizes, wordmark, palette and
+1280×640 GitHub PNG (53,297 bytes). README follows pinned Hygiene/Holon guidance
+with light/dark PNG artwork and text fallback. Funding's five active handles
+already match org defaults; Patreon stays commented under the recorded broken
+destination exception. Support data is unchanged.
+
+[The pre-migration plan](docs/pre-migration-plan.md) separates doable legacy
+transport/NFPM/migration-rehearsal/candidate/export work from actual device,
+native-platform, viewer/adoption and owner/publication facts. Companion/OAuth
+expansion does not become a new prerequisite for creating the fresh repository.
+Installed plugin/runtime identities, updater trust and native visuals are
+unchanged. Product qualification remains at4699235; no new runtime matrix, release,
+deployment, repository creation/transfer/archival, paid resource or other-repo
+write occurred. Nine draft-export tests, source-contract validation, reproducible
+raster exports/drift, source/output hashes, dimensions/byte cap, SVG checks,
+relative links and generated metadata checks passed; exact evidence follows in
+the presentation review record. Memorial PR #73 remains the preceding draft.
+
 ## Portable history before a possible fresh Decky Stream repository
 
 The owner prefers a fresh repository and requested a practical `MEMORIAL.md`

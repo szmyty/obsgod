@@ -17,7 +17,7 @@
         ".identity/sources"
       ],
       "files": {
-        ".identity/brief.md": "411d834b7694b39e7c8b577963eacc650907d8abf4c8f3272f3e65f29295ba47",
+        ".identity/brief.md": "eade665548f8e875c210fb5b097dba63cd41ce43e8a0026c3af4f72f5fb72a4a",
         ".identity/defaults/organization.tokens.json": "e8f53747482aa8914fc3307fbf63295e45fb1ca59448c8e0435e1af8fce5eda5",
         ".identity/governance/approvals.json": "e96c088f11ded1d42a60872e3de0384299615b778c4927f20f1b441bd9db7bc9",
         ".identity/governance/provenance.json": "ce9c3a4e1c40d89bcc605b9bc287276a3211d444ee05c3a3471a2f15fab8bc4f",

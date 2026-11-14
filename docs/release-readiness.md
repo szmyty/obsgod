@@ -1,4 +1,9 @@
-Current completion candidate: [owner packet](completion-review.md), version
+Latest qualified follow-up: exact source **4699235**,
+[verified review installation](current-review-install.md) and
+[revision-bound audit](../audits/qualification-4699235.md). The packets below are
+historical and do not supersede that follow-up or qualify newer source.
+
+Earlier completion candidate: [owner packet](completion-review.md), version
 **0.1.0-deck.9**, exact qualified source1a482808; [verified install command](candidate-9-install.md).
 Available local qualification passed; target/hosted/review/publication gates remain.
 Older milestone packets below are historical and retain their exact source boundaries.

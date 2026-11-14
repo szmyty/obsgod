@@ -1,7 +1,7 @@
 {
   "status": "proposed-unapproved",
-  "origin": "Existing documentation preview colors; no organization palette is asserted.",
-  "colors": {"ink": "#0b111b", "surface": "#111c2a", "text": "#eef4fc", "muted": "#b7c5d8", "accent": "#b2f2c7", "accentInk": "#10241b"},
+  "origin": "Existing documentation preview colors, extended with a cyan decorative accent for the 2026-11-14 mint-signal concept; no organization palette is asserted.",
+  "colors": {"ink": "#0b111b", "surface": "#111c2a", "text": "#eef4fc", "muted": "#b7c5d8", "accent": "#b2f2c7", "accentInk": "#10241b", "cyan": "#4adfff"},
   "typography": {"family": "DejaVu Sans", "fallback": "system-ui, sans-serif", "fontSha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e", "license": "Bitstream Vera license; DejaVu changes public domain", "licenseFile": "branding/licenses/DejaVu.txt"},
   "motion": "No animation. Honor prefers-reduced-motion if any future motion is introduced."
 }

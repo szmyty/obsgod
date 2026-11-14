@@ -1,0 +1,59 @@
+{
+  "assets": [
+    {
+      "conceptReference": ".identity/candidates/concepts/mint-signal-board.json",
+      "creator": "OpenAI Codex, for the szmyty/obsgod project",
+      "humanApproval": null,
+      "id": "mark",
+      "method": "AI-assisted original SVG geometry authored in this repository for the mint-signal concept; not traced or automatically vectorized from the generated PNG, and not a copied third-party logo",
+      "path": ".identity/candidates/mark.svg",
+      "proposedLicense": "MIT, subject to owner approval",
+      "rightsStatus": "owner-review-required",
+      "source": "local candidate source"
+    },
+    {
+      "conceptReference": ".identity/candidates/concepts/mint-signal-board.json",
+      "creator": "OpenAI Codex, for the szmyty/obsgod project",
+      "humanApproval": null,
+      "id": "decky-icon",
+      "method": "AI-assisted original SVG geometry authored in this repository for the mint-signal concept; not traced or automatically vectorized from the generated PNG, and not a copied third-party logo",
+      "path": ".identity/candidates/decky-icon.svg",
+      "proposedLicense": "MIT, subject to owner approval",
+      "rightsStatus": "owner-review-required",
+      "source": "local candidate source"
+    }
+  ],
+  "concepts": [
+    {
+      "id": "mint-signal",
+      "path": ".identity/candidates/concepts/mint-signal-board.png",
+      "record": ".identity/candidates/concepts/mint-signal-board.json",
+      "status": "proposed-unapproved"
+    }
+  ],
+  "limitations": [
+    "No trademark clearance or ownership transfer is asserted",
+    "Human creative and rights approval required",
+    "No real Deck controller or color/legibility receipt",
+    "No approved Identity production generation receipt"
+  ],
+  "preparedAt": "2026-11-14",
+  "project": {
+    "displayName": "Decky Stream",
+    "id": "decky-stream",
+    "organization": null,
+    "repository": "https://github.com/szmyty/obsgod"
+  },
+  "schema": "decky-stream.brand-candidates/v1",
+  "status": "proposed-unapproved",
+  "surfaces": {
+    "core": "identity source and draft review metadata",
+    "decky": "custom monochrome SVG and 16/24/32 raster legibility sheet; live native icon unchanged",
+    "docs": "draft wordmark SVG/PNG",
+    "github": "Draft 1280x640 PNG/SVG repository preview and custom 256/512 avatars",
+    "metadata": "intended brand ID plus actual repository",
+    "readme": "Product-specific dark/light 1600x600 header, not a native Identity v1 target",
+    "tokens": "candidate palette only; empty adopted layers",
+    "web": "Draft SVG and 16/32/64 PNG favicons; not production compiler output"
+  }
+}

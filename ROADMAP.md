@@ -1,5 +1,10 @@
 # Product roadmap
 
+Current repository-presentation preparation and useful remaining engineering
+lanes are in [the pre-migration plan](docs/pre-migration-plan.md). The owner
+prefers a fresh Decky Stream repository; draft art/README/funding preparation
+does not perform that migration or close remaining #46 acceptance.
+
 ## Current state — qualified follow-up and remaining acceptance
 
 The owner authorized merging the prepared audit and progressing the remaining

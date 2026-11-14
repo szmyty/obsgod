@@ -1,0 +1,15 @@
+{
+  "schema": "decky-stream.brand-concept/v1",
+  "id": "mint-signal",
+  "status": "proposed-unapproved",
+  "createdAt": "2026-11-14",
+  "tool": "image_gen.imagegen",
+  "method": "AI-generated brand concept board. Editable vector masters are separately authored geometry based on the direction; the PNG is not a native Identity SVG input or compiler output.",
+  "creator": "OpenAI image generation, requested by repository owner",
+  "path": ".identity/candidates/concepts/mint-signal-board.png",
+  "sha256": "ffb490b79864b80aed96cdc365346433502ca038e93207c94150f9dd8a05ba04",
+  "prompt": "Create a polished, cohesive landscape brand presentation board for a new independent open-source Steam Deck streaming tool named exactly 'Decky Stream'. Design direction: confident modern gaming utility, restrained editorial typography, deep midnight ink #0b111b, soft white #eef4fc, luminous mint #b2f2c7 and a small cyan secondary accent. Original simple geometric symbol combining a play triangle and two clean broadcast arcs inside a rounded-square outline; readable as a small icon, no copied Valve, Steam, Decky, OBS, Twitch or Kick logos. Composition: large clean hero section on the left with the original symbol, clear exact wordmark 'Decky Stream', and tagline 'Your game. Your stream.'; on the right, an elegant organized specimen panel showing the same icon on light and dark fields, a monochrome icon variant, and four small palette swatches. Along the bottom show a wide repository banner crop mockup and a small conceptual plugin panel status row with a green dot plus the text 'Streaming' and a red dot plus 'Stopped'. Make the status row unmistakably a design concept, not a screenshot of real software. Use generous spacing, precise alignment, flat vector-like geometry, subtle broadcast-wave background details, crisp readable text, no 3D, no photoreal devices, no fake screenshots, no busy gradients, no environmental scenery. This is a creative review board for the user, not a final approval or published release. The wordmark must read 'Decky Stream', not OBSGod. Wide 16:9 presentation, high-quality art direction.",
+  "humanApproval": null,
+  "rightsStatus": "owner-review-required; no trademark clearance, copyright eligibility or rights transfer asserted",
+  "usage": "Creative review reference only. Status rows are design concepts, not product screenshots."
+}
