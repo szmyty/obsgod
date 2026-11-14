@@ -30,6 +30,15 @@ individual workflows; qualification records identify the exact tested revision.
 | `steamdeck/capture` | Narrow app-filtered Gamescope/PipeWire source; unusable game selection cannot become desktop capture |
 | `scripts`, `.github/workflows`, `docs/evidence` | Builds, local/CI checks, packaging and evidence; compilation is not execution on the target |
 
+The [native destination form](docs/native-configuration.md) reads a named,
+credential-free configuration view through the same local JSON boundary. Sparse
+edits merge under Go's existing shared control lock and use its existing settings/
+secret writer; they do not introduce another credential store. Saving requires
+positively closed managed OBS and known idle outputs. Closing idle OBS is a
+separate confirmed action. Configuration, password changes and connection tests
+never start a broadcast. The adapter expires/coalesces observations, serializes
+actions with setup/control work and clears private payloads after use.
+
 ```mermaid
 flowchart TD
     CLI[CLI adapters] --> Legacy[Compatible legacy service]

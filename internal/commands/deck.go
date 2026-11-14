@@ -13,6 +13,22 @@ import (
 func newDeckCommand() *coral.Command {
 	root := &coral.Command{Use: "deck", Short: "Manage the optional Steam Deck streaming preview (JSON output)"}
 	addDeckAdvancedCommands(root)
+	root.AddCommand(&coral.Command{Use: "configuration", Short: "Read non-secret stream settings, defaults and safe edit/close availability", Args: coral.NoArgs, RunE: func(cmd *coral.Command, _ []string) error {
+		ctx, cancel := context.WithTimeout(cmd.Context(), 6*time.Second)
+		defer cancel()
+		paths, err := deck.UserPaths()
+		if err != nil {
+			return err
+		}
+		view := deck.ReadConfiguration(ctx, paths)
+		if err := json.NewEncoder(cmd.OutOrStdout()).Encode(view); err != nil {
+			return err
+		}
+		if !view.OK {
+			return errors.New("stream configuration is unavailable (see JSON result)")
+		}
+		return nil
+	}})
 	root.AddCommand(&coral.Command{Use: "support-bundle", Short: "Export filtered diagnostic facts without credentials, URLs or private paths", Args: coral.NoArgs, RunE: func(cmd *coral.Command, _ []string) error {
 		ctx, cancel := context.WithTimeout(cmd.Context(), 6*time.Second)
 		defer cancel()
@@ -64,11 +80,15 @@ func newDeckCommand() *coral.Command {
 		}
 		return deck.WatchCapture(cmd.Context(), paths)
 	}})
-	for _, name := range []string{"status", "doctor", "configure", "set-capture-mode", "start", "stop", "test-recording", "restart", "open-obs", "clear-logs"} {
+	for _, name := range []string{"status", "doctor", "configure", "configure-fields", "set-capture-mode", "start", "stop", "test-recording", "restart", "open-obs", "clear-logs"} {
 		name := name
-		cmd := &coral.Command{Use: name, Short: map[string]string{"clear-logs": "Clear local filtered diagnostic history", "status": "Read live output state without starting OBS", "doctor": "Diagnose installation, capture and OBS", "configure": "Save settings and key from JSON stdin, never argv", "set-capture-mode": "Choose screen or game video for the next explicit output (JSON stdin)", "start": "Capture Gaming Mode and wait for real stream output", "stop": "Stop streaming and confirm it stopped", "test-recording": "Save a ten-second local clip without broadcasting", "restart": "Close idle managed OBS to apply saved settings", "open-obs": "Open the isolated OBS window visibly for Desktop recovery without starting output"}[name], Args: coral.NoArgs}
+		cmd := &coral.Command{Use: name, Short: map[string]string{"clear-logs": "Clear local filtered diagnostic history", "status": "Read live output state without starting OBS", "doctor": "Diagnose installation, capture and OBS", "configure": "Save settings and key from JSON stdin, never argv", "configure-fields": "Merge private stream settings from bounded JSON stdin while managed OBS is closed", "set-capture-mode": "Choose screen or game video for the next explicit output (JSON stdin)", "start": "Capture Gaming Mode and wait for real stream output", "stop": "Stop streaming and confirm it stopped", "test-recording": "Save a ten-second local clip without broadcasting", "restart": "Close idle managed OBS to apply saved settings", "open-obs": "Open the isolated OBS window visibly for Desktop recovery without starting output"}[name], Args: coral.NoArgs}
 		cmd.RunE = func(cmd *coral.Command, _ []string) error {
-			ctx, cancel := context.WithTimeout(cmd.Context(), 75*time.Second)
+			limit := 75 * time.Second
+			if name == "configure-fields" || name == "restart" {
+				limit = 10 * time.Second
+			}
+			ctx, cancel := context.WithTimeout(cmd.Context(), limit)
 			defer cancel()
 			paths, e := deck.UserPaths()
 			if e != nil {
@@ -92,6 +112,10 @@ func newDeckCommand() *coral.Command {
 				} else {
 					defer unlock()
 					switch name {
+					case "configure-fields":
+						var settings deck.Settings
+						settings, e = deck.ConfigureFields(ctx, paths, cmd.InOrStdin())
+						result = deck.Result{OK: e == nil, Configured: e == nil, State: "stopped", Message: "Stream settings saved privately; nothing was broadcast", Settings: &settings}
 					case "configure":
 						state := deck.Status(ctx, paths)
 						if state.Connected || state.State == "unknown" {

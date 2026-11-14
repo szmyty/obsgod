@@ -7,6 +7,7 @@ from pathlib import Path
 import re
 import signal
 import uuid
+from urllib.parse import urlsplit
 
 
 def _bundled_module(name):
@@ -20,6 +21,104 @@ def _bundled_module(name):
 
 storage = _bundled_module("storage")
 dependency_setup = _bundled_module("dependency_setup")
+
+CONFIGURATION_ACTIONS = {"configure-fields", "change-obs-password", "test-connection", "restart"}
+CONFIGURATION_READS = {"configuration", "connection-info", "test-connection"}
+DESTINATION_FIELDS = {"server", "stream_key", "replace_key", "bitrate", "fps", "encoder",
+                      "microphone", "capture_mode", "width", "height"}
+PASSWORD_FIELDS = {"password", "confirm", "generate"}
+PRIVATE_FIELDS = {"stream_key", "password"}
+CONFIGURATION_UNAVAILABLE = "Configuration readiness is unavailable. Refresh settings before changing your destination or local OBS password. No stream was started."
+
+
+def _private_values(value, depth=0):
+    """Recognize private fields only to redact them, never to return/cache them."""
+    values = []
+    if isinstance(value, dict) and depth < 4:
+        for name, item in value.items():
+            normalized = str(name).lower().replace("-", "_")
+            if isinstance(item, str) and item and (normalized == "key" or any(part in normalized for part in ("password", "stream_key", "streamkey", "token", "secret"))):
+                values.append(item)
+            elif isinstance(item, dict):
+                values.extend(_private_values(item, depth + 1))
+    return values
+
+
+def _public_configuration_message(value, private=(), fallback=CONFIGURATION_UNAVAILABLE):
+    if (not isinstance(value, str) or not value or len(value) > 500 or
+            any(ord(char) < 32 or ord(char) == 127 for char in value) or
+            any(secret and secret in value for secret in private) or
+            re.search(r"(?:password|stream_key|token|secret)\s*[:=]|\b[A-Za-z][A-Za-z0-9+.-]*://|(?:^|\s)/\S+", value, re.I)):
+        return fallback
+    return value
+
+
+def _public_connection(value, private=()):
+    value = value if isinstance(value, dict) else {}
+    private = tuple(private) + tuple(_private_values(value))
+    result = {name: value.get(name) is True for name in
+              ("ok", "authentication_required", "credentials_available", "connected", "managed", "output_known", "awaiting_verification")}
+    result["host"] = value.get("host") if isinstance(value.get("host"), str) and value["host"] in {"127.0.0.1", "localhost", "::1"} else "127.0.0.1"
+    result["port"] = value.get("port") if value.get("port") == "4457" else "4457"
+    result["process"] = value.get("process") if isinstance(value.get("process"), str) and value["process"] in {"absent", "running", "unknown"} else "unknown"
+    result["state"] = value.get("state") if isinstance(value.get("state"), str) and value["state"] in {"stopped", "streaming", "recording", "unknown", "setup"} else "unknown"
+    result["message"] = _public_configuration_message(value.get("message"), private)
+    return result
+
+
+def _public_configuration(value, private=()):
+    """Explicit projection: future Go fields cannot expose private readback."""
+    value = value if isinstance(value, dict) else {}
+    private = tuple(private) + tuple(_private_values(value))
+    valid = (type(value.get("schema_version")) is int and value["schema_version"] == 1 and
+             all(type(value.get(name)) is bool for name in
+                 ("ok", "configured", "key_configured", "output_known", "can_configure", "can_close")) and
+             isinstance(value.get("settings"), dict) and isinstance(value.get("connection"), dict))
+    connection = value.get("connection") if isinstance(value.get("connection"), dict) else {}
+    for name in ("ok", "authentication_required", "credentials_available", "connected", "managed", "output_known", "awaiting_verification"):
+        if name in connection and type(connection[name]) is not bool:
+            valid = False
+    settings = {"server": "", "bitrate": 4500, "fps": 30, "encoder": "vaapi", "width": 1280,
+                "height": 720, "capture_mode": "screen", "microphone": False}
+    source = value.get("settings") if isinstance(value.get("settings"), dict) else {}
+    for name in settings:
+        if name not in source:
+            continue
+        item = source[name]
+        if name == "server":
+            safe = isinstance(item, str) and len(item.encode("utf-8", errors="replace")) <= 4096 and not any(ord(c) < 32 or ord(c) == 127 for c in item)
+            try:
+                url = urlsplit(item)
+                safe = safe and (not item or (url.scheme in {"rtmp", "rtmps"} and bool(url.hostname) and
+                        url.username is None and url.password is None and not url.query and not url.fragment))
+            except (ValueError, TypeError):
+                safe = False
+            if isinstance(item, str) and any(secret and secret in item for secret in private):
+                safe = False
+        elif name in {"bitrate", "fps", "width", "height"}:
+            safe = type(item) is int and 0 <= item <= 100000
+        elif name == "microphone":
+            safe = type(item) is bool
+        elif name == "encoder":
+            safe = item in {"vaapi", "x264"} if isinstance(item, str) else False
+        else:
+            safe = item in {"", "screen", "game"} if isinstance(item, str) else False
+        if safe:
+            settings[name] = item
+        else:
+            valid = False
+    if not settings["width"] and not settings["height"]:
+        settings["width"], settings["height"] = 1280, 720
+    if not settings["capture_mode"]:
+        settings["capture_mode"] = "screen"
+    output_known = valid and value.get("output_known") is True
+    ok = valid and value.get("ok") is True
+    return {"schema_version": 1, "ok": ok, "configured": valid and value.get("configured") is True,
+            "key_configured": valid and value.get("configured") is True and value.get("key_configured") is True,
+            "settings": settings, "connection": _public_connection(value.get("connection"), private),
+            "output_known": output_known, "can_configure": ok and output_known and value.get("can_configure") is True,
+            "can_close": ok and output_known and value.get("can_close") is True,
+            "message": _public_configuration_message(value.get("message"), private) if valid else CONFIGURATION_UNAVAILABLE}
 
 
 class Plugin:
@@ -41,6 +140,9 @@ class Plugin:
         self._cancel_media_task = None
         self._dependency_job = None
         self._setup_requested = False
+        self._configuration_task = None
+        self._configuration_tasks = set()
+        self._configuration_epoch = 0
 
     @property
     def busy(self):
@@ -150,6 +252,119 @@ class Plugin:
         except (OSError, ValueError):
             return self._setup_unavailable()
 
+    @staticmethod
+    def _configuration_failure(action=None, message=CONFIGURATION_UNAVAILABLE):
+        result = _public_configuration(None)
+        result["message"] = message
+        if action:
+            result["action_result"] = {"action": action, "ok": False, "message": message}
+        return result
+
+    def _invalidate_configuration(self):
+        self._configuration_epoch += 1
+        self._configuration_task = None
+
+    async def _read_configuration(self):
+        try:
+            raw = await self._run("configuration")
+            return _public_configuration(raw, _private_values(self._control_payload))
+        except (OSError, ValueError, TypeError, UnicodeError):
+            return self._configuration_failure()
+
+    async def _configuration_observed(self):
+        # In-flight readers share work. A mutation invalidates its generation,
+        # so a late pre-save response cannot overwrite the new destination.
+        for _ in range(3):
+            epoch = self._configuration_epoch
+            if self._configuration_task is None or self._configuration_task.done():
+                self._configuration_task = asyncio.create_task(self._read_configuration())
+                self._configuration_tasks.add(self._configuration_task)
+                self._configuration_task.add_done_callback(self._configuration_tasks.discard)
+            result = await asyncio.shield(self._configuration_task)
+            if epoch == self._configuration_epoch:
+                return dict(result)
+        return self._configuration_failure()
+
+    def _configuration_gate(self, result, finishing=None):
+        result = dict(result)
+        control_busy = bool(self._control_task and not self._control_task.done() and self._control_task is not finishing)
+        stop_busy = bool(self._stop_task and not self._stop_task.done())
+        if self._closing or self._dependency_busy or control_busy or stop_busy:
+            result["can_configure"], result["can_close"] = False, False
+            result["message"] = ("Dependency setup is running. Wait or cancel setup before changing settings." if self._dependency_busy else
+                                 "The plugin is closing. Wait for it to reload before changing settings." if self._closing else
+                                 "Another OBS operation is running. Wait for confirmed status before changing settings.")
+        return result
+
+    async def configuration_status(self):
+        return self._configuration_gate(await self._configuration_observed())
+
+    async def _configuration_input(self, action, payload, allowed):
+        if (not isinstance(payload, dict) or not payload or
+                any(type(name) is not str or name not in allowed or type(value) not in (str, int, float, bool)
+                    for name, value in payload.items())):
+            return self._configuration_failure(action, "Send one supported settings object containing only scalar fields.")
+        if action == "change-obs-password" and payload.get("confirm") is not True:
+            return self._configuration_failure(action, "Explicitly confirm the local OBS password change before retrying.")
+        owned = dict(payload)
+        try:
+            return await self._advanced(action, owned)
+        finally:
+            # The task receives its own separate copy below. A disconnected
+            # caller cannot erase the key before the queued Go command reads it.
+            for name in PRIVATE_FIELDS:
+                if name in owned:
+                    owned[name] = ""
+
+    async def configure_destination(self, payload):
+        return await self._configuration_input("configure-fields", payload, DESTINATION_FIELDS)
+
+    async def change_control_password(self, payload):
+        return await self._configuration_input("change-obs-password", payload, PASSWORD_FIELDS)
+
+    async def test_control_connection(self):
+        return await self._begin("test-connection")
+
+    async def close_managed_obs(self):
+        # Existing Go Restart positively verifies idle ownership and only closes
+        # the managed instance. It does not reopen OBS or start an output.
+        return await self._begin("restart")
+
+    async def _configuration_rejection(self, action, message):
+        result = await self.configuration_status()
+        result["action_result"] = {"action": action, "ok": False, "message": message}
+        return result
+
+    def _clear_private_operation(self, task, payload):
+        if isinstance(payload, dict):
+            for name in PRIVATE_FIELDS:
+                if name in payload:
+                    payload[name] = ""
+        if self._control_task is task and self._control_payload is payload:
+            self._control_payload = None
+
+    async def _perform_configuration(self, action, operation_id, payload):
+        task = asyncio.current_task()
+        try:
+            try:
+                command = await self._run(action, payload) if payload is not None else await self._run(action)
+            except (OSError, ValueError, TypeError, UnicodeError):
+                command = {"ok": False, "message": CONFIGURATION_UNAVAILABLE}
+            private = _private_values(payload) + _private_values(command)
+            outcome = {"id": operation_id, "action": action, "ok": isinstance(command, dict) and command.get("ok") is True,
+                       "message": _public_configuration_message(command.get("message") if isinstance(command, dict) else None, private)}
+            if self._last_action is None or operation_id >= self._last_action["id"]:
+                self._last_action = dict(outcome)
+            self._invalidate_configuration()
+            observed = await self._configuration_observed()
+            if action == "test-connection":
+                observed["connection"] = _public_connection(command, private)
+            observed = self._configuration_gate(observed, finishing=task)
+            observed["action_result"] = outcome
+            return observed
+        finally:
+            self._clear_private_operation(task, payload)
+
     def _loader_metadata(self):
         result = {}
         for key, name in (("version", "DECKY_VERSION"), ("plugin_name", "DECKY_PLUGIN_NAME"),
@@ -196,6 +411,8 @@ class Plugin:
                 "process": "unknown", "connection": "unavailable", "message": message}
 
     async def _run(self, action, payload=None):
+        private_configuration = action in CONFIGURATION_ACTIONS or action in CONFIGURATION_READS
+        cleanup_budget = 1 if private_configuration else 8
         binary = self._plugin_root() / "bin/obsgod"
         if not os.access(binary, os.X_OK):
             binary.chmod(0o700)
@@ -212,7 +429,7 @@ class Plugin:
             async def reap_late_child():
                 try:
                     child = await spawning
-                    await self._stop_child(child)
+                    await self._stop_child(child, cleanup_budget)
                 except OSError:
                     pass
             cleanup = asyncio.create_task(reap_late_child())
@@ -226,32 +443,38 @@ class Plugin:
         try:
             communication = process.communicate(json.dumps(payload).encode()) if payload is not None else process.communicate()
             timeout = 6 if action in {"status", "clear-logs"} else 85
+            if action in CONFIGURATION_READS or action == "change-obs-password":
+                timeout = 7
+            elif action in {"configure-fields", "restart"}:
+                timeout = 11
             if action == "mixer" and isinstance(payload, dict) and payload.get("action") != "configure":
                 timeout = 8
             output, _ = await asyncio.wait_for(communication, timeout)
+            if private_configuration and len(output) > 131072:
+                raise ValueError()
             result = json.loads(output)
             if not isinstance(result, dict) or not isinstance(result.get("ok"), bool):
                 raise ValueError()
             return result
         except asyncio.CancelledError:
-            await self._stop_child(process)
+            await self._stop_child(process, cleanup_budget)
             raise
         except (asyncio.TimeoutError, ValueError, UnicodeError):
-            await self._stop_child(process)
+            await self._stop_child(process, cleanup_budget)
             return self._unknown("Output state is unconfirmed. Use Stop streaming and inspect OBS if the connection does not recover.")
         finally:
             if self.pending is process:
                 self.pending = None
 
     @staticmethod
-    async def _stop_child(process):
+    async def _stop_child(process, budget=8):
         if process.returncode is None:
             try:
                 process.send_signal(signal.SIGINT)
             except ProcessLookupError:
                 pass
         try:
-            await asyncio.wait_for(process.communicate(), 8)
+            await asyncio.wait_for(process.communicate(), budget)
         except asyncio.TimeoutError:
             try:
                 process.kill()
@@ -292,6 +515,8 @@ class Plugin:
         return await self.status()
 
     async def _perform(self, action, operation_id, command=None, payload=None):
+        if action in CONFIGURATION_ACTIONS:
+            return await self._perform_configuration(action, operation_id, payload)
         if command is None:
             try:
                 if action == "set-capture-mode":
@@ -311,6 +536,7 @@ class Plugin:
                     command = await self._run(action, payload) if payload is not None else await self._run(action)
             except OSError:
                 command = self._unknown("OBSGod's backend or player storage is unavailable. Reload or repair the Decky plugin; existing settings were not reset.")
+        self._invalidate_configuration()
         # Command success/error is not an output snapshot. Re-query actual OBS
         # rather than allowing a failed Start to replace an active stream with
         # an error/stopped state, or a click to declare a stream live.
@@ -335,11 +561,15 @@ class Plugin:
 
     async def _begin(self, action, payload=None):
         if self._dependency_busy:
+            if action in CONFIGURATION_ACTIONS:
+                return await self._configuration_rejection(action, "Dependency setup is running. Wait or cancel setup before changing settings.")
             result = await self.status()
             result["action_result"] = {"ok": False, "action": action,
                                        "message": "Dependency setup is running. Wait or cancel setup before starting another operation."}
             return result
         if self._closing:
+            if action in CONFIGURATION_ACTIONS:
+                return await self._configuration_rejection(action, "The plugin is closing. Wait for it to reload before changing settings.")
             result = await self.status()
             result["action_result"] = {"ok": False, "action": action,
                                        "message": "OBSGod is shutting down. Wait for the plugin to reload."}
@@ -347,20 +577,28 @@ class Plugin:
         if self._control_task and not self._control_task.done():
             if self._control_action == action and self._control_payload == payload and not self.cancel_requested:
                 return await asyncio.shield(self._control_task)
+            if action in CONFIGURATION_ACTIONS:
+                return await self._configuration_rejection(action, "Another operation is running; wait or cancel it.")
             result = await self.status()
             result["action_result"] = {"ok": False, "action": action,
                                        "message": "Another operation is running; wait or cancel it."}
             return result
         if self._stop_task and not self._stop_task.done():
+            if action in CONFIGURATION_ACTIONS:
+                return await self._configuration_rejection(action, "Stop is still being confirmed. Wait before changing settings.")
             result = await self.status()
             result["action_result"] = {"ok": False, "action": action,
                                        "message": "Stop is still being confirmed. Wait before starting another operation."}
             return result
         self.cancel_requested = False
         self._control_action = action
-        self._control_payload = payload
+        owned = dict(payload) if action in CONFIGURATION_ACTIONS and isinstance(payload, dict) else payload
+        self._control_payload = owned
         self._operation_id += 1
-        self._control_task = asyncio.create_task(self._perform(action, self._operation_id, payload=payload))
+        self._invalidate_configuration()
+        self._control_task = asyncio.create_task(self._perform(action, self._operation_id, payload=owned))
+        if action in CONFIGURATION_ACTIONS:
+            self._control_task.add_done_callback(lambda task: self._clear_private_operation(task, owned))
         return await asyncio.shield(self._control_task)
 
     async def start(self):
@@ -371,12 +609,18 @@ class Plugin:
 
     async def _advanced(self, action, payload):
         if not isinstance(payload, dict):
+            if action in CONFIGURATION_ACTIONS:
+                return self._configuration_failure(action, "Send one settings object.")
             return {"ok": False, "message": "Send one settings object."}
         try:
             encoded = json.dumps(payload, allow_nan=False).encode()
         except (ValueError, TypeError):
+            if action in CONFIGURATION_ACTIONS:
+                return self._configuration_failure(action, "Settings must contain valid JSON values.")
             return {"ok": False, "message": "Settings must contain valid JSON values."}
         if len(encoded) > 16384:
+            if action in CONFIGURATION_ACTIONS:
+                return self._configuration_failure(action, "Settings are too large; choose a smaller profile.")
             return {"ok": False, "message": "Settings are too large; choose a smaller profile."}
         # Serialize all mutations with normal stream control. CLI read actions
         # remain bounded and have no side effects, but use the same adapter so
@@ -484,6 +728,7 @@ class Plugin:
         if self._stop_task and not self._stop_task.done():
             return await asyncio.shield(self._stop_task)
         self.cancel_requested = True
+        self._invalidate_configuration()
         self._signal_pending()
         self._operation_id += 1
         self._stop_task = asyncio.create_task(self._stop(self._operation_id))

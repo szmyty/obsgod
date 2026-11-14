@@ -9,6 +9,11 @@ separate. The reusable CLI controls an existing OBS instance without provider
 presets or automatic broadcasts. The Steam Deck `deck` commands use their own
 managed configuration and do not read this generic connection file.
 
+Steam Deck users can configure their destination/key directly in the Decky
+Gaming Mode panel; see [native destination setup](native-configuration.md).
+That form uses the existing managed XDG settings/credential binding described
+there, separately from the reusable CLI's connection precedence below.
+
 ## Precedence and defaults
 
 Connection values resolve in this order, highest priority first:

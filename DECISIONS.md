@@ -20,3 +20,17 @@ privacy/safety, destructive recovery or support claims. Explain context, choice,
 relevant alternatives, consequences and evidence. Routine fixes need no ceremonial
 ADR. Update [architecture](ARCHITECTURE.md), [vocabulary](ONTOLOGY.md), feature
 docs and continuity when inaccurate. Code/merge alone cannot accept a proposal.
+
+## Native destination setup (#79)
+
+Owner-authorized manual-key setup now uses the normal Decky panel and existing
+Go configuration writer. Destination guides remain presentation only; the
+actual server and private key binding determine the saved destination. Sparse
+edits merge under the shared control lock so unedited advanced state is retained.
+There is one canonical XDG credential store, no frontend secret readback, and no
+provider OAuth or account API dependency. A changed server or explicitly changed
+account/event requires a new key. Saving requires confirmed closed/idle managed
+OBS; closing an idle instance is a separate explicit confirmation. This preserves
+offline operation, legacy configuration and explicit broadcast authorization.
+See [the contract and user journey](docs/native-configuration.md); implementation
+and local evidence do not establish actual controller/provider acceptance.

@@ -1,12 +1,14 @@
 <!doctype html><html><head><meta charset="utf-8"><title>OBSGod simulated Decky host</title>
 <style>body{margin:0;background:#0b1019;color:#f0f3fc;font:15px system-ui}#root{width:330px;margin:0 auto;padding:14px}section{padding:8px 0;border-top:1px solid #425067}h2{font-size:12px;letter-spacing:1px;color:#a8b7ce}button{display:flex;gap:10px;align-items:center;justify-content:center;width:100%;background:#354765;color:#fff;padding:12px;margin:5px 0;border:0;border-radius:4px;font:inherit}button:disabled{opacity:.45}button:focus{outline:3px solid #86d5ff}.row{margin:9px 0}</style></head><body><div id="root"></div><script src="runtime.js"></script><script type="module">
 const h=SP_REACT.createElement;
-window.DFL={staticClasses:{Title:"title"},PanelSection:({title,children})=>h("section",null,h("h2",null,title),children),PanelSectionRow:({children})=>h("div",{className:"row"},children),ButtonItem:({children,onClick,disabled,icon,description})=>h("div",null,h("button",{onClick,disabled},icon&&h("span",{"aria-hidden":true},icon),h("span",null,children)),description&&h("div",{style:{fontSize:12,opacity:.75,lineHeight:1.4}},description)),Navigation:{NavigateToExternalWeb:url=>{fixture.externalLinks.push(url);if(fixture.linkFailure)throw Error("fixture external navigation denied");}},showModal:content=>{const mount=document.createElement("div");document.body.appendChild(mount);const root=fixtureRoot(mount);root.render(content);return {Close:()=>{root.unmount();mount.remove();}};},ConfirmModal:({strTitle,strDescription,strOKButtonText,strCancelButtonText,onOK,onCancel})=>h("div",{role:"dialog","aria-label":strTitle},h("h2",null,strTitle),strDescription,h("button",{onClick:onOK},strOKButtonText||"Done"),onCancel&&h("button",{onClick:onCancel},strCancelButtonText||"Cancel"))};
+window.DFL={staticClasses:{Title:"title"},PanelSection:({title,children})=>h("section",null,h("h2",null,title),children),PanelSectionRow:({children})=>h("div",{className:"row"},children),ButtonItem:({children,onClick,disabled,icon,description})=>h("div",null,h("button",{onClick,disabled},icon&&h("span",{"aria-hidden":true},icon),h("span",null,children)),description&&h("div",{style:{fontSize:12,opacity:.75,lineHeight:1.4}},description)),Navigation:{NavigateToExternalWeb:url=>{fixture.externalLinks.push(url);if(fixture.linkFailure)throw Error("fixture external navigation denied");}},showModal:(content,_parent,options)=>{const mount=document.createElement("div");document.body.appendChild(mount);const root=fixtureRoot(mount);root.render(content);const close=()=>{root.unmount();mount.remove();delete fixture.dismissModal;options?.fnOnClose?.();};fixture.dismissModal=close;return {Close:close};},ConfirmModal:({strTitle,strDescription,strOKButtonText,strCancelButtonText,onOK,onCancel})=>h("div",{role:"dialog","aria-label":strTitle},h("h2",null,strTitle),strDescription,h("button",{onClick:onOK},strOKButtonText||"Done"),onCancel&&h("button",{onClick:onCancel},strCancelButtonText||"Cancel"))};
 window.fixture={active:false,configured:true,recording:false,microphone:false,audio:null,mode:"screen",replay:false,unknown:false,bytes:0,stalled:false,failure:false,sequence:0,operation:null,calls:{},toasts:[],externalLinks:[],linkFailure:false,events:JSON.parse(sessionStorage.getItem("fixtureEvents")||"[]"),testFailure:false};
 Object.assign(window.DFL,{
+ TextField:({label,description,value,onChange,disabled,bIsPassword})=>h("label",null,label,h("input",{"aria-label":label,type:bIsPassword?"password":"text",value,disabled,onChange}),description&&h("small",null,description)),
+ ToggleField:({label,description,checked,disabled,onChange})=>h("label",null,h("input",{type:"checkbox","aria-label":label,checked,disabled,onChange:event=>onChange(event.target.checked)}),label,description&&h("small",null,description)),
  GamepadButton:{OK:1},
  Focusable:({children,onButtonDown,onButtonUp,onGamepadBlur,onOKActionDescription,...props})=>h("div",props,children),
- DropdownItem:({label,description,rgOptions,selectedOption,disabled,onChange})=>h("label",null,label,h("select",{"aria-label":label,value:selectedOption,disabled,onChange:event=>onChange(rgOptions.find(option=>option.data===event.target.value))},rgOptions.map(option=>h("option",{key:option.data,value:option.data},option.label))),description&&h("small",null,description)),
+ DropdownItem:({label,description,rgOptions,selectedOption,disabled,onChange})=>h("label",null,label,h("select",{"aria-label":label,value:selectedOption,disabled,onChange:event=>onChange(rgOptions.find(option=>String(option.data)===event.target.value))},rgOptions.map(option=>h("option",{key:option.data,value:option.data},option.label))),description&&h("small",null,description)),
  SliderField:({label,min,max,step,value,valueSuffix,disabled,onChange})=>h("label",null,`${label} ${value}${valueSuffix||""}`,h("input",{type:"range","aria-label":label,min,max,step,value,disabled,onChange:event=>onChange(Number(event.target.value))})),
 });
 fixture.mixerPreferences={version:1,microphone_enabled:false,microphone_device:"default",microphone_muted:true,microphone_gain_percent:100,game_gain_percent:100,push_to_talk:false};
@@ -22,8 +24,40 @@ function dependencyStatus(){
  sessionStorage.setItem("fixtureDependency",JSON.stringify(Object.fromEntries(["dependencyState","dependencyReady","dependencyCanInstall","dependencyOperation","flathubNeeded","dependencyInstalls","obsInstalled","gstreamerInstalled"].map(key=>[key,fixture[key]]))));
  return {schema_version:1,ready,state:fixture.dependencyState,message:ready?"Dependencies ready":"Install required streaming dependencies",reason:ready?null:{code:"missing",message:"OBS and GStreamer need setup"},dependencies:[{id:"obs",name:"OBS Studio",scope:obs?"user":null,ref:obs?"app/com.obsproject.Studio/x86_64/stable":null,version:obs?"33.0.1":null,installed:obs,compatible:obs},{id:"gstreamer",name:"GStreamer extension",scope:gst?"user":null,ref:gst?"runtime/com.obsproject.Studio.Plugin.Gstreamer/x86_64/stable":null,version:null,installed:gst,compatible:gst}],remote:{name:"flathub",configured:!fixture.flathubNeeded,needs_add:fixture.flathubNeeded,valid:true,reason:""},operation:fixture.dependencyOperation,can_install:fixture.dependencyCanInstall,can_cancel:fixture.dependencyState==="running"};
 }
+fixture.configurationSaved={server:"rtmps://fixture.global-contribute.live-video.net:443/app",bitrate:4500,fps:30,encoder:"vaapi",width:1280,height:720,idle_style:"black",idle_text:"Preserve this idle message",idle_media:"",idle_media_rights:""};
+fixture.privateKey="native-existing-private-key";fixture.controlPassword="native-existing-local-password";fixture.configurationPatches=[];fixture.configurationFailure=false;
+function configurationStatus(){
+ if(fixture.configurationFailure)throw Error("Fixture configuration read unavailable");
+ const known=!fixture.unknown,idle=known&&!fixture.active&&!fixture.recording&&!fixture.replay,closed=fixture.obsAbsent;
+ return {schema_version:1,ok:true,configured:fixture.configured,key_configured:fixture.configured,settings:{...fixture.configurationSaved,microphone:fixture.microphone,capture_mode:fixture.mode},output_known:known,can_configure:idle&&closed,can_close:idle&&!closed,message:idle&&closed?"Settings can be changed without starting output":"Stop all output and close managed OBS before editing settings",connection:{host:"127.0.0.1",port:"4457",authentication_required:true,credentials_available:fixture.configured,connected:false,managed:false,process:closed?"absent":"running",output_known:closed,state:closed?"stopped":"unknown",message:closed?"Managed OBS is closed":"Test the authenticated local connection"}};
+}
+function configurationResult(ok,message,action){return {...configurationStatus(),action_result:{id:++fixture.sequence,action,ok,message}};}
 window.__DECKY_SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED_deckyLoaderAPIInit={connect:()=>({_version:2,callable:(method)=>async(...args)=>{
  fixture.calls[method]=(fixture.calls[method]||0)+1;
+ if(method==="configuration_status")return configurationStatus();
+ if(method==="configure_destination"){
+  const patch=args[0];fixture.configurationPatches.push({...patch,...(patch.stream_key?{stream_key:"<provided>"}:{})});
+  if(fixture.configurePending)await new Promise(resolve=>{fixture.finishConfiguration=resolve;});
+  if(!configurationStatus().can_configure||["running","cancelling"].includes(fixture.dependencyState))return configurationResult(false,"Output or setup is busy; no settings changed","configure-fields");
+  if(!patch.stream_key&&(!fixture.configured||patch.replace_key||(patch.server!==undefined&&patch.server!==fixture.configurationSaved.server)))return configurationResult(false,"Enter the key for this destination","configure-fields");
+  if(patch.stream_key)fixture.privateKey=patch.stream_key;
+  for(const name of ["server","bitrate","fps","encoder","width","height"])if(patch[name]!==undefined)fixture.configurationSaved[name]=patch[name];
+  if(patch.capture_mode!==undefined)fixture.mode=patch.capture_mode;
+  if(patch.microphone!==undefined)fixture.microphone=patch.microphone;
+  fixture.configured=true;
+  return configurationResult(true,"Settings saved on this device; nothing was broadcast","configure-fields");
+ }
+ if(method==="close_managed_obs"){
+  if(!configurationStatus().can_close)return configurationResult(false,"Output must be confirmed idle","restart");
+  fixture.obsAbsent=true;
+  return configurationResult(true,"Managed OBS closed; settings may now be edited","restart");
+ }
+ if(method==="test_control_connection")return {...configurationResult(!fixture.obsAbsent,fixture.obsAbsent?"Managed OBS is closed; this test did not launch it":"Authenticated managed connection verified","test-connection"),connection:{...configurationStatus().connection,ok:!fixture.obsAbsent,connected:!fixture.obsAbsent,managed:!fixture.obsAbsent,message:fixture.obsAbsent?"Managed OBS is closed; this test did not launch it":"Authenticated managed connection verified"}};
+ if(method==="change_control_password"){
+  if(!configurationStatus().can_configure||args[0]?.confirm!==true)return configurationResult(false,"Close managed OBS and confirm before changing its password","change-obs-password");
+  fixture.controlPassword=args[0].generate?"generated-private-password":args[0].password;
+  return configurationResult(true,"Private control password changed; nothing was broadcast","change-obs-password");
+ }
  if(method==="dependency_status")return dependencyStatus();
  if(method==="install_dependencies"){
   if(args[0]!==true)throw Error("Explicit setup consent required");

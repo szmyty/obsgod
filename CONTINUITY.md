@@ -1,5 +1,40 @@
 # Current work
 
+## Native destination setup and current Actions audit (#79 / #91)
+
+The owner requested fixing reproducible nonbilling Actions failures and manual
+Kick key setup directly in Gaming Mode; OAuth remains deferred #89. Work uses
+the existing checkout/branch **feat/decky-native-configuration**, stacked after
+#73 → #74 → #75 → #90 in draft [#92](https://github.com/szmyty/obsgod/pull/92).
+No merge, release, deployment, migration or spending is part of this checkpoint.
+
+The [native form and contract](docs/native-configuration.md) reuse Go Configure
+under the existing shared control lock. Sparse patches preserve advanced state;
+same-destination blank keys retain their binding, changed destinations/accounts
+require a replacement, and secrets are never read back. Offline saving needs
+positively closed/idle managed OBS. Closing an idle instance and changing its
+separate control password are explicit confirmations. Saving/testing never
+launches OBS or broadcasts. Python serializes actions, coalesces reads and invalidates stale observations
+and clears private payloads; UI readiness expires and private drafts clear on
+save, destination changes, modal dismissal or removal. The candidate workflow
+now includes dependency-setup and native-configuration packaged browser checks.
+
+The live audit at 2026-11-14T20:08:03Z found 42 failed runs, 69 jobs and zero executed
+steps across default/master and then-current PR73/74/75/90 heads: 64 billing-lock
+annotations and 5 expected push-only dependency-review skips. No executed current
+hosted nonbilling failure was found. A reproducible local staticcheck ST1005 was
+tracked as [#91](https://github.com/szmyty/obsgod/issues/91) and repaired in
+56677e1 by lowercasing the storage-map error lead-in. Dependency comparison 403
+remains a separate service/fork capability gate. Do not disable it or call local
+ACT evidence hosted acceptance.
+
+Focused Go/native, Python, Node/typecheck and simulated packaged browser checks
+passed during implementation, with independent review. These dirty-tree/diagnostic
+checks do not qualify a clean candidate. The next clean source checkpoint is
+to run all six supported nonpublishing ACT jobs, build the standard Decky ZIP,
+and retain exact source/artifact/matrix evidence. Actual Deck/controller/provider
+proof, required hosted CI/reviews and later #80–#88 work remain explicit gates.
+
 ## #76–#78 source implemented; qualified batch7e539ca in draft #90
 
 User-requested package/storage/dependency setup is implemented in draft
