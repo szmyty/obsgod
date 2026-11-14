@@ -20,6 +20,13 @@ preserve this variant. Colorful icons are supported by Decky's JSX icon slot;
 monochrome is a legibility option, not an API requirement. This image has not
 been applied to the live plugin or qualified at its actual icon sizes.
 
+The [four-color comparison](../.identity/candidates/concepts/orbital-stream-color-alternatives.png)
+shows **01 aurora** (aqua/violet), **02 afterglow** (purple/pink), **03 solar**
+(coral/gold) and **04 pearl** (iridescent pale tones). Its
+[generation record](../.identity/candidates/concepts/orbital-stream-color-alternatives.json)
+preserves the prompt and reference digest. These are concept variations, not
+four production icon exports or a selected palette.
+
 The mint-signal concept was generated in chat on 2026-11-14. Its original PNG,
 full prompt, method and digest are retained in
 [the concept record](../.identity/candidates/concepts/mint-signal-board.json).

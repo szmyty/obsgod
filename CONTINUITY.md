@@ -17,6 +17,11 @@ the complete prompt, image digest and draft status. The owner likes this directi
 and requested the banner's aqua/violet glow and depth for the primary icon;
 [the square preview](.identity/candidates/concepts/orbital-stream-gradient-icon.png)
 and its full reference/prompt record are saved. This new variant awaits feedback.
+The owner then asked to see alternatives. The saved
+[four-color comparison](.identity/candidates/concepts/orbital-stream-color-alternatives.png)
+shows 01 aurora (original aqua/violet), 02 afterglow (purple/pink), 03 solar
+(coral/gold) and 04 pearl (iridescent pale tones), with full prompt/reference
+metadata. No final palette choice is inferred from the request to compare them.
 Decky's JSX icon slot supports color/gradients; monochrome was a proposed
 legibility choice, not an API restriction. Actual small-size/on-Deck rendering
 remains unqualified, and observed stream-state cues must survive any icon change.
