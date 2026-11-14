@@ -1,6 +1,49 @@
 # Current work
 
-## Local-test integration follow-up implemented in #107
+## Runtime correctness complete; source stack merged and qualified
+
+Owner-authorized **#96–#100** are implemented through merged **#106/#107**;
+the earlier stack **#73 → #74 → #75 → #90 → #92 → #105** is also merged into
+actual default `master`. The qualified source is
+**9038e23e1a7bfe79c0a5731546f1d3e1a1a74e41**, tree
+**47366b98531c97778976fe354ccdf7aa53a9bac6**. Later evidence-only commits do
+not change or relabel that qualification. Read the
+[criterion-level checkpoint](docs/runtime-correctness-checkpoint.md),
+[machine report](docs/evidence/runtime-correctness-9038e23.json) and indexed ZIP.
+
+All six free local ACT jobs pass at that exact source, with verified receipts
+and zero open failure groups. Current primary ZIP SHA256
+**8833c0a11db6bbc06f75dad931e9810e3513d491e904450774cf3edced766d33**
+matches all 33 files assembled by pinned official Decky CLI/default builder and
+the repeated workflow ZIP. Actual packaged adapter→Go passes 218 CPython and
+240 simulated-frozen checks. Supplemental CLI, pinned Decky transport, old/current
+upgrades and six normal-user absent/reused frontend checks pass. Eighteen filtered
+native proofs cover real Linux OBS/audio/capture/game/idle fixtures. All three
+temporarily relocated caches were restored with file/link hashes matching.
+
+The first complete matrix at **4b3e0bf** failed the unchanged local clip/game
+fixture despite five passing jobs. #107 retained the initiating recording lease
+and drove guarded capture during the bounded wait; final/deferred Stop now
+rechecks ownership. The unchanged fixture then passed, followed by the complete
+new-source matrix. Initial Go fixture and outdated packed-harness failures remain
+historical evidence. Both ACT attempts record constrained-runner compiler-cache
+assistance; they are not unassisted resource-policy proof for #104.
+
+Runtime child closure uses all 20 bounded criteria, focused independent review
+and final matrix evidence, not merge state. Bounded Actions repairs #91/#93/#94
+also have merged fixes and current checks. Parent #46 and all 230 original
+criteria/dependencies remain open/intact. Next proposed audit work is #101/#102
+cleanup/recovery, then #103 and existing artwork/UI/docs/#104/#85 preparation.
+Do not start those from this record without the applicable owner instruction.
+
+Hosted checks remain billing-unavailable (zero executed steps); actual PR #107
+dependency comparison is 403. Actual Steam Deck/SteamOS/Flatpak/OBS 33/Gamescope/
+AMD/controller/headset/provider and native other-platform/adoption gates remain
+unrun in #86 and the original ledgers. No product release, deployment, migration,
+Store submission or spending occurred. OAuth #89 and migration/graph #87/#95 are
+separate. Requery live issues/PRs/default state before the next batch.
+
+## Historical local-test integration checkpoint in #107
 
 The unchanged native game/OBS and idle-media fixtures now pass the previously
 failed clip path. The parent retains its initiating lease and drives the same

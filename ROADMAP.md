@@ -1,6 +1,13 @@
 # Product roadmap
 
-## Runtime correctness implementation authorized
+## Runtime correctness completed; remaining audit stages separate
+
+The authorized **#96–#100** source is merged through #106/#107. The
+[criterion-level qualification](docs/runtime-correctness-checkpoint.md) records
+exact source **9038e23**, all six local ACT passes, primary plugin/official CLI
+comparison, native/browser/process evidence and the repaired first native
+qualification failure. Missing device/provider/hosted/rights/adoption evidence
+remains explicit; this intermediate checkpoint does not close parent #46 or #85.
 
 The owner approved implementing **#96–#100** and merging the open PR stack.
 [Runtime contracts](docs/runtime-correctness.md) cover effective microphone
