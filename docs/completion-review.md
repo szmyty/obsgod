@@ -85,8 +85,10 @@ capture/output/storage guards were unchanged. Final source reruns passed.
 
 ## First owner actions
 
-1. Review the seven drafts and exact evidence, then merge in the recorded order
-   when accepted and required checks/reviews are satisfied. Preserve branch protections and immutable artifact/download refs.
+1. The seven feature drafts are merged. Audit PR #67 is also merged normally at
+   `575e4e278599a94bbeeef334531cc60fb6714115`. Review subsequent scoped changes
+   against their own exact-source evidence; preserve protections and immutable
+   artifact/download refs. These source merges do not replace candidate 9.
 2. Install the exact candidate on the real Deck without wiping existing private
    settings/media. Record model, SteamOS/channel, Steam/Decky, OBS Flatpak/bundled
    WebSocket and GStreamer versions. Verify an audible moving local clip first.
@@ -164,7 +166,48 @@ The proposed current-compatible publication is GitHub prerelease `v0.1.0-deck.9`
 
 [Merge/check/cleanup and issue-transfer evidence](evidence/completion-merge.json).
 The seven feature PRs are merged, source branches removed and all 47 downloads
-reverified. Only #46 implementation/acceptance and unchanged #51 research remain
-open. Full candidate qualification remains bound to1a482808; fresh scoped checks
+reverified. #46 retains implementation/acceptance. The later local ACT audit
+opened scoped #68 for root-owned generated frontend output. #51 now has a
+[separate research recommendation and owner checklist](research-51.md), with
+[pinned official policy findings](store-policy-research.md); research completion
+does not mean paid-feature launch or Store admission. Full candidate qualification remains bound to1a482808; fresh scoped checks
 at merge a8b19b3 are separate. No release/deployment/creative approval follows
 from source merge or administrative supersession.
+
+## Follow-up preparation
+
+The new work repairs frontend build identity in workflow and nested packaging,
+prepares Go-only generic archive notices/SPDX/audits and a Linux offline-install
+check, and adds a narrow public profile inventory read. These changes require
+their own final revision checks. Generic NFPM/native support and full legacy
+CLI transport/facade migration remain real engineering work; the
+[migration contract](legacy-api-migration.md) records its exact connection-ownership
+gap. A typed profile read does not complete that migration.
+
+The smallest owner/device next step remains installing the immutable compatible
+candidate and returning exact Deck/SteamOS/Decky/OBS versions plus an audible
+moving local clip before provider-viewer and microphone/controller tests.
+Resolve hosted billing/Dependency graph access separately. Final organization,
+creative/rights/publisher facts, companion destination and any publication/contact/
+deployment actions keep their existing explicit decisions. No new broad approval
+is requested by this preparation.
+
+## Qualified follow-up source 4699235
+
+The [fresh qualification and criterion mapping](../audits/qualification-4699235.md)
+binds the follow-up build to 4699235e9e925b76ca492d5a00a375ed37fb338e and manual
+review artifact eb92598f3a4a0dc426749c290bacfe7251452909. All 19 public files and
+full 401-file source were independently downloaded and verified.
+[Install that exact review build](current-review-install.md) for new target proof.
+The earlier source 1a/d0a candidate and its original evidence above stay historical
+and unchanged; their receipts do not qualify the follow-up. No new release or
+latest-updater offer is implied.
+
+Both local ACT sequences, owner-writable frontend postconditions, generic 20/42
+reproducibility and fresh Go/CLI/legacy delivery/browser upgrade/Fish checks
+passed. #68's five criteria and #51's fourteen research deliverables are mapped.
+Actual Deck/viewer/adoption, hosted billing/graph, independent review/rights,
+full legacy migration, NFPM/native and companion/identity/publisher decisions
+remain in #46. The prepared new-source runtime may be considered for a later
+explicit publication proposal after those applicable gates; this review upload
+does not approve publishing it.

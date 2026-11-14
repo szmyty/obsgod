@@ -1,26 +1,28 @@
 # Product roadmap
 
-## Current state — implementation, local-CI repair and separate research
-
-Owner-approved source PRs #58/#59/#60/#62/#63/#64/#65 and audit PR #67 are merged.
-The default remains `master`, now at `575e4e278599a94bbeeef334531cc60fb6714115`.
-The 34
-superseded tickets retain all 230 original criteria/dependencies in
-[#46](https://github.com/szmyty/obsgod/issues/46); closure is a tracking transfer,
-not acceptance. [#51](https://github.com/szmyty/obsgod/issues/51) contains separate
-monetization and Decky Store research. The fresh ACT audit demonstrated
-[#68](https://github.com/szmyty/obsgod/issues/68), a normal-user rebuild failure
-caused by root-owned generated frontend output. Its bounded repair is the next
-engineering checkpoint. [Audit/evidence](audits/local-act-2026-11-13.md).
+## Current state — qualified follow-up and remaining acceptance
 
 The owner authorized merging the prepared audit and progressing the remaining
-issues. Work proceeds on frontend build identity, generic CLI archive notices/
-SBOM/auditing under #46, and separate evidence-backed research under #51. New
-implementation still requires exact-source checks; an in-progress note is not
-qualification. Actual device/provider/adoption, hosted CI and owner decisions
-remain explicit gates. No release, deployment, transfer or spending is approved
-by the source merges. Candidate 9 remains the unchanged qualified 1a482808/d0a4973f
-review download. [Merge/issue-transfer evidence](docs/evidence/completion-merge.json).
+issues. #67 and follow-up source #69/#70/#71 are merged; #72 contains the final
+research/evidence follow-up. Default remains `master`; exact source/merge
+revisions are in the [fresh qualification record](audits/qualification-4699235.md)
+and GitHub. No branch protection was changed or bypassed.
+
+Exact source 4699235 passed both complete local ACT sequences and fresh
+supplemental checks. #68 has actual absent/reused-output normal-user rebuild
+proof. #51 has completed bounded [monetization/Store research](docs/research-51.md),
+with recommendations and owner choices distinct from implementation, income or
+Store admission. #46 retains every original criterion/dependency and all remaining
+engineering/target/CI/review/rights/adoption work. Neither source merges nor
+research delivery complete those gates.
+
+The [current-source manual review download](docs/current-review-install.md)
+is source 4699235/artifact eb92598f, with 19 verified public files and full 401-file
+source. The older 1a/d0a review download remains unchanged. No product release,
+site/environment snapshot, transfer or spending occurred. Actual Deck/provider
+acceptance, full legacy CLI transport migration, NFPM/native support and selected
+companion/ecosystem/identity/publisher work remain explicit. Historical planning
+below preserves the earlier issue references and original scope.
 
 ## Historical campaign planning
 
@@ -148,23 +150,20 @@ Independent qualification and repairs can proceed while naming is pending.
 
 ### Decky Store constraint
 
-Checked 2026-11-12: the official
-[submission policy](https://wiki.deckbrew.xyz/en/plugin-dev/submitting-plugins#ai-llms-and-so-on)
-rejects LLM-based code. The official
-[addition template at `0fdb6a6`](https://github.com/SteamDeckHomebrew/decky-plugin-database/blob/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/.github/PULL_REQUEST_TEMPLATE/plugin_addition.md)
-also requires: “Generative AI was NOT used to write a majority of the code I am
-submitting.” This project has substantial AI-assisted implementation history;
-no majority audit or eligibility decision exists. Do not hide provenance or
-check that box without evidence. This is the Store's admission policy, not a
-legal conclusion about the project.
+The [2026-11-13 official-source research](docs/store-policy-research.md) supersedes
+the earlier categorical summary. The older submission guide says “any LLM based
+code”; newer official template/safety text says “majority”/“excessive.” Those
+published statements conflict. No majority audit or eligibility determination
+exists for this AI-assisted project. Preserve truthful provenance and seek
+owner-approved clarification before investing in Store submission.
 
-The current native `.so` submission path also requires developer Stable/Beta
-and independent SteamOS Preview testing. Cloud native OBS tests do not supply
-that proof. The official
-[monetization policy](https://wiki.deckbrew.xyz/en/plugin-dev/submitting-plugins#monetization)
-is restrictive about paid core/accessibility features. Neither a Store payment
-API nor blanket permission for a support link has been established. Recheck
-these policies before any submission; direct distribution remains independent.
+Additional work includes root-layout/Store build compatibility, real native
+Stable/Beta/third-party Preview testing and an approved update-channel boundary.
+The panel's check-only button is distinct from the paired Desktop updater;
+neither is silently declared approved or prohibited by this research. Voluntary
+support-link treatment remains unclear. The [two-journey recommendation](docs/research-51.md)
+is to finish the free direct product and defer paid/Store implementation pending
+demand evidence and owner/channel choices. No maintainer has been contacted.
 
 ## Milestone 3: advanced streaming and validated paid offerings
 
@@ -187,12 +186,13 @@ Prioritize from actual user needs after a supported launch.
 - **Useful stream health:** measured bitrate/dropped frames/audio/network and
   understandable recommendations with private diagnostics
   ([#50](https://github.com/szmyty/obsgod/issues/50)).
-- **Validate one optional paid offering before building it:** interview willing
-  users, test an owner-approved offer and measure conversion, net receipts,
-  fees, operating cost and support time
-  ([#51](https://github.com/szmyty/obsgod/issues/51)). Candidate experiments include
-  optional licensed scene packs, paid setup/support or a separately costed hosted
-  service. None is selected, promised or allowed to obstruct the local core.
+- **Separate monetization and Store research:** compare free/voluntary-support/
+  optional offerings and direct/Store paths, distinguish real observations from
+  unknown demand/capacity/rights, and prepare explicit recommendations/questions
+  ([#51](https://github.com/szmyty/obsgod/issues/51)). The bounded
+  [research packet](docs/research-51.md) recommends deferring paid offerings and
+  Store implementation for now. A future discovery/offer experiment requires its
+  own owner choice; no offer, price, provider or account is selected.
 - **Preserve the broader ledgers:** architecture/governance
   [#7](https://github.com/szmyty/obsgod/issues/7), reusable API
   [#9](https://github.com/szmyty/obsgod/issues/9), production v1

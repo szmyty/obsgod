@@ -1,0 +1,484 @@
+{
+  "schema": 1,
+  "prepared_date": "2026-11-13",
+  "user_timezone": "America/New_York",
+  "recorded_utc": "2026-11-14T00:03:03.389342+00:00",
+  "project_revision": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+  "project_sources": [
+    {
+      "id": "project:LICENSE",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": "LICENSE",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/LICENSE",
+      "sha256": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af",
+      "bytes": 1079
+    },
+    {
+      "id": "project:.github/FUNDING.yml",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": ".github/FUNDING.yml",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/.github/FUNDING.yml",
+      "sha256": "04f14099064745d28711e94bf4b0fd785d62fc185117c69307951039b82b1037",
+      "bytes": 411
+    },
+    {
+      "id": "project:support.json",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": "support.json",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/support.json",
+      "sha256": "73d06d7d6663c47637b9f080dd6aa1360a38a566a06d1becb3bbb7194fec8eb1",
+      "bytes": 242
+    },
+    {
+      "id": "project:docs/support.md",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": "docs/support.md",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/docs/support.md",
+      "sha256": "82d9d6393d58169e57a93fa5903bd6ef273c3a52544e4c534f75d5d41641ed38",
+      "bytes": 4596
+    },
+    {
+      "id": "project:SUPPORT.md",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": "SUPPORT.md",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/SUPPORT.md",
+      "sha256": "0c8cbc8690fc622f122943c007b6a29aec7d79215e4691d959991b88ed587d7c",
+      "bytes": 2408
+    },
+    {
+      "id": "project:README.md",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": "README.md",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/README.md",
+      "sha256": "ea60090edb2d9c9619ff474a6a158b668b95ef8a28556ae2e72b3deb4ba7ba7f",
+      "bytes": 4437
+    },
+    {
+      "id": "project:ROADMAP.md",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": "ROADMAP.md",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/ROADMAP.md",
+      "sha256": "30af0d91f0c17591bdad045a065e58747cf45e1b1b4c12a974e7ef67342fab95",
+      "bytes": 13140
+    },
+    {
+      "id": "project:docs/completion-review.md",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": "docs/completion-review.md",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/docs/completion-review.md",
+      "sha256": "66a95d78a40d91cb39340671ec4d6b600b43420721b1d28c4f8c46bf49526c42",
+      "bytes": 12892
+    },
+    {
+      "id": "project:docs/release-engineering.md",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": "docs/release-engineering.md",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/docs/release-engineering.md",
+      "sha256": "3e83c3fd349a2f730cd12b67cac55e91e3f101b3a1e46212bd91ba9b3da96c3d",
+      "bytes": 7695
+    },
+    {
+      "id": "project:docs/branding-review.md",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": "docs/branding-review.md",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/docs/branding-review.md",
+      "sha256": "4614e589b92aa6ecb5ab6d9e611dbb48b357729aec50151ee207837c0a546df7",
+      "bytes": 6568
+    },
+    {
+      "id": "project:.identity/candidates/inventory.json",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": ".identity/candidates/inventory.json",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/.identity/candidates/inventory.json",
+      "sha256": "4cdc7e121ab10c8f14b9cdd6f06e63abaa845696c255d9e66fd7234653b8f83e",
+      "bytes": 1682
+    },
+    {
+      "id": "project:.identity/governance/approvals.json",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": ".identity/governance/approvals.json",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/.identity/governance/approvals.json",
+      "sha256": "e96c088f11ded1d42a60872e3de0384299615b778c4927f20f1b441bd9db7bc9",
+      "bytes": 205
+    },
+    {
+      "id": "project:steamdeck/decky/plugin.json",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": "steamdeck/decky/plugin.json",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/steamdeck/decky/plugin.json",
+      "sha256": "443e999f922777a3b490a981a4bcb0fb04b8ea3247b7ec1002fa81013df070c4",
+      "bytes": 256
+    },
+    {
+      "id": "project:steamdeck/decky/package.json",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": "steamdeck/decky/package.json",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/steamdeck/decky/package.json",
+      "sha256": "c04919d3150d3ef9a9482049f972086c3c4a778d69470f520ae6b72628fee72f",
+      "bytes": 730
+    },
+    {
+      "id": "project:steamdeck/capture/README.md",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": "steamdeck/capture/README.md",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/steamdeck/capture/README.md",
+      "sha256": "9db32e042bf354460974f29e4726b4a26109e3968c171b8662cf3ec329d3319c",
+      "bytes": 6823
+    },
+    {
+      "id": "project:scripts/package-deck.py",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": "scripts/package-deck.py",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/scripts/package-deck.py",
+      "sha256": "eb253c2d9bfe5016e3828b7564b2c6c3cd8fb09879fc092979f7fb71627ff6db",
+      "bytes": 11696
+    },
+    {
+      "id": "project:steamdeck/update.py",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": "steamdeck/update.py",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/steamdeck/update.py",
+      "sha256": "a9f85227ce97e787f0db5a911871686615526b180aaa3dff69641e5008549917",
+      "bytes": 16981
+    },
+    {
+      "id": "project:steamdeck/decky/main.py",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": "steamdeck/decky/main.py",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/steamdeck/decky/main.py",
+      "sha256": "937f7ed373a66bf64690a549c20b59d23f18c63a8017dfa1dc5de9f11f0b8464",
+      "bytes": 24399
+    },
+    {
+      "id": "project:steamdeck/decky/src/index.tsx",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": "steamdeck/decky/src/index.tsx",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/steamdeck/decky/src/index.tsx",
+      "sha256": "ffeb27ccf7134a4565c2aa0ac811cd7a5bab1acaecf62aac3ab39f37d646c296",
+      "bytes": 22072
+    },
+    {
+      "id": "project:steamdeck/decky/src/support.mjs",
+      "repository": "szmyty/obsgod",
+      "commit": "d6f67159fb88e664a4dad2e57950c29c0407653f",
+      "path": "steamdeck/decky/src/support.mjs",
+      "url": "https://github.com/szmyty/obsgod/blob/d6f67159fb88e664a4dad2e57950c29c0407653f/steamdeck/decky/src/support.mjs",
+      "sha256": "7aa2028f2dfc10a1e1537c3fe910cccc55de1840b6a93daa8ee4fb68905ba6ce",
+      "bytes": 7232
+    }
+  ],
+  "official_sources": [
+    {
+      "repo": "SteamDeckHomebrew/wiki",
+      "revision": "ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4",
+      "path": "plugin-dev/submitting-plugins.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/wiki/ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4/plugin-dev/submitting-plugins.md",
+      "blob_url": "https://github.com/SteamDeckHomebrew/wiki/blob/ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4/plugin-dev/submitting-plugins.md",
+      "sha256": "ed72fcca747827243a5f91e8ddb59371d360a6e8a7499962495ec265c17ded0e",
+      "bytes": 7569,
+      "retrieved_utc": "2026-11-13T23:55:12.349464+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/wiki",
+      "revision": "ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4",
+      "path": "plugin-dev/review-and-testing.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/wiki/ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4/plugin-dev/review-and-testing.md",
+      "blob_url": "https://github.com/SteamDeckHomebrew/wiki/blob/ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4/plugin-dev/review-and-testing.md",
+      "sha256": "0014f8956e9e28d87f28a408555fff4b1178e670e1b9a7852db498e19c83f2e2",
+      "bytes": 5080,
+      "retrieved_utc": "2026-11-13T23:55:12.658018+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/wiki",
+      "revision": "ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4",
+      "path": "plugin-dev/env-vars.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/wiki/ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4/plugin-dev/env-vars.md",
+      "blob_url": "https://github.com/SteamDeckHomebrew/wiki/blob/ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4/plugin-dev/env-vars.md",
+      "sha256": "1c40634bf8cff0950e13f7c07d19a040085a8f0b7adf0254d6cf5bc0d668e2e9",
+      "bytes": 3837,
+      "retrieved_utc": "2026-11-13T23:55:12.335966+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/wiki",
+      "revision": "ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4",
+      "path": "plugin-dev/getting-started.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/wiki/ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4/plugin-dev/getting-started.md",
+      "blob_url": "https://github.com/SteamDeckHomebrew/wiki/blob/ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4/plugin-dev/getting-started.md",
+      "sha256": "8055933b827dbd33f2862f3e411bb08881e523fbff2a41b9ff8ac3007b65ca06",
+      "bytes": 8543,
+      "retrieved_utc": "2026-11-13T23:55:12.238237+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/decky-plugin-database",
+      "revision": "0fdb6a686d7c0e79366f85c9d551576cad3ecee5",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-database/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/README.md",
+      "blob_url": "https://github.com/SteamDeckHomebrew/decky-plugin-database/blob/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/README.md",
+      "sha256": "5aa4c592fe447b61b2d2af511a8d6906c40a15fb40c14f9213b6528973da15b7",
+      "bytes": 2252,
+      "retrieved_utc": "2026-11-13T23:55:12.653717+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/decky-plugin-database",
+      "revision": "0fdb6a686d7c0e79366f85c9d551576cad3ecee5",
+      "path": ".github/PULL_REQUEST_TEMPLATE/plugin_addition.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-database/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/.github/PULL_REQUEST_TEMPLATE/plugin_addition.md",
+      "blob_url": "https://github.com/SteamDeckHomebrew/decky-plugin-database/blob/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/.github/PULL_REQUEST_TEMPLATE/plugin_addition.md",
+      "sha256": "4af9913c690846e795673f54ef92730285ec13fabce3a40701ccc825e4d9cc15",
+      "bytes": 3795,
+      "retrieved_utc": "2026-11-13T23:55:12.240007+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/decky-plugin-database",
+      "revision": "0fdb6a686d7c0e79366f85c9d551576cad3ecee5",
+      "path": ".github/PULL_REQUEST_TEMPLATE/plugin_update.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-database/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/.github/PULL_REQUEST_TEMPLATE/plugin_update.md",
+      "blob_url": "https://github.com/SteamDeckHomebrew/decky-plugin-database/blob/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/.github/PULL_REQUEST_TEMPLATE/plugin_update.md",
+      "sha256": "fa09255bd7c2f6299bdb70c34e496ce8715c7adacf829bc4e423eebb68632dab",
+      "bytes": 3858,
+      "retrieved_utc": "2026-11-13T23:55:12.916607+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/decky-plugin-database",
+      "revision": "0fdb6a686d7c0e79366f85c9d551576cad3ecee5",
+      "path": ".github/pull_request_template.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-database/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/.github/pull_request_template.md",
+      "blob_url": "https://github.com/SteamDeckHomebrew/decky-plugin-database/blob/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/.github/pull_request_template.md",
+      "sha256": "9033d4b0ae16a145435cd8d2589243c52c1c0806114be3779fd803f3b7f7ad23",
+      "bytes": 824,
+      "retrieved_utc": "2026-11-13T23:55:12.620824+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/decky-plugin-database",
+      "revision": "0fdb6a686d7c0e79366f85c9d551576cad3ecee5",
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-database/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/LICENSE",
+      "blob_url": "https://github.com/SteamDeckHomebrew/decky-plugin-database/blob/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/LICENSE",
+      "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
+      "bytes": 34523,
+      "retrieved_utc": "2026-11-13T23:55:13.199942+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/decky-plugin-template",
+      "revision": "90d0780e882a17f5714fc6de044c645f22608290",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-template/90d0780e882a17f5714fc6de044c645f22608290/README.md",
+      "blob_url": "https://github.com/SteamDeckHomebrew/decky-plugin-template/blob/90d0780e882a17f5714fc6de044c645f22608290/README.md",
+      "sha256": "031a98c802664193dadfd66f45dded396d4572835d0ad20f01e75e89e6aa65ca",
+      "bytes": 5716,
+      "retrieved_utc": "2026-11-13T23:55:13.174547+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/decky-plugin-template",
+      "revision": "90d0780e882a17f5714fc6de044c645f22608290",
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-template/90d0780e882a17f5714fc6de044c645f22608290/LICENSE",
+      "blob_url": "https://github.com/SteamDeckHomebrew/decky-plugin-template/blob/90d0780e882a17f5714fc6de044c645f22608290/LICENSE",
+      "sha256": "a759dfb248c06c33a8c34582d6f8f4842badead892caa7d4319ff82f549a1269",
+      "bytes": 1592,
+      "retrieved_utc": "2026-11-13T23:55:13.635668+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/decky-plugin-template",
+      "revision": "90d0780e882a17f5714fc6de044c645f22608290",
+      "path": "plugin.json",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-template/90d0780e882a17f5714fc6de044c645f22608290/plugin.json",
+      "blob_url": "https://github.com/SteamDeckHomebrew/decky-plugin-template/blob/90d0780e882a17f5714fc6de044c645f22608290/plugin.json",
+      "sha256": "12b774247405663a4c53eba49c8aaba47f5e27a05e9d1befc1bad4ba43385ac0",
+      "bytes": 287,
+      "retrieved_utc": "2026-11-13T23:55:13.216502+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/decky-plugin-template",
+      "revision": "90d0780e882a17f5714fc6de044c645f22608290",
+      "path": "package.json",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-template/90d0780e882a17f5714fc6de044c645f22608290/package.json",
+      "blob_url": "https://github.com/SteamDeckHomebrew/decky-plugin-template/blob/90d0780e882a17f5714fc6de044c645f22608290/package.json",
+      "sha256": "d9f11125b06f16d09d4b64ff1b658fbfd05929d5ee9df9562115abf7153e7449",
+      "bytes": 1295,
+      "retrieved_utc": "2026-11-13T23:55:14.133085+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/decky-plugin-template",
+      "revision": "90d0780e882a17f5714fc6de044c645f22608290",
+      "path": "decky.pyi",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-template/90d0780e882a17f5714fc6de044c645f22608290/decky.pyi",
+      "blob_url": "https://github.com/SteamDeckHomebrew/decky-plugin-template/blob/90d0780e882a17f5714fc6de044c645f22608290/decky.pyi",
+      "sha256": "c420d4884867805ded35712bac4cbe6a221b9d0b3062329d228583a0d0de6333",
+      "bytes": 5048,
+      "retrieved_utc": "2026-11-13T23:55:13.609167+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/decky-plugin-database",
+      "revision": "0fdb6a686d7c0e79366f85c9d551576cad3ecee5",
+      "path": "builder/Dockerfile",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-database/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/builder/Dockerfile",
+      "blob_url": "https://github.com/SteamDeckHomebrew/decky-plugin-database/blob/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/builder/Dockerfile",
+      "sha256": "54f1f27acd5cab6ca7a0f5a3ab4bd983338159173618685e28192d5736b000dd",
+      "bytes": 190,
+      "retrieved_utc": "2026-11-13T23:55:43.939047+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/decky-plugin-database",
+      "revision": "0fdb6a686d7c0e79366f85c9d551576cad3ecee5",
+      "path": "builder/entrypoint.sh",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-database/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/builder/entrypoint.sh",
+      "blob_url": "https://github.com/SteamDeckHomebrew/decky-plugin-database/blob/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/builder/entrypoint.sh",
+      "sha256": "fc3743cb42187b1a9f75fa0c574c85e7c4711e3066d871abfb51c1ce9da269a9",
+      "bytes": 477,
+      "retrieved_utc": "2026-11-13T23:55:43.686369+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/decky-plugin-database",
+      "revision": "0fdb6a686d7c0e79366f85c9d551576cad3ecee5",
+      "path": ".github/workflows/build-plugins.yml",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-database/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/.github/workflows/build-plugins.yml",
+      "blob_url": "https://github.com/SteamDeckHomebrew/decky-plugin-database/blob/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/.github/workflows/build-plugins.yml",
+      "sha256": "935b4d064168313e68407488b107a27e222495e921a4000a4a9ecf76e2760d89",
+      "bytes": 14818,
+      "retrieved_utc": "2026-11-13T23:55:43.298755+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/decky-plugin-database",
+      "revision": "0fdb6a686d7c0e79366f85c9d551576cad3ecee5",
+      "path": ".github/workflows/build-builder.yml",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-database/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/.github/workflows/build-builder.yml",
+      "blob_url": "https://github.com/SteamDeckHomebrew/decky-plugin-database/blob/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/.github/workflows/build-builder.yml",
+      "sha256": "d21ed7d12f9370a330e21ef85f8fe21c28f9e2432fbba62712cbb6ac8a77e028",
+      "bytes": 1222,
+      "retrieved_utc": "2026-11-13T23:55:42.892844+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/decky-plugin-database",
+      "revision": "0fdb6a686d7c0e79366f85c9d551576cad3ecee5",
+      "path": ".gitmodules",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/decky-plugin-database/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/.gitmodules",
+      "blob_url": "https://github.com/SteamDeckHomebrew/decky-plugin-database/blob/0fdb6a686d7c0e79366f85c9d551576cad3ecee5/.gitmodules",
+      "sha256": "c9188cadd7bd17ab03c12b33b0666e9d2fa5809d66dae824e3e6346307df77a7",
+      "bytes": 15991,
+      "retrieved_utc": "2026-11-13T23:56:37.682271+00:00"
+    },
+    {
+      "repo": "SteamDeckHomebrew/wiki",
+      "revision": "ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4",
+      "path": "user-guide/plugin-safety.md",
+      "url": "https://raw.githubusercontent.com/SteamDeckHomebrew/wiki/ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4/user-guide/plugin-safety.md",
+      "blob_url": "https://github.com/SteamDeckHomebrew/wiki/blob/ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4/user-guide/plugin-safety.md",
+      "sha256": "12ee2a739a408fc539236f9c8fdb98abf1c7b87e1951cd0481fe4a73875d47a9",
+      "bytes": 5086,
+      "retrieved_utc": "2026-11-13T23:57:30.385254+00:00"
+    }
+  ],
+  "policy_file_history": [
+    {
+      "repo": "SteamDeckHomebrew/wiki",
+      "path": "plugin-dev/submitting-plugins.md",
+      "queried_ref": "ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4",
+      "url": "https://api.github.com/repos/SteamDeckHomebrew/wiki/commits?path=plugin-dev%2Fsubmitting-plugins.md&sha=ec9d4cf8b07cdc7bc7706fd118d68a272f653cb4&per_page=1",
+      "last_path_commit": "cf20fc48b9b593ab2c291b576f92f1624bf0054c",
+      "date": "2025-11-27T17:39:39Z",
+      "subject": "docs: update plugin-dev/submitting-plugins",
+      "html_url": "https://github.com/SteamDeckHomebrew/wiki/commit/cf20fc48b9b593ab2c291b576f92f1624bf0054c"
+    },
+    {
+      "repo": "SteamDeckHomebrew/decky-plugin-database",
+      "path": ".github/PULL_REQUEST_TEMPLATE/plugin_addition.md",
+      "queried_ref": "0fdb6a686d7c0e79366f85c9d551576cad3ecee5",
+      "url": "https://api.github.com/repos/SteamDeckHomebrew/decky-plugin-database/commits?path=.github%2FPULL_REQUEST_TEMPLATE%2Fplugin_addition.md&sha=0fdb6a686d7c0e79366f85c9d551576cad3ecee5&per_page=1",
+      "last_path_commit": "dbb95f7146a55ee6ac2c81f3a4a059544abdf550",
+      "date": "2026-04-10T19:43:18Z",
+      "subject": "Add generative AI warnings, checkboxes (#1025)",
+      "html_url": "https://github.com/SteamDeckHomebrew/decky-plugin-database/commit/dbb95f7146a55ee6ac2c81f3a4a059544abdf550"
+    }
+  ],
+  "public_project_observations": {
+    "observed_utc": "2026-11-13T23:56:41.633060+00:00",
+    "repository": "szmyty/obsgod",
+    "stars": 0,
+    "forks": 0,
+    "subscribers": 0,
+    "repository_created_at": "2026-06-08T21:35:50Z",
+    "public_issues_in_one_complete_100_item_page": 40,
+    "issue_authors": [
+      "szmyty"
+    ],
+    "releases": [
+      {
+        "tag": "v0.1.0-deck.4-updater.1",
+        "prerelease": true,
+        "published_at": "2026-11-11T17:15:52Z",
+        "url": "https://github.com/szmyty/obsgod/releases/tag/v0.1.0-deck.4-updater.1",
+        "assets": []
+      },
+      {
+        "tag": "v0.1.0-deck.4",
+        "prerelease": true,
+        "published_at": "2026-11-11T16:42:27Z",
+        "url": "https://github.com/szmyty/obsgod/releases/tag/v0.1.0-deck.4",
+        "assets": []
+      },
+      {
+        "tag": "v0.1.0-deck.3",
+        "prerelease": true,
+        "published_at": "2026-11-11T16:28:06Z",
+        "url": "https://github.com/szmyty/obsgod/releases/tag/v0.1.0-deck.3",
+        "assets": []
+      },
+      {
+        "tag": "v0.1.0-deck.2",
+        "prerelease": true,
+        "published_at": "2026-11-11T16:03:00Z",
+        "url": "https://github.com/szmyty/obsgod/releases/tag/v0.1.0-deck.2",
+        "assets": []
+      },
+      {
+        "tag": "v0.1.0-deck.1",
+        "prerelease": true,
+        "published_at": "2026-11-11T07:34:58Z",
+        "url": "https://github.com/szmyty/obsgod/releases/tag/v0.1.0-deck.1",
+        "assets": []
+      }
+    ],
+    "limits": [
+      "GitHub asset counts are requests, not distinct users, retained users, successful installs, donations or willingness to pay.",
+      "Manual candidate files on artifact Git branches are not counted by release asset download counters.",
+      "All-user interviews, payment records, support time/capacity and new-user actual device journeys are unavailable; none inferred from repository activity.",
+      "Issue author metadata does not establish the source of every original report or exclude private/unlogged users."
+    ],
+    "release_asset_download_measurement": {
+      "status": "unavailable",
+      "returned_asset_records": 0,
+      "reason": "All returned release asset lists are empty; an empty-set sum is not an observed zero-download metric.",
+      "total_downloads": null
+    }
+  },
+  "observation_query_urls": [
+    "https://api.github.com/repos/szmyty/obsgod",
+    "https://api.github.com/repos/szmyty/obsgod/releases?per_page=100",
+    "https://api.github.com/repos/szmyty/obsgod/issues?state=all&per_page=100"
+  ],
+  "scope": [
+    "Read-only research; no source changes, builds, contact, submission, payment/provider/account choice, wallet activation or spending.",
+    "External/public counters do not establish users, retention, receipts, willingness to pay, source provenance percentages, device qualification or Store eligibility.",
+    "Complete third-party wiki snapshots remain private; public deliverable uses linked, attributed excerpts and source hashes."
+  ]
+}

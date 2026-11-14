@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "issue": 51,
+  "issue_updated_at": "2026-11-13T09:09:15Z",
+  "prepared_date": "2026-11-13",
+  "criteria": [
+    {
+      "original_text": "Identify actual user problems, available demand/willingness-to-pay evidence and gaps in that evidence; distinguish observations from hypotheses.",
+      "research_deliverable": "completed",
+      "evidence": "research-51.md:Journey 1",
+      "claim_limit": "Research finding/recommendation/identified gap only; no implementation, owner decision or external acceptance inferred."
+    },
+    {
+      "original_text": "Compare voluntary support, plausible optional paid offerings and keeping the product entirely free. Avoid selecting a product, price, provider or account before the evidence supports it.",
+      "research_deliverable": "completed",
+      "evidence": "research-51.md:Journey 1",
+      "claim_limit": "Research finding/recommendation/identified gap only; no implementation, owner decision or external acceptance inferred."
+    },
+    {
+      "original_text": "Assess ownership/licensing, applicable channel rules, support capacity, operating costs and the value an offer would deliver.",
+      "research_deliverable": "completed",
+      "evidence": "research-51.md:Journey 1",
+      "claim_limit": "Research finding/recommendation/identified gap only; no implementation, owner decision or external acceptance inferred."
+    },
+    {
+      "original_text": "Record a recommendation: pursue, defer or do not monetize, with alternatives, assumptions, tradeoffs and precise owner decisions.",
+      "research_deliverable": "completed",
+      "evidence": "research-51.md:Journey 1",
+      "claim_limit": "Research finding/recommendation/identified gap only; no implementation, owner decision or external acceptance inferred."
+    },
+    {
+      "original_text": "If an experiment is recommended, outline a small separately reviewable experiment and its success/stop criteria, costs and required approvals.",
+      "research_deliverable": "completed",
+      "evidence": "research-51.md:Journey 1",
+      "claim_limit": "Research finding/recommendation/identified gap only; no implementation, owner decision or external acceptance inferred."
+    },
+    {
+      "original_text": "Pin current official policies, submission templates, licensing/asset rules, technical/native-build requirements, testing requirements and support-link/monetization rules.",
+      "research_deliverable": "completed",
+      "evidence": "research-51.md:Journey 2;store-policy-research.md",
+      "claim_limit": "Research finding/recommendation/identified gap only; no implementation, owner decision or external acceptance inferred."
+    },
+    {
+      "original_text": "Compare the actual project's AI-assisted development history, sources, assets and build layout with those requirements. Document clear requirements, ambiguities and concrete blockers.",
+      "research_deliverable": "completed",
+      "evidence": "research-51.md:Journey 2;store-policy-research.md",
+      "claim_limit": "Research finding/recommendation/identified gap only; no implementation, owner decision or external acceptance inferred."
+    },
+    {
+      "original_text": "Assess legitimate available paths and the changes/evidence each would require. Prepare any necessary maintainer questions for owner review before contact.",
+      "research_deliverable": "completed",
+      "evidence": "research-51.md:Journey 2;store-policy-research.md",
+      "claim_limit": "Research finding/recommendation/identified gap only; no implementation, owner decision or external acceptance inferred."
+    },
+    {
+      "original_text": "Compare Store distribution with verified direct downloads, including installation/update friction, maintenance burden and user trust.",
+      "research_deliverable": "completed",
+      "evidence": "research-51.md:Journey 2;store-policy-research.md",
+      "claim_limit": "Research finding/recommendation/identified gap only; no implementation, owner decision or external acceptance inferred."
+    },
+    {
+      "original_text": "Record a recommendation and evidence: viable path, clarification needed, deferred or direct-only, plus the exact next actions and owner/external decisions. An accepted Store listing is an external outcome rather than a condition for closing the research.",
+      "research_deliverable": "completed",
+      "evidence": "research-51.md:Journey 2;store-policy-research.md",
+      "claim_limit": "Research finding/recommendation/identified gap only; no implementation, owner decision or external acceptance inferred."
+    },
+    {
+      "original_text": "Keep the two journeys separately readable, with dated sources, findings, alternatives, uncertainty and recommendations.",
+      "research_deliverable": "completed",
+      "evidence": "research-51.md:Owner decision checklist and evidence notes",
+      "claim_limit": "Research finding/recommendation/identified gap only; no implementation, owner decision or external acceptance inferred."
+    },
+    {
+      "original_text": "Preserve a free local core, offline operation, explicit stream controls, privacy and accessibility in every proposed path.",
+      "research_deliverable": "completed",
+      "evidence": "research-51.md:Owner decision checklist and evidence notes",
+      "claim_limit": "Research finding/recommendation/identified gap only; no implementation, owner decision or external acceptance inferred."
+    },
+    {
+      "original_text": "Separate completed research from any proposed implementation, payment/account setup, release, deployment or Store submission.",
+      "research_deliverable": "completed",
+      "evidence": "research-51.md:Owner decision checklist and evidence notes",
+      "claim_limit": "Research finding/recommendation/identified gap only; no implementation, owner decision or external acceptance inferred."
+    },
+    {
+      "original_text": "Give the owner a concise decision checklist. Research completion does not require launching a paid offering, receiving money or obtaining Store acceptance.",
+      "research_deliverable": "completed",
+      "evidence": "research-51.md:Owner decision checklist and evidence notes",
+      "claim_limit": "Research finding/recommendation/identified gap only; no implementation, owner decision or external acceptance inferred."
+    }
+  ],
+  "recommendations": {
+    "monetization": "defer_paid_offering;retain_free_local_core_and_optional_support_subject_to_owner_readiness",
+    "store": "defer_submission_and_implementation_pending_owner_disposition_and_truthful_policy_clarification"
+  },
+  "external_actions_performed": [],
+  "deliverable_files": {
+    "research-51.md": "f5c287eef2d28ff7539f5404af4af398d1830759585bcebc6ff9815124b6a4a9",
+    "research-51-sources.json": "e344799ed7d105bbe53d7c56fdaf75ea94423d15f3f784649af7b7461e7a28a8",
+    "store-policy-research.md": "17e98a13fa64e08075280553428479f2fd6ed177a30cf19bb4dc21c08e65b0e9"
+  },
+  "completion_scope": "Research deliverables only; owner adoption, payments, Store admission, product/target acceptance and external actions are not completed by this mapping."
+}

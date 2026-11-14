@@ -18,8 +18,9 @@ plugin and storage compatibility IDs remain `obsgod` / `OBSGod`.
 
 ## Install and first stream
 
-Use the [checksum-verifying candidate9 installer](docs/candidate-9-install.md)
-in Desktop Mode and follow the [Steam Deck guide](docs/steam-deck.md). Extract the
+Use the [checksum-verifying current-source review installer](docs/current-review-install.md)
+in Desktop Mode and follow the [Steam Deck guide](docs/steam-deck.md). The older
+[1a/d0a candidate](docs/candidate-9-install.md) remains available unchanged. Extract the
 whole reviewed candidate, run its installer and configure your destination/key
 locally. Return to Gaming Mode, make a local clip and verify its picture/sound,
 then explicitly start streaming and check a separate viewer.
