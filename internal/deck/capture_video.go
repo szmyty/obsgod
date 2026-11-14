@@ -101,6 +101,19 @@ func writeCaptureVideoStatus(p Paths, s Settings, state, frames string, watching
 func captureSourceSettings(pipeline string) map[string]any {
 	return map[string]any{"pipeline": pipeline, "use_timestamps_video": true, "sync_appsink_video": false, "disable_async_appsink_video": true, "disable_async_appsink_audio": true, "no_buffer": true, "drop_video": true, "stop_on_hide": false, "clear_on_end": true, "restart_on_error": true, "restart_on_eos": true, "restart_timeout": 2000}
 }
+
+// effectiveVideoSettings resolves scene membership from the same preferences as
+// managed audio. The copy is only a video policy: saved legacy settings and the
+// source's independent mute, gain, device and push-to-talk state are untouched.
+func effectiveVideoSettings(p Paths, s Settings) (Settings, error) {
+	pref, err := MixerSettings(p, s)
+	if err != nil {
+		return Settings{}, err
+	}
+	s.Microphone = pref.MicrophoneEnabled
+	return s, nil
+}
+
 func sceneVideoWhitelist(s Settings, source string) map[string]bool {
 	keep := map[string]bool{GameAudio: true}
 	if s.Microphone {
@@ -248,6 +261,10 @@ func ensureVideo(ctx context.Context, c *automation.Client, p Paths, s Settings)
 	return ensureVideoForGame(ctx, c, p, s, game)
 }
 func ensureVideoForGame(ctx context.Context, c *automation.Client, p Paths, s Settings, game GameIdentity) error {
+	s, err := effectiveVideoSettings(p, s)
+	if err != nil {
+		return err
+	}
 	if err := ensureIdleVideo(ctx, c, p, s); err != nil {
 		return err
 	}

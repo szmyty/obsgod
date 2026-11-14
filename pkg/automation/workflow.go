@@ -133,7 +133,7 @@ func ApplyWorkflow(ctx context.Context, backend WorkflowBackend, plan WorkflowPl
 	read := func() (WorkflowSnapshot, error) {
 		state, err := backend.WorkflowSnapshot(ctx)
 		if err != nil {
-			return state, errors.New("workflow output state is unconfirmed; no further changes were made; inspect OBS and retry")
+			return state, workflowFailure("workflow output state is unconfirmed; no further changes were made; inspect OBS and retry", err)
 		}
 		if state.StreamActive || state.VirtualCameraActive || (state.RecordingActive && !recordingStarted) || (state.ReplayBufferActive && !replayStarted) {
 			return state, errors.New("workflow requires confirmed idle OBS output; stop stream, recording, replay buffer and virtual camera explicitly before retrying")
@@ -180,7 +180,7 @@ func ApplyWorkflow(ctx context.Context, backend WorkflowBackend, plan WorkflowPl
 		}
 		result.Attempted = name
 		if err := change(ctx, value); err != nil {
-			return errors.New("workflow OBS change failed; its outcome may be unconfirmed; inspect OBS before retrying")
+			return workflowFailure("workflow OBS change failed; its outcome may be unconfirmed; inspect OBS before retrying", err)
 		}
 		result.Applied = append(result.Applied, name)
 		for {
@@ -220,7 +220,7 @@ func ApplyWorkflow(ctx context.Context, backend WorkflowBackend, plan WorkflowPl
 	if plan.ReplayBufferEnabled {
 		result.Attempted = "replay_buffer"
 		if err := backend.StartWorkflowReplayBuffer(ctx); err != nil {
-			return fail(errors.New("replay-buffer start is unconfirmed; inspect OBS; it was not stopped automatically"))
+			return fail(workflowFailure("replay-buffer start is unconfirmed; inspect OBS; it was not stopped automatically", err))
 		}
 		replayStarted = true
 		result.Attempted = ""
@@ -232,7 +232,7 @@ func ApplyWorkflow(ctx context.Context, backend WorkflowBackend, plan WorkflowPl
 	if plan.RecordingEnabled {
 		result.Attempted = "recording"
 		if err := backend.StartRecording(ctx); err != nil {
-			return fail(errors.New("recording start is unconfirmed; inspect OBS; it was not stopped automatically"))
+			return fail(workflowFailure("recording start is unconfirmed; inspect OBS; it was not stopped automatically", err))
 		}
 		recordingStarted = true
 		result.Attempted = ""
@@ -240,7 +240,7 @@ func ApplyWorkflow(ctx context.Context, backend WorkflowBackend, plan WorkflowPl
 	}
 	state, err = read()
 	if err != nil || (plan.RecordingEnabled && !state.RecordingActive) || (plan.ReplayBufferEnabled && !state.ReplayBufferActive) {
-		return fail(errors.New("workflow final output state is unconfirmed; inspect OBS before retrying"))
+		return fail(workflowFailure("workflow final output state is unconfirmed; inspect OBS before retrying", err))
 	}
 	finalScene := plan.LiveScene
 	if finalScene == "" {
@@ -252,6 +252,23 @@ func ApplyWorkflow(ctx context.Context, backend WorkflowBackend, plan WorkflowPl
 	result.OK = true
 	result.Message = "Workflow applied. Streaming was not started; local output was enabled only when explicitly approved."
 	return result, nil
+}
+
+// workflowFailure keeps the workflow's fixed diagnostics for arbitrary backend
+// errors while preserving the safe lifecycle identity needed by connection
+// owners. Keeping raw backend errors as causes would expose server settings.
+func workflowFailure(message string, err error) error {
+	var response *ResponseError
+	if errors.As(err, &response) {
+		return &ResponseError{Timeout: response.Timeout}
+	}
+	if errors.Is(err, context.Canceled) {
+		return context.Canceled
+	}
+	if errors.Is(err, context.DeadlineExceeded) {
+		return context.DeadlineExceeded
+	}
+	return errors.New(message)
 }
 
 func hasName(names []string, wanted string) bool {

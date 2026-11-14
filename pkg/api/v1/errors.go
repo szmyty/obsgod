@@ -45,7 +45,7 @@ func (e *Error) Remediation() string {
 	case Authentication:
 		return "check the OBS WebSocket password through a private secret source"
 	case Unavailable:
-		return "start OBS and enable its built-in WebSocket server, then reconnect"
+		return "check OBS WebSocket availability, then reconnect and inspect OBS state before retrying"
 	case Timeout, Cancelled:
 		return "inspect OBS state before retrying; an interrupted mutation may have applied"
 	case Conflict:
@@ -86,6 +86,7 @@ func Failure(operation string, err error) *Error {
 		e.Code, e.cause = Timeout, context.DeadlineExceeded
 	default:
 		var connection *automation.ConnectionError
+		var response *automation.ResponseError
 		var request *automation.RequestError
 		if errors.As(err, &connection) {
 			switch connection.Kind {
@@ -96,6 +97,8 @@ func Failure(operation string, err error) *Error {
 			default:
 				e.Code, e.Retryable = Unavailable, true
 			}
+		} else if errors.As(err, &response) {
+			e.Code = Unavailable
 		} else if errors.As(err, &request) {
 			e.Code, e.OBSCode = OBSRequest, request.Code
 		}

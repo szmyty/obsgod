@@ -2,6 +2,7 @@ package automation
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"strconv"
 	"strings"
@@ -25,14 +26,33 @@ type MediaOutputStatus struct {
 }
 
 func (c *Client) RecordingStatus(ctx context.Context) (RecordingStatus, error) {
+	return c.observeRecording(ctx, true)
+}
+
+// observeRecording validates the raw flags before generated zero values can
+// authorize or confirm a recording transition. Lifecycle/runtime callers only
+// consume Active; callers exposing Paused must require its own known value.
+func (c *Client) observeRecording(ctx context.Context, requirePaused bool) (RecordingStatus, error) {
 	r, e := empty(ctx, "GetRecordStatus", c.obs.Record.GetRecordStatus)
 	if e != nil {
 		return RecordingStatus{}, e
 	}
-	if e = workflowKnownOutput(r.GetRaw(), "outputActive"); e != nil {
-		return RecordingStatus{}, e
+	// Consume the same canonical values that passed validation. The generated
+	// struct also accepts case-insensitive aliases, whose values must not
+	// override the flags that authorize or confirm a lifecycle transition.
+	var fields map[string]json.RawMessage
+	var active, paused *bool
+	if json.Unmarshal(r.GetRaw(), &fields) != nil || json.Unmarshal(fields["outputActive"], &active) != nil || active == nil {
+		return RecordingStatus{}, &RequestError{Operation: "GetRecordStatus"}
 	}
-	return RecordingStatus{Active: r.OutputActive, Paused: r.OutputPaused, Bytes: r.OutputBytes, Duration: r.OutputDuration}, nil
+	if requirePaused && (json.Unmarshal(fields["outputPaused"], &paused) != nil || paused == nil) {
+		return RecordingStatus{}, &RequestError{Operation: "GetRecordStatus"}
+	}
+	state := RecordingStatus{Active: *active, Bytes: r.OutputBytes, Duration: r.OutputDuration}
+	if paused != nil {
+		state.Paused = *paused
+	}
+	return state, nil
 }
 func (c *Client) ReplayActive(ctx context.Context) (bool, error) {
 	r, e := empty(ctx, "GetReplayBufferStatus", c.obs.Outputs.GetReplayBufferStatus)

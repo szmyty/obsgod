@@ -21,6 +21,25 @@ relevant alternatives, consequences and evidence. Routine fixes need no ceremoni
 ADR. Update [architecture](ARCHITECTURE.md), [vocabulary](ONTOLOGY.md), feature
 docs and continuity when inaccurate. Code/merge alone cannot accept a proposal.
 
+## Runtime ownership and shutdown (#96–#100)
+
+The owner authorized these bounded correctness repairs and the existing PR
+merges. Capture changes now recheck current managed ownership/output under the
+shared control lease; microphone scene policy derives from saved mixer intent.
+Canonical raw recording flags prevent generated defaults from authorizing
+output changes. A lost SDK response boundary invalidates the owned API
+connection, including through workflow wrappers, without retrying mutations.
+
+The supported loader's five-second termination deadline requires a four-second
+best-effort adapter drain rather than serial long waits. Commands use registered
+permission and kernel parent-death protection in a fresh helper, avoiding unsafe
+`preexec_fn` in the threaded loader. Frozen Decky uses validated system Python
+instead of its `PluginLoader` executable. Independently leased dependency workers
+retain their recovery policy. Ordinary OBS is not killed as a command child;
+unknown output remains unknown. See the [runtime contract](docs/runtime-correctness.md)
+for limits and the actual-device gate. These source choices do not accept any
+previously proposed product/identity ADR or authorize publication/migration.
+
 ## Native destination setup (#79)
 
 Owner-authorized manual-key setup now uses the normal Decky panel and existing

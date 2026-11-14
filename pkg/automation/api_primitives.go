@@ -51,14 +51,7 @@ func (c *Client) ProfileInventory(ctx context.Context) (ProfileInventory, error)
 
 // APIRecordingStatus distinguishes an unknown paused state from false.
 func (c *Client) APIRecordingStatus(ctx context.Context) (RecordingStatus, error) {
-	r, err := empty(ctx, "GetRecordStatus", c.obs.Record.GetRecordStatus)
-	if err != nil {
-		return RecordingStatus{}, err
-	}
-	if err = workflowKnownOutput(r.GetRaw(), "outputActive", "outputPaused"); err != nil {
-		return RecordingStatus{}, err
-	}
-	return RecordingStatus{Active: r.OutputActive, Paused: r.OutputPaused, Bytes: r.OutputBytes, Duration: r.OutputDuration}, nil
+	return c.RecordingStatus(ctx)
 }
 func (c *Client) SceneItems(ctx context.Context, scene string) ([]SceneItemState, error) {
 	r, err := request(ctx, "GetSceneItemList", func() (*sceneitems.GetSceneItemListResponse, error) {

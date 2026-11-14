@@ -14,10 +14,12 @@ import (
 	"net/http"
 	"regexp"
 	"strconv"
+	"strings"
 	"sync"
 	"time"
 
 	"github.com/andreykaipov/goobs"
+	"github.com/andreykaipov/goobs/api/requests"
 	"github.com/gorilla/websocket"
 	"github.com/szmyty/obsgod/internal/obstransport"
 )
@@ -66,7 +68,58 @@ func (e *RequestError) Error() string {
 	return fmt.Sprintf("OBS %s failed (code %d); check OBSGod diagnostics on the device", e.Operation, e.Code)
 }
 
-var statusCode = regexp.MustCompile(`\(([0-9]{3})\)`)
+// ResponseError means a request has lost its response boundary. The SDK uses a
+// FIFO response channel, so the connection must be discarded before reuse. Only
+// a safe timeout flag is retained, never IDs, endpoints or server text.
+type ResponseError struct{ Timeout bool }
+
+func (e *ResponseError) Error() string {
+	if e.Timeout {
+		return "OBS response timed out; reconnect and inspect OBS state before retrying"
+	}
+	return "OBS response correlation is unavailable; reconnect and inspect OBS state before retrying"
+}
+
+func (e *ResponseError) Unwrap() error {
+	if e.Timeout {
+		return context.DeadlineExceeded
+	}
+	return nil
+}
+
+var statusCode = regexp.MustCompile(`^([A-Za-z0-9]+) \(([0-9]+)\)(?:: |$)`)
+
+func requestFailure(name string, err error) error {
+	if errors.Is(err, context.Canceled) {
+		return context.Canceled
+	}
+	if errors.Is(err, context.DeadlineExceeded) {
+		return &ResponseError{Timeout: true}
+	}
+	// Pinned goobs v1.8.3 exposes these failures only as formatted errors. Match
+	// its own fixed prefix before considering any server-controlled suffix. In
+	// particular an ID or comment containing "(600)" is not an OBS rejection.
+	detail, sdkError := strings.CutPrefix(err.Error(), "request "+name+": ")
+	if sdkError {
+		switch {
+		case detail == "timeout waiting for response from server":
+			return &ResponseError{Timeout: true}
+		case strings.HasPrefix(detail, "mismatched ID: expected response with ID "), detail == "client already disconnected":
+			return &ResponseError{}
+		}
+		if match := statusCode.FindStringSubmatch(detail); len(match) == 3 {
+			code, parseErr := strconv.Atoi(match[2])
+			if parseErr == nil && match[1] == requests.GetStatusForCode(code) {
+				return &RequestError{Operation: name, Code: code}
+			}
+		}
+	}
+	var transport net.Error
+	if errors.As(err, &transport) {
+		return &ResponseError{Timeout: transport.Timeout()}
+	}
+	return &RequestError{Operation: name}
+}
 
 // ConnectionError reports a fixed, credential-free connection stage. The
 // underlying server text, endpoint and password are never included.
@@ -246,11 +299,7 @@ func request[T any](ctx context.Context, name string, f func() (T, error)) (T, e
 		return zero, ctx.Err()
 	case r := <-ch:
 		if r.err != nil {
-			code := 0
-			if match := statusCode.FindStringSubmatch(r.err.Error()); len(match) == 2 {
-				code, _ = strconv.Atoi(match[1])
-			}
-			return zero, &RequestError{Operation: name, Code: code}
+			return zero, requestFailure(name, r.err)
 		}
 		return r.value, nil
 	}

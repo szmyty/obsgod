@@ -1,6 +1,59 @@
 # Current work
 
-## Proposed audit roadmap — wait for owner sync before implementation
+## Runtime source checkpoint in #106
+
+The five bounded runtime repairs are implemented on `feat/runtime-correctness`
+in [#106](https://github.com/szmyty/obsgod/pull/106), with independent cross-review.
+Read [the changed contracts](docs/runtime-correctness.md). Review also repaired
+initial observer readiness, canonical versus case-insensitive recording flags,
+workflow timeout identity and frozen Decky's non-Python `sys.executable`.
+The system-Python helper correction also applies to the existing leased
+dependency worker without changing its ownership/recovery model.
+
+Focused regression/process tests passed. The first integrated Go race run found
+three older status fixtures sharing a response without `outputPaused`; the
+fixture now supplies a real boolean and the full race rerun passes. Preserve
+that initial failure as superseded evidence. Fresh vet, tooling and frontend
+typecheck/tests/build pass; complete Python, primary packaging and the final
+exact-merged-source six-job local ACT matrix are still being completed. Do not
+call this checkpoint final qualification or close acceptance from this note.
+
+Next: finish premerge checks/primary package, retarget and merge the seven-PR
+stack into actual default `master`, then qualify that exact merged source and
+publish evidence-only review records. No product release/deploy/migration is
+authorized. Remaining audit stages #101–#104 and artwork/UI remain outside this
+batch; actual Deck/provider/hosted acceptance stays explicit.
+
+## Runtime correctness #96–#100 authorized; merge the open PR stack
+
+The owner explicitly approved the runtime-correctness stage and requested merging
+all open PRs. This supersedes the planning pause for **#96–#100** and the merges;
+#101–#104 and the remaining branding/UI work are not part of this implementation
+batch. Use the existing checkout on **feat/runtime-correctness**, from
+**8b18001a7fac8d82e17e620963c60c64da845db3**. No additional worktree is needed.
+
+Five implementation lanes cover effective microphone policy, capture-observer
+ownership/shared leases, strict recording observations, timeout/correlation
+connection invalidation and bounded backend/child teardown. Run focused checks
+and independent review before source integration; qualify the final exact source.
+Do not inherit the earlier 378b46c receipts for these changes.
+
+Live premerge stack is #73 → #74 → #75 → #90 → #92 → #105, then the runtime
+checkpoint. Retarget each dependent PR to the actual default `master` only after
+its predecessor is merged; merging a stack into its old feature base is not a
+default-branch integration. Current branch API says protected=false; active
+rulesets and branch rules return empty lists. Detailed protection read is 403;
+do not claim that capability succeeded. Existing submitted reviews are empty.
+Respect any live gate that appears before merging. User merge authority does not
+turn billing-blocked checks, missing device proof or reviews into passing checks.
+
+Inspected workflows have contents:read and snapshot publish/sign disabled; docs
+preview retains an artifact and does not deploy. No merge-authorized publication,
+deployment, transfer, other-repository change or spending is implied. Keep original
+criteria and remaining owner/target/service acceptance open as required, and
+requery actual PR/default/issue state after integration.
+
+## Prior proposed audit checkpoint (runtime stage now authorized above)
 
 The owner requested a full audit and proposed issues, explicitly followed by a
 sync before executing the audit roadmap. Current work is planning only; do not
@@ -235,7 +288,7 @@ All 230 original criteria/dependencies and #46's original details tail are
 preserved exactly; older checkpoint narrative is collapsed as historical.
 No issue is closed or marked implemented by planning. Drafts remain #73 → #74
 → #75; default master remains da89b9d. Latest release is unchanged prerelease
-v0.1.0-deck.4-updater.1. Protection detail read is403; no settings change.
+v0.1.0-deck.4-updater.1. Protection detail read is 403; no settings change.
 
 **#89** is separate OAuth/phone/QR research from preserved #14/#40, not a main
 implementation dependency. [Official-source findings](docs/authentication-options.md):

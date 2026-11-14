@@ -123,6 +123,16 @@ and `errors.Is(err, context.Canceled/DeadlineExceeded)`. Fixed codes are:
 `cancelled`, `conflict`, `obs_request`, `internal`. `obs_code` optionally contains
 the numeric protocol status; free-form server comments are excluded.
 
+An SDK response timeout or lost response correlation closes the owned connection
+before releasing its operation lease. Subsequent calls fail before dispatch;
+reconnect and inspect OBS before retrying an unconfirmed action. Workflow,
+profile and collection operations retain this failure identity. A numeric OBS
+rejection preserves `obs_request`/`obs_code` without closing a healthy connection.
+Recording lifecycle/runtime reads require canonical raw `outputActive`; public
+recording status additionally requires `outputPaused`. Missing/null/wrongly typed
+flags remain unknown, including during finalization. See the
+[runtime contract](runtime-correctness.md).
+
 Credentials are accepted privately in memory; `Connection.Password` and the
 entire `RTMPService` omit them from JSON/formatting. Errors do not retain arbitrary
 underlying errors, endpoints or server response bodies. Caller code remains

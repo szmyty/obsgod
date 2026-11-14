@@ -51,7 +51,8 @@ class BackendState(unittest.IsolatedAsyncioTestCase):
                 backend.asyncio, "create_subprocess_exec", return_value=process) as spawn:
             result = await plugin._run("set-capture-mode", {"capture_mode": "game"})
         self.assertTrue(result["ok"])
-        self.assertEqual(json.loads(process.input), {"capture_mode": "game"})
+        self.assertEqual(process.input[:1], b"\x01")
+        self.assertEqual(json.loads(process.input[1:]), {"capture_mode": "game"})
         self.assertEqual(spawn.call_args.args[-2:], ("deck", "set-capture-mode"))
         self.assertEqual(spawn.call_args.kwargs["stdin"], asyncio.subprocess.PIPE)
         self.assertNotIn("game", spawn.call_args.args)
@@ -386,12 +387,12 @@ class DependencyAdapter(unittest.IsolatedAsyncioTestCase):
         async def close():
             order.append("setup-closed")
 
-        async def stop():
-            order.append("stop")
+        async def run(action, payload=None, _teardown=False):
+            order.append(action)
             return IDLE
 
         controller.close.side_effect = close
-        with patch.object(plugin, "stop", side_effect=stop), patch.object(plugin, "mixer_action", AsyncMock()):
+        with patch.object(plugin, "_run", side_effect=run):
             await plugin._unload()
         self.assertEqual(order[0], "setup-closed")
         self.assertIn("stop", order)
@@ -440,7 +441,8 @@ class BackendContext(unittest.IsolatedAsyncioTestCase):
                     backend.asyncio, "create_subprocess_exec", return_value=process) as spawn:
                 result = await plugin._run("status")
             self.assertTrue(result["ok"])
-            self.assertEqual(spawn.call_args.args[0], str(plugin_dir / "bin/obsgod"))
+            self.assertEqual(spawn.call_args.args[-3:], (str(plugin_dir / "bin/obsgod"), "deck", "status"))
+            self.assertIn("--owned-command", spawn.call_args.args)
             child = spawn.call_args.kwargs["env"]
             self.assertEqual(child["HOME"], str(home))
             self.assertEqual(child["USER"], "player")
