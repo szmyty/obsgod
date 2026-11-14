@@ -102,8 +102,8 @@ def main():
         raise SystemExit("Use the pinned Node 24.19.0 and npm 11.9.0 tools")
     subprocess.run([sys.executable, str(REPO / "scripts/generate-product.py"), "--check"], check=True)
     subprocess.run(["node", str(REPO / "scripts/generate-support.mjs"), "--check"], check=True)
-    subprocess.run(["npm", "run", "typecheck"], cwd=REPO / "steamdeck/decky", check=True)
-    subprocess.run(["npm", "run", "build"], cwd=REPO / "steamdeck/decky", check=True)
+    for frontend_action in ("typecheck", "build"):
+        subprocess.run([sys.executable, str(REPO / "scripts/frontend-command.py"), frontend_action], check=True)
     dist = REPO / "dist"
     dist.mkdir(exist_ok=True)
     subprocess.run([sys.executable, str(REPO / "scripts/build-deck-capture.py"), "--output", str(dist / "libgstobsgodcapture.so"), "--receipt", str(dist / "capture-build.json")], check=True)

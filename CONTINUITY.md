@@ -1,5 +1,31 @@
 # Current work
 
+## Active: merge audit, repair generated-output identity and advance remaining lanes
+
+The owner instructed “okay merge everything and push forward with those few”.
+Live inspection found only PR #67 and open issues #46/#51/#68. PR #67 merged
+normally at `575e4e278599a94bbeeef334531cc60fb6714115`, with expected head
+`d6f67159fb88e664a4dad2e57950c29c0407653f`; its merge tree exactly matches the
+reviewed tree. No reviews/threads or applicable rules were present; metadata says
+unprotected, detailed protection remains403. Hosted billing/provider/device
+limitations were disclosed before this explicit source-merge instruction and
+remain gates for their respective acceptance. No bypass, publication or deployment.
+
+Use the existing checkout on `codex/completion-output-ownership`. Preserve the
+ignored historical frontend backup `steamdeck/decky/.local-ci`. Repair #68 in both
+the workflow frontend commands and package-deck's nested frontend calls, using
+the actual checkout owner and private execution environment. Refuse unsafe or
+foreign output without cleanup/chown and retain production root guards. Qualify
+absent and reused output with ACT followed by actual normal-user frontend checks.
+
+Independent preparation also covers Go-only generic archive notices/SPDX/audit
+under #46, and the two separate research journeys in #51. This research does not
+authorize payment/account setup, Store contact/submission or product changes.
+Do not invent a provider/companion repository or branding/rights decision. Keep
+all original criteria/dependencies and exact public candidate1a/d0a unchanged.
+Save draft checkpoints, then freeze source for full serial exact-revision checks.
+No new implementation is qualified by this in-progress entry.
+
 ## Completed audit: org-aligned ACT setup, reports and issue triage
 
 The owner requested following the egohygiene `.actrc` pattern, running ACT in the

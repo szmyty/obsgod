@@ -45,9 +45,9 @@ jobs:
         run: |
           python scripts/run-user-tests.py -- -m unittest discover -s steamdeck/tests -p 'test_*.py' -v
           python -m unittest discover -s scripts/tests -p 'test_*.py' -v
-          npm --prefix steamdeck/decky run typecheck
-          npm --prefix steamdeck/decky test
-          npm --prefix steamdeck/decky run build
+          python scripts/frontend-command.py typecheck
+          python scripts/frontend-command.py test
+          python scripts/frontend-command.py build
           npm --prefix steamdeck/decky audit
       - name: Package exact candidate twice
         run: |

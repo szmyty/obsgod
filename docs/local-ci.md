@@ -37,9 +37,12 @@ No other repository or user-level `.actrc` is modified.
 The [2026-11-13 audit](../audits/local-act-2026-11-13.md) retains two complete
 local sequences and reports at exact source cf12abe6. It also demonstrates
 [#68](https://github.com/szmyty/obsgod/issues/68): ACT can create root-owned
-generated frontend output that blocks a later normal-user build. Keep that
-development postcondition separate from passing workflow jobs; do not repair it
-by recursively changing checkout ownership or disabling production root guards.
+generated frontend output that blocks a later normal-user build. The repair uses
+`scripts/frontend-command.py` for workflow checks and nested package builds.
+Qualification includes ACT followed by normal-user typecheck/test/build with
+both absent and reused generated output. Keep that development postcondition
+separate from passing workflow jobs; never repair it by recursively changing
+checkout ownership or disabling production root guards.
 
 Keep logs private while running jobs. Build a consolidated report for one exact
 source revision after execution:
@@ -130,8 +133,14 @@ owned temporary HOME/TMPDIR. It never changes checkout ownership or disables
 production guards. Hosted non-root runners keep their identity. Browser binaries
 use the shared readable `PLAYWRIGHT_BROWSERS_PATH`; screenshot/site outputs go to
 an explicitly owned evidence directory outside the checkout and are retained by
-the artifact step. Package builds/audits and native containers keep their own
-existing execution identities.
+the artifact step. Frontend typecheck/test/build also use the actual non-root
+checkout owner through `scripts/frontend-command.py`, including the frontend
+builds nested inside package-deck. That fixed-command helper uses private
+HOME/TMPDIR and refuses a root-owned checkout, symlink/foreign directories or
+unsafe existing frontend output. It never deletes output or changes checkout
+ownership/permissions. Preserve incompatible old output before deliberate
+recovery. Tool/dependency installation, Go/native package work, audits and native
+containers retain their existing identities; no blanket checkout chown occurs.
 The helper's private `/tmp/ogt-*` path stays short enough for Chromium's actual
 Unix sockets. It does not replace the outer daemon-visible build TMPDIR or the
 persistent browser cache/evidence paths.

@@ -1,34 +1,47 @@
 # Product roadmap
 
-## Current state — two active issues
+## Current state — implementation, local-CI repair and separate research
 
-Owner-approved source PRs #58/#59/#60/#62/#63/#64/#65 are merged. The 34
+Owner-approved source PRs #58/#59/#60/#62/#63/#64/#65 and audit PR #67 are merged.
+The default remains `master`, now at `575e4e278599a94bbeeef334531cc60fb6714115`.
+The 34
 superseded tickets retain all 230 original criteria/dependencies in
 [#46](https://github.com/szmyty/obsgod/issues/46); closure is a tracking transfer,
-not acceptance. [#51](https://github.com/szmyty/obsgod/issues/51) remains unchanged
-research. [Merge/check/cleanup evidence](docs/evidence/completion-merge.json).
-Candidate 9 remains the unchanged qualified1a482808 review download, not a new
-release. Actual device/provider/adoption, hosted CI and remaining implementation/
-owner gates stay explicit. Historical campaign planning follows.
+not acceptance. [#51](https://github.com/szmyty/obsgod/issues/51) contains separate
+monetization and Decky Store research. The fresh ACT audit demonstrated
+[#68](https://github.com/szmyty/obsgod/issues/68), a normal-user rebuild failure
+caused by root-owned generated frontend output. Its bounded repair is the next
+engineering checkpoint. [Audit/evidence](audits/local-act-2026-11-13.md).
 
-The owner has now authorized the independent completion campaign for all open
+The owner authorized merging the prepared audit and progressing the remaining
+issues. Work proceeds on frontend build identity, generic CLI archive notices/
+SBOM/auditing under #46, and separate evidence-backed research under #51. New
+implementation still requires exact-source checks; an in-progress note is not
+qualification. Actual device/provider/adoption, hosted CI and owner decisions
+remain explicit gates. No release, deployment, transfer or spending is approved
+by the source merges. Candidate 9 remains the unchanged qualified 1a482808/d0a4973f
+review download. [Merge/issue-transfer evidence](docs/evidence/completion-merge.json).
+
+## Historical campaign planning
+
+The earlier independent completion campaign covered all open
 issues except #51, including partial preparation at genuine owner/external gates.
 See [the completion ledger](docs/completion-campaign.md),
 [review checklist](docs/completion-review.md) and
 [all 230 original criteria](docs/evidence/completion-criteria.json).
-Prepared completion drafts: #62 foundation -> #63 mixer -> #64 API/creator -> #65
-qualification. Exact source 1a482808 passed the complete available local matrix and
+Completion PRs #62 foundation -> #63 mixer -> #64 API/creator -> #65
+qualification are merged. Exact source 1a482808 passed the complete available local matrix and
 both full act sequences; [install candidate 9](docs/candidate-9-install.md) and
-[review the audit](audits/audit-2026-11-13.md). No new merge/closure is claimed. Intended slug:
+[review the audit](audits/audit-2026-11-13.md). Intended slug:
 **decky-stream**; compatibility/migration and final branding review remain explicit.
 #51 now holds two separate research journeys (monetization and Decky Store).
-After source review/merges, remaining acceptance will be consolidated into one
-final-boss checklist plus #51, preserving original criteria and evidence.
+After source review/merges, remaining acceptance was consolidated into #46,
+preserving original criteria and evidence; #68 is a newly demonstrated scoped defect.
 
 Updated 2026-11-13. **Milestone 2 source PRs #52–#57 are merged; target/CI and
 owner publication acceptance remain open. Milestone 3 features #47/#24/#48/#49/#50
-are prepared in draft PRs #58–#60 with available local checks passed; #51 is
-excluded. Device/CI/review acceptance remains open.** See the
+were merged through PRs #58–#60 with available local checks passed. #51 remains
+separate research. Device/CI/review acceptance remains open.** See the
 [M3 implementation ledger](docs/milestone-3.md).
 The organization, final product name, domain and payment destination remain TBD.
 **Decky Stream** is the owner-selected working display name. Final identity and
