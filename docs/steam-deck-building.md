@@ -35,6 +35,15 @@ manifest and SHA256SUMS under `dist/`. Repeating the same build from the same
 revision/toolchain must produce identical checksums. It includes dependency
 licenses and the preferred source for the separate LGPL Decky API module.
 
+Build from a non-root-owned checkout. Under ACT, frontend typecheck/test/build
+run as that checkout's owner through `scripts/frontend-command.py`; package-deck
+uses the same helper for its nested frontend work. It gives each command private
+HOME/TMPDIR paths and refuses symlinked, foreign-owned or unsafe generated
+frontend output without altering it. Root tool installation and Go/native build
+stages keep their existing identity. Normal-user npm commands above remain the
+post-CI rebuild check; qualification covers both absent and reused frontend
+output. Never recursively chown the checkout to hide an ownership failure.
+
 Browser tests use Playwright **1.62.0** and Chromium. They install into temporary
 homes, use fixture credentials and extract the actual archive/ZIP:
 
