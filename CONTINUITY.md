@@ -1,5 +1,37 @@
 # Current work
 
+## #76–#78 source implemented; qualified batch7e539ca in draft #90
+
+User-requested package/storage/dependency setup is implemented in draft
+[#90](https://github.com/szmyty/obsgod/pull/90), after #73 → #74 → #75.
+Exact source **7e539ca8bcf237e3da1d0c42c5045ea44d638973** produced two identical
+33-file ZIPs, SHA256 **80b956ea208b465626640a8ad432185aca5455192c367bd50e38d6608f90830c**.
+[The checkpoint](docs/decky-foundation-checkpoint.md),
+[criterion/matrix report](docs/evidence/decky-foundation-7e539ca.json) and raw
+24-file evidence ZIP retain exact commands, revisions, tool/platform/outcomes.
+Later documentation does not relabel this artifact or qualify newer code.
+
+At that clean source: Go race/count1 passed156top/268events (one root-only skip),
+vet passed; Python171discovered/170passed/one root-wrapper skip; Node37;
+packaging9/audit16/frontend-ownership6; four actual-ZIP browsers passed including
+six setup scenarios. Official CLI/default pinned builder matched all33 files.
+Actual unpacked Go/version/status/authenticated setup and Python-map→packaged-Go
+checks passed, with no OBS/Flatpak command or broadcast during setup/status.
+
+Review reproduced writable-ancestor directory replacement/split control locks;
+the bounded Python/Go/job/build repair and held-lock/sticky regressions pass.
+Primary setup now respects original XDG data/cache roots and retains one legacy
+credential/state/control store plus Decky-owned private metadata/jobs/logs.
+The untouched SDK source archive works with the default official builder.
+
+No merge/issue closure/release/deploy/migration/spending. #76–#78 stay open for
+review/recorded limits. Actual Deck/Flathub/session/controller/audio/viewer proof
+is unrun; hosted candidate job failed with zero steps and a billing-lock
+annotation. Full campaign ACT/native/platform/security matrix remains #85.
+Next implementation is #79 private in-panel configuration, #80 selected aurora
+exports and #81 UI adoption, then the remaining roadmap. Owner testing remains
+#86 after a final test-ready build; actual migration/new install are #87/#88.
+
 ## Executing #76–#78: Decky package, storage compatibility and setup jobs
 
 The owner explicitly requested implementation of #76, #77 and #78. Work uses
