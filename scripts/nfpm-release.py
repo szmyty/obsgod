@@ -12,6 +12,7 @@ import json
 import os
 from pathlib import Path
 import re
+import shlex
 import stat
 import struct
 import subprocess
@@ -42,6 +43,15 @@ IMAGES = {
     "rpm": "fedora:43@sha256:f01112b9a1f1d0504ad962d9adfa401425033f8ab067e0a821904ebdde5b8ca5",
     "apk": "alpine:3.23@sha256:469c9ea410b9215eaee7976ba6c0639039b444be8e5d638f7abbada189971eb2",
 }
+# The reviewed NFPM version emits only these metadata/payload fields. A list of
+# known-dangerous scripts is insufficient: RPM also has verify, file-trigger,
+# transaction-trigger and pre/post-untransaction script families. Unknown header
+# fields fail closed until the pinned package writer's output is reviewed.
+RPM_SIGNATURE_TAGS = {62, 269, 273, 1000, 1004, 1007}
+RPM_HEADER_TAGS = {63, 100, 1000, 1001, 1002, 1004, 1005, 1006, 1007, 1009, 1014, 1015,
+                   1020, 1021, 1022, 1028, 1030, 1033, 1034, 1035, 1036, 1037, 1039, 1040,
+                   1044, 1045, 1047, 1048, 1049, 1050, 1064, 1095, 1096, 1097, 1112, 1113,
+                   1116, 1117, 1118, 1124, 1125, 1126, 1140, 5011, 5092, 5093}
 
 
 def require(condition, message):
@@ -153,7 +163,7 @@ def rpm_header(data, offset):
         tag, kind, at, length = struct.unpack(">IIII", data[offset + 16 + index * 16:offset + 32 + index * 16])
         require(tag not in values and at < len(store) and length <= 1000000, "Invalid RPM header field")
         if kind in (6, 8, 9):
-            require(0 < length <= 10000, "Invalid RPM string count")
+            require(0 < length <= 10000 and (kind != 6 or length == 1), "Invalid RPM string count")
             strings, current = [], at
             for _ in range(length):
                 end = store.find(b"\x00", current)
@@ -194,11 +204,9 @@ def cpio_entries(data):
 def rpm_files(data):
     require(data[:6] == b"\xed\xab\xee\xdb\x03\x00" and len(data) > 112, "Invalid RPM lead")
     signatures, offset = rpm_header(data, 96)
-    require(not {267, 268, 1002, 1005} & signatures.keys(), "Unexpected RPM signature: unsigned snapshot expected")
+    require(set(signatures) <= RPM_SIGNATURE_TAGS, "Unexpected RPM signature: unsigned snapshot expected")
     header, offset = rpm_header(data, (offset + 7) // 8 * 8)
-    scripts = {1023, 1024, 1025, 1026, 1065, 1066, 1067, 1068, 1069, 1070, 1071, 1072, 1073,
-               1085, 1086, 1087, 1088, 1151, 1152, 1153, 1154, 5010}
-    require(not scripts & header.keys() and header.get(1124) == "cpio" and header.get(1125) == "gzip", "Unexpected RPM scripts or payload encoding")
+    require(set(header) <= RPM_HEADER_TAGS and header.get(1124) == "cpio" and header.get(1125) == "gzip", "Unexpected RPM scripts, unreviewed header fields or payload encoding")
     payload, unused = gzip_member(data[offset:])
     require(not unused, "Trailing RPM payload")
     files = cpio_entries(payload)
@@ -325,27 +333,43 @@ def audit(directory, revision, target=None):
     return output, summary
 
 
+def focused_configuration(config, output):
+    """Derive only target/output/private staging paths from the source config."""
+    require(config.count("dist: dist/snapshot\n") == 1 and config.count("    goos:\n") == 1, "Review changed snapshot configuration before focusing")
+    config = config.replace("dist: dist/snapshot\n", "dist: " + json.dumps(str(output)) + "\n", 1)
+    start, end = config.index("    goos:\n"), config.index("\narchives:\n")
+    config = config[:start] + "    goos: [linux]\n    goarch: [amd64]\n" + config[end:]
+    staging = output.parent / (output.name + "-notices")
+    for kind in ("generic", "nfpm"):
+        location = staging / kind
+        # Previous ACT runs can leave root-owned ignored catalogs. Keep those
+        # bytes/modes untouched; the focused build owns its new private staging.
+        hook = "python3 scripts/" + kind + "-release.py prepare"
+        require(config.count("    - " + hook + "\n") == 1, "Review changed notice-preparation hook")
+        config = config.replace("    - " + hook + "\n", "    - " + json.dumps(hook + " --output " + shlex.quote(str(location))) + "\n", 1)
+        config = config.replace(".local-ci/" + kind + "-release", str(location))
+    return config, staging
+
+
 def focused(output, goreleaser):
     """Derive a one-target config without modifying/cleaning the existing dist."""
     identity = G.source(G.command("git", "rev-parse", "HEAD"))
     output = output.absolute()
     require(not output.exists() and not any(p.is_symlink() for p in (output, *output.parents)), "Focused output must be a new safe directory")
     output.parent.mkdir(parents=True, exist_ok=True)
-    config = G.git_file(identity["revision"], ".goreleaser.yml").decode()
-    require(config.count("dist: dist/snapshot\n") == 1 and config.count("    goos:\n") == 1, "Review changed snapshot configuration before focusing")
-    config = config.replace("dist: dist/snapshot\n", "dist: " + json.dumps(str(output)) + "\n", 1)
-    start, end = config.index("    goos:\n"), config.index("\narchives:\n")
-    config = config[:start] + "    goos: [linux]\n    goarch: [amd64]\n" + config[end:]
+    config, staging = focused_configuration(G.git_file(identity["revision"], ".goreleaser.yml").decode(), output)
+    require(not staging.exists() and not any(p.is_symlink() for p in (staging, *staging.parents)), "Focused notice staging must be new and safe")
     with tempfile.TemporaryDirectory(prefix="obsgod-focused-config-") as temporary:
         path = Path(temporary) / "goreleaser.yml"
         path.write_text(config)
         subprocess.run([str(goreleaser), "release", "--snapshot", "--skip=publish,sign", "--parallelism", "2", "--config", str(path)], cwd=ROOT, check=True)
-    return {"source_revision": identity["revision"], "scope": "focused-linux-amd64; not full matrix", "derived_config_sha256": G.sha(config.encode()), "artifacts": str(output)}
+    return {"source_revision": identity["revision"], "scope": "focused-linux-amd64; not full matrix", "derived_config_sha256": G.sha(config.encode()), "artifacts": str(output), "notice_staging": str(staging)}
 
 
 def smoke(directory, summary, formats, images, previous=None):
     require(sys.platform.startswith("linux") and os.uname().machine in ("x86_64", "amd64"), "Native Linux amd64 Docker host required")
     require(summary.get("integrity") == "passed", "Successful selected-source audit required")
+    require("," not in str(directory.absolute()) and not directory.is_symlink(), "Unsafe Docker package mount path")
     selected = {r["format"]: r for r in summary["packages"] if r["platform"] == {"goos": "linux", "goarch": "amd64", "goarm": ""}}
     require(set(formats) <= selected.keys(), "Selected Linux amd64 package absent")
     results = []
@@ -381,6 +405,11 @@ def smoke(directory, summary, formats, images, previous=None):
                 old = next(r for r in previous["packages"] if r["format"] == kind and r["platform"] == record["platform"])
                 require(old["name"] != record["name"] and old["name"] in {p.name for p in directory.iterdir()}, "Previous audited package must be copied into the read-only fixture directory")
                 require(G.sha((directory / old["name"]).read_bytes()) == old["sha256"], "Previous package differs from its audit")
+                previous_payload, _ = package_files((directory / old["name"]).read_bytes(), kind)
+                require(previous["source"]["revision"] != summary["source"]["revision"]
+                        and set(n for n, v in previous_payload.items() if not v["directory"]) == set(old["files"])
+                        and all(G.sha(previous_payload[n]["data"]) == v["sha256"] for n, v in old["files"].items()),
+                        "Previous package source/payload failed current parser preflight")
                 execute([*install, "/packages/" + G.safe_member(old["name"])])
             execute([*install, "/packages/" + record["name"]])
             for filename, expected in record["files"].items():

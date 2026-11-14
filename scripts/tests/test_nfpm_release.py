@@ -141,6 +141,28 @@ class NFPMTests(unittest.TestCase):
             with self.subTest(kind=kind), self.assertRaisesRegex(ValueError, "scripts|control entries|install scripts"):
                 N.package_files(package, kind)
 
+    def test_rpm_verify_file_and_transaction_script_families_fail_closed(self):
+        # An early ordinary pre/post-install blacklist missed these families.
+        for tag in (1079, 1091, 1092, 5066, 5067, 5068, 5069, 5070, 5071, 5072, 5073,
+                    5074, 5075, 5076, 5077, 5078, 5079, 5080, 5081, 5082, 5083,
+                    5100, 5101, 5102, 5103, 5104, 5105, 5106, 5107, 65535):
+            with self.subTest(tag=tag), self.assertRaisesRegex(ValueError, "unreviewed header"):
+                N.package_files(rpm(updates={tag: (6, "unexpected-script-or-extension")}), "rpm")
+        files, _ = N.package_files(rpm(updates={1005: (6, "ordinary package description")}), "rpm")
+        self.assertEqual(set(files), N.PAYLOAD)
+
+    def test_focused_configuration_uses_new_private_staging_without_mutating_defaults(self):
+        config = (Path(__file__).parents[2] / ".goreleaser.yml").read_text()
+        before = config
+        focused, staging = N.focused_configuration(config, Path("/tmp/new focused/packages"))
+        self.assertEqual(config, before)
+        self.assertEqual(staging, Path("/tmp/new focused/packages-notices"))
+        self.assertIn("    goos: [linux]\n    goarch: [amd64]\n", focused)
+        self.assertNotIn(".local-ci/generic-release", focused)
+        self.assertNotIn(".local-ci/nfpm-release", focused)
+        self.assertIn("--output", focused)
+        self.assertIn("mode: 0644", focused)
+
     def test_path_links_privileged_modes_duplicates_and_non_root_are_refused(self):
         for path in ("../escape", "/etc/escape", "a/../escape", "a\\escape", "a//escape"):
             with self.subTest(path=path), self.assertRaisesRegex(ValueError, "Unsafe"):

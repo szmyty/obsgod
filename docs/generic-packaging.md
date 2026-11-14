@@ -48,8 +48,11 @@ python3 scripts/nfpm-release.py audit --revision "$(git rev-parse HEAD)" \
   --output /absolute/new/nfpm-focused-audit
 ```
 
-This derives the existing configuration with only the output path and selected
-Linux amd64 target changed. It still uses the real GoReleaser/NFPM package path,
+This derives the existing configuration with only the output path, selected
+Linux amd64 target and private notice-staging paths changed. Existing ignored
+catalogs from root-owned ACT runs are preserved without chown or deletion.
+Package documentation has explicit 0644 modes and commit-time mtimes, independent
+of the invoking process's umask. It still uses the real GoReleaser/NFPM package path,
 clean VCS metadata and source-bound documentation. A focused three-package pass
 is not the complete 15-package matrix or final qualification.
 

@@ -89,18 +89,39 @@ nfpms:
     contents:
       - src: .local-ci/nfpm-release/LICENSE
         dst: /usr/share/doc/obsgod/LICENSE
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
       - src: .local-ci/nfpm-release/README.md
         dst: /usr/share/doc/obsgod/README.md
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
       - src: .local-ci/nfpm-release/CHANGELOG.md
         dst: /usr/share/doc/obsgod/CHANGELOG.md
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
       - src: .local-ci/nfpm-release/THIRD_PARTY_NOTICES.md
         dst: /usr/share/doc/obsgod/THIRD_PARTY_NOTICES.md
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
       - src: .local-ci/nfpm-release/GO-NOTICES.json
         dst: /usr/share/doc/obsgod/GO-NOTICES.json
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
       - src: .local-ci/nfpm-release/GENERIC-CLI.md
         dst: /usr/share/doc/obsgod/GENERIC-CLI.md
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
       - src: .local-ci/nfpm-release/SOURCE.json
         dst: /usr/share/doc/obsgod/SOURCE.json
+        file_info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
 
 checksum:
   name_template: "checksums.txt"
