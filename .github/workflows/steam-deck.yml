@@ -37,6 +37,8 @@ jobs:
           python -m playwright install --with-deps chromium
           go install golang.org/x/vuln/cmd/govulncheck@v1.9.0
       - name: Go protocol, race, static and vulnerability checks
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: |
           go test -race ./...
           go vet ./...

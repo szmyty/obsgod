@@ -28,6 +28,19 @@ tracked as [#91](https://github.com/szmyty/obsgod/issues/91) and repaired in
 remains a separate service/fork capability gate. Do not disable it or call local
 ACT evidence hosted acceptance.
 
+Actual ACT at clean source **4c5af7f7192079fb005c8b8ae56eaa0dd51bb525**
+passed lint, then build and coverage failed because Go fixtures ran as root with
+TMPDIR under UID1000-owned workspace ancestors. [#93](https://github.com/szmyty/obsgod/issues/93)
+retains those failures and the reproduction: identical root Go tests fail under
+the foreign-owned shared temp and pass under runner-owned `/tmp`. The bounded
+repair selects runner.temp only for Go test steps in build/coverage/candidate;
+production guards, test cases and shared native-builder temporary paths stay
+intact. The remaining three jobs at that old source were unrun after the batch
+was stopped. Its official CLI assembly also failed during a separate rootfs
+space exhaustion; no candidate or pass was claimed. Inactive host Go/PNPM cache
+contents were preserved on the separate temporary filesystem, with logical cache
+paths retained. The corrected clean source needs a fresh complete six-job run.
+
 Focused Go/native, Python, Node/typecheck and simulated packaged browser checks
 passed during implementation, with independent review. These dirty-tree/diagnostic
 checks do not qualify a clean candidate. The next clean source checkpoint is
