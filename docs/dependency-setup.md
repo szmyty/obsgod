@@ -1,5 +1,10 @@
 # Consented dependency setup
 
+Frozen Decky backends launch the existing leased worker with validated system
+Python, rather than treating `PluginLoader` as an interpreter. The
+[runtime contract](runtime-correctness.md) explains environment isolation and
+bounded lifecycle behavior; setup's inherited leases/recovery remain intact.
+
 The Decky backend's `DependencySetup` observes dependencies with local Flatpak
 queries. Construction and plugin startup do not download or launch anything.
 Install requires the literal boolean `true`; Later leaves setup pending. OBS

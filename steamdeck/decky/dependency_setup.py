@@ -38,6 +38,37 @@ MAX_EVENTS = 32
 ACTIVE = {"running", "cancelling"}
 STATES = ACTIVE | {"ready", "failed", "cancelled", "interrupted", "setup_required"}
 
+
+def python_process(environ):
+    """Run our stdlib helpers with Python, including inside frozen Decky.
+
+    PyInstaller's sys.executable is PluginLoader, not a Python interpreter.
+    SteamOS supplies /usr/bin/python3; never resolve an interpreter via PATH or
+    download another runtime. Isolate helpers from loader Python configuration.
+    """
+    env = dict(environ)
+    executable = sys.executable
+    if getattr(sys, "frozen", False):
+        executable = Path("/usr/bin/python3").resolve(strict=True)
+        for path in (*reversed(executable.parents), executable):
+            info = path.stat()
+            expected_type = stat.S_ISREG(info.st_mode) if path == executable else stat.S_ISDIR(info.st_mode)
+            if info.st_uid != 0 or info.st_mode & 0o022 or not expected_type:
+                raise OSError("The system Python interpreter is unavailable or unsafe")
+        if not os.access(executable, os.X_OK):
+            raise OSError("The system Python interpreter is unavailable or unsafe")
+        # PyInstaller prepends its private libraries for itself. System Python
+        # must use the original library search environment, not bundled ABIs.
+        original = env.pop("LD_LIBRARY_PATH_ORIG", None)
+        if original is None:
+            env.pop("LD_LIBRARY_PATH", None)
+        else:
+            env["LD_LIBRARY_PATH"] = original
+    env.pop("PYTHONHOME", None)
+    env.pop("PYTHONPATH", None)
+    return [str(executable), "-I", "-B"], env
+
+
 MESSAGES = {
     "context": "Setup needs the actual player's user session. Restart Decky in Gaming Mode or sign in to Desktop Mode, then retry.",
     "flatpak_missing": "Flatpak is unavailable. Repair or update SteamOS in Desktop Mode, then retry; do not unlock the system.",
@@ -378,9 +409,10 @@ class DependencySetup:
         # The bounded worker retains kernel leases if the loader is killed. A
         # replacement backend cannot mistake its still-running child for a dead
         # transaction and start duplicate work. No process is killed by saved PID.
+        interpreter, environment = python_process(self._child_env)
         spawning = asyncio.create_task(asyncio.create_subprocess_exec(
-            sys.executable, str(Path(__file__).resolve()), "--worker", str(timeout), self._flatpak,
-            *arguments, env=self._child_env, stdin=asyncio.subprocess.DEVNULL,
+            *interpreter, str(Path(__file__).resolve()), "--worker", str(timeout), self._flatpak,
+            *arguments, env=environment, stdin=asyncio.subprocess.DEVNULL,
             stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
             start_new_session=True, pass_fds=leases))
         try:

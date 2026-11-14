@@ -31,14 +31,15 @@ type videoInput struct {
 	settings map[string]any
 }
 type videoFixture struct {
-	mu                sync.Mutex
-	scene, collection string
-	active, visible   bool
-	scenes            map[string]map[string]*videoItem
-	inputs            map[string]*videoInput
-	requests          []fixtureRequest
-	next              int
-	image             string
+	mu                         sync.Mutex
+	scene, profile, collection string
+	active, visible            bool
+	recordMalformed            bool
+	scenes                     map[string]map[string]*videoItem
+	inputs                     map[string]*videoInput
+	requests                   []fixtureRequest
+	next                       int
+	image                      string
 }
 
 func newVideoFixture(t *testing.T) *videoFixture {
@@ -53,7 +54,7 @@ func newVideoFixture(t *testing.T) *videoFixture {
 	if err := png.Encode(&encoded, im); err != nil {
 		t.Fatal(err)
 	}
-	f := &videoFixture{scene: IdleScene, collection: "OBSGod", active: true, visible: true, scenes: map[string]map[string]*videoItem{}, inputs: map[string]*videoInput{}, image: "data:image/png;base64," + base64.StdEncoding.EncodeToString(encoded.Bytes())}
+	f := &videoFixture{scene: IdleScene, profile: "OBSGod", collection: "OBSGod", active: true, visible: true, scenes: map[string]map[string]*videoItem{}, inputs: map[string]*videoInput{}, image: "data:image/png;base64," + base64.StdEncoding.EncodeToString(encoded.Bytes())}
 	for _, scene := range []string{IdleScene, LiveScene, GameScene} {
 		f.scenes[scene] = map[string]*videoItem{}
 	}
@@ -107,7 +108,7 @@ func (f *videoFixture) handle(q fixtureRequest) map[string]any {
 		data["obsVersion"] = "33.0.1"
 		data["obsWebSocketVersion"] = "5.6.3"
 	case "GetProfileList":
-		data["currentProfileName"] = "OBSGod"
+		data["currentProfileName"] = f.profile
 	case "GetSceneCollectionList":
 		data["currentSceneCollectionName"] = f.collection
 	case "GetCurrentProgramScene":
@@ -115,7 +116,9 @@ func (f *videoFixture) handle(q fixtureRequest) map[string]any {
 	case "GetReplayBufferStatus":
 		data["outputActive"] = false
 	case "GetRecordStatus":
-		data["outputActive"] = false
+		if !f.recordMalformed {
+			data["outputActive"] = false
+		}
 	case "GetStreamStatus":
 		data["outputActive"] = f.active
 		data["outputReconnecting"] = false
@@ -203,7 +206,7 @@ func assertNoOutputCommands(t *testing.T, f *videoFixture) {
 	t.Helper()
 	for _, request := range f.requests {
 		switch request.Type {
-		case "StartStream", "StopStream", "StartRecord", "StopRecord":
+		case "StartStream", "StopStream", "StartRecord", "StopRecord", "StartReplayBuffer", "StopReplayBuffer":
 			t.Fatalf("observer issued forbidden output command %s", request.Type)
 		}
 		if request.Type == "SetCurrentProgramScene" && request.Data["sceneName"] == LiveScene {

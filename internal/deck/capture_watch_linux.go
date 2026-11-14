@@ -16,11 +16,27 @@ import (
 )
 
 type captureWatchDeps struct {
-	load       func(Paths) (Settings, Secrets, error)
-	connect    func(context.Context, Secrets) (*automation.Client, error)
-	discover   func(context.Context) GameIdentity
-	routeAudio func(context.Context, *automation.Client, Paths, Settings) error
-	interval   time.Duration
+	load             func(Paths) (Settings, Secrets, error)
+	connect          func(context.Context, Secrets) (*automation.Client, error)
+	discover         func(context.Context) GameIdentity
+	routeAudio       func(context.Context, *automation.Client, Paths, Settings) error
+	interval         time.Duration
+	discoveryTimeout time.Duration
+}
+
+const captureDiscoveryTimeout = time.Second
+
+func observeCaptureOutput(ctx context.Context, c *automation.Client) (automation.RuntimeStatus, bool, error) {
+	runtime, err := c.RuntimeStatus(ctx)
+	if err != nil || runtime.Profile != "OBSGod" || runtime.Collection != "OBSGod" {
+		return runtime, false, err
+	}
+	stream, err := c.StreamStatus(ctx)
+	if err != nil {
+		return runtime, false, err
+	}
+	replay, err := c.ReplayActive(ctx)
+	return runtime, stream.Active || stream.Reconnecting || runtime.Recording || replay, err
 }
 
 // WatchCapture only maintains the selected game/idle scene while output already
@@ -30,6 +46,100 @@ func WatchCapture(ctx context.Context, p Paths) error {
 		return connect(ctx, secret, 600*time.Millisecond)
 	}, discover: DiscoverGame, interval: time.Second})
 }
+
+type captureWatchCache struct {
+	target            uint32
+	audioIdentity     uint32
+	audioReady        bool
+	videoPolicySet    bool
+	microphoneEnabled bool
+	idleKey           string
+	stability         gameStability
+}
+
+type captureWatchResult struct {
+	settings                 Settings
+	state, frames            string
+	stopped, unmanaged, busy bool
+	err                      error
+}
+
+// mutateCapture takes the shared control lease only after discovery. Every
+// setting and output fact that authorizes a mutation is checked again here.
+func mutateCapture(ctx context.Context, p Paths, deps captureWatchDeps, c *automation.Client, settings Settings, secret Secrets, discovered GameIdentity, cache *captureWatchCache) captureWatchResult {
+	result := captureWatchResult{settings: settings, state: "unknown", frames: "unknown"}
+	control, controlDone := context.WithTimeout(ctx, 250*time.Millisecond)
+	unlock, err := Lock(control, p)
+	controlDone()
+	if err != nil {
+		if errors.Is(err, context.DeadlineExceeded) || errors.Is(err, context.Canceled) {
+			result.busy = true // Explicit Start/Stop/configuration wins.
+		} else {
+			result.err = err
+		}
+		return result
+	}
+	defer unlock()
+	fresh, freshSecret, err := deps.load(p)
+	if err != nil {
+		result.err = err
+		return result
+	}
+	result.settings = fresh
+	result.stopped = fresh.CaptureModeName() != "game"
+	result.busy = fresh != settings || freshSecret != secret
+	if result.stopped || result.busy {
+		return result
+	}
+	runtime, active, err := observeCaptureOutput(ctx, c)
+	result.err = err
+	if err != nil {
+		return result
+	}
+	result.unmanaged = runtime.Profile != "OBSGod" || runtime.Collection != "OBSGod"
+	result.stopped = !result.unmanaged && !active
+	if result.unmanaged || result.stopped {
+		return result
+	}
+	videoSettings, err := effectiveVideoSettings(p, fresh)
+	if err != nil {
+		result.err = err
+		return result
+	}
+	if cache.videoPolicySet && cache.microphoneEnabled != videoSettings.Microphone {
+		cache.target, cache.idleKey = 0, ""
+	}
+	cache.videoPolicySet, cache.microphoneEnabled = true, videoSettings.Microphone
+	key := idleMediaKey(p, fresh)
+	if key != cache.idleKey {
+		if result.err = ensureIdleVideo(ctx, c, p, videoSettings); result.err != nil {
+			return result
+		}
+		cache.idleKey = key
+	}
+	result.state, result.frames, result.err = gameVideoStep(ctx, c, videoSettings, cache.stability.observe(discovered), runtime.Scene, &cache.target)
+	if result.err != nil {
+		return result
+	}
+	identity := uint32(0)
+	if discovered.State == "running" && discovered.AppID != 769 {
+		identity = discovered.AppID
+	}
+	if deps.routeAudio != nil && (!cache.audioReady || cache.audioIdentity != identity) {
+		// Video reaches its privacy-preserving state before optional audio
+		// recovery spends the remaining budget. No video mutation follows it.
+		audioCtx, audioDone := context.WithTimeout(ctx, time.Second)
+		audioErr := deps.routeAudio(audioCtx, c, p, fresh)
+		audioDone()
+		if audioErr == nil {
+			cache.audioIdentity, cache.audioReady = identity, true
+		} else {
+			logEvent(p, "audio.unavailable")
+		}
+	}
+	return result
+}
+
 func watchCaptureWith(ctx context.Context, p Paths, deps captureWatchDeps) error {
 	lockCtx, done := context.WithTimeout(ctx, 100*time.Millisecond)
 	unlock, err := Lock(lockCtx, captureWatchPaths(p))
@@ -38,16 +148,20 @@ func watchCaptureWith(ctx context.Context, p Paths, deps captureWatchDeps) error
 		if ctx.Err() != nil {
 			return ctx.Err()
 		}
-		// Another lifetime owner is authoritative; a second observer must exit.
-		return nil
+		if errors.Is(err, context.DeadlineExceeded) {
+			return nil // Another lifetime owner remains authoritative.
+		}
+		return errors.New("game capture observer could not establish its private lifetime lease")
 	}
 	defer unlock()
-	var target uint32
-	var audioIdentity uint32
-	audioReady := false
-	failures := 0
-	idleKey := ""
-	var stability gameStability
+	if deps.interval <= 0 {
+		deps.interval = time.Second
+	}
+	if deps.discoveryTimeout <= 0 {
+		deps.discoveryTimeout = captureDiscoveryTimeout
+	}
+	cache := captureWatchCache{}
+	ready, failures := false, 0
 	for {
 		if err := ctx.Err(); err != nil {
 			return err
@@ -61,78 +175,56 @@ func watchCaptureWith(ctx context.Context, p Paths, deps captureWatchDeps) error
 		}
 		cycle, cancel := context.WithTimeout(ctx, 4*time.Second)
 		c, connectErr := deps.connect(cycle, secret)
-		state, frames := "unknown", "unknown"
-		outputIdle := false
+		result := captureWatchResult{settings: settings, state: "unknown", frames: "unknown", err: connectErr}
 		if connectErr == nil {
-			runtime, runtimeErr := c.RuntimeStatus(cycle)
-			stream, streamErr := c.StreamStatus(cycle)
-			replay, replayErr := c.ReplayActive(cycle)
-			if runtimeErr == nil && streamErr == nil && replayErr == nil && runtime.Profile == "OBSGod" && runtime.Collection == "OBSGod" {
-				if !stream.Active && !runtime.Recording && !replay {
-					outputIdle = true
-					_ = c.SetScene(cycle, IdleScene)
-					_ = pauseGameCapture(cycle, c)
-					state = "stopped"
-				} else {
-					key := idleMediaKey(p, settings)
-					if key != idleKey {
-						connectErr = ensureIdleVideo(cycle, c, p, settings)
-						if connectErr == nil {
-							idleKey = key
+			runtime, active, observeErr := observeCaptureOutput(cycle, c)
+			result.err = observeErr
+			if observeErr == nil {
+				result.unmanaged = runtime.Profile != "OBSGod" || runtime.Collection != "OBSGod"
+				result.stopped = !result.unmanaged && !active
+				if !result.unmanaged && active {
+					// Read-only readiness lets Start finish while it still holds
+					// the shared control lease. Frame health remains unknown.
+					if !ready {
+						result.err = writeCaptureVideoStatus(p, settings, "unknown", "unknown", true, os.Getpid())
+						ready = result.err == nil
+					}
+					if result.err == nil {
+						discovery, discoveryDone := context.WithTimeout(cycle, deps.discoveryTimeout)
+						discovered := deps.discover(discovery)
+						result.err = discovery.Err()
+						discoveryDone()
+						if result.err == nil {
+							result = mutateCapture(cycle, p, deps, c, settings, secret, discovered, &cache)
 						}
 					}
-					if connectErr == nil {
-						discovered := deps.discover(cycle)
-						game := stability.observe(discovered)
-						identity := uint32(0)
-						if discovered.State == "running" && discovered.AppID != 769 {
-							identity = discovered.AppID
-						}
-						if deps.routeAudio != nil && (!audioReady || audioIdentity != identity) {
-							// Audio recovery must leave time for the privacy-preserving video step.
-							audioCtx, audioDone := context.WithTimeout(cycle, time.Second)
-							audioErr := deps.routeAudio(audioCtx, c, p, settings)
-							audioDone()
-							if audioErr == nil {
-								audioIdentity = identity
-								audioReady = true
-							} else {
-								logEvent(p, "audio.unavailable")
-							}
-						}
-						state, frames, connectErr = gameVideoStep(cycle, c, settings, game, runtime.Scene, &target)
-					}
 				}
-			} else {
-				if runtimeErr == nil && (runtime.Profile != "OBSGod" || runtime.Collection != "OBSGod") {
-					_ = c.Close()
-					cancel()
-					_ = writeCaptureVideoStatus(p, settings, "unknown", "unknown", false, os.Getpid())
-					return errors.New("game capture observer stopped because the managed profile or collection is no longer selected")
-				}
-				connectErr = errors.New("managed OBS output state is unconfirmed")
 			}
 			_ = c.Close()
 		}
 		cancel()
-		if outputIdle {
-			return writeCaptureVideoStatus(p, settings, "stopped", "unknown", false, os.Getpid())
+		if result.unmanaged {
+			_ = writeCaptureVideoStatus(p, result.settings, "unknown", "unknown", false, os.Getpid())
+			return errors.New("game capture observer stopped because the managed profile or collection is no longer selected")
 		}
-		if connectErr != nil {
-			target = 0
-			audioReady = false
-			idleKey = ""
-			stability = gameStability{}
+		if result.stopped {
+			// Explicit Stop owns cleanup. An idle observer performs no OBS writes.
+			return writeCaptureVideoStatus(p, result.settings, "stopped", "unknown", false, os.Getpid())
+		}
+		if result.err != nil || result.busy {
+			cache = captureWatchCache{}
+		}
+		if result.err != nil {
 			failures++
-			state, frames = "unknown", "unknown"
-		} else {
+			result.state, result.frames = "unknown", "unknown"
+		} else if !result.busy {
 			failures = 0
 		}
-		watching := failures < 3
-		if err := writeCaptureVideoStatus(p, settings, state, frames, watching, os.Getpid()); err != nil {
+		watching := ready && failures < 3
+		if err := writeCaptureVideoStatus(p, result.settings, result.state, result.frames, watching, os.Getpid()); err != nil {
 			return err
 		}
-		if !watching {
+		if failures >= 3 {
 			return errors.New("game capture observer could not confirm its control connection; no full display fallback was selected")
 		}
 		if err := wait(ctx, deps.interval); err != nil {
@@ -165,8 +257,8 @@ func captureWatchOwner(pid int, executable string) bool {
 }
 
 // StartCaptureWatch launches the same canonical CLI, with no credentials in
-// argv. A separate lifetime lock avoids duplicate observers and never takes the
-// stream-control lock held by the initiating Start/Test operation.
+// argv. Its separate lifetime lock and read-only readiness handshake let the
+// initiating Start/Test operation finish while still holding the control lease.
 func StartCaptureWatch(p Paths) error {
 	settings, _, err := Load(p)
 	if err != nil {
@@ -205,13 +297,17 @@ func StartCaptureWatch(p Paths) error {
 	}
 	exited := make(chan int, 1)
 	go func() { _ = command.Wait(); exited <- command.ProcessState.ExitCode() }()
-	deadline := time.NewTimer(5 * time.Second)
+	return waitCaptureWatchReady(p, executable, exited, 5*time.Second)
+}
+
+func waitCaptureWatchReady(p Paths, executable string, exited <-chan int, timeout time.Duration) error {
+	deadline := time.NewTimer(timeout)
 	defer deadline.Stop()
 	ticker := time.NewTicker(50 * time.Millisecond)
 	defer ticker.Stop()
 	for {
 		record, fresh := readCaptureVideoRecord(p)
-		if fresh && record.Watching && (record.State == "game" || record.State == "idle") && captureWatchOwner(record.PID, executable) {
+		if fresh && record.Watching && captureWatchOwner(record.PID, executable) {
 			return nil
 		}
 		select {

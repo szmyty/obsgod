@@ -61,7 +61,8 @@ flowchart TD
 
 `pkg/api/v1` provides independent types/errors and schema-versioned JSON through
 `obsgod api`. Operations are serialized, bounded by context/timeouts and close
-the acquired transport on cancellation before reuse. Explicit per-operation
+the acquired transport on cancellation, SDK response timeout or correlation loss
+before reuse. Explicit per-operation
 approvals preserve output-change authorization. The facade covers snapshots,
 streaming, recording/replay, scene/virtual-camera and workflow operations; it is
 a candidate contract, not a published stable product release.
@@ -135,6 +136,14 @@ Desktop and Decky use the same control boundary; a cross-process lease prevents
 competing managed lifecycle operations. Clients preserve pending/unknown state
 when operations are running or observations fail. Desired settings, a successful
 request and confirmed OBS output are distinct facts.
+
+The [runtime correctness contract](docs/runtime-correctness.md) specifies fresh
+capture ownership under that shared lease, canonical recording observations,
+effective microphone policy and bounded Decky teardown. Guarded CLI children
+require registered execution permission and Linux parent-death supervision;
+packaged Decky helpers use system Python rather than the frozen PluginLoader.
+Hooks remain best effort and cannot veto replacement/removal or prove stopped
+output when OBS observations are unavailable.
 
 Start observes valid capture and fresh advancing output bytes before reporting
 success. A socket, active flag alone or old byte counter cannot establish

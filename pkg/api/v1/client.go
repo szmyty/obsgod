@@ -38,8 +38,9 @@ type backend interface {
 
 // Client owns one authenticated connection. Public operations are serialized.
 // Close is idempotent and interrupts a running request. Cancellation of an
-// acquired operation closes the connection, preventing a still-running transport
-// request from racing a later mutation. Reconnect and inspect before retrying.
+// acquired operation, a response timeout or lost response correlation closes the
+// connection, preventing a still-running transport request from racing a later
+// mutation. Reconnect and inspect before retrying.
 type Client struct {
 	backend   backend
 	lease     chan struct{}
@@ -91,7 +92,8 @@ func (c *Client) Close() error {
 }
 
 // Closed reports that this connection cannot be reused after Close or acquired
-// operation cancellation. It does not establish OBS output state.
+// operation interruption or response correlation loss. It does not establish OBS
+// output state.
 func (c *Client) Closed() bool { return c == nil || c.closed.Load() }
 func run[T any](ctx context.Context, c *Client, operation string, action func(context.Context) (T, error)) (T, error) {
 	var zero T
@@ -121,7 +123,10 @@ func run[T any](ctx context.Context, c *Client, operation string, action func(co
 		return zero, Failure(operation, ctx.Err())
 	}
 	if err != nil {
-		if errors.Is(err, context.Canceled) || errors.Is(err, context.DeadlineExceeded) {
+		var response *automation.ResponseError
+		if errors.Is(err, context.Canceled) || errors.Is(err, context.DeadlineExceeded) || errors.As(err, &response) {
+			// Invalidate and attempt owned socket shutdown while holding the
+			// operation lease. A delayed reply must never meet a later request.
 			_ = c.Close()
 		}
 		return zero, Failure(operation, err)

@@ -138,7 +138,7 @@ func startManagedFixture(t *testing.T, rejectAuth bool, recording bool, active b
 			case "GetCurrentProgramScene":
 				data = map[string]any{"sceneName": scene}
 			case "GetRecordStatus":
-				data = map[string]any{"outputActive": recording}
+				data = map[string]any{"outputActive": recording, "outputPaused": false}
 			case "GetReplayBufferStatus":
 				data = map[string]any{"outputActive": false}
 			case "GetStreamStatus":

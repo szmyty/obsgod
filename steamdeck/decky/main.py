@@ -1,13 +1,48 @@
 """Unprivileged Decky adapter. OBS protocol and credentials stay in the CLI."""
 import asyncio
+from functools import wraps
 import importlib.util
 import json
 import os
 from pathlib import Path
 import re
 import signal
+import sys
+import threading
 import uuid
 from urllib.parse import urlsplit
+
+
+def _owned_command():
+    """Arm Linux parent-death protection in a fresh, single-threaded child.
+
+    Decky imports this file as ``_``. Only our explicit interpreter invocation
+    reaches this mode; no unsafe preexec_fn runs in the threaded loader process.
+    Permission comes over stdin AFTER asyncio has attached and registered the
+    child, so a late spawn cannot run a command after unload acknowledges.
+    """
+    if (len(sys.argv) != 6 or sys.argv[1] != "--owned-command" or
+            sys.argv[4] != "deck"):
+        return 2
+    try:
+        import ctypes
+        parent = int(sys.argv[2])
+        if parent <= 1 or os.getppid() != parent:
+            return 2
+        libc = ctypes.CDLL(None, use_errno=True)
+        if libc.prctl(1, signal.SIGKILL, 0, 0, 0) != 0:  # PR_SET_PDEATHSIG
+            return 2
+        # Close the death-before-prctl race, then wait without buffering the
+        # JSON payload which the exec'd CLI will read from the same stdin.
+        if os.getppid() != parent or os.read(0, 1) != b"\x01":
+            return 2
+        os.execv(sys.argv[3], sys.argv[3:])
+    except (OSError, ValueError, ImportError):
+        return 2
+
+
+if __name__ == "__main__":
+    sys.exit(_owned_command())
 
 
 def _bundled_module(name):
@@ -121,6 +156,52 @@ def _public_configuration(value, private=()):
             "message": _public_configuration_message(value.get("message"), private) if valid else CONFIGURATION_UNAVAILABLE}
 
 
+def _rpc(method):
+    """Include direct read/RPC callers in the adapter's bounded shutdown drain."""
+    @wraps(method)
+    async def tracked(self, *args, **kwargs):
+        task = asyncio.current_task()
+        owned = task not in self._rpc_tasks
+        if owned:
+            self._rpc_tasks.add(task)
+        try:
+            return await method(self, *args, **kwargs)
+        finally:
+            if owned:
+                self._rpc_tasks.discard(task)
+    return tracked
+
+
+async def _readonly_thread(function, *args, **kwargs):
+    """A cancelled read must not keep Decky's backend alive at interpreter exit.
+
+    urllib keeps its existing network timeout. Cancellation discards the read's
+    result; a daemon thread can finish read-only work but cannot hold shutdown.
+    """
+    loop = asyncio.get_running_loop()
+    future = loop.create_future()
+
+    def settle(result, error):
+        if not future.done():
+            if error is None:
+                future.set_result(result)
+            else:
+                future.set_exception(error)
+
+    def run():
+        try:
+            result, error = function(*args, **kwargs), None
+        except Exception as caught:
+            result, error = None, caught
+        try:
+            loop.call_soon_threadsafe(settle, result, error)
+        except RuntimeError:
+            pass  # The backend event loop already closed; no result is cached.
+
+    threading.Thread(target=run, daemon=True, name="obsgod-update-read").start()
+    return await future
+
+
 class Plugin:
     def __init__(self):
         self.pending = None
@@ -143,6 +224,10 @@ class Plugin:
         self._configuration_task = None
         self._configuration_tasks = set()
         self._configuration_epoch = 0
+        self._command_tasks = set()
+        self._rpc_tasks = set()
+        self._children = set()
+        self._unload_task = None
 
     @property
     def busy(self):
@@ -225,12 +310,16 @@ class Plugin:
                 preflight=self._dependency_preflight)
         return self._dependency_job
 
+    @_rpc
     async def dependency_status(self):
+        if self._closing:
+            return self._setup_unavailable("closing", "The plugin is closing. Reload it before checking dependency setup.")
         try:
             return await self._dependency_controller().status()
         except (OSError, ValueError):
             return self._setup_unavailable()
 
+    @_rpc
     async def install_dependencies(self, consent=False):
         if consent is not True:
             return await self.dependency_status()
@@ -246,7 +335,10 @@ class Plugin:
         finally:
             self._setup_requested = False
 
+    @_rpc
     async def cancel_dependency_setup(self):
+        if self._closing:
+            return self._setup_unavailable("closing", "The plugin is closing. Reload it before checking dependency setup.")
         try:
             return await self._dependency_controller().cancel()
         except (OSError, ValueError):
@@ -296,7 +388,10 @@ class Plugin:
                                  "Another OBS operation is running. Wait for confirmed status before changing settings.")
         return result
 
+    @_rpc
     async def configuration_status(self):
+        if self._closing:
+            return self._configuration_gate(self._configuration_failure())
         return self._configuration_gate(await self._configuration_observed())
 
     async def _configuration_input(self, action, payload, allowed):
@@ -316,15 +411,19 @@ class Plugin:
                 if name in owned:
                     owned[name] = ""
 
+    @_rpc
     async def configure_destination(self, payload):
         return await self._configuration_input("configure-fields", payload, DESTINATION_FIELDS)
 
+    @_rpc
     async def change_control_password(self, payload):
         return await self._configuration_input("change-obs-password", payload, PASSWORD_FIELDS)
 
+    @_rpc
     async def test_control_connection(self):
         return await self._begin("test-connection")
 
+    @_rpc
     async def close_managed_obs(self):
         # Existing Go Restart positively verifies idle ownership and only closes
         # the managed instance. It does not reopen OBS or start an output.
@@ -410,16 +509,34 @@ class Plugin:
         return {"ok": False, "state": "unknown", "output_known": False,
                 "process": "unknown", "connection": "unavailable", "message": message}
 
-    async def _run(self, action, payload=None):
+    async def _run(self, action, payload=None, _teardown=False):
+        task = asyncio.current_task()
+        self._command_tasks.add(task)
+        try:
+            return await self._command(action, payload, _teardown)
+        finally:
+            self._command_tasks.discard(task)
+
+    def _track_cleanup(self, awaitable):
+        task = asyncio.create_task(awaitable)
+        self._cleanup_tasks.add(task)
+        task.add_done_callback(self._cleanup_tasks.discard)
+        return task
+
+    async def _command(self, action, payload, teardown):
+        if self._closing and not teardown:
+            return self._unknown("The plugin is closing. Reload it and refresh the actual OBS output state.")
         private_configuration = action in CONFIGURATION_ACTIONS or action in CONFIGURATION_READS
         cleanup_budget = 1 if private_configuration else 8
         binary = self._plugin_root() / "bin/obsgod"
         if not os.access(binary, os.X_OK):
             binary.chmod(0o700)
+        interpreter, environment = dependency_setup.python_process(self._child_environment())
         spawning = asyncio.create_task(asyncio.create_subprocess_exec(
-            str(binary), "deck", action, stdin=asyncio.subprocess.PIPE if payload is not None else asyncio.subprocess.DEVNULL,
+            *interpreter, str(Path(__file__).resolve()), "--owned-command", str(os.getpid()),
+            str(binary), "deck", action, stdin=asyncio.subprocess.PIPE,
             stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.DEVNULL,
-            env=self._child_environment(),
+            env=environment,
         ))
         try:
             process = await asyncio.shield(spawning)
@@ -429,19 +546,29 @@ class Plugin:
             async def reap_late_child():
                 try:
                     child = await spawning
-                    await self._stop_child(child, cleanup_budget)
+                    self._children.add(child)
+                    try:
+                        # No permission byte was sent. Even a late attached
+                        # guard can only exit, never begin a CLI operation.
+                        await self._stop_child(child, 0.4 if self._closing else cleanup_budget)
+                    finally:
+                        self._children.discard(child)
                 except OSError:
                     pass
-            cleanup = asyncio.create_task(reap_late_child())
-            self._cleanup_tasks.add(cleanup)
-            cleanup.add_done_callback(self._cleanup_tasks.discard)
+            self._track_cleanup(reap_late_child())
             raise
-        if action in {"start", "test-recording"} or (action == "media" and isinstance(payload, dict) and payload.get("action") in {"record-start", "replay-start"}):
+        self._children.add(process)
+        pending_action = action in {"start", "test-recording"} or (action == "media" and isinstance(payload, dict) and payload.get("action") in {"record-start", "replay-start"})
+        if pending_action:
             self.pending = process
-            if self.cancel_requested and process.returncode is None:
-                self._signal_pending()
         try:
-            communication = process.communicate(json.dumps(payload).encode()) if payload is not None else process.communicate()
+            if (self._closing and not teardown) or (pending_action and self.cancel_requested):
+                await self._stop_child(process, 0.4 if self._closing else cleanup_budget)
+                return self._unknown("The operation was cancelled before it started. Refresh the actual OBS output state.")
+            # The permission byte is never included in argv and is consumed by
+            # the guard with one os.read. The CLI receives only its JSON stdin.
+            content = b"\x01" + (json.dumps(payload).encode() if payload is not None else b"")
+            communication = process.communicate(content)
             timeout = 6 if action in {"status", "clear-logs"} else 85
             if action in CONFIGURATION_READS or action == "change-obs-password":
                 timeout = 7
@@ -457,14 +584,17 @@ class Plugin:
                 raise ValueError()
             return result
         except asyncio.CancelledError:
-            await self._stop_child(process, cleanup_budget)
+            cleanup = self._track_cleanup(self._stop_child(process, 0.4 if self._closing else cleanup_budget))
+            await asyncio.shield(cleanup)
             raise
         except (asyncio.TimeoutError, ValueError, UnicodeError):
-            await self._stop_child(process, cleanup_budget)
+            await self._stop_child(process, 0.4 if self._closing else cleanup_budget)
             return self._unknown("Output state is unconfirmed. Use Stop streaming and inspect OBS if the connection does not recover.")
         finally:
             if self.pending is process:
                 self.pending = None
+            if process.returncode is not None:
+                self._children.discard(process)
 
     @staticmethod
     async def _stop_child(process, budget=8):
@@ -499,14 +629,18 @@ class Plugin:
         result["snapshot_id"] = snapshot_id
         return result
 
+    @_rpc
     async def status(self):
         # Multiple panel/icon/manual clients share one bounded real OBS query.
         # Operation metadata is attached at return time, not when that query
         # began, so a slow status response cannot resurrect a completed action.
+        if self._closing:
+            return self._decorate(self._unknown("The plugin is closing. Reload it and refresh the actual OBS output state."))
         if self._status_task is None or self._status_task.done():
             self._status_task = asyncio.create_task(self._read_status())
         return self._decorate(await asyncio.shield(self._status_task))
 
+    @_rpc
     async def clear_logs(self):
         try:
             await self._run("clear-logs")
@@ -601,9 +735,11 @@ class Plugin:
             self._control_task.add_done_callback(lambda task: self._clear_private_operation(task, owned))
         return await asyncio.shield(self._control_task)
 
+    @_rpc
     async def start(self):
         return await self._begin("start")
 
+    @_rpc
     async def test_recording(self):
         return await self._begin("test-recording")
 
@@ -627,15 +763,19 @@ class Plugin:
         # the panel receives a fresh authoritative status after every action.
         return await self._begin(action, payload)
 
+    @_rpc
     async def stream_profiles(self, payload):
         return await self._advanced("stream-profiles", payload)
 
+    @_rpc
     async def set_idle_media(self, payload):
         return await self._advanced("set-idle-media", payload)
 
+    @_rpc
     async def media_action(self, payload):
         return await self._advanced("media", payload)
 
+    @_rpc
     async def mixer_action(self, payload):
         if not isinstance(payload, dict):
             return {"ok": False, "message": "Send one mixer settings object."}
@@ -661,15 +801,18 @@ class Plugin:
         except OSError:
             return {"ok": False, "message": "Microphone control is unavailable; its actual mute state is unknown."}
 
+    @_rpc
     async def stream_health(self):
         try:
             return await self._run("stream-health")
         except OSError:
             return {"ok": False, "state": "unknown", "message": "Stream health is unavailable. Inspect OBS and refresh status."}
 
+    @_rpc
     async def retry_recovery(self):
         return await self._begin("retry-recovery")
 
+    @_rpc
     async def cancel_media_operation(self):
         # Local startup cancellation must never invoke StopStream: the user may
         # be recording while an unrelated, explicitly started broadcast is live.
@@ -707,6 +850,7 @@ class Plugin:
         self._cancel_media_task = asyncio.create_task(cancel())
         return await asyncio.shield(self._cancel_media_task)
 
+    @_rpc
     async def set_capture_mode(self, mode):
         if not isinstance(mode, str) or mode not in {"screen", "game"}:
             result = await self.status()
@@ -722,9 +866,12 @@ class Plugin:
                 return await self._perform("stop", operation_id, {"ok": True, "message": "OBS confirms streaming is already stopped."})
         return await self._perform("stop", operation_id)
 
+    @_rpc
     async def stop(self):
         # Coalesce Stop requests too. Cancellation is latched before spawning
         # Stop, including the race before Start's child process is attached.
+        if self._closing:
+            return await self.status()
         if self._stop_task and not self._stop_task.done():
             return await asyncio.shield(self._stop_task)
         self.cancel_requested = True
@@ -734,7 +881,11 @@ class Plugin:
         self._stop_task = asyncio.create_task(self._stop(self._operation_id))
         return await asyncio.shield(self._stop_task)
 
+    @_rpc
     async def check_for_updates(self):
+        if self._closing:
+            return {"ok": False, "state": "error", "available": False,
+                    "message": "The plugin is closing. Reload it before checking updates."}
         if self._update_task and not self._update_task.done():
             return await asyncio.shield(self._update_task)
 
@@ -746,7 +897,7 @@ class Plugin:
                 spec.loader.exec_module(module)
                 versions = module.current_versions(self._version(), environ=self._child_environment())
                 current = versions["app"] if versions["app"] != "unknown" else versions["plugin"]
-                result = await asyncio.to_thread(module.check_updates, current, channel="preview")
+                result = await _readonly_thread(module.check_updates, current, channel="preview")
                 result.update(current_app_version=versions["app"], current_plugin_version=versions["plugin"],
                               current_updater_version=versions["updater"], mismatch=versions["mismatch"])
                 if versions["mismatch"]:
@@ -760,40 +911,112 @@ class Plugin:
         return await asyncio.shield(self._update_task)
 
     async def _unload(self):
-        # Refuse new Starts first, latch cancellation, drain the original start
-        # even when its child has not attached, then confirm Stop once more.
-        # A loader teardown acknowledgement must not precede a late Start.
+        if self._unload_task is not None:
+            return await asyncio.shield(self._unload_task)
+        # Pinned Decky sends KILL five seconds after TERM. Latch and signal
+        # BEFORE the first await, including slow setup/microphone observations.
         self._closing = True
-        try:
-            # Stop the owned installer before Stop needs the shared control
-            # lock. Closing a panel never reaches this backend lifecycle hook.
-            if self._dependency_job is not None:
-                await self._dependency_job.close()
-            await self.mixer_action({"action": "talk-cancel"})
-            await asyncio.wait_for(asyncio.shield(self.stop()), 18)
-            if self._control_task and not self._control_task.done():
-                await asyncio.wait_for(asyncio.shield(self._control_task), 12)
-            return await asyncio.wait_for(asyncio.shield(self.stop()), 12)
-        except (OSError, asyncio.TimeoutError, asyncio.CancelledError):
-            self.cancel_requested = True
-            self._signal_pending()
-            tasks = [task for task in (self._control_task, self._stop_task, self._status_task)
-                     if task is not None and not task.done()]
-            for task in tasks:
+        self.cancel_requested = True
+        self._signal_pending()
+        for process in tuple(self._children):
+            if process.returncode is None:
+                try:
+                    process.send_signal(signal.SIGINT)
+                except ProcessLookupError:
+                    pass
+        # These observations cannot help finish an interrupted control action.
+        # Include invalidated generations rather than just the newest reader.
+        for task in (*self._configuration_tasks, self._status_task, self._update_task):
+            if task is not None and not task.done():
                 task.cancel()
-            if tasks:
+        self._unload_task = asyncio.create_task(self._finish_unload())
+        return await asyncio.shield(self._unload_task)
+
+    def _owned_tasks(self):
+        return {task for task in (self._control_task, self._stop_task, self._status_task,
+                                  self._configuration_task, self._cancel_media_task, self._update_task,
+                                  *self._configuration_tasks, *self._command_tasks,
+                                  *self._rpc_tasks, *self._cleanup_tasks)
+                if task is not None and task is not asyncio.current_task() and not task.done()}
+
+    async def _finish_unload(self):
+        loop = asyncio.get_running_loop()
+        deadline = loop.time() + 4
+        pending_control = self.busy
+
+        async def stop_output():
+            await self._run("stop", _teardown=True)
+            return await self._run("status", _teardown=True)
+
+        # The setup controller retains its independent inherited-lease worker
+        # policy. Start its close first; the Go Stop waits on the same lease.
+        closing_setup = asyncio.create_task(self._dependency_job.close()) if self._dependency_job is not None else None
+        microphone = asyncio.create_task(self._run("mixer", {"action": "talk-cancel"}, _teardown=True))
+        output = asyncio.create_task(stop_output())
+        helpers = {task for task in (closing_setup, microphone, output) if task is not None}
+        initial = helpers | self._owned_tasks()
+        if initial:
+            await asyncio.wait(initial, timeout=2.4)
+
+        # Escalate only exact adapter command children; never OBS, a process
+        # group or a PID read from disk. New spawns without permission remain
+        # harmless guards and are reaped if asyncio finishes attaching later.
+        tasks = helpers | self._owned_tasks()
+        for task in tasks:
+            if not task.done():
+                task.cancel()
+        for process in tuple(self._children):
+            if process.returncode is None:
                 try:
-                    await asyncio.wait_for(asyncio.gather(*tasks, return_exceptions=True), 10)
-                except asyncio.TimeoutError:
+                    process.kill()
+                except ProcessLookupError:
                     pass
-            if self._cleanup_tasks:
+        if pending_control:
+            # Start may have held control.lock while the first Stop waited.
+            # A fresh bounded Stop AFTER the original child was drained/killed
+            # cannot be overtaken by that original operation's late mutation.
+            output = asyncio.create_task(stop_output())
+            helpers.add(output)
+            tasks.add(output)
+        # Cancellation can create a late-spawn reaper. Re-snapshot until the
+        # fixed budget expires without repeatedly cancelling its cleanup.
+        settle_deadline = deadline - 0.4
+        while loop.time() < settle_deadline:
+            pending = {task for task in tasks | self._owned_tasks() if not task.done()}
+            if not pending:
+                break
+            await asyncio.wait(pending, timeout=max(0, settle_deadline - loop.time()))
+            tasks |= pending
+        # Leave a final reap allowance inside the same four-second budget.
+        # Ungranted late-spawn reapers keep ownership if attachment is delayed;
+        # they cannot execute a command and parent death closes the guard too.
+        for task in helpers | self._owned_tasks():
+            if not task.done() and task not in self._cleanup_tasks:
+                task.cancel()
+        for process in tuple(self._children):
+            if process.returncode is None:
                 try:
-                    await asyncio.wait_for(asyncio.shield(asyncio.gather(*self._cleanup_tasks, return_exceptions=True)), 5)
-                except asyncio.TimeoutError:
+                    process.kill()
+                except ProcessLookupError:
                     pass
-            message = "Shutdown could not confirm all output stopped. Inspect OBS before leaving it unattended."
-            self._last_action = {"id": self._operation_id, "action": "stop", "ok": False, "message": message}
-            return self._unknown(message)
+        remaining = {task for task in tasks | self._owned_tasks() if not task.done()}
+        if remaining and loop.time() < deadline:
+            await asyncio.wait(remaining, timeout=max(0, deadline - loop.time()))
+            tasks |= remaining
+        for task in tasks:
+            if task.done() and not task.cancelled():
+                task.exception()
+        unsettled = self._owned_tasks() | {task for task in helpers if not task.done()}
+        if not unsettled and output.done() and not output.cancelled() and output.exception() is None:
+            observed = output.result()
+            if isinstance(observed, dict) and observed.get("output_known") is True:
+                return observed
+        # Hook results are diagnostic only: Decky still replaces/removes the
+        # plugin. Abrupt parent loss kills guarded CLI commands in the kernel;
+        # an ungranted late spawn cannot execute, even before parent loss.
+        message = "Shutdown could not confirm all output stopped. Inspect OBS before leaving it unattended."
+        self._last_action = {"id": self._operation_id, "action": "stop", "ok": False, "message": message}
+        return self._unknown(message)
 
     async def _uninstall(self):
         await self._unload()

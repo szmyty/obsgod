@@ -1,5 +1,29 @@
 # Current work
 
+## Runtime source checkpoint in #106
+
+The five bounded runtime repairs are implemented on `feat/runtime-correctness`
+in [#106](https://github.com/szmyty/obsgod/pull/106), with independent cross-review.
+Read [the changed contracts](docs/runtime-correctness.md). Review also repaired
+initial observer readiness, canonical versus case-insensitive recording flags,
+workflow timeout identity and frozen Decky's non-Python `sys.executable`.
+The system-Python helper correction also applies to the existing leased
+dependency worker without changing its ownership/recovery model.
+
+Focused regression/process tests passed. The first integrated Go race run found
+three older status fixtures sharing a response without `outputPaused`; the
+fixture now supplies a real boolean and the full race rerun passes. Preserve
+that initial failure as superseded evidence. Fresh vet, tooling and frontend
+typecheck/tests/build pass; complete Python, primary packaging and the final
+exact-merged-source six-job local ACT matrix are still being completed. Do not
+call this checkpoint final qualification or close acceptance from this note.
+
+Next: finish premerge checks/primary package, retarget and merge the seven-PR
+stack into actual default `master`, then qualify that exact merged source and
+publish evidence-only review records. No product release/deploy/migration is
+authorized. Remaining audit stages #101–#104 and artwork/UI remain outside this
+batch; actual Deck/provider/hosted acceptance stays explicit.
+
 ## Runtime correctness #96–#100 authorized; merge the open PR stack
 
 The owner explicitly approved the runtime-correctness stage and requested merging

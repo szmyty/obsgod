@@ -3,7 +3,11 @@
 Audit baseline: **12ef52f9d22a7c1101f8743094325f66e3948270**,
 `szmyty/obsgod`, 2026-11-14 UTC. Parent: [#84](https://github.com/szmyty/obsgod/issues/84).
 
-**Status: proposed; wait for the owner sync before implementing this roadmap.**
+**Current status: the owner authorized runtime stage #96–#100 and the open PR
+merges. Other stages remain proposed/separately scoped.** The original planning
+checkpoint below is retained as history; see the
+[runtime contract](../docs/runtime-correctness.md) for the implemented stage.
+
 This pass inspected the repository and ran focused synthetic reproductions. It
 changed planning documents and issues, not product code, UI or artwork. The owner
 does not have the Steam Deck available; that does not block software preparation

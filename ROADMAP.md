@@ -1,6 +1,15 @@
 # Product roadmap
 
-## Proposed audit checkpoint — review before execution
+## Runtime correctness implementation authorized
+
+The owner approved implementing **#96–#100** and merging the open PR stack.
+[Runtime contracts](docs/runtime-correctness.md) cover effective microphone
+policy, fresh capture ownership, strict recording observations, poisoned
+connection disposal and bounded backend teardown. Other audit stages #101–#104
+and existing artwork/UI work remain separate. The source and final qualification
+record must identify the exact merged revision; older receipts are historical.
+
+## Original proposed audit checkpoint
 
 The owner requested a repository-wide audit at current source 12ef52f, then a
 sync before implementation. [#84](https://github.com/szmyty/obsgod/issues/84)

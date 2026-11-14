@@ -102,11 +102,11 @@ func (c *Client) RuntimeStatus(ctx context.Context) (RuntimeStatus, error) {
 		return s, e
 	}
 	s.Scene = r.SceneName
-	t, e := empty(ctx, "GetRecordStatus", c.obs.Record.GetRecordStatus)
+	t, e := c.observeRecording(ctx, false)
 	if e != nil {
 		return s, e
 	}
-	s.Recording = t.OutputActive
+	s.Recording = t.Active
 	return s, nil
 }
 
@@ -217,8 +217,8 @@ func (c *Client) Screenshot(ctx context.Context, name string) (string, error) {
 }
 
 func (c *Client) StartRecording(ctx context.Context) error {
-	r, e := empty(ctx, "GetRecordStatus", c.obs.Record.GetRecordStatus)
-	if e != nil || r.OutputActive {
+	r, e := c.observeRecording(ctx, false)
+	if e != nil || r.Active {
 		return e
 	}
 	_, e = empty(ctx, "StartRecord", c.obs.Record.StartRecord)
@@ -226,11 +226,11 @@ func (c *Client) StartRecording(ctx context.Context) error {
 		return e
 	}
 	for {
-		r, e = empty(ctx, "GetRecordStatus", c.obs.Record.GetRecordStatus)
+		r, e = c.observeRecording(ctx, false)
 		if e != nil {
 			return e
 		}
-		if r.OutputActive && r.OutputBytes > 0 {
+		if r.Active && r.Bytes > 0 {
 			return nil
 		}
 		if e = pause(ctx, 250*time.Millisecond); e != nil {
@@ -244,11 +244,11 @@ func (c *Client) StartRecording(ctx context.Context) error {
 func (c *Client) StopRecording(ctx context.Context) (string, error) {
 	ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
 	defer cancel()
-	r, err := empty(ctx, "GetRecordStatus", c.obs.Record.GetRecordStatus)
+	r, err := c.observeRecording(ctx, false)
 	if err != nil {
 		return "", err
 	}
-	if !r.OutputActive {
+	if !r.Active {
 		return "", nil
 	}
 	stopped, err := empty(ctx, "StopRecord", c.obs.Record.StopRecord)
@@ -256,11 +256,11 @@ func (c *Client) StopRecording(ctx context.Context) (string, error) {
 		return "", err
 	}
 	for {
-		r, err = empty(ctx, "GetRecordStatus", c.obs.Record.GetRecordStatus)
+		r, err = c.observeRecording(ctx, false)
 		if err != nil {
 			return "", err
 		}
-		if !r.OutputActive {
+		if !r.Active {
 			return stopped.OutputPath, nil
 		}
 		if err := pause(ctx, 100*time.Millisecond); err != nil {

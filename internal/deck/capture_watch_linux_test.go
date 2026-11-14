@@ -24,7 +24,7 @@ func TestCaptureWatchTransitionsRerouteAudioWithoutStartingOrStoppingOutput(t *t
 	var routes []uint32
 	deps := captureWatchDeps{load: func(Paths) (Settings, Secrets, error) {
 		loads++
-		if loads > len(identities) {
+		if loads > 2*len(identities) {
 			f.mu.Lock()
 			f.active = false
 			f.mu.Unlock()
@@ -52,9 +52,6 @@ func TestCaptureWatchTransitionsRerouteAudioWithoutStartingOrStoppingOutput(t *t
 	f.mu.Lock()
 	defer f.mu.Unlock()
 	assertNoOutputCommands(t, f)
-	if f.scene != IdleScene {
-		t.Fatal("observer did not leave idle after confirmed output stop")
-	}
 	var pipelines []string
 	for _, request := range f.requests {
 		if request.Type == "CreateInput" || request.Type == "SetInputSettings" {
@@ -101,7 +98,7 @@ func TestCaptureWatchRetriesAudioAndResetsTargetAfterConnectionFailure(t *testin
 	loads, connections, routes := 0, 0, 0
 	deps := captureWatchDeps{load: func(Paths) (Settings, Secrets, error) {
 		loads++
-		if loads > 5 {
+		if loads > 9 {
 			f.mu.Lock()
 			f.active = false
 			f.mu.Unlock()
@@ -145,7 +142,7 @@ func TestCaptureWatchRetriesAudioAndResetsTargetAfterConnectionFailure(t *testin
 	}
 }
 
-func TestCaptureWatchUsesSeparateLifetimeLockFromOutputControl(t *testing.T) {
+func TestCaptureWatchObservesIdleWithoutTakingOutputControlOrMutating(t *testing.T) {
 	f := newVideoFixture(t)
 	f.active = false
 	_, dial := videoClient(t, f)
@@ -169,6 +166,7 @@ func TestCaptureWatchUsesSeparateLifetimeLockFromOutputControl(t *testing.T) {
 		t.Fatal("observer was blocked by the initiating output operation")
 	}
 	assertNoOutputCommands(t, f)
+	assertCaptureReadOnly(t, f.requests)
 	if status := ReadCaptureVideoStatus(p); status.State != "stopped" {
 		t.Fatalf("observer did not run while output lock was held: %+v", status)
 	}
