@@ -11,7 +11,7 @@ export type SetupStatus={
   remote:{configured:boolean;needs_add:boolean;valid:boolean;name:string;reason:string};
   operation:{id:string;state:string;stage:string;started_at:string;finished_at:string|null;
     progress:{time:string;level:string;message:string}[];cancel_requested:boolean}|null;
-  can_install:boolean;
+  can_install:boolean;can_cancel:boolean;
 };
 export type SetupReadiness={ready:boolean;reason:string;state:string};
 const readStatus=callable<[],SetupStatus>("dependency_status");
@@ -140,6 +140,7 @@ export function DependencySetup({onReadiness}:{onReadiness?:(state:SetupReadines
       <RowButton onClick={postponeSetup}>Later</RowButton>
     </>}
     {state.busy&&<RowButton disabled={!state.canCancel} onClick={()=>void setupAction("cancel")}>{localAction==="cancel"||state.state==="cancelling"?"Cancelling setup…":"Cancel dependency setup"}</RowButton>}
+    {state.state==="running"&&status?.can_cancel!==true&&!localAction&&<PanelSectionRow><Hint>A previous setup worker is still finishing. This session cannot safely cancel it. Wait for it to finish, then check setup status; do not start another installation or delete its files.</Hint></PanelSectionRow>}
     <RowButton disabled={!!localAction} onClick={()=>{localMessage="";void refreshDependencies();}}>{pollTask?"Checking setup status…":"Check setup status"}</RowButton>
     {localMessage&&<PanelSectionRow><div role="status"><Hint>{localMessage}</Hint></div></PanelSectionRow>}
     {!state.ready&&<PanelSectionRow><Hint>Help: keep network and free storage available during installation. If Flatpak or permissions are unavailable, use Discover in Desktop Mode to install OBS Studio and its compatible GStreamer extension, then check setup status here. Do not install another WebSocket plugin. Existing shared dependencies are never removed by this setup.</Hint></PanelSectionRow>}

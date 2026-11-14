@@ -4,7 +4,7 @@ import {createDependencyView,dependencyConsent,dependencyFreshness,dependencyObs
 
 const obs={id:"obs",name:"OBS Studio",installed:true,compatible:true,scope:"user",version:"33.0.1"};
 const gstreamer={id:"gstreamer",name:"GStreamer extension",installed:false,compatible:false,scope:null,version:null};
-const missing={schema_version:1,state:"setup_required",ready:false,message:"GStreamer is missing.",reason:{code:"missing_gstreamer",message:"Install the GStreamer extension compatible with OBS."},can_install:true,dependencies:[obs,gstreamer],remote:{configured:true,needs_add:false,valid:true},operation:null};
+const missing={schema_version:1,state:"setup_required",ready:false,message:"GStreamer is missing.",reason:{code:"missing_gstreamer",message:"Install the GStreamer extension compatible with OBS."},can_install:true,can_cancel:false,dependencies:[obs,gstreamer],remote:{configured:true,needs_add:false,valid:true},operation:null};
 const ready={...missing,state:"ready",ready:true,reason:null,dependencies:[obs,{...gstreamer,installed:true,compatible:true}]};
 
 test("unknown, failed observations and expired readiness cannot enable output",()=>{
@@ -12,6 +12,8 @@ test("unknown, failed observations and expired readiness cannot enable output",(
   assert.equal(dependencyView(view,100).ready,false);
   observeDependencies(view,ready,100,1,0);
   assert.equal(dependencyView(view,101).ready,true);
+  assert.equal(dependencyView(view,99).ready,false);
+  assert.equal(dependencyView(view,99).canInstall,false);
   assert.equal(dependencyView(view,100+dependencyFreshness+1).ready,false);
   dependencyObservationFailed(view,2,0);
   assert.equal(dependencyView(view,102).canInstall,false);
@@ -35,7 +37,7 @@ test("Late pre-action polls cannot erase a new installation or cancellation job"
   const view=createDependencyView();
   observeDependencies(view,missing,100,1,0);
   view.epoch++;
-  const running={...missing,state:"running",operation:{id:"job-1",stage:"install-gstreamer"}};
+  const running={...missing,state:"running",can_cancel:true,operation:{id:"job-1",stage:"install-gstreamer"}};
   assert.equal(observeDependencies(view,running,120,3,1),true);
   assert.equal(observeDependencies(view,ready,130,2,0),false);
   assert.equal(dependencyObservationFailed(view,2,0),false);
@@ -43,6 +45,22 @@ test("Late pre-action polls cannot erase a new installation or cancellation job"
   assert.equal(dependencyView(view,130).canInstall,false);
   assert.equal(observeDependencies(view,{...running,state:"cancelling"},140,4,1),true);
   assert.equal(dependencyView(view,141).canCancel,false);
+});
+
+test("a surviving worker stays busy without unsafe cancellation after a backend restart",()=>{
+  const view=createDependencyView();
+  const running={...missing,state:"running",operation:{id:"old-worker",stage:"install-obs"}};
+  for(const can_cancel of [false,undefined]){
+    observeDependencies(view,{...running,can_cancel},100,1,0);
+    const state=dependencyView(view,101);
+    assert.equal(state.ready,false);
+    assert.equal(state.busy,true);
+    assert.equal(state.canInstall,false);
+    assert.equal(state.canCancel,false);
+  }
+  observeDependencies(view,{...running,can_cancel:true},102,2,0);
+  assert.equal(dependencyView(view,103).canCancel,true);
+  assert.equal(dependencyView(view,101).canCancel,false);
 });
 
 test("new frontend recovers an observed backend job without scheduling an install",()=>{

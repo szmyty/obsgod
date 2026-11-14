@@ -72,7 +72,11 @@ func UserPaths() (Paths, error) {
 	if e != nil {
 		return Paths{}, e
 	}
-	return Paths{Config: filepath.Join(root, "obsgod/deck.json"), Secrets: filepath.Join(root, "obsgod/secrets.json"), OBSConfig: filepath.Join(home, ".var/app/com.obsproject.Studio/config/obsgod"), State: filepath.Join(data, "obsgod"), Videos: videos}, nil
+	paths := Paths{Config: filepath.Join(root, "obsgod/deck.json"), Secrets: filepath.Join(root, "obsgod/secrets.json"), OBSConfig: filepath.Join(home, ".var/app/com.obsproject.Studio/config/obsgod"), State: filepath.Join(data, "obsgod"), Videos: videos}
+	if e = validateDeckyStorageMap(paths, home); e != nil {
+		return Paths{}, e
+	}
+	return paths, nil
 }
 
 func DefaultSettings() Settings {

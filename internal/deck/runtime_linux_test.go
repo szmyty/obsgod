@@ -38,6 +38,31 @@ func TestLaunchUsesSessionBackendAndOnlyManagedConfiguration(t *testing.T) {
 	}
 }
 
+func TestSessionEnvironmentPreservesUserFlatpakRootsAndStorageContext(t *testing.T) {
+	for key, value := range map[string]string{
+		"XDG_DATA_HOME": t.TempDir(), "XDG_CACHE_HOME": t.TempDir(),
+		"OBSGOD_DECKY_STORAGE_MAP": "/private/storage-fixture/map.json",
+		"OBSGOD_DECKY_RUNTIME_DIR": "/private/decky-persistent-fixture",
+		"OBSGOD_DECKY_LOG_DIR":     "/private/decky-log-fixture",
+	} {
+		t.Setenv(key, value)
+	}
+	t.Setenv("UNRELATED_PRIVATE_FIXTURE", "must-not-enter-child-session")
+	values := map[string]string{}
+	for _, field := range sessionEnvironment() {
+		key, value, _ := strings.Cut(field, "=")
+		values[key] = value
+	}
+	for _, key := range []string{"XDG_DATA_HOME", "XDG_CACHE_HOME", "OBSGOD_DECKY_STORAGE_MAP", "OBSGOD_DECKY_RUNTIME_DIR", "OBSGOD_DECKY_LOG_DIR"} {
+		if values[key] != os.Getenv(key) || sessionKeys[key] {
+			t.Fatal("user storage/Flatpak roots were dropped or imported from a different graphical session", key)
+		}
+	}
+	if values["UNRELATED_PRIVATE_FIXTURE"] != "" {
+		t.Fatal("unrelated environment value leaked into child session")
+	}
+}
+
 func TestRecoveryMarkersAreDetectedWithoutDeletion(t *testing.T) {
 	for _, name := range []string{"safe_mode", ".sentinel/run_fixture"} {
 		t.Run(name, func(t *testing.T) {

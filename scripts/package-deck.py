@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Build a reproducible Steam Deck archive and Decky ZIP from a source revision."""
 import argparse
-from datetime import datetime, timezone
 import gzip
 import hashlib
 import io
@@ -13,7 +12,7 @@ import subprocess
 import sys
 import tarfile
 import tempfile
-import zipfile
+from decky_package import plugin_files, zip_payload
 
 REPO = Path(__file__).resolve().parents[1]
 
@@ -35,7 +34,7 @@ def notices():
     text += "OBS Studio and obs-gstreamer are separately installed GPL software from Flathub; their binaries are not included in this package.\n\n"
     text += "OBSGod's independent capture implementation is MIT licensed. Its preferred source, native SDK header notices and full LGPL-2.1 text are included in CAPTURE-SOURCE.tar.gz and below. Separately installed GStreamer/GLib/PipeWire library binaries are not redistributed here.\n\n"
     text += (REPO / "steamdeck/capture/THIRD_PARTY_NOTICES.md").read_text() + "\n\n"
-    text += "The Decky plugin imports @decky/api 1.1.3 as a separate, replaceable LGPL-2.1 module in dist/decky-api.js, with its license included. Modifications change the manifest import to ./manifest.js and add the .js suffix to the types import for native browser modules. The original source is at https://github.com/SteamDeckHomebrew/loader-api. React and @decky/ui are supplied by Steam/Decky and are not bundled. Build inputs are pinned in steamdeck/decky/package-lock.json.\n\n"
+    text += "The Decky plugin imports @decky/api 1.1.3 as a separate, replaceable LGPL-2.1 module in dist/decky-api.js, with its license included. Its untouched package.json and src/ preferred source are in source/decky-api/SOURCE.tar.gz, with extraction/rebuild instructions alongside. Modifications change the manifest import to ./manifest.js and add the .js suffix to the types import for native browser modules. The original source is at https://github.com/SteamDeckHomebrew/loader-api. React and @decky/ui are supplied by Steam/Decky and are not bundled. Build inputs are pinned in steamdeck/decky/package-lock.json.\n\n"
     text += "## qrcode-generator 2.0.4\n\nLocal support QR generation uses the MIT-licensed qrcode-generator implementation. The pinned source package and lockfile identify the build input; the matching upstream license is also shipped as LICENSE.qrcode-generator.txt. No remote QR service receives a support address.\n\n"
     text += (REPO / "steamdeck/decky/LICENSE.qrcode-generator.txt").read_text() + "\n\n"
     text += "## Go standard library\n\n" + (Path(command("go", "env", "GOROOT")) / "LICENSE").read_text() + "\n"
@@ -63,19 +62,6 @@ def capture_source(epoch):
                 info = tarfile.TarInfo("OBSGod-Capture/" + name)
                 info.size, info.mtime, info.mode = len(data), epoch, 0o644
                 archive.addfile(info, io.BytesIO(data))
-    return output.getvalue()
-
-
-def zip_payload(files, epoch):
-    output = io.BytesIO()
-    timestamp = datetime.fromtimestamp(max(epoch, 315532800), tz=timezone.utc).timetuple()[:6]
-    with zipfile.ZipFile(output, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
-        for name, data in sorted(files.items()):
-            info = zipfile.ZipInfo("obsgod/" + name, timestamp)
-            info.create_system = 3
-            info.external_attr = (0o100755 if name == "bin/obsgod" else 0o100644) << 16
-            info.compress_type = zipfile.ZIP_DEFLATED
-            archive.writestr(info, data)
     return output.getvalue()
 
 
@@ -115,31 +101,10 @@ def main():
     helper = dist / "decky-install"
     subprocess.run(["go", "build", "-trimpath", "-buildvcs=false", "-ldflags", "-s -w -buildid=", "-o", str(helper), "./cmd/obsgod-decky-install"], cwd=REPO, env=env, check=True)
     third_party = notices().encode()
-    plugin = {
-        "main.py": (REPO / "steamdeck/decky/main.py").read_bytes(),
-        "releases.py": (REPO / "steamdeck/releases.py").read_bytes(),
-        "paths.py": (REPO / "steamdeck/paths.py").read_bytes(),
-        "product.py": (REPO / "steamdeck/product.py").read_bytes(),
-        "plugin.json": (REPO / "steamdeck/decky/plugin.json").read_bytes(),
-        "package.json": json.dumps({"name": "obsgod", "version": args.version, "license": "MIT", "type":"module"}, sort_keys=True).encode(),
-        "bin/obsgod": binary.read_bytes(),
-        "bin/libgstobsgodcapture.so": capture_library,
-        "CAPTURE-SOURCE.tar.gz": capture_preferred_source,
-        "LICENSE": (REPO / "LICENSE").read_bytes(),
-        "LICENSE.LGPL-2.1": (REPO / "steamdeck/decky/LICENSE.LGPL-2.1").read_bytes(),
-        "LICENSE.qrcode-generator.txt": (REPO / "steamdeck/decky/LICENSE.qrcode-generator.txt").read_bytes(),
-        "THIRD_PARTY_NOTICES.md": third_party,
-    }
-    for name in ["index.js", "decky-api.js", "manifest.js", "types.js", "LICENSE.qrcode-generator.txt"]:
-        plugin["dist/" + name] = (REPO / "steamdeck/decky/dist" / name).read_bytes()
-    # Include the SDK's preferred source form as well as its replaceable runtime
-    # module, so the LGPL dependency can be rebuilt and modified independently.
-    sdk = REPO / "steamdeck/decky/node_modules/@decky/api"
-    for path in sorted((sdk / "src").rglob("*")):
-        if path.is_file():
-            plugin["source/decky-api/" + path.relative_to(sdk).as_posix()] = path.read_bytes()
-    plugin["source/decky-api/package.json"] = (sdk / "package.json").read_bytes()
-    plugin["source/decky-api/BUILDING.md"] = b"The unmodified preferred TypeScript source of @decky/api 1.1.3 is included here. OBSGod's pinned TypeScript build and rollup.config.js are in the release's corresponding GitHub source archive. The runtime dist/decky-api.js is a separate replaceable module. Its build changes only the manifest import to ./manifest.js and the types export to ./types.js; dist/manifest.js supplies the OBSGod name. The complete LGPL-2.1 license is at the plugin root.\n"
+    plugin = plugin_files(REPO, version=args.version, binary=binary.read_bytes(),
+        capture_library=capture_library, frontend=REPO / "steamdeck/decky/dist",
+        capture_source=capture_preferred_source, notices=third_party,
+        revision=revision, dirty=dirty, capture_receipt=(dist / "capture-build.json").read_bytes())
     plugin_zip = zip_payload(plugin, epoch)
     (dist / "obsgod-decky.zip").write_bytes(plugin_zip)
     files = {name: (REPO / "steamdeck" / name).read_bytes() for name in ["setup.py", "bridge.py", "setup.html", "setup.js", "setup.css", "uninstall.py", "install.py", "Install OBSGod.desktop", "decky.py", "update.py", "releases.py", "Update OBSGod.desktop", "Update OBSGod.sh", "paths.py", "product.py", "Uninstall OBSGod.desktop"]}

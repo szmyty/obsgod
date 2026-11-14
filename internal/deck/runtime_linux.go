@@ -21,7 +21,7 @@ var sessionKeys = map[string]bool{"DISPLAY": true, "WAYLAND_DISPLAY": true, "XAU
 
 func sessionEnvironment() []string {
 	m := map[string]string{}
-	for _, k := range []string{"PATH", "HOME", "USER", "LOGNAME", "LANG", "LC_ALL", "DISPLAY", "WAYLAND_DISPLAY", "XAUTHORITY", "DBUS_SESSION_BUS_ADDRESS", "XDG_RUNTIME_DIR", "XDG_CONFIG_HOME", "XDG_STATE_HOME", "XDG_CURRENT_DESKTOP", "PULSE_SERVER", "HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY", "NO_PROXY", "http_proxy", "https_proxy", "all_proxy", "no_proxy", "SSL_CERT_FILE", "SSL_CERT_DIR", "CURL_CA_BUNDLE"} {
+	for _, k := range []string{"PATH", "HOME", "USER", "LOGNAME", "LANG", "LC_ALL", "DISPLAY", "WAYLAND_DISPLAY", "XAUTHORITY", "DBUS_SESSION_BUS_ADDRESS", "XDG_RUNTIME_DIR", "XDG_CONFIG_HOME", "XDG_STATE_HOME", "XDG_DATA_HOME", "XDG_CACHE_HOME", "OBSGOD_DECKY_STORAGE_MAP", "OBSGOD_DECKY_RUNTIME_DIR", "OBSGOD_DECKY_LOG_DIR", "XDG_CURRENT_DESKTOP", "PULSE_SERVER", "HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY", "NO_PROXY", "http_proxy", "https_proxy", "all_proxy", "no_proxy", "SSL_CERT_FILE", "SSL_CERT_DIR", "CURL_CA_BUNDLE"} {
 		if v := os.Getenv(k); v != "" {
 			m[k] = v
 		}
@@ -161,7 +161,7 @@ func checkDependencies(ctx context.Context) error {
 		_, err := commandOutput(dependencyCtx, "flatpak", "info", "--user", id)
 		cancel()
 		if err != nil {
-			return errors.New("install OBS and its GStreamer capture plugin using OBSGod Desktop setup")
+			return errors.New("install OBS and its compatible GStreamer extension through the Decky setup panel or Discover in Desktop Mode")
 		}
 	}
 	return nil

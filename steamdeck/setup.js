@@ -14,6 +14,20 @@ const providers = {
 };
 let savedServer = "", savedKey = false, controlCanChange = false, controlBusy = false;
 let savedIdleMedia = "", savedIdleRights = "";
+let installChannel = "desktop";
+function renderInstallChannel(channel) {
+  installChannel = channel === "decky" ? "decky" : "desktop";
+  if (installChannel !== "decky") return;
+  const dependencies = el("dependencies"), install = el("install-plugin");
+  dependencies.hidden = true; dependencies.disabled = true;
+  install.hidden = true; install.disabled = true;
+  const captureSection = dependencies.closest("section"), pluginSection = install.closest("section");
+  captureSection.querySelector("h2").textContent = "Manage capture tools in Decky";
+  captureSection.querySelector("p").textContent = "Use the Decky panel's Setup controls to check and install OBS Studio and its capture extension. This browser is for local configuration.";
+  pluginSection.querySelector("h2").textContent = "Manage the plugin in Decky";
+  for (const paragraph of pluginSection.querySelectorAll("p")) paragraph.hidden = paragraph.id !== "decky-status";
+  pluginSection.querySelector("details").hidden = true;
+}
 function inferredProvider(server) {
   try {
     const host = new URL(server).hostname.toLowerCase();
@@ -45,6 +59,7 @@ async function api(path, body) {
 function message(id, data) { el(id).textContent = data.message; el(id).className = data.ok === false ? "error" : "success"; }
 async function refresh() {
   const data = await api("/api/status");
+  renderInstallChannel(data.install_channel);
   if(data.mixer)renderMixer(data.mixer);
   if (data.product_name) {el("product-name").textContent = "● " + data.product_name;document.title = data.product_name + " · Steam Deck setup";}
   if (data.settings) {
@@ -62,7 +77,7 @@ async function refresh() {
   savedKey = !!data.configured;
   el("provider").value = inferredProvider(savedServer);
   updateProviderGuide();updateDestination();
-  el("zip-path").textContent = data.plugin_zip;
+  el("zip-path").textContent = data.plugin_zip || "Managed by Decky";
   el("decky-status").textContent = data.decky_status?.message || "Decky service readiness has not been verified.";
   if (!data.flatpak) message("dependency-status", {ok:false,message:"Flatpak was not found. This installer is intended for SteamOS / Steam Deck."});
   await refreshConnection();
@@ -91,6 +106,7 @@ el("settings").addEventListener("submit", async (event) => {
   finally{settings.stream_key="";el("save").disabled=false;}
 });
 el("dependencies").addEventListener("click", async () => {
+  if (installChannel === "decky") return;
   el("dependencies").disabled=true;
   try {
     message("dependency-status", await api("/api/action", {action:"dependencies"}));
@@ -99,6 +115,7 @@ el("dependencies").addEventListener("click", async () => {
   finally{el("dependencies").disabled=false;}
 });
 el("install-plugin").addEventListener("click", async () => {
+  if (installChannel === "decky") return;
   el("install-plugin").disabled = true;
   try {
     message("plugin-status", await api("/api/action", {action:"install-plugin"}));

@@ -14,12 +14,20 @@ from urllib.parse import urlsplit
 import webbrowser
 
 from bridge import private_process, run_cli
-import decky
-import install as installer
 from product import DISPLAY_NAME
 
 ROOT = Path(__file__).resolve().parent
+# The ordinary Decky ZIP carries this optional browser UI beside bin/obsgod.
+# Its lifecycle belongs to Decky, not the legacy paired Desktop installer.
+PLUGIN_BUNDLE = (ROOT / "plugin.json").is_file() and (ROOT / "bin/obsgod").is_file()
+if not PLUGIN_BUNDLE:
+    import decky
+    import install as installer
 MAX_BODY = 16384
+
+
+def decky_managed_setup():
+    return {"running": False, "ok": False, "message": "Use the Decky panel for OBS dependency setup and Decky's normal plugin installation/replacement controls. This browser only configures the bundled plugin."}
 
 
 class SetupServer(ThreadingHTTPServer):
@@ -34,6 +42,8 @@ class SetupServer(ThreadingHTTPServer):
         self.last_used = time.monotonic()
 
     def dependencies(self):
+        if PLUGIN_BUNDLE:
+            return decky_managed_setup()
         with self.job_lock:
             if self.job["running"]:
                 return dict(self.job)
@@ -42,6 +52,8 @@ class SetupServer(ThreadingHTTPServer):
         return dict(self.job)
 
     def install_dependencies(self):
+        if PLUGIN_BUNDLE:
+            return
         result = {"running": False, "ok": False, "message": "OBS/capture installation failed. Check Discover, disk space and your connection, then retry."}
         try:
             installer.ensure_dependencies()
@@ -52,6 +64,8 @@ class SetupServer(ThreadingHTTPServer):
             self.job = result
 
     def install_plugin(self):
+        if PLUGIN_BUNDLE:
+            return decky_managed_setup()
         with self.job_lock:
             if self.job["running"]:
                 return dict(self.job)
@@ -60,6 +74,8 @@ class SetupServer(ThreadingHTTPServer):
         return dict(self.job)
 
     def finish_plugin_install(self):
+        if PLUGIN_BUNDLE:
+            return
         try:
             installer.install(launch=False)
             result = {"running": False, "ok": True, "message": "The OBSGod app and Decky plugin are installed and verified. Return to Gaming Mode to make a local clip before streaming."}
@@ -114,9 +130,12 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/status":
             result = run_cli("status", timeout=6)
             result["flatpak"] = shutil.which("flatpak") is not None
-            result["decky_status"] = decky.status()
+            result["install_channel"] = "decky" if PLUGIN_BUNDLE else "desktop"
+            result["decky_status"] = ({"ok": True, "running": None, "frontend_connected": None,
+                "message": "Configuration is provided by this Decky plugin bundle. Manage dependencies and plugin replacement in Decky."}
+                if PLUGIN_BUNDLE else decky.status())
             result["decky"] = result["decky_status"]["ok"]
-            result["plugin_zip"] = str(ROOT / "obsgod-decky.zip")
+            result["plugin_zip"] = None if PLUGIN_BUNDLE else str(ROOT / "obsgod-decky.zip")
             result["product_name"] = DISPLAY_NAME
             self.send_data(200, result)
         elif path == "/api/connection":

@@ -27,7 +27,7 @@ export function dependencyObservationFailed(view,request,epoch) {
 
 export function dependencyView(view,now,action="") {
   const status=view.status;
-  const fresh=!!status&&!view.unavailable&&now-view.lastObserved<=dependencyFreshness;
+  const fresh=!!status&&!view.unavailable&&now>=view.lastObserved&&now-view.lastObserved<=dependencyFreshness;
   const state=fresh?status.state:"unknown";
   const ready=fresh&&state==="ready"&&status.ready===true;
   const running=state==="running"||state==="cancelling";
@@ -36,7 +36,7 @@ export function dependencyView(view,now,action="") {
     status.reason?.message||status.message||"Set up the required OBS dependencies before starting.";
   return {ready,state,reason,busy:!!action||running,
     canInstall:fresh&&!ready&&!running&&!action&&status.can_install===true,
-    canCancel:fresh&&state==="running"&&!action,
+    canCancel:fresh&&state==="running"&&!action&&status.can_cancel===true,
     title:ready?"Dependencies ready":running?state==="cancelling"?"Cancelling setup…":"Installing dependencies…":
       !fresh?view.unavailable?"Setup status unavailable":status?"Check dependency setup":"Checking dependencies…":"Setup required"};
 }

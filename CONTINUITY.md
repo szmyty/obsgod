@@ -14,12 +14,20 @@ plugin-owned persistent setup jobs, and logs holds plugin-owned logs. No secret
 copy, Flatpak config relocation or recording move. Preserve the actual player
 context and original XDG_DATA_HOME for user Flatpaks.
 
-The first checkpoint wires the dependency setup panel and readiness gates:
-Install/Later consent, background observation, cancellation/retry and progress.
-Frontend typecheck and 36 Node tests passed during integration. Backend job and
-storage modules/package work are in progress; this is not an install-ready
-candidate or final full qualification. No issue is closed. Follow-up checks and
-exact-source evidence will be recorded before reporting this batch complete.
+Draft [#90](https://github.com/szmyty/obsgod/pull/90) is based on #75 and preserves
+the early frontend checkpoint d8412f0. The source now integrates the backend
+jobs/storage map, shared-lock preflight, guarded standard package builder,
+optional self-contained loopback setup, native Install/Later UI and regressions.
+Official CLI assembly exposed an SDK-source exclusion; a deterministic preferred
+source archive preserves the LGPL source with the default builder. Go Flatpak
+launches now retain the original XDG data/cache roots.
+
+The source is being frozen for a clean actual package build, repeated-byte and
+unpacked/browser checks. Focused tests have passed during implementation; exact
+final batch evidence follows after these checks. This is not final campaign
+qualification or actual Steam Deck acceptance. No issue is closed and no product
+release, migration or deployment occurs. #79 key-entry UI and #80/#81 selected
+branding adoption remain subsequent implementation, not part of this batch.
 
 ## Active roadmap: implementation first, current Deck tests, then migration
 

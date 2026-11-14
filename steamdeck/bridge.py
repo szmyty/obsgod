@@ -7,7 +7,11 @@ import subprocess
 
 
 def cli_path():
-    return Path(__file__).resolve().parent / "obsgod"
+    root = Path(__file__).resolve().parent
+    # Standard Decky packages place executables in bin/. Keep the paired
+    # Desktop archive's adjacent executable as a compatible fallback.
+    packaged = root / "bin" / "obsgod"
+    return packaged if packaged.is_file() and not packaged.is_symlink() else root / "obsgod"
 
 
 def run_cli(action, settings=None, timeout=85):

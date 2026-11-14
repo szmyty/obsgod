@@ -1,5 +1,13 @@
 # Build and qualify the Steam Deck preview
 
+The primary standard-plugin entry point is now
+[`scripts/package-decky.py`](decky-package.md), producing one self-contained
+Decky ZIP in a new private output directory. The runtime-archive and updater
+commands below remain compatible optional Desktop/recovery builds. The
+[Decky storage bridge](decky-storage.md) and [dependency job](dependency-setup.md)
+guides describe the #76–#78 source integration; actual Deck qualification is
+still a separate owner test.
+
 Use Go **1.27.4**, Node **24.19.0**, npm **11.9.0**, and Python **3.12+** for the
 packaging/test environment. Packaging also requires a working local Docker
 daemon to build the small app-filtered capture source against the pinned
