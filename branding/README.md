@@ -13,6 +13,13 @@ mint-signal concept, editable masters, generated exports or live plugin icon.
 The flat/monochrome examples on the board are concepts; production SVGs and
 actual small-size checks remain to be made after direction selection.
 
+The owner likes that board and requested the hero's aqua/violet gradient, glow
+and depth for the primary icon. The [square gradient preview](../.identity/candidates/concepts/orbital-stream-gradient-icon.png)
+and its [reference/prompt record](../.identity/candidates/concepts/orbital-stream-gradient-icon.json)
+preserve this variant. Colorful icons are supported by Decky's JSX icon slot;
+monochrome is a legibility option, not an API requirement. This image has not
+been applied to the live plugin or qualified at its actual icon sizes.
+
 The mint-signal concept was generated in chat on 2026-11-14. Its original PNG,
 full prompt, method and digest are retained in
 [the concept record](../.identity/candidates/concepts/mint-signal-board.json).

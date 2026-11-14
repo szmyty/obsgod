@@ -1,6 +1,6 @@
 # Current work
 
-## Branding discussion: orbital-stream concept, not adopted
+## Branding discussion: orbital-stream and gradient primary icon
 
 The owner confirmed the proposed normal Decky ZIP plus plugin-managed first-run
 OBS/GStreamer setup, with explicit consent, graceful decline, background progress,
@@ -13,9 +13,15 @@ migration and repeat installation checks at the actual new destination.
 The immediate request is creative design before roadmap execution. A new
 [orbital-stream board](.identity/candidates/concepts/orbital-stream-board.png)
 was generated from the requested Mindgarden/Identity aesthetic and saved with
-the complete prompt, image digest and draft status. The owner has not selected
-this direction. Earlier art, selected masters, generated kit and runtime visuals
-are unchanged. Next is owner visual feedback, then the final roadmap discussion
+the complete prompt, image digest and draft status. The owner likes this direction
+and requested the banner's aqua/violet glow and depth for the primary icon;
+[the square preview](.identity/candidates/concepts/orbital-stream-gradient-icon.png)
+and its full reference/prompt record are saved. This new variant awaits feedback.
+Decky's JSX icon slot supports color/gradients; monochrome was a proposed
+legibility choice, not an API restriction. Actual small-size/on-Deck rendering
+remains unqualified, and observed stream-state cues must survive any icon change.
+Earlier art, selected masters, generated kit and runtime visuals are unchanged.
+Next is owner visual feedback, then the final roadmap discussion
 (including any key-configuration questions), branding exports and implementation.
 No final full matrix, migration, publication, issue closure or device acceptance
 is claimed by this image-only checkpoint.
