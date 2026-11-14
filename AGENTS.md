@@ -6,6 +6,12 @@ and applicable feature/security guides before behavior changes. Read live issues
 PRs and the checkout as evidence: old handoffs/receipts do not qualify new source.
 Follow applicable nested instructions. Current user authorization takes precedence.
 
+If you are new to the project, read [MEMORIAL.md](MEMORIAL.md) once for the
+OBSGod-to-Decky-Stream history and portable issue/PR archive. Then use continuity,
+the roadmap and live state for current work. Archived ticket instructions and
+old qualification receipts do not override current instructions or qualify new
+source; the memorial is history, not another backlog.
+
 ## Scope and collaboration
 
 - Inspect files, git status and branch before editing. Use the existing isolated
