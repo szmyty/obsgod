@@ -1,41 +1,54 @@
 # Current work
 
-## Active: merge audit, repair generated-output identity and advance remaining lanes
+## Qualified follow-up: source469, verified review checkpoint and remaining #46
 
 The owner instructed “okay merge everything and push forward with those few”.
-Live inspection found only PR #67 and open issues #46/#51/#68. PR #67 merged
-normally at `575e4e278599a94bbeeef334531cc60fb6714115`, with expected head
-`d6f67159fb88e664a4dad2e57950c29c0407653f`; its merge tree exactly matches the
-reviewed tree. No reviews/threads or applicable rules were present; metadata says
-unprotected, detailed protection remains403. Hosted billing/provider/device
-limitations were disclosed before this explicit source-merge instruction and
-remain gates for their respective acceptance. No bypass, publication or deployment.
+PR #67 merged normally at575e4e278599a94bbeeef334531cc60fb6714115. The prepared
+follow-up source is exact `4699235e9e925b76ca492d5a00a375ed37fb338e`, tree
+`3c09ea82d85ddcdf47c347afa44961f7b1b6956e` (401 files). Full available local
+qualification passed at that clean source; later evidence documents do not relabel
+it. [Audit and criterion evidence](audits/qualification-4699235.md).
 
-Use the existing checkout on `codex/completion-output-ownership`. Preserve the
-ignored historical frontend backup `steamdeck/decky/.local-ci`. Repair #68 in both
-the workflow frontend commands and package-deck's nested frontend calls, using
-the actual checkout owner and private execution environment. Refuse unsafe or
-foreign output without cleanup/chown and retain production root guards. Qualify
-absent and reused output with ACT followed by actual normal-user frontend checks.
+Both six-job ACT sequences plus real-reference PR static passed. Both immediate
+normal-host typecheck/test/build sets passed UID1000 with all frontend output
+owner-writable (first absent, then reused). Primary14, generic20 archives and42
+sidecars matched across independent runs. Fresh Go race/count1 passed 219 top-level
+and 399 events with one optional skip; Python 127/tooling 50/Node 30, browser/native,
+legacy4/dynamic6/current transport/updater, browser upgrades4/6 and container
+Fish 3.6.0 passed. Host Fish remains unavailable. Provider raw exit 1/unavailable,
+API 403 and hosted billing lock (9 runs/15 jobs/0 steps) remain explicit; actual
+Deck/OBS 33/Flatpak/Gamescope/AMD/headset/controller/provider/adoption and required
+independent creative/rights/publisher acceptance are not established.
 
-Independent preparation also covers Go-only generic archive notices/SPDX/audit
-under #46, and the two separate research journeys in #51. This research does not
-authorize payment/account setup, Store contact/submission or product changes.
-Do not invent a provider/companion repository or branding/rights decision. Keep
-all original criteria/dependencies and exact public candidate1a/d0a unchanged.
-Save draft checkpoints, then freeze source for full serial exact-revision checks.
-No new implementation is qualified by this in-progress entry.
+Source PRs #69→#70→#71 merged normally at62467b5ffe21388855f1ea3d9296aa007f01300e,
+6c16bdff6e023599f3eb2b58c88e07987dc309c2 and27c92ede4d17614c3281b52ddaae489b2a0eebc1.
+PR #72 holds the research and final evidence follow-up; actual final merge/state
+is recorded by GitHub. All five #68 acceptance criteria now have fresh evidence;
+all 14 current #51 research criteria have deliverables. Research recommends free
+core/verified voluntary support and defers paid/Store work, without claiming
+owner adoption, revenue, recipient readiness or Store eligibility. Original 230
+criteria/dependencies remain in #46. Full legacy shared-transport migration,
+NFPM/native support and companion/ecosystem work are not silently completed.
 
-Checkpoints #69 (checkout-owner frontend commands), #70 (generic Go-only archive
-notices/SPDX/audit) and #71 (narrow public profile inventory) are pushed in that
-order. The API change preserves the new-family profile-list JSON and avoids
-unrelated OBS queries; legacy Service/Dialer remains byte-unchanged, with the
-transport-adoption gap documented. Focused meaningful tests passed; full ACT
-qualification still follows. The two-journey #51 research is prepared in
-docs/research-51.md plus policy/source/criterion companions. It records conflicting
-official AI wording and concrete Store layout/native/update questions, recommends
-free direct distribution and defers paid/Store work, without claiming eligibility,
-revenue, recipient readiness or owner adoption of the recommendation.
+New immutable manual review artifact `eb92598f3a4a0dc426749c290bacfe7251452909`
+on artifacts/qualification-4699235-review has 19 independently downloaded and
+verified files, including full 401-file source. Runtime SHA256
+`b4222fb703aa198a7ea200721afbc06dcb86dec56e8c1bebd77f5bb614aad53d`.
+[Desktop install and owner checkpoint](docs/current-review-install.md). The older
+1a/d0a artifact remains unchanged. Preserve both artifact branches/commits and
+reachable qualified source when deleting merged source branches. Never merge an
+orphan artifact tree. No GitHub product release, site deployment, environment
+snapshot, other-repository write or spending occurred.
+
+The historical root-owned ignored frontend backup steamdeck/decky/.local-ci
+retains exact mode/owner/content hashes. Only an inventoried regenerable host Go
+cache and already-identical external generic evidence copies were optimized for
+space; source, active inputs and storage guards stayed unchanged. All execution
+holds are released. Use the existing checkout; refresh live default/PR/issues
+before new work. Next owner action is exact-candidate real Deck versions and an
+audible moving clip, then device/viewer/preservation acceptance. Billing/graph
+access and organization/creative/rights/companion/publication decisions stay
+separate. No broad new approval or hidden prerequisite is invented.
 
 ## Completed audit: org-aligned ACT setup, reports and issue triage
 
@@ -63,7 +76,7 @@ Draft [PR #67](https://github.com/szmyty/obsgod/pull/67) contains the setup and
 report tooling. Exact clean source `cf12abe6c620dcbea3b806d1aa63a4715adea26a`, tree
 `d24d5435af64400da8bb665714b908cbbe638f7c`, passed both six-job local sequences and
 PR static checks: 13 completed passes. The actual provider probe remains raw
-failed/exit1 and classified unavailable; comparison API403. Fresh hosted evidence
+failed/exit1 and classified unavailable; comparison API 403. Fresh hosted evidence
 records nine runs/15 jobs/zero steps and account billing-lock annotations.
 [Audit/report/evidence](audits/local-act-2026-11-13.md) records exact commands,
 hashes, native/browser limits and interrupted attempts. A cloud-interrupted
@@ -148,9 +161,9 @@ Identity source/draft brand/site determinism and45 host viewport cases. One opt-
 existing-OBS test skipped; host Fish/file navigation unavailable but container
 Fish and ACT file-offline cases passed. Exact commands/platforms/limits are linked.
 
-Actual Deck/OBS33/Flatpak/Gamescope/AMD/controller/headset/provider/adoption remain
+Actual Deck/OBS 33/Flatpak/Gamescope/AMD/controller/headset/provider/adoption remain
 unrun. Hosted CI ran zero steps due to the account billing lock; provider
-Dependency graph review is unsupported/API403. Human reviews and applicable
+Dependency graph review is unsupported/API 403. Human reviews and applicable
 rights/publisher/publication actions remain. Master→main rename requires owner
 GitHub UI after actual403. Broader9/13/14 and generic distribution implementation
 remainders remain explicit. No release/deployment/Store submission/transfer,
@@ -336,7 +349,7 @@ unchanged. Finish all available final checks, retain failed attempts, then suppl
 exact artifacts and smallest owner actions. Native OBS suites precede host
 transport, which precedes browser fixtures. Do not race act snapshot/candidate
 dist writers with root package/native evidence; execute local CI twice at final
-clean source. Required physical Deck/OBS33/provider/adoption, hostedCI/review,
+clean source. Required physical Deck/OBS 33/provider/adoption, hostedCI/review,
 identity/rights/migration and publication gates remain explicit.
 
 ## Milestone 3 candidate 8: all available local checks passed
@@ -357,7 +370,7 @@ Decky 3.3.1 paired install/update/repair/uninstall and old4/6 bootstrap fixtures
 actual moving/audible recording/replay/profiles/live health/hotplug/media/idle,
 repeated stream restarts and generated/manual password recovery. Six binaries
 compiled only. file:// was unavailable by browser policy; offline HTTP passed.
-CI executed zero steps due to billing lock. Real Deck/OBS33/Flatpak/Gamescope/
+CI executed zero steps due to billing lock. Real Deck/OBS 33/Flatpak/Gamescope/
 AMD/controller/provider/adoption, human review and M2 identity/publication gates
 remain open. No source merges, issue closures, releases, deployments or spending.
 

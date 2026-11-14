@@ -1,0 +1,764 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-11-14T00:59:50.990943+00:00",
+  "qualified_source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+  "source_tree": "3c09ea82d85ddcdf47c347afa44961f7b1b6956e",
+  "source_files": 401,
+  "local_matrix_outcome": "passed",
+  "overall_acceptance": "partial",
+  "evidence_only_followup": true,
+  "act_results": {
+    "local_matrix": {
+      "passed": 6
+    },
+    "open_failure_groups": 1,
+    "raw_results": {
+      "failed": 1,
+      "passed": 13
+    },
+    "run_statuses": {
+      "passed": 13,
+      "unavailable": 1
+    }
+  },
+  "primary14_sha256": {
+    "SHA256SUMS": "4cd504eba17fcd2b8405881d7f2e76c683147393ca4144c762a1a7379f404e7c",
+    "UPDATER-SHA256SUMS": "45ef6e666cf55186e360ea5432513eb191ab83c5d956de98de3f35f26001d331",
+    "capture-build.json": "5f401a620493b5fc282658c16530db6e87a70ad40b95bb88b0212f08417bbd16",
+    "libgstobsgodcapture.so": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+    "manifest.json": "3e1810b64d7c2d1466df075eaef2472913499ca2d21c7e6a00df62932e14b199",
+    "obsgod": "218477d1ce169298ec3dbb58cdda412fe7371a39653d6dc68bfcf81bc2226f85",
+    "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz": "b4222fb703aa198a7ea200721afbc06dcb86dec56e8c1bebd77f5bb614aad53d",
+    "obsgod-decky.zip": "33cb82f0d68f3f3ce21ae2abd4eab878df6c42f39a52af36748d6e42ceceef66",
+    "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip": "3c2fa5f5623f4c000a2371fe19bce5fdf0fc848b09929befb4ba70e7630cf986",
+    "supply-chain/AUDIT-SHA256SUMS": "c914cef6617407eb51e83e9c45351273194cd2b3128afe138fe948e438369c4e",
+    "supply-chain/provenance.unsigned.json": "c3c8743bb9c189f60496a721850218db92adee9717fa4c9d9ca55b8dd041820e",
+    "supply-chain/release-audit.json": "7d30964b89a0863b1e2fd8b86e1718918c62c9dc6fd59ecff73434e2683df6e9",
+    "supply-chain/sbom.spdx.json": "59ff8372a17840c8baf4731b0f66c2a2c071a242219f6a9eff442a1b18fd67ea",
+    "updater-manifest.json": "fbc9e106291ff478d10a52c7f77e409ace2463d7019118a7ca1d95f25f8ef514"
+  },
+  "primary14_identical": true,
+  "generic20_archives_identical": true,
+  "generic42_sidecars_identical": true,
+  "fresh_go": {
+    "passed_top_level": 219,
+    "passed_events": 399,
+    "failed_events": 0,
+    "skipped": [
+      {
+        "package": "github.com/szmyty/obsgod/pkg/automation",
+        "test": "TestRealOBSReadOnly"
+      }
+    ],
+    "cache": "test execution uncached with -count=1; compilation cache may be reused",
+    "optional_existing_obs": "Endpoint intentionally not supplied; ACT native OBS evidence is separate."
+  },
+  "python_application_tests_per_candidate": 127,
+  "tooling_tests_per_candidate": 50,
+  "node_tests_per_candidate": 30,
+  "browser_harnesses_per_candidate": 8,
+  "native_proofs_per_candidate": 18,
+  "coverage_percent_both_runs": 58.1,
+  "supplemental_phase_results": [
+    {
+      "phase": "go",
+      "status": "passed",
+      "receipt": "/workspace/.obsgod-tools/completion/ownership-4699235/supplemental/results/go/receipt.json",
+      "receipt_sha256": "2fe10e7a64bf272842ee28936a89c404a89a2f2fb4d3549dde47a67cf657410d",
+      "source_unchanged": true
+    },
+    {
+      "phase": "cli",
+      "status": "passed",
+      "receipt": "/workspace/.obsgod-tools/completion/ownership-4699235/supplemental/results/cli/receipt.json",
+      "receipt_sha256": "9e991d1818fd927e10762768a42a2fb4e9f231c1a55872d8fe77c93574d5c4f4",
+      "source_unchanged": true
+    },
+    {
+      "phase": "transport",
+      "status": "passed",
+      "receipt": "/workspace/.obsgod-tools/completion/ownership-4699235/supplemental/results/transport/receipt.json",
+      "receipt_sha256": "a0453886b0d56e112062edd4f5752d9babfcaaaeef33889e2cabc8e3f788e101",
+      "source_unchanged": true
+    },
+    {
+      "phase": "upgrades",
+      "status": "passed",
+      "receipt": "/workspace/.obsgod-tools/completion/ownership-4699235/supplemental/results/upgrades/receipt.json",
+      "receipt_sha256": "a5607055401e140d01bb56e473af569addc48f617051a852fe02a0a10658465f",
+      "source_unchanged": true
+    }
+  ],
+  "host_frontend_postconditions": {
+    "first": {
+      "after": [
+        {
+          "bytes": 4096,
+          "gid": 1000,
+          "kind": "directory",
+          "mode": "0o755",
+          "path": ".",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 1071,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o600",
+          "path": "LICENSE.qrcode-generator.txt",
+          "sha256": "3a850fa5f08101db6f40676c2786e10bd2cd5fff7b12ffdf1e0c434d4e49d90c",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 1749,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o644",
+          "path": "decky-api.js",
+          "sha256": "1aa163d7f9890fa16e2bacd3d52d8b8775510bcbae4564f144e069ee8e9f368e",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 126529,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o644",
+          "path": "index.js",
+          "sha256": "1ddbf5c8a6315ef97fa930b32f1546eaabc13f168f50e1d4a35ec77d60932604",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 32,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o644",
+          "path": "manifest.js",
+          "sha256": "f789ec51becbda8aa3f44787dc35be596419ff954ca263b3562190e5709f987c",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 11,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o644",
+          "path": "types.js",
+          "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+          "uid": 1000,
+          "write_access": true
+        }
+      ],
+      "all_outputs_owned_and_writable": true,
+      "before": [
+        {
+          "bytes": 4096,
+          "gid": 1000,
+          "kind": "directory",
+          "mode": "0o755",
+          "path": ".",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 1071,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o600",
+          "path": "LICENSE.qrcode-generator.txt",
+          "sha256": "3a850fa5f08101db6f40676c2786e10bd2cd5fff7b12ffdf1e0c434d4e49d90c",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 1749,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o644",
+          "path": "decky-api.js",
+          "sha256": "1aa163d7f9890fa16e2bacd3d52d8b8775510bcbae4564f144e069ee8e9f368e",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 126529,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o644",
+          "path": "index.js",
+          "sha256": "1ddbf5c8a6315ef97fa930b32f1546eaabc13f168f50e1d4a35ec77d60932604",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 32,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o644",
+          "path": "manifest.js",
+          "sha256": "f789ec51becbda8aa3f44787dc35be596419ff954ca263b3562190e5709f987c",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 11,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o644",
+          "path": "types.js",
+          "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+          "uid": 1000,
+          "write_access": true
+        }
+      ],
+      "checks": [
+        {
+          "command": [
+            "npm",
+            "--prefix",
+            "steamdeck/decky",
+            "run",
+            "typecheck"
+          ],
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/completion/next-act/runs/4699235e9e925b76ca492d5a00a375ed37fb338e/host-first-typecheck.log",
+          "log_sha256": "4c51a932c40c1dc7887fef7b6e3a4ef90e59dbb21158e1fe8e6c1567a99e4a0e",
+          "name": "typecheck",
+          "outcome": "passed",
+          "started_utc": "2026-11-14T00:32:39.912203+00:00"
+        },
+        {
+          "command": [
+            "npm",
+            "--prefix",
+            "steamdeck/decky",
+            "test"
+          ],
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/completion/next-act/runs/4699235e9e925b76ca492d5a00a375ed37fb338e/host-first-test.log",
+          "log_sha256": "2e643216c269e050f697a0b01f3c22c75e543c710b8c18367c0469b4baa79823",
+          "name": "test",
+          "outcome": "passed",
+          "started_utc": "2026-11-14T00:32:42.324573+00:00"
+        },
+        {
+          "command": [
+            "npm",
+            "--prefix",
+            "steamdeck/decky",
+            "run",
+            "build"
+          ],
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/completion/next-act/runs/4699235e9e925b76ca492d5a00a375ed37fb338e/host-first-build.log",
+          "log_sha256": "848d09f6fe67ecaf44c72ecb1a11656995779f0e64ebc6fa48f0eb14f7017725",
+          "name": "build",
+          "outcome": "passed",
+          "started_utc": "2026-11-14T00:32:42.582271+00:00"
+        }
+      ],
+      "host_gid": 1000,
+      "host_uid": 1000,
+      "outcome": "passed",
+      "phase": "first",
+      "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+      "source_clean_after": true,
+      "versions": {
+        "node": "v24.19.0",
+        "npm": "11.9.0"
+      }
+    },
+    "repeat": {
+      "after": [
+        {
+          "bytes": 4096,
+          "gid": 1000,
+          "kind": "directory",
+          "mode": "0o755",
+          "path": ".",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 1071,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o600",
+          "path": "LICENSE.qrcode-generator.txt",
+          "sha256": "3a850fa5f08101db6f40676c2786e10bd2cd5fff7b12ffdf1e0c434d4e49d90c",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 1749,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o644",
+          "path": "decky-api.js",
+          "sha256": "1aa163d7f9890fa16e2bacd3d52d8b8775510bcbae4564f144e069ee8e9f368e",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 126529,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o644",
+          "path": "index.js",
+          "sha256": "1ddbf5c8a6315ef97fa930b32f1546eaabc13f168f50e1d4a35ec77d60932604",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 32,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o644",
+          "path": "manifest.js",
+          "sha256": "f789ec51becbda8aa3f44787dc35be596419ff954ca263b3562190e5709f987c",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 11,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o644",
+          "path": "types.js",
+          "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+          "uid": 1000,
+          "write_access": true
+        }
+      ],
+      "all_outputs_owned_and_writable": true,
+      "before": [
+        {
+          "bytes": 4096,
+          "gid": 1000,
+          "kind": "directory",
+          "mode": "0o755",
+          "path": ".",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 1071,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o600",
+          "path": "LICENSE.qrcode-generator.txt",
+          "sha256": "3a850fa5f08101db6f40676c2786e10bd2cd5fff7b12ffdf1e0c434d4e49d90c",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 1749,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o644",
+          "path": "decky-api.js",
+          "sha256": "1aa163d7f9890fa16e2bacd3d52d8b8775510bcbae4564f144e069ee8e9f368e",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 126529,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o644",
+          "path": "index.js",
+          "sha256": "1ddbf5c8a6315ef97fa930b32f1546eaabc13f168f50e1d4a35ec77d60932604",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 32,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o644",
+          "path": "manifest.js",
+          "sha256": "f789ec51becbda8aa3f44787dc35be596419ff954ca263b3562190e5709f987c",
+          "uid": 1000,
+          "write_access": true
+        },
+        {
+          "bytes": 11,
+          "gid": 1000,
+          "kind": "file",
+          "mode": "0o644",
+          "path": "types.js",
+          "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+          "uid": 1000,
+          "write_access": true
+        }
+      ],
+      "checks": [
+        {
+          "command": [
+            "npm",
+            "--prefix",
+            "steamdeck/decky",
+            "run",
+            "typecheck"
+          ],
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/completion/next-act/runs/4699235e9e925b76ca492d5a00a375ed37fb338e/host-repeat-typecheck.log",
+          "log_sha256": "4c51a932c40c1dc7887fef7b6e3a4ef90e59dbb21158e1fe8e6c1567a99e4a0e",
+          "name": "typecheck",
+          "outcome": "passed",
+          "started_utc": "2026-11-14T00:43:49.546022+00:00"
+        },
+        {
+          "command": [
+            "npm",
+            "--prefix",
+            "steamdeck/decky",
+            "test"
+          ],
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/completion/next-act/runs/4699235e9e925b76ca492d5a00a375ed37fb338e/host-repeat-test.log",
+          "log_sha256": "3066fa460f1bc00164c9d59c1ff977c0cd433f7d72b5090546fd9eebcdeec42b",
+          "name": "test",
+          "outcome": "passed",
+          "started_utc": "2026-11-14T00:43:51.898050+00:00"
+        },
+        {
+          "command": [
+            "npm",
+            "--prefix",
+            "steamdeck/decky",
+            "run",
+            "build"
+          ],
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/completion/next-act/runs/4699235e9e925b76ca492d5a00a375ed37fb338e/host-repeat-build.log",
+          "log_sha256": "6e2ae39e51b73e3943a2a9f4ac5e1fa0b404d446f0f47b239d51e8176224c682",
+          "name": "build",
+          "outcome": "passed",
+          "started_utc": "2026-11-14T00:43:52.143234+00:00"
+        }
+      ],
+      "host_gid": 1000,
+      "host_uid": 1000,
+      "outcome": "passed",
+      "phase": "repeat",
+      "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+      "source_clean_after": true,
+      "versions": {
+        "node": "v24.19.0",
+        "npm": "11.9.0"
+      }
+    }
+  },
+  "fish": {
+    "container_outcome": "passed",
+    "version": "3.6.0",
+    "host_outcome": "unavailable"
+  },
+  "issue68_criteria": [
+    {
+      "criterion": 1,
+      "text": "ACT followed by normal-host frontend typecheck/test/build succeeds from absent and reused output without manual ownership repair.",
+      "outcome": "passed",
+      "evidence": [
+        "host-frontend-first.json",
+        "host-frontend-repeat.json",
+        "frontend-fresh-preparation.json"
+      ]
+    },
+    {
+      "criterion": 2,
+      "text": "Preserve execution identities/provenance; do not recursively change checkout ownership.",
+      "outcome": "passed",
+      "evidence": [
+        "frontend-matrix.json",
+        "raw candidate/helper logs",
+        "source401 manifests"
+      ]
+    },
+    {
+      "criterion": 3,
+      "text": "Verify safe generated paths and preserve unsafe/foreign existing outputs.",
+      "outcome": "passed",
+      "evidence": [
+        "50 tooling tests including six frontend-command tests",
+        "old-root-backup-preserved.json"
+      ]
+    },
+    {
+      "criterion": 4,
+      "text": "Production root guards and nonroot installer/browser fixtures remain intact.",
+      "outcome": "passed",
+      "evidence": [
+        "test_user_tests.py root refusal assertions",
+        "both candidate127 Python and eight browser harnesses"
+      ]
+    },
+    {
+      "criterion": 5,
+      "text": "Retain exact source/commands/ownership/raw results and source/artifact-preservation evidence.",
+      "outcome": "passed",
+      "evidence": [
+        "source.json",
+        "14 raw receipt/log pairs",
+        "five normalized matrices",
+        "public-download-verification.json"
+      ]
+    }
+  ],
+  "issue51": {
+    "research_criteria": 14,
+    "deliverables": "completed",
+    "mapping": "../research-51-criteria.json",
+    "owner_adoption_of_recommendations": false,
+    "paid_offer_launched": false,
+    "store_admission_established": false,
+    "external_contact_performed": false
+  },
+  "remaining_implementation": [
+    "Full legacy CLI shared-transport/facade migration (narrow public profile read is not that migration)",
+    "Generic NFPM/native-platform/runtime/publisher qualification",
+    "Companion managed launch after destination/scope decision",
+    "Optional ecosystem scope/implementation and approved identity/migration/site/support activation"
+  ],
+  "external_gates": {
+    "hosted_ci": {
+      "status": "unavailable",
+      "raw_result": "failed",
+      "runs": 9,
+      "jobs": 15,
+      "executed_steps": 0,
+      "reason": "Account locked due to billing"
+    },
+    "dependency_review": {
+      "status": "unavailable",
+      "raw_result": "failed",
+      "exit_code": 1,
+      "comparison_api_status": 403
+    },
+    "physical_Deck_OBS33_Flatpak_Gamescope_AMD_controller_headset_provider_adoption": "unrun",
+    "native_Windows_macOS_BSD_ARM": "unrun",
+    "required_independent_human_creative_rights_publisher_acceptance": "pending where applicable"
+  },
+  "artifact_checkpoint": {
+    "artifact_tree": "9be75db9427405e0906ce88f4c07e4dd8fba1a36",
+    "branch": "artifacts/qualification-4699235-review",
+    "commit": "eb92598f3a4a0dc426749c290bacfe7251452909",
+    "environment_snapshot_published": false,
+    "files": 19,
+    "fingerprint": "57d5f88ddff888ac4b1d0d98d556f5b8665a936ce19271b6e530052fc10ee45b",
+    "release_published": false,
+    "runtime_sha256": "b4222fb703aa198a7ea200721afbc06dcb86dec56e8c1bebd77f5bb614aad53d",
+    "site_deployed": false,
+    "source": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+    "source_tree": "3c09ea82d85ddcdf47c347afa44961f7b1b6956e"
+  },
+  "public_download_verification": {
+    "artifact_revision": "eb92598f3a4a0dc426749c290bacfe7251452909",
+    "branch": "artifacts/qualification-4699235-review",
+    "checked_at_utc": "2026-11-14T00:54:44.813007+00:00",
+    "consumer_adoption_proof": false,
+    "files": [
+      {
+        "bytes": 257,
+        "name": "AUDIT-SHA256SUMS",
+        "outcome": "passed",
+        "sha256": "c914cef6617407eb51e83e9c45351273194cd2b3128afe138fe948e438369c4e",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/AUDIT-SHA256SUMS"
+      },
+      {
+        "bytes": 1595,
+        "name": "CHECKPOINT-SHA256SUMS",
+        "outcome": "passed",
+        "sha256": "cf561dee7134c5bbd8617c34d2fd249cb3cd957df9d8236e1622c5fdddcfcf04",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/CHECKPOINT-SHA256SUMS"
+      },
+      {
+        "bytes": 2657,
+        "name": "CHECKPOINT.json",
+        "outcome": "passed",
+        "sha256": "06ee5b5c9a010fa634ee347171db4c672771483dc53c92ba6b54b77d2f35266e",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/CHECKPOINT.json"
+      },
+      {
+        "bytes": 2325,
+        "name": "README.md",
+        "outcome": "passed",
+        "sha256": "43f91393384c4441e7a50bf3935d9768b03fa98f3fd3dd51c74ff6be1cba5b01",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/README.md"
+      },
+      {
+        "bytes": 273,
+        "name": "SHA256SUMS",
+        "outcome": "passed",
+        "sha256": "4cd504eba17fcd2b8405881d7f2e76c683147393ca4144c762a1a7379f404e7c",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/SHA256SUMS"
+      },
+      {
+        "bytes": 119,
+        "name": "UPDATER-SHA256SUMS",
+        "outcome": "passed",
+        "sha256": "45ef6e666cf55186e360ea5432513eb191ab83c5d956de98de3f35f26001d331",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/UPDATER-SHA256SUMS"
+      },
+      {
+        "bytes": 14418,
+        "name": "capture-build.json",
+        "outcome": "passed",
+        "sha256": "5f401a620493b5fc282658c16530db6e87a70ad40b95bb88b0212f08417bbd16",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/capture-build.json"
+      },
+      {
+        "bytes": 1073050,
+        "name": "evidence.zip",
+        "outcome": "passed",
+        "sha256": "22e9088a6d2f6a75f0323dbe61b508203f96dd864c418736f050bb8581e1d775",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/evidence.zip"
+      },
+      {
+        "bytes": 2390,
+        "name": "manifest.json",
+        "outcome": "passed",
+        "sha256": "3e1810b64d7c2d1466df075eaef2472913499ca2d21c7e6a00df62932e14b199",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/manifest.json"
+      },
+      {
+        "bytes": 11878295,
+        "name": "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+        "outcome": "passed",
+        "sha256": "b4222fb703aa198a7ea200721afbc06dcb86dec56e8c1bebd77f5bb614aad53d",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz"
+      },
+      {
+        "bytes": 4453770,
+        "name": "obsgod-decky.zip",
+        "outcome": "passed",
+        "sha256": "33cb82f0d68f3f3ce21ae2abd4eab878df6c42f39a52af36748d6e42ceceef66",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/obsgod-decky.zip"
+      },
+      {
+        "bytes": 3073881,
+        "name": "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip",
+        "outcome": "passed",
+        "sha256": "3c2fa5f5623f4c000a2371fe19bce5fdf0fc848b09929befb4ba70e7630cf986",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip"
+      },
+      {
+        "bytes": 7855834,
+        "name": "obsgod-source-4699235e9e925b76ca492d5a00a375ed37fb338e.tar.gz",
+        "outcome": "passed",
+        "sha256": "1aed62855cb4ade413cb261845099e6d0e192f7fe23822612aa27f64bdc0a578",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/obsgod-source-4699235e9e925b76ca492d5a00a375ed37fb338e.tar.gz"
+      },
+      {
+        "bytes": 3852,
+        "name": "provenance.unsigned.json",
+        "outcome": "passed",
+        "sha256": "c3c8743bb9c189f60496a721850218db92adee9717fa4c9d9ca55b8dd041820e",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/provenance.unsigned.json"
+      },
+      {
+        "bytes": 194350,
+        "name": "qualification.json",
+        "outcome": "passed",
+        "sha256": "6acede76f7e953937435258d56d14f0e438ea985efe71c5d51f70fc64142cf70",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/qualification.json"
+      },
+      {
+        "bytes": 1915,
+        "name": "release-audit.json",
+        "outcome": "passed",
+        "sha256": "7d30964b89a0863b1e2fd8b86e1718918c62c9dc6fd59ecff73434e2683df6e9",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/release-audit.json"
+      },
+      {
+        "bytes": 84509,
+        "name": "sbom.spdx.json",
+        "outcome": "passed",
+        "sha256": "59ff8372a17840c8baf4731b0f66c2a2c071a242219f6a9eff442a1b18fd67ea",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/sbom.spdx.json"
+      },
+      {
+        "bytes": 112781,
+        "name": "source.json",
+        "outcome": "passed",
+        "sha256": "bb99fc3877902113a6a0d68148e1455e4cdee4c3cfaa147e4220e68ef390a67b",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/source.json"
+      },
+      {
+        "bytes": 1145,
+        "name": "updater-manifest.json",
+        "outcome": "passed",
+        "sha256": "fbc9e106291ff478d10a52c7f77e409ace2463d7019118a7ca1d95f25f8ef514",
+        "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/updater-manifest.json"
+      }
+    ],
+    "installer_executed": false,
+    "outcome": "passed",
+    "release_published": false,
+    "runtime_updater_inventories_verified": true,
+    "source_files_verified": 401,
+    "source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e"
+  },
+  "compact_evidence": {
+    "url": "https://raw.githubusercontent.com/szmyty/obsgod/eb92598f3a4a0dc426749c290bacfe7251452909/evidence.zip",
+    "sha256": "22e9088a6d2f6a75f0323dbe61b508203f96dd864c418736f050bb8581e1d775",
+    "bytes": 1073050,
+    "text_members": 253
+  },
+  "source_merges_before_this_evidence_commit": [
+    {
+      "pr": 69,
+      "expected_head": "73f44498910a220f6e31d81d7559040019784a94",
+      "sha": "62467b5ffe21388855f1ea3d9296aa007f01300e",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    },
+    {
+      "pr": 70,
+      "expected_head": "e7b9feecc8a534a9a6ffc2a52a383f5790dd3927",
+      "sha": "6c16bdff6e023599f3eb2b58c88e07987dc309c2",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    },
+    {
+      "pr": 71,
+      "expected_head": "2e607bde8086fc71a9e141f9227f59be14d5253a",
+      "sha": "27c92ede4d17614c3281b52ddaae489b2a0eebc1",
+      "merged": true,
+      "message": "Pull Request successfully merged"
+    }
+  ],
+  "protections_snapshot": {
+    "observed_utc": "2026-11-14T00:52:54.000174+00:00",
+    "master": "575e4e278599a94bbeeef334531cc60fb6714115",
+    "protected": false,
+    "metadata_protection": {
+      "enabled": false,
+      "required_status_checks": {
+        "enforcement_level": "off",
+        "contexts": [],
+        "checks": []
+      }
+    },
+    "rules": [],
+    "rulesets": [],
+    "protection": {
+      "http_status": 403,
+      "message": "Resource not accessible by integration"
+    }
+  },
+  "historical_checkpoint": {
+    "source": "1a482808a8281c8bce092cea057df758836b34e9",
+    "artifact": "d0a4973f9b1835471e99b046d2d4313b042f9ae2",
+    "unchanged": true
+  },
+  "product_release_published": false,
+  "deployed": false,
+  "environment_snapshot_published": false,
+  "other_repository_changed": false,
+  "spent_money": false
+}
