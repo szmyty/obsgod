@@ -1,5 +1,25 @@
 # Current work
 
+## Final qualification exposed a local-test capture lease gap
+
+The seven requested PRs are merged into `master` at
+**4b3e0bf88411289178b9e6462bf2ad2fc8da8ce9**. Five local ACT jobs passed, but
+the candidate job failed the unchanged native game/OBS fixture: `clip-game`
+never selected the game scene during `TestRecording`. Native OBS/audio and
+app-scoped capture checks passed before that failure. Do not call this revision
+fully qualified or close #96–#100 yet.
+
+The initiating local-test command holds the shared control lease for the full
+ten-second clip; the corrected independent observer now properly yields. Repair
+this on **fix/local-clip-capture-lease** by reusing capture mutation under the
+initiating owner's lease during its bounded wait. Keep that lease rather than
+releasing it and risking finalization of a replacement recording. Independent
+observers still need their own short lease. Recheck managed ownership/output
+before every mutation and cleanup; preserve the unchanged native assertions and
+timeouts. Then review, merge the bounded repair and run the complete available
+matrix at the new exact merged source. Retain all first-attempt receipts and
+resource-assistance details. No release/deploy/migration/spending is authorized.
+
 ## Runtime source checkpoint in #106
 
 The five bounded runtime repairs are implemented on `feat/runtime-correctness`
