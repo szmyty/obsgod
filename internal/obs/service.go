@@ -1,23 +1,18 @@
 package obs
 
 import (
+	"context"
 	"errors"
 	"fmt"
-	"io"
-	"log"
 	"net"
-	"net/http"
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/andreykaipov/goobs"
-	configrequests "github.com/andreykaipov/goobs/api/requests/config"
-	"github.com/andreykaipov/goobs/api/requests/inputs"
-	sceneitems "github.com/andreykaipov/goobs/api/requests/sceneitems"
-	"github.com/andreykaipov/goobs/api/requests/scenes"
-	"github.com/andreykaipov/goobs/api/requests/ui"
 	"github.com/szmyty/obsgod/internal/config"
+	"github.com/szmyty/obsgod/internal/obstransport"
 	appversion "github.com/szmyty/obsgod/internal/version"
 	api "github.com/szmyty/obsgod/pkg/api/v1"
 )
@@ -84,75 +79,117 @@ type Service interface {
 	TriggerStudioModeTransition() error
 }
 
-type Dialer func(address string, options ...goobs.Option) (*goobs.Client, error)
+type Dialer = obstransport.Dialer
 
 type service struct {
-	cfg          *config.Config
-	buildVersion string
-	dialer       Dialer
-
-	mu     sync.Mutex
-	client *goobs.Client
+	cfg           *config.Config
+	buildVersion  string
+	dialer        Dialer
+	mu            sync.Mutex
+	client        *api.Client
+	ctx           context.Context
+	acquisition   chan struct{}
+	generation    uint64
+	connectCancel context.CancelFunc
 }
 
 func NewService(cfg *config.Config, buildVersion string) Service {
 	return NewServiceWithDialer(cfg, buildVersion, goobs.New)
 }
-
 func NewServiceWithDialer(cfg *config.Config, buildVersion string, dialer Dialer) Service {
 	if dialer == nil {
 		dialer = goobs.New
 	}
-	return &service{cfg: cfg, buildVersion: buildVersion, dialer: dialer}
+	s := &service{cfg: cfg, buildVersion: buildVersion, dialer: dialer, ctx: context.Background(), acquisition: make(chan struct{}, 1)}
+	s.acquisition <- struct{}{}
+	return s
 }
 
+// SetContext binds one CLI invocation's cancellation without authorizing any
+// output change. The service captures it before each call; queued cancellation
+// is handled by the facade and cannot close an operation's acquired connection.
+func (s *service) SetContext(ctx context.Context) {
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	s.mu.Lock()
+	s.ctx = ctx
+	s.mu.Unlock()
+}
+func (s *service) invocationContext() context.Context { s.mu.Lock(); defer s.mu.Unlock(); return s.ctx }
 func (s *service) Close() error {
 	s.mu.Lock()
-	defer s.mu.Unlock()
-
-	if s.client == nil {
-		return nil
-	}
-
-	err := s.client.Disconnect()
+	s.generation++
+	cancel := s.connectCancel
+	client := s.client
 	s.client = nil
-	return legacyError(err)
-}
-
-func (s *service) clientOrConnect() (*goobs.Client, error) {
-	s.mu.Lock()
-	defer s.mu.Unlock()
-
-	if s.client != nil {
-		return s.client, nil
+	s.mu.Unlock()
+	if cancel != nil {
+		cancel()
 	}
-
+	if client != nil {
+		return legacyError(client.Close())
+	}
+	return nil
+}
+func (s *service) clientOrConnect(ctx context.Context) (*api.Client, error) {
+	if err := ctx.Err(); err != nil {
+		return nil, api.Failure("connect", err)
+	}
+	select {
+	case <-ctx.Done():
+		return nil, api.Failure("connect", ctx.Err())
+	case <-s.acquisition:
+	}
+	defer func() { s.acquisition <- struct{}{} }()
+	if err := ctx.Err(); err != nil {
+		return nil, api.Failure("connect", err)
+	}
+	s.mu.Lock()
+	if s.client != nil && !s.client.Closed() {
+		client := s.client
+		s.mu.Unlock()
+		return client, nil
+	}
 	if s.cfg == nil {
+		s.mu.Unlock()
 		return nil, fmt.Errorf("OBS configuration is not initialized")
 	}
-
-	address := net.JoinHostPort(strings.Trim(s.cfg.Host, "[]"), strconv.FormatUint(uint64(s.cfg.Port), 10))
-	client, err := s.dialer(
-		address,
-		goobs.WithPassword(s.cfg.Password),
-		goobs.WithLogger(log.New(io.Discard, "", 0)),
-		goobs.WithRequestHeader(http.Header{"User-Agent": []string{appversion.UserAgent(s.buildVersion)}}),
-	)
+	cfg := *s.cfg
+	generation := s.generation
+	attempt, cancel := context.WithCancel(ctx)
+	s.connectCancel = cancel
+	s.mu.Unlock()
+	defer cancel()
+	address := net.JoinHostPort(strings.Trim(cfg.Host, "[]"), strconv.FormatUint(uint64(cfg.Port), 10))
+	private := obstransport.WithDialer(attempt, s.dialer, appversion.UserAgent(s.buildVersion))
+	client, err := api.Connect(private, api.Connection{Address: address, Password: cfg.Password, ConnectTimeout: 10 * time.Second, OperationTimeout: 10 * time.Second})
+	s.mu.Lock()
+	s.connectCancel = nil
+	if generation != s.generation && err == nil {
+		err = context.Canceled
+	}
+	if err == nil {
+		s.client = client
+	}
+	s.mu.Unlock()
 	if err != nil {
-		// Keep the v0 contextual prefix while excluding arbitrary transport/server
-		// text. Do not echo malformed direct-caller host values as diagnostics.
+		if client != nil {
+			_ = client.Close()
+		}
+		if ctx.Err() != nil {
+			return nil, api.Failure("connect", ctx.Err())
+		}
+		if errors.Is(err, context.Canceled) || errors.Is(err, context.DeadlineExceeded) {
+			return nil, api.Failure("connect", err)
+		}
 		if strings.ContainsAny(address, "@/\\\r\n\x00") {
 			address = "configured endpoint"
 		}
 		return nil, fmt.Errorf("connect to OBS at %s: %w", address, &api.Error{Code: api.Unavailable, Operation: "connect", Retryable: true})
 	}
-
-	s.client = client
-	return s.client, nil
+	return client, nil
 }
-
-// Legacy acknowledgement/output behavior remains compatible. Its failures use
-// the public safe domain contract rather than provider/server-supplied comments.
 func legacyError(err error) error {
 	if err == nil {
 		return nil
@@ -163,497 +200,214 @@ func legacyError(err error) error {
 	}
 	return api.Failure("request", err)
 }
+func (s *service) invoke(r api.LegacyRequest, a api.Approval) (api.LegacyResult, error) {
+	ctx := s.invocationContext()
+	client, err := s.clientOrConnect(ctx)
+	if err != nil {
+		return api.LegacyResult{}, legacyError(err)
+	}
+	value, err := client.Legacy(ctx, r, a)
+	return value, legacyError(err)
+}
 
 func (s *service) ToggleStream() error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	_, err = c.Stream.ToggleStream()
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacyToggleStream}, api.Approval{Streaming: true})
+	return err
 }
 
 func (s *service) StartStream() error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	_, err = c.Stream.StartStream()
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacyStartStream}, api.Approval{Streaming: true})
+	return err
 }
 
 func (s *service) StopStream() error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	_, err = c.Stream.StopStream()
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacyStopStream}, api.Approval{Streaming: true})
+	return err
 }
 
 func (s *service) GetStreamStatus() (OutputStatus, error) {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return OutputStatus{}, legacyError(err)
-	}
-	r, err := c.Stream.GetStreamStatus()
-	if err != nil {
-		return OutputStatus{}, legacyError(err)
-	}
-	return OutputStatus{Active: r.OutputActive, Timecode: r.OutputTimecode}, nil
+	v, err := s.invoke(api.LegacyRequest{Operation: api.LegacyGetStreamStatus}, api.Approval{})
+	return OutputStatus{Active: v.Output.Active, Paused: v.Output.Paused, Timecode: v.Output.Timecode}, err
 }
 
 func (s *service) ToggleRecording() error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	_, err = c.Record.ToggleRecord()
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacyToggleRecording}, api.Approval{Recording: true})
+	return err
 }
 
 func (s *service) StartRecording() error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	_, err = c.Record.StartRecord()
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacyStartRecording}, api.Approval{Recording: true})
+	return err
 }
 
 func (s *service) StopRecording() error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	_, err = c.Record.StopRecord()
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacyStopRecording}, api.Approval{Recording: true})
+	return err
 }
 
 func (s *service) PauseRecording() error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	_, err = c.Record.PauseRecord()
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacyPauseRecording}, api.Approval{Recording: true})
+	return err
 }
 
 func (s *service) ResumeRecording() error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	_, err = c.Record.ResumeRecord()
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacyResumeRecording}, api.Approval{Recording: true})
+	return err
 }
 
 func (s *service) GetRecordingStatus() (OutputStatus, error) {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return OutputStatus{}, legacyError(err)
-	}
-	r, err := c.Record.GetRecordStatus()
-	if err != nil {
-		return OutputStatus{}, legacyError(err)
-	}
-	return OutputStatus{Active: r.OutputActive, Paused: r.OutputPaused, Timecode: r.OutputTimecode}, nil
+	v, err := s.invoke(api.LegacyRequest{Operation: api.LegacyGetRecordingStatus}, api.Approval{})
+	return OutputStatus{Active: v.Output.Active, Paused: v.Output.Paused, Timecode: v.Output.Timecode}, err
 }
 
 func (s *service) ListScenes() ([]string, error) {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return nil, legacyError(err)
-	}
-	r, err := c.Scenes.GetSceneList()
-	if err != nil {
-		return nil, legacyError(err)
-	}
-
-	scenes := make([]string, 0, len(r.Scenes))
-	for _, scene := range r.Scenes {
-		scenes = append(scenes, scene.SceneName)
-	}
-	return scenes, nil
+	v, err := s.invoke(api.LegacyRequest{Operation: api.LegacyListScenes}, api.Approval{})
+	return v.Names, err
 }
 
 func (s *service) GetCurrentScene() (string, error) {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return "", legacyError(err)
-	}
-	r, err := c.Scenes.GetCurrentProgramScene()
-	if err != nil {
-		return "", legacyError(err)
-	}
-	return r.SceneName, nil
+	v, err := s.invoke(api.LegacyRequest{Operation: api.LegacyGetCurrentScene}, api.Approval{})
+	return v.Current, err
 }
 
 func (s *service) SetCurrentScene(scene string) error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	params := scenes.NewSetCurrentProgramSceneParams().WithSceneName(scene)
-	_, err = c.Scenes.SetCurrentProgramScene(params)
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacySetCurrentScene, Name: scene}, api.Approval{Settings: true})
+	return err
 }
 
 func (s *service) SetPreviewScene(scene string) error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	params := scenes.NewSetCurrentPreviewSceneParams().WithSceneName(scene)
-	_, err = c.Scenes.SetCurrentPreviewScene(params)
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacySetPreviewScene, Name: scene}, api.Approval{Settings: true})
+	return err
 }
 
 func (s *service) ListSceneCollections() ([]string, error) {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return nil, legacyError(err)
-	}
-	r, err := c.Config.GetSceneCollectionList()
-	if err != nil {
-		return nil, legacyError(err)
-	}
-	collections := make([]string, 0, len(r.SceneCollections))
-	collections = append(collections, r.SceneCollections...)
-	return collections, nil
+	v, err := s.invoke(api.LegacyRequest{Operation: api.LegacyListSceneCollections}, api.Approval{})
+	return v.Names, err
 }
 
 func (s *service) GetCurrentSceneCollection() (string, error) {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return "", legacyError(err)
-	}
-	r, err := c.Config.GetSceneCollectionList()
-	if err != nil {
-		return "", legacyError(err)
-	}
-	return r.CurrentSceneCollectionName, nil
+	v, err := s.invoke(api.LegacyRequest{Operation: api.LegacyGetCurrentSceneCollection}, api.Approval{})
+	return v.Current, err
 }
 
 func (s *service) SetCurrentSceneCollection(collection string) error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	params := configrequests.NewSetCurrentSceneCollectionParams().WithSceneCollectionName(collection)
-	_, err = c.Config.SetCurrentSceneCollection(params)
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacySetCurrentSceneCollection, Name: collection}, api.Approval{Settings: true})
+	return err
 }
 
 func (s *service) ListSceneItems(scene string) ([]string, error) {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return nil, legacyError(err)
-	}
-	params := sceneitems.NewGetSceneItemListParams().WithSceneName(scene)
-	resp, err := c.SceneItems.GetSceneItemList(params)
-	if err != nil {
-		return nil, legacyError(err)
-	}
-
-	items := make([]string, 0, len(resp.SceneItems))
-	for _, item := range resp.SceneItems {
-		items = append(items, item.SourceName)
-	}
-	return items, nil
-}
-
-func (s *service) getSceneItemID(c *goobs.Client, scene, item string) (int, error) {
-	params := sceneitems.NewGetSceneItemIdParams().WithSceneName(scene).WithSourceName(item)
-	resp, err := c.SceneItems.GetSceneItemId(params)
-	if err != nil {
-		return 0, legacyError(err)
-	}
-	return resp.SceneItemId, nil
+	v, err := s.invoke(api.LegacyRequest{Operation: api.LegacyListSceneItems, Scene: scene}, api.Approval{})
+	return v.Names, err
 }
 
 func (s *service) SetSceneItemVisible(visible bool, scene string, items ...string) error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	for _, item := range items {
-		id, err := s.getSceneItemID(c, scene, item)
-		if err != nil {
-			return legacyError(err)
-		}
-
-		params := sceneitems.NewSetSceneItemEnabledParams().
-			WithSceneName(scene).
-			WithSceneItemId(id).
-			WithSceneItemEnabled(visible)
-		_, err = c.SceneItems.SetSceneItemEnabled(params)
-		if err != nil {
-			return legacyError(err)
-		}
-	}
-	return nil
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacySetSceneItemVisible, Enabled: visible, Scene: scene, Names: items}, api.Approval{Settings: true})
+	return err
 }
 
 func (s *service) ToggleSceneItem(scene string, items ...string) error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	for _, item := range items {
-		id, err := s.getSceneItemID(c, scene, item)
-		if err != nil {
-			return legacyError(err)
-		}
-		params := sceneitems.NewGetSceneItemEnabledParams().WithSceneName(scene).WithSceneItemId(id)
-		resp, err := c.SceneItems.GetSceneItemEnabled(params)
-		if err != nil {
-			return legacyError(err)
-		}
-		if err := s.SetSceneItemVisible(!resp.SceneItemEnabled, scene, item); err != nil {
-			return legacyError(err)
-		}
-	}
-	return nil
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacyToggleSceneItem, Scene: scene, Names: items}, api.Approval{Settings: true})
+	return err
 }
 
 func (s *service) GetSceneItemVisibility(scene string, items ...string) ([]ItemVisibility, error) {
-	c, err := s.clientOrConnect()
+	v, err := s.invoke(api.LegacyRequest{Operation: api.LegacyGetSceneItemVisibility, Scene: scene, Names: items}, api.Approval{})
 	if err != nil {
-		return nil, legacyError(err)
+		return nil, err
 	}
-	visibility := make([]ItemVisibility, 0, len(items))
-	for _, item := range items {
-		id, err := s.getSceneItemID(c, scene, item)
-		if err != nil {
-			return nil, legacyError(err)
-		}
-		params := sceneitems.NewGetSceneItemEnabledParams().WithSceneName(scene).WithSceneItemId(id)
-		resp, err := c.SceneItems.GetSceneItemEnabled(params)
-		if err != nil {
-			return nil, legacyError(err)
-		}
-		visibility = append(visibility, ItemVisibility{Name: item, Visible: resp.SceneItemEnabled})
+	result := make([]ItemVisibility, 0, len(v.Visibility))
+	for _, item := range v.Visibility {
+		result = append(result, ItemVisibility{Name: item.Name, Visible: item.Visible})
 	}
-	return visibility, nil
+	return result, err
 }
 
 func (s *service) CenterSceneItem(scene string, items ...string) error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	for _, item := range items {
-		id, err := s.getSceneItemID(c, scene, item)
-		if err != nil {
-			return legacyError(err)
-		}
-		transformParams := sceneitems.NewGetSceneItemTransformParams().WithSceneName(scene).WithSceneItemId(id)
-		transformResp, err := c.SceneItems.GetSceneItemTransform(transformParams)
-		if err != nil {
-			return legacyError(err)
-		}
-		videoResp, err := c.Config.GetVideoSettings()
-		if err != nil {
-			return legacyError(err)
-		}
-
-		transform := transformResp.SceneItemTransform
-		transform.PositionX = videoResp.BaseWidth / 2
-
-		setParams := sceneitems.NewSetSceneItemTransformParams().
-			WithSceneName(scene).
-			WithSceneItemId(id).
-			WithSceneItemTransform(transform)
-		_, err = c.SceneItems.SetSceneItemTransform(setParams)
-		if err != nil {
-			return legacyError(err)
-		}
-	}
-	return nil
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacyCenterSceneItem, Scene: scene, Names: items}, api.Approval{Settings: true})
+	return err
 }
 
 func (s *service) ListProfiles() ([]string, error) {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return nil, legacyError(err)
-	}
-	r, err := c.Config.GetProfileList()
-	if err != nil {
-		return nil, legacyError(err)
-	}
-	profiles := make([]string, 0, len(r.Profiles))
-	profiles = append(profiles, r.Profiles...)
-	return profiles, nil
+	v, err := s.invoke(api.LegacyRequest{Operation: api.LegacyListProfiles}, api.Approval{})
+	return v.Names, err
 }
 
 func (s *service) GetCurrentProfile() (string, error) {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return "", legacyError(err)
-	}
-	r, err := c.Config.GetProfileList()
-	if err != nil {
-		return "", legacyError(err)
-	}
-	return r.CurrentProfileName, nil
+	v, err := s.invoke(api.LegacyRequest{Operation: api.LegacyGetCurrentProfile}, api.Approval{})
+	return v.Current, err
 }
 
 func (s *service) SetCurrentProfile(profile string) error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	params := configrequests.NewSetCurrentProfileParams().WithProfileName(profile)
-	_, err = c.Config.SetCurrentProfile(params)
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacySetCurrentProfile, Name: profile}, api.Approval{Settings: true})
+	return err
 }
 
 func (s *service) SetLabelText(source, text string) error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	params := inputs.NewSetInputSettingsParams().
-		WithInputName(source).
-		WithInputSettings(map[string]any{"text": text}).
-		WithOverlay(true)
-	_, err = c.Inputs.SetInputSettings(params)
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacySetLabelText, Name: source, Text: text}, api.Approval{Settings: true})
+	return err
 }
 
 func (s *service) StartReplayBuffer() error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	_, err = c.Outputs.StartReplayBuffer()
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacyStartReplayBuffer}, api.Approval{ReplayBuffer: true})
+	return err
 }
 
 func (s *service) StopReplayBuffer() error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	_, err = c.Outputs.StopReplayBuffer()
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacyStopReplayBuffer}, api.Approval{ReplayBuffer: true})
+	return err
 }
 
 func (s *service) SaveReplayBuffer() error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	_, err = c.Outputs.SaveReplayBuffer()
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacySaveReplayBuffer}, api.Approval{ReplayBuffer: true})
+	return err
 }
 
 func (s *service) GetReplayBufferActive() (bool, error) {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return false, legacyError(err)
-	}
-	r, err := c.Outputs.GetReplayBufferStatus()
-	if err != nil {
-		return false, legacyError(err)
-	}
-	return r.OutputActive, nil
+	v, err := s.invoke(api.LegacyRequest{Operation: api.LegacyGetReplayBufferActive}, api.Approval{})
+	return v.Active, err
 }
 
 func (s *service) ToggleVirtualCam() error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	_, err = c.Outputs.ToggleVirtualCam()
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacyToggleVirtualCam}, api.Approval{VirtualCamera: true})
+	return err
 }
 
 func (s *service) StartVirtualCam() error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	_, err = c.Outputs.StartVirtualCam()
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacyStartVirtualCam}, api.Approval{VirtualCamera: true})
+	return err
 }
 
 func (s *service) StopVirtualCam() error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	_, err = c.Outputs.StopVirtualCam()
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacyStopVirtualCam}, api.Approval{VirtualCamera: true})
+	return err
 }
 
 func (s *service) GetVirtualCamActive() (bool, error) {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return false, legacyError(err)
-	}
-	r, err := c.Outputs.GetVirtualCamStatus()
-	if err != nil {
-		return false, legacyError(err)
-	}
-	return r.OutputActive, nil
+	v, err := s.invoke(api.LegacyRequest{Operation: api.LegacyGetVirtualCamActive}, api.Approval{})
+	return v.Active, err
 }
 
 func (s *service) GetSpecialSources() (SpecialSources, error) {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return SpecialSources{}, legacyError(err)
-	}
-	resp, err := c.Inputs.GetSpecialInputs()
-	if err != nil {
-		return SpecialSources{}, legacyError(err)
-	}
-	return SpecialSources{
-		Desktop1: resp.Desktop1,
-		Desktop2: resp.Desktop2,
-		Mic1:     resp.Mic1,
-		Mic2:     resp.Mic2,
-		Mic3:     resp.Mic3,
-	}, nil
+	v, err := s.invoke(api.LegacyRequest{Operation: api.LegacyGetSpecialSources}, api.Approval{})
+	return SpecialSources{Desktop1: v.Sources.Desktop1, Desktop2: v.Sources.Desktop2, Mic1: v.Sources.Mic1, Mic2: v.Sources.Mic2, Mic3: v.Sources.Mic3}, err
 }
 
 func (s *service) ToggleMute(source string) error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	params := inputs.NewToggleInputMuteParams().WithInputName(source)
-	_, err = c.Inputs.ToggleInputMute(params)
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacyToggleMute, Name: source}, api.Approval{Settings: true})
+	return err
 }
 
 func (s *service) SetStudioModeEnabled(enabled bool) error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	_, err = c.Ui.SetStudioModeEnabled(ui.NewSetStudioModeEnabledParams().WithStudioModeEnabled(enabled))
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacySetStudioModeEnabled, Enabled: enabled}, api.Approval{Settings: true})
+	return err
 }
 
 func (s *service) IsStudioModeEnabled() (bool, error) {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return false, legacyError(err)
-	}
-	r, err := c.Ui.GetStudioModeEnabled()
-	if err != nil {
-		return false, legacyError(err)
-	}
-	return r.StudioModeEnabled, nil
+	v, err := s.invoke(api.LegacyRequest{Operation: api.LegacyIsStudioModeEnabled}, api.Approval{})
+	return v.Active, err
 }
 
 func (s *service) TriggerStudioModeTransition() error {
-	c, err := s.clientOrConnect()
-	if err != nil {
-		return legacyError(err)
-	}
-	_, err = c.Transitions.TriggerStudioModeTransition()
-	return legacyError(err)
+	_, err := s.invoke(api.LegacyRequest{Operation: api.LegacyTriggerStudioModeTransition}, api.Approval{Settings: true})
+	return err
 }
