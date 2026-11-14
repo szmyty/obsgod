@@ -19,6 +19,7 @@ import (
 
 type backend interface {
 	automation.WorkflowBackend
+	ProfileInventory(context.Context) (automation.ProfileInventory, error)
 	StreamStatus(context.Context) (automation.StreamStatus, error)
 	StartStream(context.Context) (automation.StreamStatus, error)
 	StopStream(context.Context) (automation.StreamStatus, error)
@@ -182,6 +183,19 @@ func nonNil(v []string) []string {
 		return []string{}
 	}
 	return append([]string{}, v...)
+}
+
+// Profiles reads only OBS's profile inventory. Names retain their original order
+// and the returned slice is independent of backend storage. No approval or output
+// read is needed because this operation does not change settings.
+func (c *Client) Profiles(ctx context.Context) (ProfileInventory, error) {
+	return run(ctx, c, "profile.list", func(ctx context.Context) (ProfileInventory, error) {
+		profiles, err := c.backend.ProfileInventory(ctx)
+		if err != nil {
+			return ProfileInventory{}, err
+		}
+		return ProfileInventory{Current: profiles.Current, Profiles: nonNil(profiles.Profiles)}, nil
+	})
 }
 func (c *Client) StreamStatus(ctx context.Context) (StreamState, error) {
 	return run(ctx, c, "snapshot", func(ctx context.Context) (StreamState, error) {

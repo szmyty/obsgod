@@ -118,13 +118,20 @@ func newAPICommand(connection *config.Config, path *string, connect apiConnector
 	for _, kind := range []string{"profile", "collection", "scene"} {
 		group := &coral.Command{Use: kind, Short: "List or select existing OBS " + kind + " settings"}
 		group.AddCommand(&coral.Command{Use: "list", Short: "List existing " + kind + " names", Args: coral.NoArgs, RunE: withClient("snapshot", func(ctx context.Context, c *api.Client) (any, error) {
+			// Keep this command's existing response envelope and list shape while
+			// avoiding unrelated output queries for a profile-only observation.
+			if kind == "profile" {
+				profiles, err := c.Profiles(ctx)
+				if err != nil {
+					return nil, err
+				}
+				return profiles.Profiles, nil
+			}
 			s, e := c.Snapshot(ctx)
 			if e != nil {
 				return nil, e
 			}
 			switch kind {
-			case "profile":
-				return s.Profiles, nil
 			case "collection":
 				return s.Collections, nil
 			default:
