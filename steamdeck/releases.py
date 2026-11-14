@@ -1,7 +1,10 @@
 """Read and verify OBSGod runtime releases. Checking never changes an install.
 
-Only this repository's GitHub releases and immutable same-repository artifact
-commits are accepted. This is transport/checksum verification, not code signing.
+Only the build-selected repository's GitHub releases and immutable same-repository
+artifact commits are accepted. The owner/repository is source metadata, never an
+environment variable, CLI option or a redirect-derived value. Changing it is a
+reviewed installer/build transition, not an automatic trust expansion. This is
+transport/checksum verification, not code signing.
 """
 import hashlib
 import importlib.util
@@ -60,14 +63,15 @@ def _safe_url(url):
         return False
     if parsed.scheme != "https" or parsed.username or parsed.password or parsed.fragment or port:
         return False
+    repository_path = re.escape(REPOSITORY)
     if parsed.netloc == "api.github.com":
-        return url == RELEASES_URL or bool(re.fullmatch(r"/repos/szmyty/obsgod/commits/v?[0-9A-Za-z.-]+", parsed.path) and not parsed.query)
+        return url == RELEASES_URL or bool(re.fullmatch(r"/repos/" + repository_path + r"/commits/v?[0-9A-Za-z.-]+", parsed.path) and not parsed.query)
     if parsed.query:
         return False
     if parsed.netloc == "raw.githubusercontent.com":
-        return bool(re.fullmatch(r"/szmyty/obsgod/[0-9a-f]{40}/[A-Za-z0-9._-]+", parsed.path))
+        return bool(re.fullmatch(r"/" + repository_path + r"/[0-9a-f]{40}/[A-Za-z0-9._-]+", parsed.path))
     if parsed.netloc == "github.com":
-        return bool(re.fullmatch(r"/szmyty/obsgod/releases/download/v?[0-9A-Za-z.-]+/[A-Za-z0-9._-]+", parsed.path))
+        return bool(re.fullmatch(r"/" + repository_path + r"/releases/download/v?[0-9A-Za-z.-]+/[A-Za-z0-9._-]+", parsed.path))
     return False
 
 
@@ -178,8 +182,9 @@ def _locations(release, version):
     body = release.get("body") or ""
     if not isinstance(body, str):
         raise ReleaseError("The release description is invalid.")
-    commits = set(re.findall(r"https://raw\.githubusercontent\.com/szmyty/obsgod/([0-9a-f]{40})/" + re.escape(archive) + r"(?=[\s)\]>]|$)", body))
-    commits.update(re.findall(r"https://github\.com/szmyty/obsgod/raw/([0-9a-f]{40})/" + re.escape(archive) + r"(?=[\s)\]>]|$)", body))
+    repository_path = re.escape(REPOSITORY)
+    commits = set(re.findall(r"https://raw\.githubusercontent\.com/" + repository_path + r"/([0-9a-f]{40})/" + re.escape(archive) + r"(?=[\s)\]>]|$)", body))
+    commits.update(re.findall(r"https://github\.com/" + repository_path + r"/raw/([0-9a-f]{40})/" + re.escape(archive) + r"(?=[\s)\]>]|$)", body))
     if len(commits) != 1:
         raise ReleaseError("The latest runtime release has no complete supported download metadata. Open its release page; your installation is unchanged.", "unsupported")
     base = "https://raw.githubusercontent.com/" + REPOSITORY + "/" + commits.pop() + "/"
