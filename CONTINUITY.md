@@ -28,7 +28,11 @@ deployment, repository creation/transfer/archival, paid resource or other-repo
 write occurred. Nine draft-export tests, source-contract validation, reproducible
 raster exports/drift, source/output hashes, dimensions/byte cap, SVG checks,
 relative links and generated metadata checks passed; exact evidence follows in
-the presentation review record. Memorial PR #73 remains the preceding draft.
+the [presentation review record](branding/evidence/presentation-review.json).
+Exact presentation source is f3d2413b5f72aa858992996839aa8569ac5db331; later
+evidence notes do not relabel it. Draft PR #74 stacks on memorial PR #73: review
+and merge #73 before #74. The full 33-file repeat was byte-identical; ZIP digest
+fd92a99f1a0a09182a0f519a39f40847b378621b5a002a6c918f6236d68d7f36.
 
 ## Portable history before a possible fresh Decky Stream repository
 

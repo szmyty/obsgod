@@ -10,6 +10,22 @@ authored editable SVG candidates are under `.identity/candidates/`. The README
 uses staged draft artwork; installed plugin visuals and empty approval arrays
 are unchanged. See [remaining work](pre-migration-plan.md).
 
+## Presentation validation checkpoint
+
+Exact presentation source `f3d2413b5f72aa858992996839aa8569ac5db331`
+passed the [recorded checks](../branding/evidence/presentation-review.json):
+nine exporter tests, pinned source-contract validation, both raster drift
+checks, support/product metadata and an independent byte-identical 33-file
+repeat. All 20 input hashes, 27 staged output hashes, 83 relative links,
+10 self-contained SVGs, PNG dimensions/byte cap and concept digest passed.
+The imported font notice is byte-identical to its source; only that new copy's
+upstream trailing whitespace is excluded from whitespace lint.
+
+Full-kit ZIP SHA-256:
+`fd92a99f1a0a09182a0f519a39f40847b378621b5a002a6c918f6236d68d7f36`.
+This is draft artwork validation, not runtime/device qualification or human
+creative/rights approval. Later evidence-only notes do not relabel that source.
+
 ## Verified facts and unresolved decisions
 
 | Item | Evidence / disposition |
