@@ -366,6 +366,31 @@ def focused(output, goreleaser):
     return {"source_revision": identity["revision"], "scope": "focused-linux-amd64; not full matrix", "derived_config_sha256": G.sha(config.encode()), "artifacts": str(output), "notice_staging": str(staging)}
 
 
+def package_fixture(directory, records):
+    """Copy only verified public packages; keep private artifact modes intact."""
+    temporary = tempfile.TemporaryDirectory(prefix="obsgod-package-input-")
+    fixture = Path(temporary.name)
+    try:
+        for record in records:
+            name = G.safe_member(record["name"])
+            path = directory / name
+            require(path.is_file() and not path.is_symlink() and path.stat().st_size <= MAX_TOTAL,
+                    "Unsafe fixture package")
+            data = path.read_bytes()
+            require(G.sha(data) == record["sha256"], "Fixture package differs from selected audit")
+            target = fixture / name
+            with target.open("xb") as stream:
+                stream.write(data)
+            target.chmod(0o444)
+        # Expose only these public copies to capability-restricted root. Private
+        # build outputs remain0700/0600; no chmod/chown or DAC override is needed.
+        fixture.chmod(0o755)
+        return temporary
+    except BaseException:
+        temporary.cleanup()
+        raise
+
+
 def smoke(directory, summary, formats, images, previous=None):
     require(sys.platform.startswith("linux") and os.uname().machine in ("x86_64", "amd64"), "Native Linux amd64 Docker host required")
     require(summary.get("integrity") == "passed", "Successful selected-source audit required")
@@ -381,10 +406,18 @@ def smoke(directory, summary, formats, images, previous=None):
         payload, _ = package_files(package.read_bytes(), kind)
         require(set(n for n, v in payload.items() if not v["directory"]) == set(record["files"])
                 and all(G.sha(payload[n]["data"]) == v["sha256"] for n, v in record["files"].items()), "Smoke package payload differs from audit")
-        subprocess.run(["docker", "image", "inspect", image], stdout=subprocess.DEVNULL, check=True)
-        container = subprocess.check_output(["docker", "run", "--detach", "--rm", "--pull=never", "--network=none",
-            "--cap-drop=ALL", "--security-opt=no-new-privileges", "--mount", "type=bind,src=" + str(directory.absolute()) + ",dst=/packages,readonly",
-            "--entrypoint=/bin/sh", image, "-c", "sleep 300"], text=True).strip()
+        fixture_records = [record]
+        if previous:
+            fixture_records.append(next(r for r in previous["packages"] if r["format"] == kind and r["platform"] == record["platform"]))
+        fixture = package_fixture(directory, fixture_records)
+        try:
+            subprocess.run(["docker", "image", "inspect", image], stdout=subprocess.DEVNULL, check=True)
+            container = subprocess.check_output(["docker", "run", "--detach", "--rm", "--pull=never", "--network=none",
+                "--cap-drop=ALL", "--security-opt=no-new-privileges", "--mount", "type=bind,src=" + fixture.name + ",dst=/packages,readonly",
+                "--entrypoint=/bin/sh", image, "-c", "sleep 300"], text=True).strip()
+        except BaseException:
+            fixture.cleanup()
+            raise
         require(re.fullmatch(r"[0-9a-f]{64}", container), "Unexpected disposable container identity")
         calls = []
         def execute(args, user=None):
@@ -398,7 +431,17 @@ def smoke(directory, summary, formats, images, previous=None):
             return p.stdout
         try:
             execute(["/bin/sh", "-eu", "-c", "mkdir -p /home/package-user/.config/obsgod /home/package-user/Videos; printf preserve > /home/package-user/.config/obsgod/fixture; printf media > /home/package-user/Videos/fixture; chmod 777 /home/package-user; chmod -R a+rX /home/package-user"])
-            install = {"deb": ["dpkg", "--install"], "rpm": ["rpm", "-U", "--replacepkgs", "--oldpackage"], "apk": ["apk", "add", "--allow-untrusted", "--no-network"]}[kind]
+            if kind == "rpm":
+                # Fedora ships root-owned0555 /usr/bin and expects privileged
+                # root to bypass DAC. Give only owner-write in this disposable
+                # overlay instead of granting DAC-override capability.
+                execute(["chmod", "u+w", "/usr/bin"])
+            # Debian's minimal image intentionally prunes /usr/share/doc/*.
+            # Include only this package's docs for the lifecycle assertion;
+            # leave image/host package-manager configuration unchanged.
+            install = {"deb": ["dpkg", "--path-include=/usr/share/doc/obsgod", "--path-include=/usr/share/doc/obsgod/*", "--install"],
+                       "rpm": ["rpm", "-U", "--replacepkgs", "--oldpackage"],
+                       "apk": ["apk", "add", "--allow-untrusted", "--no-network"]}[kind]
             # An optional separately audited older source can exercise a genuine
             # cross-revision package replacement/upgrade; never fabricate one.
             if previous:
@@ -426,10 +469,20 @@ def smoke(directory, summary, formats, images, previous=None):
             execute(["/bin/sh", "-eu", "-c", "test ! -e /usr/bin/obsgod; test ! -e /usr/share/doc/obsgod/SOURCE.json; test \"$(cat /home/package-user/.config/obsgod/fixture)\" = preserve; test \"$(cat /home/package-user/Videos/fixture)\" = media; test ! -e /home/package-user/.config/obsgod/config.json"])
             results.append({"format": kind, "package": record["name"], "sha256": record["sha256"], "image": image,
                 "outcome": "passed", "commands": calls, "package_replacement": "previous audited source to current" if previous else "unrun; no previous audited source supplied",
+                "previous_package": {"source_revision": previous["source"]["revision"], "name": old["name"], "sha256": old["sha256"],
+                                     "package_metadata": old["package_metadata"]} if previous else None,
                 "limits": "Disposable Linux amd64 package lifecycle and unprivileged offline CLI only; no OBS, actual Deck, host installation or native ARM proof."})
         finally:
-            subprocess.run(["docker", "rm", "--force", container], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
-    return {"schema_version": 1, "source_revision": summary["source"]["revision"], "outcome": "passed", "results": results}
+            try:
+                subprocess.run(["docker", "rm", "--force", container], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+            finally:
+                fixture.cleanup()
+    return {"schema_version": 1, "source_revision": summary["source"]["revision"],
+            "previous_source_revision": previous["source"]["revision"] if previous else None,
+            "harness_source_revision": G.command("git", "rev-parse", "HEAD"),
+            "harness_sha256": G.sha(Path(__file__).read_bytes()),
+            "harness_worktree_dirty": bool(G.command("git", "status", "--porcelain")),
+            "outcome": "passed", "results": results}
 
 
 def main():

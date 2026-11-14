@@ -194,6 +194,25 @@ class NFPMTests(unittest.TestCase):
             with self.subTest(updates=list(updates)), self.assertRaisesRegex(ValueError, "paths differ|metadata|mismatch"):
                 N.package_files(rpm(updates=updates), "rpm")
 
+    def test_private_build_permissions_are_preserved_while_fixture_is_readable(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            directory.chmod(0o700)
+            package = directory / "fixture.deb"
+            package.write_bytes(deb())
+            package.chmod(0o600)
+            record = {"name": package.name, "sha256": N.G.sha(package.read_bytes())}
+            with N.package_fixture(directory, [record]) as fixture:
+                copied = Path(fixture) / package.name
+                self.assertEqual(copied.read_bytes(), package.read_bytes())
+                self.assertEqual(stat.S_IMODE(copied.stat().st_mode), 0o444)
+                self.assertEqual(stat.S_IMODE(Path(fixture).stat().st_mode), 0o755)
+            self.assertEqual(stat.S_IMODE(package.stat().st_mode), 0o600)
+            self.assertEqual(stat.S_IMODE(directory.stat().st_mode), 0o700)
+            self.assertFalse(Path(fixture).exists())
+            with self.assertRaisesRegex(ValueError, "differs from selected audit"):
+                N.package_fixture(directory, [{**record, "sha256": "a" * 64}])
+
     def test_unsafe_smoke_image_and_tampered_package_never_start_a_container(self):
         package = deb()
         record = {"name": "package.deb", "format": "deb", "platform": {"goos": "linux", "goarch": "amd64", "goarm": ""},

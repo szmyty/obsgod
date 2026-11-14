@@ -69,9 +69,19 @@ python3 scripts/nfpm-release.py smoke --artifacts /absolute/nfpm-artifacts \
 
 It installs through each actual package manager, checks every installed file,
 executes version/help/config-path/API-capabilities as UID/GID65534, repeats the
-installation and removes/purges the package. Temporary settings/media sentinels
+install command for idempotence and removes/purges the package. Temporary settings/media sentinels
 must survive. Only a disposable container's filesystem changes; packages are
 mounted read-only and ordinary host installations/configuration are untouched.
+Only the selected hash-verified public package bytes are copied into the
+disposable mount with readable modes. Original private build directories/files
+retain their ownership, bytes and 0700/0600 permissions; no DAC-override
+capability or recursive permission workaround is used.
+Debian's minimal image prunes documentation by default; the fixture passes
+scoped `dpkg --path-include` flags only for `/usr/share/doc/obsgod` so the actual
+notice installation can be checked. Host and image package-manager presets are
+not rewritten. Fedora ships a root-owned 0555 `/usr/bin`; the disposable fixture
+adds only owner-write on that overlay directory, keeping all container
+capabilities dropped instead of enabling DAC override.
 The installed CLI is trusted selected-source code: do not execute arbitrary
 downloads merely because an untrusted sidecar calls them safe.
 
