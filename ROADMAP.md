@@ -1,5 +1,26 @@
 # Product roadmap
 
+## Proposed audit checkpoint — review before execution
+
+The owner requested a repository-wide audit at current source 12ef52f, then a
+sync before implementation. [#84](https://github.com/szmyty/obsgod/issues/84)
+and [the audit report](audits/final-audit-2026-11-14.md) now collect concrete
+runtime/lifecycle fixes #96–#104 and refinements to existing #80–#85.
+The audit changed planning records, not product code or artwork.
+
+Proposed order: runtime/output/process correctness; cleanup and actual update
+channel; async settings contracts; selected aurora/compact controller UI/current
+docs; bounded refactors and primary-build CI; then #85's exact-source candidate
+and #86's owner Deck test/fix loop. Hardware is unavailable now and remains an
+explicit later test gate. Priority guidance does not replace original dependencies.
+
+Migration #87 now links [#95](https://github.com/szmyty/obsgod/issues/95): verify/
+enable dependency graph and real dependency review at the actual new public
+destination, with billing tracked separately, then carry proof into #88. Actual
+migration, publication and provider OAuth remain outside this planning pass.
+
+## Current implementation and migration scope
+
 The owner locked **01 / aurora** and selected future repository name
 **deckystream**. The current [implementation roadmap](docs/implementation-roadmap.md)
 is parent [#46](https://github.com/szmyty/obsgod/issues/46):

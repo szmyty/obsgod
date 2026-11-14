@@ -1,5 +1,42 @@
 # Current work
 
+## Proposed audit roadmap — wait for owner sync before implementation
+
+The owner requested a full audit and proposed issues, explicitly followed by a
+sync before executing the audit roadmap. Current work is planning only; do not
+start its product fixes, UI/artwork changes or migration before that sync.
+Use existing checkout branch **docs/final-audit-roadmap**, based on
+**12ef52f9d22a7c1101f8743094325f66e3948270**. Product source is unchanged.
+
+[#84](https://github.com/szmyty/obsgod/issues/84) now links nine bounded proposed
+children **#96–#104** with source/fixture evidence and acceptance. Existing
+#80/#81 carry selected aurora and UI work; #82/#83 lifecycle/integration and
+#84 docs/refactors are refined, not recreated. The source audit has 26 observations
+including overlaps, already-planned gaps and optional improvements. It does not
+claim 26 independent bugs or that any proposed repair is implemented.
+
+Read [the proposed audit and order](audits/final-audit-2026-11-14.md),
+[all findings](docs/evidence/final-audit-20261114.json) and the indexed evidence
+ZIP. Reproductions cover mic policy, capture ownership, recording state, SDK
+timeouts, loader cancellation, lock identity and retained helper/version flow.
+UI probes use HTML component stubs and the actual source 378b46c ZIP whose frontend
+matches baseline 12ef52f; physical Deck/controller/keyboard/provider tests stay unrun.
+
+Recommended after sync: #96–#100 runtime/process correctness → #101/#102 cleanup
+and recovery → #103 action contracts → existing #80/#81 branding/compact UI and
+#84 bounded docs/refactors → #104/#85 primary CI/final exact-source candidate.
+These are priorities, not replacement original dependencies. Owner Deck testing
+#86 follows when hardware is available; independent software preparation need
+not wait for it.
+
+New **#95** is linked from migration #87 and retest #88: after the actual approved
+new public repository exists, verify/enable dependency graph, manifest ingestion
+and real PR dependency review; distinguish permissions/fork and billing facts.
+It does not authorize a migration now or establish the unselected destination.
+OAuth remains deferred #89. All 230 original criteria/dependencies and historical
+receipts are intact. No product source/UI/artwork change, issue closure, merge,
+release/deploy, migration, paid resource or other-repository modification occurred.
+
 ## #79 native configuration and Actions repairs qualified at 378b46c
 
 Draft [#92](https://github.com/szmyty/obsgod/pull/92), after #73 → #74 → #75 →

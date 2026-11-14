@@ -1,0 +1,2122 @@
+{
+  "schema_version": 1,
+  "status": "proposed-awaiting-owner-sync",
+  "audit_baseline": "12ef52f9d22a7c1101f8743094325f66e3948270",
+  "last_qualified_product_source": "378b46cb8c4a9281f9d6890b2e13b223650626d5",
+  "repository": "szmyty/obsgod",
+  "planning_branch": "docs/final-audit-roadmap",
+  "audit_parent": 84,
+  "migration_graph_issue": 95,
+  "new_proposed_implementation_issues": [
+    {
+      "key": "mic_policy",
+      "number": 96,
+      "url": "https://github.com/szmyty/obsgod/issues/96",
+      "title": "Audit: Preserve mixer-enabled microphone audio across game and idle transitions",
+      "priority": "P1",
+      "parent": 83,
+      "finding_ids": [
+        "runtime-capture-mixer-enable"
+      ]
+    },
+    {
+      "key": "capture_ownership",
+      "number": 97,
+      "url": "https://github.com/szmyty/obsgod/issues/97",
+      "title": "Audit: Recheck managed OBS ownership before capture observer mutations",
+      "priority": "P2",
+      "parent": 83,
+      "finding_ids": [
+        "runtime-capture-ownership-recheck"
+      ]
+    },
+    {
+      "key": "recording_state",
+      "number": 98,
+      "url": "https://github.com/szmyty/obsgod/issues/98",
+      "title": "Audit: Reject unknown recording state throughout lifecycle confirmation",
+      "priority": "P1",
+      "parent": 83,
+      "finding_ids": [
+        "runtime-recording-raw-state"
+      ]
+    },
+    {
+      "key": "sdk_timeout",
+      "number": 99,
+      "url": "https://github.com/szmyty/obsgod/issues/99",
+      "title": "Audit: Invalidate OBS connections after response timeout or correlation loss",
+      "priority": "P2",
+      "parent": 83,
+      "finding_ids": [
+        "sdk-response-timeout-reuse"
+      ]
+    },
+    {
+      "key": "loader_teardown",
+      "number": 100,
+      "url": "https://github.com/szmyty/obsgod/issues/100",
+      "title": "Audit: Make backend cancellation safe within Decky’s termination deadline",
+      "priority": "P1",
+      "parent": 82,
+      "finding_ids": [
+        "LIFECYCLE-01"
+      ]
+    },
+    {
+      "key": "cleanup_locks",
+      "number": 101,
+      "url": "https://github.com/szmyty/obsgod/issues/101",
+      "title": "Audit: Preserve cleanup lock identity and reject unsafe legacy ancestors",
+      "priority": "P2",
+      "parent": 82,
+      "finding_ids": [
+        "LIFECYCLE-02",
+        "LIFECYCLE-05"
+      ]
+    },
+    {
+      "key": "recovery_channel",
+      "number": 102,
+      "url": "https://github.com/szmyty/obsgod/issues/102",
+      "title": "Audit: Align retained Desktop recovery with the active Decky installation",
+      "priority": "P2",
+      "parent": 82,
+      "finding_ids": [
+        "LIFECYCLE-03",
+        "LIFECYCLE-04"
+      ]
+    },
+    {
+      "key": "action_contracts",
+      "number": 103,
+      "url": "https://github.com/szmyty/obsgod/issues/103",
+      "title": "Audit: Bound settings actions and reject incomplete successful readback",
+      "priority": "P2",
+      "parent": 83,
+      "finding_ids": [
+        "ARCH-01",
+        "ARCH-02"
+      ]
+    },
+    {
+      "key": "primary_ci",
+      "number": 104,
+      "url": "https://github.com/szmyty/obsgod/issues/104",
+      "title": "Audit: Qualify the primary plugin build through repeatable local CI",
+      "priority": "P2",
+      "parent": 85,
+      "finding_ids": [
+        "CI-01",
+        "CI-02"
+      ]
+    }
+  ],
+  "existing_work": [
+    {
+      "issue": 80,
+      "scope": "Selected aurora source/exports and fresh source-bound brand proof"
+    },
+    {
+      "issue": 81,
+      "scope": "Primary controls first, progressive disclosure, visible async outcomes, guarded help/navigation, local aurora presentation"
+    },
+    {
+      "issue": 82,
+      "scope": "Normal Decky lifecycle, retained helper and data preservation; children 100–102"
+    },
+    {
+      "issue": 83,
+      "scope": "Runtime/contract repair regressions; children 96–99/103 and selected UI failures"
+    },
+    {
+      "issue": 84,
+      "scope": "Audit, bounded measured refactors and current README/support/site/installation/release docs"
+    },
+    {
+      "issue": 85,
+      "scope": "Primary build/free CI child 104, then final exact-source matrix/candidate/rollback/owner test packet"
+    },
+    {
+      "issue": 86,
+      "scope": "Owner-operated current-install Deck/fix loop; hardware unavailable and all physical cases unrun"
+    },
+    {
+      "issue": 87,
+      "scope": "Prepare independently; actual approved fresh target migration after #86 and destination authority"
+    },
+    {
+      "issue": 88,
+      "scope": "Actual destination install retest, graph #95/service proof and v1 approval packet"
+    },
+    {
+      "issue": 89,
+      "scope": "Provider OAuth/phone login remains separate deferred research"
+    }
+  ],
+  "recommended_order": [
+    {
+      "wave": 1,
+      "name": "Runtime, output and process correctness",
+      "issues": [
+        96,
+        97,
+        98,
+        99,
+        100
+      ]
+    },
+    {
+      "wave": 2,
+      "name": "Safe cleanup and current update/recovery channel",
+      "issues": [
+        101,
+        102,
+        82
+      ]
+    },
+    {
+      "wave": 3,
+      "name": "Async settings/readback contract",
+      "issues": [
+        103
+      ]
+    },
+    {
+      "wave": 4,
+      "name": "Selected branding, compact UI and current user docs",
+      "issues": [
+        80,
+        81,
+        84
+      ]
+    },
+    {
+      "wave": 5,
+      "name": "Bounded refactors, primary CI and exact-source test candidate",
+      "issues": [
+        84,
+        104,
+        85
+      ]
+    },
+    {
+      "wave": 6,
+      "name": "Owner current-install Deck test/fix loop",
+      "issues": [
+        86
+      ]
+    },
+    {
+      "wave": 7,
+      "name": "Approved migration, security graph check and actual new install",
+      "issues": [
+        87,
+        95,
+        88
+      ]
+    }
+  ],
+  "order_semantics": "Recommended priority, not new hard dependencies on original issues; independent preparation can proceed after sync. Existing original dependencies remain intact.",
+  "observation_counts": {
+    "runtime": 4,
+    "lifecycle": 5,
+    "architecture": 4,
+    "ui": 6,
+    "brand-docs": 4,
+    "ci-release": 3
+  },
+  "reports": {
+    "runtime": {
+      "schema_version": 1,
+      "scope": "Managed Go runtime, output/state safety, API correctness, concurrency, cancellation, recovery and filtered diagnostics",
+      "baseline": "12ef52f9d22a7c1101f8743094325f66e3948270",
+      "initial_branch": "feat/decky-native-configuration",
+      "audit_date_utc": "2026-11-14",
+      "mode": "read-only source audit plus focused external protocol-only reproductions; planning only; sync before implementation",
+      "findings": [
+        {
+          "id": "runtime-capture-mixer-enable",
+          "title": "Game capture observer disables a microphone enabled through the mixer",
+          "severity": "P1 user-visible audio loss; high confidence, no secret disclosure",
+          "confidence": "confirmed source and reproduced with external Go overlay / loopback OBS fixture",
+          "primary_locations": [
+            "internal/deck/capture_video.go:104",
+            "internal/deck/capture_video.go:106",
+            "internal/deck/capture_video.go:120",
+            "internal/deck/capture_video.go:223"
+          ],
+          "related_locations": [
+            "internal/deck/capture_watch_linux.go:79",
+            "internal/deck/capture_watch_linux.go:103",
+            "internal/deck/mixer.go:526",
+            "internal/deck/mixer.go:565",
+            "internal/deck/audio_control.go:62"
+          ],
+          "trigger": "The saved legacy deck.json microphone setting is false (the default); the player separately enables microphone_enabled in mixer.json. applyMixer/ensureAudio enable the source in all managed scenes. A game capture observer cycle rebuilds the idle scene or establishes a game target.",
+          "impact": "sceneVideoWhitelist consults Settings.Microphone instead of the effective mixer preference and removes MicAudio from the keep set. The watcher disables the microphone scene item in IdleScene and GameScene while mixer preferences/source mute can still report microphone enabled/unmuted. Broadcasts, recordings and replay can silently lose microphone audio on game transitions. The reproduction starts with enabled scene items, retains microphone_enabled=true, and observes both scene items disabled.",
+          "reproduction": {
+            "harness": "/workspace/.obsgod-tools/audit-planning-20261114/runtime-repro/capture_ownership_test.go",
+            "test": "TestAuditCaptureWatchDisablesMixerEnabledMicrophone",
+            "receipt": "/workspace/.obsgod-tools/audit-planning-20261114/runtime-repro/capture-repro-receipt.json",
+            "log": "/workspace/.obsgod-tools/audit-planning-20261114/runtime-repro/capture-repro.log",
+            "observed": [
+              "microphone_enabled=true while legacy microphone=false",
+              "OBSGod Idle MicAudio scene item disabled by watcher",
+              "OBSGod Game MicAudio scene item disabled by watcher"
+            ]
+          },
+          "fix_sketch": "Resolve effective microphone policy once for a managed video cycle using the same mixer preference source as audio configuration, then preserve its scene membership through idle/game whitelist operations. Keep enable, mute and push-to-talk semantics distinct. Avoid another microphone preference store. Consolidating the effective-policy read is a bounded refactor tied to this defect.",
+          "acceptance": [
+            "Run the actual observer path with legacy microphone=false plus mixer microphone_enabled=true; mic scene items remain connected in game and idle before/after transitions.",
+            "Check disabled, explicitly muted and push-to-talk preferences remain muted and never gain an implicit unmute.",
+            "Verify game/idle transitions preserve gain, route, source mute and all independent output states; use protocol fixtures during repair and actual audible Deck clip/viewer evidence under #86."
+          ],
+          "issue_mapping": {
+            "primary": "#83 demonstrated integration regression",
+            "supporting": "#84 consolidate effective audio policy consumption",
+            "owner_evidence": "#86 actual microphone/headset/controller/viewer tests remain unrun"
+          }
+        },
+        {
+          "id": "runtime-capture-ownership-recheck",
+          "title": "Capture observer mutates after its managed collection observation becomes stale",
+          "severity": "P2 wrong-collection mutation / output scene disruption",
+          "confidence": "confirmed source and reproduced with external Go overlay / loopback OBS fixture",
+          "primary_locations": [
+            "internal/deck/capture_watch_linux.go:67",
+            "internal/deck/capture_watch_linux.go:70",
+            "internal/deck/capture_watch_linux.go:85",
+            "internal/deck/capture_watch_linux.go:103"
+          ],
+          "related_locations": [
+            "internal/deck/capture_video.go:192",
+            "internal/deck/capture_video.go:194",
+            "internal/deck/resilience.go:178",
+            "internal/deck/resilience.go:189",
+            "internal/deck/capture_watch_linux_test.go:147"
+          ],
+          "trigger": "After WatchCapture observes the managed profile/collection and active output, delayed game discovery or another process switches OBS to an ordinary collection. No shared control lease or fresh ownership/output observation precedes gameVideoStep.",
+          "impact": "The observer may issue SetCurrentProgramScene and scene/input mutations against the newly selected collection using its prior snapshot. The loopback reproduction switches collection during discovery and the very next request is SetCurrentProgramScene(OBSGod Idle), with no intervening ownership read. If matching scene names exist, their content or program scene can be changed. This is the same stale-observation boundary that resilience explicitly rechecks; the separate lifetime lease only prevents duplicate watchers.",
+          "reproduction": {
+            "harness": "/workspace/.obsgod-tools/audit-planning-20261114/runtime-repro/capture_ownership_test.go",
+            "test": "TestAuditCaptureWatchOwnershipRace",
+            "receipt": "/workspace/.obsgod-tools/audit-planning-20261114/runtime-repro/capture-repro-receipt.json",
+            "log": "/workspace/.obsgod-tools/audit-planning-20261114/runtime-repro/capture-repro.log",
+            "observed": [
+              "collection set to Ordinary collection inside discover callback",
+              "next OBS request: SetCurrentProgramScene",
+              "program scene changed to OBSGod Idle without ownership recheck"
+            ]
+          },
+          "fix_sketch": "Keep the distinct watcher lifetime lease, but bound delayed discovery and acquire the shared control lease for the mutation phase, then re-observe managed profile/collection and active output immediately before scene/source changes. Explicit operations should win. Preserve a startup readiness handshake so Start waiting for its watcher while holding the control lease cannot deadlock; reuse the resilience observer pattern rather than introducing a new coordination framework.",
+          "acceptance": [
+            "Switch collection/profile or stop output during a blocked discovery callback: no scene/input mutation follows the stale observation.",
+            "Hold the shared control lease for an explicit stop/configuration: the watcher yields and later re-observes rather than acting on old state.",
+            "Starting output plus attaching the watcher while the initiating command holds its lease remains bounded and does not deadlock.",
+            "Retain game-only privacy: no full-display fallback and no automatic output start/restart."
+          ],
+          "issue_mapping": {
+            "primary": "#83 integration/concurrency regression",
+            "supporting": "#84 bounded observer coordination refactor",
+            "lifecycle": "#82 only where shared lifecycle coordination consumers are changed"
+          }
+        },
+        {
+          "id": "runtime-recording-raw-state",
+          "title": "Recording lifecycle and runtime reads bypass malformed-output validation",
+          "severity": "P1 safety invariant / medium-high impact under malformed successful OBS responses",
+          "confidence": "confirmed source and reproduced with a loopback protocol-only fixture; no real OBS or outputs",
+          "primary_locations": [
+            "pkg/automation/setup.go:105",
+            "pkg/automation/setup.go:109",
+            "pkg/automation/setup.go:219",
+            "pkg/automation/setup.go:247",
+            "pkg/automation/setup.go:259"
+          ],
+          "related_locations": [
+            "pkg/automation/api_primitives.go:58",
+            "pkg/automation/media.go:32",
+            "pkg/api/v1/client.go:244",
+            "internal/deck/control.go:459"
+          ],
+          "trigger": "A successful GetRecordStatus response omits or nulls outputActive in RuntimeStatus, the recording start preflight, or a StopRecording preflight/finalization poll. Generated Go bool fields default false.",
+          "impact": "RuntimeStatus returns recording=false and nil error while recording state is unknown; direct StartRecording can dispatch StartRecord after an unknown preflight. Public API StopRecording can return a supposedly finalized path and nil error while the fixture remains active, because its initial validated APIRecordingStatus does not validate the later lifecycle polls. Managed callers may treat an unknown recording as idle before capture or service configuration. This violates the documented unknown-state and finalized-recording contracts.",
+          "reproduction": {
+            "harness": "/workspace/.obsgod-tools/audit-planning-20261114/generic-api/recording-repro.go",
+            "receipt": "/workspace/.obsgod-tools/audit-planning-20261114/generic-api/recording-repro.jsonl",
+            "command": "GOTOOLCHAIN=local GOMODCACHE=/workspace/.obsgod-tools/mod /workspace/.obsgod-tools/toolchains/go1.27.4/go/bin/go run /workspace/.obsgod-tools/audit-planning-20261114/generic-api/recording-repro.go",
+            "observed": [
+              {
+                "case": "runtime",
+                "returned_recording": false,
+                "returned_error": "<nil>",
+                "server_recording_still_active": true
+              },
+              {
+                "case": "start",
+                "returned_error": "<nil>",
+                "start_requests_after_unknown": 1
+              },
+              {
+                "case": "stop",
+                "returned_error": "<nil>",
+                "returned_path": "/fixture/still-active.mkv",
+                "server_recording_still_active": true,
+                "status_reads": 3,
+                "stop_requests": 1
+              }
+            ]
+          },
+          "fix_sketch": "Use one validated recording observation helper for RuntimeStatus and every StartRecording/StopRecording preflight/readback. Require a raw bool outputActive before authorizing or confirming lifecycle actions. Require outputPaused wherever a known paused value is exposed. Keep legacy ACK behavior and safe fixed diagnostics. This is a concrete consolidation of duplicated status decoding rather than a broad framework rewrite.",
+          "acceptance": [
+            "Table-test omitted, null and wrong-type outputActive at each recording lifecycle observation; unknown preflight dispatches no StartRecord or StopRecord.",
+            "Malformed finalization polls return an error and no finalized path even after StopRecord ACK; valid delayed shutdown still waits until explicitly inactive.",
+            "RuntimeStatus and managed configuration/capture preflights cannot convert unknown recording state into idle authorization.",
+            "If outputPaused is exposed as known, omitted/null/wrong-type paused flags remain unknown/error rather than false.",
+            "Retain existing stream/record/replay coexistence, partial-media preservation and legacy request-ACK contracts; focused Go protocol/race checks only during repair, final matrix remains #85."
+          ],
+          "issue_mapping": {
+            "primary": "#83 demonstrated integration/edge-case regression",
+            "supporting": "#84 bounded shared-state decoder refactor",
+            "lifecycle": "#82 only if lifecycle consumers require repairs; do not duplicate existing scope",
+            "deferred": "#89 unrelated and remains deferred"
+          }
+        },
+        {
+          "id": "sdk-response-timeout-reuse",
+          "title": "SDK response timeouts keep a poisoned public API connection reusable",
+          "severity": "P2 correctness and interrupted-mutation state safety",
+          "confidence": "reproduced with a loopback fake OBS and confirmed pinned SDK request-ID FIFO implementation",
+          "primary_locations": [
+            "pkg/automation/client.go:157",
+            "pkg/automation/client.go:248",
+            "pkg/api/v1/client.go:123"
+          ],
+          "related_locations": [
+            "pkg/api/v1/client.go:59",
+            "pkg/api/v1/client.go:67",
+            "pkg/api/v1/errors.go:107"
+          ],
+          "trigger": "An OBS request response arrives after the SDK response timeout but before the longer public operation deadline. Public Connect passes ConnectTimeout into automation.Config.Timeout, which also sets goobs response timeout (defaults3s versus facade15s). The SDK returns an untyped timeout; request projects it to RequestError with Code0; api.run does not invalidate the connection because it only closes context errors.",
+          "impact": "The first call returns obs_request with no OBS code and Client.Closed remains false despite an interrupted operation. A subsequent mutation is sent on the same connection; the delayed prior response is consumed as its reply and fails the SDK ID check, so the second operation can apply while being reported failed. The connection stays reusable after that error too. SDK ID checking prevents a false successful acknowledgement but does not recover response alignment or establish the unknown mutation outcome.",
+          "reproduction": {
+            "harness": "/workspace/.obsgod-tools/audit-planning-20261114/generic-api/timeout-repro.go",
+            "receipt": "/workspace/.obsgod-tools/audit-planning-20261114/generic-api/timeout-repro.jsonl",
+            "command": "GOTOOLCHAIN=local GOMODCACHE=/workspace/.obsgod-tools/mod /workspace/.obsgod-tools/toolchains/go1.27.4/go/bin/go run /workspace/.obsgod-tools/audit-planning-20261114/generic-api/timeout-repro.go",
+            "parameters": "ConnectTimeout100ms, OperationTimeout1s; fixture applies legacy StartStream then delays its ACK150ms; next legacy StopStream is applied and successfully ACKed. No actual output or OBS process.",
+            "observed": {
+              "first_elapsed_ms": 100,
+              "first_error_code": "obs_request",
+              "first_obs_code": 0,
+              "closed_after_timeout": false,
+              "second_error_code_despite_successful_ack": "obs_request",
+              "closed_after_second": false,
+              "start_requests": 1,
+              "stop_requests": 1,
+              "fixture_stream_active": false
+            }
+          },
+          "fix_sketch": "Distinguish SDK transport/response deadline failures from a numeric server request rejection without retaining raw text. Invalidate/close the owned connection on a response timeout or loss of request/response correlation before releasing the public operation lease. Preserve safe timeout/cancellation classification and require reconnect plus observation before retrying. Keep ordinary numeric OBS rejection errors compatible. A small adapter error classification/lifecycle repair suffices; do not replace the transport framework.",
+          "acceptance": [
+            "A delayed-ACK fixture with shorter SDK response budget than public deadline returns a safe timeout/unavailable failure and marks the connection closed.",
+            "A subsequent operation on that client is rejected before any new request reaches the fixture; reconnect/observe remains caller-explicit.",
+            "A valid numeric OBS rejection preserves obs_request plus its OBS code and need not poison the connection.",
+            "Keep caller-deadline cancellation ownership, waiting-cancellation independence, once-only physical close, and no raw endpoint/key/server-message exposure."
+          ],
+          "issue_mapping": {
+            "primary": "#83 demonstrated timeout/lifecycle regression",
+            "supporting": "#84 bounded adapter error classification/refactor",
+            "deferred": "#89 unrelated"
+          }
+        }
+      ],
+      "hypotheses_not_promoted": [],
+      "proposed_order": [
+        "Repair shared raw recording observation validation before relying on idle/finalization authorization.",
+        "Repair mixer-enabled microphone preservation through actual game/idle observer cycles.",
+        "Repair delayed capture ownership/output recheck under existing coordination, retaining startup handshake.",
+        "Use #84 only for the bounded refactors required by the reproduced repairs; #85 follows all implementation with exact-source qualification; #86 retains actual Deck/provider tests."
+      ],
+      "positive_checks": [
+        "Public facade serializes calls and includes lease waiting in operation deadlines.",
+        "Waiting cancellation leaves another acquired call alone; acquired context cancellation closes the public facade transport before reuse.",
+        "API private service/connection models suppress formatting/JSON secrets; RequestError and public Failure suppress free-form server comments and arbitrary underlying text.",
+        "Profiles uses strict raw inventory validation and independent slices; legacy request/result arrays are copied and operations/approvals are allowlisted.",
+        "Managed Start tracks pre-existing streaming and its failure path does not stop it.",
+        "Capture path never falls back to full-screen for missing/ambiguous game identity.",
+        "Fixed diagnostic event identifiers/messages exclude arbitrary transport/provider errors and credential values.",
+        "Resilience observer has bounded retry/backoff and rechecks ownership/output under the shared lease; no output start method exists in its observer interface."
+      ],
+      "evidence_scope": {
+        "checkout_source_edited": false,
+        "commits_created_by_this_audit": false,
+        "github_writes": false,
+        "full_matrix_rerun": false,
+        "actual_obs_or_streams": false,
+        "paid_resources": false,
+        "last_product_qualification": "378b46cb8c4a9281f9d6890b2e13b223650626d5; this source audit does not requalify current source",
+        "owner_deck_testing": "unrun; no device/provider/controller acceptance claimed"
+      },
+      "reviewed_sources": [
+        "AGENTS.md",
+        "ARCHITECTURE.md",
+        "SECURITY.md",
+        "CONTINUITY.md",
+        "ONTOLOGY.md",
+        "DECISIONS.md",
+        "docs/steam-deck-building.md",
+        "docs/implementation-roadmap.md",
+        "docs/runtime-resilience.md",
+        "docs/recording-replay.md",
+        "internal/deck/control.go",
+        "internal/deck/runtime_linux.go",
+        "internal/deck/media.go",
+        "internal/deck/native_configuration.go",
+        "internal/deck/connection.go",
+        "internal/deck/config.go",
+        "internal/deck/resilience.go",
+        "internal/deck/resilience_linux.go",
+        "internal/deck/capture_watch_linux.go",
+        "internal/deck/capture_video.go",
+        "internal/deck/capture_settings.go",
+        "internal/deck/audio_control.go",
+        "internal/deck/audio_linux.go",
+        "internal/deck/mixer.go",
+        "internal/deck/mixer_talk.go",
+        "internal/deck/mixer_watch_linux.go",
+        "internal/deck/diagnostics.go",
+        "internal/commands/deck.go",
+        "internal/commands/deck_advanced.go",
+        "pkg/api/v1",
+        "pkg/automation"
+      ],
+      "limitations": [
+        "Focused bounded review; no claim every Go defect is excluded.",
+        "Reproductions use synthetic loopback OBS protocol fixtures and an external Go overlay; all real target behavior remains unrun.",
+        "Not promoting cumulative stream-byte status concerns: the generic Snapshot contract reports sequential observations; fresh advancing-byte readiness is explicitly verified at Start.",
+        "OAuth #89 remains deferred and unrelated.",
+        "No speculative security laundry list or unsolicited framework migration proposed."
+      ]
+    },
+    "lifecycle": {
+      "schema": "obsgod.audit-planning.lifecycle/v1",
+      "date": "2026-11-14",
+      "source_revision": "12ef52f9d22a7c1101f8743094325f66e3948270",
+      "scope": "Read-only audit and proposed bounded roadmap only. No source edits, commits, GitHub writes, real installation/removal, full matrix or Docker-heavy work.",
+      "checkout_status": "clean at beginning and after focused audit",
+      "evidence_boundary": "The reproductions use mocked calls and disposable local helper processes/files outside the checkout. They establish specific source defects, not actual Decky/SteamOS/OBS/provider acceptance.",
+      "findings": [
+        {
+          "id": "LIFECYCLE-01",
+          "title": "Unload can exhaust Decky's five-second deadline before cancelling an in-flight Start",
+          "classification": "confirmed-defect",
+          "severity": "high",
+          "primary_location": "steamdeck/decky/main.py:770",
+          "related_locations": [
+            "steamdeck/decky/main.py:772",
+            "steamdeck/decky/main.py:773",
+            "steamdeck/decky/main.py:419",
+            "steamdeck/decky/main.py:451",
+            "steamdeck/decky/main.py:780",
+            "steamdeck/decky/main.py:281"
+          ],
+          "trigger": "Decky replacement/reload/removal signals a backend with an in-flight Start while dependency.close or microphone talk-cancel is slow. The pinned official loader terminates a still-alive backend after five seconds.",
+          "impact": "The hook awaits dependency closure and then an eight-second mixer operation before stop() latches cancellation or signals the pending Start. Decky may SIGKILL the Python backend first. Ordinary Go children have no parent-death supervision; the pending action can continue after replacement/removal. The hook's 18/12/12-second waits cannot be relied on under this loader deadline. Hook success also does not drain configuration reader tasks; one can remain pending after unload returns.",
+          "reproduction": {
+            "script": "/workspace/.obsgod-tools/audit-planning-20261114/lifecycle-loader-budget-repro.py",
+            "command": "PYTHONDONTWRITEBYTECODE=1 python3 /workspace/.obsgod-tools/audit-planning-20261114/lifecycle-loader-budget-repro.py",
+            "observed": {
+              "loader_contract_seconds": 5,
+              "fake_child_actions": [
+                "start",
+                "mixer"
+              ],
+              "stop_invoked_before_backend_kill": false,
+              "fake_start_completed_after_backend_kill": true
+            },
+            "additional_script": "/workspace/.obsgod-tools/audit-planning-20261114/lifecycle-repro.py",
+            "additional_observed": {
+              "unload_returned_output_known_true": true,
+              "pending_owned_configuration_tasks": 1,
+              "configuration_rpc_still_pending": true
+            },
+            "safety": "Fake executable sleeps and writes a temporary marker; no OBS, Decky, Flatpak, streaming or network used. Exact owned fixture process group was killed during cleanup."
+          },
+          "upstream_contract": {
+            "revision": "ffd103b9c1a4ce5bf305e7c0998eda6e05457dad",
+            "url": "https://github.com/SteamDeckHomebrew/decky-loader/blob/ffd103b9c1a4ce5bf305e7c0998eda6e05457dad/backend/decky_loader/plugin/plugin.py#L147",
+            "sha256": "a15487dabf4ac402c13b01c5673dc41ff7bef119103c2f7b21957eb1ab1e2214",
+            "local_path": "/workspace/.obsgod-tools/decky-conventions/decky-loader/backend/decky_loader/plugin/plugin.py",
+            "record": "docs/evidence/decky-conventions-sources.json",
+            "facts": [
+              "stop sends SIGTERM and kill_if_still_running sends SIGKILL after five seconds",
+              "sandboxed_plugin.shutdown awaits _unload before _uninstall, then stops its event loop; hook return values do not veto removal"
+            ]
+          },
+          "proposed_fix": "Within #82, define one teardown policy for the supported loader budget; latch closing/cancellation and signal owned pending actions before the first await, bound/detach slow observation appropriately, and make abrupt backend termination safe for owned command processes. Drain/cancel all adapter-owned tasks, including configuration readers and update-check bookkeeping, without indiscriminately killing OBS or assuming hooks can veto Decky actions. Keep any surviving dependency worker's existing inherited leases and bounded recovery contract.",
+          "acceptance": [
+            "A faithful five-second loader stop fixture with slow microphone/dependency observations cannot permit a pending Start to mutate after backend death/reload acknowledgement",
+            "Late spawn ownership, active stream/record/replay, unknown output and abrupt parent death are tested separately; no forced kill of ordinary OBS or unrelated processes",
+            "All tracked RPC/read/update tasks have defined shutdown behavior and no child/lease is silently orphaned",
+            "Document that hooks are best effort and cannot veto normal Decky replacement/removal; leave actual supported Decky/SteamOS execution unrun until owner test"
+          ],
+          "existing_issue": 82,
+          "regression_issue": 83,
+          "audit_issue": 84,
+          "dedupe": "Extend existing #82 lifecycle acceptance; do not create another broad lifecycle/refactor issue. Missing configuration-task drain is a subcase of this finding."
+        },
+        {
+          "id": "LIFECYCLE-02",
+          "title": "Wipe deletes control/install lock inodes while holding their leases",
+          "classification": "confirmed-defect",
+          "severity": "medium",
+          "primary_location": "steamdeck/uninstall.py:130",
+          "related_locations": [
+            "steamdeck/uninstall.py:119",
+            "steamdeck/uninstall.py:231",
+            "steamdeck/uninstall.py:248",
+            "steamdeck/uninstall.py:256"
+          ],
+          "trigger": "An explicitly selected legacy --wipe runs while another controller or installer starts after the wipe removes the selected state/base directory but before the operation exits its lock contexts.",
+          "impact": "Wipe marks the state as tree and recursively removes the currently held control.lock. A concurrent controller can create a new state/control.lock inode and acquire it while the wipe still owns the old inode. The base/install.lock is deleted similarly. This defeats serialization around the remaining deletions, and waiters with old open descriptors can form a second lock generation. Reset already preserves the control.lock inode, demonstrating a bounded model to reuse.",
+          "reproduction": {
+            "script": "/workspace/.obsgod-tools/audit-planning-20261114/lifecycle-repro.py",
+            "observed": {
+              "new_controller_acquired_while_wipe_holds_old_fd": true,
+              "old_inode": 474037,
+              "new_inode": 474039,
+              "distinct_inode": true
+            },
+            "safety": "Only synthetic disposable state files were removed; OBS state checks were fixed idle mocks and plugin removal was disabled."
+          },
+          "proposed_fix": "Keep stable coordination lock inodes outside the wipe deletion set (or preserve the minimal lock namespaces as reset already does), and make the preview truthful about retained coordination metadata. Do not unlink a live coordination path as a cleanup postcondition. Cover install and control locks together.",
+          "acceptance": [
+            "A controller/installer started at each deletion boundary cannot acquire a second lock generation",
+            "Pre-existing waiters and newly opened lock descriptors serialize on the same inode",
+            "Wipe still deletes only explicitly selected owned data and preserves ordinary OBS, other plugins, shared dependencies and unselected media",
+            "Recovery after partial deletion preserves lock identity and reports remaining selected paths"
+          ],
+          "existing_issue": 82,
+          "regression_issue": 83,
+          "audit_issue": 84,
+          "dedupe": "A concrete legacy cleanup regression under #82, not a new removal framework."
+        },
+        {
+          "id": "LIFECYCLE-03",
+          "title": "Retained Desktop installer mutates Flatpak dependencies before idle preflight or shared locks",
+          "classification": "confirmed-defect",
+          "severity": "medium",
+          "primary_location": "steamdeck/install.py:350",
+          "related_locations": [
+            "steamdeck/install.py:282",
+            "steamdeck/install.py:286",
+            "steamdeck/install.py:290",
+            "steamdeck/install.py:359",
+            "steamdeck/install.py:361",
+            "steamdeck/install.py:362"
+          ],
+          "trigger": "A user runs the retained Desktop install/repair path with one OBS/GStreamer dependency missing while output is active/unknown or a native dependency job is already holding the shared control lease.",
+          "impact": "ensure_dependencies can remote-add/install both references before require_idle or installation_lock/control_lock is reached. It therefore bypasses the native dependency job's idle/lease gate and can overlap that job or alter dependencies before a later safety refusal. It also trusts an existing remote solely by the name flathub and does not match the native controller's explicit trust/branch checks.",
+          "reproduction": {
+            "script": "/workspace/.obsgod-tools/audit-planning-20261114/lifecycle-repro.py",
+            "observed_order": [
+              "dependency-mutation-stage",
+              "active-output-rejected-after-dependency-stage"
+            ],
+            "method": "Run real install composition with side-effect-free dependency marker, no-op directory preparation/locks, and an idle preflight that rejects; no package installed. Source at282–295 establishes the Flatpak mutation commands executed by that earlier stage."
+          },
+          "proposed_fix": "As part of retiring mandatory paired installation in #82, keep any explicit legacy recovery path gated by validated session, fresh idle state and the same shared lease before dependency mutation; make remote/ref policy equivalent to the native setup boundary or route to that already-owned operation. Avoid a second automatic install transaction. Preserve historical archives as compatibility evidence, not permission to leave current helper entry points inconsistent.",
+          "acceptance": [
+            "Active/unknown output, busy native setup and busy control lease produce no remote-add/install command",
+            "A pre-existing disabled/unverified/unrelated flathub remote is rejected before mutation",
+            "Only missing compatible refs are installed and cancellation/retry preserves shared dependencies",
+            "Normal standard ZIP installation still has no dependency download in lifecycle initialization"
+          ],
+          "existing_issue": 82,
+          "regression_issue": 83,
+          "audit_issue": 84,
+          "dedupe": "Bound retained helper behavior under #82 instead of duplicating completed #78 native dependency-job implementation."
+        },
+        {
+          "id": "LIFECYCLE-04",
+          "title": "Plugin update check can recommend downgrading a newer standard Decky plugin to the old paired runtime",
+          "classification": "confirmed-defect",
+          "severity": "medium",
+          "primary_location": "steamdeck/decky/main.py:748",
+          "related_locations": [
+            "steamdeck/decky/main.py:753",
+            "steamdeck/releases.py:247",
+            "steamdeck/releases.py:251",
+            "steamdeck/releases.py:265",
+            "steamdeck/update.py:210",
+            "steamdeck/update.py:246",
+            "steamdeck/decky/src/index.tsx:309"
+          ],
+          "trigger": "Standard Decky plugin version9 coexists with retained Desktop app4, and the verified old paired release channel offers version5. The panel's check chooses app4 for comparison.",
+          "impact": "The plugin reports version5 as available even though version5 is older than the loaded plugin9, then tells the user to use the Desktop updater and repair the pair. That updater compares only the Desktop version and invokes the paired installer, which replaces the normal Decky plugin as part of its apply. The normal Decky-only install can also be directed to a Desktop updater it never installed.",
+          "reproduction": {
+            "method": "Disposable app4 manifest/current symlink, real releases.current_versions and check_updates with only _latest replaced by a fixed verified-shape candidate5; comparison selection exactly mirrors main.py748.",
+            "observed": {
+              "app": "0.1.0-deck.4",
+              "plugin": "0.1.0-deck.9",
+              "comparison_version": "0.1.0-deck.4",
+              "candidate": "0.1.0-deck.5",
+              "available": true,
+              "candidate_older_than_loaded_plugin": true,
+              "message": "OBSGod 0.1.0-deck.5 is available. Stop output and use Update OBSGod in Desktop Mode to install it."
+            },
+            "safety": "No network, update or installation invoked."
+          },
+          "proposed_fix": "Complete existing #82 channel alignment: treat the loaded standard plugin as the primary update identity and give truthful Decky/sideload instructions for its actual channel. Surface a separate optional legacy app status instead of declaring the pair damaged. If retained recovery can replace a newer plugin, require a deliberate version-specific recovery/downgrade action rather than presenting it as an ordinary update.",
+          "acceptance": [
+            "Decky-only, matching old pair, newer-plugin/older-app, newer-app/older-plugin, offline and no-published-plugin-release cases return accurate independent statuses",
+            "No ordinary check recommends a candidate older than the loaded plugin or a missing updater",
+            "Check-only behavior remains read-only and source/repository trust does not expand",
+            "Legacy cleanup preview can retire obsolete app/launchers while preserving the active Decky plugin and shared settings by default"
+          ],
+          "existing_issue": 82,
+          "regression_issue": 83,
+          "audit_issue": 84,
+          "dedupe": "Already part of #82 update-channel/legacy-retirement criteria; refine that issue with this bounded downgrade trigger."
+        },
+        {
+          "id": "LIFECYCLE-05",
+          "title": "Legacy path validators lack the writable-ancestor protection used by native storage",
+          "classification": "bounded-hardening-improvement",
+          "severity": "medium",
+          "primary_location": "steamdeck/paths.py:37",
+          "related_locations": [
+            "steamdeck/paths.py:42",
+            "steamdeck/uninstall.py:47",
+            "steamdeck/decky/storage.py:53",
+            "steamdeck/decky/dependency_setup.py:108"
+          ],
+          "trigger": "Legacy installer/updater/removal roots have a user-owned group/other-writable nonsticky ancestor, such as a shared custom data directory inside the user's home.",
+          "impact": "Legacy validation accepts the ancestor even though another user may be able to replace descendants between validation and operations. New native storage and control paths explicitly refuse this condition. The validation gap is confirmed; no multi-user exploit or credential exposure was attempted or claimed.",
+          "reproduction": {
+            "method": "Create a disposable home/shared ancestor with mode0777, call paths.validate_owned_root(home/shared/obsgod,home)",
+            "observed": "Accepted without error; no installer/remover invoked."
+          },
+          "proposed_fix": "If the legacy helpers remain reachable, apply the same owned/non-writable-or-sticky ancestor policy to their current writable/removal roots; share only a small validation seam where that directly eliminates demonstrated drift. Preserve supported home aliases, safe custom XDG roots and trusted sticky temporary roots.",
+          "acceptance": [
+            "0770/0777 nonsticky unsafe ancestry fails before writes/deletes/lock creation",
+            "Safe owner-only roots, supported normalized home aliases and trusted sticky ancestors work",
+            "Ancestry changes between preview and apply fail closed and unrelated sentinels are preserved"
+          ],
+          "existing_issue": 82,
+          "audit_issue": 84,
+          "dedupe": "Coordinate with security auditor; merge into any matching ancestry/lock finding rather than creating duplicate cleanup work."
+        }
+      ],
+      "positive_observations": [
+        "Standard ZIP is primary package and contains complete backend/native/browser payload; legacy archive is documented as compatibility rather than a normal requirement.",
+        "Native DependencySetup has consent-only mutation, bounded sanitized output, actual non-root session checks, compatible user refs, same managed control lease, and inherited bounded worker leases for abrupt backend loss.",
+        "Native storage retains the canonical shared XDG credentials/state/control-lock namespace, validates rather than overrides map paths, preserves Flatpak data/cache roots, and has bounded metadata rollback without moving credentials/media.",
+        "Reset preserves control.lock inode; ordinary uninstall preserves settings/state/media/dependencies and delegates plugin removal through Decky rather than raw deletion."
+      ],
+      "checks": [
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s steamdeck/tests -p test_dependency_setup.py -v",
+          "python": "3.12.14",
+          "result": "passed",
+          "tests_ran": 19,
+          "passed": 18,
+          "skipped": 1,
+          "seconds": 31.624,
+          "skip": "RootRunner.test_fixtures_execute_as_an_actual_unprivileged_user: only needed when outer runner is root; current runner already unprivileged",
+          "limits": "Fake Flatpak, real disposable child processes/socket; no SteamOS/real Flatpak transaction claim"
+        },
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 python3 /workspace/.obsgod-tools/audit-planning-20261114/lifecycle-repro.py",
+          "result": "confirmed three targeted failures",
+          "scope": "teardown reader drain, wipe lock split, dependency/preflight order"
+        },
+        {
+          "command": "PYTHONDONTWRITEBYTECODE=1 python3 /workspace/.obsgod-tools/audit-planning-20261114/lifecycle-loader-budget-repro.py",
+          "result": "confirmed late fake Start after backend killed at5seconds",
+          "scope": "disposable owned executable and parent process only"
+        },
+        {
+          "command": "git status --porcelain=v1; git rev-parse HEAD",
+          "result": "clean; exact baseline12ef52f9d22a7c1101f8743094325f66e3948270"
+        }
+      ],
+      "proposed_sequence": [
+        {
+          "issue": 82,
+          "work": "Resolve LIFECYCLE-01 and LIFECYCLE-02 first; both undermine ownership/serialization at teardown or explicit wipe."
+        },
+        {
+          "issue": 82,
+          "work": "Complete channel/legacy transition using LIFECYCLE-03/04 and surviving helper-path protection; inventory/preview/export before any explicit old-data wipe. Reuse native storage/dependency code, no framework rewrite."
+        },
+        {
+          "issue": 83,
+          "work": "Add faithful five-second loader and hard-parent-loss regressions plus lock-generation/dependency-preflight/version-crossing cases. Integrate after actual #82 repair; do not duplicate feature implementation."
+        },
+        {
+          "issue": 84,
+          "work": "Reconcile lifecycle/storage/dependency/package/uninstall/update docs to final contracts and record remaining owner/loader gates. No new broad cleanup issue."
+        },
+        {
+          "issue": 85,
+          "work": "Only after approved source-changing work: full available exact-source matrix and candidate qualification; intentionally unrun in this audit."
+        }
+      ],
+      "remaining_target_gates": [
+        "Owner sync on this concrete proposed roadmap before executing fixes; current authorization is audit/planning only.",
+        "Exercise actual supported Decky loader install, same-version repair, upgrade, reload, removal and forced backend termination on Steam Deck/SteamOS; verify the precise installed loader kill deadline and runtime user/ownership behavior.",
+        "Demonstrate settings/secret binding/shared control inode/history/recordings preservation and one active controller across normal Decky replacement; explicit reset/wipe remains separate.",
+        "Observe real user Flatpak/D-Bus scope, remote trust, compatible OBS/GStreamer transaction cancellation/recovery and no duplicate dependency transaction.",
+        "Test active stream/record/replay/unknown output during reload/update/removal with separate viewer/audio/device observations; mocks cannot establish output disposition or finalize real recordings.",
+        "Qualify final exact-source supported local matrix/current-identity artifact under #85, then owner #86 test/fix loop; hosted CI/review and subsequent exact publisher migration/new-install tests retain their separate gates."
+      ]
+    },
+    "architecture": {
+      "audit": "Architecture and maintainability",
+      "source_revision": "12ef52f9d22a7c1101f8743094325f66e3948270",
+      "mode": "read-only source audit; no product changes, builds, full matrix, commits or external writes",
+      "summary": "The documented ownership boundaries are substantially intact. Keep the Go control/OBS layer, Python process adapters and existing React/Decky UI. The useful cleanup is a small action/deadline policy, stricter readback contracts and removal of demonstrably duplicated observations; no framework or adapter rewrite is justified.",
+      "findings": [
+        {
+          "id": "ARCH-01",
+          "priority": "P2",
+          "disposition": "fix-before-final-test-candidate",
+          "proposed_tracker": "#83, with bounded extraction tracked in #84",
+          "title": "Align capture-mode deadline and late-completion behavior across UI, adapter and CLI",
+          "locations": [
+            "steamdeck/decky/src/index.tsx:54",
+            "steamdeck/decky/src/index.tsx:201",
+            "steamdeck/decky/main.py:445",
+            "internal/commands/deck.go:87",
+            "internal/deck/lock_linux.go:34",
+            "internal/deck/capture_settings.go:46"
+          ],
+          "evidence": "The UI abandons its capture-mode promise after 15 seconds; the Promise wrapper does not cancel its RPC. Python allows 85 seconds and shields the control task; Go permits 75 seconds including the shared control-lock wait. A different CLI process holding control.lock for 15–75 seconds can therefore cause an unconfirmed UI reply before the original request acquires the lock and saves capture mode later. Backend busy/state checks still prevent this from authorizing a broadcast or competing mutation.",
+          "status": "Source-proven deadline mismatch and late-write path; timed real-process reproduction not run during this audit.",
+          "change": "Give this quick settings mutation a short backend lock/deadline policy whose complete command, cleanup and readback budget fits beneath the UI deadline, or preserve pending operation identity in the UI until authoritative completion. Extract only the small action timeout/cancellation policy used by _run and the frontend wrappers; retain special Start/Stop and microphone-lease semantics.",
+          "benefit": "The player can tell whether a capture-mode edit is still pending, failed without writing, or completed. A future action cannot silently acquire the wrong default timeout from unrelated stream-start behavior.",
+          "risk": "A generic cancellation abstraction could accidentally cancel Stop or microphone release. Keep action-specific policies and avoid replacing the existing task/state machine.",
+          "acceptance": [
+            "Hold the actual shared control lock past the UI budget, invoke packaged capture-mode change, release the lock, and prove either no later settings write occurs or the same pending operation remains visible through completion.",
+            "Cover success near the deadline, caller disconnect, watcher-lease contention, Stop during the wait, and repeated identical edits; preserve key/settings binding and explicit broadcast authorization.",
+            "Ensure action timeout ordering includes Go's post-action status and Python's additional status query; testing only the core mutation timeout is insufficient."
+          ],
+          "test_gap": "Existing Python/browser tests cover capture-mode coalescing, JSON arguments and live/unknown output guards; they do not exercise shared-lock delay beyond the 15-second UI deadline."
+        },
+        {
+          "id": "ARCH-02",
+          "priority": "P2",
+          "disposition": "bounded-contract-hardening",
+          "proposed_tracker": "#83 and #84",
+          "title": "Reject incomplete successful configuration readback instead of inventing readiness",
+          "locations": [
+            "steamdeck/decky/main.py:69",
+            "steamdeck/decky/main.py:73",
+            "steamdeck/decky/main.py:84",
+            "steamdeck/decky/src/Configuration.tsx:26",
+            "steamdeck/decky/src/state.mjs:3",
+            "steamdeck/tests/test_configuration_adapter.py:86"
+          ],
+          "evidence": "A read-only Python probe passed schema_version=1, all success/readiness booleans true, settings={} and connection={} to _public_configuration. It returned ok/configured/output_known/can_configure/can_close all true with synthesized default settings and an unknown connection. Current Go does not emit that payload; this is a malformed/future-contract robustness gap, not a reproduced production write or broadcast. Separately, shipped outputKnown accepts payloads lacking output_known via a fallback whose comment names older preview fixtures.",
+          "change": "Require the mandatory schema-v1 settings/connection fields and mutually consistent readiness flags before granting client readiness. Retain documented optional legacy fields such as zero/omitted dimensions. Use a small shared corpus of real Go-produced and malformed JSON fixtures across Go, Python and JS; do not require schema generation or a new validation library. Review and remove the fixture-only output-known fallback once supported runtime contracts are enumerated.",
+          "benefit": "A missing field cannot look like a saved default or fresh safe configuration; actual contract drift becomes visible at the boundary.",
+          "risk": "Overstrict readback validation can reject legitimate old zero-dimension/capture-mode representations. Preserve those explicitly and keep Go as the sole write authority.",
+          "acceptance": [
+            "Missing required settings/connection members, wrong member types and contradictory can_configure/can_close flags must return unknown readiness with both actions disabled.",
+            "Actual first-run, configured, running-idle, streaming, legacy-zero-dimension and unavailable Go responses retain their intended UI states.",
+            "Unknown or absent output-known data cannot enable new output or destructive/configuration controls; Stop/recovery remains available."
+          ],
+          "verification": "Executed only an import and pure projection call with PYTHONDONTWRITEBYTECODE=1; no child command, application data or source file was changed."
+        },
+        {
+          "id": "ARCH-03",
+          "priority": "P2",
+          "disposition": "measure-and-bounded-refactor-in-84; not a proven target-performance defect",
+          "proposed_tracker": "#84, focused regression coverage in #83",
+          "title": "Remove repeated observations before adding another polling/cache layer",
+          "locations": [
+            "internal/deck/control.go:114",
+            "internal/deck/control.go:127",
+            "internal/deck/control.go:140",
+            "internal/deck/media.go:49",
+            "internal/deck/media.go:61",
+            "pkg/automation/setup.go:82",
+            "steamdeck/decky/src/index.tsx:320",
+            "steamdeck/decky/src/Configuration.tsx:84",
+            "steamdeck/decky/src/Setup.tsx:119",
+            "steamdeck/decky/dependency_setup.py:475"
+          ],
+          "evidence": "One successful Status invokes RuntimeStatus twice: directly, then through ObserveMedia/mediaSnapshotFrom. RuntimeStatus performs five serial WebSocket requests. The base status path therefore performs 13 requests before optional screenshot/audio work, including GetRecordStatus three times, under a two-second budget. Source-defined frontend cadences add about 40 main status and 12 full configuration/Status CLI invocations per minute while mounted. The installed-compatible dependency readiness path executes six Flatpak queries every five seconds (up to 72 Flatpak processes/minute), even with details hidden. Opening health adds another independent five-second sample. These are call-count estimates from code, not measured Deck CPU/latency results.",
+          "change": "First pass the just-verified runtime ownership observation into an internal media snapshot helper, keeping independent public MediaStatus validation intact. Then measure actual packaged calls with panel open/closed and health shown/hidden. Only if useful, add a short completed-read cache/coalescing policy for installed dependency readiness with explicit invalidation after install/cancel/context change and manual refresh; keep Go's fresh Start/setup preflight authority.",
+          "benefit": "Removing the redundant RuntimeStatus alone takes the base status request count from 13 to 8 and reduces deadline pressure without reusing stale state. Bounded readiness polling reduces subprocess churn on the target.",
+          "risk": "Sharing state across separate invocations or caching edit/output authority would weaken unknown-state handling. Reuse only within one authenticated observation, and keep per-mutation fresh checks.",
+          "acceptance": [
+            "Count fixture WebSocket requests and verify one runtime ownership read per Status; force each request failure and retain unknown output rather than guessed idle.",
+            "Use delayed fixture responses near the two-second budget and confirm optional media/audio work cannot convert observation failure into safe idle.",
+            "Record command counts/latency for mounted, hidden, reopened and health-expanded panel states before and after any polling change; do not claim FPS/power gains without Deck measurement.",
+            "Dependency install/cancel/reload/context changes and explicit refresh invalidate cached readiness; external dependency removal is discovered within a documented bound and fresh Start still rejects it."
+          ],
+          "test_gap": "Current runtime fixture responds immediately; it checks independent recording/capture facts without an observation call-count or slow-response assertion."
+        },
+        {
+          "id": "ARCH-04",
+          "priority": "P3",
+          "disposition": "small-later-cleanup; do not delay owner testing",
+          "proposed_tracker": "#84",
+          "title": "Move the two reusable package helpers out of the legacy executable builder",
+          "locations": [
+            "scripts/package-decky.py:24",
+            "scripts/package-decky.py:160",
+            "scripts/package-deck.py:32",
+            "scripts/package-deck.py:56",
+            "scripts/decky_package.py:1"
+          ],
+          "evidence": "The primary standard Decky builder imports the entire executable legacy package-deck.py module through importlib only to call capture_source and notices. Shared payload/ZIP/staging logic already lives in decky_package.py. The dependency makes an unrelated compatibility-builder top-level edit able to break the primary builder. No current artifact corruption or unsafe import side effect was found.",
+          "change": "Move just capture_source and notices into an appropriate existing/shared packaging module, retain thin call compatibility for the older builder, and remove dynamic primary-to-legacy import. Remove unused stream_health Result/embedded branches only after confirming all supported producers; they are not a separate cleanup project.",
+          "benefit": "Primary packaging has a direct dependency on neutral helpers, while the compatibility archive remains supported.",
+          "risk": "Changing notices/order/archive timestamps changes package hashes; expected byte-preserving extraction needs equivalence checks at the same epoch and pinned dependencies.",
+          "acceptance": [
+            "Before/after helper outputs and all standard payload files match byte-for-byte at fixed source inputs/epoch; notices/preferred-source contents remain complete.",
+            "Retain primary official-CLI assembly coverage and legacy runtime/updater compatibility tests; do not remove the legacy builder or old public artifacts merely because the standard ZIP is primary."
+          ]
+        }
+      ],
+      "ownership_and_refactor_notes": [
+        "steamdeck/decky/main.py is 799 lines and owns subprocess lifecycle, action serialization, public configuration projection, setup integration and update checks. Split pure projection/validation and the bounded action/process policy only when addressing ARCH-01/02; preserve Plugin as the orchestration owner. Its length alone does not justify a rewrite.",
+        "internal/deck/control.go is 781 lines. Start/TestRecording/media.go repeat capture preparation and watcher setup, but different rollback/preexisting-output semantics are intentional. An extraction must encode those ownership differences explicitly; defer broad workflow unification until a demonstrated regression/change need.",
+        "Do not deduplicate public API types into raw automation/goobs models. Independent public models, explicit legacy acknowledgment semantics and stronger observed public API semantics are intentional contracts.",
+        "Python storage-map validation repeats security checks in Go by design. Both independently validate a cross-process trust boundary; do not collapse this into an adapter-only check.",
+        "Desktop/Decky provider guides and tiny presentation helpers are duplicated, but no current correctness drift was established. Consolidate only when editing those guides, using existing build conventions; do not add a component-library or generation project."
+      ],
+      "deferred_or_not_justified": [
+        "No new state framework, schema-generation dependency, component library, frontend rewrite or rewrite of every Python adapter.",
+        "No deletion of the legacy CLI/creator/runtime packaging surfaces solely because their modules are large or the standard plugin is primary.",
+        "No claim that polling counts prove Steam Deck FPS, power, session or provider behavior.",
+        "No application behavior change, new tool installation, matrix rerun, repository write, commit or GitHub action was performed. The output JSON is outside the checkout."
+      ],
+      "qualification_limits": "The last six-job ACT pass at 378b46c remains revision-bound and does not satisfy missing Deck/controller/provider/review/hosted CI or original acceptance. This audit does not requalify 12ef52f or a future candidate."
+    },
+    "ui": {
+      "audit": "Decky UI, UX, controller and accessibility planning audit",
+      "baseline": "12ef52f9d22a7c1101f8743094325f66e3948270",
+      "scope": "Read-only source review and focused packaged frontend reproductions; no source fixes, dependency installation, GitHub writes, commits, image generation or full matrix",
+      "artifact": {
+        "path": "/workspace/.obsgod-tools/native-config-candidate-3/obsgod-decky.zip",
+        "sha256": "077234a0b917e58a4723d846ed56ff5f8ba23bc4721f344c99889e66a7a719db",
+        "runtime_source": "378b46cb8c4a9281f9d6890b2e13b223650626d5",
+        "baseline_source_comparison": "git diff of artifact runtime source to baseline has no change in steamdeck/decky/src, current fixture.html or package.json"
+      },
+      "evidence": {
+        "browser_script": "/workspace/.obsgod-tools/audit-planning-20261114/ui-evidence/audit-browser.py",
+        "browser_results": "/workspace/.obsgod-tools/audit-planning-20261114/ui-evidence/browser-findings.json",
+        "screenshots": "/workspace/.obsgod-tools/audit-planning-20261114/ui-evidence/",
+        "browser": "Host /usr/bin/chromium through existing Python Playwright, viewport 400x800, root 330px; actual extracted package frontend with repository simulated Decky/Steam UI APIs",
+        "fixture_changes": "Only outside checkout: injected retry_recovery transport rejection and delayed clip-list response; all other cases use existing fixture flags",
+        "state_tests": {
+          "command": "node --test tests/state.test.mjs tests/health.test.mjs tests/setup-state.test.mjs tests/configuration-state.test.mjs",
+          "cwd": "/workspace/obsgod/steamdeck/decky",
+          "result": "22 passed, zero failed or skipped"
+        },
+        "limitations": [
+          "Fixture substitutes HTML buttons, selects and fields for real Steam/Decky components. Its exact pixel geometry is a reproduction of source hierarchy, not target visual or controller qualification.",
+          "Real Steam Deck, SteamOS/Flatpak/Gamescope/AMD, actual Decky focus navigation, Steam keyboard, headset routing, provider/viewer reception and adoption remain unrun.",
+          "No real OBS, provider, network install or live broadcast was exercised by this UI audit."
+        ]
+      },
+      "findings": [
+        {
+          "id": "UI-01",
+          "priority": "P1",
+          "title": "Put observed status and Start/Stop at the top of the normal panel",
+          "status": "Observed source order and reproduced with packaged frontend; target usability inference",
+          "locations": [
+            "steamdeck/decky/src/index.tsx:263",
+            "steamdeck/decky/src/index.tsx:277",
+            "steamdeck/decky/src/Configuration.tsx:164",
+            "steamdeck/decky/src/Configuration.tsx:192",
+            "steamdeck/decky/src/Mixer.tsx:43"
+          ],
+          "observation": "Dependency setup, the complete saved destination form and local connection section all render before YOUR STREAM even for an already configured/live user. In the 400x800 native-stub fixture, configured-idle Start y=1812px / Stop y=1865px and document height=5763px. After configuration also refreshed to live state, Start y=1786px / Stop y=1839px, so the primary stream controls remain off the initial viewport. First-run Start y=1942px. Advanced mixer controls and between-game/media controls are mostly expanded below.",
+          "impact": "Routine streaming and urgent Stop/recover require unnecessary navigation past setup/recovery content. The normal QAM feels like an administrative form rather than stream control.",
+          "suggested_fix": "Reuse native Decky components; move the compact observed stream status and Start/Stop before setup. Show a concise setup-required next step for first use; collapse saved destination, dependency details and local connection/advanced controls behind explicit disclosures. Keep live mute near primary controls. Keep Stop/recover reachable independent of setup readiness and do not make the decorative mark carry state.",
+          "acceptance": [
+            "Configured idle/live/unknown panels expose status plus relevant Start/Stop/recover in their initial target QAM view.",
+            "Controller navigation reaches Stop without traversing setup fields; no focus jump on polls or disclosure collapse.",
+            "Unknown/stale/output-active and setup-busy safety remains unchanged; first-use setup remains discoverable and does not broadcast.",
+            "Use a focused browser geometry/navigation check plus actual Deck controller/Steam keyboard acceptance; native-stub geometry is not the target proof."
+          ],
+          "issue_mapping": [
+            "#81"
+          ],
+          "evidence": [
+            "configured-idle-viewport.png",
+            "streaming-viewport.png",
+            "first-run-viewport.png",
+            "browser-findings.json"
+          ]
+        },
+        {
+          "id": "UI-02",
+          "priority": "P2",
+          "title": "A recovery transport failure has no visible result while stream-health details are closed",
+          "status": "Reproduced fault injection in actual packaged frontend",
+          "locations": [
+            "steamdeck/decky/src/Advanced.tsx:153",
+            "steamdeck/decky/src/Advanced.tsx:159",
+            "steamdeck/decky/src/index.tsx:213"
+          ],
+          "observation": "Retry bounded audio/capture recovery catches rejection into HealthTools.message, but that message only renders inside the open health-details block. With the default closed state, an injected retry_recovery rejection makes one backend call and produces no failure text or failure toast. The root tool runner clears busy but does not retain a failure notice on rejection.",
+          "impact": "The user gets no explanation or next action after a failed recovery attempt and can repeat it without knowing the outcome is unconfirmed.",
+          "suggested_fix": "Render the recovery action result next to its button regardless of health disclosure state and expose a visible status/live result for pending, success and unconfirmed failure. Preserve the actual observed output state and bounded backend behavior.",
+          "acceptance": [
+            "Reject the recovery callable with health details closed and open; a visible, accessible, secret-free failure explains that recovery is unconfirmed and offers inspect/retry guidance.",
+            "No green success, stopped state or restart is inferred from the request result."
+          ],
+          "issue_mapping": [
+            "#83",
+            "#81"
+          ],
+          "evidence": [
+            "recovery-error-collapsed.png",
+            "browser-findings.json:recovery-error-collapsed"
+          ]
+        },
+        {
+          "id": "UI-03",
+          "priority": "P2",
+          "title": "Saved-clip browser reports an empty library before listing has finished",
+          "status": "Reproduced delayed response in actual packaged frontend",
+          "locations": [
+            "steamdeck/decky/src/Advanced.tsx:94",
+            "steamdeck/decky/src/Advanced.tsx:101",
+            "steamdeck/decky/src/Advanced.tsx:116",
+            "steamdeck/decky/src/Advanced.tsx:118"
+          ],
+          "observation": "Browse saved clips opens immediately with clips initialized to an empty array. During an unresolved media list call it renders 'No finalized managed clips listed' and Desktop inspection advice. There is no distinct list-loading state; a later result can replace this apparent empty state.",
+          "impact": "Users can believe clips are missing and leave or repeat work while the first observation is still pending. Existing cached results similarly have no explicit freshness indicator during reload.",
+          "suggested_fix": "Track clip-list loading, loaded-empty and failure separately; show the empty message only after a successful completed empty list. Preserve previous clips with a refreshing indicator rather than claiming current completeness.",
+          "acceptance": [
+            "A delayed list shows 'Loading saved clips…' or equivalent until completion.",
+            "Completed nonempty, completed empty, rejected and subsequent refresh states have distinct appropriate text without losing prior confirmed clips or starting output."
+          ],
+          "issue_mapping": [
+            "#81",
+            "#83"
+          ],
+          "evidence": [
+            "clips-loading-empty.png",
+            "browser-findings.json:clips-loading-empty"
+          ]
+        },
+        {
+          "id": "UI-04",
+          "priority": "P2",
+          "title": "Provider guide navigation lacks error feedback",
+          "status": "Reproduced with repository external-navigation failure flag",
+          "locations": [
+            "steamdeck/decky/src/Configuration.tsx:169",
+            "steamdeck/decky/src/Support.tsx:60"
+          ],
+          "observation": "The destination guide button directly calls NavigateToExternalWeb. With fixture.linkFailure=true it raises 'fixture external navigation denied' as a page error and renders no failure message. The Support component already uses a bounded catch-and-message pattern for the same navigation API.",
+          "impact": "First-time users who cannot open the guide get no in-panel reason or recovery instruction while collecting server/key details.",
+          "suggested_fix": "Use a small shared or local guarded navigation handler with provider-specific, secret-free feedback and retry/manual URL guidance. Keep local setup usable offline.",
+          "acceptance": [
+            "Rejected external navigation preserves focus, shows an accessible provider-guide failure, and leaves server/key drafts and broadcast state intact.",
+            "Successful navigation opens only after explicit user action."
+          ],
+          "issue_mapping": [
+            "#81",
+            "#83"
+          ],
+          "evidence": [
+            "browser-findings.json:guide-navigation-error"
+          ]
+        },
+        {
+          "id": "UI-05",
+          "priority": "P2",
+          "title": "Advanced options point to optional Desktop Setup without a route from the plugin",
+          "status": "Observed source integration gap; actual target journey unrun",
+          "locations": [
+            "steamdeck/decky/src/index.tsx:264",
+            "steamdeck/decky/src/Configuration.tsx:36",
+            "steamdeck/decky/src/Configuration.tsx:189",
+            "steamdeck/decky/src/Advanced.tsx:79",
+            "steamdeck/decky/src/Advanced.tsx:88",
+            "steamdeck/decky/src/Advanced.tsx:119",
+            "docs/native-configuration.md:52"
+          ],
+          "observation": "Configuration supports an optional onOpenDesktopSetup button, but Content never supplies the callback. Multiple native hints direct users to Desktop Setup for idle media, profile import/bindings and recording storage, while only the documentation explains running the bundled bin/obsgod deck setup. The standard ZIP carries setup assets but no separately installed Desktop launcher.",
+          "impact": "Users reaching the bounds of native controls have an avoidable dead end and may install a second app or assume the advanced feature is missing.",
+          "suggested_fix": "Provide a bounded 'Open Desktop Setup / how to open' help route consistent with actual Desktop/Gaming Mode lifecycle. A clear instruction page using the existing bundled command is sufficient before any more elaborate launcher; private loopback tokens must stay private. Update stale quality guidance now that exact native quality fields exist.",
+          "acceptance": [
+            "From the installed standard plugin a user can discover exact optional Desktop Setup instructions without a separately installed application or development tools.",
+            "The route uses the existing protected local setup; no token enters diagnostics, no implicit provider login and no output begins."
+          ],
+          "issue_mapping": [
+            "#81"
+          ]
+        },
+        {
+          "id": "UI-06",
+          "priority": "P2",
+          "title": "Standalone-plugin update guidance still promises a bundled Desktop updater",
+          "status": "Observed source and package inventory mismatch; actual Decky update acceptance unrun",
+          "locations": [
+            "steamdeck/decky/src/index.tsx:239",
+            "steamdeck/decky/src/index.tsx:308",
+            "steamdeck/decky/src/index.tsx:311",
+            "scripts/decky_package.py:24",
+            "docs/decky-package.md:54"
+          ],
+          "observation": "The update failure message and persistent UPDATES hint tell users to use the bundled Desktop updater. The inspected 33-file primary standard ZIP includes the runtime and optional browser setup but contains no update.py or updater launcher. The compatibility Desktop runtime archive contains those files separately; canonical package docs already call Decky-managed replacement/removal primary.",
+          "impact": "Fresh standard-ZIP users are sent to an unavailable update tool; showing App/Plugin/Updater unknown versions also exposes compatibility implementation details without a clear user action.",
+          "suggested_fix": "Under the existing lifecycle work, present the actual install-channel update path and a concise plugin version. Retain paired app/updater information only where that compatibility installation is positively identified and useful. Do not silently let competing managers replace the same plugin.",
+          "acceptance": [
+            "Fresh standard ZIP, existing paired Desktop install, offline check and version-mismatch cases show truthful actionable instructions.",
+            "The standard plugin never advertises an absent bundled updater; checking remains read-only and respects live/unknown output safety."
+          ],
+          "issue_mapping": [
+            "#82",
+            "#81"
+          ]
+        }
+      ],
+      "planned_scope_not_new_defects": [
+        {
+          "issue": "#80",
+          "detail": "Selected 01/aurora concept and lowercase deckystream creative direction are recorded, while current runtime still uses generated Decky Stream display name and a status-dot icon. Integrate approved source/exports via #80 then #81; do not open a second broad branding issue or generate artwork during this audit.",
+          "locations": [
+            "steamdeck/decky/src/product.ts:3",
+            "steamdeck/decky/src/index.tsx:92",
+            "steamdeck/decky/src/index.tsx:321",
+            "docs/implementation-roadmap.md:27"
+          ]
+        },
+        {
+          "issue": "#81",
+          "detail": "Add disclosure semantics (aria-expanded/controls where supported) and focus-return coverage while restructuring. Existing show/hide labels provide a start; actual Steam navigation cannot be qualified by the HTML fixture."
+        },
+        {
+          "issue": "#86",
+          "detail": "Validate real QAM hide/reopen and Steam keyboard: mask and clear draft secrets as promised, retain navigation position appropriately, cancel held-talk lease on actual panel/focus loss, support modal Back/cancel and controller sliders/dropdowns, ensure contrast/text scaling, and verify audible local playback and separate viewer reception on the exact final candidate."
+        }
+      ],
+      "preserve": [
+        {
+          "fact": "Current dependency readiness is separate from OBS launch/connection/output; explicit consent and Later exist, setup status has timeout/unknown handling and background-job recovery.",
+          "locations": [
+            "steamdeck/decky/src/Setup.tsx:60",
+            "steamdeck/decky/src/Setup.tsx:87",
+            "steamdeck/decky/src/setup-state.mjs:28"
+          ]
+        },
+        {
+          "fact": "Native Kick/Twitch/YouTube/custom manual destination form already exists; masked drafts, paste fallback, no saved-secret readback, sparse writes and separate confirmed local-password controls should be preserved.",
+          "locations": [
+            "steamdeck/decky/src/Configuration.tsx:24",
+            "steamdeck/decky/src/Configuration.tsx:136",
+            "steamdeck/decky/src/Configuration.tsx:167"
+          ]
+        },
+        {
+          "fact": "Current stream health requires current observed output and recent advancing bytes; explicit unknown/blank capture does not show green; wording distinguishes OBS output from provider/viewer proof. Missing capture fields can permissively pass health.mjs but production Go initializes explicit unknown values, so this was not elevated as a reproduced product defect.",
+          "locations": [
+            "steamdeck/decky/src/health.mjs:2",
+            "steamdeck/decky/src/state.mjs:15",
+            "steamdeck/decky/src/index.tsx:77",
+            "internal/deck/control.go:76"
+          ]
+        },
+        {
+          "fact": "Stop/recover remains available when output is unknown and dependency setup cannot authorize it away. Setup/save/test/recovery do not supply implicit broadcast authorization.",
+          "locations": [
+            "steamdeck/decky/src/state.mjs:53",
+            "steamdeck/decky/src/index.tsx:160"
+          ]
+        },
+        {
+          "fact": "Mic controls distinguish observed state from preferences, per-stream gain from system volume, and panel-local renewable hold-to-talk from a global shortcut; unmute is blocked for stale/unavailable observations.",
+          "locations": [
+            "steamdeck/decky/src/Mixer.tsx:44",
+            "steamdeck/decky/src/mixer-state.mjs:3",
+            "steamdeck/decky/src/mixer-talk.mjs:6"
+          ]
+        },
+        {
+          "fact": "Status includes textual labels beyond color, logs are bounded/readable/copyable, copy fallback restores focus, support is at the bottom and optional.",
+          "locations": [
+            "steamdeck/decky/src/index.tsx:103",
+            "steamdeck/decky/src/index.tsx:146",
+            "steamdeck/decky/src/index.tsx:268",
+            "steamdeck/decky/src/index.tsx:313"
+          ]
+        }
+      ],
+      "recommended_sequence": [
+        "Sync the concrete audit and bounded choices with the owner before implementation.",
+        "Complete #80 approved aurora source/export work; execute #81 primary hierarchy and disclosures with existing native components.",
+        "Fold UI-02/03/04 into #83 concrete integration regressions and #81 user feedback; reconcile UI-05 help entry and UI-06 update copy with #82 lifecycle ownership.",
+        "Use focused browser/state checks during changes; #85 final exact-source qualification follows source-changing work and #86 real Deck/controller/provider tests follows the final candidate."
+      ],
+      "source_status_after_checks": "clean; no checkout edits"
+    },
+    "brand-docs": {
+      "schema": "obsgod.audit.brand-docs-planning/v1",
+      "audit_date": "2026-11-14",
+      "repository": "/workspace/obsgod",
+      "baseline": "12ef52f9d22a7c1101f8743094325f66e3948270",
+      "branch": "feat/decky-native-configuration",
+      "mode": "read-only audit; local planning artifact only",
+      "source_edits": false,
+      "github_writes": false,
+      "image_generation": false,
+      "other_repository_changes": false,
+      "read": [
+        "AGENTS.md",
+        "MEMORIAL.md",
+        "ROADMAP.md",
+        "CONTINUITY.md",
+        "DECISIONS.md",
+        "README.md",
+        "docs/identity-migration.md",
+        "docs/migration-review.md",
+        "docs/decisions/0002-product-identity.md",
+        "docs/implementation-roadmap.md",
+        ".identity/",
+        "branding/",
+        "docs/setup/support/build/release/history guides",
+        "site/ source",
+        "scripts/generate-brand-kit.py",
+        "scripts/decky_package.py",
+        "scripts/build-site.py"
+      ],
+      "live_sources": [
+        {
+          "url": "https://github.com/szmyty/obsgod/issues/80",
+          "state": "open",
+          "purpose": "existing issue scope read via GitHub connector"
+        },
+        {
+          "url": "https://github.com/szmyty/obsgod/issues/81",
+          "state": "open",
+          "purpose": "existing issue scope read via GitHub connector"
+        },
+        {
+          "url": "https://github.com/szmyty/obsgod/issues/84",
+          "state": "open",
+          "purpose": "existing issue scope read via GitHub connector"
+        },
+        {
+          "url": "https://github.com/szmyty/obsgod/issues/85",
+          "state": "open",
+          "purpose": "existing issue scope read via GitHub connector"
+        },
+        {
+          "url": "https://github.com/szmyty/obsgod/issues/87",
+          "state": "open",
+          "purpose": "existing issue scope read via GitHub connector"
+        },
+        {
+          "url": "https://github.com/szmyty/obsgod/issues/88",
+          "state": "open",
+          "purpose": "existing issue scope read via GitHub connector"
+        },
+        {
+          "url": "https://github.com/egohygiene/.github/blob/876bae3d92e3a28b6d3b4e9d4ef4a640cef0a44f/FUNDING.yml",
+          "purpose": "verified immutable funding source; five current handles agree; source also has Patreon, locally intentionally inactive"
+        }
+      ],
+      "findings": [
+        {
+          "id": "BD-01",
+          "severity": "medium",
+          "type": "current_documentation_mismatch",
+          "title": "Canonical install, repair and destination docs still lead through the older paired Desktop app flow",
+          "evidence": [
+            {
+              "path": "README.md",
+              "line": 41,
+              "detail": "Primary install text calls for full installer and Desktop Setup; no link to normal standard ZIP/native configuration guides in the user journey."
+            },
+            {
+              "path": "docs/steam-deck.md",
+              "line": 8,
+              "detail": "User guide calls current candidate Milestone 3 draft; lines15–35 require tar archive/Install OBSGod.desktop/Desktop Setup."
+            },
+            {
+              "path": "SUPPORT.md",
+              "line": 26,
+              "detail": "Bundled Desktop installer described as repair path without distinguishing legacy app from new Decky-owned package."
+            },
+            {
+              "path": "docs/stream-destinations.md",
+              "line": 10,
+              "detail": "Setup instructions refer only to Desktop Setup; line12 says guide changes do not overwrite an entered key, while native form clears drafts by design."
+            },
+            {
+              "path": "site/content/install.html",
+              "line": 11,
+              "detail": "Source preview still gives tar + install.py + Desktop launcher; updates.html:3–4 uses Desktop updater/unified installer and uninstall.html:2–7 gives uninstall.py."
+            },
+            {
+              "path": "docs/decky-package.md",
+              "line": 3,
+              "detail": "Current primary install unit is standard obsgod-decky.zip; lines54–59 say legacy installer is no longer required; lines140–142 describe Decky installation."
+            },
+            {
+              "path": "docs/native-configuration.md",
+              "line": 3,
+              "detail": "Current normal panel includes setup; lines15–27 describe actual keyboard/key/guide behavior."
+            },
+            {
+              "path": "scripts/decky_package.py",
+              "line": 24,
+              "detail": "Standard ZIP shared file list excludes install.py, uninstall.py and update.py; plugin_files:105–139 enumerates payload with optional browser setup."
+            },
+            {
+              "path": "docs/decky-configuration-checkpoint.md",
+              "line": 10,
+              "detail": "New qualification is source 378b46c, while release-readiness.md:1 still labels 4699235 latest qualified follow-up."
+            }
+          ],
+          "impact": "A user or tester following the repository/site can take the old app route or look for a helper absent from the standard package; current implementation is hard to discover and the test candidate can be confused with historical downloads. README current-review artifact instructions themselves remain correctly bound to 4699235 and must not be relabelled.",
+          "fix_sketch": "Under #84 reconcile source-facing README/setup/destination/support/site docs around normal Decky install → consented dependency setup → native destination form. Clearly identify older verified review-download instructions as historical paired-app instructions. Add current checkpoint links now and only make an actual new verified download canonical in #85. Document Decky replacement/removal limits honestly until #82 is implemented.",
+          "acceptance": [
+            "Current standard-ZIP instructions require no absent install.py/uninstall.py helper.",
+            "README, user guide, site source and support pages link to native configuration/dependency/package contracts and use matching state/control names.",
+            "Historical immutable hashes/commands stay exact, with explicit checkpoint boundaries.",
+            "Offline docs link checks and focused docs/browser checks pass; no hosted deployment inferred."
+          ],
+          "existing_issues": [
+            84,
+            85,
+            82
+          ],
+          "original_criteria": [
+            "38.AC4",
+            "43.AC2",
+            "43.AC4",
+            "44.AC3"
+          ]
+        },
+        {
+          "id": "BD-02",
+          "severity": "medium",
+          "type": "already_planned_implementation_gap",
+          "title": "Selected 01 / aurora is a retained creative reference, with no selected production source or export path yet",
+          "evidence": [
+            {
+              "path": ".identity/candidates/concepts/selection.json",
+              "line": 11,
+              "detail": "Selected source is top-left 01 / aurora comparison crop; scope at 24 and 46–53 excludes final vector/renders/rights/device/adoption."
+            },
+            {
+              "path": ".identity/candidates/inventory.json",
+              "line": 13,
+              "detail": "Only mint-signal mark/decky-icon geometry is inventoried; lines51–57 enumerate only mint concept."
+            },
+            {
+              "path": ".identity/governance/provenance.json",
+              "line": 4,
+              "detail": "Approved source assets array empty; .identity/governance/approvals.json:4 decisions empty."
+            },
+            {
+              "path": "scripts/generate-brand-kit.py",
+              "line": 218,
+              "detail": "Generator hardcodes earlier mark/icon/palette/inventory sources, rejects approvals at 224–225, and name is Decky Stream at 230–232; banners 259–284 use title-case earlier mint design."
+            },
+            {
+              "path": "scripts/generate-brand-kit.py",
+              "line": 54,
+              "detail": "Existing candidate sanitizer accepts only svg/title/desc/rect/path and rejects url() at 57; it does not support gradient defs/stops needed by a real local SVG gradient."
+            },
+            {
+              "path": "steamdeck/decky/src/index.tsx",
+              "line": 321,
+              "detail": "Actual plugin icon remains Dot observed status; selected logo is not integrated."
+            },
+            {
+              "path": "branding/README.md",
+              "line": 3,
+              "detail": "Explicitly calls current exporter/preview earlier outputs and maps selected work #80/#81."
+            }
+          ],
+          "impact": "The chosen art can be reviewed as a concept, but current PNG downloads/README header/site/native icon do not implement the selected lowercase deckystream aurora direction. Existing contrast and tiny-size sheets test mint-signal, not aurora.",
+          "fix_sketch": "Complete existing #80 from retained PNGs without claiming a crop is an identical vector. Author traceable master geometry and selected lowercase wordmark, record actual rights/license/source decisions, preserve old concepts. Use pinned consumer path for accepted outputs. If implementing a safe SVG gradient, allow only narrowly local defs/stops/references and keep active/external asset rejection; avoid a broad sanitizer bypass. Produce locally bundled exports and apply subtly through #81 while keeping observed status separate.",
+          "acceptance": [
+            "Exact selected and retained PNG hashes remain unchanged.",
+            "Selected source/export/dimensions/licenses/manifests are inspectable; gradient and smaller treatments open as ordinary PNGs.",
+            "Dark/light/transparent variants clearly labelled; offline gallery requires no remote assets/fonts.",
+            "Actual-size16/24/32/64 and dark/highlighted views inspected; selected palette text/controls measured separately from decorative gradient.",
+            "Controller/real-Deck rendering and rights/publication decisions remain explicit until actual evidence."
+          ],
+          "existing_issues": [
+            80,
+            81,
+            84,
+            85
+          ],
+          "original_criteria": [
+            "38.AC1",
+            "38.AC2",
+            "38.AC3",
+            "38.AC4",
+            "38.AC5",
+            "43.AC4"
+          ]
+        },
+        {
+          "id": "BD-03",
+          "severity": "medium",
+          "type": "historical_evidence_current_drift",
+          "title": "Tracked brand outputs are intact, but their source manifests/proofs predate the selected brief and aurora records",
+          "evidence": [
+            {
+              "path": "branding/repository/draft-manifest.json",
+              "line": 141,
+              "detail": "Recorded sources have seven newly retained concept/selection files absent and old brief hash at143."
+            },
+            {
+              "path": "branding/evidence/identity-source.json",
+              "line": 20,
+              "detail": "Source validator snapshot hashes earlier brief eade6655; current brief is c35da6ab."
+            },
+            {
+              "path": "scripts/generate-brand-kit.py",
+              "line": 38,
+              "detail": "Generator-defined source set includes every.identity file, generator source, and DejaVu notice; current source set is therefore distinguishable from manifest."
+            },
+            {
+              "path": "branding/evidence/presentation-review.json",
+              "line": 4,
+              "detail": "Checks are explicitly bound to old f3d2413 revision; historical check pass cannot qualify current selected brief/source."
+            }
+          ],
+          "impact": "A fresh current-source brand drift check cannot validate against the tracked old manifest, despite all 31 recorded outputs matching their digests. This is expected historicity, not corrupt artwork or forged evidence; treating old passed receipts as current would be incorrect.",
+          "fix_sketch": "Keep historical receipts unmodified. In #80 produce fresh selected-source and export receipts with exact revised input scope and source/artifact hashes; label old mint manifest/proof as historical where users encounter it. Avoid regenerating the superseded mint kit solely to make a green current check.",
+          "acceptance": [
+            "New selected-kit source manifest contains all intended sources and current brief hashes.",
+            "Read-only output drift and source-contract checks pass at the actual selected source.",
+            "Old records retain original revisions/digests and cannot be interpreted as selected aurora/device approval."
+          ],
+          "existing_issues": [
+            80,
+            84,
+            85
+          ],
+          "original_criteria": [
+            "38.AC3",
+            "43.AC4",
+            "44.AC3"
+          ],
+          "measured": {
+            "recorded_output_count": 31,
+            "output_drift": [],
+            "missing_source_paths": [
+              ".identity/candidates/concepts/orbital-stream-board.json",
+              ".identity/candidates/concepts/orbital-stream-board.png",
+              ".identity/candidates/concepts/orbital-stream-color-alternatives.json",
+              ".identity/candidates/concepts/orbital-stream-color-alternatives.png",
+              ".identity/candidates/concepts/orbital-stream-gradient-icon.json",
+              ".identity/candidates/concepts/orbital-stream-gradient-icon.png",
+              ".identity/candidates/concepts/selection.json"
+            ],
+            "changed_source_hashes": [
+              {
+                "path": ".identity/brief.md",
+                "recorded_sha256": "eade665548f8e875c210fb5b097dba63cd41ce43e8a0026c3af4f72f5fb72a4a",
+                "current_sha256": "c35da6abafca22f3a74ccf8eda068fcef30fb79c853c662826c3b8e28f153137"
+              }
+            ]
+          }
+        },
+        {
+          "id": "BD-04",
+          "severity": "low",
+          "type": "current_metadata_documentation_mismatch",
+          "title": "Identity landing README still presents the superseded future repository slug",
+          "evidence": [
+            {
+              "path": ".identity/README.md",
+              "line": 7,
+              "detail": "Calls egohygiene/decky-stream the working destination discussed without updated slug caveat."
+            },
+            {
+              "path": ".identity/candidates/concepts/selection.json",
+              "line": 10,
+              "detail": "Selected future repository name deckystream."
+            },
+            {
+              "path": ".identity/brief.md",
+              "line": 12,
+              "detail": "Explicit owner update from decky-stream to deckystream; current stable brand ID remains separate."
+            },
+            {
+              "path": "docs/migration-review.md",
+              "line": 96,
+              "detail": "Correctly warns old egohygiene/decky-stream fixture does not qualify actual OWNER/deckystream."
+            }
+          ],
+          "impact": "Someone beginning with Identity consumer source can carry the outdated repository path into final asset metadata/migration planning.",
+          "fix_sketch": "Update the consumer README to selected future slug with unresolved owner; retain old fixture names as historical and do not automatically change stable project ID decky-stream or installed compatibility IDs.",
+          "acceptance": [
+            "Current guidance consistently distinguishes future slug deckystream, unresolved repository owner, stable brand ID and current installed identities.",
+            "Historical fixture receipts stay unchanged and are not promoted to actual destination proof."
+          ],
+          "existing_issues": [
+            80,
+            84,
+            87
+          ],
+          "original_criteria": [
+            "35.AC1",
+            "35.AC2",
+            "35.AC4",
+            "36.AC5"
+          ]
+        }
+      ],
+      "verified_good": [
+        {
+          "item": "Original source attribution",
+          "evidence": [
+            "LICENSE:3 retains Copyright 2020 Christian Muehlhaeuser",
+            "README.md:161 links upstream muesli/obs-cli",
+            "scripts/decky_package.py:122–133 ships source licenses/notices and replaceable LGPL module preferred source"
+          ],
+          "limit": "Future selected art final rights/usage choices remain distinct."
+        },
+        {
+          "item": "Funding source/generation",
+          "evidence": [
+            ".github/FUNDING.yml:5–9 five handles match immutable organization funding record",
+            "Patreon deliberately commented per broken creator-page record at 11–14",
+            "node scripts/generate-support.mjs --check exited 0",
+            "python3 scripts/generate-product.py --check exited 0"
+          ],
+          "limit": "No claim of recipient control, payout readiness, provider navigation or payment success; no new wallets/accounts."
+        },
+        {
+          "item": "Historical preview bytes",
+          "evidence": [
+            "All 31 manifest outputs match current files",
+            "PNG preview ZIP CRC good; 15 members including 14 PNGs plus START-HERE.txt",
+            "Gallery contains 13 embedded PNGs and no remote href/src references",
+            "All four retained concept PNG hashes match records"
+          ],
+          "limit": "No new phone/browser/controller/device test or selected-kit qualification."
+        },
+        {
+          "item": "Markdown local target paths",
+          "evidence": [
+            "Read-only scan of root/docs/branding/.identity markdown found zero missing local path targets"
+          ],
+          "limit": "Not a complete anchor/remote availability/deployed-site audit."
+        },
+        {
+          "item": "Original criterion ledger",
+          "evidence": [
+            "docs/evidence/completion-criteria.json records 230 criteria in 35 ledgers"
+          ],
+          "limit": "No acceptance dispositions rewritten; preserve verbatim original text/dependencies."
+        }
+      ],
+      "migration_readiness": {
+        "current_identity": {
+          "repository": "szmyty/obsgod",
+          "module": "github.com/szmyty/obsgod",
+          "cli": "obsgod",
+          "plugin": "OBSGod",
+          "plugin_directory": "obsgod",
+          "xdg": "obsgod",
+          "future_slug": "deckystream",
+          "actual_future_owner": null
+        },
+        "preparation_already_exists": [
+          "Exact compatibility inventory and bounded trust contract: docs/identity-migration.md:11 and docs/migration-review.md:29.",
+          "Disposable mechanism rehearsal and old fixture caveat: docs/migration-review.md:64–99.",
+          "230-criterion export and final retirement capture workflow: docs/history/README.md:16–22,38–67.",
+          "Selected direction scope and preserved PNG references: .identity/candidates/concepts/selection.json."
+        ],
+        "still_required_under_existing_issues": [
+          {
+            "issue": 87,
+            "action": "Assemble the actual final source snapshot, selected artwork/rights/notices, public old artifact refs and rollback bytes, refreshed retirement tracker export and all 230 criterion destinations/dispositions; preserve original dependencies."
+          },
+          {
+            "issue": 87,
+            "action": "After the owner supplies exact OWNER/deckystream, inspect rules/default main/CI/dependency graph/publication side effects and the narrow updater identity map. Execute destination-specific old → transition → new → repair → rollback → uninstall and no-duplicate-controller checks. Prior egohygiene/decky-stream fixtures remain mechanism evidence only."
+          },
+          {
+            "issue": 87,
+            "action": "Prepare a reviewed scoped legacy cleanup/export/rollback package. Preserve ordinary OBS/GStreamer, unrelated plugins and shared media. The actual move follows the #86 test/fix loop and applicable creation/move/retirement authority."
+          },
+          {
+            "issue": 88,
+            "action": "Re-download actual destination artifacts, verify exact source/hash/notices/trust, then repeat the standard new install → dependency setup → private key → clip → viewer → update/recovery/removal Deck journey and affected checks."
+          }
+        ],
+        "not_new_prerequisites": [
+          "No Identity or other repository changes.",
+          "No blanket standards migration.",
+          "No companion implementation.",
+          "No OAuth implementation; #89 research remains deferred.",
+          "No payment or funding transaction.",
+          "No hosted billing payment; local ACT remains distinct from hosted evidence."
+        ]
+      },
+      "proposed_roadmap": [
+        {
+          "order": 1,
+          "issues": [
+            80
+          ],
+          "result": "Selected source/rights/export packet; retained old concepts; ordinary PNGs and offline gallery; actual-size, contrast, source and drift evidence."
+        },
+        {
+          "order": 2,
+          "issues": [
+            81
+          ],
+          "result": "Subtle local aurora/lowercase UI integration while preserving native focus, observed status and private setup; focused browser/frontend checks."
+        },
+        {
+          "order": 3,
+          "issues": [
+            82,
+            83,
+            84
+          ],
+          "result": "Integrate lifecycle/safety repairs and reconcile canonical setup/help/site/docs/evidence navigation with the actual standard payload."
+        },
+        {
+          "order": 4,
+          "issues": [
+            85,
+            86
+          ],
+          "result": "Freeze exact clean source; run the full available matrix; prepare current-identity artifact/hash/download/rollback/manual test packet; complete owner Deck bug-fix/retest loop."
+        },
+        {
+          "order": 5,
+          "issues": [
+            87,
+            88
+          ],
+          "result": "Prepare migration in parallel; perform actual move at the exact approved destination after the owner loop; fresh actual-destination install/retest and concrete v1 decision packet."
+        }
+      ],
+      "proposed_owner_decisions_separate_from_implementation": [
+        "Actual future repository owner/admins, support/contact/publisher/domain/hosting and retirement/old-URL retention facts remain unresolved. Prepare concrete packets before requesting applicable external actions.",
+        "01 / aurora direction is already decided and should not be asked again. Record the actual authored source/export choice and rights/license/attribution facts honestly before production adoption.",
+        "Stable project ID decky-stream versus future slug deckystream is a compatibility decision. Do not infer a global rename.",
+        "No product release, site publication, Store contact or spending is authorized by this audit or an issue checkbox."
+      ],
+      "scope_limitations": [
+        "No full runtime test matrix or build executed during this read-only audit.",
+        "No renderer/image generation, source edits, GitHub writes or other repository changes.",
+        "No actual Steam Deck/controller/provider/phone qualification.",
+        "Existing historical proofs retain their source boundaries. This artifact is planning evidence, not source qualification."
+      ]
+    },
+    "ci-release": {
+      "schema_version": 1,
+      "baseline": "12ef52f9d22a7c1101f8743094325f66e3948270",
+      "mode": "read-only audit; implementation awaits owner sync",
+      "findings": [
+        {
+          "id": "CI-01",
+          "priority": "P2",
+          "title": "Exercise the primary standard-plugin builder in the maintained candidate workflow",
+          "status": "source-confirmed CI coverage gap; last manual primary build passed",
+          "locations": [
+            ".github/workflows/steam-deck.yml:56",
+            ".github/workflows/steam-deck.yml:58",
+            ".github/workflows/steam-deck.yml:62",
+            "scripts/package-decky.py:119",
+            "scripts/tests/test_decky_package.py:1"
+          ],
+          "evidence": "Candidate workflow invokes package-deck.py twice and audits/tests its plugin ZIP. package-decky.py is documented primary, but no workflow invokes its complete main path. Primary and legacy ZIPs matched at378b46c; that manual receipt cannot cover future primary-only drift. Unit tests cover helpers/entry validation rather than executing full primary assembly.",
+          "impact": "A regression in the user-facing primary build entry point can leave the maintained workflow green.",
+          "fix_sketch": "Add end-to-end primary-builder execution at the actual build identity, with its new private output directory, manifest/source/privacy and deterministic output checks; feed the actual standard ZIP to existing browser/adapter checks. Retain optional legacy compatibility builds and pinned official assembly verification where available.",
+          "acceptance": [
+            "A demonstrated primary-only entry-point failure causes the candidate workflow to fail.",
+            "Primary output is built from exact clean source, audited and installed/exercised by existing fixtures; repeats have matching canonical bytes.",
+            "No publication/deployment, root guard bypass or mandatory paired app is introduced."
+          ],
+          "existing_issues": [
+            76,
+            85,
+            84
+          ]
+        },
+        {
+          "id": "CI-02",
+          "priority": "P2 improvement",
+          "title": "Make constrained local qualification resource checks and cache recovery repeatable",
+          "status": "observed environment limitation with documented manual assistance; not an unresolved product-source failure",
+          "locations": [
+            "scripts/local-ci.py:200",
+            "docs/decky-configuration-checkpoint.md:58",
+            "docs/decky-configuration-checkpoint.md:70",
+            "docs/local-ci.md:85"
+          ],
+          "evidence": "The complete378b46c matrix passed after its first candidate hit ENOSPC at native startup; the same-source retry required a manual watcher to run pinned go clean -cache after all Go builds/audits and before native tests. Raw failed/successful receipts and exact scope are retained.",
+          "impact": "The current free32GB runner can require operator timing even when product checks pass, complicating reproducible final qualification and overnight runs.",
+          "fix_sketch": "Add a bounded space preflight and explicit safe cache policy or supported low-disk local profile. Keep source, module caches, release artifacts and evidence intact; record any compiler-cache pruning in receipts. Prefer existing runner/CLI controls over another orchestration framework.",
+          "acceptance": [
+            "On an equivalent constrained free runner, the supported final-matrix command either completes without manual docker exec or stops early with a concrete resource need.",
+            "Any opted-in cleanup is limited to disposable compiler cache after its consumers finish and logs exact before/after state.",
+            "Existing network/package presets and every required test remain intact; no paid resource is selected."
+          ],
+          "existing_issues": [
+            85,
+            84
+          ]
+        },
+        {
+          "id": "CI-03",
+          "priority": "P3 optional",
+          "title": "Automate publication-safe evidence export without losing raw receipt integrity",
+          "status": "maintainer ergonomics; private raw logs are documented, no product secret exposure found",
+          "locations": [
+            "scripts/local-ci.py:43",
+            "scripts/local-ci.py:65",
+            "docs/local-ci.md:50",
+            "docs/evidence/decky-configuration-378b46c.json:1"
+          ],
+          "evidence": "Current logger redacts URL userinfo but does not consume Actions add-mask values. Last public proof export deliberately redacted10members and indexed both raw/public hashes using an external script; that safety step is not a maintained repo command.",
+          "fix_sketch": "If selected, add a small explicit public-evidence exporter or shared masking helper that honors mask directives, keeps typed records and separately binds original/public digests. Keep raw logs private and do not weaken existing proof checks.",
+          "acceptance": [
+            "Synthetic masked values are absent from public output in normal and escaped encodings.",
+            "Raw receipt hashes remain traceable and redacted bytes are never relabelled original."
+          ],
+          "existing_issues": [
+            84,
+            85
+          ],
+          "proposed_disposition": "optional after must-fix work; no new implementation issue required unless selected"
+        }
+      ],
+      "verified_good": [
+        "Six source workflows use read-only contents permissions; GoReleaser always snapshots with publish/sign skipped.",
+        "No release/site deployment workflow or automatic publication side effect found.",
+        "Pinned actions/tools/images, deterministic audits, source/notices and exact-revision reports exist and passed at378b46c.",
+        "Existing Dependabot covers Go, npm and GitHub Actions; the post-migration graph/service check is now#95 linked from#87."
+      ],
+      "remaining_gates": [
+        "Hosted account billing lock",
+        "Actual destination graph/API capability under#95",
+        "Actual Deck and other native-platform runtime evidence",
+        "Publisher/version/support/rights decisions and release approval; do not add automatic publication as an audit action"
+      ],
+      "bounded_refactor_opportunity": {
+        "location": "scripts/package-decky.py:24",
+        "evidence": "Primary builder dynamically imports legacy executable builder solely for capture_source/notices helpers.",
+        "proposal": "Move only neutral package helpers to the existing shared packaging module while aligning primary CI; preserve byte-equivalent outputs.",
+        "priority": "P3 optional; no framework or rewrite"
+      }
+    }
+  },
+  "checks": {
+    "runtime": "Four confirmed protocol-only findings; external Go overlay and loopback fake OBS repros; no actual OBS/output",
+    "lifecycle": "Disposable child-process/filesystem/composition repros; DependencySetup: 18 passed / one skipped",
+    "ui": "Actual qualified ZIP frontend in simulated native 400×800 host; 22 focused state tests passed; no real Decky/controller proof",
+    "brand_docs": "31 prior output hashes intact; seven newer source inputs and changed brief absent from older brand receipts; funding/product checks passed; retained concepts decode and offline gallery/preview checks passed",
+    "ci_release": "Workflow/packager/report/source inspection and exact prior 378receipts; no full CI/matrix rerun during audit",
+    "runtime_qualification": "Not reissued by this planning pass; prior source 378 full matrix result remains historical revision-bound evidence"
+  },
+  "not_implemented": true,
+  "no_product_code_ui_artwork_changed": true,
+  "original_criteria": {
+    "path": "docs/evidence/completion-criteria.json",
+    "count": 230,
+    "sha256_before": "0795e6594c7bbde195bb8ebfcbc4050f0d5ecbe9c879767edbe0050540386df6",
+    "sha256_after": "0795e6594c7bbde195bb8ebfcbc4050f0d5ecbe9c879767edbe0050540386df6",
+    "dependencies": "unchanged"
+  },
+  "live_baseline": {
+    "observed_at": "2026-11-14T21:52:26.163752+00:00",
+    "audit_baseline": "12ef52f9d22a7c1101f8743094325f66e3948270",
+    "repo": {
+      "command": [
+        "gh",
+        "api",
+        "repos/szmyty/obsgod",
+        "--jq",
+        "{full_name,private,fork,default_branch,archived,permissions,security_and_analysis}"
+      ],
+      "exit_code": 0,
+      "data": {
+        "archived": false,
+        "default_branch": "master",
+        "fork": true,
+        "full_name": "szmyty/obsgod",
+        "permissions": {
+          "admin": true,
+          "maintain": true,
+          "pull": true,
+          "push": true,
+          "triage": true
+        },
+        "private": false,
+        "security_and_analysis": null
+      },
+      "error": null
+    },
+    "branch": {
+      "command": [
+        "gh",
+        "api",
+        "repos/szmyty/obsgod/branches/master",
+        "--jq",
+        "{name,protected,commit:.commit.sha}"
+      ],
+      "exit_code": 0,
+      "data": {
+        "commit": "da89b9dba6e9fa15774136a706cdaea469dada0b",
+        "name": "master",
+        "protected": false
+      },
+      "error": null
+    },
+    "releases": {
+      "command": [
+        "gh",
+        "release",
+        "list",
+        "--repo",
+        "szmyty/obsgod",
+        "--limit",
+        "20",
+        "--json",
+        "tagName,isDraft,isPrerelease,publishedAt"
+      ],
+      "exit_code": 0,
+      "data": [
+        {
+          "isDraft": false,
+          "isPrerelease": true,
+          "publishedAt": "2026-11-11T17:15:52Z",
+          "tagName": "v0.1.0-deck.4-updater.1"
+        },
+        {
+          "isDraft": false,
+          "isPrerelease": true,
+          "publishedAt": "2026-11-11T16:42:27Z",
+          "tagName": "v0.1.0-deck.4"
+        },
+        {
+          "isDraft": false,
+          "isPrerelease": true,
+          "publishedAt": "2026-11-11T16:28:06Z",
+          "tagName": "v0.1.0-deck.3"
+        },
+        {
+          "isDraft": false,
+          "isPrerelease": true,
+          "publishedAt": "2026-11-11T16:03:00Z",
+          "tagName": "v0.1.0-deck.2"
+        },
+        {
+          "isDraft": false,
+          "isPrerelease": true,
+          "publishedAt": "2026-11-11T07:34:58Z",
+          "tagName": "v0.1.0-deck.1"
+        }
+      ],
+      "error": null
+    },
+    "open_issues": {
+      "command": [
+        "gh",
+        "issue",
+        "list",
+        "--repo",
+        "szmyty/obsgod",
+        "--state",
+        "open",
+        "--limit",
+        "100",
+        "--json",
+        "number,title,milestone"
+      ],
+      "exit_code": 0,
+      "data": [
+        {
+          "milestone": {
+            "number": 5,
+            "title": "deckystream — Deck validation and migration",
+            "description": "After the test-ready candidate: owner Steam Deck test/fix loop; prepare and execute the exact approved deckystream destination migration; then verify the actual new installation and v1 release-readiness packet. Preserve every original #46 criterion/dependency, old downloads, private data and attribution. Actual migration/publication and missing owner/device/review evidence remain explicit gates.",
+            "dueOn": null
+          },
+          "number": 95,
+          "title": "After migration, enable dependency graph and verify dependency review"
+        },
+        {
+          "milestone": {
+            "number": 4,
+            "title": "deckystream — implementation and test-ready build",
+            "description": "Complete the normal Decky package, recoverable plugin-managed setup, private manual-key configuration, aurora branding/UI, lifecycle integration, bounded audit and exact-source free local qualification. Deliver a current-identity OBSGod candidate and step-by-step owner test packet. Provider OAuth, physical Deck acceptance, actual migration and publication are outside this milestone.",
+            "dueOn": null
+          },
+          "number": 94,
+          "title": "Repair Linux package metadata audit failure in the snapshot workflow"
+        },
+        {
+          "milestone": {
+            "number": 4,
+            "title": "deckystream — implementation and test-ready build",
+            "description": "Complete the normal Decky package, recoverable plugin-managed setup, private manual-key configuration, aurora branding/UI, lifecycle integration, bounded audit and exact-source free local qualification. Deliver a current-identity OBSGod candidate and step-by-step owner test packet. Provider OAuth, physical Deck acceptance, actual migration and publication are outside this milestone.",
+            "dueOn": null
+          },
+          "number": 93,
+          "title": "Repair ACT temporary-directory ownership for Go and tooling tests"
+        },
+        {
+          "milestone": {
+            "number": 4,
+            "title": "deckystream — implementation and test-ready build",
+            "description": "Complete the normal Decky package, recoverable plugin-managed setup, private manual-key configuration, aurora branding/UI, lifecycle integration, bounded audit and exact-source free local qualification. Deliver a current-identity OBSGod candidate and step-by-step owner test packet. Provider OAuth, physical Deck acceptance, actual migration and publication are outside this milestone.",
+            "dueOn": null
+          },
+          "number": 91,
+          "title": "Repair reproducible local workflow lint failures hidden by the billing lock"
+        },
+        {
+          "milestone": null,
+          "number": 89,
+          "title": "Research Twitch/Kick OAuth and phone QR login as a separate mini-roadmap"
+        },
+        {
+          "milestone": {
+            "number": 5,
+            "title": "deckystream — Deck validation and migration",
+            "description": "After the test-ready candidate: owner Steam Deck test/fix loop; prepare and execute the exact approved deckystream destination migration; then verify the actual new installation and v1 release-readiness packet. Preserve every original #46 criterion/dependency, old downloads, private data and attribution. Actual migration/publication and missing owner/device/review evidence remain explicit gates.",
+            "dueOn": null
+          },
+          "number": 88,
+          "title": "Verify the migrated official install and prepare the v1 approval packet"
+        },
+        {
+          "milestone": {
+            "number": 5,
+            "title": "deckystream — Deck validation and migration",
+            "description": "After the test-ready candidate: owner Steam Deck test/fix loop; prepare and execute the exact approved deckystream destination migration; then verify the actual new installation and v1 release-readiness packet. Preserve every original #46 criterion/dependency, old downloads, private data and attribution. Actual migration/publication and missing owner/device/review evidence remain explicit gates.",
+            "dueOn": null
+          },
+          "number": 87,
+          "title": "Prepare and execute the approved fresh deckystream repository migration"
+        },
+        {
+          "milestone": {
+            "number": 5,
+            "title": "deckystream — Deck validation and migration",
+            "description": "After the test-ready candidate: owner Steam Deck test/fix loop; prepare and execute the exact approved deckystream destination migration; then verify the actual new installation and v1 release-readiness packet. Preserve every original #46 criterion/dependency, old downloads, private data and attribution. Actual migration/publication and missing owner/device/review evidence remain explicit gates.",
+            "dueOn": null
+          },
+          "number": 86,
+          "title": "Run the owner Steam Deck test cases and close the current-install fix loop"
+        },
+        {
+          "milestone": {
+            "number": 4,
+            "title": "deckystream — implementation and test-ready build",
+            "description": "Complete the normal Decky package, recoverable plugin-managed setup, private manual-key configuration, aurora branding/UI, lifecycle integration, bounded audit and exact-source free local qualification. Deliver a current-identity OBSGod candidate and step-by-step owner test packet. Provider OAuth, physical Deck acceptance, actual migration and publication are outside this milestone.",
+            "dueOn": null
+          },
+          "number": 85,
+          "title": "Qualify a current-identity build and deliver the Steam Deck test packet"
+        },
+        {
+          "milestone": {
+            "number": 4,
+            "title": "deckystream — implementation and test-ready build",
+            "description": "Complete the normal Decky package, recoverable plugin-managed setup, private manual-key configuration, aurora branding/UI, lifecycle integration, bounded audit and exact-source free local qualification. Deliver a current-identity OBSGod candidate and step-by-step owner test packet. Provider OAuth, physical Deck acceptance, actual migration and publication are outside this milestone.",
+            "dueOn": null
+          },
+          "number": 84,
+          "title": "Audit the integrated plugin and finish bounded cleanup before qualification"
+        },
+        {
+          "milestone": {
+            "number": 4,
+            "title": "deckystream — implementation and test-ready build",
+            "description": "Complete the normal Decky package, recoverable plugin-managed setup, private manual-key configuration, aurora branding/UI, lifecycle integration, bounded audit and exact-source free local qualification. Deliver a current-identity OBSGod candidate and step-by-step owner test packet. Provider OAuth, physical Deck acceptance, actual migration and publication are outside this milestone.",
+            "dueOn": null
+          },
+          "number": 83,
+          "title": "Repair demonstrated integration gaps and verify streaming edge cases"
+        },
+        {
+          "milestone": {
+            "number": 4,
+            "title": "deckystream — implementation and test-ready build",
+            "description": "Complete the normal Decky package, recoverable plugin-managed setup, private manual-key configuration, aurora branding/UI, lifecycle integration, bounded audit and exact-source free local qualification. Deliver a current-identity OBSGod candidate and step-by-step owner test packet. Provider OAuth, physical Deck acceptance, actual migration and publication are outside this milestone.",
+            "dueOn": null
+          },
+          "number": 82,
+          "title": "Make Decky replacement, removal and legacy cleanup safe"
+        },
+        {
+          "milestone": {
+            "number": 4,
+            "title": "deckystream — implementation and test-ready build",
+            "description": "Complete the normal Decky package, recoverable plugin-managed setup, private manual-key configuration, aurora branding/UI, lifecycle integration, bounded audit and exact-source free local qualification. Deliver a current-identity OBSGod candidate and step-by-step owner test packet. Provider OAuth, physical Deck acceptance, actual migration and publication are outside this milestone.",
+            "dueOn": null
+          },
+          "number": 81,
+          "title": "Polish native Decky setup and controls with subtle aurora branding"
+        },
+        {
+          "milestone": {
+            "number": 4,
+            "title": "deckystream — implementation and test-ready build",
+            "description": "Complete the normal Decky package, recoverable plugin-managed setup, private manual-key configuration, aurora branding/UI, lifecycle integration, bounded audit and exact-source free local qualification. Deliver a current-identity OBSGod candidate and step-by-step owner test packet. Provider OAuth, physical Deck acceptance, actual migration and publication are outside this milestone.",
+            "dueOn": null
+          },
+          "number": 80,
+          "title": "Produce the selected 01 aurora brand kit and lowercase deckystream assets"
+        },
+        {
+          "milestone": {
+            "number": 4,
+            "title": "deckystream — implementation and test-ready build",
+            "description": "Complete the normal Decky package, recoverable plugin-managed setup, private manual-key configuration, aurora branding/UI, lifecycle integration, bounded audit and exact-source free local qualification. Deliver a current-identity OBSGod candidate and step-by-step owner test packet. Provider OAuth, physical Deck acceptance, actual migration and publication are outside this milestone.",
+            "dueOn": null
+          },
+          "number": 79,
+          "title": "Complete private first-run configuration inside the Decky panel"
+        },
+        {
+          "milestone": {
+            "number": 4,
+            "title": "deckystream — implementation and test-ready build",
+            "description": "Complete the normal Decky package, recoverable plugin-managed setup, private manual-key configuration, aurora branding/UI, lifecycle integration, bounded audit and exact-source free local qualification. Deliver a current-identity OBSGod candidate and step-by-step owner test packet. Provider OAuth, physical Deck acceptance, actual migration and publication are outside this milestone.",
+            "dueOn": null
+          },
+          "number": 78,
+          "title": "Add consented OBS/GStreamer setup with progress, cancel and retry"
+        },
+        {
+          "milestone": {
+            "number": 4,
+            "title": "deckystream — implementation and test-ready build",
+            "description": "Complete the normal Decky package, recoverable plugin-managed setup, private manual-key configuration, aurora branding/UI, lifecycle integration, bounded audit and exact-source free local qualification. Deliver a current-identity OBSGod candidate and step-by-step owner test packet. Provider OAuth, physical Deck acceptance, actual migration and publication are outside this milestone.",
+            "dueOn": null
+          },
+          "number": 77,
+          "title": "Use Decky-provided state paths with safe legacy OBSGod migration"
+        },
+        {
+          "milestone": {
+            "number": 4,
+            "title": "deckystream — implementation and test-ready build",
+            "description": "Complete the normal Decky package, recoverable plugin-managed setup, private manual-key configuration, aurora branding/UI, lifecycle integration, bounded audit and exact-source free local qualification. Deliver a current-identity OBSGod candidate and step-by-step owner test packet. Provider OAuth, physical Deck acceptance, actual migration and publication are outside this milestone.",
+            "dueOn": null
+          },
+          "number": 76,
+          "title": "Ship one standard Decky plugin package with bundled runtime"
+        },
+        {
+          "milestone": {
+            "number": 3,
+            "title": "Roadmap 3 — Advanced streaming and validated paid offerings",
+            "description": "PROPOSED for owner review after supported-core evidence. Easy advanced profiles, richer stream media, audio/runtime resilience, replay/clips and health. Preserve broader API/platform/governance/ecosystem ledgers. Choose one optional paid offer only after real demand, costs, rights and channel policy are established; no core/accessibility paywall or income guarantee is assumed.",
+            "dueOn": null
+          },
+          "number": 46,
+          "title": "Roadmap — deckystream implementation, Deck testing and migration"
+        }
+      ],
+      "error": null
+    },
+    "prs": {
+      "command": [
+        "gh",
+        "pr",
+        "list",
+        "--repo",
+        "szmyty/obsgod",
+        "--state",
+        "open",
+        "--limit",
+        "100",
+        "--json",
+        "number,title,isDraft,baseRefName,headRefName"
+      ],
+      "exit_code": 0,
+      "data": [
+        {
+          "baseRefName": "feat/decky-native-foundation",
+          "headRefName": "feat/decky-native-configuration",
+          "isDraft": true,
+          "number": 92,
+          "title": "Add private Gaming Mode setup and repair failing workflow checks"
+        },
+        {
+          "baseRefName": "feat/pre-migration-completion",
+          "headRefName": "feat/decky-native-foundation",
+          "isDraft": true,
+          "number": 90,
+          "title": "Ship the standard Decky package and recoverable OBS setup"
+        },
+        {
+          "baseRefName": "docs/decky-stream-presentation",
+          "headRefName": "feat/pre-migration-completion",
+          "isDraft": true,
+          "number": 75,
+          "title": "Complete pre-migration engineering and define deckystream finish roadmap"
+        },
+        {
+          "baseRefName": "docs/obsgod-memorial",
+          "headRefName": "docs/decky-stream-presentation",
+          "isDraft": true,
+          "number": 74,
+          "title": "docs: prepare Decky Stream artwork, README and migration checklist"
+        },
+        {
+          "baseRefName": "master",
+          "headRefName": "docs/obsgod-memorial",
+          "isDraft": true,
+          "number": 73,
+          "title": "docs: preserve OBSGod history before Decky Stream"
+        }
+      ],
+      "error": null
+    },
+    "original_criteria_sha256": "0795e6594c7bbde195bb8ebfcbc4050f0d5ecbe9c879767edbe0050540386df6"
+  },
+  "optional_refactors": [
+    "Reuse effective microphone policy and validated recording observations as part of the concrete repairs",
+    "Use one small action/task ownership and deadline policy while preserving distinct lifecycle semantics",
+    "Remove redundant OBS status observations and measure safe dependency poll coalescing before adding another cache; source-call counts are not target CPU/battery proof",
+    "Extract only neutral capture-source/notices helpers from legacy packaging module when touching primary CI",
+    "Optional maintained public-evidence exporter with original/public hash separation; no current product credential leak found"
+  ],
+  "not_proposed": [
+    "New frameworks/component library/transport rewrite",
+    "Blanket Go/Python type or safety-check deduplication",
+    "Provider OAuth/account registration/QR login implementation",
+    "Monetization or Store implementation/submission",
+    "Another repository change, migration, release, deployment or spending"
+  ],
+  "remaining_owner_gates": [
+    "Owner sync before audit roadmap implementation",
+    "Actual Deck/OBS 33/Flatpak/Gamescope/AMD/Steam keyboard/controller/mic/headset/provider reception evidence",
+    "Exact future destination owner and migration authority",
+    "Rights/attribution/source facts and publication approvals",
+    "Required hosted CI/reviews and real dependency-review capability; billing separate",
+    "Native other-platform runtime if claimed"
+  ],
+  "evidence": {
+    "file": "final-audit-20261114.zip",
+    "sha256": "35f4d833a4f115ae4ca9ca98b8912b197462a6130ca45f6687650f45a4c15c17",
+    "members": 25,
+    "index": "INDEX.json",
+    "scope": "Synthetic loopback/process/browser fixtures; read-only GitHub API queries. No real OBS, Flatpak install, device stream or provider broadcast started."
+  }
+}
