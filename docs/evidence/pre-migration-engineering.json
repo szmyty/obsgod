@@ -1,0 +1,414 @@
+{
+  "schema": "decky-stream.pre-migration-engineering/v1",
+  "engineering_source": "4ac20bfd9e8b2fe17ab1942eeedd3fc78e38b6fb",
+  "go_regression_source": "59665ad45629f4e2ee3e4b01fd9a6e184536dc5e",
+  "go_inputs_unchanged_between_those_revisions": true,
+  "original_ledger": {
+    "path": "docs/evidence/completion-criteria.json",
+    "sha256": "0795e6594c7bbde195bb8ebfcbc4050f0d5ecbe9c879767edbe0050540386df6",
+    "issues": 35,
+    "criteria": 230,
+    "historical_receipts_modified": false
+  },
+  "owner_sequence": [
+    "finish nondeferred engineering and asset-delivery compatibility",
+    "owner new logo ideas and artwork",
+    "final full available matrix",
+    "repair bugs and rerun affected/final checks",
+    "fresh repository migration"
+  ],
+  "owner_dispositions": [
+    {
+      "work": "separate companion/StreamGod project",
+      "status": "deferred-by-owner",
+      "original_criteria_retained": true
+    },
+    {
+      "work": "provider OAuth/sign-in",
+      "status": "deferred-by-owner",
+      "original_criteria_retained": true
+    }
+  ],
+  "criteria_updates": [
+    {
+      "criteria": [
+        "9.AC2"
+      ],
+      "source_work": "implemented; all39 legacy operations share typed API/application compatibility path",
+      "focused_evidence": "Go race222top-level/456pass events across6 affected packages; vet7 packages;1 optional existing-OBS skip",
+      "overall_acceptance": "final-source full matrix and remaining original gates pending"
+    },
+    {
+      "criteria": [
+        "12.AC4",
+        "12.AC5",
+        "12.AC7",
+        "12.AC8"
+      ],
+      "source_work": "NFPM payload/notices/source/SPDX/audit and isolated lifecycle tooling implemented",
+      "focused_evidence": "3 Linuxamd64 packages, Debian/Fedora/Alpine lifecycle, genuine A-to-B upgrade, exact C replacement, reproducible4 artifacts/8 audit docs",
+      "overall_acceptance": "full15NFPM/20archive matrix, other native targets, publisher/stable-v1 gates pending"
+    },
+    {
+      "criteria": [
+        "36.AC1",
+        "36.AC2",
+        "36.AC3"
+      ],
+      "source_work": "single build-selected publisher and real-filesystem old/new fixture rehearsal implemented; current default trust unchanged",
+      "focused_evidence": "7 new migration and57 existing release/install/update/uninstall cases passed at Go-regression source",
+      "overall_acceptance": "real destination/identity candidate and actual device migration still unperformed"
+    },
+    {
+      "criteria": [
+        "38.AC3",
+        "38.AC4"
+      ],
+      "source_work": "ordinary PNG-only pack and self-contained offline gallery implemented; current draft art preserved",
+      "focused_evidence": "11 brand tests, offline Chromium mobile/desktop image decoding, CRC and public-download verification",
+      "overall_acceptance": "new logo direction, actual creative/rights decisions and approved production Identity output/application remain next-phase work"
+    }
+  ],
+  "focused_checks": {
+    "go": {
+      "source_revision": "59665ad45629f4e2ee3e4b01fd9a6e184536dc5e",
+      "scope": "Focused integration regressions for changed shared OBS connection and its direct consumers; not final full matrix",
+      "checked_at": "2026-11-14T13:45:27.762114+00:00",
+      "environment": {
+        "go": "go version go1.27.4 linux/amd64",
+        "GOMODCACHE": "/workspace/.obsgod-tools/mod",
+        "GOCACHE": "/home/agent/.cache/go-build",
+        "GOTOOLCHAIN": "local"
+      },
+      "source_dirty_after": false,
+      "checks": [
+        {
+          "id": "go-race",
+          "command": [
+            "go",
+            "test",
+            "-race",
+            "-count=1",
+            "-json",
+            "./internal/obs",
+            "./internal/commands",
+            "./pkg/api/v1",
+            "./pkg/automation",
+            "./internal/deck",
+            "./pkg/creator/v1"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "stdout": "go-race.jsonl",
+          "stderr": "go-race.stderr",
+          "test_pass_events": 456,
+          "top_level_pass": 222,
+          "skipped": [
+            {
+              "package": "github.com/szmyty/obsgod/pkg/automation",
+              "test": "TestRealOBSReadOnly"
+            }
+          ],
+          "packages": [
+            "github.com/szmyty/obsgod/internal/obs",
+            "github.com/szmyty/obsgod/internal/commands",
+            "github.com/szmyty/obsgod/pkg/api/v1",
+            "github.com/szmyty/obsgod/pkg/creator/v1",
+            "github.com/szmyty/obsgod/internal/deck",
+            "github.com/szmyty/obsgod/pkg/automation"
+          ]
+        },
+        {
+          "id": "go-vet",
+          "command": [
+            "go",
+            "vet",
+            "./internal/obs",
+            "./internal/commands",
+            "./pkg/api/v1",
+            "./pkg/automation",
+            "./internal/obstransport",
+            "./internal/deck",
+            "./pkg/creator/v1"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "stdout": "go-vet.jsonl",
+          "stderr": "go-vet.stderr"
+        }
+      ]
+    },
+    "python": {
+      "source_revision": "59665ad45629f4e2ee3e4b01fd9a6e184536dc5e",
+      "scope": "Focused checks for changed migration, packaging, history and brand delivery; final full matrix pending new logo",
+      "checked_at": "2026-11-14T13:45:53.974051+00:00",
+      "source_dirty_after": false,
+      "checks": [
+        {
+          "id": "test_repository_migration.py",
+          "command": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "steamdeck/tests",
+            "-p",
+            "test_repository_migration.py",
+            "-v"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "stdout": "test_repository_migration.py.stdout",
+          "stderr": "test_repository_migration.py.stderr"
+        },
+        {
+          "id": "test_releases.py",
+          "command": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "steamdeck/tests",
+            "-p",
+            "test_releases.py",
+            "-v"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "stdout": "test_releases.py.stdout",
+          "stderr": "test_releases.py.stderr"
+        },
+        {
+          "id": "test_install.py",
+          "command": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "steamdeck/tests",
+            "-p",
+            "test_install.py",
+            "-v"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "stdout": "test_install.py.stdout",
+          "stderr": "test_install.py.stderr"
+        },
+        {
+          "id": "test_update.py",
+          "command": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "steamdeck/tests",
+            "-p",
+            "test_update.py",
+            "-v"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "stdout": "test_update.py.stdout",
+          "stderr": "test_update.py.stderr"
+        },
+        {
+          "id": "test_uninstall.py",
+          "command": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "steamdeck/tests",
+            "-p",
+            "test_uninstall.py",
+            "-v"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "stdout": "test_uninstall.py.stdout",
+          "stderr": "test_uninstall.py.stderr"
+        },
+        {
+          "id": "test_nfpm_release.py",
+          "command": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "scripts/tests",
+            "-p",
+            "test_nfpm_release.py",
+            "-v"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "stdout": "test_nfpm_release.py.stdout",
+          "stderr": "test_nfpm_release.py.stderr"
+        },
+        {
+          "id": "test_generic_release.py",
+          "command": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "scripts/tests",
+            "-p",
+            "test_generic_release.py",
+            "-v"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "stdout": "test_generic_release.py.stdout",
+          "stderr": "test_generic_release.py.stderr"
+        },
+        {
+          "id": "test_project_history.py",
+          "command": [
+            "python3",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "scripts/tests",
+            "-p",
+            "test_project_history.py",
+            "-v"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "stdout": "test_project_history.py.stdout",
+          "stderr": "test_project_history.py.stderr"
+        },
+        {
+          "id": "brand-tests",
+          "command": [
+            "python3",
+            "branding/tests/test_brand_kit.py"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "stdout": "brand-tests.stdout",
+          "stderr": "brand-tests.stderr"
+        },
+        {
+          "id": "brand-repository-drift",
+          "command": [
+            "python3",
+            "scripts/generate-brand-kit.py",
+            "--raster",
+            "--repository-assets",
+            "--check"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "stdout": "brand-repository-drift.stdout",
+          "stderr": "brand-repository-drift.stderr"
+        },
+        {
+          "id": "support-drift",
+          "command": [
+            "node",
+            "scripts/generate-support.mjs",
+            "--check"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "stdout": "support-drift.stdout",
+          "stderr": "support-drift.stderr"
+        },
+        {
+          "id": "product-drift",
+          "command": [
+            "python3",
+            "scripts/generate-product.py",
+            "--check"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "stdout": "product-drift.stdout",
+          "stderr": "product-drift.stderr"
+        },
+        {
+          "id": "whitespace",
+          "command": [
+            "git",
+            "diff",
+            "08d5965aa410c96f30e0f4a67de9d7a8d52634f9",
+            "HEAD",
+            "--check"
+          ],
+          "exit_code": 0,
+          "outcome": "passed",
+          "stdout": "whitespace.stdout",
+          "stderr": "whitespace.stderr"
+        }
+      ]
+    },
+    "latest_nfpm_unit": {
+      "source_revision": "4ac20bfd9e8b2fe17ab1942eeedd3fc78e38b6fb",
+      "checked_at": "2026-11-14T13:58:12.240849+00:00",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts/tests",
+        "-p",
+        "test_nfpm_release.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "outcome": "passed",
+      "tests": 10,
+      "stdout": "nfpm-tests.stdout",
+      "stderr": "nfpm-tests.stderr",
+      "source_dirty_after": false
+    },
+    "raw_evidence": {
+      "path": "docs/evidence/pre-migration-focused.zip",
+      "members": 58,
+      "bytes": 83191,
+      "sha256": "7d19bdf4d9740feea9ecf17e1717cb940315919aa29fb0da54b119f95af38f7f"
+    },
+    "nfpm_details": "docs/evidence/pre-migration-nfpm.json"
+  },
+  "history": {
+    "helper": "scripts/export-project-history.py",
+    "development_checkpoint_counts": {
+      "issues": 40,
+      "prs": 35,
+      "conversation_comments": 41,
+      "reviews": 3
+    },
+    "carry_forward_criteria": 230,
+    "new_issue_numbers": null,
+    "final_retirement_export": "unrun until actual retirement",
+    "old_frozen_snapshot": "unchanged"
+  },
+  "remaining": {
+    "final_full_matrix": "intentionally unrun pending new logo; earlier4699235 receipts do not qualify current source",
+    "native_devices_viewer_adoption": "unrun for current candidate; requires actual hardware/consumer",
+    "hosted_actions": "unavailable under known billing lock; no spending/retry as qualification",
+    "dependency_review": "fork-specific API403; fresh standalone API needs verification after creation",
+    "brand": "new logo and actual owner creative/rights choices pending",
+    "repository": "fresh standalone main planned; old master rename not a prerequisite",
+    "release_site_deployment": "unperformed; exact publication/deployment gates remain"
+  },
+  "claims": {
+    "all_issues_closed": false,
+    "final_runtime_qualified": false,
+    "repository_migrated": false,
+    "release_published": false,
+    "money_spent": false
+  }
+}

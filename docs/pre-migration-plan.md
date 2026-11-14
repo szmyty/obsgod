@@ -5,6 +5,11 @@ a fresh source snapshot and clean tracker rather than transferring the old fork'
 history. `egohygiene/decky-stream` is the working destination discussed; creation,
 retirement, publication and final creative adoption have not happened.
 
+The nondeferred engineering pass has now been implemented and checked in draft
+#75. [The completion checkpoint](pre-migration-completion.md) records exact
+sources, focused passes, repaired failures and remaining gates. The table below
+preserves the original work plan; final full testing still follows the new logo.
+
 ## Current owner-directed sequence
 
 1. Repair brand-kit opening/download compatibility and finish feasible engineering

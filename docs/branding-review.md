@@ -1,5 +1,12 @@
 # Decky Stream branding owner packet
 
+Delivery follow-up: the current draft has a flat preview ZIP with 14 PNGs and a
+self-contained offline gallery; 11 focused tests and real offline browser
+decode checks passed. The complete kit has 38 files and repository projection
+has 32; the older 33/28 counts below belong to their exact historical checkpoint. Art is
+unchanged while awaiting the owner's new logo ideas. See
+[the engineering checkpoint](pre-migration-completion.md) for current receipts.
+
 Prepared 2026-11-13. Issues: #35 (owner/name), #38 (Identity kit), #43
 (site). This is reviewable preparation, not creative approval or publication.
 

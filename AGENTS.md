@@ -44,6 +44,11 @@ source; the memorial is history, not another backlog.
 
 ## Decisions, validation and handoff
 
+Current owner sequence is engineering → new logo → final full matrix → bug
+repairs/retests → migration. Focused checks continue during implementation;
+do not run or claim the final full matrix before the new-logo phase. Separate
+companion/StreamGod and provider OAuth work are deferred, not accepted as done.
+
 Update canonical docs when contracts/ownership/state/safety change. Record durable
 choices in [DECISIONS.md](DECISIONS.md); proposed ADRs stay proposed until the
 applicable decision is recorded. Do not add mandatory tools, permission gates or

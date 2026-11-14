@@ -1,9 +1,14 @@
 # Product roadmap
 
-Active phase: finish feasible nondeferred engineering and usable asset delivery,
-then review the owner's new logo, run final full qualification, fix bugs and
-migrate. Companion and OAuth are explicitly deferred. The final full matrix
-waits for the logo phase; focused implementation checks continue now.
+The feasible engineering pass is complete in draft #75. See the
+[exact-source checkpoint and remaining gates](docs/pre-migration-completion.md).
+The next phase is the owner's new logo direction, then final full available
+qualification, repairs/retests and migration. Earlier runtime receipts remain
+historical; final-source full qualification has not run for the new source.
+
+Companion and OAuth are explicitly deferred. The final full matrix waits for
+the new logo source; implementation checks remain separate from that final
+qualification. The earlier plan and source history follow below.
 
 Current repository-presentation preparation and useful remaining engineering
 lanes are in [the pre-migration plan](docs/pre-migration-plan.md). The owner

@@ -1,6 +1,39 @@
 # Current work
 
-## Active: finish engineering, then new logo, final qualification, migration
+## Engineering pass complete; next owner step is the new logo
+
+Draft #75 now contains the nondeferred engineering, after #73/#74. Exact source
+is4ac20bfd9e8b2fe17ab1942eeedd3fc78e38b6fb; [checkpoint](docs/pre-migration-completion.md)
+and [criterion/evidence map](docs/evidence/pre-migration-engineering.json).
+All39legacy operations share the typed API/application path with original ACK
+semantics and prompt owned-socket cancellation. Go regressions at59665ad (Go
+inputs unchanged at4ac) passed222top-level/456events across6affected packages
+with race/count1 and one optional existing-OBS skip; vet passed7packages.
+
+At clean4ac, actual Debian/Fedora/Alpine Linuxamd64 package lifecycle, filehash,
+UID65534 offlineCLI and data preservation checks passed. Three packages plus tar
+and8audit documents reproduced identically. Genuine A→B upward upgrade and A→C
+replacement/downgrade have separate exact-source receipts. RPM scripts/triggers,
+document modes, private staging and container fixture permissions were repaired;
+the existing root-owned catalog and original artifacts remained unchanged.
+
+Focused checks also passed64migration/release/install/update/uninstall cases,
+10NFPM/12generic/10history/11brand tests and actual offline image decoding.
+Publicly re-downloaded PNG-only ZIP is14ordinaryPNGs plus START-HERE; gallery is
+self-contained HTML. Current art is unchanged/proposed. New history tooling
+preserves all230criteria/dependencies and captures public tracker history without
+rewriting the frozen snapshot or performing retirement. Raw58-member evidence
+ZIP and compact package receipt are tracked beside the checkpoint.
+
+Next phase is the owner's new logo ideas, then final full qualification, bug
+repairs/retests and migration. The final full matrix is deliberately UNRUN now;
+old469 runtime receipts do not qualify this source. Companion/OAuth are deferred.
+Actual Deck/native/viewer/adoption, real destination/brand/rights/publisher and
+publication facts remain explicit. No issue was closed, source merged, repository
+created/archived/transferred, release/site deployed or money spent. Drafts remain
+in review order #73 → #74 → #75; use live state before the next phase.
+
+## Implementation-phase authorization (preserved)
 
 The owner reported that some brand-kit files could not be opened and authorized
 finishing all remaining feasible engineering. Current phase order is explicit:

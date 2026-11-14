@@ -1,0 +1,1885 @@
+{
+  "schema": "decky-stream.nfpm-focused-qualification/v1",
+  "captured_at": "2026-11-14T13:57:05.243441+00:00",
+  "source_revision": "4ac20bfd9e8b2fe17ab1942eeedd3fc78e38b6fb",
+  "source_tree": "e621214690a8ff001e18ee69c20f56369f56e5eb",
+  "source_inputs_sha256": {
+    "scripts/nfpm-release.py": "06905e2099f4df0ddf135aa756cf527454aac15facdb2cea71264205647f9d22",
+    "scripts/generic-release.py": "ba3396832f5269d7e566d384e70065128308275076548d9bf8cdd730e4c7d694",
+    ".goreleaser.yml": "1db1c75458b570bf13f6a6ae27057719b83f3e94a00c55d5e46db9ab0a66eced",
+    ".github/workflows/goreleaser.yml": "d08688e8e8a446af1d88abf62b77fff4bdc8595be78c94ccefd21c301111811b",
+    "scripts/tests/test_nfpm_release.py": "5ff7544d51a3c19cc94cfe1f598816832a650f7c1856e4a7717252bcfe4496c4",
+    "docs/generic-packaging.md": "480f86bf598c8deadca978c0792a868652ebcec05eb9a41251c27028155d3e4e"
+  },
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "go": "go1.27.4 linux/amd64",
+  "goreleaser": {
+    "version": "2.20.2",
+    "upstream_tar_sha256": "f3d24969a7389a46613875711d15a96d8f6ef1553d84c6ace09d69ac1e7d44c0"
+  },
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts/tests",
+        "-p",
+        "test_nfpm_release.py",
+        "-v"
+      ],
+      "outcome": "passed",
+      "log": "final-test_nfpm_release.py.log",
+      "sha256": "61f60b608e1d52ccc260bd26110bf8748238c775b2064bbbb621de63513bd6f1"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts/tests",
+        "-p",
+        "test_generic_release.py",
+        "-v"
+      ],
+      "outcome": "passed",
+      "log": "final-test_generic_release.py.log",
+      "sha256": "6e89b5dd4138c539ce197f8945e35f60bd60416e1527ac787fdc5d07d1c2a0da"
+    },
+    {
+      "command": "PATH=PINNED_GO:$PATH GOMODCACHE=TASK_MODULE_CACHE GOCACHE=TASK_BUILD_CACHE GOTOOLCHAIN=local python3 scripts/nfpm-release.py focused --goreleaser PINNED_GORELEASER --output NEW_DIRECTORY",
+      "outcome": "passed twice",
+      "logs": [
+        "build-C.log",
+        "build-C-repeat.log"
+      ]
+    },
+    {
+      "command": "python3 scripts/nfpm-release.py audit --revision 4ac20bfd9e8b2fe17ab1942eeedd3fc78e38b6fb --target linux-amd64 --artifacts ARTIFACTS --output NEW_AUDIT_DIRECTORY",
+      "outcome": "passed for both independent builds",
+      "logs": [
+        "audit-C.log",
+        "audit-C-repeat.log"
+      ]
+    },
+    {
+      "command": "python3 scripts/nfpm-release.py smoke --artifacts ARTIFACTS_WITH_BASELINE_PACKAGES --audit SELECTED_C_AUDIT --previous-audit AUDIT_A --output NEW_DIRECTORY",
+      "outcome": "passed",
+      "log": "smoke-A-to-C.log"
+    }
+  ],
+  "audit": {
+    "integrity": "passed",
+    "limits": [
+      "Bounded static package inspection is not package-manager execution or OBS integration.",
+      "Sidecars are UNSIGNED self-reported inventories, not authenticated publisher attestations.",
+      "Native ARM/386 runtime, other platforms, actual Deck and release acceptance remain separate."
+    ],
+    "matrix": "focused-linux-amd64",
+    "native_execution": "unrun-by-audit",
+    "package_count": 3,
+    "packages": [
+      {
+        "binary": "obsgod",
+        "binary_sha256": "147bbc301f4c5a7c1fba26907efb2fb68c5562c60b64aa9352abe7d539cef5d7",
+        "dependencies": [
+          {
+            "go_sum": "h1:G/WWpXY0EHO4JJPEunifq7/JRCMmVrPRfF1yHV1MoH0=",
+            "name": "github.com/andreykaipov/goobs",
+            "version": "v1.8.3"
+          },
+          {
+            "go_sum": "h1:frqHqw7otoVbk5M8LlE/L7HTnIq2v9RX6EJ48i9AxJk=",
+            "name": "github.com/buger/jsonparser",
+            "version": "v1.1.2"
+          },
+          {
+            "go_sum": "h1:saDtZ6Pbx/0u+bgYQ3q96pZgCzfhKXGPqt7kZ72aNNg=",
+            "name": "github.com/gorilla/websocket",
+            "version": "v1.5.3"
+          },
+          {
+            "go_sum": "h1:dLEQVugN8vlakKOUE3ihGLTZJRB4j+M2cdTm/ORI65Y=",
+            "name": "github.com/hashicorp/logutils",
+            "version": "v1.0.0"
+          },
+          {
+            "go_sum": "h1:jeMsZIYE/09sWLaz43PL7Gy6RuMjD2eJVyuac5Z2hdY=",
+            "name": "github.com/mitchellh/mapstructure",
+            "version": "v1.5.0"
+          },
+          {
+            "go_sum": "h1:jhDmAqPyebOsVDOCICJoINoLb/AnLBaUw58nFzxWS2w=",
+            "name": "github.com/mmcloughlin/profile",
+            "version": "v0.1.1"
+          },
+          {
+            "go_sum": "h1:odyqkoEg4aJAINOzvnjN4tUsdp+Zleccs7tRIAkkYzU=",
+            "name": "github.com/muesli/coral",
+            "version": "v1.0.0"
+          },
+          {
+            "go_sum": "h1:VhgPp6v9qf9Agr/56bj7Y/xa04UccTW04VP0Qed4vnQ=",
+            "name": "github.com/nu7hatch/gouuid",
+            "version": "v0.0.0-20131221200532-179d4d0c4d8d"
+          },
+          {
+            "go_sum": "h1:iy+VFUOCP1a+8yFto/drg2CJ5u0yRoB7fZw3DKv/JXA=",
+            "name": "github.com/spf13/pflag",
+            "version": "v1.0.5"
+          }
+        ],
+        "files": {
+          "usr/bin/obsgod": {
+            "mode": 493,
+            "sha256": "147bbc301f4c5a7c1fba26907efb2fb68c5562c60b64aa9352abe7d539cef5d7"
+          },
+          "usr/share/doc/obsgod/CHANGELOG.md": {
+            "mode": 420,
+            "sha256": "62a04eb2901efec99f85e766f702dabcb2679c405f7f3ff84c0e4a060b0d79c5"
+          },
+          "usr/share/doc/obsgod/GENERIC-CLI.md": {
+            "mode": 420,
+            "sha256": "d650c895b8f57674988e8413013e4f5e127ec2488f1dc7b478c00295fc85b932"
+          },
+          "usr/share/doc/obsgod/GO-NOTICES.json": {
+            "mode": 420,
+            "sha256": "fa712bb4e7561cfd1ff7cbb82707379fce0e3b6deae2ba0a9c6e3b24be344f87"
+          },
+          "usr/share/doc/obsgod/LICENSE": {
+            "mode": 420,
+            "sha256": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af"
+          },
+          "usr/share/doc/obsgod/README.md": {
+            "mode": 420,
+            "sha256": "7dba69a059701c54d3b726123754c86fad1333d34383f9bfe23da22b6ccc5c3b"
+          },
+          "usr/share/doc/obsgod/SOURCE.json": {
+            "mode": 420,
+            "sha256": "da82e0eeb14ea1d8dd34b2270f79cae58d00e8732668d905c3fbd8ae1a438079"
+          },
+          "usr/share/doc/obsgod/THIRD_PARTY_NOTICES.md": {
+            "mode": 420,
+            "sha256": "22810432e2128576056d9c57067ec001372563f51f29c47c2086009651793700"
+          }
+        },
+        "format": "apk",
+        "go_build_settings": {
+          "-buildmode": "exe",
+          "-compiler": "gc",
+          "-trimpath": "true",
+          "CGO_ENABLED": "0",
+          "DefaultGODEBUG": "containermaxprocs=0,cryptocustomrand=1,decoratemappings=0,gotestjsonbuildtext=1,httpcookiemaxnum=0,httpservecontentmaxranges=1,multipathtcp=0,randseednop=0,rsa1024min=0,tlsmlkem=0,tlssecpmlkem=0,tlssha1=1,tracebacklabels=0,updatemaxprocs=0,urlmaxqueryparams=0,urlstrictcolons=0,x509rsacrt=0,x509sha256skid=0,x509sslcertoverrideplatform=0,x509usepolicies=0",
+          "GOAMD64": "v1",
+          "GOARCH": "amd64",
+          "GOOS": "linux",
+          "vcs": "git",
+          "vcs.modified": "false",
+          "vcs.revision": "4ac20bfd9e8b2fe17ab1942eeedd3fc78e38b6fb",
+          "vcs.time": "2026-11-14T13:53:47Z"
+        },
+        "name": "obsgod_0.0.0-dev.g4ac20bf_linux_amd64.apk",
+        "package_metadata": {
+          "Architecture": "x86_64",
+          "Package": "obsgod",
+          "Version": "0.0.0_dev.g4ac20bf"
+        },
+        "platform": {
+          "goarch": "amd64",
+          "goarm": "",
+          "goos": "linux"
+        },
+        "sha256": "327d2e0cb0bcf2725b370fcc2eaf0a2c11983bcabb3dc6d5f5fce9b0f712d01f",
+        "source_evidence": "Go VCS metadata: exact selected revision and unmodified source",
+        "version_source_evidence": "Snapshot version metadata plus embedded byte presence; native CLI values unrun-by-audit"
+      },
+      {
+        "binary": "obsgod",
+        "binary_sha256": "147bbc301f4c5a7c1fba26907efb2fb68c5562c60b64aa9352abe7d539cef5d7",
+        "dependencies": [
+          {
+            "go_sum": "h1:G/WWpXY0EHO4JJPEunifq7/JRCMmVrPRfF1yHV1MoH0=",
+            "name": "github.com/andreykaipov/goobs",
+            "version": "v1.8.3"
+          },
+          {
+            "go_sum": "h1:frqHqw7otoVbk5M8LlE/L7HTnIq2v9RX6EJ48i9AxJk=",
+            "name": "github.com/buger/jsonparser",
+            "version": "v1.1.2"
+          },
+          {
+            "go_sum": "h1:saDtZ6Pbx/0u+bgYQ3q96pZgCzfhKXGPqt7kZ72aNNg=",
+            "name": "github.com/gorilla/websocket",
+            "version": "v1.5.3"
+          },
+          {
+            "go_sum": "h1:dLEQVugN8vlakKOUE3ihGLTZJRB4j+M2cdTm/ORI65Y=",
+            "name": "github.com/hashicorp/logutils",
+            "version": "v1.0.0"
+          },
+          {
+            "go_sum": "h1:jeMsZIYE/09sWLaz43PL7Gy6RuMjD2eJVyuac5Z2hdY=",
+            "name": "github.com/mitchellh/mapstructure",
+            "version": "v1.5.0"
+          },
+          {
+            "go_sum": "h1:jhDmAqPyebOsVDOCICJoINoLb/AnLBaUw58nFzxWS2w=",
+            "name": "github.com/mmcloughlin/profile",
+            "version": "v0.1.1"
+          },
+          {
+            "go_sum": "h1:odyqkoEg4aJAINOzvnjN4tUsdp+Zleccs7tRIAkkYzU=",
+            "name": "github.com/muesli/coral",
+            "version": "v1.0.0"
+          },
+          {
+            "go_sum": "h1:VhgPp6v9qf9Agr/56bj7Y/xa04UccTW04VP0Qed4vnQ=",
+            "name": "github.com/nu7hatch/gouuid",
+            "version": "v0.0.0-20131221200532-179d4d0c4d8d"
+          },
+          {
+            "go_sum": "h1:iy+VFUOCP1a+8yFto/drg2CJ5u0yRoB7fZw3DKv/JXA=",
+            "name": "github.com/spf13/pflag",
+            "version": "v1.0.5"
+          }
+        ],
+        "files": {
+          "usr/bin/obsgod": {
+            "mode": 493,
+            "sha256": "147bbc301f4c5a7c1fba26907efb2fb68c5562c60b64aa9352abe7d539cef5d7"
+          },
+          "usr/share/doc/obsgod/CHANGELOG.md": {
+            "mode": 420,
+            "sha256": "62a04eb2901efec99f85e766f702dabcb2679c405f7f3ff84c0e4a060b0d79c5"
+          },
+          "usr/share/doc/obsgod/GENERIC-CLI.md": {
+            "mode": 420,
+            "sha256": "d650c895b8f57674988e8413013e4f5e127ec2488f1dc7b478c00295fc85b932"
+          },
+          "usr/share/doc/obsgod/GO-NOTICES.json": {
+            "mode": 420,
+            "sha256": "fa712bb4e7561cfd1ff7cbb82707379fce0e3b6deae2ba0a9c6e3b24be344f87"
+          },
+          "usr/share/doc/obsgod/LICENSE": {
+            "mode": 420,
+            "sha256": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af"
+          },
+          "usr/share/doc/obsgod/README.md": {
+            "mode": 420,
+            "sha256": "7dba69a059701c54d3b726123754c86fad1333d34383f9bfe23da22b6ccc5c3b"
+          },
+          "usr/share/doc/obsgod/SOURCE.json": {
+            "mode": 420,
+            "sha256": "da82e0eeb14ea1d8dd34b2270f79cae58d00e8732668d905c3fbd8ae1a438079"
+          },
+          "usr/share/doc/obsgod/THIRD_PARTY_NOTICES.md": {
+            "mode": 420,
+            "sha256": "22810432e2128576056d9c57067ec001372563f51f29c47c2086009651793700"
+          }
+        },
+        "format": "deb",
+        "go_build_settings": {
+          "-buildmode": "exe",
+          "-compiler": "gc",
+          "-trimpath": "true",
+          "CGO_ENABLED": "0",
+          "DefaultGODEBUG": "containermaxprocs=0,cryptocustomrand=1,decoratemappings=0,gotestjsonbuildtext=1,httpcookiemaxnum=0,httpservecontentmaxranges=1,multipathtcp=0,randseednop=0,rsa1024min=0,tlsmlkem=0,tlssecpmlkem=0,tlssha1=1,tracebacklabels=0,updatemaxprocs=0,urlmaxqueryparams=0,urlstrictcolons=0,x509rsacrt=0,x509sha256skid=0,x509sslcertoverrideplatform=0,x509usepolicies=0",
+          "GOAMD64": "v1",
+          "GOARCH": "amd64",
+          "GOOS": "linux",
+          "vcs": "git",
+          "vcs.modified": "false",
+          "vcs.revision": "4ac20bfd9e8b2fe17ab1942eeedd3fc78e38b6fb",
+          "vcs.time": "2026-11-14T13:53:47Z"
+        },
+        "name": "obsgod_0.0.0-dev.g4ac20bf_linux_amd64.deb",
+        "package_metadata": {
+          "Architecture": "amd64",
+          "Description": "obsgod is a command-line remote control for OBS",
+          "Homepage": "https://github.com/szmyty/obsgod",
+          "Installed-Size": "10885",
+          "Maintainer": "szmyty",
+          "Package": "obsgod",
+          "Priority": "optional",
+          "Section": "",
+          "Version": "0.0.0~dev.g4ac20bf"
+        },
+        "platform": {
+          "goarch": "amd64",
+          "goarm": "",
+          "goos": "linux"
+        },
+        "sha256": "87c6bb8f15d3cba07c76587776e50ca5dfc3d4b64e1fc5b42e639da3fd8fa493",
+        "source_evidence": "Go VCS metadata: exact selected revision and unmodified source",
+        "version_source_evidence": "Snapshot version metadata plus embedded byte presence; native CLI values unrun-by-audit"
+      },
+      {
+        "binary": "obsgod",
+        "binary_sha256": "147bbc301f4c5a7c1fba26907efb2fb68c5562c60b64aa9352abe7d539cef5d7",
+        "dependencies": [
+          {
+            "go_sum": "h1:G/WWpXY0EHO4JJPEunifq7/JRCMmVrPRfF1yHV1MoH0=",
+            "name": "github.com/andreykaipov/goobs",
+            "version": "v1.8.3"
+          },
+          {
+            "go_sum": "h1:frqHqw7otoVbk5M8LlE/L7HTnIq2v9RX6EJ48i9AxJk=",
+            "name": "github.com/buger/jsonparser",
+            "version": "v1.1.2"
+          },
+          {
+            "go_sum": "h1:saDtZ6Pbx/0u+bgYQ3q96pZgCzfhKXGPqt7kZ72aNNg=",
+            "name": "github.com/gorilla/websocket",
+            "version": "v1.5.3"
+          },
+          {
+            "go_sum": "h1:dLEQVugN8vlakKOUE3ihGLTZJRB4j+M2cdTm/ORI65Y=",
+            "name": "github.com/hashicorp/logutils",
+            "version": "v1.0.0"
+          },
+          {
+            "go_sum": "h1:jeMsZIYE/09sWLaz43PL7Gy6RuMjD2eJVyuac5Z2hdY=",
+            "name": "github.com/mitchellh/mapstructure",
+            "version": "v1.5.0"
+          },
+          {
+            "go_sum": "h1:jhDmAqPyebOsVDOCICJoINoLb/AnLBaUw58nFzxWS2w=",
+            "name": "github.com/mmcloughlin/profile",
+            "version": "v0.1.1"
+          },
+          {
+            "go_sum": "h1:odyqkoEg4aJAINOzvnjN4tUsdp+Zleccs7tRIAkkYzU=",
+            "name": "github.com/muesli/coral",
+            "version": "v1.0.0"
+          },
+          {
+            "go_sum": "h1:VhgPp6v9qf9Agr/56bj7Y/xa04UccTW04VP0Qed4vnQ=",
+            "name": "github.com/nu7hatch/gouuid",
+            "version": "v0.0.0-20131221200532-179d4d0c4d8d"
+          },
+          {
+            "go_sum": "h1:iy+VFUOCP1a+8yFto/drg2CJ5u0yRoB7fZw3DKv/JXA=",
+            "name": "github.com/spf13/pflag",
+            "version": "v1.0.5"
+          }
+        ],
+        "files": {
+          "usr/bin/obsgod": {
+            "mode": 493,
+            "sha256": "147bbc301f4c5a7c1fba26907efb2fb68c5562c60b64aa9352abe7d539cef5d7"
+          },
+          "usr/share/doc/obsgod/CHANGELOG.md": {
+            "mode": 420,
+            "sha256": "62a04eb2901efec99f85e766f702dabcb2679c405f7f3ff84c0e4a060b0d79c5"
+          },
+          "usr/share/doc/obsgod/GENERIC-CLI.md": {
+            "mode": 420,
+            "sha256": "d650c895b8f57674988e8413013e4f5e127ec2488f1dc7b478c00295fc85b932"
+          },
+          "usr/share/doc/obsgod/GO-NOTICES.json": {
+            "mode": 420,
+            "sha256": "fa712bb4e7561cfd1ff7cbb82707379fce0e3b6deae2ba0a9c6e3b24be344f87"
+          },
+          "usr/share/doc/obsgod/LICENSE": {
+            "mode": 420,
+            "sha256": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af"
+          },
+          "usr/share/doc/obsgod/README.md": {
+            "mode": 420,
+            "sha256": "7dba69a059701c54d3b726123754c86fad1333d34383f9bfe23da22b6ccc5c3b"
+          },
+          "usr/share/doc/obsgod/SOURCE.json": {
+            "mode": 420,
+            "sha256": "da82e0eeb14ea1d8dd34b2270f79cae58d00e8732668d905c3fbd8ae1a438079"
+          },
+          "usr/share/doc/obsgod/THIRD_PARTY_NOTICES.md": {
+            "mode": 420,
+            "sha256": "22810432e2128576056d9c57067ec001372563f51f29c47c2086009651793700"
+          }
+        },
+        "format": "rpm",
+        "go_build_settings": {
+          "-buildmode": "exe",
+          "-compiler": "gc",
+          "-trimpath": "true",
+          "CGO_ENABLED": "0",
+          "DefaultGODEBUG": "containermaxprocs=0,cryptocustomrand=1,decoratemappings=0,gotestjsonbuildtext=1,httpcookiemaxnum=0,httpservecontentmaxranges=1,multipathtcp=0,randseednop=0,rsa1024min=0,tlsmlkem=0,tlssecpmlkem=0,tlssha1=1,tracebacklabels=0,updatemaxprocs=0,urlmaxqueryparams=0,urlstrictcolons=0,x509rsacrt=0,x509sha256skid=0,x509sslcertoverrideplatform=0,x509usepolicies=0",
+          "GOAMD64": "v1",
+          "GOARCH": "amd64",
+          "GOOS": "linux",
+          "vcs": "git",
+          "vcs.modified": "false",
+          "vcs.revision": "4ac20bfd9e8b2fe17ab1942eeedd3fc78e38b6fb",
+          "vcs.time": "2026-11-14T13:53:47Z"
+        },
+        "name": "obsgod_0.0.0-dev.g4ac20bf_linux_amd64.rpm",
+        "package_metadata": {
+          "Architecture": "x86_64",
+          "BuildHost": "reproducible.obsgod.invalid",
+          "Package": "obsgod",
+          "Release": "1",
+          "Version": "0.0.0~dev.g4ac20bf"
+        },
+        "platform": {
+          "goarch": "amd64",
+          "goarm": "",
+          "goos": "linux"
+        },
+        "sha256": "974b24e6904e4d3fdb26cb616b3c012ecd361fbd68623683d90d57d06a04d26a",
+        "source_evidence": "Go VCS metadata: exact selected revision and unmodified source",
+        "version_source_evidence": "Snapshot version metadata plus embedded byte presence; native CLI values unrun-by-audit"
+      }
+    ],
+    "publication": "not-authorized-by-audit",
+    "schema_version": 1,
+    "source": {
+      "created": "2026-11-14T13:53:47Z",
+      "epoch": 1794664427,
+      "revision": "4ac20bfd9e8b2fe17ab1942eeedd3fc78e38b6fb",
+      "tree": "e621214690a8ff001e18ee69c20f56369f56e5eb"
+    },
+    "version": "0.0.0-dev.g4ac20bf"
+  },
+  "reproducibility": {
+    "source_revision": "4ac20bfd9e8b2fe17ab1942eeedd3fc78e38b6fb",
+    "outcome": "passed",
+    "artifacts": {
+      "obsgod_0.0.0-dev.g4ac20bf_linux_amd64.deb": {
+        "first": "87c6bb8f15d3cba07c76587776e50ca5dfc3d4b64e1fc5b42e639da3fd8fa493",
+        "repeat": "87c6bb8f15d3cba07c76587776e50ca5dfc3d4b64e1fc5b42e639da3fd8fa493"
+      },
+      "obsgod_0.0.0-dev.g4ac20bf_linux_amd64.rpm": {
+        "first": "974b24e6904e4d3fdb26cb616b3c012ecd361fbd68623683d90d57d06a04d26a",
+        "repeat": "974b24e6904e4d3fdb26cb616b3c012ecd361fbd68623683d90d57d06a04d26a"
+      },
+      "obsgod_0.0.0-dev.g4ac20bf_linux_amd64.apk": {
+        "first": "327d2e0cb0bcf2725b370fcc2eaf0a2c11983bcabb3dc6d5f5fce9b0f712d01f",
+        "repeat": "327d2e0cb0bcf2725b370fcc2eaf0a2c11983bcabb3dc6d5f5fce9b0f712d01f"
+      },
+      "obsgod_0.0.0-dev.g4ac20bf_linux_amd64.tar.gz": {
+        "first": "d27b1cedefa3a43d891d39199c9878bca69bb8a9d3e1863c14ec74a517486057",
+        "repeat": "d27b1cedefa3a43d891d39199c9878bca69bb8a9d3e1863c14ec74a517486057"
+      }
+    },
+    "audit_documents": {
+      "obsgod_0.0.0-dev.g4ac20bf_linux_amd64.apk.provenance.unsigned.json": "276075c4372cac09fee468610c819c8bfdc2c04590a525a186dba31e1fee0c6a",
+      "obsgod_0.0.0-dev.g4ac20bf_linux_amd64.apk.spdx.json": "842c091b23691449b63cf339a8a44f76f9d6c23841f1da6d7fc82b8e99b2285a",
+      "obsgod_0.0.0-dev.g4ac20bf_linux_amd64.rpm.spdx.json": "f2a37c56665f3909a91ef80badf325a98a9eb42fccc1aef46270f826ff10dcd2",
+      "obsgod_0.0.0-dev.g4ac20bf_linux_amd64.deb.provenance.unsigned.json": "47f88b3ae46ca2461e8099d97241fa25725a91131abd81700170158521af1c2f",
+      "AUDIT-SHA256SUMS": "0c95dc49c7d6bbc588dd9c5e3115741f8e96caca925184b3d7b1b6347998a347",
+      "SUMMARY.json": "7d3107e787a31254dcbec18f47dfe0b43d3a1f081236ef4f531bc3b493fb89b3",
+      "obsgod_0.0.0-dev.g4ac20bf_linux_amd64.rpm.provenance.unsigned.json": "e36a5ab97f7ce2fcc7edae975f98f50adb537e3c73a82854cd3f2aea50310b2a",
+      "obsgod_0.0.0-dev.g4ac20bf_linux_amd64.deb.spdx.json": "ae2e68f7dc6e5e2641ea62bb82d6745fb1767973ff15dfb82571896335bae15a"
+    }
+  },
+  "package_lifecycle": {
+    "harness_sha256": "06905e2099f4df0ddf135aa756cf527454aac15facdb2cea71264205647f9d22",
+    "harness_source_revision": "4ac20bfd9e8b2fe17ab1942eeedd3fc78e38b6fb",
+    "harness_worktree_dirty": false,
+    "outcome": "passed",
+    "previous_source_revision": "4ea56460958f57e9bc014504e630c4d18394aa27",
+    "results": [
+      {
+        "commands": [
+          {
+            "arguments": [
+              "/bin/sh",
+              "-eu",
+              "-c",
+              "mkdir -p /home/package-user/.config/obsgod /home/package-user/Videos; printf preserve > /home/package-user/.config/obsgod/fixture; printf media > /home/package-user/Videos/fixture; chmod 777 /home/package-user; chmod -R a+rX /home/package-user"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "dpkg",
+              "--path-include=/usr/share/doc/obsgod",
+              "--path-include=/usr/share/doc/obsgod/*",
+              "--install",
+              "/packages/obsgod_0.0.0-dev.g4ea5646_linux_amd64.deb"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "Selecting previously unselected package obsgod.\n(Reading database ... 6096 files and directories currently installed.)\nPreparing to unpack .../obsgod_0.0.0-dev.g4ea5646_linux_amd64.deb ...\nUnpacking obsgod (0.0.0~dev.g4ea5646) ...\nSetting up obsgod (0.0.0~dev.g4ea5646) ...\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "dpkg",
+              "--path-include=/usr/share/doc/obsgod",
+              "--path-include=/usr/share/doc/obsgod/*",
+              "--install",
+              "/packages/obsgod_0.0.0-dev.g4ac20bf_linux_amd64.deb"
+            ],
+            "exit_code": 0,
+            "stderr": "dpkg: warning: downgrading obsgod from 0.0.0~dev.g4ea5646 to 0.0.0~dev.g4ac20bf\n",
+            "stdout": "(Reading database ... 6105 files and directories currently installed.)\nPreparing to unpack .../obsgod_0.0.0-dev.g4ac20bf_linux_amd64.deb ...\nUnpacking obsgod (0.0.0~dev.g4ac20bf) over (0.0.0~dev.g4ea5646) ...\nSetting up obsgod (0.0.0~dev.g4ac20bf) ...\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/bin/obsgod"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "147bbc301f4c5a7c1fba26907efb2fb68c5562c60b64aa9352abe7d539cef5d7  /usr/bin/obsgod\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/CHANGELOG.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "62a04eb2901efec99f85e766f702dabcb2679c405f7f3ff84c0e4a060b0d79c5  /usr/share/doc/obsgod/CHANGELOG.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/GENERIC-CLI.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "d650c895b8f57674988e8413013e4f5e127ec2488f1dc7b478c00295fc85b932  /usr/share/doc/obsgod/GENERIC-CLI.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/GO-NOTICES.json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "fa712bb4e7561cfd1ff7cbb82707379fce0e3b6deae2ba0a9c6e3b24be344f87  /usr/share/doc/obsgod/GO-NOTICES.json\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/LICENSE"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af  /usr/share/doc/obsgod/LICENSE\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/README.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "7dba69a059701c54d3b726123754c86fad1333d34383f9bfe23da22b6ccc5c3b  /usr/share/doc/obsgod/README.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/SOURCE.json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "da82e0eeb14ea1d8dd34b2270f79cae58d00e8732668d905c3fbd8ae1a438079  /usr/share/doc/obsgod/SOURCE.json\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/THIRD_PARTY_NOTICES.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "22810432e2128576056d9c57067ec001372563f51f29c47c2086009651793700  /usr/share/doc/obsgod/THIRD_PARTY_NOTICES.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "version",
+              "--json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "{\"schema_version\":1,\"name\":\"obsgod\",\"version\":\"0.0.0-dev.g4ac20bf (4ac20bfd9e8b2fe17ab1942eeedd3fc78e38b6fb)\"}\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "--help"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "obsgod is a command-line remote control for OBS\n\nUsage:\n  obsgod [command]\n\nExamples:\n  obsgod version\n  obsgod config show --json\n  obsgod stream status --json\n\nAvailable Commands:\n  api             Versioned public OBS API adapter; emits one JSON result, preserves legacy commands\n  completion      Generate offline shell completions to stdout\n  config          Inspect and validate connection configuration without starting OBS\n  creator         Optional local creator orchestration through the public OBS API\n  deck            Manage the optional Steam Deck streaming preview (JSON output)\n  doctor          Diagnose managed Steam Deck installation, OBS and capture (JSON)\n  help            Help about any command\n  label           manage text labels\n  profile         manage profiles\n  recording       manage recordings\n  reference       Generate a deterministic offline Markdown command reference\n  replaybuffer    manage replay buffer\n  scene           manage scenes\n  scenecollection manage scene collections\n  sceneitem       manage scene items\n  source          manage sources\n  stream          manage streams\n  studiomode      manage studio mode\n  version         Print build version without connecting to OBS\n  virtualcam      manage virtual camera\n  workflow        Plan or explicitly apply provider-neutral OBS settings; never starts streaming\n\nFlags:\n      --config string               OBS connection config file (env: OBSGOD_CONFIG; default: XDG obsgod/config.json)\n      --connection-profile string   Named connection profile (env: OBSGOD_CONNECTION_PROFILE)\n  -h, --help                        help for obsgod\n      --host string                 OBS host (env: OBSGOD_HOST or legacy OBS_HOST) (default \"localhost\")\n      --no-color                    Disable optional terminal color in verbose diagnostics (also respects NO_COLOR/TERM)\n      --password string             OBS password; prefer --password-file or OBS_PASSWORD to avoid shell history\n      --password-file string        Private single-line OBS password file; avoids secret command arguments\n  -p, --port uint32                 OBS port (env: OBSGOD_PORT or legacy OBS_PORT) (default 4455)\n      --verbose                     Write credential-free command/stage diagnostics to stderr\n  -v, --version                     version for obsgod\n\nUse \"obsgod [command] --help\" for more information about a command.\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "api",
+              "capabilities"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "{\"schema_version\":1,\"ok\":true,\"operation\":\"capabilities\",\"result\":{\"schema_version\":1,\"api\":\"obsgod/v1\",\"operations\":[\"snapshot\",\"stream.start\",\"stream.stop\",\"recording.start\",\"recording.stop\",\"replay.start\",\"replay.stop\",\"replay.save\",\"virtual-camera.start\",\"virtual-camera.stop\",\"profile.list\",\"profile.select\",\"collection.select\",\"scene.select\",\"scene-items.list\",\"scene-item.enable\",\"service.configure-rtmp\",\"service.verify-rtmp\",\"workflow.apply\"],\"provider_reception\":\"unknown\"}}\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "config",
+              "path"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "/home/package-user/.config/obsgod/config.json\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "dpkg",
+              "--path-include=/usr/share/doc/obsgod",
+              "--path-include=/usr/share/doc/obsgod/*",
+              "--install",
+              "/packages/obsgod_0.0.0-dev.g4ac20bf_linux_amd64.deb"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "(Reading database ... 6105 files and directories currently installed.)\nPreparing to unpack .../obsgod_0.0.0-dev.g4ac20bf_linux_amd64.deb ...\nUnpacking obsgod (0.0.0~dev.g4ac20bf) over (0.0.0~dev.g4ac20bf) ...\nSetting up obsgod (0.0.0~dev.g4ac20bf) ...\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "dpkg",
+              "--purge",
+              "obsgod"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "(Reading database ... 6105 files and directories currently installed.)\nRemoving obsgod (0.0.0~dev.g4ac20bf) ...\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "/bin/sh",
+              "-eu",
+              "-c",
+              "test ! -e /usr/bin/obsgod; test ! -e /usr/share/doc/obsgod/SOURCE.json; test \"$(cat /home/package-user/.config/obsgod/fixture)\" = preserve; test \"$(cat /home/package-user/Videos/fixture)\" = media; test ! -e /home/package-user/.config/obsgod/config.json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          }
+        ],
+        "format": "deb",
+        "image": "debian:bookworm-slim@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+        "limits": "Disposable Linux amd64 package lifecycle and unprivileged offline CLI only; no OBS, actual Deck, host installation or native ARM proof.",
+        "outcome": "passed",
+        "package": "obsgod_0.0.0-dev.g4ac20bf_linux_amd64.deb",
+        "package_replacement": "previous audited source to current",
+        "previous_package": {
+          "name": "obsgod_0.0.0-dev.g4ea5646_linux_amd64.deb",
+          "package_metadata": {
+            "Architecture": "amd64",
+            "Description": "obsgod is a command-line remote control for OBS",
+            "Homepage": "https://github.com/szmyty/obsgod",
+            "Installed-Size": "10885",
+            "Maintainer": "szmyty",
+            "Package": "obsgod",
+            "Priority": "optional",
+            "Section": "",
+            "Version": "0.0.0~dev.g4ea5646"
+          },
+          "sha256": "b2bfeb3b0c54599b4430d84a7e61e51883bdaf47a0cabb54ab2df67b5a7d3c88",
+          "source_revision": "4ea56460958f57e9bc014504e630c4d18394aa27"
+        },
+        "sha256": "87c6bb8f15d3cba07c76587776e50ca5dfc3d4b64e1fc5b42e639da3fd8fa493"
+      },
+      {
+        "commands": [
+          {
+            "arguments": [
+              "/bin/sh",
+              "-eu",
+              "-c",
+              "mkdir -p /home/package-user/.config/obsgod /home/package-user/Videos; printf preserve > /home/package-user/.config/obsgod/fixture; printf media > /home/package-user/Videos/fixture; chmod 777 /home/package-user; chmod -R a+rX /home/package-user"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "chmod",
+              "u+w",
+              "/usr/bin"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "rpm",
+              "-U",
+              "--replacepkgs",
+              "--oldpackage",
+              "/packages/obsgod_0.0.0-dev.g4ea5646_linux_amd64.rpm"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "rpm",
+              "-U",
+              "--replacepkgs",
+              "--oldpackage",
+              "/packages/obsgod_0.0.0-dev.g4ac20bf_linux_amd64.rpm"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/bin/obsgod"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "147bbc301f4c5a7c1fba26907efb2fb68c5562c60b64aa9352abe7d539cef5d7  /usr/bin/obsgod\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/CHANGELOG.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "62a04eb2901efec99f85e766f702dabcb2679c405f7f3ff84c0e4a060b0d79c5  /usr/share/doc/obsgod/CHANGELOG.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/GENERIC-CLI.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "d650c895b8f57674988e8413013e4f5e127ec2488f1dc7b478c00295fc85b932  /usr/share/doc/obsgod/GENERIC-CLI.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/GO-NOTICES.json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "fa712bb4e7561cfd1ff7cbb82707379fce0e3b6deae2ba0a9c6e3b24be344f87  /usr/share/doc/obsgod/GO-NOTICES.json\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/LICENSE"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af  /usr/share/doc/obsgod/LICENSE\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/README.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "7dba69a059701c54d3b726123754c86fad1333d34383f9bfe23da22b6ccc5c3b  /usr/share/doc/obsgod/README.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/SOURCE.json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "da82e0eeb14ea1d8dd34b2270f79cae58d00e8732668d905c3fbd8ae1a438079  /usr/share/doc/obsgod/SOURCE.json\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/THIRD_PARTY_NOTICES.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "22810432e2128576056d9c57067ec001372563f51f29c47c2086009651793700  /usr/share/doc/obsgod/THIRD_PARTY_NOTICES.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "version",
+              "--json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "{\"schema_version\":1,\"name\":\"obsgod\",\"version\":\"0.0.0-dev.g4ac20bf (4ac20bfd9e8b2fe17ab1942eeedd3fc78e38b6fb)\"}\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "--help"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "obsgod is a command-line remote control for OBS\n\nUsage:\n  obsgod [command]\n\nExamples:\n  obsgod version\n  obsgod config show --json\n  obsgod stream status --json\n\nAvailable Commands:\n  api             Versioned public OBS API adapter; emits one JSON result, preserves legacy commands\n  completion      Generate offline shell completions to stdout\n  config          Inspect and validate connection configuration without starting OBS\n  creator         Optional local creator orchestration through the public OBS API\n  deck            Manage the optional Steam Deck streaming preview (JSON output)\n  doctor          Diagnose managed Steam Deck installation, OBS and capture (JSON)\n  help            Help about any command\n  label           manage text labels\n  profile         manage profiles\n  recording       manage recordings\n  reference       Generate a deterministic offline Markdown command reference\n  replaybuffer    manage replay buffer\n  scene           manage scenes\n  scenecollection manage scene collections\n  sceneitem       manage scene items\n  source          manage sources\n  stream          manage streams\n  studiomode      manage studio mode\n  version         Print build version without connecting to OBS\n  virtualcam      manage virtual camera\n  workflow        Plan or explicitly apply provider-neutral OBS settings; never starts streaming\n\nFlags:\n      --config string               OBS connection config file (env: OBSGOD_CONFIG; default: XDG obsgod/config.json)\n      --connection-profile string   Named connection profile (env: OBSGOD_CONNECTION_PROFILE)\n  -h, --help                        help for obsgod\n      --host string                 OBS host (env: OBSGOD_HOST or legacy OBS_HOST) (default \"localhost\")\n      --no-color                    Disable optional terminal color in verbose diagnostics (also respects NO_COLOR/TERM)\n      --password string             OBS password; prefer --password-file or OBS_PASSWORD to avoid shell history\n      --password-file string        Private single-line OBS password file; avoids secret command arguments\n  -p, --port uint32                 OBS port (env: OBSGOD_PORT or legacy OBS_PORT) (default 4455)\n      --verbose                     Write credential-free command/stage diagnostics to stderr\n  -v, --version                     version for obsgod\n\nUse \"obsgod [command] --help\" for more information about a command.\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "api",
+              "capabilities"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "{\"schema_version\":1,\"ok\":true,\"operation\":\"capabilities\",\"result\":{\"schema_version\":1,\"api\":\"obsgod/v1\",\"operations\":[\"snapshot\",\"stream.start\",\"stream.stop\",\"recording.start\",\"recording.stop\",\"replay.start\",\"replay.stop\",\"replay.save\",\"virtual-camera.start\",\"virtual-camera.stop\",\"profile.list\",\"profile.select\",\"collection.select\",\"scene.select\",\"scene-items.list\",\"scene-item.enable\",\"service.configure-rtmp\",\"service.verify-rtmp\",\"workflow.apply\"],\"provider_reception\":\"unknown\"}}\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "config",
+              "path"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "/home/package-user/.config/obsgod/config.json\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "rpm",
+              "-U",
+              "--replacepkgs",
+              "--oldpackage",
+              "/packages/obsgod_0.0.0-dev.g4ac20bf_linux_amd64.rpm"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "rpm",
+              "-e",
+              "obsgod"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "/bin/sh",
+              "-eu",
+              "-c",
+              "test ! -e /usr/bin/obsgod; test ! -e /usr/share/doc/obsgod/SOURCE.json; test \"$(cat /home/package-user/.config/obsgod/fixture)\" = preserve; test \"$(cat /home/package-user/Videos/fixture)\" = media; test ! -e /home/package-user/.config/obsgod/config.json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          }
+        ],
+        "format": "rpm",
+        "image": "fedora:43@sha256:f01112b9a1f1d0504ad962d9adfa401425033f8ab067e0a821904ebdde5b8ca5",
+        "limits": "Disposable Linux amd64 package lifecycle and unprivileged offline CLI only; no OBS, actual Deck, host installation or native ARM proof.",
+        "outcome": "passed",
+        "package": "obsgod_0.0.0-dev.g4ac20bf_linux_amd64.rpm",
+        "package_replacement": "previous audited source to current",
+        "previous_package": {
+          "name": "obsgod_0.0.0-dev.g4ea5646_linux_amd64.rpm",
+          "package_metadata": {
+            "Architecture": "x86_64",
+            "BuildHost": "reproducible.obsgod.invalid",
+            "Package": "obsgod",
+            "Release": "1",
+            "Version": "0.0.0~dev.g4ea5646"
+          },
+          "sha256": "6c8271b5b99eb3389cc7426351c0b6a9740a62801930727961dfd81a36e0dff9",
+          "source_revision": "4ea56460958f57e9bc014504e630c4d18394aa27"
+        },
+        "sha256": "974b24e6904e4d3fdb26cb616b3c012ecd361fbd68623683d90d57d06a04d26a"
+      },
+      {
+        "commands": [
+          {
+            "arguments": [
+              "/bin/sh",
+              "-eu",
+              "-c",
+              "mkdir -p /home/package-user/.config/obsgod /home/package-user/Videos; printf preserve > /home/package-user/.config/obsgod/fixture; printf media > /home/package-user/Videos/fixture; chmod 777 /home/package-user; chmod -R a+rX /home/package-user"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "apk",
+              "add",
+              "--allow-untrusted",
+              "--no-network",
+              "/packages/obsgod_0.0.0-dev.g4ea5646_linux_amd64.apk"
+            ],
+            "exit_code": 0,
+            "stderr": "WARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.23/main/x86_64/APKINDEX.tar.gz: No such file or directory\nWARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.23/community/x86_64/APKINDEX.tar.gz: No such file or directory\n",
+            "stdout": "(1/1) Installing obsgod (0.0.0_dev.g4ea5646)\nExecuting busybox-1.37.0-r30.trigger\nOK: 18.6 MiB in 17 packages\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "apk",
+              "add",
+              "--allow-untrusted",
+              "--no-network",
+              "/packages/obsgod_0.0.0-dev.g4ac20bf_linux_amd64.apk"
+            ],
+            "exit_code": 0,
+            "stderr": "WARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.23/main/x86_64/APKINDEX.tar.gz: No such file or directory\nWARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.23/community/x86_64/APKINDEX.tar.gz: No such file or directory\n",
+            "stdout": "(1/1) Replacing obsgod (0.0.0_dev.g4ea5646 -> 0.0.0_dev.g4ac20bf)\nExecuting busybox-1.37.0-r30.trigger\nOK: 18.6 MiB in 17 packages\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/bin/obsgod"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "147bbc301f4c5a7c1fba26907efb2fb68c5562c60b64aa9352abe7d539cef5d7  /usr/bin/obsgod\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/CHANGELOG.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "62a04eb2901efec99f85e766f702dabcb2679c405f7f3ff84c0e4a060b0d79c5  /usr/share/doc/obsgod/CHANGELOG.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/GENERIC-CLI.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "d650c895b8f57674988e8413013e4f5e127ec2488f1dc7b478c00295fc85b932  /usr/share/doc/obsgod/GENERIC-CLI.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/GO-NOTICES.json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "fa712bb4e7561cfd1ff7cbb82707379fce0e3b6deae2ba0a9c6e3b24be344f87  /usr/share/doc/obsgod/GO-NOTICES.json\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/LICENSE"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af  /usr/share/doc/obsgod/LICENSE\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/README.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "7dba69a059701c54d3b726123754c86fad1333d34383f9bfe23da22b6ccc5c3b  /usr/share/doc/obsgod/README.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/SOURCE.json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "da82e0eeb14ea1d8dd34b2270f79cae58d00e8732668d905c3fbd8ae1a438079  /usr/share/doc/obsgod/SOURCE.json\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/THIRD_PARTY_NOTICES.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "22810432e2128576056d9c57067ec001372563f51f29c47c2086009651793700  /usr/share/doc/obsgod/THIRD_PARTY_NOTICES.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "version",
+              "--json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "{\"schema_version\":1,\"name\":\"obsgod\",\"version\":\"0.0.0-dev.g4ac20bf (4ac20bfd9e8b2fe17ab1942eeedd3fc78e38b6fb)\"}\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "--help"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "obsgod is a command-line remote control for OBS\n\nUsage:\n  obsgod [command]\n\nExamples:\n  obsgod version\n  obsgod config show --json\n  obsgod stream status --json\n\nAvailable Commands:\n  api             Versioned public OBS API adapter; emits one JSON result, preserves legacy commands\n  completion      Generate offline shell completions to stdout\n  config          Inspect and validate connection configuration without starting OBS\n  creator         Optional local creator orchestration through the public OBS API\n  deck            Manage the optional Steam Deck streaming preview (JSON output)\n  doctor          Diagnose managed Steam Deck installation, OBS and capture (JSON)\n  help            Help about any command\n  label           manage text labels\n  profile         manage profiles\n  recording       manage recordings\n  reference       Generate a deterministic offline Markdown command reference\n  replaybuffer    manage replay buffer\n  scene           manage scenes\n  scenecollection manage scene collections\n  sceneitem       manage scene items\n  source          manage sources\n  stream          manage streams\n  studiomode      manage studio mode\n  version         Print build version without connecting to OBS\n  virtualcam      manage virtual camera\n  workflow        Plan or explicitly apply provider-neutral OBS settings; never starts streaming\n\nFlags:\n      --config string               OBS connection config file (env: OBSGOD_CONFIG; default: XDG obsgod/config.json)\n      --connection-profile string   Named connection profile (env: OBSGOD_CONNECTION_PROFILE)\n  -h, --help                        help for obsgod\n      --host string                 OBS host (env: OBSGOD_HOST or legacy OBS_HOST) (default \"localhost\")\n      --no-color                    Disable optional terminal color in verbose diagnostics (also respects NO_COLOR/TERM)\n      --password string             OBS password; prefer --password-file or OBS_PASSWORD to avoid shell history\n      --password-file string        Private single-line OBS password file; avoids secret command arguments\n  -p, --port uint32                 OBS port (env: OBSGOD_PORT or legacy OBS_PORT) (default 4455)\n      --verbose                     Write credential-free command/stage diagnostics to stderr\n  -v, --version                     version for obsgod\n\nUse \"obsgod [command] --help\" for more information about a command.\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "api",
+              "capabilities"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "{\"schema_version\":1,\"ok\":true,\"operation\":\"capabilities\",\"result\":{\"schema_version\":1,\"api\":\"obsgod/v1\",\"operations\":[\"snapshot\",\"stream.start\",\"stream.stop\",\"recording.start\",\"recording.stop\",\"replay.start\",\"replay.stop\",\"replay.save\",\"virtual-camera.start\",\"virtual-camera.stop\",\"profile.list\",\"profile.select\",\"collection.select\",\"scene.select\",\"scene-items.list\",\"scene-item.enable\",\"service.configure-rtmp\",\"service.verify-rtmp\",\"workflow.apply\"],\"provider_reception\":\"unknown\"}}\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "config",
+              "path"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "/home/package-user/.config/obsgod/config.json\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "apk",
+              "add",
+              "--allow-untrusted",
+              "--no-network",
+              "/packages/obsgod_0.0.0-dev.g4ac20bf_linux_amd64.apk"
+            ],
+            "exit_code": 0,
+            "stderr": "WARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.23/main/x86_64/APKINDEX.tar.gz: No such file or directory\nWARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.23/community/x86_64/APKINDEX.tar.gz: No such file or directory\n",
+            "stdout": "OK: 18.6 MiB in 17 packages\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "apk",
+              "del",
+              "--no-network",
+              "obsgod"
+            ],
+            "exit_code": 0,
+            "stderr": "WARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.23/main/x86_64/APKINDEX.tar.gz: No such file or directory\nWARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.23/community/x86_64/APKINDEX.tar.gz: No such file or directory\n",
+            "stdout": "(1/1) Purging obsgod (0.0.0_dev.g4ac20bf)\nExecuting busybox-1.37.0-r30.trigger\nOK: 8208 KiB in 16 packages\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "/bin/sh",
+              "-eu",
+              "-c",
+              "test ! -e /usr/bin/obsgod; test ! -e /usr/share/doc/obsgod/SOURCE.json; test \"$(cat /home/package-user/.config/obsgod/fixture)\" = preserve; test \"$(cat /home/package-user/Videos/fixture)\" = media; test ! -e /home/package-user/.config/obsgod/config.json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          }
+        ],
+        "format": "apk",
+        "image": "alpine:3.23@sha256:469c9ea410b9215eaee7976ba6c0639039b444be8e5d638f7abbada189971eb2",
+        "limits": "Disposable Linux amd64 package lifecycle and unprivileged offline CLI only; no OBS, actual Deck, host installation or native ARM proof.",
+        "outcome": "passed",
+        "package": "obsgod_0.0.0-dev.g4ac20bf_linux_amd64.apk",
+        "package_replacement": "previous audited source to current",
+        "previous_package": {
+          "name": "obsgod_0.0.0-dev.g4ea5646_linux_amd64.apk",
+          "package_metadata": {
+            "Architecture": "x86_64",
+            "Package": "obsgod",
+            "Version": "0.0.0_dev.g4ea5646"
+          },
+          "sha256": "4531559f2cb6f21974d146cd532f61cc1257bc914459864b7647eee7bd586340",
+          "source_revision": "4ea56460958f57e9bc014504e630c4d18394aa27"
+        },
+        "sha256": "327d2e0cb0bcf2725b370fcc2eaf0a2c11983bcabb3dc6d5f5fce9b0f712d01f"
+      }
+    ],
+    "schema_version": 1,
+    "source_revision": "4ac20bfd9e8b2fe17ab1942eeedd3fc78e38b6fb"
+  },
+  "actual_upward_upgrade": {
+    "harness_sha256": "06905e2099f4df0ddf135aa756cf527454aac15facdb2cea71264205647f9d22",
+    "harness_source_revision": "4ac20bfd9e8b2fe17ab1942eeedd3fc78e38b6fb",
+    "harness_worktree_dirty": false,
+    "outcome": "passed",
+    "previous_source_revision": "4ea56460958f57e9bc014504e630c4d18394aa27",
+    "results": [
+      {
+        "commands": [
+          {
+            "arguments": [
+              "/bin/sh",
+              "-eu",
+              "-c",
+              "mkdir -p /home/package-user/.config/obsgod /home/package-user/Videos; printf preserve > /home/package-user/.config/obsgod/fixture; printf media > /home/package-user/Videos/fixture; chmod 777 /home/package-user; chmod -R a+rX /home/package-user"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "dpkg",
+              "--path-include=/usr/share/doc/obsgod",
+              "--path-include=/usr/share/doc/obsgod/*",
+              "--install",
+              "/packages/obsgod_0.0.0-dev.g4ea5646_linux_amd64.deb"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "Selecting previously unselected package obsgod.\n(Reading database ... 6096 files and directories currently installed.)\nPreparing to unpack .../obsgod_0.0.0-dev.g4ea5646_linux_amd64.deb ...\nUnpacking obsgod (0.0.0~dev.g4ea5646) ...\nSetting up obsgod (0.0.0~dev.g4ea5646) ...\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "dpkg",
+              "--path-include=/usr/share/doc/obsgod",
+              "--path-include=/usr/share/doc/obsgod/*",
+              "--install",
+              "/packages/obsgod_0.0.0-dev.g59665ad_linux_amd64.deb"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "(Reading database ... 6105 files and directories currently installed.)\nPreparing to unpack .../obsgod_0.0.0-dev.g59665ad_linux_amd64.deb ...\nUnpacking obsgod (0.0.0~dev.g59665ad) over (0.0.0~dev.g4ea5646) ...\nSetting up obsgod (0.0.0~dev.g59665ad) ...\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/bin/obsgod"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "f88c4d4384d2140936f56f64ec6be74fcfd52575c1925ab388bdb3278b33776d  /usr/bin/obsgod\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/CHANGELOG.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "62a04eb2901efec99f85e766f702dabcb2679c405f7f3ff84c0e4a060b0d79c5  /usr/share/doc/obsgod/CHANGELOG.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/GENERIC-CLI.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "d650c895b8f57674988e8413013e4f5e127ec2488f1dc7b478c00295fc85b932  /usr/share/doc/obsgod/GENERIC-CLI.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/GO-NOTICES.json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "19d927888317bb5178deb39d1cf8b3785dca5b090c66257c9024ed4c658f1a87  /usr/share/doc/obsgod/GO-NOTICES.json\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/LICENSE"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af  /usr/share/doc/obsgod/LICENSE\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/README.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "7dba69a059701c54d3b726123754c86fad1333d34383f9bfe23da22b6ccc5c3b  /usr/share/doc/obsgod/README.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/SOURCE.json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "60633626c9c8229fad6e43a0c727f330fe54cb930393442ef412f58f3e03f7ae  /usr/share/doc/obsgod/SOURCE.json\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/THIRD_PARTY_NOTICES.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "22810432e2128576056d9c57067ec001372563f51f29c47c2086009651793700  /usr/share/doc/obsgod/THIRD_PARTY_NOTICES.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "version",
+              "--json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "{\"schema_version\":1,\"name\":\"obsgod\",\"version\":\"0.0.0-dev.g59665ad (59665ad45629f4e2ee3e4b01fd9a6e184536dc5e)\"}\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "--help"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "obsgod is a command-line remote control for OBS\n\nUsage:\n  obsgod [command]\n\nExamples:\n  obsgod version\n  obsgod config show --json\n  obsgod stream status --json\n\nAvailable Commands:\n  api             Versioned public OBS API adapter; emits one JSON result, preserves legacy commands\n  completion      Generate offline shell completions to stdout\n  config          Inspect and validate connection configuration without starting OBS\n  creator         Optional local creator orchestration through the public OBS API\n  deck            Manage the optional Steam Deck streaming preview (JSON output)\n  doctor          Diagnose managed Steam Deck installation, OBS and capture (JSON)\n  help            Help about any command\n  label           manage text labels\n  profile         manage profiles\n  recording       manage recordings\n  reference       Generate a deterministic offline Markdown command reference\n  replaybuffer    manage replay buffer\n  scene           manage scenes\n  scenecollection manage scene collections\n  sceneitem       manage scene items\n  source          manage sources\n  stream          manage streams\n  studiomode      manage studio mode\n  version         Print build version without connecting to OBS\n  virtualcam      manage virtual camera\n  workflow        Plan or explicitly apply provider-neutral OBS settings; never starts streaming\n\nFlags:\n      --config string               OBS connection config file (env: OBSGOD_CONFIG; default: XDG obsgod/config.json)\n      --connection-profile string   Named connection profile (env: OBSGOD_CONNECTION_PROFILE)\n  -h, --help                        help for obsgod\n      --host string                 OBS host (env: OBSGOD_HOST or legacy OBS_HOST) (default \"localhost\")\n      --no-color                    Disable optional terminal color in verbose diagnostics (also respects NO_COLOR/TERM)\n      --password string             OBS password; prefer --password-file or OBS_PASSWORD to avoid shell history\n      --password-file string        Private single-line OBS password file; avoids secret command arguments\n  -p, --port uint32                 OBS port (env: OBSGOD_PORT or legacy OBS_PORT) (default 4455)\n      --verbose                     Write credential-free command/stage diagnostics to stderr\n  -v, --version                     version for obsgod\n\nUse \"obsgod [command] --help\" for more information about a command.\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "api",
+              "capabilities"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "{\"schema_version\":1,\"ok\":true,\"operation\":\"capabilities\",\"result\":{\"schema_version\":1,\"api\":\"obsgod/v1\",\"operations\":[\"snapshot\",\"stream.start\",\"stream.stop\",\"recording.start\",\"recording.stop\",\"replay.start\",\"replay.stop\",\"replay.save\",\"virtual-camera.start\",\"virtual-camera.stop\",\"profile.list\",\"profile.select\",\"collection.select\",\"scene.select\",\"scene-items.list\",\"scene-item.enable\",\"service.configure-rtmp\",\"service.verify-rtmp\",\"workflow.apply\"],\"provider_reception\":\"unknown\"}}\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "config",
+              "path"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "/home/package-user/.config/obsgod/config.json\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "dpkg",
+              "--path-include=/usr/share/doc/obsgod",
+              "--path-include=/usr/share/doc/obsgod/*",
+              "--install",
+              "/packages/obsgod_0.0.0-dev.g59665ad_linux_amd64.deb"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "(Reading database ... 6105 files and directories currently installed.)\nPreparing to unpack .../obsgod_0.0.0-dev.g59665ad_linux_amd64.deb ...\nUnpacking obsgod (0.0.0~dev.g59665ad) over (0.0.0~dev.g59665ad) ...\nSetting up obsgod (0.0.0~dev.g59665ad) ...\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "dpkg",
+              "--purge",
+              "obsgod"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "(Reading database ... 6105 files and directories currently installed.)\nRemoving obsgod (0.0.0~dev.g59665ad) ...\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "/bin/sh",
+              "-eu",
+              "-c",
+              "test ! -e /usr/bin/obsgod; test ! -e /usr/share/doc/obsgod/SOURCE.json; test \"$(cat /home/package-user/.config/obsgod/fixture)\" = preserve; test \"$(cat /home/package-user/Videos/fixture)\" = media; test ! -e /home/package-user/.config/obsgod/config.json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          }
+        ],
+        "format": "deb",
+        "image": "debian:bookworm-slim@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+        "limits": "Disposable Linux amd64 package lifecycle and unprivileged offline CLI only; no OBS, actual Deck, host installation or native ARM proof.",
+        "outcome": "passed",
+        "package": "obsgod_0.0.0-dev.g59665ad_linux_amd64.deb",
+        "package_replacement": "previous audited source to current",
+        "previous_package": {
+          "name": "obsgod_0.0.0-dev.g4ea5646_linux_amd64.deb",
+          "package_metadata": {
+            "Architecture": "amd64",
+            "Description": "obsgod is a command-line remote control for OBS",
+            "Homepage": "https://github.com/szmyty/obsgod",
+            "Installed-Size": "10885",
+            "Maintainer": "szmyty",
+            "Package": "obsgod",
+            "Priority": "optional",
+            "Section": "",
+            "Version": "0.0.0~dev.g4ea5646"
+          },
+          "sha256": "b2bfeb3b0c54599b4430d84a7e61e51883bdaf47a0cabb54ab2df67b5a7d3c88",
+          "source_revision": "4ea56460958f57e9bc014504e630c4d18394aa27"
+        },
+        "sha256": "bfeb177e6f8177d106574144501455d28c740f2140500a20cc8516dfbc5a6eb2"
+      },
+      {
+        "commands": [
+          {
+            "arguments": [
+              "/bin/sh",
+              "-eu",
+              "-c",
+              "mkdir -p /home/package-user/.config/obsgod /home/package-user/Videos; printf preserve > /home/package-user/.config/obsgod/fixture; printf media > /home/package-user/Videos/fixture; chmod 777 /home/package-user; chmod -R a+rX /home/package-user"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "chmod",
+              "u+w",
+              "/usr/bin"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "rpm",
+              "-U",
+              "--replacepkgs",
+              "--oldpackage",
+              "/packages/obsgod_0.0.0-dev.g4ea5646_linux_amd64.rpm"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "rpm",
+              "-U",
+              "--replacepkgs",
+              "--oldpackage",
+              "/packages/obsgod_0.0.0-dev.g59665ad_linux_amd64.rpm"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/bin/obsgod"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "f88c4d4384d2140936f56f64ec6be74fcfd52575c1925ab388bdb3278b33776d  /usr/bin/obsgod\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/CHANGELOG.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "62a04eb2901efec99f85e766f702dabcb2679c405f7f3ff84c0e4a060b0d79c5  /usr/share/doc/obsgod/CHANGELOG.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/GENERIC-CLI.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "d650c895b8f57674988e8413013e4f5e127ec2488f1dc7b478c00295fc85b932  /usr/share/doc/obsgod/GENERIC-CLI.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/GO-NOTICES.json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "19d927888317bb5178deb39d1cf8b3785dca5b090c66257c9024ed4c658f1a87  /usr/share/doc/obsgod/GO-NOTICES.json\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/LICENSE"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af  /usr/share/doc/obsgod/LICENSE\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/README.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "7dba69a059701c54d3b726123754c86fad1333d34383f9bfe23da22b6ccc5c3b  /usr/share/doc/obsgod/README.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/SOURCE.json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "60633626c9c8229fad6e43a0c727f330fe54cb930393442ef412f58f3e03f7ae  /usr/share/doc/obsgod/SOURCE.json\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/THIRD_PARTY_NOTICES.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "22810432e2128576056d9c57067ec001372563f51f29c47c2086009651793700  /usr/share/doc/obsgod/THIRD_PARTY_NOTICES.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "version",
+              "--json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "{\"schema_version\":1,\"name\":\"obsgod\",\"version\":\"0.0.0-dev.g59665ad (59665ad45629f4e2ee3e4b01fd9a6e184536dc5e)\"}\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "--help"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "obsgod is a command-line remote control for OBS\n\nUsage:\n  obsgod [command]\n\nExamples:\n  obsgod version\n  obsgod config show --json\n  obsgod stream status --json\n\nAvailable Commands:\n  api             Versioned public OBS API adapter; emits one JSON result, preserves legacy commands\n  completion      Generate offline shell completions to stdout\n  config          Inspect and validate connection configuration without starting OBS\n  creator         Optional local creator orchestration through the public OBS API\n  deck            Manage the optional Steam Deck streaming preview (JSON output)\n  doctor          Diagnose managed Steam Deck installation, OBS and capture (JSON)\n  help            Help about any command\n  label           manage text labels\n  profile         manage profiles\n  recording       manage recordings\n  reference       Generate a deterministic offline Markdown command reference\n  replaybuffer    manage replay buffer\n  scene           manage scenes\n  scenecollection manage scene collections\n  sceneitem       manage scene items\n  source          manage sources\n  stream          manage streams\n  studiomode      manage studio mode\n  version         Print build version without connecting to OBS\n  virtualcam      manage virtual camera\n  workflow        Plan or explicitly apply provider-neutral OBS settings; never starts streaming\n\nFlags:\n      --config string               OBS connection config file (env: OBSGOD_CONFIG; default: XDG obsgod/config.json)\n      --connection-profile string   Named connection profile (env: OBSGOD_CONNECTION_PROFILE)\n  -h, --help                        help for obsgod\n      --host string                 OBS host (env: OBSGOD_HOST or legacy OBS_HOST) (default \"localhost\")\n      --no-color                    Disable optional terminal color in verbose diagnostics (also respects NO_COLOR/TERM)\n      --password string             OBS password; prefer --password-file or OBS_PASSWORD to avoid shell history\n      --password-file string        Private single-line OBS password file; avoids secret command arguments\n  -p, --port uint32                 OBS port (env: OBSGOD_PORT or legacy OBS_PORT) (default 4455)\n      --verbose                     Write credential-free command/stage diagnostics to stderr\n  -v, --version                     version for obsgod\n\nUse \"obsgod [command] --help\" for more information about a command.\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "api",
+              "capabilities"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "{\"schema_version\":1,\"ok\":true,\"operation\":\"capabilities\",\"result\":{\"schema_version\":1,\"api\":\"obsgod/v1\",\"operations\":[\"snapshot\",\"stream.start\",\"stream.stop\",\"recording.start\",\"recording.stop\",\"replay.start\",\"replay.stop\",\"replay.save\",\"virtual-camera.start\",\"virtual-camera.stop\",\"profile.list\",\"profile.select\",\"collection.select\",\"scene.select\",\"scene-items.list\",\"scene-item.enable\",\"service.configure-rtmp\",\"service.verify-rtmp\",\"workflow.apply\"],\"provider_reception\":\"unknown\"}}\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "config",
+              "path"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "/home/package-user/.config/obsgod/config.json\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "rpm",
+              "-U",
+              "--replacepkgs",
+              "--oldpackage",
+              "/packages/obsgod_0.0.0-dev.g59665ad_linux_amd64.rpm"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "rpm",
+              "-e",
+              "obsgod"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "/bin/sh",
+              "-eu",
+              "-c",
+              "test ! -e /usr/bin/obsgod; test ! -e /usr/share/doc/obsgod/SOURCE.json; test \"$(cat /home/package-user/.config/obsgod/fixture)\" = preserve; test \"$(cat /home/package-user/Videos/fixture)\" = media; test ! -e /home/package-user/.config/obsgod/config.json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          }
+        ],
+        "format": "rpm",
+        "image": "fedora:43@sha256:f01112b9a1f1d0504ad962d9adfa401425033f8ab067e0a821904ebdde5b8ca5",
+        "limits": "Disposable Linux amd64 package lifecycle and unprivileged offline CLI only; no OBS, actual Deck, host installation or native ARM proof.",
+        "outcome": "passed",
+        "package": "obsgod_0.0.0-dev.g59665ad_linux_amd64.rpm",
+        "package_replacement": "previous audited source to current",
+        "previous_package": {
+          "name": "obsgod_0.0.0-dev.g4ea5646_linux_amd64.rpm",
+          "package_metadata": {
+            "Architecture": "x86_64",
+            "BuildHost": "reproducible.obsgod.invalid",
+            "Package": "obsgod",
+            "Release": "1",
+            "Version": "0.0.0~dev.g4ea5646"
+          },
+          "sha256": "6c8271b5b99eb3389cc7426351c0b6a9740a62801930727961dfd81a36e0dff9",
+          "source_revision": "4ea56460958f57e9bc014504e630c4d18394aa27"
+        },
+        "sha256": "3be665e3a9ce269f3c6c725909f55d47bb0e632e96b287e75de4fb4853d35f58"
+      },
+      {
+        "commands": [
+          {
+            "arguments": [
+              "/bin/sh",
+              "-eu",
+              "-c",
+              "mkdir -p /home/package-user/.config/obsgod /home/package-user/Videos; printf preserve > /home/package-user/.config/obsgod/fixture; printf media > /home/package-user/Videos/fixture; chmod 777 /home/package-user; chmod -R a+rX /home/package-user"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "apk",
+              "add",
+              "--allow-untrusted",
+              "--no-network",
+              "/packages/obsgod_0.0.0-dev.g4ea5646_linux_amd64.apk"
+            ],
+            "exit_code": 0,
+            "stderr": "WARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.23/main/x86_64/APKINDEX.tar.gz: No such file or directory\nWARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.23/community/x86_64/APKINDEX.tar.gz: No such file or directory\n",
+            "stdout": "(1/1) Installing obsgod (0.0.0_dev.g4ea5646)\nExecuting busybox-1.37.0-r30.trigger\nOK: 18.6 MiB in 17 packages\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "apk",
+              "add",
+              "--allow-untrusted",
+              "--no-network",
+              "/packages/obsgod_0.0.0-dev.g59665ad_linux_amd64.apk"
+            ],
+            "exit_code": 0,
+            "stderr": "WARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.23/main/x86_64/APKINDEX.tar.gz: No such file or directory\nWARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.23/community/x86_64/APKINDEX.tar.gz: No such file or directory\n",
+            "stdout": "(1/1) Replacing obsgod (0.0.0_dev.g4ea5646 -> 0.0.0_dev.g59665ad)\nExecuting busybox-1.37.0-r30.trigger\nOK: 18.6 MiB in 17 packages\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/bin/obsgod"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "f88c4d4384d2140936f56f64ec6be74fcfd52575c1925ab388bdb3278b33776d  /usr/bin/obsgod\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/CHANGELOG.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "62a04eb2901efec99f85e766f702dabcb2679c405f7f3ff84c0e4a060b0d79c5  /usr/share/doc/obsgod/CHANGELOG.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/GENERIC-CLI.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "d650c895b8f57674988e8413013e4f5e127ec2488f1dc7b478c00295fc85b932  /usr/share/doc/obsgod/GENERIC-CLI.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/GO-NOTICES.json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "19d927888317bb5178deb39d1cf8b3785dca5b090c66257c9024ed4c658f1a87  /usr/share/doc/obsgod/GO-NOTICES.json\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/LICENSE"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af  /usr/share/doc/obsgod/LICENSE\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/README.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "7dba69a059701c54d3b726123754c86fad1333d34383f9bfe23da22b6ccc5c3b  /usr/share/doc/obsgod/README.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/SOURCE.json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "60633626c9c8229fad6e43a0c727f330fe54cb930393442ef412f58f3e03f7ae  /usr/share/doc/obsgod/SOURCE.json\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "sha256sum",
+              "/usr/share/doc/obsgod/THIRD_PARTY_NOTICES.md"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "22810432e2128576056d9c57067ec001372563f51f29c47c2086009651793700  /usr/share/doc/obsgod/THIRD_PARTY_NOTICES.md\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "version",
+              "--json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "{\"schema_version\":1,\"name\":\"obsgod\",\"version\":\"0.0.0-dev.g59665ad (59665ad45629f4e2ee3e4b01fd9a6e184536dc5e)\"}\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "--help"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "obsgod is a command-line remote control for OBS\n\nUsage:\n  obsgod [command]\n\nExamples:\n  obsgod version\n  obsgod config show --json\n  obsgod stream status --json\n\nAvailable Commands:\n  api             Versioned public OBS API adapter; emits one JSON result, preserves legacy commands\n  completion      Generate offline shell completions to stdout\n  config          Inspect and validate connection configuration without starting OBS\n  creator         Optional local creator orchestration through the public OBS API\n  deck            Manage the optional Steam Deck streaming preview (JSON output)\n  doctor          Diagnose managed Steam Deck installation, OBS and capture (JSON)\n  help            Help about any command\n  label           manage text labels\n  profile         manage profiles\n  recording       manage recordings\n  reference       Generate a deterministic offline Markdown command reference\n  replaybuffer    manage replay buffer\n  scene           manage scenes\n  scenecollection manage scene collections\n  sceneitem       manage scene items\n  source          manage sources\n  stream          manage streams\n  studiomode      manage studio mode\n  version         Print build version without connecting to OBS\n  virtualcam      manage virtual camera\n  workflow        Plan or explicitly apply provider-neutral OBS settings; never starts streaming\n\nFlags:\n      --config string               OBS connection config file (env: OBSGOD_CONFIG; default: XDG obsgod/config.json)\n      --connection-profile string   Named connection profile (env: OBSGOD_CONNECTION_PROFILE)\n  -h, --help                        help for obsgod\n      --host string                 OBS host (env: OBSGOD_HOST or legacy OBS_HOST) (default \"localhost\")\n      --no-color                    Disable optional terminal color in verbose diagnostics (also respects NO_COLOR/TERM)\n      --password string             OBS password; prefer --password-file or OBS_PASSWORD to avoid shell history\n      --password-file string        Private single-line OBS password file; avoids secret command arguments\n  -p, --port uint32                 OBS port (env: OBSGOD_PORT or legacy OBS_PORT) (default 4455)\n      --verbose                     Write credential-free command/stage diagnostics to stderr\n  -v, --version                     version for obsgod\n\nUse \"obsgod [command] --help\" for more information about a command.\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "api",
+              "capabilities"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "{\"schema_version\":1,\"ok\":true,\"operation\":\"capabilities\",\"result\":{\"schema_version\":1,\"api\":\"obsgod/v1\",\"operations\":[\"snapshot\",\"stream.start\",\"stream.stop\",\"recording.start\",\"recording.stop\",\"replay.start\",\"replay.stop\",\"replay.save\",\"virtual-camera.start\",\"virtual-camera.stop\",\"profile.list\",\"profile.select\",\"collection.select\",\"scene.select\",\"scene-items.list\",\"scene-item.enable\",\"service.configure-rtmp\",\"service.verify-rtmp\",\"workflow.apply\"],\"provider_reception\":\"unknown\"}}\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "/usr/bin/obsgod",
+              "config",
+              "path"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "/home/package-user/.config/obsgod/config.json\n",
+            "uid": "65534:65534"
+          },
+          {
+            "arguments": [
+              "apk",
+              "add",
+              "--allow-untrusted",
+              "--no-network",
+              "/packages/obsgod_0.0.0-dev.g59665ad_linux_amd64.apk"
+            ],
+            "exit_code": 0,
+            "stderr": "WARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.23/main/x86_64/APKINDEX.tar.gz: No such file or directory\nWARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.23/community/x86_64/APKINDEX.tar.gz: No such file or directory\n",
+            "stdout": "OK: 18.6 MiB in 17 packages\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "apk",
+              "del",
+              "--no-network",
+              "obsgod"
+            ],
+            "exit_code": 0,
+            "stderr": "WARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.23/main/x86_64/APKINDEX.tar.gz: No such file or directory\nWARNING: opening from cache https://dl-cdn.alpinelinux.org/alpine/v3.23/community/x86_64/APKINDEX.tar.gz: No such file or directory\n",
+            "stdout": "(1/1) Purging obsgod (0.0.0_dev.g59665ad)\nExecuting busybox-1.37.0-r30.trigger\nOK: 8208 KiB in 16 packages\n",
+            "uid": "0"
+          },
+          {
+            "arguments": [
+              "/bin/sh",
+              "-eu",
+              "-c",
+              "test ! -e /usr/bin/obsgod; test ! -e /usr/share/doc/obsgod/SOURCE.json; test \"$(cat /home/package-user/.config/obsgod/fixture)\" = preserve; test \"$(cat /home/package-user/Videos/fixture)\" = media; test ! -e /home/package-user/.config/obsgod/config.json"
+            ],
+            "exit_code": 0,
+            "stderr": "",
+            "stdout": "",
+            "uid": "0"
+          }
+        ],
+        "format": "apk",
+        "image": "alpine:3.23@sha256:469c9ea410b9215eaee7976ba6c0639039b444be8e5d638f7abbada189971eb2",
+        "limits": "Disposable Linux amd64 package lifecycle and unprivileged offline CLI only; no OBS, actual Deck, host installation or native ARM proof.",
+        "outcome": "passed",
+        "package": "obsgod_0.0.0-dev.g59665ad_linux_amd64.apk",
+        "package_replacement": "previous audited source to current",
+        "previous_package": {
+          "name": "obsgod_0.0.0-dev.g4ea5646_linux_amd64.apk",
+          "package_metadata": {
+            "Architecture": "x86_64",
+            "Package": "obsgod",
+            "Version": "0.0.0_dev.g4ea5646"
+          },
+          "sha256": "4531559f2cb6f21974d146cd532f61cc1257bc914459864b7647eee7bd586340",
+          "source_revision": "4ea56460958f57e9bc014504e630c4d18394aa27"
+        },
+        "sha256": "56dd26671c0db8464cf8fc1842a396f9179edff49d9ef98b36a5b59f2f5433e4"
+      }
+    ],
+    "schema_version": 1,
+    "source_revision": "59665ad45629f4e2ee3e4b01fd9a6e184536dc5e"
+  },
+  "findings_repaired": [
+    {
+      "finding": "Existing ACT-owned ignored generic notice catalog refused by safe-directory guard; same-parent preservation rename denied by parent permissions",
+      "resolution": "Original catalog remains byte/owner/mode-identical; focused configs use new task-owned notice staging; no host permission workaround"
+    },
+    {
+      "finding": "Restrictive umask produced unreadable0600 package docs",
+      "resolution": "Explicit0644 file_info and source commit mtimes in package configuration"
+    },
+    {
+      "finding": "RPM blacklist missed verify/file/transaction/untransaction executable tag families",
+      "resolution": "Reviewed strict RPM metadata/signature allowlists; unknown fields fail closed; regression fixtures cover29 dangerous/future fields"
+    },
+    {
+      "finding": "Capability-restricted root could not read private0700/0600 build outputs",
+      "resolution": "Copy only already-hashed selected public package bytes into disposable0755/0444mount; preserve originals and no DAC override"
+    },
+    {
+      "finding": "Debian minimal image prunes docs and Fedora ships0555 /usr/bin",
+      "resolution": "Scoped fixture-only dpkg path-includes and owner-write only on Fedora overlay prefix; host and image presets remain untouched"
+    }
+  ],
+  "interpretation": {
+    "C_source": "Current focused source. A-to-C is a revision replacement/downgrade because snapshotSHAversions are not chronological.",
+    "upward_upgrade": "ActualA4ea-to-B596 package upgrade separately passed all3managers using cleanC harness; it is not relabeled as C runtime.",
+    "same_version": "Repeated install/idempotence, not a claimed repair of damaged files."
+  },
+  "limits": {
+    "full_package_matrix": "unrun;15packages deferred until owner newlogo thenfinalfullmatrix",
+    "full_tar_zip_matrix": "unrun for newsource; existing20targetreceipts remain historical",
+    "native_other": "ARM/386,Windows/macOS/BSD native execution unrun",
+    "OBS_Deck_viewer_adoption": "unrun; offline generic package checks only",
+    "hosted_CI": "unavailable under billing lock; not retried",
+    "release_deployment_migration": "unperformed",
+    "trust": "All inventories unsigned/self-reported, no authenticatedpublisher or SLSAlevel"
+  }
+}
