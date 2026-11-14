@@ -1,6 +1,45 @@
 # Current work
 
-## Native destination setup and current Actions audit (#79 / #91)
+## #79 native configuration and Actions repairs qualified at 378b46c
+
+Draft [#92](https://github.com/szmyty/obsgod/pull/92), after #73 → #74 → #75 →
+#90, implements private Gaming Mode server/key settings and repairs demonstrated
+nonbilling failures #91 (ST1005), #93 (Go/tooling temporary ownership), and #94
+(strict ARMv6 Debian metadata expectation). Source is committed and pushed.
+Exact qualified source: **378b46cb8c4a9281f9d6890b2e13b223650626d5**. Later
+evidence-only docs do not qualify a newer source revision.
+
+All six supported local ACT jobs pass. Seven raw attempts are retained, including
+the first candidate ENOSPC failure; the successful same-source retry cleared
+only disposable container Go compiler cache after builds/audits, before native
+tests. Reporter integrity passes, zero open failure groups; overall partial for
+external gates. No optional cache-save warnings occurred at this revision.
+The normal-user frontend also passed absent/reused-output postconditions.
+All temporary cache paths were restored; package/browser caches, source,
+artifacts, module caches and evidence were retained. Only two inactive historical
+Go compiler caches were pruned with the pinned tool.
+
+Primary standard ZIP SHA256 **077234a0b917e58a4723d846ed56ff5f8ba23bc4721f344c99889e66a7a719db**
+matches repeated workflow ZIPs and all 33 payload files assembled by pinned official
+CLI/default builder. Actual packaged Python→Go passed 150 assertions without launch
+or broadcasting. Non-root Go race passed 259 top-level tests / 545 pass events with two explicit skips;
+application Python 183 passed / one skipped, tooling 85 passed, Node 43 passed; browser and native
+OBS/audio/capture/game-transition fixtures passed with 18 filtered JSON proofs.
+Read [the checkpoint](docs/decky-configuration-checkpoint.md),
+[criterion report](docs/evidence/decky-configuration-378b46c.json) and independently
+privacy/integrity-reviewed 72-file public proof ZIP. Its INDEX distinguishes
+original receipt hashes and redacted public logs. Source and artifacts remain
+local/draft review checkpoints, with no release publication.
+
+Fresh hosted audit: nine failed runs / 15 jobs / zero steps; 14 billing-lock failures and one
+expected push dependency-review skip. Actual PR #92 dependency comparison 403 remains
+unavailable. Actual Deck/SteamOS/Flatpak/OBS 33/Gamescope/AMD/Steam keyboard/controller/
+headset/Kick viewer and native other-platform/review/hosted gates remain open.
+No merge, issue closure, release, deployment, migration or spending occurred.
+OAuth remains deferred in #89. Next roadmap implementation is #80/#81 selected aurora
+exports/UI adoption, then #82–#85 and owner testing #86 before migration #87/#88.
+
+## Native destination implementation and original Actions audit (history)
 
 The owner requested fixing reproducible nonbilling Actions failures and manual
 Kick key setup directly in Gaming Mode; OAuth remains deferred #89. Work uses

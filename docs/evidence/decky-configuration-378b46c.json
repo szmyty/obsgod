@@ -1,0 +1,254 @@
+{
+  "schema_version": 1,
+  "qualified_revision": "378b46cb8c4a9281f9d6890b2e13b223650626d5",
+  "scope": "Focused #79 manual Gaming Mode setup and #91/#93/#94 Actions repairs; later #80\u2013#88 campaign/device/release acceptance remains open",
+  "implementation_pr": "https://github.com/szmyty/obsgod/pull/92",
+  "issues": [
+    79,
+    91,
+    93,
+    94
+  ],
+  "source_commits": [
+    "56677e1efb32c59a51f8e7a2c47292fe4e1ab204",
+    "4c5af7f7192079fb005c8b8ae56eaa0dd51bb525",
+    "5935803b00fc62579e759c52b68fce24533c1dcb",
+    "378b46cb8c4a9281f9d6890b2e13b223650626d5"
+  ],
+  "package": {
+    "archive": "obsgod-decky.zip",
+    "version": "0.1.0-deck.9",
+    "platform": "linux/amd64",
+    "revision": "378b46cb8c4a9281f9d6890b2e13b223650626d5",
+    "dirty": false,
+    "sha256": "077234a0b917e58a4723d846ed56ff5f8ba23bc4721f344c99889e66a7a719db",
+    "official_cli": {
+      "builder_image": "ghcr.io/steamdeckhomebrew/builder@sha256:e2616e391f3ae9a46c4cf906b1091220c2506e7fb1301e16a2a72409efbce7c5",
+      "builder_node": "26.12.1",
+      "builder_pnpm": "12.14.0",
+      "container_network": "none",
+      "payload_files_compared": 33,
+      "raw_zip_reproducible": false,
+      "raw_zip_sha256": "ee944bd024b4d826e3dfde9237ed8926eceb18e5f76110f00707cfe3e4e1472e",
+      "scope": "Unmodified official CLI and pinned default builder, assembling prepared bytes; not source compilation",
+      "sha256": "0d0f8c127cd3dba12b75f771c786194ca9f4f771b4787ae24de8b1af45af4294",
+      "status": "passed",
+      "version": "0.0.7"
+    },
+    "source_tools": {
+      "go": "go1.27.4",
+      "node": "24.19.0",
+      "npm": "11.9.0"
+    }
+  },
+  "local_act": {
+    "result": "passed",
+    "overall": "partial",
+    "matrix": [
+      {
+        "action": "build",
+        "event": "push",
+        "job": "build",
+        "raw_result": "passed",
+        "reason": null,
+        "selected_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261114T205204Z-build.json",
+        "status": "passed",
+        "workflow": "build.yml"
+      },
+      {
+        "action": "coverage",
+        "event": "push",
+        "job": "coverage",
+        "raw_result": "passed",
+        "reason": null,
+        "selected_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261114T205253Z-coverage.json",
+        "status": "passed",
+        "workflow": "coverage.yml"
+      },
+      {
+        "action": "lint",
+        "event": "push",
+        "job": "golangci",
+        "raw_result": "passed",
+        "reason": null,
+        "selected_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261114T205121Z-lint.json",
+        "status": "passed",
+        "workflow": "lint.yml"
+      },
+      {
+        "action": "snapshot",
+        "event": "push",
+        "job": "goreleaser",
+        "raw_result": "passed",
+        "reason": null,
+        "selected_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261114T205347Z-snapshot.json",
+        "status": "passed",
+        "workflow": "goreleaser.yml"
+      },
+      {
+        "action": "docs",
+        "event": "workflow_dispatch",
+        "job": "build-preview",
+        "raw_result": "passed",
+        "reason": null,
+        "selected_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261114T205530Z-docs.json",
+        "status": "passed",
+        "workflow": "docs-preview.yml"
+      },
+      {
+        "action": "candidate",
+        "event": "workflow_dispatch",
+        "job": "candidate",
+        "raw_result": "passed",
+        "reason": null,
+        "selected_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261114T210402Z-candidate.json",
+        "status": "passed",
+        "workflow": "steam-deck.yml"
+      }
+    ],
+    "counts": {
+      "local_matrix": {
+        "passed": 6
+      },
+      "open_failure_groups": 0,
+      "raw_results": {
+        "failed": 1,
+        "passed": 6
+      },
+      "run_statuses": {
+        "failed": 1,
+        "passed": 6
+      }
+    },
+    "integrity_errors": [],
+    "environment_recovery": "Original candidate ENOSPC retained. Retry ran unchanged workflow/source; pinned go clean -cache after all Go builds/audits freed 3,450,115,155 bytes of disposable container compiler cache before native fixtures. All workflow steps then passed. Details and exact bytes/commands in evidence ZIP."
+  },
+  "host_go": {
+    "revision": "378b46cb8c4a9281f9d6890b2e13b223650626d5",
+    "command": "env PATH=/workspace/.obsgod-tools/toolchains/go1.27.4/go/bin:$PATH GOMODCACHE=/workspace/.obsgod-tools/mod GOTOOLCHAIN=local go test -race -count=1 -json ./...",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "uid": 1000,
+    "outcome": "passed",
+    "top_level_passed": 259,
+    "pass_events": 545,
+    "skipped": [
+      {
+        "package": "github.com/szmyty/obsgod/pkg/automation",
+        "test": "TestRealOBSReadOnly"
+      },
+      {
+        "package": "github.com/szmyty/obsgod/internal/deck",
+        "test": "TestDeckyStorageMapDoesNotPermitRootBackend"
+      }
+    ],
+    "raw_log_sha256": "80c9e2bea10926b20f1288c00c08cf1a454082e5da3844e116b597a1ba3b3f98",
+    "raw_log": "/workspace/.obsgod-tools/actions-current-audit/local/go-host-378b46c.jsonl"
+  },
+  "additional_checks": {
+    "packaged_python_to_go": "150 assertions passed; zero OBS/Flatpak/desktop launches",
+    "primary_zip_browsers": "Native configuration: 9 cases; dependency setup: 6 cases; existing panel passed",
+    "normal_uid_frontend_postcondition": "Typecheck/test/build passed with absent and reused generated output; UID1000 ownership and clean source verified",
+    "application_python": "184 discovered,183 passed,1 root-only skip",
+    "tooling_python": "85 passed",
+    "node": "43 passed",
+    "docs": "11 passed",
+    "coverage_percent": 60.2,
+    "native_json_proofs": 18,
+    "native_distinct_proof_hashes": 15
+  },
+  "hosted": {
+    "failed_runs": 9,
+    "jobs": 15,
+    "executed_steps": 0,
+    "billing_locked_jobs": 14,
+    "correct_event_skips": 1,
+    "unclassified": 0,
+    "actual_nonbilling_failure": false
+  },
+  "dependency_review": {
+    "status": "unavailable",
+    "raw_exit_code": 1,
+    "http_status": 403,
+    "base": "00a559352fc6be07ef750f4a1aca98aa3e5af301",
+    "head": "378b46cb8c4a9281f9d6890b2e13b223650626d5"
+  },
+  "criterion_evidence": [
+    {
+      "criterion": "79 native destination guides/typing/paste/defaults",
+      "implementation": "implemented",
+      "local_evidence": "passed UI/state/packaged-browser and actual Go configuration checks",
+      "remaining": "Actual Steam keyboard/controller/Kick reception in #86"
+    },
+    {
+      "criterion": "79 key masking/readback/privacy",
+      "implementation": "implemented",
+      "local_evidence": "passed masked/show-hide/clear/clipboard-denial/DOM-storage-reload/adapter projections",
+      "remaining": "Actual device input checks"
+    },
+    {
+      "criterion": "79 same-destination retention and changed account/server binding",
+      "implementation": "implemented",
+      "local_evidence": "passed actual packaged Python\u2192Go writes and file-preservation refusals",
+      "remaining": "Owner acceptance"
+    },
+    {
+      "criterion": "79 separate generated OBS password and safe recovery",
+      "implementation": "implemented",
+      "local_evidence": "passed actual private password generation/change, separate stream key retention, explicit confirmation",
+      "remaining": "Actual OBS33/Deck connection"
+    },
+    {
+      "criterion": "79 no broadcast from save/test and guarded output changes",
+      "implementation": "implemented",
+      "local_evidence": "passed zero launch/broadcast save/test boundary, active/unknown/replay/record/setup guards and native lifecycle fixtures",
+      "remaining": "Physical Deck/provider test"
+    },
+    {
+      "criterion": "79 CLI/profile/advanced compatibility",
+      "implementation": "implemented",
+      "local_evidence": "full non-root Go race: 259 top-level passes / 545 pass events; sparse merge preserves idle media/rights and control password",
+      "remaining": "Broader migration/new-install checks"
+    },
+    {
+      "criterion": "91 pinned ST1005 storage-map lint",
+      "implementation": "repaired",
+      "local_evidence": "passed final ACT lint including pinned staticcheck",
+      "remaining": "Draft review/merge; hosted billing"
+    },
+    {
+      "criterion": "93 root temporary ownership in Go/tooling",
+      "implementation": "repaired",
+      "local_evidence": "exact foreign-temp failure/private-temp pass; final build/coverage/candidate; production guards preserved",
+      "remaining": "Draft review/merge"
+    },
+    {
+      "criterion": "94 strict ARMv6 Debian metadata rule",
+      "implementation": "repaired",
+      "local_evidence": "pinned NFPM 2.49 armhf rule; all 15 packages audited twice and actual Debian/Fedora/Alpine smoke passed",
+      "remaining": "Draft review/merge; native ARM runtime unrun"
+    }
+  ],
+  "remaining_gates": [
+    "hosted GitHub execution blocked by billing",
+    "actual dependency-review service unavailable403",
+    "required human reviews/merges",
+    "actual Steam Deck/SteamOS/Flatpak/OBS33/Gamescope/AMD/controller/headset/provider viewer tests",
+    "native Windows/macOS/ARM runtime if claimed",
+    "provider OAuth remains deferred #89",
+    "later roadmap source/release/migration work"
+  ],
+  "publication": {
+    "merged": false,
+    "release_published": false,
+    "deployed": false,
+    "migrated": false,
+    "spending": false
+  },
+  "public_evidence": {
+    "path": "decky-configuration-378b46c.zip",
+    "sha256": "f62ee97c492f22affd26fb7ed6291226bd0f3187f33d6308af7ea98b079cf7af",
+    "files": 72,
+    "redacted_members": 10,
+    "note": "INDEX distinguishes original/raw receipt hashes and public log hashes after Actions mask-value redaction; original receipt/log integrity verified before redaction."
+  }
+}
