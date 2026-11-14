@@ -69,7 +69,7 @@ def main():
                 page.evaluate("fixture.configured=false")
                 page.get_by_role("button",name="Refresh status").click()
                 page.get_by_role("status").filter(has_text="Setup required").wait_for()
-                page.get_by_text("Finish Desktop Setup, then make a local test clip before your first stream.",exact=True).wait_for()
+                page.get_by_text("Save your server and key in Stream destination above, then make a local test clip before your first stream.",exact=True).wait_for()
                 assert page.get_by_role("button",name="Start streaming",exact=True).is_disabled()
                 assert page.get_by_role("button",name="Make 10-second test clip",exact=True).is_disabled()
                 page.evaluate("window.scrollTo(0,0)")

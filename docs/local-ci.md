@@ -118,6 +118,15 @@ hosted GitHub delivery.
 The shared state `tmp` directory is mounted at the same absolute path on both
 sides, and `TMPDIR`/`OBSGOD_ACT_TEMP` select it for nested-Docker inputs/outputs.
 This avoids treating act's container-only `/tmp` as a daemon-visible host path.
+Go test and tooling-unit-test steps explicitly set
+`TMPDIR: ${{ runner.temp }}` instead. ACT executes
+these checks as root, whereas the shared workspace ancestry belongs to the checkout user;
+production storage guards correctly reject that foreign ownership. Runner-local
+temporary directories give fixtures the actual test process's trusted owner.
+The override is limited to Go checks in build/coverage/candidate and the
+candidate installer/backend/panel checks;
+native builders and nested Docker inputs keep the daemon-visible shared path.
+Normal-user host tests remain separate evidence of the production user context.
 Native builders receive the existing proxy build arguments by name and the
 mounted combined CA as a BuildKit secret; credentials are not copied into images.
 APT receives only a read-only `Acquire::https::CaInfo` snippet pointing at the

@@ -4,6 +4,7 @@ from contextlib import redirect_stdout
 import io
 import json
 from pathlib import Path
+import re
 from types import SimpleNamespace
 import tempfile
 import unittest
@@ -15,6 +16,35 @@ SPEC.loader.exec_module(CI)
 
 
 class LocalCITests(unittest.TestCase):
+    def test_go_fixtures_use_runner_temp_without_changing_nested_docker_inputs(self):
+        # act runs Go as root; the bind-mounted shared temp has the host user's
+        # ancestors. Those ancestors must remain foreign to production guards.
+        # Only Go fixture steps select the trusted runner-local temp instead.
+        found = []
+        for name in ("build.yml", "coverage.yml", "steam-deck.yml"):
+            text = (CI.ROOT / ".github/workflows" / name).read_text()
+            for step in re.split(r"(?m)^      - ", text)[1:]:
+                if "go test " not in step:
+                    continue
+                found.append(name)
+                self.assertRegex(step, r"(?m)^        env:\n          TMPDIR: \$\{\{ runner\.temp \}\}$")
+        self.assertEqual(found, ["build.yml", "coverage.yml", "steam-deck.yml"])
+        source = Path(CI.__file__).read_text()
+        self.assertIn('"TMPDIR=" + str(state / "tmp")', source)
+        self.assertIn('"OBSGOD_ACT_TEMP=" + str(state / "tmp")', source)
+
+    def test_tooling_fixtures_use_runner_temp_before_nested_packaging_steps(self):
+        text = (CI.ROOT / ".github/workflows/steam-deck.yml").read_text()
+        steps = re.split(r"(?m)^      - ", text)[1:]
+        tooling = [step for step in steps if "python -m unittest discover -s scripts/tests" in step]
+        self.assertEqual(len(tooling), 1)
+        self.assertRegex(tooling[0], r"(?m)^        env:\n          TMPDIR: \$\{\{ runner\.temp \}\}$")
+        # Native package builders need the daemon-visible path; a job-wide
+        # override would break their mounted temporary inputs under ACT.
+        for step in steps:
+            if "python scripts/package-deck.py" in step or "docker run " in step:
+                self.assertNotIn("TMPDIR: ${{ runner.temp }}", step)
+
     def assert_proxy_is_private(self, proxy, lines=None):
         with tempfile.TemporaryDirectory() as temporary:
             state = Path(temporary)

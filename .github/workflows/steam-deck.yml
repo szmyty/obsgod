@@ -37,11 +37,15 @@ jobs:
           python -m playwright install --with-deps chromium
           go install golang.org/x/vuln/cmd/govulncheck@v1.9.0
       - name: Go protocol, race, static and vulnerability checks
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: |
           go test -race ./...
           go vet ./...
           govulncheck ./...
       - name: Installer, backend and panel checks
+        env:
+          TMPDIR: ${{ runner.temp }}
         run: |
           python scripts/run-user-tests.py -- -m unittest discover -s steamdeck/tests -p 'test_*.py' -v
           python -m unittest discover -s scripts/tests -p 'test_*.py' -v
@@ -72,6 +76,8 @@ jobs:
           browser=$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')
           python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz --browser "$browser" --screenshots "$browser_output/setup"
           python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-panel.py dist/obsgod-decky.zip --browser "$browser" --screenshots "$browser_output/panel"
+          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-dependency-setup.py dist/obsgod-decky.zip --browser "$browser" --output "$browser_output/dependency-setup"
+          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-native-configuration.py dist/obsgod-decky.zip --browser "$browser" --output "$browser_output/native-configuration"
           python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-m3-panel.py dist/obsgod-decky.zip --browser "$browser" --screenshots "$browser_output/m3-panel"
           python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-m3-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz --browser "$browser" --screenshots "$browser_output/m3-setup"
           python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-mixer-panel.py dist/obsgod-decky.zip --browser "$browser" --screenshots "$browser_output/mixer-panel"

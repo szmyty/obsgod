@@ -509,12 +509,28 @@ Clear local filtered diagnostic history
 obsgod deck clear-logs
 ```
 
+## obsgod deck configuration
+
+Read non-secret stream settings, defaults and safe edit/close availability
+
+```text
+obsgod deck configuration
+```
+
 ## obsgod deck configure
 
 Save settings and key from JSON stdin, never argv
 
 ```text
 obsgod deck configure
+```
+
+## obsgod deck configure-fields
+
+Merge private stream settings from bounded JSON stdin while managed OBS is closed
+
+```text
+obsgod deck configure-fields
 ```
 
 ## obsgod deck connection-info

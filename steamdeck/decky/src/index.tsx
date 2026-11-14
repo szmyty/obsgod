@@ -10,6 +10,7 @@ import {mediaControls} from "./advanced-state.mjs";
 import {MixerTools, cancelPanelTalk} from "./Mixer";
 import {mixerNotice, mixerView} from "./mixer-state.mjs";
 import {DependencySetup,type SetupReadiness} from "./Setup";
+import {Configuration} from "./Configuration";
 
 type Diagnostic = {time:string; level:string; message:string};
 type Outcome = {id?:number; action?:string; ok:boolean; message:string; recording_path?:string};
@@ -260,6 +261,7 @@ function Content(){
   const microphoneLabel=(current as any)?.mixer?mixerView((current as any).mixer).label.replace(/^Microphone /,""):current?.settings?.microphone===false?"Off":current?.settings?.microphone===true?(audio?.microphone_available?(audio.microphone_muted?"Muted":"Enabled"):"Enabled · device not confirmed"):"Not confirmed";
   return <>
     <DependencySetup onReadiness={updateDependencyReadiness}/>
+    <Configuration busy={!!busy||!!current?.operation||["running","cancelling"].includes(dependencyReadiness.state)} onChanged={()=>{void refresh();}}/>
     <PanelSection title="YOUR STREAM">
       <PanelSectionRow>
         <div style={{background:"#111923",border:"1px solid #536274",borderRadius:8,padding:14}}>
@@ -269,14 +271,14 @@ function Content(){
           <div style={{marginTop:6,fontSize:12,opacity:.75}}>Status updates automatically</div>
           {current?.stream?.active&&<div style={{marginTop:8,fontSize:14}}>Last reported output · {duration}</div>}
           {current?.recording&&<div style={{marginTop:8,fontSize:14}}>Local recording active</div>}
-          {current?.configured&&<div style={{marginTop:8,fontSize:12,opacity:.8}}>Destination configured in Desktop Setup</div>}
+          {current?.configured&&<div style={{marginTop:8,fontSize:12,opacity:.8}}>Destination saved privately on this Deck</div>}
         </div>
       </PanelSectionRow>
       <PanelSectionRow><ButtonItem layout="below" disabled={available.startDisabled||!dependencyReadiness.ready} onClick={()=>act("start")}>Start streaming</ButtonItem></PanelSectionRow>
       <PanelSectionRow><ButtonItem layout="below" disabled={available.stopDisabled} onClick={()=>act("stop")}>{available.stopLabel}</ButtonItem></PanelSectionRow>
       <PanelSectionRow><div aria-live="polite" style={{fontSize:14,lineHeight:1.5,whiteSpace:"pre-wrap",overflowWrap:"anywhere"}}>{statusMessage}</div></PanelSectionRow>
       {!busy&&notice&&actionNoticeAt>0&&<PanelSectionRow><Hint>Last action · {new Date(actionNoticeAt).toLocaleTimeString()}: {notice}</Hint></PanelSectionRow>}
-      {current?.configured===false&&<PanelSectionRow><Hint>Finish Desktop Setup, then make a local test clip before your first stream.</Hint></PanelSectionRow>}
+      {current?.configured===false&&<PanelSectionRow><Hint>Save your server and key in Stream destination above, then make a local test clip before your first stream.</Hint></PanelSectionRow>}
       <PanelSectionRow><Hint>Green confirms OBS is sending output. Verify picture and sound on your channel using another device.</Hint></PanelSectionRow>
     </PanelSection>
     <PanelSection title="PICTURE & SOUND">
@@ -293,7 +295,7 @@ function Content(){
       <PanelSectionRow><Hint>Check picture and sound before going live. This saves a clip without broadcasting.</Hint></PanelSectionRow>
       <PanelSectionRow><ButtonItem layout="below" disabled={available.testDisabled||!dependencyReadiness.ready} onClick={()=>act("test")}>Make 10-second test clip</ButtonItem></PanelSectionRow>
       <PanelSectionRow><ButtonItem layout="below" onClick={()=>setSetupHelp(value=>!value)}>{setupHelp?"Hide setup help":"Setup and recording help"}</ButtonItem></PanelSectionRow>
-      {setupHelp&&<PanelSectionRow><Hint>Open Desktop Setup to configure your destination, audio and between-game screen. Test clips save to Videos/{product.compatibility.plugin}. Game only can record the between-game screen without a game; entire screen needs usable frames. Play the saved clip to check picture and sound, then verify your first live stream on another device.</Hint></PanelSectionRow>}
+      {setupHelp&&<PanelSectionRow><Hint>Use Stream destination above for your server and key, and Live audio &amp; microphone for sound. Optional Desktop Setup remains available for other advanced options. Test clips save to Videos/{product.compatibility.plugin}. Game only can record the between-game screen without a game; entire screen needs usable frames. Play the saved clip to check picture and sound, then verify your first live stream on another device.</Hint></PanelSectionRow>}
     </PanelSection>
     <MixerTools mixer={(current as any)?.mixer} busy={!!busy||!!current?.operation} run={toolAction}/>
     <StreamTools current={current} busy={!!busy||!!current?.operation} run={toolAction} copy={copyText}/>

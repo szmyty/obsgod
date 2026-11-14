@@ -29,11 +29,14 @@ FORMATS = ("deb", "rpm", "apk")
 DOCS = G.BASE_FILES | {"SOURCE.json"}
 PAYLOAD = {"usr/bin/obsgod"} | {"usr/share/doc/obsgod/" + name for name in DOCS}
 DIRECTORIES = {"usr", "usr/bin", "usr/share", "usr/share/doc", "usr/share/doc/obsgod"}
+# Exact architecture labels from NFPM v2.49.0 embedded in GoReleaser v2.20.2.
+# Both GOARM=6 and GOARM=7 use Debian armhf; package labels alone do not
+# qualify native CPU or distribution compatibility.
 ARCH = {
     "amd64": {"deb": "amd64", "rpm": "x86_64", "apk": "x86_64"},
     "arm64": {"deb": "arm64", "rpm": "aarch64", "apk": "aarch64"},
     "386": {"deb": "i386", "rpm": "i386", "apk": "x86"},
-    "armv6": {"deb": "armel", "rpm": "armv6hl", "apk": "armhf"},
+    "armv6": {"deb": "armhf", "rpm": "armv6hl", "apk": "armhf"},
     "armv7": {"deb": "armhf", "rpm": "armv7hl", "apk": "armv7"},
 }
 # Explicitly resolved image digests, not mutable runner labels. The native smoke
