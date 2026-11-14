@@ -5,6 +5,20 @@ a fresh source snapshot and clean tracker rather than transferring the old fork'
 history. `egohygiene/decky-stream` is the working destination discussed; creation,
 retirement, publication and final creative adoption have not happened.
 
+## Current owner-directed sequence
+
+1. Repair brand-kit opening/download compatibility and finish feasible engineering
+   here, using focused checks during implementation.
+2. Review the owner's new logo ideas and prepare that artwork.
+3. Freeze the resulting candidate and run the final full available test matrix.
+4. Repair demonstrated failures and rerun the affected/final checks as needed.
+5. Migrate only after that preparation and the applicable concrete owner actions.
+
+Companion/StreamGod and provider OAuth are explicitly deferred. Original criteria
+remain preserved with that disposition; no new project or sign-in integration is
+implemented in this phase. Final full qualification is held for step3 rather
+than relabeling old source receipts or testing the superseded logo as final.
+
 ## Work we can do here
 
 | Work | Concrete next result | Scope and dependencies |

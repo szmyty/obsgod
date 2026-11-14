@@ -1,6 +1,7 @@
 package commands
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -31,6 +32,11 @@ func NewRoot(cfg *config.Config, service obs.Service, buildVersion string) *cora
 	var resolved config.Resolved
 	var display presentation
 	rootCmd.PersistentPreRunE = func(cmd *coral.Command, _ []string) error {
+		// Bind cancellation only; an invocation's explicit verb remains its
+		// approval boundary. Configuration still resolves before any lazy dial.
+		if binding, ok := service.(interface{ SetContext(context.Context) }); ok {
+			binding.SetContext(cmd.Context())
+		}
 		// Deck's isolated credentials/configuration are independent of the generic
 		// remote-OBS CLI. Recovery and offline help must not depend on this file.
 		branch := cmd

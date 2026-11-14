@@ -1,5 +1,10 @@
 # Product roadmap
 
+Active phase: finish feasible nondeferred engineering and usable asset delivery,
+then review the owner's new logo, run final full qualification, fix bugs and
+migrate. Companion and OAuth are explicitly deferred. The final full matrix
+waits for the logo phase; focused implementation checks continue now.
+
 Current repository-presentation preparation and useful remaining engineering
 lanes are in [the pre-migration plan](docs/pre-migration-plan.md). The owner
 prefers a fresh Decky Stream repository; draft art/README/funding preparation

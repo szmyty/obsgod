@@ -1,5 +1,108 @@
 # Legacy CLI migration contract
 
+## Current implementation
+
+At source `4ea56460958f57e9bc014504e630c4d18394aa27`, all 39 legacy request
+operations use the shared application/API boundary:
+
+`internal/commands -> internal/obs -> pkg/api/v1.Client.Legacy -> pkg/automation -> pinned goobs -> OBS`
+
+The original **9.AC2** requirement in [#46](https://github.com/szmyty/obsgod/issues/46)
+is “CLI commands use the same underlying application/API implementation.” This
+integration supplies that source wiring with a compatibility adapter; it does
+not accept every original #9 criterion, publish stable v1 or replace final-source
+qualification. The intact [original criteria and dependencies](evidence/completion-criteria.json)
+remain preserved. Separate companion/OAuth work is deferred, not implemented.
+
+### What stays compatible
+
+The service retains existing command names/aliases, configuration precedence,
+argument joining, quiet/JSON behavior and successful output formatting. Mutation
+success retains the v0 request-ACK meaning rather than silently adopting the
+normal v1 methods' observed-completion contract. Exact OBS status timecodes,
+list order/duplicates/empty lists, requested item order, studio-mode branching,
+centering transform behavior and first-error/partial-action behavior remain
+compatibility responsibilities. Countdown orchestration stays in the CLI.
+
+`api.Client.Legacy` accepts only typed `LegacyRequest`/`LegacyResult` models and
+39 documented `LegacyOperation` values. There is no arbitrary protocol request,
+raw JSON payload, public `goobs` constructor/model or new `obsgod api legacy`
+JSON command. Unknown operations fail before backend execution. Normal public
+v1 methods retain their existing approvals and stronger observation/readback.
+
+| Legacy group | Shared compatibility behavior |
+| --- | --- |
+| Stream and recording | ACK start/stop/toggle/pause/resume; narrow status with original active/paused/timecode projection. |
+| Profiles, collections and scenes | Narrow inventories/current-name reads and ACK setters; preview/studio selection stays explicit. |
+| Scene items and labels | Requested item order, visibility and partial-action behavior; horizontal center preserves other transform fields; text/countdown formatting stays compatible. |
+| Replay and virtual camera | Existing ACK controls and narrow active-state reads, without adding finalized-path/readback waits. |
+| Special sources and studio mode | Original Desktop/Mic slot labels, mute toggle, studio read/set/transition and composite ordering. |
+
+### Approval, context and connection ownership
+
+The explicit legacy verb is the existing CLI intent boundary. Each service call
+maps only that action to the matching invocation-scoped public approval;
+read-only calls supply none. Approval is neither stored nor carried by context.
+The compatibility entry point cannot authorize an unrelated operation or weaken
+normal v1 approval requirements.
+
+The service resolves configuration before one lazy facade acquisition, caches
+that facade while usable, and retains the injected dialer/User-Agent through
+private `internal/obstransport` construction metadata. It does not open a second
+independent connection for profile reads or expose protocol types through the
+public API. Close/cancellation invalidates the acquired cached connection;
+subsequent independent work may reconnect, without retrying an interrupted
+mutation. Help/version/completions and documented offline paths remain offline.
+
+The command context now reaches every legacy network request. Legacy connection
+and operation budgets are 10 seconds; a shorter command deadline wins. Cancelling
+a waiter cannot close another operation's acquired connection. Acquired
+cancellation attempts owned physical socket shutdown promptly and once, so that
+connection cannot be reused while a request is unwinding. SDK Disconnect cleanup
+finishes in the background; this is not a claim that `Close` joins every
+transport goroutine. Failed shutdown remains an explicit safe error, and neither
+cancellation nor socket close proves that OBS rejected an action or is idle.
+Inspect OBS state before any recovery/retry.
+
+### Regression sources and qualification still due
+
+- [Legacy service protocol compatibility](../internal/obs/service_compatibility_test.go):
+  authenticated lazy connection, ACK-only mutations, narrow reads, exact values,
+  ordering/partial failures, transform retention and cancellation ownership.
+- [Legacy CLI compatibility](../internal/commands/legacy_compatibility_test.go):
+  original human/JSON output, composite request order, failed-read stdout and
+  `ExecuteContext` cancellation through the acquired physical transport.
+- [Public compatibility facade](../pkg/api/v1/legacy_test.go): exact per-call
+  approvals, unknown-operation rejection, independent request/result storage,
+  safe errors and waiting-versus-acquired cancellation.
+- [Physical transport cleanup](../pkg/automation/transport_close_test.go):
+  once-only socket close, safe shutdown failure and bounded SDK cleanup completion.
+- Existing [CLI contracts](../internal/commands/root_test.go),
+  [workflow/countdown contracts](../internal/commands/workflow_test.go),
+  [legacy redaction](../internal/obs/service_redaction_test.go),
+  [profile facade](../pkg/api/v1/profiles_test.go) and
+  [facade lifecycle/approval tests](../pkg/api/v1/client_test.go) remain relevant.
+
+Focused regression/race/vet checks are preparation, not the complete final-source
+qualification matrix. Record exact revisions, commands and outcomes in the
+campaign evidence after source-changing work is finished. The final available
+matrix, required reviews and applicable target/provider/publication acceptance
+remain separate; older source4699235 receipts do not qualify this integration.
+Retain original dependencies and reconcile each #9 criterion on its own evidence.
+
+## Historical implementation map
+
+The following record is preserved from before the compatibility integration.
+Its “missing”, “next slice”, “unchanged” and “remaining” statements describe the
+inspected historical source, **not the current wiring**. It explains why a
+separate ACK compatibility surface was needed instead of replacing legacy calls
+with stronger v1 operations.
+
+<details>
+<summary>Original gap map and preparation contract (historical)</summary>
+
+# Legacy CLI migration contract
+
 This is the implementation map for the remaining **9.AC2** requirement in
 [#46](https://github.com/szmyty/obsgod/issues/46): “CLI commands use the same
 underlying application/API implementation.” It describes source inspected at
@@ -143,3 +246,5 @@ remaining deprecation decision visible under 9.AC2 until implemented and tested.
 Other #9 criteria remain in the original ledger; this mapping neither reopens
 superseded #9 nor closes #46. API contract acceptance, actual target/provider,
 hosted CI and publication evidence keep their existing independent disposition.
+
+</details>

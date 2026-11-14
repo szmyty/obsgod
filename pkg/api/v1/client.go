@@ -19,6 +19,7 @@ import (
 
 type backend interface {
 	automation.WorkflowBackend
+	Legacy(context.Context, automation.LegacyRequest) (automation.LegacyResult, error)
 	ProfileInventory(context.Context) (automation.ProfileInventory, error)
 	StreamStatus(context.Context) (automation.StreamStatus, error)
 	StartStream(context.Context) (automation.StreamStatus, error)
@@ -88,6 +89,10 @@ func (c *Client) Close() error {
 	})
 	return c.closeErr
 }
+
+// Closed reports that this connection cannot be reused after Close or acquired
+// operation cancellation. It does not establish OBS output state.
+func (c *Client) Closed() bool { return c == nil || c.closed.Load() }
 func run[T any](ctx context.Context, c *Client, operation string, action func(context.Context) (T, error)) (T, error) {
 	var zero T
 	if err := ctx.Err(); err != nil {

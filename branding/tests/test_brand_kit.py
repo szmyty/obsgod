@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 """Meaningful draft input/output ownership, drift and source projection checks."""
 import importlib.util
+import base64
+from html.parser import HTMLParser
+import io
 import json
 from pathlib import Path
 import shutil
 import tempfile
 import unittest
 import xml.etree.ElementTree as ET
+import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
 spec = importlib.util.spec_from_file_location("brand_kit", ROOT / "scripts/generate-brand-kit.py")
@@ -72,6 +76,49 @@ class BrandKit(unittest.TestCase):
         with self.assertRaises(ValueError):
             kit.write_or_check(projected, output)
         self.assertEqual(foreign.read_text(), "preserve")
+
+    def test_gallery_embeds_viewable_images_without_network_or_script(self):
+        png = (ROOT / "branding/repository/favicon-32.png").read_bytes()
+        gallery = kit.preview_gallery({"web/favicon-32.png": png, "tokens/colors.json": b"{}"})
+        class References(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.images, self.external, self.scripts = [], [], []
+            def handle_starttag(self, tag, attributes):
+                attrs = dict(attributes)
+                if tag == "img":
+                    self.images.append(attrs["src"])
+                if tag == "script":
+                    self.scripts.append(attrs)
+                for name in ("src", "href"):
+                    value = attrs.get(name, "")
+                    if value and not value.startswith("data:image/png;base64,"):
+                        self.external.append(value)
+        parser = References()
+        parser.feed(gallery.decode())
+        self.assertEqual(len(parser.images), 1)
+        self.assertEqual(base64.b64decode(parser.images[0].split(",", 1)[1]), png)
+        self.assertEqual(parser.external, [])
+        self.assertEqual(parser.scripts, [])
+        self.assertIn(b"JSON / CSS", gallery)
+        self.assertIn(b"SVG", gallery)
+
+    def test_easy_archive_is_flat_normal_pngs_and_plain_text_with_valid_crc(self):
+        png = (ROOT / "branding/repository/favicon-32.png").read_bytes()
+        files = {"web/favicon-32.png": png, "github/header.png": png, "metadata/source.json": b"{}"}
+        archive = kit.png_previews(files)
+        self.assertEqual(archive, kit.png_previews(files))
+        with zipfile.ZipFile(io.BytesIO(archive)) as reader:
+            self.assertIsNone(reader.testzip())
+            self.assertEqual(sorted(reader.namelist()), [
+                "decky-stream-png-previews/START-HERE.txt",
+                "decky-stream-png-previews/favicon-32.png",
+                "decky-stream-png-previews/header.png",
+            ])
+            self.assertEqual(reader.read("decky-stream-png-previews/favicon-32.png"), png)
+            for info in reader.infolist():
+                self.assertEqual(info.date_time, (1980, 1, 1, 0, 0, 0))
+                self.assertEqual(info.external_attr >> 16, 0o100644)
 
     def test_active_svg_is_rejected(self):
         root = self.copy_source()

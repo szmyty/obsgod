@@ -31,6 +31,20 @@ jobs:
           cp dist/snapshot/supply-chain/AUDIT-SHA256SUMS "$RUNNER_TEMP/first-generic-audit-sums"
           python3 scripts/generic-release.py audit --revision "$(git rev-parse HEAD)" --artifacts dist/snapshot --output dist/snapshot/supply-chain
           diff -u "$RUNNER_TEMP/first-generic-audit-sums" dist/snapshot/supply-chain/AUDIT-SHA256SUMS
+      - name: Audit Linux package contents and reproduce unsigned inventories
+        run: |
+          python3 scripts/nfpm-release.py audit --revision "$(git rev-parse HEAD)" --artifacts dist/snapshot --output dist/snapshot/nfpm-supply-chain
+          cp dist/snapshot/nfpm-supply-chain/AUDIT-SHA256SUMS "$RUNNER_TEMP/first-nfpm-audit-sums"
+          python3 scripts/nfpm-release.py audit --revision "$(git rev-parse HEAD)" --artifacts dist/snapshot --output dist/snapshot/nfpm-supply-chain
+          diff -u "$RUNNER_TEMP/first-nfpm-audit-sums" dist/snapshot/nfpm-supply-chain/AUDIT-SHA256SUMS
+      - name: Exercise native Linux amd64 package managers without network or OBS
+        run: |
+          docker pull debian:bookworm-slim@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc
+          docker pull fedora:43@sha256:f01112b9a1f1d0504ad962d9adfa401425033f8ab067e0a821904ebdde5b8ca5
+          docker pull alpine:3.23@sha256:469c9ea410b9215eaee7976ba6c0639039b444be8e5d638f7abbada189971eb2
+          nfpm_smoke="${OBSGOD_ACT_TEMP:-$RUNNER_TEMP}/obsgod-nfpm-smoke"
+          printf 'OBSGOD_NFPM_SMOKE_EVIDENCE=%s\n' "$nfpm_smoke" >> "$GITHUB_ENV"
+          python3 scripts/nfpm-release.py smoke --artifacts dist/snapshot --audit dist/snapshot/nfpm-supply-chain/SUMMARY.json --output "$nfpm_smoke/results"
       - name: Verify unprivileged Linux CLI installation without OBS
         run: |
           smoke_output="${OBSGOD_ACT_TEMP:-$RUNNER_TEMP}/obsgod-generic-smoke"
@@ -43,5 +57,7 @@ jobs:
           if-no-files-found: error
           path: |
             dist/snapshot/supply-chain
+            dist/snapshot/nfpm-supply-chain
             dist/snapshot/checksums.txt
             ${{ env.OBSGOD_GENERIC_SMOKE_EVIDENCE }}
+            ${{ env.OBSGOD_NFPM_SMOKE_EVIDENCE }}

@@ -1,5 +1,32 @@
 # Current work
 
+## Active: finish engineering, then new logo, final qualification, migration
+
+The owner reported that some brand-kit files could not be opened and authorized
+finishing all remaining feasible engineering. Current phase order is explicit:
+repair ordinary-viewer asset delivery; complete nondeferred source work with
+focused checks; receive the owner's new logo ideas; run the final full matrix on
+the resulting candidate; fix bugs/retest; then perform the agreed migration.
+The final full qualification is intentionally **not run before the new logo**.
+This latest sequencing supersedes older instructions to run it immediately.
+
+Companion/StreamGod and provider OAuth are deferred by the owner. Existing
+creator/RTMP behavior stays compatible; deferral is not implementation acceptance.
+Read-only review of all 230 original criteria found four current engineering
+lanes: legacy CLI/shared application integration (9.AC2), NFPM package audit and
+container lifecycle checks (12.AC4/5/7/8), installer identity/migration rehearsal
+(36.AC1/2/3), and usable brand-kit delivery (38.AC3/4). Final logo/rights adoption,
+actual device/native/viewer/adoption evidence and publication facts remain distinct.
+
+Continue in the existing checkout on `feat/pre-migration-completion`, based on
+presentation head08d5965. Memorial #73 and presentation #74 remain preceding
+drafts. Keep scoped source commits and draft checkpoints pushed; no repository
+creation/retirement, product release, deployment or spending occurs in this phase.
+Use pinned Go1.27.4 at `.obsgod-tools/toolchains/go1.27.4/go/bin/go` outside this
+checkout: `/usr/bin/go` here is a board game. Docker28.4, Node24.19 and Python3.12
+are available. Full runtime qualification remains historical at4699235 until the
+later approved final-test phase; focused results must identify their own source.
+
 ## Decky Stream draft artwork, README and pre-migration inventory
 
 The owner requested a fresh look at Identity specifications, asset generation

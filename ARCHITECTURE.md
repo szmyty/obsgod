@@ -16,9 +16,10 @@ individual workflows; qualification records identify the exact tested revision.
 | --- | --- |
 | `main.go`, `internal/commands` | CLI composition, flags/help and command adapters |
 | `internal/config` | Generic connection configuration and named connection profiles; separate from managed Deck settings and OBS's native profiles |
-| `internal/obs` | Compatible legacy CLI service, lazy connection and existing command/output behavior |
-| `pkg/api/v1` | Versioned facade with independent public models/errors, bounded serialized operations and explicit operation approvals; used by `obsgod api` |
-| `pkg/automation` | Context-aware OBS control/observation/workflows through pinned `goobs`; no application installation, provider API or UI |
+| `internal/obs` | Compatible legacy CLI adapter over `pkg/api/v1.Client.Legacy`; lazy cached facade, command context and unchanged acknowledgement/output behavior |
+| `pkg/api/v1` | Versioned facade with independent public models/errors, bounded serialized operations and invocation approvals; confirmed-state operations plus a closed typed legacy compatibility surface |
+| `pkg/automation` | Context-aware OBS control/observation/workflows and legacy request implementations through pinned `goobs`; no application installation, provider API or UI |
+| `internal/obstransport` | Private legacy dialer/User-Agent construction seam; no raw transport option in the public API |
 | `pkg/creator/v1` | Optional creator adapter consuming the public facade, with environment-backed RTMP providers; used by `obsgod creator` |
 | `internal/deck` | Managed Linux/Flatpak OBS lifecycle, serialized controls, private settings, capture, audio and local media; owns only its managed instance/data |
 | `steamdeck/bridge.py`, `steamdeck/decky/main.py` | Unprivileged JSON invocation of `obsgod deck`; no duplicate OBS WebSocket implementation |
@@ -39,8 +40,8 @@ flowchart TD
     Panel[Decky panel] --> JSON
     JSON --> Deck
     Deck --> Automation[Context-aware OBS automation]
-    Legacy --> Protocol[Pinned goobs adapter]
-    Automation --> Protocol
+    Legacy --> API
+    Automation --> Protocol[Pinned goobs adapter]
     Protocol --> OBS[Graphical OBS and bundled WebSocket]
     OBS --> Capture[Game or intentional screen capture]
     OBS --> Audio[System and microphone sources]
@@ -52,15 +53,36 @@ flowchart TD
 the acquired transport on cancellation before reuse. Explicit per-operation
 approvals preserve output-change authorization. The facade covers snapshots,
 streaming, recording/replay, scene/virtual-camera and workflow operations; it is
-a candidate contract, not a published stable product release. The legacy
-`internal/obs` command family remains an explicit compatibility path and is not
-fully migrated to this facade; that original #9 criterion remains partial.
+a candidate contract, not a published stable product release.
+
+All 39 legacy request operations now follow `internal/obs -> pkg/api/v1.Client.Legacy
+-> pkg/automation -> pinned goobs`. The compatibility adapter retains command
+names, configuration, output formatting, exact status timecodes and request-ACK
+mutation semantics. The facade's typed `LegacyRequest`/`LegacyResult` allowlist
+cannot accept arbitrary OBS requests or raw JSON; it is a Go compatibility
+surface, not a new `obsgod api` JSON command. Each legacy mutating invocation maps
+only its explicit action to the matching approval. Normal public v1 methods keep
+their stronger observation/readback contracts and existing approval requirements.
+
+The legacy service acquires one cached facade lazily after configuration resolves,
+retains its private injected dialer/User-Agent and passes the command context
+through every request. Waiting cancellation cannot close another acquired
+operation's connection. Acquired cancellation invalidates that connection before
+reuse; later independent work may reconnect rather than retry the interrupted
+mutation. Owned physical socket close is attempted promptly and once. SDK
+Disconnect cleanup completes in the background; `Close` is not a join of every
+transport goroutine or proof of OBS output state. A shutdown failure stays an
+explicit safe error. See [the migration contract](docs/legacy-api-migration.md)
+for request/output compatibility and remaining acceptance. Source integration
+and focused regression coverage do not close the full original #9 criteria.
 
 `pkg/creator/v1` consumes the facade without duplicating OBS protocol. Its
 plan/start/status/stop/extensions CLI operates on an existing OBS connection;
 it neither launches/exits OBS nor creates a companion repository. Its providers
 resolve private environment references and configure RTMP(S), without platform
-API contacts or provider-reception claims. The creator/StreamGod boundary in
+API contacts or provider-reception claims. The owner has deferred the separate
+companion and provider OAuth work; their original criteria remain in the future
+backlog rather than being marked implemented. The creator/StreamGod boundary in
 #13 remains orchestration above OBS control; see
 [the boundary decision](docs/decisions/0003-core-and-creator-boundary.md).
 
@@ -147,8 +169,9 @@ Local recording/replay does not grant content rights or authorize publication.
 
 The owner selected **Decky Stream** as a working name and requested a future
 `decky-stream` identity. Organization, final mark/creative approval, domain,
-transfer and companion-project disposition remain owner decisions. Configured
-funding links do not establish verified payout ownership. Unconfigured wallets
+transfer and publication remain owner decisions. Separate companion/OAuth work
+is explicitly deferred. Configured funding links do not establish verified payout
+ownership. Unconfigured wallets
 remain hidden. #51 separately holds monetization and Store research; completing
 the local plugin does not resolve that research.
 

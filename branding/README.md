@@ -10,6 +10,28 @@ full prompt, method and digest are retained in
 The separately authored SVG master projects to the repository assets below;
 the concept board is not a screenshot or an approved compiler input.
 
+## Open the previews
+
+Use [the standalone gallery](repository/index.html) in a browser, or download
+and extract [the PNG previews](repository/decky-stream-png-previews.zip) for an
+ordinary photo viewer. The gallery embeds its images, styles and explanations
+in one HTML file, so it works offline without fonts or neighboring files.
+The simple ZIP has one folder containing normal PNG images and `START-HERE.txt`.
+Start with `readme-header.png` or `social-preview.png`.
+
+The complete developer kit deliberately includes more file types: SVG is editable
+vector artwork, JSON and CSS describe metadata/colors, and TXT/MD contain notices
+and guides. These are useful source records but many photo apps cannot display
+them. Transparent marks and pale wordmarks need an appropriate background;
+favicons are intentionally small. A phone app or chat preview can also restrict
+which downloaded formats it opens; the PNG-only bundle avoids requiring it to
+understand the source formats.
+
+The previous ZIP passed CRC checks and its PNGs had valid headers. That does not
+identify the user's particular phone/app failure. This delivery change improves
+access to the same draft artwork; it does not choose a new logo or replace live
+plugin visuals.
+
 The [tracked review assets](repository/README.md) include dark/light README
 headers, mark/transparent/light variants, monochrome icon, wordmark, avatars,
 16/32/64 favicons and the 1280×640 GitHub preview. The README uses the PNG
@@ -48,12 +70,13 @@ python3 scripts/generate-brand-kit.py --raster --repository-assets
 python3 scripts/generate-brand-kit.py --raster --repository-assets --check
 ```
 
-Its manifest binds all sources and 27 output files; the manifest itself is the
-28th staged file. The exporter preserves unrelated files and refuses unsafe or
+Its manifest binds all sources and generated output files; the manifest itself
+is staged alongside them. The exporter preserves unrelated files and refuses unsafe or
 symlinked destinations. Do not modify generated artwork or hashes by hand.
 
-Default output: `dist/branding-draft/`. Open `review/index.html` locally; the ZIP
-is `decky-stream-proposed.zip`. Both are preparation artifacts. The content-bound
+Default output: `dist/branding-draft/`. Open `index.html` locally; the simple ZIP
+is `decky-stream-png-previews.zip`, and the complete source/metadata ZIP is
+`decky-stream-proposed.zip`. These are preparation artifacts. The content-bound
 manifest records every source and export hash; identical inputs with the same
 pinned raster tools produce identical bytes. SHA-256 integrity is not a creator
 signature or human approval. The archive has fixed paths, timestamps and file
