@@ -1,0 +1,2476 @@
+{
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "creationInfo": {
+    "comment": "Deterministic inventory. Build inputs are distinguished from redistributed components; external OBS/Flatpak/GStreamer/Steam/Decky libraries are separately installed and outside this package inventory.",
+    "created": "2026-11-14T00:17:02Z",
+    "creators": [
+      "Tool: obsgod-release-audit"
+    ]
+  },
+  "dataLicense": "CC0-1.0",
+  "documentNamespace": "https://github.com/szmyty/obsgod/sbom/4699235e9e925b76ca492d5a00a375ed37fb338e/24ae9797c534d789ea7a2030c94085098e77b678ff5eaa659f893d140b288b3e",
+  "files": [
+    {
+      "SPDXID": "SPDXRef-File-b5659ab4381064e38368",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "5f401a620493b5fc282658c16530db6e87a70ad40b95bb88b0212f08417bbd16"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "artifacts/capture-build.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-d9869e2e3126ae3da1be",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3e1810b64d7c2d1466df075eaef2472913499ca2d21c7e6a00df62932e14b199"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "artifacts/manifest.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-4e8f704b8f2fdc157504",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "b4222fb703aa198a7ea200721afbc06dcb86dec56e8c1bebd77f5bb614aad53d"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "artifacts/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-9c9865b9745fff6aced3",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "33cb82f0d68f3f3ce21ae2abd4eab878df6c42f39a52af36748d6e42ceceef66"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "artifacts/obsgod-decky.zip",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-594891f6e6a2a8f12622",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3c2fa5f5623f4c000a2371fe19bce5fdf0fc848b09929befb4ba70e7630cf986"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "artifacts/obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-d728f438e1e9e61f995f",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "fbc9e106291ff478d10a52c7f77e409ace2463d7019118a7ca1d95f25f8ef514"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "artifacts/updater-manifest.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-ea11d3caba6824ce82bb",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "938ca56762765d8e37e637708716f80ad695287a811c63d379c8970500ae3215"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/CAPTURE-SOURCE.tar.gz",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-6b2d7ba0c018047e199e",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/LICENSE",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-42971e7d5e65ac1b93f6",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "8c953bd3d8c44c562ec95f6ac32ad5c82db5fa374462e6bf529c4dec8436853d"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/LICENSE.LGPL-2.1",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-fa9c2c6aeda222f1d32d",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3a850fa5f08101db6f40676c2786e10bd2cd5fff7b12ffdf1e0c434d4e49d90c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/LICENSE.qrcode-generator.txt",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-4a5c6fba0f840c8c0dc8",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "12aa24cabb6178e5e24eab71c5e23006c85ed2082b47b249610bcb720ee94bed"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/THIRD_PARTY_NOTICES.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-b0bf723e3813c276a98d",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/bin/libgstobsgodcapture.so",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-72012f0f6a5bc7cc8040",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "218477d1ce169298ec3dbb58cdda412fe7371a39653d6dc68bfcf81bc2226f85"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/bin/obsgod",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-59f56a85bffbfa773f87",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3a850fa5f08101db6f40676c2786e10bd2cd5fff7b12ffdf1e0c434d4e49d90c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/dist/LICENSE.qrcode-generator.txt",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-c0ce2c01ad41a3cdf972",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "1aa163d7f9890fa16e2bacd3d52d8b8775510bcbae4564f144e069ee8e9f368e"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/dist/decky-api.js",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-925cd6ea94a8158d0a40",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "1ddbf5c8a6315ef97fa930b32f1546eaabc13f168f50e1d4a35ec77d60932604"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/dist/index.js",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-3764eb8c380f491a3c80",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "f789ec51becbda8aa3f44787dc35be596419ff954ca263b3562190e5709f987c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/dist/manifest.js",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-69a14c996fe408e2be6f",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/dist/types.js",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-eb00bb7b4082e9bf03b0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "937f7ed373a66bf64690a549c20b59d23f18c63a8017dfa1dc5de9f11f0b8464"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/main.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-28fa82f39bf5c4779309",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "7b7ca3421798fcb112c3d02cc3dafc79d543f5a7b5582ad3afe790fb100489ed"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/package.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-020087d20ba9af5d69ab",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "436f589b4130ac00bf60dcf5773b30caa56c8cea437fe5715c1af1f92a405f44"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/paths.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-4210406ccf394172b9f7",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "443e999f922777a3b490a981a4bcb0fb04b8ea3247b7ec1002fa81013df070c4"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/plugin.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-c5f30ccc4cebc08ebcb8",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ed28c12ff8587b1d0d51a4e6472caef97430cb001c0467c09f74ca0e5cf68401"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/product.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-f752158cf77562583420",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "cc73f175f5dab78aa2c13320f4bc91d6a059f7ea2a082ba5f58ce3329e86fc39"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/releases.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-df431036afa56e05e22e",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "0ae6ffa219939fd5e5494bb27b8bcaaaab749f9579aaff67a711af40a27efa85"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/source/decky-api/BUILDING.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-2fa7b514f628b9de1e87",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "8be297dad38eefd6e80b3a6b3f5083e875a7dd1261f866c91efbf4e380867aa1"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/source/decky-api/package.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-a9f4932757850ce6fec1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3193df7a9d563e1a7d65c3acd162e3b7357e47eb36862f2c1f3fc57134ed156d"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/source/decky-api/src/index.ts",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-c33183073cefa1f9a448",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "77c2831b47a9b2ba944e4b97466f18dd92c03a9c0c1ead4818129a5153629103"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/source/decky-api/src/types.d.ts",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-08d7fb4b5f887df9f338",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "93e5ecece4cde0d92bc2d2e77efcc5d4d9b1091211586aec83ce44d484daa51f"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "decky/source/decky-api/src/types.ts",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-c1d0fad36dbfd063ae4d",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "938ca56762765d8e37e637708716f80ad695287a811c63d379c8970500ae3215"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/CAPTURE-SOURCE.tar.gz",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-3726ef0c459f61f26840",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "945aa356f1651cf93ff8b5acadd64aec2abdf18614b2fc86e024d3d52a0f561d"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/Install OBSGod.desktop",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-a8e8fa5b6b5af08b90f8",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/LICENSE",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-16ebae2815cd2a2e3af2",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "68c949ee97afe35014bc539def37058b8bec575076b30f8c6f08b496af73c0fd"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/STEAM-DECK.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-586ad87980e8fcf8d604",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "12aa24cabb6178e5e24eab71c5e23006c85ed2082b47b249610bcb720ee94bed"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/THIRD_PARTY_NOTICES.md",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-53644b96064026192fdc",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "c357d1ff7583d3cdd09bf5b223e0d5f1d29ef8ec6ea2041e65a336de0c27423c"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/Uninstall OBSGod.desktop",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-004e96a4842345092b95",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "07c1cab1e05c83ac3cce85a03b00ad8d8ed1955ce60bfc9d7fee985a18ef30b7"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/Update OBSGod.desktop",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-0d956bdc91c2ee1c7708",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "b7f587b83634a2c95ca03c2b95a80d76d9e261a77c24b5d88f5d329888749089"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/Update OBSGod.sh",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-794a2ff803c672c330a5",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "16d610bfb0985cd61227e99db026560aa38b7b8d3a2cdc2984239c5b17487ea2"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/bridge.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-5ac5688f50000a2c6c7e",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "0bfd85edf9be05dbbee7252e7d64ff6776dd04d7b7b8bfdcb6d7492b7aa1d4d0"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/decky-install",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-9c05e816efa6e1602f91",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "96c3aa094fa8a44939a870cbba45f62296ce9314a1dfdf6e68e03347814e4816"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/decky.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-aaec2933dc7620a3af81",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "d7ba4e50f795af5e4f8860b3e3e368ae0bbf43a58fc1298815007c261505135e"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/install.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-86337decf54c7015f7af",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/libgstobsgodcapture.so",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-101a3da11cf029398710",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "3e1810b64d7c2d1466df075eaef2472913499ca2d21c7e6a00df62932e14b199"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/manifest.json",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-929082657f8a4a0577c4",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "218477d1ce169298ec3dbb58cdda412fe7371a39653d6dc68bfcf81bc2226f85"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/obsgod",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-ce8092af8d4015d77ead",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "33cb82f0d68f3f3ce21ae2abd4eab878df6c42f39a52af36748d6e42ceceef66"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/obsgod-decky.zip",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-9b8816a10117c7aae06e",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "436f589b4130ac00bf60dcf5773b30caa56c8cea437fe5715c1af1f92a405f44"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/paths.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-318c258dcc9c74029f44",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "ed28c12ff8587b1d0d51a4e6472caef97430cb001c0467c09f74ca0e5cf68401"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/product.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-29f0116bbccdd5d87d89",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "cc73f175f5dab78aa2c13320f4bc91d6a059f7ea2a082ba5f58ce3329e86fc39"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/releases.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-f10e29d7fde947ce29d5",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "d678ff8f2266ceacf0306a11111452f424b741dc04801dac0932dd6d5dc84b52"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/setup.css",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-b76daca44ef7435cf493",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "43a3485849325c0b6f13029386debe48c19cc4f5d6099d3f2ef3eac97db47f66"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/setup.html",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-b0c2faca42169e1508ab",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "03bed3eeadf475f74d828a5f7df30f8a9d106390914db0878f2beb55bbe0f609"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/setup.js",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-deaa34c01a8237afb683",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "22db974ce260e04a93f1755d79c5b23b6bd50429e54521bcaf0bef7397d38958"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/setup.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-e20b4a2590456f878bd3",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "80a41dcf694259fd20a06ac20f8b7dc2af83229db2cde9ef051378cbee3e0072"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/uninstall.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-File-24f2a6ec76543427d9d8",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "a9f85227ce97e787f0db5a911871686615526b180aaa3dff69641e5008549917"
+        }
+      ],
+      "copyrightText": "NOASSERTION",
+      "fileName": "runtime/update.py",
+      "licenseConcluded": "NOASSERTION",
+      "licenseInfoInFiles": [
+        "NOASSERTION"
+      ]
+    }
+  ],
+  "name": "OBSGod-0.1.0-deck.9",
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-Application",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "https://github.com/szmyty/obsgod/tree/4699235e9e925b76ca492d5a00a375ed37fb338e",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "OBSGod",
+      "sourceInfo": "Git revision 4699235e9e925b76ca492d5a00a375ed37fb338e",
+      "versionInfo": "0.1.0-deck.9"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-1b4f71ea7a3f3ae52a57",
+      "comment": "Linked standard library; license shipped in THIRD_PARTY_NOTICES.md",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "BSD-3-Clause",
+      "name": "Go standard library",
+      "versionInfo": "go1.27.4"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-b06134eff36ddb65d10a",
+      "comment": "Linked Go build metadata; go.sum h1:G/WWpXY0EHO4JJPEunifq7/JRCMmVrPRfF1yHV1MoH0=; full license text shipped in THIRD_PARTY_NOTICES.md",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "name": "github.com/andreykaipov/goobs",
+      "versionInfo": "v1.8.3"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-eb5a1fb8fcd892dd6626",
+      "comment": "Linked Go build metadata; go.sum h1:frqHqw7otoVbk5M8LlE/L7HTnIq2v9RX6EJ48i9AxJk=; full license text shipped in THIRD_PARTY_NOTICES.md",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "name": "github.com/buger/jsonparser",
+      "versionInfo": "v1.1.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-11713a1d2b26e712ee33",
+      "comment": "Linked Go build metadata; go.sum h1:saDtZ6Pbx/0u+bgYQ3q96pZgCzfhKXGPqt7kZ72aNNg=; full license text shipped in THIRD_PARTY_NOTICES.md",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "name": "github.com/gorilla/websocket",
+      "versionInfo": "v1.5.3"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-1bad7883b7d1d00a74a1",
+      "comment": "Linked Go build metadata; go.sum h1:dLEQVugN8vlakKOUE3ihGLTZJRB4j+M2cdTm/ORI65Y=; full license text shipped in THIRD_PARTY_NOTICES.md",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "name": "github.com/hashicorp/logutils",
+      "versionInfo": "v1.0.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-f3ef63a7e5e052c3bd84",
+      "comment": "Linked Go build metadata; go.sum h1:jeMsZIYE/09sWLaz43PL7Gy6RuMjD2eJVyuac5Z2hdY=; full license text shipped in THIRD_PARTY_NOTICES.md",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "name": "github.com/mitchellh/mapstructure",
+      "versionInfo": "v1.5.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-4e348c7d0f9274ae8b0c",
+      "comment": "Linked Go build metadata; go.sum h1:jhDmAqPyebOsVDOCICJoINoLb/AnLBaUw58nFzxWS2w=; full license text shipped in THIRD_PARTY_NOTICES.md",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "name": "github.com/mmcloughlin/profile",
+      "versionInfo": "v0.1.1"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-05b3fe3d90bb6a8b6c0e",
+      "comment": "Linked Go build metadata; go.sum h1:odyqkoEg4aJAINOzvnjN4tUsdp+Zleccs7tRIAkkYzU=; full license text shipped in THIRD_PARTY_NOTICES.md",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "name": "github.com/muesli/coral",
+      "versionInfo": "v1.0.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c251af14358b49cabd11",
+      "comment": "Linked Go build metadata; go.sum h1:VhgPp6v9qf9Agr/56bj7Y/xa04UccTW04VP0Qed4vnQ=; full license text shipped in THIRD_PARTY_NOTICES.md",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "name": "github.com/nu7hatch/gouuid",
+      "versionInfo": "v0.0.0-20131221200532-179d4d0c4d8d"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-024483b388a759b37b09",
+      "comment": "Linked Go build metadata; go.sum h1:iy+VFUOCP1a+8yFto/drg2CJ5u0yRoB7fZw3DKv/JXA=; full license text shipped in THIRD_PARTY_NOTICES.md",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "name": "github.com/spf13/pflag",
+      "versionInfo": "v1.0.5"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-3acdfe028ac2ffb542c3",
+      "comment": "Shipped separate module/preferred source",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "LGPL-2.1",
+      "name": "npm:@decky/api",
+      "versionInfo": "1.1.3"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-683636c564eeb08f9695",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "LGPL-2.1",
+      "name": "npm:@decky/ui",
+      "versionInfo": "4.11.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-9d199760922b9ea441d9",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/aix-ppc64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-6d2febf048a2263750e2",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/android-arm",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-b1b9c8d2b43f292ad496",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/android-arm64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-3c6ee48a2965db80c826",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/android-x64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-4ecab5cc275c3dbd05d5",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/darwin-arm64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-a6f944abf792c3653f59",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/darwin-x64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ab5ecac0f12f94855dfa",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/freebsd-arm64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ea226962378165a7a987",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/freebsd-x64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-390bd6404ab03e649870",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/linux-arm",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-3f0bda692b4764d315a6",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/linux-arm64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-48d65da313fafc337d97",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/linux-ia32",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-665f5479aa097bbac6c3",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/linux-loong64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-426974b024bbec6ab283",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/linux-mips64el",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-1ff71c5b70601ed58438",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/linux-ppc64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-afe7f3909214f4b8936b",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/linux-riscv64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-1cbcf21b7b38d5d1b614",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/linux-s390x",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-216e0f047a567d8fa002",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/linux-x64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-37eaa83e4327554942be",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/netbsd-arm64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-b091fae9dfb9b9e02efd",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/netbsd-x64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-63d758eb3fa7f96553fa",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/openbsd-arm64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-829746a4c4a75961a7ea",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/openbsd-x64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-fa3d816914bc5e6108f6",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/openharmony-arm64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-26e80aaf095f39939a2f",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/sunos-x64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-b03629a1ee26e12360ba",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/win32-arm64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ca70596529df153652ae",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/win32-ia32",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c1391216390a30103a0c",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@esbuild/win32-x64",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-09ff68c3e9c4fea41533",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@jridgewell/sourcemap-codec",
+      "versionInfo": "1.6.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-80e3cb09dfbb51a11c71",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/pluginutils",
+      "versionInfo": "5.5.1"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-e2052edb4d354a5599eb",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-android-arm-eabi",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-e52b2731306450507f8b",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-android-arm64",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-d2ead9961e3d31ecd4bf",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-android-x64",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-5fc77cb7110eec4113f1",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-darwin-arm64",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-6f0dfa0f9d6c0ea5a694",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-darwin-x64",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-bac2f9b5ed9d8eb0e91f",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-freebsd-arm64",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-6488bcc9d8714f9d0140",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-freebsd-x64",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-53f50d61477015853427",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-linux-arm-gnueabihf",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-134512bbb37d00ef0850",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-linux-arm-musleabihf",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ef77a620dbf1c79f5012",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-linux-arm64-gnu",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-fdde71349ff5eff80131",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-linux-arm64-musl",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-99cd6ad4446476f9bd4b",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-linux-loong64-gnu",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-22fb8785c8f2c834ced1",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-linux-loong64-musl",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-f72aed04c49530137c25",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-linux-ppc64-gnu",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-1062ff737949d890d2c9",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-linux-ppc64-musl",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-6a7929af7ff2dfe33562",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-linux-riscv64-gnu",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-3e491143bb8c51399b24",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-linux-riscv64-musl",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-90039b599d4af9c124d4",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-linux-s390x-gnu",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-14df6a53badeef26b9d9",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-linux-x64-gnu",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c6536996597c438a213d",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-linux-x64-musl",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-60e1196a36bcdb537bda",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-openbsd-x64",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ff3d16c7834b43081fc8",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-openharmony-arm64",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-1a06cc25389787e831cb",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-win32-arm64-msvc",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-a4a67401f7790ff2c2bd",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-win32-ia32-msvc",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-44652891ab402a4b49ba",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-win32-x64-gnu",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-ca17c8e3f902af7bbfbb",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@rollup/rollup-win32-x64-msvc",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-6b5283eaa16197b68a06",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@types/estree",
+      "versionInfo": "1.0.10"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-9d44a29d99b447e1f150",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@types/react",
+      "versionInfo": "19.1.1"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-bb3294670a2a3e5f2db8",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:@types/react-dom",
+      "versionInfo": "19.1.1"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-b05903de4c965507bd39",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:csstype",
+      "versionInfo": "3.2.3"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-e9298f9a40367af6a317",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:esbuild",
+      "versionInfo": "0.28.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-7f759072fe86d892e8b8",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:estree-walker",
+      "versionInfo": "2.0.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-18d53a31f9d7299c26ca",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:fsevents",
+      "versionInfo": "2.3.3"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-293572d897b41e4ccbd2",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:magic-string",
+      "versionInfo": "0.30.21"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-9e01adac92e1d6f47da8",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:picomatch",
+      "versionInfo": "4.0.7"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-c836dd4c31626939d4c8",
+      "comment": "Bundled in plugin JavaScript",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:qrcode-generator",
+      "versionInfo": "2.0.4"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-8dc0d6fe55b33c7bd1d0",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:react",
+      "versionInfo": "19.3.1"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-f7035f5aaa73dd43f56e",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:react-dom",
+      "versionInfo": "19.3.1"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-6d95df43a125c86452cf",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:rollup",
+      "versionInfo": "4.68.2"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-4d1ac1da0aeef022e5ba",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:rollup-plugin-external-globals",
+      "versionInfo": "0.13.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-a3dac2644aace561755f",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:estree-walker",
+      "versionInfo": "3.0.3"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-d8613119d2f98094f006",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:is-reference",
+      "versionInfo": "3.0.3"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-13cefd51066630a2dde2",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "MIT",
+      "name": "npm:scheduler",
+      "versionInfo": "0.28.0"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-531411c19f3ae30165be",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "0BSD",
+      "name": "npm:tslib",
+      "versionInfo": "2.8.1"
+    },
+    {
+      "SPDXID": "SPDXRef-Package-8b028a0c2b977f9b7f05",
+      "comment": "Pinned npm build environment input; inclusion here does not claim redistribution",
+      "copyrightText": "NOASSERTION",
+      "downloadLocation": "NOASSERTION",
+      "filesAnalyzed": false,
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "Apache-2.0",
+      "name": "npm:typescript",
+      "versionInfo": "5.6.3"
+    }
+  ],
+  "relationships": [
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "DESCRIBES",
+      "spdxElementId": "SPDXRef-DOCUMENT"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-1b4f71ea7a3f3ae52a57",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-b06134eff36ddb65d10a",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-eb5a1fb8fcd892dd6626",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-11713a1d2b26e712ee33",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-1bad7883b7d1d00a74a1",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-f3ef63a7e5e052c3bd84",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-4e348c7d0f9274ae8b0c",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-05b3fe3d90bb6a8b6c0e",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-c251af14358b49cabd11",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-024483b388a759b37b09",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-3acdfe028ac2ffb542c3",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-683636c564eeb08f9695"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-9d199760922b9ea441d9"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-6d2febf048a2263750e2"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-b1b9c8d2b43f292ad496"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-3c6ee48a2965db80c826"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-4ecab5cc275c3dbd05d5"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-a6f944abf792c3653f59"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-ab5ecac0f12f94855dfa"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-ea226962378165a7a987"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-390bd6404ab03e649870"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-3f0bda692b4764d315a6"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-48d65da313fafc337d97"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-665f5479aa097bbac6c3"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-426974b024bbec6ab283"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-1ff71c5b70601ed58438"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-afe7f3909214f4b8936b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-1cbcf21b7b38d5d1b614"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-216e0f047a567d8fa002"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-37eaa83e4327554942be"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-b091fae9dfb9b9e02efd"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-63d758eb3fa7f96553fa"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-829746a4c4a75961a7ea"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-fa3d816914bc5e6108f6"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-26e80aaf095f39939a2f"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-b03629a1ee26e12360ba"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-ca70596529df153652ae"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-c1391216390a30103a0c"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-09ff68c3e9c4fea41533"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-80e3cb09dfbb51a11c71"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-e2052edb4d354a5599eb"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-e52b2731306450507f8b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-d2ead9961e3d31ecd4bf"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-5fc77cb7110eec4113f1"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-6f0dfa0f9d6c0ea5a694"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-bac2f9b5ed9d8eb0e91f"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-6488bcc9d8714f9d0140"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-53f50d61477015853427"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-134512bbb37d00ef0850"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-ef77a620dbf1c79f5012"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-fdde71349ff5eff80131"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-99cd6ad4446476f9bd4b"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-22fb8785c8f2c834ced1"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-f72aed04c49530137c25"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-1062ff737949d890d2c9"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-6a7929af7ff2dfe33562"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-3e491143bb8c51399b24"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-90039b599d4af9c124d4"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-14df6a53badeef26b9d9"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-c6536996597c438a213d"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-60e1196a36bcdb537bda"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-ff3d16c7834b43081fc8"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-1a06cc25389787e831cb"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-a4a67401f7790ff2c2bd"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-44652891ab402a4b49ba"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-ca17c8e3f902af7bbfbb"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-6b5283eaa16197b68a06"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-9d44a29d99b447e1f150"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-bb3294670a2a3e5f2db8"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-b05903de4c965507bd39"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-e9298f9a40367af6a317"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-7f759072fe86d892e8b8"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-18d53a31f9d7299c26ca"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-293572d897b41e4ccbd2"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-9e01adac92e1d6f47da8"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Package-c836dd4c31626939d4c8",
+      "relationshipType": "DEPENDS_ON",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-8dc0d6fe55b33c7bd1d0"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-f7035f5aaa73dd43f56e"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-6d95df43a125c86452cf"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-4d1ac1da0aeef022e5ba"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-a3dac2644aace561755f"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-d8613119d2f98094f006"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-13cefd51066630a2dde2"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-531411c19f3ae30165be"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-Application",
+      "relationshipType": "BUILD_DEPENDENCY_OF",
+      "spdxElementId": "SPDXRef-Package-8b028a0c2b977f9b7f05"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-b5659ab4381064e38368",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-d9869e2e3126ae3da1be",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-4e8f704b8f2fdc157504",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-9c9865b9745fff6aced3",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-594891f6e6a2a8f12622",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-d728f438e1e9e61f995f",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-ea11d3caba6824ce82bb",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-6b2d7ba0c018047e199e",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-42971e7d5e65ac1b93f6",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-fa9c2c6aeda222f1d32d",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-4a5c6fba0f840c8c0dc8",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-b0bf723e3813c276a98d",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-72012f0f6a5bc7cc8040",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-59f56a85bffbfa773f87",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-c0ce2c01ad41a3cdf972",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-925cd6ea94a8158d0a40",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-3764eb8c380f491a3c80",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-69a14c996fe408e2be6f",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-eb00bb7b4082e9bf03b0",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-28fa82f39bf5c4779309",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-020087d20ba9af5d69ab",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-4210406ccf394172b9f7",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-c5f30ccc4cebc08ebcb8",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-f752158cf77562583420",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-df431036afa56e05e22e",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-2fa7b514f628b9de1e87",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-a9f4932757850ce6fec1",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-c33183073cefa1f9a448",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-08d7fb4b5f887df9f338",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-c1d0fad36dbfd063ae4d",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-3726ef0c459f61f26840",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-a8e8fa5b6b5af08b90f8",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-16ebae2815cd2a2e3af2",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-586ad87980e8fcf8d604",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-53644b96064026192fdc",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-004e96a4842345092b95",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-0d956bdc91c2ee1c7708",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-794a2ff803c672c330a5",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-5ac5688f50000a2c6c7e",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-9c05e816efa6e1602f91",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-aaec2933dc7620a3af81",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-86337decf54c7015f7af",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-101a3da11cf029398710",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-929082657f8a4a0577c4",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-ce8092af8d4015d77ead",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-9b8816a10117c7aae06e",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-318c258dcc9c74029f44",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-29f0116bbccdd5d87d89",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-f10e29d7fde947ce29d5",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-b76daca44ef7435cf493",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-b0c2faca42169e1508ab",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-deaa34c01a8237afb683",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-e20b4a2590456f878bd3",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    },
+    {
+      "relatedSpdxElement": "SPDXRef-File-24f2a6ec76543427d9d8",
+      "relationshipType": "CONTAINS",
+      "spdxElementId": "SPDXRef-Application"
+    }
+  ],
+  "spdxVersion": "SPDX-2.3"
+}

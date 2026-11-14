@@ -1,0 +1,57 @@
+{
+  "artifact_identity_sha256": "24ae9797c534d789ea7a2030c94085098e77b678ff5eaa659f893d140b288b3e",
+  "integrity": "passed",
+  "preferred_source": "passed",
+  "publication": "not-authorized-by-this-audit",
+  "qualification": "unrun-by-this-audit",
+  "remaining_gates": [
+    "Final-revision automated qualification and review receipts",
+    "Successful required hosted CI/review evidence; local act cannot prove GitHub services",
+    "Actual Steam Deck/Flatpak/Gamescope/controller/audio and provider-viewer evidence",
+    "Owner-controlled publisher/signing identity and signature verification policy",
+    "Owner approval for release/publication/deployment and final consumer adoption proof"
+  ],
+  "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+  "schema_version": 1,
+  "source_inventory": "passed",
+  "subjects": [
+    {
+      "digest": {
+        "sha256": "5f401a620493b5fc282658c16530db6e87a70ad40b95bb88b0212f08417bbd16"
+      },
+      "name": "capture-build.json"
+    },
+    {
+      "digest": {
+        "sha256": "3e1810b64d7c2d1466df075eaef2472913499ca2d21c7e6a00df62932e14b199"
+      },
+      "name": "manifest.json"
+    },
+    {
+      "digest": {
+        "sha256": "b4222fb703aa198a7ea200721afbc06dcb86dec56e8c1bebd77f5bb614aad53d"
+      },
+      "name": "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz"
+    },
+    {
+      "digest": {
+        "sha256": "33cb82f0d68f3f3ce21ae2abd4eab878df6c42f39a52af36748d6e42ceceef66"
+      },
+      "name": "obsgod-decky.zip"
+    },
+    {
+      "digest": {
+        "sha256": "3c2fa5f5623f4c000a2371fe19bce5fdf0fc848b09929befb4ba70e7630cf986"
+      },
+      "name": "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip"
+    },
+    {
+      "digest": {
+        "sha256": "fbc9e106291ff478d10a52c7f77e409ace2463d7019118a7ca1d95f25f8ef514"
+      },
+      "name": "updater-manifest.json"
+    }
+  ],
+  "unsigned_provenance": "generated",
+  "version": "0.1.0-deck.9"
+}

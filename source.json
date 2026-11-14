@@ -1,0 +1,2417 @@
+{
+  "file_sha256": {
+    ".actrc": "66ca1584712ebc7f0ea9c02c9a5cec6f5bbd3f4dba2d150bdce982a0da2bb612",
+    ".github/FUNDING.yml": "04f14099064745d28711e94bf4b0fd785d62fc185117c69307951039b82b1037",
+    ".github/ISSUE_TEMPLATE/bug_report.yml": "efc0f17b641d1aef5f61c85ee90e2175b72ad4bf42885be6e5a1014af9e3cde6",
+    ".github/act/pull-request.json": "a5e2a33cab5d8c97354c7ad374c375845d2cd9c8b8e7ae6af10c95d726b12722",
+    ".github/dependabot.yml": "d549bcee40a1fe5783e92a0d24eb34c63c7f028b9c3d176e180376fb7971e945",
+    ".github/pull_request_template.md": "ab412efacb8134fe7ac1169439fb8187228fd9caf30497514430364403ca8ddf",
+    ".github/workflows/build.yml": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486",
+    ".github/workflows/coverage.yml": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0",
+    ".github/workflows/docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+    ".github/workflows/goreleaser.yml": "fbda531956ed860f776b1f8c9f731eb282bfb5e22d9a694d2f1b0f6bc3682460",
+    ".github/workflows/lint.yml": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def",
+    ".github/workflows/steam-deck.yml": "633a4c30e2f0c9e67e55590445d2e1b53a02d25215696d11d83e92d8d2179167",
+    ".gitignore": "6dfd904a6f42b534914196e568b88712306ef7b9b9758f0591ce8bc8d96c5b39",
+    ".golangci.yml": "f1d11a89e5f73b9323ed883434218f2a6495fea6040304df7e304d51795ed574",
+    ".goreleaser.yml": "4098c3d0903fa9d1fdc9c85405b35979a0dad192681b51abf0a1a85536d14c31",
+    ".identity/README.md": "e66ea55c4f49094f3fe4b97b29a15b45d936316ff6ea0a155d18f064001c7d08",
+    ".identity/brief.md": "411d834b7694b39e7c8b577963eacc650907d8abf4c8f3272f3e65f29295ba47",
+    ".identity/candidates/decky-icon.svg": "fc9ae707d7b19d7c6a32fb92f9264eea71f2ff57e9e9205da7dbae057d784fbb",
+    ".identity/candidates/inventory.json": "4cdc7e121ab10c8f14b9cdd6f06e63abaa845696c255d9e66fd7234653b8f83e",
+    ".identity/candidates/mark.svg": "3c3514b3ca0a961a5333857434c0cd5a8dae2469c2b947ea1fa98e44d935ac9b",
+    ".identity/candidates/palette.json": "669b26545d24d1d640a453c7d6bc6f865766e5979a0f2f95df58e95cbada7813",
+    ".identity/defaults/organization.tokens.json": "e8f53747482aa8914fc3307fbf63295e45fb1ca59448c8e0435e1af8fce5eda5",
+    ".identity/governance/approvals.json": "e96c088f11ded1d42a60872e3de0384299615b778c4927f20f1b441bd9db7bc9",
+    ".identity/governance/provenance.json": "ce9c3a4e1c40d89bcc605b9bc287276a3211d444ee05c3a3471a2f15fab8bc4f",
+    ".identity/identity.json": "0a192e777313bb36eff735efe137f89f1258dc493ca27c2e9ee2b9f0bcc21a63",
+    ".identity/overrides/product.tokens.json": "c545dc44ed77337b41c7e4d1276907d1958583c3515dc1206cbcbdf479ec22d8",
+    ".identity/references/README.md": "d807b2e41796322c3264916b3f29e1209c12d91697740421d971a0dded40f865",
+    ".identity/sources/README.md": "4e804ab6294a7c3229f8010962eacbd51355c7550b7f5ecf069969a818d30645",
+    ".identity/targets/profiles.json": "1f46cce8621175f1a9fe871e4c65ab214f6f161c43d649f1110c24b79db2b463",
+    ".identity/toolchain.lock.json": "15e37a8b4b1e10bab3414166e4a48fb6040543622d7a8a45270179d0d26416c6",
+    "AGENTS.md": "cc9223a54cc4e1ea53982e06382dacb5bcd9ba6c07a2c42ca96ba74a32a088d9",
+    "ARCHITECTURE.md": "c88f1555086219d7cae5fd07f708a7bb25d0d1a7e93751a48ae88a17243cc38e",
+    "CHANGELOG.md": "62a04eb2901efec99f85e766f702dabcb2679c405f7f3ff84c0e4a060b0d79c5",
+    "CODE_OF_CONDUCT.md": "0b52b0f1418a0409d340de11ca2f6b5e780d0623ea7e04084431e5fac12a1c8a",
+    "CONTINUITY.md": "462fc227c91c3d1b4a997db2fe8df8aecd842b94317f7092dab0cda98e90818f",
+    "CONTRIBUTING.md": "2318ce3a7c27fe6c0718a26184ea8c775a39981c71895ef5a85d6399e409adc0",
+    "DECISIONS.md": "2216b170dc915c3c3f4589da005bc1026d96dd1e568a4a6b9f55683e0e82183d",
+    "LICENSE": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af",
+    "ONTOLOGY.md": "4e9f157d741099c4a319f096e1b5c77dbb052319ecdf5cf69fe2f6a9fc373ecf",
+    "README.md": "ea60090edb2d9c9619ff474a6a158b668b95ef8a28556ae2e72b3deb4ba7ba7f",
+    "ROADMAP.md": "b91681c600b9196253cb572603d5e3f45d9bd3eac3b82267ad821a09ad64b0a9",
+    "SECURITY.md": "bd6af9b3a62b52266cc4ca604388de1a26870ada7e7c343cb4e7c3c33873b367",
+    "SUPPORT.md": "0c8cbc8690fc622f122943c007b6a29aec7d79215e4691d959991b88ed587d7c",
+    "audits/audit-2026-06-08.md": "952afd0adf91125da027bc65d52d7348d00c2cd5b1b00f838d6e427a13665957",
+    "audits/audit-2026-11-13.md": "06faf0b42fbd6a442737d94165bb0ecd9c13ddf1c21f14bc6c7eb9f354cdb658",
+    "audits/local-act-2026-11-13.md": "720b9fa4e856871c22ccfc99f763e672d9e7a0934e6064311fced6ea9f8d8336",
+    "branding/README.md": "9b8dd623d73a158ae1d7e0a4997fa77c575031d05f3908e51a06b6a2991094c1",
+    "branding/evidence/identity-source.json": "5b711eb45ef4c1b8dcb33475f0de3a511bdf4dd84f8d4d5cd8d5f49e8aab6adb",
+    "branding/licenses/DejaVu.txt": "e180b3d65bf650dffffd71dd21b6180767b469a18dd87e1d8552be69bb9ecdf0",
+    "branding/licenses/Identity-MIT.txt": "1deb55b00af813e1c8f086e851d0e1ed2084ea942a54996f069df05cd0561372",
+    "branding/tests/test_brand_kit.py": "1dc9c3d1b0b54e67dd0983445e2f1071c28ba9a8e3e3364b15f607000acd1559",
+    "cmd/obsgod-decky-install/main.go": "beaa61d9dc53e9b3599e83c082e3e10b1521013ab38750477d81018edc90e7bf",
+    "docs/advanced-profiles.md": "d7cd5a500c60000e520b629347220be993a4dcdc140743a73020afdbc3f7347a",
+    "docs/api-v1.md": "cd3b6a460a2f759edb05c15b68c9ba0aa9e2849ccf5bd478b0fdadb32e5a948f",
+    "docs/architecture.md": "c0c5639aa22fd0245003e47169b9d0e63dc6aefc5bfec02d8eb8ad63455fc8f7",
+    "docs/audio-capture-upgrade.md": "b4742e69e78d7c82f7c0de78de7356a17f5e517f3df9a3d8af81168b5351424a",
+    "docs/branch-archive.md": "adad2557ce84fef7effb2799ae533b54895981a269c77cd2567a1cd40aa5f969",
+    "docs/branding-review.md": "4614e589b92aa6ecb5ab6d9e611dbb48b357729aec50151ee207837c0a546df7",
+    "docs/branding-site-preview.md": "3c0b52a266be5577dc46515157edcad34479dfa9be40504a4a458451384727f6",
+    "docs/candidate-7-install.md": "f6c674838d40cee42fce832853792271b7585f15db6eb10408300ced80bec1c8",
+    "docs/candidate-8-install.md": "fc9328c43f1136c880a771e16c9e3414cfb4f39ac652155b61099a5e67540c3e",
+    "docs/candidate-9-install.md": "4f04099eabb95d88f1ace04e612c60c308a333285b6a60600efe886005ec308f",
+    "docs/cli-audit.md": "fe5c01a35704b0a90eb512af8abaad310e382ddf2d7519f83cc6ce238a819000",
+    "docs/cli-reference.md": "d9f8df9f3242c3facca1426f5bc9acdbdded28258f9ac305304fb059a9aea4ca",
+    "docs/cli-usage.md": "5dc66622be97baed0cae3a9ba2311090dd89d9fa9ef6c72a5122bb480fac7b69",
+    "docs/completion-campaign.md": "c40340a8bf967359ed012ca0f27292f7bb4db4a09e2ea771f018464a8b59d500",
+    "docs/completion-review.md": "96d92e8c4daf1d74a2c94afd343d432428276515e055342df99a6628d1adc2ee",
+    "docs/configuration.md": "c9924edbe2f80aca3004e3e9b00d2f1fa8d3b0baa74e26305b702d95e04db826",
+    "docs/creator-workflows.md": "b6202cec6acfb482f4bac30c8fc5c0de7d57ecdb515b7f4a6b68fcd6bb0a8b73",
+    "docs/decisions/0001-managed-local-control.md": "006c6c212488cebc824ef4f88235f36da2ca22a2d0e5d8eaf011141f30d8e278",
+    "docs/decisions/0002-product-identity.md": "592769bfa69e3175685ae19ca05ce1faa8fc778f0d273cb86224c12b318a3e73",
+    "docs/decisions/0003-core-and-creator-boundary.md": "87eace5570b1fcec9d0cabda0f03c924ca17563e11687bc3b472fc215ca25c01",
+    "docs/evidence/completion-criteria.json": "0795e6594c7bbde195bb8ebfcbc4050f0d5ecbe9c879767edbe0050540386df6",
+    "docs/evidence/completion-merge.json": "e991603e7a9409499510322a5d387e565a44e241fd10ee95576326d94f8c8d8e",
+    "docs/evidence/completion-merge/after-feature-repository.json": "1178c277b816979297a4188c07200da13e1b3d3839b41bb76bf98eeb7d1f013f",
+    "docs/evidence/completion-merge/branch-cleanup.json": "5be5723b65499b69f7a5ddbbaf6004bcfca6e952f1e353e5db5ca12cb7f4627c",
+    "docs/evidence/completion-merge/ci-matrix.json": "83b4ab38b5816090850765c89376057c994b35e63b5975b034b66ec97aa25955",
+    "docs/evidence/completion-merge/frontend-python-matrix.json": "4482bce74d16102f845a324305008a2c664f11e8fc48a3f064a83b710f53e595",
+    "docs/evidence/completion-merge/go-matrix.json": "7699b06843b94899cd778622e1794bb1e297f102f2aae1b04da314d651d9b769",
+    "docs/evidence/completion-merge/issue-transfer.json": "dae63faa9bc0d8487e2b904a42fd2fcec9fae4b8371eae93b2b7d9f813ab5562",
+    "docs/evidence/completion-merge/public-download-matrix.json": "de2a32bd9a5438a4beb2b915eeaccdd5124a62256048b629bc7079d9d4bb1ffa",
+    "docs/evidence/completion-merge/source.json": "cc227303723a10a914fe01737de1cb5ac222cc0114db330cfecd82cf4bad5929",
+    "docs/evidence/completion-public-download.json": "9ed3717294d5e49b3dacaeb3350a3bb7541fe446692413079b5ef95de73fb05d",
+    "docs/evidence/completion-qualification.json": "81e343fdfb63670083cbe1b397ae4c46cd46ea7962134e9488497e81f1b2e11b",
+    "docs/evidence/completion/act-matrix.json": "7cd43d0df152f6a571426d964d47478ac8ed16fd9e3e5013fe033403a29c461c",
+    "docs/evidence/completion/brand-matrix.json": "65e3ee69060eeecc2e1eb606d3bbb298ed0ebade5dd6b7575b08e4db029085fe",
+    "docs/evidence/completion/browser-matrix.json": "bbc4c1d2c9d09f150d4b94c0d88d7800a191926795229401f95c574a0c0bb2dd",
+    "docs/evidence/completion/browser-upgrades-matrix.json": "1c0dce80bff26b032ac3d6fa854fe9a6eb47265d83060a8453568c89849b2d6b",
+    "docs/evidence/completion/ci-matrix.json": "0492a550eedc6eeac3f25073bf1f4ccbb5afc3c329324e3fa5c05b39f077aa6a",
+    "docs/evidence/completion/cli-fish-container.json": "819e61d3004907704b0a83a1f23dc86c3f6eba3a1939c829155505746acf257f",
+    "docs/evidence/completion/cli-matrix.json": "ec7e50755dae737eddcf27e59a0919d65a9a22b61c9fc8709a9a4f483796b041",
+    "docs/evidence/completion/decky-updater-matrix.json": "c151eaad0eadfcb0280631b24d4b9405726010da91cd3d6ec352350257d949a0",
+    "docs/evidence/completion/frontend-matrix.json": "9bd6f1f3032feb65a5d1c539c186d031b9381a10017cc0feb5e930e264822e68",
+    "docs/evidence/completion/go-cross-result.json": "6c8c06e3aa8dd12e72934a2699bbf73e7ff0acf479fa49b2a9fe22e76c48741f",
+    "docs/evidence/completion/go-matrix.json": "a0c2517d6c5b48de4b7a9ae3d853f4ccca41c203728e7e0b5bf1c0c3363421e5",
+    "docs/evidence/completion/go-static-result.json": "0329b5573f21aa07ccd172a6ae84e7037c1231a3191eb6f6601939ddf3b71cec",
+    "docs/evidence/completion/go-tests-result.json": "66ac9033990683b66e51b12bf58107dbfc68e7183aeb9e3990e1c73033081f62",
+    "docs/evidence/completion/native-matrix.json": "4500329897fbc678fd72c66a24a2be5dd32777ba81275a88006b57aa2b741c3d",
+    "docs/evidence/completion/package-matrix.json": "ea23cb0d6c34a83c6dc0969a5e326d8bfe7810bebb519bbea9ed81d9090b4be4",
+    "docs/evidence/completion/python-matrix.json": "a7e21c030fbe20d2905c90a3f0c8f286fa0fbd3038717dee89417387a6bc8a80",
+    "docs/evidence/completion/repository-matrix.json": "67e2935add1aba6d05c1c9e587e873bff3878b27f9457474d5329ec3631a34b2",
+    "docs/evidence/completion/scripts-matrix.json": "e4285deb533376527d9896e16aae502d5bc97aeb9ba7a0da1f11001a272296ea",
+    "docs/evidence/completion/site-matrix.json": "c87ccafec007ef5503ad571609290fa301f45514de9927fbad960d6443715ef4",
+    "docs/evidence/deck6-public-download.json": "01091efc1ff4fad14f9908e41762ee0288175f200feabe1cc0acde47dabcdab2",
+    "docs/evidence/local-act-20261113/evidence.zip": "a1e5ffb954344a009d610f53ea3eea35290b83c13078f03da8967b884f8aa0f2",
+    "docs/evidence/local-act-20261113/report.json": "12f5d7ea243fd30aa802ee6467b5f700420a80be08bf985ba5cb05d524351255",
+    "docs/evidence/local-act-20261113/summary.json": "c32ad87089a1cf92fba2830c7497549ef57cd43b3485747203ef51d76afc8495",
+    "docs/evidence/m2-criteria.json": "5bd426df5b6171a31a6e4f2f2bd1dbbd908029c5771233e158912a2dc6968503",
+    "docs/evidence/m2-merge.json": "c33cc17f7e6b786bd5e26209c01c4ac85c0bc5ec0f154d4efe6e08a612799cff",
+    "docs/evidence/m2-public-download.json": "573ca9593b8c9689e7403a4537ab67adaacac520de1c568afae025153a0b5a0e",
+    "docs/evidence/m2-qualification.json": "41cc9d13d483a7996deac1a031b14e7ffe7d7af08302208cf3aaf53d7191a838",
+    "docs/evidence/m2-security-review.json": "888c9d65fdd3edc40f3bfdafd699ce551cdfaa18b730aaa72d5260a8eec06379",
+    "docs/evidence/m3-criteria.json": "da7f642607a1f2754bb30545228fc288e4873460684b5708f6b484ad084ccc48",
+    "docs/evidence/m3-public-download.json": "4dcb9b9f8d91b483a8a165811d7ca5ede57d9e01570b998fcc1f9adf9d198876",
+    "docs/evidence/m3-qualification.json": "b06223abe8f7b94cd6c5b5e85ca3f79d407e08973e13140515f6b2c0d1ee8d15",
+    "docs/finalboss-plan.md": "c334b0644487a2898f908991977e17c256f0d056256f68f019751f991e7a98e8",
+    "docs/flatpak-config-isolation.md": "b14e652fb7693e6d8934b2ac7eae61b2722b4ced8891ece2142720ac63413f9f",
+    "docs/generic-cli-distribution.md": "d650c895b8f57674988e8413013e4f5e127ec2488f1dc7b478c00295fc85b932",
+    "docs/identity-migration.md": "f513a21ad259968a2a2570f8a170e629b2fe5f8ccff54b9a931699cb069cb425",
+    "docs/idle-media.md": "9862f88919f7d79360bf988d9e5014df7a3ade8741f6fbef09367d0bdc7ba938",
+    "docs/installer-flatpak-fix.md": "d9639ba561f0e914dfec0e2c7e55291e36ed59ffe492c519521b5e2bb52b1e3d",
+    "docs/legacy-api-migration.md": "68a4cd4e0e78ca0a773f76ae58723eb265c82476ed137a51aef726e4469822a5",
+    "docs/local-ci.md": "ef4d15c348d6c4b74efc7bd8b07699c360eba5c457971b3e273bf5855a96f6e9",
+    "docs/m3-device-acceptance.md": "f46265ec9d9ec459d2bbf1201c662adcdd3771c1c4fa12d01cc8200e3906cb2e",
+    "docs/m3-review.md": "a2461344687ae8a4044bb1ae9232a2a2788cbb58e60231b9579d157175b5c6b3",
+    "docs/microphone.md": "e73bb5e0abf8d24317353257828cdd4f8f05ff408feb1aa460f26fbb226b094e",
+    "docs/migration-review.md": "9064bb59d78bb7e2c03e5b6677c1299ca46f95a507fe9a8dfd5f1ebd139b81e8",
+    "docs/milestone-2.md": "172d7518c831a02d30413428972fdb969c0c8855faf0c523c7099c439c1fd361",
+    "docs/milestone-3.md": "9e6066083a96cbf359205fbf1ae43619bf7015c6301e3a062f10770232866512",
+    "docs/recording-replay.md": "9685ad0c5bc353b16b4559387d672a075ff85ff6565c1da4696a330f418b7b31",
+    "docs/release-engineering.md": "3e83c3fd349a2f730cd12b67cac55e91e3f101b3a1e46212bd91ba9b3da96c3d",
+    "docs/release-readiness.md": "c338955ac91b79daec2c4f76ab875ab318788b1567067fddaa607c2487357c0c",
+    "docs/releases/0.1.0-deck.7.md": "f52f924b22bd96b0864b45dcb0f6c4b1d2234f140ef13a9c594424240be61e90",
+    "docs/research-51-criteria.json": "a51d12cc246451b4a02091fda9c6464bf74e9e0519ce7829f7539b70a6de888e",
+    "docs/research-51-sources.json": "e344799ed7d105bbe53d7c56fdaf75ea94423d15f3f784649af7b7461e7a28a8",
+    "docs/research-51.md": "f5c287eef2d28ff7539f5404af4af398d1830759585bcebc6ff9815124b6a4a9",
+    "docs/roadmap1-acceptance.md": "23c71f03d8d0e7f6e7db1fd6f5e4b28175dbebda47096a20dff86d10bda93edc",
+    "docs/roadmap1-development.md": "7986fd78ae1cf651d4cea8689335e8333b3dc8895c8ee6af3631668de505e1cc",
+    "docs/roadmap1-runtime.md": "f812dfe5c493e8482e636af34f92f924cd09beede2ac8d9649ac0135359d4879",
+    "docs/runtime-resilience.md": "7ec760b70b5d1ee013db618e2f2035f670114bab781287d8b31cca3c8afb7691",
+    "docs/site-preview.md": "4845218c737364cb9a03c7903a479a32cf369734020ae2fade2038255fd6f39c",
+    "docs/steam-deck-building.md": "421798e2f85812677998e4ebcce1e989b1a91e446005bec5f75be0a7f4f33a78",
+    "docs/steam-deck-development.md": "a3abadd9880d5ce89eb6951b7061c8725066aa3e948c8620a5043090418f9ed8",
+    "docs/steam-deck-qualification.md": "008d8ed2ab5484480855e3e782224ff2499358efc4c52e4935dc7c4b046e8513",
+    "docs/steam-deck.md": "68c949ee97afe35014bc539def37058b8bec575076b30f8c6f08b496af73c0fd",
+    "docs/store-policy-research.md": "17e98a13fa64e08075280553428479f2fd6ed177a30cf19bb4dc21c08e65b0e9",
+    "docs/stream-destinations.md": "15d9d671e4b39aaf4f3df30b676ab4cb1cb3820b3a3a07065a9b164e36e2c04b",
+    "docs/stream-health.md": "828a2cc38d69199c0cae7a2a38600118625e16e3cf050684b9a60e3e5eb0323e",
+    "docs/support.md": "82d9d6393d58169e57a93fa5903bd6ef273c3a52544e4c534f75d5d41641ed38",
+    "examples/api-client/main.go": "26df0394143b1c0b5a80e26b60805d1e4a78fe1899437f634308c1a7cb58354d",
+    "examples/creator/gaming.json": "192f49169b8e0b2b9fdf49e16605491d6dbe6af377bb58292b387035eae01061",
+    "go.mod": "5a49aa5b5ad9b23f2e361f77b0703e4717fd2d25ed04aa6a98445d6922e25670",
+    "go.sum": "c6eaf27e023d2006fa1be2187868d82ea48d92b62d3f33874abb9682db090a05",
+    "internal/commands/api.go": "9b077d9c339610f3b52f16b1af8d4f05125ce5b78c6ce5922a22903425979f9b",
+    "internal/commands/api_profiles_test.go": "a9eecd4db918decdeb321e4f9748349d4eae2be3d5f68a454f0fea962b0e2699",
+    "internal/commands/api_test.go": "6a3213f6e7fc2b7341d2c5375305c2aa142439b73d752c2a4d9553bc3108d08d",
+    "internal/commands/countdown.go": "a0158867ecc9e1e6203784271109cb20be3214054f853a818f0d71339a2827c5",
+    "internal/commands/creator.go": "72694abd4b101b890df90235fa8acc646cd7723ba1097538f7e932c5c7966fec",
+    "internal/commands/deck.go": "c90fdd77cc7d68465d4df569d208146536c50251b2ce388c6897d59e440dadc7",
+    "internal/commands/deck_advanced.go": "9f5113694119b27f9b8b8345176e1b68c5fab449ce11adbe050d4aa5e85dd146",
+    "internal/commands/deck_advanced_test.go": "80c0bc3048abc1dbc06a7d193b1188ddde617cc4cd18c01cf1c98a3d50d8fbfe",
+    "internal/commands/label.go": "2ef31b22144d269d9de07b89c311750b3449e9e465b8e0e867a24179ca83f812",
+    "internal/commands/profile.go": "665ace74f6df32d2ba8f1e27074153a962b15493580c1b100174215a967810a2",
+    "internal/commands/recording.go": "466ecc77a0eb9c382735d5e4827186c0713d75a11ce699dc6a7582dde8a8d381",
+    "internal/commands/reference.go": "f6b8d76710fa79cfd3b7f3fb057b7c805c3b67fe9e419818ae9bc21828004ddb",
+    "internal/commands/replaybuffer.go": "2817ba0b9d130bc15758094b8a4eb79a2e30037b68c54bc5522891073f563454",
+    "internal/commands/root.go": "7be7e50fda4071a6279d6a0cad4389073993d4e10e24755226b2422221516785",
+    "internal/commands/root_test.go": "734866eb4e9b8d6d4d300b4ab2279e64167a8e194f300fc6126e720e9c640fe7",
+    "internal/commands/scene.go": "cf35a51ed9bf60fc783691745c550333c6dca7d145b9d0588514058420ee84fd",
+    "internal/commands/scenecollection.go": "d198c8e4f202025e0cab1a1ede4e16533fe1f6c3436e3e4f4d842b840099343b",
+    "internal/commands/sceneitems.go": "d8f2d373541f1741e910ddf57c1f0a83944c99a0ced0c91fd81fa0cb25af1355",
+    "internal/commands/sources.go": "e1aa701c4af67ed7ead78942e9faab33348dd7c0e2f58e6e108d50b55a4ff2a2",
+    "internal/commands/stream.go": "73e327dfa824f8e5df47f28be2e30b2b8fdf0fbc0b8504719f760e4486ef610e",
+    "internal/commands/studiomode.go": "dfebd0acaf8172bc143a192a96f36a39276526faab19f6de9ca6dccf392b4c6f",
+    "internal/commands/usage.go": "bcb58a42a254ea4b8b9102f21388c83b51d08f6cbc30eb69be55056c1fad61fa",
+    "internal/commands/virtualcam.go": "3596f8b8d50dcf32356d1a578aa3e24e15926ad20100de73f28b6631c65a1fa4",
+    "internal/commands/workflow.go": "5c0225f3489b1eceda9a0688d33d6264f4bd9dc54bd1241783d1029d245b6211",
+    "internal/commands/workflow_test.go": "93fee01b4e0935fbfff6ce19349aaa966c2ac414d4327bd29363be3e21b7d955",
+    "internal/config/config.go": "714f9ddbaa560de9b6eb6e7e95a46e0852cbba6eb411c9d89b2a2b93e711b613",
+    "internal/config/file.go": "f5b70425532fe2e960c4558795bd9850e3dfb407d932081c9f94c5c99cc1e1d2",
+    "internal/config/file_test.go": "904089fa92822950f89484ecc700e26a3c07452c17792d30d08091d758982488",
+    "internal/config/workflow.go": "a7ede1ad0b5579a541d1623bafe0cdd7a7bfaea714575ce44fc5c1e260e57149",
+    "internal/config/workflow_test.go": "1bd1e3f090181bb4e0bb46fc443bbd9de691442cd1b4a0b00e423f07f26100e0",
+    "internal/deck/audio.go": "ddd1dcf06b0b501136be8f7c65d5c8e15b76b6bed6a59e704ea7e427181b4323",
+    "internal/deck/audio_control.go": "074e77f3833686682f2e181fee90791e25230c7383f8c78ec7711e959958d861",
+    "internal/deck/audio_linux.go": "9a6602659dfb75cc414c844f29711ab1de00843ddff2bf1d6f90433b5e901351",
+    "internal/deck/audio_linux_test.go": "27462aae4193b5dd8958f850067fb4058914c649cc222441282ced5e0b7b4c81",
+    "internal/deck/audio_other.go": "25829a7e84b8e5f77ed8b797c8037d8a6b7e13b55babceabf4b021fe5f7485c5",
+    "internal/deck/capture_settings.go": "08e8c4e01c8592a1bf325691b5d287f56bf60d0857bc2d27f6193243d312f98d",
+    "internal/deck/capture_settings_test.go": "56cdd818156f13e05c61fb1b4fe48b711625c9a0fa5886f1dc9bdc7074d73229",
+    "internal/deck/capture_video.go": "89b1f32994a6c0d455b37640fed4d289791f7a611c1c86531b3bf90d677f2d45",
+    "internal/deck/capture_video_test.go": "1a88da1184b834e488f5c320464f584ad66e43a22ed141d89cb5ce1847ea2c4b",
+    "internal/deck/capture_watch_linux.go": "db843f412daf31a982989ec83d058e9bb3bd145266a57b323d5af733fb052d03",
+    "internal/deck/capture_watch_linux_test.go": "39fb7ee7a4f0ba3898a2d2d26fdd407cc9b42a0ecfa7a97a7ce95c70b71d69b7",
+    "internal/deck/capture_watch_other.go": "c9ed01ad9d7d3dbec23f0f4ba38672943ce7a7d65cebfa74fdaf50ce741548ab",
+    "internal/deck/config.go": "55d8f1f4cfa4c236425413ac4d7d988c5d588079d8bbb22be9570c1225719c26",
+    "internal/deck/config_test.go": "646d3679f37d2c0e5124d3df07ca6bb2000dafc110e264b805395078e43f4032",
+    "internal/deck/connection.go": "56280e20021b83a33d04b23defbfe592fb5aee96130c1f6e9328d4584af2c1c5",
+    "internal/deck/connection_linux_test.go": "a55c55435a725a6874d3222785edc996c334ddc6bac7cb651711577b2a0e7d4c",
+    "internal/deck/connection_test.go": "baffd06d85c92692dcb90e8a071a408f7489244e7aaf87d2de689c81240f15dd",
+    "internal/deck/control.go": "ca2b1c7e1efe28ec5942b1a9f92665688699878b0246082c3b7cf802e13c8758",
+    "internal/deck/diagnostics.go": "0b6bdbe2572d5efe08bd64c6cd618819bc91ee025f83e3b314ce4cd5029dfbd8",
+    "internal/deck/diagnostics_test.go": "f26335efb17e9a77a3f13862de3d3f1705587c2c3fcc5ac995c1969860d78e8e",
+    "internal/deck/game_linux.go": "7f328058758ffd05e3ebe795ec062788878691720fb536a2f0ffb31105e5ff53",
+    "internal/deck/game_linux_test.go": "efe695ccad595a7da346f0c5c7e739c58accab72be06ef1baa33c73c3a40b6ce",
+    "internal/deck/game_other.go": "839828788ff28e398de6f8590958a881316b432a3801f6a60328d9935e782e7a",
+    "internal/deck/health.go": "d3bdd66c565355dcca300dbf65275d49f4ad3deb21c4309423463a98f853968b",
+    "internal/deck/health_test.go": "fbfcd901008bd6e47d20131cbc094aed95206a75fd5a7e99c7052c2c382e78cc",
+    "internal/deck/idle_media.go": "e50444e940dbee2d8e18557ec096d294e09501e7d968e4b557a9e1ca1de8c295",
+    "internal/deck/idle_media_linux_test.go": "6760c2d64e80253ac7358894f5d34c6b65deac67a8871a67d0270aea8c0d83e4",
+    "internal/deck/idle_media_test.go": "08587d067c5bb9e7f90d09562ca9872720e60958d74364c78c9d6fe6f6f7b1a9",
+    "internal/deck/lock_linux.go": "f893bb25bdcdf2d13c8e4359dd5f39912597f16d70f87543d72d9f69e5cce9cc",
+    "internal/deck/lock_other.go": "8377921821d38abff4456db164dd9319827c80d000853d2981fe5582d95941d0",
+    "internal/deck/media.go": "fbe11aeba2fa73f03196f64ab94a8840984d1241b8a54a26d0aa31314bbe3f0a",
+    "internal/deck/media_disk_linux.go": "2e7d8bd10058770216970f0782c0491f31c7915041082ee4c01ac6d086c32cba",
+    "internal/deck/media_disk_other.go": "c1bdb8d2d15f2dbe377021f740d9f16a692e3435e89c7f1297437746d08098e9",
+    "internal/deck/media_library.go": "2f4f7e8fab5d849988ce8fd2406ccffdfcf5d55182ef77988c9237f26bff22dd",
+    "internal/deck/media_open_linux.go": "91d0f05a48c5d0f7a6ff6408487e551a96ed7583341f9fc58f539420f446bb75",
+    "internal/deck/media_open_other.go": "08e8a5a93dd2f3d576d78f6cc1c65632e858d3d7885caa4497bbe2d13a692679",
+    "internal/deck/media_storage.go": "43d90fb5237cb12a0e49e3a4217b61814c673ce972e00309b181423e183856d2",
+    "internal/deck/media_test.go": "3281f9dd7dddd7d82abf52184fc0e771aeae58a61a463178e9d782b6167feb53",
+    "internal/deck/mixer.go": "937e870115b605a18cb832c8e6f14e1bd27fe2acc3d392e7f6e60e89aff1cdeb",
+    "internal/deck/mixer_devices_linux.go": "e7184c2cb62d17f29c6a3d81fcac61dcdeccf94a2e2b218463df95387b884d80",
+    "internal/deck/mixer_devices_linux_test.go": "2e7a620041fd8cff6213930aa06ce114e3761b84084cca9a9507c0348579d36a",
+    "internal/deck/mixer_devices_other.go": "95921775b92e6eb648a7e4ea14a83d1305bdc9a148aadf2a0cd90a36493b7c4d",
+    "internal/deck/mixer_status_linux_test.go": "1f1ed3c00aec9afef488e5d9c33bb151058a91dbe873e73e93f0bf9bb2ba566e",
+    "internal/deck/mixer_talk.go": "1080ef93e9ceb7d3828ef46413949381f41a432c68bb95ebb3da0745ef217b47",
+    "internal/deck/mixer_test.go": "2a5b6b5fdf3eff91e22b39e638683359bf4f5e8acdcfb8d2b13aa04cea8cf985",
+    "internal/deck/mixer_watch_linux.go": "ff2309a2be6908bcbcfa1c84c2df442a1473bd107c4ba7d5731aabd44ee69dc4",
+    "internal/deck/mixer_watch_other.go": "63f9ca7bf386970200bbae220d74fb7e92ebf4b487189df7bac325ab6e5e3fac",
+    "internal/deck/profiles.go": "91333a47f1a11c9e3e508a42fb4f089ecfed9ae510ddb8c4a0eea4b388b4f3d6",
+    "internal/deck/profiles_test.go": "c709bda8bdc96517653d3207ffd9794a5fbdeb3505a2a2573bfe7e552990104f",
+    "internal/deck/resilience.go": "8c23d318127ad2d39523f778de35816bd70441af5985d287f1e4109b56422618",
+    "internal/deck/resilience_linux.go": "b7ea2dd017a531bcafc5f50ae8966e5b0fc99850ee56c1822882d036ae46b3d6",
+    "internal/deck/resilience_linux_test.go": "4583a2a7c8fe1a9bb0d09ab7e818b9e2e0f294c564e317c288eef8ce09c73030",
+    "internal/deck/resilience_other.go": "36b3b3e53636d16ae8479ad769cf4d86009f8a0e13b59bd71d076802fbf8f202",
+    "internal/deck/runtime_linux.go": "bcb2af1181734ad056843936fe6f6906216b7db79660a6806d1f50745bfb07af",
+    "internal/deck/runtime_linux_test.go": "1aac838be547d1122cfbd031a1748c0913b74fa590939a429ff080c378aaa535",
+    "internal/deck/runtime_other.go": "62d635e03ec367ab76bb8ddb09e97e974a4735e6bed7c51cd9f55f79f57cd485",
+    "internal/deck/support.go": "107ca93adfa70d9f15ab3f7e27c1f059f734534dc77e8249676f2fb5309ae37d",
+    "internal/deck/support_test.go": "31554734c3f9b461ca6565a10e16bd0976dc02172a6e0b20cc1b65969025c30d",
+    "internal/deck/user_paths_test.go": "364702e3b8879e26b941e4cb2a76758345f40b1dc6309c11fd9587db2b658c75",
+    "internal/deckyinstall/frontend-install.js": "92a675593806c64898c6d652398ba9dce34a565806aa227938ef070f90613ba6",
+    "internal/deckyinstall/frontend-install.test.cjs": "3c7837b636ed5c3e8a29193e19c0ddc4deaa745c2b746191db9beaf1e472c14f",
+    "internal/deckyinstall/install.go": "7e2441fc4f982a5ec57a6467b69b3ee3d60a45105375da13d571e16bc1cb049a",
+    "internal/deckyinstall/install_test.go": "005e13cb4a5f27363999067cfacf0b099b269d8bc5a37d7cb8de4f78aa2d8ffc",
+    "internal/obs/service.go": "2195f107d8f20a481c7e123498211c6fb00f75eb455eb93b699d78eb049dd4d1",
+    "internal/obs/service_redaction_test.go": "097809f129cc53a01a7514f0733b859cf64444922a12606d2f585ab3646f7ee6",
+    "internal/version/version.go": "56c5d5b1828672539af978bcb5c43adb4764249ec7aebdef5f0974d1ca4bead1",
+    "main.go": "9547165898ca0edfb9a0419a8fcc89d583939615f5bd143a542fe6f09aed06e8",
+    "obsgod": "b9314595a6391c9635dd50473278d22156c7abf3bbfe75e1bc22696f008b5a8b",
+    "pkg/api/v1/client.go": "3d7ef721c326b0f9fbdecfcf2d183e3c6513ba0d23ea78a35eec89f5d3de2beb",
+    "pkg/api/v1/client_test.go": "8078ccf9e5525ea24e94bb50c15adc99b4196f62f54f9b90b4a3fa656df5a687",
+    "pkg/api/v1/errors.go": "e2f4c491d957ba46ee8aefd231f792b75687ed7513cc17acf0fcf71276978e5f",
+    "pkg/api/v1/models.go": "6a5ca8b92e3f2ee5d6f7074306366743463e6ffc62fbf27c57d6c8925602dcad",
+    "pkg/api/v1/profiles_test.go": "d4e420e4e30573024bea100171c74a7524e8d94544cb0834b58f417f4e56514f",
+    "pkg/automation/api_primitives.go": "3748b4e75d8736dd3eea19380bae4cc25f48fb6f5efbf1d2021fd76c4fed59ea",
+    "pkg/automation/audio.go": "1d4465153b05ea2f1dde8db877cb7391c791d81f7787903d55c7fe7f9e23595f",
+    "pkg/automation/audio_recovery.go": "618fcf3b2266ee7f25d62a92f24664bec6586d79d0ce15af33a279312e73d0e3",
+    "pkg/automation/audio_recovery_test.go": "4667746415685a029de01a78fef6914d51ea9e5c3849ea1c02c32ecd1ae29cb2",
+    "pkg/automation/audio_test.go": "ad30a9e839912496d51686f345a1e6d9e4c69d95acf2ffb16b876979c3e9b1b8",
+    "pkg/automation/client.go": "23eff4e6656eeb6fc765e5994d7ee331e80736236fb3ee3057fb3877bfbf3d2d",
+    "pkg/automation/client_test.go": "c9767dc8ebc51ee4a9878f6b5db0b11c46ba1ac8dbb02d76bf1fd4d2f9e04d40",
+    "pkg/automation/health.go": "10973ca009b4cf2a3bd009a784ad08c29179489cace8cab41a08fcdce46742f1",
+    "pkg/automation/health_test.go": "b4e71770deecba86ea2cbda61d672fa7fc14df31a55479d304f8c544e7290f1d",
+    "pkg/automation/idle_media.go": "bb86362985e468899b8468a21a157566e49cf358283bacc89c26e2c10d83b574",
+    "pkg/automation/media.go": "e8ad11aa4d0df8c4050919b37ad6c59df0695cf9a37bd27a87d0cb7715fad15f",
+    "pkg/automation/media_test.go": "438ddd207792eb851140d3f00882b953df388b6448b578a404a0700edd4a1abb",
+    "pkg/automation/mixer.go": "9c8738e43af79d19c53f53d52e0d5977d3a9f2101a485463614245f28ffe2da0",
+    "pkg/automation/mixer_test.go": "bb32d5af59adf002db46195f8b74a841d9c37c51f4815d43a5c60c831b6a0b94",
+    "pkg/automation/real_obs_test.go": "231dd678fe8c2f418e24c6756f2a0d8b2a00dfe1a5302ef0281ee97b5374478a",
+    "pkg/automation/scene_items.go": "673b4453fff3de9be9c127fd1e9e4bce15ff96b4f238bc550ff3f08dddbae8fd",
+    "pkg/automation/setup.go": "1a12acd1f3da05fec2c0b38f8dcc38a082c67265f67f8989b29047efab820e17",
+    "pkg/automation/stream_progress_test.go": "a7235f440e284b08b973949987b566ed4b35dc950997a747ed19333a8e5aa263",
+    "pkg/automation/stream_status_test.go": "4e3b35d52a25a036f9cb067de09dc9973e8905f2c13af42c3af0d299883d6998",
+    "pkg/automation/workflow.go": "d5c7e2f1e30092b297e4351f32048b2e0bad9c279af4c9f7258a66aa17c27368",
+    "pkg/automation/workflow_test.go": "291ff10f508065b3ed62ca4c13cb51a0a919866abc28710790037accd04c788f",
+    "pkg/creator/v1/config.go": "dcf1608f87c6b855e94feb96571ea120f341c28f6afaf46435dd298f6e4eb82f",
+    "pkg/creator/v1/runtime.go": "9f9df5a217c3f05cd6fb1cb71ceca0cf1b66f862c9aec5bc555310c77e637c7d",
+    "pkg/creator/v1/runtime_test.go": "5ecdd3ad3af058df0e8d84f2126b4398386225fba641ad5eb1bffba708b73df1",
+    "product.json": "c2adf20387a5c3e8610b9927666d60ed67fa461f7111d4beae43e4e713d27d5c",
+    "scripts/build-deck-capture.py": "b932a66c8094bd51657d74a391fdfb81f740da367e818feda8d100a6d6e72a70",
+    "scripts/build-site.py": "7aea1000578ba784d626a4c398a1e1c7f2fb9b35ca5e3b7bb29c6b9eec70acff",
+    "scripts/frontend-command.py": "61735155f1164c9db09e8f2043cb4c537d8286da7232f9c67bb75386e5f15cc8",
+    "scripts/generate-brand-identity-proof.py": "58a4ba62f68afda1356b8e483e8991a32ea122fddf41e1ac26eadb957b30c7e1",
+    "scripts/generate-brand-kit.py": "714d10e8b9cb926a34a93677162270e6ea1241c4f97f7257868e72cdf4ae29d6",
+    "scripts/generate-product.py": "ca0ff0efae8277b244bc7841d7a9c17fa66524c4e05ea925bd41e0a4ca4e4c92",
+    "scripts/generate-support.mjs": "7478b50229f0048024cdc17f4b8516dbf6bbbf2d7e6c43898e0d5c9940858c2f",
+    "scripts/generic-release.py": "ba7ddfaf298f92f8f28a47c1fbc03383b05d3a443e5943d3a1f0001f01f8f24b",
+    "scripts/local-ci-report.py": "8b15aeb327fddd1685864e664797bddef0568bcf4f3804dead935bc59ab3d02c",
+    "scripts/local-ci.py": "de344f1ecf8153b639f251895331a247efc6be4f8bd0d18a8192d9f2ff0ca659",
+    "scripts/package-deck.py": "3a12572cd8c53251d92501bde92cdb73543992bed0cb7da50189717e703b33fb",
+    "scripts/package-updater.py": "73cbd00c3beb0dd2b72067492f35917bab7e5607cafcc525d4498b492af2c8db",
+    "scripts/release-audit.py": "37ee854f7d8583f5e5c1b3ac90dd4443be5e4ae2896d5360f078040bed86247e",
+    "scripts/run-user-tests.py": "e3c2b62ebfdd91a0452d65a11434a909938aac4310f630e2bfa486ac50dbd49d",
+    "scripts/tests/test_frontend_command.py": "8741f266c943368f0ff84bf8293ffde2a7966fffc78199a1dd60b75d2171a61c",
+    "scripts/tests/test_generic_release.py": "a5487648554a2696952771d9ae8682f62eecc6e53787b22bf8aa03b77351ce35",
+    "scripts/tests/test_local_ci.py": "6522d4926f5c8672b9f3d7b87ef734c54f30fdf387fe0618cc43d2195ba5e319",
+    "scripts/tests/test_local_ci_report.py": "ddc803c4f20fdc51a9ea21bd302e3dccfcf14a52463809b95e913fb63648acac",
+    "scripts/tests/test_release_audit.py": "c19fc46b6acc223a651325019bfb39d603b1308a3e10fd4d6b064a91fa2476a8",
+    "scripts/tests/test_user_tests.py": "851b7d34813c98eccb7c00a0926478fe0cd9115d12b431d398990e326a531e12",
+    "site/assets/site.css": "3c6a11e208905897d989925e60148efcd26088cc7b8a4d8e11652307e8e35a35",
+    "site/assets/site.js": "db7fb2f04cbf57f464a9a91edf6ec32f5e1732d277e4a2561458892f28d932e2",
+    "site/content/configuration.html": "d32f00e83aa66de2e3ca419a3a9d9a6dd5a041f63eeefcef54eed5219f8788d4",
+    "site/content/controls.html": "2a731669ec84362187bf944970f20dff6760b426a4557f83d91b8c7d495b1207",
+    "site/content/index.html": "fe3fca1e076e9fa6c6fc47b3b29eea8e6df4028b04995e289098701554be4e99",
+    "site/content/install.html": "9a931dee400fab94a37c26229e7b1252d82285745d747c77993b9b4d30281f90",
+    "site/content/privacy.html": "8ce0eb1c09c181f55a3795144b718aca89d6edb833769de3ae1a138942f28369",
+    "site/content/providers.html": "c56ef6363740bd512cd6aeaad294b9c5540ba158ea804a3d02aed80c0c31b839",
+    "site/content/troubleshooting.html": "f8ea536c231103a71575b59e6615b71002cf32c1971df5d9501b122fe0408c37",
+    "site/content/uninstall.html": "46c0bca4fef84d8730b500a428cdcf4642d46bb4bf7df3bb1f7dccab88715ace",
+    "site/content/updates.html": "e6b5dd63d431eef29488e72090d2b08d491b4c6612885e8864b6f98e3ce2e980",
+    "site/pages.json": "b62bfcff163a8a1f33cef81ef27f213ad38b8b7bfbe88b75b615e739bdd5122c",
+    "site/template.html": "f7fb9b02b4e2a73b48e872bdb56bfaab950c06d6880d486ce1c10b4f138e83b6",
+    "site/tests/browser.py": "bf7d48543a7d637c805ab351aa0a07ef59263a92c1896fb4f53d8eb6cfe7c1e0",
+    "site/tests/test_build.py": "8e6fe64f5aefa5f842a11a5bd901a935e7d50c1f6df935c7957871dd71405a9a",
+    "steamdeck/Install OBSGod.desktop": "945aa356f1651cf93ff8b5acadd64aec2abdf18614b2fc86e024d3d52a0f561d",
+    "steamdeck/Uninstall OBSGod.desktop": "c357d1ff7583d3cdd09bf5b223e0d5f1d29ef8ec6ea2041e65a336de0c27423c",
+    "steamdeck/Update OBSGod.desktop": "07c1cab1e05c83ac3cce85a03b00ad8d8ed1955ce60bfc9d7fee985a18ef30b7",
+    "steamdeck/Update OBSGod.sh": "b7f587b83634a2c95ca03c2b95a80d76d9e261a77c24b5d88f5d329888749089",
+    "steamdeck/bridge.py": "16d610bfb0985cd61227e99db026560aa38b7b8d3a2cdc2984239c5b17487ea2",
+    "steamdeck/capture/LICENSE": "258b73263e16be217d5b8120e700feceb0957e4573ca1f06d1a0885eb35ce01e",
+    "steamdeck/capture/Makefile": "c2acf2286e3c5c907b591e5fcd17e4adebb245995d1f5bae98af8ef4dcdf8c7d",
+    "steamdeck/capture/README.md": "9db32e042bf354460974f29e4726b4a26109e3968c171b8662cf3ec329d3319c",
+    "steamdeck/capture/THIRD_PARTY_NOTICES.md": "e279892a8749fa94c2a3f1fa402cd5580815e874f42b343b65c265086c42cd1d",
+    "steamdeck/capture/build.Dockerfile": "2a5907d46697011510482aed251209f83a79a2b0aa3a0cea1ced9cd3b8b74905",
+    "steamdeck/capture/gstobsgodcapture.c": "1cefd90dc7a306ac993366fa0e18573202e6ba4a13590999065c3c80018a6c5d",
+    "steamdeck/decky.py": "96c3aa094fa8a44939a870cbba45f62296ce9314a1dfdf6e68e03347814e4816",
+    "steamdeck/decky/LICENSE.LGPL-2.1": "8c953bd3d8c44c562ec95f6ac32ad5c82db5fa374462e6bf529c4dec8436853d",
+    "steamdeck/decky/LICENSE.qrcode-generator.txt": "3a850fa5f08101db6f40676c2786e10bd2cd5fff7b12ffdf1e0c434d4e49d90c",
+    "steamdeck/decky/main.py": "937f7ed373a66bf64690a549c20b59d23f18c63a8017dfa1dc5de9f11f0b8464",
+    "steamdeck/decky/package-lock.json": "8a6925b946739ef6ff08af6c605534dcc2a2fa3dc4ed692d606fca40ea041492",
+    "steamdeck/decky/package.json": "c04919d3150d3ef9a9482049f972086c3c4a778d69470f520ae6b72628fee72f",
+    "steamdeck/decky/plugin.json": "443e999f922777a3b490a981a4bcb0fb04b8ea3247b7ec1002fa81013df070c4",
+    "steamdeck/decky/rollup.config.js": "23aa193f954e7050d6039556dd1dcbe9c8454913ae6430b7d694203d215db4b7",
+    "steamdeck/decky/src/Advanced.tsx": "7c497fb6572e398a62728cbda30dcf461374023e5bb25ae3b475f55d2b31a7cc",
+    "steamdeck/decky/src/Mixer.tsx": "42f915f3beedca4e677b875a1a094e9a250f0082f47a930732fe958305a2e83a",
+    "steamdeck/decky/src/Support.tsx": "bbaa74a7334f8663400c4c12af08fe36ef0693ffe05d8bafc4a8e18261bbcdbc",
+    "steamdeck/decky/src/advanced-state.mjs": "3aca29d5963dfb6727ed981612b8c8ac7ea1328a1f59fe87a030bdd3e4985075",
+    "steamdeck/decky/src/health.mjs": "25327f4d8fa6256434667ebe37e6057a90364b6b52e743874ac75308c9415f3a",
+    "steamdeck/decky/src/index.tsx": "ffeb27ccf7134a4565c2aa0ac811cd7a5bab1acaecf62aac3ab39f37d646c296",
+    "steamdeck/decky/src/mixer-state.mjs": "32e67926cdbf517f0f39d7b184b8ea39dbe5d99e661218e2c7d922f2e75188d5",
+    "steamdeck/decky/src/mixer-talk.mjs": "2f42bad3ef735a7491eb5cee2b2c6edf87f7a6f614536d0a0aa83a3ca5e07bd1",
+    "steamdeck/decky/src/product.ts": "0c4694ba6f63f574e0e5f341e10a1797414604746d1746d198fe00caf72d7d6f",
+    "steamdeck/decky/src/state.mjs": "4c097827f199559ed084217641f2365b45ebfe81524bf3b0d208a67544b8e0cf",
+    "steamdeck/decky/src/support-data.mjs": "72759bcee3aebe4f9ad82f6b1273d91feb623771bd3a219567120d3296015c3d",
+    "steamdeck/decky/src/support-qr.mjs": "0a3f69ab0fe08640a421735727319799bdc6a687809ee311afd681e3502af456",
+    "steamdeck/decky/src/support.mjs": "7aa2028f2dfc10a1e1537c3fe910cccc55de1840b6a93daa8ee4fb68905ba6ce",
+    "steamdeck/decky/tests/advanced-state.test.mjs": "57eff008d7801adf6afc2b99c5b014b70d9aa9d9e720fc74d35c1ee7a7215611",
+    "steamdeck/decky/tests/build-fixture.mjs": "77ef761327f9a3e264d0ca7aad06b7ff64dba056963ef40745d5bacf1306318c",
+    "steamdeck/decky/tests/build-support-fixture.mjs": "65d695f8f31b57b656fa11313fdc2d68bef1b3cc51f9724235cbe9538dac8b75",
+    "steamdeck/decky/tests/fixture.html": "6619a3c6f785f89bdebdceaa6fb01ead476b5428366825caf3079cdbbcdaeca3",
+    "steamdeck/decky/tests/health.test.mjs": "36ea8b8a0b5d7cb955c6cbd54ba5d6e8107a544386d1b4afb27b21b009dd4e64",
+    "steamdeck/decky/tests/mixer-state.test.mjs": "1db650e53b9ed71ef394cd7f9d932afa54b6040caa90ea43c497b2ef085300d9",
+    "steamdeck/decky/tests/mixer-talk.test.mjs": "d72c2f0ef13013d097ec52dd9472a7bf146349a1e3d81d5168cd42db1a6c2ef3",
+    "steamdeck/decky/tests/state.test.mjs": "26582642fdc6d6a501fdcb6517231e56ae150c71b71c6167da0cbedec9b362ab",
+    "steamdeck/decky/tests/support.test.mjs": "11a2e1554def807d035b1703e4416fa0ac4920e3b2ce76bd6da0b5d7b5e2ade5",
+    "steamdeck/decky/tsconfig.json": "ede9a43cefefa91cb130ef9c4ba239b3375be0b4070583fce940293ead1eb43b",
+    "steamdeck/install.py": "d7ba4e50f795af5e4f8860b3e3e368ae0bbf43a58fc1298815007c261505135e",
+    "steamdeck/paths.py": "436f589b4130ac00bf60dcf5773b30caa56c8cea437fe5715c1af1f92a405f44",
+    "steamdeck/product.py": "ed28c12ff8587b1d0d51a4e6472caef97430cb001c0467c09f74ca0e5cf68401",
+    "steamdeck/releases.py": "cc73f175f5dab78aa2c13320f4bc91d6a059f7ea2a082ba5f58ce3329e86fc39",
+    "steamdeck/setup.css": "d678ff8f2266ceacf0306a11111452f424b741dc04801dac0932dd6d5dc84b52",
+    "steamdeck/setup.html": "43a3485849325c0b6f13029386debe48c19cc4f5d6099d3f2ef3eac97db47f66",
+    "steamdeck/setup.js": "03bed3eeadf475f74d828a5f7df30f8a9d106390914db0878f2beb55bbe0f609",
+    "steamdeck/setup.py": "22db974ce260e04a93f1755d79c5b23b6bd50429e54521bcaf0bef7397d38958",
+    "steamdeck/tests/browser-m3-panel.py": "603e5fec6fc2bd8f01c04d59798d78b68d907d67f34d997b409ceff84792a126",
+    "steamdeck/tests/browser-m3-setup.py": "a1765150d03ed2ad0d58d50518b8ab13af494ee3c5debbb4b3d3531a7e153add",
+    "steamdeck/tests/browser-mixer-panel.py": "005e07bdbe98ff6840ac8d4b963feaabeced0918d7025462aaf41760bc176ead",
+    "steamdeck/tests/browser-mixer-setup.py": "4921fded2e564f23a9509aa220fa6be8307f4bbc20a0cbd244d83e4ef7b103f7",
+    "steamdeck/tests/browser-panel.py": "280d4b32f4bcc47e7126f5c32eab7144766ac94e5185e6211420ea2b08c5faf8",
+    "steamdeck/tests/browser-setup.py": "fe4374941457334fd155404a2846b9551fabd4348d0e40ed9be6be896801a9b7",
+    "steamdeck/tests/browser-support.py": "eb8af6d817c9a92a087bad7a5ea63691d97c1bea908f8a1adce53b688f54dbcd",
+    "steamdeck/tests/capture-fixture.c": "47baee49ce57f09ef6c32bcc97703385d198b0a71775d8da3d8eee98e429be7c",
+    "steamdeck/tests/decky-transport-smoke.py": "d2387b420ae0882673bbfd30c9e5cbf33108d621204f071c13e4bead62fcdaf6",
+    "steamdeck/tests/native-audio.py": "656c0e8ff2d415310562bc7f16ee163bf6152f6af222813dd678c3043c84e1db",
+    "steamdeck/tests/native-capture-smoke.sh": "2bfa201dc43b02c72fceda8a3bfe3f53982460f55cff4e07a95e7fe47a09a015",
+    "steamdeck/tests/native-control-password.py": "aac7bdbbd2ed47da5dc27b26856c83006de91471c0b94cbe381478274b1c13de",
+    "steamdeck/tests/native-game-obs-smoke.sh": "64f95d37d84502fb4174caa4e95f5bb61a5a9671645a39f175b0161341e7a814",
+    "steamdeck/tests/native-game-obs.py": "36c1035eb0b73a189694c523069e943a4c65b62a93fdb4e2ea950a78f5102784",
+    "steamdeck/tests/native-idle-media.py": "cce725051b42277d08cbfcfa280e4532e4922a2b81fa04ee45cd5d7224c7af8a",
+    "steamdeck/tests/native-media.py": "343ab0e00a6961f8c4008c4fb9dcf2671004386a6a94d5eaa8657fb3989c3b25",
+    "steamdeck/tests/native-mixer.py": "98a3fc1ffdca6fdf41e412873c05d123bf5bddc2455d9fabdb0977e4f298f309",
+    "steamdeck/tests/native-obs-smoke.sh": "1ecad0c9ddf408ad84dbc461e99caaf390d9368c9d56b1a2b0d6edf087c86293",
+    "steamdeck/tests/native-profiles.py": "144371b3a7821e3815d233f0501ce566dd9e4d757b9cf69139f25a70c1e83b7e",
+    "steamdeck/tests/native-resilience.py": "3434157c44f08a403eb78d9a3aa865ca98dbc6b7aba3b8d023ef0115c0c2b81b",
+    "steamdeck/tests/obs-smoke.Dockerfile": "60211bc5eb18efa4367107ab56c01d11ba7919f89c5d99d374ecab78451748d3",
+    "steamdeck/tests/test_backend.py": "6306e9704b59d62d9c22b65d85153c406646f35374d54cabc2a0523a2e461460",
+    "steamdeck/tests/test_bootstrap.py": "1250855acade87931b71c263ec49c5077b207e249c370190fd417402064e6c86",
+    "steamdeck/tests/test_install.py": "80434e2a3ee48a7ae4dc547aba7e6e413d044c88392fda6065b95b13d197ecdc",
+    "steamdeck/tests/test_m3_adapters.py": "54764cbfa429245da32f72c7a1d22d474857554610f6ae637ff26d63843b8c25",
+    "steamdeck/tests/test_mixer_adapter.py": "bf5b1a634ced7ef7570c28549a606f53e26aba2975793a8e0e1682b7e19c6ede",
+    "steamdeck/tests/test_native_audio.py": "d8f96cc4ff799694cb6d9d245ba0e74c5a2a751eec7672b25cb7fa5d101fb3cd",
+    "steamdeck/tests/test_releases.py": "3f60d7067c1d5b0a81a6dc52e45bc5bdf9378e040ff1009ef5a4db6e572b90d6",
+    "steamdeck/tests/test_setup.py": "78d175fc4f4c203e52152d881630ce4aa9214c42db074c44f9500b47a3a33673",
+    "steamdeck/tests/test_uninstall.py": "7b211f4b6c826782629c65421becc8d5156e55f6df46599248aeeb17b0f1dc03",
+    "steamdeck/tests/test_update.py": "eb93f2d6e67438474527a84b8877552dfe9999632b810f4bf99d79241b2d2255",
+    "steamdeck/tests/updater-smoke.py": "54f8b83432c575a3b582f9437b56b6427e9ee90ceccffaf33457c25bd706da3a",
+    "steamdeck/uninstall.py": "80a41dcf694259fd20a06ac20f8b7dc2af83229db2cde9ef051378cbee3e0072",
+    "steamdeck/update.py": "a9f85227ce97e787f0db5a911871686615526b180aaa3dff69641e5008549917",
+    "support.json": "73d06d7d6663c47637b9f080dd6aa1360a38a566a06d1becb3bbb7194fec8eb1"
+  },
+  "files": {
+    ".actrc": {
+      "bytes": 370,
+      "mode": "100644",
+      "sha256": "66ca1584712ebc7f0ea9c02c9a5cec6f5bbd3f4dba2d150bdce982a0da2bb612"
+    },
+    ".github/FUNDING.yml": {
+      "bytes": 411,
+      "mode": "100644",
+      "sha256": "04f14099064745d28711e94bf4b0fd785d62fc185117c69307951039b82b1037"
+    },
+    ".github/ISSUE_TEMPLATE/bug_report.yml": {
+      "bytes": 1218,
+      "mode": "100644",
+      "sha256": "efc0f17b641d1aef5f61c85ee90e2175b72ad4bf42885be6e5a1014af9e3cde6"
+    },
+    ".github/act/pull-request.json": {
+      "bytes": 434,
+      "mode": "100644",
+      "sha256": "a5e2a33cab5d8c97354c7ad374c375845d2cd9c8b8e7ae6af10c95d726b12722"
+    },
+    ".github/dependabot.yml": {
+      "bytes": 411,
+      "mode": "100644",
+      "sha256": "d549bcee40a1fe5783e92a0d24eb34c63c7f028b9c3d176e180376fb7971e945"
+    },
+    ".github/pull_request_template.md": {
+      "bytes": 881,
+      "mode": "100644",
+      "sha256": "ab412efacb8134fe7ac1169439fb8187228fd9caf30497514430364403ca8ddf"
+    },
+    ".github/workflows/build.yml": {
+      "bytes": 649,
+      "mode": "100644",
+      "sha256": "875668310a58144f090bf6208ad181c22fba7329ba3c1cb868039acbd2d18486"
+    },
+    ".github/workflows/coverage.yml": {
+      "bytes": 970,
+      "mode": "100644",
+      "sha256": "6e6fb23524471a491614554ca4a4715ccf91f67a2999e416181025d3667859f0"
+    },
+    ".github/workflows/docs-preview.yml": {
+      "bytes": 1610,
+      "mode": "100644",
+      "sha256": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7"
+    },
+    ".github/workflows/goreleaser.yml": {
+      "bytes": 2285,
+      "mode": "100644",
+      "sha256": "fbda531956ed860f776b1f8c9f731eb282bfb5e22d9a694d2f1b0f6bc3682460"
+    },
+    ".github/workflows/lint.yml": {
+      "bytes": 1337,
+      "mode": "100644",
+      "sha256": "34870ef8efa32f75b31c2257f2563d785b1271952d1326a80230ce3b9e540def"
+    },
+    ".github/workflows/steam-deck.yml": {
+      "bytes": 8076,
+      "mode": "100644",
+      "sha256": "633a4c30e2f0c9e67e55590445d2e1b53a02d25215696d11d83e92d8d2179167"
+    },
+    ".gitignore": {
+      "bytes": 107,
+      "mode": "100644",
+      "sha256": "6dfd904a6f42b534914196e568b88712306ef7b9b9758f0591ce8bc8d96c5b39"
+    },
+    ".golangci.yml": {
+      "bytes": 424,
+      "mode": "100644",
+      "sha256": "f1d11a89e5f73b9323ed883434218f2a6495fea6040304df7e304d51795ed574"
+    },
+    ".goreleaser.yml": {
+      "bytes": 1999,
+      "mode": "100644",
+      "sha256": "4098c3d0903fa9d1fdc9c85405b35979a0dad192681b51abf0a1a85536d14c31"
+    },
+    ".identity/README.md": {
+      "bytes": 1666,
+      "mode": "100644",
+      "sha256": "e66ea55c4f49094f3fe4b97b29a15b45d936316ff6ea0a155d18f064001c7d08"
+    },
+    ".identity/brief.md": {
+      "bytes": 1631,
+      "mode": "100644",
+      "sha256": "411d834b7694b39e7c8b577963eacc650907d8abf4c8f3272f3e65f29295ba47"
+    },
+    ".identity/candidates/decky-icon.svg": {
+      "bytes": 475,
+      "mode": "100644",
+      "sha256": "fc9ae707d7b19d7c6a32fb92f9264eea71f2ff57e9e9205da7dbae057d784fbb"
+    },
+    ".identity/candidates/inventory.json": {
+      "bytes": 1682,
+      "mode": "100644",
+      "sha256": "4cdc7e121ab10c8f14b9cdd6f06e63abaa845696c255d9e66fd7234653b8f83e"
+    },
+    ".identity/candidates/mark.svg": {
+      "bytes": 515,
+      "mode": "100644",
+      "sha256": "3c3514b3ca0a961a5333857434c0cd5a8dae2469c2b947ea1fa98e44d935ac9b"
+    },
+    ".identity/candidates/palette.json": {
+      "bytes": 637,
+      "mode": "100644",
+      "sha256": "669b26545d24d1d640a453c7d6bc6f865766e5979a0f2f95df58e95cbada7813"
+    },
+    ".identity/defaults/organization.tokens.json": {
+      "bytes": 429,
+      "mode": "100644",
+      "sha256": "e8f53747482aa8914fc3307fbf63295e45fb1ca59448c8e0435e1af8fce5eda5"
+    },
+    ".identity/governance/approvals.json": {
+      "bytes": 205,
+      "mode": "100644",
+      "sha256": "e96c088f11ded1d42a60872e3de0384299615b778c4927f20f1b441bd9db7bc9"
+    },
+    ".identity/governance/provenance.json": {
+      "bytes": 204,
+      "mode": "100644",
+      "sha256": "ce9c3a4e1c40d89bcc605b9bc287276a3211d444ee05c3a3471a2f15fab8bc4f"
+    },
+    ".identity/identity.json": {
+      "bytes": 1409,
+      "mode": "100644",
+      "sha256": "0a192e777313bb36eff735efe137f89f1258dc493ca27c2e9ee2b9f0bcc21a63"
+    },
+    ".identity/overrides/product.tokens.json": {
+      "bytes": 434,
+      "mode": "100644",
+      "sha256": "c545dc44ed77337b41c7e4d1276907d1958583c3515dc1206cbcbdf479ec22d8"
+    },
+    ".identity/references/README.md": {
+      "bytes": 444,
+      "mode": "100644",
+      "sha256": "d807b2e41796322c3264916b3f29e1209c12d91697740421d971a0dded40f865"
+    },
+    ".identity/sources/README.md": {
+      "bytes": 402,
+      "mode": "100644",
+      "sha256": "4e804ab6294a7c3229f8010962eacbd51355c7550b7f5ecf069969a818d30645"
+    },
+    ".identity/targets/profiles.json": {
+      "bytes": 468,
+      "mode": "100644",
+      "sha256": "1f46cce8621175f1a9fe871e4c65ab214f6f161c43d649f1110c24b79db2b463"
+    },
+    ".identity/toolchain.lock.json": {
+      "bytes": 3211,
+      "mode": "100644",
+      "sha256": "15e37a8b4b1e10bab3414166e4a48fb6040543622d7a8a45270179d0d26416c6"
+    },
+    "AGENTS.md": {
+      "bytes": 3873,
+      "mode": "100644",
+      "sha256": "cc9223a54cc4e1ea53982e06382dacb5bcd9ba6c07a2c42ca96ba74a32a088d9"
+    },
+    "ARCHITECTURE.md": {
+      "bytes": 10653,
+      "mode": "100644",
+      "sha256": "c88f1555086219d7cae5fd07f708a7bb25d0d1a7e93751a48ae88a17243cc38e"
+    },
+    "CHANGELOG.md": {
+      "bytes": 1847,
+      "mode": "100644",
+      "sha256": "62a04eb2901efec99f85e766f702dabcb2679c405f7f3ff84c0e4a060b0d79c5"
+    },
+    "CODE_OF_CONDUCT.md": {
+      "bytes": 1134,
+      "mode": "100644",
+      "sha256": "0b52b0f1418a0409d340de11ca2f6b5e780d0623ea7e04084431e5fac12a1c8a"
+    },
+    "CONTINUITY.md": {
+      "bytes": 46978,
+      "mode": "100644",
+      "sha256": "462fc227c91c3d1b4a997db2fe8df8aecd842b94317f7092dab0cda98e90818f"
+    },
+    "CONTRIBUTING.md": {
+      "bytes": 2177,
+      "mode": "100644",
+      "sha256": "2318ce3a7c27fe6c0718a26184ea8c775a39981c71895ef5a85d6399e409adc0"
+    },
+    "DECISIONS.md": {
+      "bytes": 1597,
+      "mode": "100644",
+      "sha256": "2216b170dc915c3c3f4589da005bc1026d96dd1e568a4a6b9f55683e0e82183d"
+    },
+    "LICENSE": {
+      "bytes": 1079,
+      "mode": "100644",
+      "sha256": "1247f4e3b0b202b9db385c4ab28d8c8f2a69b16f25b236f1c63f930d3ec6c6af"
+    },
+    "ONTOLOGY.md": {
+      "bytes": 4681,
+      "mode": "100644",
+      "sha256": "4e9f157d741099c4a319f096e1b5c77dbb052319ecdf5cf69fe2f6a9fc373ecf"
+    },
+    "README.md": {
+      "bytes": 4437,
+      "mode": "100644",
+      "sha256": "ea60090edb2d9c9619ff474a6a158b668b95ef8a28556ae2e72b3deb4ba7ba7f"
+    },
+    "ROADMAP.md": {
+      "bytes": 13842,
+      "mode": "100644",
+      "sha256": "b91681c600b9196253cb572603d5e3f45d9bd3eac3b82267ad821a09ad64b0a9"
+    },
+    "SECURITY.md": {
+      "bytes": 1813,
+      "mode": "100644",
+      "sha256": "bd6af9b3a62b52266cc4ca604388de1a26870ada7e7c343cb4e7c3c33873b367"
+    },
+    "SUPPORT.md": {
+      "bytes": 2408,
+      "mode": "100644",
+      "sha256": "0c8cbc8690fc622f122943c007b6a29aec7d79215e4691d959991b88ed587d7c"
+    },
+    "audits/audit-2026-06-08.md": {
+      "bytes": 13441,
+      "mode": "100644",
+      "sha256": "952afd0adf91125da027bc65d52d7348d00c2cd5b1b00f838d6e427a13665957"
+    },
+    "audits/audit-2026-11-13.md": {
+      "bytes": 14856,
+      "mode": "100644",
+      "sha256": "06faf0b42fbd6a442737d94165bb0ecd9c13ddf1c21f14bc6c7eb9f354cdb658"
+    },
+    "audits/local-act-2026-11-13.md": {
+      "bytes": 6976,
+      "mode": "100644",
+      "sha256": "720b9fa4e856871c22ccfc99f763e672d9e7a0934e6064311fced6ea9f8d8336"
+    },
+    "branding/README.md": {
+      "bytes": 2417,
+      "mode": "100644",
+      "sha256": "9b8dd623d73a158ae1d7e0a4997fa77c575031d05f3908e51a06b6a2991094c1"
+    },
+    "branding/evidence/identity-source.json": {
+      "bytes": 1780,
+      "mode": "100644",
+      "sha256": "5b711eb45ef4c1b8dcb33475f0de3a511bdf4dd84f8d4d5cd8d5f49e8aab6adb"
+    },
+    "branding/licenses/DejaVu.txt": {
+      "bytes": 2734,
+      "mode": "100644",
+      "sha256": "e180b3d65bf650dffffd71dd21b6180767b469a18dd87e1d8552be69bb9ecdf0"
+    },
+    "branding/licenses/Identity-MIT.txt": {
+      "bytes": 1068,
+      "mode": "100644",
+      "sha256": "1deb55b00af813e1c8f086e851d0e1ed2084ea942a54996f069df05cd0561372"
+    },
+    "branding/tests/test_brand_kit.py": {
+      "bytes": 4037,
+      "mode": "100644",
+      "sha256": "1dc9c3d1b0b54e67dd0983445e2f1071c28ba9a8e3e3364b15f607000acd1559"
+    },
+    "cmd/obsgod-decky-install/main.go": {
+      "bytes": 1485,
+      "mode": "100644",
+      "sha256": "beaa61d9dc53e9b3599e83c082e3e10b1521013ab38750477d81018edc90e7bf"
+    },
+    "docs/advanced-profiles.md": {
+      "bytes": 8205,
+      "mode": "100644",
+      "sha256": "d7cd5a500c60000e520b629347220be993a4dcdc140743a73020afdbc3f7347a"
+    },
+    "docs/api-v1.md": {
+      "bytes": 9606,
+      "mode": "100644",
+      "sha256": "cd3b6a460a2f759edb05c15b68c9ba0aa9e2849ccf5bd478b0fdadb32e5a948f"
+    },
+    "docs/architecture.md": {
+      "bytes": 675,
+      "mode": "100644",
+      "sha256": "c0c5639aa22fd0245003e47169b9d0e63dc6aefc5bfec02d8eb8ad63455fc8f7"
+    },
+    "docs/audio-capture-upgrade.md": {
+      "bytes": 9706,
+      "mode": "100644",
+      "sha256": "b4742e69e78d7c82f7c0de78de7356a17f5e517f3df9a3d8af81168b5351424a"
+    },
+    "docs/branch-archive.md": {
+      "bytes": 5662,
+      "mode": "100644",
+      "sha256": "adad2557ce84fef7effb2799ae533b54895981a269c77cd2567a1cd40aa5f969"
+    },
+    "docs/branding-review.md": {
+      "bytes": 6568,
+      "mode": "100644",
+      "sha256": "4614e589b92aa6ecb5ab6d9e611dbb48b357729aec50151ee207837c0a546df7"
+    },
+    "docs/branding-site-preview.md": {
+      "bytes": 4228,
+      "mode": "100644",
+      "sha256": "3c0b52a266be5577dc46515157edcad34479dfa9be40504a4a458451384727f6"
+    },
+    "docs/candidate-7-install.md": {
+      "bytes": 2326,
+      "mode": "100644",
+      "sha256": "f6c674838d40cee42fce832853792271b7585f15db6eb10408300ced80bec1c8"
+    },
+    "docs/candidate-8-install.md": {
+      "bytes": 2893,
+      "mode": "100644",
+      "sha256": "fc9328c43f1136c880a771e16c9e3414cfb4f39ac652155b61099a5e67540c3e"
+    },
+    "docs/candidate-9-install.md": {
+      "bytes": 3869,
+      "mode": "100644",
+      "sha256": "4f04099eabb95d88f1ace04e612c60c308a333285b6a60600efe886005ec308f"
+    },
+    "docs/cli-audit.md": {
+      "bytes": 3889,
+      "mode": "100644",
+      "sha256": "fe5c01a35704b0a90eb512af8abaad310e382ddf2d7519f83cc6ce238a819000"
+    },
+    "docs/cli-reference.md": {
+      "bytes": 19610,
+      "mode": "100644",
+      "sha256": "d9f8df9f3242c3facca1426f5bc9acdbdded28258f9ac305304fb059a9aea4ca"
+    },
+    "docs/cli-usage.md": {
+      "bytes": 3473,
+      "mode": "100644",
+      "sha256": "5dc66622be97baed0cae3a9ba2311090dd89d9fa9ef6c72a5122bb480fac7b69"
+    },
+    "docs/completion-campaign.md": {
+      "bytes": 3414,
+      "mode": "100644",
+      "sha256": "c40340a8bf967359ed012ca0f27292f7bb4db4a09e2ea771f018464a8b59d500"
+    },
+    "docs/completion-review.md": {
+      "bytes": 14339,
+      "mode": "100644",
+      "sha256": "96d92e8c4daf1d74a2c94afd343d432428276515e055342df99a6628d1adc2ee"
+    },
+    "docs/configuration.md": {
+      "bytes": 13175,
+      "mode": "100644",
+      "sha256": "c9924edbe2f80aca3004e3e9b00d2f1fa8d3b0baa74e26305b702d95e04db826"
+    },
+    "docs/creator-workflows.md": {
+      "bytes": 8103,
+      "mode": "100644",
+      "sha256": "b6202cec6acfb482f4bac30c8fc5c0de7d57ecdb515b7f4a6b68fcd6bb0a8b73"
+    },
+    "docs/decisions/0001-managed-local-control.md": {
+      "bytes": 1538,
+      "mode": "100644",
+      "sha256": "006c6c212488cebc824ef4f88235f36da2ca22a2d0e5d8eaf011141f30d8e278"
+    },
+    "docs/decisions/0002-product-identity.md": {
+      "bytes": 1478,
+      "mode": "100644",
+      "sha256": "592769bfa69e3175685ae19ca05ce1faa8fc778f0d273cb86224c12b318a3e73"
+    },
+    "docs/decisions/0003-core-and-creator-boundary.md": {
+      "bytes": 2261,
+      "mode": "100644",
+      "sha256": "87eace5570b1fcec9d0cabda0f03c924ca17563e11687bc3b472fc215ca25c01"
+    },
+    "docs/evidence/completion-criteria.json": {
+      "bytes": 735060,
+      "mode": "100644",
+      "sha256": "0795e6594c7bbde195bb8ebfcbc4050f0d5ecbe9c879767edbe0050540386df6"
+    },
+    "docs/evidence/completion-merge.json": {
+      "bytes": 4929,
+      "mode": "100644",
+      "sha256": "e991603e7a9409499510322a5d387e565a44e241fd10ee95576326d94f8c8d8e"
+    },
+    "docs/evidence/completion-merge/after-feature-repository.json": {
+      "bytes": 3321,
+      "mode": "100644",
+      "sha256": "1178c277b816979297a4188c07200da13e1b3d3839b41bb76bf98eeb7d1f013f"
+    },
+    "docs/evidence/completion-merge/branch-cleanup.json": {
+      "bytes": 2598,
+      "mode": "100644",
+      "sha256": "5be5723b65499b69f7a5ddbbaf6004bcfca6e952f1e353e5db5ca12cb7f4627c"
+    },
+    "docs/evidence/completion-merge/ci-matrix.json": {
+      "bytes": 5030,
+      "mode": "100644",
+      "sha256": "83b4ab38b5816090850765c89376057c994b35e63b5975b034b66ec97aa25955"
+    },
+    "docs/evidence/completion-merge/frontend-python-matrix.json": {
+      "bytes": 20004,
+      "mode": "100644",
+      "sha256": "4482bce74d16102f845a324305008a2c664f11e8fc48a3f064a83b710f53e595"
+    },
+    "docs/evidence/completion-merge/go-matrix.json": {
+      "bytes": 11337,
+      "mode": "100644",
+      "sha256": "7699b06843b94899cd778622e1794bb1e297f102f2aae1b04da314d651d9b769"
+    },
+    "docs/evidence/completion-merge/issue-transfer.json": {
+      "bytes": 20071,
+      "mode": "100644",
+      "sha256": "dae63faa9bc0d8487e2b904a42fd2fcec9fae4b8371eae93b2b7d9f813ab5562"
+    },
+    "docs/evidence/completion-merge/public-download-matrix.json": {
+      "bytes": 19857,
+      "mode": "100644",
+      "sha256": "de2a32bd9a5438a4beb2b915eeaccdd5124a62256048b629bc7079d9d4bb1ffa"
+    },
+    "docs/evidence/completion-merge/source.json": {
+      "bytes": 39829,
+      "mode": "100644",
+      "sha256": "cc227303723a10a914fe01737de1cb5ac222cc0114db330cfecd82cf4bad5929"
+    },
+    "docs/evidence/completion-public-download.json": {
+      "bytes": 19857,
+      "mode": "100644",
+      "sha256": "9ed3717294d5e49b3dacaeb3350a3bb7541fe446692413079b5ef95de73fb05d"
+    },
+    "docs/evidence/completion-qualification.json": {
+      "bytes": 30009,
+      "mode": "100644",
+      "sha256": "81e343fdfb63670083cbe1b397ae4c46cd46ea7962134e9488497e81f1b2e11b"
+    },
+    "docs/evidence/completion/act-matrix.json": {
+      "bytes": 131004,
+      "mode": "100644",
+      "sha256": "7cd43d0df152f6a571426d964d47478ac8ed16fd9e3e5013fe033403a29c461c"
+    },
+    "docs/evidence/completion/brand-matrix.json": {
+      "bytes": 9356,
+      "mode": "100644",
+      "sha256": "65e3ee69060eeecc2e1eb606d3bbb298ed0ebade5dd6b7575b08e4db029085fe"
+    },
+    "docs/evidence/completion/browser-matrix.json": {
+      "bytes": 14586,
+      "mode": "100644",
+      "sha256": "bbc4c1d2c9d09f150d4b94c0d88d7800a191926795229401f95c574a0c0bb2dd"
+    },
+    "docs/evidence/completion/browser-upgrades-matrix.json": {
+      "bytes": 4851,
+      "mode": "100644",
+      "sha256": "1c0dce80bff26b032ac3d6fa854fe9a6eb47265d83060a8453568c89849b2d6b"
+    },
+    "docs/evidence/completion/ci-matrix.json": {
+      "bytes": 9866,
+      "mode": "100644",
+      "sha256": "0492a550eedc6eeac3f25073bf1f4ccbb5afc3c329324e3fa5c05b39f077aa6a"
+    },
+    "docs/evidence/completion/cli-fish-container.json": {
+      "bytes": 8292,
+      "mode": "100644",
+      "sha256": "819e61d3004907704b0a83a1f23dc86c3f6eba3a1939c829155505746acf257f"
+    },
+    "docs/evidence/completion/cli-matrix.json": {
+      "bytes": 16867,
+      "mode": "100644",
+      "sha256": "ec7e50755dae737eddcf27e59a0919d65a9a22b61c9fc8709a9a4f483796b041"
+    },
+    "docs/evidence/completion/decky-updater-matrix.json": {
+      "bytes": 5915,
+      "mode": "100644",
+      "sha256": "c151eaad0eadfcb0280631b24d4b9405726010da91cd3d6ec352350257d949a0"
+    },
+    "docs/evidence/completion/frontend-matrix.json": {
+      "bytes": 2114,
+      "mode": "100644",
+      "sha256": "9bd6f1f3032feb65a5d1c539c186d031b9381a10017cc0feb5e930e264822e68"
+    },
+    "docs/evidence/completion/go-cross-result.json": {
+      "bytes": 3662,
+      "mode": "100644",
+      "sha256": "6c8c06e3aa8dd12e72934a2699bbf73e7ff0acf479fa49b2a9fe22e76c48741f"
+    },
+    "docs/evidence/completion/go-matrix.json": {
+      "bytes": 8570,
+      "mode": "100644",
+      "sha256": "a0c2517d6c5b48de4b7a9ae3d853f4ccca41c203728e7e0b5bf1c0c3363421e5"
+    },
+    "docs/evidence/completion/go-static-result.json": {
+      "bytes": 496,
+      "mode": "100644",
+      "sha256": "0329b5573f21aa07ccd172a6ae84e7037c1231a3191eb6f6601939ddf3b71cec"
+    },
+    "docs/evidence/completion/go-tests-result.json": {
+      "bytes": 59160,
+      "mode": "100644",
+      "sha256": "66ac9033990683b66e51b12bf58107dbfc68e7183aeb9e3990e1c73033081f62"
+    },
+    "docs/evidence/completion/native-matrix.json": {
+      "bytes": 33322,
+      "mode": "100644",
+      "sha256": "4500329897fbc678fd72c66a24a2be5dd32777ba81275a88006b57aa2b741c3d"
+    },
+    "docs/evidence/completion/package-matrix.json": {
+      "bytes": 37206,
+      "mode": "100644",
+      "sha256": "ea23cb0d6c34a83c6dc0969a5e326d8bfe7810bebb519bbea9ed81d9090b4be4"
+    },
+    "docs/evidence/completion/python-matrix.json": {
+      "bytes": 663,
+      "mode": "100644",
+      "sha256": "a7e21c030fbe20d2905c90a3f0c8f286fa0fbd3038717dee89417387a6bc8a80"
+    },
+    "docs/evidence/completion/repository-matrix.json": {
+      "bytes": 17946,
+      "mode": "100644",
+      "sha256": "67e2935add1aba6d05c1c9e587e873bff3878b27f9457474d5329ec3631a34b2"
+    },
+    "docs/evidence/completion/scripts-matrix.json": {
+      "bytes": 457,
+      "mode": "100644",
+      "sha256": "e4285deb533376527d9896e16aae502d5bc97aeb9ba7a0da1f11001a272296ea"
+    },
+    "docs/evidence/completion/site-matrix.json": {
+      "bytes": 7338,
+      "mode": "100644",
+      "sha256": "c87ccafec007ef5503ad571609290fa301f45514de9927fbad960d6443715ef4"
+    },
+    "docs/evidence/deck6-public-download.json": {
+      "bytes": 4205,
+      "mode": "100644",
+      "sha256": "01091efc1ff4fad14f9908e41762ee0288175f200feabe1cc0acde47dabcdab2"
+    },
+    "docs/evidence/local-act-20261113/evidence.zip": {
+      "bytes": 327338,
+      "mode": "100644",
+      "sha256": "a1e5ffb954344a009d610f53ea3eea35290b83c13078f03da8967b884f8aa0f2"
+    },
+    "docs/evidence/local-act-20261113/report.json": {
+      "bytes": 180594,
+      "mode": "100644",
+      "sha256": "12f5d7ea243fd30aa802ee6467b5f700420a80be08bf985ba5cb05d524351255"
+    },
+    "docs/evidence/local-act-20261113/summary.json": {
+      "bytes": 17112,
+      "mode": "100644",
+      "sha256": "c32ad87089a1cf92fba2830c7497549ef57cd43b3485747203ef51d76afc8495"
+    },
+    "docs/evidence/m2-criteria.json": {
+      "bytes": 485119,
+      "mode": "100644",
+      "sha256": "5bd426df5b6171a31a6e4f2f2bd1dbbd908029c5771233e158912a2dc6968503"
+    },
+    "docs/evidence/m2-merge.json": {
+      "bytes": 4653,
+      "mode": "100644",
+      "sha256": "c33cc17f7e6b786bd5e26209c01c4ac85c0bc5ec0f154d4efe6e08a612799cff"
+    },
+    "docs/evidence/m2-public-download.json": {
+      "bytes": 18843,
+      "mode": "100644",
+      "sha256": "573ca9593b8c9689e7403a4537ab67adaacac520de1c568afae025153a0b5a0e"
+    },
+    "docs/evidence/m2-qualification.json": {
+      "bytes": 111651,
+      "mode": "100644",
+      "sha256": "41cc9d13d483a7996deac1a031b14e7ffe7d7af08302208cf3aaf53d7191a838"
+    },
+    "docs/evidence/m2-security-review.json": {
+      "bytes": 8270,
+      "mode": "100644",
+      "sha256": "888c9d65fdd3edc40f3bfdafd699ce551cdfaa18b730aaa72d5260a8eec06379"
+    },
+    "docs/evidence/m3-criteria.json": {
+      "bytes": 53927,
+      "mode": "100644",
+      "sha256": "da7f642607a1f2754bb30545228fc288e4873460684b5708f6b484ad084ccc48"
+    },
+    "docs/evidence/m3-public-download.json": {
+      "bytes": 11390,
+      "mode": "100644",
+      "sha256": "4dcb9b9f8d91b483a8a165811d7ca5ede57d9e01570b998fcc1f9adf9d198876"
+    },
+    "docs/evidence/m3-qualification.json": {
+      "bytes": 10178,
+      "mode": "100644",
+      "sha256": "b06223abe8f7b94cd6c5b5e85ca3f79d407e08973e13140515f6b2c0d1ee8d15"
+    },
+    "docs/finalboss-plan.md": {
+      "bytes": 9100,
+      "mode": "100644",
+      "sha256": "c334b0644487a2898f908991977e17c256f0d056256f68f019751f991e7a98e8"
+    },
+    "docs/flatpak-config-isolation.md": {
+      "bytes": 6518,
+      "mode": "100644",
+      "sha256": "b14e652fb7693e6d8934b2ac7eae61b2722b4ced8891ece2142720ac63413f9f"
+    },
+    "docs/generic-cli-distribution.md": {
+      "bytes": 5716,
+      "mode": "100644",
+      "sha256": "d650c895b8f57674988e8413013e4f5e127ec2488f1dc7b478c00295fc85b932"
+    },
+    "docs/identity-migration.md": {
+      "bytes": 3327,
+      "mode": "100644",
+      "sha256": "f513a21ad259968a2a2570f8a170e629b2fe5f8ccff54b9a931699cb069cb425"
+    },
+    "docs/idle-media.md": {
+      "bytes": 3724,
+      "mode": "100644",
+      "sha256": "9862f88919f7d79360bf988d9e5014df7a3ade8741f6fbef09367d0bdc7ba938"
+    },
+    "docs/installer-flatpak-fix.md": {
+      "bytes": 4618,
+      "mode": "100644",
+      "sha256": "d9639ba561f0e914dfec0e2c7e55291e36ed59ffe492c519521b5e2bb52b1e3d"
+    },
+    "docs/legacy-api-migration.md": {
+      "bytes": 13735,
+      "mode": "100644",
+      "sha256": "68a4cd4e0e78ca0a773f76ae58723eb265c82476ed137a51aef726e4469822a5"
+    },
+    "docs/local-ci.md": {
+      "bytes": 12691,
+      "mode": "100644",
+      "sha256": "ef4d15c348d6c4b74efc7bd8b07699c360eba5c457971b3e273bf5855a96f6e9"
+    },
+    "docs/m3-device-acceptance.md": {
+      "bytes": 3347,
+      "mode": "100644",
+      "sha256": "f46265ec9d9ec459d2bbf1201c662adcdd3771c1c4fa12d01cc8200e3906cb2e"
+    },
+    "docs/m3-review.md": {
+      "bytes": 6485,
+      "mode": "100644",
+      "sha256": "a2461344687ae8a4044bb1ae9232a2a2788cbb58e60231b9579d157175b5c6b3"
+    },
+    "docs/microphone.md": {
+      "bytes": 3475,
+      "mode": "100644",
+      "sha256": "e73bb5e0abf8d24317353257828cdd4f8f05ff408feb1aa460f26fbb226b094e"
+    },
+    "docs/migration-review.md": {
+      "bytes": 8017,
+      "mode": "100644",
+      "sha256": "9064bb59d78bb7e2c03e5b6677c1299ca46f95a507fe9a8dfd5f1ebd139b81e8"
+    },
+    "docs/milestone-2.md": {
+      "bytes": 5115,
+      "mode": "100644",
+      "sha256": "172d7518c831a02d30413428972fdb969c0c8855faf0c523c7099c439c1fd361"
+    },
+    "docs/milestone-3.md": {
+      "bytes": 4337,
+      "mode": "100644",
+      "sha256": "9e6066083a96cbf359205fbf1ae43619bf7015c6301e3a062f10770232866512"
+    },
+    "docs/recording-replay.md": {
+      "bytes": 5693,
+      "mode": "100644",
+      "sha256": "9685ad0c5bc353b16b4559387d672a075ff85ff6565c1da4696a330f418b7b31"
+    },
+    "docs/release-engineering.md": {
+      "bytes": 7695,
+      "mode": "100644",
+      "sha256": "3e83c3fd349a2f730cd12b67cac55e91e3f101b3a1e46212bd91ba9b3da96c3d"
+    },
+    "docs/release-readiness.md": {
+      "bytes": 10880,
+      "mode": "100644",
+      "sha256": "c338955ac91b79daec2c4f76ab875ab318788b1567067fddaa607c2487357c0c"
+    },
+    "docs/releases/0.1.0-deck.7.md": {
+      "bytes": 4052,
+      "mode": "100644",
+      "sha256": "f52f924b22bd96b0864b45dcb0f6c4b1d2234f140ef13a9c594424240be61e90"
+    },
+    "docs/research-51-criteria.json": {
+      "bytes": 6936,
+      "mode": "100644",
+      "sha256": "a51d12cc246451b4a02091fda9c6464bf74e9e0519ce7829f7539b70a6de888e"
+    },
+    "docs/research-51-sources.json": {
+      "bytes": 25519,
+      "mode": "100644",
+      "sha256": "e344799ed7d105bbe53d7c56fdaf75ea94423d15f3f784649af7b7461e7a28a8"
+    },
+    "docs/research-51.md": {
+      "bytes": 12986,
+      "mode": "100644",
+      "sha256": "f5c287eef2d28ff7539f5404af4af398d1830759585bcebc6ff9815124b6a4a9"
+    },
+    "docs/roadmap1-acceptance.md": {
+      "bytes": 14271,
+      "mode": "100644",
+      "sha256": "23c71f03d8d0e7f6e7db1fd6f5e4b28175dbebda47096a20dff86d10bda93edc"
+    },
+    "docs/roadmap1-development.md": {
+      "bytes": 5246,
+      "mode": "100644",
+      "sha256": "7986fd78ae1cf651d4cea8689335e8333b3dc8895c8ee6af3631668de505e1cc"
+    },
+    "docs/roadmap1-runtime.md": {
+      "bytes": 5833,
+      "mode": "100644",
+      "sha256": "f812dfe5c493e8482e636af34f92f924cd09beede2ac8d9649ac0135359d4879"
+    },
+    "docs/runtime-resilience.md": {
+      "bytes": 1853,
+      "mode": "100644",
+      "sha256": "7ec760b70b5d1ee013db618e2f2035f670114bab781287d8b31cca3c8afb7691"
+    },
+    "docs/site-preview.md": {
+      "bytes": 4483,
+      "mode": "100644",
+      "sha256": "4845218c737364cb9a03c7903a479a32cf369734020ae2fade2038255fd6f39c"
+    },
+    "docs/steam-deck-building.md": {
+      "bytes": 11081,
+      "mode": "100644",
+      "sha256": "421798e2f85812677998e4ebcce1e989b1a91e446005bec5f75be0a7f4f33a78"
+    },
+    "docs/steam-deck-development.md": {
+      "bytes": 4694,
+      "mode": "100644",
+      "sha256": "a3abadd9880d5ce89eb6951b7061c8725066aa3e948c8620a5043090418f9ed8"
+    },
+    "docs/steam-deck-qualification.md": {
+      "bytes": 3570,
+      "mode": "100644",
+      "sha256": "008d8ed2ab5484480855e3e782224ff2499358efc4c52e4935dc7c4b046e8513"
+    },
+    "docs/steam-deck.md": {
+      "bytes": 17221,
+      "mode": "100644",
+      "sha256": "68c949ee97afe35014bc539def37058b8bec575076b30f8c6f08b496af73c0fd"
+    },
+    "docs/store-policy-research.md": {
+      "bytes": 14192,
+      "mode": "100644",
+      "sha256": "17e98a13fa64e08075280553428479f2fd6ed177a30cf19bb4dc21c08e65b0e9"
+    },
+    "docs/stream-destinations.md": {
+      "bytes": 5908,
+      "mode": "100644",
+      "sha256": "15d9d671e4b39aaf4f3df30b676ab4cb1cb3820b3a3a07065a9b164e36e2c04b"
+    },
+    "docs/stream-health.md": {
+      "bytes": 3395,
+      "mode": "100644",
+      "sha256": "828a2cc38d69199c0cae7a2a38600118625e16e3cf050684b9a60e3e5eb0323e"
+    },
+    "docs/support.md": {
+      "bytes": 4596,
+      "mode": "100644",
+      "sha256": "82d9d6393d58169e57a93fa5903bd6ef273c3a52544e4c534f75d5d41641ed38"
+    },
+    "examples/api-client/main.go": {
+      "bytes": 1578,
+      "mode": "100644",
+      "sha256": "26df0394143b1c0b5a80e26b60805d1e4a78fe1899437f634308c1a7cb58354d"
+    },
+    "examples/creator/gaming.json": {
+      "bytes": 498,
+      "mode": "100644",
+      "sha256": "192f49169b8e0b2b9fdf49e16605491d6dbe6af377bb58292b387035eae01061"
+    },
+    "go.mod": {
+      "bytes": 586,
+      "mode": "100644",
+      "sha256": "5a49aa5b5ad9b23f2e361f77b0703e4717fd2d25ed04aa6a98445d6922e25670"
+    },
+    "go.sum": {
+      "bytes": 3038,
+      "mode": "100644",
+      "sha256": "c6eaf27e023d2006fa1be2187868d82ea48d92b62d3f33874abb9682db090a05"
+    },
+    "internal/commands/api.go": {
+      "bytes": 10160,
+      "mode": "100644",
+      "sha256": "9b077d9c339610f3b52f16b1af8d4f05125ce5b78c6ce5922a22903425979f9b"
+    },
+    "internal/commands/api_profiles_test.go": {
+      "bytes": 3007,
+      "mode": "100644",
+      "sha256": "a9eecd4db918decdeb321e4f9748349d4eae2be3d5f68a454f0fea962b0e2699"
+    },
+    "internal/commands/api_test.go": {
+      "bytes": 2703,
+      "mode": "100644",
+      "sha256": "6a3213f6e7fc2b7341d2c5375305c2aa142439b73d752c2a4d9553bc3108d08d"
+    },
+    "internal/commands/countdown.go": {
+      "bytes": 1216,
+      "mode": "100644",
+      "sha256": "a0158867ecc9e1e6203784271109cb20be3214054f853a818f0d71339a2827c5"
+    },
+    "internal/commands/creator.go": {
+      "bytes": 5090,
+      "mode": "100644",
+      "sha256": "72694abd4b101b890df90235fa8acc646cd7723ba1097538f7e932c5c7966fec"
+    },
+    "internal/commands/deck.go": {
+      "bytes": 6246,
+      "mode": "100644",
+      "sha256": "c90fdd77cc7d68465d4df569d208146536c50251b2ce388c6897d59e440dadc7"
+    },
+    "internal/commands/deck_advanced.go": {
+      "bytes": 9052,
+      "mode": "100644",
+      "sha256": "9f5113694119b27f9b8b8345176e1b68c5fab449ce11adbe050d4aa5e85dd146"
+    },
+    "internal/commands/deck_advanced_test.go": {
+      "bytes": 6963,
+      "mode": "100644",
+      "sha256": "80c0bc3048abc1dbc06a7d193b1188ddde617cc4cd18c01cf1c98a3d50d8fbfe"
+    },
+    "internal/commands/label.go": {
+      "bytes": 1124,
+      "mode": "100644",
+      "sha256": "2ef31b22144d269d9de07b89c311750b3449e9e465b8e0e867a24179ca83f812"
+    },
+    "internal/commands/profile.go": {
+      "bytes": 1286,
+      "mode": "100644",
+      "sha256": "665ace74f6df32d2ba8f1e27074153a962b15493580c1b100174215a967810a2"
+    },
+    "internal/commands/recording.go": {
+      "bytes": 3209,
+      "mode": "100644",
+      "sha256": "466ecc77a0eb9c382735d5e4827186c0713d75a11ce699dc6a7582dde8a8d381"
+    },
+    "internal/commands/reference.go": {
+      "bytes": 2737,
+      "mode": "100644",
+      "sha256": "f6b8d76710fa79cfd3b7f3fb057b7c805c3b67fe9e419818ae9bc21828004ddb"
+    },
+    "internal/commands/replaybuffer.go": {
+      "bytes": 1323,
+      "mode": "100644",
+      "sha256": "2817ba0b9d130bc15758094b8a4eb79a2e30037b68c54bc5522891073f563454"
+    },
+    "internal/commands/root.go": {
+      "bytes": 10014,
+      "mode": "100644",
+      "sha256": "7be7e50fda4071a6279d6a0cad4389073993d4e10e24755226b2422221516785"
+    },
+    "internal/commands/root_test.go": {
+      "bytes": 10031,
+      "mode": "100644",
+      "sha256": "734866eb4e9b8d6d4d300b4ab2279e64167a8e194f300fc6126e720e9c640fe7"
+    },
+    "internal/commands/scene.go": {
+      "bytes": 2137,
+      "mode": "100644",
+      "sha256": "cf35a51ed9bf60fc783691745c550333c6dca7d145b9d0588514058420ee84fd"
+    },
+    "internal/commands/scenecollection.go": {
+      "bytes": 1446,
+      "mode": "100644",
+      "sha256": "d198c8e4f202025e0cab1a1ede4e16533fe1f6c3436e3e4f4d842b840099343b"
+    },
+    "internal/commands/sceneitems.go": {
+      "bytes": 2549,
+      "mode": "100644",
+      "sha256": "d8f2d373541f1741e910ddf57c1f0a83944c99a0ced0c91fd81fa0cb25af1355"
+    },
+    "internal/commands/sources.go": {
+      "bytes": 1324,
+      "mode": "100644",
+      "sha256": "e1aa701c4af67ed7ead78942e9faab33348dd7c0e2f58e6e108d50b55a4ff2a2"
+    },
+    "internal/commands/stream.go": {
+      "bytes": 2063,
+      "mode": "100644",
+      "sha256": "73e327dfa824f8e5df47f28be2e30b2b8fdf0fbc0b8504719f760e4486ef610e"
+    },
+    "internal/commands/studiomode.go": {
+      "bytes": 1653,
+      "mode": "100644",
+      "sha256": "dfebd0acaf8172bc143a192a96f36a39276526faab19f6de9ca6dccf392b4c6f"
+    },
+    "internal/commands/usage.go": {
+      "bytes": 2257,
+      "mode": "100644",
+      "sha256": "bcb58a42a254ea4b8b9102f21388c83b51d08f6cbc30eb69be55056c1fad61fa"
+    },
+    "internal/commands/virtualcam.go": {
+      "bytes": 1309,
+      "mode": "100644",
+      "sha256": "3596f8b8d50dcf32356d1a578aa3e24e15926ad20100de73f28b6631c65a1fa4"
+    },
+    "internal/commands/workflow.go": {
+      "bytes": 3800,
+      "mode": "100644",
+      "sha256": "5c0225f3489b1eceda9a0688d33d6264f4bd9dc54bd1241783d1029d245b6211"
+    },
+    "internal/commands/workflow_test.go": {
+      "bytes": 7610,
+      "mode": "100644",
+      "sha256": "93fee01b4e0935fbfff6ce19349aaa966c2ac414d4327bd29363be3e21b7d955"
+    },
+    "internal/config/config.go": {
+      "bytes": 610,
+      "mode": "100644",
+      "sha256": "714f9ddbaa560de9b6eb6e7e95a46e0852cbba6eb411c9d89b2a2b93e711b613"
+    },
+    "internal/config/file.go": {
+      "bytes": 12248,
+      "mode": "100644",
+      "sha256": "f5b70425532fe2e960c4558795bd9850e3dfb407d932081c9f94c5c99cc1e1d2"
+    },
+    "internal/config/file_test.go": {
+      "bytes": 9782,
+      "mode": "100644",
+      "sha256": "904089fa92822950f89484ecc700e26a3c07452c17792d30d08091d758982488"
+    },
+    "internal/config/workflow.go": {
+      "bytes": 2743,
+      "mode": "100644",
+      "sha256": "a7ede1ad0b5579a541d1623bafe0cdd7a7bfaea714575ce44fc5c1e260e57149"
+    },
+    "internal/config/workflow_test.go": {
+      "bytes": 2382,
+      "mode": "100644",
+      "sha256": "1bd1e3f090181bb4e0bb46fc443bbd9de691442cd1b4a0b00e423f07f26100e0"
+    },
+    "internal/deck/audio.go": {
+      "bytes": 4042,
+      "mode": "100644",
+      "sha256": "ddd1dcf06b0b501136be8f7c65d5c8e15b76b6bed6a59e704ea7e427181b4323"
+    },
+    "internal/deck/audio_control.go": {
+      "bytes": 5282,
+      "mode": "100644",
+      "sha256": "074e77f3833686682f2e181fee90791e25230c7383f8c78ec7711e959958d861"
+    },
+    "internal/deck/audio_linux.go": {
+      "bytes": 8738,
+      "mode": "100644",
+      "sha256": "9a6602659dfb75cc414c844f29711ab1de00843ddff2bf1d6f90433b5e901351"
+    },
+    "internal/deck/audio_linux_test.go": {
+      "bytes": 9532,
+      "mode": "100644",
+      "sha256": "27462aae4193b5dd8958f850067fb4058914c649cc222441282ced5e0b7b4c81"
+    },
+    "internal/deck/audio_other.go": {
+      "bytes": 182,
+      "mode": "100644",
+      "sha256": "25829a7e84b8e5f77ed8b797c8037d8a6b7e13b55babceabf4b021fe5f7485c5"
+    },
+    "internal/deck/capture_settings.go": {
+      "bytes": 2438,
+      "mode": "100644",
+      "sha256": "08e8c4e01c8592a1bf325691b5d287f56bf60d0857bc2d27f6193243d312f98d"
+    },
+    "internal/deck/capture_settings_test.go": {
+      "bytes": 1197,
+      "mode": "100644",
+      "sha256": "56cdd818156f13e05c61fb1b4fe48b711625c9a0fa5886f1dc9bdc7074d73229"
+    },
+    "internal/deck/capture_video.go": {
+      "bytes": 11284,
+      "mode": "100644",
+      "sha256": "89b1f32994a6c0d455b37640fed4d289791f7a611c1c86531b3bf90d677f2d45"
+    },
+    "internal/deck/capture_video_test.go": {
+      "bytes": 10274,
+      "mode": "100644",
+      "sha256": "1a88da1184b834e488f5c320464f584ad66e43a22ed141d89cb5ce1847ea2c4b"
+    },
+    "internal/deck/capture_watch_linux.go": {
+      "bytes": 7474,
+      "mode": "100644",
+      "sha256": "db843f412daf31a982989ec83d058e9bb3bd145266a57b323d5af733fb052d03"
+    },
+    "internal/deck/capture_watch_linux_test.go": {
+      "bytes": 5601,
+      "mode": "100644",
+      "sha256": "39fb7ee7a4f0ba3898a2d2d26fdd407cc9b42a0ecfa7a97a7ce95c70b71d69b7"
+    },
+    "internal/deck/capture_watch_other.go": {
+      "bytes": 281,
+      "mode": "100644",
+      "sha256": "c9ed01ad9d7d3dbec23f0f4ba38672943ce7a7d65cebfa74fdaf50ce741548ab"
+    },
+    "internal/deck/config.go": {
+      "bytes": 12853,
+      "mode": "100644",
+      "sha256": "55d8f1f4cfa4c236425413ac4d7d988c5d588079d8bbb22be9570c1225719c26"
+    },
+    "internal/deck/config_test.go": {
+      "bytes": 7734,
+      "mode": "100644",
+      "sha256": "646d3679f37d2c0e5124d3df07ca6bb2000dafc110e264b805395078e43f4032"
+    },
+    "internal/deck/connection.go": {
+      "bytes": 10035,
+      "mode": "100644",
+      "sha256": "56280e20021b83a33d04b23defbfe592fb5aee96130c1f6e9328d4584af2c1c5"
+    },
+    "internal/deck/connection_linux_test.go": {
+      "bytes": 5479,
+      "mode": "100644",
+      "sha256": "a55c55435a725a6874d3222785edc996c334ddc6bac7cb651711577b2a0e7d4c"
+    },
+    "internal/deck/connection_test.go": {
+      "bytes": 8072,
+      "mode": "100644",
+      "sha256": "baffd06d85c92692dcb90e8a071a408f7489244e7aaf87d2de689c81240f15dd"
+    },
+    "internal/deck/control.go": {
+      "bytes": 27238,
+      "mode": "100644",
+      "sha256": "ca2b1c7e1efe28ec5942b1a9f92665688699878b0246082c3b7cf802e13c8758"
+    },
+    "internal/deck/diagnostics.go": {
+      "bytes": 12349,
+      "mode": "100644",
+      "sha256": "0b6bdbe2572d5efe08bd64c6cd618819bc91ee025f83e3b314ce4cd5029dfbd8"
+    },
+    "internal/deck/diagnostics_test.go": {
+      "bytes": 3521,
+      "mode": "100644",
+      "sha256": "f26335efb17e9a77a3f13862de3d3f1705587c2c3fcc5ac995c1969860d78e8e"
+    },
+    "internal/deck/game_linux.go": {
+      "bytes": 2754,
+      "mode": "100644",
+      "sha256": "7f328058758ffd05e3ebe795ec062788878691720fb536a2f0ffb31105e5ff53"
+    },
+    "internal/deck/game_linux_test.go": {
+      "bytes": 4630,
+      "mode": "100644",
+      "sha256": "efe695ccad595a7da346f0c5c7e739c58accab72be06ef1baa33c73c3a40b6ce"
+    },
+    "internal/deck/game_other.go": {
+      "bytes": 225,
+      "mode": "100644",
+      "sha256": "839828788ff28e398de6f8590958a881316b432a3801f6a60328d9935e782e7a"
+    },
+    "internal/deck/health.go": {
+      "bytes": 11932,
+      "mode": "100644",
+      "sha256": "d3bdd66c565355dcca300dbf65275d49f4ad3deb21c4309423463a98f853968b"
+    },
+    "internal/deck/health_test.go": {
+      "bytes": 8238,
+      "mode": "100644",
+      "sha256": "fbfcd901008bd6e47d20131cbc094aed95206a75fd5a7e99c7052c2c382e78cc"
+    },
+    "internal/deck/idle_media.go": {
+      "bytes": 16179,
+      "mode": "100644",
+      "sha256": "e50444e940dbee2d8e18557ec096d294e09501e7d968e4b557a9e1ca1de8c295"
+    },
+    "internal/deck/idle_media_linux_test.go": {
+      "bytes": 3255,
+      "mode": "100644",
+      "sha256": "6760c2d64e80253ac7358894f5d34c6b65deac67a8871a67d0270aea8c0d83e4"
+    },
+    "internal/deck/idle_media_test.go": {
+      "bytes": 7583,
+      "mode": "100644",
+      "sha256": "08587d067c5bb9e7f90d09562ca9872720e60958d74364c78c9d6fe6f6f7b1a9"
+    },
+    "internal/deck/lock_linux.go": {
+      "bytes": 777,
+      "mode": "100644",
+      "sha256": "f893bb25bdcdf2d13c8e4359dd5f39912597f16d70f87543d72d9f69e5cce9cc"
+    },
+    "internal/deck/lock_other.go": {
+      "bytes": 185,
+      "mode": "100644",
+      "sha256": "8377921821d38abff4456db164dd9319827c80d000853d2981fe5582d95941d0"
+    },
+    "internal/deck/media.go": {
+      "bytes": 13070,
+      "mode": "100644",
+      "sha256": "fbe11aeba2fa73f03196f64ab94a8840984d1241b8a54a26d0aa31314bbe3f0a"
+    },
+    "internal/deck/media_disk_linux.go": {
+      "bytes": 240,
+      "mode": "100644",
+      "sha256": "2e7d8bd10058770216970f0782c0491f31c7915041082ee4c01ac6d086c32cba"
+    },
+    "internal/deck/media_disk_other.go": {
+      "bytes": 168,
+      "mode": "100644",
+      "sha256": "c1bdb8d2d15f2dbe377021f740d9f16a692e3435e89c7f1297437746d08098e9"
+    },
+    "internal/deck/media_library.go": {
+      "bytes": 14348,
+      "mode": "100644",
+      "sha256": "2f4f7e8fab5d849988ce8fd2406ccffdfcf5d55182ef77988c9237f26bff22dd"
+    },
+    "internal/deck/media_open_linux.go": {
+      "bytes": 176,
+      "mode": "100644",
+      "sha256": "91d0f05a48c5d0f7a6ff6408487e551a96ed7583341f9fc58f539420f446bb75"
+    },
+    "internal/deck/media_open_other.go": {
+      "bytes": 121,
+      "mode": "100644",
+      "sha256": "08e8a5a93dd2f3d576d78f6cc1c65632e858d3d7885caa4497bbe2d13a692679"
+    },
+    "internal/deck/media_storage.go": {
+      "bytes": 10009,
+      "mode": "100644",
+      "sha256": "43d90fb5237cb12a0e49e3a4217b61814c673ce972e00309b181423e183856d2"
+    },
+    "internal/deck/media_test.go": {
+      "bytes": 10979,
+      "mode": "100644",
+      "sha256": "3281f9dd7dddd7d82abf52184fc0e771aeae58a61a463178e9d782b6167feb53"
+    },
+    "internal/deck/mixer.go": {
+      "bytes": 20297,
+      "mode": "100644",
+      "sha256": "937e870115b605a18cb832c8e6f14e1bd27fe2acc3d392e7f6e60e89aff1cdeb"
+    },
+    "internal/deck/mixer_devices_linux.go": {
+      "bytes": 3715,
+      "mode": "100644",
+      "sha256": "e7184c2cb62d17f29c6a3d81fcac61dcdeccf94a2e2b218463df95387b884d80"
+    },
+    "internal/deck/mixer_devices_linux_test.go": {
+      "bytes": 2229,
+      "mode": "100644",
+      "sha256": "2e7a620041fd8cff6213930aa06ce114e3761b84084cca9a9507c0348579d36a"
+    },
+    "internal/deck/mixer_devices_other.go": {
+      "bytes": 419,
+      "mode": "100644",
+      "sha256": "95921775b92e6eb648a7e4ea14a83d1305bdc9a148aadf2a0cd90a36493b7c4d"
+    },
+    "internal/deck/mixer_status_linux_test.go": {
+      "bytes": 5485,
+      "mode": "100644",
+      "sha256": "1f1ed3c00aec9afef488e5d9c33bb151058a91dbe873e73e93f0bf9bb2ba566e"
+    },
+    "internal/deck/mixer_talk.go": {
+      "bytes": 11836,
+      "mode": "100644",
+      "sha256": "1080ef93e9ceb7d3828ef46413949381f41a432c68bb95ebb3da0745ef217b47"
+    },
+    "internal/deck/mixer_test.go": {
+      "bytes": 13202,
+      "mode": "100644",
+      "sha256": "2a5b6b5fdf3eff91e22b39e638683359bf4f5e8acdcfb8d2b13aa04cea8cf985"
+    },
+    "internal/deck/mixer_watch_linux.go": {
+      "bytes": 1859,
+      "mode": "100644",
+      "sha256": "ff2309a2be6908bcbcfa1c84c2df442a1473bd107c4ba7d5731aabd44ee69dc4"
+    },
+    "internal/deck/mixer_watch_other.go": {
+      "bytes": 343,
+      "mode": "100644",
+      "sha256": "63f9ca7bf386970200bbae220d74fb7e92ebf4b487189df7bac325ab6e5e3fac"
+    },
+    "internal/deck/profiles.go": {
+      "bytes": 21032,
+      "mode": "100644",
+      "sha256": "91333a47f1a11c9e3e508a42fb4f089ecfed9ae510ddb8c4a0eea4b388b4f3d6"
+    },
+    "internal/deck/profiles_test.go": {
+      "bytes": 13723,
+      "mode": "100644",
+      "sha256": "c709bda8bdc96517653d3207ffd9794a5fbdeb3505a2a2573bfe7e552990104f"
+    },
+    "internal/deck/resilience.go": {
+      "bytes": 9005,
+      "mode": "100644",
+      "sha256": "8c23d318127ad2d39523f778de35816bd70441af5985d287f1e4109b56422618"
+    },
+    "internal/deck/resilience_linux.go": {
+      "bytes": 5775,
+      "mode": "100644",
+      "sha256": "b7ea2dd017a531bcafc5f50ae8966e5b0fc99850ee56c1822882d036ae46b3d6"
+    },
+    "internal/deck/resilience_linux_test.go": {
+      "bytes": 11749,
+      "mode": "100644",
+      "sha256": "4583a2a7c8fe1a9bb0d09ab7e818b9e2e0f294c564e317c288eef8ce09c73030"
+    },
+    "internal/deck/resilience_other.go": {
+      "bytes": 290,
+      "mode": "100644",
+      "sha256": "36b3b3e53636d16ae8479ad769cf4d86009f8a0e13b59bd71d076802fbf8f202"
+    },
+    "internal/deck/runtime_linux.go": {
+      "bytes": 10200,
+      "mode": "100644",
+      "sha256": "bcb2af1181734ad056843936fe6f6906216b7db79660a6806d1f50745bfb07af"
+    },
+    "internal/deck/runtime_linux_test.go": {
+      "bytes": 20632,
+      "mode": "100644",
+      "sha256": "1aac838be547d1122cfbd031a1748c0913b74fa590939a429ff080c378aaa535"
+    },
+    "internal/deck/runtime_other.go": {
+      "bytes": 881,
+      "mode": "100644",
+      "sha256": "62d635e03ec367ab76bb8ddb09e97e974a4735e6bed7c51cd9f55f79f57cd485"
+    },
+    "internal/deck/support.go": {
+      "bytes": 2814,
+      "mode": "100644",
+      "sha256": "107ca93adfa70d9f15ab3f7e27c1f059f734534dc77e8249676f2fb5309ae37d"
+    },
+    "internal/deck/support_test.go": {
+      "bytes": 1303,
+      "mode": "100644",
+      "sha256": "31554734c3f9b461ca6565a10e16bd0976dc02172a6e0b20cc1b65969025c30d"
+    },
+    "internal/deck/user_paths_test.go": {
+      "bytes": 966,
+      "mode": "100644",
+      "sha256": "364702e3b8879e26b941e4cb2a76758345f40b1dc6309c11fd9587db2b658c75"
+    },
+    "internal/deckyinstall/frontend-install.js": {
+      "bytes": 6337,
+      "mode": "100644",
+      "sha256": "92a675593806c64898c6d652398ba9dce34a565806aa227938ef070f90613ba6"
+    },
+    "internal/deckyinstall/frontend-install.test.cjs": {
+      "bytes": 7270,
+      "mode": "100644",
+      "sha256": "3c7837b636ed5c3e8a29193e19c0ddc4deaa745c2b746191db9beaf1e472c14f"
+    },
+    "internal/deckyinstall/install.go": {
+      "bytes": 10628,
+      "mode": "100644",
+      "sha256": "7e2441fc4f982a5ec57a6467b69b3ee3d60a45105375da13d571e16bc1cb049a"
+    },
+    "internal/deckyinstall/install_test.go": {
+      "bytes": 9435,
+      "mode": "100644",
+      "sha256": "005e13cb4a5f27363999067cfacf0b099b269d8bc5a37d7cb8de4f78aa2d8ffc"
+    },
+    "internal/obs/service.go": {
+      "bytes": 16574,
+      "mode": "100644",
+      "sha256": "2195f107d8f20a481c7e123498211c6fb00f75eb455eb93b699d78eb049dd4d1"
+    },
+    "internal/obs/service_redaction_test.go": {
+      "bytes": 1158,
+      "mode": "100644",
+      "sha256": "097809f129cc53a01a7514f0733b859cf64444922a12606d2f585ab3646f7ee6"
+    },
+    "internal/version/version.go": {
+      "bytes": 296,
+      "mode": "100644",
+      "sha256": "56c5d5b1828672539af978bcb5c43adb4764249ec7aebdef5f0974d1ca4bead1"
+    },
+    "main.go": {
+      "bytes": 833,
+      "mode": "100644",
+      "sha256": "9547165898ca0edfb9a0419a8fcc89d583939615f5bd143a542fe6f09aed06e8"
+    },
+    "obsgod": {
+      "bytes": 12287390,
+      "mode": "100755",
+      "sha256": "b9314595a6391c9635dd50473278d22156c7abf3bbfe75e1bc22696f008b5a8b"
+    },
+    "pkg/api/v1/client.go": {
+      "bytes": 15216,
+      "mode": "100644",
+      "sha256": "3d7ef721c326b0f9fbdecfcf2d183e3c6513ba0d23ea78a35eec89f5d3de2beb"
+    },
+    "pkg/api/v1/client_test.go": {
+      "bytes": 10806,
+      "mode": "100644",
+      "sha256": "8078ccf9e5525ea24e94bb50c15adc99b4196f62f54f9b90b4a3fa656df5a687"
+    },
+    "pkg/api/v1/errors.go": {
+      "bytes": 3615,
+      "mode": "100644",
+      "sha256": "e2f4c491d957ba46ee8aefd231f792b75687ed7513cc17acf0fcf71276978e5f"
+    },
+    "pkg/api/v1/models.go": {
+      "bytes": 5545,
+      "mode": "100644",
+      "sha256": "6a5ca8b92e3f2ee5d6f7074306366743463e6ffc62fbf27c57d6c8925602dcad"
+    },
+    "pkg/api/v1/profiles_test.go": {
+      "bytes": 6436,
+      "mode": "100644",
+      "sha256": "d4e420e4e30573024bea100171c74a7524e8d94544cb0834b58f417f4e56514f"
+    },
+    "pkg/automation/api_primitives.go": {
+      "bytes": 5115,
+      "mode": "100644",
+      "sha256": "3748b4e75d8736dd3eea19380bae4cc25f48fb6f5efbf1d2021fd76c4fed59ea"
+    },
+    "pkg/automation/audio.go": {
+      "bytes": 6886,
+      "mode": "100644",
+      "sha256": "1d4465153b05ea2f1dde8db877cb7391c791d81f7787903d55c7fe7f9e23595f"
+    },
+    "pkg/automation/audio_recovery.go": {
+      "bytes": 2842,
+      "mode": "100644",
+      "sha256": "618fcf3b2266ee7f25d62a92f24664bec6586d79d0ce15af33a279312e73d0e3"
+    },
+    "pkg/automation/audio_recovery_test.go": {
+      "bytes": 4869,
+      "mode": "100644",
+      "sha256": "4667746415685a029de01a78fef6914d51ea9e5c3849ea1c02c32ecd1ae29cb2"
+    },
+    "pkg/automation/audio_test.go": {
+      "bytes": 6103,
+      "mode": "100644",
+      "sha256": "ad30a9e839912496d51686f345a1e6d9e4c69d95acf2ffb16b876979c3e9b1b8"
+    },
+    "pkg/automation/client.go": {
+      "bytes": 9755,
+      "mode": "100644",
+      "sha256": "23eff4e6656eeb6fc765e5994d7ee331e80736236fb3ee3057fb3877bfbf3d2d"
+    },
+    "pkg/automation/client_test.go": {
+      "bytes": 10230,
+      "mode": "100644",
+      "sha256": "c9767dc8ebc51ee4a9878f6b5db0b11c46ba1ac8dbb02d76bf1fd4d2f9e04d40"
+    },
+    "pkg/automation/health.go": {
+      "bytes": 4591,
+      "mode": "100644",
+      "sha256": "10973ca009b4cf2a3bd009a784ad08c29179489cace8cab41a08fcdce46742f1"
+    },
+    "pkg/automation/health_test.go": {
+      "bytes": 4569,
+      "mode": "100644",
+      "sha256": "b4e71770deecba86ea2cbda61d672fa7fc14df31a55479d304f8c544e7290f1d"
+    },
+    "pkg/automation/idle_media.go": {
+      "bytes": 1917,
+      "mode": "100644",
+      "sha256": "bb86362985e468899b8468a21a157566e49cf358283bacc89c26e2c10d83b574"
+    },
+    "pkg/automation/media.go": {
+      "bytes": 6002,
+      "mode": "100644",
+      "sha256": "e8ad11aa4d0df8c4050919b37ad6c59df0695cf9a37bd27a87d0cb7715fad15f"
+    },
+    "pkg/automation/media_test.go": {
+      "bytes": 6569,
+      "mode": "100644",
+      "sha256": "438ddd207792eb851140d3f00882b953df388b6448b578a404a0700edd4a1abb"
+    },
+    "pkg/automation/mixer.go": {
+      "bytes": 5299,
+      "mode": "100644",
+      "sha256": "9c8738e43af79d19c53f53d52e0d5977d3a9f2101a485463614245f28ffe2da0"
+    },
+    "pkg/automation/mixer_test.go": {
+      "bytes": 5590,
+      "mode": "100644",
+      "sha256": "bb32d5af59adf002db46195f8b74a841d9c37c51f4815d43a5c60c831b6a0b94"
+    },
+    "pkg/automation/real_obs_test.go": {
+      "bytes": 872,
+      "mode": "100644",
+      "sha256": "231dd678fe8c2f418e24c6756f2a0d8b2a00dfe1a5302ef0281ee97b5374478a"
+    },
+    "pkg/automation/scene_items.go": {
+      "bytes": 2653,
+      "mode": "100644",
+      "sha256": "673b4453fff3de9be9c127fd1e9e4bce15ff96b4f238bc550ff3f08dddbae8fd"
+    },
+    "pkg/automation/setup.go": {
+      "bytes": 9388,
+      "mode": "100644",
+      "sha256": "1a12acd1f3da05fec2c0b38f8dcc38a082c67265f67f8989b29047efab820e17"
+    },
+    "pkg/automation/stream_progress_test.go": {
+      "bytes": 6615,
+      "mode": "100644",
+      "sha256": "a7235f440e284b08b973949987b566ed4b35dc950997a747ed19333a8e5aa263"
+    },
+    "pkg/automation/stream_status_test.go": {
+      "bytes": 3846,
+      "mode": "100644",
+      "sha256": "4e3b35d52a25a036f9cb067de09dc9973e8905f2c13af42c3af0d299883d6998"
+    },
+    "pkg/automation/workflow.go": {
+      "bytes": 15052,
+      "mode": "100644",
+      "sha256": "d5c7e2f1e30092b297e4351f32048b2e0bad9c279af4c9f7258a66aa17c27368"
+    },
+    "pkg/automation/workflow_test.go": {
+      "bytes": 11503,
+      "mode": "100644",
+      "sha256": "291ff10f508065b3ed62ca4c13cb51a0a919866abc28710790037accd04c788f"
+    },
+    "pkg/creator/v1/config.go": {
+      "bytes": 5674,
+      "mode": "100644",
+      "sha256": "dcf1608f87c6b855e94feb96571ea120f341c28f6afaf46435dd298f6e4eb82f"
+    },
+    "pkg/creator/v1/runtime.go": {
+      "bytes": 8885,
+      "mode": "100644",
+      "sha256": "9f9df5a217c3f05cd6fb1cb71ceca0cf1b66f862c9aec5bc555310c77e637c7d"
+    },
+    "pkg/creator/v1/runtime_test.go": {
+      "bytes": 7752,
+      "mode": "100644",
+      "sha256": "5ecdd3ad3af058df0e8d84f2126b4398386225fba641ad5eb1bffba708b73df1"
+    },
+    "product.json": {
+      "bytes": 284,
+      "mode": "100644",
+      "sha256": "c2adf20387a5c3e8610b9927666d60ed67fa461f7111d4beae43e4e713d27d5c"
+    },
+    "scripts/build-deck-capture.py": {
+      "bytes": 4814,
+      "mode": "100644",
+      "sha256": "b932a66c8094bd51657d74a391fdfb81f740da367e818feda8d100a6d6e72a70"
+    },
+    "scripts/build-site.py": {
+      "bytes": 12973,
+      "mode": "100644",
+      "sha256": "7aea1000578ba784d626a4c398a1e1c7f2fb9b35ca5e3b7bb29c6b9eec70acff"
+    },
+    "scripts/frontend-command.py": {
+      "bytes": 3604,
+      "mode": "100644",
+      "sha256": "61735155f1164c9db09e8f2043cb4c537d8286da7232f9c67bb75386e5f15cc8"
+    },
+    "scripts/generate-brand-identity-proof.py": {
+      "bytes": 2029,
+      "mode": "100644",
+      "sha256": "58a4ba62f68afda1356b8e483e8991a32ea122fddf41e1ac26eadb957b30c7e1"
+    },
+    "scripts/generate-brand-kit.py": {
+      "bytes": 15792,
+      "mode": "100644",
+      "sha256": "714d10e8b9cb926a34a93677162270e6ea1241c4f97f7257868e72cdf4ae29d6"
+    },
+    "scripts/generate-product.py": {
+      "bytes": 2410,
+      "mode": "100644",
+      "sha256": "ca0ff0efae8277b244bc7841d7a9c17fa66524c4e05ea925bd41e0a4ca4e4c92"
+    },
+    "scripts/generate-support.mjs": {
+      "bytes": 1357,
+      "mode": "100644",
+      "sha256": "7478b50229f0048024cdc17f4b8516dbf6bbbf2d7e6c43898e0d5c9940858c2f"
+    },
+    "scripts/generic-release.py": {
+      "bytes": 25858,
+      "mode": "100644",
+      "sha256": "ba7ddfaf298f92f8f28a47c1fbc03383b05d3a443e5943d3a1f0001f01f8f24b"
+    },
+    "scripts/local-ci-report.py": {
+      "bytes": 26336,
+      "mode": "100644",
+      "sha256": "8b15aeb327fddd1685864e664797bddef0568bcf4f3804dead935bc59ab3d02c"
+    },
+    "scripts/local-ci.py": {
+      "bytes": 16045,
+      "mode": "100644",
+      "sha256": "de344f1ecf8153b639f251895331a247efc6be4f8bd0d18a8192d9f2ff0ca659"
+    },
+    "scripts/package-deck.py": {
+      "bytes": 11684,
+      "mode": "100644",
+      "sha256": "3a12572cd8c53251d92501bde92cdb73543992bed0cb7da50189717e703b33fb"
+    },
+    "scripts/package-updater.py": {
+      "bytes": 3958,
+      "mode": "100644",
+      "sha256": "73cbd00c3beb0dd2b72067492f35917bab7e5607cafcc525d4498b492af2c8db"
+    },
+    "scripts/release-audit.py": {
+      "bytes": 22541,
+      "mode": "100644",
+      "sha256": "37ee854f7d8583f5e5c1b3ac90dd4443be5e4ae2896d5360f078040bed86247e"
+    },
+    "scripts/run-user-tests.py": {
+      "bytes": 3237,
+      "mode": "100644",
+      "sha256": "e3c2b62ebfdd91a0452d65a11434a909938aac4310f630e2bfa486ac50dbd49d"
+    },
+    "scripts/tests/test_frontend_command.py": {
+      "bytes": 8017,
+      "mode": "100644",
+      "sha256": "8741f266c943368f0ff84bf8293ffde2a7966fffc78199a1dd60b75d2171a61c"
+    },
+    "scripts/tests/test_generic_release.py": {
+      "bytes": 17630,
+      "mode": "100644",
+      "sha256": "a5487648554a2696952771d9ae8682f62eecc6e53787b22bf8aa03b77351ce35"
+    },
+    "scripts/tests/test_local_ci.py": {
+      "bytes": 7344,
+      "mode": "100644",
+      "sha256": "6522d4926f5c8672b9f3d7b87ef734c54f30fdf387fe0618cc43d2195ba5e319"
+    },
+    "scripts/tests/test_local_ci_report.py": {
+      "bytes": 11610,
+      "mode": "100644",
+      "sha256": "ddc803c4f20fdc51a9ea21bd302e3dccfcf14a52463809b95e913fb63648acac"
+    },
+    "scripts/tests/test_release_audit.py": {
+      "bytes": 13613,
+      "mode": "100644",
+      "sha256": "c19fc46b6acc223a651325019bfb39d603b1308a3e10fd4d6b064a91fa2476a8"
+    },
+    "scripts/tests/test_user_tests.py": {
+      "bytes": 4730,
+      "mode": "100644",
+      "sha256": "851b7d34813c98eccb7c00a0926478fe0cd9115d12b431d398990e326a531e12"
+    },
+    "site/assets/site.css": {
+      "bytes": 7015,
+      "mode": "100644",
+      "sha256": "3c6a11e208905897d989925e60148efcd26088cc7b8a4d8e11652307e8e35a35"
+    },
+    "site/assets/site.js": {
+      "bytes": 568,
+      "mode": "100644",
+      "sha256": "db7fb2f04cbf57f464a9a91edf6ec32f5e1732d277e4a2561458892f28d932e2"
+    },
+    "site/content/configuration.html": {
+      "bytes": 4205,
+      "mode": "100644",
+      "sha256": "d32f00e83aa66de2e3ca419a3a9d9a6dd5a041f63eeefcef54eed5219f8788d4"
+    },
+    "site/content/controls.html": {
+      "bytes": 5097,
+      "mode": "100644",
+      "sha256": "2a731669ec84362187bf944970f20dff6760b426a4557f83d91b8c7d495b1207"
+    },
+    "site/content/index.html": {
+      "bytes": 2740,
+      "mode": "100644",
+      "sha256": "fe3fca1e076e9fa6c6fc47b3b29eea8e6df4028b04995e289098701554be4e99"
+    },
+    "site/content/install.html": {
+      "bytes": 3527,
+      "mode": "100644",
+      "sha256": "9a931dee400fab94a37c26229e7b1252d82285745d747c77993b9b4d30281f90"
+    },
+    "site/content/privacy.html": {
+      "bytes": 2932,
+      "mode": "100644",
+      "sha256": "8ce0eb1c09c181f55a3795144b718aca89d6edb833769de3ae1a138942f28369"
+    },
+    "site/content/providers.html": {
+      "bytes": 2090,
+      "mode": "100644",
+      "sha256": "c56ef6363740bd512cd6aeaad294b9c5540ba158ea804a3d02aed80c0c31b839"
+    },
+    "site/content/troubleshooting.html": {
+      "bytes": 2768,
+      "mode": "100644",
+      "sha256": "f8ea536c231103a71575b59e6615b71002cf32c1971df5d9501b122fe0408c37"
+    },
+    "site/content/uninstall.html": {
+      "bytes": 2428,
+      "mode": "100644",
+      "sha256": "46c0bca4fef84d8730b500a428cdcf4642d46bb4bf7df3bb1f7dccab88715ace"
+    },
+    "site/content/updates.html": {
+      "bytes": 2097,
+      "mode": "100644",
+      "sha256": "e6b5dd63d431eef29488e72090d2b08d491b4c6612885e8864b6f98e3ce2e980"
+    },
+    "site/pages.json": {
+      "bytes": 2030,
+      "mode": "100644",
+      "sha256": "b62bfcff163a8a1f33cef81ef27f213ad38b8b7bfbe88b75b615e739bdd5122c"
+    },
+    "site/template.html": {
+      "bytes": 2121,
+      "mode": "100644",
+      "sha256": "f7fb9b02b4e2a73b48e872bdb56bfaab950c06d6880d486ce1c10b4f138e83b6"
+    },
+    "site/tests/browser.py": {
+      "bytes": 9614,
+      "mode": "100644",
+      "sha256": "bf7d48543a7d637c805ab351aa0a07ef59263a92c1896fb4f53d8eb6cfe7c1e0"
+    },
+    "site/tests/test_build.py": {
+      "bytes": 7985,
+      "mode": "100644",
+      "sha256": "8e6fe64f5aefa5f842a11a5bd901a935e7d50c1f6df935c7957871dd71405a9a"
+    },
+    "steamdeck/Install OBSGod.desktop": {
+      "bytes": 553,
+      "mode": "100644",
+      "sha256": "945aa356f1651cf93ff8b5acadd64aec2abdf18614b2fc86e024d3d52a0f561d"
+    },
+    "steamdeck/Uninstall OBSGod.desktop": {
+      "bytes": 550,
+      "mode": "100644",
+      "sha256": "c357d1ff7583d3cdd09bf5b223e0d5f1d29ef8ec6ea2041e65a336de0c27423c"
+    },
+    "steamdeck/Update OBSGod.desktop": {
+      "bytes": 486,
+      "mode": "100644",
+      "sha256": "07c1cab1e05c83ac3cce85a03b00ad8d8ed1955ce60bfc9d7fee985a18ef30b7"
+    },
+    "steamdeck/Update OBSGod.sh": {
+      "bytes": 88,
+      "mode": "100644",
+      "sha256": "b7f587b83634a2c95ca03c2b95a80d76d9e261a77c24b5d88f5d329888749089"
+    },
+    "steamdeck/bridge.py": {
+      "bytes": 1739,
+      "mode": "100644",
+      "sha256": "16d610bfb0985cd61227e99db026560aa38b7b8d3a2cdc2984239c5b17487ea2"
+    },
+    "steamdeck/capture/LICENSE": {
+      "bytes": 1076,
+      "mode": "100644",
+      "sha256": "258b73263e16be217d5b8120e700feceb0957e4573ca1f06d1a0885eb35ce01e"
+    },
+    "steamdeck/capture/Makefile": {
+      "bytes": 519,
+      "mode": "100644",
+      "sha256": "c2acf2286e3c5c907b591e5fcd17e4adebb245995d1f5bae98af8ef4dcdf8c7d"
+    },
+    "steamdeck/capture/README.md": {
+      "bytes": 6823,
+      "mode": "100644",
+      "sha256": "9db32e042bf354460974f29e4726b4a26109e3968c171b8662cf3ec329d3319c"
+    },
+    "steamdeck/capture/THIRD_PARTY_NOTICES.md": {
+      "bytes": 197884,
+      "mode": "100644",
+      "sha256": "e279892a8749fa94c2a3f1fa402cd5580815e874f42b343b65c265086c42cd1d"
+    },
+    "steamdeck/capture/build.Dockerfile": {
+      "bytes": 598,
+      "mode": "100644",
+      "sha256": "2a5907d46697011510482aed251209f83a79a2b0aa3a0cea1ced9cd3b8b74905"
+    },
+    "steamdeck/capture/gstobsgodcapture.c": {
+      "bytes": 27132,
+      "mode": "100644",
+      "sha256": "1cefd90dc7a306ac993366fa0e18573202e6ba4a13590999065c3c80018a6c5d"
+    },
+    "steamdeck/decky.py": {
+      "bytes": 4028,
+      "mode": "100644",
+      "sha256": "96c3aa094fa8a44939a870cbba45f62296ce9314a1dfdf6e68e03347814e4816"
+    },
+    "steamdeck/decky/LICENSE.LGPL-2.1": {
+      "bytes": 26528,
+      "mode": "100644",
+      "sha256": "8c953bd3d8c44c562ec95f6ac32ad5c82db5fa374462e6bf529c4dec8436853d"
+    },
+    "steamdeck/decky/LICENSE.qrcode-generator.txt": {
+      "bytes": 1071,
+      "mode": "100644",
+      "sha256": "3a850fa5f08101db6f40676c2786e10bd2cd5fff7b12ffdf1e0c434d4e49d90c"
+    },
+    "steamdeck/decky/main.py": {
+      "bytes": 24399,
+      "mode": "100644",
+      "sha256": "937f7ed373a66bf64690a549c20b59d23f18c63a8017dfa1dc5de9f11f0b8464"
+    },
+    "steamdeck/decky/package-lock.json": {
+      "bytes": 37171,
+      "mode": "100644",
+      "sha256": "8a6925b946739ef6ff08af6c605534dcc2a2fa3dc4ed692d606fca40ea041492"
+    },
+    "steamdeck/decky/package.json": {
+      "bytes": 730,
+      "mode": "100644",
+      "sha256": "c04919d3150d3ef9a9482049f972086c3c4a778d69470f520ae6b72628fee72f"
+    },
+    "steamdeck/decky/plugin.json": {
+      "bytes": 256,
+      "mode": "100644",
+      "sha256": "443e999f922777a3b490a981a4bcb0fb04b8ea3247b7ec1002fa81013df070c4"
+    },
+    "steamdeck/decky/rollup.config.js": {
+      "bytes": 2031,
+      "mode": "100644",
+      "sha256": "23aa193f954e7050d6039556dd1dcbe9c8454913ae6430b7d694203d215db4b7"
+    },
+    "steamdeck/decky/src/Advanced.tsx": {
+      "bytes": 16202,
+      "mode": "100644",
+      "sha256": "7c497fb6572e398a62728cbda30dcf461374023e5bb25ae3b475f55d2b31a7cc"
+    },
+    "steamdeck/decky/src/Mixer.tsx": {
+      "bytes": 8959,
+      "mode": "100644",
+      "sha256": "42f915f3beedca4e677b875a1a094e9a250f0082f47a930732fe958305a2e83a"
+    },
+    "steamdeck/decky/src/Support.tsx": {
+      "bytes": 5064,
+      "mode": "100644",
+      "sha256": "bbaa74a7334f8663400c4c12af08fe36ef0693ffe05d8bafc4a8e18261bbcdbc"
+    },
+    "steamdeck/decky/src/advanced-state.mjs": {
+      "bytes": 2045,
+      "mode": "100644",
+      "sha256": "3aca29d5963dfb6727ed981612b8c8ac7ea1328a1f59fe87a030bdd3e4985075"
+    },
+    "steamdeck/decky/src/health.mjs": {
+      "bytes": 1277,
+      "mode": "100644",
+      "sha256": "25327f4d8fa6256434667ebe37e6057a90364b6b52e743874ac75308c9415f3a"
+    },
+    "steamdeck/decky/src/index.tsx": {
+      "bytes": 22072,
+      "mode": "100644",
+      "sha256": "ffeb27ccf7134a4565c2aa0ac811cd7a5bab1acaecf62aac3ab39f37d646c296"
+    },
+    "steamdeck/decky/src/mixer-state.mjs": {
+      "bytes": 2984,
+      "mode": "100644",
+      "sha256": "32e67926cdbf517f0f39d7b184b8ea39dbe5d99e661218e2c7d922f2e75188d5"
+    },
+    "steamdeck/decky/src/mixer-talk.mjs": {
+      "bytes": 3095,
+      "mode": "100644",
+      "sha256": "2f42bad3ef735a7491eb5cee2b2c6edf87f7a6f614536d0a0aa83a3ca5e07bd1"
+    },
+    "steamdeck/decky/src/product.ts": {
+      "bytes": 380,
+      "mode": "100644",
+      "sha256": "0c4694ba6f63f574e0e5f341e10a1797414604746d1746d198fe00caf72d7d6f"
+    },
+    "steamdeck/decky/src/state.mjs": {
+      "bytes": 3381,
+      "mode": "100644",
+      "sha256": "4c097827f199559ed084217641f2365b45ebfe81524bf3b0d208a67544b8e0cf"
+    },
+    "steamdeck/decky/src/support-data.mjs": {
+      "bytes": 1206,
+      "mode": "100644",
+      "sha256": "72759bcee3aebe4f9ad82f6b1273d91feb623771bd3a219567120d3296015c3d"
+    },
+    "steamdeck/decky/src/support-qr.mjs": {
+      "bytes": 636,
+      "mode": "100644",
+      "sha256": "0a3f69ab0fe08640a421735727319799bdc6a687809ee311afd681e3502af456"
+    },
+    "steamdeck/decky/src/support.mjs": {
+      "bytes": 7232,
+      "mode": "100644",
+      "sha256": "7aa2028f2dfc10a1e1537c3fe910cccc55de1840b6a93daa8ee4fb68905ba6ce"
+    },
+    "steamdeck/decky/tests/advanced-state.test.mjs": {
+      "bytes": 2589,
+      "mode": "100644",
+      "sha256": "57eff008d7801adf6afc2b99c5b014b70d9aa9d9e720fc74d35c1ee7a7215611"
+    },
+    "steamdeck/decky/tests/build-fixture.mjs": {
+      "bytes": 449,
+      "mode": "100644",
+      "sha256": "77ef761327f9a3e264d0ca7aad06b7ff64dba056963ef40745d5bacf1306318c"
+    },
+    "steamdeck/decky/tests/build-support-fixture.mjs": {
+      "bytes": 2711,
+      "mode": "100644",
+      "sha256": "65d695f8f31b57b656fa11313fdc2d68bef1b3cc51f9724235cbe9538dac8b75"
+    },
+    "steamdeck/decky/tests/fixture.html": {
+      "bytes": 12791,
+      "mode": "100644",
+      "sha256": "6619a3c6f785f89bdebdceaa6fb01ead476b5428366825caf3079cdbbcdaeca3"
+    },
+    "steamdeck/decky/tests/health.test.mjs": {
+      "bytes": 2293,
+      "mode": "100644",
+      "sha256": "36ea8b8a0b5d7cb955c6cbd54ba5d6e8107a544386d1b4afb27b21b009dd4e64"
+    },
+    "steamdeck/decky/tests/mixer-state.test.mjs": {
+      "bytes": 3557,
+      "mode": "100644",
+      "sha256": "1db650e53b9ed71ef394cd7f9d932afa54b6040caa90ea43c497b2ef085300d9"
+    },
+    "steamdeck/decky/tests/mixer-talk.test.mjs": {
+      "bytes": 3156,
+      "mode": "100644",
+      "sha256": "d72c2f0ef13013d097ec52dd9472a7bf146349a1e3d81d5168cd42db1a6c2ef3"
+    },
+    "steamdeck/decky/tests/state.test.mjs": {
+      "bytes": 3595,
+      "mode": "100644",
+      "sha256": "26582642fdc6d6a501fdcb6517231e56ae150c71b71c6167da0cbedec9b362ab"
+    },
+    "steamdeck/decky/tests/support.test.mjs": {
+      "bytes": 6524,
+      "mode": "100644",
+      "sha256": "11a2e1554def807d035b1703e4416fa0ac4920e3b2ce76bd6da0b5d7b5e2ade5"
+    },
+    "steamdeck/decky/tsconfig.json": {
+      "bytes": 316,
+      "mode": "100644",
+      "sha256": "ede9a43cefefa91cb130ef9c4ba239b3375be0b4070583fce940293ead1eb43b"
+    },
+    "steamdeck/install.py": {
+      "bytes": 25186,
+      "mode": "100644",
+      "sha256": "d7ba4e50f795af5e4f8860b3e3e368ae0bbf43a58fc1298815007c261505135e"
+    },
+    "steamdeck/paths.py": {
+      "bytes": 4207,
+      "mode": "100644",
+      "sha256": "436f589b4130ac00bf60dcf5773b30caa56c8cea437fe5715c1af1f92a405f44"
+    },
+    "steamdeck/product.py": {
+      "bytes": 214,
+      "mode": "100644",
+      "sha256": "ed28c12ff8587b1d0d51a4e6472caef97430cb001c0467c09f74ca0e5cf68401"
+    },
+    "steamdeck/releases.py": {
+      "bytes": 17153,
+      "mode": "100644",
+      "sha256": "cc73f175f5dab78aa2c13320f4bc91d6a059f7ea2a082ba5f58ce3329e86fc39"
+    },
+    "steamdeck/setup.css": {
+      "bytes": 3099,
+      "mode": "100644",
+      "sha256": "d678ff8f2266ceacf0306a11111452f424b741dc04801dac0932dd6d5dc84b52"
+    },
+    "steamdeck/setup.html": {
+      "bytes": 20104,
+      "mode": "100644",
+      "sha256": "43a3485849325c0b6f13029386debe48c19cc4f5d6099d3f2ef3eac97db47f66"
+    },
+    "steamdeck/setup.js": {
+      "bytes": 36388,
+      "mode": "100644",
+      "sha256": "03bed3eeadf475f74d828a5f7df30f8a9d106390914db0878f2beb55bbe0f609"
+    },
+    "steamdeck/setup.py": {
+      "bytes": 10102,
+      "mode": "100644",
+      "sha256": "22db974ce260e04a93f1755d79c5b23b6bd50429e54521bcaf0bef7397d38958"
+    },
+    "steamdeck/tests/browser-m3-panel.py": {
+      "bytes": 8363,
+      "mode": "100644",
+      "sha256": "603e5fec6fc2bd8f01c04d59798d78b68d907d67f34d997b409ceff84792a126"
+    },
+    "steamdeck/tests/browser-m3-setup.py": {
+      "bytes": 8673,
+      "mode": "100644",
+      "sha256": "a1765150d03ed2ad0d58d50518b8ab13af494ee3c5debbb4b3d3531a7e153add"
+    },
+    "steamdeck/tests/browser-mixer-panel.py": {
+      "bytes": 10797,
+      "mode": "100644",
+      "sha256": "005e07bdbe98ff6840ac8d4b963feaabeced0918d7025462aaf41760bc176ead"
+    },
+    "steamdeck/tests/browser-mixer-setup.py": {
+      "bytes": 12551,
+      "mode": "100644",
+      "sha256": "4921fded2e564f23a9509aa220fa6be8307f4bbc20a0cbd244d83e4ef7b103f7"
+    },
+    "steamdeck/tests/browser-panel.py": {
+      "bytes": 18589,
+      "mode": "100644",
+      "sha256": "280d4b32f4bcc47e7126f5c32eab7144766ac94e5185e6211420ea2b08c5faf8"
+    },
+    "steamdeck/tests/browser-setup.py": {
+      "bytes": 15055,
+      "mode": "100644",
+      "sha256": "fe4374941457334fd155404a2846b9551fabd4348d0e40ed9be6be896801a9b7"
+    },
+    "steamdeck/tests/browser-support.py": {
+      "bytes": 6014,
+      "mode": "100644",
+      "sha256": "eb8af6d817c9a92a087bad7a5ea63691d97c1bea908f8a1adce53b688f54dbcd"
+    },
+    "steamdeck/tests/capture-fixture.c": {
+      "bytes": 12873,
+      "mode": "100644",
+      "sha256": "47baee49ce57f09ef6c32bcc97703385d198b0a71775d8da3d8eee98e429be7c"
+    },
+    "steamdeck/tests/decky-transport-smoke.py": {
+      "bytes": 34470,
+      "mode": "100644",
+      "sha256": "d2387b420ae0882673bbfd30c9e5cbf33108d621204f071c13e4bead62fcdaf6"
+    },
+    "steamdeck/tests/native-audio.py": {
+      "bytes": 7040,
+      "mode": "100644",
+      "sha256": "656c0e8ff2d415310562bc7f16ee163bf6152f6af222813dd678c3043c84e1db"
+    },
+    "steamdeck/tests/native-capture-smoke.sh": {
+      "bytes": 9231,
+      "mode": "100644",
+      "sha256": "2bfa201dc43b02c72fceda8a3bfe3f53982460f55cff4e07a95e7fe47a09a015"
+    },
+    "steamdeck/tests/native-control-password.py": {
+      "bytes": 18509,
+      "mode": "100644",
+      "sha256": "aac7bdbbd2ed47da5dc27b26856c83006de91471c0b94cbe381478274b1c13de"
+    },
+    "steamdeck/tests/native-game-obs-smoke.sh": {
+      "bytes": 7066,
+      "mode": "100644",
+      "sha256": "64f95d37d84502fb4174caa4e95f5bb61a5a9671645a39f175b0161341e7a814"
+    },
+    "steamdeck/tests/native-game-obs.py": {
+      "bytes": 16456,
+      "mode": "100644",
+      "sha256": "36c1035eb0b73a189694c523069e943a4c65b62a93fdb4e2ea950a78f5102784"
+    },
+    "steamdeck/tests/native-idle-media.py": {
+      "bytes": 7983,
+      "mode": "100644",
+      "sha256": "cce725051b42277d08cbfcfa280e4532e4922a2b81fa04ee45cd5d7224c7af8a"
+    },
+    "steamdeck/tests/native-media.py": {
+      "bytes": 12672,
+      "mode": "100644",
+      "sha256": "343ab0e00a6961f8c4008c4fb9dcf2671004386a6a94d5eaa8657fb3989c3b25"
+    },
+    "steamdeck/tests/native-mixer.py": {
+      "bytes": 11296,
+      "mode": "100644",
+      "sha256": "98a3fc1ffdca6fdf41e412873c05d123bf5bddc2455d9fabdb0977e4f298f309"
+    },
+    "steamdeck/tests/native-obs-smoke.sh": {
+      "bytes": 17094,
+      "mode": "100644",
+      "sha256": "1ecad0c9ddf408ad84dbc461e99caaf390d9368c9d56b1a2b0d6edf087c86293"
+    },
+    "steamdeck/tests/native-profiles.py": {
+      "bytes": 8853,
+      "mode": "100644",
+      "sha256": "144371b3a7821e3815d233f0501ce566dd9e4d757b9cf69139f25a70c1e83b7e"
+    },
+    "steamdeck/tests/native-resilience.py": {
+      "bytes": 6999,
+      "mode": "100644",
+      "sha256": "3434157c44f08a403eb78d9a3aa865ca98dbc6b7aba3b8d023ef0115c0c2b81b"
+    },
+    "steamdeck/tests/obs-smoke.Dockerfile": {
+      "bytes": 1411,
+      "mode": "100644",
+      "sha256": "60211bc5eb18efa4367107ab56c01d11ba7919f89c5d99d374ecab78451748d3"
+    },
+    "steamdeck/tests/test_backend.py": {
+      "bytes": 21926,
+      "mode": "100644",
+      "sha256": "6306e9704b59d62d9c22b65d85153c406646f35374d54cabc2a0523a2e461460"
+    },
+    "steamdeck/tests/test_bootstrap.py": {
+      "bytes": 5202,
+      "mode": "100644",
+      "sha256": "1250855acade87931b71c263ec49c5077b207e249c370190fd417402064e6c86"
+    },
+    "steamdeck/tests/test_install.py": {
+      "bytes": 7043,
+      "mode": "100644",
+      "sha256": "80434e2a3ee48a7ae4dc547aba7e6e413d044c88392fda6065b95b13d197ecdc"
+    },
+    "steamdeck/tests/test_m3_adapters.py": {
+      "bytes": 5399,
+      "mode": "100644",
+      "sha256": "54764cbfa429245da32f72c7a1d22d474857554610f6ae637ff26d63843b8c25"
+    },
+    "steamdeck/tests/test_mixer_adapter.py": {
+      "bytes": 3138,
+      "mode": "100644",
+      "sha256": "bf5b1a634ced7ef7570c28549a606f53e26aba2975793a8e0e1682b7e19c6ede"
+    },
+    "steamdeck/tests/test_native_audio.py": {
+      "bytes": 1647,
+      "mode": "100644",
+      "sha256": "d8f96cc4ff799694cb6d9d245ba0e74c5a2a751eec7672b25cb7fa5d101fb3cd"
+    },
+    "steamdeck/tests/test_releases.py": {
+      "bytes": 12614,
+      "mode": "100644",
+      "sha256": "3f60d7067c1d5b0a81a6dc52e45bc5bdf9378e040ff1009ef5a4db6e572b90d6"
+    },
+    "steamdeck/tests/test_setup.py": {
+      "bytes": 31358,
+      "mode": "100644",
+      "sha256": "78d175fc4f4c203e52152d881630ce4aa9214c42db074c44f9500b47a3a33673"
+    },
+    "steamdeck/tests/test_uninstall.py": {
+      "bytes": 17058,
+      "mode": "100644",
+      "sha256": "7b211f4b6c826782629c65421becc8d5156e55f6df46599248aeeb17b0f1dc03"
+    },
+    "steamdeck/tests/test_update.py": {
+      "bytes": 16242,
+      "mode": "100644",
+      "sha256": "eb93f2d6e67438474527a84b8877552dfe9999632b810f4bf99d79241b2d2255"
+    },
+    "steamdeck/tests/updater-smoke.py": {
+      "bytes": 11430,
+      "mode": "100644",
+      "sha256": "54f8b83432c575a3b582f9437b56b6427e9ee90ceccffaf33457c25bd706da3a"
+    },
+    "steamdeck/uninstall.py": {
+      "bytes": 20164,
+      "mode": "100644",
+      "sha256": "80a41dcf694259fd20a06ac20f8b7dc2af83229db2cde9ef051378cbee3e0072"
+    },
+    "steamdeck/update.py": {
+      "bytes": 16981,
+      "mode": "100644",
+      "sha256": "a9f85227ce97e787f0db5a911871686615526b180aaa3dff69641e5008549917"
+    },
+    "support.json": {
+      "bytes": 242,
+      "mode": "100644",
+      "sha256": "73d06d7d6663c47637b9f080dd6aa1360a38a566a06d1becb3bbb7194fec8eb1"
+    }
+  },
+  "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+  "schema_version": 1,
+  "scope": "Exact Git objects at the frozen revision; no newer evidence/source relabeling.",
+  "tracked_files": 401,
+  "tree": "3c09ea82d85ddcdf47c347afa44961f7b1b6956e"
+}

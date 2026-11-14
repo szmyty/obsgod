@@ -1,0 +1,11 @@
+# Exact-source Decky Stream review checkpoint
+
+Source `4699235e9e925b76ca492d5a00a375ed37fb338e`, tree `3c09ea82d85ddcdf47c347afa44961f7b1b6956e`, package version `0.1.0-deck.9`.
+
+The complete required available local matrix passed at these exact bytes. Actual Steam Deck/OBS33/Flatpak/Gamescope/controller/headset, separate provider viewer/adoption, hosted CI/reviews and applicable rights/publisher gates remain open. This is an immutable manual review checkpoint, not a GitHub release, site deployment, environment snapshot, Store listing or latest-updater offer. The older1a/d0a checkpoint remains unchanged.
+
+See qualification.json and evidence.zip for exact commands, platforms, raw outcomes and limitations. Source401-file inventory/archive, notices, preferred native/SDK source inside the runtime, SPDX and unsigned provenance are included. Unsigned inventories/checksums establish consistency, not authenticated publisher identity.
+
+In Steam Deck Desktop Mode, keep Steam and Decky running and stop streaming/recording/replay. Preserve existing settings/media/installation. Download the full runtime from this exact immutable commit and compare its SHA256 with CHECKPOINT-SHA256SUMS before extraction. Assert manifest revision 4699235e9e925b76ca492d5a00a375ed37fb338e, then run `python3 "$decky_stream_stage/OBSGod-0.1.0-deck.9/install.py" --no-launch` (omit --app-only). No --repair flag exists on install.py; differing manifest/payload preserves the old release and creates a suffixed one even at the same package version. Active/unknown outputs are refused; confirmed-idle managed OBS closes safely under lock. Afterward open Decky Stream Setup from Applications. Never use sudo or wipe user data as recovery.
+
+Owner acceptance checklist: record exact Deck/SteamOS/channel/Steam/Decky/OBS/GStreamer versions; play an audible moving local clip; test actual built-in/jack/USB/Bluetooth input/mute/gain/hold/release/loss behavior; verify game-only/menu/idle/game-switch/session/sleep/controller/performance; confirm intended picture/system+mic sound from a separate provider viewer; record real new-user install/update/recovery/uninstall preservation. Submit filtered diagnostics only, never stream/control secrets. Publishing any product release or contacting Store maintainers is a separate explicit owner action.

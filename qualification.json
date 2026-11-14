@@ -1,0 +1,4224 @@
+{
+  "artifacts": {
+    "SHA256SUMS": {
+      "sha256": "4cd504eba17fcd2b8405881d7f2e76c683147393ca4144c762a1a7379f404e7c"
+    },
+    "UPDATER-SHA256SUMS": {
+      "sha256": "45ef6e666cf55186e360ea5432513eb191ab83c5d956de98de3f35f26001d331"
+    },
+    "capture-build.json": {
+      "sha256": "5f401a620493b5fc282658c16530db6e87a70ad40b95bb88b0212f08417bbd16"
+    },
+    "libgstobsgodcapture.so": {
+      "sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68"
+    },
+    "manifest.json": {
+      "sha256": "3e1810b64d7c2d1466df075eaef2472913499ca2d21c7e6a00df62932e14b199"
+    },
+    "obsgod": {
+      "sha256": "218477d1ce169298ec3dbb58cdda412fe7371a39653d6dc68bfcf81bc2226f85"
+    },
+    "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz": {
+      "sha256": "b4222fb703aa198a7ea200721afbc06dcb86dec56e8c1bebd77f5bb614aad53d"
+    },
+    "obsgod-decky.zip": {
+      "sha256": "33cb82f0d68f3f3ce21ae2abd4eab878df6c42f39a52af36748d6e42ceceef66"
+    },
+    "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip": {
+      "sha256": "3c2fa5f5623f4c000a2371fe19bce5fdf0fc848b09929befb4ba70e7630cf986"
+    },
+    "supply-chain/AUDIT-SHA256SUMS": {
+      "sha256": "c914cef6617407eb51e83e9c45351273194cd2b3128afe138fe948e438369c4e"
+    },
+    "supply-chain/provenance.unsigned.json": {
+      "sha256": "c3c8743bb9c189f60496a721850218db92adee9717fa4c9d9ca55b8dd041820e"
+    },
+    "supply-chain/release-audit.json": {
+      "sha256": "7d30964b89a0863b1e2fd8b86e1718918c62c9dc6fd59ecff73434e2683df6e9"
+    },
+    "supply-chain/sbom.spdx.json": {
+      "sha256": "59ff8372a17840c8baf4731b0f66c2a2c071a242219f6a9eff442a1b18fd67ea"
+    },
+    "updater-manifest.json": {
+      "sha256": "fbc9e106291ff478d10a52c7f77e409ace2463d7019118a7ca1d95f25f8ef514"
+    }
+  },
+  "candidate": "0.1.0-deck.9",
+  "environment_snapshot_published": false,
+  "external_gates": {
+    "actual_steam_deck_obs33_flatpak_gamescope_controller_headsets": "unrun",
+    "provider_viewer_and_new_user_adoption": "unrun",
+    "required_hosted_ci_reviews": "not-established-by-local-proof",
+    "rights_creative_publisher_approval": "pending-where-applicable"
+  },
+  "local_matrix_outcome": "passed",
+  "native": {
+    "first": {
+      "act_log_sha256": "c55407ca920890fa2ead25f0b05f2e9603f216e3800d1624103d5319b1847670",
+      "act_receipt": "20261114T002434Z-candidate.json",
+      "artifacts_sha256": {
+        "SHA256SUMS": "4cd504eba17fcd2b8405881d7f2e76c683147393ca4144c762a1a7379f404e7c",
+        "UPDATER-SHA256SUMS": "45ef6e666cf55186e360ea5432513eb191ab83c5d956de98de3f35f26001d331",
+        "capture-build.json": "5f401a620493b5fc282658c16530db6e87a70ad40b95bb88b0212f08417bbd16",
+        "libgstobsgodcapture.so": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+        "manifest.json": "3e1810b64d7c2d1466df075eaef2472913499ca2d21c7e6a00df62932e14b199",
+        "obsgod": "218477d1ce169298ec3dbb58cdda412fe7371a39653d6dc68bfcf81bc2226f85",
+        "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz": "b4222fb703aa198a7ea200721afbc06dcb86dec56e8c1bebd77f5bb614aad53d",
+        "obsgod-decky.zip": "33cb82f0d68f3f3ce21ae2abd4eab878df6c42f39a52af36748d6e42ceceef66",
+        "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip": "3c2fa5f5623f4c000a2371fe19bce5fdf0fc848b09929befb4ba70e7630cf986",
+        "supply-chain/AUDIT-SHA256SUMS": "c914cef6617407eb51e83e9c45351273194cd2b3128afe138fe948e438369c4e",
+        "supply-chain/provenance.unsigned.json": "c3c8743bb9c189f60496a721850218db92adee9717fa4c9d9ca55b8dd041820e",
+        "supply-chain/release-audit.json": "7d30964b89a0863b1e2fd8b86e1718918c62c9dc6fd59ecff73434e2683df6e9",
+        "supply-chain/sbom.spdx.json": "59ff8372a17840c8baf4731b0f66c2a2c071a242219f6a9eff442a1b18fd67ea",
+        "updater-manifest.json": "fbc9e106291ff478d10a52c7f77e409ace2463d7019118a7ca1d95f25f8ef514"
+      },
+      "candidate_version": "0.1.0-deck.9",
+      "limits": [
+        "Actual Steam Deck LCD/OLED/Flatpak/Gamescope/AMD/controller/headsets and external providers remain unrun",
+        "Sanitized JSON omits any string credential fields and synthetic RTMP addresses; booleans recording privacy invariants remain intact",
+        "Parent act receipt binds summary files lacking their own source_revision marker to exact manifest/binary/source input hashes"
+      ],
+      "native_commands": [
+        [
+          "docker",
+          "run",
+          "--rm",
+          "--user",
+          "1000:1000",
+          "--mount",
+          "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+          "--mount",
+          "type=bind,src=/workspace/.obsgod-tools/completion/act/tmp/obsgod-audio,dst=/work",
+          "obsgod-obs-smoke:qualification",
+          "dbus-run-session",
+          "--",
+          "bash",
+          "/src/steamdeck/tests/native-obs-smoke.sh"
+        ],
+        [
+          "docker",
+          "run",
+          "--rm",
+          "--user",
+          "1000:1000",
+          "-e",
+          "OBSGOD_QUALIFIED_REVISION=4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "--mount",
+          "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+          "--mount",
+          "type=bind,src=/workspace/.obsgod-tools/completion/act/tmp/obsgod-capture,dst=/work",
+          "obsgod-obs-smoke:qualification",
+          "dbus-run-session",
+          "--",
+          "bash",
+          "/src/steamdeck/tests/native-capture-smoke.sh",
+          "/src/dist"
+        ],
+        [
+          "docker",
+          "run",
+          "--rm",
+          "--user",
+          "1000:1000",
+          "-e",
+          "OBSGOD_QUALIFIED_REVISION=4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "--mount",
+          "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+          "--mount",
+          "type=bind,src=/workspace/.obsgod-tools/completion/act/tmp/obsgod-game-obs,dst=/work",
+          "obsgod-obs-smoke:qualification",
+          "dbus-run-session",
+          "--",
+          "bash",
+          "/src/steamdeck/tests/native-game-obs-smoke.sh"
+        ]
+      ],
+      "native_image": "obsgod-obs-smoke:qualification",
+      "native_image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+      "native_source_inputs_sha256": {
+        "steamdeck/tests/native-audio.py": "656c0e8ff2d415310562bc7f16ee163bf6152f6af222813dd678c3043c84e1db",
+        "steamdeck/tests/native-capture-smoke.sh": "2bfa201dc43b02c72fceda8a3bfe3f53982460f55cff4e07a95e7fe47a09a015",
+        "steamdeck/tests/native-control-password.py": "aac7bdbbd2ed47da5dc27b26856c83006de91471c0b94cbe381478274b1c13de",
+        "steamdeck/tests/native-game-obs-smoke.sh": "64f95d37d84502fb4174caa4e95f5bb61a5a9671645a39f175b0161341e7a814",
+        "steamdeck/tests/native-game-obs.py": "36c1035eb0b73a189694c523069e943a4c65b62a93fdb4e2ea950a78f5102784",
+        "steamdeck/tests/native-idle-media.py": "cce725051b42277d08cbfcfa280e4532e4922a2b81fa04ee45cd5d7224c7af8a",
+        "steamdeck/tests/native-media.py": "343ab0e00a6961f8c4008c4fb9dcf2671004386a6a94d5eaa8657fb3989c3b25",
+        "steamdeck/tests/native-mixer.py": "98a3fc1ffdca6fdf41e412873c05d123bf5bddc2455d9fabdb0977e4f298f309",
+        "steamdeck/tests/native-obs-smoke.sh": "1ecad0c9ddf408ad84dbc461e99caaf390d9368c9d56b1a2b0d6edf087c86293",
+        "steamdeck/tests/native-profiles.py": "144371b3a7821e3815d233f0501ce566dd9e4d757b9cf69139f25a70c1e83b7e",
+        "steamdeck/tests/native-resilience.py": "3434157c44f08a403eb78d9a3aa865ca98dbc6b7aba3b8d023ef0115c0c2b81b"
+      },
+      "outcome": "passed",
+      "phase": "first",
+      "platform": "Linux amd64 Docker; Debian trixie OBS/PulseAudio/PipeWire with Xvfb and synthetic media/devices",
+      "proofs": [
+        {
+          "file": "native/obsgod-audio/output/audio-default-changed-audio-metrics.json",
+          "internal_revision": null,
+          "original_sha256": "6e195e07da69d002ddf4283b1f3f035c60d075240a455f4b000fcb0fccaea680",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "c9d5be27c6af924cf2fe33ffa89e701857514390f08bcdaba944a60f7a31c105"
+        },
+        {
+          "file": "native/obsgod-audio/output/audio-default-fallback-audio-metrics.json",
+          "internal_revision": null,
+          "original_sha256": "273d4629d6c6b9083691bf854b088bd2da87801567b77c77ff4e400e9baa383d",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "7138829932b92a57bbacd6b37de7cc6b0e3f72a88c4dc7e595b971d6506ea7dc"
+        },
+        {
+          "file": "native/obsgod-audio/output/audio-hotplug.json",
+          "internal_revision": null,
+          "original_sha256": "658121e11e200e99430f03d36a979042c9afcecedbd61da92eb727b7b0a2d863",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "e9730e3e001a34abb0201dd63b0bbbb99b7989c4ed82e75d48118c5b17778c35"
+        },
+        {
+          "file": "native/obsgod-audio/output/control-password-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "da83f3627068e9e7d69023903c0d17117264634a7cb2e9466d21a0a8af7d4f0d",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "995aace9941e816383ee2ca3db94e09cc64e2d6328eddd736c9de53b520992c7"
+        },
+        {
+          "file": "native/obsgod-audio/output/control-workflow-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "a5af5296a2e7ef5ca055d1c84da8d8c8a66bb8add25fa5b05a9b579bc2c4bf58",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "9ce7c14fc1f00ba3d9a3026aef7fec42e2aa85f6027069a11bcc1effe5659ab9"
+        },
+        {
+          "file": "native/obsgod-audio/output/media-live-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "3cec59e754f914ed71f8b162e39aa8645027b00ed10ada23624cf275b75c3ea4",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "ad0b9177699e30dffdb64c13da4ecb29674614765afa5206a6732fcb03ab32f7"
+        },
+        {
+          "file": "native/obsgod-audio/output/media-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "5d5815f88a5142c41342a0a0f3bbc1a047744c057f14a8abb92f0aa3d8bae03d",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "abf814b4df221eed1982c8230e2efac1908cf4885abe0d325868b95148df90fc"
+        },
+        {
+          "file": "native/obsgod-audio/output/native-live-media-summary.json",
+          "internal_revision": null,
+          "original_sha256": "3cec59e754f914ed71f8b162e39aa8645027b00ed10ada23624cf275b75c3ea4",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "ad0b9177699e30dffdb64c13da4ecb29674614765afa5206a6732fcb03ab32f7"
+        },
+        {
+          "file": "native/obsgod-audio/output/native-media-summary.json",
+          "internal_revision": null,
+          "original_sha256": "5d5815f88a5142c41342a0a0f3bbc1a047744c057f14a8abb92f0aa3d8bae03d",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "abf814b4df221eed1982c8230e2efac1908cf4885abe0d325868b95148df90fc"
+        },
+        {
+          "file": "native/obsgod-audio/output/native-mixer-summary.json",
+          "internal_revision": null,
+          "original_sha256": "b82825f3532c37db616f6e4c55e1a67793f7c5124c5fdd2c13d6642c0e110b50",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "ff87d41529e4647c69b4c2d4168a255a491e93914348d8ab6efe1111f341c443"
+        },
+        {
+          "file": "native/obsgod-audio/output/native-profiles-summary.json",
+          "internal_revision": null,
+          "original_sha256": "c1fba5ea7bd6e27783e5d10fe5f40ca6e73746a6d3eab0000b86d8b586503aee",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "c4d897c1a84cddc955af2261422df6f8b1ccc4a235ef6f591c7b682b72695238"
+        },
+        {
+          "file": "native/obsgod-audio/output/profile-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "c1fba5ea7bd6e27783e5d10fe5f40ca6e73746a6d3eab0000b86d8b586503aee",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "c4d897c1a84cddc955af2261422df6f8b1ccc4a235ef6f591c7b682b72695238"
+        },
+        {
+          "file": "native/obsgod-audio/output/recording-audio-metrics.json",
+          "internal_revision": null,
+          "original_sha256": "ef1e669f48536cdb3dd846c4abf27c41ea4335d288dbb085a7c64d59ac70fa09",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "ada4b8ed5b0d6ef6cda31e781f2d1344447e4087e39fc09a40944aff457d7db0"
+        },
+        {
+          "file": "native/obsgod-audio/output/silence-negative-control.json",
+          "internal_revision": null,
+          "original_sha256": "5a37e66d12c607bb1149f9821a2c8c8ddc5231a762778668c112d53f63eb9763",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "a7faadde4f8b511f1d542c993e9e477f5c1f3cd30b397a941264e8ad42f91eb9"
+        },
+        {
+          "file": "native/obsgod-audio/output/stream-audio-metrics.json",
+          "internal_revision": null,
+          "original_sha256": "4fb7e9e2e2338e95b9e5f6c579527eb288ad60052b49cbd065b57ad93b662f4c",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "e4a9e31230260ecc45f7339eacad74b7cc3768ee46379f4056d056fb3e08dcc4"
+        },
+        {
+          "file": "native/obsgod-capture/capture-validation/qualification.json",
+          "internal_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "original_sha256": "0dbbfc02b760a928e0402dee94f35263e1adb210f063f2882185d803ce85153b",
+          "revision_binding": "internal source_revision plus parent manifest/binary/source inputs",
+          "sanitized_sha256": "b07a1b487cefe428ba0ad524457871c55c4f219930846714cdeb91242a99cf9b"
+        },
+        {
+          "file": "native/obsgod-game-obs/output/game-obs-qualification.json",
+          "internal_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "original_sha256": "01fc4d5dc5917a7a88e46ab104c757c153b9db5a35c1003c32d6b58f60c6e431",
+          "revision_binding": "internal source_revision plus parent manifest/binary/source inputs",
+          "sanitized_sha256": "75b5ede7a630d456fe52da536e53ca26856fffe1df85f161e2552176c3bf0f32"
+        },
+        {
+          "file": "native/obsgod-game-obs/output/idle-media-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "64f1640f561094f87349f0743b0422daf002d6bb27d5b718f79ab753f71a04be",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "f72a5250af9db975e572db44189d36781c9b785ce0c5a75d0ee2eb3fa6a6286a"
+        }
+      ],
+      "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e"
+    },
+    "repeat": {
+      "act_log_sha256": "acb6e43b6810ce14571f171bf3e78284513e63ab0de23d2f6220109cc445511f",
+      "act_receipt": "20261114T003609Z-candidate.json",
+      "artifacts_sha256": {
+        "SHA256SUMS": "4cd504eba17fcd2b8405881d7f2e76c683147393ca4144c762a1a7379f404e7c",
+        "UPDATER-SHA256SUMS": "45ef6e666cf55186e360ea5432513eb191ab83c5d956de98de3f35f26001d331",
+        "capture-build.json": "5f401a620493b5fc282658c16530db6e87a70ad40b95bb88b0212f08417bbd16",
+        "libgstobsgodcapture.so": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+        "manifest.json": "3e1810b64d7c2d1466df075eaef2472913499ca2d21c7e6a00df62932e14b199",
+        "obsgod": "218477d1ce169298ec3dbb58cdda412fe7371a39653d6dc68bfcf81bc2226f85",
+        "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz": "b4222fb703aa198a7ea200721afbc06dcb86dec56e8c1bebd77f5bb614aad53d",
+        "obsgod-decky.zip": "33cb82f0d68f3f3ce21ae2abd4eab878df6c42f39a52af36748d6e42ceceef66",
+        "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip": "3c2fa5f5623f4c000a2371fe19bce5fdf0fc848b09929befb4ba70e7630cf986",
+        "supply-chain/AUDIT-SHA256SUMS": "c914cef6617407eb51e83e9c45351273194cd2b3128afe138fe948e438369c4e",
+        "supply-chain/provenance.unsigned.json": "c3c8743bb9c189f60496a721850218db92adee9717fa4c9d9ca55b8dd041820e",
+        "supply-chain/release-audit.json": "7d30964b89a0863b1e2fd8b86e1718918c62c9dc6fd59ecff73434e2683df6e9",
+        "supply-chain/sbom.spdx.json": "59ff8372a17840c8baf4731b0f66c2a2c071a242219f6a9eff442a1b18fd67ea",
+        "updater-manifest.json": "fbc9e106291ff478d10a52c7f77e409ace2463d7019118a7ca1d95f25f8ef514"
+      },
+      "candidate_version": "0.1.0-deck.9",
+      "limits": [
+        "Actual Steam Deck LCD/OLED/Flatpak/Gamescope/AMD/controller/headsets and external providers remain unrun",
+        "Sanitized JSON omits any string credential fields and synthetic RTMP addresses; booleans recording privacy invariants remain intact",
+        "Parent act receipt binds summary files lacking their own source_revision marker to exact manifest/binary/source input hashes"
+      ],
+      "native_commands": [
+        [
+          "docker",
+          "run",
+          "--rm",
+          "--user",
+          "1000:1000",
+          "--mount",
+          "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+          "--mount",
+          "type=bind,src=/workspace/.obsgod-tools/completion/act/tmp/obsgod-audio,dst=/work",
+          "obsgod-obs-smoke:qualification",
+          "dbus-run-session",
+          "--",
+          "bash",
+          "/src/steamdeck/tests/native-obs-smoke.sh"
+        ],
+        [
+          "docker",
+          "run",
+          "--rm",
+          "--user",
+          "1000:1000",
+          "-e",
+          "OBSGOD_QUALIFIED_REVISION=4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "--mount",
+          "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+          "--mount",
+          "type=bind,src=/workspace/.obsgod-tools/completion/act/tmp/obsgod-capture,dst=/work",
+          "obsgod-obs-smoke:qualification",
+          "dbus-run-session",
+          "--",
+          "bash",
+          "/src/steamdeck/tests/native-capture-smoke.sh",
+          "/src/dist"
+        ],
+        [
+          "docker",
+          "run",
+          "--rm",
+          "--user",
+          "1000:1000",
+          "-e",
+          "OBSGOD_QUALIFIED_REVISION=4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "--mount",
+          "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+          "--mount",
+          "type=bind,src=/workspace/.obsgod-tools/completion/act/tmp/obsgod-game-obs,dst=/work",
+          "obsgod-obs-smoke:qualification",
+          "dbus-run-session",
+          "--",
+          "bash",
+          "/src/steamdeck/tests/native-game-obs-smoke.sh"
+        ]
+      ],
+      "native_image": "obsgod-obs-smoke:qualification",
+      "native_image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+      "native_source_inputs_sha256": {
+        "steamdeck/tests/native-audio.py": "656c0e8ff2d415310562bc7f16ee163bf6152f6af222813dd678c3043c84e1db",
+        "steamdeck/tests/native-capture-smoke.sh": "2bfa201dc43b02c72fceda8a3bfe3f53982460f55cff4e07a95e7fe47a09a015",
+        "steamdeck/tests/native-control-password.py": "aac7bdbbd2ed47da5dc27b26856c83006de91471c0b94cbe381478274b1c13de",
+        "steamdeck/tests/native-game-obs-smoke.sh": "64f95d37d84502fb4174caa4e95f5bb61a5a9671645a39f175b0161341e7a814",
+        "steamdeck/tests/native-game-obs.py": "36c1035eb0b73a189694c523069e943a4c65b62a93fdb4e2ea950a78f5102784",
+        "steamdeck/tests/native-idle-media.py": "cce725051b42277d08cbfcfa280e4532e4922a2b81fa04ee45cd5d7224c7af8a",
+        "steamdeck/tests/native-media.py": "343ab0e00a6961f8c4008c4fb9dcf2671004386a6a94d5eaa8657fb3989c3b25",
+        "steamdeck/tests/native-mixer.py": "98a3fc1ffdca6fdf41e412873c05d123bf5bddc2455d9fabdb0977e4f298f309",
+        "steamdeck/tests/native-obs-smoke.sh": "1ecad0c9ddf408ad84dbc461e99caaf390d9368c9d56b1a2b0d6edf087c86293",
+        "steamdeck/tests/native-profiles.py": "144371b3a7821e3815d233f0501ce566dd9e4d757b9cf69139f25a70c1e83b7e",
+        "steamdeck/tests/native-resilience.py": "3434157c44f08a403eb78d9a3aa865ca98dbc6b7aba3b8d023ef0115c0c2b81b"
+      },
+      "outcome": "passed",
+      "phase": "repeat",
+      "platform": "Linux amd64 Docker; Debian trixie OBS/PulseAudio/PipeWire with Xvfb and synthetic media/devices",
+      "proofs": [
+        {
+          "file": "native/obsgod-audio/output/audio-default-changed-audio-metrics.json",
+          "internal_revision": null,
+          "original_sha256": "d464306be04eb242676abaa7f70a1eca369be8e9107fb3cf022ec4ef3e1a1e21",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "59b55a8f83dcdd62d2466bf191da36822c0fcf292ced82966f4e3885548646ca"
+        },
+        {
+          "file": "native/obsgod-audio/output/audio-default-fallback-audio-metrics.json",
+          "internal_revision": null,
+          "original_sha256": "e6cdf1192a09f88b5bbabeafa79752a83cff1fcba72c3c49aeabacb0e68cc6d1",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "a22b630335b51dbe8f08c8e462d583cd45272cf47091f76c1202b1bbfb93df09"
+        },
+        {
+          "file": "native/obsgod-audio/output/audio-hotplug.json",
+          "internal_revision": null,
+          "original_sha256": "658121e11e200e99430f03d36a979042c9afcecedbd61da92eb727b7b0a2d863",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "e9730e3e001a34abb0201dd63b0bbbb99b7989c4ed82e75d48118c5b17778c35"
+        },
+        {
+          "file": "native/obsgod-audio/output/control-password-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "da83f3627068e9e7d69023903c0d17117264634a7cb2e9466d21a0a8af7d4f0d",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "995aace9941e816383ee2ca3db94e09cc64e2d6328eddd736c9de53b520992c7"
+        },
+        {
+          "file": "native/obsgod-audio/output/control-workflow-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "a5af5296a2e7ef5ca055d1c84da8d8c8a66bb8add25fa5b05a9b579bc2c4bf58",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "9ce7c14fc1f00ba3d9a3026aef7fec42e2aa85f6027069a11bcc1effe5659ab9"
+        },
+        {
+          "file": "native/obsgod-audio/output/media-live-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "75a15a3da6c9c53d3c3ea7d44ff7e35ddb2b9d5e895c6cb029ecff50416feded",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "145cd0820de88c6a499df669abd2c4d303e214aae7ad878778976ebf69d89eb4"
+        },
+        {
+          "file": "native/obsgod-audio/output/media-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "48c45ccc52d5fd4ade2f909d0f0742c012402036193fdd7629ac1f466d02b3dc",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "578b4e8a5ae1bbfa47aac10e0e206162da3a3813128072f33e81737fc47d1e36"
+        },
+        {
+          "file": "native/obsgod-audio/output/native-live-media-summary.json",
+          "internal_revision": null,
+          "original_sha256": "75a15a3da6c9c53d3c3ea7d44ff7e35ddb2b9d5e895c6cb029ecff50416feded",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "145cd0820de88c6a499df669abd2c4d303e214aae7ad878778976ebf69d89eb4"
+        },
+        {
+          "file": "native/obsgod-audio/output/native-media-summary.json",
+          "internal_revision": null,
+          "original_sha256": "48c45ccc52d5fd4ade2f909d0f0742c012402036193fdd7629ac1f466d02b3dc",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "578b4e8a5ae1bbfa47aac10e0e206162da3a3813128072f33e81737fc47d1e36"
+        },
+        {
+          "file": "native/obsgod-audio/output/native-mixer-summary.json",
+          "internal_revision": null,
+          "original_sha256": "4ab149e53b0c7ef4b696ee78a23fbec020b036a82a6994956d29c718bc072eee",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "bf4c9481f825ef71994f7b26baab7a3d11ff4b58fc36d7ed071795c14c32f20f"
+        },
+        {
+          "file": "native/obsgod-audio/output/native-profiles-summary.json",
+          "internal_revision": null,
+          "original_sha256": "8951182520ea634eaa61eb5e2db80bc5977ec150280e16ea94931da418a352e8",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "d9f6c7c605cb3c98cde49725c55c2cc8b4ffd01708f69ad981e20621242be725"
+        },
+        {
+          "file": "native/obsgod-audio/output/profile-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "8951182520ea634eaa61eb5e2db80bc5977ec150280e16ea94931da418a352e8",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "d9f6c7c605cb3c98cde49725c55c2cc8b4ffd01708f69ad981e20621242be725"
+        },
+        {
+          "file": "native/obsgod-audio/output/recording-audio-metrics.json",
+          "internal_revision": null,
+          "original_sha256": "f3a2171518a3928f48922477f56a50daca3a880222c596e213aa53d91675dbfd",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "bc3b486d4aae40dd7571801b925b533b1bb4c260d76e4e1347e5cb7082205606"
+        },
+        {
+          "file": "native/obsgod-audio/output/silence-negative-control.json",
+          "internal_revision": null,
+          "original_sha256": "5a37e66d12c607bb1149f9821a2c8c8ddc5231a762778668c112d53f63eb9763",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "a7faadde4f8b511f1d542c993e9e477f5c1f3cd30b397a941264e8ad42f91eb9"
+        },
+        {
+          "file": "native/obsgod-audio/output/stream-audio-metrics.json",
+          "internal_revision": null,
+          "original_sha256": "fed3a5409cd81958beac6f1e06bd9f32fb5b5d493eea36eb703a27e5b32c795e",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "3f740a9919ced5b1f920294c8c51081c034e379fa1445e8065a692553aa84bd6"
+        },
+        {
+          "file": "native/obsgod-capture/capture-validation/qualification.json",
+          "internal_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "original_sha256": "3807e2b24cf68b77b2b215b6302355e7dd5544984021a5e02e38a737097468c9",
+          "revision_binding": "internal source_revision plus parent manifest/binary/source inputs",
+          "sanitized_sha256": "7f75292c8cea86f45e2ea4d906b31a9422937a1d9cf749624931a512aa5fcb9f"
+        },
+        {
+          "file": "native/obsgod-game-obs/output/game-obs-qualification.json",
+          "internal_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "original_sha256": "607f67d1483860aa8c7974ee515ad574b8a2727d8114ed8167f0b4de34062534",
+          "revision_binding": "internal source_revision plus parent manifest/binary/source inputs",
+          "sanitized_sha256": "86fe3ea03740a3f7d46a5d7b0aa8f9db221a11a8f40ee5a7294dc29f31f7f1d3"
+        },
+        {
+          "file": "native/obsgod-game-obs/output/idle-media-qualification.json",
+          "internal_revision": null,
+          "original_sha256": "66c8c892fc008fbe3ea2986c8d8e1b25db2f6e5f16a4c513d6529fc30e90ab24",
+          "revision_binding": "individual revision marker unavailable; bound to exact parent act job, read-only source mount, manifest and matched CLI/capture input hashes",
+          "sanitized_sha256": "e567ac365f8a44310d1aabff0fcae93a83de9c88484c830e06f7536256e109a2"
+        }
+      ],
+      "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e"
+    }
+  },
+  "old_immutable_candidate": {
+    "artifact": "d0a4973f9b1835471e99b046d2d4313b042f9ae2",
+    "source": "1a482808a8281c8bce092cea057df758836b34e9",
+    "unchanged": true
+  },
+  "overall_acceptance": "partial",
+  "phases": {
+    "first": {
+      "generic": {
+        "archive_count": 20,
+        "linux_install": {
+          "archive": "obsgod_0.0.0-dev.g4699235_linux_amd64.tar.gz",
+          "archive_sha256": "eef99e403c8b3078e3b8b54227a43721c529b60fb3708398f2a481a7d278e530",
+          "commands": [
+            [
+              "obsgod",
+              "version",
+              "--json"
+            ],
+            [
+              "obsgod",
+              "config",
+              "path"
+            ],
+            [
+              "obsgod",
+              "api",
+              "capabilities"
+            ]
+          ],
+          "gid": 1000,
+          "outcome": "passed",
+          "platform": "Linux/amd64",
+          "schema_version": 1,
+          "scope": "Private temporary user-prefix extraction/install/offline CLI only; no OBS connection or supported-platform claim.",
+          "source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "uid": 1000
+        },
+        "sidecars": 42,
+        "summary_sha256": "c9344eccd67d142cebb67aeddf8bb1113f2506ef6d28e6cf29c521aaf31c6a8a"
+      },
+      "host": {
+        "after": [
+          {
+            "bytes": 4096,
+            "gid": 1000,
+            "kind": "directory",
+            "mode": "0o755",
+            "path": ".",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 1071,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o600",
+            "path": "LICENSE.qrcode-generator.txt",
+            "sha256": "3a850fa5f08101db6f40676c2786e10bd2cd5fff7b12ffdf1e0c434d4e49d90c",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 1749,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o644",
+            "path": "decky-api.js",
+            "sha256": "1aa163d7f9890fa16e2bacd3d52d8b8775510bcbae4564f144e069ee8e9f368e",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 126529,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o644",
+            "path": "index.js",
+            "sha256": "1ddbf5c8a6315ef97fa930b32f1546eaabc13f168f50e1d4a35ec77d60932604",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 32,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o644",
+            "path": "manifest.js",
+            "sha256": "f789ec51becbda8aa3f44787dc35be596419ff954ca263b3562190e5709f987c",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 11,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o644",
+            "path": "types.js",
+            "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+            "uid": 1000,
+            "write_access": true
+          }
+        ],
+        "all_outputs_owned_and_writable": true,
+        "before": [
+          {
+            "bytes": 4096,
+            "gid": 1000,
+            "kind": "directory",
+            "mode": "0o755",
+            "path": ".",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 1071,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o600",
+            "path": "LICENSE.qrcode-generator.txt",
+            "sha256": "3a850fa5f08101db6f40676c2786e10bd2cd5fff7b12ffdf1e0c434d4e49d90c",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 1749,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o644",
+            "path": "decky-api.js",
+            "sha256": "1aa163d7f9890fa16e2bacd3d52d8b8775510bcbae4564f144e069ee8e9f368e",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 126529,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o644",
+            "path": "index.js",
+            "sha256": "1ddbf5c8a6315ef97fa930b32f1546eaabc13f168f50e1d4a35ec77d60932604",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 32,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o644",
+            "path": "manifest.js",
+            "sha256": "f789ec51becbda8aa3f44787dc35be596419ff954ca263b3562190e5709f987c",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 11,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o644",
+            "path": "types.js",
+            "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+            "uid": 1000,
+            "write_access": true
+          }
+        ],
+        "checks": [
+          {
+            "command": [
+              "npm",
+              "--prefix",
+              "steamdeck/decky",
+              "run",
+              "typecheck"
+            ],
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/completion/next-act/runs/4699235e9e925b76ca492d5a00a375ed37fb338e/host-first-typecheck.log",
+            "log_sha256": "4c51a932c40c1dc7887fef7b6e3a4ef90e59dbb21158e1fe8e6c1567a99e4a0e",
+            "name": "typecheck",
+            "outcome": "passed",
+            "started_utc": "2026-11-14T00:32:39.912203+00:00"
+          },
+          {
+            "command": [
+              "npm",
+              "--prefix",
+              "steamdeck/decky",
+              "test"
+            ],
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/completion/next-act/runs/4699235e9e925b76ca492d5a00a375ed37fb338e/host-first-test.log",
+            "log_sha256": "2e643216c269e050f697a0b01f3c22c75e543c710b8c18367c0469b4baa79823",
+            "name": "test",
+            "outcome": "passed",
+            "started_utc": "2026-11-14T00:32:42.324573+00:00"
+          },
+          {
+            "command": [
+              "npm",
+              "--prefix",
+              "steamdeck/decky",
+              "run",
+              "build"
+            ],
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/completion/next-act/runs/4699235e9e925b76ca492d5a00a375ed37fb338e/host-first-build.log",
+            "log_sha256": "848d09f6fe67ecaf44c72ecb1a11656995779f0e64ebc6fa48f0eb14f7017725",
+            "name": "build",
+            "outcome": "passed",
+            "started_utc": "2026-11-14T00:32:42.582271+00:00"
+          }
+        ],
+        "host_gid": 1000,
+        "host_uid": 1000,
+        "outcome": "passed",
+        "phase": "first",
+        "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+        "source_clean_after": true,
+        "versions": {
+          "node": "v24.19.0",
+          "npm": "11.9.0"
+        }
+      },
+      "jobs": [
+        {
+          "command": [
+            "python3",
+            "scripts/local-ci.py",
+            "snapshot",
+            "--act",
+            "/workspace/.obsgod-tools/pkg/bin/act",
+            "--state",
+            "/workspace/.obsgod-tools/completion/act"
+          ],
+          "derived_view": {
+            "derived_plain_log": "20261114T002036Z-snapshot.plain.log",
+            "derived_plain_sha256": "1151d2d56ce9e571082f06bc2af825d7275176b384f3a896a5191cfd0f4646d6",
+            "input_receipt": "20261114T002036Z-snapshot.json",
+            "original_log": "20261114T002036Z-snapshot.log",
+            "original_log_sha256": "dc980c6592268c4907e59cfb7719d2cdc5cd516c680e3f2acf2ffb7d5ff98ced",
+            "source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+            "transformation": "Decode JSON msg/message; retain non-JSON text; strip ANSI in derived view only. Original log/hash unchanged."
+          },
+          "disk_free_after_bytes": 10093645824,
+          "disk_free_before_bytes": 10887708672,
+          "exit_code": 0,
+          "job": "snapshot",
+          "phase": "first",
+          "raw_log_sha256": "dc980c6592268c4907e59cfb7719d2cdc5cd516c680e3f2acf2ffb7d5ff98ced",
+          "receipt": "/workspace/.obsgod-tools/completion/act/20261114T002036Z-snapshot.json",
+          "receipt_sha256": "7033785c58749dd67ed3a4af6c5a9621a5839653ac1bdfec4ab3d66c504e7d3a",
+          "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "seconds": 68.977,
+          "snapshot_retention": {
+            "audit_sidecars": [
+              {
+                "bytes": 4096,
+                "gid": 1000,
+                "kind": "directory",
+                "mode": "0o700",
+                "path": ".",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 5241,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "AUDIT-SHA256SUMS",
+                "sha256": "03edb030bfe85e1c7906346b9387fe4dbcd25aa481bff839957b8d6e7e6c8d77",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 81933,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "SUMMARY.json",
+                "sha256": "c9344eccd67d142cebb67aeddf8bb1113f2506ef6d28e6cf29c521aaf31c6a8a",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2569,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_darwin_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "2e04b29b7082af80f3d3a15674801d50a7d8baa79a2dafe42abf56fd095fa0df",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11024,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_darwin_amd64.tar.gz.spdx.json",
+                "sha256": "bb6e13d9a3b6027c2251e908acac370fa5d8749ba4bf98ada78f8806dcb59505",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2569,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_darwin_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "14d0765d8ef1aec1a17be574794890d4b4c8005d6087332e0bc7b7f3b7446153",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11024,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_darwin_arm64.tar.gz.spdx.json",
+                "sha256": "8d07ae9702eccfb24c743db1a46a8e009b793dd21a5956b992eacbff1d89999c",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2567,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_386.tar.gz.provenance.unsigned.json",
+                "sha256": "51f36f81a0458fa5753565778acd2eaaedb645170275765341b87b517d8ce5bd",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11023,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_386.tar.gz.spdx.json",
+                "sha256": "6af2bd03758820c81af0ed3dc768bf3925cf045eff74ed8974216e661fa66f53",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2571,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "49015774f6cbe4ceb12c4b86b547f30a19d222878817254c52a55ae6daf8b2aa",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11025,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_amd64.tar.gz.spdx.json",
+                "sha256": "75a826d14cb95def92c2165fa49214b548f7dfe09e6d13bc20af3d1fc53459cc",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2571,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "95f40b268bdb8ef66742bee6cb3c6a4f7cd89b0e2956453b3618b9de6ebd4da2",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11025,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_arm64.tar.gz.spdx.json",
+                "sha256": "453ec997581afeb12c1fc395ca89e9f2add23515e1374cd9161b3e56513f7eff",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2570,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_armv6.tar.gz.provenance.unsigned.json",
+                "sha256": "8d837d9ea40593ee42e8298e6d2c8cc9d0eeb054072834795a1f1a843765ce83",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11025,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_armv6.tar.gz.spdx.json",
+                "sha256": "7dd182f0314828649ff8a0b0f2a7031a7da0f57df07c465e07a5c6e99381ae6c",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2570,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_armv7.tar.gz.provenance.unsigned.json",
+                "sha256": "2606a3fd5d3ca4491a3a105f49b40c8e436dc5e994ea5d743ebc2c704b69def7",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11025,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_armv7.tar.gz.spdx.json",
+                "sha256": "6920bb545fcef20f8785af4a9b3131e33262476cbbf9c613995059d90133b35e",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2563,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_386.tar.gz.provenance.unsigned.json",
+                "sha256": "e97669ccf2c6abc4f133427fa52bec393e0210a848e163761d5a6785a78a4704",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11021,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_386.tar.gz.spdx.json",
+                "sha256": "98452cb9f3c700124951e334b1d14d88098644d8a7e03199c2c39a06f1140863",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2567,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "8d7229f3d03b720a1e547e9ac0c302e835d640795b1d211205b758a5e4abfc26",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11023,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_amd64.tar.gz.spdx.json",
+                "sha256": "5c7f0b58ef32d4a307468f7401b306b6659522de3058b63148dccbaf0edf516d",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2567,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "c28901e7066743984634fb4bdd492effb8fd185a93bc26b73e8fff380f28ac92",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11023,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_arm64.tar.gz.spdx.json",
+                "sha256": "e37506dfeead5088419b9c1df3b578379beed0d129071b004a12c401befd9f3c",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2566,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_armv6.tar.gz.provenance.unsigned.json",
+                "sha256": "d914568ade96d8f37904ae447e46cecd7140f53d74b35ad1c16524d4195fc039",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11023,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_armv6.tar.gz.spdx.json",
+                "sha256": "4efeaec5fa73c753f9832fac884bb705faf911e288719b54786cdcd37bb7fa37",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2566,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_armv7.tar.gz.provenance.unsigned.json",
+                "sha256": "2602f9230b6963e42a037e432ef47ae6e04e434b20ce2f4a17c92fc048b7ef8a",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11023,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_armv7.tar.gz.spdx.json",
+                "sha256": "36aa6eaabf67bd0118e29916ff5557017b2241606e46cddad7fa94e7c38afb23",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2567,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_386.tar.gz.provenance.unsigned.json",
+                "sha256": "111e0914c3686db11e60603441c3df7aff7311c7db28c5acb7e8f73a57b0c0dc",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11023,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_386.tar.gz.spdx.json",
+                "sha256": "1b6b6fb007229bf5549abc0711e46d80c4b3883976c835d406478b99d85da93c",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2571,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "2f5ec90a96a053cf8a8714943975d66418b7eb0d3e9ddd240f86e03fb8efac7b",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11025,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_amd64.tar.gz.spdx.json",
+                "sha256": "800e8065cab5b5cad24b35f85845300773db02c46fe83f7345b4a15fa1a81f92",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2571,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "90f9f94832ac89c366e42364a04f7d648ca1f4d4b025ee6afe9adb73d7facfa9",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11025,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_arm64.tar.gz.spdx.json",
+                "sha256": "9cc42b29d68de2cb1f31106e8063666a802cec6a4b4d2c4e58e15a9698e4d5b2",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2570,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_armv6.tar.gz.provenance.unsigned.json",
+                "sha256": "371111abecce0d28502305c12cff8550aa7fdff865576ccbdfb5d879f8b7bba1",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11025,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_armv6.tar.gz.spdx.json",
+                "sha256": "1cf04e840f57becdec4903b0d827a6ea3774d81dcc50b958737c567815a70714",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2570,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_armv7.tar.gz.provenance.unsigned.json",
+                "sha256": "efbc26b41ca7d17ef01315a9bfe79cac99faaec172f2adda052567b96f1343f1",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11025,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_armv7.tar.gz.spdx.json",
+                "sha256": "4fd289e05e94dbabf18a2180746bad717e27c5b03fa7c8cd40fdb708e2be2d4e",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2564,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_windows_386.zip.provenance.unsigned.json",
+                "sha256": "218ef9370c581e6d826fa13eee3a98d86cb8f729b58e24640206aafbd2fc0c9e",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11635,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_windows_386.zip.spdx.json",
+                "sha256": "1c32d906aaa8837e639e42598495994538c1f3136bab1f40fb2b43fa792c23b0",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2568,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_windows_amd64.zip.provenance.unsigned.json",
+                "sha256": "2433a8d76da3b37781af6c79dfe250ac7c33b0bcc0351a0ff88b3fcc3fda1fa6",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11637,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_windows_amd64.zip.spdx.json",
+                "sha256": "55866de96f996104a3e7a7f60c89f9245b47cfc3567c7332e00894d3794cdbba",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2568,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_windows_arm64.zip.provenance.unsigned.json",
+                "sha256": "555eb2c52f3962282b1bf530b9c7798a704756baa08c47b235cf61048ce32ed4",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11637,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_windows_arm64.zip.spdx.json",
+                "sha256": "16dc929a29c889a79bcf3ab830c4029690de6a62681de5b6d34f054ec4bdaaf5",
+                "uid": 1000,
+                "write_access": true
+              }
+            ],
+            "inventory": [
+              {
+                "bytes": 22721,
+                "file": "artifacts.json",
+                "sha256": "f7a2aa0731cca695c681e05c7ee98e7fa5d474d8f71bce860920837ef10e676c"
+              },
+              {
+                "bytes": 3845,
+                "file": "checksums.txt",
+                "sha256": "720ace0b827182aebc3b40cc7f32367273914bf072b81bbdc0ec51c0648c0b43"
+              },
+              {
+                "bytes": 6214,
+                "file": "config.yaml",
+                "sha256": "1362f302bb98fa15f87077c09b72f1bcaffd93a4ca2e75ab5d42629a3e06e621"
+              },
+              {
+                "bytes": 321,
+                "file": "metadata.json",
+                "sha256": "6d64a5b5aa79c6ce7241959496c1bcdc9b4ac3c7a1ba1aa917ab41a671e4fbfc"
+              },
+              {
+                "bytes": 4270732,
+                "file": "obsgod_0.0.0-dev.g4699235_darwin_amd64.tar.gz",
+                "sha256": "b8f6aa4c8ee653e4ade5fecc70aa4345a8b9c9ef5dc147690a00a53389d0e851"
+              },
+              {
+                "bytes": 3952237,
+                "file": "obsgod_0.0.0-dev.g4699235_darwin_arm64.tar.gz",
+                "sha256": "67049d84a38c023148a0dd0dee6be33fb7a3dd5ff18fa5cad7788ac4f1c97ea4"
+              },
+              {
+                "bytes": 4068348,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_386.tar.gz",
+                "sha256": "36003eac8ab4eaef365c765419f7bba8047b01f4da52e145a5d61fcf11d40a9c"
+              },
+              {
+                "bytes": 4174488,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_amd64.tar.gz",
+                "sha256": "0bd9b871179cd483c56e0e47f0730dba6bfa81785c6572fcf798c1148dfa2c3e"
+              },
+              {
+                "bytes": 3773403,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_arm64.tar.gz",
+                "sha256": "24a3dffd1874e677e330b69f97c4ed1e23eed4a455f3aacb9abadb24834298ea"
+              },
+              {
+                "bytes": 4037205,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_armv6.tar.gz",
+                "sha256": "4e0e053bfac6f5ebd419aa9dfde3fdd0593c8391a6af5cc140fb25c2ee16be08"
+              },
+              {
+                "bytes": 4030764,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_armv7.tar.gz",
+                "sha256": "88e6f8724abe1910ef72bd78f85674619567c1bbbdbc80a493d8a4855a8bb347"
+              },
+              {
+                "bytes": 4396916,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_386.apk",
+                "sha256": "bdff763c5d57664ef1857dcc91df7e2752b2939829df972612a425958ac93162"
+              },
+              {
+                "bytes": 4255480,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_386.deb",
+                "sha256": "29e1972a8a81c22984865db354820bc2848ce586e1f7cf2e003ae8b2448fb770"
+              },
+              {
+                "bytes": 4362451,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_386.rpm",
+                "sha256": "f177755ffd6371adc2c8174470478c783b1e1d4701da3f94d84f87bb0e4d5e0e"
+              },
+              {
+                "bytes": 4273655,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_386.tar.gz",
+                "sha256": "7d9212420305e96a028b9e983917f6e15a060cde129456e1b833aced99a45b31"
+              },
+              {
+                "bytes": 4524694,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_amd64.apk",
+                "sha256": "7912d07ea4976e7decfa721653f2bdfdbed31a1585a291958360ec537551ed15"
+              },
+              {
+                "bytes": 4367354,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_amd64.deb",
+                "sha256": "a1c69634c63043085c308c46550d2e566674c16f63c2ae43b02c79865c4cd91b"
+              },
+              {
+                "bytes": 4484627,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_amd64.rpm",
+                "sha256": "91e7f0580fff8cbfe06c060a1692f33d479efc2b4683076a6ffbff7562b799a1"
+              },
+              {
+                "bytes": 4387191,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_amd64.tar.gz",
+                "sha256": "eef99e403c8b3078e3b8b54227a43721c529b60fb3708398f2a481a7d278e530"
+              },
+              {
+                "bytes": 4089284,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_arm64.apk",
+                "sha256": "3adad8005533d4a5d6c9de8dd1efb6d8c788fcc7d4d907a1f8e16ffa6c1e39c1"
+              },
+              {
+                "bytes": 3955970,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_arm64.deb",
+                "sha256": "aee58e5783423b67c532b82f6ebe7114b8381c1ede6c9e8ea62d4ef489051530"
+              },
+              {
+                "bytes": 4063902,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_arm64.rpm",
+                "sha256": "8fce45c21ab49644c73509f6931b7c1dba0fbc39bd0139ed0481c9c07a7642c8"
+              },
+              {
+                "bytes": 3976376,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_arm64.tar.gz",
+                "sha256": "7842e157198b53038fe8756dbfbf57d8830bf583c72168de5cab18b3d2769b3a"
+              },
+              {
+                "bytes": 4353925,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv6.apk",
+                "sha256": "f17e014642873c44e756c24017c79f74ad8b173b5658a96f18dbcb935dba08b4"
+              },
+              {
+                "bytes": 4220776,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv6.deb",
+                "sha256": "d21b848b158c47a054e643633190485d221fe04f20d72908cfbb943abb40b812"
+              },
+              {
+                "bytes": 4317819,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv6.rpm",
+                "sha256": "97fca34ec9ea4c72f5a6c80a2157a4a516e0354065196820a5f526c963ddbf59"
+              },
+              {
+                "bytes": 4242265,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv6.tar.gz",
+                "sha256": "0829238a3849c95b4512317df1bded471789bbe35a493e6ad5f0b0020f2c6fe6"
+              },
+              {
+                "bytes": 4344814,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv7.apk",
+                "sha256": "f805ac1a8f7982826e53c906a7213e00d05b7604a9c464a46b68cfe9bcb352ac"
+              },
+              {
+                "bytes": 4209686,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv7.deb",
+                "sha256": "b05e26ac63447a7fb2ac2cffe22a48ff2905235a5b7b7c6f7325b31457bef7a3"
+              },
+              {
+                "bytes": 4309860,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv7.rpm",
+                "sha256": "b5f928eace9caf41f01c3568c5677f035418db144003db150e818da4f0eba1a2"
+              },
+              {
+                "bytes": 4233374,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv7.tar.gz",
+                "sha256": "22b026c98f8c197e525308d1084333f7fd62caf874910a481c536984b7c03cb8"
+              },
+              {
+                "bytes": 4067445,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_386.tar.gz",
+                "sha256": "6c6b51ca351a1565287814238a3d89133ea4171e97e35873a0b659e4a802f6c7"
+              },
+              {
+                "bytes": 4172058,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_amd64.tar.gz",
+                "sha256": "1fd418c7d0041b1d7f3d7883b4c612aa9320b2ddad57336d35faff0612e8712b"
+              },
+              {
+                "bytes": 3774023,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_arm64.tar.gz",
+                "sha256": "34fc418444c6f81e72bd6f397cdebb86ce4af77509944198e18a1d33c6f6ce7b"
+              },
+              {
+                "bytes": 4035106,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_armv6.tar.gz",
+                "sha256": "e37823d7b9ebeab254846be125cb8f4d648510e2373c130954aa40e2f3900887"
+              },
+              {
+                "bytes": 4029013,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_armv7.tar.gz",
+                "sha256": "370326af46638a437e393bfa32195602f1dad34097f94b32bcef59f41aed219c"
+              },
+              {
+                "bytes": 4265761,
+                "file": "obsgod_0.0.0-dev.g4699235_windows_386.zip",
+                "sha256": "666d043d6b073cee5ef33fd78b07c569babb9e0fc9b9958cbe397d592120d871"
+              },
+              {
+                "bytes": 4316058,
+                "file": "obsgod_0.0.0-dev.g4699235_windows_amd64.zip",
+                "sha256": "485cbcbbe22b1addc0fcd9e215e516641c4041dcc66eb85e8cd60c4b48c6f3f0"
+              },
+              {
+                "bytes": 3853559,
+                "file": "obsgod_0.0.0-dev.g4699235_windows_arm64.zip",
+                "sha256": "bb542b5582f14481d95971aee3efe6a1b0ad90c206a4d7be5b1575f587f95b2e"
+              },
+              {
+                "bytes": 10702640,
+                "file": "obsgod_darwin_amd64_v1/obsgod",
+                "sha256": "0a092e10adfa7c75a2839ce99f033d605101e25108b918df125104ff6ce52159"
+              },
+              {
+                "bytes": 9935522,
+                "file": "obsgod_darwin_arm64_v8.0/obsgod",
+                "sha256": "82d1ca639af1901a00a47d32ef568ab8be54b40bb219ec66a2323e6b6bdaed07"
+              },
+              {
+                "bytes": 9920646,
+                "file": "obsgod_freebsd_386_sse2/obsgod",
+                "sha256": "8159d0d1bb138fd8638060f6374d598507bf5519147451b4a913edf89294a4d0"
+              },
+              {
+                "bytes": 10416262,
+                "file": "obsgod_freebsd_amd64_v1/obsgod",
+                "sha256": "ecfb5cb141bbd9e362c7630eb7ce125416f8a0527c586ad426271a7c6335bd44"
+              },
+              {
+                "bytes": 9633926,
+                "file": "obsgod_freebsd_arm64_v8.0/obsgod",
+                "sha256": "2b431b6645cfe74a6eccefa8d5e8a4fc91a5b5e8a369e2abe9d9da0034751b48"
+              },
+              {
+                "bytes": 10158214,
+                "file": "obsgod_freebsd_arm_6/obsgod",
+                "sha256": "15e45ecf77f483c14bb5059e45093a2d7448e2c1c1fce92b7f5d9be0b2d7ff12"
+              },
+              {
+                "bytes": 10092678,
+                "file": "obsgod_freebsd_arm_7/obsgod",
+                "sha256": "d28211dd261ed79db5affb2d77589d351a5f81cb7c4b6e6ad176dfdaae9917ef"
+              },
+              {
+                "bytes": 10506364,
+                "file": "obsgod_linux_386_sse2/obsgod",
+                "sha256": "554fdea4576da41527144443ed1b3a7847909d7e6926934187e4e49e834db9d4"
+              },
+              {
+                "bytes": 10973308,
+                "file": "obsgod_linux_amd64_v1/obsgod",
+                "sha256": "027ef6f47fbb1c837bdc9ea1e723c4ea021897ca10cd506750de186ec85c799e"
+              },
+              {
+                "bytes": 10092668,
+                "file": "obsgod_linux_arm64_v8.0/obsgod",
+                "sha256": "a6e499681c193733afc0906fa710c3ef1e144e6e9528010ee5a342fbc61db950"
+              },
+              {
+                "bytes": 10616956,
+                "file": "obsgod_linux_arm_6/obsgod",
+                "sha256": "d58f7871ec29da4889ec0d1e642d3f36d1d76d256dbfcacaf42aa35599dc64ee"
+              },
+              {
+                "bytes": 10616956,
+                "file": "obsgod_linux_arm_7/obsgod",
+                "sha256": "591635fe2bc265ad6891b9844ea01f3e6820de4309e39ba5121e543f4b265cf0"
+              },
+              {
+                "bytes": 9924853,
+                "file": "obsgod_openbsd_386_sse2/obsgod",
+                "sha256": "4673329672ce2905a639c13eb5568da294b9f22ef99c990ae9b14fdd13e45e92"
+              },
+              {
+                "bytes": 10428663,
+                "file": "obsgod_openbsd_amd64_v1/obsgod",
+                "sha256": "44068dc3f20c25f9fdbc35446e745811e3bcb78a9f511ffbf6a65f71fa843377"
+              },
+              {
+                "bytes": 9699575,
+                "file": "obsgod_openbsd_arm64_v8.0/obsgod",
+                "sha256": "8a820faf1f3df67a1cab16edac6e445fad4523d43bb9e22e8ae52a8abf0e5d22"
+              },
+              {
+                "bytes": 10158325,
+                "file": "obsgod_openbsd_arm_6/obsgod",
+                "sha256": "8091111e05a5582348acd960d82ddd706795288b57cdb3ad061989b35b5f2b01"
+              },
+              {
+                "bytes": 10158325,
+                "file": "obsgod_openbsd_arm_7/obsgod",
+                "sha256": "5960f610848be78958e48b1046f3bf578fd151ecfcf06733a8076f5787b9952a"
+              },
+              {
+                "bytes": 10327552,
+                "file": "obsgod_windows_386_sse2/obsgod.exe",
+                "sha256": "b761d5dedd01f791ad7424cea47ae8b874b01eeaf0584ecbdb399187d0769cca"
+              },
+              {
+                "bytes": 10765312,
+                "file": "obsgod_windows_amd64_v1/obsgod.exe",
+                "sha256": "7ea80ebc578f0d6a9a983862f442fe5bd497c9180c219b115951818ee28a51fa"
+              },
+              {
+                "bytes": 9777152,
+                "file": "obsgod_windows_arm64_v8.0/obsgod.exe",
+                "sha256": "7de9ccd0877089a6156b2728b9c75bc6c449477cb9ae30918255614056efc9e0"
+              },
+              {
+                "bytes": 5241,
+                "file": "supply-chain/AUDIT-SHA256SUMS",
+                "sha256": "03edb030bfe85e1c7906346b9387fe4dbcd25aa481bff839957b8d6e7e6c8d77"
+              },
+              {
+                "bytes": 81933,
+                "file": "supply-chain/SUMMARY.json",
+                "sha256": "c9344eccd67d142cebb67aeddf8bb1113f2506ef6d28e6cf29c521aaf31c6a8a"
+              },
+              {
+                "bytes": 2569,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_darwin_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "2e04b29b7082af80f3d3a15674801d50a7d8baa79a2dafe42abf56fd095fa0df"
+              },
+              {
+                "bytes": 11024,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_darwin_amd64.tar.gz.spdx.json",
+                "sha256": "bb6e13d9a3b6027c2251e908acac370fa5d8749ba4bf98ada78f8806dcb59505"
+              },
+              {
+                "bytes": 2569,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_darwin_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "14d0765d8ef1aec1a17be574794890d4b4c8005d6087332e0bc7b7f3b7446153"
+              },
+              {
+                "bytes": 11024,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_darwin_arm64.tar.gz.spdx.json",
+                "sha256": "8d07ae9702eccfb24c743db1a46a8e009b793dd21a5956b992eacbff1d89999c"
+              },
+              {
+                "bytes": 2567,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_386.tar.gz.provenance.unsigned.json",
+                "sha256": "51f36f81a0458fa5753565778acd2eaaedb645170275765341b87b517d8ce5bd"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_386.tar.gz.spdx.json",
+                "sha256": "6af2bd03758820c81af0ed3dc768bf3925cf045eff74ed8974216e661fa66f53"
+              },
+              {
+                "bytes": 2571,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "49015774f6cbe4ceb12c4b86b547f30a19d222878817254c52a55ae6daf8b2aa"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_amd64.tar.gz.spdx.json",
+                "sha256": "75a826d14cb95def92c2165fa49214b548f7dfe09e6d13bc20af3d1fc53459cc"
+              },
+              {
+                "bytes": 2571,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "95f40b268bdb8ef66742bee6cb3c6a4f7cd89b0e2956453b3618b9de6ebd4da2"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_arm64.tar.gz.spdx.json",
+                "sha256": "453ec997581afeb12c1fc395ca89e9f2add23515e1374cd9161b3e56513f7eff"
+              },
+              {
+                "bytes": 2570,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_armv6.tar.gz.provenance.unsigned.json",
+                "sha256": "8d837d9ea40593ee42e8298e6d2c8cc9d0eeb054072834795a1f1a843765ce83"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_armv6.tar.gz.spdx.json",
+                "sha256": "7dd182f0314828649ff8a0b0f2a7031a7da0f57df07c465e07a5c6e99381ae6c"
+              },
+              {
+                "bytes": 2570,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_armv7.tar.gz.provenance.unsigned.json",
+                "sha256": "2606a3fd5d3ca4491a3a105f49b40c8e436dc5e994ea5d743ebc2c704b69def7"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_armv7.tar.gz.spdx.json",
+                "sha256": "6920bb545fcef20f8785af4a9b3131e33262476cbbf9c613995059d90133b35e"
+              },
+              {
+                "bytes": 2563,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_386.tar.gz.provenance.unsigned.json",
+                "sha256": "e97669ccf2c6abc4f133427fa52bec393e0210a848e163761d5a6785a78a4704"
+              },
+              {
+                "bytes": 11021,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_386.tar.gz.spdx.json",
+                "sha256": "98452cb9f3c700124951e334b1d14d88098644d8a7e03199c2c39a06f1140863"
+              },
+              {
+                "bytes": 2567,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "8d7229f3d03b720a1e547e9ac0c302e835d640795b1d211205b758a5e4abfc26"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_amd64.tar.gz.spdx.json",
+                "sha256": "5c7f0b58ef32d4a307468f7401b306b6659522de3058b63148dccbaf0edf516d"
+              },
+              {
+                "bytes": 2567,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "c28901e7066743984634fb4bdd492effb8fd185a93bc26b73e8fff380f28ac92"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_arm64.tar.gz.spdx.json",
+                "sha256": "e37506dfeead5088419b9c1df3b578379beed0d129071b004a12c401befd9f3c"
+              },
+              {
+                "bytes": 2566,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_armv6.tar.gz.provenance.unsigned.json",
+                "sha256": "d914568ade96d8f37904ae447e46cecd7140f53d74b35ad1c16524d4195fc039"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_armv6.tar.gz.spdx.json",
+                "sha256": "4efeaec5fa73c753f9832fac884bb705faf911e288719b54786cdcd37bb7fa37"
+              },
+              {
+                "bytes": 2566,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_armv7.tar.gz.provenance.unsigned.json",
+                "sha256": "2602f9230b6963e42a037e432ef47ae6e04e434b20ce2f4a17c92fc048b7ef8a"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_armv7.tar.gz.spdx.json",
+                "sha256": "36aa6eaabf67bd0118e29916ff5557017b2241606e46cddad7fa94e7c38afb23"
+              },
+              {
+                "bytes": 2567,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_386.tar.gz.provenance.unsigned.json",
+                "sha256": "111e0914c3686db11e60603441c3df7aff7311c7db28c5acb7e8f73a57b0c0dc"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_386.tar.gz.spdx.json",
+                "sha256": "1b6b6fb007229bf5549abc0711e46d80c4b3883976c835d406478b99d85da93c"
+              },
+              {
+                "bytes": 2571,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "2f5ec90a96a053cf8a8714943975d66418b7eb0d3e9ddd240f86e03fb8efac7b"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_amd64.tar.gz.spdx.json",
+                "sha256": "800e8065cab5b5cad24b35f85845300773db02c46fe83f7345b4a15fa1a81f92"
+              },
+              {
+                "bytes": 2571,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "90f9f94832ac89c366e42364a04f7d648ca1f4d4b025ee6afe9adb73d7facfa9"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_arm64.tar.gz.spdx.json",
+                "sha256": "9cc42b29d68de2cb1f31106e8063666a802cec6a4b4d2c4e58e15a9698e4d5b2"
+              },
+              {
+                "bytes": 2570,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_armv6.tar.gz.provenance.unsigned.json",
+                "sha256": "371111abecce0d28502305c12cff8550aa7fdff865576ccbdfb5d879f8b7bba1"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_armv6.tar.gz.spdx.json",
+                "sha256": "1cf04e840f57becdec4903b0d827a6ea3774d81dcc50b958737c567815a70714"
+              },
+              {
+                "bytes": 2570,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_armv7.tar.gz.provenance.unsigned.json",
+                "sha256": "efbc26b41ca7d17ef01315a9bfe79cac99faaec172f2adda052567b96f1343f1"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_armv7.tar.gz.spdx.json",
+                "sha256": "4fd289e05e94dbabf18a2180746bad717e27c5b03fa7c8cd40fdb708e2be2d4e"
+              },
+              {
+                "bytes": 2564,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_386.zip.provenance.unsigned.json",
+                "sha256": "218ef9370c581e6d826fa13eee3a98d86cb8f729b58e24640206aafbd2fc0c9e"
+              },
+              {
+                "bytes": 11635,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_386.zip.spdx.json",
+                "sha256": "1c32d906aaa8837e639e42598495994538c1f3136bab1f40fb2b43fa792c23b0"
+              },
+              {
+                "bytes": 2568,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_amd64.zip.provenance.unsigned.json",
+                "sha256": "2433a8d76da3b37781af6c79dfe250ac7c33b0bcc0351a0ff88b3fcc3fda1fa6"
+              },
+              {
+                "bytes": 11637,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_amd64.zip.spdx.json",
+                "sha256": "55866de96f996104a3e7a7f60c89f9245b47cfc3567c7332e00894d3794cdbba"
+              },
+              {
+                "bytes": 2568,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_arm64.zip.provenance.unsigned.json",
+                "sha256": "555eb2c52f3962282b1bf530b9c7798a704756baa08c47b235cf61048ce32ed4"
+              },
+              {
+                "bytes": 11637,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_arm64.zip.spdx.json",
+                "sha256": "16dc929a29c889a79bcf3ab830c4029690de6a62681de5b6d34f054ec4bdaaf5"
+              }
+            ],
+            "linux_smoke_results": [
+              {
+                "bytes": 4096,
+                "gid": 1000,
+                "kind": "directory",
+                "mode": "0o755",
+                "path": ".",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 652,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "linux-install-smoke.json",
+                "sha256": "260957c3556ac34f01375caed24357222456ca6678ff1c67205e4a9897a54be6",
+                "uid": 1000,
+                "write_access": true
+              }
+            ],
+            "notice_materials": [
+              {
+                "bytes": 4096,
+                "gid": 1000,
+                "kind": "directory",
+                "mode": "0o755",
+                "path": ".",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 5716,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "GENERIC-CLI.md",
+                "sha256": "d650c895b8f57674988e8413013e4f5e127ec2488f1dc7b478c00295fc85b932",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 4493,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "GO-NOTICES.json",
+                "sha256": "07bfd56dcd42a7f6856aa66ed949d36c7604d7f995114d8319b8475db2ac9510",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 47994,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "THIRD_PARTY_NOTICES.md",
+                "sha256": "22810432e2128576056d9c57067ec001372563f51f29c47c2086009651793700",
+                "uid": 1000,
+                "write_access": true
+              }
+            ],
+            "phase": "first",
+            "retained": [
+              {
+                "bytes": 22721,
+                "file": "artifacts.json",
+                "sha256": "f7a2aa0731cca695c681e05c7ee98e7fa5d474d8f71bce860920837ef10e676c"
+              },
+              {
+                "bytes": 3845,
+                "file": "checksums.txt",
+                "sha256": "720ace0b827182aebc3b40cc7f32367273914bf072b81bbdc0ec51c0648c0b43"
+              },
+              {
+                "bytes": 321,
+                "file": "metadata.json",
+                "sha256": "6d64a5b5aa79c6ce7241959496c1bcdc9b4ac3c7a1ba1aa917ab41a671e4fbfc"
+              },
+              {
+                "bytes": 4270732,
+                "file": "obsgod_0.0.0-dev.g4699235_darwin_amd64.tar.gz",
+                "sha256": "b8f6aa4c8ee653e4ade5fecc70aa4345a8b9c9ef5dc147690a00a53389d0e851"
+              },
+              {
+                "bytes": 3952237,
+                "file": "obsgod_0.0.0-dev.g4699235_darwin_arm64.tar.gz",
+                "sha256": "67049d84a38c023148a0dd0dee6be33fb7a3dd5ff18fa5cad7788ac4f1c97ea4"
+              },
+              {
+                "bytes": 4068348,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_386.tar.gz",
+                "sha256": "36003eac8ab4eaef365c765419f7bba8047b01f4da52e145a5d61fcf11d40a9c"
+              },
+              {
+                "bytes": 4174488,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_amd64.tar.gz",
+                "sha256": "0bd9b871179cd483c56e0e47f0730dba6bfa81785c6572fcf798c1148dfa2c3e"
+              },
+              {
+                "bytes": 3773403,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_arm64.tar.gz",
+                "sha256": "24a3dffd1874e677e330b69f97c4ed1e23eed4a455f3aacb9abadb24834298ea"
+              },
+              {
+                "bytes": 4037205,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_armv6.tar.gz",
+                "sha256": "4e0e053bfac6f5ebd419aa9dfde3fdd0593c8391a6af5cc140fb25c2ee16be08"
+              },
+              {
+                "bytes": 4030764,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_armv7.tar.gz",
+                "sha256": "88e6f8724abe1910ef72bd78f85674619567c1bbbdbc80a493d8a4855a8bb347"
+              },
+              {
+                "bytes": 4396916,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_386.apk",
+                "sha256": "bdff763c5d57664ef1857dcc91df7e2752b2939829df972612a425958ac93162"
+              },
+              {
+                "bytes": 4255480,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_386.deb",
+                "sha256": "29e1972a8a81c22984865db354820bc2848ce586e1f7cf2e003ae8b2448fb770"
+              },
+              {
+                "bytes": 4362451,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_386.rpm",
+                "sha256": "f177755ffd6371adc2c8174470478c783b1e1d4701da3f94d84f87bb0e4d5e0e"
+              },
+              {
+                "bytes": 4273655,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_386.tar.gz",
+                "sha256": "7d9212420305e96a028b9e983917f6e15a060cde129456e1b833aced99a45b31"
+              },
+              {
+                "bytes": 4524694,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_amd64.apk",
+                "sha256": "7912d07ea4976e7decfa721653f2bdfdbed31a1585a291958360ec537551ed15"
+              },
+              {
+                "bytes": 4367354,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_amd64.deb",
+                "sha256": "a1c69634c63043085c308c46550d2e566674c16f63c2ae43b02c79865c4cd91b"
+              },
+              {
+                "bytes": 4484627,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_amd64.rpm",
+                "sha256": "91e7f0580fff8cbfe06c060a1692f33d479efc2b4683076a6ffbff7562b799a1"
+              },
+              {
+                "bytes": 4387191,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_amd64.tar.gz",
+                "sha256": "eef99e403c8b3078e3b8b54227a43721c529b60fb3708398f2a481a7d278e530"
+              },
+              {
+                "bytes": 4089284,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_arm64.apk",
+                "sha256": "3adad8005533d4a5d6c9de8dd1efb6d8c788fcc7d4d907a1f8e16ffa6c1e39c1"
+              },
+              {
+                "bytes": 3955970,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_arm64.deb",
+                "sha256": "aee58e5783423b67c532b82f6ebe7114b8381c1ede6c9e8ea62d4ef489051530"
+              },
+              {
+                "bytes": 4063902,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_arm64.rpm",
+                "sha256": "8fce45c21ab49644c73509f6931b7c1dba0fbc39bd0139ed0481c9c07a7642c8"
+              },
+              {
+                "bytes": 3976376,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_arm64.tar.gz",
+                "sha256": "7842e157198b53038fe8756dbfbf57d8830bf583c72168de5cab18b3d2769b3a"
+              },
+              {
+                "bytes": 4353925,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv6.apk",
+                "sha256": "f17e014642873c44e756c24017c79f74ad8b173b5658a96f18dbcb935dba08b4"
+              },
+              {
+                "bytes": 4220776,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv6.deb",
+                "sha256": "d21b848b158c47a054e643633190485d221fe04f20d72908cfbb943abb40b812"
+              },
+              {
+                "bytes": 4317819,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv6.rpm",
+                "sha256": "97fca34ec9ea4c72f5a6c80a2157a4a516e0354065196820a5f526c963ddbf59"
+              },
+              {
+                "bytes": 4242265,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv6.tar.gz",
+                "sha256": "0829238a3849c95b4512317df1bded471789bbe35a493e6ad5f0b0020f2c6fe6"
+              },
+              {
+                "bytes": 4344814,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv7.apk",
+                "sha256": "f805ac1a8f7982826e53c906a7213e00d05b7604a9c464a46b68cfe9bcb352ac"
+              },
+              {
+                "bytes": 4209686,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv7.deb",
+                "sha256": "b05e26ac63447a7fb2ac2cffe22a48ff2905235a5b7b7c6f7325b31457bef7a3"
+              },
+              {
+                "bytes": 4309860,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv7.rpm",
+                "sha256": "b5f928eace9caf41f01c3568c5677f035418db144003db150e818da4f0eba1a2"
+              },
+              {
+                "bytes": 4233374,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv7.tar.gz",
+                "sha256": "22b026c98f8c197e525308d1084333f7fd62caf874910a481c536984b7c03cb8"
+              },
+              {
+                "bytes": 4067445,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_386.tar.gz",
+                "sha256": "6c6b51ca351a1565287814238a3d89133ea4171e97e35873a0b659e4a802f6c7"
+              },
+              {
+                "bytes": 4172058,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_amd64.tar.gz",
+                "sha256": "1fd418c7d0041b1d7f3d7883b4c612aa9320b2ddad57336d35faff0612e8712b"
+              },
+              {
+                "bytes": 3774023,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_arm64.tar.gz",
+                "sha256": "34fc418444c6f81e72bd6f397cdebb86ce4af77509944198e18a1d33c6f6ce7b"
+              },
+              {
+                "bytes": 4035106,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_armv6.tar.gz",
+                "sha256": "e37823d7b9ebeab254846be125cb8f4d648510e2373c130954aa40e2f3900887"
+              },
+              {
+                "bytes": 4029013,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_armv7.tar.gz",
+                "sha256": "370326af46638a437e393bfa32195602f1dad34097f94b32bcef59f41aed219c"
+              },
+              {
+                "bytes": 4265761,
+                "file": "obsgod_0.0.0-dev.g4699235_windows_386.zip",
+                "sha256": "666d043d6b073cee5ef33fd78b07c569babb9e0fc9b9958cbe397d592120d871"
+              },
+              {
+                "bytes": 4316058,
+                "file": "obsgod_0.0.0-dev.g4699235_windows_amd64.zip",
+                "sha256": "485cbcbbe22b1addc0fcd9e215e516641c4041dcc66eb85e8cd60c4b48c6f3f0"
+              },
+              {
+                "bytes": 3853559,
+                "file": "obsgod_0.0.0-dev.g4699235_windows_arm64.zip",
+                "sha256": "bb542b5582f14481d95971aee3efe6a1b0ad90c206a4d7be5b1575f587f95b2e"
+              },
+              {
+                "bytes": 5241,
+                "file": "supply-chain/AUDIT-SHA256SUMS",
+                "sha256": "03edb030bfe85e1c7906346b9387fe4dbcd25aa481bff839957b8d6e7e6c8d77"
+              },
+              {
+                "bytes": 81933,
+                "file": "supply-chain/SUMMARY.json",
+                "sha256": "c9344eccd67d142cebb67aeddf8bb1113f2506ef6d28e6cf29c521aaf31c6a8a"
+              },
+              {
+                "bytes": 2569,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_darwin_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "2e04b29b7082af80f3d3a15674801d50a7d8baa79a2dafe42abf56fd095fa0df"
+              },
+              {
+                "bytes": 11024,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_darwin_amd64.tar.gz.spdx.json",
+                "sha256": "bb6e13d9a3b6027c2251e908acac370fa5d8749ba4bf98ada78f8806dcb59505"
+              },
+              {
+                "bytes": 2569,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_darwin_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "14d0765d8ef1aec1a17be574794890d4b4c8005d6087332e0bc7b7f3b7446153"
+              },
+              {
+                "bytes": 11024,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_darwin_arm64.tar.gz.spdx.json",
+                "sha256": "8d07ae9702eccfb24c743db1a46a8e009b793dd21a5956b992eacbff1d89999c"
+              },
+              {
+                "bytes": 2567,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_386.tar.gz.provenance.unsigned.json",
+                "sha256": "51f36f81a0458fa5753565778acd2eaaedb645170275765341b87b517d8ce5bd"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_386.tar.gz.spdx.json",
+                "sha256": "6af2bd03758820c81af0ed3dc768bf3925cf045eff74ed8974216e661fa66f53"
+              },
+              {
+                "bytes": 2571,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "49015774f6cbe4ceb12c4b86b547f30a19d222878817254c52a55ae6daf8b2aa"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_amd64.tar.gz.spdx.json",
+                "sha256": "75a826d14cb95def92c2165fa49214b548f7dfe09e6d13bc20af3d1fc53459cc"
+              },
+              {
+                "bytes": 2571,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "95f40b268bdb8ef66742bee6cb3c6a4f7cd89b0e2956453b3618b9de6ebd4da2"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_arm64.tar.gz.spdx.json",
+                "sha256": "453ec997581afeb12c1fc395ca89e9f2add23515e1374cd9161b3e56513f7eff"
+              },
+              {
+                "bytes": 2570,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_armv6.tar.gz.provenance.unsigned.json",
+                "sha256": "8d837d9ea40593ee42e8298e6d2c8cc9d0eeb054072834795a1f1a843765ce83"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_armv6.tar.gz.spdx.json",
+                "sha256": "7dd182f0314828649ff8a0b0f2a7031a7da0f57df07c465e07a5c6e99381ae6c"
+              },
+              {
+                "bytes": 2570,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_armv7.tar.gz.provenance.unsigned.json",
+                "sha256": "2606a3fd5d3ca4491a3a105f49b40c8e436dc5e994ea5d743ebc2c704b69def7"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_armv7.tar.gz.spdx.json",
+                "sha256": "6920bb545fcef20f8785af4a9b3131e33262476cbbf9c613995059d90133b35e"
+              },
+              {
+                "bytes": 2563,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_386.tar.gz.provenance.unsigned.json",
+                "sha256": "e97669ccf2c6abc4f133427fa52bec393e0210a848e163761d5a6785a78a4704"
+              },
+              {
+                "bytes": 11021,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_386.tar.gz.spdx.json",
+                "sha256": "98452cb9f3c700124951e334b1d14d88098644d8a7e03199c2c39a06f1140863"
+              },
+              {
+                "bytes": 2567,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "8d7229f3d03b720a1e547e9ac0c302e835d640795b1d211205b758a5e4abfc26"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_amd64.tar.gz.spdx.json",
+                "sha256": "5c7f0b58ef32d4a307468f7401b306b6659522de3058b63148dccbaf0edf516d"
+              },
+              {
+                "bytes": 2567,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "c28901e7066743984634fb4bdd492effb8fd185a93bc26b73e8fff380f28ac92"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_arm64.tar.gz.spdx.json",
+                "sha256": "e37506dfeead5088419b9c1df3b578379beed0d129071b004a12c401befd9f3c"
+              },
+              {
+                "bytes": 2566,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_armv6.tar.gz.provenance.unsigned.json",
+                "sha256": "d914568ade96d8f37904ae447e46cecd7140f53d74b35ad1c16524d4195fc039"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_armv6.tar.gz.spdx.json",
+                "sha256": "4efeaec5fa73c753f9832fac884bb705faf911e288719b54786cdcd37bb7fa37"
+              },
+              {
+                "bytes": 2566,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_armv7.tar.gz.provenance.unsigned.json",
+                "sha256": "2602f9230b6963e42a037e432ef47ae6e04e434b20ce2f4a17c92fc048b7ef8a"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_armv7.tar.gz.spdx.json",
+                "sha256": "36aa6eaabf67bd0118e29916ff5557017b2241606e46cddad7fa94e7c38afb23"
+              },
+              {
+                "bytes": 2567,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_386.tar.gz.provenance.unsigned.json",
+                "sha256": "111e0914c3686db11e60603441c3df7aff7311c7db28c5acb7e8f73a57b0c0dc"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_386.tar.gz.spdx.json",
+                "sha256": "1b6b6fb007229bf5549abc0711e46d80c4b3883976c835d406478b99d85da93c"
+              },
+              {
+                "bytes": 2571,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "2f5ec90a96a053cf8a8714943975d66418b7eb0d3e9ddd240f86e03fb8efac7b"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_amd64.tar.gz.spdx.json",
+                "sha256": "800e8065cab5b5cad24b35f85845300773db02c46fe83f7345b4a15fa1a81f92"
+              },
+              {
+                "bytes": 2571,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "90f9f94832ac89c366e42364a04f7d648ca1f4d4b025ee6afe9adb73d7facfa9"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_arm64.tar.gz.spdx.json",
+                "sha256": "9cc42b29d68de2cb1f31106e8063666a802cec6a4b4d2c4e58e15a9698e4d5b2"
+              },
+              {
+                "bytes": 2570,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_armv6.tar.gz.provenance.unsigned.json",
+                "sha256": "371111abecce0d28502305c12cff8550aa7fdff865576ccbdfb5d879f8b7bba1"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_armv6.tar.gz.spdx.json",
+                "sha256": "1cf04e840f57becdec4903b0d827a6ea3774d81dcc50b958737c567815a70714"
+              },
+              {
+                "bytes": 2570,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_armv7.tar.gz.provenance.unsigned.json",
+                "sha256": "efbc26b41ca7d17ef01315a9bfe79cac99faaec172f2adda052567b96f1343f1"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_armv7.tar.gz.spdx.json",
+                "sha256": "4fd289e05e94dbabf18a2180746bad717e27c5b03fa7c8cd40fdb708e2be2d4e"
+              },
+              {
+                "bytes": 2564,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_386.zip.provenance.unsigned.json",
+                "sha256": "218ef9370c581e6d826fa13eee3a98d86cb8f729b58e24640206aafbd2fc0c9e"
+              },
+              {
+                "bytes": 11635,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_386.zip.spdx.json",
+                "sha256": "1c32d906aaa8837e639e42598495994538c1f3136bab1f40fb2b43fa792c23b0"
+              },
+              {
+                "bytes": 2568,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_amd64.zip.provenance.unsigned.json",
+                "sha256": "2433a8d76da3b37781af6c79dfe250ac7c33b0bcc0351a0ff88b3fcc3fda1fa6"
+              },
+              {
+                "bytes": 11637,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_amd64.zip.spdx.json",
+                "sha256": "55866de96f996104a3e7a7f60c89f9245b47cfc3567c7332e00894d3794cdbba"
+              },
+              {
+                "bytes": 2568,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_arm64.zip.provenance.unsigned.json",
+                "sha256": "555eb2c52f3962282b1bf530b9c7798a704756baa08c47b235cf61048ce32ed4"
+              },
+              {
+                "bytes": 11637,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_arm64.zip.spdx.json",
+                "sha256": "16dc929a29c889a79bcf3ab830c4029690de6a62681de5b6d34f054ec4bdaaf5"
+              }
+            ],
+            "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+            "scope": "Actual generic snapshot archives/packages and audit/notice/metadata bytes; loose build binaries hash-inventoried only; no target-native execution implied",
+            "snapshot_path": "/workspace/obsgod/dist/snapshot"
+          },
+          "source_clean_after": true,
+          "source_clean_before": true
+        },
+        {
+          "command": [
+            "python3",
+            "scripts/local-ci.py",
+            "lint",
+            "--act",
+            "/workspace/.obsgod-tools/pkg/bin/act",
+            "--state",
+            "/workspace/.obsgod-tools/completion/act"
+          ],
+          "derived_view": {
+            "derived_plain_log": "20261114T002145Z-lint.plain.log",
+            "derived_plain_sha256": "a5b2b382e47e6c6a60836688d05b6df6c09eff66c160880d2cfaf3d6cc200a31",
+            "input_receipt": "20261114T002145Z-lint.json",
+            "original_log": "20261114T002145Z-lint.log",
+            "original_log_sha256": "0fd6680a428e4f2520f7dc750bcfbc10a0d914ea6d0a03b612e20a5e75902051",
+            "source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+            "transformation": "Decode JSON msg/message; retain non-JSON text; strip ANSI in derived view only. Original log/hash unchanged."
+          },
+          "disk_free_after_bytes": 9905860608,
+          "disk_free_before_bytes": 10703785984,
+          "exit_code": 0,
+          "job": "lint",
+          "phase": "first",
+          "raw_log_sha256": "0fd6680a428e4f2520f7dc750bcfbc10a0d914ea6d0a03b612e20a5e75902051",
+          "receipt": "/workspace/.obsgod-tools/completion/act/20261114T002145Z-lint.json",
+          "receipt_sha256": "4034dfdf7a8ecbbca7f47885920e1711f7e790ad51eb20c79483a099df97fc1e",
+          "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "seconds": 47.693,
+          "source_clean_after": true,
+          "source_clean_before": true
+        },
+        {
+          "command": [
+            "python3",
+            "scripts/local-ci.py",
+            "build",
+            "--act",
+            "/workspace/.obsgod-tools/pkg/bin/act",
+            "--state",
+            "/workspace/.obsgod-tools/completion/act"
+          ],
+          "derived_view": {
+            "derived_plain_log": "20261114T002234Z-build.plain.log",
+            "derived_plain_sha256": "e57109a824298e9257df5ee82126e28c70f544ec00cef1859cdd8be1ea79d6fd",
+            "input_receipt": "20261114T002234Z-build.json",
+            "original_log": "20261114T002234Z-build.log",
+            "original_log_sha256": "6e5fdf19a4b5f45fbcf3ec1bbb94302ae667c6d125c036128767e22415d2df25",
+            "source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+            "transformation": "Decode JSON msg/message; retain non-JSON text; strip ANSI in derived view only. Original log/hash unchanged."
+          },
+          "disk_free_after_bytes": 9898147840,
+          "disk_free_before_bytes": 10698293248,
+          "exit_code": 0,
+          "job": "build",
+          "phase": "first",
+          "raw_log_sha256": "6e5fdf19a4b5f45fbcf3ec1bbb94302ae667c6d125c036128767e22415d2df25",
+          "receipt": "/workspace/.obsgod-tools/completion/act/20261114T002234Z-build.json",
+          "receipt_sha256": "63d85002a933073a32d3e9737c781f53e74d6522e99b0f281631b66a217c1445",
+          "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "seconds": 47.374,
+          "source_clean_after": true,
+          "source_clean_before": true
+        },
+        {
+          "command": [
+            "python3",
+            "scripts/local-ci.py",
+            "coverage",
+            "--act",
+            "/workspace/.obsgod-tools/pkg/bin/act",
+            "--state",
+            "/workspace/.obsgod-tools/completion/act"
+          ],
+          "derived_view": {
+            "derived_plain_log": "20261114T002322Z-coverage.plain.log",
+            "derived_plain_sha256": "17f9df85579ed2f9c80cd0af8242148332123019867a5038901dccd516841815",
+            "input_receipt": "20261114T002322Z-coverage.json",
+            "original_log": "20261114T002322Z-coverage.log",
+            "original_log_sha256": "0c62cd7efa1a2adbcc4c11fea50d129d0afee29099f40a94ce7987e56a086c88",
+            "source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+            "transformation": "Decode JSON msg/message; retain non-JSON text; strip ANSI in derived view only. Original log/hash unchanged."
+          },
+          "disk_free_after_bytes": 9888858112,
+          "disk_free_before_bytes": 10695970816,
+          "exit_code": 0,
+          "job": "coverage",
+          "phase": "first",
+          "raw_log_sha256": "0c62cd7efa1a2adbcc4c11fea50d129d0afee29099f40a94ce7987e56a086c88",
+          "receipt": "/workspace/.obsgod-tools/completion/act/20261114T002322Z-coverage.json",
+          "receipt_sha256": "5c94bec72913300ad004ac7e2c27e8cac23ac4330f84a2d54cf96e55612d6acf",
+          "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "seconds": 52.402,
+          "source_clean_after": true,
+          "source_clean_before": true
+        },
+        {
+          "command": [
+            "python3",
+            "scripts/local-ci.py",
+            "docs",
+            "--act",
+            "/workspace/.obsgod-tools/pkg/bin/act",
+            "--state",
+            "/workspace/.obsgod-tools/completion/act"
+          ],
+          "derived_view": {
+            "derived_plain_log": "20261114T002415Z-docs.plain.log",
+            "derived_plain_sha256": "72d68b81bb1543a52862aa6b0cfe71fa3ca55da075280308bd2683c47b32cff0",
+            "input_receipt": "20261114T002415Z-docs.json",
+            "original_log": "20261114T002415Z-docs.log",
+            "original_log_sha256": "9da587c41e61cb65053f4dbfe47726cba6c5cc4cf493820e147ccabf6eeb028a",
+            "source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+            "transformation": "Decode JSON msg/message; retain non-JSON text; strip ANSI in derived view only. Original log/hash unchanged."
+          },
+          "disk_free_after_bytes": 10688720896,
+          "disk_free_before_bytes": 10688884736,
+          "exit_code": 0,
+          "job": "docs",
+          "phase": "first",
+          "raw_log_sha256": "9da587c41e61cb65053f4dbfe47726cba6c5cc4cf493820e147ccabf6eeb028a",
+          "receipt": "/workspace/.obsgod-tools/completion/act/20261114T002415Z-docs.json",
+          "receipt_sha256": "74af70f5572d11cdb1bfc0c18fbc2a7eadc41088cb0e8d766eda5bc7a0962004",
+          "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "seconds": 18.747,
+          "source_clean_after": true,
+          "source_clean_before": true
+        },
+        {
+          "command": [
+            "python3",
+            "scripts/local-ci.py",
+            "candidate",
+            "--act",
+            "/workspace/.obsgod-tools/pkg/bin/act",
+            "--state",
+            "/workspace/.obsgod-tools/completion/act"
+          ],
+          "derived_view": {
+            "derived_plain_log": "20261114T002434Z-candidate.plain.log",
+            "derived_plain_sha256": "4344662085a9a5b663ec790c075e8f8f63ddcae54a9a1c7763ef1247074d94c0",
+            "input_receipt": "20261114T002434Z-candidate.json",
+            "original_log": "20261114T002434Z-candidate.log",
+            "original_log_sha256": "c55407ca920890fa2ead25f0b05f2e9603f216e3800d1624103d5319b1847670",
+            "source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+            "transformation": "Decode JSON msg/message; retain non-JSON text; strip ANSI in derived view only. Original log/hash unchanged."
+          },
+          "disk_free_after_bytes": 9919451136,
+          "disk_free_before_bytes": 10688708608,
+          "exit_code": 0,
+          "host_frontend_outcome": "passed",
+          "job": "candidate",
+          "native_registry": "/workspace/.obsgod-tools/completion/act/retained-4699235e/first/candidate-native.json",
+          "phase": "first",
+          "raw_log_sha256": "c55407ca920890fa2ead25f0b05f2e9603f216e3800d1624103d5319b1847670",
+          "receipt": "/workspace/.obsgod-tools/completion/act/20261114T002434Z-candidate.json",
+          "receipt_sha256": "7b770525cd4dadd13bcfe315cd2f09294a8ca92c62f026588cd69c3c99142aa5",
+          "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "seconds": 485.162,
+          "source_clean_after": true,
+          "source_clean_before": true
+        }
+      ]
+    },
+    "repeat": {
+      "generic": {
+        "archive_count": 20,
+        "linux_install": {
+          "archive": "obsgod_0.0.0-dev.g4699235_linux_amd64.tar.gz",
+          "archive_sha256": "eef99e403c8b3078e3b8b54227a43721c529b60fb3708398f2a481a7d278e530",
+          "commands": [
+            [
+              "obsgod",
+              "version",
+              "--json"
+            ],
+            [
+              "obsgod",
+              "config",
+              "path"
+            ],
+            [
+              "obsgod",
+              "api",
+              "capabilities"
+            ]
+          ],
+          "gid": 1000,
+          "outcome": "passed",
+          "platform": "Linux/amd64",
+          "schema_version": 1,
+          "scope": "Private temporary user-prefix extraction/install/offline CLI only; no OBS connection or supported-platform claim.",
+          "source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "uid": 1000
+        },
+        "sidecars": 42,
+        "summary_sha256": "c9344eccd67d142cebb67aeddf8bb1113f2506ef6d28e6cf29c521aaf31c6a8a"
+      },
+      "host": {
+        "after": [
+          {
+            "bytes": 4096,
+            "gid": 1000,
+            "kind": "directory",
+            "mode": "0o755",
+            "path": ".",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 1071,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o600",
+            "path": "LICENSE.qrcode-generator.txt",
+            "sha256": "3a850fa5f08101db6f40676c2786e10bd2cd5fff7b12ffdf1e0c434d4e49d90c",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 1749,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o644",
+            "path": "decky-api.js",
+            "sha256": "1aa163d7f9890fa16e2bacd3d52d8b8775510bcbae4564f144e069ee8e9f368e",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 126529,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o644",
+            "path": "index.js",
+            "sha256": "1ddbf5c8a6315ef97fa930b32f1546eaabc13f168f50e1d4a35ec77d60932604",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 32,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o644",
+            "path": "manifest.js",
+            "sha256": "f789ec51becbda8aa3f44787dc35be596419ff954ca263b3562190e5709f987c",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 11,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o644",
+            "path": "types.js",
+            "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+            "uid": 1000,
+            "write_access": true
+          }
+        ],
+        "all_outputs_owned_and_writable": true,
+        "before": [
+          {
+            "bytes": 4096,
+            "gid": 1000,
+            "kind": "directory",
+            "mode": "0o755",
+            "path": ".",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 1071,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o600",
+            "path": "LICENSE.qrcode-generator.txt",
+            "sha256": "3a850fa5f08101db6f40676c2786e10bd2cd5fff7b12ffdf1e0c434d4e49d90c",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 1749,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o644",
+            "path": "decky-api.js",
+            "sha256": "1aa163d7f9890fa16e2bacd3d52d8b8775510bcbae4564f144e069ee8e9f368e",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 126529,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o644",
+            "path": "index.js",
+            "sha256": "1ddbf5c8a6315ef97fa930b32f1546eaabc13f168f50e1d4a35ec77d60932604",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 32,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o644",
+            "path": "manifest.js",
+            "sha256": "f789ec51becbda8aa3f44787dc35be596419ff954ca263b3562190e5709f987c",
+            "uid": 1000,
+            "write_access": true
+          },
+          {
+            "bytes": 11,
+            "gid": 1000,
+            "kind": "file",
+            "mode": "0o644",
+            "path": "types.js",
+            "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+            "uid": 1000,
+            "write_access": true
+          }
+        ],
+        "checks": [
+          {
+            "command": [
+              "npm",
+              "--prefix",
+              "steamdeck/decky",
+              "run",
+              "typecheck"
+            ],
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/completion/next-act/runs/4699235e9e925b76ca492d5a00a375ed37fb338e/host-repeat-typecheck.log",
+            "log_sha256": "4c51a932c40c1dc7887fef7b6e3a4ef90e59dbb21158e1fe8e6c1567a99e4a0e",
+            "name": "typecheck",
+            "outcome": "passed",
+            "started_utc": "2026-11-14T00:43:49.546022+00:00"
+          },
+          {
+            "command": [
+              "npm",
+              "--prefix",
+              "steamdeck/decky",
+              "test"
+            ],
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/completion/next-act/runs/4699235e9e925b76ca492d5a00a375ed37fb338e/host-repeat-test.log",
+            "log_sha256": "3066fa460f1bc00164c9d59c1ff977c0cd433f7d72b5090546fd9eebcdeec42b",
+            "name": "test",
+            "outcome": "passed",
+            "started_utc": "2026-11-14T00:43:51.898050+00:00"
+          },
+          {
+            "command": [
+              "npm",
+              "--prefix",
+              "steamdeck/decky",
+              "run",
+              "build"
+            ],
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/completion/next-act/runs/4699235e9e925b76ca492d5a00a375ed37fb338e/host-repeat-build.log",
+            "log_sha256": "6e2ae39e51b73e3943a2a9f4ac5e1fa0b404d446f0f47b239d51e8176224c682",
+            "name": "build",
+            "outcome": "passed",
+            "started_utc": "2026-11-14T00:43:52.143234+00:00"
+          }
+        ],
+        "host_gid": 1000,
+        "host_uid": 1000,
+        "outcome": "passed",
+        "phase": "repeat",
+        "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+        "source_clean_after": true,
+        "versions": {
+          "node": "v24.19.0",
+          "npm": "11.9.0"
+        }
+      },
+      "jobs": [
+        {
+          "command": [
+            "python3",
+            "scripts/local-ci.py",
+            "lint",
+            "--act",
+            "/workspace/.obsgod-tools/pkg/bin/act",
+            "--state",
+            "/workspace/.obsgod-tools/completion/act"
+          ],
+          "derived_view": {
+            "derived_plain_log": "20261114T003250Z-lint.plain.log",
+            "derived_plain_sha256": "c66860848c5901f24f4fd4fb9ad67574efbfbca41f1904baeaa9717ebc34022a",
+            "input_receipt": "20261114T003250Z-lint.json",
+            "original_log": "20261114T003250Z-lint.log",
+            "original_log_sha256": "05d95dcc33de563f59000da648b89c54632dfafe7d480e7637f60e6cdca8f694",
+            "source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+            "transformation": "Decode JSON msg/message; retain non-JSON text; strip ANSI in derived view only. Original log/hash unchanged."
+          },
+          "disk_free_after_bytes": 9873608704,
+          "disk_free_before_bytes": 10685980672,
+          "exit_code": 0,
+          "job": "lint",
+          "phase": "repeat",
+          "raw_log_sha256": "05d95dcc33de563f59000da648b89c54632dfafe7d480e7637f60e6cdca8f694",
+          "receipt": "/workspace/.obsgod-tools/completion/act/20261114T003250Z-lint.json",
+          "receipt_sha256": "f635d3424ffdd326cfad34353eae03ec96a51e893b636177eb3350992e62f345",
+          "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "seconds": 51.275,
+          "source_clean_after": true,
+          "source_clean_before": true
+        },
+        {
+          "command": [
+            "python3",
+            "scripts/local-ci.py",
+            "build",
+            "--act",
+            "/workspace/.obsgod-tools/pkg/bin/act",
+            "--state",
+            "/workspace/.obsgod-tools/completion/act"
+          ],
+          "derived_view": {
+            "derived_plain_log": "20261114T003342Z-build.plain.log",
+            "derived_plain_sha256": "4d6dd68efd3b8bac64c8047a835cd6825502e28df7494eef276dc49f9f046bb4",
+            "input_receipt": "20261114T003342Z-build.json",
+            "original_log": "20261114T003342Z-build.log",
+            "original_log_sha256": "8ad7de84921751f14ac31dea8459c7220b30981a4a92d0f787f4c3af1674b694",
+            "source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+            "transformation": "Decode JSON msg/message; retain non-JSON text; strip ANSI in derived view only. Original log/hash unchanged."
+          },
+          "disk_free_after_bytes": 9873559552,
+          "disk_free_before_bytes": 10685886464,
+          "exit_code": 0,
+          "job": "build",
+          "phase": "repeat",
+          "raw_log_sha256": "8ad7de84921751f14ac31dea8459c7220b30981a4a92d0f787f4c3af1674b694",
+          "receipt": "/workspace/.obsgod-tools/completion/act/20261114T003342Z-build.json",
+          "receipt_sha256": "1d5684c33fd52d573f3efbcf993d145f45384fed57c9651371f4dd159f388379",
+          "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "seconds": 32.311,
+          "source_clean_after": true,
+          "source_clean_before": true
+        },
+        {
+          "command": [
+            "python3",
+            "scripts/local-ci.py",
+            "coverage",
+            "--act",
+            "/workspace/.obsgod-tools/pkg/bin/act",
+            "--state",
+            "/workspace/.obsgod-tools/completion/act"
+          ],
+          "derived_view": {
+            "derived_plain_log": "20261114T003415Z-coverage.plain.log",
+            "derived_plain_sha256": "25959c9be0076395e4f144a2d67cd7fcb51b175b9167d2315f1188888c9937e7",
+            "input_receipt": "20261114T003415Z-coverage.json",
+            "original_log": "20261114T003415Z-coverage.log",
+            "original_log_sha256": "f9bc7b2ba54362372691b4afe406769b48bf2a73522b830be3eb4790e2450e16",
+            "source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+            "transformation": "Decode JSON msg/message; retain non-JSON text; strip ANSI in derived view only. Original log/hash unchanged."
+          },
+          "disk_free_after_bytes": 9873121280,
+          "disk_free_before_bytes": 10685816832,
+          "exit_code": 0,
+          "job": "coverage",
+          "phase": "repeat",
+          "raw_log_sha256": "f9bc7b2ba54362372691b4afe406769b48bf2a73522b830be3eb4790e2450e16",
+          "receipt": "/workspace/.obsgod-tools/completion/act/20261114T003415Z-coverage.json",
+          "receipt_sha256": "3d8c3ff85a6fefe4248d8584c145c4677fc6154c7652aded2c481b95baf4f310",
+          "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "seconds": 37.821,
+          "source_clean_after": true,
+          "source_clean_before": true
+        },
+        {
+          "command": [
+            "python3",
+            "scripts/local-ci.py",
+            "snapshot",
+            "--act",
+            "/workspace/.obsgod-tools/pkg/bin/act",
+            "--state",
+            "/workspace/.obsgod-tools/completion/act"
+          ],
+          "derived_view": {
+            "derived_plain_log": "20261114T003454Z-snapshot.plain.log",
+            "derived_plain_sha256": "a2d655bf44435bf28d84536d0a90ce0789232406b9a7b2a18fc55292c1c27bf5",
+            "input_receipt": "20261114T003454Z-snapshot.json",
+            "original_log": "20261114T003454Z-snapshot.log",
+            "original_log_sha256": "988c1d0984b241e80248605c8a0bd96c07d2d0fc78c6c42838582daba771d805",
+            "source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+            "transformation": "Decode JSON msg/message; retain non-JSON text; strip ANSI in derived view only. Original log/hash unchanged."
+          },
+          "disk_free_after_bytes": 9872515072,
+          "disk_free_before_bytes": 10685329408,
+          "exit_code": 0,
+          "job": "snapshot",
+          "phase": "repeat",
+          "raw_log_sha256": "988c1d0984b241e80248605c8a0bd96c07d2d0fc78c6c42838582daba771d805",
+          "receipt": "/workspace/.obsgod-tools/completion/act/20261114T003454Z-snapshot.json",
+          "receipt_sha256": "fa27efcc1d68f45ace24e08e2a29bea6a31685b7e9c011d4c46f67a402dabb92",
+          "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "seconds": 56.919,
+          "snapshot_retention": {
+            "audit_sidecars": [
+              {
+                "bytes": 4096,
+                "gid": 1000,
+                "kind": "directory",
+                "mode": "0o700",
+                "path": ".",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 5241,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "AUDIT-SHA256SUMS",
+                "sha256": "03edb030bfe85e1c7906346b9387fe4dbcd25aa481bff839957b8d6e7e6c8d77",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 81933,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "SUMMARY.json",
+                "sha256": "c9344eccd67d142cebb67aeddf8bb1113f2506ef6d28e6cf29c521aaf31c6a8a",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2569,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_darwin_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "2e04b29b7082af80f3d3a15674801d50a7d8baa79a2dafe42abf56fd095fa0df",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11024,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_darwin_amd64.tar.gz.spdx.json",
+                "sha256": "bb6e13d9a3b6027c2251e908acac370fa5d8749ba4bf98ada78f8806dcb59505",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2569,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_darwin_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "14d0765d8ef1aec1a17be574794890d4b4c8005d6087332e0bc7b7f3b7446153",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11024,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_darwin_arm64.tar.gz.spdx.json",
+                "sha256": "8d07ae9702eccfb24c743db1a46a8e009b793dd21a5956b992eacbff1d89999c",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2567,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_386.tar.gz.provenance.unsigned.json",
+                "sha256": "51f36f81a0458fa5753565778acd2eaaedb645170275765341b87b517d8ce5bd",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11023,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_386.tar.gz.spdx.json",
+                "sha256": "6af2bd03758820c81af0ed3dc768bf3925cf045eff74ed8974216e661fa66f53",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2571,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "49015774f6cbe4ceb12c4b86b547f30a19d222878817254c52a55ae6daf8b2aa",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11025,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_amd64.tar.gz.spdx.json",
+                "sha256": "75a826d14cb95def92c2165fa49214b548f7dfe09e6d13bc20af3d1fc53459cc",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2571,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "95f40b268bdb8ef66742bee6cb3c6a4f7cd89b0e2956453b3618b9de6ebd4da2",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11025,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_arm64.tar.gz.spdx.json",
+                "sha256": "453ec997581afeb12c1fc395ca89e9f2add23515e1374cd9161b3e56513f7eff",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2570,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_armv6.tar.gz.provenance.unsigned.json",
+                "sha256": "8d837d9ea40593ee42e8298e6d2c8cc9d0eeb054072834795a1f1a843765ce83",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11025,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_armv6.tar.gz.spdx.json",
+                "sha256": "7dd182f0314828649ff8a0b0f2a7031a7da0f57df07c465e07a5c6e99381ae6c",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2570,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_armv7.tar.gz.provenance.unsigned.json",
+                "sha256": "2606a3fd5d3ca4491a3a105f49b40c8e436dc5e994ea5d743ebc2c704b69def7",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11025,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_freebsd_armv7.tar.gz.spdx.json",
+                "sha256": "6920bb545fcef20f8785af4a9b3131e33262476cbbf9c613995059d90133b35e",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2563,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_386.tar.gz.provenance.unsigned.json",
+                "sha256": "e97669ccf2c6abc4f133427fa52bec393e0210a848e163761d5a6785a78a4704",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11021,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_386.tar.gz.spdx.json",
+                "sha256": "98452cb9f3c700124951e334b1d14d88098644d8a7e03199c2c39a06f1140863",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2567,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "8d7229f3d03b720a1e547e9ac0c302e835d640795b1d211205b758a5e4abfc26",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11023,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_amd64.tar.gz.spdx.json",
+                "sha256": "5c7f0b58ef32d4a307468f7401b306b6659522de3058b63148dccbaf0edf516d",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2567,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "c28901e7066743984634fb4bdd492effb8fd185a93bc26b73e8fff380f28ac92",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11023,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_arm64.tar.gz.spdx.json",
+                "sha256": "e37506dfeead5088419b9c1df3b578379beed0d129071b004a12c401befd9f3c",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2566,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_armv6.tar.gz.provenance.unsigned.json",
+                "sha256": "d914568ade96d8f37904ae447e46cecd7140f53d74b35ad1c16524d4195fc039",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11023,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_armv6.tar.gz.spdx.json",
+                "sha256": "4efeaec5fa73c753f9832fac884bb705faf911e288719b54786cdcd37bb7fa37",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2566,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_armv7.tar.gz.provenance.unsigned.json",
+                "sha256": "2602f9230b6963e42a037e432ef47ae6e04e434b20ce2f4a17c92fc048b7ef8a",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11023,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_linux_armv7.tar.gz.spdx.json",
+                "sha256": "36aa6eaabf67bd0118e29916ff5557017b2241606e46cddad7fa94e7c38afb23",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2567,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_386.tar.gz.provenance.unsigned.json",
+                "sha256": "111e0914c3686db11e60603441c3df7aff7311c7db28c5acb7e8f73a57b0c0dc",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11023,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_386.tar.gz.spdx.json",
+                "sha256": "1b6b6fb007229bf5549abc0711e46d80c4b3883976c835d406478b99d85da93c",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2571,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "2f5ec90a96a053cf8a8714943975d66418b7eb0d3e9ddd240f86e03fb8efac7b",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11025,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_amd64.tar.gz.spdx.json",
+                "sha256": "800e8065cab5b5cad24b35f85845300773db02c46fe83f7345b4a15fa1a81f92",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2571,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "90f9f94832ac89c366e42364a04f7d648ca1f4d4b025ee6afe9adb73d7facfa9",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11025,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_arm64.tar.gz.spdx.json",
+                "sha256": "9cc42b29d68de2cb1f31106e8063666a802cec6a4b4d2c4e58e15a9698e4d5b2",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2570,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_armv6.tar.gz.provenance.unsigned.json",
+                "sha256": "371111abecce0d28502305c12cff8550aa7fdff865576ccbdfb5d879f8b7bba1",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11025,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_armv6.tar.gz.spdx.json",
+                "sha256": "1cf04e840f57becdec4903b0d827a6ea3774d81dcc50b958737c567815a70714",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2570,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_armv7.tar.gz.provenance.unsigned.json",
+                "sha256": "efbc26b41ca7d17ef01315a9bfe79cac99faaec172f2adda052567b96f1343f1",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11025,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_openbsd_armv7.tar.gz.spdx.json",
+                "sha256": "4fd289e05e94dbabf18a2180746bad717e27c5b03fa7c8cd40fdb708e2be2d4e",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2564,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_windows_386.zip.provenance.unsigned.json",
+                "sha256": "218ef9370c581e6d826fa13eee3a98d86cb8f729b58e24640206aafbd2fc0c9e",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11635,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_windows_386.zip.spdx.json",
+                "sha256": "1c32d906aaa8837e639e42598495994538c1f3136bab1f40fb2b43fa792c23b0",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2568,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_windows_amd64.zip.provenance.unsigned.json",
+                "sha256": "2433a8d76da3b37781af6c79dfe250ac7c33b0bcc0351a0ff88b3fcc3fda1fa6",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11637,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_windows_amd64.zip.spdx.json",
+                "sha256": "55866de96f996104a3e7a7f60c89f9245b47cfc3567c7332e00894d3794cdbba",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 2568,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_windows_arm64.zip.provenance.unsigned.json",
+                "sha256": "555eb2c52f3962282b1bf530b9c7798a704756baa08c47b235cf61048ce32ed4",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 11637,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "obsgod_0.0.0-dev.g4699235_windows_arm64.zip.spdx.json",
+                "sha256": "16dc929a29c889a79bcf3ab830c4029690de6a62681de5b6d34f054ec4bdaaf5",
+                "uid": 1000,
+                "write_access": true
+              }
+            ],
+            "inventory": [
+              {
+                "bytes": 22721,
+                "file": "artifacts.json",
+                "sha256": "c595b1e251ed3f84dec2572e359ac862d691fec1e3180baba165ce4bfdb75fbb"
+              },
+              {
+                "bytes": 3845,
+                "file": "checksums.txt",
+                "sha256": "eb65488cd6bc93c0ddd95180ace3b4caf91959f685744931a5c7e188585d396a"
+              },
+              {
+                "bytes": 6214,
+                "file": "config.yaml",
+                "sha256": "1362f302bb98fa15f87077c09b72f1bcaffd93a4ca2e75ab5d42629a3e06e621"
+              },
+              {
+                "bytes": 321,
+                "file": "metadata.json",
+                "sha256": "f69b3808e739adf94f4fd03dd655f87544733a4bd47257680e32d8c764a663e5"
+              },
+              {
+                "bytes": 4270732,
+                "file": "obsgod_0.0.0-dev.g4699235_darwin_amd64.tar.gz",
+                "sha256": "b8f6aa4c8ee653e4ade5fecc70aa4345a8b9c9ef5dc147690a00a53389d0e851"
+              },
+              {
+                "bytes": 3952237,
+                "file": "obsgod_0.0.0-dev.g4699235_darwin_arm64.tar.gz",
+                "sha256": "67049d84a38c023148a0dd0dee6be33fb7a3dd5ff18fa5cad7788ac4f1c97ea4"
+              },
+              {
+                "bytes": 4068348,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_386.tar.gz",
+                "sha256": "36003eac8ab4eaef365c765419f7bba8047b01f4da52e145a5d61fcf11d40a9c"
+              },
+              {
+                "bytes": 4174488,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_amd64.tar.gz",
+                "sha256": "0bd9b871179cd483c56e0e47f0730dba6bfa81785c6572fcf798c1148dfa2c3e"
+              },
+              {
+                "bytes": 3773403,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_arm64.tar.gz",
+                "sha256": "24a3dffd1874e677e330b69f97c4ed1e23eed4a455f3aacb9abadb24834298ea"
+              },
+              {
+                "bytes": 4037205,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_armv6.tar.gz",
+                "sha256": "4e0e053bfac6f5ebd419aa9dfde3fdd0593c8391a6af5cc140fb25c2ee16be08"
+              },
+              {
+                "bytes": 4030764,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_armv7.tar.gz",
+                "sha256": "88e6f8724abe1910ef72bd78f85674619567c1bbbdbc80a493d8a4855a8bb347"
+              },
+              {
+                "bytes": 4396911,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_386.apk",
+                "sha256": "fa01de6d896ea7ff58156276309b24aaee232315724f1d952cc6b9f721fcbb1a"
+              },
+              {
+                "bytes": 4255482,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_386.deb",
+                "sha256": "5ea02fa7b2449879e1c5c8199334f80d1284cc87d42842806df15f4e0f9d4449"
+              },
+              {
+                "bytes": 4362447,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_386.rpm",
+                "sha256": "153fba939854b12366c03882d26398a6309ee3bb6c9cae90fb574d97d47473bd"
+              },
+              {
+                "bytes": 4273655,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_386.tar.gz",
+                "sha256": "7d9212420305e96a028b9e983917f6e15a060cde129456e1b833aced99a45b31"
+              },
+              {
+                "bytes": 4524692,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_amd64.apk",
+                "sha256": "e7134375710956e67ad08673450d34fe98e83fb9a7e6857ac87d88b420d2458b"
+              },
+              {
+                "bytes": 4367354,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_amd64.deb",
+                "sha256": "08de1e89245a8c53896c5024d6dc07ccf63f61f95265b1e4f5373d73929090ec"
+              },
+              {
+                "bytes": 4484625,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_amd64.rpm",
+                "sha256": "94475b45692314c55bf14722e4e9cd2f716cdaea47ecc1adab9b47c078e195b9"
+              },
+              {
+                "bytes": 4387191,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_amd64.tar.gz",
+                "sha256": "eef99e403c8b3078e3b8b54227a43721c529b60fb3708398f2a481a7d278e530"
+              },
+              {
+                "bytes": 4089282,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_arm64.apk",
+                "sha256": "eaa0d21d6890bce6172a3de63156071697f9cfd9fb54c8a3f7d14996b9b5d0f8"
+              },
+              {
+                "bytes": 3955972,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_arm64.deb",
+                "sha256": "e92643808e10468795c018a473b0a6e09e0a2c191b6eaff74dcbe8bd8c18a6ec"
+              },
+              {
+                "bytes": 4063900,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_arm64.rpm",
+                "sha256": "2f37e9b990ca536751a2bfda06eb0ef1c14baee1881af0b7ef92f49101cc9611"
+              },
+              {
+                "bytes": 3976376,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_arm64.tar.gz",
+                "sha256": "7842e157198b53038fe8756dbfbf57d8830bf583c72168de5cab18b3d2769b3a"
+              },
+              {
+                "bytes": 4353924,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv6.apk",
+                "sha256": "6dd60c47a69f6f7fd0f3d2ada754b1f63a6b75cc720f56f03eb87bf173dc86b2"
+              },
+              {
+                "bytes": 4220778,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv6.deb",
+                "sha256": "9d8d777113a3848175b332bbbc01080e94cc38718307885c4000237e2ba04e6b"
+              },
+              {
+                "bytes": 4317817,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv6.rpm",
+                "sha256": "b13b88aaee29ab56976c0db88b0490cfd6b62fd4a2c371b0dcb434cf4f95987a"
+              },
+              {
+                "bytes": 4242265,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv6.tar.gz",
+                "sha256": "0829238a3849c95b4512317df1bded471789bbe35a493e6ad5f0b0020f2c6fe6"
+              },
+              {
+                "bytes": 4344814,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv7.apk",
+                "sha256": "630a0bec08944da1243007e88b0e696ff581e43822bd8c86d0f04b961e3f281a"
+              },
+              {
+                "bytes": 4209688,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv7.deb",
+                "sha256": "0b63d844582e3c4da38e5d0d22a0c5e5d4b3220c4d27c5eb6d5a13301e52c70f"
+              },
+              {
+                "bytes": 4309864,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv7.rpm",
+                "sha256": "530762d5130d85f1eb598aad89aace7f644128987d0a3aa2b45ef01dfe60639b"
+              },
+              {
+                "bytes": 4233374,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv7.tar.gz",
+                "sha256": "22b026c98f8c197e525308d1084333f7fd62caf874910a481c536984b7c03cb8"
+              },
+              {
+                "bytes": 4067445,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_386.tar.gz",
+                "sha256": "6c6b51ca351a1565287814238a3d89133ea4171e97e35873a0b659e4a802f6c7"
+              },
+              {
+                "bytes": 4172058,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_amd64.tar.gz",
+                "sha256": "1fd418c7d0041b1d7f3d7883b4c612aa9320b2ddad57336d35faff0612e8712b"
+              },
+              {
+                "bytes": 3774023,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_arm64.tar.gz",
+                "sha256": "34fc418444c6f81e72bd6f397cdebb86ce4af77509944198e18a1d33c6f6ce7b"
+              },
+              {
+                "bytes": 4035106,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_armv6.tar.gz",
+                "sha256": "e37823d7b9ebeab254846be125cb8f4d648510e2373c130954aa40e2f3900887"
+              },
+              {
+                "bytes": 4029013,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_armv7.tar.gz",
+                "sha256": "370326af46638a437e393bfa32195602f1dad34097f94b32bcef59f41aed219c"
+              },
+              {
+                "bytes": 4265761,
+                "file": "obsgod_0.0.0-dev.g4699235_windows_386.zip",
+                "sha256": "666d043d6b073cee5ef33fd78b07c569babb9e0fc9b9958cbe397d592120d871"
+              },
+              {
+                "bytes": 4316058,
+                "file": "obsgod_0.0.0-dev.g4699235_windows_amd64.zip",
+                "sha256": "485cbcbbe22b1addc0fcd9e215e516641c4041dcc66eb85e8cd60c4b48c6f3f0"
+              },
+              {
+                "bytes": 3853559,
+                "file": "obsgod_0.0.0-dev.g4699235_windows_arm64.zip",
+                "sha256": "bb542b5582f14481d95971aee3efe6a1b0ad90c206a4d7be5b1575f587f95b2e"
+              },
+              {
+                "bytes": 10702640,
+                "file": "obsgod_darwin_amd64_v1/obsgod",
+                "sha256": "0a092e10adfa7c75a2839ce99f033d605101e25108b918df125104ff6ce52159"
+              },
+              {
+                "bytes": 9935522,
+                "file": "obsgod_darwin_arm64_v8.0/obsgod",
+                "sha256": "82d1ca639af1901a00a47d32ef568ab8be54b40bb219ec66a2323e6b6bdaed07"
+              },
+              {
+                "bytes": 9920646,
+                "file": "obsgod_freebsd_386_sse2/obsgod",
+                "sha256": "8159d0d1bb138fd8638060f6374d598507bf5519147451b4a913edf89294a4d0"
+              },
+              {
+                "bytes": 10416262,
+                "file": "obsgod_freebsd_amd64_v1/obsgod",
+                "sha256": "ecfb5cb141bbd9e362c7630eb7ce125416f8a0527c586ad426271a7c6335bd44"
+              },
+              {
+                "bytes": 9633926,
+                "file": "obsgod_freebsd_arm64_v8.0/obsgod",
+                "sha256": "2b431b6645cfe74a6eccefa8d5e8a4fc91a5b5e8a369e2abe9d9da0034751b48"
+              },
+              {
+                "bytes": 10158214,
+                "file": "obsgod_freebsd_arm_6/obsgod",
+                "sha256": "15e45ecf77f483c14bb5059e45093a2d7448e2c1c1fce92b7f5d9be0b2d7ff12"
+              },
+              {
+                "bytes": 10092678,
+                "file": "obsgod_freebsd_arm_7/obsgod",
+                "sha256": "d28211dd261ed79db5affb2d77589d351a5f81cb7c4b6e6ad176dfdaae9917ef"
+              },
+              {
+                "bytes": 10506364,
+                "file": "obsgod_linux_386_sse2/obsgod",
+                "sha256": "554fdea4576da41527144443ed1b3a7847909d7e6926934187e4e49e834db9d4"
+              },
+              {
+                "bytes": 10973308,
+                "file": "obsgod_linux_amd64_v1/obsgod",
+                "sha256": "027ef6f47fbb1c837bdc9ea1e723c4ea021897ca10cd506750de186ec85c799e"
+              },
+              {
+                "bytes": 10092668,
+                "file": "obsgod_linux_arm64_v8.0/obsgod",
+                "sha256": "a6e499681c193733afc0906fa710c3ef1e144e6e9528010ee5a342fbc61db950"
+              },
+              {
+                "bytes": 10616956,
+                "file": "obsgod_linux_arm_6/obsgod",
+                "sha256": "d58f7871ec29da4889ec0d1e642d3f36d1d76d256dbfcacaf42aa35599dc64ee"
+              },
+              {
+                "bytes": 10616956,
+                "file": "obsgod_linux_arm_7/obsgod",
+                "sha256": "591635fe2bc265ad6891b9844ea01f3e6820de4309e39ba5121e543f4b265cf0"
+              },
+              {
+                "bytes": 9924853,
+                "file": "obsgod_openbsd_386_sse2/obsgod",
+                "sha256": "4673329672ce2905a639c13eb5568da294b9f22ef99c990ae9b14fdd13e45e92"
+              },
+              {
+                "bytes": 10428663,
+                "file": "obsgod_openbsd_amd64_v1/obsgod",
+                "sha256": "44068dc3f20c25f9fdbc35446e745811e3bcb78a9f511ffbf6a65f71fa843377"
+              },
+              {
+                "bytes": 9699575,
+                "file": "obsgod_openbsd_arm64_v8.0/obsgod",
+                "sha256": "8a820faf1f3df67a1cab16edac6e445fad4523d43bb9e22e8ae52a8abf0e5d22"
+              },
+              {
+                "bytes": 10158325,
+                "file": "obsgod_openbsd_arm_6/obsgod",
+                "sha256": "8091111e05a5582348acd960d82ddd706795288b57cdb3ad061989b35b5f2b01"
+              },
+              {
+                "bytes": 10158325,
+                "file": "obsgod_openbsd_arm_7/obsgod",
+                "sha256": "5960f610848be78958e48b1046f3bf578fd151ecfcf06733a8076f5787b9952a"
+              },
+              {
+                "bytes": 10327552,
+                "file": "obsgod_windows_386_sse2/obsgod.exe",
+                "sha256": "b761d5dedd01f791ad7424cea47ae8b874b01eeaf0584ecbdb399187d0769cca"
+              },
+              {
+                "bytes": 10765312,
+                "file": "obsgod_windows_amd64_v1/obsgod.exe",
+                "sha256": "7ea80ebc578f0d6a9a983862f442fe5bd497c9180c219b115951818ee28a51fa"
+              },
+              {
+                "bytes": 9777152,
+                "file": "obsgod_windows_arm64_v8.0/obsgod.exe",
+                "sha256": "7de9ccd0877089a6156b2728b9c75bc6c449477cb9ae30918255614056efc9e0"
+              },
+              {
+                "bytes": 5241,
+                "file": "supply-chain/AUDIT-SHA256SUMS",
+                "sha256": "03edb030bfe85e1c7906346b9387fe4dbcd25aa481bff839957b8d6e7e6c8d77"
+              },
+              {
+                "bytes": 81933,
+                "file": "supply-chain/SUMMARY.json",
+                "sha256": "c9344eccd67d142cebb67aeddf8bb1113f2506ef6d28e6cf29c521aaf31c6a8a"
+              },
+              {
+                "bytes": 2569,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_darwin_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "2e04b29b7082af80f3d3a15674801d50a7d8baa79a2dafe42abf56fd095fa0df"
+              },
+              {
+                "bytes": 11024,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_darwin_amd64.tar.gz.spdx.json",
+                "sha256": "bb6e13d9a3b6027c2251e908acac370fa5d8749ba4bf98ada78f8806dcb59505"
+              },
+              {
+                "bytes": 2569,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_darwin_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "14d0765d8ef1aec1a17be574794890d4b4c8005d6087332e0bc7b7f3b7446153"
+              },
+              {
+                "bytes": 11024,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_darwin_arm64.tar.gz.spdx.json",
+                "sha256": "8d07ae9702eccfb24c743db1a46a8e009b793dd21a5956b992eacbff1d89999c"
+              },
+              {
+                "bytes": 2567,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_386.tar.gz.provenance.unsigned.json",
+                "sha256": "51f36f81a0458fa5753565778acd2eaaedb645170275765341b87b517d8ce5bd"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_386.tar.gz.spdx.json",
+                "sha256": "6af2bd03758820c81af0ed3dc768bf3925cf045eff74ed8974216e661fa66f53"
+              },
+              {
+                "bytes": 2571,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "49015774f6cbe4ceb12c4b86b547f30a19d222878817254c52a55ae6daf8b2aa"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_amd64.tar.gz.spdx.json",
+                "sha256": "75a826d14cb95def92c2165fa49214b548f7dfe09e6d13bc20af3d1fc53459cc"
+              },
+              {
+                "bytes": 2571,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "95f40b268bdb8ef66742bee6cb3c6a4f7cd89b0e2956453b3618b9de6ebd4da2"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_arm64.tar.gz.spdx.json",
+                "sha256": "453ec997581afeb12c1fc395ca89e9f2add23515e1374cd9161b3e56513f7eff"
+              },
+              {
+                "bytes": 2570,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_armv6.tar.gz.provenance.unsigned.json",
+                "sha256": "8d837d9ea40593ee42e8298e6d2c8cc9d0eeb054072834795a1f1a843765ce83"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_armv6.tar.gz.spdx.json",
+                "sha256": "7dd182f0314828649ff8a0b0f2a7031a7da0f57df07c465e07a5c6e99381ae6c"
+              },
+              {
+                "bytes": 2570,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_armv7.tar.gz.provenance.unsigned.json",
+                "sha256": "2606a3fd5d3ca4491a3a105f49b40c8e436dc5e994ea5d743ebc2c704b69def7"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_armv7.tar.gz.spdx.json",
+                "sha256": "6920bb545fcef20f8785af4a9b3131e33262476cbbf9c613995059d90133b35e"
+              },
+              {
+                "bytes": 2563,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_386.tar.gz.provenance.unsigned.json",
+                "sha256": "e97669ccf2c6abc4f133427fa52bec393e0210a848e163761d5a6785a78a4704"
+              },
+              {
+                "bytes": 11021,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_386.tar.gz.spdx.json",
+                "sha256": "98452cb9f3c700124951e334b1d14d88098644d8a7e03199c2c39a06f1140863"
+              },
+              {
+                "bytes": 2567,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "8d7229f3d03b720a1e547e9ac0c302e835d640795b1d211205b758a5e4abfc26"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_amd64.tar.gz.spdx.json",
+                "sha256": "5c7f0b58ef32d4a307468f7401b306b6659522de3058b63148dccbaf0edf516d"
+              },
+              {
+                "bytes": 2567,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "c28901e7066743984634fb4bdd492effb8fd185a93bc26b73e8fff380f28ac92"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_arm64.tar.gz.spdx.json",
+                "sha256": "e37506dfeead5088419b9c1df3b578379beed0d129071b004a12c401befd9f3c"
+              },
+              {
+                "bytes": 2566,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_armv6.tar.gz.provenance.unsigned.json",
+                "sha256": "d914568ade96d8f37904ae447e46cecd7140f53d74b35ad1c16524d4195fc039"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_armv6.tar.gz.spdx.json",
+                "sha256": "4efeaec5fa73c753f9832fac884bb705faf911e288719b54786cdcd37bb7fa37"
+              },
+              {
+                "bytes": 2566,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_armv7.tar.gz.provenance.unsigned.json",
+                "sha256": "2602f9230b6963e42a037e432ef47ae6e04e434b20ce2f4a17c92fc048b7ef8a"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_armv7.tar.gz.spdx.json",
+                "sha256": "36aa6eaabf67bd0118e29916ff5557017b2241606e46cddad7fa94e7c38afb23"
+              },
+              {
+                "bytes": 2567,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_386.tar.gz.provenance.unsigned.json",
+                "sha256": "111e0914c3686db11e60603441c3df7aff7311c7db28c5acb7e8f73a57b0c0dc"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_386.tar.gz.spdx.json",
+                "sha256": "1b6b6fb007229bf5549abc0711e46d80c4b3883976c835d406478b99d85da93c"
+              },
+              {
+                "bytes": 2571,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "2f5ec90a96a053cf8a8714943975d66418b7eb0d3e9ddd240f86e03fb8efac7b"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_amd64.tar.gz.spdx.json",
+                "sha256": "800e8065cab5b5cad24b35f85845300773db02c46fe83f7345b4a15fa1a81f92"
+              },
+              {
+                "bytes": 2571,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "90f9f94832ac89c366e42364a04f7d648ca1f4d4b025ee6afe9adb73d7facfa9"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_arm64.tar.gz.spdx.json",
+                "sha256": "9cc42b29d68de2cb1f31106e8063666a802cec6a4b4d2c4e58e15a9698e4d5b2"
+              },
+              {
+                "bytes": 2570,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_armv6.tar.gz.provenance.unsigned.json",
+                "sha256": "371111abecce0d28502305c12cff8550aa7fdff865576ccbdfb5d879f8b7bba1"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_armv6.tar.gz.spdx.json",
+                "sha256": "1cf04e840f57becdec4903b0d827a6ea3774d81dcc50b958737c567815a70714"
+              },
+              {
+                "bytes": 2570,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_armv7.tar.gz.provenance.unsigned.json",
+                "sha256": "efbc26b41ca7d17ef01315a9bfe79cac99faaec172f2adda052567b96f1343f1"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_armv7.tar.gz.spdx.json",
+                "sha256": "4fd289e05e94dbabf18a2180746bad717e27c5b03fa7c8cd40fdb708e2be2d4e"
+              },
+              {
+                "bytes": 2564,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_386.zip.provenance.unsigned.json",
+                "sha256": "218ef9370c581e6d826fa13eee3a98d86cb8f729b58e24640206aafbd2fc0c9e"
+              },
+              {
+                "bytes": 11635,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_386.zip.spdx.json",
+                "sha256": "1c32d906aaa8837e639e42598495994538c1f3136bab1f40fb2b43fa792c23b0"
+              },
+              {
+                "bytes": 2568,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_amd64.zip.provenance.unsigned.json",
+                "sha256": "2433a8d76da3b37781af6c79dfe250ac7c33b0bcc0351a0ff88b3fcc3fda1fa6"
+              },
+              {
+                "bytes": 11637,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_amd64.zip.spdx.json",
+                "sha256": "55866de96f996104a3e7a7f60c89f9245b47cfc3567c7332e00894d3794cdbba"
+              },
+              {
+                "bytes": 2568,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_arm64.zip.provenance.unsigned.json",
+                "sha256": "555eb2c52f3962282b1bf530b9c7798a704756baa08c47b235cf61048ce32ed4"
+              },
+              {
+                "bytes": 11637,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_arm64.zip.spdx.json",
+                "sha256": "16dc929a29c889a79bcf3ab830c4029690de6a62681de5b6d34f054ec4bdaaf5"
+              }
+            ],
+            "linux_smoke_results": [
+              {
+                "bytes": 4096,
+                "gid": 1000,
+                "kind": "directory",
+                "mode": "0o755",
+                "path": ".",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 652,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "linux-install-smoke.json",
+                "sha256": "260957c3556ac34f01375caed24357222456ca6678ff1c67205e4a9897a54be6",
+                "uid": 1000,
+                "write_access": true
+              }
+            ],
+            "notice_materials": [
+              {
+                "bytes": 4096,
+                "gid": 1000,
+                "kind": "directory",
+                "mode": "0o755",
+                "path": ".",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 5716,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "GENERIC-CLI.md",
+                "sha256": "d650c895b8f57674988e8413013e4f5e127ec2488f1dc7b478c00295fc85b932",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 4493,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "GO-NOTICES.json",
+                "sha256": "07bfd56dcd42a7f6856aa66ed949d36c7604d7f995114d8319b8475db2ac9510",
+                "uid": 1000,
+                "write_access": true
+              },
+              {
+                "bytes": 47994,
+                "gid": 1000,
+                "kind": "file",
+                "mode": "0o644",
+                "path": "THIRD_PARTY_NOTICES.md",
+                "sha256": "22810432e2128576056d9c57067ec001372563f51f29c47c2086009651793700",
+                "uid": 1000,
+                "write_access": true
+              }
+            ],
+            "phase": "repeat",
+            "retained": [
+              {
+                "bytes": 22721,
+                "file": "artifacts.json",
+                "sha256": "c595b1e251ed3f84dec2572e359ac862d691fec1e3180baba165ce4bfdb75fbb"
+              },
+              {
+                "bytes": 3845,
+                "file": "checksums.txt",
+                "sha256": "eb65488cd6bc93c0ddd95180ace3b4caf91959f685744931a5c7e188585d396a"
+              },
+              {
+                "bytes": 321,
+                "file": "metadata.json",
+                "sha256": "f69b3808e739adf94f4fd03dd655f87544733a4bd47257680e32d8c764a663e5"
+              },
+              {
+                "bytes": 4270732,
+                "file": "obsgod_0.0.0-dev.g4699235_darwin_amd64.tar.gz",
+                "sha256": "b8f6aa4c8ee653e4ade5fecc70aa4345a8b9c9ef5dc147690a00a53389d0e851"
+              },
+              {
+                "bytes": 3952237,
+                "file": "obsgod_0.0.0-dev.g4699235_darwin_arm64.tar.gz",
+                "sha256": "67049d84a38c023148a0dd0dee6be33fb7a3dd5ff18fa5cad7788ac4f1c97ea4"
+              },
+              {
+                "bytes": 4068348,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_386.tar.gz",
+                "sha256": "36003eac8ab4eaef365c765419f7bba8047b01f4da52e145a5d61fcf11d40a9c"
+              },
+              {
+                "bytes": 4174488,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_amd64.tar.gz",
+                "sha256": "0bd9b871179cd483c56e0e47f0730dba6bfa81785c6572fcf798c1148dfa2c3e"
+              },
+              {
+                "bytes": 3773403,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_arm64.tar.gz",
+                "sha256": "24a3dffd1874e677e330b69f97c4ed1e23eed4a455f3aacb9abadb24834298ea"
+              },
+              {
+                "bytes": 4037205,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_armv6.tar.gz",
+                "sha256": "4e0e053bfac6f5ebd419aa9dfde3fdd0593c8391a6af5cc140fb25c2ee16be08"
+              },
+              {
+                "bytes": 4030764,
+                "file": "obsgod_0.0.0-dev.g4699235_freebsd_armv7.tar.gz",
+                "sha256": "88e6f8724abe1910ef72bd78f85674619567c1bbbdbc80a493d8a4855a8bb347"
+              },
+              {
+                "bytes": 4396911,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_386.apk",
+                "sha256": "fa01de6d896ea7ff58156276309b24aaee232315724f1d952cc6b9f721fcbb1a"
+              },
+              {
+                "bytes": 4255482,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_386.deb",
+                "sha256": "5ea02fa7b2449879e1c5c8199334f80d1284cc87d42842806df15f4e0f9d4449"
+              },
+              {
+                "bytes": 4362447,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_386.rpm",
+                "sha256": "153fba939854b12366c03882d26398a6309ee3bb6c9cae90fb574d97d47473bd"
+              },
+              {
+                "bytes": 4273655,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_386.tar.gz",
+                "sha256": "7d9212420305e96a028b9e983917f6e15a060cde129456e1b833aced99a45b31"
+              },
+              {
+                "bytes": 4524692,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_amd64.apk",
+                "sha256": "e7134375710956e67ad08673450d34fe98e83fb9a7e6857ac87d88b420d2458b"
+              },
+              {
+                "bytes": 4367354,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_amd64.deb",
+                "sha256": "08de1e89245a8c53896c5024d6dc07ccf63f61f95265b1e4f5373d73929090ec"
+              },
+              {
+                "bytes": 4484625,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_amd64.rpm",
+                "sha256": "94475b45692314c55bf14722e4e9cd2f716cdaea47ecc1adab9b47c078e195b9"
+              },
+              {
+                "bytes": 4387191,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_amd64.tar.gz",
+                "sha256": "eef99e403c8b3078e3b8b54227a43721c529b60fb3708398f2a481a7d278e530"
+              },
+              {
+                "bytes": 4089282,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_arm64.apk",
+                "sha256": "eaa0d21d6890bce6172a3de63156071697f9cfd9fb54c8a3f7d14996b9b5d0f8"
+              },
+              {
+                "bytes": 3955972,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_arm64.deb",
+                "sha256": "e92643808e10468795c018a473b0a6e09e0a2c191b6eaff74dcbe8bd8c18a6ec"
+              },
+              {
+                "bytes": 4063900,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_arm64.rpm",
+                "sha256": "2f37e9b990ca536751a2bfda06eb0ef1c14baee1881af0b7ef92f49101cc9611"
+              },
+              {
+                "bytes": 3976376,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_arm64.tar.gz",
+                "sha256": "7842e157198b53038fe8756dbfbf57d8830bf583c72168de5cab18b3d2769b3a"
+              },
+              {
+                "bytes": 4353924,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv6.apk",
+                "sha256": "6dd60c47a69f6f7fd0f3d2ada754b1f63a6b75cc720f56f03eb87bf173dc86b2"
+              },
+              {
+                "bytes": 4220778,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv6.deb",
+                "sha256": "9d8d777113a3848175b332bbbc01080e94cc38718307885c4000237e2ba04e6b"
+              },
+              {
+                "bytes": 4317817,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv6.rpm",
+                "sha256": "b13b88aaee29ab56976c0db88b0490cfd6b62fd4a2c371b0dcb434cf4f95987a"
+              },
+              {
+                "bytes": 4242265,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv6.tar.gz",
+                "sha256": "0829238a3849c95b4512317df1bded471789bbe35a493e6ad5f0b0020f2c6fe6"
+              },
+              {
+                "bytes": 4344814,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv7.apk",
+                "sha256": "630a0bec08944da1243007e88b0e696ff581e43822bd8c86d0f04b961e3f281a"
+              },
+              {
+                "bytes": 4209688,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv7.deb",
+                "sha256": "0b63d844582e3c4da38e5d0d22a0c5e5d4b3220c4d27c5eb6d5a13301e52c70f"
+              },
+              {
+                "bytes": 4309864,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv7.rpm",
+                "sha256": "530762d5130d85f1eb598aad89aace7f644128987d0a3aa2b45ef01dfe60639b"
+              },
+              {
+                "bytes": 4233374,
+                "file": "obsgod_0.0.0-dev.g4699235_linux_armv7.tar.gz",
+                "sha256": "22b026c98f8c197e525308d1084333f7fd62caf874910a481c536984b7c03cb8"
+              },
+              {
+                "bytes": 4067445,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_386.tar.gz",
+                "sha256": "6c6b51ca351a1565287814238a3d89133ea4171e97e35873a0b659e4a802f6c7"
+              },
+              {
+                "bytes": 4172058,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_amd64.tar.gz",
+                "sha256": "1fd418c7d0041b1d7f3d7883b4c612aa9320b2ddad57336d35faff0612e8712b"
+              },
+              {
+                "bytes": 3774023,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_arm64.tar.gz",
+                "sha256": "34fc418444c6f81e72bd6f397cdebb86ce4af77509944198e18a1d33c6f6ce7b"
+              },
+              {
+                "bytes": 4035106,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_armv6.tar.gz",
+                "sha256": "e37823d7b9ebeab254846be125cb8f4d648510e2373c130954aa40e2f3900887"
+              },
+              {
+                "bytes": 4029013,
+                "file": "obsgod_0.0.0-dev.g4699235_openbsd_armv7.tar.gz",
+                "sha256": "370326af46638a437e393bfa32195602f1dad34097f94b32bcef59f41aed219c"
+              },
+              {
+                "bytes": 4265761,
+                "file": "obsgod_0.0.0-dev.g4699235_windows_386.zip",
+                "sha256": "666d043d6b073cee5ef33fd78b07c569babb9e0fc9b9958cbe397d592120d871"
+              },
+              {
+                "bytes": 4316058,
+                "file": "obsgod_0.0.0-dev.g4699235_windows_amd64.zip",
+                "sha256": "485cbcbbe22b1addc0fcd9e215e516641c4041dcc66eb85e8cd60c4b48c6f3f0"
+              },
+              {
+                "bytes": 3853559,
+                "file": "obsgod_0.0.0-dev.g4699235_windows_arm64.zip",
+                "sha256": "bb542b5582f14481d95971aee3efe6a1b0ad90c206a4d7be5b1575f587f95b2e"
+              },
+              {
+                "bytes": 5241,
+                "file": "supply-chain/AUDIT-SHA256SUMS",
+                "sha256": "03edb030bfe85e1c7906346b9387fe4dbcd25aa481bff839957b8d6e7e6c8d77"
+              },
+              {
+                "bytes": 81933,
+                "file": "supply-chain/SUMMARY.json",
+                "sha256": "c9344eccd67d142cebb67aeddf8bb1113f2506ef6d28e6cf29c521aaf31c6a8a"
+              },
+              {
+                "bytes": 2569,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_darwin_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "2e04b29b7082af80f3d3a15674801d50a7d8baa79a2dafe42abf56fd095fa0df"
+              },
+              {
+                "bytes": 11024,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_darwin_amd64.tar.gz.spdx.json",
+                "sha256": "bb6e13d9a3b6027c2251e908acac370fa5d8749ba4bf98ada78f8806dcb59505"
+              },
+              {
+                "bytes": 2569,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_darwin_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "14d0765d8ef1aec1a17be574794890d4b4c8005d6087332e0bc7b7f3b7446153"
+              },
+              {
+                "bytes": 11024,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_darwin_arm64.tar.gz.spdx.json",
+                "sha256": "8d07ae9702eccfb24c743db1a46a8e009b793dd21a5956b992eacbff1d89999c"
+              },
+              {
+                "bytes": 2567,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_386.tar.gz.provenance.unsigned.json",
+                "sha256": "51f36f81a0458fa5753565778acd2eaaedb645170275765341b87b517d8ce5bd"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_386.tar.gz.spdx.json",
+                "sha256": "6af2bd03758820c81af0ed3dc768bf3925cf045eff74ed8974216e661fa66f53"
+              },
+              {
+                "bytes": 2571,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "49015774f6cbe4ceb12c4b86b547f30a19d222878817254c52a55ae6daf8b2aa"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_amd64.tar.gz.spdx.json",
+                "sha256": "75a826d14cb95def92c2165fa49214b548f7dfe09e6d13bc20af3d1fc53459cc"
+              },
+              {
+                "bytes": 2571,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "95f40b268bdb8ef66742bee6cb3c6a4f7cd89b0e2956453b3618b9de6ebd4da2"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_arm64.tar.gz.spdx.json",
+                "sha256": "453ec997581afeb12c1fc395ca89e9f2add23515e1374cd9161b3e56513f7eff"
+              },
+              {
+                "bytes": 2570,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_armv6.tar.gz.provenance.unsigned.json",
+                "sha256": "8d837d9ea40593ee42e8298e6d2c8cc9d0eeb054072834795a1f1a843765ce83"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_armv6.tar.gz.spdx.json",
+                "sha256": "7dd182f0314828649ff8a0b0f2a7031a7da0f57df07c465e07a5c6e99381ae6c"
+              },
+              {
+                "bytes": 2570,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_armv7.tar.gz.provenance.unsigned.json",
+                "sha256": "2606a3fd5d3ca4491a3a105f49b40c8e436dc5e994ea5d743ebc2c704b69def7"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_freebsd_armv7.tar.gz.spdx.json",
+                "sha256": "6920bb545fcef20f8785af4a9b3131e33262476cbbf9c613995059d90133b35e"
+              },
+              {
+                "bytes": 2563,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_386.tar.gz.provenance.unsigned.json",
+                "sha256": "e97669ccf2c6abc4f133427fa52bec393e0210a848e163761d5a6785a78a4704"
+              },
+              {
+                "bytes": 11021,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_386.tar.gz.spdx.json",
+                "sha256": "98452cb9f3c700124951e334b1d14d88098644d8a7e03199c2c39a06f1140863"
+              },
+              {
+                "bytes": 2567,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "8d7229f3d03b720a1e547e9ac0c302e835d640795b1d211205b758a5e4abfc26"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_amd64.tar.gz.spdx.json",
+                "sha256": "5c7f0b58ef32d4a307468f7401b306b6659522de3058b63148dccbaf0edf516d"
+              },
+              {
+                "bytes": 2567,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "c28901e7066743984634fb4bdd492effb8fd185a93bc26b73e8fff380f28ac92"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_arm64.tar.gz.spdx.json",
+                "sha256": "e37506dfeead5088419b9c1df3b578379beed0d129071b004a12c401befd9f3c"
+              },
+              {
+                "bytes": 2566,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_armv6.tar.gz.provenance.unsigned.json",
+                "sha256": "d914568ade96d8f37904ae447e46cecd7140f53d74b35ad1c16524d4195fc039"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_armv6.tar.gz.spdx.json",
+                "sha256": "4efeaec5fa73c753f9832fac884bb705faf911e288719b54786cdcd37bb7fa37"
+              },
+              {
+                "bytes": 2566,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_armv7.tar.gz.provenance.unsigned.json",
+                "sha256": "2602f9230b6963e42a037e432ef47ae6e04e434b20ce2f4a17c92fc048b7ef8a"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_linux_armv7.tar.gz.spdx.json",
+                "sha256": "36aa6eaabf67bd0118e29916ff5557017b2241606e46cddad7fa94e7c38afb23"
+              },
+              {
+                "bytes": 2567,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_386.tar.gz.provenance.unsigned.json",
+                "sha256": "111e0914c3686db11e60603441c3df7aff7311c7db28c5acb7e8f73a57b0c0dc"
+              },
+              {
+                "bytes": 11023,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_386.tar.gz.spdx.json",
+                "sha256": "1b6b6fb007229bf5549abc0711e46d80c4b3883976c835d406478b99d85da93c"
+              },
+              {
+                "bytes": 2571,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_amd64.tar.gz.provenance.unsigned.json",
+                "sha256": "2f5ec90a96a053cf8a8714943975d66418b7eb0d3e9ddd240f86e03fb8efac7b"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_amd64.tar.gz.spdx.json",
+                "sha256": "800e8065cab5b5cad24b35f85845300773db02c46fe83f7345b4a15fa1a81f92"
+              },
+              {
+                "bytes": 2571,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_arm64.tar.gz.provenance.unsigned.json",
+                "sha256": "90f9f94832ac89c366e42364a04f7d648ca1f4d4b025ee6afe9adb73d7facfa9"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_arm64.tar.gz.spdx.json",
+                "sha256": "9cc42b29d68de2cb1f31106e8063666a802cec6a4b4d2c4e58e15a9698e4d5b2"
+              },
+              {
+                "bytes": 2570,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_armv6.tar.gz.provenance.unsigned.json",
+                "sha256": "371111abecce0d28502305c12cff8550aa7fdff865576ccbdfb5d879f8b7bba1"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_armv6.tar.gz.spdx.json",
+                "sha256": "1cf04e840f57becdec4903b0d827a6ea3774d81dcc50b958737c567815a70714"
+              },
+              {
+                "bytes": 2570,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_armv7.tar.gz.provenance.unsigned.json",
+                "sha256": "efbc26b41ca7d17ef01315a9bfe79cac99faaec172f2adda052567b96f1343f1"
+              },
+              {
+                "bytes": 11025,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_openbsd_armv7.tar.gz.spdx.json",
+                "sha256": "4fd289e05e94dbabf18a2180746bad717e27c5b03fa7c8cd40fdb708e2be2d4e"
+              },
+              {
+                "bytes": 2564,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_386.zip.provenance.unsigned.json",
+                "sha256": "218ef9370c581e6d826fa13eee3a98d86cb8f729b58e24640206aafbd2fc0c9e"
+              },
+              {
+                "bytes": 11635,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_386.zip.spdx.json",
+                "sha256": "1c32d906aaa8837e639e42598495994538c1f3136bab1f40fb2b43fa792c23b0"
+              },
+              {
+                "bytes": 2568,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_amd64.zip.provenance.unsigned.json",
+                "sha256": "2433a8d76da3b37781af6c79dfe250ac7c33b0bcc0351a0ff88b3fcc3fda1fa6"
+              },
+              {
+                "bytes": 11637,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_amd64.zip.spdx.json",
+                "sha256": "55866de96f996104a3e7a7f60c89f9245b47cfc3567c7332e00894d3794cdbba"
+              },
+              {
+                "bytes": 2568,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_arm64.zip.provenance.unsigned.json",
+                "sha256": "555eb2c52f3962282b1bf530b9c7798a704756baa08c47b235cf61048ce32ed4"
+              },
+              {
+                "bytes": 11637,
+                "file": "supply-chain/obsgod_0.0.0-dev.g4699235_windows_arm64.zip.spdx.json",
+                "sha256": "16dc929a29c889a79bcf3ab830c4029690de6a62681de5b6d34f054ec4bdaaf5"
+              }
+            ],
+            "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+            "scope": "Actual generic snapshot archives/packages and audit/notice/metadata bytes; loose build binaries hash-inventoried only; no target-native execution implied",
+            "snapshot_path": "/workspace/obsgod/dist/snapshot"
+          },
+          "source_clean_after": true,
+          "source_clean_before": true
+        },
+        {
+          "command": [
+            "python3",
+            "scripts/local-ci.py",
+            "docs",
+            "--act",
+            "/workspace/.obsgod-tools/pkg/bin/act",
+            "--state",
+            "/workspace/.obsgod-tools/completion/act"
+          ],
+          "derived_view": {
+            "derived_plain_log": "20261114T003552Z-docs.plain.log",
+            "derived_plain_sha256": "5989b7c394f7a2858dfdac257c6d19e828768ef479ca159cda00a38e494b0988",
+            "input_receipt": "20261114T003552Z-docs.json",
+            "original_log": "20261114T003552Z-docs.log",
+            "original_log_sha256": "7a1c871d1f7339f27180d1dff9ff6e52bcd3b9cf629319970c3035882bac7aff",
+            "source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+            "transformation": "Decode JSON msg/message; retain non-JSON text; strip ANSI in derived view only. Original log/hash unchanged."
+          },
+          "disk_free_after_bytes": 10537631744,
+          "disk_free_before_bytes": 10537742336,
+          "exit_code": 0,
+          "job": "docs",
+          "phase": "repeat",
+          "raw_log_sha256": "7a1c871d1f7339f27180d1dff9ff6e52bcd3b9cf629319970c3035882bac7aff",
+          "receipt": "/workspace/.obsgod-tools/completion/act/20261114T003552Z-docs.json",
+          "receipt_sha256": "377731ef63dca20379bb683849ba3df3815f36b1103f02751d794fc37a08e760",
+          "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "seconds": 16.28,
+          "source_clean_after": true,
+          "source_clean_before": true
+        },
+        {
+          "command": [
+            "python3",
+            "scripts/local-ci.py",
+            "candidate",
+            "--act",
+            "/workspace/.obsgod-tools/pkg/bin/act",
+            "--state",
+            "/workspace/.obsgod-tools/completion/act"
+          ],
+          "derived_view": {
+            "derived_plain_log": "20261114T003609Z-candidate.plain.log",
+            "derived_plain_sha256": "b2ac2b52ab304458181d752504d8be630438d84b9ac4e01a583bbe92b235e219",
+            "input_receipt": "20261114T003609Z-candidate.json",
+            "original_log": "20261114T003609Z-candidate.log",
+            "original_log_sha256": "acb6e43b6810ce14571f171bf3e78284513e63ab0de23d2f6220109cc445511f",
+            "source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+            "transformation": "Decode JSON msg/message; retain non-JSON text; strip ANSI in derived view only. Original log/hash unchanged."
+          },
+          "disk_free_after_bytes": 9806077952,
+          "disk_free_before_bytes": 10537566208,
+          "exit_code": 0,
+          "host_frontend_outcome": "passed",
+          "job": "candidate",
+          "native_registry": "/workspace/.obsgod-tools/completion/act/retained-4699235e/repeat/candidate-native.json",
+          "phase": "repeat",
+          "raw_log_sha256": "acb6e43b6810ce14571f171bf3e78284513e63ab0de23d2f6220109cc445511f",
+          "receipt": "/workspace/.obsgod-tools/completion/act/20261114T003609Z-candidate.json",
+          "receipt_sha256": "4aca491f4d3637bcd84d9aa0202b24e3ab9b3878c4a0019a212707de29856a2c",
+          "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+          "seconds": 460.81,
+          "source_clean_after": true,
+          "source_clean_before": true
+        }
+      ]
+    }
+  },
+  "qualified_source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+  "release_published": false,
+  "schema_version": 1,
+  "site_deployed": false,
+  "source_tree": "3c09ea82d85ddcdf47c347afa44961f7b1b6956e",
+  "supplemental": {
+    "optional_unavailable": [
+      {
+        "exit_code": null,
+        "name": "syntax-fish",
+        "outcome": "unavailable",
+        "phase": "cli",
+        "reason": "Host shell interpreter is not installed; generated text is not syntax execution proof.",
+        "required": false
+      }
+    ],
+    "summary": {
+      "finished_utc": "2026-11-14T00:47:51.789803+00:00",
+      "phase_results": [
+        {
+          "phase": "go",
+          "receipt": "/workspace/.obsgod-tools/completion/ownership-4699235/supplemental/results/go/receipt.json",
+          "receipt_sha256": "2fe10e7a64bf272842ee28936a89c404a89a2f2fb4d3549dde47a67cf657410d",
+          "source_unchanged": true,
+          "status": "passed"
+        },
+        {
+          "phase": "cli",
+          "receipt": "/workspace/.obsgod-tools/completion/ownership-4699235/supplemental/results/cli/receipt.json",
+          "receipt_sha256": "9e991d1818fd927e10762768a42a2fb4e9f231c1a55872d8fe77c93574d5c4f4",
+          "source_unchanged": true,
+          "status": "passed"
+        },
+        {
+          "phase": "transport",
+          "receipt": "/workspace/.obsgod-tools/completion/ownership-4699235/supplemental/results/transport/receipt.json",
+          "receipt_sha256": "a0453886b0d56e112062edd4f5752d9babfcaaaeef33889e2cabc8e3f788e101",
+          "source_unchanged": true,
+          "status": "passed"
+        },
+        {
+          "phase": "upgrades",
+          "receipt": "/workspace/.obsgod-tools/completion/ownership-4699235/supplemental/results/upgrades/receipt.json",
+          "receipt_sha256": "a5607055401e140d01bb56e473af569addc48f617051a852fe02a0a10658465f",
+          "source_unchanged": true,
+          "status": "passed"
+        }
+      ],
+      "requested_phases": [
+        "go",
+        "cli",
+        "transport",
+        "upgrades"
+      ],
+      "schema": 1,
+      "scope": "Fresh uncached Go plus current-candidate CLI/protocol/browser-upgrade checks only; external/device acceptance remains separate.",
+      "source_revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+      "status": "passed"
+    },
+    "summary_sha256": "9cc3d3ca692723a3d5d445b66bbc1c24bbdd3d997eacd17a734964957f54aaf5"
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "predicate": {
+    "buildDefinition": {
+      "buildType": "https://github.com/szmyty/obsgod/blob/4699235e9e925b76ca492d5a00a375ed37fb338e/scripts/package-deck.py",
+      "externalParameters": {
+        "platform": "linux/amd64",
+        "revision": "4699235e9e925b76ca492d5a00a375ed37fb338e",
+        "version": "0.1.0-deck.9"
+      },
+      "internalParameters": {
+        "capture_builder_image": "sha256:6c3ec703e4d22b777f53e75ec33a2639ac060a81e97cd4a48da4e7e412127f78",
+        "go": "go1.27.4",
+        "node": "24.19.0",
+        "npm": "11.9.0"
+      },
+      "resolvedDependencies": [
+        {
+          "digest": {
+            "sha1": "4699235e9e925b76ca492d5a00a375ed37fb338e"
+          },
+          "uri": "git+https://github.com/szmyty/obsgod@4699235e9e925b76ca492d5a00a375ed37fb338e"
+        },
+        {
+          "digest": {
+            "sha256": "5a49aa5b5ad9b23f2e361f77b0703e4717fd2d25ed04aa6a98445d6922e25670"
+          },
+          "uri": "go.mod"
+        },
+        {
+          "digest": {
+            "sha256": "c6eaf27e023d2006fa1be2187868d82ea48d92b62d3f33874abb9682db090a05"
+          },
+          "uri": "go.sum"
+        },
+        {
+          "digest": {
+            "sha256": "8a6925b946739ef6ff08af6c605534dcc2a2fa3dc4ed692d606fca40ea041492"
+          },
+          "uri": "steamdeck/decky/package-lock.json"
+        },
+        {
+          "digest": {
+            "sha256": "23aa193f954e7050d6039556dd1dcbe9c8454913ae6430b7d694203d215db4b7"
+          },
+          "uri": "steamdeck/decky/rollup.config.js"
+        },
+        {
+          "digest": {
+            "sha256": "3a12572cd8c53251d92501bde92cdb73543992bed0cb7da50189717e703b33fb"
+          },
+          "uri": "scripts/package-deck.py"
+        },
+        {
+          "digest": {
+            "sha256": "73cbd00c3beb0dd2b72067492f35917bab7e5607cafcc525d4498b492af2c8db"
+          },
+          "uri": "scripts/package-updater.py"
+        },
+        {
+          "digest": {
+            "sha256": "2a5907d46697011510482aed251209f83a79a2b0aa3a0cea1ced9cd3b8b74905"
+          },
+          "uri": "steamdeck/capture/build.Dockerfile"
+        }
+      ]
+    },
+    "runDetails": {
+      "builder": {
+        "id": "urn:obsgod:local-self-reported-unsigned"
+      },
+      "byproducts": [
+        {
+          "annotations": {
+            "claim": "Offline self-reported inventory only; no authenticated publisher or trusted builder identity; source and build receipts require independent review.",
+            "status": "UNSIGNED"
+          },
+          "name": "trust-boundary"
+        }
+      ],
+      "metadata": {
+        "invocationId": "urn:sha256:24ae9797c534d789ea7a2030c94085098e77b678ff5eaa659f893d140b288b3e"
+      }
+    }
+  },
+  "predicateType": "https://slsa.dev/provenance/v1",
+  "subject": [
+    {
+      "digest": {
+        "sha256": "5f401a620493b5fc282658c16530db6e87a70ad40b95bb88b0212f08417bbd16"
+      },
+      "name": "capture-build.json"
+    },
+    {
+      "digest": {
+        "sha256": "3e1810b64d7c2d1466df075eaef2472913499ca2d21c7e6a00df62932e14b199"
+      },
+      "name": "manifest.json"
+    },
+    {
+      "digest": {
+        "sha256": "b4222fb703aa198a7ea200721afbc06dcb86dec56e8c1bebd77f5bb614aad53d"
+      },
+      "name": "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz"
+    },
+    {
+      "digest": {
+        "sha256": "33cb82f0d68f3f3ce21ae2abd4eab878df6c42f39a52af36748d6e42ceceef66"
+      },
+      "name": "obsgod-decky.zip"
+    },
+    {
+      "digest": {
+        "sha256": "3c2fa5f5623f4c000a2371fe19bce5fdf0fc848b09929befb4ba70e7630cf986"
+      },
+      "name": "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip"
+    },
+    {
+      "digest": {
+        "sha256": "fbc9e106291ff478d10a52c7f77e409ace2463d7019118a7ca1d95f25f8ef514"
+      },
+      "name": "updater-manifest.json"
+    }
+  ]
+}
