@@ -36,7 +36,7 @@ type deckyStorageMap struct {
 	} `json:"compatibility"`
 }
 
-var errDeckyStorageMap = errors.New("Decky storage map is unsafe or differs from the current player paths; restore the original context or repair the plugin")
+var errDeckyStorageMap = errors.New("the Decky storage map is unsafe or differs from the current player paths; restore the original context or repair the plugin")
 
 // deckyOwnedPath checks every existing component without following symlinks.
 // Missing shared data is valid before first-run setup. Existing endpoints must
