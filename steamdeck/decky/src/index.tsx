@@ -9,6 +9,7 @@ import { StreamTools, MediaTools, HealthTools, invokeTool, type ToolCommand } fr
 import {mediaControls} from "./advanced-state.mjs";
 import {MixerTools, cancelPanelTalk} from "./Mixer";
 import {mixerNotice, mixerView} from "./mixer-state.mjs";
+import {DependencySetup,type SetupReadiness} from "./Setup";
 
 type Diagnostic = {time:string; level:string; message:string};
 type Outcome = {id?:number; action?:string; ok:boolean; message:string; recording_path?:string};
@@ -37,10 +38,17 @@ let diagnostics:Diagnostic[]=[];
 let pluginVersion="";
 let updateChecking=false;
 let updateInfo:UpdateResult|undefined;
+let dependencyReadiness:SetupReadiness={ready:false,reason:"Checking dependency setup…",state:"unknown"};
 const seenOutcomes=new Set<string>();
 const seenMixerNotices=new Set<string>();
 const listeners=new Set<()=>void>();
 const changed=()=>listeners.forEach(listener=>listener());
+
+function updateDependencyReadiness(next:SetupReadiness){
+  const previous=dependencyReadiness;
+  dependencyReadiness=next;
+  if(previous.ready!==next.ready||previous.reason!==next.reason||previous.state!==next.state)changed();
+}
 
 function bounded<T>(promise:Promise<T>,milliseconds:number):Promise<T>{
   return new Promise((resolve,reject)=>{
@@ -149,6 +157,9 @@ function Console(){
 }
 
 async function act(action:"start"|"stop"|"test"){
+  // Setup readiness never authorizes Stop or changes the observed OBS state.
+  // Keep the imperative guard too: rapid clicks can precede React's repaint.
+  if(action!=="stop"&&!dependencyReadiness.ready)return;
   const available=controls(currentResult(view,Date.now()),busy);
   if(action==="start"?available.startDisabled:action==="test"?available.testDisabled:available.stopDisabled)return;
   const token=++actionSerial,generation=instance;
@@ -248,6 +259,7 @@ function Content(){
   const signalLabel=audio?.signal==="signal"?"Detected in last check":audio?.signal==="silent"?"No signal in last check":"Not measured or unconfirmed";
   const microphoneLabel=(current as any)?.mixer?mixerView((current as any).mixer).label.replace(/^Microphone /,""):current?.settings?.microphone===false?"Off":current?.settings?.microphone===true?(audio?.microphone_available?(audio.microphone_muted?"Muted":"Enabled"):"Enabled · device not confirmed"):"Not confirmed";
   return <>
+    <DependencySetup onReadiness={updateDependencyReadiness}/>
     <PanelSection title="YOUR STREAM">
       <PanelSectionRow>
         <div style={{background:"#111923",border:"1px solid #536274",borderRadius:8,padding:14}}>
@@ -260,7 +272,7 @@ function Content(){
           {current?.configured&&<div style={{marginTop:8,fontSize:12,opacity:.8}}>Destination configured in Desktop Setup</div>}
         </div>
       </PanelSectionRow>
-      <PanelSectionRow><ButtonItem layout="below" disabled={available.startDisabled} onClick={()=>act("start")}>Start streaming</ButtonItem></PanelSectionRow>
+      <PanelSectionRow><ButtonItem layout="below" disabled={available.startDisabled||!dependencyReadiness.ready} onClick={()=>act("start")}>Start streaming</ButtonItem></PanelSectionRow>
       <PanelSectionRow><ButtonItem layout="below" disabled={available.stopDisabled} onClick={()=>act("stop")}>{available.stopLabel}</ButtonItem></PanelSectionRow>
       <PanelSectionRow><div aria-live="polite" style={{fontSize:14,lineHeight:1.5,whiteSpace:"pre-wrap",overflowWrap:"anywhere"}}>{statusMessage}</div></PanelSectionRow>
       {!busy&&notice&&actionNoticeAt>0&&<PanelSectionRow><Hint>Last action · {new Date(actionNoticeAt).toLocaleTimeString()}: {notice}</Hint></PanelSectionRow>}
@@ -279,7 +291,7 @@ function Content(){
     </PanelSection>
     <PanelSection title="LOCAL TEST">
       <PanelSectionRow><Hint>Check picture and sound before going live. This saves a clip without broadcasting.</Hint></PanelSectionRow>
-      <PanelSectionRow><ButtonItem layout="below" disabled={available.testDisabled} onClick={()=>act("test")}>Make 10-second test clip</ButtonItem></PanelSectionRow>
+      <PanelSectionRow><ButtonItem layout="below" disabled={available.testDisabled||!dependencyReadiness.ready} onClick={()=>act("test")}>Make 10-second test clip</ButtonItem></PanelSectionRow>
       <PanelSectionRow><ButtonItem layout="below" onClick={()=>setSetupHelp(value=>!value)}>{setupHelp?"Hide setup help":"Setup and recording help"}</ButtonItem></PanelSectionRow>
       {setupHelp&&<PanelSectionRow><Hint>Open Desktop Setup to configure your destination, audio and between-game screen. Test clips save to Videos/{product.compatibility.plugin}. Game only can record the between-game screen without a game; entire screen needs usable frames. Play the saved clip to check picture and sound, then verify your first live stream on another device.</Hint></PanelSectionRow>}
     </PanelSection>
@@ -301,6 +313,7 @@ function Content(){
 }
 
 export default definePlugin(()=>{
+  dependencyReadiness={ready:false,reason:"Checking dependency setup…",state:"unknown"};
   active=true;instance++;view.epoch++;pollTask=undefined;
   void refresh();const timer=setInterval(()=>{void refresh();changed();},1500);
   return {name:product.compatibility.plugin,titleView:<div className={staticClasses.Title}>{product.displayName} <small style={{fontWeight:400,opacity:.7}}>preview</small></div>,content:<Content/>,icon:<Dot/>,onDismount(){cancelPanelTalk();active=false;instance++;view.epoch++;clearInterval(timer);listeners.clear();busy="";updateChecking=false;}};

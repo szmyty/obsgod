@@ -15,8 +15,26 @@ fixture.mixerUnknown=false;fixture.obsAbsent=false;fixture.mixerUnavailable=fals
 function mixerSnapshot(){const known=!fixture.mixerUnknown&&!fixture.obsAbsent;return {schema_version:1,known,state:known?"ready":"unknown",observed_at:new Date().toISOString(),expires_at:new Date(Date.now()+8000).toISOString(),preferences:{...fixture.mixerPreferences},microphone:{known,available:!fixture.mixerUnavailable,muted:fixture.mixerPreferences.microphone_muted||!fixture.mixerPreferences.microphone_enabled||fixture.mixerUnavailable||(fixture.mixerPreferences.push_to_talk&&!fixture.mixerTalking),system_muted:fixture.mixerSystemMuted,signal:"signal",peak_dbfs:-18},game:{known,available:true,muted:false,gain_percent:fixture.mixerPreferences.game_gain_percent},devices:fixture.mixerDevices,hardware:{model:"unknown",guidance:"Hardware routing is observed; no LCD jack state is assumed."},notice:fixture.mixerNotice,talking:fixture.mixerTalking};}
 function event(message,level="info"){fixture.events.push({time:new Date().toISOString(),level,message});}
 function status(){if(fixture.failure)throw Error("simulated backend unavailable");sessionStorage.setItem("fixtureEvents",JSON.stringify(fixture.events));if(fixture.active&&!fixture.stalled)fixture.bytes+=2048;return {ok:true,configured:fixture.configured,output_known:!fixture.unknown,process:fixture.obsAbsent?"absent":"running",connection:"ready",recording:fixture.recording,media:{known:!fixture.unknown,recording:{active:fixture.recording},replay_active:fixture.replay,storage:{directory:"/fixture/Videos/OBSGod",available_bytes:12884901888}},capture:"available",frames:"visible",game:"unknown",backend_id:"fixture-backend",snapshot_id:++fixture.sequence,operation:fixture.operation,state:!fixture.configured?"setup":fixture.active?"streaming":"stopped",message:!fixture.configured?"Complete Desktop Setup":fixture.active?"OBS streaming":"Not streaming",stream:{active:fixture.active,reconnecting:false,bytes:fixture.bytes,duration_ms:fixture.bytes},diagnostics:fixture.events,mixer:mixerSnapshot(),plugin_version:"0.1.0-console-fixture",audio:fixture.audio,settings:{microphone:fixture.microphone,capture_mode:fixture.mode,idle_style:"black",server:"rtmps://must-not-copy.invalid/app",stream_key:"must-not-copy"}};}
+fixture.dependencyState="ready";fixture.dependencyReady=true;fixture.dependencyCanInstall=false;fixture.dependencyOperation=null;fixture.dependencyFailure=false;fixture.flathubNeeded=false;
+function dependencyStatus(){
+ if(fixture.dependencyFailure)throw Error("Fixture dependency observation unavailable");
+ const ready=fixture.dependencyReady;
+ return {schema_version:1,ready,state:fixture.dependencyState,message:ready?"Dependencies ready":"Install required streaming dependencies",reason:ready?null:{code:"missing",message:"OBS and GStreamer need setup"},dependencies:[{id:"obs",name:"OBS Studio",scope:ready?"user":null,ref:ready?"app/com.obsproject.Studio/x86_64/stable":null,version:ready?"33.0.1":null,installed:ready,compatible:ready},{id:"gstreamer",name:"GStreamer extension",scope:ready?"user":null,ref:ready?"runtime/com.obsproject.Studio.Plugin.Gstreamer/x86_64/stable":null,version:null,installed:ready,compatible:ready}],remote:{name:"flathub",configured:!fixture.flathubNeeded,needs_add:fixture.flathubNeeded,valid:true,reason:""},operation:fixture.dependencyOperation,can_install:fixture.dependencyCanInstall};
+}
 window.__DECKY_SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED_deckyLoaderAPIInit={connect:()=>({_version:2,callable:(method)=>async(...args)=>{
  fixture.calls[method]=(fixture.calls[method]||0)+1;
+ if(method==="dependency_status")return dependencyStatus();
+ if(method==="install_dependencies"){
+  if(args[0]!==true)throw Error("Explicit setup consent required");
+  fixture.dependencyState="running";fixture.dependencyCanInstall=false;
+  fixture.dependencyOperation={id:"fixture-setup-job",state:"running",stage:"installing-obs",started_at:new Date().toISOString(),finished_at:null,cancel_requested:false,progress:[{time:new Date().toISOString(),level:"info",message:"Installing OBS for your user account"}]};
+  return dependencyStatus();
+ }
+ if(method==="cancel_dependency_setup"){
+  fixture.dependencyState="cancelled";fixture.dependencyCanInstall=true;
+  fixture.dependencyOperation={...fixture.dependencyOperation,state:"cancelled",stage:"cancelled",finished_at:new Date().toISOString(),cancel_requested:true};
+  return dependencyStatus();
+ }
  if(method==="mixer_action"){
   const payload=args[0];(fixture.mixerActions??=[]).push(payload);
   if(payload.action==="configure"){

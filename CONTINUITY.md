@@ -1,5 +1,26 @@
 # Current work
 
+## Executing #76–#78: Decky package, storage compatibility and setup jobs
+
+The owner explicitly requested implementation of #76, #77 and #78. Work uses
+the existing isolated checkout on **feat/decky-native-foundation**, based on
+planning commit **6c01b93f18b471d7168ef192ca5ab8bae185e381**. The earlier draft
+stack #73 → #74 → #75 stays intact; the next draft is based on #75's branch.
+
+Chosen compatibility approach: retain one canonical XDG settings/secrets and
+managed state/control-lock store for current CLI/Desktop users. Decky's injected
+settings directory holds a versioned storage map/receipt, runtime-data holds
+plugin-owned persistent setup jobs, and logs holds plugin-owned logs. No secret
+copy, Flatpak config relocation or recording move. Preserve the actual player
+context and original XDG_DATA_HOME for user Flatpaks.
+
+The first checkpoint wires the dependency setup panel and readiness gates:
+Install/Later consent, background observation, cancellation/retry and progress.
+Frontend typecheck and 36 Node tests passed during integration. Backend job and
+storage modules/package work are in progress; this is not an install-ready
+candidate or final full qualification. No issue is closed. Follow-up checks and
+exact-source evidence will be recorded before reporting this batch complete.
+
 ## Active roadmap: implementation first, current Deck tests, then migration
 
 The owner locked **01 / aurora** and retained earlier artwork as concepts. The
