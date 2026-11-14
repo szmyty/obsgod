@@ -1,0 +1,13 @@
+{
+  "automated_status": "passed",
+  "human_legibility": "unrun; inspect 16/24/32px in native Decky at actual device size",
+  "method": "WCAG sRGB relative luminance",
+  "minimum_normal_text": 4.5,
+  "ratios": {
+    "accent_on_ink": 14.788,
+    "body_on_ink": 17.097,
+    "button_label_on_accent": 12.726,
+    "muted_on_ink": 10.801
+  },
+  "state": "Brand colors are decorative; status must use text plus observed state, not color alone"
+}
