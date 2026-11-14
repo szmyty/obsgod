@@ -4,11 +4,14 @@ dist: dist/snapshot
 before:
   hooks:
     - go mod download
+    - python3 scripts/generic-release.py prepare
 builds:
   - binary: obsgod
+    env:
+      - CGO_ENABLED=0
     flags:
       - -trimpath
-      - -buildvcs=false
+      - -buildvcs=true
     ldflags: -s -w -buildid= -X main.version={{ .Version }} -X main.commitSHA={{ .Commit }}
     goos:
       - linux
@@ -30,6 +33,39 @@ archives:
       - goos: windows
         formats: [zip]
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    builds_info:
+      mtime: "{{ .CommitDate }}"
+    files:
+      - src: LICENSE
+        info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
+      - src: README.md
+        info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
+      - src: CHANGELOG.md
+        info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
+      - src: .local-ci/generic-release/THIRD_PARTY_NOTICES.md
+        dst: .
+        strip_parent: true
+        info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
+      - src: .local-ci/generic-release/GO-NOTICES.json
+        dst: .
+        strip_parent: true
+        info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
+      - src: .local-ci/generic-release/GENERIC-CLI.md
+        dst: .
+        strip_parent: true
+        info:
+          mode: 0644
+          mtime: "{{ .CommitDate }}"
 
 nfpms:
   - ids:
