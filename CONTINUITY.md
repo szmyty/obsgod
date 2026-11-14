@@ -1,5 +1,15 @@
 # Current work
 
+## Intended repository name: deckystream
+
+On 2026-11-14 the owner preferred **deckystream** as the future repository name,
+matching the lowercase/single-word direction. This supersedes earlier planned
+`decky-stream` spellings in historical notes. Exact destination owner remains
+unresolved. Current `szmyty/obsgod`, remotes, release trust, installed IDs, private
+paths and published artifacts are unchanged. Naming is preparation; migration
+still follows implementation, checks and manual Deck testing. Older synthetic
+destination fixtures do not qualify the newly selected slug or actual publisher.
+
 ## Branding discussion: orbital-stream and gradient primary icon
 
 The owner confirmed the proposed normal Decky ZIP plus plugin-managed first-run

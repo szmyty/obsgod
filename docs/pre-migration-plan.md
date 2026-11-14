@@ -2,8 +2,9 @@
 
 Prepared 2026-11-14 UTC from live #46 and the existing checkout. The owner prefers
 a fresh source snapshot and clean tracker rather than transferring the old fork's
-history. `egohygiene/decky-stream` is the working destination discussed; creation,
-retirement, publication and final creative adoption have not happened.
+history. Intended repository name is now `deckystream` (owner update 2026-11-14),
+with `egohygiene` the working owner discussed rather than a final destination.
+Creation, retirement, publication and final creative adoption have not happened.
 
 The nondeferred engineering pass has now been implemented and checked in draft
 #75. [The completion checkpoint](pre-migration-completion.md) records exact

@@ -8,7 +8,10 @@ a graphical OBS installation through its authenticated local WebSocket; it is
 not OBS, Decky Loader or Valve software and is not an official product of those
 projects. Its release support claims must match actual hardware qualification.
 
-Selected user-facing name: **Decky Stream**. Intended slug: **decky-stream**.
+Selected user-facing name: **Decky Stream**. Intended repository slug:
+**deckystream** (owner preference updated 2026-11-14 from `decky-stream`).
+The owner prefers lowercase, single-word naming; artwork and runtime identifiers
+are reconciled during the branding/implementation batch, not by this slug choice.
 Current repository: https://github.com/szmyty/obsgod . CLI/storage/plugin IDs stay
 `obsgod`/`OBSGod` until an independently qualified compatibility migration.
 

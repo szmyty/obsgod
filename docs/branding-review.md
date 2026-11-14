@@ -37,7 +37,7 @@ creative/rights approval. Later evidence-only notes do not relabel that source.
 
 | Item | Evidence / disposition |
 | --- | --- |
-| User-facing name | User selected **Decky Stream** and requested intended slug **decky-stream**. `product.json` already supplies the display name. |
+| User-facing name | Working display is **Decky Stream**; the owner prefers lowercase, single-word naming and on 2026-11-14 selected intended repository slug **deckystream**, replacing `decky-stream`. `product.json` still supplies the current display name. |
 | Current source and release trust | `https://github.com/szmyty/obsgod`; no repository transfer or rename is performed by this packet. |
 | Organization | Not selected. No new organization identity, authorization, license holder or inherited palette is invented. |
 | Stable local identifiers | CLI/storage namespace `obsgod`, plugin `OBSGod`, directory `obsgod`, existing OBS managed object names and media locations remain compatible. |

@@ -1,9 +1,10 @@
 # 0002: product name and compatible identity
 
-Status: **Working name accepted; final identity and migration proposed**.
-The owner selected “Decky Stream” and requested a future `decky-stream` identity,
-while leaving organization/final brand choices open. `product.json` records the
-current display/compatibility split.
+Status: **Working name accepted; repository slug selected; final identity and migration proposed**.
+The owner selected “Decky Stream” and on 2026-11-14 preferred **`deckystream`**
+for the future repository name, replacing the earlier `decky-stream` slug.
+Organization/final brand choices remain open. `product.json` records the current
+display/compatibility split; the slug decision does not rename existing IDs.
 
 ## Context and choice
 

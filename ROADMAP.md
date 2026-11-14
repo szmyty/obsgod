@@ -50,7 +50,8 @@ Completion PRs #62 foundation -> #63 mixer -> #64 API/creator -> #65
 qualification are merged. Exact source 1a482808 passed the complete available local matrix and
 both full act sequences; [install candidate 9](docs/candidate-9-install.md) and
 [review the audit](audits/audit-2026-11-13.md). Intended slug:
-**decky-stream**; compatibility/migration and final branding review remain explicit.
+**deckystream** (owner naming update 2026-11-14); compatibility/migration and
+final branding review remain explicit.
 #51 now holds two separate research journeys (monetization and Decky Store).
 After source review/merges, remaining acceptance was consolidated into #46,
 preserving original criteria and evidence; #68 is a newly demonstrated scoped defect.
