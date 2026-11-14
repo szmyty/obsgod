@@ -17,8 +17,9 @@ source; the memorial is history, not another backlog.
 - Inspect files, git status and branch before editing. Use the existing isolated
   checkout unless current instructions require otherwise; preserve others' work.
 - The completion campaign authorizes feasible plugin implementation, checks and
-  draft PR checkpoints. #51 is separate monetization/Decky Store research; do not
-  perform it as feature scope or resolve it with unsupported policy assertions.
+  draft PR checkpoints. Current scope is [the implementation roadmap](docs/implementation-roadmap.md),
+  #76–#85 then owner tests/migration #86–#88, under parent #46. Completed #51
+  monetization/Decky Store research does not authorize paid features/submission.
 - Use [pinned tools/scripts](docs/steam-deck-building.md). Preserve cloud network/
   package presets and injected authentication; do not print secrets during access
   diagnosis. End users do not need the maintainer's development toolchain.
@@ -44,10 +45,14 @@ source; the memorial is history, not another backlog.
 
 ## Decisions, validation and handoff
 
-Current owner sequence is engineering → new logo → final full matrix → bug
-repairs/retests → migration. Focused checks continue during implementation;
-do not run or claim the final full matrix before the new-logo phase. Separate
-companion/StreamGod and provider OAuth work are deferred, not accepted as done.
+Current owner sequence is selected **01 / aurora** → normal Decky implementation
+and branding integration → bounded audit/cleanup → final full available matrix
+and current-identity test build → owner Deck test/fix loop → migration → actual
+new-install retest. The creative direction is selected; production artwork and
+new runtime still need implementation/checks. Use focused checks during work.
+Separate companion/StreamGod remains deferred. Provider OAuth/phone login is
+research-only #89; discuss its design before coding it and do not block the
+manual-key implementation on it.
 
 Update canonical docs when contracts/ownership/state/safety change. Record durable
 choices in [DECISIONS.md](DECISIONS.md); proposed ADRs stay proposed until the
@@ -67,9 +72,9 @@ spending, transfer or another repository's changes need applicable authorization
 prepare concrete artifacts/evidence before an approval action and do not ask
 again for already authorized work.
 
-The owner requested issue consolidation after review/merges, leaving one
-implementation checklist and separate #51 research. Transfer every remaining
-original criterion/dependency with evidence and a responsible next action. Close
-transferred tickets as superseded/consolidated with that link, not as passed.
-Do not consolidate pending implementation tickets before agreed review/merge
-checkpoints. Missing device/CI/review/rights/adoption evidence remains visible.
+The owner now requested focused implementation issues under existing parent #46,
+superseding the earlier two-issue tracker shape. Preserve all 230 original
+criteria/dependencies and historical receipts; the new child issues are bounded
+work, not replacement acceptance. Transfer remaining criteria only with evidence
+and a responsible next action. Superseded/consolidated is not passed. Missing
+device/CI/review/rights/adoption evidence remains visible.

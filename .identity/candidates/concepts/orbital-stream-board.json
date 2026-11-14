@@ -34,5 +34,24 @@
   },
   "humanApproval": null,
   "rightsStatus": "owner-review-required; no trademark clearance, copyright eligibility or rights transfer asserted",
-  "usage": "Creative review reference only. Does not replace the earlier mint-signal concept, current editable masters, generated kit, or live plugin visuals. Flat and monochrome examples are generated concepts; actual vector exports and small-size checks remain to be produced after direction selection."
+  "usage": "Creative review reference only. Does not replace the earlier mint-signal concept, current editable masters, generated kit, or live plugin visuals. Flat and monochrome examples are generated concepts; actual vector exports and small-size checks remain to be produced after direction selection.",
+  "creativeDirectionSelection": {
+    "record": ".identity/candidates/concepts/selection.json",
+    "recordedAt": "2026-11-14T18:31:52Z",
+    "selectedPrimary": "01 / aurora",
+    "artifactRole": "origin-reference-retained",
+    "scope": "Owner creative direction only. Original artifact remains proposed; no final rights/license, vector/export, production or device approval."
+  },
+  "statusHistory": [
+    {
+      "recordedAt": "2026-11-14",
+      "status": "proposed-unapproved",
+      "scope": "Original generated concept artifact"
+    },
+    {
+      "recordedAt": "2026-11-14T18:31:52Z",
+      "status": "proposed-unapproved",
+      "scope": "Artifact status retained; primary creative direction selected separately in selection.json"
+    }
+  ]
 }

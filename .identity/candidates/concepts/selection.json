@@ -1,0 +1,68 @@
+{
+  "schema": "decky-stream.brand-direction-selection/v1",
+  "id": "orbital-stream-aurora",
+  "recordedAt": "2026-11-14T18:31:52Z",
+  "decisionDate": "2026-11-14",
+  "status": "creative-direction-selected; production-adoption-pending",
+  "actor": "Repository owner, through this chat",
+  "decisionParaphrase": "Lock 01 / aurora aqua/violet as the primary direction; retain the original and other variants as concepts.",
+  "decisionParaphraseIsVerbatimQuote": false,
+  "futureRepositoryName": "deckystream",
+  "selectedPrimary": {
+    "concept": "orbital-stream",
+    "variantNumber": "01",
+    "variantName": "aurora",
+    "positionInComparison": "top-left",
+    "paletteDirection": "Luminous aqua/cyan with violet; near-black field",
+    "formDirection": "Open orbital ring with upper-right gap and a flowing S-shaped stream ribbon",
+    "materialDirection": "Controlled luminous gradient, subtle depth and glow; retain the original airy suite atmosphere",
+    "comparisonImage": {
+      "path": ".identity/candidates/concepts/orbital-stream-color-alternatives.png",
+      "sha256": "4e2076ce7ba139a97d1ecf3b730de6db0cb15d9452cfcefbd8885b2af7b9c801"
+    },
+    "comparisonRecord": ".identity/candidates/concepts/orbital-stream-color-alternatives.json",
+    "scope": "Creative symbol/color/material direction only, not a final approved render, vector master, export or measured palette."
+  },
+  "retainedConcepts": [
+    {
+      "id": "orbital-stream",
+      "path": ".identity/candidates/concepts/orbital-stream-board.png",
+      "sha256": "5301893b21e08872262cced4e6415e117ddf20900e0ee64e816f912b298c8a5e",
+      "role": "Original direction board retained as a concept/reference"
+    },
+    {
+      "id": "orbital-stream-gradient-icon",
+      "path": ".identity/candidates/concepts/orbital-stream-gradient-icon.png",
+      "sha256": "4c59ae9c7716c3889bd837071b55cef0e8641419405ded250f8d73620eab5f49",
+      "role": "Original gradient icon retained as a concept/reference"
+    },
+    {
+      "id": "orbital-stream-color-alternatives",
+      "path": ".identity/candidates/concepts/orbital-stream-color-alternatives.png",
+      "sha256": "4e2076ce7ba139a97d1ecf3b730de6db0cb15d9452cfcefbd8885b2af7b9c801",
+      "role": "Comparison sheet retained; variants 02/03/04 remain alternative concepts"
+    }
+  ],
+  "approvalScope": {
+    "creativeDirection": "Owner selected 01 / aurora as primary",
+    "rightsLicensingAttribution": "No final rights/license approval recorded by this selection",
+    "vectorMasters": "Not authored or approved by this selection",
+    "finalRendersAndExports": "Not approved by this selection",
+    "productionAdoption": "Pending implementation and corresponding actual decisions/checks",
+    "deviceQualification": "Unrun; no native Deck icon/legibility claim",
+    "releaseOrMigration": "Not performed or approved by this creative choice"
+  },
+  "preservation": {
+    "originalPngs": "Unchanged",
+    "originalGenerationPromptsAndMethods": "Unchanged in their original concept records",
+    "originalArtifactStatus": "proposed-unapproved retained; creative-direction selection is separate",
+    "existingMastersAndGeneratedKit": "Unchanged and not relabelled as selected production artwork",
+    "runtimeAndProductMetadata": "Unchanged"
+  },
+  "nextImplementation": [
+    "Author selected vector/source geometry without asserting automatic PNG-to-vector identity",
+    "Produce final export candidates and actual-size/contrast/state-cue checks",
+    "Record actual rights/license/attribution and final source/export decisions",
+    "Apply accepted assets through the pinned Identity path; final device/release qualification remains separate"
+  ]
+}

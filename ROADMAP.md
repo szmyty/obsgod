@@ -1,21 +1,24 @@
 # Product roadmap
 
-The feasible engineering pass is complete in draft #75. See the
-[exact-source checkpoint and remaining gates](docs/pre-migration-completion.md).
-The next phase is the owner's new logo direction, then final full available
-qualification, repairs/retests and migration. Earlier runtime receipts remain
-historical; final-source full qualification has not run for the new source.
+The owner locked **01 / aurora** and selected future repository name
+**deckystream**. The current [implementation roadmap](docs/implementation-roadmap.md)
+is parent [#46](https://github.com/szmyty/obsgod/issues/46):
+[#76–#85, implementation and a test-ready build](https://github.com/szmyty/obsgod/milestone/4),
+then [#86–#88, Deck validation and migration](https://github.com/szmyty/obsgod/milestone/5).
 
-Companion and OAuth are explicitly deferred. The final full matrix waits for
-the new logo source; implementation checks remain separate from that final
-qualification. The earlier plan and source history follow below.
+Implement normal Decky packaging, recoverable in-plugin dependency setup, private
+manual-key configuration, safe state/lifecycle integration and the selected
+branding/UI under current **szmyty/obsgod** first. Reuse existing #73/#74/#75
+work. Audit, qualify the final source and give the owner numbered Deck tests;
+fix reported bugs before the actual move, then retest the new installation.
 
-Current repository-presentation preparation and useful remaining engineering
-lanes are in [the pre-migration plan](docs/pre-migration-plan.md). The owner
-prefers a fresh Decky Stream repository; draft art/README/funding preparation
-does not perform that migration or close remaining #46 acceptance.
+[#89](https://github.com/szmyty/obsgod/issues/89) separately researches Twitch/Kick
+OAuth and phone/QR login. Discuss that design before authentication coding; it
+does not block manual-key streaming. The companion remains deferred. All 230
+original criteria/dependencies are preserved; earlier source receipts do not
+qualify new implementation, artwork, hardware or publication.
 
-## Current state — qualified follow-up and remaining acceptance
+## Historical qualified follow-up and remaining acceptance
 
 The owner authorized merging the prepared audit and progressing the remaining
 issues. #67 and follow-up source #69/#70/#71 are merged; #72 contains the final

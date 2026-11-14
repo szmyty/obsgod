@@ -1,5 +1,12 @@
 # Proposed Decky Stream brand kit
 
+**Current selection:** the owner locked **01 / aurora** as the primary direction;
+see [the exact selection](../.identity/candidates/concepts/selection.json).
+Earlier boards and other palettes remain concepts. [#80](https://github.com/szmyty/obsgod/issues/80)
+tracks selected source/exports; [#81](https://github.com/szmyty/obsgod/issues/81)
+tracks UI adoption. The exporter/preview instructions below describe earlier
+draft outputs until those tasks update them; they are not the selected new kit.
+
 The editable candidates and honest rights inventory are in
 [`.identity/candidates`](../.identity/candidates/). They are **unapproved** and do
 not replace the product's existing visual baseline or native Decky icon.

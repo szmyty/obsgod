@@ -1,5 +1,45 @@
 # Current work
 
+## Active roadmap: implementation first, current Deck tests, then migration
+
+The owner locked **01 / aurora** and retained earlier artwork as concepts. The
+exact creative selection/reference hashes are in
+[selection.json](.identity/candidates/concepts/selection.json); source/exports,
+rights, live UI and target rendering are not thereby implemented or qualified.
+Future repository name is **deckystream**, with final owner still unresolved.
+
+Live parent #46 now links native sub-issues **#76–#88**. Implementation milestone
+4 has **#76–#85**: package, safe Decky state paths, recoverable dependency jobs,
+private manual-key setup, selected brand assets, native UI, lifecycle/cleanup,
+integration regressions, bounded audit and final local qualification/test build.
+Milestone 5 has **#86–#88**: owner current-install Deck test/fix loop; prepare then
+gate the actual migration; retest the official new install and prepare v1 facts.
+[The detailed plan](docs/implementation-roadmap.md) and
+[machine-readable issue snapshot](docs/evidence/implementation-roadmap.json)
+retain inputs, acceptance, original-scope links and exact live baseline.
+
+All 230 original criteria/dependencies and #46's original details tail are
+preserved exactly; older checkpoint narrative is collapsed as historical.
+No issue is closed or marked implemented by planning. Drafts remain #73 → #74
+→ #75; default master remains da89b9d. Latest release is unchanged prerelease
+v0.1.0-deck.4-updater.1. Protection detail read is403; no settings change.
+
+**#89** is separate OAuth/phone/QR research from preserved #14/#40, not a main
+implementation dependency. [Official-source findings](docs/authentication-options.md):
+Twitch documents public-client device authorization and user stream-key access;
+Kick documents PKCE plus a confidential client secret and key scopes/schema.
+Resolve its native-client/callback constraints before promising the same flow.
+OBS still needs ingest credentials internally. All real OAuth/phone/account
+tests are unrun; discuss the auth design before implementation. Companion stays
+deferred; #51 research is not reopened or turned into monetization/Store work.
+
+This checkpoint creates the roadmap and records branding selection/research;
+the new package/setup/UI code and final full matrix are not yet executed. Next
+execution uses the existing isolated checkout, preserves injected auth/network
+presets and pinned tools, and pushes reviewable checkpoints. No release, deploy,
+repository creation/retirement or spending occurred. This current sequence
+supersedes older notes that say to wait for a new-logo direction.
+
 ## Intended repository name: deckystream
 
 On 2026-11-14 the owner preferred **deckystream** as the future repository name,

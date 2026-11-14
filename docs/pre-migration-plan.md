@@ -1,5 +1,13 @@
 # Before the fresh Decky Stream repository
 
+**Current execution plan:** [the implementation roadmap](implementation-roadmap.md),
+parent #46, supersedes the earlier lane ordering below. Owner selected
+01 / aurora. Complete #76–#85 under current OBSGod, deliver manual Deck tests
+and fix reports in #86, then execute the exact approved migration in #87 and
+repeat the actual new install in #88. OAuth/phone login is separate research #89.
+The following prepared engineering table remains history, not a request to
+repeat already completed legacy/API or NFPM source work.
+
 Prepared 2026-11-14 UTC from live #46 and the existing checkout. The owner prefers
 a fresh source snapshot and clean tracker rather than transferring the old fork's
 history. Intended repository name is now `deckystream` (owner update 2026-11-14),

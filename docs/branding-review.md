@@ -1,5 +1,13 @@
 # Decky Stream branding owner packet
 
+**Current direction, 2026-11-14:** owner selected **01 / aurora**, recorded with
+source hashes in [selection.json](../.identity/candidates/concepts/selection.json).
+Retain other art as concepts. [#80](https://github.com/szmyty/obsgod/issues/80)
+and [#81](https://github.com/szmyty/obsgod/issues/81) cover final selected exports
+and live UI integration. Creative direction is decided; final rights/licensing,
+source/exports, production adoption and device proof remain separate. Dated
+delivery and qualification paragraphs below describe their historical sources.
+
 Delivery follow-up: the current draft has a flat preview ZIP with 14 PNGs and a
 self-contained offline gallery; 11 focused tests and real offline browser
 decode checks passed. The complete kit has 38 files and repository projection
