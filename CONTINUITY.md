@@ -1,40 +1,47 @@
 # Current work
 
-## Cleanup/recovery #101–#102 authorized and in progress
+## Cleanup/recovery implemented and qualified; draft #109 for review
 
-The owner requested merging pending work and proceeding to the next batch.
-Live GitHub inspection found no open PRs: the previous source/evidence stack is
-already merged, and `master` is **1440f993b445a8d90168de5d1bfc36066a6f9af1**.
-The environment briefly rejected shell execution, then reported the matching
-instance running/connected; actual commands, Git fetch/API, pinned tools and
-Docker now execute. Preserve the existing checkout and package/network presets.
+The requested previous PR stack was already merged into actual default
+`master` at **1440f993b445a8d90168de5d1bfc36066a6f9af1**. The next bounded
+batch **#101/#102** is implemented on **fix/cleanup-recovery**, in draft
+[#109](https://github.com/szmyty/obsgod/pull/109). Both issues remain open for
+review; no merge or target acceptance is inferred from local tests.
 
-Work uses **fix/cleanup-recovery** without an additional worktree. #101 covers
-stable cleanup coordination inodes, legacy ancestor validation and partial-deletion
-recovery; #102 covers gated dependency repair, plugin-first update identity,
-version-specific recovery and explicit retirement of obsolete Desktop app files.
-Keep normal Decky installation/replacement primary. Retained recovery must not
-download before validated session/fresh idle/shared leases, downgrade a newer
-plugin as an ordinary update, or remove the active plugin/shared stores when
-only the obsolete app is selected. Unknown output stays a refusal.
+Exact clean qualified source: **aa323f0119e2d3c475d04a30860a4c3e314620bc**,
+tree **9f987b34b33daad2922c0de0c49f51aeb27b1931**. All six serial free local
+ACT jobs pass, with zero evidence errors/open failure groups. Application tests:
+258 passed/2 skipped; tooling85 and frontend43 pass. Both actual packaged
+transport/upgrade/removal runs, supplemental CLI/browser upgrades, 18 filtered
+native proofs, 218 CPython/240 simulated-frozen adapter checks and six normal-user
+frontend checks pass. The primary ZIP matches both repeated workflow builds and
+all33 official CLI payload files. Read the
+[checkpoint, criterion evidence and limits](docs/cleanup-recovery-checkpoint.md).
+Evidence-only followups do not relabel aa323f0 qualification.
 
-Use focused process/filesystem/protocol/browser checks and reviewable draft
-checkpoints during implementation, then the complete required available matrix
-at the final exact source. Earlier 9038e23 receipts are historical for new code.
-Current free runner has about 1.6 GiB root space; preserve caches and evidence,
-use measured temporary relocation/resource assistance when needed and record it.
-Settings boundary #103, branding/UI and migration/release/deployment remain
-separate. No spending or another-repository change is authorized by this batch.
+The batch preserves live update/install/control lock generations, pins cleanup
+roots/ancestors through partial recovery, rejects unsafe writable ancestry,
+shares verified native dependency policy, separates loaded-plugin updates from
+optional Desktop app inventory, and binds exact-version recovery/rollback.
+Explicit legacy-app-only retirement preserves the active plugin/shared stores.
+Serial integration exposed real release-tree self-mutation; import bytecode and
+redundant chmod were repaired before final qualification. Original339 failures
+and the earlier overlapping port4457 tests remain historical, not hidden.
 
-Draft **#109** now contains source checkpoints for both issues. Focused tests
-and review cover stable updater/install/control inodes, newly-created root and
-home-alias replacement, explicit legacy-app retirement, verified native-policy
-reuse, plugin-first update metadata and exact recovery versions. Review also
-closed old-plugin rollback and historical-installer execution bypasses. The
-pinned transport fixture now supplies a real owned synthetic session and native
-Flatpak metadata; actual candidate transport/upgrade qualification is still
-pending. Full integrated tests, primary packaging and the complete final local
-matrix must qualify the final committed source before readiness claims.
+All temporary cache relocations are restored; package/network presets stayed
+unchanged. Disposable container compiler-cache assistance is recorded and does
+not complete #104. PNPM restored file count/bytes match, but its first unordered
+aggregate hash cannot prove byte equality; other2 caches have matching hashes.
+Independent finished-proof privacy/integrity review passes. No product release,
+deployment, migration, Store submission, spending or consumer adoption occurred.
+
+Actual supported-loader startup (#102-D4), Steam Deck/SteamOS/Flatpak OBS33/
+Gamescope/AMD/controller/headset/provider proof remains #86/original ledgers.
+Hosted jobs remain billing-unavailable with zero steps; actual dependency
+comparison is separately403. Original230 criteria/dependencies remain intact.
+Next bounded audit item is settings boundary **#103**, then selected artwork/UI/
+docs/#104/#85 preparation under applicable owner direction. Do not silently
+start authentication, migration or publication from this record.
 
 ## Runtime correctness complete; source stack merged and qualified
 

@@ -1,9 +1,14 @@
 # deckystream implementation and migration roadmap
 
+Cleanup/recovery **#101/#102** is implemented in draft **#109**, with all six
+local ACT jobs and bounded criterion evidence at exact clean **aa323f0**. Read
+the [review checkpoint](cleanup-recovery-checkpoint.md). Issues remain open for
+review; actual supported-loader/device/provider and hosted gates remain separate.
+
 Current runtime checkpoint: **#96–#100** are implemented through merged
 #106/#107 and qualified at exact source **9038e23**. See the
 [20-criterion evidence and full local matrix](runtime-correctness-checkpoint.md).
-Other audit stages #101–#104, selected artwork/UI and final owner test/migration
+Remaining audit stages #103/#104, selected artwork/UI and final owner test/migration
 remain separate; this checkpoint does not replace their acceptance or the
 original 230 criteria/dependencies.
 

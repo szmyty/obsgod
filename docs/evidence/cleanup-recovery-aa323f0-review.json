@@ -1,0 +1,102 @@
+{
+  "schema": "obsgod.cleanup-recovery.finished-zip-review/v1",
+  "reviewed_at": "2026-11-15T18:11:14.554380+00:00",
+  "archive": "/workspace/.obsgod-tools/cleanup-recovery-20261115/public-evidence.zip",
+  "archive_sha256": "5483d8b16041fab343d2c87038c556ed5f4264d1e80f2982f431c35f893f4ec2",
+  "qualified_revision": "aa323f0119e2d3c475d04a30860a4c3e314620bc",
+  "qualified_tree": "9f987b34b33daad2922c0de0c49f51aeb27b1931",
+  "status": "passed",
+  "counts": {
+    "index_public_hashes_verified": 140,
+    "index_private_hashes_verified": 140,
+    "redacted_members": 6,
+    "exact_act_receipt_log_pairs_verified": 6,
+    "native_members_verified": 18,
+    "criteria_verified": 15,
+    "decoded_surfaces_scanned": 15031,
+    "actions_mask_values_checked": 5,
+    "fixed_public_source_fixture_markers_checked": 2,
+    "injected_environment_values_checked": 1,
+    "decoded_privacy_findings": 0
+  },
+  "allowlist": {
+    "explicit_proposed_members": 67,
+    "explicit_final_members": 73,
+    "indexed_proof_members": 140,
+    "archive_members_including_index": 141,
+    "unique_safe_relative_paths": true,
+    "all_members_utf8_text": true,
+    "no_installed_home_contents_source_patches_binaries_or_media": true,
+    "notes": "Private original paths referenced inside receipts/INDEX are metadata; they are not implicitly included archive members."
+  },
+  "privacy": {
+    "method": "Independent raw/JSON/JSONL scalar and nested field scan, bounded percent/HTML/Unicode/embedded JSON/base64-text normalization; known private Actions masks and fixed public fixture markers derived without printing them; common private-key/access-token patterns and injected credential environment values checked.",
+    "known_values_recorded_in_report": false,
+    "findings": [],
+    "scope": "Bounded artifact privacy review, not a proof about arbitrary unknown credential encodings or third-party systems."
+  },
+  "integrity": {
+    "zip_crc_passed": true,
+    "all_140_public_hashes_match_INDEX": true,
+    "all_140_original_hashes_match_explicit_private_sources": true,
+    "all_members_match_explicit_allowlists": true,
+    "six_selected_ACT_receipts_and_logs_bind_original_private_hashes": true,
+    "redacted_public_hashes_separately_bound": true,
+    "report_local_passed_overall_partial": true
+  },
+  "claims_review_path": "/workspace/.obsgod-tools/cleanup-recovery-20261115/evidence-review/claims-review.json",
+  "historical_and_external_limits": "Only exact aa323f0 receipts qualify source. Earlier339/dirty/focused receipts are labeled historical. Actual supported loader startup102D4 remains#86; Deck/provider/hosted/non-Linux/adoption acceptance is not passed. Issues101/102 remain open and109draft. Cache PNPM initial aggregate digest is invalid due unordered traversal; count/bytes only, other two deterministic digests match. Resource-assisted run does not pass unassisted policy#104.",
+  "actions": "No checkout, original proof, ZIP or allowlist mutation; no test/matrix reruns or publication.",
+  "claims": {
+    "status": "passed",
+    "findings": [],
+    "checks": {
+      "criteria": "15 original bullets; all target states explicitly unrun;102-D4 remains86;101102open109draft",
+      "act": "six clean exact-source qualifying passes; overallpartial,0evidenceerrors",
+      "test_counts": [
+        {
+          "failed": 0,
+          "framework": "python-unittest",
+          "line": 893,
+          "passed": 258,
+          "skipped": 2,
+          "status": "passed",
+          "tests": 260
+        },
+        {
+          "failed": 0,
+          "framework": "python-unittest",
+          "line": 983,
+          "passed": 85,
+          "skipped": 0,
+          "status": "passed",
+          "tests": 85
+        },
+        {
+          "cancelled": 0,
+          "failed": 0,
+          "framework": "node-test",
+          "line": 1039,
+          "passed": 43,
+          "skipped": 0,
+          "tests": 43,
+          "todo": 0
+        }
+      ],
+      "primary": {
+        "sha256": "cb6f923f6e22efed96f98f08522a9c6f90e5b4f8d6cf398e5c8afc724ec054b8",
+        "candidate_log_checksum_lines": [
+          1098,
+          1141
+        ],
+        "official_cli": "33preparedpayloadfiles compared; rawCLI ZIP byte reproducibility explicitlyfalse and assembly-only scope explicit"
+      },
+      "native": "18proof members/15distincthashes; embedded revision absent where absent and exactACTassociation/targetlimitexplicit",
+      "transport": "2exactsourcepassed fullinstaller/updater/removal fixture runs",
+      "postmatrix": "10exactsourcecommands passed; receipt-writer typo disclosed as reporting-only",
+      "cache": "PNPM count/link/bytes+completedmove only; initialunordered aggregateinvalid/no content-equalityclaim. Other2digests match. Resourceassistance/#104limit explicit"
+    },
+    "independent_claims_review_sha256": "14a9b95c1c2ea46a7f8d0048be6aa50d8439c83d9414a282b16274761f09f4ff"
+  },
+  "finalized_at": "2026-11-15T18:12:05.875420+00:00"
+}
