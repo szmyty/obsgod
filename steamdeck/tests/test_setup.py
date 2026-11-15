@@ -12,6 +12,7 @@ import sys
 import tempfile
 import threading
 import unittest
+import zipfile
 from unittest.mock import Mock, patch
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -245,7 +246,7 @@ class InstallerSafety(unittest.TestCase):
         outside = Path(self.temp.name) / "outside"
         outside.mkdir()
         (self.home / ".local").symlink_to(outside, target_is_directory=True)
-        with self.assertRaisesRegex(RuntimeError, "inside your home"):
+        with self.assertRaisesRegex(RuntimeError, "inside your home|symlinked"):
             install.install(launch=False, with_decky=False)
         self.assertEqual(list(outside.iterdir()), [])
 
@@ -336,7 +337,16 @@ class InstallerSafety(unittest.TestCase):
 
 
 class UnifiedInstallerSafety(unittest.TestCase):
-    manifest = InstallerSafety.manifest
+    def manifest(self, version="0.1.0-test"):
+        with zipfile.ZipFile(self.source / "obsgod-decky.zip", "w") as archive:
+            archive.writestr("obsgod/package.json", json.dumps({"name": "obsgod", "version": version}))
+        InstallerSafety.manifest(self, version)
+
+    def installed_plugin(self, version):
+        root = self.home / "homebrew/plugins/obsgod"
+        root.mkdir(parents=True, exist_ok=True)
+        (root / "package.json").write_text(json.dumps({"name": "obsgod", "version": version}))
+        (root / "plugin.json").write_text(json.dumps({"name": "OBSGod"}))
 
     def setUp(self):
         InstallerSafety.setUp(self)
@@ -432,7 +442,9 @@ class UnifiedInstallerSafety(unittest.TestCase):
         with contextlib.redirect_stdout(__import__("io").StringIO()):
             current = install.install(launch=False, with_decky=False)
         previous = current.resolve()
+        self.installed_plugin(previous.name)
         self.manifest("0.2.0-test")
+        self.decky.helper_request.side_effect = lambda action, candidate, manifest: self.installed_plugin(manifest["version"])
         with patch.object(install, "activate_release", side_effect=OSError("activation failed")), self.assertRaisesRegex(RuntimeError, "previous plugin was restored and verified"):
             install.install(launch=False)
         self.assertEqual(current.resolve(), previous)
@@ -440,6 +452,50 @@ class UnifiedInstallerSafety(unittest.TestCase):
         record = current.parent / "installation-recovery.json"
         self.assertEqual(record.stat().st_mode & 0o777, 0o600)
         self.assertTrue(json.loads(record.read_text())["plugin_rollback_confirmed"])
+
+    def test_activation_failure_cannot_roll_newer_plugin_back_to_retained_older_app(self):
+        with contextlib.redirect_stdout(__import__("io").StringIO()):
+            current = install.install(launch=False, with_decky=False)
+        previous = current.resolve()
+        self.installed_plugin("0.3.0-test")
+        self.manifest("0.3.0-test")
+        self.decky.helper_request.side_effect = lambda action, candidate, manifest: self.installed_plugin(manifest["version"])
+        with patch.object(install, "activate_release", side_effect=OSError("activation failed")), self.assertRaisesRegex(RuntimeError, "rollback is unconfirmed"):
+            install.install(launch=False)
+        self.decky.helper_request.assert_called_once()
+        self.assertEqual(current.resolve(), previous)
+        self.assertEqual(install._releases.installed_plugin_version(self.home), "0.3.0-test")
+        record = json.loads((current.parent / "installation-recovery.json").read_text())
+        self.assertFalse(record["plugin_rollback_confirmed"])
+
+    def test_tampered_previous_plugin_archive_is_not_used_for_rollback(self):
+        with contextlib.redirect_stdout(__import__("io").StringIO()):
+            current = install.install(launch=False, with_decky=False)
+        previous = current.resolve()
+        self.installed_plugin(previous.name)
+        (previous / "obsgod-decky.zip").write_bytes(b"changed archived plugin")
+        self.manifest("0.2.0-test")
+        self.decky.helper_request.side_effect = lambda action, candidate, manifest: self.installed_plugin(manifest["version"])
+        with patch.object(install, "activate_release", side_effect=OSError("activation failed")), self.assertRaisesRegex(RuntimeError, "rollback is unconfirmed"):
+            install.install(launch=False)
+        self.decky.helper_request.assert_called_once()
+        self.assertEqual(install._releases.installed_plugin_version(self.home), "0.2.0-test")
+
+    def test_newer_plugin_refusal_precedes_dependency_setup(self):
+        self.installed_plugin("0.3.0-test")
+        with self.assertRaisesRegex(RuntimeError, "newer than the recovery target"):
+            install.install(launch=False)
+        install.ensure_dependencies.assert_not_called()
+        self.decky.helper_request.assert_not_called()
+
+    def test_changed_plugin_identity_is_rechecked_inside_final_control_lease(self):
+        def change_during_setup(*args):
+            self.installed_plugin("0.3.0-test")
+
+        install.ensure_dependencies.side_effect = change_during_setup
+        with self.assertRaisesRegex(RuntimeError, "newer than the recovery target"):
+            install.install(launch=False)
+        self.decky.helper_request.assert_not_called()
 
     def test_unconfirmed_rollback_is_reported_without_false_success(self):
         self.decky.helper_request.side_effect = RuntimeError("unconfirmed install")
@@ -471,19 +527,20 @@ class DependencyCompatibility(unittest.TestCase):
                 self.result(self.LIST_REF + "\t" + version + "\n")]
 
     def test_installed_modern_obs_does_not_reinstall_or_change_remotes(self):
-        with patch.object(install.shutil, "which", return_value="/usr/bin/flatpak"), patch.object(install.subprocess, "run", side_effect=self.responses()) as run:
-            install.ensure_dependencies()
+        # This retained read helper remains read-only. Actual recovery now
+        # reuses the native transaction; its real-process coverage lives in
+        # test_install_dependencies.py.
+        with patch.object(install.subprocess, "run", side_effect=self.responses()[2:]) as run:
+            self.assertEqual(install.installed_obs_version(), "33.0.1")
         self.assertEqual([call.args[0] for call in run.call_args_list], [
-            ["flatpak", "info", "--user", "com.obsproject.Studio"],
-            ["flatpak", "info", "--user", "com.obsproject.Studio.Plugin.Gstreamer"],
             ["flatpak", "info", "--user", "--show-ref", "com.obsproject.Studio"],
             ["flatpak", "list", "--user", "--app", "--columns=ref,version"],
         ])
 
-    def test_obs_before_bundled_websocket_is_rejected(self):
-        with patch.object(install.shutil, "which", return_value="/usr/bin/flatpak"), patch.object(install.subprocess, "run", side_effect=self.responses("27.2.0")):
-            with self.assertRaisesRegex(RuntimeError, "User-installed OBS 27.2.0.*older than OBS 28"):
-                install.ensure_dependencies()
+    def test_missing_native_policy_never_falls_back_to_flatpak_mutation(self):
+        with patch.object(install.subprocess, "run") as run, self.assertRaisesRegex(RuntimeError, "verified native dependency setup"):
+            install.ensure_dependencies(Mock(), {"files": {"obsgod-decky.zip": "0" * 64}}, Path.home())
+        run.assert_not_called()
 
     def test_boundary_and_current_versions_are_supported(self):
         for version in ["28.0.0", "33.0.1", "33.0.1-rc1"]:
@@ -518,18 +575,6 @@ class DependencyCompatibility(unittest.TestCase):
                self.OBS_REF + "\t27.2.0\n"
         with patch.object(install.subprocess, "run", side_effect=[self.result(self.OBS_REF), self.result(rows)]):
             self.assertEqual(install.installed_obs_version(), "27.2.0")
-
-    def test_missing_dependencies_use_user_flatpak_then_verify_version(self):
-        responses = [self.result(code=1), self.result(), self.result(),
-                     self.result(self.OBS_REF), self.result(self.OBS_REF + "\t33.0.1\n")]
-        with patch.object(install.shutil, "which", return_value="/usr/bin/flatpak"), patch.object(install.subprocess, "run", side_effect=responses) as run:
-            install.ensure_dependencies()
-        for call in run.call_args_list:
-            command = call.args[0]
-            self.assertEqual(command[0], "flatpak")
-            self.assertIn("--user", command)
-        self.assertEqual(run.call_args_list[-1].args[0], ["flatpak", "list", "--user", "--app", "--columns=ref,version"])
-
 
 if __name__ == "__main__":
     unittest.main()

@@ -896,16 +896,15 @@ class Plugin:
                 module = importlib.util.module_from_spec(spec)
                 spec.loader.exec_module(module)
                 versions = module.current_versions(self._version(), environ=self._child_environment())
-                current = versions["app"] if versions["app"] != "unknown" else versions["plugin"]
-                result = await _readonly_thread(module.check_updates, current, channel="preview")
+                result = await _readonly_thread(module.check_plugin_updates, versions["plugin"], channel="preview")
                 result.update(current_app_version=versions["app"], current_plugin_version=versions["plugin"],
-                              current_updater_version=versions["updater"], mismatch=versions["mismatch"])
-                if versions["mismatch"]:
-                    result["message"] += " App and plugin versions differ; use the Desktop installer to repair the pair."
+                              current_updater_version=versions["updater"], mismatch=versions["mismatch"],
+                              legacy_app={"state": versions.get("app_state", "unknown"), "version": versions["app"]})
                 return result
             except (OSError, ValueError, ImportError, AttributeError):
                 return {"ok": False, "state": "error", "current_version": self._version(),
-                        "available": False, "message": "Could not check updates. Retry or use the bundled Desktop updater."}
+                        "available": False, "distribution": "decky",
+                        "message": "Could not check plugin releases. Your installed plugin is unchanged; retry later or use Decky's plugin installation controls."}
 
         self._update_task = asyncio.create_task(check())
         return await asyncio.shield(self._update_task)

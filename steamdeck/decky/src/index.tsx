@@ -16,7 +16,7 @@ type Diagnostic = {time:string; level:string; message:string};
 type Outcome = {id?:number; action?:string; ok:boolean; message:string; recording_path?:string};
 type Result = {ok:boolean; state:string; message:string; configured?:boolean; output_known?:boolean; process?:string; connection?:string; recording?:boolean; capture?:string; frames?:string; game?:string; backend_id?:string; snapshot_id?:number; operation?:{id:number; action:string; state:string;media_action?:string}|null; action_result?:Outcome; last_action?:Outcome; stream?:{active:boolean; reconnecting:boolean; bytes:number; duration_ms:number}; recording_path?:string; diagnostics?:Diagnostic[]; plugin_version?:string; media?:any;stream_health?:any;resilience?:any;settings?:{capture_mode?:"screen"|"game";idle_style?:"black"|"placeholder"|"image"|"video";idle_text?:string;idle_media?:string;microphone?:boolean};audio?:AudioStatus;video?:{state:string;message?:string;watching?:boolean}};
 type AudioStatus = {state:string;message?:string;output_available?:boolean;output_muted?:boolean;microphone_requested?:boolean;microphone_available?:boolean;microphone_muted?:boolean;signal?:string};
-type UpdateResult = {ok:boolean; state:string; message:string; current_version?:string; latest_version?:string; available?:boolean; current_app_version?:string; current_plugin_version?:string; current_updater_version?:string; mismatch?:boolean; channel?:string};
+type UpdateResult = {ok:boolean; state:string; message:string; current_version?:string; latest_version?:string; available?:boolean; current_plugin_version?:string; legacy_app?:{state:string;version:string}; channel?:string};
 const readStatus=callable<[],Result>("status");
 const start=callable<[],Result>("start");
 const stop=callable<[],Result>("stop");
@@ -236,7 +236,7 @@ async function checkForUpdates(){
     const next=await bounded(checkUpdates(),25000);
     if(active&&generation===instance)updateInfo=next;
   }catch{
-    if(active&&generation===instance)updateInfo={ok:false,state:"error",message:"Could not check updates. Retry or use the bundled Desktop updater."};
+    if(active&&generation===instance)updateInfo={ok:false,state:"error",message:"Could not check plugin releases. Your installed plugin is unchanged; retry later or use Decky's plugin installation controls."};
   }finally{if(active&&generation===instance){updateChecking=false;changed();}}
 }
 
@@ -307,8 +307,8 @@ function Content(){
     </PanelSection>
     <PanelSection title="UPDATES">
       <PanelSectionRow><ButtonItem layout="below" disabled={updateChecking} onClick={()=>void checkForUpdates()}>{updateChecking?"Checking for updates…":"Check for updates"}</ButtonItem></PanelSectionRow>
-      <PanelSectionRow><div aria-live="polite" style={{fontSize:13,lineHeight:1.5,whiteSpace:"pre-wrap",overflowWrap:"anywhere"}}>{updateInfo?`${updateInfo.message}\nApp: ${updateInfo.current_app_version??updateInfo.current_version??"unknown"} · Plugin: ${updateInfo.current_plugin_version??pluginVersion??"unknown"} · Updater: ${updateInfo.current_updater_version??"unknown"}${updateInfo.latest_version?`\nLatest: ${updateInfo.latest_version}`:""}`:`Installed plugin: ${pluginVersion||"checking…"}`}</div></PanelSectionRow>
-      <PanelSectionRow><Hint>Apply updates in Desktop Mode with the bundled updater after streaming and recording stop. Checking here does not install an update or interrupt a stream.</Hint></PanelSectionRow>
+      <PanelSectionRow><div aria-live="polite" style={{fontSize:13,lineHeight:1.5,whiteSpace:"pre-wrap",overflowWrap:"anywhere"}}>{updateInfo?`${updateInfo.message}\nInstalled plugin: ${updateInfo.current_plugin_version||updateInfo.current_version||pluginVersion||"unknown"}${updateInfo.latest_version?`\nLatest published plugin: ${updateInfo.latest_version}`:""}${updateInfo.legacy_app?`\nOptional Desktop app: ${updateInfo.legacy_app.state==="installed"?updateInfo.legacy_app.version:updateInfo.legacy_app.state==="absent"?"not installed":"not confirmed"}. Managed separately from this plugin.`:""}`:`Installed plugin: ${pluginVersion||"checking…"}`}</div></PanelSectionRow>
+      <PanelSectionRow><Hint>Use Decky's plugin installation controls for plugin updates, after streaming, recording and replay are confirmed stopped. A retained Desktop app is optional and managed separately; different versions do not by themselves require repairing a pair. Checking here is read-only and does not interrupt output.</Hint></PanelSectionRow>
     </PanelSection>
     <Support/>
   </>;

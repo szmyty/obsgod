@@ -268,7 +268,7 @@ class BackendState(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(one["backend_id"], two["backend_id"])
         self.assertIsNone(one["operation"])
 
-    async def test_update_checks_coalesce_and_compare_the_app_not_only_the_plugin(self):
+    async def test_update_checks_coalesce_and_compare_the_loaded_plugin_independently(self):
         plugin = backend.Plugin()
         calls = []
 
@@ -276,17 +276,42 @@ class BackendState(unittest.IsolatedAsyncioTestCase):
             calls.append((version, channel))
             return {"ok": True, "available": True, "state": "update-available", "message": "Update available"}
 
-        module = SimpleNamespace(check_updates=check, current_versions=lambda _, **_kwargs: {
-            "app": "0.1.0-deck.1", "plugin": "0.1.0-deck.4", "updater": "not-bundled", "mismatch": True})
+        module = SimpleNamespace(check_plugin_updates=check, current_versions=lambda _, **_kwargs: {
+            "app": "0.1.0-deck.1", "app_state": "installed", "plugin": "0.1.0-deck.4", "updater": "not-bundled", "mismatch": True})
         fake_spec = SimpleNamespace(loader=SimpleNamespace(exec_module=Mock()))
         with patch.object(backend.importlib.util, "spec_from_file_location", return_value=fake_spec), patch.object(backend.importlib.util, "module_from_spec", return_value=module):
             one, two = await asyncio.gather(plugin.check_for_updates(), plugin.check_for_updates())
-        self.assertEqual(calls, [("0.1.0-deck.1", "preview")])
+        self.assertEqual(calls, [("0.1.0-deck.4", "preview")])
         self.assertEqual(one, two)
         self.assertTrue(one["mismatch"])
         self.assertEqual(one["current_app_version"], "0.1.0-deck.1")
         self.assertEqual(one["current_plugin_version"], "0.1.0-deck.4")
-        self.assertIn("Desktop installer", one["message"])
+        self.assertEqual(one["legacy_app"], {"state": "installed", "version": "0.1.0-deck.1"})
+        self.assertNotIn("repair", one["message"])
+        self.assertNotIn("Desktop installer", one["message"])
+
+    async def test_plugin_checks_keep_optional_desktop_inventory_separate_in_each_composition(self):
+        for app, plugin_version, app_state in [
+                ("unknown", "0.1.0-deck.9", "absent"),
+                ("0.1.0-deck.4", "0.1.0-deck.4", "installed"),
+                ("0.1.0-deck.4", "0.1.0-deck.9", "installed"),
+                ("0.1.0-deck.9", "0.1.0-deck.4", "installed")]:
+            for state in ("offline", "unavailable", "up-to-date"):
+                with self.subTest(app=app, plugin=plugin_version, state=state):
+                    check = Mock(return_value={"ok": state != "offline", "available": False,
+                                               "state": state, "message": "Independent plugin check"})
+                    module = SimpleNamespace(check_plugin_updates=check, current_versions=lambda _, **_kwargs: {
+                        "app": app, "app_state": app_state, "plugin": plugin_version,
+                        "updater": "not-bundled", "mismatch": app_state == "installed" and app != plugin_version})
+                    fake_spec = SimpleNamespace(loader=SimpleNamespace(exec_module=Mock()))
+                    with patch.object(backend.importlib.util, "spec_from_file_location", return_value=fake_spec), patch.object(
+                            backend.importlib.util, "module_from_spec", return_value=module):
+                        result = await backend.Plugin().check_for_updates()
+                    check.assert_called_once_with(plugin_version, channel="preview")
+                    self.assertEqual(result["state"], state)
+                    self.assertFalse(result["available"])
+                    self.assertEqual(result["legacy_app"], {"state": app_state, "version": app})
+                    self.assertEqual(result["message"], "Independent plugin check")
 
     async def test_idle_stop_does_not_issue_another_command(self):
         plugin = backend.Plugin()
@@ -522,7 +547,7 @@ class BackendContext(unittest.IsolatedAsyncioTestCase):
         current_versions = Mock(return_value={"app": "1.2.3", "plugin": "1.2.3",
                                              "updater": "1.2.3", "mismatch": False})
         module = SimpleNamespace(current_versions=current_versions,
-                                 check_updates=lambda *_args, **_kwargs: {"ok": True, "message": "No update"})
+                                 check_plugin_updates=lambda *_args, **_kwargs: {"ok": True, "message": "No update"})
         fake_spec = SimpleNamespace(loader=SimpleNamespace(exec_module=Mock()))
         values = {"HOME": str(self.root), "DECKY_USER_HOME": str(home),
                   "DECKY_PLUGIN_DIR": str(self.root), "DECKY_PLUGIN_VERSION": "1.2.3"}

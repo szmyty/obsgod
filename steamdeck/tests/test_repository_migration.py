@@ -61,7 +61,8 @@ class RepositoryMigration(unittest.TestCase):
             "ok": True, "configured": True, "state": "stopped",
             "stream": {"active": False}, "recording": False,
             "output_known": True, "process": "absent",
-            "media": {"known": True, "replay_active": False},
+            "media": {"known": True, "replay_active": False,
+                      "recording": {"active": False, "paused": False}},
         }
         self.bridge = SimpleNamespace(run_cli=self.observe)
         self.decky = SimpleNamespace(
@@ -98,12 +99,15 @@ class RepositoryMigration(unittest.TestCase):
         data = (package / "obsgod-decky.zip").read_bytes()
         self.assertEqual(hashlib.sha256(data).hexdigest(), manifest["files"]["obsgod-decky.zip"])
         with zipfile.ZipFile(io.BytesIO(data)) as archive:
-            self.assertEqual(archive.namelist(), ["OBSGod/plugin.json"])
-            plugin = json.loads(archive.read("OBSGod/plugin.json"))
+            self.assertEqual(archive.namelist(), ["obsgod/plugin.json", "obsgod/package.json"])
+            plugin = json.loads(archive.read("obsgod/plugin.json"))
+            identity = json.loads(archive.read("obsgod/package.json"))
         self.assertEqual(plugin, {"name": "OBSGod", "version": manifest["version"]})
+        self.assertEqual(identity, {"name": "obsgod", "version": manifest["version"]})
         self.calls.append(("plugin", manifest["version"]))
         self.plugin.mkdir(parents=True, exist_ok=True)
         (self.plugin / "plugin.json").write_text(json.dumps(plugin))
+        (self.plugin / "package.json").write_text(json.dumps(identity))
         return {"ok": True, "version": manifest["version"]}
 
     def package(self, version, repository):
@@ -126,7 +130,8 @@ class RepositoryMigration(unittest.TestCase):
                 content = content.replace(before, b'REPOSITORY = "' + repository.encode() + b'"')
             (package / name).write_bytes(content)
         with zipfile.ZipFile(package / "obsgod-decky.zip", "w") as archive:
-            archive.writestr("OBSGod/plugin.json", json.dumps({"name": "OBSGod", "version": version}))
+            archive.writestr("obsgod/plugin.json", json.dumps({"name": "OBSGod", "version": version}))
+            archive.writestr("obsgod/package.json", json.dumps({"name": "obsgod", "version": version}))
         manifest = {
             "version": version, "revision": "e" * 40, "platform": "linux/amd64",
             "dirty": False, "updater_version": version,
@@ -238,7 +243,11 @@ class RepositoryMigration(unittest.TestCase):
         self.assert_pair(future_manifest["version"])
         # Explicit rollback uses a verified previous installer; it is not a
         # version downgrade silently authorized by ordinary update discovery.
-        self.installer(old).install(launch=False)
+        with self.assertRaisesRegex(RuntimeError, "newer than the recovery target"):
+            self.installer(old).install(launch=False)
+        self.assert_pair(future_manifest["version"])
+        self.installer(old).install(launch=False, recovery_plugin_version=old_manifest["version"],
+                                   expected_plugin_version=future_manifest["version"])
         self.assert_pair(old_manifest["version"])
         self.installer(future).install(launch=False)
         self.assert_pair(future_manifest["version"])

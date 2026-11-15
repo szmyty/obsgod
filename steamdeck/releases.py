@@ -191,7 +191,7 @@ def _locations(release, version):
     return archive, {name: base + name for name in names}
 
 
-def _latest(channel):
+def _release_candidates(channel):
     if channel not in {"stable", "preview"}:
         raise ReleaseError("Choose the stable or preview update channel.")
     releases = _json(RELEASES_URL)
@@ -213,6 +213,15 @@ def _latest(channel):
         if release.get("prerelease") is not preview or (channel == "stable" and preview):
             continue
         candidates.append((key, version, release))
+    return candidates
+
+
+def _latest(channel, target_version=None):
+    if target_version is not None:
+        version_key(target_version)
+    candidates = _release_candidates(channel)
+    if target_version is not None:
+        candidates = [item for item in candidates if item[1] == target_version]
     if not candidates:
         return None
     _, version, release = max(candidates, key=lambda item: item[0])
@@ -236,12 +245,12 @@ def _latest(channel):
     return {"version": version, "revision": revision, "manifest": manifest, "manifest_sha256": sums["manifest.json"], "archive": archive, "archive_url": locations[archive], "archive_sha256": sums[archive], "release_url": "https://github.com/" + REPOSITORY + "/releases/tag/" + release["tag_name"]}
 
 
-def inspect_updates(installed_version, channel="preview"):
+def inspect_updates(installed_version, channel="preview", *, target_version=None):
     """Return public check result plus a private, verified download descriptor."""
     result = {"ok": False, "state": "error", "available": False, "current_version": installed_version, "latest_version": None, "revision": None, "channel": channel}
     try:
         current = version_key(installed_version)
-        candidate = _latest(channel)
+        candidate = _latest(channel) if target_version is None else _latest(channel, target_version)
         if candidate is None:
             result.update(ok=True, state="unavailable", message="No runtime release is published for this channel. The installed version is unchanged.")
             return result, None
@@ -262,13 +271,114 @@ def check_updates(installed_version, channel="preview"):
     return inspect_updates(installed_version, channel)[0]
 
 
+def check_plugin_updates(installed_version, channel="preview"):
+    """Observe published standard ZIPs, independently of retained Desktop releases.
+
+    The primary builder already emits these three files. No runtime archive,
+    release-body URL or separately installed updater implies a plugin release.
+    """
+    result = {"ok": False, "state": "error", "available": False,
+              "current_version": installed_version, "latest_version": None,
+              "channel": channel, "distribution": "decky", "automatic_update_supported": False}
+    try:
+        current = version_key(installed_version)
+        candidates = []
+        for item in _release_candidates(channel):
+            assets = item[2].get("assets", [])
+            if not isinstance(assets, list):
+                raise ReleaseError("The release asset list is invalid.", "unsupported")
+            if any(isinstance(asset, dict) and asset.get("name") == "obsgod-decky.zip" for asset in assets):
+                candidates.append(item)
+        if not candidates:
+            result.update(ok=True, state="unavailable", message="No standard Decky plugin release is published for this channel. Your installed plugin is unchanged; Desktop runtime releases are separate.")
+            return result
+        _, version, release = max(candidates, key=lambda item: item[0])
+        names = {"obsgod-decky.zip", "build-receipt.json", "SHA256SUMS"}
+        locations = {}
+        for asset in release["assets"]:
+            if not isinstance(asset, dict) or asset.get("name") not in names:
+                continue
+            name = asset["name"]
+            expected = "https://github.com/" + REPOSITORY + "/releases/download/" + release["tag_name"] + "/" + name
+            if name in locations or asset.get("browser_download_url") != expected:
+                raise ReleaseError("The plugin release has an unexpected address or duplicate asset.", "unsupported")
+            locations[name] = expected
+        if not names.issubset(locations):
+            raise ReleaseError("The latest standard plugin release has incomplete verification metadata. Your plugin is unchanged.", "unsupported")
+        commit = _json("https://api.github.com/repos/" + REPOSITORY + "/commits/" + release["tag_name"])
+        revision = commit.get("sha") if isinstance(commit, dict) else None
+        sums = _checksums(_read_url(locations["SHA256SUMS"]))
+        receipt = _json(locations["build-receipt.json"])
+        checksum = sums.get("obsgod-decky.zip")
+        if (not isinstance(revision, str) or not _SHA.fullmatch(revision) or
+                not isinstance(receipt, dict) or receipt.get("revision") != revision or
+                receipt.get("version") != version or receipt.get("dirty") is not False or
+                receipt.get("platform") != "linux/amd64" or receipt.get("archive") != "obsgod-decky.zip" or
+                not isinstance(checksum, str) or receipt.get("sha256") != checksum):
+            raise ReleaseError("The plugin release version, source or checksum could not be verified. Your plugin is unchanged.", "unsupported")
+        available = version_key(version) > current
+        result.update(ok=True, state="update-available" if available else "up-to-date",
+                      available=available, latest_version=version, revision=revision,
+                      release_url="https://github.com/" + REPOSITORY + "/releases/tag/" + release["tag_name"],
+                      message=("Plugin " + version + " is available. Use Decky's plugin installation controls with the verified ZIP from its official release after all output is confirmed stopped."
+                               if available else "No newer standard Decky plugin release is available on this channel. Your installed plugin is unchanged."))
+    except ReleaseError as error:
+        result.update(state=error.state, message=str(error))
+    return result
+
+
+def installed_plugin_version(home, *, environ=None):
+    """Read the stable installed plugin identity; an unreadable install is unknown."""
+    spec = importlib.util.spec_from_file_location("_obsgod_plugin_paths", Path(__file__).with_name("paths.py"))
+    paths = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(paths)
+    try:
+        root = paths.decky_locations(home, environ)["plugin"]
+        # Decky may own the installed plugin directory as root. This is an
+        # identity observation, not permission to write that directory.
+        paths.validate_directory_ancestry(root, home)
+        if not root.exists() and not root.is_symlink():
+            return None
+        package, identity = root / "package.json", root / "plugin.json"
+        for saved in (package, identity):
+            if (saved.is_symlink() or not saved.is_file() or saved.stat().st_size > 64 * 1024 or
+                    saved.stat().st_uid not in (0, os.getuid()) or saved.stat().st_mode & 0o022):
+                raise ValueError()
+        manifest, plugin = json.loads(package.read_text()), json.loads(identity.read_text())
+        if (not isinstance(manifest, dict) or manifest.get("name") not in {"obsgod", "obsgod-decky"} or
+                not isinstance(plugin, dict) or plugin.get("name") != "OBSGod"):
+            raise ValueError()
+        version_key(manifest.get("version"))
+        return manifest["version"]
+    except (OSError, ValueError, TypeError, AttributeError, RuntimeError):
+        raise ReleaseError("The installed Decky plugin version could not be verified. No plugin replacement is allowed; inspect or repair it through Decky first.") from None
+
+
+def require_plugin_replacement(target_version, home, recovery_plugin_version=None, expected_plugin_version=None):
+    """A legacy recovery cannot silently replace a newer standard plugin."""
+    target = version_key(target_version)
+    if recovery_plugin_version is not None:
+        version_key(recovery_plugin_version)
+        if recovery_plugin_version != target_version:
+            raise ReleaseError("The explicit plugin recovery version does not match the verified target version. Nothing was replaced.")
+        version_key(expected_plugin_version)
+    elif expected_plugin_version is not None:
+        raise ReleaseError("An expected plugin version requires an explicit recovery target. Nothing was replaced.")
+    installed = installed_plugin_version(home)
+    if recovery_plugin_version is not None and installed != expected_plugin_version:
+        raise ReleaseError("The installed plugin no longer matches the explicitly expected recovery version. Nothing was replaced; inspect its current version through Decky before retrying.")
+    if installed is not None and version_key(installed) > target and recovery_plugin_version is None:
+        raise ReleaseError("The installed Decky plugin " + installed + " is newer than the recovery target " + target_version + ". Nothing was replaced. Use Decky for normal plugin updates; deliberate recovery requires --recover-plugin-version " + target_version + " --expect-plugin-version " + installed + ".")
+    return installed
+
+
 def current_versions(plugin_version="unknown", *, environ=None):
     """Read version identifiers only; never settings or stream credentials.
 
     The backend supplies the loaded plugin version. An unknown/unsafe app path
     remains unknown instead of claiming a matched pair from the plugin alone.
     """
-    values = {"app": "unknown", "plugin": plugin_version, "updater": "not-bundled", "revision": None, "mismatch": False}
+    values = {"app": "unknown", "app_state": "unknown", "plugin": plugin_version, "updater": "not-bundled", "revision": None, "mismatch": False}
     try:
         version_key(plugin_version)
     except ReleaseError:
@@ -285,7 +395,11 @@ def current_versions(plugin_version="unknown", *, environ=None):
         paths = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(paths)
         base, _ = paths.app_directories(home, environment)
+        paths.validate_owned_root(base, home)
         current = base / "current"
+        if not current.exists() and not current.is_symlink():
+            values["app_state"] = "absent"
+            return values
         if not current.is_symlink() or current.resolve().parent != (base / "releases").resolve() or not current.resolve().is_relative_to(home):
             return values
         saved = current / "manifest.json"
@@ -294,6 +408,7 @@ def current_versions(plugin_version="unknown", *, environ=None):
         manifest = json.loads(saved.read_text())
         version_key(manifest.get("version"))
         values["app"] = manifest["version"]
+        values["app_state"] = "installed"
         updater = manifest.get("updater_version")
         if updater is not None:
             version_key(updater)
