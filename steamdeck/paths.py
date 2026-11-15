@@ -1,6 +1,7 @@
 """Shared Desktop paths. Existing installations keep their compatibility location."""
 import os
 from pathlib import Path
+import stat
 
 
 DEFAULTS = {
@@ -27,20 +28,50 @@ def xdg_root(name, home, environ=None):
     return root
 
 
+def normalize_home_path(path, home, *, allow_home=False):
+    """Normalize the player's home alias, never links inside owned roots."""
+    boundary = Path(home)
+    home = boundary.resolve()
+    path = Path(path)
+    if (not path.is_absolute() or ".." in path.parts or
+            any(ord(char) < 32 or ord(char) == 127 for char in str(path))):
+        raise ValueError("Application paths must stay inside your home directory")
+    aliases = [boundary]
+    environment_home = Path(os.environ.get("HOME", str(home)))
+    if environment_home.is_absolute() and environment_home.resolve() == home:
+        aliases.append(environment_home)
+    for alias in aliases:
+        if path.is_relative_to(alias):
+            path = home / path.relative_to(alias)
+            break
+    if not path.is_relative_to(home) or (path == home and not allow_home):
+        raise ValueError("Application paths must stay inside your home directory")
+    return path
+
+
+def validate_directory_ancestry(path, home):
+    """Refuse replaceable parents before writes, locks or owned-data removal."""
+    path = normalize_home_path(path, home, allow_home=True)
+    for item in (*reversed(path.parents), path):
+        try:
+            info = item.lstat()
+        except FileNotFoundError:
+            break
+        if stat.S_ISLNK(info.st_mode):
+            raise ValueError("Refusing a symlinked application directory: " + str(item))
+        if not stat.S_ISDIR(info.st_mode) or info.st_uid not in (0, os.getuid()):
+            raise ValueError("An application directory has unexpected type or ownership: " + str(item))
+        if info.st_mode & 0o022 and not info.st_mode & stat.S_ISVTX:
+            raise ValueError("Refusing a writable nonsticky application directory: " + str(item))
+    return path
+
+
 def validate_owned_root(path, home):
     """Validate a writable application root before creating any directories."""
-    home_boundary = Path(home)
-    home = home_boundary.resolve()
-    path = Path(path)
-    if not path.is_absolute() or ".." in path.parts or path.resolve() == home or not path.resolve().is_relative_to(home):
-        raise ValueError("Application paths must stay inside your home directory")
-    for item in [path, *path.parents]:
-        if item in (home, home_boundary) or not item.resolve().is_relative_to(home):
-            continue
-        if item.is_symlink():
-            raise ValueError("Refusing a symlinked application directory: " + str(item))
-        if item.exists() and (not item.is_dir() or item.stat().st_uid != os.getuid()):
-            raise ValueError("An application directory has unexpected type or ownership: " + str(item))
+    path = normalize_home_path(path, home)
+    validate_directory_ancestry(path, home)
+    if path.exists() and path.stat().st_uid != os.getuid():
+        raise ValueError("An application directory has unexpected type or ownership: " + str(path))
 
 
 def app_directories(home, environ=None):
