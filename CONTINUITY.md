@@ -1,5 +1,31 @@
 # Current work
 
+## Cleanup/recovery #101–#102 authorized and in progress
+
+The owner requested merging pending work and proceeding to the next batch.
+Live GitHub inspection found no open PRs: the previous source/evidence stack is
+already merged, and `master` is **1440f993b445a8d90168de5d1bfc36066a6f9af1**.
+The environment briefly rejected shell execution, then reported the matching
+instance running/connected; actual commands, Git fetch/API, pinned tools and
+Docker now execute. Preserve the existing checkout and package/network presets.
+
+Work uses **fix/cleanup-recovery** without an additional worktree. #101 covers
+stable cleanup coordination inodes, legacy ancestor validation and partial-deletion
+recovery; #102 covers gated dependency repair, plugin-first update identity,
+version-specific recovery and explicit retirement of obsolete Desktop app files.
+Keep normal Decky installation/replacement primary. Retained recovery must not
+download before validated session/fresh idle/shared leases, downgrade a newer
+plugin as an ordinary update, or remove the active plugin/shared stores when
+only the obsolete app is selected. Unknown output stays a refusal.
+
+Use focused process/filesystem/protocol/browser checks and reviewable draft
+checkpoints during implementation, then the complete required available matrix
+at the final exact source. Earlier 9038e23 receipts are historical for new code.
+Current free runner has about 1.6 GiB root space; preserve caches and evidence,
+use measured temporary relocation/resource assistance when needed and record it.
+Settings boundary #103, branding/UI and migration/release/deployment remain
+separate. No spending or another-repository change is authorized by this batch.
+
 ## Runtime correctness complete; source stack merged and qualified
 
 Owner-authorized **#96–#100** are implemented through merged **#106/#107**;
