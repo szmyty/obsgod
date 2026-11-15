@@ -26,6 +26,16 @@ use measured temporary relocation/resource assistance when needed and record it.
 Settings boundary #103, branding/UI and migration/release/deployment remain
 separate. No spending or another-repository change is authorized by this batch.
 
+Draft **#109** now contains source checkpoints for both issues. Focused tests
+and review cover stable updater/install/control inodes, newly-created root and
+home-alias replacement, explicit legacy-app retirement, verified native-policy
+reuse, plugin-first update metadata and exact recovery versions. Review also
+closed old-plugin rollback and historical-installer execution bypasses. The
+pinned transport fixture now supplies a real owned synthetic session and native
+Flatpak metadata; actual candidate transport/upgrade qualification is still
+pending. Full integrated tests, primary packaging and the complete final local
+matrix must qualify the final committed source before readiness claims.
+
 ## Runtime correctness complete; source stack merged and qualified
 
 Owner-authorized **#96–#100** are implemented through merged **#106/#107**;

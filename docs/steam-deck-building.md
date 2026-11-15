@@ -134,15 +134,16 @@ Check discovery without changing the installation:
 python3 /path/to/extracted/OBSGod-Updater/update.py --check --json --channel preview
 ```
 
-The bottom panel button calls the same read-only release checker. Applying an
-update is an explicit Desktop action after output is confirmed idle; use the
-installed **Update OBSGod** Applications entry or bundled Desktop launcher.
-Normal update skips a matching version; `--repair` explicitly reinstalls it.
-Channels distinguish stable releases and previews, and ignore updater-only tags.
-Only official repository assets or immutable same-repository artifact links are
-accepted, with matching tagged source, manifest, platform and file hashes.
-Historical preview 4 is discoverable but lacks unified installation and cannot
-be automatically applied by this newer updater.
+The bottom panel button checks the loaded plugin against published standard
+plugin ZIP/receipt/checksum metadata. Ordinary plugin updates use Decky's
+controls; optional Desktop inventory is independent. Retained Desktop recovery
+uses its separate runtime channel after confirmed idle. Same-version `--repair`
+does not authorize replacing a newer plugin; deliberate recovery pins both target
+and expected installed versions. Downloaded historical installers without the
+current recovery-policy interface are refused before execution. See
+[cleanup and recovery](cleanup-recovery.md) for exact scopes and remaining gates.
+Only the existing approved repository/redirect paths are accepted; source,
+manifest, platform and checksum verification remain required.
 
 The protocol smoke uses the unmodified Decky 3.3.1 backend router/installer and
 its actual frontend WebSocket router at revision

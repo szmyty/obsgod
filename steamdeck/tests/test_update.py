@@ -323,11 +323,118 @@ class UpdateSafety(unittest.TestCase):
     def test_concurrent_updater_stops_before_network_and_writes(self):
         self.base.mkdir(parents=True)
         with (self.base / "update.lock").open("w") as lock:
+            (self.base / "update.lock").chmod(0o600)
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
             with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module") as release:
                 with self.assertRaisesRegex(updater.UpdateError, "Another OBSGod updater"):
                     updater.run_update()
                 release.return_value.inspect_updates.assert_not_called()
+
+    def test_new_intermediate_writable_ancestry_is_rejected_before_lock_or_network(self):
+        release, _, _ = self.fixture()
+        previous = os.umask(0o002)
+        try:
+            with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release):
+                with self.assertRaisesRegex(updater.UpdateError, "writable nonsticky"):
+                    updater.run_update()
+        finally:
+            os.umask(previous)
+        release.inspect_updates.assert_not_called()
+        release.download_archive.assert_not_called()
+        self.assertFalse((self.base / "update.lock").exists())
+        self.assertFalse((self.base / "update-status.json").exists())
+
+    def test_unsafe_update_locks_are_refused_without_truncation_progress_or_download(self):
+        self.base.mkdir(parents=True)
+        path = self.base / "update.lock"
+        linked = self.home / "lock-alias"
+        sentinel = self.home / "protected-lock-target"
+        sentinel.write_bytes(b"unchanged target")
+        for kind in ("public", "hardlink", "fifo", "directory", "symlink"):
+            release, _, _ = self.fixture()
+            if kind == "fifo":
+                os.mkfifo(path, 0o600)
+            elif kind == "directory":
+                path.mkdir()
+            elif kind == "symlink":
+                path.symlink_to(sentinel)
+            else:
+                path.write_bytes(b"unchanged lock")
+                path.chmod(0o644 if kind == "public" else 0o600)
+                if kind == "hardlink":
+                    os.link(path, linked)
+            try:
+                with self.subTest(kind=kind), patch.object(updater, "verify_bundle"), patch.object(
+                        updater, "release_module", return_value=release), patch.object(updater, "load_module") as load:
+                    with self.assertRaisesRegex(updater.UpdateError, "unsafe"):
+                        updater.run_update()
+                release.inspect_updates.assert_not_called()
+                release.download_archive.assert_not_called()
+                load.assert_not_called()
+                self.assertFalse((self.base / "update-status.json").exists())
+                self.assertEqual(sentinel.read_bytes(), b"unchanged target")
+                if kind in ("public", "hardlink"):
+                    self.assertEqual(path.read_bytes(), b"unchanged lock")
+            finally:
+                path.rmdir() if kind == "directory" else path.unlink()
+                linked.unlink(missing_ok=True)
+
+    def test_foreign_update_lock_fd_owner_is_refused_before_network(self):
+        self.base.mkdir(parents=True)
+        path = self.base / "update.lock"
+        path.write_bytes(b"unchanged lock")
+        path.chmod(0o600)
+        original = updater.os.fstat
+        def foreign_owner(descriptor):
+            info = list(original(descriptor))
+            info[4] = os.getuid() + 1
+            return os.stat_result(info)
+        release, _, _ = self.fixture()
+        with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release), patch.object(
+                updater.os, "fstat", side_effect=foreign_owner):
+            with self.assertRaisesRegex(updater.UpdateError, "unsafe"):
+                updater.run_update()
+        release.inspect_updates.assert_not_called()
+        release.download_archive.assert_not_called()
+        self.assertEqual(path.read_bytes(), b"unchanged lock")
+        self.assertFalse((self.base / "update-status.json").exists())
+
+    def test_replaced_update_lock_inode_after_acquisition_is_refused_before_network(self):
+        self.base.mkdir(parents=True)
+        path = self.base / "update.lock"
+        original = updater.fcntl.flock
+        def replace(lock, operation):
+            original(lock, operation)
+            path.unlink()
+            path.write_bytes(b"replacement preserved")
+            path.chmod(0o600)
+        release, _, _ = self.fixture()
+        with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release), patch.object(
+                updater.fcntl, "flock", side_effect=replace):
+            with self.assertRaisesRegex(updater.UpdateError, "unsafe|changed"):
+                updater.run_update()
+        release.inspect_updates.assert_not_called()
+        release.download_archive.assert_not_called()
+        self.assertEqual(path.read_bytes(), b"replacement preserved")
+        self.assertFalse((self.base / "update-status.json").exists())
+
+    def test_replaced_update_lock_during_release_check_prevents_progress_and_download(self):
+        release, candidate, _ = self.fixture()
+        path = self.base / "update.lock"
+        def replace(*args, **kwargs):
+            path.unlink()
+            path.write_bytes(b"replacement preserved")
+            path.chmod(0o600)
+            return {"ok": True, "available": True}, candidate
+        release.inspect_updates.side_effect = replace
+        with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release), patch.object(
+                updater, "load_module") as load:
+            with contextlib.redirect_stdout(io.StringIO()), self.assertRaisesRegex(updater.UpdateError, "unsafe|changed"):
+                updater.run_update()
+        release.download_archive.assert_not_called()
+        load.assert_not_called()
+        self.assertEqual(path.read_bytes(), b"replacement preserved")
+        self.assertFalse((self.base / "update-status.json").exists())
 
     def test_settings_backup_private_and_symlinked_recovery_record_refused(self):
         config = self.home / ".config/obsgod"

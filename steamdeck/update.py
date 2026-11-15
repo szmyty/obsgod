@@ -2,6 +2,7 @@
 """Check official OBSGod releases and explicitly apply an idle Desktop update."""
 import argparse
 import ast
+from contextlib import contextmanager
 import fcntl
 import hashlib
 import importlib.util
@@ -11,6 +12,7 @@ from pathlib import Path, PurePosixPath
 import platform
 import re
 import shutil
+import stat
 import subprocess
 import sys
 import tarfile
@@ -37,11 +39,45 @@ class UpdateError(RuntimeError):
 def private_directory(path, home):
     try:
         validate_owned_root(path, home)
+        path.mkdir(parents=True, exist_ok=True, mode=0o700)
+        # mkdir's intermediate parents use the caller's umask, not mode=0700.
+        # Recheck before writing locks, progress records or downloaded data.
+        validate_owned_root(path, home)
     except ValueError as error:
         raise UpdateError(str(error) + ". Existing files were preserved.") from None
-    path.mkdir(parents=True, exist_ok=True, mode=0o700)
     if path.is_symlink() or not path.is_dir():
         raise UpdateError("An install directory is unsafe. Existing files were preserved.")
+
+
+def _check_update_lock(lock, path):
+    info = os.fstat(lock.fileno())
+    if (not stat.S_ISREG(info.st_mode) or info.st_uid != os.getuid()
+            or info.st_nlink != 1 or info.st_mode & 0o077):
+        raise UpdateError("The updater lock has unsafe type, ownership or permissions. Existing files were preserved.")
+    try:
+        current = path.lstat()
+    except OSError:
+        raise UpdateError("The updater lock changed. Existing files were preserved.") from None
+    if (current.st_dev, current.st_ino) != (info.st_dev, info.st_ino):
+        raise UpdateError("The updater lock changed. Existing files were preserved.")
+
+
+@contextmanager
+def update_lock(base, home):
+    private_directory(base, home)
+    path = base / "update.lock"
+    try:
+        descriptor = os.open(path, os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
+    except OSError:
+        raise UpdateError("The updater lock is unsafe or unavailable. Existing files were preserved.") from None
+    with os.fdopen(descriptor, "w") as lock:
+        _check_update_lock(lock, path)
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            raise UpdateError("Another OBSGod updater is running. Let it finish, then retry.") from None
+        _check_update_lock(lock, path)
+        yield lock
 
 
 def verify_bundle():
@@ -236,13 +272,7 @@ def run_update(channel="preview", repair=False, recovery_plugin_version=None, ex
     releases = release_module()
     home = Path.home()
     base, _ = app_directories(home)
-    private_directory(base, home)
-    descriptor = os.open(base / "update.lock", os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
-    with os.fdopen(descriptor, "w") as lock:
-        try:
-            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except BlockingIOError:
-            raise UpdateError("Another OBSGod updater is running. Let it finish, then retry.") from None
+    with update_lock(base, home) as lock:
         current, installed = installed_release(home)
         if current and (current / "bridge.py").is_file():
             legacy = installed.get("version") in {"0.1.0-deck.1", "0.1.0-deck.2", "0.1.0-deck.3", "0.1.0-deck.4"}
@@ -262,6 +292,7 @@ def run_update(channel="preview", repair=False, recovery_plugin_version=None, ex
             raise UpdateError("This historical runtime predates the unified installer. Open its official release page for installation instructions; your current app and plugin were not replaced.")
         releases.require_plugin_replacement(candidate["version"], home, recovery_plugin_version, expected_plugin_version)
         progress = {"state": "downloading", "from_version": installed.get("version"), "version": candidate["version"], "revision": candidate["revision"], "channel": channel}
+        _check_update_lock(lock, base / "update.lock")
         save_progress(base, progress)
         try:
             with tempfile.TemporaryDirectory(prefix=".update-", dir=base) as temporary:

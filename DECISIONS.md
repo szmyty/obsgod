@@ -48,6 +48,23 @@ unknown output remains unknown. See the [runtime contract](docs/runtime-correctn
 for limits and the actual-device gate. These source choices do not accept any
 previously proposed product/identity ADR or authorize publication/migration.
 
+## Cleanup and recovery (#101–#102)
+
+The owner authorized the next cleanup/recovery batch after runtime completion.
+Keep coordination lock inodes and minimal namespaces through deletion, rather
+than creating multiple generations of one logical lease. Retained helpers use
+protected ancestry and preview/held-identity checks; obsolete-app retirement
+preserves the independently installed Decky plugin and shared stores.
+
+The loaded plugin is the primary update identity. Optional Desktop versions do
+not require repairing a pair. Legacy dependency recovery reuses the candidate's
+verified native policy; unsafe historical installers cannot bypass it. Deliberate
+replacement binds exact target/current versions, and automatic rollback needs
+the verified preimage version rather than any older Desktop archive. See
+[the contract](docs/cleanup-recovery.md). These choices do not authorize a new
+publisher, release, transfer, deployment, paid resource or another-repository
+change, and do not accept a proposed identity/companion ADR.
+
 ## Native destination setup (#79)
 
 Owner-authorized manual-key setup now uses the normal Decky panel and existing
