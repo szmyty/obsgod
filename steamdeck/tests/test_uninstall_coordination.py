@@ -322,6 +322,26 @@ class CleanupCoordination(unittest.TestCase):
         self.cli.assert_not_called()
         self.plugin.assert_not_called()
 
+    def test_running_idle_close_that_changes_state_requires_a_new_preview(self):
+        self.fixture()
+        process = "running"
+        def cli(action, **_kwargs):
+            nonlocal process
+            if action == "restart":
+                self.write(".local/state/obsgod/diagnostics/close.json", "owned close observation")
+                process = "absent"
+                return {"ok": True}
+            return {**IDLE, "process": process}
+        self.cli.side_effect = cli
+        with self.assertRaisesRegex(uninstall.RemovalError, "selected path changed"):
+            uninstall.apply_plan(uninstall.build_plan(self.home, "reset"), self.home)
+        self.assertTrue((self.config / "secrets.json").exists())
+        self.assertTrue((self.state / "diagnostics/close.json").exists())
+        self.plugin.assert_not_called()
+        uninstall.apply_plan(uninstall.build_plan(self.home, "reset"), self.home)
+        self.assertFalse(self.config.exists())
+        self.assertEqual(sum(call.args[0] == "restart" for call in self.cli.call_args_list), 1)
+
 
 if __name__ == "__main__":
     unittest.main()

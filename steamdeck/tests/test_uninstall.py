@@ -83,7 +83,7 @@ class RemovalSafety(unittest.TestCase):
         for kind in ["settings", "data", "logs"]:
             self.assertTrue((self.home / "homebrew" / kind / "obsgod/owned").exists())
         self.assertTrue((self.obs.parent / "obs-studio/ordinary.json").exists())
-        self.assertEqual([x.args[0] for x in self.run_cli.call_args_list], ["status", "restart", "status", "status"])
+        self.assertEqual([x.args[0] for x in self.run_cli.call_args_list], ["status", "status", "status"])
 
     def test_wipe_removes_owned_credentials_backups_data_but_not_recordings_or_ordinary_obs(self):
         self.fixture()
@@ -236,7 +236,7 @@ class RemovalSafety(unittest.TestCase):
 
     def test_reappearing_idle_obs_is_not_removed_under_the_control_lock(self):
         self.fixture()
-        self.run_cli.side_effect = [self.idle, {"ok": True}, self.idle,
+        self.run_cli.side_effect = [self.idle, self.idle,
                                     {**self.idle, "process": "running"}]
         with self.assertRaisesRegex(uninstall.RemovalError, "partial"):
             uninstall.apply_plan(uninstall.build_plan(self.home, "wipe"), self.home)

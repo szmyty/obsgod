@@ -13,6 +13,10 @@ import stat
 import subprocess
 import sys
 
+# This tool may remove its own installed release. Lazy sibling imports must
+# remain read-only after the user has reviewed that release's identity.
+sys.dont_write_bytecode = True
+
 def _sibling(name):
     spec = importlib.util.spec_from_file_location("obsgod_remove_" + name, Path(__file__).resolve().parent / (name + ".py"))
     module = importlib.util.module_from_spec(spec)
@@ -366,7 +370,7 @@ def apply_plan(plan, home):
         if plan.get("legacy_app_only"):
             if state.get("process") != "absent":
                 raise RemovalError("Close managed OBS explicitly through Decky before retiring the legacy app.")
-        elif state.get("configured") or state.get("process") not in (None, "absent"):
+        elif state.get("process") != "absent":
             closed = run_cli("restart", timeout=20)
             if not isinstance(closed, dict) or closed.get("ok") is not True:
                 raise RemovalError("Idle managed OBS could not be closed safely. Inspect Desktop OBS and retry.")

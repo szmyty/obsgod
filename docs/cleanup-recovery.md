@@ -76,6 +76,13 @@ are checked at operation boundaries. Changed previews stop safely and report
 completed and remaining selections. Unrelated files, ordinary OBS, other
 plugins, shared Flatpaks and unselected media remain outside the deletion scope.
 
+Cleanup suppresses its own sibling-import bytecode writes, and an already
+private executable helper is not chmodded merely to run it. Those self-changes
+would otherwise invalidate the approved release-tree identity. An already
+absent managed process is not restarted. If explicitly closing an idle instance
+changes selected runtime state, the old preview is refused and a fresh preview
+is required; external changes are not silently accepted as cleanup side effects.
+
 To retire only obsolete Desktop app files, preview
 `python3 uninstall.py --legacy-app-only --dry-run`. This explicit scope removes
 owned app releases, matching aliases and managed launchers while preserving the
