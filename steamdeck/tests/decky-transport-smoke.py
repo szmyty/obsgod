@@ -7,16 +7,21 @@ This is protocol evidence, not Steam Deck qualification.
 """
 import argparse
 import asyncio
+from contextlib import contextmanager
 import hashlib
 import importlib.util
 import json
 import os
 from pathlib import Path
+import pwd
 import shutil
+import socket
+import struct
 import subprocess
 import sys
 import tarfile
 import tempfile
+import threading
 import zipfile
 
 import aiohttp
@@ -105,6 +110,123 @@ server.listen(0,'127.0.0.1',()=>process.stdout.write(JSON.stringify({port:server
 """
 
 
+@contextmanager
+def native_dependency_fixture(work, home, environment):
+    """Real user/socket ownership with a synthetic passwd-home alias only.
+
+    The candidate's unchanged native setup validates the actual nonroot UID,
+    private directories and connected socket peer UID. Only the account home
+    is mapped to this disposable HOME; this is not a real SteamOS/D-Bus session.
+    Flatpak is a strict read-only protocol fixture: mutation or OBS launch fails.
+    """
+    assert os.getuid() == os.geteuid() != 0, "Run the packaged transport fixture as a normal user"
+    account = pwd.getpwuid(os.getuid())
+    # Unix socket paths have a small fixed limit; the package work/TMPDIR path
+    # may be long under local CI. Keep only these disposable sockets in /tmp.
+    runtime_temp = tempfile.TemporaryDirectory(prefix="obsgod-native-session-", dir="/tmp")
+    runtime = Path(runtime_temp.name)
+    commands = work / "fixture-bin"
+    commands.mkdir()
+    command_log = work / "native-flatpak-commands.jsonl"
+    command_log.write_text("")
+    (commands / "flatpak").write_text("#!" + sys.executable + "\n" + r'''
+import json, os, sys
+from pathlib import Path
+args = sys.argv[1:]
+with Path(os.environ['OBSGOD_TEST_FLATPAK_LOG']).open('a') as log:
+    log.write(json.dumps(args) + '\n')
+obs = 'com.obsproject.Studio'
+gst = obs + '.Plugin.Gstreamer'
+obs_ref = 'app/' + obs + '/x86_64/stable'
+gst_ref = 'runtime/' + gst + '/x86_64/stable'
+if args in [['info', '--user', obs], ['info', '--user', gst]]:
+    pass
+elif args == ['info', '--user', '--show-ref', obs]:
+    print(obs_ref)
+elif args == ['list', '--user', '--app', '--columns=ref,version']:
+    print(obs_ref.removeprefix('app/') + '\t33.0.1')
+elif args == ['list', '--user', '--columns=ref,version']:
+    print(obs_ref.removeprefix('app/') + '\t33.0.1')
+    print(gst_ref.removeprefix('runtime/') + '\t0.4.1')
+elif args == ['list', '--system', '--columns=ref,version']:
+    pass
+elif args == ['remotes', '--user', '--columns=name,url,options']:
+    print('flathub\thttps://dl.flathub.org/repo/\t')
+elif args == ['info', '--user', '--show-metadata', obs_ref]:
+    print('[Application]\nname=' + obs + '\n[Extension ' + obs + '.Plugin]\nversion=stable\n')
+elif args == ['info', '--user', '--show-metadata', gst_ref]:
+    print('[ExtensionOf]\nref=' + obs_ref + '\n')
+else:
+    Path(os.environ['OBSGOD_TEST_FLATPAK_LOG']).with_suffix('.forbidden').write_text(json.dumps(args))
+    print('Forbidden Flatpak fixture mutation, launch or unsupported command', file=sys.stderr)
+    raise SystemExit(90)
+''')
+    (commands / "flatpak").chmod(0o700)
+    python = work / "native-account-fixture"
+    python.mkdir(mode=0o700)
+    account_hook = python / "sitecustomize.py"
+    account_hook.write_text(
+        "import os,pwd\n"
+        "_fixture_original_getpwuid=pwd.getpwuid\n"
+        "def _fixture_getpwuid(uid):\n"
+        "    account=_fixture_original_getpwuid(uid)\n"
+        "    if uid==os.getuid()==os.geteuid()!=0:\n"
+        "        fields=list(account);fields[5]=" + repr(str(home)) + ";account=pwd.struct_passwd(fields)\n"
+        "    return account\n"
+        "pwd.getpwuid=_fixture_getpwuid\n")
+    env = dict(environment, XDG_RUNTIME_DIR=str(runtime),
+               DBUS_SESSION_BUS_ADDRESS="unix:path=" + str(runtime / "bus"),
+               DECKY_USER_HOME=str(home), DECKY_USER=account.pw_name,
+               OBSGOD_TEST_ACCOUNT_HOOK=str(account_hook), OBSGOD_TEST_FLATPAK_LOG=str(command_log),
+               PYTHONPATH=str(python) + os.pathsep + environment.get("PYTHONPATH", ""),
+               PATH=str(commands) + os.pathsep + environment["PATH"])
+    for name in ("FLATPAK_USER_DIR", "FLATPAK_SYSTEM_DIR", "DECKY_PLUGIN_DIR",
+                 "DECKY_PLUGIN_SETTINGS_DIR", "DECKY_PLUGIN_RUNTIME_DIR", "DECKY_PLUGIN_LOG_DIR",
+                 "OBSGOD_DECKY_STORAGE_MAP", "OBSGOD_DECKY_RUNTIME_DIR", "OBSGOD_DECKY_LOG_DIR"):
+        env.pop(name, None)
+    stop = threading.Event()
+    sockets, threads = [], []
+    def drain(listener):
+        while not stop.is_set():
+            try:
+                connection, _ = listener.accept()
+                connection.close()
+            except socket.timeout:
+                continue
+            except OSError:
+                return
+    try:
+        for name in ("bus", "pipewire-0"):
+            listener = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+            listener.bind(str(runtime / name))
+            listener.listen(10)
+            listener.settimeout(0.1)
+            sockets.append(listener)
+            thread = threading.Thread(target=drain, args=(listener,), daemon=True)
+            thread.start()
+            threads.append(thread)
+            with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as peer:
+                peer.connect(str(runtime / name))
+                credentials = peer.getsockopt(socket.SOL_SOCKET, socket.SO_PEERCRED, struct.calcsize("3i"))
+                assert struct.unpack("3i", credentials)[1] == os.getuid()
+        yield env
+        observed = [json.loads(line) for line in command_log.read_text().splitlines()]
+        required = [["list", "--user", "--columns=ref,version"],
+                    ["list", "--system", "--columns=ref,version"],
+                    ["info", "--user", "--show-metadata", "app/com.obsproject.Studio/x86_64/stable"],
+                    ["info", "--user", "--show-metadata", "runtime/com.obsproject.Studio.Plugin.Gstreamer/x86_64/stable"]]
+        assert all(query in observed for query in required), "Native setup did not verify installed refs and extension metadata"
+        assert not command_log.with_suffix(".forbidden").exists(), "Forbidden Flatpak fixture command was attempted"
+        assert all(query[0] in {"list", "info", "remotes"} for query in observed), "Fixture attempted dependency mutation or OBS launch"
+    finally:
+        stop.set()
+        for listener in sockets:
+            listener.close()
+        for thread in threads:
+            thread.join(1)
+        runtime_temp.cleanup()
+
+
 async def runtime_installer_upgrade(fixture, args, work, plugins, loader, settings):
     """Run the packaged default unified installer; preserve actual user files."""
     home = work / "home with spaces %20"
@@ -113,6 +235,11 @@ async def runtime_installer_upgrade(fixture, args, work, plugins, loader, settin
                XDG_STATE_HOME=str(home / ".local/state"), XDG_DATA_HOME=str(home / ".local/share"),
                XDG_CACHE_HOME=str(home / ".cache"), DECKY_HOME=str(plugins.parent),
                XDG_CURRENT_DESKTOP="KDE", DESKTOP_SESSION="plasma")
+    with native_dependency_fixture(work, home, env) as env:
+        await runtime_installer_upgrade_with_session(fixture, args, work, plugins, loader, settings, home, env)
+
+
+async def runtime_installer_upgrade_with_session(fixture, args, work, plugins, loader, settings, home, env):
     previous = work / "previous runtime"
     previous.mkdir()
     with tarfile.open(args.previous_archive) as archive:
@@ -152,26 +279,6 @@ async def runtime_installer_upgrade(fixture, args, work, plugins, loader, settin
         archive.extractall(candidate,filter="data")
     package = next(candidate.glob("OBSGod-*"))
     manifest = json.loads((package / "manifest.json").read_text())
-    commands = work / "fixture-bin"
-    commands.mkdir()
-    # Reject unsupported CLI options, including the old invented --show-version.
-    (commands / "flatpak").write_text("#!" + sys.executable + "\n" + """
-import sys
-args = sys.argv[1:]
-obs = 'com.obsproject.Studio'
-ref = 'app/' + obs + '/x86_64/stable'
-if args in [['info', '--user', obs], ['info', '--user', obs + '.Plugin.Gstreamer']]:
-    pass
-elif args == ['info', '--user', '--show-ref', obs]:
-    print(ref)
-elif args == ['list', '--user', '--app', '--columns=ref,version']:
-    print(ref.removeprefix('app/') + '\\t33.0.1')
-else:
-    print('Unsupported Flatpak fixture command', file=sys.stderr)
-    raise SystemExit(2)
-""")
-    (commands / "flatpak").chmod(0o700)
-    env["PATH"] = str(commands) + os.pathsep + os.environ["PATH"]
     for _ in range(2):
         output = await fixture.execute([sys.executable,str(package / "install.py"),"--no-launch"],env)
         assert b"in the app and Decky" in output, output
@@ -195,7 +302,7 @@ else:
     assert current.resolve() != previous_release, "candidate app was not activated"
     assert not list(current.parent.glob(".install-*"))
     print("PASS: actual runtime archive default unified install.py --no-launch upgraded " + old_metadata["version"] +
-          " to " + manifest["version"] + " and repeated same-version installation; authenticated active-frontend plugin replacement, app/plugin pair, bundled updater/menu entry, private settings/key, recordings, ordinary/managed OBS files, diagnostic data, prior release and unrelated plugins/order preserved. Flatpak installation/version, Steam/CDP and loader ownership/lifecycle are fixtures.")
+          " to " + manifest["version"] + " and repeated same-version installation; authenticated active-frontend plugin replacement, app/plugin pair, bundled updater/menu entry, private settings/key, recordings, ordinary/managed OBS files, diagnostic data, prior release and unrelated plugins/order preserved. Native setup uses real nonroot UID/socket ownership with a synthetic passwd-home alias, compatible Flatpak metadata and fatal mutation/launch traps. SteamOS/D-Bus/Flatpak, Steam/CDP and loader ownership/lifecycle remain fixtures.")
     if args.bootstrap_updater_zip:
         await desktop_updater_upgrade(fixture, args, work, env, previous_package, package,
                                       current, plugins, loader, settings, snapshots,
@@ -246,8 +353,9 @@ async def desktop_updater_upgrade(fixture, args, work, env, previous_package, pa
                                   history, saved_event, manifest, *, updater_zip=None,fixture_name="modern"):
     """Run the unmodified extracted Desktop updater with network responses staged.
 
-    sitecustomize exists only in this disposable fixture. It substitutes HTTPS
-    responses at urllib's boundary; the real discovery/origin/tag/checksum,
+    sitecustomize exists only in this disposable fixture. It composes the
+    synthetic passwd-home alias and substitutes HTTPS responses at urllib's
+    boundary; the real discovery/origin/tag/checksum,
     archive download/verification/extraction and unified installer all execute.
     No product environment variable or arbitrary runtime URL bypass is added.
     """
@@ -290,6 +398,7 @@ async def desktop_updater_upgrade(fixture, args, work, env, previous_package, pa
     response_file = network / "responses.json"
     response_file.write_text(json.dumps(responses))
     (network / "sitecustomize.py").write_text(
+        "import runpy\nrunpy.run_path(" + repr(env["OBSGOD_TEST_ACCOUNT_HOOK"]) + ")\n" +
         "import json,os,urllib.request\n"
         "from pathlib import Path\n"
         "_responses=json.loads(Path(os.environ['OBSGOD_UPDATE_TEST_RESPONSES']).read_text())\n"

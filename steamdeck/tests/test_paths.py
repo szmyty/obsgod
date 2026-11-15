@@ -59,6 +59,19 @@ class OwnedAncestors(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "symlinked"):
                 paths.validate_owned_root(alias / "inside-link/obsgod", alias)
 
+    def test_home_alias_under_replaceable_ancestor_fails_before_raw_alias_writes(self):
+        for mode in (0o770, 0o777):
+            parent = Path(self.temp.name) / ("alias-parent-" + oct(mode))
+            parent.mkdir(mode=mode)
+            parent.chmod(mode)
+            alias = parent / "player"
+            alias.symlink_to(self.home)
+            with patch.dict(os.environ, {"HOME": str(alias)}):
+                for create in (install.owned_directory, update.private_directory):
+                    with self.assertRaisesRegex(RuntimeError, "nonsticky"):
+                        create(alias / "data/obsgod", alias)
+                    self.assertFalse((self.home / "data").exists())
+
 
 if __name__ == "__main__":
     unittest.main()

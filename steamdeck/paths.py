@@ -42,6 +42,17 @@ def normalize_home_path(path, home, *, allow_home=False):
         aliases.append(environment_home)
     for alias in aliases:
         if path.is_relative_to(alias):
+            # Legacy callers may still write through their supplied spelling.
+            # Validate the alias prefix too, including trusted system aliases
+            # such as /home -> /var/home, before discarding that spelling.
+            for item in (*reversed(alias.parents), alias):
+                info = item.lstat()
+                target = item.stat()
+                if (not stat.S_ISDIR(target.st_mode) or info.st_uid not in (0, os.getuid())
+                        or target.st_uid not in (0, os.getuid())):
+                    raise ValueError("A home alias has unexpected type or ownership: " + str(item))
+                if target.st_mode & 0o022 and not target.st_mode & stat.S_ISVTX:
+                    raise ValueError("Refusing a writable nonsticky home alias directory: " + str(item))
             path = home / path.relative_to(alias)
             break
     if not path.is_relative_to(home) or (path == home and not allow_home):

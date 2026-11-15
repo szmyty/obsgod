@@ -220,6 +220,49 @@ class CleanupCoordination(unittest.TestCase):
         self.assertTrue((self.base / "current/obsgod").exists())
         self.assertTrue((self.home / ".local/bin/obsgod").is_symlink())
 
+    def test_created_and_preexisting_coordination_roots_and_locks_are_pinned(self):
+        for mutation in ("fresh-root", "existing-root", "existing-lock"):
+            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as tmp:
+                home = Path(tmp) / "player"
+                home.mkdir(mode=0o700)
+                state = home / ".local/state/obsgod"
+                if mutation != "fresh-root":
+                    state.mkdir(parents=True)
+                    (state / "sentinel").write_text("preserved")
+                with patch.dict(os.environ, {"HOME": str(home)}):
+                    plan = uninstall.build_plan(home)
+                    def replace(*_args):
+                        lock = state / "control.lock"
+                        original = lock.stat().st_ino
+                        if mutation == "existing-lock":lock.unlink()
+                        else:
+                            state.rename(home / "original-state")
+                            state.mkdir(mode=0o700)
+                        lock.touch(mode=0o600)
+                        self.assertNotEqual(lock.stat().st_ino, original)
+                        self.assertTrue(self.probe(lock)["acquired"])
+                    self.plugin.side_effect = replace
+                    with self.assertRaisesRegex(uninstall.RemovalError, "changed"):
+                        uninstall.apply_plan(plan, home)
+                    preserved = state if mutation == "existing-lock" else home / "original-state"
+                    if mutation != "fresh-root":self.assertTrue((preserved / "sentinel").exists())
+
+    def test_lock_replacement_at_selected_deletion_boundary_stops_remaining_deletions(self):
+        self.fixture()
+        plan = uninstall.build_plan(self.home, "wipe")
+        original_unlink = Path.unlink
+        alias = self.home / ".local/bin/obsgod"
+        def replace_after_alias(path, *args, **kwargs):
+            original_unlink(path, *args, **kwargs)
+            if path == alias:
+                lock = self.state / "control.lock"
+                original_unlink(lock)
+                lock.touch(mode=0o600)
+        with patch.object(Path, "unlink", replace_after_alias), self.assertRaisesRegex(uninstall.RemovalError, "changed"):
+            uninstall.apply_plan(plan, self.home)
+        self.assertTrue((self.config / "secrets.json").exists())
+        self.assertTrue((self.base / "current/obsgod").exists())
+
     def test_safe_alias_sticky_xdg_and_coincident_coordination_roots(self):
         root = self.home / "shared-data"
         root.mkdir(mode=0o1777)

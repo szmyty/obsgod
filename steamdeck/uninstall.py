@@ -115,6 +115,11 @@ def _check_preview(plan, home, entries=None, *, coordination_created=False):
             _paths.validate_directory_ancestry(path, home)
         if _identity(path) != identity:
             raise RemovalError("A removal parent changed; review the inventory again: " + name)
+    for name, identity in plan.get("locks", {}).items():
+        info = Path(name).lstat()
+        actual = [info.st_dev, info.st_ino, info.st_mode, info.st_uid, info.st_nlink]
+        if actual != identity:
+            raise RemovalError("An operation lock changed; review the inventory again: " + name)
     for entry in plan["entries"] if entries is None else entries:
         path = Path(entry["path"])
         if entry["kind"] == "alias":
@@ -133,14 +138,37 @@ def _check_preview(plan, home, entries=None, *, coordination_created=False):
             raise RemovalError("A selected path changed; review the inventory again: " + str(path))
 
 
+def _pin_coordination(plan, locks):
+    """Own-created namespaces get exact identities before any external helper."""
+    pinned = {**plan, "ancestors": dict(plan["ancestors"]),
+              "entries": [dict(entry) for entry in plan["entries"]], "locks": locks}
+    for root in (Path(plan["base"]), Path(plan["state"])):
+        for parent in (*reversed(root.parents), root):
+            pinned["ancestors"].setdefault(str(parent), _identity(parent))
+    for entry in pinned["entries"]:
+        path = Path(entry["path"])
+        if _retained_names(path, plan) and entry["identity"] == [[".", None]]:
+            entry["identity"] = [[".", _identity(path)]]
+    return pinned
+
+
+def _selected_child(entry, child):
+    prefix = child.name + "/"
+    nodes = [["." if name == child.name else name[len(prefix):], identity]
+             for name, identity in entry["identity"]
+             if name == child.name or name.startswith(prefix)]
+    return {"path": str(child), "kind": "current" if child.name == "current" else "tree",
+            "identity": nodes}
+
+
 def build_plan(home, mode="uninstall", purge=False, delete_recordings=False, recordings=(), environ=None,
                legacy_app_only=False):
     if legacy_app_only and (mode != "uninstall" or purge or delete_recordings or recordings):
         raise RemovalError("Legacy app retirement cannot be combined with reset, wipe, settings or recording deletion.")
     home = home.resolve()
     base, apps = app_directories(home, environ)
-    base = _paths.normalize_home_path(base, home)
-    apps = _paths.normalize_home_path(apps, home)
+    base = validate_path(base, home)
+    apps = validate_path(apps, home)
     config = xdg_root("XDG_CONFIG_HOME", home, environ) / "obsgod"
     state = xdg_root("XDG_STATE_HOME", home, environ) / "obsgod"
     cache = xdg_root("XDG_CACHE_HOME", home, environ) / "obsgod"
@@ -220,7 +248,7 @@ def build_plan(home, mode="uninstall", purge=False, delete_recordings=False, rec
         if exists(path) and not path.is_file():
             raise RemovalError("A selected recording is not a regular file")
         add(path, "Explicitly selected recording", "file")
-    state = _paths.normalize_home_path(state, home)
+    state = validate_path(state, home)
     preserved.extend([str(base / "update.lock") + " (stable updater coordination lock)",
                       str(base / "install.lock") + " (stable installation coordination lock)",
                       str(state / "control.lock") + " (stable control coordination lock)"])
@@ -304,7 +332,7 @@ def removal_lock(path, home=None):
         named = path.lstat()
         if (named.st_dev, named.st_ino) != (info.st_dev, info.st_ino):
             raise RemovalError("The operation lock changed; review the inventory again")
-        yield
+        yield [info.st_dev, info.st_ino, info.st_mode, info.st_uid, info.st_nlink]
 
 
 def remove_plugin(home, directory=None):
@@ -346,16 +374,20 @@ def apply_plan(plan, home):
         # Match the updater's update -> install -> control acquisition order.
         # These names remain after every removal so already-open waiters and
         # later controllers always use the same kernel lock generation.
-        with removal_lock(base / "update.lock", home), removal_lock(base / "install.lock", home), removal_lock(state_path / "control.lock", home):
+        with removal_lock(base / "update.lock", home) as updater, removal_lock(base / "install.lock", home) as installer, removal_lock(state_path / "control.lock", home) as controller:
             _check_preview(plan, home, coordination_created=True)
+            pinned = _pin_coordination(plan, {str(base / "update.lock"): updater,
+                                             str(base / "install.lock"): installer,
+                                             str(state_path / "control.lock"): controller})
+            _check_preview(pinned, home)
             current = require_idle()
             if current.get("process") != "absent":
                 raise RemovalError("Managed OBS restarted during removal. Close it and review the inventory before retrying.")
             if plan["remove_plugin"]:
                 remove_plugin(home, plan["plugin_directory"])
-            _check_preview(plan, home, coordination_created=True)
-            for entry in plan["entries"]:
-                _check_preview(plan, home, [entry], coordination_created=True)
+            _check_preview(pinned, home)
+            for entry in pinned["entries"]:
+                _check_preview(pinned, home, [entry])
                 path = Path(entry["path"])
                 if not exists(path):
                     continue
@@ -363,12 +395,15 @@ def apply_plan(plan, home):
                 if retained:
                     for child in sorted(path.iterdir()):
                         if child.name not in retained:
+                            _check_preview(pinned, home, [_selected_child(entry, child)])
                             shutil.rmtree(child) if child.is_dir() and not child.is_symlink() else child.unlink()
+                            _check_preview(pinned, home, [])
                 elif path.is_symlink() or path.is_file():
                     path.unlink()
                 else:
                     shutil.rmtree(path)
                 completed.append(str(path))
+            _check_preview(pinned, home, [])
     except (OSError, ValueError, RemovalError, KeyboardInterrupt, EOFError) as error:
         remaining = [entry["path"] for entry in plan["entries"] if entry["path"] not in completed and exists(Path(entry["path"]))]
         interrupted = isinstance(error, (KeyboardInterrupt, EOFError))
