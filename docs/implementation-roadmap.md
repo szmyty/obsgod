@@ -1,5 +1,11 @@
 # deckystream implementation and migration roadmap
 
+Owner-authorized **#109/#110** source is merged into `master` at **cdcc668**.
+Next bounded **#104** work makes the primary plugin build and constrained local
+qualification repeatable. Source-bound earlier receipts remain historical;
+issue closure, hosted/target acceptance and #85 final candidate are separate.
+All230 original criteria/dependencies remain intact.
+
 Settings boundary **#103** is implemented in draft **#110**, stacked on unmerged
 #109. Exact source **4eac7a4** passed six local ACT jobs, six actual packaged
 settings scenarios and all six bounded criteria. Read the

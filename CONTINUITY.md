@@ -1,6 +1,33 @@
 # Current work
 
-## Settings boundary #103 local checkpoint ready for review
+## Primary builder and repeatable local qualification #104 authorized
+
+The owner explicitly requested merging all open PRs and starting the next batch
+on 2026-11-18. Normal merge order **#109 → retarget #110 to master → #110**
+completed at **2fbb0cb67bbb42adae6e52210124f6aa5a22d6d6** and
+**cdcc668dc21f86748dbb5a8a00d2516affb83c7e**. Default remains `master`. The
+final merge tree exactly matches the reviewed #110 head85dc65c; this does not
+relabel the older4eac runtime qualification as a newly built merge candidate.
+Effective branch rules/check requirements were empty; no protection was bypassed.
+Hosted jobs executed zero steps under the known billing gate. Source merges do
+not close issues or actual supported-loader/device/CI/rights/adoption gates.
+
+Next authorized bounded work is **#104**, on existing isolated checkout branch
+**fix/repeatable-primary-ci**, based on cdcc668. This supersedes104's planning
+pause. Exercise the complete primary builder twice as the real non-root owner,
+audit/install the actual ZIP and detect primary-only entry drift. Retain legacy
+compatibility and optional pinned official assembly evidence. Add a bounded
+constrained local profile/space preflight and fresh attempt outputs, with explicit
+private compiler-cache cleanup only after its consumers finish. Preserve source,
+module caches, pinned tools, artifacts/evidence and network/package/auth presets.
+The current low-free-space state must fail early with measured requirements if
+it cannot fit; do not weaken reserves or tests. No global prune or paid resource.
+
+All230 original criteria/dependencies remain intact. Artwork/controller UI and
+final #85 qualification/owner #86 test loop remain separate. No release, deploy,
+migration, Store action or other-repository change is authorized by this batch.
+
+## Earlier settings boundary #103 local review checkpoint
 
 Draft **#110** implements the bounded capture deadline/readback contract on
 **fix/settings-boundary**, stacked on still-unmerged draft **#109**. Exact clean

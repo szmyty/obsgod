@@ -1,6 +1,17 @@
 # Product roadmap
 
-## Settings boundary draft checkpoint
+## Primary-build and local resource batch #104 in progress
+
+The owner authorized merging the completed drafts and proceeding. **#109** and
+**#110** merged in order into actual `master`, now **cdcc668**. Their source
+and criterion evidence remain revision-bound; merge alone closes no acceptance.
+Next bounded work **#104** exercises the complete primary plugin builder in the
+candidate workflow and adds repeatable constrained-runner preflight/cache/temp
+policy. Source, artifacts, modules, presets, all required tests and all230 original
+criteria/dependencies are preserved. Artwork/UI and final #85/#86 work remain
+separate. No release, deployment, migration or paid execution.
+
+## Earlier settings boundary draft checkpoint
 
 Bounded **#103** is implemented in draft [#110](https://github.com/szmyty/obsgod/pull/110),
 stacked on unmerged #109. Exact clean source **4eac7a4** passed all six local ACT
