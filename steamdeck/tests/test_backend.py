@@ -13,8 +13,8 @@ backend = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(backend)
 
 IDLE = {"ok": True, "state": "stopped", "output_known": True,
-        "stream": {"active": False}, "message": "fixture idle", "process": "absent",
-        "media": {"known": True, "replay_active": False}}
+        "stream": {"active": False, "reconnecting": False}, "recording": False, "message": "fixture idle", "process": "absent",
+        "media": {"known": True, "replay_active": False, "recording": {"active": False, "paused": False}}}
 LIVE = {"ok": True, "state": "streaming", "output_known": True,
         "stream": {"active": True, "bytes": 4096}, "message": "fixture live"}
 
@@ -58,11 +58,13 @@ class BackendState(unittest.IsolatedAsyncioTestCase):
         self.assertNotIn("game", spawn.call_args.args)
 
     async def test_capture_mode_rechecks_real_output_and_refuses_live_unknown_or_recording(self):
-        for current in [LIVE, {**IDLE, "output_known": False}, {**IDLE, "recording": True}]:
+        for current in [LIVE, {**IDLE, "output_known": False}, {**IDLE, "recording": True},
+                        {**IDLE, "ok": False}, {**IDLE, "stream": {"active": False}},
+                        {**IDLE, "media": None}, {**IDLE, "process": "unknown"}]:
             with self.subTest(current=current):
                 plugin = backend.Plugin()
                 calls = []
-                async def run(action, payload=None):
+                async def run(action, payload=None, **_options):
                     calls.append((action, payload))
                     return current
                 with patch.object(plugin, "_run", side_effect=run):
@@ -79,7 +81,7 @@ class BackendState(unittest.IsolatedAsyncioTestCase):
         finish = asyncio.Event()
         calls = []
         mode = "screen"
-        async def run(action, payload=None):
+        async def run(action, payload=None, **_options):
             nonlocal mode
             calls.append((action, payload))
             if action == "set-capture-mode":

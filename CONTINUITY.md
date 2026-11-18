@@ -30,6 +30,30 @@ focused regression/process/browser checks, independent review, then the complete
 required available matrix at the final committed source.
 
 
+### Settings source checkpoint in draft #110
+
+Draft [#110](https://github.com/szmyty/obsgod/pull/110) is stacked on unmerged
+#109. Source now bounds the full capture operation, preserves pending identity
+until owned process exit, requires canonical preflight and strict configuration
+readback, and removes fixture-only output-known defaults. The shared106-case
+corpus covers actual Go emission and malformed wire cases, including legacy
+fields, legitimate nested-connection differences and JSON numeric/URL parity.
+Read [the contract](docs/settings-boundary.md).
+
+Focused Go, Python52 and frontend checks pass with independent lane review.
+The first integrated Go race failed when the new real CLI process test collided
+with the deck package's fixed-port simulated OBS. Keep that original evidence;
+the new process case now has the explicit `deck_process` tag and runs serially
+in the candidate workflow. Full default race, the isolated tagged case and vet
+then pass. Assertions and deadline limits were retained. The workflow also runs
+actual packaged Python/Go under a control lock held beyond the panel deadline.
+
+Current source is ready for a committed candidate and actual packaged checks.
+The complete new exact-source matrix, final independent evidence review and
+qualification records remain pending; older aa323f0 receipts are historical.
+Actual supported Deck/provider/hosted and all release/migration gates remain
+unchanged. #103 and both drafts stay open for review. No paid resource used.
+
 ## Cleanup/recovery implemented and qualified; draft #109 for review
 
 The requested previous PR stack was already merged into actual default

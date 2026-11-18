@@ -41,6 +41,9 @@ jobs:
           TMPDIR: ${{ runner.temp }}
         run: |
           go test -race ./...
+          # The real managed CLI probes the fixed OBS port. Run its process
+          # fixture separately from deck's simulated listener on that port.
+          go test -race -count=1 -tags=deck_process ./internal/commands -run '^TestCaptureModeCommandProcess'
           go vet ./...
           govulncheck ./...
       - name: Installer, backend and panel checks
@@ -78,6 +81,7 @@ jobs:
           python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-panel.py dist/obsgod-decky.zip --browser "$browser" --screenshots "$browser_output/panel"
           python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-dependency-setup.py dist/obsgod-decky.zip --browser "$browser" --output "$browser_output/dependency-setup"
           python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-native-configuration.py dist/obsgod-decky.zip --browser "$browser" --output "$browser_output/native-configuration"
+          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/packaged-settings-boundary.py dist/obsgod-decky.zip --revision "$GITHUB_SHA" --output "$browser_output/settings-boundary"
           python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-m3-panel.py dist/obsgod-decky.zip --browser "$browser" --screenshots "$browser_output/m3-panel"
           python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-m3-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz --browser "$browser" --screenshots "$browser_output/m3-setup"
           python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-mixer-panel.py dist/obsgod-decky.zip --browser "$browser" --screenshots "$browser_output/mixer-panel"

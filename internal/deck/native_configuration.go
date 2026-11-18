@@ -97,7 +97,7 @@ func readConfiguration(ctx context.Context, p Paths, observe func(context.Contex
 	view := ConfigurationView{SchemaVersion: 1, OK: err == nil, Settings: settings, Connection: local,
 		OutputKnown:  state.OutputKnown && state.Process == local.Process,
 		CanConfigure: err == nil && configurationClosed(state) && local.OutputKnown && local.Process == "absent" && !local.Connected,
-		CanClose:     configurationCanClose(state) && local.Process == "running",
+		CanClose:     err == nil && configurationCanClose(state) && local.Process == "running",
 		Message:      "Enter a stream key privately on this device. Saving does not start broadcasting"}
 	if err == nil {
 		_, _, loadErr := Load(p)
@@ -224,7 +224,14 @@ func configureFields(ctx context.Context, p Paths, reader io.Reader, observe fun
 	if err != nil {
 		return Settings{}, errors.New("could not prepare stream settings")
 	}
-	if ctx.Err() != nil || !configurationClosed(observe(ctx, p)) {
+	if err := ctx.Err(); err != nil {
+		return Settings{}, err
+	}
+	state := observe(ctx, p)
+	if err := ctx.Err(); err != nil {
+		return Settings{}, err
+	}
+	if !configurationClosed(state) {
 		return Settings{}, errors.New("managed OBS state changed before saving; close it and retry")
 	}
 	return Configure(p, bytes.NewReader(data))

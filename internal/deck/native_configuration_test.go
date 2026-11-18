@@ -273,6 +273,45 @@ func TestNativeConfigurationRechecksStateAndCancellationBeforeWriting(t *testing
 	}
 }
 
+func TestNativeConfigurationCancellationDuringFinalObservationPreservesSavedPair(t *testing.T) {
+	p := testPaths(t)
+	if _, err := Configure(p, strings.NewReader(fixtureSettings)); err != nil {
+		t.Fatal(err)
+	}
+	before := configurationPair(t, p)
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	calls := 0
+	_, err := configureFields(ctx, p, strings.NewReader(`{"bitrate":6000}`), func(context.Context, Paths) Result {
+		calls++
+		if calls == 2 {
+			cancel()
+		}
+		return configurationStopped()
+	})
+	if err == nil || calls != 2 || !reflect.DeepEqual(before, configurationPair(t, p)) {
+		t.Fatal("cancellation in the final closed-state observation permitted a write", err, calls)
+	}
+}
+
+func TestNativeConfigurationInvalidSavedSettingsCannotAuthorizeClose(t *testing.T) {
+	p := testPaths(t)
+	if _, err := Configure(p, strings.NewReader(fixtureSettings)); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(p.Config, []byte("{invalid saved settings}"), 0600); err != nil {
+		t.Fatal(err)
+	}
+	before := configurationPair(t, p)
+	state := configurationStopped()
+	state.Process, state.Connected = "running", true
+	state.Runtime = &automation.RuntimeStatus{Profile: "OBSGod", Collection: "OBSGod"}
+	view := readConfiguration(context.Background(), p, configurationProbe(state), configurationLocal("running"))
+	if view.OK || view.CanConfigure || view.CanClose || !reflect.DeepEqual(before, configurationPair(t, p)) {
+		t.Fatal("invalid settings granted a configuration action despite known idle output", view)
+	}
+}
+
 func TestNativeConfigurationCloseRequiresIdleAuthenticatedManagedOBS(t *testing.T) {
 	p := testPaths(t)
 	state := configurationStopped()

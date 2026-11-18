@@ -1,9 +1,25 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {createView,currentResult,observe,controls} from "../src/state.mjs";
+import {createView,currentResult,observe,controls,outputKnown} from "../src/state.mjs";
 
 const idle={ok:true,state:"stopped",configured:true,output_known:true,recording:false,stream:{active:false,bytes:0}};
 const live={...idle,state:"streaming",stream:{active:true,bytes:4096,reconnecting:false}};
+
+test("only explicit output-known true enables output; absent or mistyped values retain recovery Stop",()=>{
+  for(const value of [undefined,null,false,"true",1]){
+    const result={...idle,output_known:value};
+    assert.equal(outputKnown(result),false);
+    assert.equal(controls(result).startDisabled,true);
+    assert.equal(controls(result).testDisabled,true);
+    assert.equal(controls(result).stopDisabled,false);
+    assert.equal(controls(result).stopLabel,"Stop streaming / recover");
+  }
+  assert.equal(outputKnown(idle),true);
+  const view=createView();
+  observe(view,idle,100,1,0);
+  assert.equal(observe(view,{...live,output_known:undefined},200,2,0).transition,undefined);
+  assert.equal(view.progressAt,0);
+});
 
 test("controls use confirmed stream/operation state; unknown output keeps recovery Stop",()=>{
   assert.equal(controls(idle).stopDisabled,true);

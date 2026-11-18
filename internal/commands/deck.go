@@ -85,7 +85,11 @@ func newDeckCommand() *coral.Command {
 		cmd := &coral.Command{Use: name, Short: map[string]string{"clear-logs": "Clear local filtered diagnostic history", "status": "Read live output state without starting OBS", "doctor": "Diagnose installation, capture and OBS", "configure": "Save settings and key from JSON stdin, never argv", "configure-fields": "Merge private stream settings from bounded JSON stdin while managed OBS is closed", "set-capture-mode": "Choose screen or game video for the next explicit output (JSON stdin)", "start": "Capture Gaming Mode and wait for real stream output", "stop": "Stop streaming and confirm it stopped", "test-recording": "Save a ten-second local clip without broadcasting", "restart": "Close idle managed OBS to apply saved settings", "open-obs": "Open the isolated OBS window visibly for Desktop recovery without starting output"}[name], Args: coral.NoArgs}
 		cmd.RunE = func(cmd *coral.Command, _ []string) error {
 			limit := 75 * time.Second
-			if name == "configure-fields" || name == "restart" {
+			if name == "set-capture-mode" {
+				// Include both control leases and the mutation's observations. The
+				// separate two-second result snapshot below is read-only reporting.
+				limit = 3 * time.Second
+			} else if name == "configure-fields" || name == "restart" {
 				limit = 10 * time.Second
 			}
 			ctx, cancel := context.WithTimeout(cmd.Context(), limit)

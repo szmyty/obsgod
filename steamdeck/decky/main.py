@@ -3,6 +3,7 @@ import asyncio
 from functools import wraps
 import importlib.util
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -64,6 +65,10 @@ DESTINATION_FIELDS = {"server", "stream_key", "replace_key", "bitrate", "fps", "
 PASSWORD_FIELDS = {"password", "confirm", "generate"}
 PRIVATE_FIELDS = {"stream_key", "password"}
 CONFIGURATION_UNAVAILABLE = "Configuration readiness is unavailable. Refresh settings before changing your destination or local OBS password. No stream was started."
+# A capture edit includes fresh preflight, Go's action/post-action observation,
+# and a final independent read. Even three timeout cleanups fit below the UI's
+# fifteen-second budget; Start/Stop and microphone leases retain their budgets.
+CAPTURE_MODE_BUDGET = {"preflight": 2.5, "command": 5.5, "readback": 2.5, "cleanup": 0.4}
 
 
 def _private_values(value, depth=0):
@@ -101,37 +106,42 @@ def _public_connection(value, private=()):
     return result
 
 
-def _public_configuration(value, private=()):
-    """Explicit projection: future Go fields cannot expose private readback."""
-    value = value if isinstance(value, dict) else {}
-    private = tuple(private) + tuple(_private_values(value))
-    valid = (type(value.get("schema_version")) is int and value["schema_version"] == 1 and
-             all(type(value.get(name)) is bool for name in
-                 ("ok", "configured", "key_configured", "output_known", "can_configure", "can_close")) and
-             isinstance(value.get("settings"), dict) and isinstance(value.get("connection"), dict))
-    connection = value.get("connection") if isinstance(value.get("connection"), dict) else {}
-    for name in ("ok", "authentication_required", "credentials_available", "connected", "managed", "output_known", "awaiting_verification"):
-        if name in connection and type(connection[name]) is not bool:
-            valid = False
-    settings = {"server": "", "bitrate": 4500, "fps": 30, "encoder": "vaapi", "width": 1280,
+def _json_integer(value):
+    # JSON has one numeric type; browser parsing cannot distinguish 30/30.0.
+    return type(value) is int or type(value) is float and math.isfinite(value) and value.is_integer()
+
+
+def _configuration_settings(value, private=()):
+    """Validate the named public settings, retaining only documented defaults."""
+    settings = {"version": 1, "server": "", "bitrate": 4500, "fps": 30, "encoder": "vaapi", "width": 1280,
                 "height": 720, "capture_mode": "screen", "microphone": False}
-    source = value.get("settings") if isinstance(value.get("settings"), dict) else {}
+    source = value if isinstance(value, dict) else {}
+    valid = isinstance(value, dict) and all(name in source for name in
+            ("version", "server", "bitrate", "fps", "encoder", "microphone"))
+    if ("width" in source) != ("height" in source):
+        valid = False
     for name in settings:
         if name not in source:
             continue
         item = source[name]
         if name == "server":
-            safe = isinstance(item, str) and len(item.encode("utf-8", errors="replace")) <= 4096 and not any(ord(c) < 32 or ord(c) == 127 for c in item)
             try:
-                url = urlsplit(item)
+                safe = isinstance(item, str) and len(item.encode("utf-8")) <= 4096 and not any(ord(c) < 32 or 127 <= ord(c) <= 159 for c in item)
+                url = urlsplit(item) if isinstance(item, str) else None
                 safe = safe and (not item or (url.scheme in {"rtmp", "rtmps"} and bool(url.hostname) and
                         url.username is None and url.password is None and not url.query and not url.fragment))
-            except (ValueError, TypeError):
+            except (ValueError, TypeError, UnicodeError):
                 safe = False
             if isinstance(item, str) and any(secret and secret in item for secret in private):
                 safe = False
-        elif name in {"bitrate", "fps", "width", "height"}:
-            safe = type(item) is int and 0 <= item <= 100000
+        elif name == "version":
+            safe = _json_integer(item) and item == 1
+        elif name == "bitrate":
+            safe = _json_integer(item) and 1000 <= item <= 8000
+        elif name == "fps":
+            safe = _json_integer(item) and item in {30, 60}
+        elif name in {"width", "height"}:
+            safe = _json_integer(item) and 0 <= item <= 1920
         elif name == "microphone":
             safe = type(item) is bool
         elif name == "encoder":
@@ -139,13 +149,57 @@ def _public_configuration(value, private=()):
         else:
             safe = item in {"", "screen", "game"} if isinstance(item, str) else False
         if safe:
-            settings[name] = item
+            settings[name] = int(item) if name in {"version", "bitrate", "fps", "width", "height"} else item
         else:
             valid = False
     if not settings["width"] and not settings["height"]:
         settings["width"], settings["height"] = 1280, 720
+    if (settings["width"], settings["height"]) not in {(960, 540), (1280, 720), (1920, 1080)}:
+        valid = False
     if not settings["capture_mode"]:
         settings["capture_mode"] = "screen"
+    return settings, valid
+
+
+def _valid_configuration(value, private=()):
+    if (not isinstance(value, dict) or not _json_integer(value.get("schema_version")) or value["schema_version"] != 1 or
+            not all(type(value.get(name)) is bool for name in
+                    ("ok", "configured", "key_configured", "output_known", "can_configure", "can_close")) or
+            not isinstance(value.get("message"), str)):
+        return False
+    settings, valid = _configuration_settings(value.get("settings"), private)
+    connection = value.get("connection")
+    if (not valid or not isinstance(connection, dict) or
+            not all(type(connection.get(name)) is bool for name in
+                    ("ok", "authentication_required", "credentials_available", "connected", "managed", "output_known")) or
+            ("awaiting_verification" in connection and type(connection["awaiting_verification"]) is not bool) or
+            connection.get("authentication_required") is not True or
+            connection.get("host") not in ("127.0.0.1", "localhost", "::1") or connection.get("port") != "4457" or
+            connection.get("process") not in ("absent", "running", "unknown") or
+            connection.get("state") not in ("stopped", "streaming", "recording", "unknown", "setup") or
+            not isinstance(connection.get("message"), str)):
+        return False
+    if (value["configured"] != value["key_configured"] or
+            value["configured"] and not settings["server"] or value["can_configure"] and value["can_close"]):
+        return False
+    if (value["can_configure"] or value["can_close"]) and (not value["ok"] or not value["output_known"]):
+        return False
+    if value["can_configure"] and (connection["process"] != "absent" or not connection["output_known"] or
+            connection["connected"] or connection["managed"] or connection["state"] not in ("stopped", "setup")):
+        return False
+    # Connection inventory is presence-only until an explicit connection test.
+    # A separately authenticated Status read owns the top-level close decision.
+    if value["can_close"] and (connection["process"] != "running" or connection["state"] in ("streaming", "recording")):
+        return False
+    return True
+
+
+def _public_configuration(value, private=()):
+    """Explicit projection: incomplete readback can never invent readiness."""
+    value = value if isinstance(value, dict) else {}
+    private = tuple(private) + tuple(_private_values(value))
+    settings, _ = _configuration_settings(value.get("settings"), private)
+    valid = _valid_configuration(value, private)
     output_known = valid and value.get("output_known") is True
     ok = valid and value.get("ok") is True
     return {"schema_version": 1, "ok": ok, "configured": valid and value.get("configured") is True,
@@ -458,6 +512,13 @@ class Plugin:
             observed = await self._configuration_observed()
             if action == "test-connection":
                 observed["connection"] = _public_connection(command, private)
+                if not _valid_configuration(observed, private):
+                    # The explicit test and the later settings read can straddle
+                    # a process/output change. Keep the test facts, but require
+                    # a new coherent observation before granting edit/close.
+                    observed["output_known"] = False
+                    observed["can_configure"], observed["can_close"] = False, False
+                    observed["message"] = "Local OBS observations changed during the connection test. Refresh settings before making changes."
             observed = self._configuration_gate(observed, finishing=task)
             observed["action_result"] = outcome
             return observed
@@ -509,11 +570,11 @@ class Plugin:
         return {"ok": False, "state": "unknown", "output_known": False,
                 "process": "unknown", "connection": "unavailable", "message": message}
 
-    async def _run(self, action, payload=None, _teardown=False):
+    async def _run(self, action, payload=None, _teardown=False, _deadline=None):
         task = asyncio.current_task()
         self._command_tasks.add(task)
         try:
-            return await self._command(action, payload, _teardown)
+            return await self._command(action, payload, _teardown, _deadline)
         finally:
             self._command_tasks.discard(task)
 
@@ -523,11 +584,13 @@ class Plugin:
         task.add_done_callback(self._cleanup_tasks.discard)
         return task
 
-    async def _command(self, action, payload, teardown):
+    async def _command(self, action, payload, teardown, deadline=None):
         if self._closing and not teardown:
             return self._unknown("The plugin is closing. Reload it and refresh the actual OBS output state.")
         private_configuration = action in CONFIGURATION_ACTIONS or action in CONFIGURATION_READS
-        cleanup_budget = 1 if private_configuration else 8
+        if action == "set-capture-mode" and deadline is None:
+            deadline = asyncio.get_running_loop().time() + CAPTURE_MODE_BUDGET["command"]
+        cleanup_budget = CAPTURE_MODE_BUDGET["cleanup"] if deadline is not None else 1 if private_configuration else 8
         binary = self._plugin_root() / "bin/obsgod"
         if not os.access(binary, os.X_OK):
             binary.chmod(0o700)
@@ -539,8 +602,10 @@ class Plugin:
             env=environment,
         ))
         try:
-            process = await asyncio.shield(spawning)
-        except asyncio.CancelledError:
+            attached = asyncio.shield(spawning)
+            process = (await asyncio.wait_for(attached, max(0, deadline - asyncio.get_running_loop().time()))
+                       if deadline is not None else await attached)
+        except (asyncio.CancelledError, asyncio.TimeoutError) as error:
             # Cancellation can arrive while asyncio is attaching the child.
             # Keep ownership of that spawn until its eventual child is reaped.
             async def reap_late_child():
@@ -550,20 +615,23 @@ class Plugin:
                     try:
                         # No permission byte was sent. Even a late attached
                         # guard can only exit, never begin a CLI operation.
-                        await self._stop_child(child, 0.4 if self._closing else cleanup_budget)
+                        await self._stop_child(child, 0.4 if self._closing else cleanup_budget, _bounded=deadline is not None)
                     finally:
                         self._children.discard(child)
                 except OSError:
                     pass
             self._track_cleanup(reap_late_child())
+            if isinstance(error, asyncio.TimeoutError):
+                return self._unknown("The settings command did not attach before its deadline. Refresh settings before retrying; no late command was permitted.")
             raise
         self._children.add(process)
-        pending_action = action in {"start", "test-recording"} or (action == "media" and isinstance(payload, dict) and payload.get("action") in {"record-start", "replay-start"})
+        pending_action = action in {"start", "test-recording", "set-capture-mode"} or (action == "media" and isinstance(payload, dict) and payload.get("action") in {"record-start", "replay-start"})
         if pending_action:
             self.pending = process
         try:
-            if (self._closing and not teardown) or (pending_action and self.cancel_requested):
-                await self._stop_child(process, 0.4 if self._closing else cleanup_budget)
+            if ((self._closing and not teardown) or (pending_action and self.cancel_requested) or
+                    deadline is not None and asyncio.get_running_loop().time() >= deadline):
+                await self._stop_child(process, 0.4 if self._closing else cleanup_budget, _bounded=deadline is not None)
                 return self._unknown("The operation was cancelled before it started. Refresh the actual OBS output state.")
             # The permission byte is never included in argv and is consumed by
             # the guard with one os.read. The CLI receives only its JSON stdin.
@@ -576,6 +644,8 @@ class Plugin:
                 timeout = 11
             if action == "mixer" and isinstance(payload, dict) and payload.get("action") != "configure":
                 timeout = 8
+            if deadline is not None:
+                timeout = min(timeout, max(0, deadline - asyncio.get_running_loop().time()))
             output, _ = await asyncio.wait_for(communication, timeout)
             if private_configuration and len(output) > 131072:
                 raise ValueError()
@@ -584,11 +654,11 @@ class Plugin:
                 raise ValueError()
             return result
         except asyncio.CancelledError:
-            cleanup = self._track_cleanup(self._stop_child(process, 0.4 if self._closing else cleanup_budget))
+            cleanup = self._track_cleanup(self._stop_child(process, 0.4 if self._closing else cleanup_budget, _bounded=deadline is not None))
             await asyncio.shield(cleanup)
             raise
         except (asyncio.TimeoutError, ValueError, UnicodeError):
-            await self._stop_child(process, 0.4 if self._closing else cleanup_budget)
+            await self._stop_child(process, 0.4 if self._closing else cleanup_budget, _bounded=deadline is not None)
             return self._unknown("Output state is unconfirmed. Use Stop streaming and inspect OBS if the connection does not recover.")
         finally:
             if self.pending is process:
@@ -597,20 +667,33 @@ class Plugin:
                 self._children.discard(process)
 
     @staticmethod
-    async def _stop_child(process, budget=8):
+    async def _stop_child(process, budget=8, _bounded=False):
         if process.returncode is None:
             try:
                 process.send_signal(signal.SIGINT)
             except ProcessLookupError:
                 pass
         try:
-            await asyncio.wait_for(process.communicate(), budget)
+            await asyncio.wait_for(process.communicate(), budget / 2 if _bounded else budget)
         except asyncio.TimeoutError:
             try:
                 process.kill()
             except ProcessLookupError:
                 pass
-            await process.communicate()
+            if _bounded:
+                # A helper descendant can retain inherited stdout after the
+                # exact owned leader exits. Close only our read transports;
+                # never kill an OBS process group or wait forever for its pipe.
+                for stream in (getattr(process, "stdout", None), getattr(process, "stderr", None)):
+                    transport = getattr(stream, "_transport", None)
+                    if transport is not None:
+                        transport.close()
+                # Leader exit is the permission boundary. If the OS cannot
+                # reap a killed process promptly, keep its operation pending
+                # instead of reporting a completed failure ahead of that exit.
+                await process.wait()
+            else:
+                await process.communicate()
 
     def _signal_pending(self):
         if self.pending is not None and self.pending.returncode is None:
@@ -648,24 +731,74 @@ class Plugin:
             pass
         return await self.status()
 
+    async def _capture_call(self, action, payload=None, phase="command"):
+        budget = CAPTURE_MODE_BUDGET[phase]
+        deadline = asyncio.get_running_loop().time() + budget
+        # One process deadline includes spawn attachment and communication.
+        # Let its owned cleanup finish: a second wait_for at this same instant
+        # could cancel that cleanup and acknowledge failure before child exit.
+        return await self._run(action, payload, _deadline=deadline)
+
+    @staticmethod
+    def _capture_idle(current):
+        if not isinstance(current, dict):
+            return False
+        stream, media = current.get("stream"), current.get("media")
+        recording = media.get("recording") if isinstance(media, dict) else None
+        media_idle = (isinstance(media, dict) and media.get("known") is True and media.get("replay_active") is False and
+                      isinstance(recording, dict) and recording.get("active") is False and recording.get("paused") is False)
+        return (current.get("ok") is True and current.get("output_known") is True and current.get("recording") is False and
+                current.get("state") in ("stopped", "setup") and current.get("process") in ("absent", "running") and
+                isinstance(stream, dict) and stream.get("active") is False and stream.get("reconnecting") is False and
+                media_idle)
+
+    async def _capture_readback(self):
+        self._snapshot_id += 1
+        snapshot_id = self._snapshot_id
+        try:
+            observed = await self._capture_call("status", phase="readback")
+        except (OSError, asyncio.TimeoutError):
+            observed = self._unknown("Capture settings readback is unavailable. Refresh status before retrying; the requested setting may already have been saved.")
+        observed["snapshot_id"] = snapshot_id
+        return observed
+
+    async def _perform_capture_mode(self, operation_id, payload):
+        try:
+            current = await self._capture_call("status", phase="preflight")
+            if not self._capture_idle(current):
+                command = {"ok": False, "message": "Stop streaming and recording, then wait for confirmed status before changing capture mode."}
+            elif self.cancel_requested or self._closing:
+                command = {"ok": False, "message": "Capture mode change was cancelled. Refresh settings before retrying."}
+            else:
+                command = await self._capture_call("set-capture-mode", payload)
+        except (OSError, asyncio.TimeoutError):
+            command = {"ok": False, "message": "Capture mode change could not be confirmed before its deadline. Refresh settings before retrying; the requested setting may already have been saved."}
+        self._invalidate_configuration()
+        # Do not join a pre-action query's separate timeout. Its older snapshot
+        # ID cannot replace this fresh observation, and its readers keep their
+        # own shielded ownership. Panel/manual readers coalesce on this readback.
+        self._status_task = asyncio.create_task(self._capture_readback())
+        observed = self._decorate(await asyncio.shield(self._status_task))
+        settings = observed.get("settings")
+        confirmed = (observed.get("configured") is True and isinstance(settings, dict) and
+                     (settings.get("capture_mode") or "screen") == payload["capture_mode"])
+        ok = command.get("ok") is True and confirmed
+        outcome = {"id": operation_id, "action": "set-capture-mode", "ok": ok,
+                   "message": command.get("message", "Capture mode change could not be confirmed. Refresh settings before retrying.")}
+        if command.get("ok") is True and not confirmed:
+            outcome["message"] = "Capture mode save was acknowledged but fresh settings could not confirm it. Refresh status before retrying; no output was started."
+        if self._last_action is None or operation_id >= self._last_action["id"]:
+            self._last_action = dict(outcome)
+        observed["action_result"] = outcome
+        return observed
+
     async def _perform(self, action, operation_id, command=None, payload=None):
+        if action == "set-capture-mode":
+            return await self._perform_capture_mode(operation_id, payload)
         if action in CONFIGURATION_ACTIONS:
             return await self._perform_configuration(action, operation_id, payload)
         if command is None:
             try:
-                if action == "set-capture-mode":
-                    # This read occurs after the control operation is reserved.
-                    # Never use a pre-click cached panel snapshot to authorize
-                    # changing capture, and keep the CLI's own lock/state gate.
-                    current = await self._run("status")
-                    media = current.get("media")
-                    media_idle = (isinstance(media, dict) and media.get("known") is True and
-                                  media.get("replay_active") is False)
-                    legacy_absent = media is None and current.get("process") == "absent"
-                    if (current.get("output_known") is not True or
-                            current.get("stream", {}).get("active") or current.get("recording") or
-                            not (media_idle or legacy_absent)):
-                        command = {"ok": False, "message": "Stop streaming and recording, then wait for confirmed status before changing capture mode."}
                 if command is None:
                     command = await self._run(action, payload) if payload is not None else await self._run(action)
             except OSError:

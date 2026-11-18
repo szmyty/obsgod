@@ -100,4 +100,10 @@ class AdvancedAdapter(IsolatedAsyncioTestCase):
             with patch.object(plugin, "_run", AsyncMock(return_value={**IDLE, "process": "running", "media": media})) as run:
                 result = await plugin.set_capture_mode("game")
             self.assertFalse(result["action_result"]["ok"])
-            self.assertTrue(all(call.args == ("status",) for call in run.call_args_list))
+            # Capture uses independent bounded preflight/readback calls. Neither
+            # malformed media nor active replay may invoke a mutation between them.
+            self.assertEqual(len(run.call_args_list), 2)
+            for call in run.call_args_list:
+                self.assertEqual(call.args, ("status", None))
+                self.assertEqual(set(call.kwargs), {"_deadline"})
+                self.assertGreater(call.kwargs["_deadline"], 0)

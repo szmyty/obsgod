@@ -1,10 +1,11 @@
 import {ButtonItem,ConfirmModal,DropdownItem,Navigation,PanelSection,PanelSectionRow,showModal,SliderField,TextField,ToggleField} from "@decky/ui";
 import {callable} from "@decky/api";
 import {useEffect,useRef,useState,type ReactNode} from "react";
-import {configurationControls,configurationDraft,configurationPayload,destinationChanged,inferredProvider,providers,validateControlPassword,validateDestination} from "./configuration-state.mjs";
+import {configurationControls,configurationDraft,configurationPayload,destinationChanged,inferredProvider,providers,publicConfiguration,validateControlPassword,validateDestination} from "./configuration-state.mjs";
+import {boundedRequest as bounded,settingsTimeouts} from "./action-timeouts.mjs";
 
-type Settings={server:string;bitrate:number;fps:number;encoder:string;width:number;height:number;capture_mode:string;microphone:boolean};
-type Connection={host?:string;port?:string;authentication_required?:boolean;credentials_available?:boolean;connected?:boolean;managed?:boolean;process?:string;output_known?:boolean;state?:string;awaiting_verification?:boolean;message?:string};
+type Settings={version:number;server:string;bitrate:number;fps:number;encoder:string;width:number;height:number;capture_mode:string;microphone:boolean};
+type Connection={ok:boolean;host:string;port:string;authentication_required:boolean;credentials_available:boolean;connected:boolean;managed:boolean;process:string;output_known:boolean;state:string;awaiting_verification?:boolean;message:string};
 export type ConfigurationStatus={schema_version:1;ok:boolean;configured:boolean;key_configured:boolean;settings:Settings;connection:Connection;output_known:boolean;can_configure:boolean;can_close:boolean;message:string;action_result?:{id?:number;action?:string;ok:boolean;message:string}};
 const readConfiguration=callable<[],ConfigurationStatus>("configuration_status");
 const configureDestination=callable<[payload:Record<string,unknown>],ConfigurationStatus>("configure_destination");
@@ -14,23 +15,12 @@ const changePassword=callable<[payload:{password?:string;confirm:true;generate?:
 const hintStyle={fontSize:13,lineHeight:1.5,overflowWrap:"anywhere" as const,whiteSpace:"pre-wrap" as const};
 function Hint({children}:{children:ReactNode}){return <div style={hintStyle}>{children}</div>;}
 function RowButton({children,disabled,onClick}:{children:ReactNode;disabled?:boolean;onClick:()=>void}){return <PanelSectionRow><ButtonItem layout="below" disabled={disabled} onClick={onClick}>{children}</ButtonItem></PanelSectionRow>;}
-function bounded<T>(promise:Promise<T>,milliseconds:number):Promise<T>{
-  return new Promise((resolve,reject)=>{
-    const timer=setTimeout(()=>reject(new Error("Configuration request timed out")),milliseconds);
-    promise.then(value=>{clearTimeout(timer);resolve(value);},error=>{clearTimeout(timer);reject(error);});
-  });
-}
-
 // Project only named public fields. Neither a future settings property nor an
 // unexpected backend property can populate a key/password field in this form.
 function publicView(value:ConfigurationStatus):ConfigurationStatus{
-  if(value?.schema_version!==1||typeof value.configured!=="boolean"||typeof value.output_known!=="boolean")throw new Error("Unrecognized configuration status");
-  const connection=value.connection??{};
-  return {schema_version:1,ok:value.ok===true,configured:value.configured,key_configured:value.key_configured===true,
-    settings:configurationDraft(value.settings) as Settings,output_known:value.output_known,can_configure:value.can_configure===true,can_close:value.can_close===true,message:value.message,
-    connection:{host:connection.host,port:connection.port,authentication_required:connection.authentication_required,credentials_available:connection.credentials_available,
-      connected:connection.connected,managed:connection.managed,process:connection.process,output_known:connection.output_known,state:connection.state,awaiting_verification:connection.awaiting_verification,message:connection.message},
-    action_result:value.action_result?{id:value.action_result.id,action:value.action_result.action,ok:value.action_result.ok===true,message:value.action_result.message}:undefined};
+  const projected=publicConfiguration(value);
+  if(!projected)throw new Error("Unrecognized configuration status");
+  return projected as ConfigurationStatus;
 }
 
 export function Configuration({busy=false,onChanged,onOpenDesktopSetup}:{busy?:boolean;onChanged?:()=>void;onOpenDesktopSetup?:()=>void}){
@@ -73,7 +63,7 @@ export function Configuration({busy=false,onChanged,onOpenDesktopSetup}:{busy?:b
     poll.current=true;
     const token=++request.current;
     try{
-      const next=await bounded(readConfiguration(),12000);
+      const next=await bounded(readConfiguration(),settingsTimeouts.configurationRead,"Configuration request timed out");
       if(alive.current&&token===request.current)accept(next,reset);
     }catch{
       if(alive.current&&token===request.current){lastObserved.current=0;setObservedAt(0);setMessage("Could not confirm configuration readiness. Refresh settings before saving or changing the local password.");}
@@ -118,7 +108,7 @@ export function Configuration({busy=false,onChanged,onOpenDesktopSetup}:{busy?:b
     action.current=kind;setPending(kind);setMessage(kind==="save"?"Saving private settings… nothing will be broadcast.":kind==="test"?"Testing the existing local OBS connection…":kind==="close"?"Closing the idle managed OBS instance…":"Updating the private local control password…");
     const token=++request.current;
     try{
-      const next=await bounded(kind==="save"?configureDestination(payload??{}):kind==="test"?testConnection():kind==="close"?closeOBS():changePassword(payload as {password?:string;confirm:true;generate?:boolean}),20000);
+      const next=await bounded(kind==="save"?configureDestination(payload??{}):kind==="test"?testConnection():kind==="close"?closeOBS():changePassword(payload as {password?:string;confirm:true;generate?:boolean}),settingsTimeouts.configurationAction,"Configuration request timed out");
       if(!alive.current||token!==request.current)return;
       accept(next,kind==="save"&&next.action_result?.ok===true);
       const outcome=next.action_result??next;
