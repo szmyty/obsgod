@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {configurationControls,configurationDraft,configurationPayload,destinationChanged,inferredProvider,providers,validateControlPassword,validateDestination} from "../src/configuration-state.mjs";
+import {configurationControls,configurationDraft,configurationPayload,destinationChanged,inferredProvider,providers,publicConfiguration,validConfiguration,validateControlPassword,validateDestination} from "../src/configuration-state.mjs";
 
 const server="rtmps://example.invalid/app";
-const saved={schema_version:1,ok:true,configured:true,provider:"custom",settings:{server,bitrate:6000,fps:60,encoder:"vaapi",width:1920,height:1080,capture_mode:"game",microphone:true,idle_style:"video",idle_media:"/private/idle.webm",idle_media_rights:"Owner rights",idle_text:"Saved message"},output_known:true,can_configure:true,connection:{process:"absent",output_known:true}};
+const saved={schema_version:1,ok:true,configured:true,key_configured:true,provider:"custom",message:"Settings are editable",settings:{version:1,server,bitrate:6000,fps:60,encoder:"vaapi",width:1920,height:1080,capture_mode:"game",microphone:true,idle_style:"video",idle_media:"/private/idle.webm",idle_media_rights:"Owner rights",idle_text:"Saved message"},output_known:true,can_configure:true,can_close:false,connection:{ok:true,host:"127.0.0.1",port:"4457",authentication_required:true,credentials_available:true,connected:false,managed:false,process:"absent",output_known:true,state:"stopped",message:"Managed OBS is closed"}};
 
 test("blank keys retain only the same saved provider/server binding, including an explicit account-key replacement",()=>{
   const draft=configurationDraft(saved.settings);
@@ -18,12 +18,16 @@ test("blank keys retain only the same saved provider/server binding, including a
 
 test("URL validation rejects embedded credentials and query/fragment without guessing secrets from URL paths",()=>{
   const draft=configurationDraft(saved.settings);
-  for(const value of ["https://example.invalid/app","rtmps://user:password@example.invalid/app","rtmps://example.invalid/app?key=sentinel","rtmps://example.invalid/app#key","rtmps://"]){
+  for(const value of ["https://example.invalid/app","rtmps://user:password@example.invalid/app","rtmps://@example.invalid/app","rtmps://:@example.invalid/app","rtmps://example.invalid/app\u0085","rtmps://example.invalid/\ud800","rtmps://example.invalid/app?key=sentinel","rtmps://example.invalid/app#key","rtmps://"]){
     const result=validateDestination(saved,"custom",{...draft,server:value},"synthetic-key");
     assert.match(result,/RTMP\(S\) server URL/);
     assert.equal(result.includes("sentinel"),false);
   }
   assert.equal(validateDestination(saved,"custom",{...draft,server:"rtmp://localhost/app/arbitrary-path"},"synthetic-key"),"");
+  for(const server of ["rtmps://example.invalid/path@live","rtmps://example.invalid/café/😀"]){
+    assert.equal(validateDestination(saved,"custom",{...draft,server},"synthetic-key"),"");
+    assert.equal(validConfiguration({...saved,settings:{...saved.settings,server}}),true);
+  }
 });
 
 test("private readback fields never enter a draft or settings patch; untouched advanced state remains backend-owned",()=>{
@@ -58,11 +62,34 @@ test("active/unknown/stale/backward-clock/dependency-busy observations cannot au
     assert.equal(controls.canChangePassword,false);
   }
   assert.equal(configurationControls({...saved,connection:{process:"running",output_known:true}},100,101).canChangePassword,false);
-  const idleOpen={...saved,can_configure:false,can_close:true,connection:{process:"running",output_known:true}};
+  const idleOpen={...saved,can_configure:false,can_close:true,connection:{...saved.connection,process:"running",output_known:false,state:"unknown"}};
   assert.equal(configurationControls(idleOpen,100,101).canClose,true);
   assert.equal(configurationControls({...idleOpen,output_known:false},100,101).canClose,false);
   assert.equal(configurationControls(idleOpen,100,101,{busy:true}).canClose,false);
   assert.equal(configurationControls(idleOpen,100,99).canClose,false);
+});
+
+test("incomplete or contradictory successful readback never becomes writable draft defaults",()=>{
+  for(const patch of [{settings:{}},{connection:{}},{can_close:true},{output_known:false},
+      {settings:{...saved.settings,version:undefined}},{key_configured:false},
+      {connection:{...saved.connection,connected:true}},{connection:{...saved.connection,authentication_required:false}}]){
+    const value={...saved,...patch};
+    assert.equal(validConfiguration(value),false);
+    assert.equal(publicConfiguration(value),undefined);
+    const state=configurationControls(value,100,101);
+    assert.equal(state.canConfigure,false);assert.equal(state.canClose,false);assert.equal(state.canChangePassword,false);
+  }
+});
+
+test("public projection preserves closed connection-test failure and strips unknown private fields",()=>{
+  const value={...saved,stream_key:"TOP-SECRET",settings:{...saved.settings,stream_key:"SETTINGS-SECRET"},
+    connection:{...saved.connection,ok:false,password:"PASSWORD-SECRET"}};
+  const projected=publicConfiguration(value);
+  assert.equal(validConfiguration(projected),true);
+  assert.equal(configurationControls(projected,100,101).canConfigure,true);
+  assert.equal(projected.connection.ok,false);
+  assert.equal(projected.settings.version,1);
+  assert.equal(JSON.stringify(projected).includes("SECRET"),false);
 });
 
 test("provider guides preserve established endpoint classification and never invent a Kick account URL",()=>{

@@ -23,7 +23,7 @@ CONNECTION = {"ok": True, "host": "127.0.0.1", "port": "4457", "authentication_r
               "credentials_available": True, "connected": False, "managed": False, "process": "absent",
               "output_known": True, "state": "stopped", "message": "Managed OBS is closed"}
 VIEW = {"schema_version": 1, "ok": True, "configured": True, "key_configured": True,
-        "settings": {"server": SERVER, "bitrate": 4500, "fps": 30, "encoder": "vaapi",
+        "settings": {"version": 1, "server": SERVER, "bitrate": 4500, "fps": 30, "encoder": "vaapi",
                      "width": 1280, "height": 720, "capture_mode": "game", "microphone": False},
         "connection": CONNECTION, "output_known": True, "can_configure": True, "can_close": False,
         "message": "Saving settings does not start OBS or broadcast"}
@@ -32,6 +32,25 @@ IDLE = {"ok": True, "state": "stopped", "output_known": True, "stream": {"active
 
 
 class ConfigurationAdapter(unittest.IsolatedAsyncioTestCase):
+    def test_shared_go_wire_corpus_requires_complete_consistent_readiness(self):
+        corpus = json.loads((Path(__file__).parent / "fixtures/configuration-contract.json").read_text())
+        self.assertEqual(corpus["schema_version"], 1)
+        for case in corpus["cases"]:
+            with self.subTest(case=case["name"]):
+                value = case["input"]
+                self.assertEqual(backend._valid_configuration(value), case["valid"])
+                projected = backend._public_configuration(value)
+                self.assertEqual(projected["can_configure"], case["can_configure"])
+                self.assertEqual(projected["can_close"], case["can_close"])
+                password = (projected["can_configure"] and projected["configured"] and
+                            projected["connection"]["process"] == "absent" and projected["connection"]["output_known"])
+                self.assertEqual(password, case["can_change_password"])
+                for name, expected in case.get("normalized_settings", {}).items():
+                    self.assertEqual(projected["settings"][name], expected)
+                if not case["valid"]:
+                    self.assertFalse(projected["ok"])
+                    self.assertFalse(projected["output_known"])
+
     async def test_real_child_receives_literal_json_stdin_and_only_fixed_actions(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -294,8 +313,24 @@ class ConfigurationAdapter(unittest.IsolatedAsyncioTestCase):
             result = await plugin.test_control_connection()
         self.assertTrue(result["connection"]["connected"])
         self.assertEqual(result["connection"]["state"], "streaming")
+        self.assertFalse(result["output_known"])
+        self.assertFalse(result["can_configure"])
+        self.assertFalse(result["can_close"])
         self.assertNotIn(KEY, json.dumps(result))
         self.assertNotIn(PASSWORD, json.dumps(result))
+
+    async def test_closed_failed_connection_test_preserves_coherent_offline_configuration(self):
+        plugin = backend.Plugin()
+        tested = {**CONNECTION, "ok": False, "message": "Managed OBS is offline"}
+
+        async def run(action, payload=None):
+            return copy.deepcopy(VIEW) if action == "configuration" else tested
+
+        with patch.object(plugin, "_run", side_effect=run):
+            result = await plugin.test_control_connection()
+        self.assertFalse(result["connection"]["ok"])
+        self.assertTrue(result["can_configure"])
+        self.assertTrue(backend._valid_configuration(result))
 
     async def test_failed_or_cancelled_private_operations_clear_payload(self):
         for failure in (OSError("private-path-" + KEY), asyncio.CancelledError()):

@@ -1,5 +1,110 @@
 # Current work
 
+## Settings boundary #103 local checkpoint ready for review
+
+Draft **#110** implements the bounded capture deadline/readback contract on
+**fix/settings-boundary**, stacked on still-unmerged draft **#109**. Exact clean
+qualified source **4eac7a469285cbafad5dc5a7ea07205374293dfd**, tree
+**2ca38c6e704ce9c9ea19b50938e99af98714b7d9**, passed all six local ACT jobs,
+application269/two skips, tooling85, frontend156, six actual packaged settings
+cases, native18 proofs and all11 supplemental/postmatrix commands. Read the
+[criterion-level checkpoint, proof and independent review](docs/settings-boundary-checkpoint.md).
+Later evidence-only commits do not qualify newer runtime or become a release.
+
+All six original #103 criteria have local evidence; #103 and drafts #109/#110
+remain open for review. Actual default `master` remains **1440f993**. All230
+original criteria/dependencies, #86 owner Deck/provider/loader/controller/headset
+gates and hosted/dependency-review limits remain intact. No merge, release,
+deployment, migration, Store submission, spending or consumer adoption occurred.
+
+The report uses an explicit hash-verified view of all nine completed same-source
+runs (six PASS/three FAIL). The original interrupted `200445Z` provisional record
+has no final exit/checksum and remains unchanged/unverifiable/unqualified. Both
+reports, its filtered partial log and the selection inventory are preserved;
+the original-state report still exposes that integrity error. Zero integrity
+errors applies only to the completed-run selection.
+
+Runner reserve refusals and the repeated-evidence guard were retained, then
+resolved with measured disposable compiler-cache assistance, a preserved separate
+fixture volume and fresh test-output preparation. All five cache/tool/artifact
+locations and the fixture volume were restored with matching current hashes;
+network/auth/package presets are unchanged. This does not complete #104.
+Next separate work is selected aurora artwork/controller UI/current docs, bounded
+#104 build/resource work, then #85 final qualification and the #86 owner test loop.
+Do not reuse this receipt to qualify those future changes.
+
+## Earlier #103 authorization and implementation checkpoints
+
+The owner requested the next batch on 2026-11-18. This authorizes bounded
+**#103** implementation, focused checks and a new exact-source qualification;
+it supersedes that issue's planning pause. Existing draft **#109** is still
+unmerged at **6968ad9ebb577c2f37ae42bf51f2f1862c319e8a**, while actual default
+`master` remains **1440f993b445a8d90168de5d1bfc36066a6f9af1**.
+
+Use existing isolated checkout branch **fix/settings-boundary**, stacked on
+#109's branch for a reviewable #103-only diff. This is an integration checkpoint,
+not a new hard dependency or permission to merge #109. Preserve all230 original
+criteria/dependencies and all prior evidence as historical for newer source.
+
+The batch bounds complete capture-mode operations across Go action/post-status,
+Python preflight/cleanup/readback and UI deadlines, preserving explicit Start,
+Stop/recovery, caller-disconnect ownership and microphone leases. It also
+requires complete, consistent configuration readback using one small shared
+Go-produced JSON corpus across Go/Python/JS, including documented legacy
+omitted/zero dimensions. No schema generator, new validation library or framework.
+Actual Deck/provider/hosted gates, remaining settings/artwork/resource work,
+release/deployment/migration, OAuth and spending remain separate.
+
+The environment is running/connected; actual shell, Git/API, pinned tools and
+Docker work. Preserve network/package/auth presets. Temporary cache relocation
+is measured with deterministic hashes and must be restored after qualification.
+No old aa323f0 receipt qualifies this new source. Continue source integration,
+focused regression/process/browser checks, independent review, then the complete
+required available matrix at the final committed source.
+
+
+### First settings matrix: worker fixture synchronization
+
+Exact source **e2928ffea50eaf9988be30c47d2c471c8653434e** passed five local
+ACT jobs, but the candidate failed an unchanged dependency-worker test. Its
+fixed1.1-second sleep raced the real worker's inherited lease release; observed
+`running` was correct while that lease was held. Preserve the failed complete
+attempt and do not call e2928ff fully qualified. Its separate actual packaged
+settings check did pass all six cases, including the lock held beyond UI15.
+
+The bounded repair changes only the test: controlled fake-child release, normal
+completion marker and actual kernel setup-lease release precede the interrupted
+status assertion. The real three-second worker budget and product module stay
+unchanged. Assertions retain/strengthen running/retry-blocked/same-ID/exact-one-
+mutation, then interrupted/compatible/retryable states. Twelve normal-user host
+repeats, twelve isolated-container repeats and the dependency module pass.
+Commit the repair, rebuild the exact candidate and rerun all six jobs at the new
+clean source before final qualification. No old pass is promoted.
+
+### Earlier settings source checkpoint in draft #110
+
+Draft [#110](https://github.com/szmyty/obsgod/pull/110) is stacked on unmerged
+#109. Source now bounds the full capture operation, preserves pending identity
+until owned process exit, requires canonical preflight and strict configuration
+readback, and removes fixture-only output-known defaults. The shared106-case
+corpus covers actual Go emission and malformed wire cases, including legacy
+fields, legitimate nested-connection differences and JSON numeric/URL parity.
+Read [the contract](docs/settings-boundary.md).
+
+Focused Go, Python52 and frontend checks pass with independent lane review.
+The first integrated Go race failed when the new real CLI process test collided
+with the deck package's fixed-port simulated OBS. Keep that original evidence;
+the new process case now has the explicit `deck_process` tag and runs serially
+in the candidate workflow. Full default race, the isolated tagged case and vet
+then pass. Assertions and deadline limits were retained. The workflow also runs
+actual packaged Python/Go under a control lock held beyond the panel deadline.
+
+Current source is ready for a committed candidate and actual packaged checks.
+The complete new exact-source matrix, final independent evidence review and
+qualification records remain pending; older aa323f0 receipts are historical.
+Actual supported Deck/provider/hosted and all release/migration gates remain
+unchanged. #103 and both drafts stay open for review. No paid resource used.
+
 ## Cleanup/recovery implemented and qualified; draft #109 for review
 
 The requested previous PR stack was already merged into actual default

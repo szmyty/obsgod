@@ -1,5 +1,13 @@
 # deckystream implementation and migration roadmap
 
+Settings boundary **#103** is implemented in draft **#110**, stacked on unmerged
+#109. Exact source **4eac7a4** passed six local ACT jobs, six actual packaged
+settings scenarios and all six bounded criteria. Read the
+[reviewed checkpoint](settings-boundary-checkpoint.md) for source/artifacts,
+completed-run selection, preserved failures/interruption and external gates.
+This is a review checkpoint; neither issue closure nor final #85/#86 acceptance
+is implied. All230 original criteria/dependencies remain intact.
+
 Cleanup/recovery **#101/#102** is implemented in draft **#109**, with all six
 local ACT jobs and bounded criterion evidence at exact clean **aa323f0**. Read
 the [review checkpoint](cleanup-recovery-checkpoint.md). Issues remain open for
@@ -8,7 +16,7 @@ review; actual supported-loader/device/provider and hosted gates remain separate
 Current runtime checkpoint: **#96–#100** are implemented through merged
 #106/#107 and qualified at exact source **9038e23**. See the
 [20-criterion evidence and full local matrix](runtime-correctness-checkpoint.md).
-Remaining audit stages #103/#104, selected artwork/UI and final owner test/migration
+Remaining audit stage #104, selected artwork/UI and final owner test/migration
 remain separate; this checkpoint does not replace their acceptance or the
 original 230 criteria/dependencies.
 

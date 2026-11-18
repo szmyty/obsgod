@@ -1,0 +1,2375 @@
+{
+  "schema_version": 1,
+  "qualified_revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+  "qualified_tree": "2ca38c6e704ce9c9ea19b50938e99af98714b7d9",
+  "source_clean": true,
+  "act": {
+    "counts": {
+      "local_matrix": {
+        "passed": 6
+      },
+      "open_failure_groups": 0,
+      "raw_results": {
+        "failed": 3,
+        "passed": 6
+      },
+      "run_statuses": {
+        "failed": 3,
+        "passed": 6
+      }
+    },
+    "local_result": "passed",
+    "overall_result": "partial",
+    "evidence_errors": [],
+    "report_sha256": "72dad329230356a7f7612a143bbd399bfdc48d8d6e7e61a2459adbddc03328b5",
+    "report_scope": "All same-source completed PASS/FAIL runs in an explicit hash-verified copy view; zero integrity errors applies only to this view. The original interrupted provisional run remains unfinalized/unverifiable, and the fresh original-state report still records that error.",
+    "completed_run_selection": {
+      "schema": 1,
+      "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+      "observed_utc": "2026-11-18T20:59:31.983729+00:00",
+      "scope": "Unmodified local-ci-report runs on an explicit bounded completed-run view, including every same-source completed PASS and FAIL. Original ACT state and all original files remain unchanged. The one interrupted provisional record is preserved separately as incomplete/unverifiable, never converted to PASS or given an invented final checksum. Zero evidence errors in the completed view does not repair or qualify that historical interrupted record.",
+      "original_state": "/workspace/.obsgod-tools/actions-current-audit/local/act-state",
+      "bounded_state": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4",
+      "completed_runs": [
+        {
+          "original_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T195426Z-lint.json",
+          "original_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T195426Z-lint.log",
+          "receipt_sha256": "61a8dd716cd629c80d7ea88bcd724812d0ef934c78f526ee2cebfcc654e5ad39",
+          "observed_log_sha256": "f2f54780f715aede95351d72b006c4cdbfb2281ec7dbed7c4553a35f7814b127",
+          "action": "lint",
+          "result": "passed",
+          "exit_code": 0,
+          "bounded_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195426Z-lint.json",
+          "bounded_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195426Z-lint.log"
+        },
+        {
+          "original_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T195514Z-build.json",
+          "original_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T195514Z-build.log",
+          "receipt_sha256": "edc396752d2a9bc6a6cb18b5d8b8efbd37d8b7c487274b02a87bc3d3a4283ed8",
+          "observed_log_sha256": "017e5d14f2e033944cfa9edbdecb70071b160394453f39fa0897d1d748a56e0c",
+          "action": "build",
+          "result": "passed",
+          "exit_code": 0,
+          "bounded_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195514Z-build.json",
+          "bounded_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195514Z-build.log"
+        },
+        {
+          "original_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T195549Z-coverage.json",
+          "original_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T195549Z-coverage.log",
+          "receipt_sha256": "e68a728a9b9ce554ad61c72a90e950b91dad98b27755b63cf5fa8594c7fd6301",
+          "observed_log_sha256": "45b14696c0a3e18f8668456a923b15632b152ea68dc48dd0f3e750a120b84662",
+          "action": "coverage",
+          "result": "passed",
+          "exit_code": 0,
+          "bounded_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195549Z-coverage.json",
+          "bounded_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195549Z-coverage.log"
+        },
+        {
+          "original_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T195623Z-snapshot.json",
+          "original_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T195623Z-snapshot.log",
+          "receipt_sha256": "8c44773716b061c077a2bdc868450f20fca9ac43e3366e67e438176a8e10e026",
+          "observed_log_sha256": "3a4f59dce8b3cf2822c2035535ff4947559bc639620840b9ebe2e62a7bc8dba3",
+          "action": "snapshot",
+          "result": "passed",
+          "exit_code": 0,
+          "bounded_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195623Z-snapshot.json",
+          "bounded_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195623Z-snapshot.log"
+        },
+        {
+          "original_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T195747Z-docs.json",
+          "original_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T195747Z-docs.log",
+          "receipt_sha256": "2bc8280b517530b57edff8f21b2b2be495714d31d47b8db3f78ce7c22c3c24ef",
+          "observed_log_sha256": "c574b07ee50eef6336eabddc827fdedb68630b253a43b05b5c7227d04bc3b3a8",
+          "action": "docs",
+          "result": "passed",
+          "exit_code": 0,
+          "bounded_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195747Z-docs.json",
+          "bounded_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195747Z-docs.log"
+        },
+        {
+          "original_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T195801Z-candidate.json",
+          "original_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T195801Z-candidate.log",
+          "receipt_sha256": "fe6ca7512f0866150afa76533a07bcd83203fdece45329d43e77667019e89ce2",
+          "observed_log_sha256": "fd4327c7c29f3aedef7c149ff94acdc3a0ab568cd970e722bba7da08b91115d9",
+          "action": "candidate",
+          "result": "failed",
+          "exit_code": 1,
+          "bounded_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195801Z-candidate.json",
+          "bounded_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195801Z-candidate.log"
+        },
+        {
+          "original_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T201559Z-candidate.json",
+          "original_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T201559Z-candidate.log",
+          "receipt_sha256": "f84b82c99ae9fcab9bfbf078638de8241fb4feb0c98dc1b8e553a64cd17bf46a",
+          "observed_log_sha256": "096346e3439fcc3ac676df1d480f8183a30f1ca6142a2fb3aa0edf2a3695246d",
+          "action": "candidate",
+          "result": "failed",
+          "exit_code": 1,
+          "bounded_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T201559Z-candidate.json",
+          "bounded_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T201559Z-candidate.log"
+        },
+        {
+          "original_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T203726Z-candidate.json",
+          "original_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T203726Z-candidate.log",
+          "receipt_sha256": "9c97099fa342e5a63927f33f1d9c323402646d946966552adcd8accd66ea071a",
+          "observed_log_sha256": "67f0e8ad141ebb9d41f00b9c831c750dbebf26844e7b0c0285bf3c80f1072c4b",
+          "action": "candidate",
+          "result": "failed",
+          "exit_code": 1,
+          "bounded_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T203726Z-candidate.json",
+          "bounded_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T203726Z-candidate.log"
+        },
+        {
+          "original_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T204648Z-candidate.json",
+          "original_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T204648Z-candidate.log",
+          "receipt_sha256": "171c93f5595150595e959d8e7bf8300bf199ec55f3d0e69690817c67d7859b58",
+          "observed_log_sha256": "b320f3fc8d1eb5c23b9ac4452db470adf711131e1ef2d6d8f85d0f80fa3259db",
+          "action": "candidate",
+          "result": "passed",
+          "exit_code": 0,
+          "bounded_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T204648Z-candidate.json",
+          "bounded_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T204648Z-candidate.log"
+        }
+      ],
+      "incomplete_unqualified_runs": [
+        {
+          "original_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T200445Z-candidate.json",
+          "original_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T200445Z-candidate.log",
+          "receipt_sha256": "f4bc184c31fd9c3fab030bedca31113d0013d2f67e79eaead351cd541801a8f4",
+          "observed_log_sha256": "fda87451389b8f4703310cd28fd5b3298816c751a14cd056cad5a1a80b354a7e",
+          "action": "candidate",
+          "result": "running",
+          "exit_code": null,
+          "reason": "Tool reconnect killed controller before a completion receipt/log checksum; preserved unmodified and never eligible as a completed run. Original-state report retains this missing checksum evidence error.",
+          "recorded_log_sha256": null
+        }
+      ],
+      "other_revision_receipt_names": [
+        "20261114T202748Z-lint.json",
+        "20261114T202840Z-build.json",
+        "20261114T202912Z-coverage.json",
+        "20261114T203558Z-lint.json",
+        "20261114T203654Z-build.json",
+        "20261114T203745Z-coverage.json",
+        "20261114T203838Z-snapshot.json",
+        "20261114T204210Z-docs.json",
+        "20261114T204230Z-candidate.json",
+        "20261114T205121Z-lint.json",
+        "20261114T205204Z-build.json",
+        "20261114T205253Z-coverage.json",
+        "20261114T205347Z-snapshot.json",
+        "20261114T205530Z-docs.json",
+        "20261114T205540Z-candidate.json",
+        "20261114T210402Z-candidate.json",
+        "20261114T224732Z-lint.json",
+        "20261114T224818Z-build.json",
+        "20261114T224858Z-coverage.json",
+        "20261114T224950Z-snapshot.json",
+        "20261114T225341Z-docs.json",
+        "20261114T225409Z-candidate.json",
+        "20261114T231345Z-lint.json",
+        "20261114T231436Z-build.json",
+        "20261114T231518Z-coverage.json",
+        "20261114T231609Z-snapshot.json",
+        "20261114T231739Z-docs.json",
+        "20261114T231756Z-candidate.json",
+        "20261115T173943Z-lint.json",
+        "20261115T174023Z-build.json",
+        "20261115T174101Z-coverage.json",
+        "20261115T174150Z-snapshot.json",
+        "20261115T174525Z-docs.json",
+        "20261115T174541Z-candidate.json",
+        "20261118T193603Z-lint.json",
+        "20261118T193642Z-build.json",
+        "20261118T193719Z-coverage.json",
+        "20261118T193807Z-snapshot.json",
+        "20261118T194147Z-docs.json",
+        "20261118T194207Z-candidate.json"
+      ],
+      "originals_unchanged": true,
+      "original_state_final_report": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/local-ci-report.py",
+          "--state",
+          "/workspace/.obsgod-tools/actions-current-audit/local/act-state",
+          "--revision",
+          "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+          "--output",
+          "/workspace/.obsgod-tools/settings-boundary-20261118/original-state-final-report"
+        ],
+        "exit_code": 1,
+        "stdout": "{\"counts\": {\"local_matrix\": {\"passed\": 6}, \"open_failure_groups\": 0, \"raw_results\": {\"failed\": 3, \"passed\": 6, \"running\": 1}, \"run_statuses\": {\"failed\": 3, \"passed\": 6, \"unavailable\": 1}}, \"local_result\": \"passed\", \"overall_result\": \"failed\", \"report\": \"/workspace/.obsgod-tools/settings-boundary-20261118/original-state-final-report/report.json\", \"revision\": \"4eac7a469285cbafad5dc5a7ea07205374293dfd\"}\n",
+        "stderr": "",
+        "report_sha256": "56a45c8153e833b6f32d5b2c3732187b4efc8e86ead38416a62f800757484670",
+        "local_matrix": {
+          "passed": 6
+        },
+        "evidence_errors": [
+          {
+            "raw_result": "running",
+            "reason": "missing_or_invalid_log_sha256",
+            "receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T200445Z-candidate.json"
+          }
+        ]
+      }
+    },
+    "selected_jobs": [
+      {
+        "action": "build",
+        "event": "push",
+        "job": "build",
+        "raw_result": "passed",
+        "reason": null,
+        "selected_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195514Z-build.json",
+        "status": "passed",
+        "workflow": "build.yml"
+      },
+      {
+        "action": "coverage",
+        "event": "push",
+        "job": "coverage",
+        "raw_result": "passed",
+        "reason": null,
+        "selected_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195549Z-coverage.json",
+        "status": "passed",
+        "workflow": "coverage.yml"
+      },
+      {
+        "action": "lint",
+        "event": "push",
+        "job": "golangci",
+        "raw_result": "passed",
+        "reason": null,
+        "selected_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195426Z-lint.json",
+        "status": "passed",
+        "workflow": "lint.yml"
+      },
+      {
+        "action": "snapshot",
+        "event": "push",
+        "job": "goreleaser",
+        "raw_result": "passed",
+        "reason": null,
+        "selected_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195623Z-snapshot.json",
+        "status": "passed",
+        "workflow": "goreleaser.yml"
+      },
+      {
+        "action": "docs",
+        "event": "workflow_dispatch",
+        "job": "build-preview",
+        "raw_result": "passed",
+        "reason": null,
+        "selected_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195747Z-docs.json",
+        "status": "passed",
+        "workflow": "docs-preview.yml"
+      },
+      {
+        "action": "candidate",
+        "event": "workflow_dispatch",
+        "job": "candidate",
+        "raw_result": "passed",
+        "reason": null,
+        "selected_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T204648Z-candidate.json",
+        "status": "passed",
+        "workflow": "steam-deck.yml"
+      }
+    ],
+    "failure_groups": [
+      {
+        "availability": "not_assumed",
+        "category": "workflow_failure",
+        "disposition": "superseded_by_later_pass",
+        "evidence": [
+          {
+            "diagnostics": [],
+            "line": 1310,
+            "log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T203726Z-candidate.log",
+            "log_sha256": "67f0e8ad141ebb9d41f00b9c831c750dbebf26844e7b0c0285bf3c80f1072c4b",
+            "receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T203726Z-candidate.json"
+          }
+        ],
+        "fingerprint": "f09faba5dd2d92f8257355b13e7c912a364c0e7ea0ec2cb1734be02fc50d7119",
+        "later_pass_receipts": [
+          "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T204648Z-candidate.json"
+        ],
+        "next_steps": [
+          "Confirm a clean checkout of 4eac7a469285cbafad5dc5a7ea07205374293dfd.",
+          "Reproduce the captured job from the exact clean revision, inspect its first failing step, repair the demonstrated source/fixture/environment cause, and retain the new receipt.",
+          "Compare new evidence without overwriting these receipts; review private logs before sharing."
+        ],
+        "occurrences": [
+          {
+            "exit_code": 1,
+            "line": 1310,
+            "recorded_result": "failed",
+            "run": "20261118T203726Z-candidate",
+            "step": "Main Actual package browser checks"
+          }
+        ],
+        "raw_result": "failed",
+        "reproduction": {
+          "captured_command_requires_context_review": false,
+          "command": [
+            "python3",
+            "scripts/local-ci.py",
+            "candidate",
+            "--state",
+            "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4",
+            "--act",
+            "/workspace/.obsgod-tools/pkg/bin/act"
+          ],
+          "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd"
+        },
+        "title": "candidate: Main Actual package browser checks"
+      },
+      {
+        "availability": "not_assumed",
+        "category": "workflow_failure",
+        "disposition": "superseded_by_later_pass",
+        "evidence": [
+          {
+            "diagnostics": [
+              {
+                "line": 582,
+                "message": "--- FAIL: TestClipExportCopiesExclusivelyAndPreservesOriginal (0.00s)",
+                "step": "Go protocol, race, static and vulnerability checks"
+              },
+              {
+                "line": 585,
+                "message": "FAIL\tgithub.com/szmyty/obsgod/internal/deck\t6.080s",
+                "step": "Go protocol, race, static and vulnerability checks"
+              }
+            ],
+            "line": 594,
+            "log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195801Z-candidate.log",
+            "log_sha256": "fd4327c7c29f3aedef7c149ff94acdc3a0ab568cd970e722bba7da08b91115d9",
+            "receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195801Z-candidate.json"
+          }
+        ],
+        "fingerprint": "6ea0b86b273aa476c2c8ace6f3eca37b6785dd007f1f0ca9bd845acab47698ff",
+        "later_pass_receipts": [
+          "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T204648Z-candidate.json"
+        ],
+        "next_steps": [
+          "Confirm a clean checkout of 4eac7a469285cbafad5dc5a7ea07205374293dfd.",
+          "Reproduce the captured job from the exact clean revision, inspect its first failing step, repair the demonstrated source/fixture/environment cause, and retain the new receipt.",
+          "Compare new evidence without overwriting these receipts; review private logs before sharing."
+        ],
+        "occurrences": [
+          {
+            "exit_code": 1,
+            "line": 594,
+            "recorded_result": "failed",
+            "run": "20261118T195801Z-candidate",
+            "step": "Main Go protocol, race, static and vulnerability checks"
+          }
+        ],
+        "raw_result": "failed",
+        "reproduction": {
+          "captured_command_requires_context_review": false,
+          "command": [
+            "python3",
+            "scripts/local-ci.py",
+            "candidate",
+            "--state",
+            "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4",
+            "--act",
+            "/workspace/.obsgod-tools/pkg/bin/act"
+          ],
+          "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd"
+        },
+        "title": "candidate: Main Go protocol, race, static and vulnerability checks"
+      },
+      {
+        "availability": "not_assumed",
+        "category": "workflow_failure",
+        "disposition": "superseded_by_later_pass",
+        "evidence": [
+          {
+            "diagnostics": [
+              {
+                "line": 1351,
+                "message": "error: the Steam Deck operation failed (see JSON result)",
+                "step": "Native audio and app-filtered capture checks"
+              }
+            ],
+            "line": 1352,
+            "log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T201559Z-candidate.log",
+            "log_sha256": "096346e3439fcc3ac676df1d480f8183a30f1ca6142a2fb3aa0edf2a3695246d",
+            "receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T201559Z-candidate.json"
+          }
+        ],
+        "fingerprint": "b52e4304e5e3af73d1cbab81deea55eeffd645de6a6b6179cc0173976661fa53",
+        "later_pass_receipts": [
+          "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T204648Z-candidate.json"
+        ],
+        "next_steps": [
+          "Confirm a clean checkout of 4eac7a469285cbafad5dc5a7ea07205374293dfd.",
+          "Reproduce the captured job from the exact clean revision, inspect its first failing step, repair the demonstrated source/fixture/environment cause, and retain the new receipt.",
+          "Compare new evidence without overwriting these receipts; review private logs before sharing."
+        ],
+        "occurrences": [
+          {
+            "exit_code": 1,
+            "line": 1352,
+            "recorded_result": "failed",
+            "run": "20261118T201559Z-candidate",
+            "step": "Main Native audio and app-filtered capture checks"
+          }
+        ],
+        "raw_result": "failed",
+        "reproduction": {
+          "captured_command_requires_context_review": false,
+          "command": [
+            "python3",
+            "scripts/local-ci.py",
+            "candidate",
+            "--state",
+            "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4",
+            "--act",
+            "/workspace/.obsgod-tools/pkg/bin/act"
+          ],
+          "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd"
+        },
+        "title": "candidate: Main Native audio and app-filtered capture checks"
+      }
+    ],
+    "resource_assistance": {
+      "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+      "scope": "Constrained free-runner assistance only: discard active candidate container unmounted disposable compiler cache during dependency installation with no Go compiler active after toolchain/cache restore, then after completed builds/audits before native fixtures. All actual tests, reserve thresholds, toolchains, module caches, source, artifacts and evidence remain; later builds recompile normally. This is not unassisted resource-policy evidence for #104.",
+      "phases": [
+        {
+          "utc": "2026-11-18T20:47:19.780523+00:00",
+          "trigger_step": "Install pinned development dependencies",
+          "trigger_log_time": "2026-11-18T20:47:19Z",
+          "container": "act-Steam-Deck-candidate-candidate-f4ded90601f222056fd521d2c7e7511f09d10367a29f851d6f0d078157d01384",
+          "command": [
+            "docker",
+            "exec",
+            "act-Steam-Deck-candidate-candidate-f4ded90601f222056fd521d2c7e7511f09d10367a29f851d6f0d078157d01384",
+            "/opt/hostedtoolcache/go/1.27.4/x64/bin/go",
+            "clean",
+            "-cache"
+          ],
+          "cache": "/root/.cache/go-build",
+          "cache_mounted": false,
+          "source_before": {
+            "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+            "dirty": false
+          },
+          "host_df_before": "Filesystem       1B-blocks        Used  Available Use% Mounted on\noverlay        33770192896 30646878208 1388552192  96% /\nnone            9441329152  4603002880 4838326272  49% /tmp",
+          "cache_bytes_before": "2865149538\t/root/.cache/go-build",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "host_df_after": "Filesystem       1B-blocks        Used  Available Use% Mounted on\noverlay        33770192896 27692539904 4342890496  87% /\nnone            9441329152  4603002880 4838326272  49% /tmp",
+          "cache_bytes_after": "228\t/root/.cache/go-build",
+          "source_after": {
+            "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+            "dirty": false
+          }
+        },
+        {
+          "utc": "2026-11-18T20:52:54.801004+00:00",
+          "trigger_step": "Actual package browser checks",
+          "trigger_log_time": "2026-11-18T20:52:54Z",
+          "container": "act-Steam-Deck-candidate-candidate-f4ded90601f222056fd521d2c7e7511f09d10367a29f851d6f0d078157d01384",
+          "command": [
+            "docker",
+            "exec",
+            "act-Steam-Deck-candidate-candidate-f4ded90601f222056fd521d2c7e7511f09d10367a29f851d6f0d078157d01384",
+            "/opt/hostedtoolcache/go/1.27.4/x64/bin/go",
+            "clean",
+            "-cache"
+          ],
+          "cache": "/root/.cache/go-build",
+          "cache_mounted": false,
+          "source_before": {
+            "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+            "dirty": false
+          },
+          "host_df_before": "Filesystem       1B-blocks        Used  Available Use% Mounted on\noverlay        33770192896 28604264448 3431165952  90% /\nnone            9441329152  4603002880 4838326272  49% /tmp",
+          "cache_bytes_before": "475494466\t/root/.cache/go-build",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "host_df_after": "Filesystem       1B-blocks        Used  Available Use% Mounted on\noverlay        33770192896 28106551296 3928879104  88% /\nnone            9441329152  4603002880 4838326272  49% /tmp",
+          "cache_bytes_after": "228\t/root/.cache/go-build",
+          "source_after": {
+            "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+            "dirty": false
+          }
+        }
+      ],
+      "completed": true
+    }
+  },
+  "tests": {
+    "application_python": {
+      "failed": 0,
+      "framework": "python-unittest",
+      "line": 906,
+      "passed": 269,
+      "skipped": 2,
+      "status": "passed",
+      "tests": 271
+    },
+    "tooling_python": {
+      "failed": 0,
+      "framework": "python-unittest",
+      "line": 996,
+      "passed": 85,
+      "skipped": 0,
+      "status": "passed",
+      "tests": 85
+    },
+    "frontend_node": {
+      "cancelled": 0,
+      "failed": 0,
+      "framework": "node-test",
+      "line": 1165,
+      "passed": 156,
+      "skipped": 0,
+      "tests": 156,
+      "todo": 0
+    },
+    "shared_configuration_corpus": {
+      "cases": 106,
+      "valid": 16,
+      "malformed": 90,
+      "sha256": "b70e5de0201eb3eb347f9b19b2e87b534db575ec44d11f1b807915f31cfd5cad"
+    },
+    "normal_user_frontend": {
+      "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+      "uid": 1000,
+      "output_owner": 1000,
+      "previous_preserved": "/workspace/.obsgod-tools/settings-boundary-20261118/integration/frontend-before-final",
+      "checks": [
+        {
+          "name": "frontend-absent-typecheck",
+          "command": [
+            "npm",
+            "--prefix",
+            "steamdeck/decky",
+            "run",
+            "typecheck"
+          ],
+          "exit_code": 0,
+          "seconds": 1.151,
+          "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+          "log": "/workspace/.obsgod-tools/settings-boundary-20261118/integration/frontend-absent-typecheck.log",
+          "log_sha256": "b5b8b3b6d861c7d30fc12986074169a84f87e3d03fa319e64fc7ed1d605ae2fe"
+        },
+        {
+          "name": "frontend-absent-test",
+          "command": [
+            "npm",
+            "--prefix",
+            "steamdeck/decky",
+            "run",
+            "test"
+          ],
+          "exit_code": 0,
+          "seconds": 0.32,
+          "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+          "log": "/workspace/.obsgod-tools/settings-boundary-20261118/integration/frontend-absent-test.log",
+          "log_sha256": "5815cb234593697bb3f9c84fa0e114021180e3a09b90f43f8e4775c6a8b74738"
+        },
+        {
+          "name": "frontend-absent-build",
+          "command": [
+            "npm",
+            "--prefix",
+            "steamdeck/decky",
+            "run",
+            "build"
+          ],
+          "exit_code": 0,
+          "seconds": 0.793,
+          "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+          "log": "/workspace/.obsgod-tools/settings-boundary-20261118/integration/frontend-absent-build.log",
+          "log_sha256": "4acc38a58dedf942fdbd0a0048052c6ee6fd9b4a4c5e1f9c4f798b6d7fe2eb2c"
+        },
+        {
+          "name": "frontend-reused-typecheck",
+          "command": [
+            "npm",
+            "--prefix",
+            "steamdeck/decky",
+            "run",
+            "typecheck"
+          ],
+          "exit_code": 0,
+          "seconds": 1.048,
+          "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+          "log": "/workspace/.obsgod-tools/settings-boundary-20261118/integration/frontend-reused-typecheck.log",
+          "log_sha256": "4c51a932c40c1dc7887fef7b6e3a4ef90e59dbb21158e1fe8e6c1567a99e4a0e"
+        },
+        {
+          "name": "frontend-reused-test",
+          "command": [
+            "npm",
+            "--prefix",
+            "steamdeck/decky",
+            "run",
+            "test"
+          ],
+          "exit_code": 0,
+          "seconds": 0.33,
+          "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+          "log": "/workspace/.obsgod-tools/settings-boundary-20261118/integration/frontend-reused-test.log",
+          "log_sha256": "4fd3f0fa9ace0d26966f845a7dc5f3135529497e037ecc9c7ca7b55218d01c47"
+        },
+        {
+          "name": "frontend-reused-build",
+          "command": [
+            "npm",
+            "--prefix",
+            "steamdeck/decky",
+            "run",
+            "build"
+          ],
+          "exit_code": 0,
+          "seconds": 0.798,
+          "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+          "log": "/workspace/.obsgod-tools/settings-boundary-20261118/integration/frontend-reused-build.log",
+          "log_sha256": "211d92009bc08b3407307b7cbfbf881f01eebfcc28fc9736e013e84f59a813d5"
+        }
+      ]
+    }
+  },
+  "primary_package": {
+    "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+    "sha256": "2c40cba7b89065f410ec9e20cc73973e2638edd612e250c7bdf2aef3328c72e0",
+    "payload_files": 33,
+    "official_cli": {
+      "builder_image": "ghcr.io/steamdeckhomebrew/builder@sha256:e2616e391f3ae9a46c4cf906b1091220c2506e7fb1301e16a2a72409efbce7c5",
+      "builder_node": "26.12.1",
+      "builder_pnpm": "12.14.0",
+      "container_network": "none",
+      "payload_files_compared": 33,
+      "raw_zip_reproducible": false,
+      "raw_zip_sha256": "c374f60c22675e965f3f36be81cc148e406a90afd3a121471ba90bd3a7f5a102",
+      "scope": "Unmodified official CLI and pinned default builder, assembling prepared bytes; not source compilation",
+      "sha256": "0d0f8c127cd3dba12b75f771c786194ca9f4f771b4787ae24de8b1af45af4294",
+      "status": "passed",
+      "version": "0.0.7"
+    },
+    "repeated_workflow_zip_matches": 2
+  },
+  "packaged_settings": {
+    "action_counts": {
+      "configuration": 1,
+      "configure-fields": 1,
+      "set-capture-mode": 12,
+      "status": 27,
+      "stop": 1
+    },
+    "checks": [
+      {
+        "name": "shared-lock-past-ui-deadline",
+        "seconds": 16.527,
+        "status": "passed"
+      },
+      {
+        "name": "near-deadline-lock-release-success",
+        "seconds": 2.298,
+        "status": "passed"
+      },
+      {
+        "name": "caller-disconnect-owned-deadline",
+        "seconds": 3.723,
+        "status": "passed"
+      },
+      {
+        "name": "stop-during-blocked-edit",
+        "seconds": 0.219,
+        "status": "passed"
+      },
+      {
+        "name": "repeated-identical-edit-coalescing",
+        "seconds": 0.256,
+        "status": "passed"
+      },
+      {
+        "name": "watcher-lifetime-lease-contention",
+        "seconds": 3.71,
+        "status": "passed"
+      }
+    ],
+    "guarded_child_count": 42,
+    "harness_sha256": "3de1d572ad4929b189c5fbf5171450bbb39106b36063585c46d30753075a5bc0",
+    "limits": [
+      "Actual packaged Python and Go with real locks/children; synthetic HOME/Decky paths.",
+      "No real loader RPC transport, SteamOS, OBS/Flatpak launch, controller, audio or provider qualification."
+    ],
+    "payload_sha256": {
+      "bin/obsgod": "ceb995c51378dd302ed145456d4fe9bc4651c81ffa3df0f55ac5f0f977c9baed",
+      "dependency_setup.py": "6602dd8bdb6fb4864ed55fa4c891983279a59952b2d251db5b4208efc297e0e8",
+      "main.py": "eca913d64b6a4749d2d533eddb8afeebed2d0fbeba0bba063ee1b85871ebfd14",
+      "storage.py": "3a3e62ed814c64bf33e89f75c8eab645cab564fdd47476c7cbeabfff11714c5e"
+    },
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.39",
+    "python": "3.12.16",
+    "recorded_at_utc": "2026-11-18T20:53:24.271920+00:00",
+    "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+    "schema": "obsgod.packaged-settings-boundary/v1",
+    "seconds": 28.08,
+    "status": "passed",
+    "uid": 1000,
+    "zip_bytes": 4567165,
+    "zip_sha256": "2c40cba7b89065f410ec9e20cc73973e2638edd612e250c7bdf2aef3328c72e0"
+  },
+  "packaged_integration": {
+    "cpython": {
+      "status": "passed",
+      "checks": 218,
+      "guarded_go_spawns": 22,
+      "receipt_sha256": "1349a91d155c8cafd9d39166b1818b10cc3ae0cf421319664bec764053471e70",
+      "limitations": [
+        "Synthetic private account home/XDG/Decky paths; not a real loader transport",
+        "Frozen mode simulates sys.frozen, a failing PluginLoader decoy and loader environment; it does not execute an actual PyInstaller backend",
+        "No SteamOS, OBS launch, Flatpak transaction, controller, audio/video or provider viewer qualification",
+        "Offline authenticated-listener test is expected to report a closed listener; no live authentication proof"
+      ]
+    },
+    "frozen": {
+      "status": "passed",
+      "checks": 240,
+      "guarded_go_spawns": 22,
+      "receipt_sha256": "9421a6d9b68e6e301d1a71fde65ae09d5332da3a35feacd8569f2ef67aa37e90",
+      "limitations": [
+        "Synthetic private account home/XDG/Decky paths; not a real loader transport",
+        "Frozen mode simulates sys.frozen, a failing PluginLoader decoy and loader environment; it does not execute an actual PyInstaller backend",
+        "No SteamOS, OBS launch, Flatpak transaction, controller, audio/video or provider viewer qualification",
+        "Offline authenticated-listener test is expected to report a closed listener; no live authentication proof"
+      ]
+    }
+  },
+  "native": {
+    "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+    "files": [
+      {
+        "file": "audio/recording-audio-metrics.json",
+        "original_fixture_path": "obsgod-audio/output/recording-audio-metrics.json",
+        "original_sha256": "96439409ba34d837f8459d8aa079ca2699be88f3c39d68a0fa636e953044abed",
+        "public_sha256": "9c681726d26c62b7131910c2b13ec853c25af637a216720e3a9b0f7182ca653a",
+        "declared_revision": null,
+        "result": "passed"
+      },
+      {
+        "file": "audio/stream-audio-metrics.json",
+        "original_fixture_path": "obsgod-audio/output/stream-audio-metrics.json",
+        "original_sha256": "677715274ad4631bc1d84309faa3c7913f6587883f723766403606c20ffa9e2d",
+        "public_sha256": "7fe2a21d09868235a3fc264df5d52fd22b81cdb2c4b338c92f2c799f45e8dd99",
+        "declared_revision": null,
+        "result": "passed"
+      },
+      {
+        "file": "audio/audio-default-fallback-audio-metrics.json",
+        "original_fixture_path": "obsgod-audio/output/audio-default-fallback-audio-metrics.json",
+        "original_sha256": "76b7c232d3e9e6420e9722764d414bc385c0e78da552de5dfbb6e7d2629b0e21",
+        "public_sha256": "7332ec7e96d4067003b8db76a62852c41a4113d9558a330044f9ed4a70c89c58",
+        "declared_revision": null,
+        "result": "passed"
+      },
+      {
+        "file": "audio/audio-default-changed-audio-metrics.json",
+        "original_fixture_path": "obsgod-audio/output/audio-default-changed-audio-metrics.json",
+        "original_sha256": "fb94ede17f53ef5533fa00d039e680d5f0a8c82a2ad5d5cc7c8b1f8c0bfca6f0",
+        "public_sha256": "2e481db4e066e264e2192fbd3273fbc8b9164f97c2c6ea923f2186dc5819935e",
+        "declared_revision": null,
+        "result": "passed"
+      },
+      {
+        "file": "audio/silence-negative-control.json",
+        "original_fixture_path": "obsgod-audio/output/silence-negative-control.json",
+        "original_sha256": "5a37e66d12c607bb1149f9821a2c8c8ddc5231a762778668c112d53f63eb9763",
+        "public_sha256": "a7faadde4f8b511f1d542c993e9e477f5c1f3cd30b397a941264e8ad42f91eb9",
+        "declared_revision": null,
+        "result": "silence-rejected-as-expected"
+      },
+      {
+        "file": "audio/audio-hotplug.json",
+        "original_fixture_path": "obsgod-audio/output/audio-hotplug.json",
+        "original_sha256": "658121e11e200e99430f03d36a979042c9afcecedbd61da92eb727b7b0a2d863",
+        "public_sha256": "e9730e3e001a34abb0201dd63b0bbbb99b7989c4ed82e75d48118c5b17778c35",
+        "declared_revision": null,
+        "result": "passed"
+      },
+      {
+        "file": "audio/native-mixer-summary.json",
+        "original_fixture_path": "obsgod-audio/output/native-mixer-summary.json",
+        "original_sha256": "c563f49917510dc6594520633482ea503671d7b2781ac88e523de4de95fcf165",
+        "public_sha256": "bdb6292a6916078e807ce1ec2f8086373c42a756ac46671c9243721d4d83ca33",
+        "declared_revision": null,
+        "result": "passed"
+      },
+      {
+        "file": "audio/control-password-qualification.json",
+        "original_fixture_path": "obsgod-audio/output/control-password-qualification.json",
+        "original_sha256": "72c2ebc82c5027f08a38725f03ef253e6cc52c8f1c2838a5203ec9a085d207fd",
+        "public_sha256": "dfbe5528e3dcf8e14a1c10496dbec508542292f76f00bd9c7c9edd825c029db4",
+        "declared_revision": null,
+        "result": "passed"
+      },
+      {
+        "file": "audio/control-workflow-qualification.json",
+        "original_fixture_path": "obsgod-audio/output/control-workflow-qualification.json",
+        "original_sha256": "a5af5296a2e7ef5ca055d1c84da8d8c8a66bb8add25fa5b05a9b579bc2c4bf58",
+        "public_sha256": "9ce7c14fc1f00ba3d9a3026aef7fec42e2aa85f6027069a11bcc1effe5659ab9",
+        "declared_revision": null,
+        "result": "passed"
+      },
+      {
+        "file": "audio/media-qualification.json",
+        "original_fixture_path": "obsgod-audio/output/media-qualification.json",
+        "original_sha256": "62d08cd23f58c312b0435379b6ecd978c7c3c0a44c336422d34b50407f169a5c",
+        "public_sha256": "3fe256c21a7da80f1beabf6e04c7743e646eb284fb470080c584e8c7727612c5",
+        "declared_revision": null,
+        "result": "passed"
+      },
+      {
+        "file": "audio/media-live-qualification.json",
+        "original_fixture_path": "obsgod-audio/output/media-live-qualification.json",
+        "original_sha256": "34bf9d9c20cdc5543f4211175bd1e595156e28a9d5fc45a79a95d3c1d661775e",
+        "public_sha256": "47faae0138fb1f5ea8b7fb59c5abd84a792947b801714a03d72edc1e8a92d075",
+        "declared_revision": null,
+        "result": "passed"
+      },
+      {
+        "file": "audio/profile-qualification.json",
+        "original_fixture_path": "obsgod-audio/output/profile-qualification.json",
+        "original_sha256": "c137db7d779abf8ab805c3a829e738b1c802e6031e253db6f394ebdf799c0af3",
+        "public_sha256": "7b6f2c7bde6dd37b54711b2c653208205dd332ddf6c8c3c3f6d01313545e859f",
+        "declared_revision": null,
+        "result": "passed"
+      },
+      {
+        "file": "audio/native-media-summary.json",
+        "original_fixture_path": "obsgod-audio/output/native-media-summary.json",
+        "original_sha256": "62d08cd23f58c312b0435379b6ecd978c7c3c0a44c336422d34b50407f169a5c",
+        "public_sha256": "3fe256c21a7da80f1beabf6e04c7743e646eb284fb470080c584e8c7727612c5",
+        "declared_revision": null,
+        "result": "passed"
+      },
+      {
+        "file": "audio/native-live-media-summary.json",
+        "original_fixture_path": "obsgod-audio/output/native-live-media-summary.json",
+        "original_sha256": "34bf9d9c20cdc5543f4211175bd1e595156e28a9d5fc45a79a95d3c1d661775e",
+        "public_sha256": "47faae0138fb1f5ea8b7fb59c5abd84a792947b801714a03d72edc1e8a92d075",
+        "declared_revision": null,
+        "result": "passed"
+      },
+      {
+        "file": "audio/native-profiles-summary.json",
+        "original_fixture_path": "obsgod-audio/output/native-profiles-summary.json",
+        "original_sha256": "c137db7d779abf8ab805c3a829e738b1c802e6031e253db6f394ebdf799c0af3",
+        "public_sha256": "7b6f2c7bde6dd37b54711b2c653208205dd332ddf6c8c3c3f6d01313545e859f",
+        "declared_revision": null,
+        "result": "passed"
+      },
+      {
+        "file": "capture/qualification.json",
+        "original_fixture_path": "obsgod-capture/capture-validation/qualification.json",
+        "original_sha256": "5b0524c8ae7a494c55a059fb41e4053a7153c92b1d385b4997579c22d829fdba",
+        "public_sha256": "e303a4a74da8b62a1479709401d3b1e7dd0b6a1e1fe6e7e1df5f645d3e0780b4",
+        "declared_revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+        "result": "passed"
+      },
+      {
+        "file": "game-obs/game-obs-qualification.json",
+        "original_fixture_path": "obsgod-game-obs/output/game-obs-qualification.json",
+        "original_sha256": "5db685d5e8422f8656dfdc28f41f0c73cc6fc2d136f0968640fcf0776694c095",
+        "public_sha256": "9aab1ced2f86274cb090d5c23930baf147e10c1eabdf49ddaebfda1e06712e97",
+        "declared_revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+        "result": "passed"
+      },
+      {
+        "file": "game-obs/idle-media-qualification.json",
+        "original_fixture_path": "obsgod-game-obs/output/idle-media-qualification.json",
+        "original_sha256": "51b5f5b728e01e052f5e3fcbc3f4a85eb22b15f11377527338f44fafbe40713f",
+        "public_sha256": "08c9b38e8f3904c2ebf0706c59db143ba15c9de4b6cc159c2705a74f79307810",
+        "declared_revision": null,
+        "result": "passed"
+      }
+    ],
+    "file_count": 18,
+    "distinct_sha256_count": 15,
+    "scope": "Native Linux OBS/PipeWire/PulseAudio/capture/RTMP synthetic fixtures; actual Steam Deck, SteamOS, Flatpak OBS33, Gamescope, AMD, controller, headset and provider are unrun. These files without embedded revision are associated with this completed exact-source ACT attempt only."
+  },
+  "platform": {
+    "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+    "native_image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+    "base_image": "debian:trixie-slim@sha256:a72b4433de1cf7d6bae0c4cee74d0547f58601a643b3375f070c51600d63b6b2",
+    "read_only_image_metadata": {
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--entrypoint",
+        "dpkg-query",
+        "obsgod-obs-smoke:qualification",
+        "-W",
+        "-f=${Package}\t${Version}\n",
+        "obs-studio",
+        "python3",
+        "ffmpeg",
+        "pulseaudio",
+        "gstreamer1.0-pipewire",
+        "libpipewire-0.3-0"
+      ],
+      "exit_code": 0,
+      "stdout": "ffmpeg\t7:7.1.5-0+deb13u1\ngstreamer1.0-pipewire\t1.4.2-1\nlibpipewire-0.3-0\t\nobs-studio\t30.2.3+dfsg-3\npulseaudio\t17.0+dfsg1-2+b1\npython3\t3.13.5-1\n",
+      "stderr": ""
+    },
+    "scope": "Synthetic native Linux OBS/audio/capture; actual SteamOS/Flatpak OBS33/hardware/provider unrun"
+  },
+  "criteria": {
+    "schema": "obsgod.settings-boundary.criteria-review/v1",
+    "recorded_at": "2026-11-18T21:00:45.004413+00:00",
+    "source_revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+    "source_tree": "2ca38c6e704ce9c9ea19b50938e99af98714b7d9",
+    "source_clean": true,
+    "issue_url": "https://github.com/szmyty/obsgod/issues/103",
+    "issue_state": "open",
+    "draft_pr": {
+      "number": 110,
+      "state": "draft/open for review",
+      "base": "fix/cleanup-recovery (#109 unmerged)",
+      "no_new_hard_dependency": true
+    },
+    "original_acceptance_bullets": 6,
+    "original_issue_snapshot": {
+      "path": "/workspace/.obsgod-tools/settings-boundary-20261118/criteria/issue103-snapshot.json",
+      "sha256": "e3899626c20ce1c522917f84677350ce84fa77929e106389a004f1e3d86278c9",
+      "body_sha256": "6951dac67269e29526b7db76b920c01fa4e5a13ebaa1e07802e92cce9599d05e",
+      "updated_at": "2026-11-18T19:11:08Z"
+    },
+    "parent_and_original_dependencies": [
+      "#84 audit roadmap",
+      "#83 implementation/integration home",
+      "#46 campaign;230 original criteria/dependencies preserved",
+      "#85 complete final available matrix/test-ready candidate",
+      "#86 actual Deck/provider/controller/headset acceptance"
+    ],
+    "status": "FINAL LOCAL CRITERION ELIGIBILITY: all6 bounded103 criteria supported at exact4eac source; six ACT jobs/native18/packaged6 passed; issue103/open and PR110/draft pending independent final public evidence/review reconciliation",
+    "criteria": [
+      {
+        "id": "103-D1",
+        "original_text": "Hold the actual shared control lock past the UI budget, invoke packaged capture-mode change, release the lock, and prove either no later settings write occurs or the same pending operation remains visible through completion.",
+        "source": [
+          {
+            "path": "internal/commands/deck.go",
+            "line": 91,
+            "anchor": "limit = 3 * time.Second"
+          },
+          {
+            "path": "internal/deck/capture_settings.go",
+            "line": 15,
+            "anchor": "func SetCaptureMode"
+          },
+          {
+            "path": "steamdeck/decky/main.py",
+            "line": 765,
+            "anchor": "async def _perform_capture_mode"
+          },
+          {
+            "path": "steamdeck/decky/main.py",
+            "line": 587,
+            "anchor": "async def _command"
+          },
+          {
+            "path": "steamdeck/decky/src/action-timeouts.mjs",
+            "line": 3,
+            "anchor": "settingsTimeouts"
+          }
+        ],
+        "tests": [
+          {
+            "path": "internal/commands/deck_capture_process_linux_test.go",
+            "line": 66,
+            "test": "TestCaptureModeCommandProcessDeadlineAndSignalCannotLeaveALateWrite"
+          },
+          {
+            "path": "steamdeck/tests/test_capture_mode_adapter.py",
+            "line": 100,
+            "test": "test_capture_mode_adapter.CaptureModeAdapter.test_actual_lock_waiter_is_terminated_before_failure_and_cannot_write_after_release"
+          },
+          {
+            "path": "steamdeck/tests/test_capture_mode_adapter.py",
+            "line": 198,
+            "test": "test_capture_mode_adapter.CaptureModeAdapter.test_unconfirmed_leader_exit_retains_same_pending_operation_until_reaped"
+          },
+          {
+            "path": "steamdeck/tests/packaged-settings-boundary.py",
+            "line": 226,
+            "test": "shared-lock-past-ui-deadline"
+          }
+        ],
+        "focused_evidence": "The actual bundled Python adapter/Go command held the real shared flock past UI15s. The source harness asserts RPC<12s and owned-child reap before releasing the held lock, then observes no late saved-pair write. Controlled delayed-reap coverage separately retains one visible pending identity until exit.",
+        "evidence_ids": [
+          "go-focused",
+          "go-integrated-retry",
+          "go-isolated-process-log",
+          "python-capture",
+          "packaged-probe-preparation",
+          "current-packaged-process",
+          "current-primary-build",
+          "current-final-matrix",
+          "current-native-index",
+          "completed-state-selection",
+          "original-state-final-report"
+        ],
+        "edge_coverage": {
+          "actual_shared_flock": "passed Go/Python local process fixtures",
+          "hold_past_15_second_UI_budget": "PASSED exact4eac packaged subcheck, wholecase16.527s including deliberatehold; RPC<12s+reapbeforelease-release assertions pass, then saved pair unchanged",
+          "same_pending_identity_until_exit": "passed controlled delayed-reap regression",
+          "late_spawn_permission": "passed real guarded late-attachment test; no execution permission sent"
+        },
+        "source_status": "implemented at frozen 4eac7a469285cbafad5dc5a7ea07205374293dfd",
+        "focused_status": "Historical focused receipts remain hash-bound development evidence. Current exact-source candidate completed required Go/process/Python/JS/corpus/browser/native tests successfully; old focused passes alone were not promoted.",
+        "actual_packaged_status": "passed current exact4eac ZIP6cases/42guardedchildren/12settercalls under UID1000 in selected PASSED candidate; actual loader/SteamOS/controller/provider remains unrun",
+        "final_matrix_status": "passed all6 actual exact-source supported local ACT jobs; zero evidence errors and zero open local failure groups in the explicitly scoped completed-run view (all9completed6PASS/3FAIL). Native18/packaged6passed. Originalfullstate retains one unverifiable interrupted200445missingloghash; that attempt is not qualified. Overall target/hosted acceptance remains partial.",
+        "actual_steam_deck_status": "unrun; existing #86/original target gates remain explicit",
+        "closure_recommendation": "Eligible for bounded103 review with current-source local evidence. Keep issue103 open and PR110 draft pending final public evidence/privacy/integrity review and owner review reconciliation. Do not mark #83/#84/#85/#86/#46 or actual target acceptance complete.",
+        "local_acceptance_status": "passed bounded local criterion at exact 4eac7a469285cbafad5dc5a7ea07205374293dfd"
+      },
+      {
+        "id": "103-D2",
+        "original_text": "Cover success near the deadline, caller disconnect, watcher-lease contention, Stop during the wait, and repeated identical edits; preserve key/settings binding and explicit broadcast authorization.",
+        "source": [
+          {
+            "path": "internal/deck/capture_settings.go",
+            "line": 15,
+            "anchor": "func SetCaptureMode"
+          },
+          {
+            "path": "internal/deck/native_configuration.go",
+            "line": 180,
+            "anchor": "func configureFields"
+          },
+          {
+            "path": "steamdeck/decky/main.py",
+            "line": 628,
+            "anchor": "pending_action ="
+          },
+          {
+            "path": "steamdeck/decky/main.py",
+            "line": 765,
+            "anchor": "async def _perform_capture_mode"
+          }
+        ],
+        "tests": [
+          {
+            "path": "internal/deck/capture_settings_cancel_linux_test.go",
+            "line": 51,
+            "test": "TestCaptureModeWatcherDeadlineCannotWriteAfterLeaseRelease"
+          },
+          {
+            "path": "internal/deck/capture_settings_cancel_linux_test.go",
+            "line": 28,
+            "test": "TestCaptureModeCancellationBeforeOrDuringInputPreservesSavedPair"
+          },
+          {
+            "path": "internal/deck/game_linux_test.go",
+            "line": 109,
+            "test": "TestCaptureModeChangePreservesCredentialsAndRejectsUnsafeOutput"
+          },
+          {
+            "path": "steamdeck/tests/test_capture_mode_adapter.py",
+            "line": 116,
+            "test": "test_capture_mode_adapter.CaptureModeAdapter.test_near_deadline_success_includes_post_action_and_fresh_readback_without_old_query_join"
+          },
+          {
+            "path": "steamdeck/tests/test_capture_mode_adapter.py",
+            "line": 131,
+            "test": "test_capture_mode_adapter.CaptureModeAdapter.test_disconnected_and_repeated_callers_share_the_owned_bounded_edit"
+          },
+          {
+            "path": "steamdeck/tests/test_capture_mode_adapter.py",
+            "line": 145,
+            "test": "test_capture_mode_adapter.CaptureModeAdapter.test_stop_signals_waiting_capture_without_starting_any_output_or_a_late_write"
+          },
+          {
+            "path": "steamdeck/tests/test_capture_mode_adapter.py",
+            "line": 158,
+            "test": "test_capture_mode_adapter.CaptureModeAdapter.test_timeout_after_commit_keeps_saved_pair_and_reports_unconfirmed_instead_of_rollback"
+          }
+        ],
+        "focused_evidence": "All five named edge cases passed through the exact bundled Python adapter and Go executable. The harness preserves private settings/key binding and asserts no broadcast authorization. Additional focused cases cover cancellation during input/final observation and unconfirmed readback after commit without rollback.",
+        "evidence_ids": [
+          "go-focused",
+          "go-integrated-retry",
+          "python-capture",
+          "python-config",
+          "python-backend",
+          "python-lifecycle",
+          "current-packaged-process",
+          "current-primary-build",
+          "current-final-matrix",
+          "current-native-index",
+          "completed-state-selection",
+          "original-state-final-report"
+        ],
+        "edge_coverage": {
+          "near_deadline": "PASSED exact4eac packaged case2.298s",
+          "caller_disconnect": "PASSED exact4eac packaged case3.723s; owned child settles and no late write",
+          "watcher_lease_contention": "PASSED exact4eac packaged case3.71s; plus hash-bound focused Go context tests",
+          "Stop_during_wait": "PASSED exact4eac packaged case0.219s; capture child reaped before release",
+          "repeated_identical_edits": "PASSED exact4eac packaged case0.256s; same action ID and one setter invocation",
+          "private_pair_and_broadcast": "Go binding checks and no-start assertions; no automatic rollback of committed pair"
+        },
+        "source_status": "implemented at frozen 4eac7a469285cbafad5dc5a7ea07205374293dfd",
+        "focused_status": "Historical focused receipts remain hash-bound development evidence. Current exact-source candidate completed required Go/process/Python/JS/corpus/browser/native tests successfully; old focused passes alone were not promoted.",
+        "actual_packaged_status": "passed current exact4eac ZIP6cases/42guardedchildren/12settercalls under UID1000 in selected PASSED candidate; actual loader/SteamOS/controller/provider remains unrun",
+        "final_matrix_status": "passed all6 actual exact-source supported local ACT jobs; zero evidence errors and zero open local failure groups in the explicitly scoped completed-run view (all9completed6PASS/3FAIL). Native18/packaged6passed. Originalfullstate retains one unverifiable interrupted200445missingloghash; that attempt is not qualified. Overall target/hosted acceptance remains partial.",
+        "actual_steam_deck_status": "unrun; existing #86/original target gates remain explicit",
+        "closure_recommendation": "Eligible for bounded103 review with current-source local evidence. Keep issue103 open and PR110 draft pending final public evidence/privacy/integrity review and owner review reconciliation. Do not mark #83/#84/#85/#86/#46 or actual target acceptance complete.",
+        "local_acceptance_status": "passed bounded local criterion at exact 4eac7a469285cbafad5dc5a7ea07205374293dfd"
+      },
+      {
+        "id": "103-D3",
+        "original_text": "Ensure action timeout ordering includes Go's post-action status and Python's additional status query; testing only the core mutation timeout is insufficient.",
+        "source": [
+          {
+            "path": "internal/commands/deck.go",
+            "line": 91,
+            "anchor": "limit = 3 * time.Second"
+          },
+          {
+            "path": "internal/commands/deck.go",
+            "line": 150,
+            "anchor": "snapshotCtx, done :="
+          },
+          {
+            "path": "steamdeck/decky/main.py",
+            "line": 71,
+            "anchor": "CAPTURE_MODE_BUDGET ="
+          },
+          {
+            "path": "steamdeck/decky/main.py",
+            "line": 734,
+            "anchor": "async def _capture_call"
+          },
+          {
+            "path": "steamdeck/decky/main.py",
+            "line": 755,
+            "anchor": "async def _capture_readback"
+          },
+          {
+            "path": "steamdeck/decky/src/action-timeouts.mjs",
+            "line": 3,
+            "anchor": "settingsTimeouts"
+          }
+        ],
+        "tests": [
+          {
+            "path": "steamdeck/tests/test_capture_mode_adapter.py",
+            "line": 116,
+            "test": "test_capture_mode_adapter.CaptureModeAdapter.test_near_deadline_success_includes_post_action_and_fresh_readback_without_old_query_join"
+          },
+          {
+            "path": "steamdeck/tests/test_capture_mode_adapter.py",
+            "line": 166,
+            "test": "test_capture_mode_adapter.CaptureModeAdapter.test_ack_without_fresh_matching_readback_is_not_reported_as_success"
+          },
+          {
+            "path": "steamdeck/tests/test_capture_mode_adapter.py",
+            "line": 188,
+            "test": "test_capture_mode_adapter.CaptureModeAdapter.test_inherited_stdout_cannot_extend_capture_cleanup_after_owned_leader_exit"
+          },
+          {
+            "path": "steamdeck/decky/tests/action-timeouts.test.mjs",
+            "line": 5,
+            "test": "settings reply just before the UI boundary remains authoritative"
+          },
+          {
+            "path": "steamdeck/decky/tests/action-timeouts.test.mjs",
+            "line": 15,
+            "test": "deadline rejects as unconfirmed and a late RPC reply cannot turn it into success"
+          }
+        ],
+        "focused_evidence": "The contract includes Go mutation3s and independent post-status2s inside Python command5.5s, Python preflight2.5s/fresh-readback2.5s and cleanup0.4s per phase: nominal11.7s under UI15s. Exact packaged checks exercise full command/status/readback/reap. This is not a hard real-time OS guarantee; an unreapable leader retains the same owned pending operation until exit.",
+        "evidence_ids": [
+          "python-capture",
+          "ui-focused",
+          "ui-tests",
+          "go-integrated-retry",
+          "independent-review",
+          "current-packaged-process",
+          "current-primary-build",
+          "current-final-matrix",
+          "current-native-index",
+          "completed-state-selection",
+          "original-state-final-report"
+        ],
+        "edge_coverage": {
+          "spawn_and_cleanup": "absolute command deadline includes attach/communication; late guard receives no permission; own pipe drains close on inherited stdout",
+          "preexisting_query": "older shared query is not joined; snapshot ordering remains",
+          "after_commit": "unconfirmed readback never creates success or rolls back pair",
+          "operating_system_limit": "not hard real-time: unreapable killed leader retains same visible pending control task until exit; no completed failure before exit",
+          "full_packaged_timing": "PASSED all6 exact4eac packaged cases through full preflight/action/poststatus/fresh-readback/owned-reap; selectedcandidate and all6supportedlocaljobs also passed"
+        },
+        "source_status": "implemented at frozen 4eac7a469285cbafad5dc5a7ea07205374293dfd",
+        "focused_status": "Historical focused receipts remain hash-bound development evidence. Current exact-source candidate completed required Go/process/Python/JS/corpus/browser/native tests successfully; old focused passes alone were not promoted.",
+        "actual_packaged_status": "passed current exact4eac ZIP6cases/42guardedchildren/12settercalls under UID1000 in selected PASSED candidate; actual loader/SteamOS/controller/provider remains unrun",
+        "final_matrix_status": "passed all6 actual exact-source supported local ACT jobs; zero evidence errors and zero open local failure groups in the explicitly scoped completed-run view (all9completed6PASS/3FAIL). Native18/packaged6passed. Originalfullstate retains one unverifiable interrupted200445missingloghash; that attempt is not qualified. Overall target/hosted acceptance remains partial.",
+        "actual_steam_deck_status": "unrun; existing #86/original target gates remain explicit",
+        "closure_recommendation": "Eligible for bounded103 review with current-source local evidence. Keep issue103 open and PR110 draft pending final public evidence/privacy/integrity review and owner review reconciliation. Do not mark #83/#84/#85/#86/#46 or actual target acceptance complete.",
+        "local_acceptance_status": "passed bounded local criterion at exact 4eac7a469285cbafad5dc5a7ea07205374293dfd"
+      },
+      {
+        "id": "103-R1",
+        "original_text": "Missing required settings/connection members, wrong member types and contradictory can_configure/can_close flags must return unknown readiness with both actions disabled.",
+        "source": [
+          {
+            "path": "steamdeck/decky/main.py",
+            "line": 114,
+            "anchor": "def _configuration_settings"
+          },
+          {
+            "path": "steamdeck/decky/main.py",
+            "line": 164,
+            "anchor": "def _valid_configuration"
+          },
+          {
+            "path": "steamdeck/decky/main.py",
+            "line": 197,
+            "anchor": "def _public_configuration("
+          },
+          {
+            "path": "steamdeck/decky/src/configuration-state.mjs",
+            "line": 29,
+            "anchor": "export function validConfiguration"
+          },
+          {
+            "path": "steamdeck/decky/src/configuration-state.mjs",
+            "line": 55,
+            "anchor": "export function publicConfiguration"
+          }
+        ],
+        "tests": [
+          {
+            "path": "steamdeck/tests/test_configuration_adapter.py",
+            "line": 35,
+            "test": "test_configuration_adapter.ConfigurationAdapter.test_shared_go_wire_corpus_requires_complete_consistent_readiness"
+          },
+          {
+            "path": "steamdeck/tests/test_configuration_adapter.py",
+            "line": 105,
+            "test": "test_configuration_adapter.ConfigurationAdapter.test_malformed_configuration_is_closed_to_writes"
+          },
+          {
+            "path": "steamdeck/decky/tests/configuration-contract.test.mjs",
+            "line": 7,
+            "test": "shared configuration contract:"
+          },
+          {
+            "path": "steamdeck/decky/tests/configuration-state.test.mjs",
+            "line": 72,
+            "test": "incomplete or contradictory successful readback never becomes writable draft defaults"
+          }
+        ],
+        "focused_evidence": "The common106-case Go/Python/JS corpus binds actual Go JSON with synthetic observations and malformed mutations. Both consumers reject missing/wrong-type mandatory members, invalid numeric/URL/Unicode data and contradictory action-readiness flags. Rejected payloads grant neither configure nor close authority.",
+        "evidence_ids": [
+          "python-config",
+          "ui-focused",
+          "ui-corpus",
+          "go-corpus",
+          "independent-review",
+          "current-packaged-process",
+          "current-primary-build",
+          "current-final-matrix",
+          "current-native-index",
+          "completed-state-selection",
+          "original-state-final-report"
+        ],
+        "edge_coverage": {
+          "required_settings": "version1/server/bitrate/fps/encoder/microphone; finite mathematical integers excluding bool/fraction/nonfinite",
+          "required_connection": "all non-omitempty Go fields; awaiting_verification optional bool; empty message legitimate on unavailable path",
+          "malformed_and_contradictory": "missing/wrong-type fields, both permission flags, unknown output, invalid numeric/URL/Unicode cases all disable actions",
+          "secret_projection": "only named safe fields survive; unexpected secrets/private paths never populate frontend drafts"
+        },
+        "source_status": "implemented at frozen 4eac7a469285cbafad5dc5a7ea07205374293dfd",
+        "focused_status": "Historical focused receipts remain hash-bound development evidence. Current exact-source candidate completed required Go/process/Python/JS/corpus/browser/native tests successfully; old focused passes alone were not promoted.",
+        "actual_packaged_status": "passed current exact4eac ZIP6cases/42guardedchildren/12settercalls under UID1000 in selected PASSED candidate; actual loader/SteamOS/controller/provider remains unrun",
+        "final_matrix_status": "passed all6 actual exact-source supported local ACT jobs; zero evidence errors and zero open local failure groups in the explicitly scoped completed-run view (all9completed6PASS/3FAIL). Native18/packaged6passed. Originalfullstate retains one unverifiable interrupted200445missingloghash; that attempt is not qualified. Overall target/hosted acceptance remains partial.",
+        "actual_steam_deck_status": "unrun; existing #86/original target gates remain explicit",
+        "closure_recommendation": "Eligible for bounded103 review with current-source local evidence. Keep issue103 open and PR110 draft pending final public evidence/privacy/integrity review and owner review reconciliation. Do not mark #83/#84/#85/#86/#46 or actual target acceptance complete.",
+        "local_acceptance_status": "passed bounded local criterion at exact 4eac7a469285cbafad5dc5a7ea07205374293dfd"
+      },
+      {
+        "id": "103-R2",
+        "original_text": "Actual first-run, configured, running-idle, streaming, legacy-zero-dimension and unavailable Go responses retain their intended UI states.",
+        "source": [
+          {
+            "path": "internal/deck/configuration_contract_test.go",
+            "line": 33,
+            "anchor": "func TestConfigurationSharedWireCorpus"
+          },
+          {
+            "path": "internal/deck/native_configuration.go",
+            "line": 89,
+            "anchor": "func readConfiguration"
+          },
+          {
+            "path": "steamdeck/decky/main.py",
+            "line": 114,
+            "anchor": "def _configuration_settings"
+          },
+          {
+            "path": "steamdeck/decky/main.py",
+            "line": 513,
+            "anchor": "if action == \"test-connection\":"
+          },
+          {
+            "path": "steamdeck/decky/src/configuration-state.mjs",
+            "line": 29,
+            "anchor": "export function validConfiguration"
+          }
+        ],
+        "tests": [
+          {
+            "path": "internal/deck/configuration_contract_test.go",
+            "line": 33,
+            "test": "TestConfigurationSharedWireCorpus"
+          },
+          {
+            "path": "internal/deck/native_configuration_test.go",
+            "line": 297,
+            "test": "TestNativeConfigurationInvalidSavedSettingsCannotAuthorizeClose"
+          },
+          {
+            "path": "steamdeck/tests/test_configuration_adapter.py",
+            "line": 322,
+            "test": "test_configuration_adapter.ConfigurationAdapter.test_closed_failed_connection_test_preserves_coherent_offline_configuration"
+          },
+          {
+            "path": "steamdeck/tests/test_configuration_adapter.py",
+            "line": 304,
+            "test": "test_configuration_adapter.ConfigurationAdapter.test_tested_connection_is_projected_and_secret_error_echo_is_removed"
+          },
+          {
+            "path": "steamdeck/decky/tests/configuration-state.test.mjs",
+            "line": 84,
+            "test": "public projection preserves closed connection-test failure and strips unknown private fields"
+          }
+        ],
+        "focused_evidence": "The common corpus preserves first-run, configured, running-idle, streaming, documented legacy omitted/zero fields and unavailable states. It distinguishes top-level authenticated readiness from nested presence-only connection state and guards malformed saved settings from authorizing CanClose. These are synthetic Go-produced observations, not physical SteamOS observations.",
+        "evidence_ids": [
+          "go-corpus",
+          "python-config",
+          "ui-corpus",
+          "ui-focused",
+          "independent-review",
+          "current-packaged-process",
+          "current-primary-build",
+          "current-final-matrix",
+          "current-native-index",
+          "completed-state-selection",
+          "original-state-final-report"
+        ],
+        "edge_coverage": {
+          "legacy_defaults": "both dimensions omitted or0/0 normalize1280x720; capture mode omitted/empty normalizes screen; partial/unsupported pairs reject",
+          "running_idle": "top known/close can coexist nested connected=false/managed=false/output_known=false,stateunknown",
+          "closed_connection_test_failure": "nestedokfalse may retain independent known absent process/editability",
+          "changed_test_observation": "when test/read straddle process change, public test facts remain but output/edit/close readiness expires",
+          "invalid_settings_running_idle": "Go producer now gatesCanClose on settings-read success; unavailable responses remain safe",
+          "numeric_and_URL_parity": "1 and1.0 mathematical equality; invalid surrogates/control/userinfo reject; ordinaryUnicode and path@ remain valid"
+        },
+        "source_status": "implemented at frozen 4eac7a469285cbafad5dc5a7ea07205374293dfd",
+        "focused_status": "Historical focused receipts remain hash-bound development evidence. Current exact-source candidate completed required Go/process/Python/JS/corpus/browser/native tests successfully; old focused passes alone were not promoted.",
+        "actual_packaged_status": "passed current exact4eac ZIP6cases/42guardedchildren/12settercalls under UID1000 in selected PASSED candidate; actual loader/SteamOS/controller/provider remains unrun",
+        "final_matrix_status": "passed all6 actual exact-source supported local ACT jobs; zero evidence errors and zero open local failure groups in the explicitly scoped completed-run view (all9completed6PASS/3FAIL). Native18/packaged6passed. Originalfullstate retains one unverifiable interrupted200445missingloghash; that attempt is not qualified. Overall target/hosted acceptance remains partial.",
+        "actual_steam_deck_status": "unrun; existing #86/original target gates remain explicit",
+        "closure_recommendation": "Eligible for bounded103 review with current-source local evidence. Keep issue103 open and PR110 draft pending final public evidence/privacy/integrity review and owner review reconciliation. Do not mark #83/#84/#85/#86/#46 or actual target acceptance complete.",
+        "local_acceptance_status": "passed bounded local criterion at exact 4eac7a469285cbafad5dc5a7ea07205374293dfd"
+      },
+      {
+        "id": "103-R3",
+        "original_text": "Unknown or absent output-known data cannot enable new output or destructive/configuration controls; Stop/recovery remains available.",
+        "source": [
+          {
+            "path": "steamdeck/decky/src/state.mjs",
+            "line": 3,
+            "anchor": "export function outputKnown"
+          },
+          {
+            "path": "steamdeck/decky/src/state.mjs",
+            "line": 50,
+            "anchor": "export function controls"
+          },
+          {
+            "path": "steamdeck/decky/src/health.mjs",
+            "line": 5,
+            "anchor": "output_known"
+          },
+          {
+            "path": "steamdeck/decky/src/configuration-state.mjs",
+            "line": 122,
+            "anchor": "export function configurationControls"
+          },
+          {
+            "path": "steamdeck/decky/main.py",
+            "line": 743,
+            "anchor": "def _capture_idle"
+          }
+        ],
+        "tests": [
+          {
+            "path": "steamdeck/decky/tests/state.test.mjs",
+            "line": 8,
+            "test": "only explicit output-known true enables output; absent or mistyped values retain recovery Stop"
+          },
+          {
+            "path": "steamdeck/decky/tests/state.test.mjs",
+            "line": 62,
+            "test": "stale status ages to unknown and cannot enable Start"
+          },
+          {
+            "path": "steamdeck/decky/tests/health.test.mjs",
+            "line": 27,
+            "test": "missing or mistyped output knowledge cannot display a healthy stream from old byte progress"
+          },
+          {
+            "path": "steamdeck/decky/tests/configuration-state.test.mjs",
+            "line": 50,
+            "test": "active/unknown/stale/backward-clock/dependency-busy observations cannot authorize changes"
+          },
+          {
+            "path": "steamdeck/tests/test_backend.py",
+            "line": 60,
+            "test": "test_backend.BackendState.test_capture_mode_rechecks_real_output_and_refuses_live_unknown_or_recording"
+          },
+          {
+            "path": "steamdeck/tests/test_configuration_adapter.py",
+            "line": 162,
+            "test": "test_configuration_adapter.ConfigurationAdapter.test_stop_is_available_during_save_and_save_is_blocked_during_stop"
+          }
+        ],
+        "focused_evidence": "Only explicit output_known=true can authorize new output or configuration/destructive controls; fixture-only inference is removed from control and health paths. Unknown output retains Stop/recovery. Backend capture preflight requires canonical stream/recording/replay facts and rechecks authority rather than treating missing media as idle.",
+        "evidence_ids": [
+          "ui-focused",
+          "ui-tests",
+          "python-backend",
+          "python-config",
+          "independent-review",
+          "current-packaged-process",
+          "current-primary-build",
+          "current-final-matrix",
+          "current-native-index",
+          "completed-state-selection",
+          "original-state-final-report"
+        ],
+        "edge_coverage": {
+          "output_authority": "only explicit output_known===true qualifies; no legacy frontend fallback",
+          "unknown_recovery": "Stop remains enabled for unknown/unavailable output; fresh direct backend authority still rechecks",
+          "stale_observations": "age, epoch, snapshot and backend identity rules preserve safe pending/unknown state",
+          "public_api_compatibility": "generic v0/public API/legacy CLI behavior unchanged; strictness applies to bundled managed JSON boundary"
+        },
+        "source_status": "implemented at frozen 4eac7a469285cbafad5dc5a7ea07205374293dfd",
+        "focused_status": "Historical focused receipts remain hash-bound development evidence. Current exact-source candidate completed required Go/process/Python/JS/corpus/browser/native tests successfully; old focused passes alone were not promoted.",
+        "actual_packaged_status": "passed current exact4eac ZIP6cases/42guardedchildren/12settercalls under UID1000 in selected PASSED candidate; actual loader/SteamOS/controller/provider remains unrun",
+        "final_matrix_status": "passed all6 actual exact-source supported local ACT jobs; zero evidence errors and zero open local failure groups in the explicitly scoped completed-run view (all9completed6PASS/3FAIL). Native18/packaged6passed. Originalfullstate retains one unverifiable interrupted200445missingloghash; that attempt is not qualified. Overall target/hosted acceptance remains partial.",
+        "actual_steam_deck_status": "unrun; existing #86/original target gates remain explicit",
+        "closure_recommendation": "Eligible for bounded103 review with current-source local evidence. Keep issue103 open and PR110 draft pending final public evidence/privacy/integrity review and owner review reconciliation. Do not mark #83/#84/#85/#86/#46 or actual target acceptance complete.",
+        "local_acceptance_status": "passed bounded local criterion at exact 4eac7a469285cbafad5dc5a7ea07205374293dfd"
+      }
+    ],
+    "shared_corpus": {
+      "path": "steamdeck/tests/fixtures/configuration-contract.json",
+      "sha256": "b70e5de0201eb3eb347f9b19b2e87b534db575ec44d11f1b807915f31cfd5cad",
+      "cases": 106,
+      "valid": 16,
+      "invalid": 90,
+      "producer": "actual Go readConfiguration/json.Marshal with synthetic observations plus explicit malformed/legacy/adapter mutations; not real SteamOS observations",
+      "plain_test_data_no_new_framework": true
+    },
+    "evidence": {
+      "python-final": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/python/summary.json",
+        "sha256": "363ba4649f8730dc62ac68d86376533d74f8ba519448f6a4341b8344b9638ba7"
+      },
+      "python-capture": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/python/final-test_capture_mode_adapter.json",
+        "sha256": "7b9263164c1765a6b2b086cbb2882d44fc13437ed11eb41184956b6062c3bb7a"
+      },
+      "python-config": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/python/final-test_configuration_adapter.json",
+        "sha256": "4797d55a94777356ed4b7df682e6768311b07d85850b9615ef7de8c99e7637c1"
+      },
+      "python-backend": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/python/final-test_backend.json",
+        "sha256": "735a101e6a068b558d1f9d7243427ea21ba2b4fb874ea91224e05a9d2037d4c2"
+      },
+      "python-lifecycle": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/python/test_backend-all.json",
+        "sha256": "2d999ffdcfea8b1c8de6110d53e42897093031f488972e2e0d4a9e832f1e5fb6"
+      },
+      "ui-focused": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/ui/summary.json",
+        "sha256": "e6e5c40e05040be1e623a31d06cde34474f1225e3b61cda6250a6ee614f02ef9"
+      },
+      "ui-corpus": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/ui/corpus-final-106.log",
+        "sha256": "04703f58a9ce7a96d3ec3c6d1b2df59a568b2ef908a841a1caa61650cf45f9b4"
+      },
+      "ui-tests": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/ui/frontend-tests-final.log",
+        "sha256": "7a6e2337f7eaf317f3f031eef3d0e9802dc64e48cb989f60ea86ed69c05ecc10"
+      },
+      "go-focused": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/go-capture/focused-go-summary.json",
+        "sha256": "36796200b6302e9db4572304baaf93030d36afaed4836c12981440eea2800c91"
+      },
+      "go-integrated-retry": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/go-integrated-retry.json",
+        "sha256": "9906a0252578c0e6699062dc24b72882fe6ae6e372a9be83b73d93a47aaa4ff9"
+      },
+      "go-race-retry-log": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/go-race-integrated-retry.log",
+        "sha256": "314c9ad53904136614a1243455e1315c7773924720eb262f35797e79f1072d55"
+      },
+      "go-isolated-process-log": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/go-capture-process-isolated.log",
+        "sha256": "0a79c093520575b39af56355515a5bce9ce93d33c163e3ec3737dee6ac32ab95"
+      },
+      "go-vet-log": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/go-vet-integrated.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "go-corpus": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/corpus-final-generation.log",
+        "sha256": "3c54bf774df6b9c142a8ee2e7240115a535896a644135c27b707a734e9752c29"
+      },
+      "independent-review": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/contract-audit/final-review.json",
+        "sha256": "2b7f30890e56d3193f94bb1db915dc3f0381cc22a132b3704f590c1f8f4c9f28"
+      },
+      "packaged-probe-preparation": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/go-capture/packaged-script-preparation.json",
+        "sha256": "e21af1c8d38ac4e96569c2a0f4e574ab224b28e3d4fc32abb3f34cf76403a0c0"
+      },
+      "historical-go-failure": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/go-integrated.json",
+        "sha256": "26b27f11d22da86f0a42073ae38664a3e390263ff8a1a2ca8dbebd0828816e25"
+      },
+      "historical-go-log": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/go-race-integrated.log",
+        "sha256": "31ea5dc2c54ccbc222ee1a7c6ee9056b4f934a06add370ca51541b2bc43a9026"
+      },
+      "historical-python-failure": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/python-integrated.json",
+        "sha256": "2ed9cd7746b99343c4406019b194a77681e233927828c765754379e6bfbfef5a"
+      },
+      "historical-python-log": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/python-integrated.log",
+        "sha256": "2178f4bb0055b17f30f0581e20a44fb336b728c09c63c7e1de46e1d557a82add"
+      },
+      "m3-args-retry": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/python-m3-adapter-retry.log",
+        "sha256": "fcf87e92d4df00492de1ea69fd260b1cf9297a43953dadc217ac783f46eccc16"
+      },
+      "historical-e2928ff-package": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/packaged-prequal-e2928ff/receipt.json",
+        "sha256": "3c6d6416dded2f50e04f9d22b3dffcef8e925a3b12ea7bab564145f548c7a14e"
+      },
+      "historical-e2928ff-primary": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/primary-e2928ff/build-receipt.json",
+        "sha256": "2faa19f96f10246695daaa84a72203e9e772a2b74ebdc2ff1f9a812896b6fe67"
+      },
+      "current-packaged-process": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/packaged-final-4eac7a4/receipt.json",
+        "sha256": "e9fabde1cf31eb7fd97c7bd5f168025531fa1bec867b82a8b1f5b5d2b6a8c2c2",
+        "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+        "role": "passed exact-source packaged subcheck in the selected PASSED candidate",
+        "containing_attempt_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T204648Z-candidate.json",
+        "containing_attempt_sha256": "171c93f5595150595e959d8e7bf8300bf199ec55f3d0e69690817c67d7859b58"
+      },
+      "current-primary-build": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/primary-4eac7a4/build-receipt.json",
+        "sha256": "3e1335b170028f4580707777b7c8fef4a438766772ae5638d616b62b4a0d12de",
+        "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+        "role": "exact-source primary package/officialCLI assembly precheck"
+      },
+      "current-partial-matrix": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/act-report-native-capacity-4eac7a4/report.json",
+        "sha256": "bccbc1081c29c3477effa70bbc80365fae3f7eb50a66abb2c3ae2be350f67d33",
+        "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+        "role": "historical failed complete matrix report,5passed/1failed and two open failure groups"
+      },
+      "current-final-matrix": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/act-report/report.json",
+        "sha256": "72dad329230356a7f7612a143bbd399bfdc48d8d6e7e61a2459adbddc03328b5",
+        "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+        "role": "six actual passed clean exact-source supported local jobs; zero evidence errors/open failure groups"
+      },
+      "current-native-index": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/native-proof/index.json",
+        "sha256": "13687c05b26f535ab19ea6c896603a3336ca7227b158735eb5879bc69cdebf14",
+        "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+        "role": "18 filtered actual nativeLinux synthetic OBS/audio/capture/idle prooffiles from completed selectedcandidate"
+      },
+      "completed-state-selection": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/completed-state-selection.json",
+        "sha256": "7825faf344e9b4dc82f76807cd8dbfdd8a55b1a0b7abfa568d690157b4e1d022",
+        "role": "verified inventory of all9completedcopies plus separately preserved interrupted provisionalrecord; no hidden failedrun"
+      },
+      "original-state-final-report": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/original-state-final-report/report.json",
+        "sha256": "56a45c8153e833b6f32d5b2c3732187b4efc8e86ead38416a62f800757484670",
+        "role": "unaltered originalfullstate report:6selectedlocalpasses but overallfailed due historical interruptedmissingloghash"
+      }
+    },
+    "source_sha256": {
+      ".github/workflows/steam-deck.yml": "06e5ad4f4e842e59abf41d18071ba8f9062a14dd8374b27a97da5f1621e05664",
+      "docs/settings-boundary.md": "76e71f7cc07bbcda0acf9d09dc5b401587864f6991be1862cdbb844f714bb08b",
+      "internal/commands/deck.go": "7e759fddd5f9ae12555b5f9c0cd367c399528a979df10dfbcab4257e29f94787",
+      "internal/commands/deck_capture_process_linux_test.go": "fe73ffc786021dd421e6c7f75a3fc1c4b48c9f55dad828f039c18a83a45ddd3d",
+      "internal/deck/capture_settings.go": "88e33977541a85018984413548c77e03abaddc1bdc642edba284f5eccdae90dd",
+      "internal/deck/capture_settings_cancel_linux_test.go": "e7a2144efdd0faea0f74adf9795cb06a57a2f7971be70bcebf55e8c3b747346e",
+      "internal/deck/configuration_contract_test.go": "c682e840e0ca4f4acd549f09cef349d614195192f49f22ec08e4ecfd3818b659",
+      "internal/deck/game_linux_test.go": "efe695ccad595a7da346f0c5c7e739c58accab72be06ef1baa33c73c3a40b6ce",
+      "internal/deck/native_configuration.go": "829ae26ea1c662a2fabd2e769b66dd9522965303b24e110b79ab97ed28eb58e6",
+      "internal/deck/native_configuration_test.go": "584a8fe3b2dd6577c09e5221f0b3da68dc64af356f0c57d511a2ed327b94e48c",
+      "steamdeck/decky/main.py": "eca913d64b6a4749d2d533eddb8afeebed2d0fbeba0bba063ee1b85871ebfd14",
+      "steamdeck/decky/src/action-timeouts.mjs": "2d931e583ae985f0d0e7ef9bce11e62a27a95e218f0cb433ed9c412aa7049512",
+      "steamdeck/decky/src/configuration-state.mjs": "202ff2dd7864bfa34287e9fb3347e33548a1b62a72cb412e440e2177f52c7078",
+      "steamdeck/decky/src/health.mjs": "89c74bbd0ea218209ddda91ca519a29f4a2eeaa7044b2f2e6ae42de143266f94",
+      "steamdeck/decky/src/state.mjs": "1f3e2dc06c141a88d6f9e72d41796635be0cc6e815066f4d422092b19fe46246",
+      "steamdeck/decky/tests/action-timeouts.test.mjs": "aa43306aea07ecaf212a30596abcd4265c361316757914fb91f96d512433789e",
+      "steamdeck/decky/tests/configuration-contract.test.mjs": "f95f0bd40aa933bdc3c4eaaac1dc3b23c2a2f6c6c2acd7db6398318ddbece0af",
+      "steamdeck/decky/tests/configuration-state.test.mjs": "18f51e5a3b5c1a25ba91909c6085ea394f55cf81039a41d8bf0e10f1f5facb88",
+      "steamdeck/decky/tests/health.test.mjs": "a1d8657bee811654ac043cdd5311b8182891f49cd74cb0f2bd4141362401f81c",
+      "steamdeck/decky/tests/state.test.mjs": "2ac975eddb1c1bfc0b9e25538f23ce88df0c5a3cdb92ca620336acf8df126491",
+      "steamdeck/tests/fixtures/configuration-contract.json": "b70e5de0201eb3eb347f9b19b2e87b534db575ec44d11f1b807915f31cfd5cad",
+      "steamdeck/tests/packaged-settings-boundary.py": "3de1d572ad4929b189c5fbf5171450bbb39106b36063585c46d30753075a5bc0",
+      "steamdeck/tests/test_backend.py": "7b9f1d7d2f806d54d6089b6fb4fe478d167cbd4472082330000a7209e9ee9046",
+      "steamdeck/tests/test_capture_mode_adapter.py": "31462ee8b751db8164a36a623e6a00b9d5fe171936d354ccab2ddaa47c6ea72b",
+      "steamdeck/tests/test_configuration_adapter.py": "c83600082635c4b82f5604559de61ec434c54e702d6f69c4d09b4858d8705036",
+      "steamdeck/tests/test_m3_adapters.py": "94b62471bd967cfbd88053f8b52a2d4b6252efed8e837cfda2123397f52257ec",
+      "steamdeck/tests/test_dependency_setup.py": "28f869ff6d25b64e46dda7fbd73a56c58846f3e73291bb7cb1575966325bcaa8",
+      "steamdeck/decky/dependency_setup.py": "6602dd8bdb6fb4864ed55fa4c891983279a59952b2d251db5b4208efc297e0e8"
+    },
+    "evidence_identity_notes": [
+      "Zero evidence errors is limited to the explicit9completed-run view, containing ALL6PASS/3FAIL same-source attempts. Originals/copies were hashcompared. Originalfullstate overallfailed remains visible solely for historical interrupted200445missingfinal-loghash; it has no invented completion/checksum and remains unqualified.",
+      "All previously mapped implementation/test/workflow/corpus hashes match frozen4eac. Only dependency-worker test synchronization and continuity changed from e2928ff. Historical focused receipts are retained as development evidence; final qualification uses current actual clean-revision local workflows.",
+      "Final selected candidate 20261118T204648Z-candidate completed successfully at4eac after capacity/fresh-evidence preparation. Application271total/269passed/2skipped, tooling85passed, frontend156passed; required browser, packaged process and nativeOBS/audio/capture/idle checks passed.",
+      "Current canonicalZIP matches exact primary prepared payloads and all6 packaged settings checks. OfficialCLI comparison covers33prepared payloads, not source compilation or rawZIP reproducibility.",
+      "The first held-lock case metric includes intentional hold past15s. Source assertions establish RPC<12s and owned child reap before release; no16sRPC orhardreal-time guarantee is claimed.",
+      "Final report selects same-source5prior passing jobs and the latest completedcandidatePASS. Earlier failed/interrupted same-source attempts remain historical/superseded, not erased. No oldsourcepass qualifies4eac.",
+      "Actual Deck/SteamOS/OBS33/provider/loader/controller/headset/nonLinux and hostedreview acceptance remain separate. Final publicproofreview, supplementalpostmatrix collection and alltemporaryrestoration must be reconciled by root before the batch checkpoint is finished."
+    ],
+    "historical_attempts": [
+      {
+        "evidence_ids": [
+          "historical-go-failure",
+          "historical-go-log"
+        ],
+        "outcome": "Initial integrated race failed when package-parallel new real CLI process test and deck simulated OBS fixture both used4457. Failureevents include TestCaptureModeChangePreservesCredentialsAndRejectsUnsafeOutput and capture process action_deadline.",
+        "repair": "New real process case has explicit linux&&deck_process tag and required serial candidate-workflow command; default race, isolated tagged case and vet then passed. Product signals/limits/assertions retained; not a blanket test skip.",
+        "status": "retained historical failure; retry is development evidence, final source matrix pending."
+      },
+      {
+        "evidence_ids": [
+          "historical-python-failure",
+          "historical-python-log",
+          "m3-args-retry"
+        ],
+        "outcome": "Initial full application Python diagnostic ran271 tests: one old test_m3_adapters positional-only status-argument assertion failed; two skips remained explicit.",
+        "repair": "Assertion now requires exactly two status-only bounded calls with positive _deadline and no mutation between them;5/5 module retrypassed. No production guard weakened and no full-suite success inferred from that retry.",
+        "status": "retained historical failure; final exact-source application suite pending root."
+      },
+      {
+        "revision": "e2928ffea50eaf9988be30c47d2c471c8653434e",
+        "outcome": "First complete matrix5passed/1failed brittle fixed1.1s dependency-worker recovery assertion while inherited lease legitimately remained held.",
+        "repair": "4eac test-only explicit fake-child release/marker/kernel-lease synchronization; production worker/module budget unchanged.",
+        "status": "historical failed source; never qualifies4eac"
+      },
+      {
+        "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+        "outcome": "First exact4eac matrix5passed/1failed: Go clip-export fixture correctly refused under256MiB reserve.",
+        "repair": "Constrained runner capacity investigation; reserve and assertions unchanged.",
+        "status": "retained historical failure/unavailable attempt; later completed same-source candidate pass supersedes in finalreport"
+      },
+      {
+        "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+        "outcome": "Next candidate interrupted by cloud tool reconnect; Docker survived but runner/controller had no completion receipt.",
+        "repair": "Orphan container stopped and attempt retained as unavailable; detached local controller used subsequently.",
+        "status": "interrupted/unavailable, not passed"
+      },
+      {
+        "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+        "outcome": "Detached candidate20261118T201559Z: application/tooling/frontend/browser and all6 packaged settings checks passed, then native test-recording refused available919879680<required1073741824 bytes.",
+        "repair": "Root investigates separate temporary fixture disk/capacity while preserving thresholds and source.",
+        "status": "retained historical failure/unavailable attempt; later completed same-source candidate pass supersedes in finalreport"
+      },
+      {
+        "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+        "outcome": "Candidate20261118T203726Z passed Go/application271/tooling85/Node156/packages but correctly refused packaged settings output because a prior settings receipt folder already existed.",
+        "repair": "Prior folder moved intact to private packaged-before-volume-retry-4eac7a4 with receiptSHA in fresh-settings-evidence-preparation.json; fresh output confirmed absent. No guard/source/assertion change.",
+        "status": "retainedfailed; laterclean same-source complete candidate pass selected by finalreport"
+      }
+    ],
+    "closure_policy": "All six bounded #103 local criteria have current exact-source implementation and successful local workflow/package/process/corpus evidence. This supports review eligibility only: keep issue103 and drafts109/110 open pending finalpublicproof/independentreview/ownerreconciliation. Actual Deck/SteamOS/Decky/controller/headset/OBS33/provider/adoption stays unrun in #86/original ledgers. No broad issue acceptance is transferred as passed.",
+    "outstanding_gates": [
+      "Preserve the exact report scope in public claims: completed9run view has6selectedpasses/3historicalfailures/zerointegrityerrors; originalfullstate retains the separately unqualified interruptedrecordmissingloghash and overallfailed report.",
+      "Root complete supplemental/postmatrix evidence collection and actual cache/fixture-volume restoration, then generate exact-source machine summary/publicproof; this local criterion review does not assume those receipts exist.",
+      "Independent final public evidence privacy/integrity review and owner review reconciliation; issue103 remains open and PR110 remains draft. No merge or closure performed by this review.",
+      "Actual Steam Deck/SteamOS/Flatpak OBS33/Gamescope/AMD/controller/headset/provider/new-user adoption remains #86/original acceptance and unrun.",
+      "Hosted acceptance unavailable: exact4eac12zero-stepbillingrefusals,2unstartedcancelledjobs,1expectedpushskip; real PRdependencycomparison403 remains separate. Native non-Linux and requiredreviews remain explicit.",
+      "Remaining artwork/UI/#104 primary-build/resource-policy/#85 final-candidate and migration/publication work remains separate. Manual capacity assistance does not pass #104.",
+      "All230 original campaign criteria and dependencies remain intact; integration stacking/priority creates no new hard dependencies and closes no broad acceptance."
+    ],
+    "actions": "Read-only checkout/evidence inspection and private criterion-review files only. No source edits, tests, GitHub mutations, commits, merge/issue closure, release/deployment/migration or paid resources performed by this reviewer.",
+    "preserved_original_inventory": {
+      "path": "/workspace/.obsgod-tools/settings-boundary-20261118/criteria/criteria-inventory.json",
+      "sha256": "b2a575ea9d4d985850ce70a7a81fe40daa54ddebe7ab9da5ae4c2c2de92c6ae6",
+      "markdown_path": "/workspace/.obsgod-tools/settings-boundary-20261118/criteria/criteria-inventory.md",
+      "markdown_sha256": "ba0ba90cea6fbdcd863a0875d317707d46a7ccca6c17b3fb3087aef0162c5048",
+      "unchanged": true
+    },
+    "exact_packaged_precheck": {
+      "receipt": "/workspace/.obsgod-tools/settings-boundary-20261118/packaged-final-4eac7a4/receipt.json",
+      "receipt_sha256": "e9fabde1cf31eb7fd97c7bd5f168025531fa1bec867b82a8b1f5b5d2b6a8c2c2",
+      "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+      "zip_sha256": "2c40cba7b89065f410ec9e20cc73973e2638edd612e250c7bdf2aef3328c72e0",
+      "uid": 1000,
+      "status": "passed",
+      "guarded_child_count": 42,
+      "action_counts": {
+        "configuration": 1,
+        "configure-fields": 1,
+        "set-capture-mode": 12,
+        "status": 27,
+        "stop": 1
+      },
+      "checks": [
+        {
+          "name": "shared-lock-past-ui-deadline",
+          "seconds": 16.527,
+          "status": "passed"
+        },
+        {
+          "name": "near-deadline-lock-release-success",
+          "seconds": 2.298,
+          "status": "passed"
+        },
+        {
+          "name": "caller-disconnect-owned-deadline",
+          "seconds": 3.723,
+          "status": "passed"
+        },
+        {
+          "name": "stop-during-blocked-edit",
+          "seconds": 0.219,
+          "status": "passed"
+        },
+        {
+          "name": "repeated-identical-edit-coalescing",
+          "seconds": 0.256,
+          "status": "passed"
+        },
+        {
+          "name": "watcher-lifetime-lease-contention",
+          "seconds": 3.71,
+          "status": "passed"
+        }
+      ],
+      "harness_sha256": "3de1d572ad4929b189c5fbf5171450bbb39106b36063585c46d30753075a5bc0",
+      "payload_sha256": {
+        "bin/obsgod": "ceb995c51378dd302ed145456d4fe9bc4651c81ffa3df0f55ac5f0f977c9baed",
+        "dependency_setup.py": "6602dd8bdb6fb4864ed55fa4c891983279a59952b2d251db5b4208efc297e0e8",
+        "main.py": "eca913d64b6a4749d2d533eddb8afeebed2d0fbeba0bba063ee1b85871ebfd14",
+        "storage.py": "3a3e62ed814c64bf33e89f75c8eab645cab564fdd47476c7cbeabfff11714c5e"
+      },
+      "limits": [
+        "Actual packaged Python and Go with real locks/children; synthetic HOME/Decky paths.",
+        "No real loader RPC transport, SteamOS, OBS/Flatpak launch, controller, audio or provider qualification."
+      ],
+      "containing_candidate_result": "passed",
+      "first_case_timing_note": "16.527s is whole held-lock case walltime including deliberate hold beyond15s. Source assertions separately require RPC response<12s and all children reaped before lock release; no standalone response elapsed field is recorded."
+    },
+    "primary_package_precheck": {
+      "receipt": "/workspace/.obsgod-tools/settings-boundary-20261118/primary-4eac7a4/build-receipt.json",
+      "receipt_sha256": "3e1335b170028f4580707777b7c8fef4a438766772ae5638d616b62b4a0d12de",
+      "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+      "zip_sha256": "2c40cba7b89065f410ec9e20cc73973e2638edd612e250c7bdf2aef3328c72e0",
+      "official_cli": {
+        "builder_image": "ghcr.io/steamdeckhomebrew/builder@sha256:e2616e391f3ae9a46c4cf906b1091220c2506e7fb1301e16a2a72409efbce7c5",
+        "builder_node": "26.12.1",
+        "builder_pnpm": "12.14.0",
+        "container_network": "none",
+        "payload_files_compared": 33,
+        "raw_zip_reproducible": false,
+        "raw_zip_sha256": "c374f60c22675e965f3f36be81cc148e406a90afd3a121471ba90bd3a7f5a102",
+        "scope": "Unmodified official CLI and pinned default builder, assembling prepared bytes; not source compilation",
+        "sha256": "0d0f8c127cd3dba12b75f771c786194ca9f4f771b4787ae24de8b1af45af4294",
+        "status": "passed",
+        "version": "0.0.7"
+      },
+      "payload_files": 33,
+      "scope": "Exact-source primary package and officialCLI prepared-payload assembly comparison. Native/browser/workflow proof is separate; actual target/loader/provider acceptance remains unrun."
+    },
+    "source_change_from_prior_precheck": {
+      "previous_revision": "e2928ffea50eaf9988be30c47d2c471c8653434e",
+      "changed_files": [
+        "CONTINUITY.md",
+        "steamdeck/tests/test_dependency_setup.py"
+      ],
+      "all_previously_reviewed_implementation_hashes_unchanged": true,
+      "changed_test_scope": "Explicit fake-child release, normal completion marker and actual kernel setup-lease release replace a fixed1.1s sleep before recovery assertion. Product dependency worker and its three-second budget are unchanged.",
+      "product_dependency_setup_sha256": "6602dd8bdb6fb4864ed55fa4c891983279a59952b2d251db5b4208efc297e0e8"
+    },
+    "prior_precheck": {
+      "path": "/workspace/.obsgod-tools/settings-boundary-20261118/criteria/criteria-precheck-review.json",
+      "sha256": "e46b142663f7ec87853c84f5e77245452718c46e0ce76aa3020656a317f8058f",
+      "revision": "e2928ffea50eaf9988be30c47d2c471c8653434e",
+      "role": "historical precheck only; no old source receipt promoted"
+    },
+    "local_acceptance_counts": {
+      "criteria_supported": 6,
+      "criteria_total": 6,
+      "act_jobs_passed": 6,
+      "native_proof_files": 18,
+      "packaged_process_cases_passed": 6,
+      "guarded_children": 42,
+      "shared_corpus_cases": 106,
+      "shared_corpus_valid": 16,
+      "shared_corpus_malformed": 90
+    },
+    "final_matrix": {
+      "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+      "tree": "2ca38c6e704ce9c9ea19b50938e99af98714b7d9",
+      "report": "/workspace/.obsgod-tools/settings-boundary-20261118/act-report/report.json",
+      "report_sha256": "72dad329230356a7f7612a143bbd399bfdc48d8d6e7e61a2459adbddc03328b5",
+      "counts": {
+        "local_matrix": {
+          "passed": 6
+        },
+        "open_failure_groups": 0,
+        "raw_results": {
+          "failed": 3,
+          "passed": 6
+        },
+        "run_statuses": {
+          "failed": 3,
+          "passed": 6
+        }
+      },
+      "local_result": "passed",
+      "overall_result": "partial",
+      "evidence_errors": [],
+      "selected_jobs": [
+        {
+          "action": "build",
+          "event": "push",
+          "job": "build",
+          "raw_result": "passed",
+          "reason": null,
+          "selected_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195514Z-build.json",
+          "status": "passed",
+          "workflow": "build.yml"
+        },
+        {
+          "action": "coverage",
+          "event": "push",
+          "job": "coverage",
+          "raw_result": "passed",
+          "reason": null,
+          "selected_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195549Z-coverage.json",
+          "status": "passed",
+          "workflow": "coverage.yml"
+        },
+        {
+          "action": "lint",
+          "event": "push",
+          "job": "golangci",
+          "raw_result": "passed",
+          "reason": null,
+          "selected_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195426Z-lint.json",
+          "status": "passed",
+          "workflow": "lint.yml"
+        },
+        {
+          "action": "snapshot",
+          "event": "push",
+          "job": "goreleaser",
+          "raw_result": "passed",
+          "reason": null,
+          "selected_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195623Z-snapshot.json",
+          "status": "passed",
+          "workflow": "goreleaser.yml"
+        },
+        {
+          "action": "docs",
+          "event": "workflow_dispatch",
+          "job": "build-preview",
+          "raw_result": "passed",
+          "reason": null,
+          "selected_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T195747Z-docs.json",
+          "status": "passed",
+          "workflow": "docs-preview.yml"
+        },
+        {
+          "action": "candidate",
+          "event": "workflow_dispatch",
+          "job": "candidate",
+          "raw_result": "passed",
+          "reason": null,
+          "selected_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T204648Z-candidate.json",
+          "status": "passed",
+          "workflow": "steam-deck.yml"
+        }
+      ],
+      "selected_candidate_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4/20261118T204648Z-candidate.json",
+      "selected_candidate_sha256": "171c93f5595150595e959d8e7bf8300bf199ec55f3d0e69690817c67d7859b58",
+      "selected_candidate_log_sha256": "b320f3fc8d1eb5c23b9ac4452db470adf711131e1ef2d6d8f85d0f80fa3259db",
+      "scope": "Completed actual exact-source local workflows. Native/browser/fixture evidence is not actual Steam Deck/provider/hosted acceptance.",
+      "report_scope": "Explicit bounded completed-state view: all9same-source completed attempts (6PASS/3FAIL), byte-equal copies verified against untouched originals. Provisional interrupted200445 remains outside that completedview and unqualified; originalfullstate retains its evidence error."
+    },
+    "native_proof": {
+      "index": "/workspace/.obsgod-tools/settings-boundary-20261118/native-proof/index.json",
+      "index_sha256": "13687c05b26f535ab19ea6c896603a3336ca7227b158735eb5879bc69cdebf14",
+      "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+      "file_count": 18,
+      "distinct_sha256_count": 15,
+      "all_results_passed": true,
+      "scope": "Native Linux OBS/PipeWire/PulseAudio/capture/RTMP synthetic fixtures; actual Steam Deck, SteamOS, Flatpak OBS33, Gamescope, AMD, controller, headset and provider are unrun. These files without embedded revision are associated with this completed exact-source ACT attempt only."
+    },
+    "suite_observations": {
+      "application_python": {
+        "failed": 0,
+        "framework": "python-unittest",
+        "line": 906,
+        "passed": 269,
+        "skipped": 2,
+        "status": "passed",
+        "tests": 271
+      },
+      "tooling_python": {
+        "failed": 0,
+        "framework": "python-unittest",
+        "line": 996,
+        "passed": 85,
+        "skipped": 0,
+        "status": "passed",
+        "tests": 85
+      },
+      "frontend_node": {
+        "cancelled": 0,
+        "failed": 0,
+        "framework": "node-test",
+        "line": 1165,
+        "passed": 156,
+        "skipped": 0,
+        "tests": 156,
+        "todo": 0
+      },
+      "source": "selected completed candidate log, not prior failed attempt"
+    },
+    "resource_assistance": {
+      "scope": "Measured constrained free-runner assistance only. Existing5caches/toolchain/artifact paths were preserved under same logical paths; private ACT fixture/temp volume moved to separate host/tmp filesystem with content/ownership/mode verification. Only active candidate container disposable unmounted compiler cache cleared at safe stages. Source, tools, modulecache, package/network/auth presets, testassertions and recordingreserve thresholds stayed unchanged.",
+      "policy_acceptance": "Manual assistance does not complete #104 unassisted primary-build/resource-policy acceptance.",
+      "restoration": "Root finalizer separately verifies/restores caches and fixture volume; this criterion eligibility review does not assume restoration before its receipt exists.",
+      "record_paths": [
+        "/workspace/.obsgod-tools/settings-boundary-20261118/fixture-relocation-launcher.json",
+        "/workspace/.obsgod-tools/settings-boundary-20261118/fresh-settings-evidence-preparation.json",
+        "/workspace/.obsgod-tools/actions-current-audit/local/space-recovery-4eac7a4.json"
+      ]
+    },
+    "external_snapshot": {
+      "summary": "/workspace/.obsgod-tools/settings-boundary-20261118/live-github/near-final-4eac7a4/summary.json",
+      "sha256": "2a799eab06dc646d60956b66ae635fdc777e55e5fc9e3b4440fe04308274db6a",
+      "observed_utc": "2026-11-18T20:40:27.699677+00:00",
+      "head_revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+      "head_job_classifications": {
+        "zero-step billing refusal": 12,
+        "unstarted cancelled": 2,
+        "expected push-only skip": 1
+      },
+      "executed_steps": 0,
+      "dependency_comparison": {
+        "base": "6968ad9ebb577c2f37ae42bf51f2f1862c319e8a",
+        "head": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+        "exit_code": 1,
+        "api_error": {
+          "message": "Forbidden",
+          "status": "403",
+          "documentation_url": "https://docs.github.com/rest/dependency-graph/dependency-review#get-a-diff-of-the-dependencies-between-commits"
+        },
+        "separate_from": "Hosted billing refusal"
+      },
+      "review_state": "PR109/110 open drafts and no reviews at this snapshot; protections respected; detailed protection API403 is not bypass permission",
+      "interpretation": "12billingrefusals are separate from2unstartedcancelled jobs and1expectedskip. No queued or hostedpass claim."
+    },
+    "completed_evidence_scope": {
+      "selection_inventory": "/workspace/.obsgod-tools/settings-boundary-20261118/completed-state-selection.json",
+      "selection_inventory_sha256": "7825faf344e9b4dc82f76807cd8dbfdd8a55b1a0b7abfa568d690157b4e1d022",
+      "bounded_state": "/workspace/.obsgod-tools/actions-current-audit/local/act-state-completed-4eac7a4",
+      "original_state": "/workspace/.obsgod-tools/actions-current-audit/local/act-state",
+      "completed_runs": 9,
+      "completed_passes": 6,
+      "completed_failures": 3,
+      "all_original_completed_receipts_and_logs_byte_equal_to_bounded_copies": true,
+      "originals_unchanged": true,
+      "zero_error_claim_scope": "Only the explicit completed-run report, which includes every same-source completed PASS and FAIL. This does not repair or qualify the separately preserved interrupted provisional record.",
+      "interrupted_unqualified": {
+        "original_receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T200445Z-candidate.json",
+        "original_log": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T200445Z-candidate.log",
+        "receipt_sha256": "f4bc184c31fd9c3fab030bedca31113d0013d2f67e79eaead351cd541801a8f4",
+        "observed_log_sha256": "fda87451389b8f4703310cd28fd5b3298816c751a14cd056cad5a1a80b354a7e",
+        "action": "candidate",
+        "result": "running",
+        "exit_code": null,
+        "reason": "Tool reconnect killed controller before a completion receipt/log checksum; preserved unmodified and never eligible as a completed run. Original-state report retains this missing checksum evidence error.",
+        "recorded_log_sha256": null
+      },
+      "original_state_report": {
+        "path": "/workspace/.obsgod-tools/settings-boundary-20261118/original-state-final-report/report.json",
+        "sha256": "56a45c8153e833b6f32d5b2c3732187b4efc8e86ead38416a62f800757484670",
+        "local_result": "passed",
+        "overall_result": "failed",
+        "local_matrix": {
+          "passed": 6
+        },
+        "evidence_errors": [
+          {
+            "raw_result": "running",
+            "reason": "missing_or_invalid_log_sha256",
+            "receipt": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/20261118T200445Z-candidate.json"
+          }
+        ]
+      },
+      "interpretation": "Original full state still reports overallfailed solely for the interrupted200445missing final log hash, despite six passing selected jobs. No completion/checksum was invented; interruption remains unqualified historical evidence and all3completedfailures remain in completedview."
+    }
+  },
+  "cache_restoration": {
+    "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+    "package_network_auth_presets_unchanged": true,
+    "locations": [
+      {
+        "path": "/home/agent/.cache/pnpm",
+        "kind": "preserved cache",
+        "restored": true,
+        "before": {
+          "digest": "77a986da3f013fa9e5a1725bf6249e2de56069617e6a9e185069dde0a7eaf9d4",
+          "files": 3350,
+          "links": 0,
+          "bytes": 1132126076
+        },
+        "after": {
+          "digest": "77a986da3f013fa9e5a1725bf6249e2de56069617e6a9e185069dde0a7eaf9d4",
+          "files": 3350,
+          "links": 0,
+          "bytes": 1132126076
+        },
+        "root_mode": "0o755"
+      },
+      {
+        "path": "/home/agent/.cache/go-build",
+        "kind": "preserved cache",
+        "restored": true,
+        "before": {
+          "digest": "d759cceee0896ae84a0c690add091435f84d9bf7e666c71b1aaf1666d5b3f03e",
+          "files": 11103,
+          "links": 0,
+          "bytes": 1309981227
+        },
+        "after": {
+          "digest": "d759cceee0896ae84a0c690add091435f84d9bf7e666c71b1aaf1666d5b3f03e",
+          "files": 11103,
+          "links": 0,
+          "bytes": 1309981227
+        },
+        "root_mode": "0o700"
+      },
+      {
+        "path": "/home/agent/.cache/actcache",
+        "kind": "preserved cache",
+        "restored": true,
+        "before": {
+          "digest": "5fd2eb298236143bcd22cb9d9e8e2a57a47810b2338db37fbf89c2c6313cadd0",
+          "files": 3,
+          "links": 0,
+          "bytes": 739164214
+        },
+        "after": {
+          "digest": "5fd2eb298236143bcd22cb9d9e8e2a57a47810b2338db37fbf89c2c6313cadd0",
+          "files": 3,
+          "links": 0,
+          "bytes": 739164214
+        },
+        "root_mode": "0o700"
+      },
+      {
+        "path": "/workspace/.obsgod-tools/toolchains/go1.27.4",
+        "kind": "pinned toolchain preserved at same logical path",
+        "restored": true,
+        "before": {
+          "digest": "9418d5f01e541cd3fe8041db45f2cb07ee88475e4bc67f95913ac00dddd9e8fa",
+          "files": 15659,
+          "links": 0,
+          "bytes": 244338457
+        },
+        "after": {
+          "digest": "9418d5f01e541cd3fe8041db45f2cb07ee88475e4bc67f95913ac00dddd9e8fa",
+          "files": 15659,
+          "links": 0,
+          "bytes": 244338457
+        },
+        "root_mode": "0o700"
+      },
+      {
+        "path": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/artifacts",
+        "kind": "existing local ACT artifact service output preserved at same logical path",
+        "restored": true,
+        "before": {
+          "digest": "52621cf07cd5c81bf252bb8f11b743139278507cb9ea6bcf9e46be2a8cb05345",
+          "files": 18,
+          "links": 0,
+          "bytes": 359297997
+        },
+        "after": {
+          "digest": "52621cf07cd5c81bf252bb8f11b743139278507cb9ea6bcf9e46be2a8cb05345",
+          "files": 18,
+          "links": 0,
+          "bytes": 359297997
+        },
+        "root_mode": "0o700"
+      }
+    ]
+  },
+  "fixture_volume_restoration": {
+    "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+    "source": "/workspace/.obsgod-tools/actions-current-audit/local/act-state/tmp",
+    "temporary_location": "/tmp/obsgod-settings-cache-space-20261118/act-fixtures",
+    "before": {
+      "digest": "bd947656c338d61a3509fdf843c1d1c4eac3a314c79eccb311b76b9bce7f7b7b",
+      "entries": 1956,
+      "bytes": 769225147,
+      "root": {
+        "mode": 448,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1795033453019904939
+      }
+    },
+    "relocated": {
+      "digest": "bd947656c338d61a3509fdf843c1d1c4eac3a314c79eccb311b76b9bce7f7b7b",
+      "entries": 1956,
+      "bytes": 769225147,
+      "root": {
+        "mode": 448,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1795033453019904939
+      }
+    },
+    "restored": true,
+    "logical_path_unchanged": true,
+    "scope": "Only private local ACT fixture/temp volume moved to the separate host /tmp filesystem; no source, reserve thresholds, tools, package/network/auth presets or assertions changed.",
+    "restoration_before": {
+      "digest": "a246ce43ca82e8045ec9888b5d9039fa3a58abfe30635b5d105ade4e7e8a782d",
+      "entries": 2067,
+      "bytes": 815471519,
+      "root": {
+        "mode": 448,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1795035174276902138
+      }
+    },
+    "restoration_after": {
+      "digest": "a246ce43ca82e8045ec9888b5d9039fa3a58abfe30635b5d105ade4e7e8a782d",
+      "entries": 2067,
+      "bytes": 815471519,
+      "root": {
+        "mode": 448,
+        "uid": 1000,
+        "gid": 1000,
+        "mtime_ns": 1795035174276902138
+      }
+    }
+  },
+  "artifacts": {
+    "obsgod-decky.zip": "2c40cba7b89065f410ec9e20cc73973e2638edd612e250c7bdf2aef3328c72e0",
+    "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz": "4e21f3adb9d8d57dd64dcdd51e15c3c9465afc81e822080abb7319a192c383a2",
+    "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip": "9d474b7c7b45309945bf3abef9fa40fbd38f37afc8bec767d1c8de953cbc1e64"
+  },
+  "historical_attempts": [
+    "Initial working integration Go race: fixed-port test-package collision; isolated tagged case and full retry passed.",
+    "Initial working Python integration: old M3 test asserted former status call shape; deadline-bound read-only assertions repaired.",
+    "First complete matrix at e2928ff:5passed/1failed brittle dependency-worker sleep. Test-only explicit release/marker/kernel-lease synchronization fixed it; production worker deadline unchanged.",
+    "First4eac7a4 matrix:5passed/1failed because clip-export reserve test correctly refused under256MiB free; source/assertions unchanged.",
+    "First resource-assisted candidate retry interrupted by Cloud tool reconnect: no controller/completion receipt; partial evidence retained, orphaned test container stopped.",
+    "The next detached same-source candidate reached passing browser/settings checks but failed native recording because the fixture volume had919879680 bytes available, below the unchanged1GiBreserve; preserved as historical failure. The exact fixture volume was then moved reversibly to the separate host/tmp filesystem with verified content/ownership/modes and old logical bind path preserved.",
+    "The next same-source volume-assisted attempt passed four browser flows then correctly refused to overwrite an existing settings-test evidence folder. That old six-case receipt was moved intact into private history; the next run used a fresh output path with the assertion unchanged. This fixture preparation is recorded, and the failed complete attempt retained.",
+    "Final detached same-source candidate completed with measured disposable compiler-cache assistance and preserved separate fixture volume. Five other same-source passing jobs remain valid; latest selected candidate supersedes resource failure."
+  ],
+  "limits": [
+    "Hosted frozen4eac:12 billing refusals,2 unstarted cancelled macOS jobs and1 expected push skip with zero executed steps in the near-final audit; no hosted pass. Exact PR dependency comparison403.",
+    "Actual Steam Deck/SteamOS/Flatpak OBS33/Gamescope/AMD/controller/headset/provider and native non-Linux execution remain unrun under86/original ledgers.",
+    "Python3.9 grammar is checked; actual3.9 runtime remains unrun. Native Linux OBS package versions are recorded separately.",
+    "Capture11.7s is nominal normally-reapable budget. Unreapable leader keeps same owned pending operation until exit; no hard real-time guarantee.",
+    "The first held-lock metric includes16seconds of deliberate lock hold; source assertion proves RPC<12seconds and owned child exit before release.",
+    "Manual free-runner resource assistance does not complete104 primary-build/resource-policy acceptance.",
+    "Issue103 and drafts109/110 remain open for review. All230 original criteria/dependencies remain intact.",
+    "No product release, deployment, migration, Store submission, spending or consumer adoption occurred.",
+    "Subsequent evidence-only commits are not relabeled as this exact qualified source."
+  ],
+  "supplemental": [
+    {
+      "phase": "transport",
+      "status": "passed",
+      "receipt_sha256": "9b86d8dda93bedf978d1fbf9546d38e1e5e99a503701d4d67eaa46cd6312a1b3",
+      "checks": [
+        {
+          "name": "node-version",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        },
+        {
+          "name": "legacy4-dynamic6-current9",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        },
+        {
+          "name": "legacy6-current9",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        }
+      ]
+    },
+    {
+      "phase": "cli",
+      "status": "passed",
+      "receipt_sha256": "c1210123b7a815de3806315e00dfd4c84f75aad210adbc5dc086716248cbb879",
+      "checks": [
+        {
+          "name": "toolchain",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        },
+        {
+          "name": "version",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        },
+        {
+          "name": "api-capabilities",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        },
+        {
+          "name": "creator-plan",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        },
+        {
+          "name": "creator-extensions",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        },
+        {
+          "name": "config-path",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        },
+        {
+          "name": "completion-bash",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        },
+        {
+          "name": "syntax-bash",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        },
+        {
+          "name": "completion-zsh",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        },
+        {
+          "name": "syntax-zsh",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        },
+        {
+          "name": "completion-fish",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        },
+        {
+          "name": "syntax-fish",
+          "outcome": "unavailable",
+          "exit_code": null,
+          "required": false
+        },
+        {
+          "name": "reference",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        },
+        {
+          "name": "api-client-example",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        }
+      ]
+    },
+    {
+      "phase": "upgrades",
+      "status": "passed",
+      "receipt_sha256": "f28956b07e5f0f30c51077ceb35ed62aa2294a08118fb8b826d4e8625c3c38b1",
+      "checks": [
+        {
+          "name": "node-version",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        },
+        {
+          "name": "browser-version",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        },
+        {
+          "name": "browser-upgrade4",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        },
+        {
+          "name": "browser-upgrade6",
+          "outcome": "passed",
+          "exit_code": 0,
+          "required": true
+        }
+      ]
+    }
+  ]
+}

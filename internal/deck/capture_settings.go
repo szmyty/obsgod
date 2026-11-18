@@ -13,6 +13,9 @@ import (
 // stops output and does not rewrite the running OBS profile. The next explicit
 // Start/Test configures the selected capture path after checking output again.
 func SetCaptureMode(ctx context.Context, p Paths, reader io.Reader) (Result, error) {
+	if err := ctx.Err(); err != nil {
+		return Result{}, err
+	}
 	var input struct {
 		Mode string `json:"capture_mode"`
 	}
@@ -24,6 +27,9 @@ func SetCaptureMode(ctx context.Context, p Paths, reader io.Reader) (Result, err
 	var extra any
 	if d.Decode(&extra) != io.EOF {
 		return Result{}, errors.New("capture mode must be one JSON object")
+	}
+	if err := ctx.Err(); err != nil {
+		return Result{}, err
 	}
 	s, _, err := Load(p)
 	if err != nil {
@@ -38,11 +44,18 @@ func SetCaptureMode(ctx context.Context, p Paths, reader io.Reader) (Result, err
 	// cannot overwrite the next explicit full-screen start. Never kill it or OBS.
 	leaseCtx, cancel := context.WithTimeout(ctx, 6*time.Second)
 	unlock, err := Lock(leaseCtx, captureWatchPaths(p))
+	leaseErr := leaseCtx.Err()
 	cancel()
 	if err != nil {
+		if ctx.Err() != nil {
+			return Result{}, ctx.Err()
+		}
 		return Result{}, errors.New("the previous game capture observer is finishing; wait for idle status and retry")
 	}
 	defer unlock()
+	if leaseErr != nil {
+		return Result{}, leaseErr
+	}
 	state = Status(ctx, p)
 	if !state.OutputKnown || state.Stream.Active || state.Recording || state.Media == nil || !state.Media.Known || state.Media.ReplayActive {
 		return Result{}, errors.New("output changed while waiting; capture mode was not changed")
@@ -54,6 +67,11 @@ func SetCaptureMode(ctx context.Context, p Paths, reader io.Reader) (Result, err
 	}
 	// Configure preserves the saved key/password and atomically binds the new
 	// settings pair. Only app preferences change; no OBS scene or output call.
+	// Offline observations can succeed after cancellation. Check at the commit
+	// boundary too, then let Configure finish its existing bound settings pair.
+	if err := ctx.Err(); err != nil {
+		return Result{}, err
+	}
 	if _, err = Configure(p, bytes.NewReader(data)); err != nil {
 		return Result{}, err
 	}

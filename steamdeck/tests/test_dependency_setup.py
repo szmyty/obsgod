@@ -70,6 +70,10 @@ elif args[0] == "install":
     state["user"][ref] = "33.0.1" if stage == "obs" else "0.4.1"
     save()
     (root / (stage + ".started")).write_text(str(os.getpid()))
+    if state.get("hold_stage") == stage:
+        while not (root / (stage + ".release")).exists():
+            time.sleep(0.01)
+        (root / (stage + ".finished")).write_text(str(os.getpid()))
     if state.get("delay_stage") == stage:
         time.sleep(state.get("delay_seconds", 30))
     if state.get("noise"):
@@ -371,8 +375,21 @@ class DependencySetupTests(unittest.IsolatedAsyncioTestCase):
         receipt = state_dir / "receipt.json"
         receipt.write_text(json.dumps({"schema_version": 1, "operation": operation}))
         receipt.chmod(0o600)
-        self.state.update(delay_stage="obs", delay_seconds=1)
+        self.state.update(hold_stage="obs")
         self.save()
+        release = self.root / "obs.release"
+
+        async def worker_released():
+            # A real inherited lease, rather than elapsed fixture sleep, proves
+            # the orphan worker has reaped its child and finished.
+            with (state_dir / "setup.lock").open() as stream:
+                while True:
+                    try:
+                        fcntl.flock(stream.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+                        return
+                    except BlockingIOError:
+                        await asyncio.sleep(0.01)
+
         parent_code = '''import fcntl,os,pathlib,subprocess,sys,time
 root=pathlib.Path(sys.argv[1]);fd=os.open(str(root/"jobs/dependencies/setup.lock"),os.O_CREAT|os.O_RDWR,0o600)
 fcntl.flock(fd,fcntl.LOCK_EX)
@@ -383,22 +400,35 @@ time.sleep(30)
                                                       str(MODULE), str(self.bin / "flatpak"), OBS_REF, env=self.env)
         try:
             await self.started("obs")
-            parent.kill()
-            await parent.wait()
             job = self.job()
             result = await job.status()
             self.assertEqual(result["state"], "running")
             self.assertFalse(result["can_install"])
+            parent.kill()
+            await parent.wait()
+            result = await job.status()
+            self.assertEqual(result["state"], "running")
+            self.assertFalse(result["can_install"])
+            retried = await job.start(True)
+            self.assertEqual(retried["operation"]["id"], operation["id"])
+            self.assertEqual(retried["state"], "running")
+            self.assertFalse(retried["can_install"])
             self.assertEqual(len(self.mutations()), 1)
-            await asyncio.sleep(1.1)
+            release.touch()
+            await asyncio.wait_for(worker_released(), 4)
+            self.assertEqual((self.root / "obs.finished").read_text(),
+                             (self.root / "obs.started").read_text())
             result = await job.status()
             self.assertEqual(result["operation"]["state"], "interrupted")
             self.assertTrue(result["dependencies"][0]["compatible"])
             self.assertTrue(result["can_install"])
+            self.assertEqual(len(self.mutations()), 1)
         finally:
             if parent.returncode is None:
                 parent.kill()
                 await parent.wait()
+            release.touch()
+            await asyncio.wait_for(worker_released(), 4)
 
     async def test_setup_budget_and_large_output_are_bounded(self):
         self.state.update(delay_stage="obs", delay_seconds=10, noise="secret-output-never-publish")

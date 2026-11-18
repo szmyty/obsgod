@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "reviewed_at_utc": "2026-11-18T21:08:45.302436+00:00",
+  "reviewer": "independent lifecycle/evidence review with a separate read-only claims review",
+  "result": "passed",
+  "scope": "Actual final proof ZIP privacy, integrity, explicit member scope, completed-run selection and checkpoint claim review. Read-only inspection; no source, ZIP, original evidence or qualification context modified.",
+  "qualified_revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+  "qualified_tree": "2ca38c6e704ce9c9ea19b50938e99af98714b7d9",
+  "qualified_checkout_clean_at_review": true,
+  "proof_zip_sha256": "e5bd203af8d774c803e5b889cf3eb61fd374ff8cf2600b81d37b7e9a2be81082",
+  "proof_zip_bytes": 1147662,
+  "index_sha256": "658a1bcc2f442a55840e96e9019a3e965bbab5e60b71f5badf95ce37d029608d",
+  "checks": {
+    "membership": {
+      "members_including_index": 195,
+      "explicit_indexed_text_members": 194,
+      "duplicate_unsafe_or_unindexed_members": 0,
+      "binary_or_non_utf8_members": 0,
+      "scope": "Only explicit text receipts, logs, indexes and context. No source, installed-release, HOME/config/state, media or binary trees."
+    },
+    "hashes": {
+      "all_public_sha256_and_sizes_verified": 194,
+      "all_original_sha256_verified_against_existing_sources": 194,
+      "redaction_flags_match_byte_changes": true,
+      "redacted_members": 25,
+      "deterministic_declared_redaction_reproduced_exactly": 194,
+      "original_and_public_hashes_retained_distinctly": true
+    },
+    "privacy": {
+      "raw_and_decoded_json_strings_scanned": true,
+      "nested_log_json_and_unicode_escape_forms_scanned": true,
+      "actions_mask_values_checked": 14,
+      "fixed_source_fixture_markers_checked": 2,
+      "known_sensitive_values_remaining": 0,
+      "credential_patterns_or_private_json_fields_found": 0,
+      "raw_storage_maps_found": 0,
+      "known_secret_values_omitted_from_this_report": true
+    },
+    "current_matrix": {
+      "passing_receipt_log_pairs": 6,
+      "all_selected_source_tree_and_clean_flags_match": true,
+      "completed_report_reproduced_exactly_with_unmodified_reporter": true,
+      "selected_local_result": "passed",
+      "selected_overall_result": "partial",
+      "selected_integrity_errors": 0,
+      "selected_open_failure_groups": 0
+    },
+    "completed_selection": {
+      "all_same_revision_completed_runs": 9,
+      "completed_passed": 6,
+      "completed_failed": 3,
+      "all_completed_original_copy_receipt_and_log_pairs_byte_identical": true,
+      "all_recorded_original_log_hashes_verified": true,
+      "all_nine_receipts_and_logs_retained_in_zip_by_original_hash": true,
+      "all_same_revision_original_attempts_accounted": 10,
+      "explicit_incomplete_exclusion": 1,
+      "selection_inventory_is_hash_bound_not_cryptographically_signed": true
+    },
+    "interrupted_history": {
+      "record": "20261118T200445Z-candidate",
+      "provisional_receipt_remains_running_without_exit_or_final_log_checksum": true,
+      "provisional_receipt_and_filtered_partial_log_retained": true,
+      "original_state_final_report_reproduced_exactly_with_unmodified_reporter": true,
+      "original_state_final_overall_result": "failed",
+      "original_missing_log_checksum_integrity_error_retained": true,
+      "original_error_repaired_or_run_qualified": false
+    },
+    "claims": {
+      "six_original_issue103_criteria_reviewed": 6,
+      "shared_configuration_cases": 106,
+      "valid_configuration_cases": 16,
+      "malformed_configuration_cases": 90,
+      "native_filtered_proof_files": 18,
+      "native_distinct_original_hashes": 15,
+      "postmatrix_checks_passed": 11,
+      "cache_tool_artifact_locations_restored": 5,
+      "separate_fixture_volume_restored_with_matching_hashes": true,
+      "checkpoint_counts_and_source_identity_consistent": true,
+      "nominal_11_7_second_budget_not_a_hard_realtime_claim": true,
+      "known_checkpoint_copy_step": "Replace the declared PROOF_SHA256 placeholder with proof_zip_sha256 before committing final documentation."
+    }
+  },
+  "findings": [],
+  "limitations": [
+    "Zero integrity errors applies to the explicit completed-run selection. The preserved interrupted original record remains unfinalized, unverifiable and unqualified; its original-state report remains failed.",
+    "Checksums and deterministic redaction support byte preservation and review; they are not cryptographic signatures or independent reconstruction of an unrecorded completion.",
+    "Privacy review checks known mask/fixture values, decoded JSON and credential-shaped patterns; it is not a proof that every possible future sensitive format is recognized.",
+    "Local Linux process/browser/native and synthetic-state evidence does not establish supported Decky-loader startup, Steam Deck/SteamOS/Flatpak OBS33/Gamescope/AMD/controller/headset/provider-viewer acceptance, native non-Linux execution or actual Python3.9 runtime.",
+    "Hosted CI/reviews/artifact delivery and actual dependency comparison remain external gates. Runner accommodations do not satisfy unassisted resource acceptance under issue104.",
+    "The issue and draft PRs remain open for review. All230 original criteria/dependencies remain intact. No merge, release, deployment, migration, Store submission, spending or consumer acceptance is inferred."
+  ],
+  "actions": "Only private review scripts/results and this separate report were written. No runtime/test suite, Go/native process, source mutation, ZIP/context edit or external publication performed."
+}

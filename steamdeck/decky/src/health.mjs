@@ -2,7 +2,7 @@
 export function health(result, lastProgress, now) {
   if (!result) return {label:"Checking OBS…", color:"#f5c56b", live:false};
   if (result.state === "setup") return {label:"Setup required", color:"#f5c56b", live:false};
-  if (!result.ok || result.output_known === false || result.state === "unknown" || result.state === "error") return {label:"Check OBS", color:"#f5c56b", live:false};
+  if (!result.ok || result.output_known !== true || result.state === "unknown" || result.state === "error") return {label:"Check OBS", color:"#f5c56b", live:false};
   if (result.stream?.active) {
     if (!lastProgress || result.stream.reconnecting || result.stream.bytes <= 0 || now-lastProgress > 7000) return {label:"Connecting / stalled", color:"#f5c56b", live:false};
     const betweenGames=result.settings?.capture_mode === "game" && result.runtime?.scene === "OBSGod Idle" && result.game === "idle" && result.frames === "placeholder";

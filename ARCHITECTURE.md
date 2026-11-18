@@ -39,6 +39,15 @@ separate confirmed action. Configuration, password changes and connection tests
 never start a broadcast. The adapter expires/coalesces observations, serializes
 actions with setup/control work and clears private payloads after use.
 
+The [settings boundary](docs/settings-boundary.md) requires complete schema-v1
+readback and consistent action gates before client readiness. Go-produced shared
+wire fixtures preserve first-run, missing-key, running and legacy-dimension
+states across Go/Python/JS. Capture-mode edits have a short complete-operation
+budget including lock wait, child cleanup and fresh readback; timed-out UI
+promises do not imply cancellation. The backend retains operation identity
+until its owned command has exited. Missing output knowledge cannot become an
+idle default or a green status indicator; Stop/recovery remains available.
+
 ```mermaid
 flowchart TD
     CLI[CLI adapters] --> Legacy[Compatible legacy service]

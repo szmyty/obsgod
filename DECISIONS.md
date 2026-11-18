@@ -65,6 +65,24 @@ the verified preimage version rather than any older Desktop archive. See
 publisher, release, transfer, deployment, paid resource or another-repository
 change, and do not accept a proposed identity/companion ADR.
 
+## Bounded settings and complete readback (#103)
+
+The owner authorized the next bounded audit batch. Capture-mode edits use a
+short Go mutation context, its existing separate status observation, and a
+Python operation budget that includes preflight, spawn, cleanup and readback
+under the UI timer. Backend ownership survives caller disconnect; an unreaped
+command remains pending rather than becoming a completed failure with late
+execution authority. Start/Stop, microphone leases and generic API behavior
+retain their separate semantics.
+
+Configuration readiness requires mandatory fields and consistent gates instead
+of synthesized permission. Preserve Go's settings version in the public
+projection and share plain Go-produced/malformed JSON test data across clients.
+Documented legacy dimensions and presence-only nested connection observations
+remain supported. There is no schema generator or new validation dependency.
+Read [the contract](docs/settings-boundary.md). These repairs do not accept a
+proposed identity/companion ADR or authorize publication/migration/spending.
+
 ## Native destination setup (#79)
 
 Owner-authorized manual-key setup now uses the normal Decky panel and existing

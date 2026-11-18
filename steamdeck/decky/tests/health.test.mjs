@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {health} from "../src/health.mjs";
 test("green requires reported output and recent byte progress",()=>{
-  const live={ok:true,state:"streaming",stream:{active:true,reconnecting:false,bytes:2048}};
+  const live={ok:true,state:"streaming",output_known:true,stream:{active:true,reconnecting:false,bytes:2048}};
   assert.equal(health(live,1000,1100).live,true);
   assert.equal(health(live,1000,9000).live,false);
   assert.equal(health({...live,ok:false},1000,1100).live,false);
@@ -11,7 +11,7 @@ test("green requires reported output and recent byte progress",()=>{
 });
 test("unknown never looks stopped; offline and setup are distinct",()=>{
   assert.equal(health({ok:false,state:"unknown"},0,0).label,"Check OBS");
-  assert.equal(health({ok:true,state:"stopped",stream:{active:false}},0,0).label,"Stopped");
+  assert.equal(health({ok:true,state:"stopped",output_known:true,stream:{active:false}},0,0).label,"Stopped");
   assert.equal(health({ok:true,state:"setup"},0,0).label,"Setup required");
 });
 test("unconfirmed or blank capture cannot show healthy green",()=>{
@@ -21,7 +21,14 @@ test("unconfirmed or blank capture cannot show healthy green",()=>{
   assert.equal(health({...live,frames:"unknown"},1000,1100).live,false);
   assert.equal(health({...live,frames:"visible"},1000,1100).live,true);
   assert.equal(health({...live,frames:"visible",capture:"unavailable"},1000,1100).live,false);
-  assert.equal(health({ok:true,state:"stopped",recording:true},0,0).label,"Recording locally");
+  assert.equal(health({ok:true,state:"stopped",output_known:true,recording:true},0,0).label,"Recording locally");
+});
+
+test("missing or mistyped output knowledge cannot display a healthy stream from old byte progress",()=>{
+  for(const output_known of [undefined,null,"true",1]){
+    const state=health({ok:true,state:"streaming",output_known,frames:"visible",stream:{active:true,bytes:4096}},1000,1100);
+    assert.equal(state.live,false);assert.equal(state.label,"Check OBS");
+  }
 });
 
 test("intentional between-game screen requires matching mode, scene and advancing output",()=>{

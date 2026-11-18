@@ -11,6 +11,7 @@ import {MixerTools, cancelPanelTalk} from "./Mixer";
 import {mixerNotice, mixerView} from "./mixer-state.mjs";
 import {DependencySetup,type SetupReadiness} from "./Setup";
 import {Configuration} from "./Configuration";
+import {boundedRequest as bounded,settingsTimeouts} from "./action-timeouts.mjs";
 
 type Diagnostic = {time:string; level:string; message:string};
 type Outcome = {id?:number; action?:string; ok:boolean; message:string; recording_path?:string};
@@ -49,13 +50,6 @@ function updateDependencyReadiness(next:SetupReadiness){
   const previous=dependencyReadiness;
   dependencyReadiness=next;
   if(previous.ready!==next.ready||previous.reason!==next.reason||previous.state!==next.state)changed();
-}
-
-function bounded<T>(promise:Promise<T>,milliseconds:number):Promise<T>{
-  return new Promise((resolve,reject)=>{
-    const timer=setTimeout(()=>reject(new Error("Operation timed out")),milliseconds);
-    promise.then(value=>{clearTimeout(timer);resolve(value);},error=>{clearTimeout(timer);reject(error);});
-  });
 }
 
 function refresh():Promise<void>{
@@ -198,7 +192,7 @@ async function changeCaptureMode(){
   currentAction=token;busy="capture-mode";view.epoch++;actionNoticeAt=0;
   notice="Saving capture mode…";changed();
   try{
-    const next=await bounded(setCaptureMode(mode),15000);
+    const next=await bounded(setCaptureMode(mode),settingsTimeouts.captureMode);
     if(!active||instance!==generation||currentAction!==token)return;
     const outcome=next.action_result??next;
     notice=outcome.message;actionNoticeAt=Date.now();

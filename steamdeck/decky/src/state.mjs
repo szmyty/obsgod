@@ -1,10 +1,7 @@
 import {health} from "./health.mjs";
 
 export function outputKnown(result) {
-  // Older preview fixtures did not expose output_known. An explicit false
-  // always wins; otherwise require an actual stream snapshot from the CLI.
-  return result?.output_known === true || (result?.output_known === undefined &&
-    result?.ok === true && !!result?.stream && !["unknown","error","setup"].includes(result.state));
+  return result?.output_known === true;
 }
 
 export function createView() {

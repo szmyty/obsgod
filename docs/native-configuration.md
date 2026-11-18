@@ -79,3 +79,11 @@ despite its compatibility name, it does not relaunch OBS. Configuration writes
 and this close action have a ten-second context/lock budget. Connection testing
 and public settings reads are bounded separately. A timeout is an unconfirmed
 outcome: refresh and inspect state before retrying.
+
+Readback now requires complete schema-v1 settings/connection members and
+consistent readiness flags; defaults never grant editing or closing permission.
+The public projection retains Go's settings version. Legacy omitted/zero
+dimensions and presence-only nested connection observations remain supported.
+The separate quick capture-mode action includes its complete command, cleanup
+and fresh readback below the panel's deadline. See the
+[settings boundary and shared-corpus checks](settings-boundary.md).
