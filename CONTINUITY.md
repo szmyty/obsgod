@@ -30,7 +30,25 @@ focused regression/process/browser checks, independent review, then the complete
 required available matrix at the final committed source.
 
 
-### Settings source checkpoint in draft #110
+### First settings matrix: worker fixture synchronization
+
+Exact source **e2928ffea50eaf9988be30c47d2c471c8653434e** passed five local
+ACT jobs, but the candidate failed an unchanged dependency-worker test. Its
+fixed1.1-second sleep raced the real worker's inherited lease release; observed
+`running` was correct while that lease was held. Preserve the failed complete
+attempt and do not call e2928ff fully qualified. Its separate actual packaged
+settings check did pass all six cases, including the lock held beyond UI15.
+
+The bounded repair changes only the test: controlled fake-child release, normal
+completion marker and actual kernel setup-lease release precede the interrupted
+status assertion. The real three-second worker budget and product module stay
+unchanged. Assertions retain/strengthen running/retry-blocked/same-ID/exact-one-
+mutation, then interrupted/compatible/retryable states. Twelve normal-user host
+repeats, twelve isolated-container repeats and the dependency module pass.
+Commit the repair, rebuild the exact candidate and rerun all six jobs at the new
+clean source before final qualification. No old pass is promoted.
+
+### Earlier settings source checkpoint in draft #110
 
 Draft [#110](https://github.com/szmyty/obsgod/pull/110) is stacked on unmerged
 #109. Source now bounds the full capture operation, preserves pending identity
