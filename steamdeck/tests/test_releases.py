@@ -193,3 +193,147 @@ class RedirectTrust(unittest.TestCase):
             for target in targets:
                 with self.subTest(source=source, target=target), self.assertRaises(releases.ReleaseError):
                     self.redirect(source, target)
+
+
+class PluginReleaseChecks(unittest.TestCase):
+    def fixture(self, version="0.1.0-deck.10"):
+        revision = "1" * 40
+        base = "https://github.com/szmyty/obsgod/releases/download/v" + version + "/"
+        receipt = {"version": version, "revision": revision, "dirty": False,
+                   "platform": "linux/amd64", "archive": "obsgod-decky.zip", "sha256": "a" * 64}
+        entry = {"tag_name": "v" + version, "prerelease": "-" in version, "draft": False,
+                 "assets": [{"name": name, "browser_download_url": base + name}
+                            for name in ("obsgod-decky.zip", "build-receipt.json", "SHA256SUMS")]}
+        values = {releases.RELEASES_URL: json.dumps([entry]).encode(),
+                  "https://api.github.com/repos/szmyty/obsgod/commits/v" + version: json.dumps({"sha": revision}).encode(),
+                  base + "build-receipt.json": json.dumps(receipt).encode(),
+                  base + "SHA256SUMS": ("a" * 64 + "  obsgod-decky.zip\n").encode()}
+        return entry, receipt, values, base
+
+    def test_standard_plugin_release_compares_loaded_version_and_never_downloads(self):
+        _, _, values, _ = self.fixture("0.1.0-deck.5")
+        for installed, expected, available in [("0.1.0-deck.4", "update-available", True),
+                                                ("0.1.0-deck.5", "up-to-date", False),
+                                                ("0.1.0-deck.9", "up-to-date", False)]:
+            seen = []
+            def read(url, *args, **kwargs):
+                seen.append(url)
+                return values[url]
+            with self.subTest(installed=installed), patch.object(releases, "_read_url", side_effect=read):
+                result = releases.check_plugin_updates(installed)
+            self.assertEqual(result["state"], expected)
+            self.assertEqual(result["available"], available)
+            self.assertEqual(result["current_version"], installed)
+            self.assertFalse(result["automatic_update_supported"])
+            self.assertNotIn("Desktop updater", result["message"])
+            self.assertFalse(any(url.endswith(".zip") for url in seen))
+
+    def test_paired_runtime_alone_is_not_a_published_standard_plugin_release(self):
+        paired, values, _ = ReleaseChecks().fixture("0.1.0-deck.5")
+        values[releases.RELEASES_URL] = json.dumps([paired]).encode()
+        with patch.object(releases, "_read_url", side_effect=lambda url, *a, **k: values[url]) as read:
+            result = releases.check_plugin_updates("0.1.0-deck.9")
+        self.assertTrue(result["ok"])
+        self.assertEqual(result["state"], "unavailable")
+        self.assertFalse(result["available"])
+        self.assertIsNone(result["latest_version"])
+        self.assertEqual(read.call_count, 1)
+
+    def test_incomplete_foreign_dirty_or_inconsistent_plugin_metadata_fails_closed(self):
+        entry, receipt, values, base = self.fixture()
+        cases = []
+        for field, value in [("revision", "2" * 40), ("version", "0.1.0-deck.11"),
+                             ("dirty", True), ("platform", "linux/arm64"),
+                             ("sha256", "b" * 64), ("archive", "another.zip")]:
+            changed = dict(values)
+            changed[base + "build-receipt.json"] = json.dumps(dict(receipt, **{field: value})).encode()
+            cases.append(changed)
+        cases.append(dict(values, **{base + "SHA256SUMS": b""}))
+        for assets in [entry["assets"][:1], entry["assets"] + [entry["assets"][0]],
+                       [dict(asset, browser_download_url="https://attacker.invalid/zip") for asset in entry["assets"]]]:
+            cases.append(dict(values, **{releases.RELEASES_URL: json.dumps([dict(entry, assets=assets)]).encode()}))
+        for altered in cases:
+            with self.subTest(metadata=altered), patch.object(releases, "_read_url", side_effect=lambda url, *a, **k: altered[url]):
+                result = releases.check_plugin_updates("0.1.0-deck.9")
+            self.assertFalse(result["ok"])
+            self.assertFalse(result["available"])
+            self.assertEqual(result["state"], "unsupported")
+
+    def test_offline_does_not_claim_plugin_is_current(self):
+        with patch.object(releases, "_open_url", side_effect=urllib.error.URLError("private fixture")):
+            result = releases.check_plugin_updates("0.1.0-deck.9")
+        self.assertEqual(result["state"], "offline")
+        self.assertFalse(result["ok"])
+        self.assertFalse(result["available"])
+        self.assertNotIn("private fixture", str(result))
+
+    def test_exact_recovery_target_is_selected_only_from_published_trusted_channel(self):
+        old, values, _ = ReleaseChecks().fixture("0.1.0-deck.5")
+        new, new_values, _ = ReleaseChecks().fixture("0.1.0-deck.10")
+        values.update(new_values)
+        values[releases.RELEASES_URL] = json.dumps([new, old]).encode()
+        with patch.object(releases, "_read_url", side_effect=lambda url, *a, **k: values[url]):
+            result, candidate = releases.inspect_updates("0.1.0-deck.9", target_version="0.1.0-deck.5")
+            absent, no_candidate = releases.inspect_updates("0.1.0-deck.9", target_version="0.1.0-deck.6")
+        self.assertEqual(candidate["version"], "0.1.0-deck.5")
+        self.assertFalse(result["available"])
+        self.assertEqual(absent["state"], "unavailable")
+        self.assertIsNone(no_candidate)
+
+
+class PluginReplacementGuard(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.home = Path(self.temp.name)
+        self.environment = patch.dict(os.environ, {"HOME": str(self.home), "DECKY_HOME": "",
+                                                  "DECKY_PLUGIN_DIR": "", "DECKY_PLUGIN_SETTINGS_DIR": "",
+                                                  "DECKY_PLUGIN_RUNTIME_DIR": "", "DECKY_PLUGIN_LOG_DIR": ""})
+        self.environment.start()
+
+    def tearDown(self):
+        self.environment.stop()
+        self.temp.cleanup()
+
+    def plugin(self, version):
+        root = self.home / "homebrew/plugins/obsgod"
+        root.mkdir(parents=True, exist_ok=True)
+        (root / "package.json").write_text(json.dumps({"name": "obsgod", "version": version}))
+        (root / "plugin.json").write_text(json.dumps({"name": "OBSGod"}))
+        return root
+
+    def test_absent_equal_older_newer_and_unknown_installed_plugin(self):
+        self.assertIsNone(releases.require_plugin_replacement("0.1.0-deck.5", self.home))
+        for installed in ("0.1.0-deck.4", "0.1.0-deck.5"):
+            self.plugin(installed)
+            self.assertEqual(releases.require_plugin_replacement("0.1.0-deck.5", self.home), installed)
+        self.plugin("0.1.0-deck.9")
+        with self.assertRaisesRegex(releases.ReleaseError, "newer"):
+            releases.require_plugin_replacement("0.1.0-deck.5", self.home)
+        self.plugin("unknown")
+        with self.assertRaisesRegex(releases.ReleaseError, "could not be verified"):
+            releases.require_plugin_replacement("0.1.0-deck.5", self.home)
+
+    def test_recovery_binds_exact_target_and_observed_current_version_on_every_read(self):
+        self.plugin("0.1.0-deck.9")
+        for target, expected in [("0.1.0-deck.4", "0.1.0-deck.9"), ("0.1.0-deck.5", None),
+                                 ("0.1.0-deck.5", "0.1.0-deck.8")]:
+            with self.subTest(target=target, expected=expected), self.assertRaises(releases.ReleaseError):
+                releases.require_plugin_replacement("0.1.0-deck.5", self.home, target, expected)
+        self.assertEqual(releases.require_plugin_replacement("0.1.0-deck.5", self.home,
+                                                            "0.1.0-deck.5", "0.1.0-deck.9"), "0.1.0-deck.9")
+        self.plugin("0.1.0-deck.10")
+        with self.assertRaisesRegex(releases.ReleaseError, "no longer matches"):
+            releases.require_plugin_replacement("0.1.0-deck.5", self.home, "0.1.0-deck.5", "0.1.0-deck.9")
+
+    def test_symlinked_incomplete_and_foreign_plugin_identities_fail_closed(self):
+        root = self.plugin("0.1.0-deck.9")
+        (root / "plugin.json").write_text('{"name":"Another plugin"}')
+        with self.assertRaises(releases.ReleaseError):
+            releases.installed_plugin_version(self.home)
+        (root / "plugin.json").unlink()
+        (root / "plugin.json").symlink_to(root / "package.json")
+        with self.assertRaises(releases.ReleaseError):
+            releases.installed_plugin_version(self.home)
+        (root / "plugin.json").unlink()
+        with self.assertRaises(releases.ReleaseError):
+            releases.installed_plugin_version(self.home)

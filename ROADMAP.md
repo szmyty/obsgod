@@ -1,5 +1,16 @@
 # Product roadmap
 
+## Cleanup/recovery draft checkpoint
+
+The next authorized batch **#101/#102** is implemented in draft
+[#109](https://github.com/szmyty/obsgod/pull/109) and locally qualified at exact
+clean source **aa323f0**: all six ACT jobs, packaged transport/upgrades/removal,
+native/browser/process checks and 15 criterion mappings. Read the
+[reviewed evidence and limits](docs/cleanup-recovery-checkpoint.md). Both issues
+remain open for review. Actual supported-loader/device/provider/hosted evidence
+stays explicit; no release, deployment or migration occurred. Settings #103 and
+remaining artwork/UI/resource/final-candidate work are separate.
+
 ## Runtime correctness completed; remaining audit stages separate
 
 The authorized **#96–#100** source is merged through #106/#107. The

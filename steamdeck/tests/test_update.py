@@ -15,6 +15,7 @@ from unittest.mock import Mock, patch
 spec = importlib.util.spec_from_file_location("obsgod_updater", Path(__file__).resolve().parents[1] / "update.py")
 updater = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(updater)
+real_releases = updater.release_module()
 
 
 class UpdateSafety(unittest.TestCase):
@@ -30,14 +31,16 @@ class UpdateSafety(unittest.TestCase):
         self.env.stop()
         self.temp.cleanup()
 
-    def fixture(self):
+    def fixture(self, installer_source=b"RECOVERY_POLICY_VERSION = 1\n"):
         version = "0.1.0-deck.5"
         files = {name: b"verified fixture" for name in ["obsgod", "install.py", "bridge.py", "decky.py", "decky-install", "update.py", "releases.py", "obsgod-decky.zip"]}
+        files["install.py"] = installer_source
         manifest = {"version": version, "revision": "1" * 40, "platform": "linux/amd64", "dirty": False, "updater_version": version, "files": {name: hashlib.sha256(data).hexdigest() for name, data in files.items()}}
         files["manifest.json"] = json.dumps(manifest).encode()
         candidate = {"version": version, "revision": manifest["revision"], "manifest": manifest, "manifest_sha256": hashlib.sha256(files["manifest.json"]).hexdigest()}
         release = Mock()
         release.inspect_updates.return_value = ({"ok": True, "available": True}, candidate)
+        release.require_plugin_replacement.side_effect = real_releases.require_plugin_replacement
 
         def download(_candidate, destination):
             with tarfile.open(destination, "w:gz") as archive:
@@ -47,6 +50,110 @@ class UpdateSafety(unittest.TestCase):
                     archive.addfile(member, io.BytesIO(data))
         release.download_archive.side_effect = download
         return release, candidate, files
+
+    def plugin(self, version):
+        root = self.home / "homebrew/plugins/obsgod"
+        root.mkdir(parents=True, exist_ok=True)
+        (root / "package.json").write_text(json.dumps({"name": "obsgod", "version": version}))
+        (root / "plugin.json").write_text(json.dumps({"name": "OBSGod"}))
+
+    def test_newer_standard_plugin_blocks_ordinary_desktop_update_before_download(self):
+        release, _, _ = self.fixture()
+        self.plugin("0.1.0-deck.9")
+        with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release), patch.object(updater, "load_module") as load:
+            with contextlib.redirect_stdout(io.StringIO()), self.assertRaisesRegex(RuntimeError, "newer"):
+                updater.run_update()
+        release.download_archive.assert_not_called()
+        load.assert_not_called()
+        self.assertFalse((self.base / "update-status.json").exists())
+
+    def test_desktop_check_explains_protected_plugin_without_recommending_pair_repair(self):
+        release, _, _ = self.fixture()
+        release.check_updates.return_value = {"ok": True, "available": True,
+                                              "latest_version": "0.1.0-deck.5", "message": "Desktop update"}
+        self.plugin("0.1.0-deck.9")
+        with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release):
+            result = updater.check()
+        self.assertFalse(result["available"])
+        self.assertEqual(result["state"], "plugin-protected")
+        self.assertIn("--recover-plugin-version 0.1.0-deck.5 --expect-plugin-version 0.1.0-deck.9", result["message"])
+        release.download_archive.assert_not_called()
+        self.assertFalse(self.base.exists())
+
+    def test_explicit_recovery_forwards_exact_target_and_expected_plugin_to_installer(self):
+        release, candidate, files = self.fixture()
+        self.plugin("0.1.0-deck.9")
+        installer, bridge = Mock(RECOVERY_POLICY_VERSION=1), Mock()
+        bridge.run_cli.return_value = {"ok": True, "state": "stopped", "output_known": True,
+                                       "recording": False, "stream": {"active": False}, "process": "absent"}
+        def install(**kwargs):
+            target = self.base / "releases" / candidate["version"]
+            target.mkdir(parents=True)
+            for name, data in files.items():
+                (target / name).write_bytes(data)
+            (self.base / "current").symlink_to(target)
+            return self.base / "current"
+        installer.install.side_effect = install
+        with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release), patch.object(
+                updater, "load_module", side_effect=lambda name, path: installer if name == "obsgod_payload_installer" else bridge):
+            with contextlib.redirect_stdout(io.StringIO()):
+                updater.run_update(recovery_plugin_version="0.1.0-deck.5", expected_plugin_version="0.1.0-deck.9")
+        release.inspect_updates.assert_called_once_with("0.0.0", "preview", target_version="0.1.0-deck.5")
+        installer.install.assert_called_once_with(launch=False, recovery_plugin_version="0.1.0-deck.5",
+                                                  expected_plugin_version="0.1.0-deck.9")
+
+    def test_changed_plugin_during_download_invalidates_explicit_recovery_before_backup_install(self):
+        release, _, _ = self.fixture()
+        self.plugin("0.1.0-deck.9")
+        original_download = release.download_archive.side_effect
+        def download(candidate, destination):
+            original_download(candidate, destination)
+            self.plugin("0.1.0-deck.10")
+        release.download_archive.side_effect = download
+        installer, bridge = Mock(RECOVERY_POLICY_VERSION=1), Mock()
+        bridge.run_cli.return_value = {"ok": True, "state": "stopped", "output_known": True,
+                                       "recording": False, "stream": {"active": False}, "process": "absent"}
+        with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release), patch.object(
+                updater, "load_module", side_effect=lambda name, path: installer if name == "obsgod_payload_installer" else bridge), patch.object(
+                updater, "backup_settings") as backup:
+            with contextlib.redirect_stdout(io.StringIO()), self.assertRaisesRegex(RuntimeError, "no longer matches"):
+                updater.run_update(recovery_plugin_version="0.1.0-deck.5", expected_plugin_version="0.1.0-deck.9")
+        backup.assert_not_called()
+        installer.install.assert_not_called()
+
+    def test_target_only_or_wrong_expected_recovery_is_not_a_blanket_downgrade(self):
+        release, _, _ = self.fixture()
+        self.plugin("0.1.0-deck.9")
+        for expected in (None, "0.1.0-deck.8"):
+            with self.subTest(expected=expected), patch.object(updater, "verify_bundle"), patch.object(
+                    updater, "release_module", return_value=release):
+                with contextlib.redirect_stdout(io.StringIO()), self.assertRaises(RuntimeError):
+                    updater.run_update(recovery_plugin_version="0.1.0-deck.5", expected_plugin_version=expected)
+        release.download_archive.assert_not_called()
+
+    def test_historical_or_nonliteral_policy_is_rejected_before_import_backup_or_dependency_work(self):
+        sentinel = self.home / "candidate-code-ran"
+        touch = "from pathlib import Path\nPath(" + repr(str(sentinel)) + ").write_text('unexpected')\n"
+        sources = [touch, "RECOVERY_POLICY_VERSION = 2\n", "RECOVERY_POLICY_VERSION = True\n",
+                   "RECOVERY_POLICY_VERSION = '1'\n", touch + "RECOVERY_POLICY_VERSION = int('1')\n",
+                   touch + "def RECOVERY_POLICY_VERSION(): return 1\n",
+                   "RECOVERY_POLICY_VERSION = 1\nRECOVERY_POLICY_VERSION = 2\n"]
+        retained = self.home / "retained-settings"
+        retained.write_bytes(b"preserved fixture")
+        for source in sources:
+            release, _, _ = self.fixture(source.encode())
+            with self.subTest(source=source), patch.object(updater, "verify_bundle"), patch.object(
+                    updater, "release_module", return_value=release), patch.object(updater, "load_module") as load, patch.object(
+                    updater, "backup_settings") as backup:
+                with contextlib.redirect_stdout(io.StringIO()), self.assertRaisesRegex(updater.UpdateError, "predates safe"):
+                    updater.run_update()
+            load.assert_not_called()
+            backup.assert_not_called()
+            self.assertFalse(sentinel.exists())
+            self.assertEqual(retained.read_bytes(), b"preserved fixture")
+
+    def test_policy_literal_accepts_current_installer_without_executing_it(self):
+        updater.require_recovery_policy(Path(__file__).resolve().parents[1] / "install.py")
 
     def test_bundle_checksum_and_symlink_validation_before_download(self):
         package = self.home / "updater"
@@ -170,7 +277,7 @@ class UpdateSafety(unittest.TestCase):
         media = self.home / "Videos/OBSGod/keep.mkv"
         media.parent.mkdir(parents=True)
         media.write_bytes(b"existing recording")
-        installer = Mock()
+        installer = Mock(RECOVERY_POLICY_VERSION=1)
         bridge = Mock()
         bridge.run_cli.return_value = {"ok": True, "state": "stopped", "output_known": True, "recording": False, "stream": {"active": False}, "process": "absent"}
 
@@ -202,7 +309,7 @@ class UpdateSafety(unittest.TestCase):
         old.mkdir(parents=True)
         (old / "manifest.json").write_text(json.dumps({"version": "0.1.0-deck.4"}))
         (self.base / "current").symlink_to(old)
-        installer = Mock()
+        installer = Mock(RECOVERY_POLICY_VERSION=1)
         installer.install.side_effect = KeyboardInterrupt()
         bridge = Mock()
         bridge.run_cli.return_value = {"ok": True, "state": "stopped", "output_known": True, "recording": False, "stream": {"active": False}, "process": "absent"}
@@ -216,11 +323,118 @@ class UpdateSafety(unittest.TestCase):
     def test_concurrent_updater_stops_before_network_and_writes(self):
         self.base.mkdir(parents=True)
         with (self.base / "update.lock").open("w") as lock:
+            (self.base / "update.lock").chmod(0o600)
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
             with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module") as release:
                 with self.assertRaisesRegex(updater.UpdateError, "Another OBSGod updater"):
                     updater.run_update()
                 release.return_value.inspect_updates.assert_not_called()
+
+    def test_new_intermediate_writable_ancestry_is_rejected_before_lock_or_network(self):
+        release, _, _ = self.fixture()
+        previous = os.umask(0o002)
+        try:
+            with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release):
+                with self.assertRaisesRegex(updater.UpdateError, "writable nonsticky"):
+                    updater.run_update()
+        finally:
+            os.umask(previous)
+        release.inspect_updates.assert_not_called()
+        release.download_archive.assert_not_called()
+        self.assertFalse((self.base / "update.lock").exists())
+        self.assertFalse((self.base / "update-status.json").exists())
+
+    def test_unsafe_update_locks_are_refused_without_truncation_progress_or_download(self):
+        self.base.mkdir(parents=True)
+        path = self.base / "update.lock"
+        linked = self.home / "lock-alias"
+        sentinel = self.home / "protected-lock-target"
+        sentinel.write_bytes(b"unchanged target")
+        for kind in ("public", "hardlink", "fifo", "directory", "symlink"):
+            release, _, _ = self.fixture()
+            if kind == "fifo":
+                os.mkfifo(path, 0o600)
+            elif kind == "directory":
+                path.mkdir()
+            elif kind == "symlink":
+                path.symlink_to(sentinel)
+            else:
+                path.write_bytes(b"unchanged lock")
+                path.chmod(0o644 if kind == "public" else 0o600)
+                if kind == "hardlink":
+                    os.link(path, linked)
+            try:
+                with self.subTest(kind=kind), patch.object(updater, "verify_bundle"), patch.object(
+                        updater, "release_module", return_value=release), patch.object(updater, "load_module") as load:
+                    with self.assertRaisesRegex(updater.UpdateError, "unsafe"):
+                        updater.run_update()
+                release.inspect_updates.assert_not_called()
+                release.download_archive.assert_not_called()
+                load.assert_not_called()
+                self.assertFalse((self.base / "update-status.json").exists())
+                self.assertEqual(sentinel.read_bytes(), b"unchanged target")
+                if kind in ("public", "hardlink"):
+                    self.assertEqual(path.read_bytes(), b"unchanged lock")
+            finally:
+                path.rmdir() if kind == "directory" else path.unlink()
+                linked.unlink(missing_ok=True)
+
+    def test_foreign_update_lock_fd_owner_is_refused_before_network(self):
+        self.base.mkdir(parents=True)
+        path = self.base / "update.lock"
+        path.write_bytes(b"unchanged lock")
+        path.chmod(0o600)
+        original = updater.os.fstat
+        def foreign_owner(descriptor):
+            info = list(original(descriptor))
+            info[4] = os.getuid() + 1
+            return os.stat_result(info)
+        release, _, _ = self.fixture()
+        with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release), patch.object(
+                updater.os, "fstat", side_effect=foreign_owner):
+            with self.assertRaisesRegex(updater.UpdateError, "unsafe"):
+                updater.run_update()
+        release.inspect_updates.assert_not_called()
+        release.download_archive.assert_not_called()
+        self.assertEqual(path.read_bytes(), b"unchanged lock")
+        self.assertFalse((self.base / "update-status.json").exists())
+
+    def test_replaced_update_lock_inode_after_acquisition_is_refused_before_network(self):
+        self.base.mkdir(parents=True)
+        path = self.base / "update.lock"
+        original = updater.fcntl.flock
+        def replace(lock, operation):
+            original(lock, operation)
+            path.unlink()
+            path.write_bytes(b"replacement preserved")
+            path.chmod(0o600)
+        release, _, _ = self.fixture()
+        with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release), patch.object(
+                updater.fcntl, "flock", side_effect=replace):
+            with self.assertRaisesRegex(updater.UpdateError, "unsafe|changed"):
+                updater.run_update()
+        release.inspect_updates.assert_not_called()
+        release.download_archive.assert_not_called()
+        self.assertEqual(path.read_bytes(), b"replacement preserved")
+        self.assertFalse((self.base / "update-status.json").exists())
+
+    def test_replaced_update_lock_during_release_check_prevents_progress_and_download(self):
+        release, candidate, _ = self.fixture()
+        path = self.base / "update.lock"
+        def replace(*args, **kwargs):
+            path.unlink()
+            path.write_bytes(b"replacement preserved")
+            path.chmod(0o600)
+            return {"ok": True, "available": True}, candidate
+        release.inspect_updates.side_effect = replace
+        with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release), patch.object(
+                updater, "load_module") as load:
+            with contextlib.redirect_stdout(io.StringIO()), self.assertRaisesRegex(updater.UpdateError, "unsafe|changed"):
+                updater.run_update()
+        release.download_archive.assert_not_called()
+        load.assert_not_called()
+        self.assertEqual(path.read_bytes(), b"replacement preserved")
+        self.assertFalse((self.base / "update-status.json").exists())
 
     def test_settings_backup_private_and_symlinked_recovery_record_refused(self):
         config = self.home / ".config/obsgod"
@@ -255,7 +469,7 @@ class UpdateSafety(unittest.TestCase):
             updater.require_idle(legacy_bridge)
         malformed_new_bridge = Mock()
         malformed_new_bridge.run_cli.return_value = legacy_bridge.run_cli.return_value
-        installer = Mock()
+        installer = Mock(RECOVERY_POLICY_VERSION=1)
         def module(name, path):
             return installer if name == "obsgod_payload_installer" else legacy_bridge if name == "obsgod_installed_bridge" else malformed_new_bridge
         with patch.object(updater, "verify_bundle"), patch.object(updater, "release_module", return_value=release), patch.object(updater, "load_module", side_effect=module), patch.object(updater, "backup_settings") as backup:

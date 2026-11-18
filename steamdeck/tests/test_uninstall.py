@@ -83,13 +83,15 @@ class RemovalSafety(unittest.TestCase):
         for kind in ["settings", "data", "logs"]:
             self.assertTrue((self.home / "homebrew" / kind / "obsgod/owned").exists())
         self.assertTrue((self.obs.parent / "obs-studio/ordinary.json").exists())
-        self.assertEqual([x.args[0] for x in self.run_cli.call_args_list], ["status", "restart", "status", "status"])
+        self.assertEqual([x.args[0] for x in self.run_cli.call_args_list], ["status", "status", "status"])
 
     def test_wipe_removes_owned_credentials_backups_data_but_not_recordings_or_ordinary_obs(self):
         self.fixture()
         uninstall.apply_plan(uninstall.build_plan(self.home, "wipe"), self.home)
-        for path in [self.base, self.config, self.obs, self.state, self.cache]:
+        for path in [self.config, self.obs, self.cache]:
             self.assertFalse(path.exists(), path)
+        self.assertEqual({path.name for path in self.base.iterdir()}, {"update.lock", "install.lock"})
+        self.assertEqual({path.name for path in self.state.iterdir()}, {"control.lock"})
         for kind in ["settings", "data", "logs"]:
             self.assertFalse((self.home / "homebrew" / kind / "obsgod").exists())
             self.assertTrue((self.home / "homebrew" / kind / "OtherPlugin/keep").exists())
@@ -234,7 +236,7 @@ class RemovalSafety(unittest.TestCase):
 
     def test_reappearing_idle_obs_is_not_removed_under_the_control_lock(self):
         self.fixture()
-        self.run_cli.side_effect = [self.idle, {"ok": True}, self.idle,
+        self.run_cli.side_effect = [self.idle, self.idle,
                                     {**self.idle, "process": "running"}]
         with self.assertRaisesRegex(uninstall.RemovalError, "partial"):
             uninstall.apply_plan(uninstall.build_plan(self.home, "wipe"), self.home)
@@ -281,11 +283,11 @@ class RemovalSafety(unittest.TestCase):
             self.assertFalse(folder.exists())
             self.assertEqual(helper.call_count, 2)
 
-    def test_fresh_removal_leaves_no_new_owned_lock_namespaces(self):
+    def test_fresh_removal_retains_coordination_for_existing_and_future_waiters(self):
         self.run_cli.return_value = {**self.idle, "configured": False}
         uninstall.apply_plan(uninstall.build_plan(self.home), self.home)
-        self.assertFalse(self.base.exists())
-        self.assertFalse(self.state.exists())
+        self.assertEqual({path.name for path in self.base.iterdir()}, {"update.lock", "install.lock"})
+        self.assertEqual({path.name for path in self.state.iterdir()}, {"control.lock"})
 
     def test_wipe_unknown_decky_root_has_visible_gate_and_never_mutates(self):
         self.write(".config/obsgod/secrets.json", "preserved private fixture")

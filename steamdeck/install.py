@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Install or repair OBSGod and its Decky plugin, preserving private user data."""
 import argparse
+import asyncio
 import hashlib
+import io
 import json
 import os
 from pathlib import Path
@@ -9,12 +11,14 @@ import platform
 import importlib.util
 import re
 import shutil
+import stat
 import subprocess
 import sys
 import tempfile
 import time
 import fcntl
 import webbrowser
+import zipfile
 from contextlib import contextmanager
 def _sibling(name):
     # Published older updaters load a downloaded installer with importlib while
@@ -28,8 +32,10 @@ def _sibling(name):
 _paths = _sibling("paths")
 app_directories, xdg_root, validate_owned_root = _paths.app_directories, _paths.xdg_root, _paths.validate_owned_root
 DISPLAY_NAME = _sibling("product").DISPLAY_NAME if (Path(__file__).resolve().parent / "product.py").is_file() else "OBSGod"
+_releases = _sibling("releases") if (Path(__file__).resolve().parent / "releases.py").is_file() else None
 
 ROOT = Path(__file__).resolve().parent
+RECOVERY_POLICY_VERSION = 1
 
 
 def owned_directory(path, home):
@@ -75,13 +81,27 @@ def verify_payload():
 
 
 @contextmanager
-def installation_lock(base):
-    descriptor = os.open(base / "install.lock", os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
+def _installation_lease(path, home, busy_message):
+    owned_directory(path.parent, home)
+    descriptor = os.open(path, os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
     with os.fdopen(descriptor, "w") as lock:
+        info = os.fstat(lock.fileno())
+        if (not stat.S_ISREG(info.st_mode) or info.st_uid != os.getuid()
+                or info.st_nlink != 1 or info.st_mode & 0o077):
+            raise RuntimeError("The OBSGod installation/control lease is unsafe. Existing data was preserved.")
         try:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
-            raise RuntimeError("Another OBSGod installer is running. Let it finish, then retry")
+            raise RuntimeError(busy_message) from None
+        current = path.lstat()
+        if (current.st_dev, current.st_ino) != (info.st_dev, info.st_ino):
+            raise RuntimeError("The OBSGod installation/control lease changed. Existing data was preserved.")
+        yield
+
+
+@contextmanager
+def installation_lock(base):
+    with _installation_lease(base / "install.lock", Path.home(), "Another OBSGod installer is running. Let it finish, then retry"):
         yield
 
 
@@ -226,10 +246,14 @@ def require_idle(bridge, close=False):
     # after OBS is absent; missing replay state from a running instance is not
     # proof of idle output. New runtimes always report a media snapshot.
     media_idle = (isinstance(media, dict) and media.get("known") is True
-                  and media.get("replay_active") is False)
+                  and media.get("replay_active") is False
+                  and isinstance(media.get("recording"), dict)
+                  and media["recording"].get("active") is False
+                  and media["recording"].get("paused") is False)
     legacy_absent = media is None and state.get("process") == "absent"
     if (state.get("ok") is not True or state.get("state") not in ("stopped", "setup")
             or not isinstance(stream, dict) or stream.get("active") is not False
+            or stream.get("reconnecting", False) is not False
             or not isinstance(recording_active, bool) or recording_active
             or not (media_idle or legacy_absent)
             or state.get("output_known") is not True
@@ -245,13 +269,7 @@ def require_idle(bridge, close=False):
 @contextmanager
 def control_lock(home):
     state = xdg_root("XDG_STATE_HOME", home) / "obsgod"
-    owned_directory(state, home)
-    descriptor = os.open(state / "control.lock", os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
-    with os.fdopen(descriptor, "w") as lock:
-        try:
-            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except BlockingIOError:
-            raise RuntimeError("Another OBSGod control operation is busy. Let it finish before installing.") from None
+    with _installation_lease(state / "control.lock", home, "Another OBSGod control operation is busy. Let it finish before installing."):
         yield
 
 
@@ -279,37 +297,123 @@ def installed_obs_version():
     return versions[0]
 
 
-def ensure_dependencies():
-    if not shutil.which("flatpak"):
-        raise RuntimeError("Flatpak is unavailable. Install on your Steam Deck in Desktop Mode.")
-    apps = ["com.obsproject.Studio", "com.obsproject.Studio.Plugin.Gstreamer"]
-    installed = all(subprocess.run(["flatpak", "info", "--user", app], stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=15).returncode == 0 for app in apps)
-    if not installed:
-        print("Installing OBS and its capture plugin through Flathub. This may take several minutes…", flush=True)
-        commands = [
-            ["flatpak", "remote-add", "--user", "--if-not-exists", "flathub", "https://flathub.org/repo/flathub.flatpakrepo"],
-            ["flatpak", "install", "--user", "--noninteractive", "-y", "flathub"] + apps,
-        ]
-        for command in commands:
-            if subprocess.run(command, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=1200).returncode:
-                raise RuntimeError("OBS/capture installation failed. Check Discover, disk space and your connection, then rerun this installer.")
-    version = installed_obs_version()
-    if int(re.match(r"[0-9]+", version).group()) < 28:
-        raise RuntimeError("User-installed OBS " + version + " is older than OBS 28, which is required for bundled obs-websocket. Update that user installation in Discover, then retry; do not install a second WebSocket plugin.")
-    print("OBS " + version + " includes obs-websocket; authenticated readiness will be checked on startup.", flush=True)
+@contextmanager
+def dependency_policy(manifest):
+    """Use the exact native setup worker shipped in this verified plugin ZIP.
+
+    Historical archives without native setup remain usable for app-only repair.
+    They cannot fall back to the old unguarded dependency transaction.
+    """
+    path = ROOT / "obsgod-decky.zip"
+    try:
+        if path.is_symlink() or not path.is_file() or path.stat().st_size > 64 * 1024 * 1024:
+            raise ValueError()
+        payload = path.read_bytes()
+        if hashlib.sha256(payload).hexdigest() != manifest["files"][path.name]:
+            raise ValueError()
+        with zipfile.ZipFile(io.BytesIO(payload)) as archive:
+            names = [item for item in archive.infolist() if item.filename == "obsgod/dependency_setup.py"]
+            if len(names) != 1 or names[0].file_size > 128 * 1024:
+                raise ValueError()
+            source = archive.read(names[0])
+    except (OSError, ValueError, KeyError, zipfile.BadZipFile):
+        raise RuntimeError("This recovery package cannot use verified native dependency setup. Use the current Decky plugin's Setup controls, or install app files only; no Flatpak dependencies were changed.") from None
+    with tempfile.TemporaryDirectory(prefix="obsgod-dependency-policy-") as temporary:
+        module_path = Path(temporary) / "dependency_setup.py"
+        module_path.write_bytes(source)
+        module_path.chmod(0o600)
+        yield load_module("obsgod_install_dependencies", module_path)
 
 
-def recover_previous_plugin(decky, previous):
-    if previous is None:
+async def run_dependency_setup(policy, bridge, home):
+    """Join the native leased transaction while the caller holds install.lock."""
+    jobs = _paths.decky_locations(home)["data"] / "jobs"
+    state = xdg_root("XDG_STATE_HOME", home) / "obsgod"
+
+    async def preflight():
+        # Native setup owns the canonical control lease before this fresh read.
+        # Keep status off the event loop so its bounded subprocess can drain.
+        await asyncio.to_thread(require_idle, bridge)
+        return True
+
+    job = policy.DependencySetup(jobs, os.environ, control_lock=state / "control.lock", preflight=preflight)
+    try:
+        observed = await job.start(consent=True)
+        if not observed["can_cancel"]:
+            if observed["state"] in {"running", "cancelling"}:
+                raise RuntimeError("Native dependency setup is already running. Wait or cancel it in Decky before retrying recovery; no second transaction was started.")
+            raise RuntimeError(observed["message"])
+        operation_id = observed["operation"]["id"]
+
+        def same_operation(snapshot):
+            if ((snapshot.get("operation") or {}).get("id") != operation_id or
+                    snapshot["state"] in {"running", "cancelling"} and not snapshot["can_cancel"]):
+                raise RuntimeError("Native dependency setup changed while recovery was observing it. Recheck setup in Decky before retrying; no second transaction was started.")
+
+        while job.running:
+            await asyncio.sleep(0.1)
+            observed = await job.status()
+            same_operation(observed)
+        observed = await job.status()
+        same_operation(observed)
+        operation = observed.get("operation") or {}
+        if not observed["ready"] or operation.get("state") != "ready":
+            raise RuntimeError(policy.MESSAGES.get(operation.get("error_code"), observed["message"]))
+        return observed
+    finally:
+        # Explicit interruption terminates only this transaction's owned group;
+        # native worker leases survive abrupt parent death until its budget ends.
+        await job.close()
+
+
+def ensure_dependencies(bridge=None, manifest=None, home=None):
+    if bridge is None and manifest is None and home is None:
+        # The retained Desktop browser calls this helper directly. It receives
+        # the same package verification and installer/control leases, rather
+        # than keeping a second dependency-installation implementation.
+        home = Path.home()
+        manifest = verify_payload()
+        bridge = load_module("obsgod_install_bridge", ROOT / "bridge.py")
+        base, _ = app_directories(home)
+        owned_directory(base, home)
+        with installation_lock(base):
+            return ensure_dependencies(bridge, manifest, home)
+    with dependency_policy(manifest) as policy:
+        result = asyncio.run(run_dependency_setup(policy, bridge, home))
+    print(result["message"], flush=True)
+
+
+def recover_previous_plugin(decky, previous, original_plugin_version, candidate_version, home):
+    if previous is None or original_plugin_version is None:
         return False
     try:
         manifest_path = previous / "manifest.json"
         if manifest_path.is_symlink() or not manifest_path.is_file():
             return False
         manifest = json.loads(manifest_path.read_text())
+        # A retained Desktop app can be older than the normal Decky plugin.
+        # Automatic rollback may restore only the exact plugin preimage, never
+        # turn an app-activation failure into an unrelated plugin downgrade.
+        if (not isinstance(manifest, dict) or not isinstance(manifest.get("files"), dict) or
+                manifest.get("version") != original_plugin_version or
+                _releases.installed_plugin_version(home) != candidate_version):
+            return False
+        archive_path = previous / "obsgod-decky.zip"
+        if archive_path.is_symlink() or not archive_path.is_file() or archive_path.stat().st_size > 32 * 1024 * 1024:
+            return False
+        payload = archive_path.read_bytes()
+        if hashlib.sha256(payload).hexdigest() != manifest.get("files", {}).get(archive_path.name):
+            return False
+        with zipfile.ZipFile(io.BytesIO(payload)) as archive:
+            packages = [item for item in archive.infolist() if item.filename == "obsgod/package.json"]
+            if len(packages) != 1 or packages[0].file_size > 16384:
+                return False
+            package = json.loads(archive.read(packages[0]))
+            if not isinstance(package, dict) or package.get("version") != original_plugin_version:
+                return False
         decky.helper_request("install", previous, manifest)
         return True
-    except (OSError, ValueError, KeyError, RuntimeError):
+    except (OSError, ValueError, KeyError, TypeError, RuntimeError, zipfile.BadZipFile):
         return False
 
 
@@ -328,7 +432,7 @@ def offer_decky_guide(url):
     return False
 
 
-def install(launch=True, with_decky=True):
+def install(launch=True, with_decky=True, recovery_plugin_version=None, expected_plugin_version=None):
     if platform.system() != "Linux" or platform.machine() not in {"x86_64", "amd64"}:
         raise RuntimeError("This preview package requires Linux x86_64 (Steam Deck)")
     if os.getuid() == 0:
@@ -347,9 +451,12 @@ def install(launch=True, with_decky=True):
                 offer_decky_guide("https://decky.xyz/")
             raise RuntimeError(report["message"] + " No app or plugin was replaced. Install/start Decky using its official instructions, keep normal Steam open in Desktop Mode, and rerun this installer.")
         print("Decky " + report["version"] + " is ready.", flush=True)
-        ensure_dependencies()
         bridge = load_module("obsgod_install_bridge", ROOT / "bridge.py")
     home = Path.home()
+    if with_decky:
+        if _releases is None or not hasattr(_releases, "require_plugin_replacement"):
+            raise RuntimeError("This installer cannot verify the current Decky plugin version. Use the current recovery package or install app files only.")
+        _releases.require_plugin_replacement(manifest["version"], home, recovery_plugin_version, expected_plugin_version)
     base, apps = app_directories(home)
     releases = base / "releases"
     bin_dir = home / ".local/bin"
@@ -358,11 +465,13 @@ def install(launch=True, with_decky=True):
     require_space(base, manifest)
     with installation_lock(base):
         if with_decky:
+            ensure_dependencies(bridge, manifest, home)
             require_idle(bridge, close=True)
             with control_lock(home):
                 # Close/recheck while holding the same lock as Start/configure.
                 # A concurrent start cannot race plugin replacement or activation.
                 require_idle(bridge)
+                original_plugin_version = _releases.require_plugin_replacement(manifest["version"], home, recovery_plugin_version, expected_plugin_version)
                 current_path = base / "current"
                 previous = current_path.resolve() if current_path.is_symlink() and current_path.resolve().parent == releases else None
                 validate_activation_paths(base, releases, bin_dir, apps, manifest)
@@ -377,7 +486,7 @@ def install(launch=True, with_decky=True):
                     # An interrupted/timeout request can still be running in
                     # Decky. Never race it with a second rollback request. Only
                     # restore after confirmed plugin completion + app failure.
-                    recovered = recover_previous_plugin(decky, previous) if plugin_verified else False
+                    recovered = recover_previous_plugin(decky, previous, original_plugin_version, manifest["version"], home) if plugin_verified else False
                     record = {"version": manifest["version"], "previous_version": previous.name if previous else None, "app_activation_changed": current_path.is_symlink() and current_path.resolve() == candidate, "plugin_rollback_confirmed": recovered}
                     recovery_path = base / "installation-recovery.json"
                     if not recovery_path.is_symlink():
@@ -408,9 +517,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--no-launch", action="store_true")
     parser.add_argument("--app-only", action="store_true", help="Install only app files for manual repair/testing; does not install or verify Decky")
+    parser.add_argument("--recover-plugin-version", metavar="VERSION", help="Explicitly permit replacing a newer Decky plugin with this exact package version")
+    parser.add_argument("--expect-plugin-version", metavar="VERSION", help="Require this exact installed plugin version for an explicit recovery replacement")
     args = parser.parse_args()
     try:
-        install(launch=not args.no_launch, with_decky=not args.app_only)
+        install(launch=not args.no_launch, with_decky=not args.app_only, recovery_plugin_version=args.recover_plugin_version,
+                expected_plugin_version=args.expect_plugin_version)
     except subprocess.TimeoutExpired:
         raise SystemExit("Install timed out while checking or installing a dependency. Inspect Decky/Discover and rerun the same installer to verify or repair the app/plugin pair; settings and recordings are preserved.") from None
     except KeyboardInterrupt:

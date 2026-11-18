@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Check official OBSGod releases and explicitly apply an idle Desktop update."""
 import argparse
+import ast
+from contextlib import contextmanager
 import fcntl
 import hashlib
 import importlib.util
@@ -10,6 +12,7 @@ from pathlib import Path, PurePosixPath
 import platform
 import re
 import shutil
+import stat
 import subprocess
 import sys
 import tarfile
@@ -36,11 +39,45 @@ class UpdateError(RuntimeError):
 def private_directory(path, home):
     try:
         validate_owned_root(path, home)
+        path.mkdir(parents=True, exist_ok=True, mode=0o700)
+        # mkdir's intermediate parents use the caller's umask, not mode=0700.
+        # Recheck before writing locks, progress records or downloaded data.
+        validate_owned_root(path, home)
     except ValueError as error:
         raise UpdateError(str(error) + ". Existing files were preserved.") from None
-    path.mkdir(parents=True, exist_ok=True, mode=0o700)
     if path.is_symlink() or not path.is_dir():
         raise UpdateError("An install directory is unsafe. Existing files were preserved.")
+
+
+def _check_update_lock(lock, path):
+    info = os.fstat(lock.fileno())
+    if (not stat.S_ISREG(info.st_mode) or info.st_uid != os.getuid()
+            or info.st_nlink != 1 or info.st_mode & 0o077):
+        raise UpdateError("The updater lock has unsafe type, ownership or permissions. Existing files were preserved.")
+    try:
+        current = path.lstat()
+    except OSError:
+        raise UpdateError("The updater lock changed. Existing files were preserved.") from None
+    if (current.st_dev, current.st_ino) != (info.st_dev, info.st_ino):
+        raise UpdateError("The updater lock changed. Existing files were preserved.")
+
+
+@contextmanager
+def update_lock(base, home):
+    private_directory(base, home)
+    path = base / "update.lock"
+    try:
+        descriptor = os.open(path, os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
+    except OSError:
+        raise UpdateError("The updater lock is unsafe or unavailable. Existing files were preserved.") from None
+    with os.fdopen(descriptor, "w") as lock:
+        _check_update_lock(lock, path)
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            raise UpdateError("Another OBSGod updater is running. Let it finish, then retry.") from None
+        _check_update_lock(lock, path)
+        yield lock
 
 
 def verify_bundle():
@@ -74,6 +111,33 @@ def release_module():
     return load_module("obsgod_release_metadata", ROOT / "releases.py")
 
 
+def require_recovery_policy(path):
+    """Recognize the fixed installer contract without executing candidate code.
+
+    Checksums and source trust are checked separately. A capability marker is
+    compatibility metadata, not a signature or a general code-safety proof.
+    """
+    try:
+        data = path.read_bytes()
+        if len(data) > 1024 * 1024:
+            raise ValueError()
+        tree = ast.parse(data, filename="verified-install.py")
+        stores = [node for node in ast.walk(tree) if
+                  (isinstance(node, ast.Name) and isinstance(node.ctx, (ast.Store, ast.Del)) and
+                   node.id == "RECOVERY_POLICY_VERSION") or
+                  (isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)) and
+                   node.name == "RECOVERY_POLICY_VERSION")]
+        declarations = [node for node in tree.body if isinstance(node, ast.Assign) and
+                        len(node.targets) == 1 and isinstance(node.targets[0], ast.Name) and
+                        node.targets[0].id == "RECOVERY_POLICY_VERSION"]
+        if (len(stores) != 1 or len(declarations) != 1 or
+                not isinstance(declarations[0].value, ast.Constant) or
+                type(declarations[0].value.value) is not int or declarations[0].value.value != 1):
+            raise ValueError()
+    except (OSError, ValueError, SyntaxError, TypeError, RecursionError):
+        raise UpdateError("This historical installer predates safe independent Decky recovery. Nothing was replaced. Use a current reviewed recovery package or Decky's plugin installation controls.") from None
+
+
 def installed_release(home):
     base, _ = app_directories(home)
     current = base / "current"
@@ -93,8 +157,16 @@ def installed_release(home):
 def check(channel="preview"):
     verify_bundle()
     _, installed = installed_release(Path.home())
-    result = release_module().check_updates(installed.get("version", "unknown"), channel)
+    releases = release_module()
+    result = releases.check_updates(installed.get("version", "unknown"), channel)
     result["current_updater_version"] = installed.get("updater_version", "not-bundled")
+    if result.get("available"):
+        try:
+            plugin = releases.require_plugin_replacement(result.get("latest_version"), Path.home())
+            result["current_plugin_version"] = plugin
+        except RuntimeError as error:
+            result.update(available=False, state="plugin-protected", plugin_replacement_blocked=True,
+                          message=str(error))
     return result
 
 
@@ -190,7 +262,7 @@ def save_progress(base, values):
         Path(temporary).unlink(missing_ok=True)
 
 
-def run_update(channel="preview", repair=False):
+def run_update(channel="preview", repair=False, recovery_plugin_version=None, expected_plugin_version=None):
     if platform.system() != "Linux" or platform.machine() not in {"x86_64", "amd64"} or os.getuid() == 0:
         raise UpdateError("Run this updater as your normal Steam Deck user in Desktop Mode, without sudo.")
     session = (os.environ.get("XDG_CURRENT_DESKTOP", "") + ":" + os.environ.get("DESKTOP_SESSION", "")).lower()
@@ -200,27 +272,27 @@ def run_update(channel="preview", repair=False):
     releases = release_module()
     home = Path.home()
     base, _ = app_directories(home)
-    private_directory(base, home)
-    descriptor = os.open(base / "update.lock", os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
-    with os.fdopen(descriptor, "w") as lock:
-        try:
-            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except BlockingIOError:
-            raise UpdateError("Another OBSGod updater is running. Let it finish, then retry.") from None
+    with update_lock(base, home) as lock:
         current, installed = installed_release(home)
         if current and (current / "bridge.py").is_file():
             legacy = installed.get("version") in {"0.1.0-deck.1", "0.1.0-deck.2", "0.1.0-deck.3", "0.1.0-deck.4"}
             require_idle(load_module("obsgod_installed_bridge", current / "bridge.py"), allow_legacy=legacy)
         print("1/4 Checking the official " + channel + " runtime releases…", flush=True)
-        result, candidate = releases.inspect_updates(installed.get("version", "unknown"), channel)
+        if recovery_plugin_version is None:
+            result, candidate = releases.inspect_updates(installed.get("version", "unknown"), channel)
+        else:
+            result, candidate = releases.inspect_updates(installed.get("version", "unknown"), channel,
+                                                        target_version=recovery_plugin_version)
         if not result.get("ok") or candidate is None:
             raise UpdateError(result.get("message", "No verified runtime release is available."))
-        if not result["available"] and (not repair or candidate["version"] != installed.get("version")):
+        if not result["available"] and recovery_plugin_version is None and (not repair or candidate["version"] != installed.get("version")):
             return result["message"] + " Nothing was replaced."
         required = {"install.py", "decky.py", "decky-install", "update.py", "releases.py"}
         if not required.issubset(candidate["manifest"]["files"]):
             raise UpdateError("This historical runtime predates the unified installer. Open its official release page for installation instructions; your current app and plugin were not replaced.")
+        releases.require_plugin_replacement(candidate["version"], home, recovery_plugin_version, expected_plugin_version)
         progress = {"state": "downloading", "from_version": installed.get("version"), "version": candidate["version"], "revision": candidate["revision"], "channel": channel}
+        _check_update_lock(lock, base / "update.lock")
         save_progress(base, progress)
         try:
             with tempfile.TemporaryDirectory(prefix=".update-", dir=base) as temporary:
@@ -236,14 +308,22 @@ def run_update(channel="preview", repair=False):
                     path = package / name
                     if not path.is_file() or path.is_symlink() or hashlib.sha256(path.read_bytes()).hexdigest() != digest:
                         raise UpdateError("The release payload checksum does not match. Existing files were preserved.")
+                require_recovery_policy(package / "install.py")
                 installer = load_module("obsgod_payload_installer", package / "install.py")
                 installer.verify_payload()
                 require_idle(load_module("obsgod_payload_bridge", package / "bridge.py"))
+                releases.require_plugin_replacement(candidate["version"], home, recovery_plugin_version, expected_plugin_version)
                 backup_settings(base, home)
                 progress["state"] = "installing"
                 save_progress(base, progress)
                 print("3/4 Installing the app and Decky plugin; preserving settings and key…", flush=True)
-                current = installer.install(launch=False)
+                if recovery_plugin_version is None:
+                    current = installer.install(launch=False)
+                else:
+                    # Older verified installers cannot accept this explicit
+                    # contract. Refuse rather than silently bypassing it.
+                    current = installer.install(launch=False, recovery_plugin_version=recovery_plugin_version,
+                                                expected_plugin_version=expected_plugin_version)
                 if hashlib.sha256((current / "manifest.json").read_bytes()).hexdigest() != candidate["manifest_sha256"]:
                     raise UpdateError("The final app version could not be verified. Keep the recovery record and rerun the updater.")
                 progress["state"] = "complete"
@@ -275,10 +355,18 @@ def main():
     parser.add_argument("--json", action="store_true", help="machine-readable check result")
     parser.add_argument("--channel", choices=["stable", "preview"], default="preview")
     parser.add_argument("--repair", action="store_true", help="explicitly reinstall the same verified runtime")
+    parser.add_argument("--recover-plugin-version", metavar="VERSION",
+                        help="explicitly recover this exact published app/plugin version, including a plugin downgrade")
+    parser.add_argument("--expect-plugin-version", metavar="VERSION",
+                        help="bind recovery to this exact currently installed plugin version")
     args = parser.parse_args()
     os.umask(0o077)
     if args.json and not args.check:
         parser.error("--json requires --check; installation is an explicit Desktop action")
+    if args.check and args.recover_plugin_version is not None:
+        parser.error("--recover-plugin-version is an explicit install action, not a check")
+    if (args.recover_plugin_version is None) != (args.expect_plugin_version is None):
+        parser.error("recovery requires both --recover-plugin-version TARGET and --expect-plugin-version CURRENT")
     if args.check:
         try:
             result = check(args.channel)
@@ -288,7 +376,7 @@ def main():
         return 0 if result.get("ok") else 1
     success = False
     try:
-        message = run_update(args.channel, args.repair)
+        message = run_update(args.channel, args.repair, args.recover_plugin_version, args.expect_plugin_version)
         success = True
     except UpdateError as error:
         message = str(error)

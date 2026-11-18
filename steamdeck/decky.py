@@ -3,6 +3,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import stat
 import subprocess
 import tempfile
 
@@ -16,7 +17,10 @@ def helper_request(operation, package=ROOT, manifest=None, uninstall_existing=Fa
     helper = ROOT / "decky-install"
     if helper.is_symlink() or not helper.is_file():
         raise RuntimeError("The verified Decky installer is missing. Extract the complete OBSGod release and retry.")
-    helper.chmod(0o700)
+    # chmod changes ctime even when mode bits already match. Installed cleanup
+    # previews must not be invalidated by merely executing the verified helper.
+    if stat.S_IMODE(helper.stat().st_mode) != 0o700:
+        helper.chmod(0o700)
     request = {"operation": operation}
     if uninstall_existing:
         if operation != "uninstall":

@@ -94,7 +94,8 @@ class ProductInstallBoundaries(unittest.TestCase):
                 install.require_idle(bridge, close=True)
             self.assertEqual([x.args[0] for x in bridge.run_cli.call_args_list], ["status"])
         bridge = Mock()
-        bridge.run_cli.return_value = {**idle, "media": {"known": True, "replay_active": False}}
+        bridge.run_cli.return_value = {**idle, "media": {"known": True, "replay_active": False,
+            "recording": {"active": False, "paused": False}}}
         install.require_idle(bridge)
 
     def test_old_updater_imports_new_modules_without_sys_path_or_stale_helpers(self):
@@ -114,6 +115,49 @@ for name in ['install', 'update', 'uninstall']:
 """
         result = subprocess.run([sys.executable, "-I", "-c", code, str(ROOT), str(self.home)], cwd=self.home, capture_output=True, text=True, timeout=10)
         self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_install_and_control_locks_refuse_public_hardlinked_or_nonregular_files(self):
+        base = self.home / ".local/share/obsgod"
+        state = self.home / ".local/state/obsgod"
+        for path in (base, state):
+            install.owned_directory(path, self.home)
+        for name, path, lease in (
+                ("install", base / "install.lock", lambda: install.installation_lock(base)),
+                ("control", state / "control.lock", lambda: install.control_lock(self.home))):
+            for kind in ("public", "hardlink", "fifo"):
+                with self.subTest(name=name, kind=kind):
+                    if kind == "fifo":
+                        os.mkfifo(path, 0o600)
+                    else:
+                        path.write_text("preserved lock identity")
+                        path.chmod(0o644 if kind == "public" else 0o600)
+                        if kind == "hardlink":
+                            os.link(path, path.with_suffix(".other"))
+                    with self.assertRaisesRegex(RuntimeError, "lease is unsafe"):
+                        with lease():
+                            self.fail("unsafe lease was acquired")
+                    if kind != "fifo":
+                        self.assertEqual(path.read_text(), "preserved lock identity")
+                    path.unlink()
+                    path.with_suffix(".other").unlink(missing_ok=True)
+
+    def test_replaced_lock_inode_is_refused_before_installation_can_proceed(self):
+        base = self.home / ".local/share/obsgod"
+        install.owned_directory(base, self.home)
+        path = base / "install.lock"
+        original = install.fcntl.flock
+
+        def replace_after_acquiring(lock, operation):
+            original(lock, operation)
+            path.unlink()
+            path.write_text("replacement preserved")
+            path.chmod(0o600)
+
+        with patch.object(install.fcntl, "flock", side_effect=replace_after_acquiring), \
+                self.assertRaisesRegex(RuntimeError, "lease changed"):
+            with install.installation_lock(base):
+                self.fail("changed lock inode was accepted")
+        self.assertEqual(path.read_text(), "replacement preserved")
 
     def test_official_decky_guide_requires_operator_consent(self):
         with patch.object(install.shutil, "which", return_value="kdialog"), patch.object(install.subprocess, "run") as dialog, patch.object(install.webbrowser, "open", return_value=True) as opened:

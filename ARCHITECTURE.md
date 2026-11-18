@@ -119,9 +119,18 @@ plugin installation. No download occurs in lifecycle initialization. Explicit
 consent reserves a bounded backend-owned job; decline preserves the plugin and
 cancel/reload re-observes actual installed refs. Its shared control lease and
 fresh output preflight prevent a legacy Start racing the dependency transaction.
+
+Retained Desktop dependency recovery consumes that same policy from its verified
+candidate ZIP and shares the native setup/control leases. The
+[cleanup/recovery contract](docs/cleanup-recovery.md) separates loaded-plugin
+update identity from optional Desktop inventory, pins deliberate replacement
+versions and preserves stable coordination inodes through cleanup. Normal
+Decky-managed replacement/removal remains primary; legacy app retirement is an
+explicit scope that preserves the active plugin and shared stores.
 Dependency installed, OBS launched, authenticated connection and streaming remain
-separate observed facts. Native destination/key configuration and final selected
-branding are subsequent roadmap work, not implied by dependency readiness.
+separate observed facts. Native destination/key configuration has its own
+readiness contract; selected branding remains separate roadmap work. Dependency
+readiness alone does not establish either.
 
 OBS is a graphical application controlled through its bundled WebSocket, not a
 headless renderer. Managed operation uses user-installed OBS 28+ and its
