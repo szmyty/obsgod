@@ -256,3 +256,18 @@ The owner requested consolidation after review/merges into one implementation
 checklist, keeping #51 separate. A superseded issue must transfer every remaining
 original criterion and dependency. Consolidation cannot mark missing device,
 CI, rights, review or adoption evidence passed.
+
+## Maintainer build qualification
+
+The maintained candidate executes and inspects both complete primary plugin
+builds as the checkout owner, compares canonical bytes and uses the primary ZIP
+in packaged checks. Compatibility archives remain independently checked; they
+are not a required application for normal installation. The optional official
+CLI check remains prepared-payload assembly rather than source-compilation proof.
+
+[Local CI](docs/local-ci.md) provides an opt-in constrained profile with measured
+host/daemon capacity, fresh per-attempt paths and a serial matrix evidence session.
+An early resource refusal is unavailable/unrun workflow evidence. Explicit
+post-consumer cleanup is limited to private compiler caches; source, modules,
+toolchains, artifacts, receipts and package/network presets are retained. These
+maintainer checks do not replace actual Deck/provider/hosted acceptance.

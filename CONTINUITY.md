@@ -9,8 +9,12 @@ completed at **2fbb0cb67bbb42adae6e52210124f6aa5a22d6d6** and
 final merge tree exactly matches the reviewed #110 head85dc65c; this does not
 relabel the older4eac runtime qualification as a newly built merge candidate.
 Effective branch rules/check requirements were empty; no protection was bypassed.
-Hosted jobs executed zero steps under the known billing gate. Source merges do
-not close issues or actual supported-loader/device/CI/rights/adoption gates.
+Hosted jobs executed zero steps under the known billing gate. Source merges alone close no issues. Independent criterion reconciliation supports
+closing101(7/7),102(8/8) and103(6/6) for their literal bounded software contracts;
+[the closure assessment](docs/evidence/audit-101-103-closure.json) retains actual
+supported-loader/device/CI/rights/adoption gates separately. In particular102-D4
+prohibits dependency downloads during initialization; its actual-loader startup
+observation remains UNRUN under86, rather than being claimed as target proof.
 
 Next authorized bounded work is **#104**, on existing isolated checkout branch
 **fix/repeatable-primary-ci**, based on cdcc668. This supersedes104's planning

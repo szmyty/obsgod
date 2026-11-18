@@ -20,9 +20,9 @@ to stream.
 Use [the supported development setup](steam-deck-building.md): Go **1.27.4**,
 Node **24.19.0**, npm **11.9.0**, Python **3.12+**, the committed npm lockfile,
 and Docker for the existing pinned native-capture builder. Run the primary
-package build as the non-root checkout owner, including when using act (the
-repository's `scripts/run-user-tests.py` can drop an act root process to that
-owner). Preserve configured
+package build as the non-root checkout owner, including when using act. The
+maintained repeat helper below drops an ACT root process to that owner while
+retaining a daemon-visible private build context. Preserve configured
 package registries, proxy settings and certificate bundles. The system `go`
 command must actually be the pinned Go compiler. The tools are build requirements,
 not packages Steam Deck users must install.
@@ -50,6 +50,43 @@ archive hash, platform and explicit unrun device checks. `manifest.json` inside
 the ZIP records every payload file's checksum. Repeating from identical source,
 tools and native builder must produce identical canonical ZIP bytes. Build
 receipts that include an optional raw CLI ZIP hash may differ, as described below.
+
+For maintained primary-build qualification, invoke the complete primary entry
+point twice through the owner wrapper:
+
+```sh
+candidate_parent=$(mktemp -d)
+python3 scripts/qualify-decky-build.py --revision "$(git rev-parse HEAD)" \
+  --output "$candidate_parent/primary"
+```
+
+The existing parent must belong to the checkout owner and be protected against
+other users replacing its contents; an ordinary 0755 runner temp parent is
+accepted. The new output and its context/cache directories remain private 0700.
+Output must be new and outside the checkout. Inside ACT, use the launcher's owned,
+daemon-visible attempt directory instead of a container-only `/tmp` path. The
+helper gives both builds a private HOME and TMPDIR under that output. Its root
+wrapper drops supplementary groups and adds only the existing local Docker
+socket group before running the entire qualification as the checkout owner.
+It never changes checkout or socket permissions or bypasses the primary root
+guard. The short browser-fixture `run-user-tests.py` context remains separate.
+
+`qualification.json` records each complete primary command, private log hash,
+source/tool/manifest checks and literal canonical ZIP comparison. Only a passed
+receipt exposes `second/obsgod-decky.zip` as the accepted artifact; any primary
+entry failure fails the helper before a later candidate is accepted. Existing
+outputs remain intact. The optional `--verify-cli` argument forwards the pinned
+assembly check to each primary build, with the same limits described below.
+
+For the supported local scratch profile, compiler and module caches use separate
+owner-private `go-build-user-UID` and `go-mod-user-UID` directories under
+`OBSGOD_LOCAL_SCRATCH`; otherwise they stay under the private output context.
+Module caches, package/proxy/CA presets and prior artifacts are preserved. This
+helper deletes no cache. Any opted-in compiler-cache cleanup belongs to the
+documented local-CI policy after its consumers finish. Keep context/cache trees
+and raw logs private; select the ZIP and reviewed receipts explicitly when
+sharing artifacts. Passing local primary assembly does not establish device,
+provider, hosted CI or publication acceptance.
 
 The older `scripts/package-deck.py` remains a compatibility builder for the
 paired Desktop archive/updater and their existing checks. It uses the same

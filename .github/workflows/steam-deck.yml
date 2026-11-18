@@ -18,6 +18,7 @@ jobs:
       - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff
         with:
           go-version: '1.27.4'
+          cache: ${{ env.OBSGOD_LOCAL_PROFILE != 'constrained' }}
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '24.19.0'
@@ -56,7 +57,14 @@ jobs:
           python scripts/frontend-command.py test
           python scripts/frontend-command.py build
           npm --prefix steamdeck/decky audit
-      - name: Package exact candidate twice
+      - name: Qualify the complete primary standard-plugin build
+        run: |
+          qualification_tmp="${OBSGOD_ACT_TEMP:-$RUNNER_TEMP}"
+          primary_output="$qualification_tmp/obsgod-primary-$(python -c 'import uuid; print(uuid.uuid4().hex)')"
+          python scripts/qualify-decky-build.py --revision "$GITHUB_SHA" --version 0.1.0-deck.9 --output "$primary_output"
+          printf 'OBSGOD_PRIMARY_EVIDENCE=%s\n' "$primary_output" >> "$GITHUB_ENV"
+          printf 'OBSGOD_PRIMARY_ZIP=%s\n' "$primary_output/second/obsgod-decky.zip" >> "$GITHUB_ENV"
+      - name: Package compatibility archive and updater twice
         run: |
           python scripts/package-deck.py --version 0.1.0-deck.9
           python scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz
@@ -66,25 +74,40 @@ jobs:
           python scripts/package-updater.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz
           diff -u /tmp/first-runtime-sums dist/SHA256SUMS
           diff -u /tmp/first-updater-sums dist/UPDATER-SHA256SUMS
+          # Compatibility must match the independently executed primary path.
+          # Audit staging takes the primary bytes; browser fixtures below use
+          # the original primary output directly.
+          cmp "$OBSGOD_PRIMARY_ZIP" dist/obsgod-decky.zip
+          cp "$OBSGOD_PRIMARY_ZIP" dist/obsgod-decky.zip
+          python - "$OBSGOD_PRIMARY_ZIP" <<'PY'
+          import sys,zipfile
+          from pathlib import Path
+          with zipfile.ZipFile(sys.argv[1]) as archive:
+              assert archive.read('obsgod/bin/obsgod') == Path('dist/obsgod').read_bytes()
+              assert archive.read('obsgod/bin/libgstobsgodcapture.so') == Path('dist/libgstobsgodcapture.so').read_bytes()
+          PY
       - name: Audit actual artifacts and reproduce unsigned supply-chain evidence
         run: |
           python scripts/release-audit.py --revision "$GITHUB_SHA" --output dist/supply-chain
           cp dist/supply-chain/AUDIT-SHA256SUMS /tmp/first-audit-sums
           python scripts/release-audit.py --revision "$GITHUB_SHA" --output dist/supply-chain
           diff -u /tmp/first-audit-sums dist/supply-chain/AUDIT-SHA256SUMS
+      - name: Release only opted-in private compiler caches after Go consumers
+        if: env.OBSGOD_LOCAL_PROFILE == 'constrained'
+        run: python scripts/local-ci-resources.py trim-compiler-cache
       - name: Actual package browser checks
         run: |
           browser_output="${OBSGOD_ACT_TEMP:-$RUNNER_TEMP}/obsgod-browser-evidence"
           printf 'OBSGOD_BROWSER_EVIDENCE=%s\n' "$browser_output" >> "$GITHUB_ENV"
           browser=$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')
           python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz --browser "$browser" --screenshots "$browser_output/setup"
-          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-panel.py dist/obsgod-decky.zip --browser "$browser" --screenshots "$browser_output/panel"
-          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-dependency-setup.py dist/obsgod-decky.zip --browser "$browser" --output "$browser_output/dependency-setup"
-          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-native-configuration.py dist/obsgod-decky.zip --browser "$browser" --output "$browser_output/native-configuration"
-          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/packaged-settings-boundary.py dist/obsgod-decky.zip --revision "$GITHUB_SHA" --output "$browser_output/settings-boundary"
-          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-m3-panel.py dist/obsgod-decky.zip --browser "$browser" --screenshots "$browser_output/m3-panel"
+          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-panel.py "$OBSGOD_PRIMARY_ZIP" --browser "$browser" --screenshots "$browser_output/panel"
+          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-dependency-setup.py "$OBSGOD_PRIMARY_ZIP" --browser "$browser" --output "$browser_output/dependency-setup"
+          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-native-configuration.py "$OBSGOD_PRIMARY_ZIP" --browser "$browser" --output "$browser_output/native-configuration"
+          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/packaged-settings-boundary.py "$OBSGOD_PRIMARY_ZIP" --revision "$GITHUB_SHA" --output "$browser_output/settings-boundary"
+          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-m3-panel.py "$OBSGOD_PRIMARY_ZIP" --browser "$browser" --screenshots "$browser_output/m3-panel"
           python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-m3-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz --browser "$browser" --screenshots "$browser_output/m3-setup"
-          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-mixer-panel.py dist/obsgod-decky.zip --browser "$browser" --screenshots "$browser_output/mixer-panel"
+          python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-mixer-panel.py "$OBSGOD_PRIMARY_ZIP" --browser "$browser" --screenshots "$browser_output/mixer-panel"
           python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-mixer-setup.py dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz --browser "$browser" --screenshots "$browser_output/mixer-setup"
           python scripts/run-user-tests.py --output-root "$browser_output" -- steamdeck/tests/browser-support.py --browser "$browser" --screenshots "$browser_output/support"
           python scripts/run-user-tests.py --output-root "$browser_output" -- site/tests/browser.py --browser "$browser" --site-dir "$browser_output/site-html" --output "$browser_output/site"
@@ -119,5 +142,10 @@ jobs:
             dist/capture-build.json
             dist/supply-chain/*
             ${{ env.OBSGOD_BROWSER_EVIDENCE }}
+            ${{ env.OBSGOD_PRIMARY_EVIDENCE }}/qualification.json
+            ${{ env.OBSGOD_PRIMARY_EVIDENCE }}/first.log
+            ${{ env.OBSGOD_PRIMARY_EVIDENCE }}/second.log
+            ${{ env.OBSGOD_PRIMARY_EVIDENCE }}/first/build-receipt.json
+            ${{ env.OBSGOD_PRIMARY_EVIDENCE }}/second/build-receipt.json
           if-no-files-found: error
           retention-days: 14
