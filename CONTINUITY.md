@@ -1,6 +1,39 @@
 # Current work
 
-## Settings boundary #103 authorized and in progress
+## Settings boundary #103 local checkpoint ready for review
+
+Draft **#110** implements the bounded capture deadline/readback contract on
+**fix/settings-boundary**, stacked on still-unmerged draft **#109**. Exact clean
+qualified source **4eac7a469285cbafad5dc5a7ea07205374293dfd**, tree
+**2ca38c6e704ce9c9ea19b50938e99af98714b7d9**, passed all six local ACT jobs,
+application269/two skips, tooling85, frontend156, six actual packaged settings
+cases, native18 proofs and all11 supplemental/postmatrix commands. Read the
+[criterion-level checkpoint, proof and independent review](docs/settings-boundary-checkpoint.md).
+Later evidence-only commits do not qualify newer runtime or become a release.
+
+All six original #103 criteria have local evidence; #103 and drafts #109/#110
+remain open for review. Actual default `master` remains **1440f993**. All230
+original criteria/dependencies, #86 owner Deck/provider/loader/controller/headset
+gates and hosted/dependency-review limits remain intact. No merge, release,
+deployment, migration, Store submission, spending or consumer adoption occurred.
+
+The report uses an explicit hash-verified view of all nine completed same-source
+runs (six PASS/three FAIL). The original interrupted `200445Z` provisional record
+has no final exit/checksum and remains unchanged/unverifiable/unqualified. Both
+reports, its filtered partial log and the selection inventory are preserved;
+the original-state report still exposes that integrity error. Zero integrity
+errors applies only to the completed-run selection.
+
+Runner reserve refusals and the repeated-evidence guard were retained, then
+resolved with measured disposable compiler-cache assistance, a preserved separate
+fixture volume and fresh test-output preparation. All five cache/tool/artifact
+locations and the fixture volume were restored with matching current hashes;
+network/auth/package presets are unchanged. This does not complete #104.
+Next separate work is selected aurora artwork/controller UI/current docs, bounded
+#104 build/resource work, then #85 final qualification and the #86 owner test loop.
+Do not reuse this receipt to qualify those future changes.
+
+## Earlier #103 authorization and implementation checkpoints
 
 The owner requested the next batch on 2026-11-18. This authorizes bounded
 **#103** implementation, focused checks and a new exact-source qualification;

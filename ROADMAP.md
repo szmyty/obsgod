@@ -1,5 +1,16 @@
 # Product roadmap
 
+## Settings boundary draft checkpoint
+
+Bounded **#103** is implemented in draft [#110](https://github.com/szmyty/obsgod/pull/110),
+stacked on unmerged #109. Exact clean source **4eac7a4** passed all six local ACT
+jobs, six real packaged settings scenarios and 106 shared contract cases, with
+all six original criteria mapped. Read the [reviewed checkpoint and limits](docs/settings-boundary-checkpoint.md).
+The completed-run report preserves three failed attempts; the interrupted provisional
+run remains separately unverifiable. Issues/drafts remain open for review.
+Selected artwork/UI/docs, #104 and final #85 preparation remain separate; all230
+original criteria/dependencies and actual Deck/hosted gates remain intact.
+
 ## Cleanup/recovery draft checkpoint
 
 The next authorized batch **#101/#102** is implemented in draft
@@ -8,8 +19,8 @@ clean source **aa323f0**: all six ACT jobs, packaged transport/upgrades/removal,
 native/browser/process checks and 15 criterion mappings. Read the
 [reviewed evidence and limits](docs/cleanup-recovery-checkpoint.md). Both issues
 remain open for review. Actual supported-loader/device/provider/hosted evidence
-stays explicit; no release, deployment or migration occurred. Settings #103 and
-remaining artwork/UI/resource/final-candidate work are separate.
+stays explicit; no release, deployment or migration occurred. That earlier checkpoint preceded settings #103 above;
+remaining artwork/UI/resource/final-candidate work is separate.
 
 ## Runtime correctness completed; remaining audit stages separate
 
