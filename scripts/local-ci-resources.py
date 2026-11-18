@@ -77,6 +77,22 @@ def disk(path):
             "filesystem_id": info.f_fsid, "device": os.stat(path).st_dev}
 
 
+def docker_metadata(image, env):
+    """Read cached metadata without creating a potentially expensive VFS copy."""
+    commands = [["docker", "--host", "unix:///var/run/docker.sock", "info", "--format", "{{json .Driver}}"],
+                ["docker", "--host", "unix:///var/run/docker.sock", "image", "inspect", "--format", "{{json .Size}}", image]]
+    values = []
+    for command in commands:
+        result = subprocess.run(command, env=env, capture_output=True, text=True, timeout=15)
+        if result.returncode:
+            raise ValueError("Managed Docker metadata unavailable; verify the local daemon and cached pinned runner image")
+        values.append(json.loads(result.stdout))
+    driver, size = values
+    if not isinstance(driver, str) or not driver or not isinstance(size, int) or isinstance(size, bool) or size <= 0:
+        raise ValueError("Invalid managed Docker driver/image metadata")
+    return {"driver": driver, "image_size_bytes": size, "image": image, "commands": commands}
+
+
 def preflight(root, attempt, image, revision):
     """Measure both host paths and what the local Docker daemon actually sees."""
     root, attempt = Path(root), Path(attempt)
@@ -84,9 +100,48 @@ def preflight(root, attempt, image, revision):
     written = attempt / ".daemon-volume-probe-output"
     if marker.exists() or marker.is_symlink() or written.exists() or written.is_symlink():
         raise ValueError("Expected unused private probe paths")
+    env = {key: value for key, value in os.environ.items() if key not in {
+        "DOCKER_HOST", "DOCKER_CONTEXT", "DOCKER_TLS", "DOCKER_TLS_VERIFY", "DOCKER_CERT_PATH"}}
+    receipt = {"schema_version": 1, "profile": PROFILE, "revision": revision,
+               "scope": "Preflight only; no workflow check was executed", "scratch": str(attempt),
+               "host_root": disk(root), "host_scratch": disk(attempt),
+               "probe": {"status": "unrun", "exit_code": None},
+               "status": "unavailable", "shortfalls": []}
+    same = receipt["host_root"]["device"] == receipt["host_scratch"]["device"]
+    receipt["same_host_filesystem"] = same
+    try:
+        metadata = docker_metadata(image, env)
+        # VFS deep-copies an image when a container is created. The observed
+        # cached ACT image exhausted ~3GiB merely probing a 1.625GB logical
+        # image, so reserve 2x its reported size before any docker run. Other
+        # drivers retain the operational floor and the actual allocation probe.
+        allowance = 2 * metadata["image_size_bytes"] if metadata["driver"] == "vfs" else 0
+        receipt["docker_metadata"] = metadata
+        receipt["allocation_policy"] = {"runner_copy_allowance_bytes": allowance,
+            "formula": "2 * cached image Size for vfs; 0 for other drivers",
+            "scope": "Conservative pre-allocation allowance, not a peak-space guarantee"}
+        root_required = ROOT_REQUIRED + allowance
+        combined = root_required + SCRATCH_REQUIRED
+        receipt["requirements"] = {"root_bytes": root_required, "scratch_bytes": SCRATCH_REQUIRED,
+                                   "same_filesystem_bytes": combined, "daemon_root_after_allocation_bytes": ROOT_REQUIRED}
+        for name, required in (("host_root", combined if same else root_required),
+                               ("host_scratch", combined if same else SCRATCH_REQUIRED)):
+            available = receipt[name]["available_bytes"]
+            if available < required:
+                receipt["shortfalls"].append({"location": name, "required_bytes": required,
+                                              "available_bytes": available, "missing_bytes": required - available})
+        if receipt["shortfalls"]:
+            receipt.update(status="refused", reason="Host capacity is insufficient before allocating the cached runner probe")
+            write_json(attempt / "preflight.json", receipt)
+            return receipt
+    except (OSError, ValueError, KeyError, TypeError, subprocess.TimeoutExpired) as error:
+        receipt["reason"] = str(error)
+        write_json(attempt / "preflight.json", receipt)
+        return receipt
     marker.write_text(secrets.token_hex(24))
     marker.chmod(0o600)
-    # A cached, pinned image avoids pulling anything merely to diagnose capacity.
+    # The host allocation gate passed. Verify actual daemon capacity and owner
+    # access using only the cached pinned image, without pulling anything.
     command = ["docker", "--host", "unix:///var/run/docker.sock", "run", "--rm", "--network", "none", "--pull=never",
                "--user", f"{os.getuid()}:{os.getgid()}",
                "--mount", f"type=bind,src={attempt},dst=/probe",
@@ -99,18 +154,11 @@ def preflight(root, attempt, image, revision):
                "print(json.dumps(dict(marker=marker,"
                "docker_root=disk('/'),scratch=disk('/probe'))))"]
     try:
-        env = {key: value for key, value in os.environ.items() if key not in {
-            "DOCKER_HOST", "DOCKER_CONTEXT", "DOCKER_TLS", "DOCKER_TLS_VERIFY", "DOCKER_CERT_PATH"}}
         result = subprocess.run(command, env=env, capture_output=True, text=True, timeout=60)
     except (OSError, subprocess.TimeoutExpired):
         result = None
-    receipt = {"schema_version": 1, "profile": PROFILE, "revision": revision,
-               "scope": "Preflight only; no workflow check was executed", "scratch": str(attempt),
-               "host_root": disk(root), "host_scratch": disk(attempt),
-               "probe": {"command": command, "exit_code": result.returncode if result else None},
-               "requirements": {"root_bytes": ROOT_REQUIRED, "scratch_bytes": SCRATCH_REQUIRED,
-                                "same_filesystem_bytes": ROOT_REQUIRED + SCRATCH_REQUIRED},
-               "status": "unavailable", "shortfalls": []}
+    receipt["probe"] = {"command": command, "status": "passed" if result and result.returncode == 0 else "failed",
+                        "exit_code": result.returncode if result else None}
     try:
         if result is None or result.returncode:
             raise ValueError("Pinned Docker probe failed; verify the local daemon and cached runner image")
@@ -122,13 +170,8 @@ def preflight(root, attempt, image, revision):
             raise ValueError("Docker daemon cannot write scratch as the actual local owner")
         receipt["owner_write_verified"] = True
         receipt["daemon"] = observed
-        same = receipt["host_root"]["device"] == receipt["host_scratch"]["device"]
-        receipt["same_host_filesystem"] = same
-        requirements = (("host_root", ROOT_REQUIRED + SCRATCH_REQUIRED if same else ROOT_REQUIRED),
-                        ("host_scratch", ROOT_REQUIRED + SCRATCH_REQUIRED if same else SCRATCH_REQUIRED),
-                        ("daemon_root", ROOT_REQUIRED), ("daemon_scratch", SCRATCH_REQUIRED))
-        observations = {"host_root": receipt["host_root"], "host_scratch": receipt["host_scratch"],
-                        "daemon_root": observed["docker_root"], "daemon_scratch": observed["scratch"]}
+        requirements = (("daemon_root", ROOT_REQUIRED), ("daemon_scratch", SCRATCH_REQUIRED))
+        observations = {"daemon_root": observed["docker_root"], "daemon_scratch": observed["scratch"]}
         for name, required in requirements:
             available = observations[name]["available_bytes"]
             if available < required:
@@ -136,6 +179,7 @@ def preflight(root, attempt, image, revision):
                                               "available_bytes": available, "missing_bytes": required - available})
         receipt["status"] = "refused" if receipt["shortfalls"] else "passed"
     except (ValueError, KeyError, TypeError) as error:
+        receipt["probe"]["status"] = "failed"
         receipt["reason"] = str(error)
     finally:
         marker.unlink()

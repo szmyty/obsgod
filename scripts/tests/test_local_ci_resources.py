@@ -23,6 +23,13 @@ class ResourceTests(unittest.TestCase):
         self.checkout.mkdir()
         self.scratch = self.base / "scratch"
         self.scratch.mkdir(mode=0o700)
+        self.real_metadata = R.docker_metadata
+        metadata = patch.object(R, "docker_metadata", return_value={"driver": "overlay2", "image_size_bytes": 1024})
+        metadata.start()
+        self.addCleanup(metadata.stop)
+        capacity = patch.object(R, "disk", return_value={"available_bytes": 20 * R.GIB, "device": 1})
+        capacity.start()
+        self.addCleanup(capacity.stop)
 
     def attempt(self):
         return R.allocate_attempt(self.scratch, "fixture", self.checkout)
@@ -45,6 +52,15 @@ class ResourceTests(unittest.TestCase):
         self.assertEqual(receipt["status"], "refused")
         self.assertEqual(receipt["shortfalls"], [{"location": "host_root", "available_bytes": 3 * R.GIB,
             "required_bytes": 4 * R.GIB, "missing_bytes": R.GIB}])
+        run.assert_not_called()
+        self.assertEqual(receipt["probe"]["status"], "unrun")
+        self.assertFalse((attempt / ".daemon-volume-probe").exists())
+
+    def test_sufficient_capacity_checks_actual_owner_read_write_with_cached_image(self):
+        attempt = self.attempt()
+        with patch.object(R.subprocess, "run", side_effect=self.probe) as run:
+            receipt = R.preflight(self.checkout, attempt, CI.IMAGE, "a" * 40)
+        self.assertEqual(receipt["status"], "passed")
         command = run.call_args.args[0]
         self.assertIn("--pull=never", command)
         self.assertEqual(command[command.index("--host") + 1], "unix:///var/run/docker.sock")
@@ -53,6 +69,46 @@ class ResourceTests(unittest.TestCase):
         self.assertTrue(receipt["owner_write_verified"])
         self.assertFalse((attempt / ".daemon-volume-probe").exists())
         self.assertFalse((attempt / ".daemon-volume-probe-output").exists())
+
+    def test_vfs_copy_budget_refuses_before_creating_container(self):
+        size = 1_624_696_918
+        available = 5 * R.GIB
+        def disk(path):
+            return {"available_bytes": available if Path(path) == self.checkout else 8 * R.GIB,
+                    "device": 1 if Path(path) == self.checkout else 2}
+        with patch.object(R, "docker_metadata", return_value={"driver": "vfs", "image_size_bytes": size}) as metadata, \
+                patch.object(R, "disk", side_effect=disk), patch.object(R.subprocess, "run") as run:
+            receipt = R.preflight(self.checkout, self.attempt(), CI.IMAGE, "a" * 40)
+        metadata.assert_called_once()
+        run.assert_not_called()
+        self.assertEqual(receipt["status"], "refused")
+        self.assertEqual(receipt["requirements"]["root_bytes"], 4 * R.GIB + 2 * size)
+        self.assertEqual(receipt["shortfalls"], [{"location": "host_root", "available_bytes": available,
+            "required_bytes": 4 * R.GIB + 2 * size, "missing_bytes": 4 * R.GIB + 2 * size - available}])
+        self.assertEqual(receipt["probe"]["status"], "unrun")
+
+    def test_same_vfs_filesystem_combines_scratch_and_runner_allocation(self):
+        size = 1_624_696_918
+        with patch.object(R, "docker_metadata", return_value={"driver": "vfs", "image_size_bytes": size}), \
+                patch.object(R, "disk", return_value={"available_bytes": 11 * R.GIB, "device": 1}), \
+                patch.object(R.subprocess, "run") as run:
+            receipt = R.preflight(self.checkout, self.attempt(), CI.IMAGE, "a" * 40)
+        run.assert_not_called()
+        self.assertEqual(receipt["status"], "refused")
+        self.assertEqual(receipt["requirements"]["same_filesystem_bytes"], 10 * R.GIB + 2 * size)
+        self.assertTrue(all(row["required_bytes"] == 10 * R.GIB + 2 * size for row in receipt["shortfalls"]))
+
+    def test_metadata_is_cached_local_only_and_does_not_create_container(self):
+        results = [SimpleNamespace(returncode=0, stdout='"vfs"'), SimpleNamespace(returncode=0, stdout='1624696918')]
+        with patch.object(R.subprocess, "run", side_effect=results) as run:
+            metadata = self.real_metadata(CI.IMAGE, {"HTTP_PROXY": "preserved"})
+        self.assertEqual(metadata["driver"], "vfs")
+        self.assertEqual(metadata["image_size_bytes"], 1_624_696_918)
+        for call in run.call_args_list:
+            command = call.args[0]
+            self.assertEqual(command[:3], ["docker", "--host", "unix:///var/run/docker.sock"])
+            self.assertNotIn("run", command)
+            self.assertNotIn("pull", command)
 
     def test_same_filesystem_requires_combined_budget(self):
         with patch.object(R, "disk", return_value={"available_bytes": 9 * R.GIB, "device": 1}), \
@@ -72,6 +128,8 @@ class ResourceTests(unittest.TestCase):
             receipt = R.preflight(self.checkout, self.attempt(), CI.IMAGE, "a" * 40)
         self.assertEqual(receipt["status"], "unavailable")
         self.assertIn("cannot observe", receipt["reason"])
+        self.assertEqual(receipt["probe"]["status"], "failed")
+        self.assertEqual(receipt["probe"]["exit_code"], 0)
 
     def test_owner_write_failure_is_unavailable_before_workflow(self):
         def no_write(command, **kwargs):
@@ -84,6 +142,8 @@ class ResourceTests(unittest.TestCase):
             receipt = R.preflight(self.checkout, self.attempt(), CI.IMAGE, "a" * 40)
         self.assertEqual(receipt["status"], "unavailable")
         self.assertIn("cannot write", receipt["reason"])
+        self.assertEqual(receipt["probe"]["status"], "failed")
+        self.assertEqual(receipt["probe"]["exit_code"], 0)
 
     def test_missing_daemon_is_unavailable_not_capacity_or_check_pass(self):
         with patch.object(R.subprocess, "run", side_effect=OSError("fixture missing daemon")):

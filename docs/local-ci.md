@@ -224,11 +224,16 @@ Legacy single-job calls retain their existing behavior when no profile is given.
 The current pinned runner image must already be cached; the probe uses
 `--pull=never`, the managed local socket and no network. It verifies owner
 read/write access across the actual Docker bind and measures host and daemon
-filesystems. Requirements are **4GiB free for root/workspace** and **6GiB free
-for scratch** when separate, or **10GiB free** when shared. A refusal records
-required, available and missing bytes and exits3 before downloading actions or
-running a workflow. These conservative floors are a preflight policy, not a
-promise that arbitrary future workloads fit. Required recording reserves and
+filesystems. Metadata-only checks run before allocating even the cached probe.
+The base requirements are **4GiB free for root/workspace** and **6GiB free for
+scratch**, or **10GiB free** when shared. The VFS Docker driver additionally
+reserves **twice the cached runner image Size** for its container-copy allocation;
+the receipt records the actual driver, image size, allowance and combined budget.
+An early shortage leaves the Docker probe and workflows unrun. Other drivers add
+zero copy allowance and retain the actual allocation/read/write probe after host
+checks pass. A refusal records required, available and missing bytes and exits3
+before downloading actions or running a workflow. These conservative floors are
+a preflight policy, not a promise that arbitrary future workloads fit. Required recording reserves and
 all tests remain unchanged. A failed probe is unavailable evidence, not a pass.
 
 `matrix` creates a new `state/sessions/<unique-id>` and a matching private

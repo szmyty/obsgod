@@ -24,8 +24,12 @@ compatibility and optional pinned official assembly evidence. Add a bounded
 constrained local profile/space preflight and fresh attempt outputs, with explicit
 private compiler-cache cleanup only after its consumers finish. Preserve source,
 module caches, pinned tools, artifacts/evidence and network/package/auth presets.
-The current low-free-space state must fail early with measured requirements if
-it cannot fit; do not weaken reserves or tests. No global prune or paid resource.
+The initial4108 probe correctly refused capacity, but copying the cached VFS
+runner itself briefly exhausted root space. Preserve that historical attempt.
+The repair reserves a metadata-only VFS copy allowance before any container
+allocation; low-space refusal keeps the probe and workflow checks unrun. No
+reserve or test is weakened. Requalify the repaired source;4108 primary2/official
+assembly and112 tooling passes remain historical for the newer source. No global prune or paid resource.
 
 All230 original criteria/dependencies remain intact. Artwork/controller UI and
 final #85 qualification/owner #86 test loop remain separate. No release, deploy,
