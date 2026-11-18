@@ -1,5 +1,35 @@
 # Current work
 
+## Settings boundary #103 authorized and in progress
+
+The owner requested the next batch on 2026-11-18. This authorizes bounded
+**#103** implementation, focused checks and a new exact-source qualification;
+it supersedes that issue's planning pause. Existing draft **#109** is still
+unmerged at **6968ad9ebb577c2f37ae42bf51f2f1862c319e8a**, while actual default
+`master` remains **1440f993b445a8d90168de5d1bfc36066a6f9af1**.
+
+Use existing isolated checkout branch **fix/settings-boundary**, stacked on
+#109's branch for a reviewable #103-only diff. This is an integration checkpoint,
+not a new hard dependency or permission to merge #109. Preserve all230 original
+criteria/dependencies and all prior evidence as historical for newer source.
+
+The batch bounds complete capture-mode operations across Go action/post-status,
+Python preflight/cleanup/readback and UI deadlines, preserving explicit Start,
+Stop/recovery, caller-disconnect ownership and microphone leases. It also
+requires complete, consistent configuration readback using one small shared
+Go-produced JSON corpus across Go/Python/JS, including documented legacy
+omitted/zero dimensions. No schema generator, new validation library or framework.
+Actual Deck/provider/hosted gates, remaining settings/artwork/resource work,
+release/deployment/migration, OAuth and spending remain separate.
+
+The environment is running/connected; actual shell, Git/API, pinned tools and
+Docker work. Preserve network/package/auth presets. Temporary cache relocation
+is measured with deterministic hashes and must be restored after qualification.
+No old aa323f0 receipt qualifies this new source. Continue source integration,
+focused regression/process/browser checks, independent review, then the complete
+required available matrix at the final committed source.
+
+
 ## Cleanup/recovery implemented and qualified; draft #109 for review
 
 The requested previous PR stack was already merged into actual default
