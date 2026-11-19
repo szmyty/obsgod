@@ -1,6 +1,6 @@
 # Current work
 
-## Primary builder and repeatable local qualification #104 authorized
+## Primary builder and repeatable local qualification #104 review checkpoint
 
 The owner explicitly requested merging all open PRs and starting the next batch
 on 2026-11-18. Normal merge order **#109 → retarget #110 to master → #110**
@@ -16,24 +16,38 @@ supported-loader/device/CI/rights/adoption gates separately. In particular102-D4
 prohibits dependency downloads during initialization; its actual-loader startup
 observation remains UNRUN under86, rather than being claimed as target proof.
 
-Next authorized bounded work is **#104**, on existing isolated checkout branch
-**fix/repeatable-primary-ci**, based on cdcc668. This supersedes104's planning
-pause. Exercise the complete primary builder twice as the real non-root owner,
-audit/install the actual ZIP and detect primary-only entry drift. Retain legacy
-compatibility and optional pinned official assembly evidence. Add a bounded
-constrained local profile/space preflight and fresh attempt outputs, with explicit
-private compiler-cache cleanup only after its consumers finish. Preserve source,
-module caches, pinned tools, artifacts/evidence and network/package/auth presets.
-The initial4108 probe correctly refused capacity, but copying the cached VFS
-runner itself briefly exhausted root space. Preserve that historical attempt.
-The repair reserves a metadata-only VFS copy allowance before any container
-allocation; low-space refusal keeps the probe and workflow checks unrun. No
-reserve or test is weakened. Requalify the repaired source;4108 primary2/official
-assembly and112 tooling passes remain historical for the newer source. No global prune or paid resource.
+**#104** is implemented in draft [#111](https://github.com/szmyty/obsgod/pull/111)
+on **fix/repeatable-primary-ci**, based on cdcc668. Exact clean qualified source
+**0c798468ecadd753c43bb8970b76e88f263f3a5c**, tree
+**b5d95741d3352d8eccfc954085895fda8268fa38**, has local evidence for all six
+literal criteria. Read the [checkpoint and reviewed proof](docs/primary-ci-checkpoint.md).
+Two complete non-root primary builds match canonical ZIP **7fc9faad**;
+optional official assembly compares33 files. Standalone application269/two
+skips, tooling116, frontend156, actual packaged/browser/native/adapter/snapshot
+checks pass. The completed report verifies61 passed command-check predicates
+plus one capacity-unavailable command; these are not61 test cases or ACT passes.
 
-All230 original criteria/dependencies remain intact. Artwork/controller UI and
-final #85 qualification/owner #86 test loop remain separate. No release, deploy,
-migration, Store action or other-repository change is authorized by this batch.
+The supported constrained matrix actually exits3 before allocation: all six ACT
+workflows and the Docker probe remain **UNRUN**. R1 explicitly permits an early
+refusal with a concrete need; this does not satisfy #85's full matrix. Latest
+preflight requires7,544,361,132 root bytes but observes2,684,194,816: free at
+least **4.6GiB more on root/Docker**, or use a free workspace meeting the printed
+root/scratch budgets. Separate scratch has enough space. Hosted jobs execute
+zero steps under billing; actual dependency comparison separately returns403.
+
+Post-consumer cleanup touched only private compiler caches; module inventory
+before/after matches. Source, artifacts/evidence, tools and presets remain.
+Old root-owned generated outputs were preserved by literal same-mount rename;
+no recursive chown, host-cache move, global prune or paid resource. Historical
+4108 VFS allocation, generated-output permission failures and the private long-TMP
+browser failure are retained. The final metadata-only VFS preflight refuses
+before any allocation; the maintained short-path wrapper passes browser checks
+at unchanged0c source. Later evidence-only commits do not qualify newer runtime.
+
+All230 original criteria/dependencies remain intact. PR111/104 remain open for
+review. Next source batch is selected aurora artwork/controller UI/current docs
+under #80/#81, before final #85 qualification and owner #86 test loop. No release,
+deploy, migration, Store action or other-repository change occurred.
 
 ## Earlier settings boundary #103 local review checkpoint
 
