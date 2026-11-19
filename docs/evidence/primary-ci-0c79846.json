@@ -1,0 +1,4280 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+  "source_tree": "b5d95741d3352d8eccfc954085895fda8268fa38",
+  "source_clean": true,
+  "recorded_utc": "2026-11-19T00:28:12.489816+00:00",
+  "disposition": "All six bounded software criteria have local evidence; full ACT matrix remains unavailable. This is not final release, hosted, target or consumer acceptance.",
+  "primary": {
+    "archive": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/tmp/primary/second/obsgod-decky.zip",
+    "build_context": {
+      "GOCACHE": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/go-build-user-1000",
+      "GOMODCACHE": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/go-mod-user-1000",
+      "HOME": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/tmp/primary/context/home",
+      "TMPDIR": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/tmp/primary/context/tmp"
+    },
+    "builds": [
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "-B",
+          "/workspace/obsgod/scripts/package-decky.py",
+          "--version",
+          "0.1.0-deck.9",
+          "--revision",
+          "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "--output",
+          "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/tmp/primary/first",
+          "--verify-cli",
+          "/workspace/.obsgod-tools/decky-package-cli/decky-0.0.7"
+        ],
+        "exit_code": 0,
+        "inspection": {
+          "archive": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/tmp/primary/first/obsgod-decky.zip",
+          "manifest_sha256": "2432d9bccf70413ca3e37258a11c2343ba149d4bcf7b7e48d0a23005a9ad5bce",
+          "official_cli": {
+            "builder_image": "ghcr.io/steamdeckhomebrew/builder@sha256:e2616e391f3ae9a46c4cf906b1091220c2506e7fb1301e16a2a72409efbce7c5",
+            "builder_node": "26.12.1",
+            "builder_pnpm": "12.14.0",
+            "container_network": "none",
+            "payload_files_compared": 33,
+            "raw_zip_reproducible": false,
+            "raw_zip_sha256": "2908cbc26689a431c65e256170a45356ff800968f7c8305bf968bb1826276b3e",
+            "scope": "Unmodified official CLI and pinned default builder, assembling prepared bytes; not source compilation",
+            "sha256": "0d0f8c127cd3dba12b75f771c786194ca9f4f771b4787ae24de8b1af45af4294",
+            "status": "passed",
+            "version": "0.0.7"
+          },
+          "payload_files": 33,
+          "receipt_sha256": "1e5f2025a01a7a64830980e11fb3aa0be9c1e1e60644f07cc23453453ede384a",
+          "sha256": "7fc9faada008280f2edfa0ff59f92e4a61edfae0d1f20675f629a88ccad81984",
+          "source_files": 553,
+          "source_private_inventory": "passed"
+        },
+        "log": "first.log",
+        "log_sha256": "3389990dab90efc88bc68a261678eb3f0bda75db996f86ea1d13cbd8443da411",
+        "name": "first",
+        "seconds": 30.693
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "-B",
+          "/workspace/obsgod/scripts/package-decky.py",
+          "--version",
+          "0.1.0-deck.9",
+          "--revision",
+          "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "--output",
+          "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/tmp/primary/second",
+          "--verify-cli",
+          "/workspace/.obsgod-tools/decky-package-cli/decky-0.0.7"
+        ],
+        "exit_code": 0,
+        "inspection": {
+          "archive": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/tmp/primary/second/obsgod-decky.zip",
+          "manifest_sha256": "2432d9bccf70413ca3e37258a11c2343ba149d4bcf7b7e48d0a23005a9ad5bce",
+          "official_cli": {
+            "builder_image": "ghcr.io/steamdeckhomebrew/builder@sha256:e2616e391f3ae9a46c4cf906b1091220c2506e7fb1301e16a2a72409efbce7c5",
+            "builder_node": "26.12.1",
+            "builder_pnpm": "12.14.0",
+            "container_network": "none",
+            "payload_files_compared": 33,
+            "raw_zip_reproducible": false,
+            "raw_zip_sha256": "2908cbc26689a431c65e256170a45356ff800968f7c8305bf968bb1826276b3e",
+            "scope": "Unmodified official CLI and pinned default builder, assembling prepared bytes; not source compilation",
+            "sha256": "0d0f8c127cd3dba12b75f771c786194ca9f4f771b4787ae24de8b1af45af4294",
+            "status": "passed",
+            "version": "0.0.7"
+          },
+          "payload_files": 33,
+          "receipt_sha256": "1e5f2025a01a7a64830980e11fb3aa0be9c1e1e60644f07cc23453453ede384a",
+          "sha256": "7fc9faada008280f2edfa0ff59f92e4a61edfae0d1f20675f629a88ccad81984",
+          "source_files": 553,
+          "source_private_inventory": "passed"
+        },
+        "log": "second.log",
+        "log_sha256": "c3d02cae3fed5e5b4c65c954521f755ed9cac095b014f9aa7ccaa3d30ebdba53",
+        "name": "second",
+        "seconds": 11.53
+      }
+    ],
+    "dirty": false,
+    "finished_utc": "2026-11-18T23:51:14.489562+00:00",
+    "gid": 1000,
+    "groups": [],
+    "limits": [
+      "Local build only; actual Deck, OBS/provider, hosted acceptance and publication remain separate.",
+      "Canonical ZIP bytes are compared; optional official CLI assembly is not source compilation or reproducible raw ZIP proof.",
+      "Logs are private and require review before sharing. No cache is deleted by this helper."
+    ],
+    "observed_revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+    "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+    "schema": "obsgod.primary-build-qualification/v1",
+    "sha256": "7fc9faada008280f2edfa0ff59f92e4a61edfae0d1f20675f629a88ccad81984",
+    "source_tree": "b5d95741d3352d8eccfc954085895fda8268fa38",
+    "started_utc": "2026-11-18T23:50:32.052107+00:00",
+    "status": "passed",
+    "uid": 1000,
+    "version": "0.1.0-deck.9"
+  },
+  "primary_receipt_sha256": "62c8ba400ca434333d39107153ccd0d4d97ba7cbc2d52491a13d6db2c490e8fa",
+  "act": {
+    "result": "unavailable",
+    "workflow_jobs_unrun": 6,
+    "matrix": {
+      "completed": false,
+      "jobs": [
+        {
+          "action": "lint",
+          "result": "unrun"
+        },
+        {
+          "action": "build",
+          "result": "unrun"
+        },
+        {
+          "action": "coverage",
+          "result": "unrun"
+        },
+        {
+          "action": "snapshot",
+          "result": "unrun"
+        },
+        {
+          "action": "docs",
+          "result": "unrun"
+        },
+        {
+          "action": "candidate",
+          "result": "unrun"
+        }
+      ],
+      "preflight": "/tmp/obsgod-ci-104/20261119T000030Z-c14e7bfd3a71/20261119T000030Z-preflight-2d488f70a748/preflight.json",
+      "profile": "constrained",
+      "reason": "Resource preflight refused before any workflow",
+      "result": "unavailable",
+      "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+      "schema_version": 1,
+      "scratch": "/tmp/obsgod-ci-104/20261119T000030Z-c14e7bfd3a71",
+      "source_tree": "b5d95741d3352d8eccfc954085895fda8268fa38",
+      "state": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/state/sessions/20261119T000030Z-c14e7bfd3a71"
+    },
+    "matrix_receipt_sha256": "ee65986816157c8a33e9acb0d0d80a7f3672f17b68621a49fadb50726364d172",
+    "latest_capacity": {
+      "allocation_policy": {
+        "formula": "2 * cached image Size for vfs; 0 for other drivers",
+        "runner_copy_allowance_bytes": 3249393836,
+        "scope": "Conservative pre-allocation allowance, not a peak-space guarantee"
+      },
+      "docker_metadata": {
+        "commands": [
+          [
+            "docker",
+            "--host",
+            "unix:///var/run/docker.sock",
+            "info",
+            "--format",
+            "{{json .Driver}}"
+          ],
+          [
+            "docker",
+            "--host",
+            "unix:///var/run/docker.sock",
+            "image",
+            "inspect",
+            "--format",
+            "{{json .Size}}",
+            "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270"
+          ]
+        ],
+        "driver": "vfs",
+        "image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+        "image_size_bytes": 1624696918
+      },
+      "host_root": {
+        "available_bytes": 2684194816,
+        "device": 27,
+        "filesystem_id": 12610801368548068993,
+        "total_bytes": 33770192896
+      },
+      "host_scratch": {
+        "available_bytes": 9158107136,
+        "device": 34,
+        "filesystem_id": 18435797035770236925,
+        "total_bytes": 9441329152
+      },
+      "probe": {
+        "exit_code": null,
+        "status": "unrun"
+      },
+      "profile": "constrained",
+      "reason": "Host capacity is insufficient before allocating the cached runner probe",
+      "requirements": {
+        "daemon_root_after_allocation_bytes": 4294967296,
+        "root_bytes": 7544361132,
+        "same_filesystem_bytes": 13986812076,
+        "scratch_bytes": 6442450944
+      },
+      "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+      "same_host_filesystem": false,
+      "schema_version": 1,
+      "scope": "Preflight only; no workflow check was executed",
+      "scratch": "/tmp/obsgod-ci-104/20261119T002141Z-preflight-f1dc4b4dd802",
+      "shortfalls": [
+        {
+          "available_bytes": 2684194816,
+          "location": "host_root",
+          "missing_bytes": 4860166316,
+          "required_bytes": 7544361132
+        }
+      ],
+      "status": "refused"
+    }
+  },
+  "standalone": {
+    "result": "passed",
+    "passed_command_checks": 61,
+    "new_passed": 38,
+    "retained_same_source_passed": 23,
+    "source_report_sha256": "df05d453601f7dfd466d5eeb6829805b4eee2cc47de733bf84fb2018d765bb2e",
+    "retained_report": {
+      "source_report": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/available-checks.json",
+      "source_report_sha256": "c8cef4e4cd41c180bc8728a8d841d404b3c7114d98da7d81fe79839e04c0e300",
+      "scope": "Only unchanged exact-source0c command evidence is retained by reference. Original report remains failed/incomplete and its browser failure remains historical. No earlier-revision pass, invented completion or newly executed command is claimed.",
+      "skipped_execution": "Previously completed core commands and six packaged settings cases are not rerun. New execution begins with corrected browser fixture invocation."
+    },
+    "historical_failures": [
+      {
+        "source_report": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/available-checks.json",
+        "source_report_sha256": "c8cef4e4cd41c180bc8728a8d841d404b3c7114d98da7d81fe79839e04c0e300",
+        "original_check_index": 24,
+        "original_record": {
+          "name": "browser-panel",
+          "command": [
+            "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+            "steamdeck/tests/browser-panel.py",
+            "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/tmp/primary/second/obsgod-decky.zip",
+            "--browser",
+            "/usr/bin/chromium",
+            "--screenshots",
+            "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/browser-panel"
+          ],
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "result": "failed",
+          "expected_exit_codes": [
+            0
+          ],
+          "optional": false,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/browser-panel.log",
+          "source_before": {
+            "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+            "dirty": false
+          },
+          "exit_code": 1,
+          "seconds": 0.715,
+          "log_sha256": "d900e46fa0f16bdd5a1fa03ab1b6a372dc7b905e6ac5ab2b4d18e532a660248f",
+          "source_after": {
+            "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+            "dirty": false
+          }
+        },
+        "disposition": "Private controller bypassed the maintained short browser wrapper; Chromium socket path too long. Preserved failed log/output, source unchanged; actual browser flow is rerun with maintained wrapper."
+      }
+    ],
+    "checks": [
+      {
+        "name": "supported-matrix",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/local-ci.py",
+          "matrix",
+          "--act",
+          "/workspace/.obsgod-tools/pkg/bin/act",
+          "--state",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/state",
+          "--profile",
+          "constrained",
+          "--scratch",
+          "/tmp/obsgod-ci-104"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "unavailable",
+        "expected_exit_codes": [
+          3
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/supported-matrix.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 3,
+        "seconds": 0.125,
+        "log_sha256": "ab375076f51f536b2b829390d35e9e5d4af466e511eba02c9a72eabbee711329",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "preserve-dist-root-move",
+        "command": [
+          "docker",
+          "--host=unix:///var/run/docker.sock",
+          "run",
+          "--rm",
+          "--network",
+          "none",
+          "--pull=never",
+          "--user",
+          "0:0",
+          "--read-only",
+          "--cap-drop",
+          "ALL",
+          "--cap-add",
+          "DAC_OVERRIDE",
+          "--security-opt",
+          "no-new-privileges",
+          "--mount",
+          "type=bind,src=/workspace,dst=/workspace",
+          "--entrypoint",
+          "/bin/mv",
+          "alpine:3.23@sha256:469c9ea410b9215eaee7976ba6c0639039b444be8e5d638f7abbada189971eb2",
+          "--",
+          "/workspace/obsgod/dist",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/previous-dist-4eac7a4"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/preserve-dist-root-move.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.198,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "workflow-primary-negative",
+        "command": [
+          "bash",
+          "-euo",
+          "pipefail",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/workflow-primary-negative.sh"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          1
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/workflow-primary-negative.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 1,
+        "seconds": 0.18,
+        "log_sha256": "09bc6f1caa26a7659b20160d84e4719ec0e6c1ef65386857d369b08d84b3fb0e",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "compatibility-1",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/package-deck.py",
+          "--version",
+          "0.1.0-deck.9"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/compatibility-1.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 11.535,
+        "log_sha256": "dfc42ebf16d52ad0e9936ba3fcc4713ed06c2020da0a2991e606553950e7ac2f",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "updater-1",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/package-updater.py",
+          "dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/updater-1.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.656,
+        "log_sha256": "92d5ab10c78051cab5b3cabaf4c27e3ab0e147692326bd5d45e7a1d788d092c1",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "compatibility-2",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/package-deck.py",
+          "--version",
+          "0.1.0-deck.9"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/compatibility-2.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 11.574,
+        "log_sha256": "a00fe3ce6363b1db99e378045fdf85c7c68805f09877d48a72dfddc163046b34",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "updater-2",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/package-updater.py",
+          "dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/updater-2.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.635,
+        "log_sha256": "92d5ab10c78051cab5b3cabaf4c27e3ab0e147692326bd5d45e7a1d788d092c1",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "artifact-audit-1",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/release-audit.py",
+          "--revision",
+          "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/supply-chain"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/artifact-audit-1.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.381,
+        "log_sha256": "0d658f25ad4bff33feec85d08321045c9f306948e81db282c01f5268f27f1695",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "artifact-audit-2",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/release-audit.py",
+          "--revision",
+          "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/supply-chain"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/artifact-audit-2.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.479,
+        "log_sha256": "0d658f25ad4bff33feec85d08321045c9f306948e81db282c01f5268f27f1695",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "application-python",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "steamdeck/tests",
+          "-p",
+          "test_*.py",
+          "-v"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/application-python.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 90.399,
+        "log_sha256": "9fe5539697b0c8820de107cd6287970f5e0d1401e28edeacc23decc8fdf353f4",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "tooling-python",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "scripts/tests",
+          "-p",
+          "test_*.py",
+          "-v"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/tooling-python.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 1.892,
+        "log_sha256": "b0e45c2f231d9aeba57ea1cfe3b1f8c5776809a940f021e4ed8c187a226d178d",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "go-race",
+        "command": [
+          "go",
+          "test",
+          "-race",
+          "./..."
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/go-race.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 28.577,
+        "log_sha256": "a0e8f70e338368577275d57bc4f70004cc5cb03d8f874de2a4464fc0b5a256f3",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "go-process",
+        "command": [
+          "go",
+          "test",
+          "-race",
+          "-count=1",
+          "-tags=deck_process",
+          "./internal/commands",
+          "-run",
+          "^TestCaptureModeCommandProcess"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/go-process.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 9.199,
+        "log_sha256": "724118bf328b6e7f9112416077d4d05b97b3e9a6009c81f7dceae4598fb3d1e0",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "go-vet",
+        "command": [
+          "go",
+          "vet",
+          "./..."
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/go-vet.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 10.563,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "staticcheck",
+        "command": [
+          "staticcheck",
+          "./..."
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/staticcheck.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 2.289,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "govulncheck",
+        "command": [
+          "govulncheck",
+          "./..."
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/govulncheck.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 8.475,
+        "log_sha256": "3016e51e4eac0d421674d2128bbbdefb2924b4646e0c14a1ab034977ad73fae5",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "frontend-absent-typecheck",
+        "command": [
+          "npm",
+          "--prefix",
+          "steamdeck/decky",
+          "run",
+          "typecheck"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/frontend-absent-typecheck.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.981,
+        "log_sha256": "4c51a932c40c1dc7887fef7b6e3a4ef90e59dbb21158e1fe8e6c1567a99e4a0e",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "frontend-absent-test",
+        "command": [
+          "npm",
+          "--prefix",
+          "steamdeck/decky",
+          "run",
+          "test"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/frontend-absent-test.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.306,
+        "log_sha256": "dfa54b62eb053400b2ec38ad53bd7c6a2f446be594074951a80e1c6e0ffcda1e",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "frontend-absent-build",
+        "command": [
+          "npm",
+          "--prefix",
+          "steamdeck/decky",
+          "run",
+          "build"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/frontend-absent-build.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.614,
+        "log_sha256": "b2cb9c27c98f0aedab74a4d28111ccc9e9cf8f9c9ca201298dc3fd1b30a1156f",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "frontend-reused-typecheck",
+        "command": [
+          "npm",
+          "--prefix",
+          "steamdeck/decky",
+          "run",
+          "typecheck"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/frontend-reused-typecheck.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.962,
+        "log_sha256": "4c51a932c40c1dc7887fef7b6e3a4ef90e59dbb21158e1fe8e6c1567a99e4a0e",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "frontend-reused-test",
+        "command": [
+          "npm",
+          "--prefix",
+          "steamdeck/decky",
+          "run",
+          "test"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/frontend-reused-test.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.302,
+        "log_sha256": "7887f4d13a00c9b5fe5f9f845978962e18256d984b9d0947dbf7cef7cfa83e61",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "frontend-reused-build",
+        "command": [
+          "npm",
+          "--prefix",
+          "steamdeck/decky",
+          "run",
+          "build"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/frontend-reused-build.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.613,
+        "log_sha256": "5af691e12ea5ef294d29649b703afa1149b11e7ebf5bac6417c76ab1289086d5",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "npm-audit",
+        "command": [
+          "npm",
+          "--prefix",
+          "steamdeck/decky",
+          "audit"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/npm-audit.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.553,
+        "log_sha256": "6d8c5c8f3d7684adb070417bd608d01ae90aa3dc26a65af03ffda4955f38d9a3",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "packaged-settings",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "steamdeck/tests/packaged-settings-boundary.py",
+          "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/tmp/primary/second/obsgod-decky.zip",
+          "--revision",
+          "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/packaged-settings"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/packaged-settings.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 27.858,
+        "log_sha256": "d515bc1a4dd7bda0e974c9c210b8fb33de3582d6d3a1b53c502293a9288b3b69",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "browser-panel",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry",
+          "--",
+          "steamdeck/tests/browser-panel.py",
+          "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/tmp/primary/second/obsgod-decky.zip",
+          "--browser",
+          "/usr/bin/chromium",
+          "--screenshots",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-panel"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-panel.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 15.683,
+        "log_sha256": "bd02e037a42e8dc0a3083eec72e4f59e516bb2dcb89690c89c41072781a4a811",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "browser-dependencies",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry",
+          "--",
+          "steamdeck/tests/browser-dependency-setup.py",
+          "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/tmp/primary/second/obsgod-decky.zip",
+          "--browser",
+          "/usr/bin/chromium",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-dependencies"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-dependencies.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 3.841,
+        "log_sha256": "3ccce3bdeef5d81acb5d9cd6be286732db15f2bf77be535f143dbf6b0d6f54f1",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "browser-configuration",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry",
+          "--",
+          "steamdeck/tests/browser-native-configuration.py",
+          "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/tmp/primary/second/obsgod-decky.zip",
+          "--browser",
+          "/usr/bin/chromium",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-configuration"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-configuration.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 8.096,
+        "log_sha256": "1eb2dbdb7c445fb268e4e77a23da2c309aa3f4339d6de0994a22d0bae3f64dd1",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "browser-m3-panel",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry",
+          "--",
+          "steamdeck/tests/browser-m3-panel.py",
+          "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/tmp/primary/second/obsgod-decky.zip",
+          "--browser",
+          "/usr/bin/chromium",
+          "--screenshots",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-m3-panel"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-m3-panel.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 13.05,
+        "log_sha256": "f38d6abc8e7da65aadf16d3be8d16da418d2e26f6db91c0c25c7463342063233",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "browser-mixer-panel",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry",
+          "--",
+          "steamdeck/tests/browser-mixer-panel.py",
+          "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/tmp/primary/second/obsgod-decky.zip",
+          "--browser",
+          "/usr/bin/chromium",
+          "--screenshots",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-mixer-panel"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-mixer-panel.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 3.032,
+        "log_sha256": "0179d16220fa05ff8cea119976256c9fd55c8cb01e91ec39551110ef90f39041",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "browser-setup",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry",
+          "--",
+          "steamdeck/tests/browser-setup.py",
+          "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+          "--browser",
+          "/usr/bin/chromium",
+          "--screenshots",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-setup"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-setup.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 3.292,
+        "log_sha256": "269e81b1e10d87446ab85cd92b8dfee301a2482783a2c97b612d965f2fce6a41",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "browser-m3-setup",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry",
+          "--",
+          "steamdeck/tests/browser-m3-setup.py",
+          "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+          "--browser",
+          "/usr/bin/chromium",
+          "--screenshots",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-m3-setup"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-m3-setup.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 3.82,
+        "log_sha256": "8b89ee58e9039ccc809617b16bd2421e3772d33f77b5cc676d4dc686d9fad0e1",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "browser-mixer-setup",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry",
+          "--",
+          "steamdeck/tests/browser-mixer-setup.py",
+          "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+          "--browser",
+          "/usr/bin/chromium",
+          "--screenshots",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-mixer-setup"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-mixer-setup.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 2.341,
+        "log_sha256": "8e1fd1aab86129a1761f97fbe84ee8bca41164e99a8ba6621cc570d83dbd3ce8",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "browser-support",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry",
+          "--",
+          "steamdeck/tests/browser-support.py",
+          "--browser",
+          "/usr/bin/chromium",
+          "--screenshots",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-support"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-support.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 2.051,
+        "log_sha256": "793f783e96662b00925852f207378db9d6c48f608e5b06e3a9bf1c7bc068c58d",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "browser-site",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry",
+          "--",
+          "site/tests/browser.py",
+          "--browser",
+          "/usr/bin/chromium",
+          "--site-dir",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/site-html",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/site-browser"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-site.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 5.47,
+        "log_sha256": "326cd129835327ad1e3fae6bd270bd2d5afcd3664fc603262da63a8ad7df2a3c",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "native-image",
+        "command": [
+          "docker",
+          "build",
+          "--build-arg",
+          "HTTP_PROXY",
+          "--build-arg",
+          "HTTPS_PROXY",
+          "--build-arg",
+          "NO_PROXY",
+          "--build-arg",
+          "http_proxy",
+          "--build-arg",
+          "https_proxy",
+          "--build-arg",
+          "no_proxy",
+          "--secret",
+          "id=proxy_ca,src=/usr/local/share/ca-certificates/environment-proxy-ca.crt",
+          "-f",
+          "steamdeck/tests/obs-smoke.Dockerfile",
+          "-t",
+          "obsgod-obs-smoke:qualification",
+          "."
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/native-image.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.137,
+        "log_sha256": "7abca0c0c38dee1c47c96370cc3835a10d12537f40eb9c394ac086839a8f0ffe",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "native-audio",
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "--user",
+          "1000:1000",
+          "-e",
+          "OBSGOD_QUALIFIED_REVISION=0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "--mount",
+          "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+          "--mount",
+          "type=bind,src=/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-audio,dst=/work",
+          "obsgod-obs-smoke:qualification",
+          "dbus-run-session",
+          "--",
+          "bash",
+          "/src/steamdeck/tests/native-obs-smoke.sh"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/native-audio.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 134.014,
+        "log_sha256": "a7e86c2ce6a8321de8baf48d35c96728060a2b747cf3c103c5ac2b688eaa9e84",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "native-capture",
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "--user",
+          "1000:1000",
+          "-e",
+          "OBSGOD_QUALIFIED_REVISION=0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "--mount",
+          "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+          "--mount",
+          "type=bind,src=/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-capture,dst=/work",
+          "obsgod-obs-smoke:qualification",
+          "dbus-run-session",
+          "--",
+          "bash",
+          "/src/steamdeck/tests/native-capture-smoke.sh",
+          "/src/dist"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/native-capture.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 23.219,
+        "log_sha256": "4bfe67e970711708b15a5d6ded0a1ee60fac2356d4663e0ec5842daddc68df29",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "native-game-obs",
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "--user",
+          "1000:1000",
+          "-e",
+          "OBSGOD_QUALIFIED_REVISION=0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "--mount",
+          "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+          "--mount",
+          "type=bind,src=/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-game-obs,dst=/work",
+          "obsgod-obs-smoke:qualification",
+          "dbus-run-session",
+          "--",
+          "bash",
+          "/src/steamdeck/tests/native-game-obs-smoke.sh"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/native-game-obs.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 79.005,
+        "log_sha256": "0471d185435474aa7387c53cfea8135baaf0adf7fa990999958c07cf95f83839",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "supplemental-transport",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "/workspace/.obsgod-tools/completion/ownership-4699235/supplemental/run-supplement.py",
+          "transport",
+          "--revision",
+          "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "--dist",
+          "/workspace/obsgod/dist",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/supplemental/run-transport",
+          "--execute-after-hold-release"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/supplemental-transport.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 41.39,
+        "log_sha256": "0c01c2342f34830bf1d9ea228275498537d136a665e1cc71111d804da46432fc",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "supplemental-cli",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "/workspace/.obsgod-tools/completion/ownership-4699235/supplemental/run-supplement.py",
+          "cli",
+          "--revision",
+          "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "--dist",
+          "/workspace/obsgod/dist",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/supplemental/run-cli",
+          "--execute-after-hold-release"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/supplemental-cli.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 4.836,
+        "log_sha256": "2ef5709b9090225a13803153515137adf8a9149300db6a6bf30492270dd24a7c",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "supplemental-upgrades",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--",
+          "/workspace/.obsgod-tools/completion/ownership-4699235/supplemental/run-supplement.py",
+          "upgrades",
+          "--revision",
+          "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "--dist",
+          "/workspace/obsgod/dist",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/supplemental/run-upgrades",
+          "--execute-after-hold-release",
+          "--browser",
+          "/usr/bin/chromium"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/supplemental-upgrades.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 7.795,
+        "log_sha256": "e4b0ac40b1511e7414d7a37fe8a985eea1f14f0416a637e12e1c10fa7771ddd8",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "integration-cpython",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "/workspace/.obsgod-tools/runtime-correctness-20261114/integration/packaged-integration.py",
+          "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/tmp/primary/second/obsgod-decky.zip",
+          "--revision",
+          "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/integration-cpython.json",
+          "--runtime",
+          "cpython"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/integration-cpython.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 1.189,
+        "log_sha256": "00317ac58e81940c69daf11ce735086954cc6bfca45d11ab19bdba895c2ea161",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "integration-frozen",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "/workspace/.obsgod-tools/runtime-correctness-20261114/integration/packaged-integration.py",
+          "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/tmp/primary/second/obsgod-decky.zip",
+          "--revision",
+          "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/integration-frozen.json",
+          "--runtime",
+          "frozen"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/integration-frozen.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 1.358,
+        "log_sha256": "f80144c5c10d82a0c689783fbddeb399ed208c8e1b8b7c0f62b8b9ace5adc06e",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "host-build",
+        "command": [
+          "go",
+          "build",
+          "-trimpath",
+          "-v",
+          "./..."
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/host-build.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 1.239,
+        "log_sha256": "0d94cd3d081a33b680a1cfb975d21d2136f5ee87a9f4184926d46b925dd5225c",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "host-build-tests",
+        "command": [
+          "go",
+          "test",
+          "./..."
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/host-build-tests.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 12.407,
+        "log_sha256": "583c785b60b92718c9e6581e976d13f2dfa2fd9f377160f384b5a11b15dac5ad",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "host-coverage",
+        "command": [
+          "go",
+          "test",
+          "-race",
+          "-covermode",
+          "atomic",
+          "-coverprofile=/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/profile.cov",
+          "./..."
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/host-coverage.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 16.834,
+        "log_sha256": "6090b135ab1f93230bafa4118e73a4c289c745911444d119f0f5e554f982cc18",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "host-coverage-summary",
+        "command": [
+          "go",
+          "tool",
+          "cover",
+          "-func=/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/profile.cov"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/host-coverage-summary.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.093,
+        "log_sha256": "c84dd13a68c6977decf90389f91b34b5cef73ce73394d84062e65b427e27b65e",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "host-format",
+        "command": [
+          "gofmt",
+          "-l",
+          "cmd/obsgod-decky-install/main.go",
+          "examples/api-client/main.go",
+          "internal/commands/api.go",
+          "internal/commands/api_profiles_test.go",
+          "internal/commands/api_test.go",
+          "internal/commands/countdown.go",
+          "internal/commands/creator.go",
+          "internal/commands/deck.go",
+          "internal/commands/deck_advanced.go",
+          "internal/commands/deck_advanced_test.go",
+          "internal/commands/deck_capture_process_linux_test.go",
+          "internal/commands/deck_native_configuration_linux_test.go",
+          "internal/commands/label.go",
+          "internal/commands/legacy_compatibility_test.go",
+          "internal/commands/profile.go",
+          "internal/commands/recording.go",
+          "internal/commands/reference.go",
+          "internal/commands/replaybuffer.go",
+          "internal/commands/root.go",
+          "internal/commands/root_test.go",
+          "internal/commands/scene.go",
+          "internal/commands/scenecollection.go",
+          "internal/commands/sceneitems.go",
+          "internal/commands/sources.go",
+          "internal/commands/stream.go",
+          "internal/commands/studiomode.go",
+          "internal/commands/usage.go",
+          "internal/commands/virtualcam.go",
+          "internal/commands/workflow.go",
+          "internal/commands/workflow_test.go",
+          "internal/config/config.go",
+          "internal/config/file.go",
+          "internal/config/file_test.go",
+          "internal/config/workflow.go",
+          "internal/config/workflow_test.go",
+          "internal/deck/audio.go",
+          "internal/deck/audio_control.go",
+          "internal/deck/audio_linux.go",
+          "internal/deck/audio_linux_test.go",
+          "internal/deck/audio_other.go",
+          "internal/deck/capture_mic_policy_linux_test.go",
+          "internal/deck/capture_ownership_linux_test.go",
+          "internal/deck/capture_settings.go",
+          "internal/deck/capture_settings_cancel_linux_test.go",
+          "internal/deck/capture_settings_test.go",
+          "internal/deck/capture_video.go",
+          "internal/deck/capture_video_test.go",
+          "internal/deck/capture_watch_linux.go",
+          "internal/deck/capture_watch_linux_test.go",
+          "internal/deck/capture_watch_other.go",
+          "internal/deck/config.go",
+          "internal/deck/config_test.go",
+          "internal/deck/configuration_contract_test.go",
+          "internal/deck/connection.go",
+          "internal/deck/connection_linux_test.go",
+          "internal/deck/connection_test.go",
+          "internal/deck/control.go",
+          "internal/deck/diagnostics.go",
+          "internal/deck/diagnostics_test.go",
+          "internal/deck/game_linux.go",
+          "internal/deck/game_linux_test.go",
+          "internal/deck/game_other.go",
+          "internal/deck/health.go",
+          "internal/deck/health_test.go",
+          "internal/deck/idle_media.go",
+          "internal/deck/idle_media_linux_test.go",
+          "internal/deck/idle_media_test.go",
+          "internal/deck/local_test_capture_linux_test.go",
+          "internal/deck/lock_linux.go",
+          "internal/deck/lock_other.go",
+          "internal/deck/lock_paths_linux_test.go",
+          "internal/deck/media.go",
+          "internal/deck/media_disk_linux.go",
+          "internal/deck/media_disk_other.go",
+          "internal/deck/media_library.go",
+          "internal/deck/media_open_linux.go",
+          "internal/deck/media_open_other.go",
+          "internal/deck/media_storage.go",
+          "internal/deck/media_test.go",
+          "internal/deck/mixer.go",
+          "internal/deck/mixer_devices_linux.go",
+          "internal/deck/mixer_devices_linux_test.go",
+          "internal/deck/mixer_devices_other.go",
+          "internal/deck/mixer_status_linux_test.go",
+          "internal/deck/mixer_talk.go",
+          "internal/deck/mixer_test.go",
+          "internal/deck/mixer_watch_linux.go",
+          "internal/deck/mixer_watch_other.go",
+          "internal/deck/native_configuration.go",
+          "internal/deck/native_configuration_paths_linux.go",
+          "internal/deck/native_configuration_paths_other.go",
+          "internal/deck/native_configuration_test.go",
+          "internal/deck/profiles.go",
+          "internal/deck/profiles_test.go",
+          "internal/deck/resilience.go",
+          "internal/deck/resilience_linux.go",
+          "internal/deck/resilience_linux_test.go",
+          "internal/deck/resilience_other.go",
+          "internal/deck/runtime_linux.go",
+          "internal/deck/runtime_linux_test.go",
+          "internal/deck/runtime_other.go",
+          "internal/deck/storage_map_linux.go",
+          "internal/deck/storage_map_other.go",
+          "internal/deck/support.go",
+          "internal/deck/support_test.go",
+          "internal/deck/user_paths_test.go",
+          "internal/deckyinstall/install.go",
+          "internal/deckyinstall/install_test.go",
+          "internal/obs/service.go",
+          "internal/obs/service_compatibility_test.go",
+          "internal/obs/service_redaction_test.go",
+          "internal/obstransport/dialer.go",
+          "internal/version/version.go",
+          "main.go",
+          "pkg/api/v1/client.go",
+          "pkg/api/v1/client_test.go",
+          "pkg/api/v1/errors.go",
+          "pkg/api/v1/legacy.go",
+          "pkg/api/v1/legacy_test.go",
+          "pkg/api/v1/models.go",
+          "pkg/api/v1/profiles_test.go",
+          "pkg/api/v1/response_transport_test.go",
+          "pkg/automation/api_primitives.go",
+          "pkg/automation/audio.go",
+          "pkg/automation/audio_recovery.go",
+          "pkg/automation/audio_recovery_test.go",
+          "pkg/automation/audio_test.go",
+          "pkg/automation/client.go",
+          "pkg/automation/client_test.go",
+          "pkg/automation/health.go",
+          "pkg/automation/health_test.go",
+          "pkg/automation/idle_media.go",
+          "pkg/automation/legacy.go",
+          "pkg/automation/media.go",
+          "pkg/automation/media_test.go",
+          "pkg/automation/mixer.go",
+          "pkg/automation/mixer_test.go",
+          "pkg/automation/real_obs_test.go",
+          "pkg/automation/recording_observation_test.go",
+          "pkg/automation/response_error_test.go",
+          "pkg/automation/scene_items.go",
+          "pkg/automation/setup.go",
+          "pkg/automation/stream_progress_test.go",
+          "pkg/automation/stream_status_test.go",
+          "pkg/automation/transport_close_test.go",
+          "pkg/automation/workflow.go",
+          "pkg/automation/workflow_response_test.go",
+          "pkg/automation/workflow_test.go",
+          "pkg/creator/v1/config.go",
+          "pkg/creator/v1/runtime.go",
+          "pkg/creator/v1/runtime_test.go"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/host-format.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.03,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "goreleaser-version",
+        "command": [
+          "/workspace/.obsgod-tools/nfpm-completion/tools/goreleaser",
+          "--version"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": true,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/goreleaser-version.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.05,
+        "log_sha256": "a0716157ffe7d242c84b9ef42f98d516eb5a6a12d3dfdace1b0e23eb5c49f5c5",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "preserve-notices-root-move",
+        "command": [
+          "docker",
+          "--host=unix:///var/run/docker.sock",
+          "run",
+          "--rm",
+          "--network",
+          "none",
+          "--pull=never",
+          "--user",
+          "0:0",
+          "--read-only",
+          "--cap-drop",
+          "ALL",
+          "--cap-add",
+          "DAC_OVERRIDE",
+          "--security-opt",
+          "no-new-privileges",
+          "--mount",
+          "type=bind,src=/workspace,dst=/workspace",
+          "--entrypoint",
+          "/bin/mv",
+          "alpine:3.23@sha256:469c9ea410b9215eaee7976ba6c0639039b444be8e5d638f7abbada189971eb2",
+          "--",
+          "/workspace/obsgod/.local-ci",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/previous-notice-staging-4eac7a4"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/preserve-notices-root-move.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.444,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "host-snapshot",
+        "command": [
+          "/workspace/.obsgod-tools/nfpm-completion/tools/goreleaser",
+          "release",
+          "--snapshot",
+          "--skip=publish,sign",
+          "--clean",
+          "--parallelism",
+          "1"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": true,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/host-snapshot.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 194.13,
+        "log_sha256": "ffb3b6825d21332d2993ca2e18679f5ef194174410fdae42e23856cc883eed91",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "snapshot-generic-audit-1",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/generic-release.py",
+          "audit",
+          "--revision",
+          "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "--artifacts",
+          "/workspace/obsgod/dist/snapshot",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-generic-audit"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": true,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-generic-audit-1.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 4.422,
+        "log_sha256": "64d516852cba4c0aa7408be5d83f753ea4c8abef87fbe4e450d23296e7767f30",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "snapshot-generic-audit-2",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/generic-release.py",
+          "audit",
+          "--revision",
+          "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "--artifacts",
+          "/workspace/obsgod/dist/snapshot",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-generic-audit"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": true,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-generic-audit-2.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 4.438,
+        "log_sha256": "64d516852cba4c0aa7408be5d83f753ea4c8abef87fbe4e450d23296e7767f30",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "snapshot-generic-smoke",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/generic-release.py",
+          "smoke",
+          "--artifacts",
+          "/workspace/obsgod/dist/snapshot",
+          "--audit",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-generic-audit/SUMMARY.json",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-generic-smoke"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": true,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-generic-smoke.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.263,
+        "log_sha256": "e23ce0f37b65d1f51e9a303fbeefaa5146b49e3ec3375ff2c1ea7d8ebda4d3e1",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "snapshot-nfpm-audit-1",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/nfpm-release.py",
+          "audit",
+          "--revision",
+          "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "--artifacts",
+          "/workspace/obsgod/dist/snapshot",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-nfpm-audit"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": true,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-nfpm-audit-1.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 4.327,
+        "log_sha256": "6a94f4517f9432049af018257e5cd74f85afb344011d4f2a816993e2ba30b610",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "snapshot-nfpm-audit-2",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/nfpm-release.py",
+          "audit",
+          "--revision",
+          "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "--artifacts",
+          "/workspace/obsgod/dist/snapshot",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-nfpm-audit"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": true,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-nfpm-audit-2.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 3.925,
+        "log_sha256": "6a94f4517f9432049af018257e5cd74f85afb344011d4f2a816993e2ba30b610",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "snapshot-nfpm-smoke",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/nfpm-release.py",
+          "smoke",
+          "--artifacts",
+          "/workspace/obsgod/dist/snapshot",
+          "--audit",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-nfpm-audit/SUMMARY.json",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-nfpm-smoke"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": true,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-nfpm-smoke.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 8.658,
+        "log_sha256": "36a49606e2ef4526661fa07cbe271d34d47db65049bbb654c9c72629f721df5b",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "funding-check",
+        "command": [
+          "node",
+          "scripts/generate-support.mjs",
+          "--check"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/funding-check.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.024,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "docs-build",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/build-site.py",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/docs-preview"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/docs-build.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.036,
+        "log_sha256": "d90135d03c70ceff417d7ea64ed97d7a98cb3efafac194795f740a3580433e17",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "docs-check",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/build-site.py",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/docs-preview",
+          "--check"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/docs-check.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.037,
+        "log_sha256": "640865b8e67eaf0bc42c9c5bf96b92768089a62415472022672c9253ed039e74",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "site-safety",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "site/tests/test_build.py",
+          "--output",
+          "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/site-safety"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/site-safety.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 0.178,
+        "log_sha256": "847bd5e6426dffd93a6816dd8e02ce6f2645a890cbb5030f84aed4bd6e789314",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      },
+      {
+        "name": "actual-post-consumer-compiler-policy",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/local-ci-resources.py",
+          "trim-compiler-cache"
+        ],
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "result": "passed",
+        "expected_exit_codes": [
+          0
+        ],
+        "optional": false,
+        "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/actual-post-consumer-compiler-policy.log",
+        "source_before": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        },
+        "exit_code": 0,
+        "seconds": 4.539,
+        "log_sha256": "658333ff6b82928e30afc0281fec5346b6d9fcf04fc6b60677d272096a5a3b3f",
+        "source_after": {
+          "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+          "dirty": false
+        }
+      }
+    ]
+  },
+  "tests": {
+    "application_python": {
+      "framework": "python-unittest",
+      "tests": 271,
+      "status": "passed",
+      "line": 308,
+      "failed": 0,
+      "skipped": 2,
+      "passed": 269
+    },
+    "tooling_python": {
+      "framework": "python-unittest",
+      "tests": 116,
+      "status": "passed",
+      "line": 129,
+      "failed": 0,
+      "skipped": 0,
+      "passed": 116
+    },
+    "frontend": {
+      "framework": "node-test",
+      "line": 161,
+      "tests": 156,
+      "passed": 156,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "configuration_corpus_cases": 106,
+    "packaged_settings": {
+      "action_counts": {
+        "configuration": 1,
+        "configure-fields": 1,
+        "set-capture-mode": 12,
+        "status": 27,
+        "stop": 1
+      },
+      "checks": [
+        {
+          "name": "shared-lock-past-ui-deadline",
+          "seconds": 16.523,
+          "status": "passed"
+        },
+        {
+          "name": "near-deadline-lock-release-success",
+          "seconds": 2.173,
+          "status": "passed"
+        },
+        {
+          "name": "caller-disconnect-owned-deadline",
+          "seconds": 3.678,
+          "status": "passed"
+        },
+        {
+          "name": "stop-during-blocked-edit",
+          "seconds": 0.282,
+          "status": "passed"
+        },
+        {
+          "name": "repeated-identical-edit-coalescing",
+          "seconds": 0.242,
+          "status": "passed"
+        },
+        {
+          "name": "watcher-lifetime-lease-contention",
+          "seconds": 3.674,
+          "status": "passed"
+        }
+      ],
+      "guarded_child_count": 42,
+      "harness_sha256": "3de1d572ad4929b189c5fbf5171450bbb39106b36063585c46d30753075a5bc0",
+      "limits": [
+        "Actual packaged Python and Go with real locks/children; synthetic HOME/Decky paths.",
+        "No real loader RPC transport, SteamOS, OBS/Flatpak launch, controller, audio or provider qualification."
+      ],
+      "payload_sha256": {
+        "bin/obsgod": "41014ef39722ebc050c3240d60ea77322282a5a1e5d5c84503203fb25dd8fc47",
+        "dependency_setup.py": "6602dd8bdb6fb4864ed55fa4c891983279a59952b2d251db5b4208efc297e0e8",
+        "main.py": "eca913d64b6a4749d2d533eddb8afeebed2d0fbeba0bba063ee1b85871ebfd14",
+        "storage.py": "3a3e62ed814c64bf33e89f75c8eab645cab564fdd47476c7cbeabfff11714c5e"
+      },
+      "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+      "python": "3.12.14",
+      "recorded_at_utc": "2026-11-19T00:03:32.748243+00:00",
+      "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+      "schema": "obsgod.packaged-settings-boundary/v1",
+      "seconds": 27.768,
+      "status": "passed",
+      "uid": 1000,
+      "zip_bytes": 4568043,
+      "zip_sha256": "7fc9faada008280f2edfa0ff59f92e4a61edfae0d1f20675f629a88ccad81984"
+    }
+  },
+  "native": {
+    "collector_sha256": "64b4b2fa81924694b1c00b58250c3b2814b403fae3adf53fed7b6fdbf747c1e5",
+    "command_receipts": [
+      {
+        "exit_code": 0,
+        "log_sha256": "a7e86c2ce6a8321de8baf48d35c96728060a2b747cf3c103c5ac2b688eaa9e84",
+        "name": "native-audio",
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c"
+      },
+      {
+        "exit_code": 0,
+        "log_sha256": "4bfe67e970711708b15a5d6ded0a1ee60fac2356d4663e0ec5842daddc68df29",
+        "name": "native-capture",
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c"
+      },
+      {
+        "exit_code": 0,
+        "log_sha256": "0471d185435474aa7387c53cfea8135baaf0adf7fa990999958c07cf95f83839",
+        "name": "native-game-obs",
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c"
+      }
+    ],
+    "curator_sha256": "cd731992802c0aff38817b747129a13e1b8d120abef0dab18cd47ba287a9b81c",
+    "distinct_sha256_count": 15,
+    "file_count": 18,
+    "files": [
+      {
+        "declared_revision": null,
+        "file": "audio/recording-audio-metrics.json",
+        "original_path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-audio/output/recording-audio-metrics.json",
+        "original_sha256": "7a196808210081c2047a5224c8bb5121bbb7d98db8e9ad80d03e3ed193928804",
+        "public_sha256": "0bfc502d3dd3179bbc5238d0a478662a42e55e0d5d98bbd96aedbfe447b7b5fb",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/stream-audio-metrics.json",
+        "original_path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-audio/output/stream-audio-metrics.json",
+        "original_sha256": "bd8b41f209bdea836fd64248084974628220eda3cff843f9cf49a0166676d107",
+        "public_sha256": "ba95381dc28d04a9ca97ebfa5570ed50710b107bd6ffe848eb3747611ea89f16",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/audio-default-fallback-audio-metrics.json",
+        "original_path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-audio/output/audio-default-fallback-audio-metrics.json",
+        "original_sha256": "0112ae99dad6650c384de8607f9af80adee6b5f755c06936f3dafd107949398c",
+        "public_sha256": "94f1405caa41e8752be980dd784da7f9f93fdd1d4203e080b919c0eea8a6f7ce",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/audio-default-changed-audio-metrics.json",
+        "original_path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-audio/output/audio-default-changed-audio-metrics.json",
+        "original_sha256": "9758826fca8bdd641d26e4ec5bbf1237af4e942cf14419538ab09c9d8c2371db",
+        "public_sha256": "d5a6dbb2e425e7710cc6c9b969fdaed78557387b180123a53429a1b52a6763a6",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/silence-negative-control.json",
+        "original_path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-audio/output/silence-negative-control.json",
+        "original_sha256": "5a37e66d12c607bb1149f9821a2c8c8ddc5231a762778668c112d53f63eb9763",
+        "public_sha256": "a7faadde4f8b511f1d542c993e9e477f5c1f3cd30b397a941264e8ad42f91eb9",
+        "redacted": true,
+        "result": "silence-rejected-as-expected"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/audio-hotplug.json",
+        "original_path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-audio/output/audio-hotplug.json",
+        "original_sha256": "658121e11e200e99430f03d36a979042c9afcecedbd61da92eb727b7b0a2d863",
+        "public_sha256": "e9730e3e001a34abb0201dd63b0bbbb99b7989c4ed82e75d48118c5b17778c35",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/native-mixer-summary.json",
+        "original_path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-audio/output/native-mixer-summary.json",
+        "original_sha256": "6950116953fead6371a28c8dc818b8e6255ee8b8a08e5fb918f7b248ed3de1ee",
+        "public_sha256": "0feb2b2c7aadf8b589c66675c4c0f4005a81176fbb43aa4a94c073912e4f8298",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/control-password-qualification.json",
+        "original_path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-audio/output/control-password-qualification.json",
+        "original_sha256": "2afa6914ddfdd79eef6cec34a89dd4692481c0b6fac6bad1149d1bd8cf76ab39",
+        "public_sha256": "b29bc3d2cd0d8978fa13450fc573857941e893281e4ec5f74cfafdd19ce72ac0",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/control-workflow-qualification.json",
+        "original_path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-audio/output/control-workflow-qualification.json",
+        "original_sha256": "a5af5296a2e7ef5ca055d1c84da8d8c8a66bb8add25fa5b05a9b579bc2c4bf58",
+        "public_sha256": "9ce7c14fc1f00ba3d9a3026aef7fec42e2aa85f6027069a11bcc1effe5659ab9",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/media-qualification.json",
+        "original_path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-audio/output/media-qualification.json",
+        "original_sha256": "903b8084a6dbcdc9c2f3d1bcb527ce78035999a007fde23eca635f0900174fcd",
+        "public_sha256": "59f48a365390c8fa4d0fb34b752d6e793d46093ac68abd170bfdda2364491727",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/media-live-qualification.json",
+        "original_path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-audio/output/media-live-qualification.json",
+        "original_sha256": "9dccf306153cfccfb8287979373dee16b58e1245c87f3534e36c7653cbed08df",
+        "public_sha256": "78c6da52f0e6f556607b0e8fd8e862ecee10eb8f5edd466caeffd724ed4194c0",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/profile-qualification.json",
+        "original_path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-audio/output/profile-qualification.json",
+        "original_sha256": "2dc5b673007fffcb5331c9994a05284e92c4a4af558cb34d7f3a14c265fe6bd5",
+        "public_sha256": "2b2532d31cb33eaeb7728a8c950ba21b90c22547199b2947b20f04fa46afb532",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/native-media-summary.json",
+        "original_path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-audio/output/native-media-summary.json",
+        "original_sha256": "903b8084a6dbcdc9c2f3d1bcb527ce78035999a007fde23eca635f0900174fcd",
+        "public_sha256": "59f48a365390c8fa4d0fb34b752d6e793d46093ac68abd170bfdda2364491727",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/native-live-media-summary.json",
+        "original_path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-audio/output/native-live-media-summary.json",
+        "original_sha256": "9dccf306153cfccfb8287979373dee16b58e1245c87f3534e36c7653cbed08df",
+        "public_sha256": "78c6da52f0e6f556607b0e8fd8e862ecee10eb8f5edd466caeffd724ed4194c0",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/native-profiles-summary.json",
+        "original_path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-audio/output/native-profiles-summary.json",
+        "original_sha256": "2dc5b673007fffcb5331c9994a05284e92c4a4af558cb34d7f3a14c265fe6bd5",
+        "public_sha256": "2b2532d31cb33eaeb7728a8c950ba21b90c22547199b2947b20f04fa46afb532",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "file": "capture/qualification.json",
+        "original_path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-capture/capture-validation/qualification.json",
+        "original_sha256": "3f0e42467d46e7467319cc506ebf86b284c688af44719704e6e6302828e2606f",
+        "public_sha256": "e5ffb2c3bf67840adbeed9df11417e5bb183a92ae9c4309248bf5aae8de6dd28",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "file": "game-obs/game-obs-qualification.json",
+        "original_path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-game-obs/output/game-obs-qualification.json",
+        "original_sha256": "3a2f4ae7281a8924c4e5bd8030802b2db0ca8caabc4846b4313e855bd4cd17ff",
+        "public_sha256": "4a5f9aebcc2c83329c13d265c7b6c9d739a873a6da1d11c365e304ec8e21db3b",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "game-obs/idle-media-qualification.json",
+        "original_path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/native-game-obs/output/idle-media-qualification.json",
+        "original_sha256": "8467209d81d8c7c0742aabd22869bfe5bfebc2159aa6fb5debbe86b3434a7ba3",
+        "public_sha256": "1db240f90aebcc6d2111c15b63765999d7ea3dc870cad8d2acb1738b8718939c",
+        "redacted": true,
+        "result": "passed"
+      }
+    ],
+    "native_image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+    "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+    "scope": "Exactly18 filtered synthetic native Linux OBS/audio/capture/RTMP summary JSONs from the completed standalone command run. No raw HOME/config/cache/media/binaries. Actual Steam Deck/SteamOS/FlatpakOBS33/Gamescope/AMD/controller/headset/provider/non-Linux and full ACT workflows remain separate."
+  },
+  "integrations": {
+    "cpython": {
+      "checks": 218,
+      "guarded_go_spawns": 22,
+      "sha256": "409212ba02d61fde3350cdf8cf3a53c29393b513e2b42825c9ecd3f1503e718d",
+      "scope": [
+        "Synthetic private account home/XDG/Decky paths; not a real loader transport",
+        "Frozen mode simulates sys.frozen, a failing PluginLoader decoy and loader environment; it does not execute an actual PyInstaller backend",
+        "No SteamOS, OBS launch, Flatpak transaction, controller, audio/video or provider viewer qualification",
+        "Offline authenticated-listener test is expected to report a closed listener; no live authentication proof"
+      ]
+    },
+    "frozen": {
+      "checks": 240,
+      "guarded_go_spawns": 22,
+      "sha256": "583ed4fba996f6791afe8e5892e6c7e8c01de2fd48d6c5e7848d0bf82d1baeed",
+      "scope": [
+        "Synthetic private account home/XDG/Decky paths; not a real loader transport",
+        "Frozen mode simulates sys.frozen, a failing PluginLoader decoy and loader environment; it does not execute an actual PyInstaller backend",
+        "No SteamOS, OBS launch, Flatpak transaction, controller, audio/video or provider viewer qualification",
+        "Offline authenticated-listener test is expected to report a closed listener; no live authentication proof"
+      ]
+    }
+  },
+  "compiler_cache_policy": {
+    "completed": true,
+    "phases": [
+      {
+        "after": {
+          "bytes": 0,
+          "files": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "before": {
+          "bytes": 0,
+          "files": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "cache": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/go-build-root",
+        "command": [
+          "go",
+          "clean",
+          "-cache"
+        ],
+        "disk_after": {
+          "available_bytes": 6287601664,
+          "device": 34,
+          "filesystem_id": 18435797035770236925,
+          "total_bytes": 9441329152
+        },
+        "disk_before": {
+          "available_bytes": 6287605760,
+          "device": 34,
+          "filesystem_id": 18435797035770236925,
+          "total_bytes": 9441329152
+        },
+        "exit_code": 0
+      },
+      {
+        "after": {
+          "bytes": 228,
+          "files": 2,
+          "sha256": "3a676926ef9659f593614a999211219bcaf3944658505173d2b6cb0b6ffbb915"
+        },
+        "before": {
+          "bytes": 2777516899,
+          "files": 26731,
+          "sha256": "345a00c0c7ac90c1fda3c48b12996f4b219390e0626f05eb14bf08325959720c"
+        },
+        "cache": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/go-build-user-1000",
+        "command": [
+          "go",
+          "clean",
+          "-cache"
+        ],
+        "disk_after": {
+          "available_bytes": 9158107136,
+          "device": 34,
+          "filesystem_id": 18435797035770236925,
+          "total_bytes": 9441329152
+        },
+        "disk_before": {
+          "available_bytes": 6287601664,
+          "device": 34,
+          "filesystem_id": 18435797035770236925,
+          "total_bytes": 9441329152
+        },
+        "exit_code": 0
+      }
+    ],
+    "profile": "constrained",
+    "schema_version": 1,
+    "scope": "Only attempt-local compiler caches, after all Go consumers; no host caches, module caches, toolchains, artifacts or evidence removed"
+  },
+  "module_cache_preservation": {
+    "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+    "before": {
+      "sha256": "049fed17ea1f79059737bd170679abf2411f3359a527c0a4679b4918f9c593e4",
+      "files": 639,
+      "bytes": 2881186
+    },
+    "after": {
+      "sha256": "049fed17ea1f79059737bd170679abf2411f3359a527c0a4679b4918f9c593e4",
+      "files": 639,
+      "bytes": 2881186
+    },
+    "status": "passed",
+    "scope": "Only final compiler trim interval; earlier Go consumers may legitimately populate modules. No host cache or module cache was pruned."
+  },
+  "platform": {
+    "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+    "tree": "b5d95741d3352d8eccfc954085895fda8268fa38",
+    "observed_utc": "2026-11-19T00:22:21.705531+00:00",
+    "host": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "uid": 1000,
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "tools": [
+      {
+        "command": [
+          "/workspace/.obsgod-tools/toolchains/go1.27.4/go/bin/go",
+          "version"
+        ],
+        "exit_code": 0,
+        "stdout": "go version go1.27.4 linux/amd64\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "node",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "v24.19.0\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "npm",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "11.9.0\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/chromium",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "docker",
+          "version",
+          "--format",
+          "{{.Client.Version}} / {{.Server.Version}}"
+        ],
+        "exit_code": 0,
+        "stdout": "28.4.0 / 28.4.0\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "docker",
+          "info",
+          "--format",
+          "{{.Driver}}"
+        ],
+        "exit_code": 0,
+        "stdout": "vfs\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/workspace/.obsgod-tools/pkg/bin/act",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "act version 0.2.97\n",
+        "stderr": ""
+      }
+    ],
+    "native_metadata": {
+      "command": [
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--pull=never",
+        "--network",
+        "none",
+        "--entrypoint",
+        "dpkg-query",
+        "obsgod-obs-smoke:qualification",
+        "-W",
+        "-f=${Package}\t${Version}\n",
+        "obs-studio",
+        "python3",
+        "ffmpeg",
+        "pulseaudio",
+        "pipewire",
+        "libpipewire-0.3-0t64",
+        "gstreamer1.0-pipewire"
+      ],
+      "exit_code": 0,
+      "stdout": "ffmpeg\t7:7.1.5-0+deb13u1\ngstreamer1.0-pipewire\t1.4.2-1\nlibpipewire-0.3-0t64\t1.4.2-1\nobs-studio\t30.2.3+dfsg-3\npipewire\t1.4.2-1\npulseaudio\t17.0+dfsg1-2+b1\npython3\t3.13.5-1\n",
+      "stderr": ""
+    },
+    "native_image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+    "limits": [
+      "Synthetic Linux OBS fixtures only; actual Steam Deck/SteamOS/FlatpakOBS33/Gamescope/AMD/controller/headset/provider/native non-Linux unrun.",
+      "Host Chromium used by standalone browser fixtures; full ACT-pinned browser workflows remain unrun on capacity refusal.",
+      "Go cross builds do not establish native non-Linux execution."
+    ]
+  },
+  "criteria": {
+    "schema": "obsgod.repeatable-primary-ci.criteria-review/v1",
+    "recorded_at_utc": "2026-11-19T00:26:20.158840+00:00",
+    "status": "FINAL LOCAL CRITERION ELIGIBILITY: all 6 literal #104 criteria are supported by exact 0c source and verified standalone evidence. The full ACT matrix remains unavailable with six workflows unrun; #85/#86 and external gates are unpassed.",
+    "source_revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+    "source_tree": "b5d95741d3352d8eccfc954085895fda8268fa38",
+    "source_clean_at_inventory": true,
+    "issue_url": "https://github.com/szmyty/obsgod/issues/104",
+    "live_issue_state": "open",
+    "original_acceptance_count": 6,
+    "original_issue_snapshot": {
+      "path": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/issue104-snapshot.json",
+      "sha256": "d7546890fa5283b0493af6e13da9343939b313c85236341470065ba1cf5f99db"
+    },
+    "criteria": [
+      {
+        "id": "104-P1",
+        "original_text": "A demonstrated primary-only entry-point failure causes the candidate workflow to fail.",
+        "status": "ELIGIBLE: bounded local criterion supported at exact current source",
+        "source_implementation": "Implemented at frozen 0c and reconciled with actual completed current-source evidence.",
+        "source": [
+          {
+            "path": ".github/workflows/steam-deck.yml",
+            "line": 60
+          },
+          {
+            "path": "scripts/qualify-decky-build.py",
+            "line": 225
+          },
+          {
+            "path": "scripts/qualify-decky-build.py",
+            "line": 239
+          }
+        ],
+        "focused_tests_to_bind": [
+          "scripts.tests.test_primary_qualification.PrimaryQualificationTests.test_actual_primary_refusal_fails_command_and_cannot_accept_candidate"
+        ],
+        "meaningful_required_evidence": [
+          "Execute the actual maintained primary workflow shell block with a deliberately wrong full SHA. Bind workflow/block hashes, exact command and current clean source; require actual primary entry failure/nonzero shell exit and no GITHUB_ENV success artifact lines.",
+          "Record the failing child command and failed qualification receipt; no accepted archive/second build. Source shows direct fail-fast invocation without continue-on-error. This demonstrates maintained-step failure propagation; it must not be relabeled as an executed full ACT candidate job."
+        ],
+        "pending_evidence": [],
+        "local_acceptance_status": "Passed bounded source/standalone regression contract at 0c; no full ACT, hosted or target acceptance inferred.",
+        "observed_final_evidence": "The exact maintained primary step ran under bash -euo pipefail with a deliberately wrong full SHA, reached the real package-decky.py entry, returned 1 and left GITHUB_ENV empty. Its failed helper receipt has one rejected child build, no accepted archive and no second build. The workflow calls this step directly without continue-on-error. Complete ACT execution remains unrun.",
+        "evidence_ids": [
+          "primary-negative",
+          "negative-shell",
+          "final-available",
+          "input-integrity"
+        ],
+        "current_check_rows": [
+          {
+            "name": "workflow-primary-negative",
+            "result": "passed",
+            "exit_code": 1,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/workflow-primary-negative.log",
+            "log_sha256": "09bc6f1caa26a7659b20160d84e4719ec0e6c1ef65386857d369b08d84b3fb0e"
+          }
+        ]
+      },
+      {
+        "id": "104-P2",
+        "original_text": "Primary output is built from exact clean source, audited and installed/exercised by existing fixtures; repeats have matching canonical bytes.",
+        "status": "ELIGIBLE: bounded local criterion supported at exact current source",
+        "source_implementation": "Implemented at frozen 0c and reconciled with actual completed current-source evidence.",
+        "source": [
+          {
+            "path": "scripts/qualify-decky-build.py",
+            "line": 131
+          },
+          {
+            "path": "scripts/qualify-decky-build.py",
+            "line": 198
+          },
+          {
+            "path": "scripts/qualify-decky-build.py",
+            "line": 225
+          },
+          {
+            "path": "scripts/qualify-decky-build.py",
+            "line": 247
+          },
+          {
+            "path": ".github/workflows/steam-deck.yml",
+            "line": 77
+          },
+          {
+            "path": ".github/workflows/steam-deck.yml",
+            "line": 97
+          }
+        ],
+        "focused_tests_to_bind": [
+          "scripts.tests.test_primary_qualification.PrimaryQualificationTests.test_extra_private_file_and_rehashed_source_tampering_are_refused",
+          "scripts.tests.test_primary_qualification.PrimaryQualificationTests.test_outer_receipt_and_inner_readiness_identity_must_match_actual_bytes"
+        ],
+        "meaningful_required_evidence": [
+          "Two complete scripts/package-decky.py main invocations at exact clean source as actual non-root checkout UID1000, new protected output/HOME/TMPDIR, matching canonical ZIP bytes, manifest/source/private inventory and payload hashes.",
+          "Use the actual primary ZIP directly for existing package install/browser/panel/dependency/configuration/media/mixer/settings/adapter fixtures; associate commands/exits/log hashes with that archive and frozen revision. Confirm native fixture inputs match its Go/capture payload.",
+          "Retain repeated compatibility archive/updater and unsigned source audits. When available, pinned official CLI/default builder compares all33 prepared payload files; do not call that source compilation or reproducible raw ZIP proof."
+        ],
+        "pending_evidence": [],
+        "local_acceptance_status": "Passed bounded source/standalone regression contract at 0c; no full ACT, hosted or target acceptance inferred.",
+        "observed_final_evidence": "Two complete primary builds ran as UID1000 at exact clean 0c and have byte-identical canonical ZIPs. Both pinned official assembly checks compare 33 prepared payload files. Repeated compatibility/updater/source audits pass; existing browser, actual transport/upgrade, broad adapter and six packaged settings scenarios exercise the same primary ZIP bytes. Native Go/capture inputs match the actual primary payload. This is standalone local evidence, not an ACT candidate pass.",
+        "evidence_ids": [
+          "current-primary",
+          "artifact-repeat",
+          "native-index",
+          "final-available",
+          "input-integrity"
+        ],
+        "current_check_rows": [
+          {
+            "name": "compatibility-1",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/compatibility-1.log",
+            "log_sha256": "dfc42ebf16d52ad0e9936ba3fcc4713ed06c2020da0a2991e606553950e7ac2f"
+          },
+          {
+            "name": "updater-1",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/updater-1.log",
+            "log_sha256": "92d5ab10c78051cab5b3cabaf4c27e3ab0e147692326bd5d45e7a1d788d092c1"
+          },
+          {
+            "name": "compatibility-2",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/compatibility-2.log",
+            "log_sha256": "a00fe3ce6363b1db99e378045fdf85c7c68805f09877d48a72dfddc163046b34"
+          },
+          {
+            "name": "updater-2",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/updater-2.log",
+            "log_sha256": "92d5ab10c78051cab5b3cabaf4c27e3ab0e147692326bd5d45e7a1d788d092c1"
+          },
+          {
+            "name": "artifact-audit-1",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/artifact-audit-1.log",
+            "log_sha256": "0d658f25ad4bff33feec85d08321045c9f306948e81db282c01f5268f27f1695"
+          },
+          {
+            "name": "artifact-audit-2",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/artifact-audit-2.log",
+            "log_sha256": "0d658f25ad4bff33feec85d08321045c9f306948e81db282c01f5268f27f1695"
+          },
+          {
+            "name": "packaged-settings",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/packaged-settings.log",
+            "log_sha256": "d515bc1a4dd7bda0e974c9c210b8fb33de3582d6d3a1b53c502293a9288b3b69"
+          },
+          {
+            "name": "browser-panel",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-panel.log",
+            "log_sha256": "bd02e037a42e8dc0a3083eec72e4f59e516bb2dcb89690c89c41072781a4a811"
+          },
+          {
+            "name": "browser-dependencies",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-dependencies.log",
+            "log_sha256": "3ccce3bdeef5d81acb5d9cd6be286732db15f2bf77be535f143dbf6b0d6f54f1"
+          },
+          {
+            "name": "browser-configuration",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-configuration.log",
+            "log_sha256": "1eb2dbdb7c445fb268e4e77a23da2c309aa3f4339d6de0994a22d0bae3f64dd1"
+          },
+          {
+            "name": "browser-m3-panel",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-m3-panel.log",
+            "log_sha256": "f38d6abc8e7da65aadf16d3be8d16da418d2e26f6db91c0c25c7463342063233"
+          },
+          {
+            "name": "browser-mixer-panel",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-mixer-panel.log",
+            "log_sha256": "0179d16220fa05ff8cea119976256c9fd55c8cb01e91ec39551110ef90f39041"
+          },
+          {
+            "name": "supplemental-transport",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/supplemental-transport.log",
+            "log_sha256": "0c01c2342f34830bf1d9ea228275498537d136a665e1cc71111d804da46432fc"
+          },
+          {
+            "name": "supplemental-upgrades",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/supplemental-upgrades.log",
+            "log_sha256": "e4b0ac40b1511e7414d7a37fe8a985eea1f14f0416a637e12e1c10fa7771ddd8"
+          },
+          {
+            "name": "integration-cpython",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/integration-cpython.log",
+            "log_sha256": "00317ac58e81940c69daf11ce735086954cc6bfca45d11ab19bdba895c2ea161"
+          },
+          {
+            "name": "integration-frozen",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/integration-frozen.log",
+            "log_sha256": "f80144c5c10d82a0c689783fbddeb399ed208c8e1b8b7c0f62b8b9ace5adc06e"
+          }
+        ]
+      },
+      {
+        "id": "104-P3",
+        "original_text": "No publication/deployment, root guard bypass or mandatory paired app is introduced.",
+        "status": "ELIGIBLE: bounded local criterion supported at exact current source",
+        "source_implementation": "Implemented at frozen 0c and reconciled with actual completed current-source evidence.",
+        "source": [
+          {
+            "path": "scripts/qualify-decky-build.py",
+            "line": 58
+          },
+          {
+            "path": "scripts/qualify-decky-build.py",
+            "line": 198
+          },
+          {
+            "path": ".github/workflows/steam-deck.yml",
+            "line": 7
+          },
+          {
+            "path": ".github/workflows/goreleaser.yml",
+            "line": 27
+          }
+        ],
+        "focused_tests_to_bind": [
+          "scripts.tests.test_primary_qualification.PrimaryQualificationTests.test_actual_primary_refusal_fails_command_and_cannot_accept_candidate",
+          "scripts.tests.test_primary_qualification.PrimaryQualificationTests.test_existing_evidence_and_linked_output_are_preserved"
+        ],
+        "meaningful_required_evidence": [
+          "Record UID/GID and production root/ownership refusal tests; a root-entered wrapper must re-exec the exact checkout owner rather than disable package guards or chown source.",
+          "Review changed workflows for contents:read, no publish/deploy/sign or payment/provisioning path; snapshot remains --skip=publish,sign.",
+          "Verify the standard plugin remains standalone and its install/browser/adapter fixtures do not add a mandatory paired app. Optional compatibility/archive output remains distinct."
+        ],
+        "pending_evidence": [],
+        "local_acceptance_status": "Passed bounded source/standalone regression contract at 0c; no full ACT, hosted or target acceptance inferred.",
+        "observed_final_evidence": "Actual positive and rejected primary runs retain the non-root checkout owner UID1000 and production guard behavior. Output, HOME and TMPDIR are private and new. The standard ZIP remains standalone; the compatibility app is optional. Frozen workflows retain contents:read, snapshot publishing/signing disabled, and no deploy/payment/provisioning action. No source ownership bypass or mandatory pair was introduced.",
+        "evidence_ids": [
+          "current-primary",
+          "artifact-repeat",
+          "final-available",
+          "input-integrity"
+        ],
+        "current_check_rows": [
+          {
+            "name": "workflow-primary-negative",
+            "result": "passed",
+            "exit_code": 1,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/workflow-primary-negative.log",
+            "log_sha256": "09bc6f1caa26a7659b20160d84e4719ec0e6c1ef65386857d369b08d84b3fb0e"
+          },
+          {
+            "name": "tooling-python",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/tooling-python.log",
+            "log_sha256": "b0e45c2f231d9aeba57ea1cfe3b1f8c5776809a940f021e4ed8c187a226d178d"
+          },
+          {
+            "name": "application-python",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/application-python.log",
+            "log_sha256": "9fe5539697b0c8820de107cd6287970f5e0d1401e28edeacc23decc8fdf353f4"
+          },
+          {
+            "name": "browser-panel",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-panel.log",
+            "log_sha256": "bd02e037a42e8dc0a3083eec72e4f59e516bb2dcb89690c89c41072781a4a811"
+          },
+          {
+            "name": "browser-dependencies",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-dependencies.log",
+            "log_sha256": "3ccce3bdeef5d81acb5d9cd6be286732db15f2bf77be535f143dbf6b0d6f54f1"
+          },
+          {
+            "name": "supplemental-transport",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/supplemental-transport.log",
+            "log_sha256": "0c01c2342f34830bf1d9ea228275498537d136a665e1cc71111d804da46432fc"
+          }
+        ]
+      },
+      {
+        "id": "104-R1",
+        "original_text": "On an equivalent constrained free runner, the supported final-matrix command either completes without manual docker exec or stops early with a concrete resource need.",
+        "status": "ELIGIBLE: bounded local criterion supported at exact current source",
+        "source_implementation": "Implemented at frozen 0c and reconciled with actual completed current-source evidence.",
+        "source": [
+          {
+            "path": "scripts/local-ci-resources.py",
+            "line": 80
+          },
+          {
+            "path": "scripts/local-ci-resources.py",
+            "line": 96
+          },
+          {
+            "path": "scripts/local-ci-resources.py",
+            "line": 118
+          },
+          {
+            "path": "scripts/local-ci-resources.py",
+            "line": 133
+          },
+          {
+            "path": "scripts/local-ci.py",
+            "line": 200
+          },
+          {
+            "path": "scripts/local-ci.py",
+            "line": 218
+          },
+          {
+            "path": "scripts/local-ci.py",
+            "line": 241
+          },
+          {
+            "path": "scripts/local-ci.py",
+            "line": 254
+          }
+        ],
+        "focused_tests_to_bind": [
+          "scripts.tests.test_local_ci_resources.ResourceTests.test_vfs_copy_budget_refuses_before_creating_container",
+          "scripts.tests.test_local_ci_resources.ResourceTests.test_same_vfs_filesystem_combines_scratch_and_runner_allocation",
+          "scripts.tests.test_local_ci_resources.MatrixTests.test_refusal_leaves_all_jobs_unrun_and_old_sessions_intact",
+          "scripts.tests.test_local_ci_resources.MatrixTests.test_zero_exit_without_receipt_is_not_a_passing_matrix",
+          "scripts.tests.test_local_ci_resources.MatrixTests.test_six_jobs_are_serial_and_require_actual_completed_receipts"
+        ],
+        "meaningful_required_evidence": [
+          "Run the actual supported scripts/local-ci.py matrix command on the current equivalent constrained runner at0c, and preserve command/exit/log plus unique session/preflight receipts. Either six genuine verified clean-source completed jobs with no manual docker exec, OR an early concrete resource refusal is explicitly permitted.",
+          "For present refusal: require actual exit3; session completed=false/result=unavailable with exactlysix members unrun; current revision/tree; metadata-only Docker driver/imageSize and VFS2x allocation allowance measured before docker run; required/available/missing bytes per location; Docker allocation probe unrun on early shortage.",
+          "Never turn standalone command passes into six ACT workflow passes. Preserve the prior4108 metadata/probe/ENOSPC attempt as historical."
+        ],
+        "pending_evidence": [],
+        "local_acceptance_status": "Passed bounded source/standalone regression contract at 0c; no full ACT, hosted or target acceptance inferred.",
+        "observed_final_evidence": "The actual supported matrix command at 0c exited 3 after a metadata-only VFS capacity refusal. Cached image Size 1,624,696,918 bytes yields a 3,249,393,836-byte copy allowance. Host root requires 7,544,361,132 bytes, has 3,103,039,488 bytes and reports 4,441,321,644 missing bytes. Scratch meets its 6 GiB floor. The allocation probe and all six workflow members remain unrun. This satisfies the literal early-refusal alternative; no six-job ACT pass or completed matrix is claimed.",
+        "evidence_ids": [
+          "matrix-session",
+          "matrix-preflight",
+          "retained-source",
+          "final-available",
+          "input-integrity"
+        ],
+        "current_check_rows": [
+          {
+            "name": "supported-matrix",
+            "result": "unavailable",
+            "exit_code": 3,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/supported-matrix.log",
+            "log_sha256": "ab375076f51f536b2b829390d35e9e5d4af466e511eba02c9a72eabbee711329"
+          }
+        ]
+      },
+      {
+        "id": "104-R2",
+        "original_text": "Any opted-in cleanup is limited to disposable compiler cache after its consumers finish and logs exact before/after state.",
+        "status": "ELIGIBLE: bounded local criterion supported at exact current source",
+        "source_implementation": "Implemented at frozen 0c and reconciled with actual completed current-source evidence.",
+        "source": [
+          {
+            "path": "scripts/local-ci-resources.py",
+            "line": 225
+          },
+          {
+            "path": "scripts/local-ci-resources.py",
+            "line": 237
+          },
+          {
+            "path": "scripts/local-ci-resources.py",
+            "line": 250
+          },
+          {
+            "path": "scripts/local-ci-resources.py",
+            "line": 260
+          },
+          {
+            "path": "scripts/local-ci-resources.py",
+            "line": 263
+          },
+          {
+            "path": ".github/workflows/steam-deck.yml",
+            "line": 94
+          },
+          {
+            "path": ".github/workflows/build.yml",
+            "line": 29
+          },
+          {
+            "path": ".github/workflows/coverage.yml",
+            "line": 26
+          },
+          {
+            "path": ".github/workflows/lint.yml",
+            "line": 29
+          },
+          {
+            "path": ".github/workflows/goreleaser.yml",
+            "line": 55
+          }
+        ],
+        "focused_tests_to_bind": [
+          "scripts.tests.test_local_ci_resources.ResourceTests.test_trim_is_opt_in_and_preserves_modules_artifacts_evidence",
+          "scripts.tests.test_local_ci_resources.ResourceTests.test_trim_refuses_host_cache_before_executing_go",
+          "scripts.tests.test_local_ci_resources.ResourceTests.test_trim_waits_for_all_compiler_consumers",
+          "scripts.tests.test_local_ci_resources.ResourceTests.test_trim_rejects_unexpected_user_cache_without_mutation"
+        ],
+        "meaningful_required_evidence": [
+          "After all actual Go build/audit/security/optional snapshot consumers finish, execute maintained trim-compiler-cache with explicit constrained opt-in and attempt-local cache paths. Preserve exact command/tool version, active-consumer check, exit and before/after cache file counts/bytes/hashes plus disk state.",
+          "Prove only exact go-build-root/go-build-user-UID caches are targeted; default policy is no-op and unsafe path/symlink/mount/active-consumer cases refuse. Module/source/tool/artifact/evidence sentinels must survive; inventory comparison should cover the actual trim interval because earlier consumers may legitimately populate modules.",
+          "In a running ACT attempt the launcher must bind resource-policy.json SHA to its receipt; present standalone exercise remains standalone and cannot produce an ACT pass."
+        ],
+        "pending_evidence": [],
+        "local_acceptance_status": "Passed bounded source/standalone regression contract at 0c; no full ACT, hosted or target acceptance inferred.",
+        "observed_final_evidence": "The maintained opt-in compiler-policy command ran last after all actual Go/package/audit/optional snapshot consumers. Only the exact private go-build-root and go-build-user-1000 caches were passed to go clean -cache; both commands exited 0, with complete before/after file/byte/hash/disk inventories. The user cache changed from 2,777,516,899 bytes/26,731 files to 228 bytes/two housekeeping files; the root cache was empty. Module inventory stayed identical across the trim interval: 639 files/2,881,186 bytes. Passed tooling tests exercise default no-op, host/unexpected-cache and active-consumer refusals. Source inspection additionally confirms symlink and mount denial.",
+        "evidence_ids": [
+          "resource-policy",
+          "module-preservation",
+          "final-available",
+          "input-integrity"
+        ],
+        "current_check_rows": [
+          {
+            "name": "actual-post-consumer-compiler-policy",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/actual-post-consumer-compiler-policy.log",
+            "log_sha256": "658333ff6b82928e30afc0281fec5346b6d9fcf04fc6b60677d272096a5a3b3f"
+          },
+          {
+            "name": "tooling-python",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/tooling-python.log",
+            "log_sha256": "b0e45c2f231d9aeba57ea1cfe3b1f8c5776809a940f021e4ed8c187a226d178d"
+          }
+        ]
+      },
+      {
+        "id": "104-R3",
+        "original_text": "Existing network/package presets and every required test remain intact; no paid resource is selected.",
+        "status": "ELIGIBLE: bounded local criterion supported at exact current source",
+        "source_implementation": "Implemented at frozen 0c and reconciled with actual completed current-source evidence.",
+        "source": [
+          {
+            "path": "scripts/local-ci.py",
+            "line": 343
+          },
+          {
+            "path": "scripts/local-ci.py",
+            "line": 355
+          },
+          {
+            "path": "scripts/local-ci-resources.py",
+            "line": 103
+          },
+          {
+            "path": "scripts/local-ci-resources.py",
+            "line": 145
+          },
+          {
+            "path": "scripts/local-ci-resources.py",
+            "line": 272
+          },
+          {
+            "path": ".github/workflows/steam-deck.yml",
+            "line": 28
+          },
+          {
+            "path": ".github/workflows/steam-deck.yml",
+            "line": 40
+          }
+        ],
+        "focused_tests_to_bind": [
+          "scripts.tests.test_local_ci_resources.ResourceTests.test_probe_never_uses_remote_context_or_host",
+          "scripts.tests.test_local_ci_resources.ResourceTests.test_metadata_is_cached_local_only_and_does_not_create_container",
+          "scripts.tests.test_local_ci_resources.ResourceTests.test_trim_is_opt_in_and_preserves_modules_artifacts_evidence"
+        ],
+        "meaningful_required_evidence": [
+          "Compare preserved proxy/CA/package/action/image/tool pins and workflow required tests; no secret values printed, no TLS/network/preset weakening, no remote Docker context or paid runner/provisioning path.",
+          "Record all feasible actual standalone Go/Python/UI/package/browser/settings/adapter/native commands with outcomes. Existing tests, fixed-port isolation and native recording/export reserves remain unchanged; optional snapshot/NFPM unavailable outcomes remain explicit.",
+          "Retain previous artifact/cache/evidence trees and capture any deliberate private output preservation. Unsupported whole ACT/hosted/device execution is unavailable/unrun, never silently skipped into pass."
+        ],
+        "pending_evidence": [],
+        "local_acceptance_status": "Passed bounded source/standalone regression contract at 0c; no full ACT, hosted or target acceptance inferred.",
+        "observed_final_evidence": "Current-source existing Go/Python/UI/security command suites, package/browser/adapter/native fixtures and optional host snapshot/NFPM audits and smokes passed their captured standalone checks. Source and environment construction preserve existing managed-socket, network/proxy/CA/package/action/image/tool inputs. Cache policy removes no modules/source/tools/artifacts/evidence, and recording/export reserves are unchanged. No paid runner or provisioning path was selected. Full ACT, hosted and target unavailability remain explicit.",
+        "evidence_ids": [
+          "final-available",
+          "resource-policy",
+          "module-preservation",
+          "hosted-snapshot",
+          "input-integrity"
+        ],
+        "current_check_rows": [
+          {
+            "name": "application-python",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/application-python.log",
+            "log_sha256": "9fe5539697b0c8820de107cd6287970f5e0d1401e28edeacc23decc8fdf353f4"
+          },
+          {
+            "name": "tooling-python",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/tooling-python.log",
+            "log_sha256": "b0e45c2f231d9aeba57ea1cfe3b1f8c5776809a940f021e4ed8c187a226d178d"
+          },
+          {
+            "name": "go-race",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/go-race.log",
+            "log_sha256": "a0e8f70e338368577275d57bc4f70004cc5cb03d8f874de2a4464fc0b5a256f3"
+          },
+          {
+            "name": "go-process",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/go-process.log",
+            "log_sha256": "724118bf328b6e7f9112416077d4d05b97b3e9a6009c81f7dceae4598fb3d1e0"
+          },
+          {
+            "name": "go-vet",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/go-vet.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "staticcheck",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/staticcheck.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "govulncheck",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/govulncheck.log",
+            "log_sha256": "3016e51e4eac0d421674d2128bbbdefb2924b4646e0c14a1ab034977ad73fae5"
+          },
+          {
+            "name": "npm-audit",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/npm-audit.log",
+            "log_sha256": "6d8c5c8f3d7684adb070417bd608d01ae90aa3dc26a65af03ffda4955f38d9a3"
+          },
+          {
+            "name": "native-audio",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/native-audio.log",
+            "log_sha256": "a7e86c2ce6a8321de8baf48d35c96728060a2b747cf3c103c5ac2b688eaa9e84"
+          },
+          {
+            "name": "native-capture",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/native-capture.log",
+            "log_sha256": "4bfe67e970711708b15a5d6ded0a1ee60fac2356d4663e0ec5842daddc68df29"
+          },
+          {
+            "name": "native-game-obs",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/native-game-obs.log",
+            "log_sha256": "0471d185435474aa7387c53cfea8135baaf0adf7fa990999958c07cf95f83839"
+          },
+          {
+            "name": "host-snapshot",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/host-snapshot.log",
+            "log_sha256": "ffb3b6825d21332d2993ca2e18679f5ef194174410fdae42e23856cc883eed91"
+          },
+          {
+            "name": "snapshot-generic-smoke",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-generic-smoke.log",
+            "log_sha256": "e23ce0f37b65d1f51e9a303fbeefaa5146b49e3ec3375ff2c1ea7d8ebda4d3e1"
+          },
+          {
+            "name": "snapshot-nfpm-smoke",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-nfpm-smoke.log",
+            "log_sha256": "36a49606e2ef4526661fa07cbe271d34d47db65049bbb654c9c72629f721df5b"
+          },
+          {
+            "name": "docs-check",
+            "result": "passed",
+            "exit_code": 0,
+            "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/docs-check.log",
+            "log_sha256": "640865b8e67eaf0bc42c9c5bf96b92768089a62415472022672c9253ed039e74"
+          }
+        ]
+      }
+    ],
+    "observed_receipts_at_inventory": {
+      "current_primary": {
+        "path": "/tmp/obsgod-ci-104/20261118T235031Z-standalone-a973fba67ff6/tmp/primary/qualification.json",
+        "sha256": "62c8ba400ca434333d39107153ccd0d4d97ba7cbc2d52491a13d6db2c490e8fa",
+        "status": "passed",
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "tree": "b5d95741d3352d8eccfc954085895fda8268fa38",
+        "dirty": false,
+        "uid": 1000,
+        "canonical_zip_sha256": "7fc9faada008280f2edfa0ff59f92e4a61edfae0d1f20675f629a88ccad81984",
+        "build_count": 2,
+        "both_builds_exit0": true,
+        "official_cli_prepared_payload_comparison": [
+          "passed",
+          "passed"
+        ],
+        "scope": "Both current-source primarybuilds plus artifact/log/source/byte identity have now been independently checked. Actual ZIPexercise/audit evidence is linked in final rows."
+      },
+      "historical_matrix_refusal": {
+        "path": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/matrix-unavailable.json",
+        "sha256": "ae20111d134b7586562d238cd8286c2ccebe5f6b6b689b07610430fcc355193a",
+        "revision": "4108c8311e2dfb66ad05657a95b0d3502f01523f",
+        "status": "unavailable",
+        "jobs": [
+          {
+            "action": "lint",
+            "result": "unrun"
+          },
+          {
+            "action": "build",
+            "result": "unrun"
+          },
+          {
+            "action": "coverage",
+            "result": "unrun"
+          },
+          {
+            "action": "snapshot",
+            "result": "unrun"
+          },
+          {
+            "action": "docs",
+            "result": "unrun"
+          },
+          {
+            "action": "candidate",
+            "result": "unrun"
+          }
+        ],
+        "role": "Historical4108 evidence remains preserved only. Current0c supported-command refusal is separately verified by matrix-session/matrix-preflight."
+      }
+    },
+    "genuine_pending_in_issue_evidence": [],
+    "separate_gates_not_new_hard_dependencies": [
+      "Full six-job ACT success remains unavailable on a measured resource refusal; the R1 literal alternative allows early refusal and does not require six passes. The six members must stay unrun.",
+      "P1 requires actual maintained primary-step failure propagation proof; executing that unchanged shell is local step evidence. Do not claim that the full candidate ACT job ran when infrastructure prevented it.",
+      "Complete final exact-source campaign/test-ready acceptance remains85. Available standalone checks may be recorded without relabeling them as ACT/hosted workflow results.",
+      "Actual supported Decky/SteamDeck/SteamOS/FlatpakOBS33/Gamescope/AMD/controller/headset/provider, native non-Linux execution and actual target Python3.9 remain86/original-ledger gates.",
+      "Hosted CI/reviews/artifact delivery and actual dependency comparison remain separately unavailable/unrun if not executed; no invented formal-review or hardware prerequisite is added to these six bounded bullets.",
+      "No publication, deployment, release/migration, Store action, paid resources or other-repository change is authorized; all230 original criteria/dependencies remain intact."
+    ],
+    "secondary_review": {
+      "reviewer": "/root/audit_lifecycle/review_cleanup",
+      "result": "R1/R2/R3 actual current-source receipts independently verified and locallyeligible; no additional resource-sidegap. FullACTsixunrun and historicalbrowserfailure remain explicit."
+    },
+    "source_sha256": {
+      "scripts/qualify-decky-build.py": "4a837629f7f702a1dbf176bb99e952ae7cfc36a8c4530d72b0c757e9bf5bea5a",
+      "scripts/package-decky.py": "3bbc7412f4d0ab755abc34bd3dba2e1164bc2ed35fd83554401aebc6acb7cc4f",
+      "scripts/local-ci.py": "092eb0ccec17c357460cbb41ba54b132661bdb88d157a3c620a2b670baf1eca6",
+      "scripts/local-ci-resources.py": "03ee133a94b59a7f5a7c8408c3d7de920dd869baee7014e1e41d89cdf08cc503",
+      "scripts/tests/test_primary_qualification.py": "125c78e9d15da1f7202bb388b64ff1697ea42d277ff0d3e1d0c08260ea8f7f2b",
+      "scripts/tests/test_local_ci_resources.py": "78f616a48e0b84c4c33dd95231df99a67b065c4cc8bf6ea0dccae78de7b8100b",
+      ".github/workflows/steam-deck.yml": "bf762e9099f360b867f69f8d81670151388dfb4846caa578b03bf9f7e17ef65e",
+      ".github/workflows/build.yml": "fd780289ebabc60567d2fe1b856f36c2e284197c76c368d0ee9dac972adee1c2",
+      ".github/workflows/coverage.yml": "97112458b8c819111c461d31fb84364b5799706796890427ab661d5cf640708b",
+      ".github/workflows/lint.yml": "85978be34e7c3564565b20ff2a235df599818197211faca2e5e57ec499c3b291",
+      ".github/workflows/goreleaser.yml": "fe7bb4ccd7fcdce5ec6c44b3fc7a2cd3c467c28d3c9ae0808c030927424402e7",
+      ".github/workflows/docs-preview.yml": "e21be3d8ee678b8fb76c05559294cf67f21fb3bdb26d3856567f7a1b5b801ba7",
+      "docs/local-ci.md": "a330f1b5595760dd826ef97efd9fe40ec440f4c6b5fee7c1e3cb98d8d6cb3a89",
+      "docs/steam-deck-building.md": "c179f3e7a7cd7be49346902a24330ddcc8377fedb3751f038ac32b717da96d3b"
+    },
+    "actions": "Read-only liveissue/source/receipt/log/artifact hash validation and private review outputs only. No source edits, issue/GitHub mutation, test suite, ACT/Go/native execution or evidence modification performed.",
+    "source_clean_at_final_review": true,
+    "final_local_eligibility": {
+      "criteria": 6,
+      "eligible": 6,
+      "genuine_in_issue_gaps": [],
+      "full_ACT_matrix": "Unavailable: all six workflow members unrun; no ACT job pass inferred.",
+      "standalone_check_rows": 62,
+      "passed_expected_check_outcomes": 61,
+      "unavailable_checks": 1,
+      "new_passed_rows": 38,
+      "retained_passed_rows": 23,
+      "negative_control": "Actual maintained primary step exit1 is the expected rejection, not a successful primary build.",
+      "primary_uid": 1000,
+      "primary_zip_sha256": "7fc9faada008280f2edfa0ff59f92e4a61edfae0d1f20675f629a88ccad81984"
+    },
+    "evidence": {
+      "final-available": {
+        "path": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/available-checks.json",
+        "sha256": "df05d453601f7dfd466d5eeb6829805b4eee2cc47de733bf84fb2018d765bb2e",
+        "scope": "Completed standalone report: 38 new passed check predicates plus24 retained same-source rows; overall unavailable because full ACT matrix is six unrun."
+      },
+      "retained-source": {
+        "path": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/available-checks.json",
+        "sha256": "c8cef4e4cd41c180bc8728a8d841d404b3c7114d98da7d81fe79839e04c0e300",
+        "scope": "Original unchanged failed/incomplete report;23passed+currentmatrixunavailable retained; failed browser launch separately preserved."
+      },
+      "input-integrity": {
+        "path": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/criteria-final-input-integrity.json",
+        "sha256": "42b7f42ea4ed2b7c774d9c894b7c9f237872d58b4c4ff8dd2606a838b578d5ec",
+        "scope": "Independent source/report/62log/retained-index/artifact/negative/native hash validation."
+      },
+      "current-primary": {
+        "path": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/primary-qualification.json",
+        "sha256": "62c8ba400ca434333d39107153ccd0d4d97ba7cbc2d52491a13d6db2c490e8fa",
+        "scope": "Two complete UID1000 primary builds at exact clean0c, identical canonical ZIP, optional pinned official assembly33preparedfiles."
+      },
+      "primary-negative": {
+        "path": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/primary-step-negative.json",
+        "sha256": "100c2ec4bec3a801c45a757f7cdc88db38dcd5619628572fa31c527d177bdb95",
+        "scope": "Actual maintained shell rejects wrongSHA with exit1; no success artifact exports or accepted primary archive. Not a full ACT job run."
+      },
+      "negative-shell": {
+        "path": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/workflow-primary-negative.sh",
+        "sha256": "b3730b8e6d4bce936ef395e1e6bf73771e7b6581abd906158d2fc013f0c33d96",
+        "scope": "Byte-identical extracted primary workflow shell from frozen source."
+      },
+      "artifact-repeat": {
+        "path": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/artifact-repeat.json",
+        "sha256": "844ad80d0f967677e91229ec988e7ca2c927f7a2a088ef312cad4c5201df6e84",
+        "scope": "Current compatibility/updater repeats and audit hashes; standardZIP equals actual primary canonical archive."
+      },
+      "matrix-session": {
+        "path": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/matrix-unavailable.json",
+        "sha256": "ee65986816157c8a33e9acb0d0d80a7f3672f17b68621a49fadb50726364d172",
+        "scope": "Actual current-source supported matrix early refusal with allsixmembersunrun, no workflow execution."
+      },
+      "resource-policy": {
+        "path": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/resource-policy.json",
+        "sha256": "e3ef033da86407f31e301cc04d74626e56c55916fd58aa3265932191b4ec7188",
+        "scope": "Actual maintained compiler-only post-consumer trim,2exactprivatecachepaths,before/after inventories/disk,exit0."
+      },
+      "module-preservation": {
+        "path": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/module-cache-preservation.json",
+        "sha256": "9cf9ff601d31a2aff10729c22a3192e0fa9af487667e2e987abd2f8a0fda3eef",
+        "scope": "Module inventory before=after across actual trim interval; earlier consumers may legitimately populate modules."
+      },
+      "native-index": {
+        "path": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/native-proof/index.json",
+        "sha256": "4fbc3831755e0f1e1eaac6052938304295fc40f62f8d94db46ef96dcff9ca9e0",
+        "scope": "18filterednativeLinuxproofs/15originalhashes from actual3serialnativeharnesses; noDeck/SteamOS/provider claim."
+      },
+      "hosted-snapshot": {
+        "path": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/live-github/final-source-0c79846/summary.json",
+        "sha256": "355c29b4829741174890247f0130f499ec0772119d23597029331b1a287e8b21",
+        "scope": "Read-only source0chostedsnapshot:14billingrefusals+1expectedpushskip,0executedsteps."
+      },
+      "historical-browser-log": {
+        "path": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/browser-panel.log",
+        "sha256": "d900e46fa0f16bdd5a1fa03ab1b6a372dc7b905e6ac5ab2b4d18e532a660248f",
+        "scope": "Historical private-controller browser launch failure (TMP socket path too long), rawlog retained; no source change."
+      },
+      "matrix-preflight": {
+        "path": "/tmp/obsgod-ci-104/20261119T000030Z-c14e7bfd3a71/20261119T000030Z-preflight-2d488f70a748/preflight.json",
+        "sha256": "daa89e042e05b25d86617478a1ab0a6fc85c7c11bed4b788a4333aef0e0e3017",
+        "scope": "Metadata-only VFS allocation budget refuses insufficient hostrootcapacity before docker allocation; probe remainsunrun."
+      }
+    },
+    "verified_input_integrity": {
+      "status": "passed",
+      "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+      "tree": "b5d95741d3352d8eccfc954085895fda8268fa38",
+      "final_report": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/available-checks.json",
+      "final_report_sha256": "df05d453601f7dfd466d5eeb6829805b4eee2cc47de733bf84fb2018d765bb2e",
+      "retained_source_report": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/available-checks.json",
+      "retained_source_report_sha256": "c8cef4e4cd41c180bc8728a8d841d404b3c7114d98da7d81fe79839e04c0e300",
+      "retained_report_unchanged_failed_and_incomplete": true,
+      "retained_rows_byte_semantic_equal_original_indices": 24,
+      "retained_row_results": {
+        "unavailable": 1,
+        "passed": 23
+      },
+      "new_rows_verified": 38,
+      "combined_rows": 62,
+      "combined_results": {
+        "unavailable": 1,
+        "passed": 61
+      },
+      "all_current_row_logs_verified": 62,
+      "historical_failed_browser_preserved": {
+        "log_sha256": "d900e46fa0f16bdd5a1fa03ab1b6a372dc7b905e6ac5ab2b4d18e532a660248f",
+        "before_launch_socket_path_failure": true,
+        "retry_passed": true
+      },
+      "controller_versions_preserved": true,
+      "primary": {
+        "qualification_sha256": "62c8ba400ca434333d39107153ccd0d4d97ba7cbc2d52491a13d6db2c490e8fa",
+        "uid": 1000,
+        "zip_sha256": "7fc9faada008280f2edfa0ff59f92e4a61edfae0d1f20675f629a88ccad81984",
+        "canonical_byte_identical_builds": 2,
+        "official_cli_prepared_files_compared": 33,
+        "actual_primary_go_capture_equal_native_inputs": true
+      },
+      "negative": {
+        "status": "passed expected rejection",
+        "actual_exit": 1,
+        "exact_workflow_shell_sha256": "b3730b8e6d4bce936ef395e1e6bf73771e7b6581abd906158d2fc013f0c33d96",
+        "success_env_file_empty": true,
+        "wrong_revision_reached_real_primary": true
+      },
+      "matrix": {
+        "session_sha256": "ee65986816157c8a33e9acb0d0d80a7f3672f17b68621a49fadb50726364d172",
+        "preflight_sha256": "daa89e042e05b25d86617478a1ab0a6fc85c7c11bed4b788a4333aef0e0e3017",
+        "exit_code": 3,
+        "status": "unavailable",
+        "all_six_jobs_unrun": true,
+        "docker_probe_unrun": true,
+        "docker_metadata": {
+          "commands": [
+            [
+              "docker",
+              "--host",
+              "unix:///var/run/docker.sock",
+              "info",
+              "--format",
+              "{{json .Driver}}"
+            ],
+            [
+              "docker",
+              "--host",
+              "unix:///var/run/docker.sock",
+              "image",
+              "inspect",
+              "--format",
+              "{{json .Size}}",
+              "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270"
+            ]
+          ],
+          "driver": "vfs",
+          "image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+          "image_size_bytes": 1624696918
+        },
+        "shortfalls": [
+          {
+            "available_bytes": 3103039488,
+            "location": "host_root",
+            "missing_bytes": 4441321644,
+            "required_bytes": 7544361132
+          }
+        ]
+      },
+      "compiler_policy": {
+        "receipt_sha256": "e3ef033da86407f31e301cc04d74626e56c55916fd58aa3265932191b4ec7188",
+        "module_preservation_sha256": "9cf9ff601d31a2aff10729c22a3192e0fa9af487667e2e987abd2f8a0fda3eef",
+        "module_before_equals_after": true,
+        "last_check_after_all_go_consumers": true,
+        "private_cache_paths_only": true
+      },
+      "native": {
+        "index_sha256": "4fbc3831755e0f1e1eaac6052938304295fc40f62f8d94db46ef96dcff9ca9e0",
+        "files": 18,
+        "distinct_hashes": 15,
+        "original_and_public_hashes_verified": true
+      },
+      "checks": [
+        {
+          "name": "supported-matrix",
+          "result": "unavailable",
+          "exit_code": 3,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/supported-matrix.log",
+          "log_sha256": "ab375076f51f536b2b829390d35e9e5d4af466e511eba02c9a72eabbee711329"
+        },
+        {
+          "name": "preserve-dist-root-move",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/preserve-dist-root-move.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "workflow-primary-negative",
+          "result": "passed",
+          "exit_code": 1,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/workflow-primary-negative.log",
+          "log_sha256": "09bc6f1caa26a7659b20160d84e4719ec0e6c1ef65386857d369b08d84b3fb0e"
+        },
+        {
+          "name": "compatibility-1",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/compatibility-1.log",
+          "log_sha256": "dfc42ebf16d52ad0e9936ba3fcc4713ed06c2020da0a2991e606553950e7ac2f"
+        },
+        {
+          "name": "updater-1",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/updater-1.log",
+          "log_sha256": "92d5ab10c78051cab5b3cabaf4c27e3ab0e147692326bd5d45e7a1d788d092c1"
+        },
+        {
+          "name": "compatibility-2",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/compatibility-2.log",
+          "log_sha256": "a00fe3ce6363b1db99e378045fdf85c7c68805f09877d48a72dfddc163046b34"
+        },
+        {
+          "name": "updater-2",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/updater-2.log",
+          "log_sha256": "92d5ab10c78051cab5b3cabaf4c27e3ab0e147692326bd5d45e7a1d788d092c1"
+        },
+        {
+          "name": "artifact-audit-1",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/artifact-audit-1.log",
+          "log_sha256": "0d658f25ad4bff33feec85d08321045c9f306948e81db282c01f5268f27f1695"
+        },
+        {
+          "name": "artifact-audit-2",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/artifact-audit-2.log",
+          "log_sha256": "0d658f25ad4bff33feec85d08321045c9f306948e81db282c01f5268f27f1695"
+        },
+        {
+          "name": "application-python",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/application-python.log",
+          "log_sha256": "9fe5539697b0c8820de107cd6287970f5e0d1401e28edeacc23decc8fdf353f4"
+        },
+        {
+          "name": "tooling-python",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/tooling-python.log",
+          "log_sha256": "b0e45c2f231d9aeba57ea1cfe3b1f8c5776809a940f021e4ed8c187a226d178d"
+        },
+        {
+          "name": "go-race",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/go-race.log",
+          "log_sha256": "a0e8f70e338368577275d57bc4f70004cc5cb03d8f874de2a4464fc0b5a256f3"
+        },
+        {
+          "name": "go-process",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/go-process.log",
+          "log_sha256": "724118bf328b6e7f9112416077d4d05b97b3e9a6009c81f7dceae4598fb3d1e0"
+        },
+        {
+          "name": "go-vet",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/go-vet.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "staticcheck",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/staticcheck.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "govulncheck",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/govulncheck.log",
+          "log_sha256": "3016e51e4eac0d421674d2128bbbdefb2924b4646e0c14a1ab034977ad73fae5"
+        },
+        {
+          "name": "frontend-absent-typecheck",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/frontend-absent-typecheck.log",
+          "log_sha256": "4c51a932c40c1dc7887fef7b6e3a4ef90e59dbb21158e1fe8e6c1567a99e4a0e"
+        },
+        {
+          "name": "frontend-absent-test",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/frontend-absent-test.log",
+          "log_sha256": "dfa54b62eb053400b2ec38ad53bd7c6a2f446be594074951a80e1c6e0ffcda1e"
+        },
+        {
+          "name": "frontend-absent-build",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/frontend-absent-build.log",
+          "log_sha256": "b2cb9c27c98f0aedab74a4d28111ccc9e9cf8f9c9ca201298dc3fd1b30a1156f"
+        },
+        {
+          "name": "frontend-reused-typecheck",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/frontend-reused-typecheck.log",
+          "log_sha256": "4c51a932c40c1dc7887fef7b6e3a4ef90e59dbb21158e1fe8e6c1567a99e4a0e"
+        },
+        {
+          "name": "frontend-reused-test",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/frontend-reused-test.log",
+          "log_sha256": "7887f4d13a00c9b5fe5f9f845978962e18256d984b9d0947dbf7cef7cfa83e61"
+        },
+        {
+          "name": "frontend-reused-build",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/frontend-reused-build.log",
+          "log_sha256": "5af691e12ea5ef294d29649b703afa1149b11e7ebf5bac6417c76ab1289086d5"
+        },
+        {
+          "name": "npm-audit",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/npm-audit.log",
+          "log_sha256": "6d8c5c8f3d7684adb070417bd608d01ae90aa3dc26a65af03ffda4955f38d9a3"
+        },
+        {
+          "name": "packaged-settings",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/packaged-settings.log",
+          "log_sha256": "d515bc1a4dd7bda0e974c9c210b8fb33de3582d6d3a1b53c502293a9288b3b69"
+        },
+        {
+          "name": "browser-panel",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-panel.log",
+          "log_sha256": "bd02e037a42e8dc0a3083eec72e4f59e516bb2dcb89690c89c41072781a4a811"
+        },
+        {
+          "name": "browser-dependencies",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-dependencies.log",
+          "log_sha256": "3ccce3bdeef5d81acb5d9cd6be286732db15f2bf77be535f143dbf6b0d6f54f1"
+        },
+        {
+          "name": "browser-configuration",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-configuration.log",
+          "log_sha256": "1eb2dbdb7c445fb268e4e77a23da2c309aa3f4339d6de0994a22d0bae3f64dd1"
+        },
+        {
+          "name": "browser-m3-panel",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-m3-panel.log",
+          "log_sha256": "f38d6abc8e7da65aadf16d3be8d16da418d2e26f6db91c0c25c7463342063233"
+        },
+        {
+          "name": "browser-mixer-panel",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-mixer-panel.log",
+          "log_sha256": "0179d16220fa05ff8cea119976256c9fd55c8cb01e91ec39551110ef90f39041"
+        },
+        {
+          "name": "browser-setup",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-setup.log",
+          "log_sha256": "269e81b1e10d87446ab85cd92b8dfee301a2482783a2c97b612d965f2fce6a41"
+        },
+        {
+          "name": "browser-m3-setup",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-m3-setup.log",
+          "log_sha256": "8b89ee58e9039ccc809617b16bd2421e3772d33f77b5cc676d4dc686d9fad0e1"
+        },
+        {
+          "name": "browser-mixer-setup",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-mixer-setup.log",
+          "log_sha256": "8e1fd1aab86129a1761f97fbe84ee8bca41164e99a8ba6621cc570d83dbd3ce8"
+        },
+        {
+          "name": "browser-support",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-support.log",
+          "log_sha256": "793f783e96662b00925852f207378db9d6c48f608e5b06e3a9bf1c7bc068c58d"
+        },
+        {
+          "name": "browser-site",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/browser-site.log",
+          "log_sha256": "326cd129835327ad1e3fae6bd270bd2d5afcd3664fc603262da63a8ad7df2a3c"
+        },
+        {
+          "name": "native-image",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/native-image.log",
+          "log_sha256": "7abca0c0c38dee1c47c96370cc3835a10d12537f40eb9c394ac086839a8f0ffe"
+        },
+        {
+          "name": "native-audio",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/native-audio.log",
+          "log_sha256": "a7e86c2ce6a8321de8baf48d35c96728060a2b747cf3c103c5ac2b688eaa9e84"
+        },
+        {
+          "name": "native-capture",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/native-capture.log",
+          "log_sha256": "4bfe67e970711708b15a5d6ded0a1ee60fac2356d4663e0ec5842daddc68df29"
+        },
+        {
+          "name": "native-game-obs",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/native-game-obs.log",
+          "log_sha256": "0471d185435474aa7387c53cfea8135baaf0adf7fa990999958c07cf95f83839"
+        },
+        {
+          "name": "supplemental-transport",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/supplemental-transport.log",
+          "log_sha256": "0c01c2342f34830bf1d9ea228275498537d136a665e1cc71111d804da46432fc"
+        },
+        {
+          "name": "supplemental-cli",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/supplemental-cli.log",
+          "log_sha256": "2ef5709b9090225a13803153515137adf8a9149300db6a6bf30492270dd24a7c"
+        },
+        {
+          "name": "supplemental-upgrades",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/supplemental-upgrades.log",
+          "log_sha256": "e4b0ac40b1511e7414d7a37fe8a985eea1f14f0416a637e12e1c10fa7771ddd8"
+        },
+        {
+          "name": "integration-cpython",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/integration-cpython.log",
+          "log_sha256": "00317ac58e81940c69daf11ce735086954cc6bfca45d11ab19bdba895c2ea161"
+        },
+        {
+          "name": "integration-frozen",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/integration-frozen.log",
+          "log_sha256": "f80144c5c10d82a0c689783fbddeb399ed208c8e1b8b7c0f62b8b9ace5adc06e"
+        },
+        {
+          "name": "host-build",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/host-build.log",
+          "log_sha256": "0d94cd3d081a33b680a1cfb975d21d2136f5ee87a9f4184926d46b925dd5225c"
+        },
+        {
+          "name": "host-build-tests",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/host-build-tests.log",
+          "log_sha256": "583c785b60b92718c9e6581e976d13f2dfa2fd9f377160f384b5a11b15dac5ad"
+        },
+        {
+          "name": "host-coverage",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/host-coverage.log",
+          "log_sha256": "6090b135ab1f93230bafa4118e73a4c289c745911444d119f0f5e554f982cc18"
+        },
+        {
+          "name": "host-coverage-summary",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/host-coverage-summary.log",
+          "log_sha256": "c84dd13a68c6977decf90389f91b34b5cef73ce73394d84062e65b427e27b65e"
+        },
+        {
+          "name": "host-format",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/host-format.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "goreleaser-version",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/goreleaser-version.log",
+          "log_sha256": "a0716157ffe7d242c84b9ef42f98d516eb5a6a12d3dfdace1b0e23eb5c49f5c5"
+        },
+        {
+          "name": "preserve-notices-root-move",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/preserve-notices-root-move.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "host-snapshot",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/host-snapshot.log",
+          "log_sha256": "ffb3b6825d21332d2993ca2e18679f5ef194174410fdae42e23856cc883eed91"
+        },
+        {
+          "name": "snapshot-generic-audit-1",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-generic-audit-1.log",
+          "log_sha256": "64d516852cba4c0aa7408be5d83f753ea4c8abef87fbe4e450d23296e7767f30"
+        },
+        {
+          "name": "snapshot-generic-audit-2",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-generic-audit-2.log",
+          "log_sha256": "64d516852cba4c0aa7408be5d83f753ea4c8abef87fbe4e450d23296e7767f30"
+        },
+        {
+          "name": "snapshot-generic-smoke",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-generic-smoke.log",
+          "log_sha256": "e23ce0f37b65d1f51e9a303fbeefaa5146b49e3ec3375ff2c1ea7d8ebda4d3e1"
+        },
+        {
+          "name": "snapshot-nfpm-audit-1",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-nfpm-audit-1.log",
+          "log_sha256": "6a94f4517f9432049af018257e5cd74f85afb344011d4f2a816993e2ba30b610"
+        },
+        {
+          "name": "snapshot-nfpm-audit-2",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-nfpm-audit-2.log",
+          "log_sha256": "6a94f4517f9432049af018257e5cd74f85afb344011d4f2a816993e2ba30b610"
+        },
+        {
+          "name": "snapshot-nfpm-smoke",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/snapshot-nfpm-smoke.log",
+          "log_sha256": "36a49606e2ef4526661fa07cbe271d34d47db65049bbb654c9c72629f721df5b"
+        },
+        {
+          "name": "funding-check",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/funding-check.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "name": "docs-build",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/docs-build.log",
+          "log_sha256": "d90135d03c70ceff417d7ea64ed97d7a98cb3efafac194795f740a3580433e17"
+        },
+        {
+          "name": "docs-check",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/docs-check.log",
+          "log_sha256": "640865b8e67eaf0bc42c9c5bf96b92768089a62415472022672c9253ed039e74"
+        },
+        {
+          "name": "site-safety",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/site-safety.log",
+          "log_sha256": "847bd5e6426dffd93a6816dd8e02ce6f2645a890cbb5030f84aed4bd6e789314"
+        },
+        {
+          "name": "actual-post-consumer-compiler-policy",
+          "result": "passed",
+          "exit_code": 0,
+          "log": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-browser-retry/actual-post-consumer-compiler-policy.log",
+          "log_sha256": "658333ff6b82928e30afc0281fec5346b6d9fcf04fc6b60677d272096a5a3b3f"
+        }
+      ],
+      "limits": "Read-only receipt/source/hash validation; no test execution, ACT pass, hosted pass, target acceptance or public-proof privacy review inferred."
+    },
+    "historical_attempts": [
+      {
+        "revision": "4108c8311e2dfb66ad05657a95b0d3502f01523f",
+        "status": "historical only",
+        "scope": "Earlier primary/official/tooling and initialVFSallocation/refusal do not qualify repaired0c."
+      },
+      {
+        "revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+        "source_report": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/run-0c-retry/available-checks.json",
+        "source_report_sha256": "c8cef4e4cd41c180bc8728a8d841d404b3c7114d98da7d81fe79839e04c0e300",
+        "status": "failed/incomplete original unchanged",
+        "failure": "Private controller bypassed maintained short browser wrapper; Chromiumsocket path too long before launch.",
+        "reconciliation": "Retained originalrows0\u201323 are exact semantic copies and their62combinedcurrentloghashes verify; originalfailedbrowserrow24+rawlog retained separately. New38rows execute corrected maintainedwrapper browser flows and remaining commands; no earlier execution/completion invented."
+      }
+    ],
+    "closure_and_review_boundary": "All six bounded criteria have current local eligibility, including the literal R1 early-refusal alternative. Issue/PR state is not changed here. Root still curates the public proof and obtains its separate privacy/integrity/claims review; that later archive review is not claimed complete. No full ACT, hosted, Deck, #85/#86 acceptance, issue closure, merge, publication or formal review is inferred.",
+    "hosted_status": {
+      "source": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+      "jobs": 15,
+      "executed_steps": 0,
+      "classifications": {
+        "billing_refusal": 14,
+        "unstarted_skipped": 1
+      },
+      "expected_push_dependency_skip": 1
+    },
+    "preserved_pending_review": {
+      "json": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/criteria-review.pending-0c79846.json",
+      "json_sha256": "8890923c4d5ae55274da3875cf7c7eb868dd38f3ac1ebdb8ea64511ca4c0f442",
+      "markdown": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/criteria-review.pending-0c79846.md",
+      "markdown_sha256": "232bddd730e7bb3307b9976c850e3443984ddd1cb4f4d1a08f816a9d3927a212"
+    }
+  },
+  "merges": {
+    "pr109": "2fbb0cb67bbb42adae6e52210124f6aa5a22d6d6",
+    "pr110": "cdcc668dc21f86748dbb5a8a00d2516affb83c7e",
+    "master": "cdcc668dc21f86748dbb5a8a00d2516affb83c7e",
+    "closed_bounded_issues": {
+      "101": 7,
+      "102": 8,
+      "103": 6
+    },
+    "closure_assessment_sha256": "a10d6ce4851992852749c58b83131af07965a8c43e30ca8fe05bd6aee5366c10"
+  },
+  "cross_build": {
+    "archive_count": 20,
+    "package_count": 15,
+    "source_config": "Unmodified .goreleaser.yml with explicit parallelism1; snapshot --skip=publish,sign; native non-Linux unrun"
+  },
+  "artifacts": {
+    "obsgod-decky.zip": "7fc9faada008280f2edfa0ff59f92e4a61edfae0d1f20675f629a88ccad81984",
+    "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz": "a7a1fa08fdc5a15c98a29e40ad771a345784f8cad4da953d1377132a461955ba",
+    "obsgod-one-click-update_0.1.0-deck.9_linux_amd64.zip": "8d4bc40559e797781633b62c004e377e191a82a96b2038694c814e5acf637d75"
+  },
+  "limits": [
+    "No six-ACT-job pass is claimed. Metadata-only VFS preflight refused before container allocation and all6 workflows remained unrun.",
+    "Standalone host commands test current source directly; they do not establish ACT wrapper or hosted service execution.",
+    "Host Chromium and synthetic Debian OBS30.2.3/Python3.13.5 are recorded separately; actual SteamOS/FlatpakOBS33/Gamescope/AMD/controller/headset/provider and native non-Linux remain unrun86.",
+    "Hosted new-source jobs:14billingrefusals+1expectedpushskip,0executedsteps; actualPR111 dependency comparison403.",
+    "Generated old root-owned output trees were preserved by literal same-mount rename using pinned tiny Alpine; no recursivechown, hostcache move or globalprune.",
+    "Private compiler cleanup ran only after all Go consumers, with source/module/artifact/evidence/preset preservation; actual rootACT cache execution remainsunrun.",
+    "Prior4108 source receipts are historical. Same0c Chromium firstlaunch failed on private longTMP; corrected maintained short-path wrapper passed; original failure remains explicit.",
+    "All230 original criteria/dependencies remain intact. Closing101/102/103 meets only their literal bounded software contracts; actualsupportedloader target proof stays86.",
+    "PR111/104 remain open for owner review. No release/deploy/migration/Store action/spending/consumer adoption.",
+    "Later evidence-only commits are not relabeled as this source or a rebuilt qualified candidate."
+  ],
+  "public_evidence": {
+    "file": "primary-ci-0c79846-proof.zip",
+    "sha256": "58334d517a9c0f3dbe19b433a52a3b69dcda586a88c8f86330b40dc9f46887e9",
+    "indexed_text_members": 172,
+    "archive_members": 173,
+    "scope": "Source-bound standalone command evidence, retained same-source rows, separately preserved failures and six UNRUN ACT workflows; review attestation is separate."
+  }
+}

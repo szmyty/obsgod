@@ -96,3 +96,21 @@ OBS; closing an idle instance is a separate explicit confirmation. This preserve
 offline operation, legacy configuration and explicit broadcast authorization.
 See [the contract and user journey](docs/native-configuration.md); implementation
 and local evidence do not establish actual controller/provider acceptance.
+
+## Primary build and constrained local qualification (#104)
+
+The owner authorized this bounded next batch after merging #109/#110. The
+maintained candidate must execute the documented primary builder, not infer its
+health from a compatibility builder sharing helpers. Both full primary outputs
+are independently inspected and compared, then their actual ZIP feeds existing
+checks. Root ACT setup drops to the non-root checkout owner for primary work;
+private build paths and the existing Docker socket group are explicit.
+
+The opt-in constrained local profile measures real host/daemon capacity and
+uses a fresh serial matrix session. Known resource shortfalls stop before
+workflow execution. Separate private root/owner compiler caches avoid ownership
+repair; only their post-consumer contents can be cleaned, with exact receipts.
+Module caches, artifacts, evidence and existing presets remain intact. Failed or
+interrupted attempts retain their own outcome instead of inheriting a later
+pass. See [local CI](docs/local-ci.md). No product permission, proposed ADR,
+release/publisher, deployment, migration or spending decision is changed.

@@ -1,0 +1,980 @@
+{
+  "schema_version": 1,
+  "assessed_at_utc": "2026-11-18T23:24:21.084393+00:00",
+  "scope": "Read-only independent criterion-level closure assessment after owner-directed source merges109/110. No issue, checklist, label, source, frozen receipt or GitHub state modified.",
+  "result": "All three bounded issues are eligible for closure on their evidence: #101 7/7, #102 8/8, #103 6/6. No genuine remaining in-issue gate identified. Closure is supported by criterion evidence and completed review reconciliation, not inferred from merge alone.",
+  "qualified_sources": {
+    "cleanup_recovery": {
+      "revision": "aa323f0119e2d3c475d04a30860a4c3e314620bc",
+      "tree": "9f987b34b33daad2922c0de0c49f51aeb27b1931"
+    },
+    "settings_boundary": {
+      "revision": "4eac7a469285cbafad5dc5a7ea07205374293dfd",
+      "tree": "2ca38c6e704ce9c9ea19b50938e99af98714b7d9"
+    }
+  },
+  "integration_context": {
+    "pr109_merge": "2fbb0cb67bbb42adae6e52210124f6aa5a22d6d6",
+    "pr110_merge": "cdcc668dc21f86748dbb5a8a00d2516affb83c7e",
+    "current_checkout": "dee722f5ed48e1a5e5036c623adcd7a5fcaac4e5",
+    "next_batch": "Owner-authorized104 in separate in-progress111; this assessment does not use or qualify its working changes."
+  },
+  "issue_assessments": [
+    {
+      "issue": 101,
+      "live_state": "open",
+      "original_acceptance_count": 7,
+      "bounded_criteria_supported": 7,
+      "bounded_criteria_failed": 0,
+      "bounded_criteria_unrun": 0,
+      "closure_recommendation": "May close as implemented and locally verified for the issue\u2019s bounded scope; preserve explicit external acceptance limits.",
+      "criteria": [
+        {
+          "id": "101-L1",
+          "original_acceptance": "A controller/installer started at each deletion boundary cannot acquire a second lock generation",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "steamdeck/uninstall.py",
+              "line": 91
+            },
+            {
+              "path": "steamdeck/uninstall.py",
+              "line": 145
+            },
+            {
+              "path": "steamdeck/uninstall.py",
+              "line": 362
+            }
+          ],
+          "named_tests": [
+            "test_uninstall_coordination.CleanupCoordination.test_wipe_preserves_all_generations_during_each_deletion_and_on_retry",
+            "test_uninstall_coordination.CleanupCoordination.test_lock_replacement_at_selected_deletion_boundary_stops_remaining_deletions",
+            "test_uninstall_coordination.CleanupCoordination.test_created_and_preexisting_coordination_roots_and_locks_are_pinned"
+          ],
+          "evidence_ids": [
+            "cleanup-final",
+            "cleanup-final-log",
+            "final-act-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        },
+        {
+          "id": "101-L2",
+          "original_acceptance": "Pre-existing waiters and newly opened lock descriptors serialize on the same inode",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "steamdeck/uninstall.py",
+              "line": 321
+            },
+            {
+              "path": "steamdeck/uninstall.py",
+              "line": 362
+            },
+            {
+              "path": "steamdeck/install.py",
+              "line": 84
+            },
+            {
+              "path": "steamdeck/update.py",
+              "line": 52
+            }
+          ],
+          "named_tests": [
+            "test_uninstall_coordination.CleanupCoordination.test_wipe_preserves_all_generations_during_each_deletion_and_on_retry",
+            "test_uninstall.RemovalSafety.test_fresh_removal_retains_coordination_for_existing_and_future_waiters"
+          ],
+          "evidence_ids": [
+            "cleanup-final",
+            "cleanup-final-log",
+            "update-lock-followup",
+            "final-act-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        },
+        {
+          "id": "101-L3",
+          "original_acceptance": "Wipe still deletes only explicitly selected owned data and preserves ordinary OBS, other plugins, shared dependencies and unselected media",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "steamdeck/uninstall.py",
+              "line": 168
+            },
+            {
+              "path": "steamdeck/uninstall.py",
+              "line": 362
+            }
+          ],
+          "named_tests": [
+            "test_uninstall.RemovalSafety.test_wipe_removes_owned_credentials_backups_data_but_not_recordings_or_ordinary_obs",
+            "test_uninstall.RemovalSafety.test_media_requires_separate_selection_and_automatic_selection_excludes_other_files",
+            "test_uninstall_coordination.CleanupCoordination.test_wipe_preserves_all_generations_during_each_deletion_and_on_retry",
+            "test_uninstall_self.InstalledSelfRemoval.test_bytecode_disabled_python_self_wipe_preserves_coordination_and_media"
+          ],
+          "evidence_ids": [
+            "cleanup-final",
+            "cleanup-final-log",
+            "exact-transport",
+            "final-act-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        },
+        {
+          "id": "101-L4",
+          "original_acceptance": "Recovery after partial deletion preserves lock identity and reports remaining selected paths",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "steamdeck/uninstall.py",
+              "line": 115
+            },
+            {
+              "path": "steamdeck/uninstall.py",
+              "line": 145
+            },
+            {
+              "path": "steamdeck/uninstall.py",
+              "line": 362
+            }
+          ],
+          "named_tests": [
+            "test_uninstall_coordination.CleanupCoordination.test_partial_failure_keeps_locks_and_lists_remaining_for_fresh_preview",
+            "test_uninstall.RemovalSafety.test_mid_plan_interrupt_reports_failure_and_preserves_remaining_data",
+            "test_uninstall.RemovalSafety.test_changed_alias_or_removal_failure_is_reported_as_partial"
+          ],
+          "evidence_ids": [
+            "cleanup-final",
+            "cleanup-final-log",
+            "final-act-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        },
+        {
+          "id": "101-A1",
+          "original_acceptance": "0770/0777 nonsticky unsafe ancestry fails before writes/deletes/lock creation",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "steamdeck/paths.py",
+              "line": 31
+            },
+            {
+              "path": "steamdeck/paths.py",
+              "line": 63
+            },
+            {
+              "path": "steamdeck/paths.py",
+              "line": 80
+            },
+            {
+              "path": "steamdeck/install.py",
+              "line": 84
+            },
+            {
+              "path": "steamdeck/update.py",
+              "line": 39
+            },
+            {
+              "path": "steamdeck/uninstall.py",
+              "line": 321
+            }
+          ],
+          "named_tests": [
+            "test_paths.OwnedAncestors.test_unsafe_group_or_other_writable_parents_fail_before_creation",
+            "test_paths.OwnedAncestors.test_home_itself_and_missing_grandchildren_are_checked",
+            "test_paths.OwnedAncestors.test_home_alias_under_replaceable_ancestor_fails_before_raw_alias_writes",
+            "test_update.UpdateSafety.test_new_intermediate_writable_ancestry_is_rejected_before_lock_or_network"
+          ],
+          "evidence_ids": [
+            "cleanup-final",
+            "paths-final-log",
+            "update-lock-followup",
+            "update-lock-log",
+            "final-act-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        },
+        {
+          "id": "101-A2",
+          "original_acceptance": "Safe owner-only roots, supported normalized home aliases and trusted sticky ancestors work",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "steamdeck/paths.py",
+              "line": 31
+            },
+            {
+              "path": "steamdeck/paths.py",
+              "line": 63
+            },
+            {
+              "path": "steamdeck/paths.py",
+              "line": 80
+            }
+          ],
+          "named_tests": [
+            "test_paths.OwnedAncestors.test_safe_owner_only_and_trusted_sticky_custom_xdg_roots_work",
+            "test_paths.OwnedAncestors.test_only_the_home_alias_is_normalized_not_links_inside_owned_roots",
+            "test_uninstall_coordination.CleanupCoordination.test_safe_alias_sticky_xdg_and_coincident_coordination_roots"
+          ],
+          "evidence_ids": [
+            "cleanup-final",
+            "paths-final-log",
+            "cleanup-final-log",
+            "final-act-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        },
+        {
+          "id": "101-A3",
+          "original_acceptance": "Ancestry changes between preview and apply fail closed and unrelated sentinels are preserved",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "steamdeck/uninstall.py",
+              "line": 100
+            },
+            {
+              "path": "steamdeck/uninstall.py",
+              "line": 115
+            },
+            {
+              "path": "steamdeck/uninstall.py",
+              "line": 145
+            },
+            {
+              "path": "steamdeck/uninstall.py",
+              "line": 362
+            }
+          ],
+          "named_tests": [
+            "test_uninstall_coordination.CleanupCoordination.test_changed_ancestor_or_tree_refuses_before_locks_and_helpers",
+            "test_uninstall_coordination.CleanupCoordination.test_helper_time_path_changes_are_rejected_before_selected_deletions",
+            "test_uninstall_coordination.CleanupCoordination.test_created_and_preexisting_coordination_roots_and_locks_are_pinned"
+          ],
+          "evidence_ids": [
+            "cleanup-final",
+            "cleanup-final-log",
+            "final-act-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        }
+      ]
+    },
+    {
+      "issue": 102,
+      "live_state": "open",
+      "original_acceptance_count": 8,
+      "bounded_criteria_supported": 8,
+      "bounded_criteria_failed": 0,
+      "bounded_criteria_unrun": 0,
+      "closure_recommendation": "May close as implemented and locally verified for the issue\u2019s bounded scope; preserve explicit external acceptance limits.",
+      "criteria": [
+        {
+          "id": "102-D1",
+          "original_acceptance": "Active/unknown output, busy native setup and busy control lease produce no remote-add/install command",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "steamdeck/install.py",
+              "line": 237
+            },
+            {
+              "path": "steamdeck/install.py",
+              "line": 333
+            },
+            {
+              "path": "steamdeck/install.py",
+              "line": 369
+            },
+            {
+              "path": "steamdeck/install.py",
+              "line": 435
+            },
+            {
+              "path": "steamdeck/decky/dependency_setup.py",
+              "line": 629
+            },
+            {
+              "path": "steamdeck/decky/dependency_setup.py",
+              "line": 660
+            }
+          ],
+          "named_tests": [
+            "test_install_dependencies.InstallerDependencyTests.test_active_unknown_recording_paused_replay_and_busy_snapshots_never_mutate",
+            "test_install_dependencies.InstallerDependencyTests.test_busy_shared_control_prevents_flatpak_queries_and_mutators",
+            "test_install_dependencies.InstallerDependencyTests.test_busy_native_setup_does_not_start_a_second_transaction",
+            "test_install_dependencies.InstallerDependencyTests.test_fresh_install_checks_idle_under_both_leases_before_trusted_mutations"
+          ],
+          "evidence_ids": [
+            "dependency-focused",
+            "dependency-log",
+            "exact-transport",
+            "final-act-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        },
+        {
+          "id": "102-D2",
+          "original_acceptance": "A pre-existing disabled/unverified/unrelated flathub remote is rejected before mutation",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "steamdeck/install.py",
+              "line": 301
+            },
+            {
+              "path": "steamdeck/decky/dependency_setup.py",
+              "line": 507
+            },
+            {
+              "path": "steamdeck/decky/dependency_setup.py",
+              "line": 660
+            }
+          ],
+          "named_tests": [
+            "test_install_dependencies.InstallerDependencyTests.test_wrong_disabled_and_unverified_flathub_remotes_never_mutate",
+            "test_dependency_setup.DependencySetupTests.test_system_only_refs_remote_conflicts_and_old_obs_are_not_reinstalled"
+          ],
+          "evidence_ids": [
+            "dependency-focused",
+            "dependency-log",
+            "final-act-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        },
+        {
+          "id": "102-D3",
+          "original_acceptance": "Only missing compatible refs are installed and cancellation/retry preserves shared dependencies",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "steamdeck/install.py",
+              "line": 333
+            },
+            {
+              "path": "steamdeck/decky/dependency_setup.py",
+              "line": 507
+            },
+            {
+              "path": "steamdeck/decky/dependency_setup.py",
+              "line": 660
+            },
+            {
+              "path": "steamdeck/decky/dependency_setup.py",
+              "line": 741
+            }
+          ],
+          "named_tests": [
+            "test_install_dependencies.InstallerDependencyTests.test_installed_compatible_refs_are_reused_without_mutation",
+            "test_install_dependencies.InstallerDependencyTests.test_only_missing_extension_branch_from_obs_metadata_is_installed",
+            "test_install_dependencies.InstallerDependencyTests.test_system_only_old_obs_and_wrong_extension_owner_never_mutate",
+            "test_install_dependencies.InstallerDependencyTests.test_cancellation_preserves_partial_install_and_retry_only_installs_missing_ref"
+          ],
+          "evidence_ids": [
+            "dependency-focused",
+            "dependency-log",
+            "final-act-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        },
+        {
+          "id": "102-D4",
+          "original_acceptance": "Normal standard ZIP installation still has no dependency download in lifecycle initialization",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 504
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 285
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 319
+            },
+            {
+              "path": "steamdeck/decky/dependency_setup.py",
+              "line": 629
+            }
+          ],
+          "named_tests": [
+            "test_backend.DependencyAdapter.test_loading_and_observing_do_not_authorize_installation",
+            "test_dependency_setup.DependencySetupTests.test_status_and_later_are_read_only_then_explicit_consent_installs"
+          ],
+          "evidence_ids": [
+            "no-init-download-log",
+            "adapter-log",
+            "exact-transport",
+            "final-act-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": "D4 is the no-automatic-dependency-transaction software invariant during lifecycle initialization. The literal issue does not demand an actual supported Decky/SteamOS device run; its Verification section explicitly separates local fixtures from86. Real Plugin constructor/_main tests, literalTrue consent gating and exact-package transport mutation traps support that bounded invariant; actual supported-loader observation remains unrun86."
+        },
+        {
+          "id": "102-U1",
+          "original_acceptance": "Decky-only, matching old pair, newer-plugin/older-app, newer-app/older-plugin, offline and no-published-plugin-release cases return accurate independent statuses",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 885
+            },
+            {
+              "path": "steamdeck/releases.py",
+              "line": 274
+            },
+            {
+              "path": "steamdeck/releases.py",
+              "line": 375
+            },
+            {
+              "path": "steamdeck/decky/src/index.tsx",
+              "line": 310
+            }
+          ],
+          "named_tests": [
+            "test_backend.BackendState.test_update_checks_coalesce_and_compare_the_loaded_plugin_independently",
+            "test_backend.BackendState.test_plugin_checks_keep_optional_desktop_inventory_separate_in_each_composition",
+            "test_releases.PluginReleaseChecks.test_paired_runtime_alone_is_not_a_published_standard_plugin_release",
+            "test_releases.PluginReleaseChecks.test_offline_does_not_claim_plugin_is_current"
+          ],
+          "evidence_ids": [
+            "update-focused",
+            "adapter-log",
+            "release-log",
+            "update-browser",
+            "final-act-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        },
+        {
+          "id": "102-U2",
+          "original_acceptance": "No ordinary check recommends a candidate older than the loaded plugin or a missing updater",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "steamdeck/releases.py",
+              "line": 274
+            },
+            {
+              "path": "steamdeck/releases.py",
+              "line": 357
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 885
+            },
+            {
+              "path": "steamdeck/decky/src/index.tsx",
+              "line": 310
+            },
+            {
+              "path": "steamdeck/update.py",
+              "line": 114
+            },
+            {
+              "path": "steamdeck/update.py",
+              "line": 265
+            },
+            {
+              "path": "steamdeck/install.py",
+              "line": 386
+            },
+            {
+              "path": "steamdeck/install.py",
+              "line": 435
+            }
+          ],
+          "named_tests": [
+            "test_releases.PluginReleaseChecks.test_standard_plugin_release_compares_loaded_version_and_never_downloads",
+            "test_update.UpdateSafety.test_newer_standard_plugin_blocks_ordinary_desktop_update_before_download",
+            "test_update.UpdateSafety.test_historical_or_nonliteral_policy_is_rejected_before_import_backup_or_dependency_work",
+            "test_setup.UnifiedInstallerSafety.test_activation_failure_cannot_roll_newer_plugin_back_to_retained_older_app",
+            "test_setup.UnifiedInstallerSafety.test_changed_plugin_identity_is_rechecked_inside_final_control_lease"
+          ],
+          "evidence_ids": [
+            "update-focused",
+            "update-lock-followup",
+            "release-log",
+            "update-browser",
+            "installer-log",
+            "exact-transport",
+            "final-act-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        },
+        {
+          "id": "102-U3",
+          "original_acceptance": "Check-only behavior remains read-only and source/repository trust does not expand",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "steamdeck/releases.py",
+              "line": 56
+            },
+            {
+              "path": "steamdeck/releases.py",
+              "line": 97
+            },
+            {
+              "path": "steamdeck/releases.py",
+              "line": 274
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 885
+            },
+            {
+              "path": "steamdeck/update.py",
+              "line": 157
+            }
+          ],
+          "named_tests": [
+            "test_releases.PluginReleaseChecks.test_standard_plugin_release_compares_loaded_version_and_never_downloads",
+            "test_releases.PluginReleaseChecks.test_incomplete_foreign_dirty_or_inconsistent_plugin_metadata_fails_closed",
+            "test_releases.RedirectTrust.test_changed_owner_api_raw_or_untrusted_download_redirects_fail_closed",
+            "test_repository_migration.RepositoryMigration.test_repository_is_build_identity_not_environment_or_redirect_trust"
+          ],
+          "evidence_ids": [
+            "update-focused",
+            "release-log",
+            "update-browser",
+            "dependency-focused",
+            "final-act-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        },
+        {
+          "id": "102-U4",
+          "original_acceptance": "Legacy cleanup preview can retire obsolete app/launchers while preserving the active Decky plugin and shared settings by default",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "steamdeck/uninstall.py",
+              "line": 168
+            },
+            {
+              "path": "steamdeck/uninstall.py",
+              "line": 362
+            },
+            {
+              "path": "steamdeck/uninstall.py",
+              "line": 463
+            }
+          ],
+          "named_tests": [
+            "test_uninstall_coordination.CleanupCoordination.test_legacy_retirement_preserves_plugin_shared_data_backups_and_media",
+            "test_uninstall_coordination.CleanupCoordination.test_legacy_retirement_never_closes_running_obs_or_accepts_active_unknown",
+            "test_uninstall_coordination.CleanupCoordination.test_legacy_retirement_rejects_destructive_flags_and_dry_run_is_offline"
+          ],
+          "evidence_ids": [
+            "cleanup-final",
+            "cleanup-final-log",
+            "final-act-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        }
+      ]
+    },
+    {
+      "issue": 103,
+      "live_state": "open",
+      "original_acceptance_count": 6,
+      "bounded_criteria_supported": 6,
+      "bounded_criteria_failed": 0,
+      "bounded_criteria_unrun": 0,
+      "closure_recommendation": "May close as implemented and locally verified for the issue\u2019s bounded scope; preserve explicit external acceptance limits.",
+      "criteria": [
+        {
+          "id": "103-D1",
+          "original_acceptance": "Hold the actual shared control lock past the UI budget, invoke packaged capture-mode change, release the lock, and prove either no later settings write occurs or the same pending operation remains visible through completion.",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "internal/commands/deck.go",
+              "line": 91,
+              "anchor": "limit = 3 * time.Second"
+            },
+            {
+              "path": "internal/deck/capture_settings.go",
+              "line": 15,
+              "anchor": "func SetCaptureMode"
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 765,
+              "anchor": "async def _perform_capture_mode"
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 587,
+              "anchor": "async def _command"
+            },
+            {
+              "path": "steamdeck/decky/src/action-timeouts.mjs",
+              "line": 3,
+              "anchor": "settingsTimeouts"
+            }
+          ],
+          "named_tests": [
+            "TestCaptureModeCommandProcessDeadlineAndSignalCannotLeaveALateWrite",
+            "test_capture_mode_adapter.CaptureModeAdapter.test_actual_lock_waiter_is_terminated_before_failure_and_cannot_write_after_release",
+            "test_capture_mode_adapter.CaptureModeAdapter.test_unconfirmed_leader_exit_retains_same_pending_operation_until_reaped",
+            "shared-lock-past-ui-deadline"
+          ],
+          "evidence_ids": [
+            "go-focused",
+            "go-integrated-retry",
+            "go-isolated-process-log",
+            "python-capture",
+            "packaged-probe-preparation",
+            "current-packaged-process",
+            "current-primary-build",
+            "current-final-matrix",
+            "current-native-index",
+            "completed-state-selection",
+            "original-state-final-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        },
+        {
+          "id": "103-D2",
+          "original_acceptance": "Cover success near the deadline, caller disconnect, watcher-lease contention, Stop during the wait, and repeated identical edits; preserve key/settings binding and explicit broadcast authorization.",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "internal/deck/capture_settings.go",
+              "line": 15,
+              "anchor": "func SetCaptureMode"
+            },
+            {
+              "path": "internal/deck/native_configuration.go",
+              "line": 180,
+              "anchor": "func configureFields"
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 628,
+              "anchor": "pending_action ="
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 765,
+              "anchor": "async def _perform_capture_mode"
+            }
+          ],
+          "named_tests": [
+            "TestCaptureModeWatcherDeadlineCannotWriteAfterLeaseRelease",
+            "TestCaptureModeCancellationBeforeOrDuringInputPreservesSavedPair",
+            "TestCaptureModeChangePreservesCredentialsAndRejectsUnsafeOutput",
+            "test_capture_mode_adapter.CaptureModeAdapter.test_near_deadline_success_includes_post_action_and_fresh_readback_without_old_query_join",
+            "test_capture_mode_adapter.CaptureModeAdapter.test_disconnected_and_repeated_callers_share_the_owned_bounded_edit",
+            "test_capture_mode_adapter.CaptureModeAdapter.test_stop_signals_waiting_capture_without_starting_any_output_or_a_late_write",
+            "test_capture_mode_adapter.CaptureModeAdapter.test_timeout_after_commit_keeps_saved_pair_and_reports_unconfirmed_instead_of_rollback"
+          ],
+          "evidence_ids": [
+            "go-focused",
+            "go-integrated-retry",
+            "python-capture",
+            "python-config",
+            "python-backend",
+            "python-lifecycle",
+            "current-packaged-process",
+            "current-primary-build",
+            "current-final-matrix",
+            "current-native-index",
+            "completed-state-selection",
+            "original-state-final-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        },
+        {
+          "id": "103-D3",
+          "original_acceptance": "Ensure action timeout ordering includes Go's post-action status and Python's additional status query; testing only the core mutation timeout is insufficient.",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "internal/commands/deck.go",
+              "line": 91,
+              "anchor": "limit = 3 * time.Second"
+            },
+            {
+              "path": "internal/commands/deck.go",
+              "line": 150,
+              "anchor": "snapshotCtx, done :="
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 71,
+              "anchor": "CAPTURE_MODE_BUDGET ="
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 734,
+              "anchor": "async def _capture_call"
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 755,
+              "anchor": "async def _capture_readback"
+            },
+            {
+              "path": "steamdeck/decky/src/action-timeouts.mjs",
+              "line": 3,
+              "anchor": "settingsTimeouts"
+            }
+          ],
+          "named_tests": [
+            "test_capture_mode_adapter.CaptureModeAdapter.test_near_deadline_success_includes_post_action_and_fresh_readback_without_old_query_join",
+            "test_capture_mode_adapter.CaptureModeAdapter.test_ack_without_fresh_matching_readback_is_not_reported_as_success",
+            "test_capture_mode_adapter.CaptureModeAdapter.test_inherited_stdout_cannot_extend_capture_cleanup_after_owned_leader_exit",
+            "settings reply just before the UI boundary remains authoritative",
+            "deadline rejects as unconfirmed and a late RPC reply cannot turn it into success"
+          ],
+          "evidence_ids": [
+            "python-capture",
+            "ui-focused",
+            "ui-tests",
+            "go-integrated-retry",
+            "independent-review",
+            "current-packaged-process",
+            "current-primary-build",
+            "current-final-matrix",
+            "current-native-index",
+            "completed-state-selection",
+            "original-state-final-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        },
+        {
+          "id": "103-R1",
+          "original_acceptance": "Missing required settings/connection members, wrong member types and contradictory can_configure/can_close flags must return unknown readiness with both actions disabled.",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 114,
+              "anchor": "def _configuration_settings"
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 164,
+              "anchor": "def _valid_configuration"
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 197,
+              "anchor": "def _public_configuration("
+            },
+            {
+              "path": "steamdeck/decky/src/configuration-state.mjs",
+              "line": 29,
+              "anchor": "export function validConfiguration"
+            },
+            {
+              "path": "steamdeck/decky/src/configuration-state.mjs",
+              "line": 55,
+              "anchor": "export function publicConfiguration"
+            }
+          ],
+          "named_tests": [
+            "test_configuration_adapter.ConfigurationAdapter.test_shared_go_wire_corpus_requires_complete_consistent_readiness",
+            "test_configuration_adapter.ConfigurationAdapter.test_malformed_configuration_is_closed_to_writes",
+            "shared configuration contract:",
+            "incomplete or contradictory successful readback never becomes writable draft defaults"
+          ],
+          "evidence_ids": [
+            "python-config",
+            "ui-focused",
+            "ui-corpus",
+            "go-corpus",
+            "independent-review",
+            "current-packaged-process",
+            "current-primary-build",
+            "current-final-matrix",
+            "current-native-index",
+            "completed-state-selection",
+            "original-state-final-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        },
+        {
+          "id": "103-R2",
+          "original_acceptance": "Actual first-run, configured, running-idle, streaming, legacy-zero-dimension and unavailable Go responses retain their intended UI states.",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "internal/deck/configuration_contract_test.go",
+              "line": 33,
+              "anchor": "func TestConfigurationSharedWireCorpus"
+            },
+            {
+              "path": "internal/deck/native_configuration.go",
+              "line": 89,
+              "anchor": "func readConfiguration"
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 114,
+              "anchor": "def _configuration_settings"
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 513,
+              "anchor": "if action == \"test-connection\":"
+            },
+            {
+              "path": "steamdeck/decky/src/configuration-state.mjs",
+              "line": 29,
+              "anchor": "export function validConfiguration"
+            }
+          ],
+          "named_tests": [
+            "TestConfigurationSharedWireCorpus",
+            "TestNativeConfigurationInvalidSavedSettingsCannotAuthorizeClose",
+            "test_configuration_adapter.ConfigurationAdapter.test_closed_failed_connection_test_preserves_coherent_offline_configuration",
+            "test_configuration_adapter.ConfigurationAdapter.test_tested_connection_is_projected_and_secret_error_echo_is_removed",
+            "public projection preserves closed connection-test failure and strips unknown private fields"
+          ],
+          "evidence_ids": [
+            "go-corpus",
+            "python-config",
+            "ui-corpus",
+            "ui-focused",
+            "independent-review",
+            "current-packaged-process",
+            "current-primary-build",
+            "current-final-matrix",
+            "current-native-index",
+            "completed-state-selection",
+            "original-state-final-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        },
+        {
+          "id": "103-R3",
+          "original_acceptance": "Unknown or absent output-known data cannot enable new output or destructive/configuration controls; Stop/recovery remains available.",
+          "bounded_criterion_result": "supported by exact-source implementation and passed focused/packaged/final local evidence",
+          "source": [
+            {
+              "path": "steamdeck/decky/src/state.mjs",
+              "line": 3,
+              "anchor": "export function outputKnown"
+            },
+            {
+              "path": "steamdeck/decky/src/state.mjs",
+              "line": 50,
+              "anchor": "export function controls"
+            },
+            {
+              "path": "steamdeck/decky/src/health.mjs",
+              "line": 5,
+              "anchor": "output_known"
+            },
+            {
+              "path": "steamdeck/decky/src/configuration-state.mjs",
+              "line": 122,
+              "anchor": "export function configurationControls"
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "line": 743,
+              "anchor": "def _capture_idle"
+            }
+          ],
+          "named_tests": [
+            "only explicit output-known true enables output; absent or mistyped values retain recovery Stop",
+            "stale status ages to unknown and cannot enable Start",
+            "missing or mistyped output knowledge cannot display a healthy stream from old byte progress",
+            "active/unknown/stale/backward-clock/dependency-busy observations cannot authorize changes",
+            "test_backend.BackendState.test_capture_mode_rechecks_real_output_and_refuses_live_unknown_or_recording",
+            "test_configuration_adapter.ConfigurationAdapter.test_stop_is_available_during_save_and_save_is_blocked_during_stop"
+          ],
+          "evidence_ids": [
+            "ui-focused",
+            "ui-tests",
+            "python-backend",
+            "python-config",
+            "independent-review",
+            "current-packaged-process",
+            "current-primary-build",
+            "current-final-matrix",
+            "current-native-index",
+            "completed-state-selection",
+            "original-state-final-report"
+          ],
+          "actual_target_acceptance": "unrun under86/original ledgers; not counted as passed by this bounded result",
+          "special_interpretation": null
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "original_bounded_acceptance_bullets": 21,
+    "supported_bounded_contracts": 21,
+    "remaining_in_issue_blocking_gates": 0,
+    "actual_supported_loader_hardware_provider_gates_passed_by_this_assessment": 0
+  },
+  "why_the_old_pauses_no_longer_block": [
+    "Frozen issue/report language saying open pending review or draft records the status when evidence was written. It is not a new mandatory formal GitHub approval or physical-device prerequisite.",
+    "Both final public proofs have passed independent privacy/integrity/claim review, required local qualification exists at exactAA/4e, and the owner explicitly directed the source merges. No required review/ruleset gate was bypassed.",
+    "The accepted verification text calls for focused process/protocol/browser/fixture checks and explicitly leaves complete campaign85/actual86 acceptance separate. Do not import those broad gates into every bounded issue."
+  ],
+  "issue102_D4_boundary": {
+    "literal_bullet": "Normal standard ZIP installation still has no dependency download in lifecycle initialization",
+    "bounded_source_contract": "Supported: construction and_main perform no dependency transaction; only literalTrue consent starts native dependency setup.",
+    "local_evidence": [
+      "Actual Plugin/_main consent regression exercises false/None/string/integer refusal and literalTrue start.",
+      "Native dependency controller status/Later observation is read-only; explicit consent begins mutation.",
+      "Exact-package transport installs payload with fatal Flatpak mutation/launch traps; supported-loader lifecycle itself remains a fixture boundary."
+    ],
+    "unrun_actual_acceptance": "Actual normal supported Decky/SteamOS startup with no dependency transaction before Install consent remains explicitly unrun in86/original ledgers. Closing the bounded issue does not pass that observation.",
+    "assessment": "Treating102 as7/8 solely because the separate86 device run is unrun would add a requirement beyond the literalD4 and the issue\u2019s own verification boundary. Preserve the distinction in closure text; do not relabel target passed."
+  },
+  "recommended_issue_notes": {
+    "101": "All 7 bounded cleanup lock/ancestor criteria are supported at qualified aa323f0 by real process/filesystem tests, exact packages and the complete local matrix; final proof was independently reviewed and implementation merged via #109. Close bounded #101. Actual device, hosted and broad campaign gates remain unchanged.",
+    "102": "All 8 bounded recovery/update/lifecycle-policy criteria are supported at qualified aa323f0 by source, focused/package tests and the complete local matrix; final proof was independently reviewed and implementation merged via #109. Close bounded #102 as locally verified. D4 actual supported Decky/SteamOS startup remains explicitly UNRUN under #86; neither merge nor closure passes target behavior.",
+    "103": "All 6 bounded settings deadline/readback criteria are supported at qualified 4eac7a4 by actual packaged lock/process scenarios, the shared 106-case Go/Python/JS corpus, full local matrix and independently reviewed proof; implementation merged via #110. Close bounded #103. Preserve original interrupted 200445 unverifiability and completed-selection scope; actual Deck, provider, hosted and resource gates remain separate."
+  },
+  "preservation": [
+    "Do not alter immutable qualified-source receipts merely to update their historical open/draft language. Add current reconciliation as new issue/documentation status.",
+    "All230 original criteria and dependencies remain unchanged. Do not close82/83/84/85/86/46 or claim release/migration/adoption from these bounded closures.",
+    "Actual supported-loader/SteamDeck/SteamOS/FlatpakOBS33/Gamescope/AMD/controller/headset/provider, native other-platform and hosted/dependency-comparison/resource104 gates retain their recorded statuses."
+  ],
+  "secondary_independent_interpretation": {
+    "reviewer": "/root/audit_lifecycle/review_cleanup",
+    "result": "Agrees102D4 can close as bounded source/local contract; actual supported-loader observation stays unrun86. No extra hardware/formal-review prerequisite inferred."
+  },
+  "evidence_hashes": {
+    "live_issue_snapshot_sha256": "4f7a046ae13f9f4b1107945dbfdd699f0f052157996995d2e0ce3b42b297f45d",
+    "cleanup_machine_report_sha256": "fbd120531aa03e5961998857acfaa7f6960836f31650a5c72ca77663ead5b53a",
+    "settings_machine_report_sha256": "cfe6565e3ff48e48229ef4a20a7a01f5c40d0ab1792388a9fbb72ce241478a27",
+    "cleanup_independent_public_review_sha256": "5c9aa14f0057cb9696a3296b842d1d0b55f9ebf0ba9147da86f5a2f5636278c4",
+    "settings_independent_public_review_sha256": "0597b3a29b89a4eba0cde56b7ef4ee55bfb6271f5e8eb2de212e4d32ca137810"
+  },
+  "actions": "Read-only GitHub issue fetches, local immutable Git/file inspection and private assessment outputs only. No tests or issue mutations."
+}

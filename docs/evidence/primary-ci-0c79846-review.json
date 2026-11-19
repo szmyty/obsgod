@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "reviewed_utc": "2026-11-19T00:37:30.035517+00:00",
+  "reviewer": "independent final public-evidence reviewer",
+  "source_revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+  "source_tree": "b5d95741d3352d8eccfc954085895fda8268fa38",
+  "archive": "primary-ci-0c79846-proof.zip",
+  "archive_sha256": "58334d517a9c0f3dbe19b433a52a3b69dcda586a88c8f86330b40dc9f46887e9",
+  "archive_bytes": 681716,
+  "archive_members": 173,
+  "indexed_text_members": 172,
+  "result": "passed with explicit qualification limits",
+  "checks": {
+    "exact_explicit_manifest_selection": "passed; 172 entries match archive index and immutable selected raw/public digests",
+    "archive_integrity_safe_paths_regular_files_text": "passed; 173 unique bounded nonencrypted regular text members; no traversal, source or fixture trees",
+    "privacy_raw_decoded_masks_credentials": "passed; recomputed mask/fixture redaction from 172 originals, verified every public byte and recursively scanned every payload plus index, supplemented by independent raw/escape credential and URL-authority checks",
+    "native_filtered_summary_binding": "passed; 18 files, 15 distinct original hashes, individual public payload hashes match native index",
+    "cross_build_counts": "passed; actual audit summaries list 20 archives and 15 packages",
+    "compiler_only_cleanup_and_module_preservation": "passed; two successful private compiler policy phases and unchanged 639-file module inventory across trim interval",
+    "criterion_claim_boundary": "passed; six literal bounded local criteria eligible, including R1 explicit early-refusal alternative; no full ACT or hardware acceptance inferred",
+    "matrix_boundary": "passed; actual matrix unavailable, six unrun workflows, preflight Docker probe unrun",
+    "test_counts": "passed; 269 application passes/two skips,116 tooling,156 frontend,six packaged settings/42 guarded children",
+    "failed_evidence_preservation": "passed; raw expected negative remains failed; original controller failed/incomplete and browser failure log retained as historical",
+    "committed_copy_and_derived_report": "passed; copied archive bytes match reviewed SHA; derived report exactly equals sanitized ZIP summary plus public_evidence metadata"
+  },
+  "role_counts": {
+    "context": 6,
+    "external": 2,
+    "historical": 21,
+    "native": 18,
+    "native-index": 1,
+    "primary-negative": 4,
+    "primary": 9,
+    "resource": 6,
+    "retained": 32,
+    "standalone": 73
+  },
+  "findings": [],
+  "limits": [
+    "This is an evidence privacy/integrity/claims review, not new test execution, formal GitHub approval, merge or release authorization.",
+    "Frozen qualified source remains0c; later evidence/documentation edits are not relabeled as its source or a rebuilt candidate.",
+    "61 passed command-check predicates include the expected nonzero negative; they are not61 test cases,61 all-exit-zero invocations or six ACT passes.",
+    "All six ACT workflows remain unrun due capacity; hosted billing/dependency-review limits remain separate.",
+    "Actual Steam Deck/SteamOS/FlatpakOBS33/Gamescope/AMD/controller/headset/provider, native non-Linux,rights,migration and consumer-adoption acceptance remain unrun or separately gated under85/86/original ledgers.",
+    "Official CLI evidence compares prepared files only, not source compilation or reproducible raw official ZIPs.",
+    "No product source edit, test rerun, GitHub mutation, publication, deployment, paid action or fixture/HOME/cache/media/binary tree disclosure occurred during this review."
+  ],
+  "secondary_binding_review": {
+    "sha256": "69f7f7583a6b6cf08782b5303f00f13cc8d89a44686eef1ffb12226bfff827f3",
+    "review": {
+      "schema": 1,
+      "source_revision": "0c798468ecadd753c43bb8970b76e88f263f3a5c",
+      "source_tree": "b5d95741d3352d8eccfc954085895fda8268fa38",
+      "archive_sha256": "58334d517a9c0f3dbe19b433a52a3b69dcda586a88c8f86330b40dc9f46887e9",
+      "result": "passed",
+      "checks": {
+        "indexed_public_hashes": 172,
+        "frozen_source_git_objects": 553,
+        "primary_complete_builds": 2,
+        "actual_canonical_primary_zip_matches": 2,
+        "official_prepared_file_comparisons": [
+          33,
+          33
+        ],
+        "source_bound_current_rows": 62,
+        "passed_command_predicates": 61,
+        "capacity_unavailable_commands": 1,
+        "retained_original_rows": 24,
+        "new_current_rows": 38,
+        "historical_failed_browser_preserved": true,
+        "act_workflows_unrun": 6,
+        "actual_private_log_hashes": 63
+      },
+      "issues": [],
+      "limits": [
+        "Read-only artifact/source/log binding review; no new test execution, full ACT pass, hosted pass, hardware, release or formal GitHub approval.",
+        "Current evidence/document edits differ from frozen source; immutable git objects verified, not relabeled working tree.",
+        "Official CLI evidence assembles prepared bytes and does not establish source compilation or reproducible raw CLI ZIPs."
+      ]
+    }
+  }
+}

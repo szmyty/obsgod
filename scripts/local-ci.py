@@ -7,6 +7,7 @@ configuration is retained. Logs remain local and must be reviewed before sharing
 """
 import argparse
 import hashlib
+import importlib.util
 import io
 import json
 import os
@@ -15,6 +16,7 @@ import platform
 import re
 import shlex
 import socket
+import stat
 import subprocess
 import sys
 import tarfile
@@ -34,6 +36,10 @@ JOBS = {"build": ("build.yml", "build", "push"),
         "snapshot": ("goreleaser.yml", "goreleaser", "push"),
         "docs": ("docs-preview.yml", "build-preview", "workflow_dispatch"),
         "candidate": ("steam-deck.yml", "candidate", "workflow_dispatch")}
+MATRIX_ORDER = ("lint", "build", "coverage", "snapshot", "docs", "candidate")
+RESOURCE_SPEC = importlib.util.spec_from_file_location("local_ci_resources", ROOT / "scripts/local-ci-resources.py")
+RESOURCES = importlib.util.module_from_spec(RESOURCE_SPEC)
+RESOURCE_SPEC.loader.exec_module(RESOURCES)
 
 
 def sha(data):
@@ -99,12 +105,12 @@ def install(prefix):
     subprocess.run([str(target), "--version"], check=True)
 
 
-def network_options(state):
+def network_options(state, temporary=None):
     # Bind the combined public CA bundle, never credentials or Docker config.
     ca = Path("/etc/ssl/certs/ca-certificates.crt")
     if not ca.is_file():
         raise SystemExit("A trusted combined CA bundle is required")
-    temporary = state / "tmp"
+    temporary = temporary or state / "tmp"
     temporary.mkdir(parents=True, exist_ok=True)
     apt_configuration = state / "apt-cloud-ca.conf"
     if apt_configuration.is_symlink():
@@ -191,22 +197,129 @@ def prepare_actions(state):
     return mappings, receipts
 
 
+def matrix(args, state):
+    """A fresh, serial evidence session; interrupted attempts are never resumed."""
+    scratch_base = RESOURCES.private_directory(args.scratch, ROOT)
+    session = state / "sessions" / (time.strftime("%Y%m%dT%H%M%SZ", time.gmtime()) + "-" + os.urandom(6).hex())
+    session.mkdir(mode=0o700, parents=True)
+    scratch = scratch_base / session.name
+    scratch.mkdir(mode=0o700)
+    revision = git("rev-parse", "HEAD")
+    tree = git("rev-parse", "HEAD^{tree}")
+    if git("status", "--porcelain"):
+        raise SystemExit("Matrix requires a committed clean source revision")
+    receipt = {"schema_version": 1, "revision": revision, "source_tree": tree,
+               "profile": "constrained", "state": str(session), "scratch": str(scratch),
+               "completed": False, "result": "running",
+               "jobs": [{"action": action, "result": "unrun"} for action in MATRIX_ORDER]}
+    path = session / "session.json"
+    RESOURCES.write_json(path, receipt)
+    print("New local matrix session: " + str(session), flush=True)
+    probe = RESOURCES.allocate_attempt(scratch, "preflight", ROOT)
+    measured = RESOURCES.preflight(ROOT, probe, IMAGE, revision)
+    receipt["preflight"] = str(probe / "preflight.json")
+    if measured["status"] != "passed":
+        receipt.update(result="unavailable", reason="Resource preflight refused before any workflow")
+        RESOURCES.write_json(path, receipt)
+        print(json.dumps(measured, sort_keys=True), flush=True)
+        return 3
+    for job in receipt["jobs"]:
+        if git("rev-parse", "HEAD") != revision or git("status", "--porcelain"):
+            receipt.update(result="failed", reason="Frozen source changed; later jobs remain unrun")
+            RESOURCES.write_json(path, receipt)
+            return 1
+        action = job["action"]
+        command = [sys.executable, str(Path(__file__).resolve()), action, "--act", str(args.act),
+                   "--state", str(session), "--profile", "constrained", "--scratch", str(scratch),
+                   "--action-source-state", str(state)]
+        job.update(result="running", command=command)
+        RESOURCES.write_json(path, receipt)
+        previous = set(session.glob("*-" + action + ".json"))
+        prior_scratch = set(scratch.iterdir())
+        result = subprocess.run(command, cwd=ROOT)
+        job.update(exit_code=result.returncode, result="passed" if result.returncode == 0 else "failed")
+        if result.returncode == 3:
+            produced_scratch = set(scratch.iterdir()) - prior_scratch
+            if len(produced_scratch) == 1:
+                resource_path = produced_scratch.pop() / "preflight.json"
+                try:
+                    resource = json.loads(resource_path.read_text())
+                    if resource.get("profile") == "constrained" and resource.get("status") in ("refused", "unavailable") and resource.get("revision") == revision:
+                        job.update(result="unrun", availability="unavailable", preflight=str(resource_path))
+                        receipt.update(result="unavailable", reason="Per-job resource preflight refused; this workflow and later jobs remain unrun")
+                        RESOURCES.write_json(path, receipt)
+                        return 3
+                except (OSError, ValueError, TypeError):
+                    pass
+        if result.returncode == 0:
+            produced = set(session.glob("*-" + action + ".json")) - previous
+            verified = False
+            if len(produced) == 1:
+                actual_path = produced.pop()
+                try:
+                    if actual_path.is_symlink() or not stat.S_ISREG(actual_path.stat().st_mode) or actual_path.stat().st_size > 2_000_000:
+                        raise ValueError("Unsafe child receipt")
+                    actual = json.loads(actual_path.read_text())
+                    log = actual_path.with_suffix(".log")
+                    verified = (actual.get("action") == action and actual.get("revision") == revision and actual.get("source_tree") == tree
+                                and actual.get("dirty") is False and actual.get("result") == "passed"
+                                and actual.get("exit_code") == 0 and log.is_file() and not log.is_symlink()
+                                and stat.S_ISREG(log.stat().st_mode) and log.stat().st_size <= 256_000_000
+                                and actual.get("log_sha256") == sha(log.read_bytes()))
+                    job["receipt"] = str(actual_path)
+                except (OSError, ValueError, TypeError, AttributeError):
+                    verified = False
+            if not verified:
+                job.update(result="failed", reason="Child exited0 without one verified clean-source completion receipt")
+        RESOURCES.write_json(path, receipt)
+        if result.returncode or job["result"] != "passed":
+            receipt.update(result="failed", reason="Stopped after failed job; later jobs remain unrun")
+            RESOURCES.write_json(path, receipt)
+            return result.returncode or 1
+    unchanged = git("rev-parse", "HEAD") == revision and not git("status", "--porcelain")
+    receipt.update(completed=bool(unchanged), result="passed" if unchanged else "failed")
+    RESOURCES.write_json(path, receipt)
+    print("Matrix evidence: " + str(path), flush=True)
+    return 0 if unchanged else 1
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", choices=["install", "prepare-actions", "list", "dry-run", *JOBS])
+    parser.add_argument("action", choices=["install", "prepare-actions", "list", "dry-run", "preflight", "matrix", *JOBS])
     parser.add_argument("--act", type=Path, default=Path(os.environ.get("XDG_DATA_HOME", Path.home() / ".local/share")) / "obsgod/tools/bin/act")
     parser.add_argument("--state", type=Path, default=ROOT / ".local-ci")
     parser.add_argument("--pull-request", action="store_true", help="Use the reviewed synthetic PR event (no provider review API is simulated)")
+    parser.add_argument("--profile", choices=["constrained"], help="Opt into measured private scratch and post-consumer compiler-cache policy")
+    parser.add_argument("--scratch", type=Path, help="Explicit private directory outside the checkout, visible to the local Docker daemon")
+    parser.add_argument("--action-source-state", type=Path, help=argparse.SUPPRESS)
     args = parser.parse_args()
+    if args.action in ("preflight", "matrix"):
+        args.profile = "constrained"
+    if args.profile and (args.scratch is None or not args.scratch.is_absolute()):
+        parser.error("The constrained profile requires an explicit absolute --scratch path")
+    if args.scratch is not None and not args.profile:
+        parser.error("--scratch requires --profile constrained")
+    if args.pull_request and args.action in ("preflight", "matrix"):
+        parser.error("Matrix/preflight do not simulate provider pull-request acceptance")
     if args.action == "install":
         install(args.act.parent)
         return
+    state = args.state.resolve()
+    state.mkdir(parents=True, exist_ok=True)
+    if args.action == "matrix":
+        raise SystemExit(matrix(args, state))
+    resource = None
+    attempt = None
+    if args.profile:
+        attempt = RESOURCES.allocate_attempt(args.scratch, args.action, ROOT)
+        resource = RESOURCES.preflight(ROOT, attempt, IMAGE, git("rev-parse", "HEAD"))
+        if args.action == "preflight" or resource["status"] != "passed":
+            print(json.dumps(resource, sort_keys=True))
+            raise SystemExit(0 if resource["status"] == "passed" else 3)
     actual = subprocess.check_output([str(args.act), "--version"], text=True).strip()
     if actual != f"act version {VERSION}":
         raise SystemExit(f"Expected act {VERSION}, got {actual}")
-    state = args.state.resolve()
-    state.mkdir(parents=True, exist_ok=True)
-    mappings, action_receipts = prepare_actions(state)
+    mappings, action_receipts = prepare_actions(args.action_source_state.resolve() if args.action_source_state else state)
     if args.action == "prepare-actions":
         print(json.dumps(action_receipts, indent=2, sort_keys=True))
         return
@@ -227,7 +340,7 @@ def main():
     command = [str(args.act), "--directory", str(ROOT), "--bind", "--env-file", os.devnull,
                "--secret-file", os.devnull, "--input-file", os.devnull,
                "--container-daemon-socket", "/var/run/docker.sock", "--network", "bridge",
-               "--concurrent-jobs", "1", "--container-options", network_options(state),
+               "--concurrent-jobs", "1", "--container-options", network_options(state, attempt / "tmp") if attempt else network_options(state),
                "--action-cache-path", str(state / "actions"),
                "--artifact-server-path", str(state / "artifacts"),
                "--artifact-server-addr", service_address, "--artifact-server-port", "34567",
@@ -236,6 +349,17 @@ def main():
                "--env", "GIT_SSL_CAINFO=/run/obsgod-ca.pem", "--env", "PIP_CERT=/run/obsgod-ca.pem",
                "--env", "CODEX_PROXY_CERT=/run/obsgod-ca.pem", "--env", "TMPDIR=" + str(state / "tmp"),
                "--env", "OBSGOD_ACT_TEMP=" + str(state / "tmp")]
+    if attempt:
+        for prefix in ("TMPDIR=", "OBSGOD_ACT_TEMP="):
+            command[command.index(prefix + str(state / "tmp"))] = prefix + str(attempt / "tmp")
+        # Bind the complete private attempt for compiler caches and nested builds;
+        # network_options already binds the per-attempt daemon-visible temp.
+        options = command.index("--container-options") + 1
+        command[options] += " " + shlex.join(["--mount", f"type=bind,src={attempt},dst={attempt}"])
+        for key, value in {"OBSGOD_LOCAL_PROFILE": "constrained", "OBSGOD_LOCAL_SCRATCH": str(attempt),
+                           "OBSGOD_LOCAL_RESOURCE_RECEIPT": str(attempt / "resource-policy.json"),
+                           "OBSGOD_LOCAL_OWNER_UID": str(os.getuid()), "GOCACHE": str(attempt / "go-build-root")}.items():
+            command += ["--env", key + "=" + value]
     command += mappings
     # act uses the Engine API rather than `docker run`, so Docker client's proxy
     # defaults are not automatically copied. Values reach only the child argv;
@@ -269,6 +393,10 @@ def main():
                "pull_request_fixture": args.pull_request,
                "workflow_sha256": {p.name: sha(p.read_bytes()) for p in sorted((ROOT / ".github/workflows").glob("*.yml"))},
                "started_utc": stamp, "result": "running"}
+    if resource:
+        receipt["resource_profile"] = {"name": "constrained", "preflight": str(attempt / "preflight.json"),
+                                       "preflight_sha256": sha((attempt / "preflight.json").read_bytes()),
+                                       "scratch": str(attempt), "compiler_cache_policy": "explicit post-consumer workflow boundary"}
     # Commands contain session paths; they are local evidence, not release metadata.
     receipt["command"] = redact_log_value([re.sub(r"^((?:HTTP_PROXY|HTTPS_PROXY|ALL_PROXY|NO_PROXY|http_proxy|https_proxy|all_proxy|no_proxy))=.*$", r"\1=[injected]", value) for value in command])
     prefix.with_suffix(".json").write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n")
@@ -281,6 +409,10 @@ def main():
             log.write(line)
     code = process.wait()
     receipt.update(exit_code=code, result="passed" if code == 0 else "failed", log_sha256=sha(prefix.with_suffix(".log").read_bytes()))
+    if attempt:
+        policy = attempt / "resource-policy.json"
+        if policy.exists() and not policy.is_symlink() and policy.is_file() and policy.stat().st_size <= 2_000_000:
+            receipt["resource_profile"].update(compiler_cache_receipt=str(policy), compiler_cache_receipt_sha256=sha(policy.read_bytes()))
     prefix.with_suffix(".json").write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n")
     print(f"Local evidence: {prefix}.json (review log before sharing)")
     sys.exit(code)

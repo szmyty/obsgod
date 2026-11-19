@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff
         with:
           go-version: '1.27.4'
-          cache: true
+          cache: ${{ env.OBSGOD_LOCAL_PROFILE != 'constrained' }}
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.12'
@@ -50,6 +50,9 @@ jobs:
           smoke_output="${OBSGOD_ACT_TEMP:-$RUNNER_TEMP}/obsgod-generic-smoke"
           printf 'OBSGOD_GENERIC_SMOKE_EVIDENCE=%s\n' "$smoke_output" >> "$GITHUB_ENV"
           python3 scripts/run-user-tests.py --output-root "$smoke_output" -- scripts/generic-release.py smoke --artifacts dist/snapshot --audit dist/snapshot/supply-chain/SUMMARY.json --output "$smoke_output/results"
+      - name: Release only opted-in private compiler caches after Go consumers
+        if: env.OBSGOD_LOCAL_PROFILE == 'constrained'
+        run: python3 scripts/local-ci-resources.py trim-compiler-cache
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: generic-snapshot-audit-${{ github.sha }}

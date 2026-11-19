@@ -199,3 +199,73 @@ event/matrix, result (**passed**, **failed**, **partial**, **unavailable**,
 **not applicable**), counts, sanitized evidence and the smallest next action.
 Keep first and final runs distinguishable. Direct repository commands are useful
 fallback evidence when an act step is unavailable; label their source and limits.
+
+## Constrained runner preflight and serial matrix (#104)
+
+Use the supported profile when the local runner needs a bounded capacity check
+and private compiler-cache policy. It requires an explicit absolute scratch
+base outside the checkout, owned by the invoking user with mode0700. The local
+Docker daemon must see that same path. Existing caches, tools, artifacts and
+receipts are not relocated or pruned by this profile.
+
+```sh
+python3 scripts/local-ci.py preflight \
+  --state /absolute/private/local-ci-state \
+  --scratch /absolute/private/local-ci-scratch
+python3 scripts/local-ci.py matrix \
+  --act /absolute/path/to/act \
+  --state /absolute/private/local-ci-state \
+  --scratch /absolute/private/local-ci-scratch
+```
+
+Both commands select the constrained profile. A single existing job can opt in
+with `--profile constrained --scratch /absolute/private/local-ci-scratch`.
+Legacy single-job calls retain their existing behavior when no profile is given.
+The current pinned runner image must already be cached; the probe uses
+`--pull=never`, the managed local socket and no network. It verifies owner
+read/write access across the actual Docker bind and measures host and daemon
+filesystems. Metadata-only checks run before allocating even the cached probe.
+The base requirements are **4GiB free for root/workspace** and **6GiB free for
+scratch**, or **10GiB free** when shared. The VFS Docker driver additionally
+reserves **twice the cached runner image Size** for its container-copy allocation;
+the receipt records the actual driver, image size, allowance and combined budget.
+An early shortage leaves the Docker probe and workflows unrun. Other drivers add
+zero copy allowance and retain the actual allocation/read/write probe after host
+checks pass. A refusal records required, available and missing bytes and exits3
+before downloading actions or running a workflow. These conservative floors are
+a preflight policy, not a promise that arbitrary future workloads fit. Required recording reserves and
+all tests remain unchanged. A failed probe is unavailable evidence, not a pass.
+
+`matrix` creates a new `state/sessions/<unique-id>` and a matching private
+scratch session. Six jobs run serially: lint, build, coverage, snapshot, docs,
+candidate. Every job has a fresh temp/cache tree; repeated settings tests cannot
+reuse a previous evidence directory. The matrix stops on failure or capacity
+refusal and records later members as unrun. Success requires six genuine
+clean-source exit0 receipts, matching action/revision/tree and log hashes, and
+unchanged source. It does not infer success from the child process exit alone.
+
+Pass the printed session path, rather than the persistent state root, to the
+existing report command. An interrupted session remains incomplete and is never
+silently resumed or converted into completion; a retry gets its own session.
+Old sessions, failed receipts and evidence remain intact. The report still
+requires authentic completed checksums and retains its separate external gates.
+
+Constrained Go jobs disable setup-go's automatic compiler-cache restoration.
+Root workflow Go and the non-root primary builder use different named caches
+under that job's private scratch directory. At an explicit workflow boundary
+**after all Go consumers finish**, `scripts/local-ci-resources.py` runs the
+pinned toolchain's `go clean -cache` for only those exact caches. It rejects
+unexpected paths, links, mounts and active Go consumers, and records cache
+bytes/hashes, disk availability, command and exit before/after. The workflow
+receipt binds that policy receipt's hash. Module caches, source, toolchains,
+release outputs, artifact-service data and evidence are retained. Docs has no
+Go consumers and needs no compiler-cache cleanup. There is no global Docker
+prune, host-cache mutation, paid runner or change to network/package presets.
+
+The candidate invokes `scripts/qualify-decky-build.py` through the full primary
+entry twice, as the actual non-root checkout owner. Its new daemon-visible
+output contains private context, logs, both builds and `qualification.json`.
+The original primary ZIP feeds packaged browser/settings tests. Compatibility
+archives must contain identical plugin bytes; the audit staging uses the primary
+ZIP, and native fixtures verify their Go/capture binaries match it. Ordinary
+plugin installation gains no paired-application or root requirement.

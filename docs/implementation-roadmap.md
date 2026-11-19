@@ -1,5 +1,18 @@
 # deckystream implementation and migration roadmap
 
+Owner-authorized **#109/#110** source is merged into `master` at **cdcc668**.
+Independent bounded acceptance reconciliation closed #101(7), #102(8), #103(6).
+**#104** is implemented in draft [#111](https://github.com/szmyty/obsgod/pull/111),
+with six locally supported criteria at exact clean **0c79846**. See the
+[primary/resource checkpoint](primary-ci-checkpoint.md). Two complete primary
+builds and standalone package/native/browser/snapshot checks pass. The supported
+ACT matrix correctly refuses insufficient root capacity; all six workflows stay
+unrun, with a latest measured need for at least4.6GiB more root/Docker space.
+Next source work is selected #80/#81 artwork/controller UI, then final #85 and
+actual #86 owner testing. Hosted/target acceptance remains separate. All230
+original criteria/dependencies remain intact. Draft-state notes below preserve
+their historical checkpoints and do not describe current issue/PR state.
+
 Settings boundary **#103** is implemented in draft **#110**, stacked on unmerged
 #109. Exact source **4eac7a4** passed six local ACT jobs, six actual packaged
 settings scenarios and all six bounded criteria. Read the

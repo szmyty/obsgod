@@ -1,6 +1,25 @@
 # Product roadmap
 
-## Settings boundary draft checkpoint
+## Primary-build and local resource batch #104 review checkpoint
+
+The owner authorized merging the completed drafts and proceeding. **#109** and
+**#110** merged in order into actual `master`, now **cdcc668**. Their source
+and criterion evidence remain revision-bound; merge alone closes no acceptance.
+Independent literal-criterion reconciliation closed #101(7), #102(8), #103(6),
+with target/hosted gates retained. **#104** is implemented in draft
+[#111](https://github.com/szmyty/obsgod/pull/111). Exact source **0c79846** has
+six locally supported criteria: complete primary builds twice, actual package
+checks, constrained preflight/private cache policy and61 passing standalone
+command-check predicates. Read the [checkpoint, proof and limits](docs/primary-ci-checkpoint.md).
+The actual supported matrix correctly refuses insufficient root capacity; all
+six ACT jobs remain unrun. Latest measured next action is at least4.6GiB more
+root/Docker space, or an adequate free workspace; this is not a full matrix pass.
+Source, artifacts, modules, presets, every required test and all230 original
+criteria/dependencies are preserved. Next source work is selected artwork/UI
+#80/#81; final #85/#86 remains separate. No release, deployment, migration or
+paid execution occurred. Earlier draft-state sections below are historical.
+
+## Earlier settings boundary draft checkpoint
 
 Bounded **#103** is implemented in draft [#110](https://github.com/szmyty/obsgod/pull/110),
 stacked on unmerged #109. Exact clean source **4eac7a4** passed all six local ACT
