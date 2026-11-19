@@ -84,12 +84,15 @@ def main():
                 expect(page.get_by_text("Loading saved clips…",exact=True)).to_be_visible()
                 assert page.get_by_text("No finalized managed clips were found",exact=False).count()==0
                 page.get_by_role("button",name="Hide saved clips",exact=True).click()
-                page.evaluate("fixture.statusPending=true;fixture.clipListPending=false;fixture.finishClipList()")
+                page.evaluate("fixture.statusPending=true")
+                page.get_by_role("button",name="Refresh status",exact=True).click()
                 page.wait_for_function("typeof fixture.finishStatus==='function'")
+                page.evaluate("fixture.clipListPending=false;fixture.finishClipList()")
                 # Force a parent presentation render while the list command's
                 # final status refresh is held. Global busy has already cleared;
                 # the local list promise must still prevent a premature reopen.
                 page.get_by_role("button",name="Capture help",exact=True).click()
+                expect(page.get_by_role("button",name="Start local recording",exact=True)).to_be_enabled()
                 expect(page.get_by_role("button",name="Browse saved clips",exact=True)).to_be_disabled()
                 page.evaluate("fixture.statusPending=false;fixture.finishStatus()")
                 expect(page.get_by_role("button",name="Browse saved clips",exact=True)).to_be_enabled()
