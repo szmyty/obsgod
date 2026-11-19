@@ -1,6 +1,17 @@
 # Product roadmap
 
-## Primary-build and local resource batch #104 review checkpoint
+## Aurora/native-panel batch #80/#81
+
+#111 merged normally into `master` at **699fac3** and bounded #104 closed with
+six criterion mappings. The owner authorized #80/#81 next, retaining selected
+01 / aurora and all 230 original criteria/dependencies. Read the
+[work checkpoint](docs/aurora-ui-checkpoint.md). Machine testing is planned after
+source integration, followed by actual Steam Deck validation; both stay unrun
+until executed. The current Cloud executor is unavailable, so remote drafts must
+not claim new build, render, browser or device passes. Hosted billing and the
+full ACT capacity gate remain separate. No release/deployment/migration.
+
+## Earlier primary-build and local resource review checkpoint
 
 The owner authorized merging the completed drafts and proceeding. **#109** and
 **#110** merged in order into actual `master`, now **cdcc668**. Their source

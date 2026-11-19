@@ -1,5 +1,15 @@
 # deckystream implementation and migration roadmap
 
+#111 merged into actual `master` at **699fac3**, and #104 closed after six
+bounded criterion mappings; source qualification remains exact 0c79846. The owner
+now authorizes selected aurora artwork and native UI #80/#81. Follow the
+[batch checkpoint](aurora-ui-checkpoint.md), preserve all 230 original criteria/
+dependencies and keep final machine testing then actual Steam Deck validation
+as explicit, unrun acceptance. Current Cloud startup failed; new draft changes
+are not qualified by earlier receipts. No release/deployment/migration occurred.
+
+## Earlier implementation checkpoints
+
 Owner-authorized **#109/#110** source is merged into `master` at **cdcc668**.
 Independent bounded acceptance reconciliation closed #101(7), #102(8), #103(6).
 **#104** is implemented in draft [#111](https://github.com/szmyty/obsgod/pull/111),

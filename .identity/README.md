@@ -1,11 +1,21 @@
-# Decky Stream identity source — preparation only
+# deckystream identity source — selected direction in progress
 
 This is a manually authored `identity.project/v1` consumer source, following Ego
-Hygiene Identity's supported authoring path. `decky-stream` is the intended stable
-brand ID and **Decky Stream** is the user's selected display name. The actual
-repository remains `szmyty/obsgod`; the owner prefers a fresh repository, with
-`egohygiene/decky-stream` the working destination discussed. Creation and the
-installed identity transition have not happened.
+Hygiene Identity's supported authoring path. The stable brand ID remains
+`decky-stream`. The intended future repository slug is **deckystream**, and the
+owner prefers lowercase display styling. The current display name still comes
+from `product.json`; installed `obsgod`/`OBSGod` identifiers are unchanged.
+The actual repository remains `szmyty/obsgod`; the destination owner/organization
+is unresolved. No repository creation, migration or installed identity transition
+is performed by these source notes.
+
+The owner selected **01 / aurora** in
+[the retained concept selection record](candidates/concepts/selection.json):
+open orbital ring, S-shaped stream ribbon and aqua/violet luminous finish.
+This approves the creative direction only; source artwork, exports, rights and
+production/device acceptance remain separate. Retain mint-signal, the original
+orbital board/icon and all other palettes as concepts. #80/#81 implement the
+selected direction without relabeling old mint outputs or their receipts.
 
 The governance arrays are deliberately empty. Nothing in `candidates/` is an
 approved source. Empty token layers reserve the structure without inventing an
