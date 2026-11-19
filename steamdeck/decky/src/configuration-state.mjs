@@ -6,6 +6,14 @@ export const providers={
   youtube:{name:"YouTube",help:"Enable live streaming and select the intended stream in YouTube Live Control Room. Copy its RTMPS Stream URL and that event's separate stream key. YouTube may also require Go Live; OBS sending bytes does not prove the event is public.",docs:"https://support.google.com/youtube/answer/10364924?hl=en",placeholder:"Copy the RTMPS Stream URL from Live Control Room"},
   custom:{name:"Custom RTMP(S)",help:"Use the server and separate key supplied by your destination. RTMPS encrypts transport; RTMP also supports local/offline workflows. Server URLs cannot contain credentials, query strings or the stream key.",docs:"https://obsproject.com/kb/quick-start-guide",placeholder:"rtmps://your-ingest-server/app"}
 };
+// Only the fixed public guide inventory can reach Decky's browser navigation.
+// Transport errors are deliberately replaced so they cannot echo private data.
+export async function openProviderGuide(provider,navigate) {
+  if(typeof provider!=="string"||!Object.hasOwn(providers,provider)||typeof navigate!=="function")throw new Error("Could not open the provider setup guide.");
+  try{await navigate(providers[provider].docs);}
+  catch{throw new Error("Could not open the provider setup guide.");}
+}
+
 export const configurationDefaults={version:1,server:"",bitrate:4500,fps:30,encoder:"vaapi",width:1280,height:720,capture_mode:"screen",microphone:false};
 export const editableFields=["bitrate","fps","encoder","width","height","capture_mode","microphone"];
 

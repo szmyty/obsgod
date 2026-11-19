@@ -244,6 +244,7 @@ function Content(){
   const available=controls(current,busy);
   const [captureHelp,setCaptureHelp]=useState(false);
   const [setupHelp,setSetupHelp]=useState(false);
+  const [desktopHelp,setDesktopHelp]=useState(false);
   const captureMode=current?.settings?.capture_mode;
   const captureLabel=captureMode==="game"?"Game only":captureMode==="screen"?"Entire screen":"Not confirmed";
   const seconds=Math.floor((current?.stream?.duration_ms??0)/1000);
@@ -254,8 +255,6 @@ function Content(){
   const signalLabel=audio?.signal==="signal"?"Detected in last check":audio?.signal==="silent"?"No signal in last check":"Not measured or unconfirmed";
   const microphoneLabel=(current as any)?.mixer?mixerView((current as any).mixer).label.replace(/^Microphone /,""):current?.settings?.microphone===false?"Off":current?.settings?.microphone===true?(audio?.microphone_available?(audio.microphone_muted?"Muted":"Enabled"):"Enabled · device not confirmed"):"Not confirmed";
   return <>
-    <DependencySetup onReadiness={updateDependencyReadiness}/>
-    <Configuration busy={!!busy||!!current?.operation||["running","cancelling"].includes(dependencyReadiness.state)} onChanged={()=>{void refresh();}}/>
     <PanelSection title="YOUR STREAM">
       <PanelSectionRow>
         <div style={{background:"#111923",border:"1px solid #536274",borderRadius:8,padding:14}}>
@@ -272,9 +271,11 @@ function Content(){
       <PanelSectionRow><ButtonItem layout="below" disabled={available.stopDisabled} onClick={()=>act("stop")}>{available.stopLabel}</ButtonItem></PanelSectionRow>
       <PanelSectionRow><div aria-live="polite" style={{fontSize:14,lineHeight:1.5,whiteSpace:"pre-wrap",overflowWrap:"anywhere"}}>{statusMessage}</div></PanelSectionRow>
       {!busy&&notice&&actionNoticeAt>0&&<PanelSectionRow><Hint>Last action · {new Date(actionNoticeAt).toLocaleTimeString()}: {notice}</Hint></PanelSectionRow>}
-      {current?.configured===false&&<PanelSectionRow><Hint>Save your server and key in Stream destination above, then make a local test clip before your first stream.</Hint></PanelSectionRow>}
+      {current?.configured===false&&<PanelSectionRow><Hint>Complete dependency setup and save your server and key in Stream destination below, then make a local test clip before your first stream.</Hint></PanelSectionRow>}
       <PanelSectionRow><Hint>Green confirms OBS is sending output. Verify picture and sound on your channel using another device.</Hint></PanelSectionRow>
     </PanelSection>
+    <DependencySetup onReadiness={updateDependencyReadiness}/>
+    <Configuration busy={!!busy||!!current?.operation||["running","cancelling"].includes(dependencyReadiness.state)} onChanged={()=>{void refresh();}} onOpenDesktopSetup={()=>setDesktopHelp(true)}/>
     <PanelSection title="PICTURE & SOUND">
       <PanelSectionRow><div style={{fontSize:15,fontWeight:700}}>Capture mode: {captureLabel}</div></PanelSectionRow>
       <PanelSectionRow><ButtonItem layout="below" disabled={!canChangeCaptureMode(current)} onClick={()=>void changeCaptureMode()}>{busy==="capture-mode"?"Saving capture mode…":captureMode==="game"?"Switch to entire screen":"Switch to game only"}</ButtonItem></PanelSectionRow>
@@ -289,6 +290,8 @@ function Content(){
       <PanelSectionRow><Hint>Check picture and sound before going live. This saves a clip without broadcasting.</Hint></PanelSectionRow>
       <PanelSectionRow><ButtonItem layout="below" disabled={available.testDisabled||!dependencyReadiness.ready} onClick={()=>act("test")}>Make 10-second test clip</ButtonItem></PanelSectionRow>
       <PanelSectionRow><ButtonItem layout="below" onClick={()=>setSetupHelp(value=>!value)}>{setupHelp?"Hide setup help":"Setup and recording help"}</ButtonItem></PanelSectionRow>
+      <PanelSectionRow><ButtonItem layout="below" onClick={()=>setDesktopHelp(value=>!value)}>{desktopHelp?"Hide Desktop Setup instructions":"Optional Desktop Setup instructions"}</ButtonItem></PanelSectionRow>
+      {desktopHelp&&<PanelSectionRow><Hint>Advanced profiles, custom between-game media and storage controls are also available in the bundled Desktop Setup. Switch to Desktop Mode and open the installed plugin folder in Dolphin, usually ~/homebrew/plugins/{product.compatibility.plugin_directory}; use your actual Decky location if different. Choose Open Terminal Here and run: python3 setup.py. It opens a local browser page on this Deck with a private session token. Keep that address private; do not remove its token or expose the server to your network. This is optional and uses the same settings, not a second required application. Stop all outputs before changing protected settings.</Hint></PanelSectionRow>}
       {setupHelp&&<PanelSectionRow><Hint>Use Stream destination above for your server and key, and Live audio &amp; microphone for sound. Optional Desktop Setup remains available for other advanced options. Test clips save to Videos/{product.compatibility.plugin}. Game only can record the between-game screen without a game; entire screen needs usable frames. Play the saved clip to check picture and sound, then verify your first live stream on another device.</Hint></PanelSectionRow>}
     </PanelSection>
     <MixerTools mixer={(current as any)?.mixer} busy={!!busy||!!current?.operation} run={toolAction}/>

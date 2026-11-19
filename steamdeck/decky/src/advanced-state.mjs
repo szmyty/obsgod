@@ -35,3 +35,12 @@ export function profileSummary(profile) {
   if (!profile) return "Settings not loaded";
   return `${profile.width}×${profile.height} · ${profile.fps} fps · ${profile.bitrate} kbps · ${profile.encoder === "vaapi" ? "hardware H.264" : "software H.264"}\n${profile.capture_mode === "game" ? "Game-only video" : "Entire screen, including menus"} · initial microphone default ${profile.microphone ? "on" : "off"}`;
 }
+
+// A list request must positively confirm its array before an empty-library
+// message is possible. Select only the named display fields from valid rows.
+export function clipListResult(reply) {
+  const text=(value,limit)=>typeof value==="string"&&value.length>0&&value.length<=limit&&!/[\x00-\x1f\x7f]/.test(value);
+  if(reply?.ok!==true||!Array.isArray(reply.clips)||!reply.clips.every(clip=>clip&&text(clip.name,1024)&&text(clip.kind,64)&&Number.isSafeInteger(clip.bytes)&&clip.bytes>=0&&text(clip.modified_utc,128)&&Number.isFinite(Date.parse(clip.modified_utc))))return {state:"error",clips:[]};
+  const clips=reply.clips.map(({name,kind,bytes,modified_utc})=>({name,kind,bytes,modified_utc}));
+  return {state:clips.length?"ready":"empty",clips};
+}
