@@ -3,7 +3,9 @@
 #111 merged into actual `master` at **699fac3**, and #104 closed after six
 bounded criterion mappings; source qualification remains exact 0c79846. The owner
 now authorizes selected aurora artwork and native UI #80/#81. Follow the
-[batch checkpoint](aurora-ui-checkpoint.md), preserve all 230 original criteria/
+[batch checkpoint](aurora-ui-checkpoint.md): draft #112 contains functional UI
+source **3943f3c**, independently inspected but not build/browser qualified;
+selected artwork/logo/lowercase exports remain pending. Preserve all 230 original criteria/
 dependencies and keep final machine testing then actual Steam Deck validation
 as explicit, unrun acceptance. Current Cloud startup failed; new draft changes
 are not qualified by earlier receipts. No release/deployment/migration occurred.

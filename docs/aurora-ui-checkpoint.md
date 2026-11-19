@@ -6,6 +6,52 @@ The owner authorized this batch after merging #111, with machine testing at the
 end followed by final Steam Deck validation. This is an in-progress source
 checkpoint, not artwork approval, qualification, release or issue closure.
 
+## Functional UI source checkpoint — not qualified
+
+Draft [#112](https://github.com/szmyty/obsgod/pull/112) now contains the
+functional UI edits at exact source **3943f3c10189dc4b2cc7cc11bc98fe9501c0c1c0**, tree
+**57e5eadf55c3802eecbfff737b3a3b119af57fab**. Later documentation-only commits are not
+relabeled as that source. [Independent static review](evidence/aurora-ui-3943f3c-static-review.json)
+records the exact eleven changed source/test blobs and its limits.
+
+The source now places observed stream state and Start/Stop before setup, without
+changing component order during polling. First-run configuration opens once;
+saved destination and connection controls collapse. Leaving destination editing
+clears private drafts, visibility, clipboard epoch and confirmation modals,
+restores the saved public draft and does not mutate stored configuration.
+Existing mutation/readiness/unknown-state guards remain unchanged.
+
+Provider guides use the fixed public inventory and generic navigation failure
+feedback. Clips distinguish loading, confirmed empty, populated and error states,
+with explicit refresh and separate request identity. Hide invalidates late list
+results; a local pending gate spans the complete request and final status
+refresh so reopening cannot race it. Media action identity remains independent.
+Health/recovery failures remain visible while details are collapsed, with
+secret-free generic feedback. Optional Desktop Setup instructions describe the
+existing bundled, authenticated loopback page; no new service is introduced.
+
+Four focused Node test cases and the existing native-configuration/M3/panel
+browser fixtures were extended. The fixture has controlled delayed/empty/failed
+clip responses and a held final-status response; the race case first establishes
+that hold and explicitly checks the global-busy-cleared/local-list-still-pending
+window. These are authored tests, **not passing executions**.
+
+Static review found and repaired two pre-execution gaps: clip-list pending could
+outlive the global busy flag during final refresh, and an existing browser
+assertion still expected the old “destination above” wording. The final race
+fixture also uses explicit response synchronization rather than relying on
+poll timing. These were source-review findings, not recorded runtime failures.
+Independent final source/fixture review reports no remaining material findings;
+it is not a formal GitHub approval, typecheck, build, browser/controller pass or
+release qualification.
+
+All new repository Node/typecheck/build/Python/browser/package/site checks
+remain **UNRUN** because the execution server is unavailable. Limited authoring
+language/static probes are not promoted into repository test results.
+Aurora production source/exports, icon/logo integration, lowercase display
+generation and actual-size/rendering evidence remain pending #80/#81. Both
+issues stay open; this draft is not a test-ready installation.
+
 ## Current source and execution boundary
 
 #111 merged normally at **699fac3503decc05345ec992f09eeedea8080fce**, tree

@@ -1,6 +1,6 @@
 # Current work
 
-## Auroral branding and native panel batch in progress
+## Aurora branding and native panel batch in progress
 
 The owner authorized merging #111 and proceeding with #80/#81, with the final
 machine test pass followed by Steam Deck validation. #111 merged normally into
@@ -8,8 +8,10 @@ machine test pass followed by Steam Deck validation. #111 merged normally into
 reviewed head bed3daf. #104 closed after independent evidence for its six literal
 criteria. Its exact qualified source remains 0c79846, not this merge metadata.
 
-Work continues on **work/aurora-native-panel**. The selected 01 / aurora direction
-and all retained concepts remain intact. Fix native panel information order,
+Work continues on **work/aurora-native-panel**. Draft **#112** now contains
+functional UI source **3943f3c** with independent static review; new repository
+build/typecheck/Node/browser checks remain **UNRUN**. The selected 01 / aurora direction
+and all retained concepts remain intact. Source now refines native panel order,
 progressive disclosure, safe navigation feedback, collapsed recovery errors and
 clip loading/retry presentation while preserving observed-state/action gates.
 Read the [batch checkpoint](docs/aurora-ui-checkpoint.md) for source facts,
