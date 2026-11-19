@@ -34,6 +34,7 @@ function configurationStatus(){
 function configurationResult(ok,message,action){return {...configurationStatus(),action_result:{id:++fixture.sequence,action,ok,message}};}
 window.__DECKY_SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED_deckyLoaderAPIInit={connect:()=>({_version:2,callable:(method)=>async(...args)=>{
  fixture.calls[method]=(fixture.calls[method]||0)+1;
+ if(method==="status"&&fixture.statusPending){await new Promise(resolve=>{fixture.finishStatus=resolve;});delete fixture.finishStatus;}
  if(method==="configuration_status")return configurationStatus();
  if(method==="configure_destination"){
   const patch=args[0];fixture.configurationPatches.push({...patch,...(patch.stream_key?{stream_key:"<provided>"}:{})});

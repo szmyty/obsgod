@@ -93,6 +93,7 @@ export function StreamTools({current,busy,run,copy}:{current:any;busy:boolean;ru
 export function MediaTools({current,busy,mediaPending,run}:{current:any;busy:boolean;mediaPending:string;run:ToolRunner}){
   const [open,setOpen]=useState(false),[clipList,setClipList]=useState<{state:string;clips:Clip[]}>({state:"idle",clips:[]}),[message,setMessage]=useState("");
   const clipRequest=useRef(0),clipPending=useRef(false);
+  const [clipLoading,setClipLoading]=useState(false);
   const [latest,setLatest]=useState("");
   const [serial]=useState(()=>({value:0}));
   const alive=useAlive();
@@ -104,13 +105,13 @@ export function MediaTools({current,busy,mediaPending,run}:{current:any;busy:boo
   }
   async function loadClips(){
     if(clipPending.current)return;
-    clipPending.current=true;const token=++clipRequest.current;
+    clipPending.current=true;setClipLoading(true);const token=++clipRequest.current;
     setClipList({state:"loading",clips:[]});
     try{
       const reply=await run({kind:"media",payload:{action:"list"}});
       if(alive.current&&token===clipRequest.current)setClipList(clipListResult(reply));
     }catch{if(alive.current&&token===clipRequest.current)setClipList({state:"error",clips:[]});}
-    finally{clipPending.current=false;}
+    finally{clipPending.current=false;if(alive.current)setClipLoading(false);}
   }
   function toggleClips(){
     if(open){clipRequest.current++;setClipList({state:"idle",clips:[]});setOpen(false);}
@@ -128,10 +129,10 @@ export function MediaTools({current,busy,mediaPending,run}:{current:any;busy:boo
     <RowButton disabled={state.replayStopDisabled} onClick={()=>void action("replay-stop")}>{state.known?"Stop replay buffer":"Stop replay / recover"}</RowButton>
     {message&&<PanelSectionRow><div role="status"><Hint>{message}{latest?"\nSaved: "+latest:""}</Hint></div></PanelSectionRow>}
     <PanelSectionRow><Hint>These actions never start a stream. Stopping streaming preserves independent recording/replay. Use the focused panel buttons with your controller; no global button chord is registered.</Hint></PanelSectionRow>
-    <RowButton disabled={!open&&busy} onClick={toggleClips}>{open?"Hide saved clips":"Browse saved clips"}</RowButton>
+    <RowButton disabled={!open&&(busy||clipLoading)} onClick={toggleClips}>{open?"Hide saved clips":"Browse saved clips"}</RowButton>
     {open&&<>
       <PanelSectionRow><div role="status" aria-live="polite" aria-busy={clipList.state==="loading"}><Hint>{clipList.state==="loading"?"Loading saved clips…":clipList.state==="error"?"Could not load saved clips. Refresh to retry; existing files are unchanged.":clipList.state==="empty"?"No finalized managed clips were found in the completed check. Existing or interrupted files are preserved; inspect the recording folder in Desktop Mode.":clipList.state==="ready"?clipList.clips.slice(0,12).map(clip=>`${clip.kind} · ${clip.name}\n${(clip.bytes/1024**2).toFixed(1)} MiB · ${new Date(clip.modified_utc).toLocaleString()}`).join("\n\n"):"Saved clips have not been checked yet."}</Hint></div></PanelSectionRow>
-      <RowButton disabled={busy||clipList.state==="loading"} onClick={()=>void loadClips()}>{clipList.state==="loading"?"Refreshing saved clips…":"Refresh saved clips"}</RowButton>
+      <RowButton disabled={busy||clipLoading||clipList.state==="loading"} onClick={()=>void loadClips()}>{clipList.state==="loading"?"Refreshing saved clips…":"Refresh saved clips"}</RowButton>
       <PanelSectionRow><Hint>Folder: {storage?.directory??"Not confirmed"}. The list reflects its last completed check; refresh after saving a new clip. Change the recording folder, replay duration, reserve and explicit retention/export choices in Desktop Setup. No automatic clip deletion is enabled by default.</Hint></PanelSectionRow>
     </>}
   </PanelSection>;
