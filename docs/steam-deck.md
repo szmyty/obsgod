@@ -15,8 +15,9 @@ controller, audio or Kick compatibility. Required device checks remain open.
 The current source produces one `obsgod-decky.zip`, installed through Decky's
 normal plugin controls. Do not substitute a GitHub source-code ZIP. A separate
 Desktop application/updater is optional and its version need not match the plugin.
-The [current review download and numbered tests](aurora-owner-packet.md) identify
-exact source and checksums; final qualification remains
+The [current review checkpoint](pre-migration-qualified-checkpoint.md) and
+[numbered tests](https://github.com/szmyty/obsgod/blob/430cc391cb63f080214aacc279e5c04b1092c7a5/OWNER-TESTS.md)
+identify exact source and checksums; remaining qualification is tracked in
 [#85](https://github.com/szmyty/obsgod/issues/85). The retained
 [4699235 review installer](current-review-install.md) is explicitly historical.
 

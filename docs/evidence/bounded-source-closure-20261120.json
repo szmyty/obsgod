@@ -1,0 +1,2687 @@
+{
+  "schema": "deckystream.bounded-source-closure-map/v1",
+  "recorded_utc": "2026-11-20T22:53:41.664164+00:00",
+  "reviewers": [
+    "/root/merge_safety_review",
+    "/root/merge_safety_review/audit_art_docs_literals"
+  ],
+  "purpose": "Read-only literal closure recommendation for six completed bounded source issues; not an issue closure, human GitHub approval, release or target acceptance.",
+  "qualified_source": {
+    "revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+    "tree": "f157ea77d16a1f1ce04bf1e47b584f9183c9c359",
+    "tracked_files": 648,
+    "report_sha256": "4727b7dbcb5b3a81c024ee0b0738a2b61bcb38c5c1ed5ced9bf3d25157c29c31",
+    "command_predicates": {
+      "passed": 70,
+      "unavailable": 2,
+      "failed": 0
+    }
+  },
+  "merged_observation": {
+    "revision": "a315224a8a5cdf8e415a9e5bdc8b9bc5a8740640",
+    "tree": "69a83da2fbb086b25b107510de16814c64ce24b3",
+    "source_relation": "Tree equals reviewed68f7; only four Markdown files differ from qualified772. Later doc fixes are separately verified; no newsource qualification is inferred."
+  },
+  "public_evidence": {
+    "artifact_commit": "430cc391cb63f080214aacc279e5c04b1092c7a5",
+    "base_url": "https://github.com/szmyty/obsgod/blob/430cc391cb63f080214aacc279e5c04b1092c7a5/",
+    "proof_zip": "pre-migration-772230a-public-proof.zip",
+    "proof_sha256": "b3b117bd4527643a1525be87481e8b0bb594939854c9b5126a45d514a9237c43",
+    "qualified_summary": "qualification-summary.json",
+    "package_review": "PUBLIC-OWNER-REVIEW.json"
+  },
+  "original_preservation": {
+    "path": "docs/evidence/completion-criteria.json",
+    "sha256": "0795e6594c7bbde195bb8ebfcbc4050f0d5ecbe9c879767edbe0050540386df6",
+    "count": 230,
+    "unchanged": true,
+    "current_ids_scope": "The47 IDs below identify current bounded issue clauses. They do not replace or mark passed the original230 broader criteria or dependencies."
+  },
+  "closure_conditions": [
+    "The current documentation/link reconciliation fix must land with its focused checks and verified merge.",
+    "Root records criterion-level source evidence and the current owner-authorized source-review decision. This does not assert formal human GitHub approval or waive actual required branch rules.",
+    "Preserve original issue acceptance/dependency tails; do not rewrite unchecked device observations as passed."
+  ],
+  "separate_gates": [
+    "#79 retains its explicit device/review keep-open instruction.",
+    "#82-C1 actual supported-loader lifecycle; #83/#86 actual Deck/SteamOS/Gamescope/OBS33/Flatpak/controller/microphone/headset/provider/session observations remain unrun.",
+    "#85 full ACT remains unavailable (six jobs/probe unrun); hosted/service/review/platform evidence remains where required.",
+    "Artwork rights/license/publisher/production adoption remain proposed or unresolved; closing80 accepts honest source/provenance/gap reporting only.",
+    "#87 exact owner/destination and actual migration, #88 actual new-install/v1, #95 real destination service proof, and independent adoption remain separate.",
+    "#89 OAuth is research pending owner design discussion; no authentication implementation is claimed."
+  ],
+  "criterion_count": 47,
+  "issues": [
+    {
+      "issue": 76,
+      "title": "Ship one standard Decky plugin package with bundled runtime",
+      "live_body_sha256": "ae9451df26c8a765f02aa629ba92a8f29ba7969cc06bf1455f54aa7a5f6264d7",
+      "criterion_count": 7,
+      "criteria": [
+        {
+          "id": "76.C1",
+          "literal_criterion": "Document and implement the supported source/build entry point using the current official Decky template/CLI conventions, with pinned reproducible tooling; retain justified license boundaries rather than blindly replacing Rollup.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "PRIMARY",
+              "artifact_member": "primary/qualification.json",
+              "sha256": "b0cc5991ddad4bad3e6982e513038958ad06ab7cac9051f029d274fe3a2d5e0d"
+            },
+            {
+              "role": "PRIMARY",
+              "artifact_member": "primary/second/build-receipt.json",
+              "sha256": "a174bb6719084a97036de94363f55de3523e0febd0f8f182fa43a7c72bc227c2"
+            },
+            {
+              "role": "OFFICIAL",
+              "artifact_member": "standalone/official-assembly.json",
+              "sha256": "7528433ee6513df43418310b267609a4627f7226268e51d98150842fd6e9e8eb"
+            },
+            {
+              "role": "TOOLS",
+              "artifact_member": "standalone/logs/tooling-python.log",
+              "sha256": "6fcbf69155d6a71e1d9012d2415b3ef8105c7a4fd405fbb02de2ced4067a95ce"
+            },
+            {
+              "role": "FRONTEND",
+              "artifact_member": "standalone/logs/frontend-absent-test.log",
+              "sha256": "a56d350b91862dd9be14a042dabf781cb11738864f1bed5150a7266a733a3917"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "docs/decky-package.md",
+              "at_qualified_source": "d0fc5d280a07bae4a726560167e393a587006acf",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "scripts/package-decky.py",
+              "at_qualified_source": "3fdc7325ad30d112e381e8527755ee4eb464f40a",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "scripts/decky_package.py",
+              "at_qualified_source": "c5957f7b27ee739dba70f79b1461b9a3f4ab8551",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/decky/rollup.config.js",
+              "at_qualified_source": "0d7cc3ccf14a5cacd94832aea29c495847ff5056",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [
+            "This does not claim that the upstream default builder compiled our source or that its raw ZIP is deterministic."
+          ],
+          "historical_af7_source_rationale": [
+            "Maintained primary entry compiles source with Go1.27.4/Node24.19.0/npm11.9.0, refuses dirty/mislabeled source and builds a conventional plugin root.",
+            "Current docs pin official template90d0780e\u2026 and CLI0.0.7. Separate SDK LGPL module and preferred source remain intact; justified Rollup boundary retained.",
+            "Two complete primary entries produced identical canonical bytes; supplementary official prepared-byte output comparison passed all33 files."
+          ],
+          "fresh772_observations": [
+            "Two complete new772 source builds passed and produced identical canonical ZIP fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a, with33 payload entries and648 tracked-source hash inventory entries.",
+            "Fresh unmodified CLI0.0.7 assembly compared all33 prepared payload files; it is not source compilation or reproducible raw officialZIP proof.",
+            "Fresh772 tooling discovery passed all151 tests.",
+            "Fresh absent/reused frontend commands passed, with161 Node tests per test invocation."
+          ]
+        },
+        {
+          "id": "76.C2",
+          "literal_criterion": "A clean build produces a directly installable ZIP with correct top-level folder, manifests, dist/index.js, Python backend, bundled Go helper, native capture library, assets and required notices/preferred source.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "PRIMARY",
+              "artifact_member": "primary/qualification.json",
+              "sha256": "b0cc5991ddad4bad3e6982e513038958ad06ab7cac9051f029d274fe3a2d5e0d"
+            },
+            {
+              "role": "PRIMARY",
+              "artifact_member": "primary/second/build-receipt.json",
+              "sha256": "a174bb6719084a97036de94363f55de3523e0febd0f8f182fa43a7c72bc227c2"
+            },
+            {
+              "role": "OFFICIAL",
+              "artifact_member": "standalone/official-assembly.json",
+              "sha256": "7528433ee6513df43418310b267609a4627f7226268e51d98150842fd6e9e8eb"
+            },
+            {
+              "role": "CPYTHON",
+              "artifact_member": "standalone/integration-cpython.json",
+              "sha256": "5fe633ebf4c980770cfc621e371981b47c3ad96b161a7c4df2d07e701a327d60"
+            },
+            {
+              "role": "TOOLS",
+              "artifact_member": "standalone/logs/tooling-python.log",
+              "sha256": "6fcbf69155d6a71e1d9012d2415b3ef8105c7a4fd405fbb02de2ced4067a95ce"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "scripts/package-decky.py",
+              "at_qualified_source": "3fdc7325ad30d112e381e8527755ee4eb464f40a",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "scripts/decky_package.py",
+              "at_qualified_source": "c5957f7b27ee739dba70f79b1461b9a3f4ab8551",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "scripts/release-audit.py",
+              "at_qualified_source": "3321db4e3377c8fbcb09d69c363efb188beb8d1f",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [
+            "Directly installable format/payload supported; actual normal UI install is explicitly assigned by #76 Verification to owner gate, not claimed here."
+          ],
+          "historical_af7_source_rationale": [
+            "Clean canonical ZIP contains exactly33 ordinary unique safe payload files under obsgod/, manifest hashes match shipped bytes, dist/index.js/Python/backend/Go/native library/setup/assets/notices/preferred source included.",
+            "The accepted ZIP is4,570,728 bytes/SHA4deece2\u2026; real unpacked backend/Go executes at uid1000."
+          ],
+          "fresh772_observations": [
+            "Two complete new772 source builds passed and produced identical canonical ZIP fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a, with33 payload entries and648 tracked-source hash inventory entries.",
+            "Fresh unmodified CLI0.0.7 assembly compared all33 prepared payload files; it is not source compilation or reproducible raw officialZIP proof.",
+            "The fresh exactZIP unpacked Python/backend-to-Go integration passed as actual UID1000, with simulated loader/account/Flatpak context.",
+            "Fresh772 tooling discovery passed all151 tests."
+          ]
+        },
+        {
+          "id": "76.C3",
+          "literal_criterion": "The normal Decky ZIP alone contains everything our plugin needs for its own setup UI; OBS/GStreamer remain external Flatpak dependencies.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "PRIMARY",
+              "artifact_member": "primary/qualification.json",
+              "sha256": "b0cc5991ddad4bad3e6982e513038958ad06ab7cac9051f029d274fe3a2d5e0d"
+            },
+            {
+              "role": "PRIMARY",
+              "artifact_member": "primary/second/build-receipt.json",
+              "sha256": "a174bb6719084a97036de94363f55de3523e0febd0f8f182fa43a7c72bc227c2"
+            },
+            {
+              "role": "CPYTHON",
+              "artifact_member": "standalone/integration-cpython.json",
+              "sha256": "5fe633ebf4c980770cfc621e371981b47c3ad96b161a7c4df2d07e701a327d60"
+            },
+            {
+              "role": "FROZEN",
+              "artifact_member": "standalone/integration-frozen.json",
+              "sha256": "a2bb0e24c523ff2f0bf71c40a27b0eb069f296f6ffb3e4befea642786b9d59e6"
+            },
+            {
+              "role": "CONFIG_UI",
+              "artifact_member": "standalone/browser-configuration/result.json",
+              "sha256": "1e825b340759ddabdd28473cba05427943ac80434453651f1c363cb9982e4cca"
+            },
+            {
+              "role": "DEPS_UI",
+              "artifact_member": "standalone/browser-dependencies/result.json",
+              "sha256": "191a912a8c2813e17151073c8a37920f2925d8c740723df533afc782fd9fea89"
+            },
+            {
+              "role": "DESKTOP",
+              "artifact_member": "standalone/logs/browser-setup.log",
+              "sha256": "cc58ab721731a4bbfe868d8d03f3c6c7c83461868fce02630446ab544158b9f3"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "docs/decky-package.md",
+              "at_qualified_source": "d0fc5d280a07bae4a726560167e393a587006acf",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "at_qualified_source": "b084cc2354116ee4f6a2e7bc21f1a9186bee0b33",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/decky/src/Configuration.tsx",
+              "at_qualified_source": "379729c5a62eba55ff6206775d311a55529007e1",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/setup.py",
+              "at_qualified_source": "8ca7c25b98efcfb2ae81018fb6baeb6e25637a33",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [
+            "Actual Flatpak installation is not inferred from mock dependency readiness."
+          ],
+          "historical_af7_source_rationale": [
+            "Primary ZIP alone includes native form and optional browser setup; fresh no-dependency configuration is editable and actual packaged Python\u2192Go saves/reads it offline.",
+            "No separately installed Desktop app is required; dependency UI keeps OBS/GStreamer as external user Flatpaks and configuration invokes none."
+          ],
+          "fresh772_observations": [
+            "Two complete new772 source builds passed and produced identical canonical ZIP fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a, with33 payload entries and648 tracked-source hash inventory entries.",
+            "The fresh exactZIP unpacked Python/backend-to-Go integration passed as actual UID1000, with simulated loader/account/Flatpak context.",
+            "The fresh exactZIP Python-to-Go integration passed its frozen-environment/PluginLoader decoy simulation; not an actual installed Decky loader.",
+            "Fresh actual-package native destination/configuration browser scenarios passed; no provider login or target installation is implied.",
+            "All six fresh actual-package browser dependency scenarios passed with simulated Decky/Flatpak APIs.",
+            "Fresh compatibility-package optionalDesktop setup browser checks passed."
+          ]
+        },
+        {
+          "id": "76.C4",
+          "literal_criterion": "Use ordinary player privileges, supplied Decky context, and no root/debug flags or SteamOS read-only unlock.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "PRIMARY",
+              "artifact_member": "primary/qualification.json",
+              "sha256": "b0cc5991ddad4bad3e6982e513038958ad06ab7cac9051f029d274fe3a2d5e0d"
+            },
+            {
+              "role": "PRIMARY",
+              "artifact_member": "primary/second/build-receipt.json",
+              "sha256": "a174bb6719084a97036de94363f55de3523e0febd0f8f182fa43a7c72bc227c2"
+            },
+            {
+              "role": "CPYTHON",
+              "artifact_member": "standalone/integration-cpython.json",
+              "sha256": "5fe633ebf4c980770cfc621e371981b47c3ad96b161a7c4df2d07e701a327d60"
+            },
+            {
+              "role": "FROZEN",
+              "artifact_member": "standalone/integration-frozen.json",
+              "sha256": "a2bb0e24c523ff2f0bf71c40a27b0eb069f296f6ffb3e4befea642786b9d59e6"
+            },
+            {
+              "role": "APP",
+              "artifact_member": "standalone/logs/application-python.log",
+              "sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "role": "SETTINGS",
+              "artifact_member": "standalone/packaged-settings/receipt.json",
+              "sha256": "87e0cddef46328dcbd7193dac32409047af24aaa95956466a8e394aadd983ea5"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "steamdeck/decky/plugin.json",
+              "at_qualified_source": "9ce3c393124d929a8652169a3e67e4e0082fa1f3",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "at_qualified_source": "b084cc2354116ee4f6a2e7bc21f1a9186bee0b33",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/decky/storage.py",
+              "at_qualified_source": "99fc8ee8b2ad1d6a390848ee75de21458f306b49",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/decky/dependency_setup.py",
+              "at_qualified_source": "672f62b9aa9236af3d48fdf88db1dee96085a0a1",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [
+            "Actual loader-supplied target paths/session identity are owner observations under #86/#82-C1. That is not a missing implementation of the source privilege/context contract."
+          ],
+          "historical_af7_source_rationale": [
+            "Plugin flags are[]/api_version1; primary and unpacked execution observed uid1000, no debug/root requirement.",
+            "Adapter reads documented supplied context from environment or decky module; actual account identity/path validation and child-only environment logic executed in current tests.",
+            "Dependency command policy is user-scoped; source adds no SteamOS unlock or second privileged installation path."
+          ],
+          "fresh772_observations": [
+            "Two complete new772 source builds passed and produced identical canonical ZIP fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a, with33 payload entries and648 tracked-source hash inventory entries.",
+            "The fresh exactZIP unpacked Python/backend-to-Go integration passed as actual UID1000, with simulated loader/account/Flatpak context.",
+            "The fresh exactZIP Python-to-Go integration passed its frozen-environment/PluginLoader decoy simulation; not an actual installed Decky loader.",
+            "Fresh772 full application discovery passed289 of291 outcomes, with only2 root-wrapper checks skipped under actual UID1000. Relevant storage, ownership and dependency fixtures executed.",
+            "Six fresh packaged lock/deadline/coalescing scenarios and42 guarded children passed."
+          ]
+        },
+        {
+          "id": "76.C5",
+          "literal_criterion": "Preserve obsgod/OBSGod plugin/command/update compatibility while building and testing under szmyty/obsgod; the future repository is deckystream, with owner still unresolved.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "PRIMARY",
+              "artifact_member": "primary/qualification.json",
+              "sha256": "b0cc5991ddad4bad3e6982e513038958ad06ab7cac9051f029d274fe3a2d5e0d"
+            },
+            {
+              "role": "PRIMARY",
+              "artifact_member": "primary/second/build-receipt.json",
+              "sha256": "a174bb6719084a97036de94363f55de3523e0febd0f8f182fa43a7c72bc227c2"
+            },
+            {
+              "role": "PRODUCT",
+              "artifact_member": "standalone/logs/product-projection-check.log",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "role": "CPYTHON",
+              "artifact_member": "standalone/integration-cpython.json",
+              "sha256": "5fe633ebf4c980770cfc621e371981b47c3ad96b161a7c4df2d07e701a327d60"
+            },
+            {
+              "role": "TRANSPORT",
+              "artifact_member": "supplemental/transport/receipt.json",
+              "sha256": "1f28f3f0ab27436cb36229c3588ede480619cf38763b972cc26bbdc1b925132f"
+            },
+            {
+              "role": "APP",
+              "artifact_member": "standalone/logs/application-python.log",
+              "sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "product.json",
+              "at_qualified_source": "f2f5b6e8c74a1b2f4ec1399b079f9dcf4c42cf63",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/decky/plugin.json",
+              "at_qualified_source": "9ce3c393124d929a8652169a3e67e4e0082fa1f3",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/product.py",
+              "at_qualified_source": "ace48bec1f2a3d54a79150807f5f128535c8124b",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/decky/src/product.ts",
+              "at_qualified_source": "3890123b859ba2b6674d0f9b4fef8ded696589c6",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/releases.py",
+              "at_qualified_source": "de5b50ce270f368a2623317b584cbce982d9b944",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [],
+          "historical_af7_source_rationale": [
+            "Current product.json retains repository szmyty/obsgod, CLI/storage/folder obsgod and plugin OBSGod while lowercase display changes to deckystream.",
+            "Current ZIP manifest/plugin identity and actual packaged commands preserve compatibility; current product projection and legacy transport/update fixtures passed.",
+            "Future exact owner/deckystream remains unresolved and is not activated as arbitrary update trust."
+          ],
+          "fresh772_observations": [
+            "Two complete new772 source builds passed and produced identical canonical ZIP fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a, with33 payload entries and648 tracked-source hash inventory entries.",
+            "Fresh product projection check passed with current stable compatibility IDs and update trust.",
+            "The fresh exactZIP unpacked Python/backend-to-Go integration passed as actual UID1000, with simulated loader/account/Flatpak context.",
+            "Fresh legacy4/6/current9 compatibility fixtures passed with loader/release/Flatpak interfaces explicitly substituted.",
+            "Fresh772 full application discovery passed289 of291 outcomes, with only2 root-wrapper checks skipped under actual UID1000. Relevant storage, ownership and dependency fixtures executed."
+          ]
+        },
+        {
+          "id": "76.C6",
+          "literal_criterion": "Check source/native ABI consumers separately and verify the official build/output path plus ZIP contents; archive checks do not establish actual Deck installation.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "PRIMARY",
+              "artifact_member": "primary/qualification.json",
+              "sha256": "b0cc5991ddad4bad3e6982e513038958ad06ab7cac9051f029d274fe3a2d5e0d"
+            },
+            {
+              "role": "PRIMARY",
+              "artifact_member": "primary/second/build-receipt.json",
+              "sha256": "a174bb6719084a97036de94363f55de3523e0febd0f8f182fa43a7c72bc227c2"
+            },
+            {
+              "role": "OFFICIAL",
+              "artifact_member": "standalone/official-assembly.json",
+              "sha256": "7528433ee6513df43418310b267609a4627f7226268e51d98150842fd6e9e8eb"
+            },
+            {
+              "role": "NATIVE_CAPTURE",
+              "artifact_member": "native/capture/qualification.json",
+              "sha256": "150641d032c37434cf8c79c6384e04a4d5f436290782f905df653bd1162f7b1f"
+            },
+            {
+              "role": "NATIVE_OBS",
+              "artifact_member": "native/game-obs/game-obs-qualification.json",
+              "sha256": "e5301e695b2ef89cbb2290287181be4ccc8eda32dd77b9b204221f153af37813"
+            },
+            {
+              "role": "ARTIFACT_REPEAT",
+              "artifact_member": "standalone/artifact-repeat.json",
+              "sha256": "d1b09c3f066e1575fde003fc5bbdebfb61a79d1878a189f3e00cd872ed971c39"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "docs/decky-package.md",
+              "at_qualified_source": "d0fc5d280a07bae4a726560167e393a587006acf",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/capture/build.Dockerfile",
+              "at_qualified_source": "1a28a1edae4e9ff5c22656586287c4e89d512a0c",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/tests/native-capture-smoke.sh",
+              "at_qualified_source": "36e4d4b007013999ea574c5d046d66b2e28b7e44",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/tests/native-game-obs-smoke.sh",
+              "at_qualified_source": "4450ab8c972b31857709e9ea8e4b68d23bd295b8",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [
+            "ABI consumer checks are Linux fixture evidence, not a claim that the owner\u2019s OBS Flatpak loads it; actual Deck installation remains explicitly unrun."
+          ],
+          "historical_af7_source_rationale": [
+            "Source compilation/repeat and source617 inventory are separate from official33-file prepared-byte assembly.",
+            "Native build receipt records exact builder image ID/compiler/packages/dynamic ABI/symbol versions; compiled .so a954d1\u2026 is the ZIP/runtime payload.",
+            "Current native capture receipt actually loads this .so through GStreamer and synthetic PipeWire; current real Linux OBS receipt binds the primary Go/.so hashes."
+          ],
+          "fresh772_observations": [
+            "Two complete new772 source builds passed and produced identical canonical ZIP fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a, with33 payload entries and648 tracked-source hash inventory entries.",
+            "Fresh unmodified CLI0.0.7 assembly compared all33 prepared payload files; it is not source compilation or reproducible raw officialZIP proof.",
+            "Fresh native capture harness loaded the actual bundled capture library through GStreamer with synthetic PipeWire media.",
+            "Fresh real Linux OBS harness passed with primary-matching Go/capture payload and synthetic game/idle producer; not SteamOS, targetFlatpak or provider-viewer proof.",
+            "Fresh repeated runtime/updater packaging and artifact inventory checks passed."
+          ]
+        },
+        {
+          "id": "76.C7",
+          "literal_criterion": "Inspect workflow side effects and prepare version metadata without triggering a product release, deployment or Store submission.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "PRIMARY",
+              "artifact_member": "primary/qualification.json",
+              "sha256": "b0cc5991ddad4bad3e6982e513038958ad06ab7cac9051f029d274fe3a2d5e0d"
+            },
+            {
+              "role": "PRIMARY",
+              "artifact_member": "primary/second/build-receipt.json",
+              "sha256": "a174bb6719084a97036de94363f55de3523e0febd0f8f182fa43a7c72bc227c2"
+            },
+            {
+              "role": "PRODUCT",
+              "artifact_member": "standalone/logs/product-projection-check.log",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": ".github/workflows/steam-deck.yml",
+              "at_qualified_source": "bea01aa046dc93c1e9f6a18a3e3fc0684f2694fd",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": ".github/workflows/docs-preview.yml",
+              "at_qualified_source": "ac70344b9e34d3c01a364088a610f49295baa65b",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": ".github/workflows/goreleaser.yml",
+              "at_qualified_source": "d19b83d90fcb56adc221c59d2f6da4a88c03d2bf",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": ".goreleaser.yml",
+              "at_qualified_source": "4aef09073f60f90d7670c70917c88c0c697923e4",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/decky/package.json",
+              "at_qualified_source": "d906ec0a50d5207e4dc2cd693e7ab507586ae534",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "CHANGELOG.md",
+              "at_qualified_source": "7c076dc7a4a06a8cbf6402b00bb02c6bd0a9f5e4",
+              "unchanged_from_historical_rationale": false
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [],
+          "historical_af7_source_rationale": [
+            "Inspected source workflows have read-only contents scope and review artifacts/nonpublishing snapshots; GoReleaser passes --snapshot --skip=publish,sign.",
+            "Prepared version0.1.0-deck.9/Unreleased preview metadata; no product release/tag, deployment or Store submission triggered.",
+            "Later pushed review artifact branch is a review-only checkpoint, distinct from product release/deploy/updater publication."
+          ],
+          "fresh772_observations": [
+            "Two complete new772 source builds passed and produced identical canonical ZIP fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a, with33 payload entries and648 tracked-source hash inventory entries.",
+            "Fresh product projection check passed with current stable compatibility IDs and update trust."
+          ]
+        }
+      ],
+      "closure_recommendation": "eligible after current documentation/link fix and its verified merge",
+      "unmet_bounded_source_criteria": [],
+      "separate_unproved_facts": [
+        "Actual normal Decky UI install/native Flatpak/loader observation remains #82-C1/#86."
+      ],
+      "review_hold_resolution": "Current owner merge authorization resolves only the source-review hold, not device/publication/rights/adoption acceptance."
+    },
+    {
+      "issue": 77,
+      "title": "Use Decky-provided state paths with safe legacy OBSGod migration",
+      "live_body_sha256": "d980bcd921ba0e045340499c05d73c129fbaac857bf9d80f1037435cbc2b45eb",
+      "criterion_count": 6,
+      "criteria": [
+        {
+          "id": "77.C1",
+          "literal_criterion": "Use actual injected Decky settings/runtime/log and user context for Decky-owned files; distinguish persistent plugin runtime data from ephemeral XDG_RUNTIME_DIR.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "APP",
+              "artifact_member": "standalone/logs/application-python.log",
+              "sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "role": "GO",
+              "artifact_member": "standalone/logs/go-race.log",
+              "sha256": "9a8b4075db4e983b43a92343faca811014e9ebbe2e1b21b916d38998b5902a36"
+            },
+            {
+              "role": "CPYTHON",
+              "artifact_member": "standalone/integration-cpython.json",
+              "sha256": "5fe633ebf4c980770cfc621e371981b47c3ad96b161a7c4df2d07e701a327d60"
+            },
+            {
+              "role": "FROZEN",
+              "artifact_member": "standalone/integration-frozen.json",
+              "sha256": "a2bb0e24c523ff2f0bf71c40a27b0eb069f296f6ffb3e4befea642786b9d59e6"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "steamdeck/decky/main.py",
+              "at_qualified_source": "b084cc2354116ee4f6a2e7bc21f1a9186bee0b33",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/decky/storage.py",
+              "at_qualified_source": "99fc8ee8b2ad1d6a390848ee75de21458f306b49",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "docs/decky-storage.md",
+              "at_qualified_source": "1a641eb2bbc4d66216e2b1605e314a6faf2f69a7",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [
+            "Synthetic loader path values establish implemented mapping/identity behavior; they do not assert an actual SteamOS loader session was observed."
+          ],
+          "historical_af7_source_rationale": [
+            "Adapter consumes DECKY_PLUGIN_SETTINGS_DIR/RUNTIME_DIR/LOG_DIR and DECKY_USER_HOME/USER via documented injected environment or decky attributes; no invented package-name global state.",
+            "Current storage/context tests execute actual UID validation, child-only environment and native metadata/jobs/log locations; ephemeral XDG_RUNTIME_DIR and session bus remain unchanged.",
+            "Actual packaged Python-derived map is consumed by the actual Go command at uid1000."
+          ],
+          "fresh772_observations": [
+            "Fresh772 full application discovery passed289 of291 outcomes, with only2 root-wrapper checks skipped under actual UID1000. Relevant storage, ownership and dependency fixtures executed.",
+            "Fresh772 Go race checks passed, including current Deck/storage/control packages.",
+            "The fresh exactZIP unpacked Python/backend-to-Go integration passed as actual UID1000, with simulated loader/account/Flatpak context.",
+            "The fresh exactZIP Python-to-Go integration passed its frozen-environment/PluginLoader decoy simulation; not an actual installed Decky loader."
+          ]
+        },
+        {
+          "id": "77.C2",
+          "literal_criterion": "Keep OBS Flatpak configuration, ordinary OBS data, selected Videos/media and optional CLI XDG locations in appropriate ownership boundaries; avoid hard-coded /home/deck.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "APP",
+              "artifact_member": "standalone/logs/application-python.log",
+              "sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "role": "GO",
+              "artifact_member": "standalone/logs/go-race.log",
+              "sha256": "9a8b4075db4e983b43a92343faca811014e9ebbe2e1b21b916d38998b5902a36"
+            },
+            {
+              "role": "CPYTHON",
+              "artifact_member": "standalone/integration-cpython.json",
+              "sha256": "5fe633ebf4c980770cfc621e371981b47c3ad96b161a7c4df2d07e701a327d60"
+            },
+            {
+              "role": "FROZEN",
+              "artifact_member": "standalone/integration-frozen.json",
+              "sha256": "a2bb0e24c523ff2f0bf71c40a27b0eb069f296f6ffb3e4befea642786b9d59e6"
+            },
+            {
+              "role": "TRANSPORT",
+              "artifact_member": "supplemental/transport/receipt.json",
+              "sha256": "1f28f3f0ab27436cb36229c3588ede480619cf38763b972cc26bbdc1b925132f"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "steamdeck/decky/storage.py",
+              "at_qualified_source": "99fc8ee8b2ad1d6a390848ee75de21458f306b49",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "internal/deck/config.go",
+              "at_qualified_source": "84debfeb9124dd03cc17da7e7bb4513a17398617",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "internal/deck/runtime_linux.go",
+              "at_qualified_source": "c97e981413f782e9a1b1cebf47a91d06526bbd53",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "docs/decky-storage.md",
+              "at_qualified_source": "1a641eb2bbc4d66216e2b1605e314a6faf2f69a7",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [],
+          "historical_af7_source_rationale": [
+            "Managed shared XDG config/secrets/state/controller, OBS native Flatpak config, ordinary OBS and selected Videos/media remain separate ownership scopes.",
+            "Current custom-XDG/service-home/fallback tests preserve data/cache/runtime and refuse duplicate roots; current integration leaves ordinary OBS preferences byte-identical.",
+            "No production /home/deck hardcoding is introduced; synthetic player homes differ from that path."
+          ],
+          "fresh772_observations": [
+            "Fresh772 full application discovery passed289 of291 outcomes, with only2 root-wrapper checks skipped under actual UID1000. Relevant storage, ownership and dependency fixtures executed.",
+            "Fresh772 Go race checks passed, including current Deck/storage/control packages.",
+            "The fresh exactZIP unpacked Python/backend-to-Go integration passed as actual UID1000, with simulated loader/account/Flatpak context.",
+            "The fresh exactZIP Python-to-Go integration passed its frozen-environment/PluginLoader decoy simulation; not an actual installed Decky loader.",
+            "Fresh legacy4/6/current9 compatibility fixtures passed with loader/release/Flatpak interfaces explicitly substituted."
+          ]
+        },
+        {
+          "id": "77.C3",
+          "literal_criterion": "Define one versioned authoritative settings/credential map and migration receipt, including existing stream-key/OBS-password binding, without silently creating two conflicting stores or controllers.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "APP",
+              "artifact_member": "standalone/logs/application-python.log",
+              "sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "role": "GO",
+              "artifact_member": "standalone/logs/go-race.log",
+              "sha256": "9a8b4075db4e983b43a92343faca811014e9ebbe2e1b21b916d38998b5902a36"
+            },
+            {
+              "role": "CPYTHON",
+              "artifact_member": "standalone/integration-cpython.json",
+              "sha256": "5fe633ebf4c980770cfc621e371981b47c3ad96b161a7c4df2d07e701a327d60"
+            },
+            {
+              "role": "FROZEN",
+              "artifact_member": "standalone/integration-frozen.json",
+              "sha256": "a2bb0e24c523ff2f0bf71c40a27b0eb069f296f6ffb3e4befea642786b9d59e6"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "steamdeck/decky/storage.py",
+              "at_qualified_source": "99fc8ee8b2ad1d6a390848ee75de21458f306b49",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "internal/deck/storage_map_linux.go",
+              "at_qualified_source": "5cf0ee6a8b56f0b50905902ca3fd61c62b0c7535",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "internal/deck/user_paths_test.go",
+              "at_qualified_source": "db965d35dc4b2e458f32ebfbcf26a0f115153e38",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "docs/decky-storage.md",
+              "at_qualified_source": "1a641eb2bbc4d66216e2b1605e314a6faf2f69a7",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [],
+          "historical_af7_source_rationale": [
+            "One versioned obsgod.decky-storage-map/v1 metadata map and retained-shared-xdg receipt bind existing settings/secrets/state/control-lock identity; no secret copy or lock relocation.",
+            "Current tests cover UID/schema/path/context changes and reject another store/controller; Go validates same map before loading original key/password settings-hash binding.",
+            "Real packaged Python\u2192Go preserves private key/password distinction and legacy advanced prefs through edits."
+          ],
+          "fresh772_observations": [
+            "Fresh772 full application discovery passed289 of291 outcomes, with only2 root-wrapper checks skipped under actual UID1000. Relevant storage, ownership and dependency fixtures executed.",
+            "Fresh772 Go race checks passed, including current Deck/storage/control packages.",
+            "The fresh exactZIP unpacked Python/backend-to-Go integration passed as actual UID1000, with simulated loader/account/Flatpak context.",
+            "The fresh exactZIP Python-to-Go integration passed its frozen-environment/PluginLoader decoy simulation; not an actual installed Decky loader."
+          ]
+        },
+        {
+          "id": "77.C4",
+          "literal_criterion": "Detect and validate legacy state; exercise upgrade, repeated migration/repair and rollback with synthetic secrets and sentinel settings/media. Preserve compatible CLI/optional Desktop access or document the bounded transition.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "APP",
+              "artifact_member": "standalone/logs/application-python.log",
+              "sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "role": "GO",
+              "artifact_member": "standalone/logs/go-race.log",
+              "sha256": "9a8b4075db4e983b43a92343faca811014e9ebbe2e1b21b916d38998b5902a36"
+            },
+            {
+              "role": "CPYTHON",
+              "artifact_member": "standalone/integration-cpython.json",
+              "sha256": "5fe633ebf4c980770cfc621e371981b47c3ad96b161a7c4df2d07e701a327d60"
+            },
+            {
+              "role": "TRANSPORT",
+              "artifact_member": "supplemental/transport/receipt.json",
+              "sha256": "1f28f3f0ab27436cb36229c3588ede480619cf38763b972cc26bbdc1b925132f"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "steamdeck/tests/test_decky_storage.py",
+              "at_qualified_source": "45f2772a0e1347b84bcf6aaa56ae13e58f62dc82",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "internal/deck/user_paths_test.go",
+              "at_qualified_source": "db965d35dc4b2e458f32ebfbcf26a0f115153e38",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/decky/storage.py",
+              "at_qualified_source": "99fc8ee8b2ad1d6a390848ee75de21458f306b49",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "docs/decky-storage.md",
+              "at_qualified_source": "1a641eb2bbc4d66216e2b1605e314a6faf2f69a7",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [
+            "Fixture lifecycle/Flatpak ownership remain substituted, not real loader/storage-device evidence."
+          ],
+          "historical_af7_source_rationale": [
+            "Current repeat/repair/rollback test preserves exact credential/settings/media/control-lock bytes and inode, repairs missing matching receipt, removes only adapter metadata and reconstructs it safely.",
+            "Legacy/partial context falls back without writes; CLI and optional Desktop canonical store stays shared.",
+            "Current pinned legacy4/6\u2192current9 transport/installer/update fixtures also verify synthetic sentinel preservation; no old passing receipt is promoted."
+          ],
+          "fresh772_observations": [
+            "Fresh772 full application discovery passed289 of291 outcomes, with only2 root-wrapper checks skipped under actual UID1000. Relevant storage, ownership and dependency fixtures executed.",
+            "Fresh772 Go race checks passed, including current Deck/storage/control packages.",
+            "The fresh exactZIP unpacked Python/backend-to-Go integration passed as actual UID1000, with simulated loader/account/Flatpak context.",
+            "Fresh legacy4/6/current9 compatibility fixtures passed with loader/release/Flatpak interfaces explicitly substituted."
+          ]
+        },
+        {
+          "id": "77.C5",
+          "literal_criterion": "Reject symlink/ownership/path-confusion cases and avoid exposing secrets in exported state or diagnostics.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "APP",
+              "artifact_member": "standalone/logs/application-python.log",
+              "sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "role": "GO",
+              "artifact_member": "standalone/logs/go-race.log",
+              "sha256": "9a8b4075db4e983b43a92343faca811014e9ebbe2e1b21b916d38998b5902a36"
+            },
+            {
+              "role": "CPYTHON",
+              "artifact_member": "standalone/integration-cpython.json",
+              "sha256": "5fe633ebf4c980770cfc621e371981b47c3ad96b161a7c4df2d07e701a327d60"
+            },
+            {
+              "role": "FROZEN",
+              "artifact_member": "standalone/integration-frozen.json",
+              "sha256": "a2bb0e24c523ff2f0bf71c40a27b0eb069f296f6ffb3e4befea642786b9d59e6"
+            },
+            {
+              "role": "CONFIG_UI",
+              "artifact_member": "standalone/browser-configuration/result.json",
+              "sha256": "1e825b340759ddabdd28473cba05427943ac80434453651f1c363cb9982e4cca"
+            },
+            {
+              "role": "SETTINGS",
+              "artifact_member": "standalone/packaged-settings/receipt.json",
+              "sha256": "87e0cddef46328dcbd7193dac32409047af24aaa95956466a8e394aadd983ea5"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "steamdeck/decky/storage.py",
+              "at_qualified_source": "99fc8ee8b2ad1d6a390848ee75de21458f306b49",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "internal/deck/storage_map_linux.go",
+              "at_qualified_source": "5cf0ee6a8b56f0b50905902ca3fd61c62b0c7535",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "internal/deck/user_paths_test.go",
+              "at_qualified_source": "db965d35dc4b2e458f32ebfbcf26a0f115153e38",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "internal/deck/diagnostics.go",
+              "at_qualified_source": "2883adb70d599e21731f1b95bb0ae4f75a87c715",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [],
+          "historical_af7_source_rationale": [
+            "Current storage tests explicitly pass symlink/hardlink/foreign-owner/public-secret/mutated-map/nonsticky-writable-ancestor and alternate-controller rejection.",
+            "Trusted sticky ancestry remains supported; changed XDG roots fail instead of selecting a second controller.",
+            "Current packaged responses/argv/readback/drafts/clipboard and public diagnostics never return the observed synthetic credentials; private maps/receipts carry no secret bytes."
+          ],
+          "fresh772_observations": [
+            "Fresh772 full application discovery passed289 of291 outcomes, with only2 root-wrapper checks skipped under actual UID1000. Relevant storage, ownership and dependency fixtures executed.",
+            "Fresh772 Go race checks passed, including current Deck/storage/control packages.",
+            "The fresh exactZIP unpacked Python/backend-to-Go integration passed as actual UID1000, with simulated loader/account/Flatpak context.",
+            "The fresh exactZIP Python-to-Go integration passed its frozen-environment/PluginLoader decoy simulation; not an actual installed Decky loader.",
+            "Fresh actual-package native destination/configuration browser scenarios passed; no provider login or target installation is implied.",
+            "Six fresh packaged lock/deadline/coalescing scenarios and42 guarded children passed."
+          ]
+        },
+        {
+          "id": "77.C6",
+          "literal_criterion": "Document current IDs versus future deckystream naming; no actual repository trust activation or installed-ID rename occurs here.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "PRIMARY",
+              "artifact_member": "primary/qualification.json",
+              "sha256": "b0cc5991ddad4bad3e6982e513038958ad06ab7cac9051f029d274fe3a2d5e0d"
+            },
+            {
+              "role": "PRIMARY",
+              "artifact_member": "primary/second/build-receipt.json",
+              "sha256": "a174bb6719084a97036de94363f55de3523e0febd0f8f182fa43a7c72bc227c2"
+            },
+            {
+              "role": "PRODUCT",
+              "artifact_member": "standalone/logs/product-projection-check.log",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "role": "APP",
+              "artifact_member": "standalone/logs/application-python.log",
+              "sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "docs/decky-storage.md",
+              "at_qualified_source": "1a641eb2bbc4d66216e2b1605e314a6faf2f69a7",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "docs/identity-migration.md",
+              "at_qualified_source": "c34e47b1c1dc321b03959ad164a57b70cb948b35",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "docs/migration-review.md",
+              "at_qualified_source": "4a0c489fd8d396e0002960e1b6fd53deea7526a0",
+              "unchanged_from_historical_rationale": false
+            },
+            {
+              "path": "product.json",
+              "at_qualified_source": "f2f5b6e8c74a1b2f4ec1399b079f9dcf4c42cf63",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [],
+          "historical_af7_source_rationale": [
+            "Current docs distinguish display deckystream and future exact-owner unresolved slug from installed obsgod/OBSGod IDs and current szmyty/obsgod update trust.",
+            "Current package/projection and source trust rejection tests agree; no runtime ID rename or future-repo activation occurs."
+          ],
+          "fresh772_observations": [
+            "Two complete new772 source builds passed and produced identical canonical ZIP fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a, with33 payload entries and648 tracked-source hash inventory entries.",
+            "Fresh product projection check passed with current stable compatibility IDs and update trust.",
+            "Fresh772 full application discovery passed289 of291 outcomes, with only2 root-wrapper checks skipped under actual UID1000. Relevant storage, ownership and dependency fixtures executed."
+          ]
+        }
+      ],
+      "closure_recommendation": "eligible after current documentation/link fix and its verified merge",
+      "unmet_bounded_source_criteria": [],
+      "separate_unproved_facts": [
+        "Actual owner storage/session/migration observations remain #86/#87."
+      ],
+      "review_hold_resolution": "Current owner merge authorization resolves only the source-review hold, not device/publication/rights/adoption acceptance."
+    },
+    {
+      "issue": 78,
+      "title": "Add consented OBS/GStreamer setup with progress, cancel and retry",
+      "live_body_sha256": "d401acbc7fd6a757c3e5597762692a558d51f6892c442455a2a2bceae12aec18",
+      "criterion_count": 7,
+      "criteria": [
+        {
+          "id": "78.C1",
+          "literal_criterion": "Opening the plugin observes dependency readiness and offers an Install/Later consent UI listing OBS, its compatible GStreamer extension and any required Flathub setup. _main/_migration never start dependency downloads.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "APP",
+              "artifact_member": "standalone/logs/application-python.log",
+              "sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "role": "DEPS_UI",
+              "artifact_member": "standalone/browser-dependencies/result.json",
+              "sha256": "191a912a8c2813e17151073c8a37920f2925d8c740723df533afc782fd9fea89"
+            },
+            {
+              "role": "CPYTHON",
+              "artifact_member": "standalone/integration-cpython.json",
+              "sha256": "5fe633ebf4c980770cfc621e371981b47c3ad96b161a7c4df2d07e701a327d60"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "steamdeck/decky/main.py",
+              "at_qualified_source": "b084cc2354116ee4f6a2e7bc21f1a9186bee0b33",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/decky/dependency_setup.py",
+              "at_qualified_source": "672f62b9aa9236af3d48fdf88db1dee96085a0a1",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/decky/src/Setup.tsx",
+              "at_qualified_source": "b605b710db3764657cfdb2ace33033b2760daf63",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [
+            "Actual first load under supported Decky remains #82-C1/#86, not claimed from construction fixtures."
+          ],
+          "historical_af7_source_rationale": [
+            "Loading/status/Later do not authorize installation; actual packaged UI lists missing refs and explicit Install/Later consent.",
+            "Current application tests validate read-only observation and explicit literal consent before worker start; setup/main/migration does not download automatically."
+          ],
+          "fresh772_observations": [
+            "Fresh772 full application discovery passed289 of291 outcomes, with only2 root-wrapper checks skipped under actual UID1000. Relevant storage, ownership and dependency fixtures executed.",
+            "All six fresh actual-package browser dependency scenarios passed with simulated Decky/Flatpak APIs.",
+            "The fresh exactZIP unpacked Python/backend-to-Go integration passed as actual UID1000, with simulated loader/account/Flatpak context."
+          ]
+        },
+        {
+          "id": "78.C2",
+          "literal_criterion": "Declining leaves the plugin installed with a clear Setup required screen, help and explicit retry; streaming stays unavailable with the actual missing-dependency reason.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "APP",
+              "artifact_member": "standalone/logs/application-python.log",
+              "sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "role": "DEPS_UI",
+              "artifact_member": "standalone/browser-dependencies/result.json",
+              "sha256": "191a912a8c2813e17151073c8a37920f2925d8c740723df533afc782fd9fea89"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "steamdeck/decky/src/Setup.tsx",
+              "at_qualified_source": "b605b710db3764657cfdb2ace33033b2760daf63",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/decky/src/index.tsx",
+              "at_qualified_source": "430c6496106eb365eb9dc8ac597d4fac94888497",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/decky/dependency_setup.py",
+              "at_qualified_source": "672f62b9aa9236af3d48fdf88db1dee96085a0a1",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [],
+          "historical_af7_source_rationale": [
+            "Current packaged UI scenarios pass missing-dependency new-output block, preserved plugin, Later with no installer call, explicit retry and actual observed-ready control gating.",
+            "Backend tests expose fixed actionable missing/scope/context reasons rather than treating consent denial as uninstall/failure."
+          ],
+          "fresh772_observations": [
+            "Fresh772 full application discovery passed289 of291 outcomes, with only2 root-wrapper checks skipped under actual UID1000. Relevant storage, ownership and dependency fixtures executed.",
+            "All six fresh actual-package browser dependency scenarios passed with simulated Decky/Flatpak APIs."
+          ]
+        },
+        {
+          "id": "78.C3",
+          "literal_criterion": "Run a backend-owned asynchronous setup job with operation identity, bounded diagnostics/progress and a multi-minute budget separate from stream-operation timeouts. Closing/reopening the panel recovers status without duplicate work.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "APP",
+              "artifact_member": "standalone/logs/application-python.log",
+              "sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "role": "DEPS_UI",
+              "artifact_member": "standalone/browser-dependencies/result.json",
+              "sha256": "191a912a8c2813e17151073c8a37920f2925d8c740723df533afc782fd9fea89"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "steamdeck/decky/dependency_setup.py",
+              "at_qualified_source": "672f62b9aa9236af3d48fdf88db1dee96085a0a1",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/decky/main.py",
+              "at_qualified_source": "b084cc2354116ee4f6a2e7bc21f1a9186bee0b33",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "docs/dependency-setup.md",
+              "at_qualified_source": "3a620c3983d2620498ebb2df4aae0653e858a5bf",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [],
+          "historical_af7_source_rationale": [
+            "Current tests show prompt return before slow preflight, backend operation ID/leased job, bounded fixed public progress and multi-minute setup budget separate from stream deadlines.",
+            "Panel reload recovers same backend operation; repeated Install shares the job instead of duplicating work.",
+            "Current budget/large-output tests execute actual subprocess boundaries without unbounded log/progress output."
+          ],
+          "fresh772_observations": [
+            "Fresh772 full application discovery passed289 of291 outcomes, with only2 root-wrapper checks skipped under actual UID1000. Relevant storage, ownership and dependency fixtures executed.",
+            "All six fresh actual-package browser dependency scenarios passed with simulated Decky/Flatpak APIs."
+          ]
+        },
+        {
+          "id": "78.C4",
+          "literal_criterion": "Cancellation, interruption, reload and failures re-observe installed refs; retry only missing work. Do not assume an interrupted Flatpak transaction installed nothing or delete its cache/shared apps.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "APP",
+              "artifact_member": "standalone/logs/application-python.log",
+              "sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "role": "DEPS_UI",
+              "artifact_member": "standalone/browser-dependencies/result.json",
+              "sha256": "191a912a8c2813e17151073c8a37920f2925d8c740723df533afc782fd9fea89"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "steamdeck/decky/dependency_setup.py",
+              "at_qualified_source": "672f62b9aa9236af3d48fdf88db1dee96085a0a1",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/tests/test_dependency_setup.py",
+              "at_qualified_source": "0e90f829e8cdbd5ce9ba07dfad7e8b2c265bf5ed",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "docs/dependency-setup.md",
+              "at_qualified_source": "3a620c3983d2620498ebb2df4aae0653e858a5bf",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [
+            "No actual interrupted target Flatpak transaction was exercised; #86 keeps that observation explicit."
+          ],
+          "historical_af7_source_rationale": [
+            "Current cancel/partial-ref/retry/backend-close/abrupt-parent-loss lease cases pass: actual workers/Unix sockets with fake Flatpak responses and re-observation of installed refs.",
+            "Browser reopen/cancel/retry preserves partial installation and requests only missing extension work; no shared cache/apps deletion."
+          ],
+          "fresh772_observations": [
+            "Fresh772 full application discovery passed289 of291 outcomes, with only2 root-wrapper checks skipped under actual UID1000. Relevant storage, ownership and dependency fixtures executed.",
+            "All six fresh actual-package browser dependency scenarios passed with simulated Decky/Flatpak APIs."
+          ]
+        },
+        {
+          "id": "78.C5",
+          "literal_criterion": "Verify actual player UID/home/session bus, user versus system scope, compatible active OBS/add-on branches, OBS 28+ bundled WebSocket capability, and the identity of an existing flathub remote. Never overwrite an unrelated remote, silently create a duplicate installation, install a second WebSocket plugin or unlock SteamOS.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "APP",
+              "artifact_member": "standalone/logs/application-python.log",
+              "sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "role": "DEPS_UI",
+              "artifact_member": "standalone/browser-dependencies/result.json",
+              "sha256": "191a912a8c2813e17151073c8a37920f2925d8c740723df533afc782fd9fea89"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "steamdeck/decky/dependency_setup.py",
+              "at_qualified_source": "672f62b9aa9236af3d48fdf88db1dee96085a0a1",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/tests/test_dependency_setup.py",
+              "at_qualified_source": "0e90f829e8cdbd5ce9ba07dfad7e8b2c265bf5ed",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/tests/test_install_dependencies.py",
+              "at_qualified_source": "3532a0d63473186e6663e051473288ff2ced2202",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [
+            "This proves the implemented verification policy and real local identity/socket checks, not current SteamOS D-Bus/Flathub transaction compatibility."
+          ],
+          "historical_af7_source_rationale": [
+            "Current actual unprivileged UID/home/owned socket tests reject root/wrong account/missing bus; fake Flatpak subprocesses exercise user/system scope, active refs, matching ExtensionOf, OBS28+ and Flathub identity/verification.",
+            "Disabled/unverified/unrelated remote, system-only duplicate risk and old/incompatible versions fail actionably; no second WebSocket plugin or SteamOS unlock is invoked."
+          ],
+          "fresh772_observations": [
+            "Fresh772 full application discovery passed289 of291 outcomes, with only2 root-wrapper checks skipped under actual UID1000. Relevant storage, ownership and dependency fixtures executed.",
+            "All six fresh actual-package browser dependency scenarios passed with simulated Decky/Flatpak APIs."
+          ]
+        },
+        {
+          "id": "78.C6",
+          "literal_criterion": "Handle offline network, disk exhaustion, missing Flatpak, permissions and incompatible versions with actionable recovery; keep ordinary OBS and shared dependencies intact.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "APP",
+              "artifact_member": "standalone/logs/application-python.log",
+              "sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "role": "DEPS_UI",
+              "artifact_member": "standalone/browser-dependencies/result.json",
+              "sha256": "191a912a8c2813e17151073c8a37920f2925d8c740723df533afc782fd9fea89"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "steamdeck/decky/dependency_setup.py",
+              "at_qualified_source": "672f62b9aa9236af3d48fdf88db1dee96085a0a1",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/tests/test_dependency_setup.py",
+              "at_qualified_source": "0e90f829e8cdbd5ce9ba07dfad7e8b2c265bf5ed",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "docs/dependency-setup.md",
+              "at_qualified_source": "3a620c3983d2620498ebb2df4aae0653e858a5bf",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [
+            "No destructive real disk-exhaustion experiment is required or claimed."
+          ],
+          "historical_af7_source_rationale": [
+            "Current classification tests cover network/disk/permission/trust/version/missing-Flatpak/budget/large-output failures with fixed recovery messages.",
+            "Raw subprocess output, private paths and observed fixture secrets do not escape; partial refs/shared cache/apps are retained."
+          ],
+          "fresh772_observations": [
+            "Fresh772 full application discovery passed289 of291 outcomes, with only2 root-wrapper checks skipped under actual UID1000. Relevant storage, ownership and dependency fixtures executed.",
+            "All six fresh actual-package browser dependency scenarios passed with simulated Decky/Flatpak APIs."
+          ]
+        },
+        {
+          "id": "78.C7",
+          "literal_criterion": "Dependency installed, managed OBS launched, authenticated listener ready and stream active are separate observed states. Setup cannot broadcast.",
+          "disposition": "passed_bounded_source_and_fixture_contract",
+          "qualified_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+          "fresh_evidence": [
+            {
+              "role": "APP",
+              "artifact_member": "standalone/logs/application-python.log",
+              "sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "role": "DEPS_UI",
+              "artifact_member": "standalone/browser-dependencies/result.json",
+              "sha256": "191a912a8c2813e17151073c8a37920f2925d8c740723df533afc782fd9fea89"
+            },
+            {
+              "role": "CPYTHON",
+              "artifact_member": "standalone/integration-cpython.json",
+              "sha256": "5fe633ebf4c980770cfc621e371981b47c3ad96b161a7c4df2d07e701a327d60"
+            },
+            {
+              "role": "SETTINGS",
+              "artifact_member": "standalone/packaged-settings/receipt.json",
+              "sha256": "87e0cddef46328dcbd7193dac32409047af24aaa95956466a8e394aadd983ea5"
+            },
+            {
+              "role": "NATIVE_OBS",
+              "artifact_member": "native/game-obs/game-obs-qualification.json",
+              "sha256": "e5301e695b2ef89cbb2290287181be4ccc8eda32dd77b9b204221f153af37813"
+            }
+          ],
+          "source_paths": [
+            {
+              "path": "steamdeck/decky/main.py",
+              "at_qualified_source": "b084cc2354116ee4f6a2e7bc21f1a9186bee0b33",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/decky/dependency_setup.py",
+              "at_qualified_source": "672f62b9aa9236af3d48fdf88db1dee96085a0a1",
+              "unchanged_from_historical_rationale": true
+            },
+            {
+              "path": "steamdeck/decky/src/index.tsx",
+              "at_qualified_source": "430c6496106eb365eb9dc8ac597d4fac94888497",
+              "unchanged_from_historical_rationale": true
+            }
+          ],
+          "separate_target_or_external_facts_not_claimed": [],
+          "historical_af7_source_rationale": [
+            "Backend/native UI separates dependency observed-ready, managed OBS presence, authenticated connection and observed stream output; new output requires readiness while explicit observed Stop stays available.",
+            "Setup worker does not invoke OBS/broadcast; shared control lease prevents racing legacy Start.",
+            "Actual packaged configuration path performs no OBS/Flatpak/desktop/process-control or broadcasting/recording action; current native OBS fixture separately establishes control/output behavior."
+          ],
+          "fresh772_observations": [
+            "Fresh772 full application discovery passed289 of291 outcomes, with only2 root-wrapper checks skipped under actual UID1000. Relevant storage, ownership and dependency fixtures executed.",
+            "All six fresh actual-package browser dependency scenarios passed with simulated Decky/Flatpak APIs.",
+            "The fresh exactZIP unpacked Python/backend-to-Go integration passed as actual UID1000, with simulated loader/account/Flatpak context.",
+            "Six fresh packaged lock/deadline/coalescing scenarios and42 guarded children passed.",
+            "Fresh real Linux OBS harness passed with primary-matching Go/capture payload and synthetic game/idle producer; not SteamOS, targetFlatpak or provider-viewer proof."
+          ]
+        }
+      ],
+      "closure_recommendation": "eligible after current documentation/link fix and its verified merge",
+      "unmet_bounded_source_criteria": [],
+      "separate_unproved_facts": [
+        "Actual Gaming Mode Flatpak installation remains UNRUN under #86, as the issue verification explicitly directs."
+      ],
+      "review_hold_resolution": "Current owner merge authorization resolves only the source-review hold, not device/publication/rights/adoption acceptance."
+    },
+    {
+      "issue": 80,
+      "title": "Produce the selected 01 aurora brand kit and lowercase deckystream assets",
+      "criterion_count": 7,
+      "criteria": [
+        {
+          "id": "80-C1",
+          "current_inventory_alias": "80.C1",
+          "literal_criterion": "Use .identity/candidates/concepts/selection.json and exact retained PNG hashes as the creative reference; keep mint-signal, the original orbital board/icon and alternatives accessible as concepts.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            ".identity/candidates/concepts/selection.json",
+            ".identity/candidates/aurora/inventory.json",
+            "branding/repository",
+            ".identity/candidates/concepts"
+          ],
+          "limits": [
+            "Direction approval is a creative-reference fact only."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "selected-brand-tests",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-tests.log",
+              "log_sha256": "1596eaf573ee52f41ef1eccb8a1d610e40e6205e28fd66e5feecfa2767118419"
+            },
+            {
+              "name": "selected-brand-drift",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-drift.log",
+              "log_sha256": "e9100fe6f6ae134029dcbf5ca6f5e72ac70ce925239fbd8e54c45be43d3720d0"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Selection binds exact original board, icon and selected 01 comparison PNG digests. Independent byte comparison against merged 069 verified all 41 retained mint/concept files unchanged; the current 617-file source inventory also matches.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "80-C2",
+          "current_inventory_alias": "80.C2",
+          "literal_criterion": "Finalize traceable selected source artwork and user-facing lowercase deckystream wordmark. Distinguish original raster masters from any separately authored vector geometry; do not claim automatic or identical PNG-to-SVG conversion.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            ".identity/candidates/aurora/mark.svg",
+            ".identity/candidates/aurora/mark-small.svg",
+            ".identity/candidates/aurora/hero-master.png",
+            ".identity/candidates/aurora/hero-generation.json",
+            "branding/aurora/docs/wordmark.svg",
+            "product.json"
+          ],
+          "limits": [
+            "Image generation itself is not deterministic; deterministic export starts from the pinned original raster. Final creative adoption and rights decisions remain unapproved."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "selected-brand-tests",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-tests.log",
+              "log_sha256": "1596eaf573ee52f41ef1eccb8a1d610e40e6205e28fd66e5feecfa2767118419"
+            },
+            {
+              "name": "selected-brand-drift",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-drift.log",
+              "log_sha256": "e9100fe6f6ae134029dcbf5ca6f5e72ac70ce925239fbd8e54c45be43d3720d0"
+            },
+            {
+              "name": "product-projection-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/product-projection-check.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Separately authored Codex vectors and a single unchanged image_gen raster master have distinct source hashes and actual creator/method records. Generated wordmark and user-facing product display are lowercase deckystream. The selected vector visibly interprets the orbital S motif; it is not an identical raster conversion.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "80-C3",
+          "current_inventory_alias": "80.C3",
+          "literal_criterion": "Generate the main gradient icon, appropriate small-size treatments, banner/README, repository preview/avatar and existing docs/landing assets from pinned sources, with reproducible exports where promised.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "scripts/generate-aurora-kit.py",
+            "scripts/generate-aurora-ui.py",
+            "branding/aurora/aurora-manifest.json",
+            "README.md",
+            "site/assets/brand-icon.png",
+            "site/assets/brand-hero.png"
+          ],
+          "limits": [
+            "Reproducibility is conditional on the explicitly pinned Inkscape/font toolchain, not a claim that arbitrary renderers or image generation produce identical bytes."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "selected-brand-tests",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-tests.log",
+              "log_sha256": "1596eaf573ee52f41ef1eccb8a1d610e40e6205e28fd66e5feecfa2767118419"
+            },
+            {
+              "name": "selected-brand-drift",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-drift.log",
+              "log_sha256": "e9100fe6f6ae134029dcbf5ca6f5e72ac70ce925239fbd8e54c45be43d3720d0"
+            },
+            {
+              "name": "selected-brand-repeat",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-repeat.log",
+              "log_sha256": "f1a8be708f8df676e9a4f4237ec4b200b24bb9b76d7531e89553c430fc37c8e7"
+            },
+            {
+              "name": "selected-ui-projection-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-ui-projection-check.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "name": "browser-site",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-site.log",
+              "log_sha256": "b99cbfa5bd9d2c7431c32848984f628d1cc9178a9a301de34ddc169757be6c0b"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "The 19 pinned source digests and all 36 manifest output digest/byte rows independently match source. The export directory contains 38 files: 36 manifest-bound outputs, its manifest and a full kit ZIP. It includes main/small/transparent/light marks, actual-size sheets, wordmark, README headers, repository avatars/preview, local docs/landing projections and PNG/full ZIP downloads. Fresh-directory repeat and raster drift checks actually passed.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "80-C4",
+          "current_inventory_alias": "80.C4",
+          "literal_criterion": "Create ordinary PNG downloads and an offline gallery that open without remote assets/fonts, with transparent/light/dark variants clearly explained.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "branding/aurora/index.html",
+            "branding/aurora/deckystream-aurora-png.zip",
+            "branding/aurora/deckystream-aurora-kit.zip",
+            "branding/aurora/README.md"
+          ],
+          "limits": [
+            "Direct file:// navigation was actually attempted and blocked by administration policy (ERR_BLOCKED_BY_ADMINISTRATOR); retained raw receipt exit 1 is UNAVAILABLE, never a file-open pass. Loopback proof establishes self-contained artifact rendering/downloads, not literal file-URL or target-device acceptance."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "selected-brand-tests",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-tests.log",
+              "log_sha256": "1596eaf573ee52f41ef1eccb8a1d610e40e6205e28fd66e5feecfa2767118419"
+            },
+            {
+              "name": "selected-brand-drift",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-drift.log",
+              "log_sha256": "e9100fe6f6ae134029dcbf5ca6f5e72ac70ce925239fbd8e54c45be43d3720d0"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Ordinary decoded PNG outputs and a self-contained data-URI gallery are present. The byte-identical HTML rendered at desktop/mobile loopback viewports with all 16 PNGs decoded, no external requests or browser errors, and a real PNG download matching its source/manifest bytes. Gallery copy explains transparent, dark and light variants.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "80-C5",
+          "current_inventory_alias": "80.C5",
+          "literal_criterion": "Review real 16/24/32/64 sizes and normal/highlighted dark-menu presentation; a monochrome fallback is optional, not a Decky API requirement.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "branding/aurora/review/menu-sheet.png",
+            "branding/aurora/review/legibility-sheet.png",
+            "branding/aurora/review/contrast.json",
+            "branding/aurora/web/favicon-16.png",
+            "branding/aurora/web/favicon-24.png",
+            "branding/aurora/web/favicon-32.png",
+            "branding/aurora/web/favicon-64.png"
+          ],
+          "limits": [
+            "Physical Steam Deck display/controller perception is UNRUN under #86. Pixel-level visual inspection is human-agent review, not trademark/creative-rights approval."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "selected-brand-tests",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-tests.log",
+              "log_sha256": "1596eaf573ee52f41ef1eccb8a1d610e40e6205e28fd66e5feecfa2767118419"
+            },
+            {
+              "name": "selected-brand-drift",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-drift.log",
+              "log_sha256": "e9100fe6f6ae134029dcbf5ca6f5e72ac70ce925239fbd8e54c45be43d3720d0"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Independent visual reviewer opened actual 16/24/32/64 review sheets and selected raster exports: the ring/S remains identifiable on normal and highlighted dark fields, with no blocking visual defect. The recorded text contrast ratios exceed the declared 4.5 minimum; no monochrome API requirement is invented.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "80-C6",
+          "current_inventory_alias": "80.C6",
+          "literal_criterion": "Keep actual creator/tool provenance, licenses/notices, rights gaps and chosen publication owners honest. Direction approval alone does not approve rights/licensing or qualify final output.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            ".identity/candidates/aurora/inventory.json",
+            ".identity/candidates/aurora/hero-generation.json",
+            "branding/aurora/metadata/rights-and-sources.json",
+            "branding/aurora/licenses/DejaVu.txt",
+            ".identity/governance/approvals.json",
+            ".identity/governance/provenance.json"
+          ],
+          "limits": [
+            "This satisfies honest provenance/gap reporting, not rights clearance or publication permission. Owner must decide legal/license/attribution and publication ownership in the consolidated owner packet before publication/adoption."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "selected-brand-tests",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-tests.log",
+              "log_sha256": "1596eaf573ee52f41ef1eccb8a1d610e40e6205e28fd66e5feecfa2767118419"
+            },
+            {
+              "name": "selected-brand-drift",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-drift.log",
+              "log_sha256": "e9100fe6f6ae134029dcbf5ca6f5e72ac70ce925239fbd8e54c45be43d3720d0"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Actual Codex vector authoring and one image_gen hero operation are recorded without human/exclusive-rights claims. The font notice is bundled. Vector MIT is explicitly a proposed owner decision; hero license is unasserted. Final human approvals, rights clearance, organization/publisher selection and Identity adopted governance entries remain empty/pending rather than fabricated.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "80-C7",
+          "current_inventory_alias": "80.C7",
+          "literal_criterion": "Update Identity consumer source/evidence for the selected assets; earlier source-bound brand receipts remain historical. No Identity repository changes or deployment.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            ".identity/identity.json",
+            ".identity/README.md",
+            ".identity/brief.md",
+            "branding/evidence/aurora-identity-source.json",
+            "docs/selected-aurora.md"
+          ],
+          "limits": [
+            "No Identity repository mutation, deployment, adopted token-layer change, approved Identity compiler output or final artwork approval is asserted. Current upstream head is not silently substituted for the deliberately pinned consumer contract."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "identity-consumer-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/identity-consumer-check.log",
+              "log_sha256": "1c33153db3f6b55a7408ed7d9b9cb259e3746bb158911b75b57679e1c176d161"
+            },
+            {
+              "name": "selected-brand-drift",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-drift.log",
+              "log_sha256": "e9100fe6f6ae134029dcbf5ca6f5e72ac70ce925239fbd8e54c45be43d3720d0"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Selected candidate/source and lowercase consumer display are updated without changing stable project/plugin IDs. The immutable cfb6c29 Identity validator (recorded digest) actually validates current consumer source with no diagnostics. Separate export manifest binds art bytes; the Identity contract receipt does not falsely claim it validates every PNG. Historical mint/old-revision receipts remain present and distinct.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        }
+      ],
+      "closure_recommendation": "eligible-for-bounded-source-closure-after-doc-link-fix-and-merge",
+      "closure_condition": "Root must finish current docs/link repair and merge, record its exact notes/checks and preserve original230 dependencies/broader issue gates. Current owner merge authorization clears source review hold only; it is not formal human GitHub review, rights grant, physical-device acceptance, production publication or adoption.",
+      "unmet_bounded_source_criteria": [],
+      "separate_unproved_facts": [
+        "#79 explicit actual-device keep-open checkpoint remains.",
+        "#82-C1/#83/#85/#86/#87/#88/#95 and original parent230 retain their actual loader/device/ACT/hosted/service/rights/publisher/destination/adoption gates.",
+        "No blanket fullACT/device/production-rights prerequisite is imposed on these source-only literal criteria."
+      ],
+      "source_comparison": "af7\u2192772 has no changes under .identity, branding, steamdeck/decky/src, product.json or selected asset generator scripts. README/current uninstall guidance changed; fresh772 docs/site checks passed."
+    },
+    {
+      "issue": 81,
+      "title": "Polish native Decky setup and controls with subtle aurora branding",
+      "criterion_count": 14,
+      "criteria": [
+        {
+          "id": "81-C1",
+          "current_inventory_alias": "81.C1",
+          "literal_criterion": "Use native Decky components with predictable controller focus, readable text, touch targets, keyboard entry and compact progressive disclosure for advanced settings.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "steamdeck/decky/src/index.tsx:261",
+            "steamdeck/decky/src/Configuration.tsx:37",
+            "steamdeck/decky/src/Configuration.tsx:186",
+            "steamdeck/decky/src/Setup.tsx:87",
+            "steamdeck/decky/src/Advanced.tsx:132"
+          ],
+          "limits": [
+            "Decky browser/native API fixtures do not prove physical controller behavior, actual Steam keyboard or SteamOS geometry; those remain #86 by the issue wording."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "frontend-absent-typecheck",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/frontend-absent-typecheck.log",
+              "log_sha256": "4c51a932c40c1dc7887fef7b6e3a4ef90e59dbb21158e1fe8e6c1567a99e4a0e"
+            },
+            {
+              "name": "frontend-absent-test",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/frontend-absent-test.log",
+              "log_sha256": "a56d350b91862dd9be14a042dabf781cb11738864f1bed5150a7266a733a3917"
+            },
+            {
+              "name": "frontend-absent-build",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/frontend-absent-build.log",
+              "log_sha256": "373123a247d6f30c319c4eac0cf870d1a4e1f676d668a69fb5be2d367ef91db5"
+            },
+            {
+              "name": "frontend-reused-typecheck",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/frontend-reused-typecheck.log",
+              "log_sha256": "4c51a932c40c1dc7887fef7b6e3a4ef90e59dbb21158e1fe8e6c1567a99e4a0e"
+            },
+            {
+              "name": "frontend-reused-test",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/frontend-reused-test.log",
+              "log_sha256": "1a1e8318474990c143699bc8e5043c1fb30fa42f3cd221be8a6310aa7532379c"
+            },
+            {
+              "name": "frontend-reused-build",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/frontend-reused-build.log",
+              "log_sha256": "18978882699166aa60766c38cca2e202dbded2cf7fe320a85bed2dd4f05e413b"
+            },
+            {
+              "name": "browser-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-panel.log",
+              "log_sha256": "bd02e037a42e8dc0a3083eec72e4f59e516bb2dcb89690c89c41072781a4a811"
+            },
+            {
+              "name": "browser-configuration",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-configuration.log",
+              "log_sha256": "e203dcf5f78dec53d6e7d1482721ac0bb2290622a87fcddb62a86ac2be4b339e"
+            },
+            {
+              "name": "browser-dependencies",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-dependencies.log",
+              "log_sha256": "3ccce3bdeef5d81acb5d9cd6be286732db15f2bf77be535f143dbf6b0d6f54f1"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Native Decky components are composed with controls first, stable progressive-disclosure editors and keyboard/focus browser cases. Current packaged browser tests cover narrow configured panel geometry, save/paste/keyboard entry, locked pending edits and focus persistence. All six normal-user frontend commands passed; 161 Node tests passed in each test invocation.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "81-C2",
+          "current_inventory_alias": "81.C2",
+          "literal_criterion": "Add the bundled aurora gradient logo subtly in the header/plugin icon and use the selected lowercase display styling; keep live observed status dot/text independent of decorative logo color.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "steamdeck/decky/src/index.tsx:87",
+            "steamdeck/decky/src/index.tsx:89",
+            "steamdeck/decky/src/index.tsx:321",
+            "steamdeck/decky/src/AuroraMark.tsx",
+            "steamdeck/decky/src/aurora-brand.mjs",
+            "steamdeck/decky/src/product.ts"
+          ],
+          "limits": [
+            "Gradient art is a bundled review-preview projection; its color makes no streaming or approved-production claim."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "selected-ui-projection-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-ui-projection-check.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "name": "product-projection-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/product-projection-check.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "name": "browser-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-panel.log",
+              "log_sha256": "bd02e037a42e8dc0a3083eec72e4f59e516bb2dcb89690c89c41072781a4a811"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Local generated gradient SVG appears in both header and actual plugin icon; lowercase display comes from product projection. Separate observed-state dot and aria-label/status text remain bound to health/currentResult, not decorative logo color. Actual live/unconfirmed/stopped screenshots show distinct green/yellow/red status with invariant aurora artwork.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "81-C3",
+          "current_inventory_alias": "81.C3",
+          "literal_criterion": "Expose setup/dependency job progress, missing configuration and recovery with specific actions; retain manual Refresh plus automatic current-state updates.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "steamdeck/decky/src/index.tsx:320",
+            "steamdeck/decky/src/Setup.tsx:109",
+            "steamdeck/decky/src/Setup.tsx:136",
+            "steamdeck/decky/src/Configuration.tsx:104",
+            "steamdeck/decky/src/Advanced.tsx:174"
+          ],
+          "limits": [
+            "Actual Flatpak package installation/network interruption and Decky lifecycle remain separate target checks."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "browser-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-panel.log",
+              "log_sha256": "bd02e037a42e8dc0a3083eec72e4f59e516bb2dcb89690c89c41072781a4a811"
+            },
+            {
+              "name": "browser-dependencies",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-dependencies.log",
+              "log_sha256": "3ccce3bdeef5d81acb5d9cd6be286732db15f2bf77be535f143dbf6b0d6f54f1"
+            },
+            {
+              "name": "browser-configuration",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-configuration.log",
+              "log_sha256": "e203dcf5f78dec53d6e7d1482721ac0bb2290622a87fcddb62a86ac2be4b339e"
+            },
+            {
+              "name": "browser-m3-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-m3-panel.log",
+              "log_sha256": "f127a8ec33356abb88c4d3055da556dce284d8ba595277550ccf2f482ae5453e"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Manual Refresh remains available alongside 1.5-second status polling and setup/configuration polling. Current dependency browser cases prove consent/Later/cancel/retry/missing-only progress and surviving reload without restarting installation. Missing configuration, failed readiness and collapsed recovery feedback provide specific actions.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "81-C4",
+          "current_inventory_alias": "81.C4",
+          "literal_criterion": "Disable or serialize actions from actual streaming/recording/replay/busy/unknown state; repeated clicks cannot create repeated success notifications, duplicate work or accidental Stop.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "steamdeck/decky/src/state.mjs",
+            "steamdeck/decky/src/index.tsx:273",
+            "steamdeck/decky/src/index.tsx:274",
+            "steamdeck/decky/src/Configuration.tsx:54",
+            "steamdeck/decky/src/advanced-state.mjs"
+          ],
+          "limits": [
+            "Simulated browser and synthetic-HOME process tests do not authorize real output or replace actual provider/OBS33/Deck qualification."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "frontend-absent-test",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/frontend-absent-test.log",
+              "log_sha256": "a56d350b91862dd9be14a042dabf781cb11738864f1bed5150a7266a733a3917"
+            },
+            {
+              "name": "browser-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-panel.log",
+              "log_sha256": "bd02e037a42e8dc0a3083eec72e4f59e516bb2dcb89690c89c41072781a4a811"
+            },
+            {
+              "name": "browser-configuration",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-configuration.log",
+              "log_sha256": "e203dcf5f78dec53d6e7d1482721ac0bb2290622a87fcddb62a86ac2be4b339e"
+            },
+            {
+              "name": "browser-m3-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-m3-panel.log",
+              "log_sha256": "f127a8ec33356abb88c4d3055da556dce284d8ba595277550ccf2f482ae5453e"
+            },
+            {
+              "name": "browser-mixer-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-mixer-panel.log",
+              "log_sha256": "0179d16220fa05ff8cea119976256c9fd55c8cb01e91ec39551110ef90f39041"
+            },
+            {
+              "name": "packaged-settings",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/packaged-settings.log",
+              "log_sha256": "f6ef95b5d2eeb63f8a565bd1e288d0a118035defc8b6b3e4dc678195563f3da5"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Existing guarded state controls remain byte-identical to merged 069, with exact-af7 fresh tests. Browser cases cover streaming/recording/replay/busy/unknown controls, repeated output/edit requests, stale results and no false success. Actual packaged Python-to-Go contention exercised six cases and 42 guarded child calls, including long shared locks, deadline ownership, independent explicit Stop and duplicate coalescing.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "81-C5",
+          "current_inventory_alias": "81.C5",
+          "literal_criterion": "Keep screen versus verified game-only capture explicit, with intentional idle state and no automatic desktop fallback; show system audio/microphone selection, mute and availability honestly.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "steamdeck/decky/src/index.tsx",
+            "steamdeck/decky/src/Mixer.tsx",
+            "steamdeck/decky/src/mixer-state.mjs",
+            "steamdeck/decky/src/advanced-state.mjs"
+          ],
+          "limits": [
+            "Native harnesses are isolated Linux software/display/audio fixtures, not SteamOS/Gamescope/AMD/OBS33, actual Deck LCD/OLED/headset routing or provider acceptance."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "browser-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-panel.log",
+              "log_sha256": "bd02e037a42e8dc0a3083eec72e4f59e516bb2dcb89690c89c41072781a4a811"
+            },
+            {
+              "name": "browser-m3-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-m3-panel.log",
+              "log_sha256": "f127a8ec33356abb88c4d3055da556dce284d8ba595277550ccf2f482ae5453e"
+            },
+            {
+              "name": "browser-mixer-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-mixer-panel.log",
+              "log_sha256": "0179d16220fa05ff8cea119976256c9fd55c8cb01e91ec39551110ef90f39041"
+            },
+            {
+              "name": "browser-mixer-setup",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-mixer-setup.log",
+              "log_sha256": "8e1fd1aab86129a1761f97fbe84ee8bca41164e99a8ba6621cc570d83dbd3ce8"
+            },
+            {
+              "name": "native-audio",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/native-audio.log",
+              "log_sha256": "03c3da7630464086066cc23976a6f3591ee7b56aefb2d5faf771b08e1c86ad1e"
+            },
+            {
+              "name": "native-capture",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/native-capture.log",
+              "log_sha256": "4bfe67e970711708b15a5d6ded0a1ee60fac2356d4663e0ec5842daddc68df29"
+            },
+            {
+              "name": "native-game-obs",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/native-game-obs.log",
+              "log_sha256": "72e4d4be553aa46062a7798fca74c06784972c29a2bf71e1f67113bca942813f"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Verified game-only versus screen capture, deliberate idle, no silent desktop fallback, and stream-only mixer/mic controls are preserved in existing source. Current packaged browser and Linux native OBS harnesses passed applicable transition/routing/privacy cases; availability, gain/mute and unknown states remain explicit.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "81-C6",
+          "current_inventory_alias": "81.C6",
+          "literal_criterion": "Retain useful diagnostic console/copy with redaction and existing local-media/health/settings workflows; optional support links stay unobtrusive, verified and payment-free for core functionality.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "steamdeck/decky/src/index.tsx:142",
+            "steamdeck/decky/src/index.tsx:147",
+            "steamdeck/decky/src/Advanced.tsx",
+            "steamdeck/decky/src/Support.tsx",
+            ".github/FUNDING.yml"
+          ],
+          "limits": [
+            "No wallet address, external support transaction, account registration or monetization/Store research is fabricated; #51 remains separate."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "browser-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-panel.log",
+              "log_sha256": "bd02e037a42e8dc0a3083eec72e4f59e516bb2dcb89690c89c41072781a4a811"
+            },
+            {
+              "name": "browser-m3-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-m3-panel.log",
+              "log_sha256": "f127a8ec33356abb88c4d3055da556dce284d8ba595277550ccf2f482ae5453e"
+            },
+            {
+              "name": "browser-configuration",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-configuration.log",
+              "log_sha256": "e203dcf5f78dec53d6e7d1482721ac0bb2290622a87fcddb62a86ac2be4b339e"
+            },
+            {
+              "name": "browser-support",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-support.log",
+              "log_sha256": "793f783e96662b00925852f207378db9d6c48f608e5b06e3a9bf1c7bc068c58d"
+            },
+            {
+              "name": "browser-setup",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-setup.log",
+              "log_sha256": "cc58ab721731a4bbfe868d8d03f3c6c7c83461868fce02630446ab544158b9f3"
+            },
+            {
+              "name": "browser-m3-setup",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-m3-setup.log",
+              "log_sha256": "8b89ee58e9039ccc809617b16bd2421e3772d33f77b5cc676d4dc686d9fad0e1"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Current browser cases retain diagnostic console/copy/filter/redaction, protected settings, local clips/media/profiles and health recovery. Support uses verified funding inventory, guarded navigation and hidden unset wallets; it remains optional at the bottom with no core payment requirement.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "81-C7",
+          "current_inventory_alias": "81.C7",
+          "literal_criterion": "Bundle assets locally and inspect dark/focused/stale/error/empty states; screenshot fixtures are not claimed as real Deck acceptance.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "steamdeck/decky/src/AuroraMark.tsx",
+            "steamdeck/decky/src/aurora-brand.mjs",
+            "steamdeck/decky/src/index.tsx",
+            "steamdeck/tests/browser-panel.py",
+            "steamdeck/tests/browser-native-configuration.py",
+            "steamdeck/tests/browser-m3-panel.py"
+          ],
+          "limits": [
+            "Screenshots are explicitly simulated packaged-frontend fixtures, never actual Deck acceptance."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "selected-ui-projection-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-ui-projection-check.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "name": "browser-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-panel.log",
+              "log_sha256": "bd02e037a42e8dc0a3083eec72e4f59e516bb2dcb89690c89c41072781a4a811"
+            },
+            {
+              "name": "browser-configuration",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-configuration.log",
+              "log_sha256": "e203dcf5f78dec53d6e7d1482721ac0bb2290622a87fcddb62a86ac2be4b339e"
+            },
+            {
+              "name": "browser-m3-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-m3-panel.log",
+              "log_sha256": "f127a8ec33356abb88c4d3055da556dce284d8ba595277550ccf2f482ae5453e"
+            },
+            {
+              "name": "browser-mixer-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-mixer-panel.log",
+              "log_sha256": "0179d16220fa05ff8cea119976256c9fd55c8cb01e91ec39551110ef90f39041"
+            },
+            {
+              "name": "browser-site",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-site.log",
+              "log_sha256": "b99cbfa5bd9d2c7431c32848984f628d1cc9178a9a301de34ddc169757be6c0b"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Logo images are locally bundled inline SVG and site imagery is local PNG; packaged browser assertions actually decode header/plugin images with no remote asset need. Inspected screenshots cover live/unconfirmed/stopped and focus; automated cases cover stale/error/loading/empty states. Independent visual review found no blocking defect.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "81-A1",
+          "current_inventory_alias": "81.C8",
+          "literal_criterion": "Configured/streaming view shows observed state and Start/Stop before setup/advanced forms; setup remains prominent when required. In the 400\u00d7800 simulated native host, Stop currently appears around 1839px below expanded setup. This is fixture geometry, not physical Deck measurement.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "steamdeck/decky/src/index.tsx:261",
+            "steamdeck/decky/src/index.tsx:273",
+            "steamdeck/decky/src/index.tsx:274",
+            "steamdeck/decky/src/index.tsx:280",
+            "steamdeck/decky/src/index.tsx:281"
+          ],
+          "limits": [
+            "The earlier 400x800 fixture Stop-at-1839px finding is historical and is not represented as a physical Deck measurement."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "browser-configuration",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-configuration.log",
+              "log_sha256": "e203dcf5f78dec53d6e7d1482721ac0bb2290622a87fcddb62a86ac2be4b339e"
+            },
+            {
+              "name": "browser-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-panel.log",
+              "log_sha256": "bd02e037a42e8dc0a3083eec72e4f59e516bb2dcb89690c89c41072781a4a811"
+            },
+            {
+              "name": "browser-dependencies",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-dependencies.log",
+              "log_sha256": "3ccce3bdeef5d81acb5d9cd6be286732db15f2bf77be535f143dbf6b0d6f54f1"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "YOUR STREAM and Start/Stop are structurally before dependency/setup forms. A current configured streaming narrow-panel browser case verifies primary controls without scrolling; dependency setup remains visible when missing.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "81-A2",
+          "current_inventory_alias": "81.C9",
+          "literal_criterion": "Collapse saved destination/connection and advanced sections progressively; keep controller focus stable and clear private drafts when leaving editing.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "steamdeck/decky/src/Configuration.tsx:48",
+            "steamdeck/decky/src/Configuration.tsx:52",
+            "steamdeck/decky/src/Configuration.tsx:54",
+            "steamdeck/decky/src/Configuration.tsx:65",
+            "steamdeck/decky/src/Configuration.tsx:79",
+            "steamdeck/decky/src/Configuration.tsx:123"
+          ],
+          "limits": [
+            "Physical controller navigation and Steam keyboard rendering remain #86."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "frontend-absent-test",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/frontend-absent-test.log",
+              "log_sha256": "a56d350b91862dd9be14a042dabf781cb11738864f1bed5150a7266a733a3917"
+            },
+            {
+              "name": "browser-configuration",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-configuration.log",
+              "log_sha256": "e203dcf5f78dec53d6e7d1482721ac0bb2290622a87fcddb62a86ac2be4b339e"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Saved destination/connection and advanced sections collapse independently. Leaving editing clears both key/password refs, visibility and dialogs; increments the sensitive clipboard epoch so delayed clipboard resolution cannot restore a private draft. Poll results do not reopen/collapse a focused editor; current browser case exercises both privacy and focus.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "81-A3",
+          "current_inventory_alias": "81.C10",
+          "literal_criterion": "A failed health/recovery request is visibly reported even with health details collapsed.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "steamdeck/decky/src/Advanced.tsx:167",
+            "steamdeck/decky/src/Advanced.tsx:174",
+            "steamdeck/tests/browser-m3-panel.py:125"
+          ],
+          "limits": [
+            "A displayed failed request is not a successful recovery or proof of actual device fault remediation."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "browser-m3-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-m3-panel.log",
+              "log_sha256": "f127a8ec33356abb88c4d3055da556dce284d8ba595277550ccf2f482ae5453e"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Recovery/health failure is projected as generic public message outside the collapsed health details. Current browser tests hide details and verify failure remains visible without exposing private backend error sentinels.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "81-A4",
+          "current_inventory_alias": "81.C11",
+          "literal_criterion": "Clip loading, confirmed empty, populated, failed and refresh states are distinct; loading cannot immediately claim an empty library.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "steamdeck/decky/src/Advanced.tsx:94",
+            "steamdeck/decky/src/Advanced.tsx:108",
+            "steamdeck/decky/src/Advanced.tsx:114",
+            "steamdeck/decky/src/Advanced.tsx:117",
+            "steamdeck/decky/src/advanced-state.mjs:39",
+            "steamdeck/tests/browser-m3-panel.py:79"
+          ],
+          "limits": [
+            "Library states are packaged frontend/fixture tests; actual on-Deck storage/recovery cases remain separate."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "frontend-absent-test",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/frontend-absent-test.log",
+              "log_sha256": "a56d350b91862dd9be14a042dabf781cb11738864f1bed5150a7266a733a3917"
+            },
+            {
+              "name": "browser-m3-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-m3-panel.log",
+              "log_sha256": "f127a8ec33356abb88c4d3055da556dce284d8ba595277550ccf2f482ae5453e"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Clip results explicitly project idle/loading/ready/empty/failed and strict public display fields. The local pending lock lasts through final tool status refresh. The maintained browser fixture actually holds status refresh after returning clips, verifies unrelated local-record action is available while Browse stays locked, then releases the refresh; hide invalidates late requests and retry is exercised.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "81-A5",
+          "current_inventory_alias": "81.C12",
+          "literal_criterion": "Failed provider-guide navigation gives accessible, secret-free feedback; reuse the existing guarded support-link pattern.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "steamdeck/decky/src/configuration-state.mjs:9",
+            "steamdeck/decky/src/Configuration.tsx:70",
+            "steamdeck/decky/src/Configuration.tsx:74",
+            "steamdeck/decky/src/Configuration.tsx:212"
+          ],
+          "limits": [
+            "No external provider authentication or successful navigation is claimed by the failure-path check."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "frontend-absent-test",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/frontend-absent-test.log",
+              "log_sha256": "a56d350b91862dd9be14a042dabf781cb11738864f1bed5150a7266a733a3917"
+            },
+            {
+              "name": "browser-configuration",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-configuration.log",
+              "log_sha256": "e203dcf5f78dec53d6e7d1482721ac0bb2290622a87fcddb62a86ac2be4b339e"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Provider guide URLs come only from the fixed own-property provider inventory. Synchronous/asynchronous navigation failure becomes accessible polite, generic feedback; user destination URL and secret drafts are never passed to the guide action.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "81-A6",
+          "current_inventory_alias": "81.C13",
+          "literal_criterion": "Advanced features have discoverable instructions/entry help for the existing protected optional Desktop Setup, with no separate mandatory application or unauthenticated LAN service.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "steamdeck/decky/src/index.tsx:295",
+            "steamdeck/decky/src/index.tsx:296",
+            "steamdeck/decky/src/index.tsx:297",
+            "steamdeck/decky/src/Configuration.tsx:213"
+          ],
+          "limits": [
+            "Protected Desktop Setup is optional; OAuth/companion setup remains deferred, not silently delivered here."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "browser-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-panel.log",
+              "log_sha256": "bd02e037a42e8dc0a3083eec72e4f59e516bb2dcb89690c89c41072781a4a811"
+            },
+            {
+              "name": "browser-configuration",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-configuration.log",
+              "log_sha256": "e203dcf5f78dec53d6e7d1482721ac0bb2290622a87fcddb62a86ac2be4b339e"
+            },
+            {
+              "name": "browser-setup",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-setup.log",
+              "log_sha256": "cc58ab721731a4bbfe868d8d03f3c6c7c83461868fce02630446ab544158b9f3"
+            },
+            {
+              "name": "browser-m3-setup",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-m3-setup.log",
+              "log_sha256": "8b89ee58e9039ccc809617b16bd2421e3772d33f77b5cc676d4dc686d9fad0e1"
+            },
+            {
+              "name": "browser-mixer-setup",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-mixer-setup.log",
+              "log_sha256": "8e1fd1aab86129a1761f97fbe84ee8bca41164e99a8ba6621cc570d83dbd3ce8"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Optional Desktop Setup instructions are reachable from native configuration and advanced stream tools and describe the protected existing setup path. No separate mandatory app, unauthenticated LAN service or output-triggering navigation is introduced.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        },
+        {
+          "id": "81-A7",
+          "current_inventory_alias": "81.C14",
+          "literal_criterion": "Apply the selected local aurora assets from #80; observed status color/text stay independent. Align update guidance with #102/#82 so no absent updater is advertised.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "steamdeck/decky/src/index.tsx:309",
+            "steamdeck/decky/src/index.tsx:310",
+            "steamdeck/decky/src/index.tsx:311",
+            "steamdeck/decky/src/index.tsx:321",
+            "steamdeck/decky/src/AuroraMark.tsx"
+          ],
+          "limits": [
+            "No publishing/release, migration, installed-version update on a real Deck or Store eligibility is claimed."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "selected-ui-projection-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-ui-projection-check.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "name": "product-projection-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/product-projection-check.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "name": "browser-panel",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-panel.log",
+              "log_sha256": "bd02e037a42e8dc0a3083eec72e4f59e516bb2dcb89690c89c41072781a4a811"
+            },
+            {
+              "name": "browser-configuration",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-configuration.log",
+              "log_sha256": "e203dcf5f78dec53d6e7d1482721ac0bb2290622a87fcddb62a86ac2be4b339e"
+            }
+          ],
+          "historical_source_review": "docs/evidence/aurora-af7-criteria.json",
+          "historical_af7_source_rationale": "Selected local art is integrated with independent observed state. Update controls advertise the actual normal Decky ZIP/update path and optional Desktop Setup version; there is no native self-updater button or nonexistent updater claim.",
+          "fresh772_observation": "Listed fresh772 commands passed and their log SHA256 values match the completed report. Relevant selected artwork/frontend/product sources are unchanged from af7; the fresh primary has648 tracked-source hash inventory entries, not617. Historical rationale is not a new-source receipt."
+        }
+      ],
+      "closure_recommendation": "eligible-for-bounded-source-closure-after-doc-link-fix-and-merge",
+      "closure_condition": "Root must finish current docs/link repair and merge, record its exact notes/checks and preserve original230 dependencies/broader issue gates. Current owner merge authorization clears source review hold only; it is not formal human GitHub review, rights grant, physical-device acceptance, production publication or adoption.",
+      "unmet_bounded_source_criteria": [],
+      "separate_unproved_facts": [
+        "#79 explicit actual-device keep-open checkpoint remains.",
+        "#82-C1/#83/#85/#86/#87/#88/#95 and original parent230 retain their actual loader/device/ACT/hosted/service/rights/publisher/destination/adoption gates.",
+        "No blanket fullACT/device/production-rights prerequisite is imposed on these source-only literal criteria."
+      ],
+      "source_comparison": "af7\u2192772 has no changes under .identity, branding, steamdeck/decky/src, product.json or selected asset generator scripts. README/current uninstall guidance changed; fresh772 docs/site checks passed."
+    },
+    {
+      "issue": 84,
+      "title": "Audit the integrated plugin and finish bounded cleanup before qualification",
+      "criterion_count": 6,
+      "criteria": [
+        {
+          "id": "84-C1",
+          "current_inventory_alias": "84.C1",
+          "literal_criterion": "Review package/build entry points, adapter-to-core direction, job/state ownership, error/redaction paths, settings migration, recovery and resource cleanup.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "ARCHITECTURE.md",
+            "docs/pre-migration-readiness.md"
+          ],
+          "finding": "Existing integrated audits plus bounded32-file736..772 diff reviewed; private source-review.json records no blocking source finding and explicit limits.",
+          "limits": [
+            "Actual target/service/rights/adoption gates are preserved in their original issues; this criterion records audit/preparation rather than claiming them passed."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "application-python",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/application-python.log",
+              "log_sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "name": "tooling-python",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/tooling-python.log",
+              "log_sha256": "6fcbf69155d6a71e1d9012d2415b3ef8105c7a4fd405fbb02de2ced4067a95ce"
+            },
+            {
+              "name": "selected-brand-drift",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-drift.log",
+              "log_sha256": "e9100fe6f6ae134029dcbf5ca6f5e72ac70ce925239fbd8e54c45be43d3720d0"
+            },
+            {
+              "name": "identity-consumer-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/identity-consumer-check.log",
+              "log_sha256": "1c33153db3f6b55a7408ed7d9b9cb259e3746bb158911b75b57679e1c176d161"
+            },
+            {
+              "name": "product-projection-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/product-projection-check.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "name": "browser-site",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-site.log",
+              "log_sha256": "b99cbfa5bd9d2c7431c32848984f628d1cc9178a9a301de34ddc169757be6c0b"
+            },
+            {
+              "name": "artifact-audit-1",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/artifact-audit-1.log",
+              "log_sha256": "8ff7526d6d66f7b4ea66bfdaec64a3330755981799d60877ad4d9739b22b8770"
+            },
+            {
+              "name": "artifact-audit-2",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/artifact-audit-2.log",
+              "log_sha256": "8ff7526d6d66f7b4ea66bfdaec64a3330755981799d60877ad4d9739b22b8770"
+            }
+          ],
+          "historical_source_review": "source-review.json and criteria-review.json in immutable430 packet"
+        },
+        {
+          "id": "84-C2",
+          "current_inventory_alias": "84.C2",
+          "literal_criterion": "Apply useful small refactors only when they simplify a demonstrated issue; do not introduce a framework, standards migration, component library or blanket pattern rewrite.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "steamdeck/uninstall.py",
+            "scripts/export-project-history.py",
+            "scripts/destination-readiness.py"
+          ],
+          "finding": "Only demonstrated pre-wipe export and real GitHub pagination gaps plus conservative evidence-identity fixes added; no new framework or component library.",
+          "limits": [
+            "Actual target/service/rights/adoption gates are preserved in their original issues; this criterion records audit/preparation rather than claiming them passed."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "application-python",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/application-python.log",
+              "log_sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "name": "tooling-python",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/tooling-python.log",
+              "log_sha256": "6fcbf69155d6a71e1d9012d2415b3ef8105c7a4fd405fbb02de2ced4067a95ce"
+            },
+            {
+              "name": "selected-brand-drift",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-drift.log",
+              "log_sha256": "e9100fe6f6ae134029dcbf5ca6f5e72ac70ce925239fbd8e54c45be43d3720d0"
+            },
+            {
+              "name": "identity-consumer-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/identity-consumer-check.log",
+              "log_sha256": "1c33153db3f6b55a7408ed7d9b9cb259e3746bb158911b75b57679e1c176d161"
+            },
+            {
+              "name": "product-projection-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/product-projection-check.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "name": "browser-site",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-site.log",
+              "log_sha256": "b99cbfa5bd9d2c7431c32848984f628d1cc9178a9a301de34ddc169757be6c0b"
+            },
+            {
+              "name": "artifact-audit-1",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/artifact-audit-1.log",
+              "log_sha256": "8ff7526d6d66f7b4ea66bfdaec64a3330755981799d60877ad4d9739b22b8770"
+            },
+            {
+              "name": "artifact-audit-2",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/artifact-audit-2.log",
+              "log_sha256": "8ff7526d6d66f7b4ea66bfdaec64a3330755981799d60877ad4d9739b22b8770"
+            }
+          ],
+          "historical_source_review": "source-review.json and criteria-review.json in immutable430 packet"
+        },
+        {
+          "id": "84-C3",
+          "current_inventory_alias": "84.C3",
+          "literal_criterion": "Reconcile README/setup/configuration/support/uninstall/docs previews, selected branding, source rights/notices and current vs historical evidence.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "docs/steam-deck.md",
+            "docs/legacy-cleanup-kit.md",
+            "docs/release-readiness.md",
+            "SECURITY.md"
+          ],
+          "finding": "Normal Decky update/remove, optional current cleanup helper, retained credential TAR and current-vs-historical packet guidance updated. Immutable469 installer remains untouched.",
+          "limits": [
+            "Actual target/service/rights/adoption gates are preserved in their original issues; this criterion records audit/preparation rather than claiming them passed."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "application-python",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/application-python.log",
+              "log_sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "name": "tooling-python",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/tooling-python.log",
+              "log_sha256": "6fcbf69155d6a71e1d9012d2415b3ef8105c7a4fd405fbb02de2ced4067a95ce"
+            },
+            {
+              "name": "selected-brand-drift",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-drift.log",
+              "log_sha256": "e9100fe6f6ae134029dcbf5ca6f5e72ac70ce925239fbd8e54c45be43d3720d0"
+            },
+            {
+              "name": "identity-consumer-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/identity-consumer-check.log",
+              "log_sha256": "1c33153db3f6b55a7408ed7d9b9cb259e3746bb158911b75b57679e1c176d161"
+            },
+            {
+              "name": "product-projection-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/product-projection-check.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "name": "browser-site",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-site.log",
+              "log_sha256": "b99cbfa5bd9d2c7431c32848984f628d1cc9178a9a301de34ddc169757be6c0b"
+            },
+            {
+              "name": "artifact-audit-1",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/artifact-audit-1.log",
+              "log_sha256": "8ff7526d6d66f7b4ea66bfdaec64a3330755981799d60877ad4d9739b22b8770"
+            },
+            {
+              "name": "artifact-audit-2",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/artifact-audit-2.log",
+              "log_sha256": "8ff7526d6d66f7b4ea66bfdaec64a3330755981799d60877ad4d9739b22b8770"
+            }
+          ],
+          "historical_source_review": "source-review.json and criteria-review.json in immutable430 packet"
+        },
+        {
+          "id": "84-C4",
+          "current_inventory_alias": "84.C4",
+          "literal_criterion": "Inspect release/workflow side effects and prepare semantic versioning/changelog/release configuration safely; no tag/publish/deploy happens as an audit side effect.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "CHANGELOG.md",
+            "docs/release-engineering.md",
+            "docs/release-readiness.md"
+          ],
+          "finding": "Primary package/repeat instructions now precede optional legacy/generic audit; Unreleased changelog and release-readiness preparation updated. Workflow files are unchanged in bounded diff.",
+          "limits": [
+            "Actual target/service/rights/adoption gates are preserved in their original issues; this criterion records audit/preparation rather than claiming them passed."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "application-python",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/application-python.log",
+              "log_sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "name": "tooling-python",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/tooling-python.log",
+              "log_sha256": "6fcbf69155d6a71e1d9012d2415b3ef8105c7a4fd405fbb02de2ced4067a95ce"
+            },
+            {
+              "name": "selected-brand-drift",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-drift.log",
+              "log_sha256": "e9100fe6f6ae134029dcbf5ca6f5e72ac70ce925239fbd8e54c45be43d3720d0"
+            },
+            {
+              "name": "identity-consumer-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/identity-consumer-check.log",
+              "log_sha256": "1c33153db3f6b55a7408ed7d9b9cb259e3746bb158911b75b57679e1c176d161"
+            },
+            {
+              "name": "product-projection-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/product-projection-check.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "name": "browser-site",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-site.log",
+              "log_sha256": "b99cbfa5bd9d2c7431c32848984f628d1cc9178a9a301de34ddc169757be6c0b"
+            },
+            {
+              "name": "artifact-audit-1",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/artifact-audit-1.log",
+              "log_sha256": "8ff7526d6d66f7b4ea66bfdaec64a3330755981799d60877ad4d9739b22b8770"
+            },
+            {
+              "name": "artifact-audit-2",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/artifact-audit-2.log",
+              "log_sha256": "8ff7526d6d66f7b4ea66bfdaec64a3330755981799d60877ad4d9739b22b8770"
+            }
+          ],
+          "historical_source_review": "source-review.json and criteria-review.json in immutable430 packet"
+        },
+        {
+          "id": "84-C5",
+          "current_inventory_alias": "84.C5",
+          "literal_criterion": "Carry all 230 original criteria/dependencies and explicit scope dispositions forward; Steam Deck focus does not silently pass broader native-platform, review, hosted CI, rights or adoption gates.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "docs/evidence/completion-criteria.json",
+            "docs/history/README.md"
+          ],
+          "finding": "Canonical230 ledger unchanged at recordedSHA; current development history carries all original IDs/text/dependencies with destination links pending.",
+          "limits": [
+            "Actual target/service/rights/adoption gates are preserved in their original issues; this criterion records audit/preparation rather than claiming them passed."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "application-python",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/application-python.log",
+              "log_sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "name": "tooling-python",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/tooling-python.log",
+              "log_sha256": "6fcbf69155d6a71e1d9012d2415b3ef8105c7a4fd405fbb02de2ced4067a95ce"
+            },
+            {
+              "name": "selected-brand-drift",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-drift.log",
+              "log_sha256": "e9100fe6f6ae134029dcbf5ca6f5e72ac70ce925239fbd8e54c45be43d3720d0"
+            },
+            {
+              "name": "identity-consumer-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/identity-consumer-check.log",
+              "log_sha256": "1c33153db3f6b55a7408ed7d9b9cb259e3746bb158911b75b57679e1c176d161"
+            },
+            {
+              "name": "product-projection-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/product-projection-check.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "name": "browser-site",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-site.log",
+              "log_sha256": "b99cbfa5bd9d2c7431c32848984f628d1cc9178a9a301de34ddc169757be6c0b"
+            },
+            {
+              "name": "artifact-audit-1",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/artifact-audit-1.log",
+              "log_sha256": "8ff7526d6d66f7b4ea66bfdaec64a3330755981799d60877ad4d9739b22b8770"
+            },
+            {
+              "name": "artifact-audit-2",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/artifact-audit-2.log",
+              "log_sha256": "8ff7526d6d66f7b4ea66bfdaec64a3330755981799d60877ad4d9739b22b8770"
+            }
+          ],
+          "historical_source_review": "source-review.json and criteria-review.json in immutable430 packet"
+        },
+        {
+          "id": "84-C6",
+          "current_inventory_alias": "84.C6",
+          "literal_criterion": "Record any remaining owner/publication/authentication facts as specific followups rather than claiming completion or inventing permissions.",
+          "disposition": "satisfied-bounded-source-scope-after-doc-link-fix-and-merge",
+          "source_references": [
+            "docs/authentication-decision-packet.md",
+            "docs/pre-migration-readiness.md",
+            "docs/migration-review.md"
+          ],
+          "finding": "Auth proposal, rights/provenance limits, exact-owner unresolved migration and release/adoption/service gates remain explicit.",
+          "limits": [
+            "Actual target/service/rights/adoption gates are preserved in their original issues; this criterion records audit/preparation rather than claiming them passed."
+          ],
+          "fresh772_checks": [
+            {
+              "name": "application-python",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/application-python.log",
+              "log_sha256": "c0349412912bbb2c320931a723ce90f4954b801dfac5b7faae29446dc90e7e09"
+            },
+            {
+              "name": "tooling-python",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/tooling-python.log",
+              "log_sha256": "6fcbf69155d6a71e1d9012d2415b3ef8105c7a4fd405fbb02de2ced4067a95ce"
+            },
+            {
+              "name": "selected-brand-drift",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/selected-brand-drift.log",
+              "log_sha256": "e9100fe6f6ae134029dcbf5ca6f5e72ac70ce925239fbd8e54c45be43d3720d0"
+            },
+            {
+              "name": "identity-consumer-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/identity-consumer-check.log",
+              "log_sha256": "1c33153db3f6b55a7408ed7d9b9cb259e3746bb158911b75b57679e1c176d161"
+            },
+            {
+              "name": "product-projection-check",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/product-projection-check.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "name": "browser-site",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/browser-site.log",
+              "log_sha256": "b99cbfa5bd9d2c7431c32848984f628d1cc9178a9a301de34ddc169757be6c0b"
+            },
+            {
+              "name": "artifact-audit-1",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/artifact-audit-1.log",
+              "log_sha256": "8ff7526d6d66f7b4ea66bfdaec64a3330755981799d60877ad4d9739b22b8770"
+            },
+            {
+              "name": "artifact-audit-2",
+              "result": "passed",
+              "public_proof_member": "standalone/logs/artifact-audit-2.log",
+              "log_sha256": "8ff7526d6d66f7b4ea66bfdaec64a3330755981799d60877ad4d9739b22b8770"
+            }
+          ],
+          "historical_source_review": "source-review.json and criteria-review.json in immutable430 packet"
+        }
+      ],
+      "closure_recommendation": "eligible-for-bounded-source-closure-after-doc-link-fix-and-merge",
+      "closure_condition": "Root must finish current docs/link repair and merge, record its exact notes/checks and preserve original230 dependencies/broader issue gates. Current owner merge authorization clears source review hold only; it is not formal human GitHub review, rights grant, physical-device acceptance, production publication or adoption.",
+      "unmet_bounded_source_criteria": [],
+      "separate_unproved_facts": [
+        "#79 explicit actual-device keep-open checkpoint remains.",
+        "#82-C1/#83/#85/#86/#87/#88/#95 and original parent230 retain their actual loader/device/ACT/hosted/service/rights/publisher/destination/adoption gates.",
+        "No blanket fullACT/device/production-rights prerequisite is imposed on these source-only literal criteria."
+      ],
+      "source_comparison": "af7\u2192772 has no changes under .identity, branding, steamdeck/decky/src, product.json or selected asset generator scripts. README/current uninstall guidance changed; fresh772 docs/site checks passed."
+    }
+  ],
+  "no_mutations": "This audit performed no GitHub writes, issue closures, repository source edits or product test runs."
+}

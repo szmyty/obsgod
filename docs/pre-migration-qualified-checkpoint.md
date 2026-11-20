@@ -1,7 +1,9 @@
 # Pre-migration available-check checkpoint
 
-The implemented batch is in draft [#114](https://github.com/szmyty/obsgod/pull/114),
-stacked after [#113](https://github.com/szmyty/obsgod/pull/113). It repairs the
+The implementation merged through [#113](https://github.com/szmyty/obsgod/pull/113)
+then [#114](https://github.com/szmyty/obsgod/pull/114). Merge `a315224` matches the
+reviewed `68f7a288` tree; see [continuity](../CONTINUITY.md) for full revisions.
+The batch repairs the
 missing private export before explicit wipe, corrects normal Decky update/removal
 guidance, fixes verified GitHub history pagination, and adds a read-only
 repository/real-PR readiness collector. Authentication remains proposed research
@@ -119,6 +121,8 @@ blanket device/full-ACT prerequisites; their original gates remain authoritative
   until confidential/public-client ownership is resolved. Authentication coding
   remains outside this batch.
 
-No issue was closed, source PR merged, product release published, site deployed,
-repository migrated, account registered or money spent by this checkpoint.
+The original qualification did not merge source or close issues. The later
+implementation merges do not waive the acceptance above. No product release,
+site deployment, repository migration, account registration or spending is
+authorized by this checkpoint.
 The old af7 review artifacts and historical installer URLs/hashes are unchanged.

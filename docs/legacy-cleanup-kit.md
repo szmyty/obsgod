@@ -1,4 +1,4 @@
-# Current legacy-cleanup helper preparation
+# Current legacy-cleanup helper
 
 Normal plugin installation/update/removal belongs to Decky. This optional
 maintainer-reviewed helper is for explicitly retiring old OBSGod Desktop files
@@ -7,17 +7,23 @@ It is not another required application or a migration performed on your behalf.
 
 ## Use verified current source
 
-The standard33-file Decky ZIP deliberately does not install the optional Desktop
+The standard Decky ZIP deliberately does not install the optional Desktop
 uninstaller. Updating that plugin cannot upgrade a retained old Desktop launcher.
 Use the **full runtime archive from the same exact candidate in your review
 packet** as the helper kit. The existing packager already supplies `uninstall.py`,
 its sibling bridge/paths/product modules, the matching Go observer, source,
 manifest and notices. No second cleanup/removal policy is implemented.
 
-The new helper/source/artifact hashes will be recorded after the integrated
-source is frozen and checked. Until that packet exists, do not substitute the
-historical469 installer or assume an installed same-version script has the new
-private-export behavior. Exact source/hash matters more than0.1.0-deck.9 alone.
+The [current review packet](https://github.com/szmyty/obsgod/blob/430cc391cb63f080214aacc279e5c04b1092c7a5/OWNER-PACKET.md)
+binds the helper to exact source `772230a32a8fdb237a58b8a637947b31671ad509`.
+Its [runtime TAR](https://raw.githubusercontent.com/szmyty/obsgod/430cc391cb63f080214aacc279e5c04b1092c7a5/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz)
+is 12,053,779 bytes, SHA256
+`e8d32968573989565dc74eb4e2bd8bd41e97107ebdbd6f57e56e69f565ef1487`;
+verify the [checksums](https://github.com/szmyty/obsgod/blob/430cc391cb63f080214aacc279e5c04b1092c7a5/SHA256SUMS)
+and [source/evidence limits](pre-migration-qualified-checkpoint.md).
+Do not substitute the historical `4699235` installer or assume an installed same-version
+script has the new private-export behavior. Version `0.1.0-deck.9` alone does not
+identify the source.
 
 Download the candidate's named runtime TAR and checksum from its pinned review
 artifact commit. Verify SHA256 and manifest/source revision, then extract only

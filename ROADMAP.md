@@ -2,7 +2,9 @@
 
 ## Current pre-migration candidate and remaining tests
 
-Draft #114 advances #82/#84 private wipe recovery and current Decky guidance,
+#113 and #114 are merged in order, with implementation merge `a315224` matching
+the reviewed `68f7a288` tree. They advance #82/#84 private wipe recovery and
+current Decky guidance,
 #87 history/cleanup preparation, #88/#95 read-only readiness evidence and
 #89 proposed authentication research. Exact clean packaged source 772230a
 (tree f157ea77, 648 files) recorded 70 passed command predicates, 2 unavailable
@@ -17,11 +19,53 @@ billing refusals / 1 skip / 0 steps. All 3 native and 10 browser checks passed; 
 required review/rights/CI/platform/adoption and exact destination authority remain.
 The first failed 772 attempt is retained separately, not reused as passing proof.
 
-Next: owner current-install tests/fixes, then specifically approved #87 migration
-to OWNER/deckystream on main, actual #95 service verification and #88 new-install/
-v1 packet. #89 needs owner design discussion before authentication code. All 230
-original criteria/dependencies and 111 current clauses (104 bounded plus 7 auth)
-remain. No issue closure, source merge, release, deployment, migration or spending.
+All 230 original criteria/dependencies and 111 current clauses (104 bounded plus
+7 authentication) remain. Source merges do not close missing acceptance or
+publish a release, deploy a site, migrate the repository or authorize spending.
+
+## Before manual testing
+
+1. **#84 — Current handoff.** Reconcile current README, setup, recovery,
+   release and migration entry points with the exact `772230a` test candidate.
+   These Markdown updates implement that cleanup; historical af7/469 packets,
+   download commands and receipts retain their original source boundaries.
+2. **#76–#78/#80–#81/#84 — Source acceptance reviewed.** The
+   [47-clause assessment](docs/evidence/bounded-source-closure-20261120.md)
+   supports these bounded implementation closures after the handoff merge.
+   Keep #79's explicit review/device checkpoint, #82-C1 loader lifecycle and
+   #83 hardware observations open; source merge is not acceptance.
+3. **#85 — Qualification and test handoff.** Use the immutable candidate,
+   checksums, rollback and numbered cases linked above. A new source/artifact
+   candidate needs affected checks and its own exact revision. Complete the
+   supported ACT matrix on adequate free Linux capacity when available; current
+   ACT, hosted billing and GitHub service limitations remain separate and do
+   not turn into passes or require paid execution.
+4. **#87/#88 — Owner facts, in parallel.** Record the exact
+   `OWNER/deckystream`, administrator/publisher/contact, artwork rights/license,
+   signing or transparent unsigned policy, and site destinations. These are
+   migration/publication decisions, not prerequisites for testing the current
+   compatible plugin with manual keys.
+
+## Paired testing and final transition
+
+1. **#86, with #82/#83 — Test and repair together.** Follow the numbered cases:
+   setup and an audible moving local clip, then explicit provider/viewer testing,
+   game/menu privacy, microphone/headsets, session and update/recovery/removal.
+   Record actual outcomes; fix demonstrated failures, supply a new exact
+   candidate and repeat affected cases.
+2. **#87 → #95/#88 — Approved migration and clean installation.** After the
+   current-install fix loop and exact authority, perform the migration, verify
+   the actual destination's dependency graph, manifest ingestion and review
+   execution on a real PR, then test its
+   new canonical download and installation. Record independent/new-user adoption
+   and remaining CI/platform/rights/review gates in the concrete v1 packet.
+3. **#88/#46 — Publication and closure.** Prepare the exact final version,
+   artifacts, changelog and responsible publishers before specific release or
+   deployment approval. Reconcile #46 last against its original criteria.
+
+**#89 stays separate:** login research is ready for owner design discussion;
+authentication coding or app registration does not start automatically. The
+current manual-key streaming path does not wait for optional login.
 
 ## Earlier aurora review candidate
 

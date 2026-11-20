@@ -1,6 +1,26 @@
 # deckystream implementation and migration roadmap
 
-## Selected aurora candidate ready for review
+## Current merged implementation and remaining sequence
+
+#113 and #114 are merged in order; implementation merge `a315224` has the same
+tree as reviewed head `68f7a288`. The existing test candidate remains exact source
+`772230a`, not the merge revision. Its
+[checkpoint](pre-migration-qualified-checkpoint.md) links the immutable
+[owner packet](https://github.com/szmyty/obsgod/blob/430cc391cb63f080214aacc279e5c04b1092c7a5/OWNER-PACKET.md),
+standard ZIP, checksums, rollback and numbered tests. Available qualification
+recorded 70 passed command checks and two unavailable; actual manual cases,
+supported ACT capacity, hosted/services, rights/review and adoption remain open.
+
+Follow the [ordered pre-test work](../ROADMAP.md#before-manual-testing): current
+#84 handoff cleanup, literal source-acceptance bookkeeping, #85 candidate/matrix
+evidence and parallel #87/#88 owner facts. Then use the paired #86 test/fix loop
+before the approved #87 migration, actual #95 service verification and #88 clean
+installation/v1 packet. #46 closes last. #89 stays research-only until owner
+design discussion; manual-key testing does not depend on it. This sequence
+preserves the original dependencies and all 230 criteria rather than creating
+new prerequisites or publication authority.
+
+## Earlier selected aurora review candidate
 
 #112 merged normally at **069db4a**. Draft [#113](https://github.com/szmyty/obsgod/pull/113)
 implements selected 01 / aurora assets, lowercase presentation, local native
