@@ -8,18 +8,17 @@
 
 # deckystream
 
-**Stream from Steam Deck with OBS.** Set up in Desktop Mode, then control your
-stream, microphone and local recordings from Decky's Quick Access panel in
-Gaming Mode.
+**Stream from Steam Deck with OBS.** Set up and control your stream, microphone
+and local recordings from Decky's Quick Access panel in Gaming Mode.
 
-[Historical review download](docs/current-review-install.md) ·
+[Current review download and tests](docs/aurora-owner-packet.md) ·
 [User guide](docs/steam-deck.md) · [Get help](SUPPORT.md) ·
 [Roadmap](ROADMAP.md) · [Support development](#support-development)
 
-**Development preview.** The linked review build has passed its available local
-qualification. Actual Deck/provider-viewer acceptance, required CI and applicable
-reviews remain open. See the [exact-source results](audits/qualification-4699235.md)
-for what passed and what remains unrun or unavailable. The executable, installed
+**Development preview.** The current review candidate is exact source `af7a20f`:67
+local command predicates passed; the full ACT matrix is unavailable. Actual Deck/
+provider-viewer acceptance, required CI and applicable reviews remain open. See
+[exact-source results and limits](docs/aurora-integration-checkpoint.md). The executable, installed
 plugin and storage compatibility names are still `obsgod` / `OBSGod`.
 
 ## What you can do
@@ -41,8 +40,8 @@ making a local clip or recovering a connection does not start a stream.
 The current source uses one standard Decky plugin ZIP. Decky Loader must already
 be installed; OBS Studio and matching capture dependencies are consented first-run
 setup, with progress, cancel and retry. A separate Desktop application is optional.
-The next exact-source install/test packet is tracked in [#85](https://github.com/szmyty/obsgod/issues/85).
-The historical review download above remains its explicitly named older source.
+Use the [checksum-bound current review packet](docs/aurora-owner-packet.md); final
+qualification remains tracked in [#85](https://github.com/szmyty/obsgod/issues/85).
 
 1. Stop streaming, recording and replay before replacement. Install the exact
    checksum-bound standard ZIP supplied with your candidate through Decky's
@@ -61,8 +60,10 @@ includes its WebSocket server, so a second WebSocket plugin is unnecessary.
 OBS remains a graphical application managed in the background; a graphical
 session is required.
 
-The linked manual review checkpoint is exact source `4699235e9e925b76ca492d5a00a375ed37fb338e`,
-not a newly published release or an update offered by **Check for updates**.
+The current review checkpoint is exact source `af7a20fdd0c62404e9b11d540fb605368e269380`,
+not a release or update offered by **Check for updates**. The unchanged
+[historical Desktop review installer](docs/current-review-install.md) still targets
+`4699235e9e925b76ca492d5a00a375ed37fb338e`.
 The older [1a/d0a candidate](docs/candidate-9-install.md) remains unchanged, and
 [published previews](https://github.com/szmyty/obsgod/releases) do not contain all
 current work. Use the source revision and checksums supplied with your candidate.

@@ -1,28 +1,44 @@
 # Current work
 
-## Selected aurora integration and restored execution
+## Selected aurora review candidate and qualification
 
-The owner authorized merging #112 and continuing. Fresh focused checks at clean
-448b15d actually passed: TypeScript,160 Node tests, frontend build, two complete
-primary ZIP builds (5b068a7d) and all three affected packaged browser suites.
-Normal merge is **069db4a21ec0a173b7dd30c12a53018c7700f79b**, with exactly the
-reviewed head tree. No protection was bypassed; hosted billing jobs ran no steps.
-#80/#81 remain open for their selected artwork/integration acceptance.
+#112 merged normally at **069db4a21ec0a173b7dd30c12a53018c7700f79b** after
+fresh focused checks at448b15d. Its two verified-merged branches were removed.
+Draft [#113](https://github.com/szmyty/obsgod/pull/113) integrates the selected
+01 / aurora source kit, lowercase deckystream, local native marks plus an
+independent observed-state badge, README/site assets and current setup docs.
 
-Execution now works on the existing checkout; Git/API/Docker and pinned tools
-were verified. Branch **feat/aurora-selected-brand** implements the selected
-source/export kit, local native logo and separate status badge, lowercase display,
-README/site projections and fresh Identity consumer evidence. Read the
-[selected source/rights contract](docs/selected-aurora.md). Original concepts,
-mint outputs, stable IDs and all230 criteria/dependencies remain intact.
+Qualified clean source is **af7a20fdd0c62404e9b11d540fb605368e269380**, tree
+**d6149d9ec670cffcc30db355262aa688382b5e7e**. The completed controller has
+**67 passed command predicates and1 unavailable matrix command**. All10
+packaged browser flows,3 native Linux OBS harnesses,161 Node tests,33 branding
+tests,38-file export repeat, Go/Python/security and package/install audits passed
+with recorded skips/limits. Two complete primary builds match ZIP **4deece2b**.
+Read the [exact-source checkpoint](docs/aurora-integration-checkpoint.md) and
+[owner packet](docs/aurora-owner-packet.md).
 
-Asset/guard tests and fresh-repeat exports passed during preparation, but no
-working-tree result is promoted to a later source. Commit the integrated source,
-run fresh appropriate checks and record exact revisions/commands/platforms and
-passed/failed/skipped/unavailable/unrun outcomes. Full #85 matrix/owner-machine
-and actual #86 Deck/provider/controller/headset acceptance remain separate. No
-rights/production-adoption decision, release/deploy/migration/Store action,
-spending or other-repository change is implied.
+All18 immutable review-artifact files at **f2b160823800e3befd7440e6bcce8d135845a008**
+were publicly downloaded and hash-verified. This is a review branch, never a
+source merge target or release/updater offer. Actual proof ZIP, original/public
+hashes, independent source/visual/privacy reviews and all104 bounded criterion
+remainders are recorded. The original230 ledger/dependencies remain unchanged.
+All21 literal #80/#81 local criteria have evidence; issues stay open for review.
+
+FullACT preflight refused before allocation: root shortfall4,946,694,316bytes at
+the recorded attempt; all6 jobs/probe unrun. Standalone commands are not ACT jobs.
+Hosted af7:15 billing refusals+1skip,0steps, no executed non-billing source failure.
+Machine OS is still unknown; next is the capable-free-machine matrix and numbered
+owner tests, then actual #86 Steam Deck/loader/provider/controller/headset loop.
+#82-C1 real supported-loader lifecycle remains explicit. #87/#88 migration/new
+install/v1 and #95 actual destination dependency graph follow their original
+gates; #89 OAuth/phone research remains separate. Rights/license/publisher,
+required CI/platform/review and independent/new-user adoption remain open.
+
+Later evidence/documentation commits do not relabel af7 package/source bytes as
+a newer qualified revision. No release, deployment, migration, Store submission,
+paid resource or other-repository change occurred. No network/package preset or
+injected authentication change was made. Existing checkout remains the source
+workspace; old receipts apply only to their stated revisions.
 
 ## Earlier checkpoints
 

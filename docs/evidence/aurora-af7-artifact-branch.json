@@ -1,0 +1,103 @@
+{
+  "schema": "deckystream.review-artifact-branch/v1",
+  "branch": "artifacts/aurora-af7-review",
+  "commit": "f2b160823800e3befd7440e6bcce8d135845a008",
+  "tree": "372ec00952ec461b95671d68402a466bbb4c5a06",
+  "source_parent": "af7a20fdd0c62404e9b11d540fb605368e269380",
+  "source_checkout_unchanged": true,
+  "files": {
+    "OWNER-PACKET.json": {
+      "git_blob": "b471656d0ee630ab8156c0d484af5ae8729590f9",
+      "sha256": "35505509bb74ef1edfceb625b5555e818d967b4963212ee3731ec84784c2d1f3",
+      "bytes": 36252
+    },
+    "OWNER-PACKET.md": {
+      "git_blob": "9b48fdd37b89b2891c3aff8932f8f1e983f23d71",
+      "sha256": "83f428cc669cad4ccd7ffeea8b05cf19b9ef7e8c5ae84ae197a4aba0936117e0",
+      "bytes": 10615
+    },
+    "OWNER-TESTS.md": {
+      "git_blob": "470782f017443ecaccf24e0b7c234d826f54fbd6",
+      "sha256": "17d7291c96ca118e9e6d423475de28fd365807508dd2f8b9473f7c93fba8e088",
+      "bytes": 14087
+    },
+    "PUBLIC-OWNER-REVIEW.json": {
+      "git_blob": "9f66e779c1a2ab8185366e3ae552d0ebcbe479e6",
+      "sha256": "ed573e399e268033daadbe730e25e7a146f3311af3ccce001722176b6b3db923",
+      "bytes": 3188
+    },
+    "PUBLIC-OWNER-REVIEW.md": {
+      "git_blob": "627faca5d0fb9d2b87b43f0466ff7c7fe9841b26",
+      "sha256": "4dd897ae183247de60dce6e895561df586355e97dbb8d1e587de2336c82cd4bc",
+      "bytes": 896
+    },
+    "PUBLIC-PROOF-REVIEW.json": {
+      "git_blob": "c5c0cd57615426966732d276627630795b00606b",
+      "sha256": "b693b5bbb011d77fd42bc2a807ecfc3dbc1733f636ab4d81769f8eed8cd235fe",
+      "bytes": 50497
+    },
+    "PUBLIC-PROOF-REVIEW.md": {
+      "git_blob": "15dd4f1f2e36174dec29c39670665f54bcc0e848",
+      "sha256": "506af95d47924f7d6ebe46661664c19193879f4f09a6bdab89a1a34a239bad6c",
+      "bytes": 2046
+    },
+    "README.md": {
+      "git_blob": "6ed59f4affc23fed2e27bf2a5966e3f4d27a3bc6",
+      "sha256": "b15d88f77d692317d70dcc5ae8faf837d5b33452a7fdc025abc8c20d4ae36752",
+      "bytes": 1283
+    },
+    "REPRODUCE.md": {
+      "git_blob": "dd6161ce348bd57545901c86c543dee7a66e33d3",
+      "sha256": "a66239969be2d02116336a8008eae98ce3727fad96790e93088a27ff71a1d669",
+      "bytes": 9268
+    },
+    "SHA256SUMS": {
+      "git_blob": "256a2792a1f6dfbfda9a028c648fb2316ea7f265",
+      "sha256": "55ab08333dafa6a5411c09bf361058f5c3b5fe2946e1193e4971e3f778722fc2",
+      "bytes": 1467
+    },
+    "aurora-af7-public-proof.zip": {
+      "git_blob": "da3569f2ebf92322ef1d6666fd8a90b2a9c3009e",
+      "sha256": "de58f9171eaa6b3b091dbe3a10d0ab5bb1515cc3d922cb2a4f44b61aba643241",
+      "bytes": 586090
+    },
+    "build-receipt.json": {
+      "git_blob": "906b2881cbb119cd34ffd53c8ec181a1fbf968c9",
+      "sha256": "ace6c1ad10d6f52539034a47742dc2083b9dd66954c2b2dbc37741a4a94ffcad",
+      "bytes": 67570
+    },
+    "candidate.json": {
+      "git_blob": "03a7d9bcc7909954f3eaf679e4398c65bb9bb898",
+      "sha256": "8d65bda6eaeab87a4b035d5618e0c8e3fb2dceccf90244fa56ef581ebddae989",
+      "bytes": 928
+    },
+    "criteria-review.json": {
+      "git_blob": "7b240b07cb7b6e0bbebd9b65909a1baaae11e431",
+      "sha256": "00ec0dd193a5882de1199c9be5721d7aaee7df9eb4e9e3bf1faa3b6cffaaf697",
+      "bytes": 59889
+    },
+    "obsgod-decky.zip": {
+      "git_blob": "1814445f89ba07062d80d10b71a20cbc6c575c04",
+      "sha256": "4deece2bcaba6440c168d5cb7b1bc585e346d6b2f06655a1672c0d9638afeab8",
+      "bytes": 4570728
+    },
+    "qualification-summary.json": {
+      "git_blob": "99ea451d59822094cb069f615ffa8d0cc5039e6a",
+      "sha256": "ea422d3d2d0dde4ecd822706f4a9fddbccdd1a0b01084ee7f585dcfd3276d45a",
+      "bytes": 26153
+    },
+    "remaining-acceptance.json": {
+      "git_blob": "943ab3672c147012e5fb38c00c943264b406fdfd",
+      "sha256": "99972b9fb06e6594d0f82dd9588ba663de211d038a954bf2f789001aede65835",
+      "bytes": 98180
+    },
+    "remaining-acceptance.md": {
+      "git_blob": "863ba8a038103104ec626532045ac8a7436d46a1",
+      "sha256": "66cb98655f70d9b2295958db205c24cdc86e908871869be818ccea27cdf15e0a",
+      "bytes": 5612
+    }
+  },
+  "publication_type": "review branch checkpoint; no release/tag/deployment/migration/updater offer",
+  "pushed": true,
+  "download_verification": "passed"
+}

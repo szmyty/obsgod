@@ -1,15 +1,23 @@
 # Product roadmap
 
-## Selected aurora integration #80/#81
+## Selected aurora candidate ready for review
 
-#112 merged normally at **069db4a** after fresh focused source448b15d validation:
-160 Node tests, typecheck/build, primary2 and three packaged browsers passed.
-The restored existing workspace now supports selected aurora source/exports,
-lowercase display and local UI/README/site integration. See the
-[selected source contract](docs/selected-aurora.md). Source-changing repairs and
-fresh candidate checks precede final #85 qualification/machine tests, then #86
-actual Steam Deck validation. All230 original criteria/dependencies and actual
-rights/publisher/CI/adoption gates remain. No release/deploy/migration/spending.
+#112 merged normally at **069db4a**. Draft [#113](https://github.com/szmyty/obsgod/pull/113)
+implements selected 01 / aurora assets, lowercase presentation, local native
+branding with separate observed state, README/site integration and bounded setup
+documentation repairs. Clean source **af7a20f** has67 passed command predicates;
+the fullACT matrix remains unavailable and all6 jobs unrun. Hosted af7 jobs
+executed0steps due15 billing refusals/1expected skip. No current-source platform,
+provider, rights, review or adoption gate is waived.
+
+Read the [qualified source, results and limitations](docs/aurora-integration-checkpoint.md) and
+[immutable review download/owner packet](docs/aurora-owner-packet.md). All18 published review files
+were downloaded and hash-verified; no release/deployment/migration occurred.
+Next: review #113, complete #85 on a capable free machine, run #86 actual Deck
+cases/fix loop, then approved #87 migration and #88 new-install/v1 packet with
+#95 dependency graph/real PR comparison. #89 authentication stays research-only.
+All230 original criteria/dependencies and104 bounded current criteria remain.
+Later notes/evidence commits are not the qualified af7 package revision.
 
 ## Earlier checkpoints
 

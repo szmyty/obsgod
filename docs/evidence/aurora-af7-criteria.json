@@ -1,0 +1,1294 @@
+{
+  "schema": "deckystream.aurora-independent-acceptance-review/v1",
+  "recorded_utc": "2026-11-20T07:52:03.124095+00:00",
+  "reviewer": "/root/aurora_acceptance_review",
+  "source": {
+    "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+    "tree": "d6149d9ec670cffcc30db355262aa688382b5e7e",
+    "dirty": false,
+    "tracked_file_count": 617
+  },
+  "pr": {
+    "number": 113,
+    "state_at_assignment": "draft-open",
+    "merged": false,
+    "url": "https://github.com/szmyty/obsgod/pull/113"
+  },
+  "purpose": "Read-only independent mapping of seven live #80 plus fourteen live #81 literal local criteria to frozen source and existing actual evidence. No repository code/test rerun or GitHub mutation.",
+  "result": "no-blocking-local-source-or-visual-finding; broader-qualification-completed",
+  "formal_github_approval": false,
+  "issue_closures_performed": false,
+  "issue_state": {
+    "80": {
+      "state": "open",
+      "url": "https://github.com/szmyty/obsgod/issues/80",
+      "updated_at": "2026-11-19T01:50:51Z",
+      "snapshot": {
+        "path": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/aurora-review-live-80.json",
+        "sha256": "979c8a013b1f0c6517fda14f381913dd5675745e79d73ab33d0e77b88dd87f0d",
+        "bytes": 11493
+      }
+    },
+    "81": {
+      "state": "open",
+      "url": "https://github.com/szmyty/obsgod/issues/81",
+      "updated_at": "2026-11-19T01:50:52Z",
+      "snapshot": {
+        "path": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/aurora-review-live-81.json",
+        "sha256": "0cbd34175dc687d5d6aa85f627d0ed68037105ebcc25ecf364cb4ebc8bc256ab",
+        "bytes": 12179
+      }
+    }
+  },
+  "criteria_count": {
+    "80": 7,
+    "81": 14,
+    "total": 21
+  },
+  "criteria": [
+    {
+      "id": "80-C1",
+      "issue": 80,
+      "literal_criterion": "Use .identity/candidates/concepts/selection.json and exact retained PNG hashes as the creative reference; keep mint-signal, the original orbital board/icon and alternatives accessible as concepts.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        ".identity/candidates/concepts/selection.json",
+        ".identity/candidates/aurora/inventory.json",
+        "branding/repository",
+        ".identity/candidates/concepts"
+      ],
+      "checks": [
+        "selected-brand-tests",
+        "selected-brand-drift"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Selection binds exact original board, icon and selected 01 comparison PNG digests. Independent byte comparison against merged 069 verified all 41 retained mint/concept files unchanged; the current 617-file source inventory also matches.",
+      "limits": [
+        "Direction approval is a creative-reference fact only."
+      ]
+    },
+    {
+      "id": "80-C2",
+      "issue": 80,
+      "literal_criterion": "Finalize traceable selected source artwork and user-facing lowercase deckystream wordmark. Distinguish original raster masters from any separately authored vector geometry; do not claim automatic or identical PNG-to-SVG conversion.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        ".identity/candidates/aurora/mark.svg",
+        ".identity/candidates/aurora/mark-small.svg",
+        ".identity/candidates/aurora/hero-master.png",
+        ".identity/candidates/aurora/hero-generation.json",
+        "branding/aurora/docs/wordmark.svg",
+        "product.json"
+      ],
+      "checks": [
+        "selected-brand-tests",
+        "selected-brand-drift",
+        "product-projection-check"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Separately authored Codex vectors and a single unchanged image_gen raster master have distinct source hashes and actual creator/method records. Generated wordmark and user-facing product display are lowercase deckystream. The selected vector visibly interprets the orbital S motif; it is not an identical raster conversion.",
+      "limits": [
+        "Image generation itself is not deterministic; deterministic export starts from the pinned original raster. Final creative adoption and rights decisions remain unapproved."
+      ]
+    },
+    {
+      "id": "80-C3",
+      "issue": 80,
+      "literal_criterion": "Generate the main gradient icon, appropriate small-size treatments, banner/README, repository preview/avatar and existing docs/landing assets from pinned sources, with reproducible exports where promised.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        "scripts/generate-aurora-kit.py",
+        "scripts/generate-aurora-ui.py",
+        "branding/aurora/aurora-manifest.json",
+        "README.md",
+        "site/assets/brand-icon.png",
+        "site/assets/brand-hero.png"
+      ],
+      "checks": [
+        "selected-brand-tests",
+        "selected-brand-drift",
+        "selected-brand-repeat",
+        "selected-ui-projection-check",
+        "browser-site"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "The 19 pinned source digests and all 36 manifest output digest/byte rows independently match source. The export directory contains 38 files: 36 manifest-bound outputs, its manifest and a full kit ZIP. It includes main/small/transparent/light marks, actual-size sheets, wordmark, README headers, repository avatars/preview, local docs/landing projections and PNG/full ZIP downloads. Fresh-directory repeat and raster drift checks actually passed.",
+      "limits": [
+        "Reproducibility is conditional on the explicitly pinned Inkscape/font toolchain, not a claim that arbitrary renderers or image generation produce identical bytes."
+      ]
+    },
+    {
+      "id": "80-C4",
+      "issue": 80,
+      "literal_criterion": "Create ordinary PNG downloads and an offline gallery that open without remote assets/fonts, with transparent/light/dark variants clearly explained.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        "branding/aurora/index.html",
+        "branding/aurora/deckystream-aurora-png.zip",
+        "branding/aurora/deckystream-aurora-kit.zip",
+        "branding/aurora/README.md"
+      ],
+      "checks": [
+        "selected-brand-tests",
+        "selected-brand-drift"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Ordinary decoded PNG outputs and a self-contained data-URI gallery are present. The byte-identical HTML rendered at desktop/mobile loopback viewports with all 16 PNGs decoded, no external requests or browser errors, and a real PNG download matching its source/manifest bytes. Gallery copy explains transparent, dark and light variants.",
+      "limits": [
+        "Direct file:// navigation was actually attempted and blocked by administration policy (ERR_BLOCKED_BY_ADMINISTRATOR); retained raw receipt exit 1 is UNAVAILABLE, never a file-open pass. Loopback proof establishes self-contained artifact rendering/downloads, not literal file-URL or target-device acceptance."
+      ]
+    },
+    {
+      "id": "80-C5",
+      "issue": 80,
+      "literal_criterion": "Review real 16/24/32/64 sizes and normal/highlighted dark-menu presentation; a monochrome fallback is optional, not a Decky API requirement.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        "branding/aurora/review/menu-sheet.png",
+        "branding/aurora/review/legibility-sheet.png",
+        "branding/aurora/review/contrast.json",
+        "branding/aurora/web/favicon-16.png",
+        "branding/aurora/web/favicon-24.png",
+        "branding/aurora/web/favicon-32.png",
+        "branding/aurora/web/favicon-64.png"
+      ],
+      "checks": [
+        "selected-brand-tests",
+        "selected-brand-drift"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Independent visual reviewer opened actual 16/24/32/64 review sheets and selected raster exports: the ring/S remains identifiable on normal and highlighted dark fields, with no blocking visual defect. The recorded text contrast ratios exceed the declared 4.5 minimum; no monochrome API requirement is invented.",
+      "limits": [
+        "Physical Steam Deck display/controller perception is UNRUN under #86. Pixel-level visual inspection is human-agent review, not trademark/creative-rights approval."
+      ]
+    },
+    {
+      "id": "80-C6",
+      "issue": 80,
+      "literal_criterion": "Keep actual creator/tool provenance, licenses/notices, rights gaps and chosen publication owners honest. Direction approval alone does not approve rights/licensing or qualify final output.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        ".identity/candidates/aurora/inventory.json",
+        ".identity/candidates/aurora/hero-generation.json",
+        "branding/aurora/metadata/rights-and-sources.json",
+        "branding/aurora/licenses/DejaVu.txt",
+        ".identity/governance/approvals.json",
+        ".identity/governance/provenance.json"
+      ],
+      "checks": [
+        "selected-brand-tests",
+        "selected-brand-drift"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Actual Codex vector authoring and one image_gen hero operation are recorded without human/exclusive-rights claims. The font notice is bundled. Vector MIT is explicitly a proposed owner decision; hero license is unasserted. Final human approvals, rights clearance, organization/publisher selection and Identity adopted governance entries remain empty/pending rather than fabricated.",
+      "limits": [
+        "This satisfies honest provenance/gap reporting, not rights clearance or publication permission. Owner must decide legal/license/attribution and publication ownership in the consolidated owner packet before publication/adoption."
+      ]
+    },
+    {
+      "id": "80-C7",
+      "issue": 80,
+      "literal_criterion": "Update Identity consumer source/evidence for the selected assets; earlier source-bound brand receipts remain historical. No Identity repository changes or deployment.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        ".identity/identity.json",
+        ".identity/README.md",
+        ".identity/brief.md",
+        "branding/evidence/aurora-identity-source.json",
+        "docs/selected-aurora.md"
+      ],
+      "checks": [
+        "identity-consumer-check",
+        "selected-brand-drift"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Selected candidate/source and lowercase consumer display are updated without changing stable project/plugin IDs. The immutable cfb6c29 Identity validator (recorded digest) actually validates current consumer source with no diagnostics. Separate export manifest binds art bytes; the Identity contract receipt does not falsely claim it validates every PNG. Historical mint/old-revision receipts remain present and distinct.",
+      "limits": [
+        "No Identity repository mutation, deployment, adopted token-layer change, approved Identity compiler output or final artwork approval is asserted. Current upstream head is not silently substituted for the deliberately pinned consumer contract."
+      ]
+    },
+    {
+      "id": "81-C1",
+      "issue": 81,
+      "literal_criterion": "Use native Decky components with predictable controller focus, readable text, touch targets, keyboard entry and compact progressive disclosure for advanced settings.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        "steamdeck/decky/src/index.tsx:261",
+        "steamdeck/decky/src/Configuration.tsx:37",
+        "steamdeck/decky/src/Configuration.tsx:186",
+        "steamdeck/decky/src/Setup.tsx:87",
+        "steamdeck/decky/src/Advanced.tsx:132"
+      ],
+      "checks": [
+        "frontend-absent-typecheck",
+        "frontend-absent-test",
+        "frontend-absent-build",
+        "frontend-reused-typecheck",
+        "frontend-reused-test",
+        "frontend-reused-build",
+        "browser-panel",
+        "browser-configuration",
+        "browser-dependencies"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Native Decky components are composed with controls first, stable progressive-disclosure editors and keyboard/focus browser cases. Current packaged browser tests cover narrow configured panel geometry, save/paste/keyboard entry, locked pending edits and focus persistence. All six normal-user frontend commands passed; 161 Node tests passed in each test invocation.",
+      "limits": [
+        "Decky browser/native API fixtures do not prove physical controller behavior, actual Steam keyboard or SteamOS geometry; those remain #86 by the issue wording."
+      ]
+    },
+    {
+      "id": "81-C2",
+      "issue": 81,
+      "literal_criterion": "Add the bundled aurora gradient logo subtly in the header/plugin icon and use the selected lowercase display styling; keep live observed status dot/text independent of decorative logo color.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        "steamdeck/decky/src/index.tsx:87",
+        "steamdeck/decky/src/index.tsx:89",
+        "steamdeck/decky/src/index.tsx:321",
+        "steamdeck/decky/src/AuroraMark.tsx",
+        "steamdeck/decky/src/aurora-brand.mjs",
+        "steamdeck/decky/src/product.ts"
+      ],
+      "checks": [
+        "selected-ui-projection-check",
+        "product-projection-check",
+        "browser-panel"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Local generated gradient SVG appears in both header and actual plugin icon; lowercase display comes from product projection. Separate observed-state dot and aria-label/status text remain bound to health/currentResult, not decorative logo color. Actual live/unconfirmed/stopped screenshots show distinct green/yellow/red status with invariant aurora artwork.",
+      "limits": [
+        "Gradient art is a bundled review-preview projection; its color makes no streaming or approved-production claim."
+      ]
+    },
+    {
+      "id": "81-C3",
+      "issue": 81,
+      "literal_criterion": "Expose setup/dependency job progress, missing configuration and recovery with specific actions; retain manual Refresh plus automatic current-state updates.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        "steamdeck/decky/src/index.tsx:320",
+        "steamdeck/decky/src/Setup.tsx:109",
+        "steamdeck/decky/src/Setup.tsx:136",
+        "steamdeck/decky/src/Configuration.tsx:104",
+        "steamdeck/decky/src/Advanced.tsx:174"
+      ],
+      "checks": [
+        "browser-panel",
+        "browser-dependencies",
+        "browser-configuration",
+        "browser-m3-panel"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Manual Refresh remains available alongside 1.5-second status polling and setup/configuration polling. Current dependency browser cases prove consent/Later/cancel/retry/missing-only progress and surviving reload without restarting installation. Missing configuration, failed readiness and collapsed recovery feedback provide specific actions.",
+      "limits": [
+        "Actual Flatpak package installation/network interruption and Decky lifecycle remain separate target checks."
+      ]
+    },
+    {
+      "id": "81-C4",
+      "issue": 81,
+      "literal_criterion": "Disable or serialize actions from actual streaming/recording/replay/busy/unknown state; repeated clicks cannot create repeated success notifications, duplicate work or accidental Stop.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        "steamdeck/decky/src/state.mjs",
+        "steamdeck/decky/src/index.tsx:273",
+        "steamdeck/decky/src/index.tsx:274",
+        "steamdeck/decky/src/Configuration.tsx:54",
+        "steamdeck/decky/src/advanced-state.mjs"
+      ],
+      "checks": [
+        "frontend-absent-test",
+        "browser-panel",
+        "browser-configuration",
+        "browser-m3-panel",
+        "browser-mixer-panel",
+        "packaged-settings"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Existing guarded state controls remain byte-identical to merged 069, with exact-af7 fresh tests. Browser cases cover streaming/recording/replay/busy/unknown controls, repeated output/edit requests, stale results and no false success. Actual packaged Python-to-Go contention exercised six cases and 42 guarded child calls, including long shared locks, deadline ownership, independent explicit Stop and duplicate coalescing.",
+      "limits": [
+        "Simulated browser and synthetic-HOME process tests do not authorize real output or replace actual provider/OBS33/Deck qualification."
+      ]
+    },
+    {
+      "id": "81-C5",
+      "issue": 81,
+      "literal_criterion": "Keep screen versus verified game-only capture explicit, with intentional idle state and no automatic desktop fallback; show system audio/microphone selection, mute and availability honestly.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        "steamdeck/decky/src/index.tsx",
+        "steamdeck/decky/src/Mixer.tsx",
+        "steamdeck/decky/src/mixer-state.mjs",
+        "steamdeck/decky/src/advanced-state.mjs"
+      ],
+      "checks": [
+        "browser-panel",
+        "browser-m3-panel",
+        "browser-mixer-panel",
+        "browser-mixer-setup",
+        "native-audio",
+        "native-capture",
+        "native-game-obs"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Verified game-only versus screen capture, deliberate idle, no silent desktop fallback, and stream-only mixer/mic controls are preserved in existing source. Current packaged browser and Linux native OBS harnesses passed applicable transition/routing/privacy cases; availability, gain/mute and unknown states remain explicit.",
+      "limits": [
+        "Native harnesses are isolated Linux software/display/audio fixtures, not SteamOS/Gamescope/AMD/OBS33, actual Deck LCD/OLED/headset routing or provider acceptance."
+      ]
+    },
+    {
+      "id": "81-C6",
+      "issue": 81,
+      "literal_criterion": "Retain useful diagnostic console/copy with redaction and existing local-media/health/settings workflows; optional support links stay unobtrusive, verified and payment-free for core functionality.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        "steamdeck/decky/src/index.tsx:142",
+        "steamdeck/decky/src/index.tsx:147",
+        "steamdeck/decky/src/Advanced.tsx",
+        "steamdeck/decky/src/Support.tsx",
+        ".github/FUNDING.yml"
+      ],
+      "checks": [
+        "browser-panel",
+        "browser-m3-panel",
+        "browser-configuration",
+        "browser-support",
+        "browser-setup",
+        "browser-m3-setup"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Current browser cases retain diagnostic console/copy/filter/redaction, protected settings, local clips/media/profiles and health recovery. Support uses verified funding inventory, guarded navigation and hidden unset wallets; it remains optional at the bottom with no core payment requirement.",
+      "limits": [
+        "No wallet address, external support transaction, account registration or monetization/Store research is fabricated; #51 remains separate."
+      ]
+    },
+    {
+      "id": "81-C7",
+      "issue": 81,
+      "literal_criterion": "Bundle assets locally and inspect dark/focused/stale/error/empty states; screenshot fixtures are not claimed as real Deck acceptance.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        "steamdeck/decky/src/AuroraMark.tsx",
+        "steamdeck/decky/src/aurora-brand.mjs",
+        "steamdeck/decky/src/index.tsx",
+        "steamdeck/tests/browser-panel.py",
+        "steamdeck/tests/browser-native-configuration.py",
+        "steamdeck/tests/browser-m3-panel.py"
+      ],
+      "checks": [
+        "selected-ui-projection-check",
+        "browser-panel",
+        "browser-configuration",
+        "browser-m3-panel",
+        "browser-mixer-panel",
+        "browser-site"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Logo images are locally bundled inline SVG and site imagery is local PNG; packaged browser assertions actually decode header/plugin images with no remote asset need. Inspected screenshots cover live/unconfirmed/stopped and focus; automated cases cover stale/error/loading/empty states. Independent visual review found no blocking defect.",
+      "limits": [
+        "Screenshots are explicitly simulated packaged-frontend fixtures, never actual Deck acceptance."
+      ]
+    },
+    {
+      "id": "81-A1",
+      "issue": 81,
+      "literal_criterion": "Configured/streaming view shows observed state and Start/Stop before setup/advanced forms; setup remains prominent when required. In the 400\u00d7800 simulated native host, Stop currently appears around 1839px below expanded setup. This is fixture geometry, not physical Deck measurement.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        "steamdeck/decky/src/index.tsx:261",
+        "steamdeck/decky/src/index.tsx:273",
+        "steamdeck/decky/src/index.tsx:274",
+        "steamdeck/decky/src/index.tsx:280",
+        "steamdeck/decky/src/index.tsx:281"
+      ],
+      "checks": [
+        "browser-configuration",
+        "browser-panel",
+        "browser-dependencies"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "YOUR STREAM and Start/Stop are structurally before dependency/setup forms. A current configured streaming narrow-panel browser case verifies primary controls without scrolling; dependency setup remains visible when missing.",
+      "limits": [
+        "The earlier 400x800 fixture Stop-at-1839px finding is historical and is not represented as a physical Deck measurement."
+      ]
+    },
+    {
+      "id": "81-A2",
+      "issue": 81,
+      "literal_criterion": "Collapse saved destination/connection and advanced sections progressively; keep controller focus stable and clear private drafts when leaving editing.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        "steamdeck/decky/src/Configuration.tsx:48",
+        "steamdeck/decky/src/Configuration.tsx:52",
+        "steamdeck/decky/src/Configuration.tsx:54",
+        "steamdeck/decky/src/Configuration.tsx:65",
+        "steamdeck/decky/src/Configuration.tsx:79",
+        "steamdeck/decky/src/Configuration.tsx:123"
+      ],
+      "checks": [
+        "frontend-absent-test",
+        "browser-configuration"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Saved destination/connection and advanced sections collapse independently. Leaving editing clears both key/password refs, visibility and dialogs; increments the sensitive clipboard epoch so delayed clipboard resolution cannot restore a private draft. Poll results do not reopen/collapse a focused editor; current browser case exercises both privacy and focus.",
+      "limits": [
+        "Physical controller navigation and Steam keyboard rendering remain #86."
+      ]
+    },
+    {
+      "id": "81-A3",
+      "issue": 81,
+      "literal_criterion": "A failed health/recovery request is visibly reported even with health details collapsed.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        "steamdeck/decky/src/Advanced.tsx:167",
+        "steamdeck/decky/src/Advanced.tsx:174",
+        "steamdeck/tests/browser-m3-panel.py:125"
+      ],
+      "checks": [
+        "browser-m3-panel"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Recovery/health failure is projected as generic public message outside the collapsed health details. Current browser tests hide details and verify failure remains visible without exposing private backend error sentinels.",
+      "limits": [
+        "A displayed failed request is not a successful recovery or proof of actual device fault remediation."
+      ]
+    },
+    {
+      "id": "81-A4",
+      "issue": 81,
+      "literal_criterion": "Clip loading, confirmed empty, populated, failed and refresh states are distinct; loading cannot immediately claim an empty library.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        "steamdeck/decky/src/Advanced.tsx:94",
+        "steamdeck/decky/src/Advanced.tsx:108",
+        "steamdeck/decky/src/Advanced.tsx:114",
+        "steamdeck/decky/src/Advanced.tsx:117",
+        "steamdeck/decky/src/advanced-state.mjs:39",
+        "steamdeck/tests/browser-m3-panel.py:79"
+      ],
+      "checks": [
+        "frontend-absent-test",
+        "browser-m3-panel"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Clip results explicitly project idle/loading/ready/empty/failed and strict public display fields. The local pending lock lasts through final tool status refresh. The maintained browser fixture actually holds status refresh after returning clips, verifies unrelated local-record action is available while Browse stays locked, then releases the refresh; hide invalidates late requests and retry is exercised.",
+      "limits": [
+        "Library states are packaged frontend/fixture tests; actual on-Deck storage/recovery cases remain separate."
+      ]
+    },
+    {
+      "id": "81-A5",
+      "issue": 81,
+      "literal_criterion": "Failed provider-guide navigation gives accessible, secret-free feedback; reuse the existing guarded support-link pattern.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        "steamdeck/decky/src/configuration-state.mjs:9",
+        "steamdeck/decky/src/Configuration.tsx:70",
+        "steamdeck/decky/src/Configuration.tsx:74",
+        "steamdeck/decky/src/Configuration.tsx:212"
+      ],
+      "checks": [
+        "frontend-absent-test",
+        "browser-configuration"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Provider guide URLs come only from the fixed own-property provider inventory. Synchronous/asynchronous navigation failure becomes accessible polite, generic feedback; user destination URL and secret drafts are never passed to the guide action.",
+      "limits": [
+        "No external provider authentication or successful navigation is claimed by the failure-path check."
+      ]
+    },
+    {
+      "id": "81-A6",
+      "issue": 81,
+      "literal_criterion": "Advanced features have discoverable instructions/entry help for the existing protected optional Desktop Setup, with no separate mandatory application or unauthenticated LAN service.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        "steamdeck/decky/src/index.tsx:295",
+        "steamdeck/decky/src/index.tsx:296",
+        "steamdeck/decky/src/index.tsx:297",
+        "steamdeck/decky/src/Configuration.tsx:213"
+      ],
+      "checks": [
+        "browser-panel",
+        "browser-configuration",
+        "browser-setup",
+        "browser-m3-setup",
+        "browser-mixer-setup"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Optional Desktop Setup instructions are reachable from native configuration and advanced stream tools and describe the protected existing setup path. No separate mandatory app, unauthenticated LAN service or output-triggering navigation is introduced.",
+      "limits": [
+        "Protected Desktop Setup is optional; OAuth/companion setup remains deferred, not silently delivered here."
+      ]
+    },
+    {
+      "id": "81-A7",
+      "issue": 81,
+      "literal_criterion": "Apply the selected local aurora assets from #80; observed status color/text stay independent. Align update guidance with #102/#82 so no absent updater is advertised.",
+      "status": "supported-local-evidence-with-explicit-limits",
+      "source": [
+        "steamdeck/decky/src/index.tsx:309",
+        "steamdeck/decky/src/index.tsx:310",
+        "steamdeck/decky/src/index.tsx:311",
+        "steamdeck/decky/src/index.tsx:321",
+        "steamdeck/decky/src/AuroraMark.tsx"
+      ],
+      "checks": [
+        "selected-ui-projection-check",
+        "product-projection-check",
+        "browser-panel",
+        "browser-configuration"
+      ],
+      "nonpassing_referenced_checks": [],
+      "finding": "Selected local art is integrated with independent observed state. Update controls advertise the actual normal Decky ZIP/update path and optional Desktop Setup version; there is no native self-updater button or nonexistent updater claim.",
+      "limits": [
+        "No publishing/release, migration, installed-version update on a real Deck or Store eligibility is claimed."
+      ]
+    }
+  ],
+  "evidence": {
+    "available_checks": {
+      "binding": {
+        "path": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/available-checks.json",
+        "sha256": "9cc1a2f369fa7fa2be3e54056cb4dd7b9ea0fafdd25c3d559b8b965aa7061e59",
+        "bytes": 76627
+      },
+      "completed": true,
+      "primary_receipt_sha256": "d23cb8f370fbae5cf84dae9ffa137a0c22e7a71c900588ad4baf9e8eea0ca30a",
+      "primary_zip_sha256": "4deece2bcaba6440c168d5cb7b1bc585e346d6b2f06655a1672c0d9638afeab8",
+      "primary_archive": "/tmp/obsgod-aurora-final-100138e64c/primary/second/obsgod-decky.zip",
+      "scope": "Actual standalone commands only. A refused full ACT matrix is six unrun workflows; never relabel standalone checks as six hosted/local ACT job passes.",
+      "limits": [
+        "Actual Steam Deck/OBS33/Flatpak/Gamescope/AMD/controller/headset/provider and native non-Linux execution remain separate.",
+        "All logs are private pending independent review; source and synthetic fixture values may appear in raw test output.",
+        "No publication, deployment, migration, Store submission or spending is performed."
+      ],
+      "counts_at_observation": {
+        "unavailable": 1,
+        "passed": 67
+      },
+      "running_report_sha_not_bound_as_final": false
+    },
+    "criterion_check_bindings": {
+      "browser-configuration": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7",
+          "--",
+          "steamdeck/tests/browser-native-configuration.py",
+          "/tmp/obsgod-aurora-final-100138e64c/primary/second/obsgod-decky.zip",
+          "--browser",
+          "/usr/bin/chromium",
+          "--output",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-configuration"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-configuration.log",
+        "log_sha256": "e203dcf5f78dec53d6e7d1482721ac0bb2290622a87fcddb62a86ac2be4b339e",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "browser-dependencies": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7",
+          "--",
+          "steamdeck/tests/browser-dependency-setup.py",
+          "/tmp/obsgod-aurora-final-100138e64c/primary/second/obsgod-decky.zip",
+          "--browser",
+          "/usr/bin/chromium",
+          "--output",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-dependencies"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-dependencies.log",
+        "log_sha256": "3ccce3bdeef5d81acb5d9cd6be286732db15f2bf77be535f143dbf6b0d6f54f1",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "browser-m3-panel": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7",
+          "--",
+          "steamdeck/tests/browser-m3-panel.py",
+          "/tmp/obsgod-aurora-final-100138e64c/primary/second/obsgod-decky.zip",
+          "--browser",
+          "/usr/bin/chromium",
+          "--screenshots",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-m3-panel"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-m3-panel.log",
+        "log_sha256": "f127a8ec33356abb88c4d3055da556dce284d8ba595277550ccf2f482ae5453e",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "browser-m3-setup": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7",
+          "--",
+          "steamdeck/tests/browser-m3-setup.py",
+          "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+          "--browser",
+          "/usr/bin/chromium",
+          "--screenshots",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-m3-setup"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-m3-setup.log",
+        "log_sha256": "8b89ee58e9039ccc809617b16bd2421e3772d33f77b5cc676d4dc686d9fad0e1",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "browser-mixer-panel": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7",
+          "--",
+          "steamdeck/tests/browser-mixer-panel.py",
+          "/tmp/obsgod-aurora-final-100138e64c/primary/second/obsgod-decky.zip",
+          "--browser",
+          "/usr/bin/chromium",
+          "--screenshots",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-mixer-panel"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-mixer-panel.log",
+        "log_sha256": "0179d16220fa05ff8cea119976256c9fd55c8cb01e91ec39551110ef90f39041",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "browser-mixer-setup": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7",
+          "--",
+          "steamdeck/tests/browser-mixer-setup.py",
+          "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+          "--browser",
+          "/usr/bin/chromium",
+          "--screenshots",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-mixer-setup"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-mixer-setup.log",
+        "log_sha256": "8e1fd1aab86129a1761f97fbe84ee8bca41164e99a8ba6621cc570d83dbd3ce8",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "browser-panel": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7",
+          "--",
+          "steamdeck/tests/browser-panel.py",
+          "/tmp/obsgod-aurora-final-100138e64c/primary/second/obsgod-decky.zip",
+          "--browser",
+          "/usr/bin/chromium",
+          "--screenshots",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-panel"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-panel.log",
+        "log_sha256": "bd02e037a42e8dc0a3083eec72e4f59e516bb2dcb89690c89c41072781a4a811",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "browser-setup": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7",
+          "--",
+          "steamdeck/tests/browser-setup.py",
+          "/workspace/obsgod/dist/obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+          "--browser",
+          "/usr/bin/chromium",
+          "--screenshots",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-setup"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-setup.log",
+        "log_sha256": "79078b98cfde07d345ce8f0efc9abe4f6f14c7c8faf48da0920d9da86bc7c157",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "browser-site": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7",
+          "--",
+          "site/tests/browser.py",
+          "--browser",
+          "/usr/bin/chromium",
+          "--site-dir",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/site-html",
+          "--output",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/site-browser"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-site.log",
+        "log_sha256": "45c3806fd38070d6643e33709b0195c8cdcb643ba1d4ff901edf398f44c95ebc",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "browser-support": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7",
+          "--",
+          "steamdeck/tests/browser-support.py",
+          "--browser",
+          "/usr/bin/chromium",
+          "--screenshots",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-support"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/browser-support.log",
+        "log_sha256": "793f783e96662b00925852f207378db9d6c48f608e5b06e3a9bf1c7bc068c58d",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "frontend-absent-build": {
+        "command": [
+          "npm",
+          "--prefix",
+          "steamdeck/decky",
+          "run",
+          "build"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/frontend-absent-build.log",
+        "log_sha256": "911fa66000aeafc6c2f02b516b4ecf915ca6f956bbd36fe08934d07ecad64592",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "frontend-absent-test": {
+        "command": [
+          "npm",
+          "--prefix",
+          "steamdeck/decky",
+          "run",
+          "test"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/frontend-absent-test.log",
+        "log_sha256": "3a7b93002122232a6534f946e73245a6a7a93e231da35b614f5fc7e26a7a3f19",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "frontend-absent-typecheck": {
+        "command": [
+          "npm",
+          "--prefix",
+          "steamdeck/decky",
+          "run",
+          "typecheck"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/frontend-absent-typecheck.log",
+        "log_sha256": "4c51a932c40c1dc7887fef7b6e3a4ef90e59dbb21158e1fe8e6c1567a99e4a0e",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "frontend-reused-build": {
+        "command": [
+          "npm",
+          "--prefix",
+          "steamdeck/decky",
+          "run",
+          "build"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/frontend-reused-build.log",
+        "log_sha256": "b75ce3f762b3be18a34c775c11a2a1c08459a682d72df188469d924e62bc6429",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "frontend-reused-test": {
+        "command": [
+          "npm",
+          "--prefix",
+          "steamdeck/decky",
+          "run",
+          "test"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/frontend-reused-test.log",
+        "log_sha256": "1b372dc09ae952e71902883d72aeaa44202188362a5f0f74b701d33faf9d2ff9",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "frontend-reused-typecheck": {
+        "command": [
+          "npm",
+          "--prefix",
+          "steamdeck/decky",
+          "run",
+          "typecheck"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/frontend-reused-typecheck.log",
+        "log_sha256": "4c51a932c40c1dc7887fef7b6e3a4ef90e59dbb21158e1fe8e6c1567a99e4a0e",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "identity-consumer-check": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/generate-brand-identity-proof.py",
+          "--validator",
+          "/workspace/.obsgod-tools/completion/identity-upstream/scripts/validate_identity.py"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/identity-consumer-check.log",
+        "log_sha256": "1c33153db3f6b55a7408ed7d9b9cb259e3746bb158911b75b57679e1c176d161",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "native-audio": {
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "--user",
+          "1000:1000",
+          "-e",
+          "OBSGOD_QUALIFIED_REVISION=af7a20fdd0c62404e9b11d540fb605368e269380",
+          "--mount",
+          "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+          "--mount",
+          "type=bind,src=/tmp/obsgod-aurora-final-100138e64c/native-audio,dst=/work",
+          "obsgod-obs-smoke:qualification",
+          "dbus-run-session",
+          "--",
+          "bash",
+          "/src/steamdeck/tests/native-obs-smoke.sh"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/native-audio.log",
+        "log_sha256": "a8926c6c53506ecde47883e948defac2b0b46577c522de612e43f54421e0ef2c",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "native-capture": {
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "--user",
+          "1000:1000",
+          "-e",
+          "OBSGOD_QUALIFIED_REVISION=af7a20fdd0c62404e9b11d540fb605368e269380",
+          "--mount",
+          "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+          "--mount",
+          "type=bind,src=/tmp/obsgod-aurora-final-100138e64c/native-capture,dst=/work",
+          "obsgod-obs-smoke:qualification",
+          "dbus-run-session",
+          "--",
+          "bash",
+          "/src/steamdeck/tests/native-capture-smoke.sh",
+          "/src/dist"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/native-capture.log",
+        "log_sha256": "4bfe67e970711708b15a5d6ded0a1ee60fac2356d4663e0ec5842daddc68df29",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "native-game-obs": {
+        "command": [
+          "docker",
+          "run",
+          "--rm",
+          "--user",
+          "1000:1000",
+          "-e",
+          "OBSGOD_QUALIFIED_REVISION=af7a20fdd0c62404e9b11d540fb605368e269380",
+          "--mount",
+          "type=bind,src=/workspace/obsgod,dst=/src,readonly",
+          "--mount",
+          "type=bind,src=/tmp/obsgod-aurora-final-100138e64c/native-game-obs,dst=/work",
+          "obsgod-obs-smoke:qualification",
+          "dbus-run-session",
+          "--",
+          "bash",
+          "/src/steamdeck/tests/native-game-obs-smoke.sh"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/native-game-obs.log",
+        "log_sha256": "5bdf3781fcdeb8153601a5bfb24e0a41c03fbc7397a812956750e3a5ff294913",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "packaged-settings": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7",
+          "--",
+          "steamdeck/tests/packaged-settings-boundary.py",
+          "/tmp/obsgod-aurora-final-100138e64c/primary/second/obsgod-decky.zip",
+          "--revision",
+          "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "--output",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/packaged-settings"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/packaged-settings.log",
+        "log_sha256": "f6ef95b5d2eeb63f8a565bd1e288d0a118035defc8b6b3e4dc678195563f3da5",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "product-projection-check": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/generate-product.py",
+          "--check"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/product-projection-check.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "selected-brand-drift": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/generate-aurora-kit.py",
+          "--raster",
+          "--check"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/selected-brand-drift.log",
+        "log_sha256": "e9100fe6f6ae134029dcbf5ca6f5e72ac70ce925239fbd8e54c45be43d3720d0",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "selected-brand-repeat": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/generate-aurora-kit.py",
+          "--raster",
+          "--output",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/aurora-repeat"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/selected-brand-repeat.log",
+        "log_sha256": "4fd1eb8143bed4c365d7535f7a0facc2336078f55491977efd942df9684733ea",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "selected-brand-tests": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "branding/tests",
+          "-p",
+          "test_*.py",
+          "-v"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/selected-brand-tests.log",
+        "log_sha256": "71e7358b0dc63d2b5530a70505ac6625b5c0dd8db3b65876e663766664499a61",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      },
+      "selected-ui-projection-check": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "scripts/generate-aurora-ui.py",
+          "--check"
+        ],
+        "result": "passed",
+        "exit_code": 0,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/selected-ui-projection-check.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "dirty": false
+        }
+      }
+    },
+    "visual_review": {
+      "path": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/aurora-visual-independent.json",
+      "sha256": "342a4bdbc111331e5568dea492262f5401260cba435305cb6b693d7745c5d160",
+      "bytes": 12876
+    },
+    "visual_review_markdown": {
+      "path": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/aurora-visual-independent.md",
+      "sha256": "8f046de46431d96529d4603d3a7271ada65281800ecb7f6fe763587525a9412a",
+      "bytes": 4435
+    },
+    "gallery_summary": {
+      "path": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/gallery-evidence-summary.json",
+      "sha256": "cef9c1d1b662c64abfa04fa9b10a95ea35f4509a08c9cd593b1314158d31596c",
+      "bytes": 3188
+    },
+    "retained_inputs": {
+      "path": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/aurora-review-retained-inputs.json",
+      "sha256": "4bdf5fea910c4a39e3803528e8855cd536567e395f7dc8a0350c577af384a71b",
+      "bytes": 6454
+    },
+    "source_inventory": {
+      "path": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/final-source-hashes.json",
+      "sha256": "2315ac30fe9db92a08d1b7226f900f97d56b5359cd9ed8f1571a130b2f07ca5d",
+      "bytes": 103860
+    },
+    "source_inventory_hashes_verified": 617,
+    "manifest": {
+      "path": "/workspace/obsgod/branding/aurora/aurora-manifest.json",
+      "sha256": "53f2516abf4c1d1ec804f3bf64ca548e6c9aa6fb52d05f63a579565e4462304b",
+      "bytes": 8410
+    },
+    "manifest_sources_verified": 19,
+    "manifest_output_hash_and_byte_rows_verified": 36,
+    "identity_consumer_source_proof": {
+      "path": "/workspace/obsgod/branding/evidence/aurora-identity-source.json",
+      "sha256": "1c33153db3f6b55a7408ed7d9b9cb259e3746bb158911b75b57679e1c176d161",
+      "bytes": 1780
+    },
+    "rights_source_record": {
+      "path": "/workspace/obsgod/branding/aurora/metadata/rights-and-sources.json",
+      "sha256": "6ea8d8ba91db26ceae9c6923abe9a699d811e918ea31f7158dcba55dcda5c1a1",
+      "bytes": 2697
+    },
+    "original_230_criterion_ledger": {
+      "binding": {
+        "path": "/workspace/obsgod/docs/evidence/completion-criteria.json",
+        "sha256": "0795e6594c7bbde195bb8ebfcbc4050f0d5ecbe9c879767edbe0050540386df6",
+        "bytes": 735060
+      },
+      "criteria_count": 230,
+      "unchanged_from_merged_069": true
+    }
+  },
+  "preserved_scope": [
+    "All 230 original criteria/dependencies remain byte-identical; this bounded review does not replace/pass original ledgers.",
+    "Current native UI state/control/setup/configuration/advanced/mixer/support source is unchanged from merged 069 except selected artwork/header/icon integration in index.tsx; fresh current-source tests qualify preserved behavior.",
+    "Compatibility IDs, offline operation, approvals, public/review projections, deterministic export boundary, guarded paths and recovery remain preserved; no additional hard dependencies are inferred from priority order.",
+    "Old passing receipts do not qualify af7; current live issue checkpoint cancellation and pending-master language predates the present executed source and is historical."
+  ],
+  "explicit_remaining_gates_and_limits": [
+    "Physical Steam Deck/controller/Steam keyboard/rendering and actual SteamOS/Gamescope/AMD/OBS33/Flatpak/LCD-OLED/headset/provider validation remains #86/original criteria. Linux native fixtures do not substitute for it.",
+    "Owner source/rights/license/attribution/creative adoption and chosen organization/publisher decisions remain unapproved original facts/gates; accurate gap reporting is supported, publication rights are not asserted.",
+    "Consumer-owner actions, actual installed/adoption proof, release/publisher destinations and final owner packet remain separate original campaign work.",
+    "Actual supported ACT matrix exited 3 on demonstrated capacity preflight. All six ACT jobs are UNRUN; direct standalone passes are never described as ACT passes.",
+    "Direct gallery file:// navigation is UNAVAILABLE due administration policy, with failed raw receipt retained. Identical offline-content loopback rendering and download passed; literal file-open/target-device proof is not invented.",
+    "Hosted CI, required reviews/branch protections and any remaining full-matrix evidence must be assessed by root before merge/closure. This private local review is not formal GitHub approval.",
+    "No release, deployment, migration, account registration, other-repository change, Store submission, paid execution or issue closure occurred in this review."
+  ],
+  "next_parent_actions": [
+    "Use the exact frozen af7 candidate and bind the completed available-checks receipt only after the controller actually finishes; preserve every failed/skipped/unavailable/unrun distinction.",
+    "Curate public criterion-level evidence and reconcile stale issue checkpoints without discarding original acceptance/dependency text.",
+    "Inspect live protections/reviews/workflow side effects before any review, merge or issue disposition; no closure is performed or requested by this report.",
+    "Keep genuine owner/device/publication/adoption gates in the consolidated packet and #86/original ledgers without broadening bounded #80/#81 criteria."
+  ]
+}

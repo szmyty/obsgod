@@ -1,0 +1,69 @@
+{
+  "schema": "deckystream.independent-public-owner-staging-review/v1",
+  "reviewed_utc": "2026-11-20T08:05:37.022049+00:00",
+  "reviewer": "/root/qualify_aurora",
+  "status": "passed",
+  "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+  "source_tree": "d6149d9ec670cffcc30db355262aa688382b5e7e",
+  "archive_sha256": "de58f9171eaa6b3b091dbe3a10d0ab5bb1515cc3d922cb2a4f44b61aba643241",
+  "files": [
+    {
+      "name": "OWNER-PACKET.md",
+      "bytes": 10615,
+      "sha256": "83f428cc669cad4ccd7ffeea8b05cf19b9ef7e8c5ae84ae197a4aba0936117e0",
+      "nofollow_regular_read": true,
+      "raw_and_decoded_privacy": "passed",
+      "editor_placeholder_scan": "passed"
+    },
+    {
+      "name": "OWNER-PACKET.json",
+      "bytes": 36252,
+      "sha256": "35505509bb74ef1edfceb625b5555e818d967b4963212ee3731ec84784c2d1f3",
+      "nofollow_regular_read": true,
+      "raw_and_decoded_privacy": "passed",
+      "editor_placeholder_scan": "passed"
+    },
+    {
+      "name": "OWNER-TESTS.md",
+      "bytes": 14087,
+      "sha256": "17d7291c96ca118e9e6d423475de28fd365807508dd2f8b9473f7c93fba8e088",
+      "nofollow_regular_read": true,
+      "raw_and_decoded_privacy": "passed",
+      "editor_placeholder_scan": "passed"
+    },
+    {
+      "name": "REPRODUCE.md",
+      "bytes": 9268,
+      "sha256": "a66239969be2d02116336a8008eae98ce3727fad96790e93088a27ff71a1d669",
+      "nofollow_regular_read": true,
+      "raw_and_decoded_privacy": "passed",
+      "editor_placeholder_scan": "passed"
+    },
+    {
+      "name": "remaining-acceptance.md",
+      "bytes": 5612,
+      "sha256": "66cb98655f70d9b2295958db205c24cdc86e908871869be818ccea27cdf15e0a",
+      "nofollow_regular_read": true,
+      "raw_and_decoded_privacy": "passed",
+      "editor_placeholder_scan": "passed"
+    },
+    {
+      "name": "remaining-acceptance.json",
+      "bytes": 98180,
+      "sha256": "99972b9fb06e6594d0f82dd9588ba663de211d038a954bf2f789001aede65835",
+      "nofollow_regular_read": true,
+      "raw_and_decoded_privacy": "passed",
+      "editor_placeholder_scan": "passed"
+    }
+  ],
+  "original_and_public_main_report_sha256": "9cc1a2f369fa7fa2be3e54056cb4dd7b9ea0fafdd25c3d559b8b965aa7061e59",
+  "public_summary_sha256": "ea422d3d2d0dde4ecd822706f4a9fddbccdd1a0b01084ee7f585dcfd3276d45a",
+  "errors": [],
+  "scope": "Six explicitly named staging text files read nofollow, hashed, scanned raw and recursively decoded with pinned reviewed scanner, and checked for unredacted known masks/editor placeholders; bounded source/count/gate/hash facts compared with actual proof ZIP. Root separately reviews links and broader claims. No files were modified or product tests executed.",
+  "notes": [
+    "Corrected main-report and summary hashes verified separately; public main report is byte-identical to original private report, zero redactions.",
+    "TBD refers only to genuine unresolved owner-machine OS/architecture facts, not an editing placeholder.",
+    "104-bullet inventory remains a dated pre-qualification preparation snapshot, separate from the unchanged230 original criteria.",
+    "These byte hashes must match final copied owner files; later corrections need a fresh byte-bound review."
+  ]
+}
