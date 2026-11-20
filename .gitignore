@@ -1,9 +1,0 @@
-obs-cli
-dist/
-node_modules/
-__pycache__/
-*.pyc
-*.cov
-coverage-summary.txt
-steamdeck/decky/dist/
-.local-ci/

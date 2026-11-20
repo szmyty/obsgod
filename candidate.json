@@ -1,0 +1,25 @@
+{
+  "schema": "deckystream.review-candidate/v1",
+  "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+  "source_tree": "d6149d9ec670cffcc30db355262aa688382b5e7e",
+  "version": "0.1.0-deck.9",
+  "package": {
+    "file": "obsgod-decky.zip",
+    "sha256": "4deece2bcaba6440c168d5cb7b1bc585e346d6b2f06655a1672c0d9638afeab8",
+    "bytes": 4570728
+  },
+  "evidence": {
+    "file": "aurora-af7-public-proof.zip",
+    "sha256": "de58f9171eaa6b3b091dbe3a10d0ab5bb1515cc3d922cb2a4f44b61aba643241",
+    "bytes": 586090
+  },
+  "status": "review-only; incomplete device/full-matrix/hosted/rights/adoption qualification",
+  "release_publication": false,
+  "deployment": false,
+  "migration": false,
+  "updater_offer": false,
+  "installed_compatibility_ids": "obsgod / OBSGod",
+  "display_name": "deckystream",
+  "review_pr": "https://github.com/szmyty/obsgod/pull/113",
+  "source_repository": "https://github.com/szmyty/obsgod"
+}

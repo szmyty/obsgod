@@ -1,0 +1,879 @@
+{
+  "schema": "deckystream.consolidated-owner-packet/v1",
+  "recorded_utc": "2026-11-20T08:03:05.119084+00:00",
+  "status": "Review-only source/artifact checkpoint; source evidence completed, full ACT/hosted/device/rights/adoption gates remain; no product release or updater offer.",
+  "privacy": "Reviewed public summary: public source/provenance, artifact digests and bounded measured outcomes; no credentials, environment values or raw private logs.",
+  "source": {
+    "repository": "https://github.com/szmyty/obsgod",
+    "public": true,
+    "namespace_owner_login": "szmyty",
+    "legal_publisher": null,
+    "fork_parent": "muesli/obs-cli",
+    "default_branch": "master",
+    "default_revision": "069db4a21ec0a173b7dd30c12a53018c7700f79b",
+    "candidate_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+    "candidate_tree": "d6149d9ec670cffcc30db355262aa688382b5e7e",
+    "candidate_clean": true,
+    "branch": "feat/aurora-selected-brand",
+    "merged_checkpoint": {
+      "pr": "https://github.com/szmyty/obsgod/pull/112",
+      "merge_revision": "069db4a21ec0a173b7dd30c12a53018c7700f79b"
+    },
+    "candidate_pr": {
+      "url": "https://github.com/szmyty/obsgod/pull/113",
+      "state": "open draft at latest read-only inspection; refresh before merging",
+      "head": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "base": "069db4a21ec0a173b7dd30c12a53018c7700f79b",
+      "observed_utc": "2026-11-20T08:03:05.119084+00:00"
+    },
+    "protection_observation": "Default branch API returned protected=false. Refresh actual protections/reviews/status requirements before any merge; an open draft is not merged acceptance.",
+    "display_name": "deckystream",
+    "retained_ids": {
+      "cli": "obsgod",
+      "plugin": "OBSGod",
+      "plugin_directory": "obsgod",
+      "storage_namespace": "obsgod"
+    },
+    "trust": "Current repository/update allowlist remains exactly szmyty/obsgod; future owner/deckystream is not activated."
+  },
+  "candidate": {
+    "version": "0.1.0-deck.9",
+    "purpose": "Current-identity owner-machine and Steam Deck review build",
+    "release_name_or_tag": null,
+    "planned_v1": "Future decision, not current package version or published tag",
+    "primary": {
+      "name": "obsgod-decky.zip",
+      "bytes": 4570728,
+      "sha256": "4deece2bcaba6440c168d5cb7b1bc585e346d6b2f06655a1672c0d9638afeab8",
+      "builds": 2,
+      "uid": 1000,
+      "gid": 1000,
+      "status": "passed",
+      "source_inventory_files": 617,
+      "payload_files": 33,
+      "manifest_sha256": "f837ad569b2d161ffe91ed92dbff14caf07a572badfce3cdb799a270f6b4e323",
+      "build_receipt_sha256": "ace6c1ad10d6f52539034a47742dc2083b9dd66954c2b2dbc37741a4a94ffcad",
+      "official_cli": "Supplementary official0.0.7 prepared-byte assembly passed33 payload files for af7. The two original primary builds did not invoke it; no source-compilation or raw-CLI-ZIP repeatability claim.",
+      "receipt": {
+        "path": "build-receipt.json",
+        "sha256": "ace6c1ad10d6f52539034a47742dc2083b9dd66954c2b2dbc37741a4a94ffcad"
+      }
+    },
+    "artifacts": [
+      {
+        "path": "obsgod-decky.zip",
+        "bytes": 4570728,
+        "sha256": "4deece2bcaba6440c168d5cb7b1bc585e346d6b2f06655a1672c0d9638afeab8"
+      }
+    ],
+    "download_status": "The same-directory verified plugin/checksum/build receipt and public proof are provided as a review-only checkpoint. No GitHub release/tag, updater offer or production publication is claimed; historical469 download remains separate and unchanged.",
+    "current_install_path": "Standard built Decky ZIP through Decky; explicit Install/Later for missing OBS/GStreamer dependencies; private native key settings. Optional Desktop installer/config/recovery remains separate.",
+    "artifact_scope": "Only the standard primary ZIP is offered here. Separately built compatibility archives/updater/audits remain engineering evidence, not additional install requirements."
+  },
+  "qualification": {
+    "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+    "source_tree": "d6149d9ec670cffcc30db355262aa688382b5e7e",
+    "platform": "Linux amd64 cloud runtime, uid1000; not Steam Deck/SteamOS",
+    "runtime": "Actual shell/Git/GitHub API/package/browser/native fixture execution works now; old offline/canceled setup state is historical.",
+    "available_status": "unavailable",
+    "available_receipt": "aurora-af7-public-proof.zip::standalone/available-checks.json",
+    "available_completed": true,
+    "available_check_counts": {
+      "unavailable": 1,
+      "passed": 67
+    },
+    "available_finished_utc": "2026-11-20T07:50:00.340773+00:00",
+    "available_receipt_final_hash": "9cc1a2f369fa7fa2be3e54056cb4dd7b9ea0fafdd25c3d559b8b965aa7061e59",
+    "snapshot_rows": [
+      {
+        "name": "supported-matrix",
+        "result": "unavailable",
+        "exit_code": 3,
+        "seconds": 0.122
+      },
+      {
+        "name": "preserve-dist-owned-rename",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.008
+      },
+      {
+        "name": "workflow-primary-negative",
+        "result": "passed",
+        "exit_code": 1,
+        "seconds": 0.191
+      },
+      {
+        "name": "compatibility-1",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 10.734
+      },
+      {
+        "name": "updater-1",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.639
+      },
+      {
+        "name": "compatibility-2",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 9.082
+      },
+      {
+        "name": "updater-2",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.704
+      },
+      {
+        "name": "artifact-audit-1",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.357
+      },
+      {
+        "name": "artifact-audit-2",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.324
+      },
+      {
+        "name": "application-python",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 86.045
+      },
+      {
+        "name": "tooling-python",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 1.922
+      },
+      {
+        "name": "go-race",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 27.578
+      },
+      {
+        "name": "go-process",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 9.033
+      },
+      {
+        "name": "go-vet",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 9.694
+      },
+      {
+        "name": "staticcheck",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 2.164
+      },
+      {
+        "name": "govulncheck",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 5.125
+      },
+      {
+        "name": "frontend-absent-typecheck",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.966
+      },
+      {
+        "name": "frontend-absent-test",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.305
+      },
+      {
+        "name": "frontend-absent-build",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.579
+      },
+      {
+        "name": "frontend-reused-typecheck",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.958
+      },
+      {
+        "name": "frontend-reused-test",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.285
+      },
+      {
+        "name": "frontend-reused-build",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.562
+      },
+      {
+        "name": "npm-audit",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.509
+      },
+      {
+        "name": "selected-brand-tests",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 4.674
+      },
+      {
+        "name": "selected-brand-drift",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 2.526
+      },
+      {
+        "name": "selected-brand-repeat",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 2.585
+      },
+      {
+        "name": "selected-ui-projection-check",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.034
+      },
+      {
+        "name": "product-projection-check",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.018
+      },
+      {
+        "name": "identity-consumer-check",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.07
+      },
+      {
+        "name": "packaged-settings",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 27.889
+      },
+      {
+        "name": "browser-panel",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 15.556
+      },
+      {
+        "name": "browser-dependencies",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 3.813
+      },
+      {
+        "name": "browser-configuration",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 11.813
+      },
+      {
+        "name": "browser-m3-panel",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 13.62
+      },
+      {
+        "name": "browser-mixer-panel",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 2.952
+      },
+      {
+        "name": "browser-setup",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 3.14
+      },
+      {
+        "name": "browser-m3-setup",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 3.59
+      },
+      {
+        "name": "browser-mixer-setup",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 2.324
+      },
+      {
+        "name": "browser-support",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 2.017
+      },
+      {
+        "name": "browser-site",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 5.707
+      },
+      {
+        "name": "native-image",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.112
+      },
+      {
+        "name": "native-audio",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 130.446
+      },
+      {
+        "name": "native-capture",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 17.704
+      },
+      {
+        "name": "native-game-obs",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 76.784
+      },
+      {
+        "name": "supplemental-transport",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 38.977
+      },
+      {
+        "name": "supplemental-cli",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 4.329
+      },
+      {
+        "name": "supplemental-upgrades",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 7.814
+      },
+      {
+        "name": "integration-cpython",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 1.207
+      },
+      {
+        "name": "integration-frozen",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 1.416
+      },
+      {
+        "name": "host-build",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 1.094
+      },
+      {
+        "name": "host-build-tests",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 12.408
+      },
+      {
+        "name": "host-coverage",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 16.32
+      },
+      {
+        "name": "host-coverage-summary",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.087
+      },
+      {
+        "name": "host-format",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.03
+      },
+      {
+        "name": "goreleaser-version",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.049
+      },
+      {
+        "name": "preserve-notices-owned-rename",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.008
+      },
+      {
+        "name": "host-snapshot",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 187.615
+      },
+      {
+        "name": "snapshot-generic-audit-1",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 3.673
+      },
+      {
+        "name": "snapshot-generic-audit-2",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 3.322
+      },
+      {
+        "name": "snapshot-generic-smoke",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.183
+      },
+      {
+        "name": "snapshot-nfpm-audit-1",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 3.275
+      },
+      {
+        "name": "snapshot-nfpm-audit-2",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 3.571
+      },
+      {
+        "name": "snapshot-nfpm-smoke",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 8.539
+      },
+      {
+        "name": "funding-check",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.023
+      },
+      {
+        "name": "docs-build",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.054
+      },
+      {
+        "name": "docs-check",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.051
+      },
+      {
+        "name": "site-safety",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 0.342
+      },
+      {
+        "name": "actual-post-consumer-compiler-policy",
+        "result": "passed",
+        "exit_code": 0,
+        "seconds": 5.529
+      }
+    ],
+    "supported_act": {
+      "status": "unavailable",
+      "completed": false,
+      "workflow_checks_executed": 0,
+      "jobs": [
+        {
+          "action": "lint",
+          "result": "unrun"
+        },
+        {
+          "action": "build",
+          "result": "unrun"
+        },
+        {
+          "action": "coverage",
+          "result": "unrun"
+        },
+        {
+          "action": "snapshot",
+          "result": "unrun"
+        },
+        {
+          "action": "docs",
+          "result": "unrun"
+        },
+        {
+          "action": "candidate",
+          "result": "unrun"
+        }
+      ],
+      "reason": "Resource preflight refused before any workflow",
+      "capacity": {
+        "root_available_bytes": 2597666816,
+        "root_required_bytes": 7544361132,
+        "root_shortfall_bytes": 4946694316,
+        "scratch_available_bytes": 9153650688,
+        "scratch_required_bytes": 6442450944,
+        "docker_storage_driver": "vfs",
+        "runner_image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+        "measurement_scope": "At the recorded preflight time; not a claim about disk availability now"
+      },
+      "meaning": "Real conservative preflight refusal before probe allocation; six unrun workflows, never six ACT passes. More capacity or qualifying free runner remains necessary for this literal matrix gate.",
+      "evidence": "qualification-summary.json and aurora-af7-public-proof.zip"
+    },
+    "hosted": "Billing-locked jobs cannot start. Standalone checks/local ACT cannot establish hosted service, required review, dependency graph/advisory or protection acceptance.",
+    "fresh_hosted": {
+      "recorded_utc": "2026-11-20T07:47:39.236067+00:00",
+      "run_count": 10,
+      "job_count": 16,
+      "billing_refused_job_count": 15,
+      "other_failed_job_count": 0,
+      "skipped_job_count": 1,
+      "observed_step_count": 0,
+      "scope": "Exact af7 push and PR113 events;9 PR failures including docs-preview,6 push failures and1 push dependency-review skip. All15 failed jobs have billing refusal annotations and zero steps/runner_id0. macOS also has queue-capacity notice, not a separate executed source failure.",
+      "evidence": "qualification-summary.json and aurora-af7-public-proof.zip"
+    },
+    "audit": {
+      "integrity": "passed",
+      "source_inventory": "passed",
+      "preferred_source": "passed",
+      "provenance": "unsigned self-reported; not authenticated publisher or trusted builder attestation",
+      "evidence": "qualification-summary.json and aurora-af7-public-proof.zip; original preferred-source and unsigned audit boundaries retained"
+    },
+    "limits": [
+      "Snapshot rows are measured command outcomes;67 passed check rows include preparation/audit actions, not67 whole test suites. Supported ACT workflow gate remains unavailable.",
+      "Commands, platform, raw outcomes and reviewed proof must be assessed together; check rows are not whole suites or ACT job passes.",
+      "Browser/controller fixtures, native synthetic media and ordinary Linux OBS do not prove real Decky/SteamOS/Gamescope/AMD/headset/provider operation.",
+      "Cross-builds are not native Windows/macOS/BSD/ARM acceptance; no unobserved platform is supported by assertion.",
+      "Later source-changing fixes/version changes require affected requalification; evidence/docs-only commits must identify the packaged source separately."
+    ],
+    "original_private_receipt_sha256": "9cc1a2f369fa7fa2be3e54056cb4dd7b9ea0fafdd25c3d559b8b965aa7061e59",
+    "receipt_hash_scope": "Public and original standalone main receipt are identical bytes (zero additional redactions), both9cc1a2f369fa7fa2be3e54056cb4dd7b9ea0fafdd25c3d559b8b965aa7061e59. Only qualification-summary.json metadata alias was corrected; source/package hashes are unchanged.",
+    "public_summary": "qualification-summary.json",
+    "public_summary_sha256": "ea422d3d2d0dde4ecd822706f4a9fddbccdd1a0b01084ee7f585dcfd3276d45a",
+    "snapshot_scope": "Names/results/exits are bounded command predicates; consult the public main receipt for commands and reviewed public log hashes. Original private log hashes are not relabeled as public bytes.",
+    "official_assembly": {
+      "status": "passed",
+      "version": "0.0.7",
+      "sha256": "0d0f8c127cd3dba12b75f771c786194ca9f4f771b4787ae24de8b1af45af4294",
+      "builder_image": "ghcr.io/steamdeckhomebrew/builder@sha256:e2616e391f3ae9a46c4cf906b1091220c2506e7fb1301e16a2a72409efbce7c5",
+      "builder_node": "26.12.1",
+      "builder_pnpm": "12.14.0",
+      "container_network": "none",
+      "payload_files_compared": 33,
+      "raw_zip_sha256": "48445c810291d6dffec8ac4a1fcd6ac3224fce9453c6f00fe97d2b02acb3010a",
+      "raw_zip_reproducible": false,
+      "scope": "Unmodified official CLI and pinned default builder, assembling prepared bytes; not source compilation",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "primary_zip_sha256": "4deece2bcaba6440c168d5cb7b1bc585e346d6b2f06655a1672c0d9638afeab8",
+      "uid": 1000
+    }
+  },
+  "identity_framework": {
+    "upstream_repository": "egohygiene/identity",
+    "fresh_default_branch": "main",
+    "fresh_main_revision": "afc368003bfc6a2101051229efd237c8d6fadf71",
+    "latest_stable": {
+      "tag": "v1.0.0",
+      "published_at": "2026-08-28T05:30:18Z"
+    },
+    "latest_prerelease": {
+      "tag": "v1.0.0-rc.2",
+      "published_at": "2026-08-28T03:50:19Z"
+    },
+    "consumer_pin": "cfb6c29bd02589a47fc48050ab02e7e0da359719",
+    "validator_sha256": "aea7ba3ff1f331acb0cf2d05501c56c4d89c15ad41c8c57b4fd7448b323175f5",
+    "pin_status": "Exact reviewed additive source pin, distinct from current main and published stable v1.0.0. Lock uses same-commit immutable source URLs/hashes.",
+    "fresh_docs_read": [
+      "docs/consumers/AUTHORING.md",
+      "docs/consumers/ADOPTION.md",
+      "CONTINUITY.md"
+    ],
+    "adoption_limits": "Local selected draft-kit profile and consumer source-contract validation are not Identity production compiler output, an upstream release, asset approval or consumer/device adoption.",
+    "upstream_actions": "Read-only inspection only; no pin upgrade, upstream changes, release or deployment."
+  },
+  "artwork": {
+    "creative_direction": "Owner selected 01 / aurora; lowercase deckystream and orbital-stream direction",
+    "approval": "Final source/export/license/production adoption remains proposed-unapproved; decisions arrays remain empty",
+    "outputs_count": 38,
+    "files": [
+      {
+        "path": "branding/aurora/aurora-manifest.json",
+        "bytes": 8410,
+        "sha256": "53f2516abf4c1d1ec804f3bf64ca548e6c9aa6fb52d05f63a579565e4462304b"
+      },
+      {
+        "path": "branding/aurora/deckystream-aurora-kit.zip",
+        "bytes": 6652243,
+        "sha256": "f4abedc63a6382e4f5e3aa8c39b25776b22af6cfee94448adce5bfdfd9a2104f"
+      },
+      {
+        "path": "branding/aurora/deckystream-aurora-png.zip",
+        "bytes": 1323637,
+        "sha256": "c1df01a1bc7b4fb34c3d84e7567e84899d4737792e3065cdc6429a5d8b4d9b9c"
+      },
+      {
+        "path": "branding/aurora/index.html",
+        "bytes": 3577245,
+        "sha256": "ff381e1f97a8cc5e92637cde907b3b119495f00dad35b66d84aefce9b97c7554"
+      },
+      {
+        "path": "branding/aurora/metadata/rights-and-sources.json",
+        "bytes": 2697,
+        "sha256": "6ea8d8ba91db26ceae9c6923abe9a699d811e918ea31f7158dcba55dcda5c1a1"
+      },
+      {
+        "path": "branding/aurora/metadata/hero-generation.json",
+        "bytes": 3671,
+        "sha256": "e81d0d34aa1045784184430d9c8b6cff4e16699879277e9bc3224ef99d515312"
+      }
+    ],
+    "assets": [
+      {
+        "creator": "OpenAI Codex, for szmyty/obsgod",
+        "humanApproval": null,
+        "id": "mark",
+        "method": "Separately authored SVG orbital stream geometry based on visually inspected owner-selected 01 / aurora direction; not traced, automatically vectorized or asserted identical to the raster concept.",
+        "path": ".identity/candidates/aurora/mark.svg",
+        "proposedLicense": "MIT, subject to owner decision",
+        "rightsStatus": "owner-review-required; no trademark clearance, copyright eligibility or rights transfer asserted",
+        "sha256": "f3b68d3937e49767a80415d98177f36f9d80adcd4b6cc8d0441ce0b87485a9c3"
+      },
+      {
+        "creator": "OpenAI Codex, for szmyty/obsgod",
+        "humanApproval": null,
+        "id": "mark-small",
+        "method": "Separately authored SVG orbital stream geometry based on visually inspected owner-selected 01 / aurora direction; not traced, automatically vectorized or asserted identical to the raster concept.",
+        "path": ".identity/candidates/aurora/mark-small.svg",
+        "proposedLicense": "MIT, subject to owner decision",
+        "rightsStatus": "owner-review-required; no trademark clearance, copyright eligibility or rights transfer asserted",
+        "sha256": "e53ee844953468d21e8c7255bea8e1e18f715859ffb2eead6ae5d05ca9819356"
+      },
+      {
+        "creator": "OpenAI image generation requested for this repository",
+        "humanApproval": null,
+        "id": "hero-master",
+        "method": "One image_gen edit from retained selected references; original output preserved unchanged. See hero-generation.json for exact prompt and reference digests.",
+        "path": ".identity/candidates/aurora/hero-master.png",
+        "proposedLicense": null,
+        "rightsStatus": "owner-review-required",
+        "sha256": "6b3c458e2f81b9d31435fcbc87c86e8f5c8ad7df579dfca34f578beac5e75b2c"
+      }
+    ],
+    "source_manifest_sha256": "f0e99fa947016798bc15480d7dae38ed286266a9d630fc7fdd79048a271e21e5",
+    "raster_record": {
+      "operation": "OpenAI image_gen.imagegen edit from retained references; unchanged original output",
+      "path": ".identity/candidates/aurora/hero-master.png",
+      "sha256": "6b3c458e2f81b9d31435fcbc87c86e8f5c8ad7df579dfca34f578beac5e75b2c",
+      "width": 2048,
+      "height": 768,
+      "bytes": 1465734,
+      "deterministic_generation": false,
+      "exact_prompt_and_reference_digests": ".identity/candidates/aurora/hero-generation.json"
+    },
+    "vectors": "Separately authored SVG geometry after visual inspection; no traced/identical conversion, exclusivity, human authorship or copyright eligibility asserted.",
+    "tools": {
+      "inkscape": "1.4 (e7c3feb100, 2024-10-09)",
+      "font": "DejaVu Sans",
+      "font_sha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e",
+      "font_license": "branding/aurora/licenses/DejaVu.txt; no font binary redistributed"
+    },
+    "originals": "41 prior mint/concept files preserved; selected raster reference and authored vectors remain distinct.",
+    "missing_decisions": [
+      "Final mark/name availability and owner acceptance of exact source/export bytes",
+      "Final license and permission/attribution for new raster and separately authored vectors",
+      "Actual owner/publisher/legal contact and any production Identity adoption decision"
+    ]
+  },
+  "rights_and_notices": {
+    "original_code_license": "MIT; Copyright (c) 2020 Christian Muehlhaeuser retained",
+    "repository_namespace_is_not": "Proof of legal ownership assignment or permission for every new asset",
+    "third_party": "Bundled SDK LGPL/runtime/preferred source and native capture preferred source/notices retained; QR and font notices separate. OBS/GStreamer remain external Flatpak dependencies.",
+    "evidence": [
+      "https://github.com/szmyty/obsgod/tree/af7a20fdd0c62404e9b11d540fb605368e269380/LICENSE",
+      "https://github.com/szmyty/obsgod/tree/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/capture/THIRD_PARTY_NOTICES.md",
+      "https://github.com/szmyty/obsgod/tree/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/decky/LICENSE.LGPL-2.1",
+      "https://github.com/szmyty/obsgod/tree/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/decky/LICENSE.qrcode-generator.txt",
+      "https://github.com/szmyty/obsgod/tree/af7a20fdd0c62404e9b11d540fb605368e269380/.identity/candidates/aurora/inventory.json",
+      "https://github.com/szmyty/obsgod/tree/af7a20fdd0c62404e9b11d540fb605368e269380/branding/aurora/metadata/rights-and-sources.json",
+      "qualification-summary.json",
+      "aurora-af7-public-proof.zip"
+    ],
+    "no_invention": "No trademark clearance, rights transfer, copyright eligibility, final asset license or authenticated publisher inferred."
+  },
+  "release_preparation": {
+    "actual_product_releases": "Current API query found prereleases only; latest v0.1.0-deck.4-updater.1 published 2026-11-11T17:15:52Z. No product stable v1 exists.",
+    "version_source": "steamdeck/decky/package.json = 0.1.0-deck.9; package obsgod-decky, private true, author string szmyty, MIT",
+    "changelog": "CHANGELOG.md Unreleased completion preview; source history, not release/device/CI approval. Final approved tag/version/release notes remain to select.",
+    "generic_config": ".goreleaser.yml version2 cross-build/snapshot packaging; configured platforms are cross-build scope, not target proof.",
+    "workflow": ".github/workflows/goreleaser.yml uses contents:read and release --snapshot --skip=publish,sign --clean. No auto-publication/site deployment on this merge.",
+    "semantic_release": "No assumption that a semantic-release publisher is installed/active; current snapshot config and final changelog/version decision govern.",
+    "verification": "Unsigned provenance/checksums show integrity/reproduction. Owner must choose actual signing/publisher verification or explicitly accept a clearly labeled unsigned preview.",
+    "status": "No product or Identity release, tag, deployment, transfer, Store submission or spending performed."
+  },
+  "publication_destinations": [
+    {
+      "destination": "szmyty/obsgod",
+      "status": "Current source/release/update trust; review artifacts not published as new release",
+      "responsible": "Repository owner with verified account authority; legal publisher still to identify"
+    },
+    {
+      "destination": "<chosen-owner>/deckystream",
+      "status": "Intended slug selected, exact owner/org and create/move/archive approach unresolved; no wildcard destination activated",
+      "responsible": "Repository owner must name destination/admin/contact and authorize exact operation after #86"
+    },
+    {
+      "destination": "Static landing/documentation site",
+      "status": "Offline site source/build prepared; no selected canonical public domain/deployment destination/owner",
+      "responsible": "Owner must select hosting/domain/responsible deployer; deployment separately approved"
+    },
+    {
+      "destination": "Decky Store",
+      "status": "Separate completed #51 research; not submission approval, admission guarantee or current delivery requirement",
+      "responsible": "Future authorized submitter; no contact/submission performed"
+    },
+    {
+      "destination": "Flathub",
+      "status": "No product Flatpak distribution planned; OBS/GStreamer are dependency Flatpaks",
+      "responsible": null
+    },
+    {
+      "destination": "Funding/crypto",
+      "status": "Existing public funding configuration retained; crypto addresses intentionally unset; no paid spending or income/support promises",
+      "responsible": "Owner supplies any future wallet/beneficiary facts"
+    }
+  ],
+  "owner_actions_and_adoption": {
+    "owner_machine": {
+      "platform": "TBD; OS/architecture question pending, no response observed",
+      "action": "Provide machine OS/architecture; then use candidate-specific numbered test steps and record exact candidate/runtime outcomes. Do not invent Windows/macOS/Linux commands before platform is known."
+    },
+    "steam_deck": "#86 actual Deck model/SteamOS/Decky/OBS/Flatpak versions; normal ZIP install/dependency consent/native key flow; observed Start/Stop/local recording, game-only/idle transitions, system/mic mute and devices/headsets/controller/session/recovery/uninstall/update safety. Separate viewer confirms provider audio/video with no secret key in evidence.",
+    "supported_loader": "#82-C1 actual supported loader lifecycle remains a literal gate; pinned RPC/unit/browser/five-second fixtures cannot substitute. Capture install/load/frontend/backend/unload/reload/reconnect and errors on actual supported loader.",
+    "independent_adoption": "Owner existing-install success is not original independent/new-user adoption. Record actual consumer owner, fresh install/destination/candidate and outcomes; no invented adopter.",
+    "post_migration": "After exact approved destination exists, update bounded trust/URLs/default main; enable dependency graph and prove manifest ingestion/real dependency comparison under #95; verify actual artifact download/checksum/signing choice and clean new-install retest.",
+    "required_ci": "Complete supported matrix on a free capable runner if available; actual hosted services/required reviews remain separate explicit gates. Billing block is not a source test failure and is not fixed by relabeling local commands."
+  },
+  "remaining_acceptance": {
+    "original_ledger": {
+      "path": "docs/evidence/completion-criteria.json",
+      "sha256": "0795e6594c7bbde195bb8ebfcbc4050f0d5ecbe9c879767edbe0050540386df6",
+      "criteria_count": 230,
+      "unchanged": true
+    },
+    "current_bounded_inventory": {
+      "path": "remaining-acceptance.json",
+      "scope": "Frozen104-bullet pre-qualification inventory, not newly executed acceptance passes; criteria-review.json supplies later criterion reconciliation."
+    },
+    "current_bounded_criteria": 104,
+    "continuation": [
+      {
+        "order": 1,
+        "issues": [
+          80,
+          81,
+          83,
+          84
+        ],
+        "action": "Finish current-source export/UI/package/site/native regression evidence and narrowly reconcile source claims/docs; fix only demonstrated failures. Keep80/81 open until review/evidence, no old receipt promotion."
+      },
+      {
+        "order": 2,
+        "issues": [
+          76,
+          77,
+          78,
+          79,
+          82,
+          83,
+          84
+        ],
+        "action": "Map current actual software/fixture evidence to each literal bounded criterion. Do not reimplement merged work or close solely because merged. #82.C1 actual supported-loader lifecycle remains explicit #86."
+      },
+      {
+        "order": 3,
+        "issues": [
+          85
+        ],
+        "action": "Freeze the final source after source-changing repairs, attempt complete applicable free matrix, retain actual capacity/CI/service limitations, prepare exact candidate/download/rollback and one numbered owner-machine then Deck packet."
+      },
+      {
+        "order": 4,
+        "issues": [
+          86
+        ],
+        "action": "Owner-machine test/fix loop then actual Deck/provider/controller/headset/session/lifecycle observations. Record real platform/version/candidate and each outcome."
+      },
+      {
+        "order": 5,
+        "issues": [
+          87,
+          88,
+          95
+        ],
+        "action": "Prepare snapshot/tracker/history/cleanup/rights/release packet in parallel; execute only with actual destination authority after current-install loop, then qualify actual new trust and public dependency service/new install."
+      }
+    ],
+    "limits": "Source-present/merged is not passed. Bounded literal software criteria need current evidence without invented device dependencies; original rights/platform/CI/review/adoption criteria stay explicit. Original IDs/dependencies retained.",
+    "deferred": "#89 provider OAuth/phone login research only, design sync before coding; companion/StreamGod and broader optional ecosystem explicitly deferred, not passed. #51 monetization/Store research stays separate.",
+    "inventory_summary": "remaining-acceptance.md"
+  },
+  "approval_actions_later": [
+    {
+      "action": "Publish exact product release/tag/assets",
+      "needed_before_request": "Final reviewed exact revision/version/artifacts/download policy, completed available matrix plus explicit external/device/CI limits, rights and publisher/signing choice, actual consumer/device evidence required by acceptance",
+      "scope": "Exact repository/tag/assets/changelog/signature or clearly labeled unsigned preview; no generic blanket approval"
+    },
+    {
+      "action": "Create/migrate/retire repositories or change another repository",
+      "needed_before_request": "Exact current and destination owner/repo/authority, final #86 result, retained history/tracker/rights and compatibility/trust plan",
+      "scope": "Name precise operations and destinations; current repository prep is authorized, actual other-repo change/transfer is not inferred"
+    },
+    {
+      "action": "Deploy landing/docs site",
+      "needed_before_request": "Concrete reviewed site build/hash, exact hosting/domain/admin and side effects",
+      "scope": "Exact site/domain deployment; no deployment approval implied by source PR merge"
+    },
+    {
+      "action": "Publish an Identity release or change Identity",
+      "needed_before_request": "Separate actual requested upstream change/candidate/authority",
+      "scope": "None required to consume current immutable pin; no upstream publication assumed"
+    },
+    {
+      "action": "Spend money",
+      "needed_before_request": "Concrete service/purpose/amount and approved payer",
+      "scope": "Use current free/local/cloud resources; no paid action planned"
+    }
+  ],
+  "ready_to_request_publication_approval": false,
+  "next_smallest_actions": "Review completed final-source standalone evidence; resolve owner machine OS and run the unavailable full matrix on capable free resources, then owner-machine/actual Deck checklist and demonstrated repairs. Final rights/destination/publisher facts then make exact migration/publication review concrete. No generic approval request now.",
+  "review_files": {
+    "plugin": "obsgod-decky.zip",
+    "checksums": "SHA256SUMS",
+    "primary_build_receipt": "build-receipt.json",
+    "qualification_summary": "qualification-summary.json",
+    "public_proof": "aurora-af7-public-proof.zip",
+    "criterion_review": "criteria-review.json",
+    "owner_tests": "OWNER-TESTS.md",
+    "reproduction": "REPRODUCE.md",
+    "source": "https://github.com/szmyty/obsgod/tree/af7a20fdd0c62404e9b11d540fb605368e269380",
+    "remaining_inventory": "remaining-acceptance.json"
+  }
+}

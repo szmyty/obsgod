@@ -1,0 +1,574 @@
+{
+  "schema": "deckystream.aurora-qualification/v1",
+  "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+  "source_tree": "d6149d9ec670cffcc30db355262aa688382b5e7e",
+  "qualified_source_clean": true,
+  "disposition": "Current-source standalone software and selected-asset evidence; full ACT/hosted/owner-machine/actual Deck and rights/publication/adoption gates remain. This is not a release qualification.",
+  "main_report": {
+    "path": "standalone/available-checks.json",
+    "original_sha256": "9cc1a2f369fa7fa2be3e54056cb4dd7b9ea0fafdd25c3d559b8b965aa7061e59",
+    "completed": true,
+    "result": "unavailable",
+    "command_counts": {
+      "unavailable": 1,
+      "passed": 67
+    },
+    "counts_scope": "67 successful command-check predicates include a primary rejection with expected exit1; not 67 test cases, all-exit-zero invocations or ACT jobs."
+  },
+  "primary": {
+    "archive": "/tmp/obsgod-aurora-final-100138e64c/primary/second/obsgod-decky.zip",
+    "build_context": {
+      "GOCACHE": "/tmp/obsgod-aurora-final-100138e64c/go-build-user-1000",
+      "GOMODCACHE": "/tmp/obsgod-aurora-final-100138e64c/go-mod-user-1000",
+      "HOME": "/tmp/obsgod-aurora-final-100138e64c/primary/context/home",
+      "TMPDIR": "/tmp/obsgod-aurora-final-100138e64c/primary/context/tmp"
+    },
+    "builds": [
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "-B",
+          "/workspace/obsgod/scripts/package-decky.py",
+          "--version",
+          "0.1.0-deck.9",
+          "--revision",
+          "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "--output",
+          "/tmp/obsgod-aurora-final-100138e64c/primary/first"
+        ],
+        "exit_code": 0,
+        "inspection": {
+          "archive": "/tmp/obsgod-aurora-final-100138e64c/primary/first/obsgod-decky.zip",
+          "manifest_sha256": "f837ad569b2d161ffe91ed92dbff14caf07a572badfce3cdb799a270f6b4e323",
+          "official_cli": {
+            "status": "unrun"
+          },
+          "payload_files": 33,
+          "receipt_sha256": "ace6c1ad10d6f52539034a47742dc2083b9dd66954c2b2dbc37741a4a94ffcad",
+          "sha256": "4deece2bcaba6440c168d5cb7b1bc585e346d6b2f06655a1672c0d9638afeab8",
+          "source_files": 617,
+          "source_private_inventory": "passed"
+        },
+        "log": "first.log",
+        "log_sha256": "df7d1003a740765e2ff53b897ddd8a5e7ff40b3f655f9ebe07f8bf366e654a1b",
+        "name": "first",
+        "seconds": 25.121
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "-B",
+          "/workspace/obsgod/scripts/package-decky.py",
+          "--version",
+          "0.1.0-deck.9",
+          "--revision",
+          "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "--output",
+          "/tmp/obsgod-aurora-final-100138e64c/primary/second"
+        ],
+        "exit_code": 0,
+        "inspection": {
+          "archive": "/tmp/obsgod-aurora-final-100138e64c/primary/second/obsgod-decky.zip",
+          "manifest_sha256": "f837ad569b2d161ffe91ed92dbff14caf07a572badfce3cdb799a270f6b4e323",
+          "official_cli": {
+            "status": "unrun"
+          },
+          "payload_files": 33,
+          "receipt_sha256": "ace6c1ad10d6f52539034a47742dc2083b9dd66954c2b2dbc37741a4a94ffcad",
+          "sha256": "4deece2bcaba6440c168d5cb7b1bc585e346d6b2f06655a1672c0d9638afeab8",
+          "source_files": 617,
+          "source_private_inventory": "passed"
+        },
+        "log": "second.log",
+        "log_sha256": "105f3bca3f754f9c9fb98d53d193ace5ba50984ee1b9299f9a7da26a8656e504",
+        "name": "second",
+        "seconds": 6.748
+      }
+    ],
+    "dirty": false,
+    "finished_utc": "2026-11-20T07:36:07.358140+00:00",
+    "gid": 1000,
+    "groups": [],
+    "limits": [
+      "Local build only; actual Deck, OBS/provider, hosted acceptance and publication remain separate.",
+      "Canonical ZIP bytes are compared; optional official CLI assembly is not source compilation or reproducible raw ZIP proof.",
+      "Logs are private and require review before sharing. No cache is deleted by this helper."
+    ],
+    "observed_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+    "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+    "schema": "obsgod.primary-build-qualification/v1",
+    "sha256": "4deece2bcaba6440c168d5cb7b1bc585e346d6b2f06655a1672c0d9638afeab8",
+    "source_tree": "d6149d9ec670cffcc30db355262aa688382b5e7e",
+    "started_utc": "2026-11-20T07:35:35.232615+00:00",
+    "status": "passed",
+    "uid": 1000,
+    "version": "0.1.0-deck.9"
+  },
+  "official_assembly": {
+    "status": "passed",
+    "version": "0.0.7",
+    "sha256": "0d0f8c127cd3dba12b75f771c786194ca9f4f771b4787ae24de8b1af45af4294",
+    "builder_image": "ghcr.io/steamdeckhomebrew/builder@sha256:e2616e391f3ae9a46c4cf906b1091220c2506e7fb1301e16a2a72409efbce7c5",
+    "builder_node": "26.12.1",
+    "builder_pnpm": "12.14.0",
+    "container_network": "none",
+    "payload_files_compared": 33,
+    "raw_zip_sha256": "48445c810291d6dffec8ac4a1fcd6ac3224fce9453c6f00fe97d2b02acb3010a",
+    "raw_zip_reproducible": false,
+    "scope": "Unmodified official CLI and pinned default builder, assembling prepared bytes; not source compilation",
+    "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+    "primary_zip_sha256": "4deece2bcaba6440c168d5cb7b1bc585e346d6b2f06655a1672c0d9638afeab8",
+    "uid": 1000
+  },
+  "native": {
+    "collector_sha256": "c4300404e3fea158d54aee88d896b6abbfdb5d9e288e71c88684cd5f7e537c30",
+    "command_receipts": [
+      {
+        "exit_code": 0,
+        "log_sha256": "a8926c6c53506ecde47883e948defac2b0b46577c522de612e43f54421e0ef2c",
+        "name": "native-audio",
+        "revision": "af7a20fdd0c62404e9b11d540fb605368e269380"
+      },
+      {
+        "exit_code": 0,
+        "log_sha256": "4bfe67e970711708b15a5d6ded0a1ee60fac2356d4663e0ec5842daddc68df29",
+        "name": "native-capture",
+        "revision": "af7a20fdd0c62404e9b11d540fb605368e269380"
+      },
+      {
+        "exit_code": 0,
+        "log_sha256": "5bdf3781fcdeb8153601a5bfb24e0a41c03fbc7397a812956750e3a5ff294913",
+        "name": "native-game-obs",
+        "revision": "af7a20fdd0c62404e9b11d540fb605368e269380"
+      }
+    ],
+    "curator_sha256": "2293a8a16059c14f770b9179bd12b2a1def37f6d28a42ee762f11ed0d81ea3dc",
+    "distinct_sha256_count": 15,
+    "file_count": 18,
+    "files": [
+      {
+        "declared_revision": null,
+        "file": "audio/recording-audio-metrics.json",
+        "original_path": "/tmp/obsgod-aurora-final-100138e64c/native-audio/output/recording-audio-metrics.json",
+        "original_sha256": "5e86bdd3f508f89c3328661bd183dceb7512b91b997496269b0a16f1aa8cadf3",
+        "public_sha256": "b8c1e6dbba4622f9200a2b4771e94840e84b6399b99c379c06e3f2048fddc182",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/stream-audio-metrics.json",
+        "original_path": "/tmp/obsgod-aurora-final-100138e64c/native-audio/output/stream-audio-metrics.json",
+        "original_sha256": "7ffa7ebde9d95eef8dfad461b83a6d1a244c5f4012e54fb9d17718dd72fadddf",
+        "public_sha256": "02d84081de755efcc8c43975071a6e4debaadae4a22c0b03b1349dad23059096",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/audio-default-fallback-audio-metrics.json",
+        "original_path": "/tmp/obsgod-aurora-final-100138e64c/native-audio/output/audio-default-fallback-audio-metrics.json",
+        "original_sha256": "5ef95d3d9ca434e7a21baba210a97daffd4511aafa922086ca76b7199e9eaaec",
+        "public_sha256": "6a45bb5ca29ecda19b74d1e9a6e41c07e5c399e57fe57d6f45fadc61278ed8e3",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/audio-default-changed-audio-metrics.json",
+        "original_path": "/tmp/obsgod-aurora-final-100138e64c/native-audio/output/audio-default-changed-audio-metrics.json",
+        "original_sha256": "eadb66703b99b31a37a674a9d166a4cd21ed1cf7749a63a2065ad54e11187002",
+        "public_sha256": "b1b03cbfc32058eaa8ec74454d09a3df1ad525aebb1e29c81a232d90cd302c7f",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/silence-negative-control.json",
+        "original_path": "/tmp/obsgod-aurora-final-100138e64c/native-audio/output/silence-negative-control.json",
+        "original_sha256": "5a37e66d12c607bb1149f9821a2c8c8ddc5231a762778668c112d53f63eb9763",
+        "public_sha256": "a7faadde4f8b511f1d542c993e9e477f5c1f3cd30b397a941264e8ad42f91eb9",
+        "redacted": true,
+        "result": "silence-rejected-as-expected"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/audio-hotplug.json",
+        "original_path": "/tmp/obsgod-aurora-final-100138e64c/native-audio/output/audio-hotplug.json",
+        "original_sha256": "658121e11e200e99430f03d36a979042c9afcecedbd61da92eb727b7b0a2d863",
+        "public_sha256": "e9730e3e001a34abb0201dd63b0bbbb99b7989c4ed82e75d48118c5b17778c35",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/native-mixer-summary.json",
+        "original_path": "/tmp/obsgod-aurora-final-100138e64c/native-audio/output/native-mixer-summary.json",
+        "original_sha256": "9b8644d8ea43d2478ee8be5afee87c43b4f56d178b539348aa63a7f857aa0dce",
+        "public_sha256": "4191d672bb82b88c37abe3aff78a65e9f7b3eae43f3fc69e464573376cad789a",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/control-password-qualification.json",
+        "original_path": "/tmp/obsgod-aurora-final-100138e64c/native-audio/output/control-password-qualification.json",
+        "original_sha256": "c6d5ad09a905f359e4881be237f99f1726db485712e2ce47b6af79eb1160b5ee",
+        "public_sha256": "ed05dc75d9eb9af003e8c3d6afe190059dd7c352d8db90a3f712c0e9a0baeafa",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/control-workflow-qualification.json",
+        "original_path": "/tmp/obsgod-aurora-final-100138e64c/native-audio/output/control-workflow-qualification.json",
+        "original_sha256": "a5af5296a2e7ef5ca055d1c84da8d8c8a66bb8add25fa5b05a9b579bc2c4bf58",
+        "public_sha256": "9ce7c14fc1f00ba3d9a3026aef7fec42e2aa85f6027069a11bcc1effe5659ab9",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/media-qualification.json",
+        "original_path": "/tmp/obsgod-aurora-final-100138e64c/native-audio/output/media-qualification.json",
+        "original_sha256": "6ab22eb70cbf579c1f9120251bdc8984daaade459c3266768f0104465493782b",
+        "public_sha256": "822d00a46455e54f7b5b1cfaa6f16affa8a448c11777029ec3e73eb997e69d46",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/media-live-qualification.json",
+        "original_path": "/tmp/obsgod-aurora-final-100138e64c/native-audio/output/media-live-qualification.json",
+        "original_sha256": "5f5713a778591e0b4048f4aa92e7899e2e58753343fe87c68e9ee5010de492f2",
+        "public_sha256": "e2abb8354b466365bba1a62f785bbf49db9fedc72f7e18ded13527970d951461",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/profile-qualification.json",
+        "original_path": "/tmp/obsgod-aurora-final-100138e64c/native-audio/output/profile-qualification.json",
+        "original_sha256": "e03cddfc855e71db74ce674277bb135ac79293e43c63591e526c595e26225aba",
+        "public_sha256": "44bae83f3b9e0246c2b1516c855c54d62707b1e002d9e4997cd4b72e23aacf73",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/native-media-summary.json",
+        "original_path": "/tmp/obsgod-aurora-final-100138e64c/native-audio/output/native-media-summary.json",
+        "original_sha256": "6ab22eb70cbf579c1f9120251bdc8984daaade459c3266768f0104465493782b",
+        "public_sha256": "822d00a46455e54f7b5b1cfaa6f16affa8a448c11777029ec3e73eb997e69d46",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/native-live-media-summary.json",
+        "original_path": "/tmp/obsgod-aurora-final-100138e64c/native-audio/output/native-live-media-summary.json",
+        "original_sha256": "5f5713a778591e0b4048f4aa92e7899e2e58753343fe87c68e9ee5010de492f2",
+        "public_sha256": "e2abb8354b466365bba1a62f785bbf49db9fedc72f7e18ded13527970d951461",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "audio/native-profiles-summary.json",
+        "original_path": "/tmp/obsgod-aurora-final-100138e64c/native-audio/output/native-profiles-summary.json",
+        "original_sha256": "e03cddfc855e71db74ce674277bb135ac79293e43c63591e526c595e26225aba",
+        "public_sha256": "44bae83f3b9e0246c2b1516c855c54d62707b1e002d9e4997cd4b72e23aacf73",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+        "file": "capture/qualification.json",
+        "original_path": "/tmp/obsgod-aurora-final-100138e64c/native-capture/capture-validation/qualification.json",
+        "original_sha256": "a0171e28147846462c95b8cf9211d75203b74eb37242bdb2924c6fd844d623b6",
+        "public_sha256": "6bfa6542f65685afea210b3135c02f7293dfb66c3a0d14d024db52b7934ad266",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+        "file": "game-obs/game-obs-qualification.json",
+        "original_path": "/tmp/obsgod-aurora-final-100138e64c/native-game-obs/output/game-obs-qualification.json",
+        "original_sha256": "af93602c124dff0b9c5fd98c67414362c3fcdcffeea2fe72309fb3a44a0d2cf3",
+        "public_sha256": "53e627c7142cf840cd77300b15e4b581e0de5552e49610478c812a0cc9a54db6",
+        "redacted": true,
+        "result": "passed"
+      },
+      {
+        "declared_revision": null,
+        "file": "game-obs/idle-media-qualification.json",
+        "original_path": "/tmp/obsgod-aurora-final-100138e64c/native-game-obs/output/idle-media-qualification.json",
+        "original_sha256": "fa9a677b7838203719f29a88680854fa9eb09a6d1b714de74cbb03355bafeac1",
+        "public_sha256": "1ecb99b9fd28965925ce8ebc4d422db7ce727a6bcf81ca60a5df7bcca8f2ba69",
+        "redacted": true,
+        "result": "passed"
+      }
+    ],
+    "native_image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+    "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+    "scope": "Exactly18 filtered synthetic native Linux OBS/audio/capture/RTMP summary JSONs from the completed standalone command run. No raw HOME/config/cache/media/binaries. Actual Steam Deck/SteamOS/FlatpakOBS33/Gamescope/AMD/controller/headset/provider/non-Linux and full ACT workflows remain separate."
+  },
+  "gallery": {
+    "schema": "deckystream.aurora-gallery-evidence/v1",
+    "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+    "result": "passed-with-explicit-unavailable",
+    "file_url": "unavailable: ERR_BLOCKED_BY_ADMINISTRATOR; no browser policy change/override attempted",
+    "loopback_gallery": "passed: identical source HTML, 16 PNG images at two viewport sizes, actual PNG download, zero external requests/errors",
+    "attempts": [
+      {
+        "name": "gallery-af7",
+        "command": [
+          "python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/gallery-af7",
+          "--",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/gallery-af7/check.py"
+        ],
+        "exit_code": 1,
+        "raw_receipt_result": "failed",
+        "classification": "unavailable: direct file URL blocked by administrator policy",
+        "artifacts": {
+          "check.py": "53545fa425d913965648cf4d16d56fff0854cd8c70adda567313757ebdc90b92",
+          "command.log": "5048a05e429128b5df040024bdeb281b202a9e98489968cce9d9a8bc27734e96",
+          "receipt.json": "e9887423b11e0b79941ea8bdb5c03c416ae43fa49f8c5a6f09df6fc4685d5cea"
+        },
+        "directory": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/gallery-af7",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "tree": "d6149d9ec670cffcc30db355262aa688382b5e7e",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "tree": "d6149d9ec670cffcc30db355262aa688382b5e7e",
+          "dirty": false
+        }
+      },
+      {
+        "name": "gallery-af7-loopback",
+        "command": [
+          "python3",
+          "scripts/run-user-tests.py",
+          "--output-root",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/gallery-af7-loopback",
+          "--",
+          "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/gallery-af7-loopback/check.py"
+        ],
+        "exit_code": 0,
+        "raw_receipt_result": "passed",
+        "classification": "passed: byte-identical gallery on loopback",
+        "artifacts": {
+          "check.py": "182fe1b1a179b28104568d88edf7cefb6cc6e46a4945a9f6ee862df1d24d1dab",
+          "command.log": "bd84ab2240e4e5eff598efccc50cf55c0041d8543dd08c66f79b8c4fc4e965c6",
+          "receipt.json": "321b466785934ecfce7f11ec1205de41293de0764ca49d4f15e42cd4d43abaff"
+        },
+        "directory": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/gallery-af7-loopback",
+        "source_before": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "tree": "d6149d9ec670cffcc30db355262aa688382b5e7e",
+          "dirty": false
+        },
+        "source_after": {
+          "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+          "tree": "d6149d9ec670cffcc30db355262aa688382b5e7e",
+          "dirty": false
+        }
+      }
+    ],
+    "limits": "The original direct-file attempt remains failed in its raw receipt. The aggregate classifies its observed administration block as unavailable, not a product failure or a file-open pass. Loopback evidence is not literal file-URL acceptance, real Deck/controller, rights/adoption, or release acceptance."
+  },
+  "platform": {
+    "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+    "tree": "d6149d9ec670cffcc30db355262aa688382b5e7e",
+    "observed_utc": "2026-11-20T07:39:02.703444+00:00",
+    "host": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "python": "3.12.14",
+    "uid": 1000,
+    "tools": [
+      {
+        "command": [
+          "/workspace/.obsgod-tools/toolchains/go1.27.4/go/bin/go",
+          "version"
+        ],
+        "exit_code": 0,
+        "stdout": "go version go1.27.4 linux/amd64\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "node",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "v24.19.0\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "npm",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "11.9.0\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/usr/bin/chromium",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "inkscape",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "Inkscape 1.4 (e7c3feb100, 2024-10-09)\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "docker",
+          "version",
+          "--format",
+          "{{.Client.Version}} / {{.Server.Version}}"
+        ],
+        "exit_code": 0,
+        "stdout": "28.4.0 / 28.4.0\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "docker",
+          "info",
+          "--format",
+          "{{.Driver}}"
+        ],
+        "exit_code": 0,
+        "stdout": "vfs\n",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "/workspace/.obsgod-tools/pkg/bin/act",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout": "act version 0.2.97\n",
+        "stderr": ""
+      }
+    ],
+    "native_image_id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+    "font_sha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e",
+    "limits": "Host/fixture platform metadata, not actual SteamOS/Decky/Flatpak OBS33/Gamescope/AMD/controller/headset/provider/native non-Linux qualification."
+  },
+  "integrity_review": {
+    "schema": "deckystream.private-final-qualification-validation/v1",
+    "observed_utc": "2026-11-20T07:51:33.184090+00:00",
+    "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+    "source_tree": "d6149d9ec670cffcc30db355262aa688382b5e7e",
+    "source_clean": true,
+    "status": "passed",
+    "scope": "Read-only receipt hashes and source binding; this validation does not run new product checks or convert unavailable checks to passes. All referenced raw logs remain private pending curation.",
+    "main_report_completed": true,
+    "main_report_result": "unavailable",
+    "command_counts": {
+      "unavailable": 1,
+      "passed": 67
+    },
+    "validated_command_logs": 68,
+    "errors": [],
+    "files": [
+      {
+        "path": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/available-checks.json",
+        "sha256": "9cc1a2f369fa7fa2be3e54056cb4dd7b9ea0fafdd25c3d559b8b965aa7061e59",
+        "bytes": 76627
+      },
+      {
+        "path": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/primary-qualification.json",
+        "sha256": "d23cb8f370fbae5cf84dae9ffa137a0c22e7a71c900588ad4baf9e8eea0ca30a",
+        "bytes": 3589
+      },
+      {
+        "path": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/artifact-repeat.json",
+        "sha256": "7b151414c61822c2596c7f06d0c408a8e49a6c4224d73b1f047744a414b6584b",
+        "bytes": 558
+      },
+      {
+        "path": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/native-proof/index.json",
+        "sha256": "408ba612b3fde8036f9df447ab6cdecce37db5363c576d1d91628699b51fe18d",
+        "bytes": 9484
+      },
+      {
+        "path": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/module-cache-preservation.json",
+        "sha256": "490e4223e2da496901d67ffe52ff0b4fd89976d9a1f29a9ec9be91860fb0f6b7",
+        "bytes": 509
+      },
+      {
+        "path": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/available-af7/resource-policy.json",
+        "sha256": "f56ebfd45f3b3913c6f698da5769c0b82727d4942946e5a9f868501d241693ec",
+        "bytes": 1916
+      },
+      {
+        "path": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/gallery-evidence-summary.json",
+        "sha256": "cef9c1d1b662c64abfa04fa9b10a95ea35f4509a08c9cd593b1314158d31596c",
+        "bytes": 3188
+      },
+      {
+        "path": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/final-source-hashes.json",
+        "sha256": "2315ac30fe9db92a08d1b7226f900f97d56b5359cd9ed8f1571a130b2f07ca5d",
+        "bytes": 103860
+      },
+      {
+        "path": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/final-platform.json",
+        "sha256": "9c8e39772126ca3db9c387313da215182e1c63d824727fa7a6e34019b4f616ca",
+        "bytes": 2122
+      }
+    ],
+    "limits": [
+      "Full ACT matrix unavailable: six workflow jobs and allocation probe unrun after preflight refusal.",
+      "Actual Steam Deck/OBS33/Flatpak/Gamescope/AMD/controller/headset/provider and native non-Linux execution remain gates.",
+      "Direct file URL opening unavailable because of managed browser administrator policy; byte-identical loopback gallery passed.",
+      "Optional fish syntax execution unavailable because host interpreter is absent; generated completion text passed.",
+      "Application suite skipped two privilege-wrapper tests because the runner was already UID1000."
+    ]
+  },
+  "criterion_review_sha256": "00ec0dd193a5882de1199c9be5721d7aaee7df9eb4e9e3bf1faa3b6cffaaf697",
+  "source_hashes_sha256": "2315ac30fe9db92a08d1b7226f900f97d56b5359cd9ed8f1571a130b2f07ca5d",
+  "software_counts": {
+    "application_total": 271,
+    "application_pass": 269,
+    "application_skipped": 2,
+    "tooling_pass": 124,
+    "node_pass": 161,
+    "branding_pass": 33,
+    "selected_outputs_repeat": 38,
+    "packaged_browser_flows_pass": 10,
+    "native_filtered_summaries": 18,
+    "snapshot_cross_archives": 20,
+    "snapshot_linux_packages": 15,
+    "site_safety": 12,
+    "coverage_percent": 62.4
+  },
+  "limits": [
+    "Six ACT workflows and probe UNRUN after actual measured capacity refusal; standalone commands are not ACT passes.",
+    "Direct gallery fileURL administration-blocked; retained failed attempt is unavailable, separate offline loopback PNG decode/download passed.",
+    "Optional Fish syntax execution unavailable; two root-wrapper tests skipped under unprivileged fixture.",
+    "Host Chromium and Debian Linux OBS30.2.3 synthetic fixtures are not SteamOS/FlatpakOBS33/Gamescope/AMD/controller/headset/provider proof.",
+    "Official CLI assembles prepared33 files; raw official ZIP is not claimed reproducible or source compilation.",
+    "Current hosted af7 checks have billing refusals/expected skip and0executedsteps; no hosted pass.",
+    "Creator/tool provenance and proposed artwork license do not establish owner rights/publisher/adoption approval.",
+    "No product release, deployment, migration, Store submission, paid resource or other-repository change.",
+    "Later evidence/documentation commits are not relabeled as these qualified source/artifact bytes."
+  ]
+}
