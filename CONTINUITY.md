@@ -1,6 +1,36 @@
 # Current work
 
-## Primary builder and repeatable local qualification #104 review checkpoint
+## Aurora branding and native panel batch in progress
+
+The owner authorized merging #111 and proceeding with #80/#81, with the final
+machine test pass followed by Steam Deck validation. #111 merged normally into
+`master` at **699fac3503decc05345ec992f09eeedea8080fce**; its tree matches
+reviewed head bed3daf. #104 closed after independent evidence for its six literal
+criteria. Its exact qualified source remains 0c79846, not this merge metadata.
+
+Work continues on **work/aurora-native-panel**. Draft **#112** now contains
+functional UI source **3943f3c** with independent static review; new repository
+build/typecheck/Node/browser checks remain **UNRUN**. The selected 01 / aurora direction
+and all retained concepts remain intact. Source now refines native panel order,
+progressive disclosure, safe navigation feedback, collapsed recovery errors and
+clip loading/retry presentation while preserving observed-state/action gates.
+Read the [batch checkpoint](docs/aurora-ui-checkpoint.md) for source facts,
+remaining artwork work and verification status.
+
+The Cloud execution server failed to start with “environment configuration was
+canceled”; a shell probe confirms no usable runtime. GitHub access works. Remote
+reviewable checkpoints preserve the existing offline checkout and any local edits.
+New build/typecheck/test/render checks are **UNRUN**, and earlier receipts do not
+qualify new source. Restart/reconnect the Cloud workspace to resume the pinned
+tools and focused checks. The later owner-machine and actual Deck tests remain
+explicit #85/#86 gates; deferring them does not mark them passed.
+
+All 230 original criteria/dependencies remain intact. Existing executable/plugin/
+storage IDs, public API and approved state/privacy behavior remain compatible.
+No rights/production-art approval, Identity repository change, release, deployment,
+migration, Store action or paid resource is implied.
+
+## Earlier primary builder and local qualification checkpoint
 
 The owner explicitly requested merging all open PRs and starting the next batch
 on 2026-11-18. Normal merge order **#109 → retarget #110 to master → #110**

@@ -1,7 +1,7 @@
 import {ButtonItem,ConfirmModal,DropdownItem,Navigation,PanelSection,PanelSectionRow,showModal,SliderField,TextField,ToggleField} from "@decky/ui";
 import {callable} from "@decky/api";
 import {useEffect,useRef,useState,type ReactNode} from "react";
-import {configurationControls,configurationDraft,configurationPayload,destinationChanged,inferredProvider,providers,publicConfiguration,validateControlPassword,validateDestination} from "./configuration-state.mjs";
+import {configurationControls,configurationDraft,configurationPayload,destinationChanged,inferredProvider,openProviderGuide,providers,publicConfiguration,validateControlPassword,validateDestination} from "./configuration-state.mjs";
 import {boundedRequest as bounded,settingsTimeouts} from "./action-timeouts.mjs";
 
 type Settings={version:number;server:string;bitrate:number;fps:number;encoder:string;width:number;height:number;capture_mode:string;microphone:boolean};
@@ -35,6 +35,10 @@ export function Configuration({busy=false,onChanged,onOpenDesktopSetup}:{busy?:b
   const [message,setMessage]=useState("");
   const [observedAt,setObservedAt]=useState(0);
   const [clock,setClock]=useState(Date.now());
+  const [editing,setEditing]=useState(false);
+  const [connectionOpen,setConnectionOpen]=useState(false);
+  const [guidePending,setGuidePending]=useState(false),[guideNotice,setGuideNotice]=useState("");
+  const guideAction=useRef(false);
   const [qualityOpen,setQualityOpen]=useState(false);
   const [controlOpen,setControlOpen]=useState(false);
   const [password,setPassword]=useState("");
@@ -47,8 +51,34 @@ export function Configuration({busy=false,onChanged,onOpenDesktopSetup}:{busy?:b
 
   function clearKey(){secret.current="";setKey("");setShowKey(false);sensitiveEpoch.current++;}
   function clearPassword(){controlSecret.current="";setPassword("");setShowPassword(false);}
+  function toggleEditing(){
+    if(action.current)return;
+    if(editing){
+      clearKey();clearPassword();modal.current?.Close();modal.current=undefined;
+      const saved=current.current,selected=saved?.configured?inferredProvider(saved.settings.server):"kick";
+      setDraft(configurationDraft(saved?.settings) as Settings);setEdited({});dirty.current=false;
+      baselineProvider.current=selected;setProvider(selected);setReplaceKey(false);
+      setQualityOpen(false);setControlOpen(false);setConnectionOpen(false);
+    }
+    setEditing(value=>!value);
+  }
+  function toggleConnection(){
+    if(action.current)return;
+    if(connectionOpen){clearPassword();modal.current?.Close();modal.current=undefined;setControlOpen(false);}
+    setConnectionOpen(value=>!value);
+  }
+  async function openGuide(){
+    if(guideAction.current)return;
+    guideAction.current=true;setGuidePending(true);setGuideNotice("");
+    try{await openProviderGuide(provider,(url:string)=>Navigation.NavigateToExternalWeb(url));}
+    catch{if(alive.current)setGuideNotice("Could not open the provider setup guide. Try again when the browser is available, or open your provider's official help in Desktop Mode.");}
+    finally{guideAction.current=false;if(alive.current)setGuidePending(false);}
+  }
   function accept(raw:ConfigurationStatus,reset=false){
     const next=publicView(raw),previous=current.current;
+    // First-run setup opens once. Ordinary polls never reopen a saved editor
+    // or collapse a focused draft after Save.
+    if(next.configured===false&&previous?.configured!==false)setEditing(true);
     const switched=!!previous&&previous.settings.server!==next.settings.server;
     current.current=next;lastObserved.current=Date.now();setStatus(next);setObservedAt(lastObserved.current);setClock(lastObserved.current);
     if(reset||!dirty.current||switched){
@@ -153,17 +183,19 @@ export function Configuration({busy=false,onChanged,onOpenDesktopSetup}:{busy?:b
   return <>
     <PanelSection title="STREAM DESTINATION">
       <PanelSectionRow><div role="status" aria-live="polite"><strong>{status?.configured?"Destination saved privately":"Configure your stream destination"}</strong><Hint>{controls.reason}</Hint></div></PanelSectionRow>
+      <RowButton disabled={!!pending} onClick={toggleEditing}>{editing?"Hide destination settings":status?.configured?"Edit saved destination":"Configure stream destination"}</RowButton>
+      {editing&&<>
       {controls.canClose&&<RowButton onClick={confirmClose}>Close managed OBS to edit settings…</RowButton>}
       <PanelSectionRow><DropdownItem label="Destination guide" description="Guidance only; changing this never contacts a provider or starts streaming." rgOptions={Object.entries(providers).map(([data,value])=>({data,label:value.name}))} selectedOption={provider} disabled={!controls.canConfigure} onChange={option=>changeProvider(option.data)}/></PanelSectionRow>
       <PanelSectionRow><Hint>{guide.help}</Hint></PanelSectionRow>
-      <RowButton onClick={()=>Navigation.NavigateToExternalWeb(guide.docs)}>Open {guide.name} setup guide</RowButton>
+      <RowButton disabled={guidePending} onClick={()=>void openGuide()}>{guidePending?"Opening provider setup guide…":`Open ${guide.name} setup guide`}</RowButton>
       {"preset" in guide&&<RowButton disabled={!controls.canConfigure} onClick={()=>edit("server",guide.preset)}>Use Twitch secure server</RowButton>}
       <PanelSectionRow><TextField label="Stream server URL" aria-label="Stream server URL" description={guide.placeholder} value={draft.server} disabled={!controls.canConfigure} bShowCopyAction={false} onChange={event=>edit("server",event.target.value)}/></PanelSectionRow>
       <PanelSectionRow><TextField label="Stream key" aria-label="Stream key" description={keyNeeded?"Enter a new key for this destination/account. The key is never put in the server URL.":"Saved privately. Leave blank to keep it for this same destination only."} bIsPassword={!showKey} bShowCopyAction={false} bShowClearAction value={key} disabled={!controls.canConfigure} onChange={event=>{sensitiveEpoch.current++;secret.current=event.target.value;setKey(event.target.value);dirty.current=true;}}/></PanelSectionRow>
       <RowButton disabled={!controls.canConfigure||!key} onClick={()=>setShowKey(value=>!value)}>{showKey?"Hide stream key":"Show stream key"}</RowButton>
       <RowButton disabled={!controls.canConfigure} onClick={()=>void pasteKey()}>Paste stream key</RowButton>
       <PanelSectionRow><ToggleField label="Different account or event on the same server" description="Requires a new key even when the server URL is unchanged." checked={replaceKey} disabled={!controls.canConfigure} onChange={value=>{clearKey();clearPassword();setReplaceKey(value);dirty.current=true;}}/></PanelSectionRow>
-      <PanelSectionRow><Hint>Select a field with your controller. STEAM + X opens the on-screen keyboard; normal typing and paste are supported. Keys start hidden and private drafts clear on Save, destination changes and panel close. A saved key is never read back.</Hint></PanelSectionRow>
+      <PanelSectionRow><Hint>Select a field with your controller. STEAM + X opens the on-screen keyboard; normal typing and paste are supported. Keys start hidden and private drafts clear on Save, destination changes, hiding settings and panel close. A saved key is never read back.</Hint></PanelSectionRow>
       <RowButton onClick={()=>setQualityOpen(value=>!value)}>{qualityOpen?"Hide stream settings":"Stream quality & capture settings"}</RowButton>
       {qualityOpen&&<>
         <PanelSectionRow><SliderField label="Video bitrate" min={1000} max={8000} step={100} value={draft.bitrate} valueSuffix=" kbps" showValue disabled={!controls.canConfigure} onChange={value=>edit("bitrate",value)}/></PanelSectionRow>
@@ -175,11 +207,15 @@ export function Configuration({busy=false,onChanged,onOpenDesktopSetup}:{busy?:b
         <PanelSectionRow><Hint>Defaults are 720p, 30 fps, 4500 kbps and AMD hardware H.264. They are starting points, not a measured performance guarantee. Saved advanced options and idle media are preserved unless you edit them.</Hint></PanelSectionRow>
       </>}
       <RowButton disabled={!controls.canConfigure} onClick={save}>{pending==="save"?"Saving settings…":"Save destination & settings"}</RowButton>
+      </>}
       <RowButton disabled={!!pending||busy} onClick={()=>void refresh()}>Refresh settings</RowButton>
-      {onOpenDesktopSetup&&<RowButton disabled={!!pending||busy} onClick={onOpenDesktopSetup}>Open optional local Desktop Setup</RowButton>}
+      {guideNotice&&<PanelSectionRow><div role="status" aria-live="polite"><Hint>{guideNotice}</Hint></div></PanelSectionRow>}
+      {onOpenDesktopSetup&&<RowButton disabled={!!pending||busy} onClick={onOpenDesktopSetup}>Show Desktop Setup instructions</RowButton>}
       <PanelSectionRow><Hint>Save never broadcasts. When ready, use a local test clip to check picture and sound, then explicitly Start streaming. If settings are locked, stop streaming, recording and replay, wait for confirmed idle state, then use Close managed OBS to edit settings.</Hint></PanelSectionRow>
     </PanelSection>
     <PanelSection title="LOCAL OBS CONNECTION">
+      <RowButton disabled={!!pending} onClick={toggleConnection}>{connectionOpen?"Hide local connection controls":"Show local connection controls"}</RowButton>
+      {connectionOpen&&<>
       <PanelSectionRow><Hint>{status?.connection?.host??"127.0.0.1"}:{status?.connection?.port??"4457"} · Password authentication required{"\n"}{status?.connection?.message??"Refresh settings to inspect the managed local connection."}</Hint></PanelSectionRow>
       <RowButton disabled={!controls.canTest} onClick={()=>void run("test")}>{pending==="test"?"Testing local connection…":"Test local OBS connection"}</RowButton>
       <PanelSectionRow><Hint>This read-only test authenticates an already running managed OBS. It does not launch OBS, record, contact your provider or start streaming. A working control connection does not prove viewers receive audio/video.</Hint></PanelSectionRow>
@@ -190,6 +226,7 @@ export function Configuration({busy=false,onChanged,onOpenDesktopSetup}:{busy?:b
         <RowButton disabled={!controls.canChangePassword||!password} onClick={()=>setShowPassword(value=>!value)}>{showPassword?"Hide local password":"Show local password"}</RowButton>
         <RowButton disabled={!controls.canChangePassword||!password} onClick={()=>confirmPassword(false)}>Change local OBS password…</RowButton>
         <RowButton disabled={!controls.canChangePassword} onClick={()=>confirmPassword(true)}>Generate a new private OBS password…</RowButton>
+      </>}
       </>}
     </PanelSection>
     {message&&<PanelSection title="CONFIGURATION RESULT"><PanelSectionRow><div role="status" aria-live="polite"><Hint>{message}</Hint></div></PanelSectionRow></PanelSection>}

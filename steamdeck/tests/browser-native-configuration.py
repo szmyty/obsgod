@@ -45,6 +45,30 @@ def main():
                 page.on("pageerror", lambda error: errors.append(str(error)))
                 page.goto("http://127.0.0.1:" + str(server.server_port))
                 button = lambda name: page.get_by_role("button", name=name, exact=True)
+                # Primary output controls stay before saved setup at the narrow
+                # simulated panel size. This is geometry, not Deck controller proof.
+                page.set_viewport_size({"width": 400, "height": 800})
+                expect(button("Edit saved destination")).to_be_visible()
+                expect(page.get_by_label("Stream key", exact=True)).to_have_count(0)
+                for active in (False, True):
+                    page.evaluate("active=>{fixture.active=active;fixture.bytes=2048}", active)
+                    button("Refresh status").click()
+                    if active:
+                        expect(button("Start streaming")).to_be_disabled()
+                    else:
+                        expect(button("Start streaming")).to_be_enabled()
+                    page.evaluate("window.scrollTo(0,0)")
+                    stop = page.get_by_role("button", name=re.compile(r"^Stop streaming"))
+                    stop_box = stop.bounding_box()
+                    setup_box = page.get_by_role("heading", name="DEPENDENCY SETUP", exact=True).bounding_box()
+                    assert stop_box and setup_box and stop_box["y"] + stop_box["height"] <= 800
+                    assert stop_box["y"] < setup_box["y"]
+                page.evaluate("fixture.active=false")
+                button("Refresh status").click()
+                expect(button("Start streaming")).to_be_enabled()
+                page.set_viewport_size({"width": 800, "height": 900})
+                button("Edit saved destination").click()
+                cases.append("configured and streaming primary controls precede saved setup without narrow-panel scrolling")
                 key = page.get_by_label("Stream key", exact=True)
                 url = page.get_by_label("Stream server URL", exact=True)
                 save = button("Save destination & settings")
@@ -160,6 +184,7 @@ def main():
                 expect(save).to_be_enabled()
                 cases.append("active, recording, replay, unknown and setup-busy states block edits while Stop stays available")
 
+                button("Show local connection controls").click()
                 button("Test local OBS connection").click()
                 expect(page.get_by_text("Managed OBS is closed", exact=False).first).to_be_visible()
                 assert page.evaluate("fixture.obsAbsent")
@@ -183,6 +208,41 @@ def main():
                 assert not page.evaluate("fixture.active")
                 cases.append("read-only connection test never launches; confirmed password changes preserve the separate stream key")
 
+                page.evaluate("fixture.linkFailure=true")
+                page.get_by_role("button", name=re.compile(r"^Open .* setup guide$")).click()
+                expect(page.get_by_text("Could not open the provider setup guide.", exact=False)).to_be_visible()
+                page.evaluate("fixture.linkFailure=false")
+                cases.append("failed provider guide navigation has accessible public feedback")
+
+                key.fill("discard-on-hide-key")
+                password.fill("discard-on-hide-password")
+                page.evaluate("Object.defineProperty(navigator,'clipboard',{configurable:true,value:{readText:()=>new Promise(resolve=>{fixture.finishClipboard=resolve})}})")
+                button("Paste stream key").click()
+                page.wait_for_function("typeof fixture.finishClipboard==='function'")
+                button("Hide destination settings").click()
+                expect(key).to_have_count(0)
+                expect(password).to_have_count(0)
+                page.evaluate("fixture.finishClipboard('late-private-clipboard-value')")
+                edit = button("Edit saved destination")
+                edit.focus()
+                reads = page.evaluate("fixture.calls.configuration_status")
+                page.wait_for_function("reads=>fixture.calls.configuration_status>reads", arg=reads)
+                expect(edit).to_be_focused()
+                edit.click()
+                expect(key).to_have_value("")
+                expect(key).to_have_attribute("type", "password")
+                button("Show local connection controls").click()
+                button("Manage local OBS password").click()
+                expect(password).to_have_value("")
+                expect(password).to_have_attribute("type", "password")
+                for private in ("discard-on-hide-key", "discard-on-hide-password", "late-private-clipboard-value"):
+                    assert private not in page.locator("body").inner_text()
+                    assert private not in page.evaluate("JSON.stringify({...localStorage,...sessionStorage})")
+                button("Show Desktop Setup instructions").click()
+                expect(page.get_by_text("Advanced profiles, custom between-game media", exact=False)).to_be_visible()
+                assert "127.0.0.1" not in page.evaluate("JSON.stringify(fixture.externalLinks)")
+                cases.append("hiding settings clears both private drafts and late clipboard replies; stable focus and optional Desktop instructions")
+
                 page.evaluate("fixture.configurationFailure=true")
                 refresh.click()
                 expect(save).to_be_disabled()
@@ -196,6 +256,7 @@ def main():
                 expect(key).to_be_enabled()
                 key.fill("unsaved-reload-private-draft")
                 page.reload()
+                button("Edit saved destination").click()
                 expect(key).to_have_value("")
                 assert "unsaved-reload-private-draft" not in page.evaluate("JSON.stringify({...localStorage,...sessionStorage})")
                 assert not errors, errors

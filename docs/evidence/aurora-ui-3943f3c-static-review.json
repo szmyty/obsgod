@@ -1,0 +1,182 @@
+{
+  "schema": "deckystream.aurora-ui-static-review/v1",
+  "recorded_utc": "2026-11-19T01:47:25Z",
+  "reviewer": "Independent source and fixture reviewer",
+  "review_scope": "Read-only static source/fixture review. This separate report is stored as an authorized UTF-8 Git blob for coordinator assembly; it does not mutate a branch, commit or PR.",
+  "source_revision": "3943f3c10189dc4b2cc7cc11bc98fe9501c0c1c0",
+  "source_tree": "57e5eadf55c3802eecbfff737b3a3b119af57fab",
+  "base_revision": "699fac3503decc05345ec992f09eeedea8080fce",
+  "base_tree": "5781f285b6b0121c88fb209f430c0545d2b5df9a",
+  "result": "Static review passed with explicit unrun qualification limits",
+  "findings": [],
+  "immutable_readback": {
+    "source_commit_and_tree_verified": true,
+    "recursive_trees_complete": true,
+    "reviewed_file_count": 11,
+    "method": "Read exact candidate blobs, compare base contents, then verify all 11 reviewed blob SHAs against the immutable source Git tree. No working-tree execution or runtime validation is implied."
+  },
+  "reviewed_files": [
+    {
+      "path": "steamdeck/decky/src/index.tsx",
+      "base_blob_sha": "5971ce56e341d5f28a35bfdd0dcc011d520d4370",
+      "reviewed_source_blob_sha": "5781d9883d6cd6d4e0b797fe007afded3049047a",
+      "mode": "100644"
+    },
+    {
+      "path": "steamdeck/decky/src/Configuration.tsx",
+      "base_blob_sha": "d0b5accd8a345e3a51fc57f5485efd072fea335b",
+      "reviewed_source_blob_sha": "379729c5a62eba55ff6206775d311a55529007e1",
+      "mode": "100644"
+    },
+    {
+      "path": "steamdeck/decky/src/Advanced.tsx",
+      "base_blob_sha": "72fdc11458b3b567742654ab8ce50bf20b54979f",
+      "reviewed_source_blob_sha": "5054e82e5d6c8fe181078b872f379ec97f729346",
+      "mode": "100644"
+    },
+    {
+      "path": "steamdeck/decky/src/configuration-state.mjs",
+      "base_blob_sha": "c48c84ef3e2ba6418456579156201a455da95264",
+      "reviewed_source_blob_sha": "673103180d0bf0f9a461ec3f33898b00cdfc2b33",
+      "mode": "100644"
+    },
+    {
+      "path": "steamdeck/decky/src/advanced-state.mjs",
+      "base_blob_sha": "332d843fc01b838cf59d2a33dcaa89b25fa739c5",
+      "reviewed_source_blob_sha": "03d6b9a188be87293c6430ed56c8f9b9b1cabfa4",
+      "mode": "100644"
+    },
+    {
+      "path": "steamdeck/decky/tests/configuration-state.test.mjs",
+      "base_blob_sha": "703187274298b6b9e5dfb75ebc58a87e1b7f0aef",
+      "reviewed_source_blob_sha": "1582dede6591247b17f251469255397377b40670",
+      "mode": "100644"
+    },
+    {
+      "path": "steamdeck/decky/tests/advanced-state.test.mjs",
+      "base_blob_sha": "9f7be332ac551a8e20ead6f921ffcbfae7426088",
+      "reviewed_source_blob_sha": "b17d7eb3ff7f5515ebafc446e74b33d32ae76190",
+      "mode": "100644"
+    },
+    {
+      "path": "steamdeck/decky/tests/fixture.html",
+      "base_blob_sha": "cc490d4268348001a7e3f062e9bfaae6330733fb",
+      "reviewed_source_blob_sha": "02b63f90bba37bd671b7e104075649eb124cefe7",
+      "mode": "100644"
+    },
+    {
+      "path": "steamdeck/tests/browser-m3-panel.py",
+      "base_blob_sha": "0c162de12035262ba4a8d75b406304d09add4901",
+      "reviewed_source_blob_sha": "f8bc14c315f97c2fb979f03e2f93763a440ca2d8",
+      "mode": "100644"
+    },
+    {
+      "path": "steamdeck/tests/browser-native-configuration.py",
+      "base_blob_sha": "156c11558a980855468305df44e7a43c89d3d37e",
+      "reviewed_source_blob_sha": "4358f01cce301ea643b93689c326c726af1588c7",
+      "mode": "100644"
+    },
+    {
+      "path": "steamdeck/tests/browser-panel.py",
+      "base_blob_sha": "523c78394dde7aa6a0d329d663cd56d7f449bcaa",
+      "reviewed_source_blob_sha": "3136002c6036036f11c3efebefd5880847b18678",
+      "mode": "100644"
+    }
+  ],
+  "unchanged_preservation_files": [
+    {
+      "path": "docs/evidence/completion-criteria.json",
+      "unchanged_blob_sha": "fb470f2c39825425c44065d58d1e87aa04795a20"
+    },
+    {
+      "path": "product.json",
+      "unchanged_blob_sha": "e4b2426bdf698d20084b2391aadd96c04cad230e"
+    },
+    {
+      "path": "steamdeck/decky/src/state.mjs",
+      "unchanged_blob_sha": "855ef56da10294216726bdbfc1e669954fb7625c"
+    },
+    {
+      "path": "steamdeck/decky/main.py",
+      "unchanged_blob_sha": "b084cc2354116ee4f6a2e7bc21f1a9186bee0b33"
+    },
+    {
+      "path": "steamdeck/decky/src/Mixer.tsx",
+      "unchanged_blob_sha": "99a1ca54dc9e0c142d13451751d537179ec754c8"
+    },
+    {
+      "path": ".identity/candidates/concepts/selection.json",
+      "unchanged_blob_sha": "200479fa5fef8e13292d1d37ea704a86641f8c26"
+    },
+    {
+      "path": ".identity/toolchain.lock.json",
+      "unchanged_blob_sha": "dc46856f48f618fe2c76ea4cd3fb57548f8b193a"
+    },
+    {
+      "path": ".identity/candidates/concepts/orbital-stream-color-alternatives.png",
+      "unchanged_blob_sha": "90bbd29a0632cbdab891e9328d0b12acc3deadc4"
+    },
+    {
+      "path": ".identity/candidates/concepts/orbital-stream-board.png",
+      "unchanged_blob_sha": "fdafc98399273491b39824174b281c46cfae89a2"
+    },
+    {
+      "path": ".identity/candidates/concepts/orbital-stream-gradient-icon.png",
+      "unchanged_blob_sha": "6d1173282ee7940e3b72ef6e87d17325b1c8d8e1"
+    }
+  ],
+  "checks": {
+    "action_and_permission_preservation": "The refresh, act, canChangeCaptureMode, changeCaptureMode, toolAction and checkForUpdates function bodies are unchanged from the base. Backend/public API, observed-state gates, explicit Start, capture privacy and microphone intent remain unchanged.",
+    "private_configuration_disclosure": "Saved destination and connection controls collapse progressively. Hiding destination settings clears key/password drafts, invalidates the clipboard epoch, closes confirmation modals, resets public drafts and is refused during a pending mutation. Ordinary polling does not reopen a saved editor; first-run setup opens on the unconfigured transition. Public configuration projection and mutation checks are unchanged.",
+    "guide_navigation": "Only an own-property key from the fixed public provider inventory reaches browser navigation. Sync and async navigation errors become generic feedback; no account data, private destination or token is passed to the navigation helper.",
+    "media_list_states": "Clip loading, positive empty, populated and failed results are distinct. Malformed/incomplete lists cannot establish an empty library. Only named display fields are projected. List request generation is separate from media-action serials; hiding discards late results.",
+    "clip_pending_lifetime": "Local React loading state and the imperative pending ref cover the complete list promise, including the awaited final status refresh. Closed Browse and Refresh remain disabled until settlement; Hide remains available. Unmount guards prevent late React state writes.",
+    "health_and_recovery_feedback": "Generic request failures remain visible outside collapsed health details. A returned recovery request is not presented as proof of recovered output or a streaming success.",
+    "optional_desktop_instructions": "The referenced setup.py is included by the existing plugin shared-file inventory and implements authenticated loopback-only setup with a private session token. Instructions introduce no new server, mandatory companion or unauthenticated LAN service.",
+    "tsx_and_types_scope": "Imports, local state shapes, JSX fragment nesting and callback use are consistent on manual source inspection. This is not a TypeScript compiler, JSX parser, native Decky API or render test.",
+    "test_scope": "Existing state/privacy assertions remain. New model/browser fixtures address guide errors, clip validity and delayed list states, secret disposal and late clipboard completion, narrow primary-control order, focus, collapsed failures and the pending-through-final-refresh race. Test source inspection is not test execution.",
+    "identity_and_scope": "The original 230-criterion ledger, product metadata, compatibility IDs, selected concept records and PNG blobs remain unchanged. Selected aurora production source, lowercase display adoption, logo integration, exports and rights facts remain pending under open work #80/#81."
+  },
+  "source_confirmed_preexecution_repairs": [
+    {
+      "id": "clip-list-pending-final-refresh",
+      "disposition": "Repaired in source before repository test execution",
+      "detail": "The earlier candidate relied on global busy even though toolAction clears it before awaiting its final status refresh. A local loading gate now lasts until the whole list promise settles; the refined fixture establishes a held status request first and explicitly proves global busy is cleared while Browse remains disabled."
+    },
+    {
+      "id": "existing-browser-hint",
+      "disposition": "Reconciled in test source before repository test execution",
+      "detail": "The existing exact browser-panel setup hint assertion now matches the setup-below wording after primary controls moved first."
+    },
+    {
+      "id": "race-fixture-coalescing",
+      "disposition": "Strengthened test source before repository test execution",
+      "detail": "The final M3 fixture holds a known status request before releasing the list result, forces a parent render and verifies an unrelated recording action is enabled before asserting the local list gate. This avoids the earlier potential coalescing/false-positive window."
+    }
+  ],
+  "execution_boundary": {
+    "runtime_observation_source": "Coordinating agent's verified startup and shell probes",
+    "startup_failure": "environment configuration was canceled",
+    "shell_probe": "No usable execution environment",
+    "new_repository_checks": {
+      "node_tests": "unrun",
+      "typecheck": "unrun",
+      "build": "unrun",
+      "browser_fixtures": "unrun",
+      "asset_decode_hash_export_render": "unrun",
+      "full_act_matrix": "unrun",
+      "owner_machine": "unrun",
+      "actual_steam_deck_controller_provider": "unrun"
+    },
+    "this_review_test_execution": "None",
+    "runtime_failure_recorded_by_this_review": false
+  },
+  "limits": [
+    "No recorded runtime failure, command completion, screenshot or passing repository test receipt is invented by the pre-execution repairs.",
+    "No Node, TypeScript, build, browser, export, native Decky, controller, SteamOS, OBS/provider or real Steam Deck pass is established.",
+    "Earlier source-bound receipts, including #104 qualification at 0c79846, do not qualify this UI source or later documentation commits.",
+    "This is not a formal GitHub review approval, issue closure, complete qualification, release or authorization to publish/deploy/migrate.",
+    "All original criteria remain. Selected artwork, lowercase production styling, logo/export integration and actual rights/publisher facts remain incomplete under #80/#81; owner-machine and Steam Deck checks remain #85/#86.",
+    "No release, deployment, migration, Store action, paid resource or other-repository change is performed."
+  ]
+}

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {configurationControls,configurationDraft,configurationPayload,destinationChanged,inferredProvider,providers,publicConfiguration,validConfiguration,validateControlPassword,validateDestination} from "../src/configuration-state.mjs";
+import {configurationControls,configurationDraft,configurationPayload,destinationChanged,inferredProvider,openProviderGuide,providers,publicConfiguration,validConfiguration,validateControlPassword,validateDestination} from "../src/configuration-state.mjs";
 
 const server="rtmps://example.invalid/app";
 const saved={schema_version:1,ok:true,configured:true,key_configured:true,provider:"custom",message:"Settings are editable",settings:{version:1,server,bitrate:6000,fps:60,encoder:"vaapi",width:1920,height:1080,capture_mode:"game",microphone:true,idle_style:"video",idle_media:"/private/idle.webm",idle_media_rights:"Owner rights",idle_text:"Saved message"},output_known:true,can_configure:true,can_close:false,connection:{ok:true,host:"127.0.0.1",port:"4457",authentication_required:true,credentials_available:true,connected:false,managed:false,process:"absent",output_known:true,state:"stopped",message:"Managed OBS is closed"}};
@@ -106,4 +106,20 @@ test("quality and control-password boundaries reject malformed values without ec
   for(const secret of ["short","a".repeat(129),"password\nSENTINEL"])assert.match(validateControlPassword(secret),/12–128 bytes/);
   assert.equal(validateControlPassword("long-local-password"),"");
   assert.equal(validateControlPassword("😀".repeat(33)).includes("12–128 bytes"),true);
+});
+
+test("provider guide navigation accepts only the fixed public inventory, never account data or inherited keys",async()=>{
+  const opened=[];
+  for(const provider of Object.keys(providers))await openProviderGuide(provider,url=>opened.push(url));
+  assert.deepEqual(opened,Object.values(providers).map(guide=>guide.docs));
+  for(const provider of ["__proto__","constructor","https://private.invalid/KEY",null]){
+    await assert.rejects(openProviderGuide(provider,url=>opened.push(url)),{message:"Could not open the provider setup guide."});
+  }
+  assert.equal(opened.length,Object.keys(providers).length);
+  await assert.rejects(openProviderGuide("kick",undefined),{message:"Could not open the provider setup guide."});
+});
+test("provider guide sync/async failures receive the same secret-free error",async()=>{
+  for(const navigate of [()=>{throw new Error("PRIVATE-KEY-SENTINEL");},()=>Promise.reject(new Error("PRIVATE-KEY-SENTINEL"))]){
+    await assert.rejects(openProviderGuide("kick",navigate),{message:"Could not open the provider setup guide."});
+  }
 });

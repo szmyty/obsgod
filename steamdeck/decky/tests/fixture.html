@@ -34,6 +34,7 @@ function configurationStatus(){
 function configurationResult(ok,message,action){return {...configurationStatus(),action_result:{id:++fixture.sequence,action,ok,message}};}
 window.__DECKY_SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED_deckyLoaderAPIInit={connect:()=>({_version:2,callable:(method)=>async(...args)=>{
  fixture.calls[method]=(fixture.calls[method]||0)+1;
+ if(method==="status"&&fixture.statusPending){await new Promise(resolve=>{fixture.finishStatus=resolve;});delete fixture.finishStatus;}
  if(method==="configuration_status")return configurationStatus();
  if(method==="configure_destination"){
   const patch=args[0];fixture.configurationPatches.push({...patch,...(patch.stream_key?{stream_key:"<provided>"}:{})});
@@ -106,7 +107,11 @@ window.__DECKY_SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED_deckyLoaderAPIIn
  }
  if(method==="media_action"){
   const payload=args[0];fixture.mediaArgs=payload;
-  if(payload.action==="list")return {ok:true,message:"Clips loaded",clips:[{id:"fixture",name:"clip.mkv",kind:"recording",bytes:1048576,modified_utc:"2026-11-13T12:00:00Z"}]};
+  if(payload.action==="list"){
+    if(fixture.clipListPending){await new Promise(resolve=>{fixture.finishClipList=resolve;});delete fixture.finishClipList;}
+    if(fixture.clipListFailure)throw Error("PRIVATE-CLIP-ERROR-SENTINEL");
+    return {ok:true,message:"Clips loaded",clips:fixture.clipListEmpty?[]:[{id:"fixture",name:"clip.mkv",kind:"recording",bytes:1048576,modified_utc:"2026-11-13T12:00:00Z"}]};
+   }
   if(fixture.unknown)return {ok:false,message:"Media state unconfirmed"};
   if(["record-start","replay-start"].includes(payload.action)&&fixture.mediaStartPending){
    fixture.operation={id:fixture.sequence+1,action:"media",media_action:payload.action,state:"running"};
@@ -123,7 +128,7 @@ window.__DECKY_SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED_deckyLoaderAPIIn
   fixture.mediaCancelled=true;if(fixture.finishMedia)fixture.finishMedia();
   return {data:{ok:true,message:"Local media startup cancelled; stream unchanged"},action_result:{ok:true,message:"Local media startup cancelled; stream unchanged"}};
  }
- if(method==="retry_recovery")return {ok:true,message:"Bounded recovery requested; no stopped output restarted"};
+ if(method==="retry_recovery"){if(fixture.recoveryFailure)throw Error("PRIVATE-RECOVERY-ERROR-SENTINEL");return {ok:true,message:"Bounded recovery requested; no stopped output restarted"};}
  if(method==="stream_health"){if(fixture.healthFailure)throw Error("Health observation unavailable");return {schema_version:1,ok:true,state:"degraded",message:"Network dropped frames observed",observed_at:new Date().toISOString(),expires_at:new Date(Date.now()+8000).toISOString(),output_known:true,streaming:fixture.active,metrics:{bitrate_kbps:4500,stream_dropped_percent:5,cpu_percent:12,fps:30},audio:"signal",capture:"visible",provider_reception:"unknown",advice:[{code:"network",message:"Check your connection; quality was not changed automatically."}]};}
  if(method==="check_for_updates")return {ok:true,state:"update-available",current_version:"0.1.0-console-fixture",latest_version:"0.1.0-deck.5",available:true,message:"A preview update is available."};
  if(method==="set_capture_mode"){

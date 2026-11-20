@@ -1,7 +1,7 @@
 import {ButtonItem, PanelSection, PanelSectionRow} from "@decky/ui";
 import {callable} from "@decky/api";
-import {useEffect, useState, type ReactNode} from "react";
-import {healthFresh, mediaControls, metricText, profileSummary} from "./advanced-state.mjs";
+import {useEffect, useRef, useState, type ReactNode} from "react";
+import {clipListResult, healthFresh, mediaControls, metricText, profileSummary} from "./advanced-state.mjs";
 
 type Profile={version:number;width:number;height:number;fps:number;bitrate:number;encoder:string;microphone:boolean;capture_mode:string};
 type Preset={name:string;label:string;description:string;profile:Profile};
@@ -91,15 +91,31 @@ export function StreamTools({current,busy,run,copy}:{current:any;busy:boolean;ru
 }
 
 export function MediaTools({current,busy,mediaPending,run}:{current:any;busy:boolean;mediaPending:string;run:ToolRunner}){
-  const [open,setOpen]=useState(false),[clips,setClips]=useState<Clip[]>([]),[message,setMessage]=useState("");
+  const [open,setOpen]=useState(false),[clipList,setClipList]=useState<{state:string;clips:Clip[]}>({state:"idle",clips:[]}),[message,setMessage]=useState("");
+  const clipRequest=useRef(0),clipPending=useRef(false);
+  const [clipLoading,setClipLoading]=useState(false);
   const [latest,setLatest]=useState("");
   const [serial]=useState(()=>({value:0}));
   const alive=useAlive();
   const state=mediaControls(current,busy);
   async function action(name:string){
     const token=++serial.value;
-    try{const reply=await run({kind:name==="cancel-media"?"cancel-media":"media",payload:{action:name}});if(!alive.current||token!==serial.value)return;setMessage(reply.message??"Confirm the current output state before another action.");if(reply.recording_path)setLatest(reply.recording_path);if(reply.clips)setClips(reply.clips);}
+    try{const reply=await run({kind:name==="cancel-media"?"cancel-media":"media",payload:{action:name}});if(!alive.current||token!==serial.value)return;setMessage(reply.message??"Confirm the current output state before another action.");if(reply.recording_path)setLatest(reply.recording_path);}
     catch(error){if(alive.current&&token===serial.value)setMessage(error instanceof Error?error.message:"Media action could not be confirmed. Use Stop/recover and inspect OBS.");}
+  }
+  async function loadClips(){
+    if(clipPending.current)return;
+    clipPending.current=true;setClipLoading(true);const token=++clipRequest.current;
+    setClipList({state:"loading",clips:[]});
+    try{
+      const reply=await run({kind:"media",payload:{action:"list"}});
+      if(alive.current&&token===clipRequest.current)setClipList(clipListResult(reply));
+    }catch{if(alive.current&&token===clipRequest.current)setClipList({state:"error",clips:[]});}
+    finally{clipPending.current=false;if(alive.current)setClipLoading(false);}
+  }
+  function toggleClips(){
+    if(open){clipRequest.current++;setClipList({state:"idle",clips:[]});setOpen(false);}
+    else{setOpen(true);void loadClips();}
   }
   const storage=current?.media?.storage;
   const free=typeof storage?.available_bytes==="number"?`${(storage.available_bytes/1024**3).toFixed(1)} GiB available`:"Free space not confirmed";
@@ -113,10 +129,11 @@ export function MediaTools({current,busy,mediaPending,run}:{current:any;busy:boo
     <RowButton disabled={state.replayStopDisabled} onClick={()=>void action("replay-stop")}>{state.known?"Stop replay buffer":"Stop replay / recover"}</RowButton>
     {message&&<PanelSectionRow><div role="status"><Hint>{message}{latest?"\nSaved: "+latest:""}</Hint></div></PanelSectionRow>}
     <PanelSectionRow><Hint>These actions never start a stream. Stopping streaming preserves independent recording/replay. Use the focused panel buttons with your controller; no global button chord is registered.</Hint></PanelSectionRow>
-    <RowButton disabled={busy} onClick={()=>{setOpen(value=>!value);if(!open)void action("list");}}>{open?"Hide saved clips":"Browse saved clips"}</RowButton>
+    <RowButton disabled={!open&&(busy||clipLoading)} onClick={toggleClips}>{open?"Hide saved clips":"Browse saved clips"}</RowButton>
     {open&&<>
-      <PanelSectionRow><Hint>{clips.length?clips.slice(0,12).map(clip=>`${clip.kind} · ${clip.name}\n${(clip.bytes/1024**2).toFixed(1)} MiB · ${new Date(clip.modified_utc).toLocaleString()}`).join("\n\n"):"No finalized managed clips listed. Existing or interrupted files are preserved; inspect the recording folder in Desktop Mode."}</Hint></PanelSectionRow>
-      <PanelSectionRow><Hint>Folder: {storage?.directory??"Not confirmed"}. Change the recording folder, replay duration, reserve and explicit retention/export choices in Desktop Setup. No automatic clip deletion is enabled by default.</Hint></PanelSectionRow>
+      <PanelSectionRow><div role="status" aria-live="polite" aria-busy={clipList.state==="loading"}><Hint>{clipList.state==="loading"?"Loading saved clips…":clipList.state==="error"?"Could not load saved clips. Refresh to retry; existing files are unchanged.":clipList.state==="empty"?"No finalized managed clips were found in the completed check. Existing or interrupted files are preserved; inspect the recording folder in Desktop Mode.":clipList.state==="ready"?clipList.clips.slice(0,12).map(clip=>`${clip.kind} · ${clip.name}\n${(clip.bytes/1024**2).toFixed(1)} MiB · ${new Date(clip.modified_utc).toLocaleString()}`).join("\n\n"):"Saved clips have not been checked yet."}</Hint></div></PanelSectionRow>
+      <RowButton disabled={busy||clipLoading||clipList.state==="loading"} onClick={()=>void loadClips()}>{clipList.state==="loading"?"Refreshing saved clips…":"Refresh saved clips"}</RowButton>
+      <PanelSectionRow><Hint>Folder: {storage?.directory??"Not confirmed"}. The list reflects its last completed check; refresh after saving a new clip. Change the recording folder, replay duration, reserve and explicit retention/export choices in Desktop Setup. No automatic clip deletion is enabled by default.</Hint></PanelSectionRow>
     </>}
   </PanelSection>;
 }
@@ -143,12 +160,18 @@ export function HealthTools({current,busy,run}:{current:any;busy:boolean;run:Too
   },[open]);
   const fresh=healthFresh(observed,clock);
   async function sample(){
-    setOpen(true);
-    try{const reply=await run({kind:"health",payload:{}});if(alive.current){setReport(reply);setClock(Date.now());setMessage(reply.message??"");}}
-    catch(error){if(alive.current)setMessage(error instanceof Error?error.message:"Health observation unavailable.");}
+    setOpen(true);setMessage("");
+    try{const reply=await run({kind:"health",payload:{}});if(alive.current){setReport(reply);setClock(Date.now());if(reply?.ok===false)setMessage("Health observation could not be confirmed. Measure again or inspect OBS.");}}
+    catch{if(alive.current)setMessage("Health observation could not be confirmed. Measure again or inspect OBS.");}
+  }
+  async function recover(){
+    setMessage("");
+    try{const reply=await run({kind:"recovery",payload:{}});if(alive.current)setMessage(reply?.ok===false?"Recovery could not be confirmed; inspect OBS.":"Recovery request returned. Confirm the observed capture and audio state.");}
+    catch{if(alive.current)setMessage("Recovery could not be confirmed; inspect OBS.");}
   }
   return <PanelSection title="STREAM HEALTH">
     <RowButton disabled={busy} onClick={()=>void sample()}>Measure current stream health</RowButton>
+    {message&&<PanelSectionRow><div role="status" aria-live="polite"><Hint>Last health or recovery request: {message}</Hint></div></PanelSectionRow>}
     {open&&<>
       <PanelSectionRow><div role="status"><Hint>{fresh?observed?.message??message:"Measurements expired or unavailable. Measure again; last values are not current health."}</Hint></div></PanelSectionRow>
       <PanelSectionRow><Hint>Bitrate: {metricText(observed,"bitrate_kbps"," kbps",clock,0)}{"\n"}Network-dropped frames: {metricText(observed,"stream_dropped_percent","%",clock)}{"\n"}Encoder-skipped frames: {metricText(observed,"encode_skipped_percent","%",clock)}{"\n"}Render-missed frames: {metricText(observed,"render_missed_percent","%",clock)}{"\n"}CPU: {metricText(observed,"cpu_percent","%",clock)}{"\n"}OBS frame rate: {metricText(observed,"fps"," fps",clock)}{"\n"}GPU: {metricText(observed,"gpu_percent","%",clock)}{"\n"}Audio: {fresh?observed?.audio??"unknown":"unknown"}{"\n"}Capture: {fresh?observed?.capture??"unknown":"unknown"}</Hint></PanelSectionRow>
@@ -156,7 +179,7 @@ export function HealthTools({current,busy,run}:{current:any;busy:boolean;run:Too
       <PanelSectionRow><Hint>Updates every five seconds while these details are open. Measured locally; nothing is uploaded. OBS sending output does not prove your provider or viewers receive picture and sound. Missing metrics stay unknown. Quality settings never change automatically.</Hint></PanelSectionRow>
       <RowButton onClick={()=>setOpen(false)}>Hide stream health</RowButton>
     </>}
-    <RowButton disabled={busy||(!current?.stream?.active&&!current?.recording&&!current?.media?.replay_active)} onClick={()=>void run({kind:"recovery",payload:{}}).catch(()=>setMessage("Recovery could not be confirmed; inspect OBS."))}>Retry bounded audio/capture recovery</RowButton>
+    <RowButton disabled={busy||(!current?.stream?.active&&!current?.recording&&!current?.media?.replay_active)} onClick={()=>void recover()}>Retry bounded audio/capture recovery</RowButton>
     {current?.resilience&&<PanelSectionRow><Hint>Recovery: {current.resilience.message??current.resilience.state??"Not confirmed"}. Recovery never restarts a stopped broadcast.</Hint></PanelSectionRow>}
   </PanelSection>;
 }
