@@ -16,6 +16,10 @@ spec.loader.exec_module(history)
 REPOSITORY = "szmyty/obsgod"
 API = "https://api.github.com/repos/" + REPOSITORY
 HEAD = "a" * 40
+# Exact public repository ID and next-page cursor observed in GitHub's Link
+# header on 2026-11-20; a cursor is public pagination metadata, not a credential.
+REPOSITORY_ID = 1263344065
+CURSOR = "Y3Vyc29yOnYyOpLPAAABodwRKrjPAAAAAX1CUqw%3D"
 
 
 class Response(io.BytesIO):
@@ -95,12 +99,59 @@ class PublicHistory(unittest.TestCase):
         self.assertNotIn("fixture-token", json.dumps(snapshot))
 
     def test_private_or_moved_repository_is_refused_before_tracker_requests(self):
-        for changed in ({"private": True, "visibility": "private"}, {"full_name": "other/project"}):
+        for changed in ({"private": True, "visibility": "private"}, {"full_name": "other/project"},
+                        *({"id": value} for value in (None, True, 0, -1, "10", 1.5))):
             fixture = Fixture()
             fixture.repo.update(changed)
             with self.subTest(changed=changed), self.assertRaises(history.ExportError):
                 history.capture(fixture.api())
             self.assertEqual([c[0] for c in fixture.calls], [API])
+
+    def test_actual_numeric_id_and_cursor_header_requests_canonical_verified_repository(self):
+        fixture = Fixture()
+        fixture.repo["id"] = REPOSITORY_ID
+        next_url = ("https://api.github.com/repositories/1263344065/issues"
+                    "?state=all&per_page=100&sort=created&direction=asc&after=" + CURSOR + "&page=2")
+        fixture.routes[fixture.issues_url] = ([fixture.issue], '<' + next_url + '>; rel="next"')
+        canonical = fixture.issues_url + "&after=" + CURSOR + "&page=2"
+        fixture.routes[canonical] = ([fixture.pull], "")
+        snapshot = history.capture(fixture.api())
+        self.assertEqual(snapshot["repository"]["id"], REPOSITORY_ID)
+        self.assertEqual([i["number"] for i in snapshot["items"]], [1, 2])
+        self.assertIn(canonical, [call[0] for call in fixture.calls])
+        self.assertNotIn(next_url, [call[0] for call in fixture.calls])
+        for url, headers, _timeout in fixture.calls:
+            self.assertTrue(url.startswith(API))
+            self.assertNotIn("authorization", {key.lower() for key in headers})
+
+    def test_verified_numeric_alias_is_exact_for_each_endpoint(self):
+        for path in ("/issues/comments?per_page=100&sort=created&direction=asc",
+                     "/pulls?state=all&per_page=100&sort=created&direction=asc",
+                     "/pulls/comments?per_page=100&sort=created&direction=asc",
+                     "/pulls/2/reviews?per_page=100"):
+            fixture = Fixture()
+            api = fixture.api()
+            api.verify_repository(fixture.repo)
+            original = API + path
+            numeric = original.replace("/repos/" + REPOSITORY, "/repositories/10")
+            fixture.routes[original] = ([{"id": 21}], '<' + numeric + '&page=2>; rel="next"')
+            fixture.routes[original + "&page=2"] = ([{"id": 22}], "")
+            with self.subTest(path=path):
+                self.assertEqual(api.get(path, pages=True), [{"id": 21}, {"id": 22}])
+                self.assertEqual([call[0] for call in fixture.calls], [original, original + "&page=2"])
+
+    def test_numeric_alias_requires_metadata_binding_and_cannot_rebind(self):
+        fixture = Fixture()
+        numeric = fixture.issues_url.replace("/repos/" + REPOSITORY, "/repositories/10")
+        fixture.routes[fixture.issues_url] = ([fixture.issue], '<' + numeric + '&page=2>; rel="next"')
+        with self.assertRaisesRegex(history.ExportError, "pagination"):
+            fixture.api().get("/issues?state=all&per_page=100&sort=created&direction=asc", pages=True)
+        self.assertEqual(len(fixture.calls), 1)
+        api = fixture.api()
+        api.verify_repository(fixture.repo)
+        with self.assertRaises(history.ExportError):
+            api.verify_repository(dict(fixture.repo, id=11))
+        self.assertEqual(api.repository_id, 10)
 
     def test_remote_branch_changes_are_reported_instead_of_claimed_atomic_backup(self):
         fixture = Fixture()
@@ -131,6 +182,62 @@ class PublicHistory(unittest.TestCase):
             with self.subTest(url=url), self.assertRaisesRegex(history.ExportError, "pagination"):
                 fixture.api().get("/issues?state=all&per_page=100&sort=created&direction=asc", pages=True)
             self.assertEqual(len(fixture.calls), 1)
+
+    def test_numeric_pagination_rejects_identity_endpoint_authority_and_query_confusion(self):
+        numeric = "https://api.github.com/repositories/1263344065/issues"
+        query = "?state=all&per_page=100&sort=created&direction=asc"
+        valid = numeric + query + "&after=" + CURSOR + "&page=2"
+        urls = [
+            valid.replace("1263344065", "1263344066"),
+            valid.replace("1263344065", "01263344065"),
+            valid.replace("1263344065", "1263344065-extra"),
+            valid.replace("/issues?", "/issues/comments?"),
+            valid.replace("/issues?", "/pulls?"),
+            valid.replace("/issues?", "/issues/../issues?"),
+            valid.replace("/issues?", "/%69ssues?"),
+            valid.replace("https://", "http://"),
+            valid.replace("https:", ""),
+            valid.replace("api.github.com", "api.github.com.attacker.invalid"),
+            valid.replace("api.github.com", "api.github.com:443"),
+            valid.replace("api.github.com", "user@api.github.com"),
+            valid.replace("api.github.com", "api.github.com@attacker.invalid"),
+            valid.replace("api.github.com", "api.github.com."),
+            valid + "#", valid + "#fragment", valid + "\t",
+            valid + "&access_token=fixture", valid + "&access_token=",
+            valid + "&page=2", valid + "&per_page=100", valid + "&after=" + CURSOR,
+            valid.replace("state=all", "state=open"),
+            valid.replace("sort=created", "sort=updated"),
+            valid.replace("&page=2", "&page=0"), valid.replace("&page=2", "&page=01"),
+            valid.replace("&page=2", "&page=3"), valid.replace("&page=2", "&page=２"),
+            valid.replace("&page=2", "&page="),
+            numeric + query + "&after=&page=2",
+            numeric + query + "&after=" + "a" * 1025 + "&page=2",
+            numeric + query + "&after=cursor%26access_token%3Dfixture&page=2",
+            numeric + query + "&after=cursor%0Avalue&page=2",
+            numeric + query + "&before=" + CURSOR + "&page=2",
+        ]
+        for url in urls:
+            fixture = Fixture()
+            fixture.repo["id"] = REPOSITORY_ID
+            fixture.routes[fixture.issues_url] = ([fixture.issue], '<' + url + '>; rel="next"')
+            api = fixture.api()
+            api.verify_repository(fixture.repo)
+            with self.subTest(url=url), self.assertRaisesRegex(history.ExportError, "pagination"):
+                api.get("/issues?state=all&per_page=100&sort=created&direction=asc", pages=True)
+            self.assertEqual([call[0] for call in fixture.calls], [fixture.issues_url])
+
+    def test_verified_alias_does_not_authorize_a_response_redirect(self):
+        fixture = Fixture()
+        numeric = fixture.issues_url.replace("/repos/" + REPOSITORY, "/repositories/10")
+        fixture.routes[fixture.issues_url] = ([fixture.issue], '<' + numeric + '&page=2>; rel="next"')
+        def open_response(request, timeout):
+            if "page=2" in request.full_url:
+                return Response(request.full_url, [fixture.pull], final_url=numeric + "&page=2")
+            return fixture.open(request, timeout)
+        api = history.PublicGitHub(REPOSITORY, open_response)
+        api.verify_repository(fixture.repo)
+        with self.assertRaisesRegex(history.ExportError, "changed the requested"):
+            api.get("/issues?state=all&per_page=100&sort=created&direction=asc", pages=True)
 
     def test_redirect_and_response_page_request_limits_fail_closed(self):
         api = history.PublicGitHub(REPOSITORY, lambda request, **_kw: Response(request.full_url, {}, final_url=API + "/other"))

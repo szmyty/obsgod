@@ -1,0 +1,753 @@
+{
+  "schema": "deckystream.destination-readiness/v1",
+  "recorded_utc": "2026-11-20T19:02:48.676650+00:00",
+  "requested_repository": "szmyty/obsgod",
+  "requested_pull_request": 114,
+  "authentication": {
+    "source": "existing-gh-authentication",
+    "credential_values_recorded": false
+  },
+  "observations": {
+    "repository": {
+      "status": "ok",
+      "http_status": 200
+    },
+    "pull_request": {
+      "status": "ok",
+      "http_status": 200
+    },
+    "default_branch_start": {
+      "status": "ok",
+      "http_status": 200
+    },
+    "default_commit": {
+      "status": "ok",
+      "http_status": 200
+    },
+    "base_commit": {
+      "status": "ok",
+      "http_status": 200
+    },
+    "head_commit": {
+      "status": "ok",
+      "http_status": 200
+    },
+    "head_tree": {
+      "status": "ok",
+      "http_status": 200
+    },
+    "default_tree": {
+      "status": "ok",
+      "http_status": 200
+    },
+    "dependency_sbom": {
+      "status": "unavailable",
+      "http_status": 404,
+      "reason": "missing-or-inaccessible-or-unsupported"
+    },
+    "dependency_comparison": {
+      "status": "unavailable",
+      "http_status": 403,
+      "reason": "permission-or-capability"
+    },
+    "pull_request_end": {
+      "status": "ok",
+      "http_status": 200
+    },
+    "default_branch_end": {
+      "status": "ok",
+      "http_status": 200
+    },
+    "repository_end": {
+      "status": "ok",
+      "http_status": 200
+    }
+  },
+  "gates": [
+    "default-branch-is-not-main",
+    "standalone-destination-not-confirmed",
+    "real-pr-dependency-comparison-unavailable",
+    "both-manifest-ingestion-evidence-incomplete",
+    "actual-executed-dependency-review-success-unconfirmed"
+  ],
+  "scope": "Read-only preparation. No issue criterion, actual migration, Graph setting, required review, device or publication acceptance is inferred.",
+  "mutations_performed": false,
+  "raw_annotation_or_pr_body_recorded": false,
+  "repository": {
+    "full_name": "szmyty/obsgod",
+    "id": 1263344065,
+    "public": true,
+    "default_branch": "master",
+    "fork": true,
+    "archived": false,
+    "authenticated_permissions": {
+      "admin": true,
+      "maintain": true,
+      "push": true,
+      "pull": true
+    }
+  },
+  "pull_request": {
+    "number": 114,
+    "state": "open",
+    "draft": true,
+    "base_sha": "736be3e2964179f180de34d21dbe81dd33fd8c52",
+    "head_sha": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+    "head_repository": "szmyty/obsgod",
+    "head_repository_id": 1263344065
+  },
+  "default_revision": "069db4a21ec0a173b7dd30c12a53018c7700f79b",
+  "commit_trees": {
+    "default": "ea671b0c5a6807a4ee0d42b86e57f1c69e5a543a",
+    "base": "ac154f8abcd22e772fc8e1f51313bbbba2549730",
+    "head": "3585debfa7406db272a8abcf84c21d9deec9e7e3"
+  },
+  "committed_manifests": [
+    {
+      "path": "go.mod",
+      "ecosystem": "Go",
+      "source_scope": "default-revision",
+      "status": "ok",
+      "http_status": 200,
+      "git_blob": "c90558142a697c5fe8e074dc65ab5e677f55cd20",
+      "sha256": "5a49aa5b5ad9b23f2e361f77b0703e4717fd2d25ed04aa6a98445d6922e25670",
+      "module_directive_observed": true
+    },
+    {
+      "path": "steamdeck/decky/package-lock.json",
+      "ecosystem": "npm",
+      "source_scope": "default-revision",
+      "status": "ok",
+      "http_status": 200,
+      "git_blob": "e86c5566d21a51e338a64100c37ab78719e1077d",
+      "sha256": "8a6925b946739ef6ff08af6c605534dcc2a2fa3dc4ed692d606fca40ea041492",
+      "lockfile_version": 3,
+      "declared_package_entries": 76
+    }
+  ],
+  "pr_head_manifests": [
+    {
+      "path": "go.mod",
+      "ecosystem": "Go",
+      "source_scope": "pr-head",
+      "status": "ok",
+      "http_status": 200,
+      "git_blob": "c90558142a697c5fe8e074dc65ab5e677f55cd20",
+      "sha256": "5a49aa5b5ad9b23f2e361f77b0703e4717fd2d25ed04aa6a98445d6922e25670",
+      "module_directive_observed": true
+    },
+    {
+      "path": "steamdeck/decky/package-lock.json",
+      "ecosystem": "npm",
+      "source_scope": "pr-head",
+      "status": "ok",
+      "http_status": 200,
+      "git_blob": "e86c5566d21a51e338a64100c37ab78719e1077d",
+      "sha256": "8a6925b946739ef6ff08af6c605534dcc2a2fa3dc4ed692d606fca40ea041492",
+      "lockfile_version": 3,
+      "declared_package_entries": 76
+    }
+  ],
+  "workflows": [
+    {
+      "path": ".github/workflows/build.yml",
+      "status": "observed",
+      "sha256": "fd780289ebabc60567d2fe1b856f36c2e284197c76c368d0ee9dac972adee1c2",
+      "actions": [
+        {
+          "action": "actions/checkout",
+          "pinned_commit": true
+        },
+        {
+          "action": "actions/setup-go",
+          "pinned_commit": true
+        }
+      ],
+      "dependency_review_jobs": [],
+      "known_write_markers": [],
+      "all_action_uses_commit_pinned": true,
+      "side_effect_scope": "Conservative static markers only; absence is not proof that arbitrary invoked scripts cannot publish/deploy.",
+      "git_blob": "3938d78ee13660cc7839c7ce87ab459b3a703c9b"
+    },
+    {
+      "path": ".github/workflows/coverage.yml",
+      "status": "observed",
+      "sha256": "97112458b8c819111c461d31fb84364b5799706796890427ab661d5cf640708b",
+      "actions": [
+        {
+          "action": "actions/checkout",
+          "pinned_commit": true
+        },
+        {
+          "action": "actions/setup-go",
+          "pinned_commit": true
+        },
+        {
+          "action": "actions/upload-artifact",
+          "pinned_commit": true
+        }
+      ],
+      "dependency_review_jobs": [],
+      "known_write_markers": [],
+      "all_action_uses_commit_pinned": true,
+      "side_effect_scope": "Conservative static markers only; absence is not proof that arbitrary invoked scripts cannot publish/deploy.",
+      "git_blob": "94088e2752c5c0f67106dfc90381231e97231c5d"
+    },
+    {
+      "path": ".github/workflows/docs-preview.yml",
+      "status": "observed",
+      "sha256": "5ba67fee3e1fb33c6404e632b39c330107af54ec78d410c1cff5fda636046ddd",
+      "actions": [
+        {
+          "action": "actions/checkout",
+          "pinned_commit": true
+        },
+        {
+          "action": "actions/setup-python",
+          "pinned_commit": true
+        },
+        {
+          "action": "actions/setup-node",
+          "pinned_commit": true
+        },
+        {
+          "action": "actions/upload-artifact",
+          "pinned_commit": true
+        }
+      ],
+      "dependency_review_jobs": [],
+      "known_write_markers": [],
+      "all_action_uses_commit_pinned": true,
+      "side_effect_scope": "Conservative static markers only; absence is not proof that arbitrary invoked scripts cannot publish/deploy.",
+      "git_blob": "ac70344b9e34d3c01a364088a610f49295baa65b"
+    },
+    {
+      "path": ".github/workflows/goreleaser.yml",
+      "status": "observed",
+      "sha256": "fe7bb4ccd7fcdce5ec6c44b3fc7a2cd3c467c28d3c9ae0808c030927424402e7",
+      "actions": [
+        {
+          "action": "actions/checkout",
+          "pinned_commit": true
+        },
+        {
+          "action": "actions/setup-go",
+          "pinned_commit": true
+        },
+        {
+          "action": "actions/setup-python",
+          "pinned_commit": true
+        },
+        {
+          "action": "goreleaser/goreleaser-action",
+          "pinned_commit": true
+        },
+        {
+          "action": "actions/upload-artifact",
+          "pinned_commit": true
+        }
+      ],
+      "dependency_review_jobs": [],
+      "known_write_markers": [],
+      "all_action_uses_commit_pinned": true,
+      "side_effect_scope": "Conservative static markers only; absence is not proof that arbitrary invoked scripts cannot publish/deploy.",
+      "git_blob": "d19b83d90fcb56adc221c59d2f6da4a88c03d2bf"
+    },
+    {
+      "path": ".github/workflows/lint.yml",
+      "status": "observed",
+      "sha256": "85978be34e7c3564565b20ff2a235df599818197211faca2e5e57ec499c3b291",
+      "actions": [
+        {
+          "action": "actions/checkout",
+          "pinned_commit": true
+        },
+        {
+          "action": "actions/setup-go",
+          "pinned_commit": true
+        },
+        {
+          "action": "actions/checkout",
+          "pinned_commit": true
+        },
+        {
+          "action": "actions/dependency-review-action",
+          "pinned_commit": true
+        }
+      ],
+      "dependency_review_jobs": [
+        {
+          "job_id": "dependency-review",
+          "job_name": "dependency-review",
+          "workflow_path": ".github/workflows/lint.yml",
+          "review_step_name": "Review dependency changes against GitHub's advisory database",
+          "workflow_name": "lint",
+          "action_commit_pinned": true,
+          "high_and_critical_policy": true,
+          "weakening_or_unknown_error_policy": false,
+          "pr_only_guard_observed": true,
+          "permissions": {
+            "status": "known",
+            "read_only": true,
+            "contents_read": true
+          }
+        }
+      ],
+      "known_write_markers": [],
+      "all_action_uses_commit_pinned": true,
+      "side_effect_scope": "Conservative static markers only; absence is not proof that arbitrary invoked scripts cannot publish/deploy.",
+      "git_blob": "d020ed03869818963c084679a43cc205ca4bf592"
+    },
+    {
+      "path": ".github/workflows/steam-deck.yml",
+      "status": "observed",
+      "sha256": "bf762e9099f360b867f69f8d81670151388dfb4846caa578b03bf9f7e17ef65e",
+      "actions": [
+        {
+          "action": "actions/checkout",
+          "pinned_commit": true
+        },
+        {
+          "action": "actions/setup-go",
+          "pinned_commit": true
+        },
+        {
+          "action": "actions/setup-node",
+          "pinned_commit": true
+        },
+        {
+          "action": "actions/setup-python",
+          "pinned_commit": true
+        },
+        {
+          "action": "actions/upload-artifact",
+          "pinned_commit": true
+        }
+      ],
+      "dependency_review_jobs": [],
+      "known_write_markers": [],
+      "all_action_uses_commit_pinned": true,
+      "side_effect_scope": "Conservative static markers only; absence is not proof that arbitrary invoked scripts cannot publish/deploy.",
+      "git_blob": "bea01aa046dc93c1e9f6a18a3e3fc0684f2694fd"
+    }
+  ],
+  "dependency_review_policy_observed": true,
+  "dependency_sbom": {
+    "status": "unavailable",
+    "http_status": 404,
+    "reason": "missing-or-inaccessible-or-unsupported"
+  },
+  "dependency_comparison": {
+    "status": "unavailable",
+    "http_status": 403,
+    "reason": "permission-or-capability",
+    "base_sha": "736be3e2964179f180de34d21dbe81dd33fd8c52",
+    "head_sha": "a6d13ad85b132101453dc76a7c96152cf47fcfdd"
+  },
+  "manifest_ingestion": {
+    "repository_ecosystems_observed_in_sbom": false,
+    "both_expected_manifests_observed_in_real_pr_comparison": false,
+    "source_specific_support": false,
+    "graph_enabled_setting": "not-directly-observed-by-this-collector",
+    "scope": "Committed files, repository SBOM ecosystems and exact PR manifest changes are distinct observations. 404 does not establish disabled Graph; an empty comparison does not establish ingestion."
+  },
+  "hosted": {
+    "status": "ok",
+    "http_status": 200,
+    "jobs": [
+      {
+        "check_run_id": 136500218511,
+        "name": "build (windows-2025)",
+        "status": "observed",
+        "job_id": 136500218511,
+        "run_id": 44797345851,
+        "head_sha": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+        "conclusion": "failure",
+        "observed_step_count": 0,
+        "executed_step_count": 0,
+        "runner_assigned": false,
+        "workflow_name": "build",
+        "classification": "billing-refused-before-execution",
+        "annotation_observation": {
+          "status": "ok",
+          "http_status": 200
+        },
+        "billing_annotation_observed": true,
+        "annotation_count": 1,
+        "annotation_text_recorded": false,
+        "annotation_coverage": "complete-current-page"
+      },
+      {
+        "check_run_id": 136500218463,
+        "name": "build (macos-15)",
+        "status": "observed",
+        "job_id": 136500218463,
+        "run_id": 44797345851,
+        "head_sha": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+        "conclusion": "failure",
+        "observed_step_count": 0,
+        "executed_step_count": 0,
+        "runner_assigned": false,
+        "workflow_name": "build",
+        "classification": "billing-refused-before-execution",
+        "annotation_observation": {
+          "status": "ok",
+          "http_status": 200
+        },
+        "billing_annotation_observed": true,
+        "annotation_count": 3,
+        "annotation_text_recorded": false,
+        "annotation_coverage": "complete-current-page"
+      },
+      {
+        "check_run_id": 136500218029,
+        "name": "build (ubuntu-24.04)",
+        "status": "observed",
+        "job_id": 136500218029,
+        "run_id": 44797345851,
+        "head_sha": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+        "conclusion": "failure",
+        "observed_step_count": 0,
+        "executed_step_count": 0,
+        "runner_assigned": false,
+        "workflow_name": "build",
+        "classification": "billing-refused-before-execution",
+        "annotation_observation": {
+          "status": "ok",
+          "http_status": 200
+        },
+        "billing_annotation_observed": true,
+        "annotation_count": 1,
+        "annotation_text_recorded": false,
+        "annotation_coverage": "complete-current-page"
+      },
+      {
+        "check_run_id": 136500213480,
+        "name": "candidate",
+        "status": "observed",
+        "job_id": 136500213480,
+        "run_id": 44797346026,
+        "head_sha": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+        "conclusion": "failure",
+        "observed_step_count": 0,
+        "executed_step_count": 0,
+        "runner_assigned": false,
+        "workflow_name": "Steam Deck candidate",
+        "classification": "billing-refused-before-execution",
+        "annotation_observation": {
+          "status": "ok",
+          "http_status": 200
+        },
+        "billing_annotation_observed": true,
+        "annotation_count": 1,
+        "annotation_text_recorded": false,
+        "annotation_coverage": "complete-current-page"
+      },
+      {
+        "check_run_id": 136500211699,
+        "name": "goreleaser",
+        "status": "observed",
+        "job_id": 136500211699,
+        "run_id": 44797345836,
+        "head_sha": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+        "conclusion": "failure",
+        "observed_step_count": 0,
+        "executed_step_count": 0,
+        "runner_assigned": false,
+        "workflow_name": "goreleaser",
+        "classification": "billing-refused-before-execution",
+        "annotation_observation": {
+          "status": "ok",
+          "http_status": 200
+        },
+        "billing_annotation_observed": true,
+        "annotation_count": 1,
+        "annotation_text_recorded": false,
+        "annotation_coverage": "complete-current-page"
+      },
+      {
+        "check_run_id": 136500210913,
+        "name": "format, vet and staticcheck",
+        "status": "observed",
+        "job_id": 136500210913,
+        "run_id": 44797345948,
+        "head_sha": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+        "conclusion": "failure",
+        "observed_step_count": 0,
+        "executed_step_count": 0,
+        "runner_assigned": false,
+        "workflow_name": "lint",
+        "classification": "billing-refused-before-execution",
+        "annotation_observation": {
+          "status": "ok",
+          "http_status": 200
+        },
+        "billing_annotation_observed": true,
+        "annotation_count": 1,
+        "annotation_text_recorded": false,
+        "annotation_coverage": "complete-current-page"
+      },
+      {
+        "check_run_id": 136500210651,
+        "name": "coverage",
+        "status": "observed",
+        "job_id": 136500210651,
+        "run_id": 44797345819,
+        "head_sha": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+        "conclusion": "failure",
+        "observed_step_count": 0,
+        "executed_step_count": 0,
+        "runner_assigned": false,
+        "workflow_name": "coverage",
+        "classification": "billing-refused-before-execution",
+        "annotation_observation": {
+          "status": "ok",
+          "http_status": 200
+        },
+        "billing_annotation_observed": true,
+        "annotation_count": 1,
+        "annotation_text_recorded": false,
+        "annotation_coverage": "complete-current-page"
+      },
+      {
+        "check_run_id": 136500210475,
+        "name": "dependency-review",
+        "status": "observed",
+        "job_id": 136500210475,
+        "run_id": 44797345948,
+        "head_sha": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+        "conclusion": "failure",
+        "observed_step_count": 0,
+        "executed_step_count": 0,
+        "runner_assigned": false,
+        "workflow_name": "lint",
+        "classification": "billing-refused-before-execution",
+        "annotation_observation": {
+          "status": "ok",
+          "http_status": 200
+        },
+        "billing_annotation_observed": true,
+        "annotation_count": 1,
+        "annotation_text_recorded": false,
+        "annotation_coverage": "complete-current-page",
+        "dependency_review_job": true,
+        "run_observation": {
+          "status": "ok",
+          "http_status": 200
+        },
+        "exact_pr_run_binding": true,
+        "review_action_step_succeeded": false
+      },
+      {
+        "check_run_id": 136500209961,
+        "name": "build-preview",
+        "status": "observed",
+        "job_id": 136500209961,
+        "run_id": 44797345802,
+        "head_sha": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+        "conclusion": "failure",
+        "observed_step_count": 0,
+        "executed_step_count": 0,
+        "runner_assigned": false,
+        "workflow_name": "Documentation preview",
+        "classification": "billing-refused-before-execution",
+        "annotation_observation": {
+          "status": "ok",
+          "http_status": 200
+        },
+        "billing_annotation_observed": true,
+        "annotation_count": 1,
+        "annotation_text_recorded": false,
+        "annotation_coverage": "complete-current-page"
+      },
+      {
+        "check_run_id": 136500173778,
+        "name": "build (macos-15)",
+        "status": "observed",
+        "job_id": 136500173778,
+        "run_id": 44797333399,
+        "head_sha": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+        "conclusion": "failure",
+        "observed_step_count": 0,
+        "executed_step_count": 0,
+        "runner_assigned": false,
+        "workflow_name": "build",
+        "classification": "billing-refused-before-execution",
+        "annotation_observation": {
+          "status": "ok",
+          "http_status": 200
+        },
+        "billing_annotation_observed": true,
+        "annotation_count": 3,
+        "annotation_text_recorded": false,
+        "annotation_coverage": "complete-current-page"
+      },
+      {
+        "check_run_id": 136500173701,
+        "name": "build (windows-2025)",
+        "status": "observed",
+        "job_id": 136500173701,
+        "run_id": 44797333399,
+        "head_sha": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+        "conclusion": "failure",
+        "observed_step_count": 0,
+        "executed_step_count": 0,
+        "runner_assigned": false,
+        "workflow_name": "build",
+        "classification": "billing-refused-before-execution",
+        "annotation_observation": {
+          "status": "ok",
+          "http_status": 200
+        },
+        "billing_annotation_observed": true,
+        "annotation_count": 1,
+        "annotation_text_recorded": false,
+        "annotation_coverage": "complete-current-page"
+      },
+      {
+        "check_run_id": 136500173246,
+        "name": "build (ubuntu-24.04)",
+        "status": "observed",
+        "job_id": 136500173246,
+        "run_id": 44797333399,
+        "head_sha": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+        "conclusion": "failure",
+        "observed_step_count": 0,
+        "executed_step_count": 0,
+        "runner_assigned": false,
+        "workflow_name": "build",
+        "classification": "billing-refused-before-execution",
+        "annotation_observation": {
+          "status": "ok",
+          "http_status": 200
+        },
+        "billing_annotation_observed": true,
+        "annotation_count": 1,
+        "annotation_text_recorded": false,
+        "annotation_coverage": "complete-current-page"
+      },
+      {
+        "check_run_id": 136500169709,
+        "name": "coverage",
+        "status": "observed",
+        "job_id": 136500169709,
+        "run_id": 44797334446,
+        "head_sha": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+        "conclusion": "failure",
+        "observed_step_count": 0,
+        "executed_step_count": 0,
+        "runner_assigned": false,
+        "workflow_name": "coverage",
+        "classification": "billing-refused-before-execution",
+        "annotation_observation": {
+          "status": "ok",
+          "http_status": 200
+        },
+        "billing_annotation_observed": true,
+        "annotation_count": 1,
+        "annotation_text_recorded": false,
+        "annotation_coverage": "complete-current-page"
+      },
+      {
+        "check_run_id": 136500169451,
+        "name": "dependency-review",
+        "status": "observed",
+        "job_id": 136500169451,
+        "run_id": 44797333416,
+        "head_sha": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+        "conclusion": "skipped",
+        "observed_step_count": 0,
+        "executed_step_count": 0,
+        "runner_assigned": null,
+        "workflow_name": "lint",
+        "classification": "skipped-not-a-pass",
+        "dependency_review_job": true,
+        "run_observation": {
+          "status": "ok",
+          "http_status": 200
+        },
+        "exact_pr_run_binding": false,
+        "review_action_step_succeeded": false
+      },
+      {
+        "check_run_id": 136500166501,
+        "name": "format, vet and staticcheck",
+        "status": "observed",
+        "job_id": 136500166501,
+        "run_id": 44797333416,
+        "head_sha": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+        "conclusion": "failure",
+        "observed_step_count": 0,
+        "executed_step_count": 0,
+        "runner_assigned": false,
+        "workflow_name": "lint",
+        "classification": "billing-refused-before-execution",
+        "annotation_observation": {
+          "status": "ok",
+          "http_status": 200
+        },
+        "billing_annotation_observed": true,
+        "annotation_count": 1,
+        "annotation_text_recorded": false,
+        "annotation_coverage": "complete-current-page"
+      },
+      {
+        "check_run_id": 136500166252,
+        "name": "goreleaser",
+        "status": "observed",
+        "job_id": 136500166252,
+        "run_id": 44797333481,
+        "head_sha": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+        "conclusion": "failure",
+        "observed_step_count": 0,
+        "executed_step_count": 0,
+        "runner_assigned": false,
+        "workflow_name": "goreleaser",
+        "classification": "billing-refused-before-execution",
+        "annotation_observation": {
+          "status": "ok",
+          "http_status": 200
+        },
+        "billing_annotation_observed": true,
+        "annotation_count": 1,
+        "annotation_text_recorded": false,
+        "annotation_coverage": "complete-current-page"
+      }
+    ],
+    "review_jobs": [
+      136500210475,
+      136500169451
+    ],
+    "coverage": "complete-current-page",
+    "counts": {
+      "observed_jobs": 16,
+      "billing_refusals": 15,
+      "skipped": 1,
+      "observed_steps": 0,
+      "other_failures": 0
+    }
+  },
+  "ref_binding_stable_during_capture": true,
+  "readiness": "unavailable-or-incomplete",
+  "requests": {
+    "count": 57,
+    "response_bytes": 626039,
+    "maximum_calls": 64,
+    "maximum_response_bytes": 2097152,
+    "maximum_total_bytes": 16777216,
+    "new_request_budget_seconds": 120,
+    "socket_inactivity_timeout_seconds": 8,
+    "retry_count": 0,
+    "methods": [
+      "GET"
+    ]
+  },
+  "limits": [
+    "This collector neither reads nor enables the actual Graph setting; correlate its bounded service observations with the destination owner's setting/manifest evidence.",
+    "Static workflow markers are not a full YAML/action/script security audit; no publication/deployment action is executed.",
+    "Auth/admin access, fork/default identity, source policy, comparison, ingestion and job billing are separate facts.",
+    "No raw PR body, annotation/error response, token, environment dump or workflow content is included.",
+    "The time budget is checked before requests and incremental body reads; urllib's socket inactivity timeout is not a hard end-to-end wall-clock guarantee.",
+    "No source merge, required review/CI, platform/device, migration, rights or publication acceptance is granted."
+  ]
+}

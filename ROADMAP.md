@@ -1,6 +1,29 @@
 # Product roadmap
 
-## Selected aurora candidate ready for review
+## Current pre-migration candidate and remaining tests
+
+Draft #114 advances #82/#84 private wipe recovery and current Decky guidance,
+#87 history/cleanup preparation, #88/#95 read-only readiness evidence and
+#89 proposed authentication research. Exact clean packaged source 772230a
+(tree f157ea77, 648 files) recorded 70 passed command predicates, 2 unavailable
+and 0 failed. Read the
+[exact-source checkpoint](docs/pre-migration-qualified-checkpoint.md) and its
+immutable owner packet. These later notes do not relabel the packaged revision.
+
+Full local ACT remains unavailable after a 3,915,341,996-byte root/Docker shortfall;
+all 6 jobs/probe are unrun. Real PR #114 retained SBOM 404/comparison 403 and 15 hosted
+billing refusals / 1 skip / 0 steps. All 3 native and 10 browser checks passed; actual
+#79/#82-C1/#83/#86 loader/Deck/controller/audio/provider/session acceptance,
+required review/rights/CI/platform/adoption and exact destination authority remain.
+The first failed 772 attempt is retained separately, not reused as passing proof.
+
+Next: owner current-install tests/fixes, then specifically approved #87 migration
+to OWNER/deckystream on main, actual #95 service verification and #88 new-install/
+v1 packet. #89 needs owner design discussion before authentication code. All 230
+original criteria/dependencies and 111 current clauses (104 bounded plus 7 auth)
+remain. No issue closure, source merge, release, deployment, migration or spending.
+
+## Earlier aurora review candidate
 
 #112 merged normally at **069db4a**. Draft [#113](https://github.com/szmyty/obsgod/pull/113)
 implements selected 01 / aurora assets, lowercase presentation, local native

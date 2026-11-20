@@ -1,6 +1,37 @@
 # Current work
 
-## Selected aurora review candidate and qualification
+## Current pre-migration source and review checkpoint
+
+Draft #114 is stacked after #113. Exact clean packaged source is
+**772230a32a8fdb237a58b8a637947b31671ad509**, tree
+**f157ea77d16a1f1ce04bf1e47b584f9183c9c359**, 648 tracked files.
+The new [checkpoint](docs/pre-migration-qualified-checkpoint.md) binds immutable
+artifacts, commands, counts and remaining gates. This later entry is notes only;
+it is not the qualified package revision. Candidate version remains 0.1.0-deck.9.
+
+Verified private pre-wipe export, current Decky update/removal guidance, history
+pagination/230 carry-forward and a read-only exact-PR readiness collector are
+implemented. #89 authentication research remains proposed, ready for discussion.
+The fresh complete standalone run has 70 passed command predicates, 2 unavailable
+and 0 failed. All 3 native OBS harnesses and 10 packaged browser flows passed.
+The first 44-pass/1-unavailable/1-failed attempt is retained separately; ENOSPC
+is observed but the sole disconnect cause remains unproven.
+
+Local ACT remains unavailable: 7,544,361,132 bytes required versus 3,629,019,136
+available, short 3,915,341,996; probe and 6 jobs unrun. Real PR #114 observations retain
+SBOM 404/comparison 403 and 15 hosted billing refusals / 1 skip / 0 steps. Actual
+supported-loader/Deck/controller/mic/headset/provider/session evidence remains
+#82-C1/#79/#83/#86. Required rights/review/platform/CI/adoption and exact-owner
+migration/new-install gates stay open. All 230 originals and 111 current clauses
+(104 bounded plus 7 authentication) remain; priority creates no new dependencies.
+
+Use the numbered current-candidate owner tests when hardware is available.
+Then repair/requalify reported defects before exact-destination #87 migration,
+#95 service checks and #88 official-install/v1 approval preparation. No merge,
+issue closure, release, deployment, migration or spending occurred here. Old af7
+artifacts and historical installer hashes remain unchanged.
+
+## Earlier aurora review candidate and qualification
 
 #112 merged normally at **069db4a21ec0a173b7dd30c12a53018c7700f79b** after
 fresh focused checks at448b15d. Its two verified-merged branches were removed.

@@ -1,0 +1,119 @@
+{
+  "schema": "deckystream.independent-history-privacy-review/v1",
+  "reviewed_utc": "2026-11-20T19:03:44.491440+00:00",
+  "reviewer": "/root/aurora_acceptance_review",
+  "decision": "approved-to-share-verbatim-exact-bound-inputs-with-one-manual-documentation-example-exception",
+  "scope": "Read-only privacy/integrity review of exactly the two development-history JSONs. No input/source/GitHub change, publication, retirement, product qualification or ownership permission was performed or inferred.",
+  "inputs": {
+    "history": {
+      "path": "/workspace/.obsgod-tools/pre-migration-readiness-20261120-736be3e/history/obsgod-github.json",
+      "bytes": 760767,
+      "sha256": "847118823a5e98c2cb1490e0c5260b4d62cb51fe6c9809fc331fe86016d93204"
+    },
+    "carry_forward": {
+      "path": "/workspace/.obsgod-tools/pre-migration-readiness-20261120-736be3e/history/obsgod-criteria-carry-forward.json",
+      "bytes": 168214,
+      "sha256": "6a29eadf42d03503c8dbd5e5a739b1a7628a34a2a277f3205f26140e4450dce3"
+    },
+    "original_ledger": {
+      "path": "/workspace/obsgod/docs/evidence/completion-criteria.json",
+      "bytes": 735060,
+      "sha256": "0795e6594c7bbde195bb8ebfcbc4050f0d5ecbe9c879767edbe0050540386df6"
+    },
+    "exporter": {
+      "path": "/workspace/obsgod/scripts/export-project-history.py",
+      "bytes": 21929,
+      "sha256": "3fd9eb08418955d48eb29385252fd6b594451073907ace3bacef5188fa1dccab"
+    },
+    "capture_review": {
+      "path": "/workspace/.obsgod-tools/pre-migration-readiness-20261120-736be3e/history/capture-review.json",
+      "bytes": 1781,
+      "sha256": "bb37f48cf249c964849bfaee51cd206776c629eebaf8d54e4287d20e5a07b75f"
+    }
+  },
+  "scanner": {
+    "path": "/workspace/.obsgod-tools/repeatable-primary-ci-20261118/curate-public.py",
+    "sha256": "2293a8a16059c14f770b9179bd12b2a1def37f6d28a42ee762f11ed0d81ea3dc",
+    "unchanged": true,
+    "strict_original_history_result": "rejected: Credential assignment detected",
+    "strict_flagged_string_fields": 1,
+    "history_string_leaves_scanned_raw_and_decoded": 2059,
+    "strict_carry_forward_result": "passed",
+    "other_flags": [],
+    "mutation_or_policy_weakening": false
+  },
+  "manual_exception": {
+    "permitted_only_for_history_sha256": "847118823a5e98c2cb1490e0c5260b4d62cb51fe6c9809fc331fe86016d93204",
+    "exact_field": "history.items[3].body",
+    "item_kind": "pull_request",
+    "item_number": 4,
+    "public_url": "https://github.com/szmyty/obsgod/pull/4",
+    "title": "Foundation modernization: rebrand to obsgod, OBS WebSocket v5, env vars, CI overhaul",
+    "body_characters": 1951,
+    "body_sha256": "4eedf9286b5997c01b328dd5a5df1555f4cc1b336274ce1c5d9c05e4d0448006",
+    "assignment_name": "OBS_PASSWORD",
+    "matched_value_characters": 8,
+    "matched_value_sha256": "652c7dc687d98c9889304ed2e408c74b611e86a40caa51c4b43f1dd5913c5cd0",
+    "matched_value_not_reproduced": true,
+    "manual_classification": "generic public documentation credential example, not an account-specific authentication artifact",
+    "context": "The Environment variable support section contains a fenced shell example using a generic private-LAN host, the OBS v5 default port and the status command. The bound value is a common lowercase dictionary-style credential example, with no URL/account identifiers. The entire body was inspected with only the value masked from outputs.",
+    "independent_predicates": {
+      "exact_parent_reported_value_digest_and_length_match": true,
+      "lowercase_ascii_generic_password_or_secret_word": true,
+      "contains_account_or_url_delimiters": false,
+      "inside_generic_environment_setup_fence": true,
+      "no_live_account_binding_in_inspected_context": true
+    },
+    "remainder_review": "Unchanged pinned scanner passed the remainder of this exact body with only the matched value replaced in memory by its recognized redaction marker, and passed the raw/decoded full JSON with only this already separately reviewed bound body replaced in memory. Original file bytes were never rewritten.",
+    "limits": [
+      "Not a blanket allowlist for OBS passwords, common words, other public PR bodies or historical credentials.",
+      "Any file, field, body, matched-value or context change invalidates this exception and requires a fresh review.",
+      "The strict scanner continues to reject the original bytes; this manual review does not relabel its result as a strict pass."
+    ]
+  },
+  "integrity": {
+    "all_captured_body_hashes_verified": 158,
+    "items": 114,
+    "unique_item_numbers": 114,
+    "counts": {
+      "issues": 67,
+      "pull_requests": 47,
+      "conversation_comments": 41,
+      "inline_review_comments": 0,
+      "submitted_reviews": 3
+    },
+    "all_collection_record_ids_unique": true,
+    "body_hash_mismatches": [],
+    "carry_issues": 35,
+    "literal_original_criteria_preserved": 230,
+    "all_original_id_text_section_line_checkbox_fields_match": true,
+    "original_issue_title_url_body_hash_gate_and_dependency_sections_match": true,
+    "all_destination_and_acceptance_fields_remain_null": true,
+    "verified_null_fields": 990,
+    "carry_history_sha256_matches_exact_history_file": true,
+    "carry_source_ledger_sha256_matches_exact_unchanged_original230": true
+  },
+  "source_binding": {
+    "captured_remote_default_branch": "master",
+    "captured_remote_default_head": "069db4a21ec0a173b7dd30c12a53018c7700f79b",
+    "remote_default_head_source": "GitHub REST default branch; local checkout revision is not used",
+    "local_exporter_revision": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+    "local_exporter_bytes_match_commit": true,
+    "local_working_tree_clean_claimed": false,
+    "captured_pr113": {
+      "head": "736be3e2964179f180de34d21dbe81dd33fd8c52",
+      "base": "069db4a21ec0a173b7dd30c12a53018c7700f79b",
+      "draft": true
+    },
+    "captured_pr114": {
+      "head": "f0f0d1d69a60d0073975085efce0458a395eea3e",
+      "base": "736be3e2964179f180de34d21dbe81dd33fd8c52",
+      "draft": true
+    },
+    "qualification_revision_unchanged": "af7a20fdd0c62404e9b11d540fb605368e269380",
+    "interpretation": "Default069, captured draft heads736/f0f0, current local exporter a6d13ad and frozen qualified af7 are distinct facts. The public tracker capture is explicitly non-atomic; captured PR114 metadata is not relabeled as the later local/pushed exporter revision or a product qualification."
+  },
+  "publication_performed": false,
+  "retirement_performed": false,
+  "conclusion": "The two exact reviewed JSON inputs may be shared verbatim as development history, carrying this exact manual example exception and the existing scope caveats. No other credential exception, source qualification, migration or closure is approved."
+}

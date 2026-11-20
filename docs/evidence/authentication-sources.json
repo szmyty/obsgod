@@ -1,95 +1,195 @@
 {
-  "source_type": "official technical documentation; no authenticated account test",
+  "schema": "deckystream.auth-research-current-sources/v1",
+  "observed_utc": "2026-11-20T18:33:16.622016+00:00",
+  "scope": "Public official technical documents only; no registered application/account/token/key/phone/Deck/provider test",
   "sources": [
     {
+      "name": "twitch-oauth",
       "url": "https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/",
-      "retrieved_date_utc": "2026-11-14T18:31:17.069803+00:00",
-      "sha256": "a4103e4b8b78b533ad62e72a2ab1af6afd4a1e967a6bbb7e95cb4d9126ec331e",
+      "retrieved_utc": "2026-11-20T18:33:12.479058+00:00",
+      "status": 200,
+      "final_url": "https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/",
+      "content_type": "text/html",
+      "result": "retrieved",
       "bytes": 80030,
-      "note": null,
-      "cache_file": "source-0.html"
+      "sha256": "e1895a7159aa55733c094031e9bad76429d73f1aadc8e10dd6af81be2f4de77a",
+      "cache_file": "twitch-oauth.raw"
     },
     {
-      "url": "https://dev.twitch.tv/docs/api/reference/#get-stream-key",
-      "retrieved_date_utc": "2026-11-14T18:31:18.312034+00:00",
-      "sha256": "8976dead609d10522f90d83b2e021057150c9de4ac47ccddda6087d1f6562f16",
-      "bytes": 85073,
-      "note": "API index is not detailed endpoint evidence; use extra-3.",
-      "cache_file": "source-1.html"
-    },
-    {
-      "url": "https://docs.kick.com/getting-started/generating-tokens-oauth2-flow",
-      "retrieved_date_utc": "2026-11-14T18:31:18.760764+00:00",
-      "sha256": "87a6ce4ae4d45ba17b7d0723e48e1057268b39fb72ab8a02c98153188a501436",
-      "bytes": 12398,
-      "note": null,
-      "cache_file": "source-2.html"
-    },
-    {
-      "url": "https://docs.kick.com/apis/channels",
-      "retrieved_date_utc": "2026-11-14T18:31:19.164979+00:00",
-      "sha256": "a6d55c838fe22bb3d9f526869c781e033bc2d132c26e97a57ec0a9e5370ebcfa",
-      "bytes": 7873,
-      "note": null,
-      "cache_file": "source-3.html"
-    },
-    {
-      "url": "https://docs.kick.com/llms.txt",
-      "retrieved_date_utc": "2026-11-14T18:32:05.952367+00:00",
-      "sha256": "f3c1cc4ab2c1293d9690f2cc88ef26384ffbe3a2cb4d9894456687d44237126d",
-      "bytes": 2320,
-      "note": null,
-      "cache_file": "extra-0.txt"
-    },
-    {
-      "url": "https://docs.kick.com/getting-started/scopes",
-      "retrieved_date_utc": "2026-11-14T18:32:06.307153+00:00",
-      "sha256": "af26287cc7cbf241f019f15c69bda72cf04c4646b9cb3673d1dabacfb6c30014",
-      "bytes": 2399,
-      "note": null,
-      "cache_file": "extra-1.txt"
-    },
-    {
+      "name": "twitch-registration",
       "url": "https://dev.twitch.tv/docs/authentication/register-app/",
-      "retrieved_date_utc": "2026-11-14T18:32:07.414713+00:00",
-      "sha256": "bff3883078909e538e206f65554480b190dca85ee294c02da323cbc17be34357",
+      "retrieved_utc": "2026-11-20T18:33:12.479933+00:00",
+      "status": 200,
+      "final_url": "https://dev.twitch.tv/docs/authentication/register-app/",
+      "content_type": "text/html",
+      "result": "retrieved",
       "bytes": 27319,
-      "note": null,
-      "cache_file": "extra-2.txt"
+      "sha256": "72ad53493be3d21915f737a412b076ca1ff0a0b612781ab1b365639544df7651",
+      "cache_file": "twitch-registration.raw"
     },
     {
+      "name": "twitch-key",
       "url": "https://dev.twitch.tv/docs/api/reference/streams/#get-stream-key",
-      "retrieved_date_utc": "2026-11-14T18:32:08.850718+00:00",
-      "sha256": "27f1153665c2215e149e34ac3eb86a5243dcc2af9697669d784751126cb320c5",
+      "retrieved_utc": "2026-11-20T18:33:12.480331+00:00",
+      "status": 200,
+      "final_url": "https://dev.twitch.tv/docs/api/reference/streams/#get-stream-key",
+      "content_type": "text/html",
+      "result": "retrieved",
       "bytes": 238156,
-      "note": null,
-      "cache_file": "extra-3.txt"
+      "sha256": "58cba77f86b9f7fe7e53efe83b6392ec3bf8252228018438a443c91408b8f2b3",
+      "cache_file": "twitch-key.raw"
     },
     {
-      "url": "https://docs.kick.com/getting-started/kick-apps-setup",
-      "retrieved_date_utc": "2026-11-14T18:34:25.190188+00:00",
-      "sha256": "d64080372fa911e0df447f54f9e7521d1ff3ae0485689d928d05370b57828b25",
-      "bytes": 1496,
-      "note": null,
-      "cache_file": "kick-app-setup.md"
-    },
-    {
+      "name": "twitch-validation",
       "url": "https://dev.twitch.tv/docs/authentication/validate-tokens/",
-      "retrieved_date_utc": "2026-11-14T18:34:27.346861+00:00",
-      "sha256": "0cea8cddd9c7814b37ec87660162a0e4c2943fd54956241e9a08d310eac1a661",
+      "retrieved_utc": "2026-11-20T18:33:12.480647+00:00",
+      "status": 200,
+      "final_url": "https://dev.twitch.tv/docs/authentication/validate-tokens/",
+      "content_type": "text/html",
+      "result": "retrieved",
       "bytes": 32064,
-      "note": null,
-      "cache_file": "twitch-validate.html"
+      "sha256": "c1741971cba9ce047acddc144f642e0c603d256473f68abf05b8a7bd08dd134f",
+      "cache_file": "twitch-validation.raw"
     },
     {
+      "name": "twitch-refresh",
+      "url": "https://dev.twitch.tv/docs/authentication/refresh-tokens/",
+      "retrieved_utc": "2026-11-20T18:33:12.480899+00:00",
+      "status": 200,
+      "final_url": "https://dev.twitch.tv/docs/authentication/refresh-tokens/",
+      "content_type": "text/html",
+      "result": "retrieved",
+      "bytes": 36166,
+      "sha256": "6775f39fc7e4b361733a8d84af59c9ad320945ca5901b635d4361c8c407195eb",
+      "cache_file": "twitch-refresh.raw"
+    },
+    {
+      "name": "twitch-revoke",
+      "url": "https://dev.twitch.tv/docs/authentication/revoke-tokens/",
+      "retrieved_utc": "2026-11-20T18:33:14.197794+00:00",
+      "status": 200,
+      "final_url": "https://dev.twitch.tv/docs/authentication/revoke-tokens/",
+      "content_type": "text/html",
+      "result": "retrieved",
+      "bytes": 27837,
+      "sha256": "e3684fd97e44a437bbb71cec03c9220617341cfaac4a32262a280e236778a6ee",
+      "cache_file": "twitch-revoke.raw"
+    },
+    {
+      "name": "twitch-broadcast",
       "url": "https://dev.twitch.tv/docs/video-broadcast/",
-      "retrieved_date_utc": "2026-11-14T18:34:26.678830+00:00",
-      "sha256": "0d92a365161c4639d5d0e09e010c8b4b38f1c05b7611e2f76eafbca5241958b6",
+      "retrieved_utc": "2026-11-20T18:33:15.136249+00:00",
+      "status": 200,
+      "final_url": "https://dev.twitch.tv/docs/video-broadcast/",
+      "content_type": "text/html",
+      "result": "retrieved",
       "bytes": 26429,
-      "note": null,
-      "cache_file": "twitch-broadcast.html"
+      "sha256": "fb6848a83d44cd132eb5449fb3ed32108c51922b74d980f9ac3bc7f5ad0cf75d",
+      "cache_file": "twitch-broadcast.raw"
+    },
+    {
+      "name": "kick-oauth",
+      "url": "https://docs.kick.com/getting-started/generating-tokens-oauth2-flow",
+      "retrieved_utc": "2026-11-20T18:33:15.140822+00:00",
+      "status": 200,
+      "final_url": "https://docs.kick.com/getting-started/generating-tokens-oauth2-flow",
+      "content_type": "text/markdown; charset=utf-8",
+      "result": "retrieved",
+      "bytes": 12398,
+      "sha256": "87a6ce4ae4d45ba17b7d0723e48e1057268b39fb72ab8a02c98153188a501436",
+      "cache_file": "kick-oauth.raw"
+    },
+    {
+      "name": "kick-registration",
+      "url": "https://docs.kick.com/getting-started/kick-apps-setup",
+      "retrieved_utc": "2026-11-20T18:33:15.521627+00:00",
+      "status": 200,
+      "final_url": "https://docs.kick.com/getting-started/kick-apps-setup",
+      "content_type": "text/markdown; charset=utf-8",
+      "result": "retrieved",
+      "bytes": 1517,
+      "sha256": "2ec23f5790e32595371b2098d2bf885cff890e7ee15d799306d18690d3c58ea2",
+      "cache_file": "kick-registration.raw"
+    },
+    {
+      "name": "kick-scopes",
+      "url": "https://docs.kick.com/getting-started/scopes",
+      "retrieved_utc": "2026-11-20T18:33:15.723568+00:00",
+      "status": 200,
+      "final_url": "https://docs.kick.com/getting-started/scopes",
+      "content_type": "text/markdown; charset=utf-8",
+      "result": "retrieved",
+      "bytes": 2399,
+      "sha256": "af26287cc7cbf241f019f15c69bda72cf04c4646b9cb3673d1dabacfb6c30014",
+      "cache_file": "kick-scopes.raw"
+    },
+    {
+      "name": "kick-channels",
+      "url": "https://docs.kick.com/apis/channels",
+      "retrieved_utc": "2026-11-20T18:33:15.796352+00:00",
+      "status": 200,
+      "final_url": "https://docs.kick.com/apis/channels",
+      "content_type": "text/markdown; charset=utf-8",
+      "result": "retrieved",
+      "bytes": 7873,
+      "sha256": "a6d55c838fe22bb3d9f526869c781e033bc2d132c26e97a57ec0a9e5370ebcfa",
+      "cache_file": "kick-channels.raw"
+    },
+    {
+      "name": "kick-index",
+      "url": "https://docs.kick.com/llms.txt",
+      "retrieved_utc": "2026-11-20T18:33:15.829403+00:00",
+      "status": 200,
+      "final_url": "https://docs.kick.com/llms.txt",
+      "content_type": "text/markdown; charset=utf-8",
+      "result": "retrieved",
+      "bytes": 2320,
+      "sha256": "f3c1cc4ab2c1293d9690f2cc88ef26384ffbe3a2cb4d9894456687d44237126d",
+      "cache_file": "kick-index.raw"
+    },
+    {
+      "name": "kick-faq",
+      "url": "https://docs.kick.com/apis/faqs.md",
+      "retrieved_utc": "2026-11-20T18:34:15.775515+00:00",
+      "result": "unavailable",
+      "error": "HTTPError: HTTP Error 403: Forbidden",
+      "status": 403
+    },
+    {
+      "name": "kick-changelog",
+      "url": "https://docs.kick.com/changelog.md",
+      "retrieved_utc": "2026-11-20T18:34:15.864703+00:00",
+      "result": "unavailable",
+      "error": "HTTPError: HTTP Error 403: Forbidden",
+      "status": 403
+    },
+    {
+      "name": "device-grant-standard",
+      "url": "https://www.rfc-editor.org/rfc/rfc8628.txt",
+      "retrieved_utc": "2026-11-20T18:34:15.959688+00:00",
+      "status": 200,
+      "final_url": "https://www.rfc-editor.org/rfc/rfc8628.txt",
+      "content_type": "text/plain;charset=utf-8",
+      "result": "retrieved",
+      "bytes": 46718,
+      "sha256": "ebd3c37415aa665b55b412fccd9571943e8dbd3f2bf0b18fee4924264252decd",
+      "cache_file": "device-grant-standard.raw"
+    },
+    {
+      "name": "native-app-standard",
+      "url": "https://www.rfc-editor.org/rfc/rfc8252.txt",
+      "retrieved_utc": "2026-11-20T18:34:16.195874+00:00",
+      "status": 200,
+      "final_url": "https://www.rfc-editor.org/rfc/rfc8252.txt",
+      "content_type": "text/plain;charset=utf-8",
+      "result": "retrieved",
+      "bytes": 49680,
+      "sha256": "4233c0650ec7e7918c20e0fde2dc565f85e2aa2d4c18123e3cd834295c2f68d0",
+      "cache_file": "native-app-standard.raw"
     }
   ],
-  "schema": "deckystream.auth-documentation-sources/v1",
-  "qualification": "Documentation retrieval only; provider/account/phone/Deck/ingest tests unrun."
+  "source_type": "Public official technical documentation and OAuth standards; no authenticated account test",
+  "historical_manifest": "authentication-sources-20261114.json",
+  "qualification": "Documentation retrieval only: fourteen HTTP200 responses and two optional Kick documentation HTTP403 responses. Provider registration, authorization, key retrieval, phone/Deck, refresh/revoke and ingest tests remain unrun.",
+  "cache_scope": "cache_file names identify privately retained retrieval bytes, not repository-committed bodies; bodies include official documentation example credentials and are not public execution evidence."
 }

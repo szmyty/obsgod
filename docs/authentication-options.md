@@ -1,15 +1,22 @@
 # Provider authentication options
 
-Research status: official documentation retrieved **2026-11-14 UTC**. This is a
+Research status: official documentation rechecked **2026-11-20 UTC**. This is a
 separate, proposed authentication follow-up after the current implementation
 campaign. It preserves the deferred intent of [#14](https://github.com/szmyty/obsgod/issues/14)
 and [#40](https://github.com/szmyty/obsgod/issues/40), which were consolidated into
 [#46](https://github.com/szmyty/obsgod/issues/46). It implements no authentication
 and does not claim a successful provider account, phone, or Steam Deck test.
 The bounded follow-up is [#89](https://github.com/szmyty/obsgod/issues/89).
-Retrieved official-document URLs, timestamps and content digests are retained in
+Official-document URLs, timestamps, retrieval statuses and content digests are retained in
 [the source manifest](evidence/authentication-sources.json); those digests bind
 the cached documents, not a successful API or account test.
+The unchanged [2026-11-14 manifest](evidence/authentication-sources-20261114.json)
+is retained as history. The [proposed decision packet](authentication-decision-packet.md)
+adds lifecycle/error handling, storage/account switching, phone tradeoffs and the
+owner evidence plan. Its recommendation is Twitch public-device login first and
+manual-key Kick until a confidential-client strategy or documented public/native
+support is selected. **Design discussion and selection remain pending the owner**;
+this research authorizes no authentication coding or public service.
 
 OAuth can remove **manual stream-key entry**. OBS still needs the provider's
 ingest URL and stream key to broadcast: Twitch documents the key in its RTMP
@@ -55,6 +62,13 @@ refresh tokens are single-use, so concurrent refresh must be serialized and the
 replacement token saved safely.
 [Token validation](https://dev.twitch.tv/docs/authentication/validate-tokens/),
 [device-flow lifecycle](https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#device-code-grant-flow).
+The [general refresh page](https://dev.twitch.tv/docs/authentication/refresh-tokens/)
+describes public-token expiry as 30 days after generation; the device guide says
+30 days inactive. It also retains older auth-code-only prose despite an explicit
+public-client secret exception. Use returned expiry values, fail safely into
+reauthorization and verify actual registered-client behavior later. Twitch's
+documented pending response is HTTP 400 with a `message` field; generic RFC error
+handling alone does not establish provider compatibility.
 
 ## Kick: key access exists; native secretless login needs resolution
 
@@ -130,8 +144,10 @@ authorized or created by this document.
    remain future work. Main implementation and its hardware qualification do
    not depend on completing this optional login research.
 
-Evidence currently **passed:** retrieval and comparison of the linked official
-documentation. **Unrun:** provider authorization, registered-client behavior,
+Evidence currently **passed:** retrieval and comparison of twelve official
+provider pages and two OAuth standards documents (HTTP 200). Two optional Kick
+FAQ/changelog Markdown reads returned HTTP 403 and remain **unavailable**; no
+access-control workaround was attempted. **Unrun:** provider authorization, registered-client behavior,
 stream-key retrieval, phone callbacks/device approval, refresh/revoke behavior,
 Steam Deck integration and live ingest. No successful end-to-end authentication
 or account eligibility is claimed.

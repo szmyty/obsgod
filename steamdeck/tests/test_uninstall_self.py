@@ -55,9 +55,9 @@ class InstalledSelfRemoval(unittest.TestCase):
         return subprocess.run([sys.executable, flag, str(self.release / "uninstall.py"), *scope, "--yes", "--json"],
                               env=env, text=True, capture_output=True, timeout=15)
 
-    def assert_only_read_observations(self):
+    def assert_only_read_observations(self, count=3):
         calls = [json.loads(line) for line in (self.home / "calls.jsonl").read_text().splitlines()]
-        self.assertEqual(calls, ["status", "status", "status"])
+        self.assertEqual(calls, ["status"] * count)
         self.assertFalse((self.home / ".local/state/obsgod/diagnostics/unexpected-restart").exists())
 
     def test_isolated_python_self_uninstall_keeps_helper_identity_and_imports_read_only(self):
@@ -83,7 +83,8 @@ class InstalledSelfRemoval(unittest.TestCase):
         self.assertEqual({path.name for path in self.base.iterdir()}, {"update.lock", "install.lock"})
         self.assertEqual({path.name for path in (self.home / ".local/state/obsgod").iterdir()}, {"control.lock"})
         self.assertTrue((self.home / "Videos/OBSGod/keep.mkv").exists())
-        self.assert_only_read_observations()
+        self.assertTrue(json.loads(result.stdout)["export"]["preserved_after_wipe"])
+        self.assert_only_read_observations(4)
 
     def test_configured_but_absent_reset_does_not_record_an_unnecessary_restart(self):
         result = self.command("-I", "--reset")

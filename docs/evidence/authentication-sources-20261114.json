@@ -1,0 +1,95 @@
+{
+  "source_type": "official technical documentation; no authenticated account test",
+  "sources": [
+    {
+      "url": "https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/",
+      "retrieved_date_utc": "2026-11-14T18:31:17.069803+00:00",
+      "sha256": "a4103e4b8b78b533ad62e72a2ab1af6afd4a1e967a6bbb7e95cb4d9126ec331e",
+      "bytes": 80030,
+      "note": null,
+      "cache_file": "source-0.html"
+    },
+    {
+      "url": "https://dev.twitch.tv/docs/api/reference/#get-stream-key",
+      "retrieved_date_utc": "2026-11-14T18:31:18.312034+00:00",
+      "sha256": "8976dead609d10522f90d83b2e021057150c9de4ac47ccddda6087d1f6562f16",
+      "bytes": 85073,
+      "note": "API index is not detailed endpoint evidence; use extra-3.",
+      "cache_file": "source-1.html"
+    },
+    {
+      "url": "https://docs.kick.com/getting-started/generating-tokens-oauth2-flow",
+      "retrieved_date_utc": "2026-11-14T18:31:18.760764+00:00",
+      "sha256": "87a6ce4ae4d45ba17b7d0723e48e1057268b39fb72ab8a02c98153188a501436",
+      "bytes": 12398,
+      "note": null,
+      "cache_file": "source-2.html"
+    },
+    {
+      "url": "https://docs.kick.com/apis/channels",
+      "retrieved_date_utc": "2026-11-14T18:31:19.164979+00:00",
+      "sha256": "a6d55c838fe22bb3d9f526869c781e033bc2d132c26e97a57ec0a9e5370ebcfa",
+      "bytes": 7873,
+      "note": null,
+      "cache_file": "source-3.html"
+    },
+    {
+      "url": "https://docs.kick.com/llms.txt",
+      "retrieved_date_utc": "2026-11-14T18:32:05.952367+00:00",
+      "sha256": "f3c1cc4ab2c1293d9690f2cc88ef26384ffbe3a2cb4d9894456687d44237126d",
+      "bytes": 2320,
+      "note": null,
+      "cache_file": "extra-0.txt"
+    },
+    {
+      "url": "https://docs.kick.com/getting-started/scopes",
+      "retrieved_date_utc": "2026-11-14T18:32:06.307153+00:00",
+      "sha256": "af26287cc7cbf241f019f15c69bda72cf04c4646b9cb3673d1dabacfb6c30014",
+      "bytes": 2399,
+      "note": null,
+      "cache_file": "extra-1.txt"
+    },
+    {
+      "url": "https://dev.twitch.tv/docs/authentication/register-app/",
+      "retrieved_date_utc": "2026-11-14T18:32:07.414713+00:00",
+      "sha256": "bff3883078909e538e206f65554480b190dca85ee294c02da323cbc17be34357",
+      "bytes": 27319,
+      "note": null,
+      "cache_file": "extra-2.txt"
+    },
+    {
+      "url": "https://dev.twitch.tv/docs/api/reference/streams/#get-stream-key",
+      "retrieved_date_utc": "2026-11-14T18:32:08.850718+00:00",
+      "sha256": "27f1153665c2215e149e34ac3eb86a5243dcc2af9697669d784751126cb320c5",
+      "bytes": 238156,
+      "note": null,
+      "cache_file": "extra-3.txt"
+    },
+    {
+      "url": "https://docs.kick.com/getting-started/kick-apps-setup",
+      "retrieved_date_utc": "2026-11-14T18:34:25.190188+00:00",
+      "sha256": "d64080372fa911e0df447f54f9e7521d1ff3ae0485689d928d05370b57828b25",
+      "bytes": 1496,
+      "note": null,
+      "cache_file": "kick-app-setup.md"
+    },
+    {
+      "url": "https://dev.twitch.tv/docs/authentication/validate-tokens/",
+      "retrieved_date_utc": "2026-11-14T18:34:27.346861+00:00",
+      "sha256": "0cea8cddd9c7814b37ec87660162a0e4c2943fd54956241e9a08d310eac1a661",
+      "bytes": 32064,
+      "note": null,
+      "cache_file": "twitch-validate.html"
+    },
+    {
+      "url": "https://dev.twitch.tv/docs/video-broadcast/",
+      "retrieved_date_utc": "2026-11-14T18:34:26.678830+00:00",
+      "sha256": "0d92a365161c4639d5d0e09e010c8b4b38f1c05b7611e2f76eafbca5241958b6",
+      "bytes": 26429,
+      "note": null,
+      "cache_file": "twitch-broadcast.html"
+    }
+  ],
+  "schema": "deckystream.auth-documentation-sources/v1",
+  "qualification": "Documentation retrieval only; provider/account/phone/Deck/ingest tests unrun."
+}

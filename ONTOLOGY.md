@@ -34,6 +34,7 @@ concrete fields and commands.
 | Microphone | Input source whose availability can change with headset/device/session routing. Hardware existence is not availability. |
 | Stream mixer | OBS-source gain/mute/device preferences; must not alter system volume or other applications. |
 | Push-to-talk lease | Short-lived held-control permission to unmute; missing renewal releases safely. Adapter controls remain subject to qualification. |
+| Private wipe export | Verified filesystem-private TAR of the exact selected owned data, retained outside wipe roots; may contain credentials. Not encrypted, public evidence or automatic restore. |
 | Recovery | Bounded restoration of selected runtime/sources; no authority to broadcast, erase settings or own unrelated output. |
 | Provider preset | RTMP(S) guidance/validation, not OAuth or provider account integration. |
 | Destination | RTMP(S) server and separate private key; changes respect current output state. |

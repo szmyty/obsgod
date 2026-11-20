@@ -1,0 +1,280 @@
+{
+  "schema": "deckystream.pre-migration-focused-preparation/v1",
+  "scope": "Focused working-tree evidence and development observations; not final clean-source qualification or device/service acceptance",
+  "core_source_commit": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+  "private_wipe_export": {
+    "files": {
+      "steamdeck/uninstall.py": "e79ce1dfb85021b78d5390071cf48f72308ff40b6ffb6565200a86258eadbce9",
+      "steamdeck/tests/test_wipe_export.py": "4c0cd536154d97f4331582f66c4087c20c8d67eba4e8301735e73b2d280ddff6",
+      "steamdeck/tests/test_uninstall_self.py": "813d4723aa74b1d522117a12d376fdbcc875946f24137b88d5b589860730de5d"
+    },
+    "checks": [
+      {
+        "name": "wipe-export",
+        "command": [
+          "python3",
+          "scripts/run-user-tests.py",
+          "--",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "steamdeck/tests",
+          "-p",
+          "test_wipe_export.py",
+          "-v"
+        ],
+        "exit_code": 0,
+        "result": "passed",
+        "seconds": 1.461,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/wipe-export-focused/wipe-export.log",
+        "sha256": "b28eb6222a37e23d6bad1cf6b517122741d97afd4b49c9ef29a9742ae32ced57"
+      },
+      {
+        "name": "existing-removal",
+        "command": [
+          "python3",
+          "scripts/run-user-tests.py",
+          "--",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "steamdeck/tests",
+          "-p",
+          "test_uninstall*.py",
+          "-v"
+        ],
+        "exit_code": 0,
+        "result": "passed",
+        "seconds": 3.401,
+        "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/wipe-export-focused/existing-removal.log",
+        "sha256": "2118541b408f0e1c829b3692c0ca5116a9f103e3e6aada8ad23312294a2adc19"
+      }
+    ],
+    "tests_passed": {
+      "new": 20,
+      "retained_removal": 35
+    },
+    "skipped": 0,
+    "result": "passed",
+    "receipt_sha256": "58665b282c9f8becd0b8d57b21e5655e5e22f4fa048881e4815b35e8c0501275",
+    "limits": "Source/fixture proof only; no actual owner data wiped or automatic restore/device result claimed"
+  },
+  "history_pagination": {
+    "schema": "deckystream.history-pagination-repair-evidence/v1",
+    "recorded_utc": "2026-11-20T18:45:20.009367+00:00",
+    "base_revision": "f0f0d1d69a60d0073975085efce0458a395eea3e",
+    "source_state": "working tree changes, not a clean-source full qualification",
+    "files": [
+      {
+        "path": "scripts/export-project-history.py",
+        "sha256": "3fd9eb08418955d48eb29385252fd6b594451073907ace3bacef5188fa1dccab"
+      },
+      {
+        "path": "scripts/tests/test_project_history.py",
+        "sha256": "7f6e4e68590218166e32660d1ee1a4f387f4695345a6db923f574f244cb0f7c7"
+      }
+    ],
+    "diagnosis_file": "/workspace/.obsgod-tools/pre-migration-readiness-20261120-736be3e/history/pagination-diagnosis.json",
+    "diagnosis_sha256": "550b6cd2ae64060acc21b95af077d269bfa7c908e4f56fa35a35443285b71e47",
+    "finding": "Exact public metadata returned ID1263344065; actual issues Link uses /repositories/1263344065/issues and adds after cursor plus page. Old owner-path-only guard and page-only query policy rejected legitimate pagination.",
+    "repair": "Bind repository ID only after exact public metadata validation; accept same-ID/same-endpoint aliases and normalize requests to original canonical path. Preserve static filters; admit only single bounded demonstrated after cursor and sequential next page. Reject all other identity/authority/endpoint/query changes.",
+    "focused_check": {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts/tests",
+        "-p",
+        "test_project_history.py",
+        "-v"
+      ],
+      "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+      "exit_code": 0,
+      "tests_passed": 15,
+      "malicious_pagination_subcases": 34,
+      "log": "/workspace/.obsgod-tools/pre-migration-readiness-20261120-736be3e/history/project-history-tests.log",
+      "log_sha256": "b9a48075f2b67e3479947f5e1b797dbc79885af42c73cd82395f517fd5bfcead"
+    },
+    "other_checks": [
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check",
+          "--",
+          "scripts/export-project-history.py",
+          "scripts/tests/test_project_history.py"
+        ],
+        "exit_code": 0
+      }
+    ],
+    "preserved": [
+      "Exact HTTPS api.github.com authority; no authentication read/sent; redirects refused",
+      "Public exact repository metadata check; positive integer ID pinned, no arbitrary numeric repository access",
+      "Same endpoint/static filters; unknown,duplicate,blank or malformed pagination query refused",
+      "MAX_REQUESTS256,MAX_PAGES50,MAX_RESPONSE8MiB,MAX_CAPTURE32MiB",
+      "Existing safe outputs, output preservation and complete230 original criterion carry-forward tests"
+    ],
+    "limits": [
+      "Only focused fixture checks and the two public diagnostic reads were performed by this repair task. Root will rerun the actual full public capture.",
+      "No repository/GitHub mutation, registration, migration, source commit, release or deployment was performed.",
+      "Other agents have unrelated working-tree edits; these test results bind only the recorded script/test hashes, not a full clean revision."
+    ]
+  },
+  "development_history": {
+    "history_sha256": "847118823a5e98c2cb1490e0c5260b4d62cb51fe6c9809fc331fe86016d93204",
+    "carry_forward_sha256": "6a29eadf42d03503c8dbd5e5a739b1a7628a34a2a277f3205f26140e4450dce3",
+    "counts": {
+      "issues": 67,
+      "pull_requests": 47,
+      "conversation_comments": 41,
+      "inline_review_comments": 0,
+      "submitted_reviews": 3
+    },
+    "original_criteria": 230,
+    "remote_default_revision": "069db4a21ec0a173b7dd30c12a53018c7700f79b",
+    "captured_pr114_head": "f0f0d1d69a60d0073975085efce0458a395eea3e",
+    "purpose": "development checkpoint; not atomic and not retirement",
+    "privacy": "One exact-field documented-example exception independently approved; strict scanner rejection retained and unchanged; raw history never mixed into generic proof",
+    "privacy_review_sha256": "f47fd200c1961bd9f56c85b0f36c21da8fefd2b0ba886b8a4096cd629651c273",
+    "initial_capture": "Failed on unsupported legitimate pagination; repaired-source actual rerun completed; old failure retained separately"
+  },
+  "destination_collector": {
+    "schema": "deckystream.destination-readiness-working-check/v3",
+    "recorded_utc": "2026-11-20T19:18:31.147766+00:00",
+    "checkout_head": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+    "source_scope": "Final uncommitted collector/test/docs hashes, not final frozen-source or af7 runtime qualification",
+    "files": {
+      "scripts/destination-readiness.py": {
+        "bytes": 45063,
+        "sha256": "e0a6ee1803147121c67565bcc69a5854588d3fcda9c873839285963bf7902a50"
+      },
+      "scripts/tests/test_destination_readiness.py": {
+        "bytes": 29927,
+        "sha256": "6515a9d6a7511c4f220cee6ce9e7818a87c464caf7f5d71069a849582cb064e8"
+      },
+      "docs/destination-readiness.md": {
+        "bytes": 7857,
+        "sha256": "5baf8a472aae2abd628f06948fb578b8d6e53fa3d6f2422c9f07c75f62612590"
+      }
+    },
+    "focused_tests": {
+      "command": "python3 -B -m unittest discover -s scripts/tests -p test_destination_readiness.py -v",
+      "exit_code": 0,
+      "tests": 22,
+      "failures": 0,
+      "skips": 0,
+      "log_sha256": "3bd64dea115218dda7ea734da571495e494e47ec7ab5efd66679a779b1e961ec"
+    },
+    "repair": "Effective review job display identity must be uniquely known across source workflow jobs, in addition to unique source-step label and exactly one successful runtime match. Unknown/dynamic/matrix/reusable or duplicate job displays cannot prove review execution; explicit custom display name cannot be replaced by job ID fallback.",
+    "actual_probe_after_repair": {
+      "status": "unrun",
+      "reason": "No live retries; frozen-source probe may run later at the new head."
+    },
+    "prior_version": {
+      "receipt": "destination-readiness-implementation-before-job-identity-fix.json",
+      "receipt_sha256": "3f3fd43759a1c3a442084170fe5320d8c08ee948b23e4412dd4b85d25a6471e7",
+      "recorded_utc": "2026-11-20T19:12:29.812813+00:00",
+      "files": {
+        "scripts/destination-readiness.py": {
+          "bytes": 43011,
+          "sha256": "4c6e51f0c7d567100b8afd727a1d3fb8fa02e86ff0dee8e0bd680665abe6c14f"
+        },
+        "scripts/tests/test_destination_readiness.py": {
+          "bytes": 25788,
+          "sha256": "417f984cac1c6c7bfc5e1dd7bb5ff85dbb9258b45e9d2b4cd886ec208c456a1f"
+        },
+        "docs/destination-readiness.md": {
+          "bytes": 7543,
+          "sha256": "16a36b8c8b3ee8e411149b8f449a26d7ee5c9c642df500ad37294c22b28ca1e9"
+        }
+      },
+      "focused_tests": {
+        "command": "python3 -B -m unittest discover -s scripts/tests -p test_destination_readiness.py -v",
+        "exit_code": 0,
+        "tests": 19,
+        "failures": 0,
+        "skips": 0,
+        "log_sha256": "c15aa48a27552f89096dd3a14f3a6370230f9debf9be76d8aa0932150e2c27d1"
+      },
+      "actual_probe_after_repair": {
+        "status": "unrun",
+        "reason": "No live retries requested; final frozen-source probe may be captured at new head later."
+      },
+      "prior_16_test_and_a6_probe_receipt": {
+        "receipt": "destination-readiness-implementation-before-label-fix.json",
+        "receipt_sha256": "61c835bc866a32d0aeb0aedbdd9dfb5d270279201c4180839120d8fa239b1ab2",
+        "recorded_utc": "2026-11-20T19:05:04.513152+00:00",
+        "files": {
+          "scripts/destination-readiness.py": {
+            "bytes": 41238,
+            "sha256": "4c8edc4be5f4869a0935e815b21fdc5788aa39ca67442167a05e3f97852d7cb6"
+          },
+          "scripts/tests/test_destination_readiness.py": {
+            "bytes": 21850,
+            "sha256": "9d4e6155d8c507b01bb6e98ea2737e8630d9c5f780c37e12c7a8da8a45b3f2bf"
+          },
+          "docs/destination-readiness.md": {
+            "bytes": 7289,
+            "sha256": "66c681d013a59b3737fbf8f5237e39dc10c7675fe1524e29a87c96428cf3f183"
+          }
+        },
+        "focused_tests": {
+          "command": "python3 -B -m unittest discover -s scripts/tests -p test_destination_readiness.py -v",
+          "exit_code": 0,
+          "tests": 16,
+          "failures": 0,
+          "skips": 0,
+          "log_sha256": "eeaef503ae719e94103bc06a087de20df905c740e70e6b84b48ba5a49bf4ceb5"
+        },
+        "actual_probe": {
+          "command": "python3 -B scripts/destination-readiness.py --repository szmyty/obsgod --pull-request 114 --output PRIVATE_NEW_REPORT_DIR",
+          "exit_code": 3,
+          "request_count": 57,
+          "response_bytes": 626039,
+          "auth_source": "existing-gh-authentication",
+          "real_pr_base": "736be3e2964179f180de34d21dbe81dd33fd8c52",
+          "real_pr_head": "a6d13ad85b132101453dc76a7c96152cf47fcfdd",
+          "sbom_http_status": 404,
+          "comparison_http_status": 403,
+          "hosted": {
+            "observed_jobs": 16,
+            "billing_refusals": 15,
+            "skipped": 1,
+            "observed_steps": 0,
+            "other_failures": 0
+          },
+          "source_policy": true,
+          "refs_stable": true,
+          "report_sha256": "3371c7fc70df95465121e5363159a3403c56fdf34198094135210917e7571285",
+          "markdown_sha256": "f7d0b6e2a8e85ca90bf0b6a538a3f13d5f583184a603720eacd2dd2679074ff8",
+          "gates": [
+            "default-branch-is-not-main",
+            "standalone-destination-not-confirmed",
+            "real-pr-dependency-comparison-unavailable",
+            "both-manifest-ingestion-evidence-incomplete",
+            "actual-executed-dependency-review-success-unconfirmed"
+          ]
+        },
+        "scope": "16-test and actual a6 PR114 probe support ONLY these prior file hashes; they are retained historical observations, not repaired-source execution."
+      },
+      "scope": "Retains prior19-test repaired-step-label source and original16-test/a6 live probe separately. Neither is execution of final job-identity source."
+    },
+    "mutations": "No GitHub writes, workflow retry, settings changes, release/deploy/spend, commit or branch action by this agent."
+  },
+  "authentication_research": {
+    "http200": 14,
+    "optional_http403": 2,
+    "owner_selection": "pending; proposal only",
+    "registered_accounts_or_provider_api_tests": "unrun",
+    "implementation": "none"
+  },
+  "preserved_original_ledger_sha256": "0795e6594c7bbde195bb8ebfcbc4050f0d5ecbe9c879767edbe0050540386df6",
+  "remaining": "Final integrated source/checks/packages, full ACT/hosted/platform, actual Deck/loader/controller/headset/provider, actual future destination/graph/reviews/rights/adoption remain separate gates",
+  "publication_or_migration_performed": false
+}
