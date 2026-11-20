@@ -25,6 +25,12 @@ Fresh exact-head hosted evidence: 10 runs/16 jobs, **15 billing refusals, 1 push
 
 Current audits report payload integrity, preferred source and source inventory passed. SBOM/checksums/provenance are **unsigned and self-reported**: no authenticated publisher, trusted-builder attestation or SLSA level inferred. Full matrix/hosted services, required reviews, actual supported-loader/SteamOS/Flatpak/Gamescope/AMD/controller/headset/provider performance and independent/new-user adoption stay explicit. Cross-builds are not native-platform runtime support. Later source changes need affected requalification.
 
+A later [capacity audit](evidence/aurora-af7-resource-feasibility.md) found no safe
+cleanup/relocation plan that satisfies the supported root/scratch reserves.
+Use a suitably sized free machine or additional free root/Docker capacity; no
+paid capacity or destructive cleanup was attempted. This does not rerun the
+matrix or change the original recorded refusal.
+
 ## Branding, provenance and rights
 
 Owner selected **01 / aurora** and lowercase **deckystream**. [38-file selected kit](https://github.com/szmyty/obsgod/tree/af7a20fdd0c62404e9b11d540fb605368e269380/branding/aurora) includes a standalone gallery, ordinary PNG archive, full kit, marks/avatars/headers/social previews/favicons, palette and contrast/legibility/menu evidence. Full kit ZIP SHA256 `f4abedc63a6382e4f5e3aa8c39b25776b22af6cfee94448adce5bfdfd9a2104f`; PNG ZIP `c1df01a1bc7b4fb34c3d84e7567e84899d4737792e3065cdc6429a5d8b4d9b9c`.

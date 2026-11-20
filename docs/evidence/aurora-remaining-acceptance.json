@@ -1606,5 +1606,13 @@
   "privacy": "Public source/issue metadata and criterion text only. Local snapshot filesystem paths removed; original criterion wording and IDs preserved.",
   "snapshot_scope": "This is the104-bullet inventory captured before final af7 qualification. Pending dispositions and next actions are historical preparation, not a claim that current-source checks remain unrun or that104 criteria newly passed. Consult criteria-review.json for later exact-source reconciliation and qualification-summary.json for measured command evidence.",
   "qualification_summary": "qualification-summary.json",
-  "criterion_review": "criteria-review.json"
+  "criterion_review": "criteria-review.json",
+  "subsequent_reconciliation": {
+    "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+    "foundation": "aurora-af7-foundation-criteria.json",
+    "foundation_source_contracts_locally_supported": 27,
+    "selected_aurora": "aurora-af7-criteria.json",
+    "selected_aurora_bounded_local_criteria_supported": 21,
+    "note": "Original entries are the pre-final-evidence snapshot, retained as recorded; use subsequent criterion reviews for current local support. No issue closures or device/service acceptance are implied."
+  }
 }

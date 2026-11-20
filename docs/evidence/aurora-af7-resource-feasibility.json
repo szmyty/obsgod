@@ -1,0 +1,109 @@
+{
+  "schema": "deckystream.additional-resource-feasibility/v1",
+  "recorded_utc": "2026-11-20T08:14:26.779482+00:00",
+  "scope": "Additional read-only feasibility audit after the completed af7 standalone qualification. It does not run an ACT workflow, modify the original matrix refusal/report, change the 68 command-row counts or qualify later documentation.",
+  "qualification_source": "af7a20fdd0c62404e9b11d540fb605368e269380",
+  "current_working_tree": "Parent is preparing evidence-only documentation; no cleanliness qualification is asserted by this audit.",
+  "status": "no-safe-space-plan-within-preservation-and-reserve-constraints",
+  "capacity": {
+    "root_free_bytes": 2118672384,
+    "root_required_bytes": 7544361132,
+    "root_shortfall_bytes": 5425688748,
+    "scratch_free_bytes": 9160065024,
+    "scratch_required_reserve_bytes": 6442450944,
+    "maximum_possible_root_output_relocation_bytes": 2717614080,
+    "optimistic_optional_builder_allocation_bytes": 1487716352,
+    "optimistic_root_available_after_both_bytes": 6324002816,
+    "remaining_shortfall_even_with_both_bytes": 1220358316,
+    "unidentified_layer_allocation_bytes": 24834048,
+    "remaining_shortfall_even_if_unidentified_layer_were_fully_freeable_bytes": 1195524268
+  },
+  "method": {
+    "docker_storage_driver": "vfs",
+    "logical_sizes_are_not_physical_reclaim": "Docker system df and image Size are logical/differential. Actual per-cache-directory allocated blocks were measured by read-only du and mapped through cache-id/parent layer metadata. Per-directory allocation is at most an optimistic reclaim bound, not proof Docker can release every block.",
+    "physical_measurement": "UID0,cap-dropALL,onlyDAC_READ_SEARCH,networknone,read-onlyroot+twoexactreadonlyDockerVFS/layerdbbinds",
+    "diagnostic_helper": "alpine:3.23@sha256:469c9ea410b9215eaee7976ba6c0639039b444be8e5d638f7abbada189971eb2",
+    "first_probe": "No capabilities; du had permission-denied warnings, so its incomplete sizes are not used",
+    "host_sudo": "unavailable; host UID1000 cannot directly traverse Docker root",
+    "filesystem_contents_read": "Only du/stat metadata plus Docker layer cache-id/size/parent metadata; no profile, cache credential, image environment or ordinary file contents."
+  },
+  "required_images_preserved": [
+    {
+      "id": "sha256:7d95db24dde3481619581f7e0b06b1aaa57d1aab2cf0e1da0521c5309a308212",
+      "reason": "Tagless but pinned ACT runner digest19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270; not a disposable stale image."
+    },
+    {
+      "id": "sha256:74e5068d35ebfb2344b1be935fd7e48ed09b1383cc702fe88c1854a50823c9b5",
+      "reason": "Current native OBS test image; all its prefix layers remain required."
+    },
+    {
+      "id": "sha256:6c3ec703e4d22b777f53e75ec33a2639ac060a81e97cd4a48da4e7e412127f78",
+      "reason": "Current pinned capture builder used by actual package construction."
+    },
+    {
+      "description": "Pinned Debian/Fedora/Alpine images",
+      "reason": "Required native package-manager and build/test inputs; disposing them before full matrix would require restoring their space."
+    }
+  ],
+  "stale_native_prefixes": {
+    "ids": [
+      "sha256:9ad9c28bfe007871956666f0df6c75b515b1f276531671e7a8402803a344f9d2",
+      "sha256:cbaa98c38bede0d2146280ed9de3af9faaca890cb27e989addd003e25eb17592",
+      "sha256:c58abc8bc813d10389697ba92ecb7a6185cdf877b05463ee6de896c0ed6af835"
+    ],
+    "rootfs_relation": "Strict layer prefixes of required current image74e5068; Docker reports zero unique logical bytes and their physical cache-id directories remain shared with the current image.",
+    "reclaimable_needed_layer_bytes": 0
+  },
+  "optional_official_builder": {
+    "id": "sha256:d09384b7794e6c426aeab6de2747710493b55937cc606ec5313862e828986193",
+    "logical_image_bytes_approx": 287900000,
+    "allocated_layer_bytes": 1487716352,
+    "layers": [
+      {
+        "chain_id": "sha256:74d97c428c51a828f9051a7a40a53ff1fc99e54fc30323ce36760701b0b7f711",
+        "cache_id": "be02572b1f9e9b115c2efd42ca88a55b0ef2d88b3ba80edd605efbc49eeb8156",
+        "allocated_bytes": 9080832
+      },
+      {
+        "chain_id": "sha256:7779b80dfeda93ca5ce8507f5d18ceeb7edfdafcf71545bece909f4f69afaf05",
+        "cache_id": "dda0127c5277bafcbce361607ed2c84a48de98cf793223524d2a6d1cfd4cb3c8",
+        "allocated_bytes": 188194816
+      },
+      {
+        "chain_id": "sha256:373230677d4c5e655f921b5fbaed3c50001ca4b28b9135bf91f515e0f42cfcd9",
+        "cache_id": "245106da147509532c375dc72847f405308850d83f8286e4a912f4f9eb7e8afb",
+        "allocated_bytes": 188198912
+      },
+      {
+        "chain_id": "sha256:028747fb9fc703500b97d351069731f1965709e2fe86e14b8cf8a817bdbbf472",
+        "cache_id": "42650ef5587a57919634187ce6c6fbcb464e851f99a742e3cdcd4f27f2308fd5",
+        "allocated_bytes": 202235904
+      },
+      {
+        "chain_id": "sha256:21bb76d823795093d76e365e695c67340f4157575a2e52917886ecfffdd53f73",
+        "cache_id": "7f09b37c88fc24cf815f07e196fbbc7f42b8ebda51280e6024dd0ffc459768cf",
+        "allocated_bytes": 299999232
+      },
+      {
+        "chain_id": "sha256:be124e59f9b564650a9a62d5ffe478f4d9e0e07d77fd020695980c4538de6196",
+        "cache_id": "b8e85aff0db5a1727d103fbe70f7be038998adee2fc637dd553a355e454d4a17",
+        "allocated_bytes": 300003328
+      },
+      {
+        "chain_id": "sha256:d541ade0acb343de2916d43a9522d7cbe6d7b3e87e1f756196abc07359928a3c",
+        "cache_id": "f07de7113469e87c4cfe0e0fa8a08ce4bed48092db368964817b986bf91c00cb",
+        "allocated_bytes": 300003328
+      }
+    ],
+    "ownership_and_disposal": "Known used by this campaign, but exclusive ownership/staleness and actual reclaim are not established. The bound grants full disposal optimistically anyway and still fails the reserve. This is not a disposal recommendation."
+  },
+  "other_storage": {
+    "act_toolcache_volume_bytes_approx": 982400000,
+    "act_toolcache_disposition": "Required reusable ACT tool cache, not demonstrated stale; preserve pinned tools/host caches/modules.",
+    "unshared_build_cache_bytes_approx": 47930,
+    "output_relocation": "Even granting any owned output relocation up to all scratch surplus cannot bridge the shortfall. No specific relocation or symlink alias is recommended.",
+    "workspace_evidence_artifacts": "All receipts, needed artifacts, host/module caches and package/network presets remain preserved."
+  },
+  "permanent_mutations": "None. No image, volume, build cache, artifact or output was deleted/pruned/moved. No source, daemon or network/package/auth preset changed. Two explicitly authorized tiny transient read-only Docker helpers completed with --rm.",
+  "conclusion": "No demonstrably safe path found to run the supported full ACT matrix on the current root filesystem while preserving required images/tools/evidence and at least6GiB scratch. More root/Docker filesystem capacity or an adequately sized free owner-machine runner is required; do not weaken the measured preflight budget."
+}

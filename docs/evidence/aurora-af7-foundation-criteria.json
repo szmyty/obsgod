@@ -1,0 +1,1315 @@
+{
+  "schema": "deckystream.foundation-current-evidence-reconciliation/v1",
+  "recorded_utc": "2026-11-20T08:19:57.026775+00:00",
+  "purpose": "Reviewable closure preparation for27 literal #76\u2013#79 source contracts; no tests/source/GitHub mutation/checkbox or issue closure performed by this assessment.",
+  "source": {
+    "packaged_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+    "tree": "d6149d9ec670cffcc30db355262aa688382b5e7e",
+    "zip_sha256": "4deece2bcaba6440c168d5cb7b1bc585e346d6b2f06655a1672c0d9638afeab8",
+    "zip_bytes": 4570728,
+    "primary_payload_files": 33,
+    "source_inventory_files": 617,
+    "platform": "Linux6.18.57 x86_64/glibc2.41; actual uid/gid1000; Python3.12.14; pinned Go1.27.4/Node24.19.0/npm11.9.0",
+    "current_main_at_inspection": "069db4a21ec0a173b7dd30c12a53018c7700f79b",
+    "foundation_pr90": {
+      "merged": true,
+      "merge": "e3290c2a4606aa155ae7a6ece245539127a9893d",
+      "ancestor_of_main069": true
+    },
+    "native_config_pr92": {
+      "merged": true,
+      "merge": "04282f425e45d4978c02fd239d77673756dd3612",
+      "ancestor_of_main069": true
+    },
+    "pr113": {
+      "state": "open draft at fresh read",
+      "head": "f5b5a60982e442bb79a232511b608d331211aa36",
+      "qualified_package_source": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "after_af7_diff": "Documentation/evidence only; no later docs head is relabeled as a newly qualified package.",
+      "core_foundation_paths": "main.py/storage.py/dependency_setup.py/native Configuration.tsx and primary package entry unchanged between main069 and af7; current package-deck/product/branding/docs deltas belong to113."
+    }
+  },
+  "evidence_location": {
+    "artifact_commit": "f2b160823800e3befd7440e6bcce8d135845a008",
+    "artifact_tree_url": "https://github.com/szmyty/obsgod/tree/f2b160823800e3befd7440e6bcce8d135845a008",
+    "proof_name": "aurora-af7-public-proof.zip",
+    "proof_sha256": "de58f9171eaa6b3b091dbe3a10d0ab5bb1515cc3d922cb2a4f44b61aba643241",
+    "main_report_path": "standalone/available-checks.json",
+    "main_report_sha256": "9cc1a2f369fa7fa2be3e54056cb4dd7b9ea0fafdd25c3d559b8b965aa7061e59",
+    "qualification_summary_sha256": "ea422d3d2d0dde4ecd822706f4a9fddbccdd1a0b01084ee7f585dcfd3276d45a",
+    "download": "Actual checkpoint downloads/hashes verified by root; review-only branch, no product release/tag/deploy/updater offer."
+  },
+  "issue_body_snapshot_scope": "Original criterion/dependency wording is preserved. Body hashes/update times identify the pre-latest-prefix snapshot; root has refreshed live checkpoint prefixes without closures. This is not a claim that old prefix prose is current.",
+  "criteria_count": 27,
+  "locally_supported_source_contracts": 27,
+  "new_source_gaps_established": 0,
+  "acceptance_passes_or_closures_performed": false,
+  "issues": [
+    {
+      "number": 76,
+      "title": "Ship one standard Decky plugin package with bundled runtime",
+      "live_state": "open at read; latest root prefix reconciliation performs no closure",
+      "issue_snapshot_updated_at": "2026-11-14T19:50:09Z",
+      "body_sha256_before_latest_prefix_reconciliation": "d9107c283442a0c40da1cf94aea9f4855010a239094567334b3c60982bdb2c10",
+      "criteria_count": 7,
+      "criteria": [
+        {
+          "id": "76.C1",
+          "original_text": "Document and implement the supported source/build entry point using the current official Decky template/CLI conventions, with pinned reproducible tooling; retain justified license boundaries rather than blindly replacing Rollup.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "PRIMARY",
+            "OFFICIAL",
+            "TOOLS",
+            "FRONTEND"
+          ],
+          "source_paths": [
+            "docs/decky-package.md",
+            "scripts/package-decky.py",
+            "scripts/decky_package.py",
+            "steamdeck/decky/rollup.config.js"
+          ],
+          "observed_support": [
+            "Maintained primary entry compiles source with Go1.27.4/Node24.19.0/npm11.9.0, refuses dirty/mislabeled source and builds a conventional plugin root.",
+            "Current docs pin official template90d0780e\u2026 and CLI0.0.7. Separate SDK LGPL module and preferred source remain intact; justified Rollup boundary retained.",
+            "Two complete primary entries produced identical canonical bytes; supplementary official prepared-byte output comparison passed all33 files."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [
+            "This does not claim that the upstream default builder compiled our source or that its raw ZIP is deterministic."
+          ],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "76.C2",
+          "original_text": "A clean build produces a directly installable ZIP with correct top-level folder, manifests, dist/index.js, Python backend, bundled Go helper, native capture library, assets and required notices/preferred source.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "PRIMARY",
+            "OFFICIAL",
+            "CPYTHON",
+            "TOOLS"
+          ],
+          "source_paths": [
+            "scripts/package-decky.py",
+            "scripts/decky_package.py",
+            "scripts/release-audit.py"
+          ],
+          "observed_support": [
+            "Clean canonical ZIP contains exactly33 ordinary unique safe payload files under obsgod/, manifest hashes match shipped bytes, dist/index.js/Python/backend/Go/native library/setup/assets/notices/preferred source included.",
+            "The accepted ZIP is4,570,728 bytes/SHA4deece2\u2026; real unpacked backend/Go executes at uid1000."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [
+            "Directly installable format/payload supported; actual normal UI install is explicitly assigned by #76 Verification to owner gate, not claimed here."
+          ],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "76.C3",
+          "original_text": "The normal Decky ZIP alone contains everything our plugin needs for its own setup UI; OBS/GStreamer remain external Flatpak dependencies.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "PRIMARY",
+            "CPYTHON",
+            "FROZEN",
+            "CONFIG_UI",
+            "DEPS_UI",
+            "DESKTOP"
+          ],
+          "source_paths": [
+            "docs/decky-package.md",
+            "steamdeck/decky/main.py",
+            "steamdeck/decky/src/Configuration.tsx",
+            "steamdeck/setup.py"
+          ],
+          "observed_support": [
+            "Primary ZIP alone includes native form and optional browser setup; fresh no-dependency configuration is editable and actual packaged Python\u2192Go saves/reads it offline.",
+            "No separately installed Desktop app is required; dependency UI keeps OBS/GStreamer as external user Flatpaks and configuration invokes none."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [
+            "Actual Flatpak installation is not inferred from mock dependency readiness."
+          ],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "76.C4",
+          "original_text": "Use ordinary player privileges, supplied Decky context, and no root/debug flags or SteamOS read-only unlock.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "PRIMARY",
+            "CPYTHON",
+            "FROZEN",
+            "APP",
+            "SETTINGS"
+          ],
+          "source_paths": [
+            "steamdeck/decky/plugin.json",
+            "steamdeck/decky/main.py",
+            "steamdeck/decky/storage.py",
+            "steamdeck/decky/dependency_setup.py"
+          ],
+          "observed_support": [
+            "Plugin flags are[]/api_version1; primary and unpacked execution observed uid1000, no debug/root requirement.",
+            "Adapter reads documented supplied context from environment or decky module; actual account identity/path validation and child-only environment logic executed in current tests.",
+            "Dependency command policy is user-scoped; source adds no SteamOS unlock or second privileged installation path."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [
+            "Actual loader-supplied target paths/session identity are owner observations under #86/#82-C1. That is not a missing implementation of the source privilege/context contract."
+          ],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "76.C5",
+          "original_text": "Preserve obsgod/OBSGod plugin/command/update compatibility while building and testing under szmyty/obsgod; the future repository is deckystream, with owner still unresolved.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "PRIMARY",
+            "PRODUCT",
+            "CPYTHON",
+            "TRANSPORT",
+            "APP"
+          ],
+          "source_paths": [
+            "product.json",
+            "steamdeck/decky/plugin.json",
+            "steamdeck/product.py",
+            "steamdeck/decky/src/product.ts",
+            "steamdeck/releases.py"
+          ],
+          "observed_support": [
+            "Current product.json retains repository szmyty/obsgod, CLI/storage/folder obsgod and plugin OBSGod while lowercase display changes to deckystream.",
+            "Current ZIP manifest/plugin identity and actual packaged commands preserve compatibility; current product projection and legacy transport/update fixtures passed.",
+            "Future exact owner/deckystream remains unresolved and is not activated as arbitrary update trust."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "76.C6",
+          "original_text": "Check source/native ABI consumers separately and verify the official build/output path plus ZIP contents; archive checks do not establish actual Deck installation.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "PRIMARY",
+            "OFFICIAL",
+            "NATIVE_CAPTURE",
+            "NATIVE_OBS",
+            "ARTIFACT_REPEAT"
+          ],
+          "source_paths": [
+            "docs/decky-package.md",
+            "steamdeck/capture/build.Dockerfile",
+            "steamdeck/tests/native-capture-smoke.sh",
+            "steamdeck/tests/native-game-obs-smoke.sh"
+          ],
+          "observed_support": [
+            "Source compilation/repeat and source617 inventory are separate from official33-file prepared-byte assembly.",
+            "Native build receipt records exact builder image ID/compiler/packages/dynamic ABI/symbol versions; compiled .so a954d1\u2026 is the ZIP/runtime payload.",
+            "Current native capture receipt actually loads this .so through GStreamer and synthetic PipeWire; current real Linux OBS receipt binds the primary Go/.so hashes."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [
+            "ABI consumer checks are Linux fixture evidence, not a claim that the owner\u2019s OBS Flatpak loads it; actual Deck installation remains explicitly unrun."
+          ],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "76.C7",
+          "original_text": "Inspect workflow side effects and prepare version metadata without triggering a product release, deployment or Store submission.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "PRIMARY",
+            "PRODUCT"
+          ],
+          "source_paths": [
+            ".github/workflows/steam-deck.yml",
+            ".github/workflows/docs-preview.yml",
+            ".github/workflows/goreleaser.yml",
+            ".goreleaser.yml",
+            "steamdeck/decky/package.json",
+            "CHANGELOG.md"
+          ],
+          "observed_support": [
+            "Inspected source workflows have read-only contents scope and review artifacts/nonpublishing snapshots; GoReleaser passes --snapshot --skip=publish,sign.",
+            "Prepared version0.1.0-deck.9/Unreleased preview metadata; no product release/tag, deployment or Store submission triggered.",
+            "Later pushed review artifact branch is a review-only checkpoint, distinct from product release/deploy/updater publication."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        }
+      ],
+      "source_owned_disposition": "All literal implementation/fixture contracts have current af7 local support; no new source defect established.",
+      "issue_level_closure_gates": [
+        "Review exact current local source evidence; merge relied-on113 documentation/projection deltas. Preserve original related-ledger gates, without adding fullACT/device requirements to this bounded source issue."
+      ]
+    },
+    {
+      "number": 77,
+      "title": "Use Decky-provided state paths with safe legacy OBSGod migration",
+      "live_state": "open at read; latest root prefix reconciliation performs no closure",
+      "issue_snapshot_updated_at": "2026-11-14T19:50:11Z",
+      "body_sha256_before_latest_prefix_reconciliation": "967547e49e267184b6446fcf756ea2b8264cf805e4eae8bd94e6f7b53f12a83c",
+      "criteria_count": 6,
+      "criteria": [
+        {
+          "id": "77.C1",
+          "original_text": "Use actual injected Decky settings/runtime/log and user context for Decky-owned files; distinguish persistent plugin runtime data from ephemeral XDG_RUNTIME_DIR.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "APP",
+            "GO",
+            "CPYTHON",
+            "FROZEN"
+          ],
+          "source_paths": [
+            "steamdeck/decky/main.py",
+            "steamdeck/decky/storage.py",
+            "docs/decky-storage.md"
+          ],
+          "observed_support": [
+            "Adapter consumes DECKY_PLUGIN_SETTINGS_DIR/RUNTIME_DIR/LOG_DIR and DECKY_USER_HOME/USER via documented injected environment or decky attributes; no invented package-name global state.",
+            "Current storage/context tests execute actual UID validation, child-only environment and native metadata/jobs/log locations; ephemeral XDG_RUNTIME_DIR and session bus remain unchanged.",
+            "Actual packaged Python-derived map is consumed by the actual Go command at uid1000."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [
+            "Synthetic loader path values establish implemented mapping/identity behavior; they do not assert an actual SteamOS loader session was observed."
+          ],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "77.C2",
+          "original_text": "Keep OBS Flatpak configuration, ordinary OBS data, selected Videos/media and optional CLI XDG locations in appropriate ownership boundaries; avoid hard-coded /home/deck.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "APP",
+            "GO",
+            "CPYTHON",
+            "FROZEN",
+            "TRANSPORT"
+          ],
+          "source_paths": [
+            "steamdeck/decky/storage.py",
+            "internal/deck/config.go",
+            "internal/deck/runtime_linux.go",
+            "docs/decky-storage.md"
+          ],
+          "observed_support": [
+            "Managed shared XDG config/secrets/state/controller, OBS native Flatpak config, ordinary OBS and selected Videos/media remain separate ownership scopes.",
+            "Current custom-XDG/service-home/fallback tests preserve data/cache/runtime and refuse duplicate roots; current integration leaves ordinary OBS preferences byte-identical.",
+            "No production /home/deck hardcoding is introduced; synthetic player homes differ from that path."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "77.C3",
+          "original_text": "Define one versioned authoritative settings/credential map and migration receipt, including existing stream-key/OBS-password binding, without silently creating two conflicting stores or controllers.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "APP",
+            "GO",
+            "CPYTHON",
+            "FROZEN"
+          ],
+          "source_paths": [
+            "steamdeck/decky/storage.py",
+            "internal/deck/storage_map_linux.go",
+            "internal/deck/user_paths_test.go",
+            "docs/decky-storage.md"
+          ],
+          "observed_support": [
+            "One versioned obsgod.decky-storage-map/v1 metadata map and retained-shared-xdg receipt bind existing settings/secrets/state/control-lock identity; no secret copy or lock relocation.",
+            "Current tests cover UID/schema/path/context changes and reject another store/controller; Go validates same map before loading original key/password settings-hash binding.",
+            "Real packaged Python\u2192Go preserves private key/password distinction and legacy advanced prefs through edits."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "77.C4",
+          "original_text": "Detect and validate legacy state; exercise upgrade, repeated migration/repair and rollback with synthetic secrets and sentinel settings/media. Preserve compatible CLI/optional Desktop access or document the bounded transition.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "APP",
+            "GO",
+            "CPYTHON",
+            "TRANSPORT"
+          ],
+          "source_paths": [
+            "steamdeck/tests/test_decky_storage.py",
+            "internal/deck/user_paths_test.go",
+            "steamdeck/decky/storage.py",
+            "docs/decky-storage.md"
+          ],
+          "observed_support": [
+            "Current repeat/repair/rollback test preserves exact credential/settings/media/control-lock bytes and inode, repairs missing matching receipt, removes only adapter metadata and reconstructs it safely.",
+            "Legacy/partial context falls back without writes; CLI and optional Desktop canonical store stays shared.",
+            "Current pinned legacy4/6\u2192current9 transport/installer/update fixtures also verify synthetic sentinel preservation; no old passing receipt is promoted."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [
+            "Fixture lifecycle/Flatpak ownership remain substituted, not real loader/storage-device evidence."
+          ],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "77.C5",
+          "original_text": "Reject symlink/ownership/path-confusion cases and avoid exposing secrets in exported state or diagnostics.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "APP",
+            "GO",
+            "CPYTHON",
+            "FROZEN",
+            "CONFIG_UI",
+            "SETTINGS"
+          ],
+          "source_paths": [
+            "steamdeck/decky/storage.py",
+            "internal/deck/storage_map_linux.go",
+            "internal/deck/user_paths_test.go",
+            "internal/deck/diagnostics.go"
+          ],
+          "observed_support": [
+            "Current storage tests explicitly pass symlink/hardlink/foreign-owner/public-secret/mutated-map/nonsticky-writable-ancestor and alternate-controller rejection.",
+            "Trusted sticky ancestry remains supported; changed XDG roots fail instead of selecting a second controller.",
+            "Current packaged responses/argv/readback/drafts/clipboard and public diagnostics never return the observed synthetic credentials; private maps/receipts carry no secret bytes."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "77.C6",
+          "original_text": "Document current IDs versus future deckystream naming; no actual repository trust activation or installed-ID rename occurs here.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "PRIMARY",
+            "PRODUCT",
+            "APP"
+          ],
+          "source_paths": [
+            "docs/decky-storage.md",
+            "docs/identity-migration.md",
+            "docs/migration-review.md",
+            "product.json"
+          ],
+          "observed_support": [
+            "Current docs distinguish display deckystream and future exact-owner unresolved slug from installed obsgod/OBSGod IDs and current szmyty/obsgod update trust.",
+            "Current package/projection and source trust rejection tests agree; no runtime ID rename or future-repo activation occurs."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        }
+      ],
+      "source_owned_disposition": "All literal implementation/fixture contracts have current af7 local support; no new source defect established.",
+      "issue_level_closure_gates": [
+        "Review exact current local source evidence; merge relied-on113 documentation/projection deltas. Preserve original related-ledger gates, without adding fullACT/device requirements to this bounded source issue."
+      ]
+    },
+    {
+      "number": 78,
+      "title": "Add consented OBS/GStreamer setup with progress, cancel and retry",
+      "live_state": "open at read; latest root prefix reconciliation performs no closure",
+      "issue_snapshot_updated_at": "2026-11-14T19:50:12Z",
+      "body_sha256_before_latest_prefix_reconciliation": "0748bff9402aa8b4c978af8d89ad009c186c5f66ad3ac190d090f228e04cd201",
+      "criteria_count": 7,
+      "criteria": [
+        {
+          "id": "78.C1",
+          "original_text": "Opening the plugin observes dependency readiness and offers an Install/Later consent UI listing OBS, its compatible GStreamer extension and any required Flathub setup. _main/_migration never start dependency downloads.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "APP",
+            "DEPS_UI",
+            "CPYTHON"
+          ],
+          "source_paths": [
+            "steamdeck/decky/main.py",
+            "steamdeck/decky/dependency_setup.py",
+            "steamdeck/decky/src/Setup.tsx"
+          ],
+          "observed_support": [
+            "Loading/status/Later do not authorize installation; actual packaged UI lists missing refs and explicit Install/Later consent.",
+            "Current application tests validate read-only observation and explicit literal consent before worker start; setup/main/migration does not download automatically."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [
+            "Actual first load under supported Decky remains #82-C1/#86, not claimed from construction fixtures."
+          ],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "78.C2",
+          "original_text": "Declining leaves the plugin installed with a clear Setup required screen, help and explicit retry; streaming stays unavailable with the actual missing-dependency reason.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "APP",
+            "DEPS_UI"
+          ],
+          "source_paths": [
+            "steamdeck/decky/src/Setup.tsx",
+            "steamdeck/decky/src/index.tsx",
+            "steamdeck/decky/dependency_setup.py"
+          ],
+          "observed_support": [
+            "Current packaged UI scenarios pass missing-dependency new-output block, preserved plugin, Later with no installer call, explicit retry and actual observed-ready control gating.",
+            "Backend tests expose fixed actionable missing/scope/context reasons rather than treating consent denial as uninstall/failure."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "78.C3",
+          "original_text": "Run a backend-owned asynchronous setup job with operation identity, bounded diagnostics/progress and a multi-minute budget separate from stream-operation timeouts. Closing/reopening the panel recovers status without duplicate work.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "APP",
+            "DEPS_UI"
+          ],
+          "source_paths": [
+            "steamdeck/decky/dependency_setup.py",
+            "steamdeck/decky/main.py",
+            "docs/dependency-setup.md"
+          ],
+          "observed_support": [
+            "Current tests show prompt return before slow preflight, backend operation ID/leased job, bounded fixed public progress and multi-minute setup budget separate from stream deadlines.",
+            "Panel reload recovers same backend operation; repeated Install shares the job instead of duplicating work.",
+            "Current budget/large-output tests execute actual subprocess boundaries without unbounded log/progress output."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "78.C4",
+          "original_text": "Cancellation, interruption, reload and failures re-observe installed refs; retry only missing work. Do not assume an interrupted Flatpak transaction installed nothing or delete its cache/shared apps.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "APP",
+            "DEPS_UI"
+          ],
+          "source_paths": [
+            "steamdeck/decky/dependency_setup.py",
+            "steamdeck/tests/test_dependency_setup.py",
+            "docs/dependency-setup.md"
+          ],
+          "observed_support": [
+            "Current cancel/partial-ref/retry/backend-close/abrupt-parent-loss lease cases pass: actual workers/Unix sockets with fake Flatpak responses and re-observation of installed refs.",
+            "Browser reopen/cancel/retry preserves partial installation and requests only missing extension work; no shared cache/apps deletion."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [
+            "No actual interrupted target Flatpak transaction was exercised; #86 keeps that observation explicit."
+          ],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "78.C5",
+          "original_text": "Verify actual player UID/home/session bus, user versus system scope, compatible active OBS/add-on branches, OBS 28+ bundled WebSocket capability, and the identity of an existing flathub remote. Never overwrite an unrelated remote, silently create a duplicate installation, install a second WebSocket plugin or unlock SteamOS.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "APP",
+            "DEPS_UI"
+          ],
+          "source_paths": [
+            "steamdeck/decky/dependency_setup.py",
+            "steamdeck/tests/test_dependency_setup.py",
+            "steamdeck/tests/test_install_dependencies.py"
+          ],
+          "observed_support": [
+            "Current actual unprivileged UID/home/owned socket tests reject root/wrong account/missing bus; fake Flatpak subprocesses exercise user/system scope, active refs, matching ExtensionOf, OBS28+ and Flathub identity/verification.",
+            "Disabled/unverified/unrelated remote, system-only duplicate risk and old/incompatible versions fail actionably; no second WebSocket plugin or SteamOS unlock is invoked."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [
+            "This proves the implemented verification policy and real local identity/socket checks, not current SteamOS D-Bus/Flathub transaction compatibility."
+          ],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "78.C6",
+          "original_text": "Handle offline network, disk exhaustion, missing Flatpak, permissions and incompatible versions with actionable recovery; keep ordinary OBS and shared dependencies intact.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "APP",
+            "DEPS_UI"
+          ],
+          "source_paths": [
+            "steamdeck/decky/dependency_setup.py",
+            "steamdeck/tests/test_dependency_setup.py",
+            "docs/dependency-setup.md"
+          ],
+          "observed_support": [
+            "Current classification tests cover network/disk/permission/trust/version/missing-Flatpak/budget/large-output failures with fixed recovery messages.",
+            "Raw subprocess output, private paths and observed fixture secrets do not escape; partial refs/shared cache/apps are retained."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [
+            "No destructive real disk-exhaustion experiment is required or claimed."
+          ],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "78.C7",
+          "original_text": "Dependency installed, managed OBS launched, authenticated listener ready and stream active are separate observed states. Setup cannot broadcast.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "APP",
+            "DEPS_UI",
+            "CPYTHON",
+            "SETTINGS",
+            "NATIVE_OBS"
+          ],
+          "source_paths": [
+            "steamdeck/decky/main.py",
+            "steamdeck/decky/dependency_setup.py",
+            "steamdeck/decky/src/index.tsx"
+          ],
+          "observed_support": [
+            "Backend/native UI separates dependency observed-ready, managed OBS presence, authenticated connection and observed stream output; new output requires readiness while explicit observed Stop stays available.",
+            "Setup worker does not invoke OBS/broadcast; shared control lease prevents racing legacy Start.",
+            "Actual packaged configuration path performs no OBS/Flatpak/desktop/process-control or broadcasting/recording action; current native OBS fixture separately establishes control/output behavior."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        }
+      ],
+      "source_owned_disposition": "All literal implementation/fixture contracts have current af7 local support; no new source defect established.",
+      "issue_level_closure_gates": [
+        "Review this exact current evidence and preserve existing #76/#77 implementation/evidence inputs; merge any relied-on113 documentation/projection deltas. Actual target observations remain #86."
+      ]
+    },
+    {
+      "number": 79,
+      "title": "Complete private first-run configuration inside the Decky panel",
+      "live_state": "open at read; latest root prefix reconciliation performs no closure",
+      "issue_snapshot_updated_at": "2026-11-14T21:23:21Z",
+      "body_sha256_before_latest_prefix_reconciliation": "1983e253ec0d847865d3fd780ef93894155b68ea962a4db8895280acbf515536",
+      "criteria_count": 7,
+      "criteria": [
+        {
+          "id": "79.C1",
+          "original_text": "Provide controller-usable setup/settings for Kick, Twitch and existing supported RTMP(S) destinations, with sensible defaults and validation. Manual stream-key input remains fully supported offline after configuration.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "CONFIG_UI",
+            "APP",
+            "GO",
+            "CPYTHON"
+          ],
+          "source_paths": [
+            "steamdeck/decky/src/Configuration.tsx",
+            "steamdeck/decky/src/configuration-state.mjs",
+            "docs/native-configuration.md",
+            "internal/deck/native_configuration.go"
+          ],
+          "observed_support": [
+            "Actual packaged frontend provides native Kick/Twitch/custom RTMP(S) guides, editable controller/keyboard form, defaults, validation and stable focus; first Kick save succeeds offline without dependencies.",
+            "Current Go/adapter source and real packaged Python\u2192Go validation/persistence preserve manual keys and offline existing configuration."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [
+            "Physical Steam controller/STEAM+X usability is unrun under #86; current browser focus/semantics do not prove hardware usability. Literal source provision is supported; no physical result is inferred."
+          ],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "79.C2",
+          "original_text": "Mask keys by default; integrate normal keyboard/paste behavior and an optional documented Desktop entry path for easier typing, without requiring a separately installed app or exposing an unauthenticated LAN service.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "CONFIG_UI",
+            "DESKTOP",
+            "CPYTHON",
+            "APP"
+          ],
+          "source_paths": [
+            "steamdeck/decky/src/Configuration.tsx",
+            "steamdeck/setup.py",
+            "docs/native-configuration.md",
+            "docs/decky-package.md"
+          ],
+          "observed_support": [
+            "Current packaged browser cases pass masked typing/paste/clipboard denial guidance, private draft/late reply clearing and optional Desktop instructions.",
+            "Primary ZIP includes optional setup files; real local app-only setup browser/launcher validates loopback token/origin, no unauthenticated LAN service or separate required app."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [
+            "Desktop browser fixture is app-only; no Decky install or physical Steam keyboard proof."
+          ],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "79.C3",
+          "original_text": "Reuse current binding semantics: blank means keep a stored key only for the same destination; changing the server/account destination cannot silently reuse another key.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "CPYTHON",
+            "FROZEN",
+            "CONFIG_UI",
+            "GO"
+          ],
+          "source_paths": [
+            "internal/deck/native_configuration.go",
+            "internal/deck/native_configuration_test.go",
+            "steamdeck/decky/src/Configuration.tsx"
+          ],
+          "observed_support": [
+            "Actual packaged Python\u2192Go checks same-destination blank retention, changed-server blank rejection, explicit new-destination key and same-server account replacement only with explicit new key.",
+            "Current packaged browser mirrors replacement-required validation and masked paste; Go tests reject mismatched settings/credential binding reuse."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "79.C4",
+          "original_text": "Keep destination stream key, local setup authorization and managed OBS WebSocket password distinct. Generate/store the managed password privately; support the existing safe recovery/change behavior.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "CPYTHON",
+            "FROZEN",
+            "CONFIG_UI",
+            "APP",
+            "GO",
+            "NATIVE_OBS"
+          ],
+          "source_paths": [
+            "internal/deck/connection.go",
+            "internal/deck/connection_test.go",
+            "steamdeck/decky/main.py",
+            "steamdeck/decky/src/Configuration.tsx"
+          ],
+          "observed_support": [
+            "Actual packaged operations keep stream key, optional local authorization and generated/control password distinct and private; custom rotation syncs managed stores without replacing destination key.",
+            "Current Go WebSocket/password tests and real Linux OBS checks separately support authentication/rotation; frontend never reads back saved passwords."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [
+            "Actual OBS Flatpak listener/password behavior on the owner Deck remains #86; no provider authorization proof inferred."
+          ],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "79.C5",
+          "original_text": "Saving, testing readiness or recording a local test never starts broadcasting. Unsafe active/unknown output changes retain existing stop/confirmation behavior.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "CPYTHON",
+            "FROZEN",
+            "CONFIG_UI",
+            "SETTINGS",
+            "APP",
+            "NATIVE_OBS"
+          ],
+          "source_paths": [
+            "steamdeck/decky/main.py",
+            "steamdeck/decky/src/Configuration.tsx",
+            "internal/deck/native_configuration.go",
+            "steamdeck/tests/packaged-settings-boundary.py"
+          ],
+          "observed_support": [
+            "Current actual packaged save/test/close operations leave output positively absent and invoke no broadcast/record/OBS-open/dependency action; read-only connection test does not launch.",
+            "Current frontend blocks active/record/replay/unknown/setup-busy edits and keeps Stop; six real-child lock/deadline/coalescing/caller-disconnect cases pass.",
+            "Native Linux recording/loopback harnesses validate local-test/stream boundaries separately without live provider credentials."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [
+            "Owner\u2019s actual Deck local clip and separate provider viewer are unrun; no native fixture is relabeled that proof."
+          ],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "79.C6",
+          "original_text": "Preserve current CLI/file/environment precedence and existing profiles without using an environment variable to change branding, update trust or compatibility IDs.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "GO",
+            "CPYTHON",
+            "FROZEN",
+            "PRODUCT",
+            "APP"
+          ],
+          "source_paths": [
+            "internal/commands",
+            "internal/config",
+            "internal/deck/profiles_test.go",
+            "steamdeck/decky/main.py",
+            "product.json"
+          ],
+          "observed_support": [
+            "Current Go race suite executes CLI/file/environment/profile precedence and private-secret-reference tests; offline profile and legacy Configure advanced preferences remain intact.",
+            "Actual packaged native sparse edits preserve advanced/microphone preferences and key binding; current product projection retains installed IDs/current trust.",
+            "No branding environment variable can activate another repository or namespace."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        },
+        {
+          "id": "79.C7",
+          "original_text": "Diagnostics, receipts, support export, frontend readback and clipboard-copy logs never reveal stream keys, OBS passwords or private setup tokens.",
+          "local_support": "supported_by_fresh_af7_source_and_measured_local_evidence",
+          "evidence": [
+            "APP",
+            "GO",
+            "CPYTHON",
+            "FROZEN",
+            "CONFIG_UI",
+            "PANEL",
+            "SETTINGS"
+          ],
+          "source_paths": [
+            "steamdeck/decky/main.py",
+            "steamdeck/decky/src/Configuration.tsx",
+            "steamdeck/decky/src/index.tsx",
+            "internal/deck/diagnostics.go"
+          ],
+          "observed_support": [
+            "Current adapter/Go/setup tests validate credential-free public responses/errors/receipts/support projection; actual packaged invocation uses stdin rather than argv and clears private payload.",
+            "Current packaged browser checks no saved keys/password in DOM/browser storage/readback/reload and safe draft removal.",
+            "Panel test checks actual console clipboard-copy/history/version projection excludes settings; funding/crypto browser-support test is not used as diagnostic-export evidence."
+          ],
+          "literal_outstanding_source_facts": [],
+          "external_scope_and_unproved_facts": [],
+          "acceptance_checkbox_mutated": false,
+          "closure_preparation": "Source contract locally supported; root must review exact evidence and merged state. This recommendation performs no GitHub checkbox/closure action."
+        }
+      ],
+      "source_owned_disposition": "All literal implementation/fixture contracts have current af7 local support; no new source defect established.",
+      "issue_level_closure_gates": [
+        "Review exact current local source evidence; merge relied-on113 documentation/projection deltas. Preserve original related-ledger gates, without adding fullACT/device requirements to this bounded source issue.",
+        "The live dated checkpoint explicitly says \"Keep this issue open for review and the recorded device acceptance.\" Reconcile that retained issue-level instruction explicitly: do not silently close it as full physical controller/device acceptance. Current local support is not a fabricated physical result; owner #86 observation or an explicit authorized bounded-source/remaining-device disposition is still needed."
+      ],
+      "controller_disposition": "C1 source provision/focus/semantics supported; actual hardware usability unrun. This does not invent a device prerequisite for all other source criteria."
+    }
+  ],
+  "evidence_registry": {
+    "PRIMARY": {
+      "proof_member": "primary/qualification.json",
+      "sha256": "d23cb8f370fbae5cf84dae9ffa137a0c22e7a71c900588ad4baf9e8eea0ca30a",
+      "summary": "Two complete primary source builds, uid/gid1000, clean af7/tree d614;617 source files,33 payload files and identical canonical ZIP4deece2\u2026 . Optional official CLI remained unrun in this pair.",
+      "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380"
+    },
+    "OFFICIAL": {
+      "proof_member": "primary/official-prepared-assembly.json",
+      "sha256": "ac824715a5bd56819646343681727e543163733c91505492f5ba74accf9b27d7",
+      "summary": "Supplementary current-af7 unmodified official CLI0.0.7 + pinned default builder, network disabled, compares33 prepared payload files. Not source compilation or raw CLI ZIP reproducibility.",
+      "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380"
+    },
+    "APP": {
+      "proof_member": "standalone/logs/application-python.log",
+      "sha256": "7bb588d6fff289f30b50fa3532b4206e680e24c518964a26a140055f2462864f",
+      "summary": "271 unittest cases;269 successful,2 root-wrapper cases skipped because actual runner is uid1000. Relevant storage/context/dependency/native-form/security cases executed.",
+      "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "main_check": {
+        "name": "application-python",
+        "result": "passed",
+        "exit_code": 0
+      }
+    },
+    "TOOLS": {
+      "proof_member": "standalone/logs/tooling-python.log",
+      "sha256": "a1c0a84403159ef757a638f46a14a5c7a60305f26f8f379418994a6229fcd77a",
+      "summary": "Current source package/audit/ownership/tooling unit suite passed; no older foundation receipt substituted.",
+      "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "main_check": {
+        "name": "tooling-python",
+        "result": "passed",
+        "exit_code": 0
+      }
+    },
+    "GO": {
+      "proof_member": "standalone/logs/go-race.log",
+      "sha256": "15df9423d1b9b164ab993ce9d8523bfd300254e3d165681608b52fb8d1e2ffe4",
+      "summary": "Current go test -race ./... passed internal/commands/config/deck/deckyinstall/obs and public API/automation packages. Root-only negative cases are not relabeled passed.",
+      "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "main_check": {
+        "name": "go-race",
+        "result": "passed",
+        "exit_code": 0
+      }
+    },
+    "CPYTHON": {
+      "proof_member": "standalone/integration-cpython.json",
+      "sha256": "890a5dd3e0fc3c783a8f79a4cd5148de73a8665ccf726dd02bc86aac7670e17f",
+      "summary": "Actual unpacked primary Python\u2192guard\u2192Go, uid1000,218 successful assertion events/40 distinct names; synthetic HOME/XDG/Decky context, no real loader transport.",
+      "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "main_check": {
+        "name": "integration-cpython",
+        "result": "passed",
+        "exit_code": 0
+      }
+    },
+    "FROZEN": {
+      "proof_member": "standalone/integration-frozen.json",
+      "sha256": "f9613d3e8ba941b4960b4b4188014dfddb614e591c7dcf5db47303a18cf0238c",
+      "summary": "240 successful assertion events with frozen-environment/PluginLoader decoy simulation; real packaged Python\u2192Go, not actual PyInstaller loader execution.",
+      "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "main_check": {
+        "name": "integration-frozen",
+        "result": "passed",
+        "exit_code": 0
+      }
+    },
+    "SETTINGS": {
+      "proof_member": "standalone/packaged-settings.json",
+      "sha256": "4784af24c32da326b2985e81cbd03a380a5ceb78b1c2d8f620a4f2d350796b32",
+      "summary": "Six packaged boundary scenarios,42 actual guarded children, uid1000; real lock/deadline/stop/coalescing paths with synthetic account/loader context.",
+      "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "main_check": {
+        "name": "packaged-settings",
+        "result": "passed",
+        "exit_code": 0
+      }
+    },
+    "DEPS_UI": {
+      "proof_member": "standalone/browser-dependencies.json",
+      "sha256": "191a912a8c2813e17151073c8a37920f2925d8c740723df533afc782fd9fea89",
+      "summary": "Six actual packaged frontend scenarios with simulated Decky APIs: Install/Later, reopen, cancel/partial-ref/retry, readiness and no secret echo.",
+      "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "main_check": {
+        "name": "browser-dependencies",
+        "result": "passed",
+        "exit_code": 0
+      }
+    },
+    "CONFIG_UI": {
+      "proof_member": "standalone/browser-configuration.json",
+      "sha256": "1e825b340759ddabdd28473cba05427943ac80434453651f1c363cb9982e4cca",
+      "summary": "12 actual packaged frontend scenarios: native offline Kick, masking/binding/replacement, settings safety, connection/password, drafts/focus/readiness; Decky/OBS APIs simulated.",
+      "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "main_check": {
+        "name": "browser-configuration",
+        "result": "passed",
+        "exit_code": 0
+      }
+    },
+    "PANEL": {
+      "proof_member": "standalone/logs/browser-panel.log",
+      "sha256": "bd02e037a42e8dc0a3083eec72e4f59e516bb2dcb89690c89c41072781a4a811",
+      "summary": "Actual primary ZIP imports/rendering/status and clipboard console checks passed in Chromium with simulated Decky/Steam APIs.",
+      "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "main_check": {
+        "name": "browser-panel",
+        "result": "passed",
+        "exit_code": 0
+      }
+    },
+    "DESKTOP": {
+      "proof_member": "standalone/logs/browser-setup.log",
+      "sha256": "79078b98cfde07d345ce8f0efc9abe4f6f14c7c8faf48da0920d9da86bc7c157",
+      "summary": "Optional app-only Desktop setup launcher/loopback/token/browser checks passed with fixture credentials. Does not qualify Decky installation.",
+      "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "main_check": {
+        "name": "browser-setup",
+        "result": "passed",
+        "exit_code": 0
+      }
+    },
+    "NATIVE_CAPTURE": {
+      "proof_member": "native/capture/qualification.json",
+      "sha256": "6bfa6542f65685afea210b3135c02f7293dfb66c3a0d14d024db52b7934ad266",
+      "summary": "Actual packaged .so hash a954d1\u2026 loads through GStreamer inspect and synthetic PipeWire custom-SPA media checks; source af7. Not real Gamescope/SteamOS/Flatpak/OBS scene qualification.",
+      "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "main_check": {
+        "name": "native-capture",
+        "result": "passed",
+        "exit_code": 0
+      }
+    },
+    "NATIVE_OBS": {
+      "proof_member": "native/game-obs/game-obs-qualification.json",
+      "sha256": "53e627c7142cf840cd77300b15e4b581e0de5552e49610478c812a0cc9a54db6",
+      "summary": "Real Linux OBS/GStreamer loopback media uses primary-matching Go689e\u2026 and .soa954\u2026; verifies game/idle behavior with synthetic capture producer, not SteamOS/Flatpak/Kick.",
+      "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "main_check": {
+        "name": "native-game-obs",
+        "result": "passed",
+        "exit_code": 0
+      }
+    },
+    "TRANSPORT": {
+      "proof_member": "supplemental/transport/receipt.json",
+      "sha256": "a1154250b7c1bf4b4481d625ccf029ef36bc23aabf93342e46f0ac799de09a3c",
+      "summary": "Fresh af7 pinned Decky3.3.1 backend/frontend router installer + legacy4/6/current9 compatibility fixtures passed. Steam/CDP/loader lifecycle/ownership/Flatpak/release HTTP are substituted.",
+      "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "main_check": {
+        "name": "supplemental-transport",
+        "result": "passed",
+        "exit_code": 0
+      }
+    },
+    "ARTIFACT_REPEAT": {
+      "proof_member": "standalone/artifact-repeat.json",
+      "sha256": "7b151414c61822c2596c7f06d0c408a8e49a6c4224d73b1f047744a414b6584b",
+      "summary": "Current compatibility ZIP equals accepted primary ZIP; compatibility runtime/updater repeats match their own hashes.",
+      "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "main_check": {
+        "name": "compatibility-2",
+        "result": "passed",
+        "exit_code": 0
+      }
+    },
+    "FRONTEND": {
+      "proof_member": "standalone/logs/frontend-absent-test.log",
+      "sha256": "3a7b93002122232a6534f946e73245a6a7a93e231da35b614f5fc7e26a7a3f19",
+      "summary": "Current normal-user source frontend test run:161 tests passed,0 failures/0 skipped; distinct absent/reused typecheck/build rows also passed.",
+      "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "main_check": {
+        "name": "frontend-absent-test",
+        "result": "passed",
+        "exit_code": 0
+      }
+    },
+    "PRODUCT": {
+      "proof_member": "standalone/logs/product-projection-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "summary": "Current product.json\u2192TypeScript/Python projections match; stable compatibility IDs/current update repository preserved.",
+      "source_revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "main_check": {
+        "name": "product-projection-check",
+        "result": "passed",
+        "exit_code": 0
+      }
+    }
+  },
+  "immutable_source_facts": [
+    {
+      "path": ".github/workflows/docs-preview.yml",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "5ba67fee3e1fb33c6404e632b39c330107af54ec78d410c1cff5fda636046ddd",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/.github/workflows/docs-preview.yml"
+    },
+    {
+      "path": ".github/workflows/goreleaser.yml",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "fe7bb4ccd7fcdce5ec6c44b3fc7a2cd3c467c28d3c9ae0808c030927424402e7",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/.github/workflows/goreleaser.yml"
+    },
+    {
+      "path": ".github/workflows/steam-deck.yml",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "bf762e9099f360b867f69f8d81670151388dfb4846caa578b03bf9f7e17ef65e",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/.github/workflows/steam-deck.yml"
+    },
+    {
+      "path": ".goreleaser.yml",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "1db1c75458b570bf13f6a6ae27057719b83f3e94a00c55d5e46db9ab0a66eced",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/.goreleaser.yml"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "62a04eb2901efec99f85e766f702dabcb2679c405f7f3ff84c0e4a060b0d79c5",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/CHANGELOG.md"
+    },
+    {
+      "path": "docs/decky-package.md",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "e6020d6987900865a4e8eed8f543fa570aaf89ae550204c55e41bbc97c010abf",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/docs/decky-package.md"
+    },
+    {
+      "path": "docs/decky-storage.md",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "af2171eea21541634aca8b8f1b04364afcf1e3b845c1b4df8c2a4b0516e218ee",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/docs/decky-storage.md"
+    },
+    {
+      "path": "docs/dependency-setup.md",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "1357e25879c78a4ecfca9bd499f9b70db2ad75d27bcdb8447bfe01d4371010cb",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/docs/dependency-setup.md"
+    },
+    {
+      "path": "docs/identity-migration.md",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "23377b823a960467b1b6edf893e24db99ff4adf79b8397cb64a6b613675aa8cc",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/docs/identity-migration.md"
+    },
+    {
+      "path": "docs/migration-review.md",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "3713248b914a20a06654f445d175a01facbcb340a9d30b42e3fa454752da67c6",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/docs/migration-review.md"
+    },
+    {
+      "path": "docs/native-configuration.md",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "daef6f5628cfd0d8dca8834f8891df6aae0de8a2c66f2eb47ad42490414916bb",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/docs/native-configuration.md"
+    },
+    {
+      "path": "internal/deck/config.go",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "e76bc2d2cfdac34129f636e294603c47fa811f5781f213208d17ff2a525c0bdb",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/internal/deck/config.go"
+    },
+    {
+      "path": "internal/deck/connection.go",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "56280e20021b83a33d04b23defbfe592fb5aee96130c1f6e9328d4584af2c1c5",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/internal/deck/connection.go"
+    },
+    {
+      "path": "internal/deck/connection_test.go",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "baffd06d85c92692dcb90e8a071a408f7489244e7aaf87d2de689c81240f15dd",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/internal/deck/connection_test.go"
+    },
+    {
+      "path": "internal/deck/diagnostics.go",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "0b6bdbe2572d5efe08bd64c6cd618819bc91ee025f83e3b314ce4cd5029dfbd8",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/internal/deck/diagnostics.go"
+    },
+    {
+      "path": "internal/deck/native_configuration.go",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "829ae26ea1c662a2fabd2e769b66dd9522965303b24e110b79ab97ed28eb58e6",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/internal/deck/native_configuration.go"
+    },
+    {
+      "path": "internal/deck/native_configuration_test.go",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "584a8fe3b2dd6577c09e5221f0b3da68dc64af356f0c57d511a2ed327b94e48c",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/internal/deck/native_configuration_test.go"
+    },
+    {
+      "path": "internal/deck/profiles_test.go",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "c709bda8bdc96517653d3207ffd9794a5fbdeb3505a2a2573bfe7e552990104f",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/internal/deck/profiles_test.go"
+    },
+    {
+      "path": "internal/deck/runtime_linux.go",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "f2f8daed9f414654784dfdf9f7854b20a7058396a000df5b6ee4c90529f11695",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/internal/deck/runtime_linux.go"
+    },
+    {
+      "path": "internal/deck/storage_map_linux.go",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "2054068f947489b702b08a628682e00ceb0521348fee130f22de8d684aef74ea",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/internal/deck/storage_map_linux.go"
+    },
+    {
+      "path": "internal/deck/user_paths_test.go",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "1e220270c26dc28f94f937874b99bedf7b75b3e3dcd6f74765810ad8960422a1",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/internal/deck/user_paths_test.go"
+    },
+    {
+      "path": "product.json",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "0413db5b7f10c82a0af2e94eda7342f906d116026087ab7ab68a6bb43c414e3d",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/product.json"
+    },
+    {
+      "path": "scripts/decky_package.py",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "e57be1275130d03996ea1dbd9538955d34b35f640115d8c71ae875d6ebb9b2c2",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/scripts/decky_package.py"
+    },
+    {
+      "path": "scripts/package-decky.py",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "3bbc7412f4d0ab755abc34bd3dba2e1164bc2ed35fd83554401aebc6acb7cc4f",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/scripts/package-decky.py"
+    },
+    {
+      "path": "scripts/release-audit.py",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "8d28e04c2a96329a49dd322fe1deef66358af9e5b975ceb301def0bbe6488217",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/scripts/release-audit.py"
+    },
+    {
+      "path": "steamdeck/capture/build.Dockerfile",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "2a5907d46697011510482aed251209f83a79a2b0aa3a0cea1ced9cd3b8b74905",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/capture/build.Dockerfile"
+    },
+    {
+      "path": "steamdeck/decky/dependency_setup.py",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "6602dd8bdb6fb4864ed55fa4c891983279a59952b2d251db5b4208efc297e0e8",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/decky/dependency_setup.py"
+    },
+    {
+      "path": "steamdeck/decky/main.py",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "eca913d64b6a4749d2d533eddb8afeebed2d0fbeba0bba063ee1b85871ebfd14",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/decky/main.py"
+    },
+    {
+      "path": "steamdeck/decky/package.json",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "c04919d3150d3ef9a9482049f972086c3c4a778d69470f520ae6b72628fee72f",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/decky/package.json"
+    },
+    {
+      "path": "steamdeck/decky/plugin.json",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "443e999f922777a3b490a981a4bcb0fb04b8ea3247b7ec1002fa81013df070c4",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/decky/plugin.json"
+    },
+    {
+      "path": "steamdeck/decky/rollup.config.js",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "4d9d447c28ebb5f5496361926f84ec81906bd063732b0e2089c9635788ee1f0c",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/decky/rollup.config.js"
+    },
+    {
+      "path": "steamdeck/decky/src/Configuration.tsx",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "6a3ee34fc3e2dfcbd9a80936b849327ee67736c9476f44e3c8ef794cfec57a15",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/decky/src/Configuration.tsx"
+    },
+    {
+      "path": "steamdeck/decky/src/Setup.tsx",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "5c3995f85ca440194ac8657e83d361e258b60830c672da284fb83923b851d1c9",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/decky/src/Setup.tsx"
+    },
+    {
+      "path": "steamdeck/decky/src/configuration-state.mjs",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "e20ce0cf6774079f82d180bef5a27b87be664f6c7dae1ae7d3a7c8ba6f77ed25",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/decky/src/configuration-state.mjs"
+    },
+    {
+      "path": "steamdeck/decky/src/index.tsx",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "4380ab3ce67c5d7ba9f53ed124f77498d299f476f6c233db1c5ade578391ff7f",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/decky/src/index.tsx"
+    },
+    {
+      "path": "steamdeck/decky/src/product.ts",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "7c2e15e9c90941886a7484ba99f36bee6a23b6150eb299da97142bf5073d0cc7",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/decky/src/product.ts"
+    },
+    {
+      "path": "steamdeck/decky/storage.py",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "3a3e62ed814c64bf33e89f75c8eab645cab564fdd47476c7cbeabfff11714c5e",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/decky/storage.py"
+    },
+    {
+      "path": "steamdeck/product.py",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "dc3bac0be3e25667a4abd29df5545d16178266d938e6970c5decc51f5c7f94c8",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/product.py"
+    },
+    {
+      "path": "steamdeck/releases.py",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "3a5e3348e102712809812352aa2a51c25d5c44e27ece638c0f1a3d3adbc6c7f0",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/releases.py"
+    },
+    {
+      "path": "steamdeck/setup.py",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "a24a68513e2363cd93ef410c02f6e250e85636ad208f6f7e7c47c03f655816da",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/setup.py"
+    },
+    {
+      "path": "steamdeck/tests/native-capture-smoke.sh",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "2bfa201dc43b02c72fceda8a3bfe3f53982460f55cff4e07a95e7fe47a09a015",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/tests/native-capture-smoke.sh"
+    },
+    {
+      "path": "steamdeck/tests/native-game-obs-smoke.sh",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "64f95d37d84502fb4174caa4e95f5bb61a5a9671645a39f175b0161341e7a814",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/tests/native-game-obs-smoke.sh"
+    },
+    {
+      "path": "steamdeck/tests/packaged-settings-boundary.py",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "3de1d572ad4929b189c5fbf5171450bbb39106b36063585c46d30753075a5bc0",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/tests/packaged-settings-boundary.py"
+    },
+    {
+      "path": "steamdeck/tests/test_decky_storage.py",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "7d0eacc968fe7ad908c21565f52df64bd6641cd7edc0041715ee5657b367b816",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/tests/test_decky_storage.py"
+    },
+    {
+      "path": "steamdeck/tests/test_dependency_setup.py",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "28f869ff6d25b64e46dda7fbd73a56c58846f3e73291bb7cb1575966325bcaa8",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/tests/test_dependency_setup.py"
+    },
+    {
+      "path": "steamdeck/tests/test_install_dependencies.py",
+      "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+      "sha256": "e8c971aa5b61f813cfc42fdbac97578d7fab94dada218a6879c734df588bd9c0",
+      "url": "https://github.com/szmyty/obsgod/blob/af7a20fdd0c62404e9b11d540fb605368e269380/steamdeck/tests/test_install_dependencies.py"
+    }
+  ],
+  "native_abi": {
+    "dockerfile_sha256": "2a5907d46697011510482aed251209f83a79a2b0aa3a0cea1ced9cd3b8b74905",
+    "image_id": "sha256:6c3ec703e4d22b777f53e75ec33a2639ac060a81e97cd4a48da4e7e412127f78",
+    "library": "libgstobsgodcapture.so",
+    "network_during_compile": false,
+    "platform": "linux/amd64",
+    "sha256": "a954d1a6a86e2bfe1e01f97c7e6bc71438a311d7fa311f55c0c86592c2e89f68",
+    "source_sha256": "1cefd90dc7a306ac993366fa0e18573202e6ba4a13590999065c3c80018a6c5d"
+  },
+  "native_abi_scope": "Capture build records ELF dependencies/GLIBC2.2.5 and2.14 symbol requirements/compiler/package inventory; actual packaged .so consumer ran in native Linux fixtures. Official prepared-byte assembly is separate; actual OBS Flatpak/Deck remains unrun.",
+  "remaining_external_and_parent_gates": [
+    "#82-C1 actual supported loader lifecycle",
+    "#86 actual Deck/SteamOS/Flatpak/bus/controller/headset/provider viewer and session acceptance",
+    "#85 full supported ACT matrix is genuinely unavailable with six workflows unrun; do not invent that as a new prerequisite on every bounded source issue",
+    "Hosted CI15 billing refusals/1 skip/0 steps and service/review requirements stay explicit; local fixtures do not qualify GitHub advisory services",
+    "Original230 related ledgers retain rights/platform/CI/review/adoption/publication criteria and dependencies; this bounded-source support passes none of those by implication"
+  ],
+  "next_root_actions": [
+    "Review each exact criterion/evidence mapping and reconcile existing child issues, replacing stale draft/old-source checkpoint prose without modifying original acceptance/dependency text.",
+    "Merge only after current required reviews/protection/sideeffect gates are handled; attach exact af7 source/ZIP/proof and current documentation state.",
+    "For #79, explicitly resolve its retained review/device-open instruction and mark actual controller/provider observations unrun; do not silently call source-only local evidence full device acceptance.",
+    "Continue #85/#86 and remaining owner facts, not a new source framework or reimplementation."
+  ]
+}

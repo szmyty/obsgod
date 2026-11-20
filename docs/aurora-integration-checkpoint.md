@@ -79,14 +79,28 @@ modules and prior outputs; no unrelated cache, Docker image or network preset
 was removed. Hosted billing, dependency-advisory services and local capacity are
 separate limitations.
 
+A later [read-only resource feasibility audit](evidence/aurora-af7-resource-feasibility.md)
+measured a **5,425,688,748-byte root shortfall**. Maximum relocation while keeping
+6GiB scratch plus even optimistic optional-builder reclamation still falls short
+by1,220,358,316bytes. The apparent older native images share required layers;
+removing their names would reclaim none. No images/caches/outputs were deleted
+or moved. This additional audit does not change the original matrix refusal or
+67+1 command-row dispositions.
+
 ## Criterion evidence and remaining gates
 
 The [independent criterion review](evidence/aurora-af7-criteria.json) maps all
 **7 literal #80 criteria and 14 literal #81 criteria** to current source and
 measured local results, with no blocking source or visual finding. This is an
 agent review, not a formal GitHub human approval. Both issues stay open for the
-review decision; source merge alone never supplies closure evidence. The
-[remaining inventory](evidence/aurora-remaining-acceptance.json) preserves all
+review decision; source merge alone never supplies closure evidence.
+
+A separate [foundation reconciliation](evidence/aurora-af7-foundation-criteria.md)
+now maps all27 #76–#79 source contracts to fresh af7 evidence, with no new
+source gap. Physical-controller/service facts and #79's explicit review/device
+keep-open instruction remain separate; no issue closure is performed.
+
+The [remaining inventory](evidence/aurora-remaining-acceptance.json) preserves all
 104 current bounded criteria and their next evidence/actions. The original
 230-entry ledger is unchanged, SHA256
 `0795e6594c7bbde195bb8ebfcbc4050f0d5ecbe9c879767edbe0050540386df6`.

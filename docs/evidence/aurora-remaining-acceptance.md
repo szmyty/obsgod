@@ -1,5 +1,11 @@
 # Remaining acceptance inventory
 
+This inventory preserves the pre-final-evidence snapshot. Read the later
+[27 foundation source-contract reconciliation](aurora-af7-foundation-criteria.md)
+and [21 selected-aurora local criterion review](aurora-af7-criteria.md) for current
+local support; snapshot pending labels are not new implementation tasks.
+Actual device/service/review/rights gates and original criteria remain.
+
 This is a preserved **104-bullet pre-qualification inventory**, captured for exact source `af7a20fdd0c62404e9b11d540fb605368e269380`. It is not a fresh execution receipt and does not mark any criterion passed. Later exact-source reconciliation is in [criteria-review.json](https://github.com/szmyty/obsgod/blob/f2b160823800e3befd7440e6bcce8d135845a008/criteria-review.json); measured checks are in [qualification-summary.json](https://github.com/szmyty/obsgod/blob/f2b160823800e3befd7440e6bcce8d135845a008/qualification-summary.json) and [aurora-af7-public-proof.zip](aurora-af7-public-proof.zip).
 
 The unchanged original ledger contains **230 criteria**, SHA256 `0795e6594c7bbde195bb8ebfcbc4050f0d5ecbe9c879767edbe0050540386df6`. [Original ledger at af7](https://github.com/szmyty/obsgod/tree/af7a20fdd0c62404e9b11d540fb605368e269380/docs/evidence/completion-criteria.json). The104 bounded issue bullets do not replace those criteria or dependencies. [Companion JSON](https://github.com/szmyty/obsgod/blob/f2b160823800e3befd7440e6bcce8d135845a008/remaining-acceptance.json) retains exact wording, local inventory IDs, preparation dispositions and next actions; its pending labels reflect its capture time, not a claim that later checks were unrun.

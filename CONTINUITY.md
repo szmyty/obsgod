@@ -23,10 +23,17 @@ source merge target or release/updater offer. Actual proof ZIP, original/public
 hashes, independent source/visual/privacy reviews and all104 bounded criterion
 remainders are recorded. The original230 ledger/dependencies remain unchanged.
 All21 literal #80/#81 local criteria have evidence; issues stay open for review.
+The [foundation reconciliation](docs/evidence/aurora-af7-foundation-criteria.md)
+maps27 #76–#79 source contracts to fresh af7 evidence,0new gaps. No new
+fullACT/hardware dependency was imposed on source-only literals; real controller/
+Flatpak/provider and #79's explicit review/device keep-open checkpoint remain.
 
 FullACT preflight refused before allocation: root shortfall4,946,694,316bytes at
 the recorded attempt; all6 jobs/probe unrun. Standalone commands are not ACT jobs.
 Hosted af7:15 billing refusals+1skip,0steps, no executed non-billing source failure.
+A later read-only [capacity audit](docs/evidence/aurora-af7-resource-feasibility.md)
+found no safe reclaim/relocation plan: even optimistic measures remain short;
+no images/caches/outputs were removed. Original matrix dispositions are unchanged.
 Machine OS is still unknown; next is the capable-free-machine matrix and numbered
 owner tests, then actual #86 Steam Deck/loader/provider/controller/headset loop.
 #82-C1 real supported-loader lifecycle remains explicit. #87/#88 migration/new
