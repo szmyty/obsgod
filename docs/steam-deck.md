@@ -285,6 +285,13 @@ deliberate migration; it refuses conflicting installations instead of guessing.
 
 ### Private recovery export before wipe
 
+These guarantees belong to the **current reviewed cleanup helper**, not an old
+installed Desktop launcher. A plugin-only update does not replace a separately
+installed legacy `uninstall.py`. Before reset/wipe, use the helper/source/hash
+provided by your current review packet; an older same-version script may lack
+`--export` and these guards. Stage the verified helper archive without running
+its installer. See the [current cleanup preparation](legacy-cleanup-kit.md).
+
 `--wipe` now requires a successful private recovery TAR before it can remove the
 plugin or selected data. Its fresh inventory names the export and explicitly
 states that it can contain stream keys, OBS passwords and private history.

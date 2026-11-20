@@ -5,6 +5,17 @@ completed device qualification, successful hosted CI or production support.
 
 ## Unreleased completion preview
 
+* Preserve a verified durable private recovery export before explicit wipe;
+  keep its credential-containing archive outside removal roots and leave normal
+  uninstall/reset/legacy retirement scopes intact. No automatic restore claimed.
+* Accept verified GitHub numeric/cursor pagination for public history capture
+  while retaining exact repository/query/redirect and230-criterion safeguards.
+* Add an optional read-only destination/real-PR readiness collector with private
+  authentication, explicit unavailable service/billing results and guarded
+  workflow/job/step evidence. It changes no repository settings or workflows.
+* Reconcile standard Decky update/removal guidance and prepare proposed provider
+  OAuth/phone-login research; no login, account, migration or release is activated.
+
 * Add an offline release auditor for actual runtime/Decky/updater bytes, source
   and preferred-source correspondence, deterministic SPDX inventory and unsigned
   provenance. Preserve explicit review/device/publisher/publication gates.

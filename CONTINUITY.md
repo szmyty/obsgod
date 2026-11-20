@@ -3,7 +3,8 @@
 ## Current source preparation while owner tests are deferred
 
 The owner permits source work now and machine/Deck testing later. Branch
-**work/pre-migration-readiness** starts from736be3e (draft#113), in the same
+**work/pre-migration-readiness** starts from736be3e (draft#113), with new
+stacked draft#114 and pushed checkpointsf0f0d1d→a6d13ad, in the same
 isolated checkout. Read the [bounded batch](docs/pre-migration-readiness.md).
 Concrete work: missing verified export before explicit wipe (#82-C4), normal
 Decky update/removal guide corrections (#84), bounded real GitHub history
@@ -12,7 +13,17 @@ and a read-only exact-destination/real-PR readiness collector (#88/#95).
 Fresh proposed OAuth/phone research is prepared for #89's owner discussion;
 no login/account/broker code is activated. No destination or release is chosen.
 
-Source changes are in progress and not qualified by the earlier af7 receipts.
+Private wipe export20new+35retained focused tests and independent review passed;
+history pagination15focused tests and the real67issue/47PR/41comment/3review
+export passed, retaining230criteria. Raw history independently passed verbatim
+sharing review with one exact-field documentation-example exception (strict
+scanner unchanged). Collector22focused tests and final independent identity review passed; its
+older a6PR114development probe used57GETs with existingauth and preserved
+SBOM404/comparison403/15billing+1skip/0steps as unavailable. The [focused
+record](docs/evidence/pre-migration-focused-preparation.json) preserves the
+prior source/probe stages; final integrated qualification is next. Runtime startup briefly reset `/tmp`; workspace files/
+Git branches/pins survived, temporary old artifacts did not. Rebuild final
+qualification outputs fresh. Source changes are not qualified by af7 receipts.
 Keep focused checks and final exact-source qualification ahead of a new install
 candidate. FullACT/hosted/device/required-review/rights/adoption gates stay
 explicit; deferring the owner's test is not a passing result. No migration,
