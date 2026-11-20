@@ -1,0 +1,543 @@
+{
+  "schema": "deckystream.consolidated-owner-packet/v2",
+  "prepared_utc": "2026-11-20T20:35:30.522411+00:00",
+  "status": "Review-only exact-source checkpoint: complete available standalone run; full ACT, hosted services, device, required reviews, rights and adoption gates remain. Not a product release.",
+  "privacy": "Public facts and bounded reviewed evidence only; no credentials, environment dumps, private wipe archives or raw private logs.",
+  "source": {
+    "repository": "https://github.com/szmyty/obsgod",
+    "namespace_owner_login": "szmyty",
+    "legal_publisher": null,
+    "public": true,
+    "fork_parent": "muesli/obs-cli",
+    "default_branch": "master",
+    "default_revision": "069db4a21ec0a173b7dd30c12a53018c7700f79b",
+    "candidate_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+    "candidate_tree": "f157ea77d16a1f1ce04bf1e47b584f9183c9c359",
+    "tracked_files": 648,
+    "candidate_clean_at_freeze": true,
+    "branch": "work/pre-migration-readiness",
+    "candidate_pr": "https://github.com/szmyty/obsgod/pull/114",
+    "stacked_after": "https://github.com/szmyty/obsgod/pull/113",
+    "merge_order": [
+      113,
+      114
+    ],
+    "refresh_live_state_before_merge": true,
+    "display_name": "deckystream",
+    "retained_ids": {
+      "cli": "obsgod",
+      "plugin": "OBSGod",
+      "plugin_directory": "obsgod",
+      "storage_namespace": "obsgod"
+    },
+    "trust": "Current trust exactly szmyty/obsgod; chosen future slug deckystream does not activate an unknown owner or wildcard."
+  },
+  "candidate": {
+    "version": "0.1.0-deck.9",
+    "purpose": "Current-identity review build for owner-machine then actual Steam Deck tests",
+    "primary": {
+      "path": "obsgod-decky.zip",
+      "bytes": 4570722,
+      "sha256": "fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a",
+      "build_receipt": "build-receipt.json",
+      "payload_files": 33,
+      "source_inventory_files": 648,
+      "final_new_run_status": "passed",
+      "builds": 2,
+      "official_cli_scope": "Optional unmodified official 0.0.7 prepared-byte assembly; not source compilation or raw-CLI-ZIP reproducibility.",
+      "build_receipt_sha256": "a174bb6719084a97036de94363f55de3523e0febd0f8f182fa43a7c72bc227c2",
+      "manifest_sha256": "aa8c8fe4540ac7088678bf24ad8cf6a028f9af492dfcd18a40b60b7f3d531a45"
+    },
+    "optional_cleanup_helper": {
+      "path": "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+      "sha256": "e8d32968573989565dc74eb4e2bd8bd41e97107ebdbd6f57e56e69f565ef1487",
+      "bytes": 12053779,
+      "scope": "Current exact-source full legacy runtime used without installation for optional read-only cleanup preview; not required for normal Decky operation.",
+      "old_desktop_uninstaller_updated_by_plugin_zip": false,
+      "manifest_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+      "uninstall_sha256": "e79ce1dfb85021b78d5390071cf48f72308ff40b6ffb6565200a86258eadbce9",
+      "artifact_integrity": "All 24 manifest payload digests and 25 regular TAR members verified; exact primary ZIP and current cleanup helper match source."
+    },
+    "release_tag": null,
+    "download_validation": "Separate final delivery receipt must verify every supplied public file from its immutable artifact commit before providing installation links; no mutable URL is trusted here.",
+    "installation": "Standard Decky ZIP via loader; explicit dependency Install/Later; private manual-key native setup; Desktop tools optional.",
+    "artifacts": [
+      {
+        "path": "obsgod-decky.zip",
+        "bytes": 4570722,
+        "sha256": "fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a"
+      },
+      {
+        "path": "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+        "bytes": 12053779,
+        "sha256": "e8d32968573989565dc74eb4e2bd8bd41e97107ebdbd6f57e56e69f565ef1487"
+      },
+      {
+        "path": "development-history-772230a.zip",
+        "bytes": 202064,
+        "sha256": "3f037e45d9f9613b68946d0e4ea12ffd448dc24b43c7525a4db1732381a31d18"
+      },
+      {
+        "path": "development-history-772230a-index.json",
+        "bytes": 3718,
+        "sha256": "db63d7cb929203269f1803b9818d306219a386296eb162bec80d3b6bfaae2265"
+      },
+      {
+        "path": "pre-migration-772230a-public-proof.zip",
+        "bytes": 683339,
+        "sha256": "b3b117bd4527643a1525be87481e8b0bb594939854c9b5126a45d514a9237c43"
+      }
+    ]
+  },
+  "qualification": {
+    "revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+    "source_tree": "f157ea77d16a1f1ce04bf1e47b584f9183c9c359",
+    "platform": "Linux amd64 cloud, actual UID1000; not SteamOS/Deck hardware",
+    "new_run": {
+      "status": "unavailable",
+      "completed": true,
+      "actual_command_counts": {
+        "unavailable": 2,
+        "passed": 70
+      },
+      "failed_command_predicates": 0,
+      "verified_command_logs": 72,
+      "main_report_original_sha256": "4727b7dbcb5b3a81c024ee0b0738a2b61bcb38c5c1ed5ced9bf3d25157c29c31",
+      "main_report_public_sha256": "4727b7dbcb5b3a81c024ee0b0738a2b61bcb38c5c1ed5ced9bf3d25157c29c31",
+      "summary_original_sha256": "efeea7e7c15b3b8c951a0fd2ad149dd34042c441a6dbe58286cdc55d7c9cf461",
+      "proof": "pre-migration-772230a-public-proof.zip",
+      "tests": {
+        "application": {
+          "run": 291,
+          "passed": 289,
+          "skipped": 2,
+          "limits": "Two privilege-wrapper checks skipped; focused new wipe20 plus retained35 removal tests passed without skips."
+        },
+        "tooling": {
+          "passed": 151,
+          "skipped": 0
+        },
+        "frontend": {
+          "passed": 161,
+          "modes": [
+            "absent",
+            "reused"
+          ]
+        },
+        "branding": {
+          "passed": 33
+        },
+        "packaged_browser_flows": 10
+      },
+      "native": {
+        "native-audio": {
+          "receipt_sha256": "098e09415d5dcb0302f4c814231bf12353612c2f2a833f191984db0decc6f5de",
+          "minimum_root_free_bytes": 1316741120,
+          "result": "passed"
+        },
+        "native-capture": {
+          "receipt_sha256": "b73bb71088b9ac524f78badb4244b5b04358928228d170df3c73ab40c3b18672",
+          "minimum_root_free_bytes": 1316798464,
+          "result": "passed"
+        },
+        "native-game-obs": {
+          "receipt_sha256": "aea6801182034c7030a653ce26f010bf3c33ad26c3d8491c9177809e439a3e82",
+          "minimum_root_free_bytes": 1316749312,
+          "result": "passed"
+        }
+      },
+      "official_prepared_assembly": {
+        "status": "passed",
+        "version": "0.0.7",
+        "sha256": "0d0f8c127cd3dba12b75f771c786194ca9f4f771b4787ae24de8b1af45af4294",
+        "builder_image": "ghcr.io/steamdeckhomebrew/builder@sha256:e2616e391f3ae9a46c4cf906b1091220c2506e7fb1301e16a2a72409efbce7c5",
+        "builder_node": "26.12.1",
+        "builder_pnpm": "12.14.0",
+        "container_network": "none",
+        "payload_files_compared": 33,
+        "raw_zip_sha256": "5d93ded4dee7a493d1fa65bc86d886a3b8a1aa842c985bf65f9c7d15b8bc8479",
+        "raw_zip_reproducible": false,
+        "scope": "Unmodified official CLI and pinned default builder, assembling prepared bytes; not source compilation",
+        "revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+        "primary_zip_sha256": "fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a",
+        "uid": 1000
+      },
+      "snapshot_audits_smokes": "Host snapshot, two generic audits, generic Linux smoke, two NFPM audits and NFPM Linux smoke all passed as standalone command predicates.",
+      "public_proof_sha256": "b3b117bd4527643a1525be87481e8b0bb594939854c9b5126a45d514a9237c43",
+      "public_proof_bytes": 683339,
+      "public_proof_members": 184,
+      "public_proof_additional_redactions": 0
+    },
+    "previous_failed_attempt": {
+      "completed": false,
+      "counts": {
+        "passed": 44,
+        "unavailable": 1,
+        "failed": 1
+      },
+      "failed_check": "native-game-obs",
+      "scope": "First same-source attempt; failed native WebSocket readiness after writable disk pressure. X server logged ENOSPC. Sole disconnect cause remains unproven. None of its passes are merged into the new run.",
+      "appendix_selection_sha256": "d308554d903cfe5a3d0da50cc1559e261a77298fe76cbef58fc8912eb9355874"
+    },
+    "supported_act": {
+      "status": "unavailable",
+      "completed": false,
+      "jobs": [
+        {
+          "action": "lint",
+          "result": "unrun"
+        },
+        {
+          "action": "build",
+          "result": "unrun"
+        },
+        {
+          "action": "coverage",
+          "result": "unrun"
+        },
+        {
+          "action": "snapshot",
+          "result": "unrun"
+        },
+        {
+          "action": "docs",
+          "result": "unrun"
+        },
+        {
+          "action": "candidate",
+          "result": "unrun"
+        }
+      ],
+      "probe": "unrun",
+      "root_available_bytes": 3629019136,
+      "root_required_bytes": 7544361132,
+      "root_shortfall_bytes": 3915341996,
+      "scratch_available_bytes": 8686321664,
+      "scratch_required_bytes": 6442450944,
+      "scope": "Actual conservative preflight refused before probe allocation. Six workflow jobs unrun; standalone host equivalents are separate passed checks."
+    },
+    "hosted_and_services": {
+      "status": "unavailable-or-incomplete",
+      "observed_utc": "2026-11-20T20:41:09.941470+00:00",
+      "actual_pr": 114,
+      "actual_head": "772230a32a8fdb237a58b8a637947b31671ad509",
+      "actual_base": "736be3e2964179f180de34d21dbe81dd33fd8c52",
+      "collector_sha256": "e0a6ee1803147121c67565bcc69a5854588d3fcda9c873839285963bf7902a50",
+      "report_sha256": "2ba94abb987e9a87a7030d835901263b447c172037d7242ad548cad962faeb16",
+      "counts": {
+        "observed_jobs": 16,
+        "billing_refusals": 15,
+        "skipped": 1,
+        "observed_steps": 0,
+        "other_failures": 0
+      },
+      "sbom_http_status": 404,
+      "comparison_http_status": 403,
+      "graph_enabled_setting": "not-directly-observed",
+      "source_policy_observed": true,
+      "required_review_action_executed_successfully": false,
+      "rule": "Committed manifests and source policy are distinct from ingestion/executed review. A404 is not proof Graph is disabled, and local passes cannot qualify hosted services."
+    },
+    "audit": {
+      "integrity": "passed",
+      "source_inventory": "passed",
+      "preferred_source": "passed",
+      "provenance": "Unsigned self-reported, not authenticated publisher/trusted builder attestation or a SLSA level.",
+      "receipt_sha256": "c735b4b27c52bc7016c020878c7ab44220d7858a0cc37d122ea70c6a631be226"
+    },
+    "limits": [
+      "Command counts include preparation, audits and expected nonzero negative controls; they are not test-suite counts.",
+      "Browser/native Linux fixtures do not prove actual Decky/SteamOS/Flatpak/Gamescope/AMD/controller/headset/provider operation.",
+      "Cross-builds are not native Windows/macOS/BSD/ARM runtime acceptance.",
+      "Source-changing fixes/version changes require affected requalification; later evidence-only commits must name packaged772 source."
+    ]
+  },
+  "identity_framework": {
+    "upstream_repository": "egohygiene/identity",
+    "consumer_pin": "cfb6c29bd02589a47fc48050ab02e7e0da359719",
+    "validator_sha256": "aea7ba3ff1f331acb0cf2d05501c56c4d89c15ad41c8c57b4fd7448b323175f5",
+    "pin_status": "Exact reviewed additive source pin, distinct from current main and published stable v1.0.0. Lock uses same-commit immutable source URLs/hashes.",
+    "adoption_limits": "Local selected draft-kit profile and consumer source-contract validation are not Identity production compiler output, an upstream release, asset approval or consumer/device adoption.",
+    "upstream_actions": "Read-only inspection only; no pin upgrade, upstream changes, release or deployment.",
+    "historical_upstream_observation": {
+      "fresh_default_branch": "main",
+      "fresh_main_revision": "afc368003bfc6a2101051229efd237c8d6fadf71",
+      "latest_stable": {
+        "tag": "v1.0.0",
+        "published_at": "2026-08-28T05:30:18Z"
+      },
+      "latest_prerelease": {
+        "tag": "v1.0.0-rc.2",
+        "published_at": "2026-08-28T03:50:19Z"
+      },
+      "fresh_docs_read": [
+        "docs/consumers/AUTHORING.md",
+        "docs/consumers/ADOPTION.md",
+        "CONTINUITY.md"
+      ],
+      "scope": "Earlier2026-11-20 af7 packet observation, not a new API query for772. Consumer pin remains actual source input; upstream main/release need not change to consume it."
+    }
+  },
+  "artwork": {
+    "creative_direction": "Owner selected 01 / aurora; lowercase deckystream and orbital-stream direction",
+    "approval": "Final source/export/license/production adoption remains proposed-unapproved; decisions arrays remain empty",
+    "outputs_count": 38,
+    "files": [
+      {
+        "path": "branding/aurora/aurora-manifest.json",
+        "bytes": 8410,
+        "sha256": "53f2516abf4c1d1ec804f3bf64ca548e6c9aa6fb52d05f63a579565e4462304b"
+      },
+      {
+        "path": "branding/aurora/deckystream-aurora-kit.zip",
+        "bytes": 6652243,
+        "sha256": "f4abedc63a6382e4f5e3aa8c39b25776b22af6cfee94448adce5bfdfd9a2104f"
+      },
+      {
+        "path": "branding/aurora/deckystream-aurora-png.zip",
+        "bytes": 1323637,
+        "sha256": "c1df01a1bc7b4fb34c3d84e7567e84899d4737792e3065cdc6429a5d8b4d9b9c"
+      },
+      {
+        "path": "branding/aurora/index.html",
+        "bytes": 3577245,
+        "sha256": "ff381e1f97a8cc5e92637cde907b3b119495f00dad35b66d84aefce9b97c7554"
+      },
+      {
+        "path": "branding/aurora/metadata/rights-and-sources.json",
+        "bytes": 2697,
+        "sha256": "6ea8d8ba91db26ceae9c6923abe9a699d811e918ea31f7158dcba55dcda5c1a1"
+      },
+      {
+        "path": "branding/aurora/metadata/hero-generation.json",
+        "bytes": 3671,
+        "sha256": "e81d0d34aa1045784184430d9c8b6cff4e16699879277e9bc3224ef99d515312"
+      }
+    ],
+    "assets": [
+      {
+        "creator": "OpenAI Codex, for szmyty/obsgod",
+        "humanApproval": null,
+        "id": "mark",
+        "method": "Separately authored SVG orbital stream geometry based on visually inspected owner-selected 01 / aurora direction; not traced, automatically vectorized or asserted identical to the raster concept.",
+        "path": ".identity/candidates/aurora/mark.svg",
+        "proposedLicense": "MIT, subject to owner decision",
+        "rightsStatus": "owner-review-required; no trademark clearance, copyright eligibility or rights transfer asserted",
+        "sha256": "f3b68d3937e49767a80415d98177f36f9d80adcd4b6cc8d0441ce0b87485a9c3"
+      },
+      {
+        "creator": "OpenAI Codex, for szmyty/obsgod",
+        "humanApproval": null,
+        "id": "mark-small",
+        "method": "Separately authored SVG orbital stream geometry based on visually inspected owner-selected 01 / aurora direction; not traced, automatically vectorized or asserted identical to the raster concept.",
+        "path": ".identity/candidates/aurora/mark-small.svg",
+        "proposedLicense": "MIT, subject to owner decision",
+        "rightsStatus": "owner-review-required; no trademark clearance, copyright eligibility or rights transfer asserted",
+        "sha256": "e53ee844953468d21e8c7255bea8e1e18f715859ffb2eead6ae5d05ca9819356"
+      },
+      {
+        "creator": "OpenAI image generation requested for this repository",
+        "humanApproval": null,
+        "id": "hero-master",
+        "method": "One image_gen edit from retained selected references; original output preserved unchanged. See hero-generation.json for exact prompt and reference digests.",
+        "path": ".identity/candidates/aurora/hero-master.png",
+        "proposedLicense": null,
+        "rightsStatus": "owner-review-required",
+        "sha256": "6b3c458e2f81b9d31435fcbc87c86e8f5c8ad7df579dfca34f578beac5e75b2c"
+      }
+    ],
+    "source_manifest_sha256": "f0e99fa947016798bc15480d7dae38ed286266a9d630fc7fdd79048a271e21e5",
+    "raster_record": {
+      "operation": "OpenAI image_gen.imagegen edit from retained references; unchanged original output",
+      "path": ".identity/candidates/aurora/hero-master.png",
+      "sha256": "6b3c458e2f81b9d31435fcbc87c86e8f5c8ad7df579dfca34f578beac5e75b2c",
+      "width": 2048,
+      "height": 768,
+      "bytes": 1465734,
+      "deterministic_generation": false,
+      "exact_prompt_and_reference_digests": ".identity/candidates/aurora/hero-generation.json"
+    },
+    "vectors": "Separately authored SVG geometry after visual inspection; no traced/identical conversion, exclusivity, human authorship or copyright eligibility asserted.",
+    "tools": {
+      "inkscape": "1.4 (e7c3feb100, 2024-10-09)",
+      "font": "DejaVu Sans",
+      "font_sha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e",
+      "font_license": "branding/aurora/licenses/DejaVu.txt; no font binary redistributed"
+    },
+    "originals": "41 prior mint/concept files preserved; selected raster reference and authored vectors remain distinct.",
+    "missing_decisions": [
+      "Final mark/name availability and owner acceptance of exact source/export bytes",
+      "Final license and permission/attribution for new raster and separately authored vectors",
+      "Actual owner/publisher/legal contact and any production Identity adoption decision"
+    ],
+    "evidence_source_revision": "772230a32a8fdb237a58b8a637947b31671ad509"
+  },
+  "rights_and_notices": {
+    "original_code_license": "MIT; Copyright (c) 2020 Christian Muehlhaeuser retained",
+    "repository_namespace_is_not": "Proof of legal ownership assignment or permission for every new asset",
+    "third_party": "Bundled SDK LGPL/runtime/preferred source and native capture preferred source/notices retained; QR and font notices separate. OBS/GStreamer remain external Flatpak dependencies.",
+    "evidence": [
+      "https://github.com/szmyty/obsgod/tree/772230a32a8fdb237a58b8a637947b31671ad509/LICENSE",
+      "https://github.com/szmyty/obsgod/tree/772230a32a8fdb237a58b8a637947b31671ad509/steamdeck/capture/THIRD_PARTY_NOTICES.md",
+      "https://github.com/szmyty/obsgod/tree/772230a32a8fdb237a58b8a637947b31671ad509/steamdeck/decky/LICENSE.LGPL-2.1",
+      "https://github.com/szmyty/obsgod/tree/772230a32a8fdb237a58b8a637947b31671ad509/steamdeck/decky/LICENSE.qrcode-generator.txt",
+      "https://github.com/szmyty/obsgod/tree/772230a32a8fdb237a58b8a637947b31671ad509/.identity/candidates/aurora/inventory.json",
+      "https://github.com/szmyty/obsgod/tree/772230a32a8fdb237a58b8a637947b31671ad509/branding/aurora/metadata/rights-and-sources.json",
+      "qualification-summary.json",
+      "pre-migration-772230a-public-proof.zip"
+    ],
+    "no_invention": "No trademark clearance, rights transfer, copyright eligibility, final asset license or authenticated publisher inferred."
+  },
+  "prepared_source_changes": [
+    "Durable verified private export before explicit wipe;20 new and 35 retained focused software checks passed, actual recovery separate.",
+    "Public history pagination bound to verified repo ID and bounded cursor;15focused tests passed and real development capture retained all 230criteria.",
+    "Read-only exact real-repository/PR dependency/service/execution collector;22focused tests passed, no remote mutation.",
+    "Correct current normal-Decky update/removal documentation and optional legacy helper path.",
+    "Provider authentication #89 research packet ready for owner discussion; no OAuth implementation or app registration."
+  ],
+  "publication_destinations": [
+    {
+      "destination": "szmyty/obsgod",
+      "status": "Current source/release/update trust; review artifacts not published as new release",
+      "responsible": "Repository owner with verified account authority; legal publisher still to identify"
+    },
+    {
+      "destination": "<chosen-owner>/deckystream",
+      "status": "Intended slug selected, exact owner/org and create/move/archive approach unresolved; no wildcard destination activated",
+      "responsible": "Repository owner must name destination/admin/contact and authorize exact operation after #86"
+    },
+    {
+      "destination": "Static landing/documentation site",
+      "status": "Offline site source/build prepared; no selected canonical public domain/deployment destination/owner",
+      "responsible": "Owner must select hosting/domain/responsible deployer; deployment separately approved"
+    },
+    {
+      "destination": "Decky Store",
+      "status": "Separate completed #51 research; not submission approval, admission guarantee or current delivery requirement",
+      "responsible": "Future authorized submitter; no contact/submission performed"
+    },
+    {
+      "destination": "Flathub",
+      "status": "No product Flatpak distribution planned; OBS/GStreamer are dependency Flatpaks",
+      "responsible": null
+    },
+    {
+      "destination": "Funding/crypto",
+      "status": "Existing public funding configuration retained; crypto addresses intentionally unset; no paid spending or income/support promises",
+      "responsible": "Owner supplies any future wallet/beneficiary facts"
+    }
+  ],
+  "owner_actions_and_adoption": {
+    "machine_and_device_tests": "User has deferred testing until later. Follow numbered OWNER-TESTS.md when available; do not infer OS/installed capabilities or ask the same missing-platform question as a gate to independent preparation.",
+    "supported_loader": "#82-C1 actual supported-loader install/load/frontend/backend/unload/reload/reconnect remains pending.",
+    "private_configuration": "Manual provider keys/current password path implemented; #89 Device Grant/phone flow is research-only pending design discussion.",
+    "dated_review_gate": "#79 explicit keep-open review/device instruction retained.",
+    "independent_adoption": "Owner existing-install success is not independent/new-user adoption. Record actual consumer owner/candidate/fresh install/outcomes.",
+    "post_migration": "After approved exact destination/current-install acceptance, update bounded trust/default main, enable dependency graph and prove manifest ingestion/real PR comparison under #95; clean canonical install retest."
+  },
+  "remaining_acceptance": {
+    "original_ledger": {
+      "source_path": "docs/evidence/completion-criteria.json",
+      "sha256": "0795e6594c7bbde195bb8ebfcbc4050f0d5ecbe9c879767edbe0050540386df6",
+      "criteria_count": 230,
+      "original_dependencies_preserved": true
+    },
+    "criterion_review": "criteria-review.json",
+    "rule": "Source-present or merged is not acceptance passed; do not invent device/fullACT prerequisites for software-only literals. Actual original loader/hardware/CI/review/rights/adoption gates remain.",
+    "research": "#89 authentication ready for design discussion; no OAuth code. #51 monetization/Store research separate; no submission or paid features."
+  },
+  "release_preparation": {
+    "version": "0.1.0-deck.9",
+    "final_tag_version_notes": null,
+    "latest_published_release": {
+      "observed_utc": "2026-11-20T20:20:59.538939+00:00",
+      "releases_observed": 5,
+      "all_prerelease": true,
+      "latest_tag": "v0.1.0-deck.4-updater.1",
+      "latest_published_at": "2026-11-11T17:15:52Z",
+      "stable_v1": "none observed",
+      "new_release_by_this_batch": false
+    },
+    "changelog": "Source CHANGELOG.md Unreleased completion-preview; not release/device/CI approval.",
+    "workflow": "GoReleaser snapshot uses --skip=publish,sign and contents:read; source merge does not authorize product publication or site deployment.",
+    "semantic_release": "No assumption an automatic semantic-release publisher is active.",
+    "signing": "Owner must choose actual signing/publisher verification or an explicit transparent unsigned-preview policy.",
+    "site": "Offline landing/docs source prepared; canonical domain/hosting/deployer unresolved.",
+    "product_flathub": "None planned; OBS/GStreamer are dependency Flatpaks."
+  },
+  "approval_actions_later": [
+    {
+      "action": "Publish exact product release/tag/assets",
+      "needed_before_request": "Final reviewed exact revision/version/artifacts/download policy, completed available matrix plus explicit external/device/CI limits, rights and publisher/signing choice, actual consumer/device evidence required by acceptance",
+      "scope": "Exact repository/tag/assets/changelog/signature or clearly labeled unsigned preview; no generic blanket approval"
+    },
+    {
+      "action": "Create/migrate/retire repositories or change another repository",
+      "needed_before_request": "Exact current and destination owner/repo/authority, final #86 result, retained history/tracker/rights and compatibility/trust plan",
+      "scope": "Name precise operations and destinations; current repository prep is authorized, actual other-repo change/transfer is not inferred"
+    },
+    {
+      "action": "Deploy landing/docs site",
+      "needed_before_request": "Concrete reviewed site build/hash, exact hosting/domain/admin and side effects",
+      "scope": "Exact site/domain deployment; no deployment approval implied by source PR merge"
+    },
+    {
+      "action": "Publish an Identity release or change Identity",
+      "needed_before_request": "Separate actual requested upstream change/candidate/authority",
+      "scope": "None required to consume current immutable pin; no upstream publication assumed"
+    },
+    {
+      "action": "Spend money",
+      "needed_before_request": "Concrete service/purpose/amount and approved payer",
+      "scope": "Use current free/local/cloud resources; no paid action planned"
+    }
+  ],
+  "ready_to_request_publication_approval": false,
+  "next_actions": "Review exact-source evidence and current artifact, then later owner-machine/Deck test loop and bounded fixes. Complete actual required matrix/services/reviews where available; owner supplies destination/admin, rights/publisher/contact/signing/site decisions before concrete migration/release/deployment approvals. No generic approval question now.",
+  "review_files": {
+    "plugin": "obsgod-decky.zip",
+    "optional_current_cleanup_helper": "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+    "checksums": "SHA256SUMS",
+    "primary_build_receipt": "build-receipt.json",
+    "qualification_summary": "qualification-summary.json",
+    "public_proof": "pre-migration-772230a-public-proof.zip",
+    "criterion_review": "criteria-review.json",
+    "owner_tests": "OWNER-TESTS.md",
+    "reproduction": "REPRODUCE.md",
+    "source": "https://github.com/szmyty/obsgod/tree/772230a32a8fdb237a58b8a637947b31671ad509"
+  },
+  "no_actions_performed": [
+    "product release",
+    "Identity release",
+    "deployment",
+    "migration",
+    "app registration",
+    "Decky Store contact/submission",
+    "paid spending",
+    "other repository changes"
+  ],
+  "recorded_utc": "2026-11-20T20:50:59.335192+00:00",
+  "development_history": {
+    "zip": "development-history-772230a.zip",
+    "index": "development-history-772230a-index.json",
+    "zip_sha256": "3f037e45d9f9613b68946d0e4ea12ffd448dc24b43c7525a4db1732381a31d18",
+    "zip_bytes": 202064,
+    "index_sha256": "db63d7cb929203269f1803b9818d306219a386296eb162bec80d3b6bfaae2265",
+    "capture": {
+      "executed_source": "772230a32a8fdb237a58b8a637947b31671ad509",
+      "remote_default_revision": "069db4a21ec0a173b7dd30c12a53018c7700f79b",
+      "counts": {
+        "issues": 67,
+        "pull_requests": 47,
+        "conversation_comments": 41,
+        "inline_review_comments": 0,
+        "submitted_reviews": 3
+      },
+      "history_sha256": "2a5fddf297c292613bd96af7cd8c157fa5bdc726191bc35eb4dce64bca096f1f",
+      "carry_forward_sha256": "19e47337af318bc92971fe6f98140307fe400bd9806a18ecc2b5a920d6d91f16",
+      "scope": "Actual fresh public GET-only capture by current exporter. Remote tracker/default source is observed separately; no migration, issue mapping or acceptance is inferred."
+    },
+    "privacy": "Separately independently reviewed exact fresh history and documentation-example exception; excluded from generic strict text proof. No generic password whitelist.",
+    "purpose": "Development checkpoint, not atomic retirement/migration, not accepted issue mapping."
+  }
+}

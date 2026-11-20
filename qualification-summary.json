@@ -1,0 +1,171 @@
+{
+  "schema": "deckystream.exact-source-review-qualification/v1",
+  "recorded_utc": "2026-11-20T20:46:53.937691+00:00",
+  "revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+  "source_tree": "f157ea77d16a1f1ce04bf1e47b584f9183c9c359",
+  "qualified_source_clean": true,
+  "scope": "Fresh complete available standalone checks at exact clean source; not full ACT, hosted service, device, rights, review, release or adoption acceptance.",
+  "main_report": {
+    "original_sha256": "4727b7dbcb5b3a81c024ee0b0738a2b61bcb38c5c1ed5ced9bf3d25157c29c31",
+    "path": "/workspace/.obsgod-tools/pre-migration-readiness-20261120-736be3e/qualification-772230a32a8f-20261120T203042Z-7dafbe4c/available/available-checks.json",
+    "completed": true,
+    "command_predicates": {
+      "unavailable": 2,
+      "passed": 70
+    },
+    "verified_command_logs": 72
+  },
+  "launch": {
+    "sha256": "84f017a088cdc0ebec85d73d3dc495c64f910d4c382680f295fe21a4dec27e58",
+    "completed": true,
+    "path": "/workspace/.obsgod-tools/pre-migration-readiness-20261120-736be3e/qualification-772230a32a8f-20261120T203042Z-7dafbe4c/launch.json"
+  },
+  "primary": {
+    "sha256": "fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a",
+    "bytes": 4570722,
+    "version": "0.1.0-deck.9",
+    "status": "passed",
+    "complete_source_builds": 2,
+    "payload_files": 33,
+    "preferred_source_files": 648,
+    "build_receipt_sha256": "a174bb6719084a97036de94363f55de3523e0febd0f8f182fa43a7c72bc227c2",
+    "manifest_sha256": "aa8c8fe4540ac7088678bf24ad8cf6a028f9af492dfcd18a40b60b7f3d531a45",
+    "optional_primary_cli_fields": "unrun; separate prepared-byte assembly is recorded separately"
+  },
+  "official_prepared_assembly": {
+    "status": "passed",
+    "version": "0.0.7",
+    "sha256": "0d0f8c127cd3dba12b75f771c786194ca9f4f771b4787ae24de8b1af45af4294",
+    "builder_image": "ghcr.io/steamdeckhomebrew/builder@sha256:e2616e391f3ae9a46c4cf906b1091220c2506e7fb1301e16a2a72409efbce7c5",
+    "builder_node": "26.12.1",
+    "builder_pnpm": "12.14.0",
+    "container_network": "none",
+    "payload_files_compared": 33,
+    "raw_zip_sha256": "5d93ded4dee7a493d1fa65bc86d886a3b8a1aa842c985bf65f9c7d15b8bc8479",
+    "raw_zip_reproducible": false,
+    "scope": "Unmodified official CLI and pinned default builder, assembling prepared bytes; not source compilation",
+    "revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+    "primary_zip_sha256": "fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a",
+    "uid": 1000
+  },
+  "native": {
+    "native-audio": {
+      "receipt_sha256": "098e09415d5dcb0302f4c814231bf12353612c2f2a833f191984db0decc6f5de",
+      "minimum_root_free_bytes": 1316741120,
+      "result": "passed"
+    },
+    "native-capture": {
+      "receipt_sha256": "b73bb71088b9ac524f78badb4244b5b04358928228d170df3c73ab40c3b18672",
+      "minimum_root_free_bytes": 1316798464,
+      "result": "passed"
+    },
+    "native-game-obs": {
+      "receipt_sha256": "aea6801182034c7030a653ce26f010bf3c33ad26c3d8491c9177809e439a3e82",
+      "minimum_root_free_bytes": 1316749312,
+      "result": "passed"
+    }
+  },
+  "supported_matrix": {
+    "result": "unavailable",
+    "jobs": [
+      {
+        "action": "lint",
+        "result": "unrun"
+      },
+      {
+        "action": "build",
+        "result": "unrun"
+      },
+      {
+        "action": "coverage",
+        "result": "unrun"
+      },
+      {
+        "action": "snapshot",
+        "result": "unrun"
+      },
+      {
+        "action": "docs",
+        "result": "unrun"
+      },
+      {
+        "action": "candidate",
+        "result": "unrun"
+      }
+    ],
+    "session": "/workspace/.obsgod-tools/pre-migration-readiness-20261120-736be3e/qualification-772230a32a8f-20261120T203042Z-7dafbe4c/available/state/sessions/20261120T203119Z-cd3f88e1bf65/session.json"
+  },
+  "destination_observation": {
+    "result": "unavailable",
+    "executed_source": "772230a32a8fdb237a58b8a637947b31671ad509",
+    "repository": "szmyty/obsgod",
+    "pull_request": 114,
+    "readiness": "unavailable-or-incomplete",
+    "gates": [
+      "default-branch-is-not-main",
+      "standalone-destination-not-confirmed",
+      "real-pr-dependency-comparison-unavailable",
+      "both-manifest-ingestion-evidence-incomplete",
+      "actual-executed-dependency-review-success-unconfirmed"
+    ],
+    "report_sha256": "2ba94abb987e9a87a7030d835901263b447c172037d7242ad548cad962faeb16",
+    "scope": "Current collector execution and explicit remote public PR observations; unavailable graph/service/hosted gates remain. This does not migrate or prove another repository ready."
+  },
+  "public_history_observation": {
+    "executed_source": "772230a32a8fdb237a58b8a637947b31671ad509",
+    "remote_default_revision": "069db4a21ec0a173b7dd30c12a53018c7700f79b",
+    "counts": {
+      "issues": 67,
+      "pull_requests": 47,
+      "conversation_comments": 41,
+      "inline_review_comments": 0,
+      "submitted_reviews": 3
+    },
+    "history_sha256": "2a5fddf297c292613bd96af7cd8c157fa5bdc726191bc35eb4dce64bca096f1f",
+    "carry_forward_sha256": "19e47337af318bc92971fe6f98140307fe400bd9806a18ecc2b5a920d6d91f16",
+    "scope": "Actual fresh public GET-only capture by current exporter. Remote tracker/default source is observed separately; no migration, issue mapping or acceptance is inferred."
+  },
+  "tests": {
+    "application": {
+      "run": 291,
+      "passed": 289,
+      "skipped": 2,
+      "limits": "Two privilege-wrapper checks skipped; focused new wipe20 plus retained35 removal tests passed without skips."
+    },
+    "tooling": {
+      "passed": 151,
+      "skipped": 0
+    },
+    "frontend": {
+      "passed": 161,
+      "modes": [
+        "absent",
+        "reused"
+      ]
+    },
+    "branding": {
+      "passed": 33
+    },
+    "packaged_browser_flows": 10
+  },
+  "previous_failed_attempt": {
+    "completed": false,
+    "counts": {
+      "passed": 44,
+      "unavailable": 1,
+      "failed": 1
+    },
+    "retained_separately": true,
+    "sole_disconnect_cause_unproven": true,
+    "passes_not_reused": true
+  },
+  "limits": [
+    "Command predicates include preparation/audits and expected nonzero negative controls; they are not suite counts.",
+    "ACT lint/build/coverage/snapshot/docs/candidate remain unrun after actual capacity refusal.",
+    "Current PR readiness evidence is unavailable/incomplete; local passes do not qualify GitHub dependency services or hosted execution.",
+    "Actual Decky loader, SteamOS/Flatpak/Gamescope/AMD, controller, mic/headset, provider viewer, native non-Linux and independent adoption remain unrun.",
+    "Proposed branding rights/license/publisher/destination/signing/site decisions remain unresolved. Source review is automated engineering review, not a required human GitHub approval.",
+    "Readable-holder observations are limited to accessible processes; inaccessible root daemons and administrative actors are not global exclusivity proof.",
+    "No product release/tag, deployment, migration, other-repository change, OAuth implementation/registration, paid spending or issue closure occurred."
+  ]
+}

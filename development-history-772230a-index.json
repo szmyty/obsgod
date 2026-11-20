@@ -1,0 +1,83 @@
+{
+  "schema": "deckystream.separate-development-history-archive/v1",
+  "built_utc": "2026-11-20T20:44:34.503750+00:00",
+  "source_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+  "archive": {
+    "path": "/workspace/.obsgod-tools/pre-migration-readiness-20261120-736be3e/development-history-772230a.zip",
+    "bytes": 202064,
+    "sha256": "3f037e45d9f9613b68946d0e4ea12ffd448dc24b43c7525a4db1732381a31d18"
+  },
+  "inputs": [
+    {
+      "member": "obsgod-github.json",
+      "path": "/workspace/.obsgod-tools/pre-migration-readiness-20261120-736be3e/qualification-772230a32a8f-20261120T203042Z-7dafbe4c/available/public-history/obsgod-github.json",
+      "bytes": 760767,
+      "sha256": "2a5fddf297c292613bd96af7cd8c157fa5bdc726191bc35eb4dce64bca096f1f"
+    },
+    {
+      "member": "obsgod-criteria-carry-forward.json",
+      "path": "/workspace/.obsgod-tools/pre-migration-readiness-20261120-736be3e/qualification-772230a32a8f-20261120T203042Z-7dafbe4c/available/public-history/obsgod-criteria-carry-forward.json",
+      "bytes": 168214,
+      "sha256": "19e47337af318bc92971fe6f98140307fe400bd9806a18ecc2b5a920d6d91f16"
+    },
+    {
+      "member": "independent-privacy-review.json",
+      "path": "/workspace/.obsgod-tools/pre-migration-readiness-20261120-736be3e/qualification-772230a32a8f-20261120T203042Z-7dafbe4c/available/public-history/independent-privacy-review.json",
+      "bytes": 6133,
+      "sha256": "fe5bef71719358eaadcabfe934af5f990217ff6b484c33eace13d2e4b38298a1"
+    },
+    {
+      "member": "independent-privacy-review.md",
+      "path": "/workspace/.obsgod-tools/pre-migration-readiness-20261120-736be3e/qualification-772230a32a8f-20261120T203042Z-7dafbe4c/available/public-history/independent-privacy-review.md",
+      "bytes": 3052,
+      "sha256": "d64bd7ddb0c4a394265a5f618d998a9a65353de6a36f1c52a998e0b466f56a98"
+    }
+  ],
+  "members": [
+    {
+      "name": "README.md",
+      "bytes": 1274,
+      "sha256": "40eb230a7ae7eb093a412b40731317d2e22c9cdc6ba0615b38c178263aececde",
+      "mode": "regular0644",
+      "timestamp": "1980-01-01T00:00:00"
+    },
+    {
+      "name": "independent-privacy-review.json",
+      "bytes": 6133,
+      "sha256": "fe5bef71719358eaadcabfe934af5f990217ff6b484c33eace13d2e4b38298a1",
+      "mode": "regular0644",
+      "timestamp": "1980-01-01T00:00:00"
+    },
+    {
+      "name": "independent-privacy-review.md",
+      "bytes": 3052,
+      "sha256": "d64bd7ddb0c4a394265a5f618d998a9a65353de6a36f1c52a998e0b466f56a98",
+      "mode": "regular0644",
+      "timestamp": "1980-01-01T00:00:00"
+    },
+    {
+      "name": "obsgod-criteria-carry-forward.json",
+      "bytes": 168214,
+      "sha256": "19e47337af318bc92971fe6f98140307fe400bd9806a18ecc2b5a920d6d91f16",
+      "mode": "regular0644",
+      "timestamp": "1980-01-01T00:00:00"
+    },
+    {
+      "name": "obsgod-github.json",
+      "bytes": 760767,
+      "sha256": "2a5fddf297c292613bd96af7cd8c157fa5bdc726191bc35eb4dce64bca096f1f",
+      "mode": "regular0644",
+      "timestamp": "1980-01-01T00:00:00"
+    }
+  ],
+  "zip_method": "DEFLATE level9; sorted fixed5 names; no extra/comment/encryption; two in-memory encodings identical",
+  "exact_member_set_verified": true,
+  "readback_member_bytes_and_hashes_verified": true,
+  "zip_crc_test_passed": true,
+  "input_bytes_and_hashes_unchanged_pre_post": true,
+  "strict_scanner_unchanged": true,
+  "privacy": "The exact-bound independent review approves the raw history with one exact-field public documentation example exception; the original strict rejection remains. Carry-forward passes strict scan. This ZIP is separate from generic proof.",
+  "publication_performed": false,
+  "retirement_performed": false,
+  "qualification_claimed": false
+}

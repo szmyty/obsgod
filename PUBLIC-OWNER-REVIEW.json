@@ -1,0 +1,208 @@
+{
+  "base_stage": {
+    "all_other_reviewed_bytes_must_remain_unchanged": true,
+    "base_payload_sha256": [
+      {
+        "file": "OWNER-PACKET.json",
+        "sha256": "9f887ac0c93e9e68af6b822b0a94ddcde4abc677889ee9889d76d448016966d5"
+      },
+      {
+        "file": "OWNER-PACKET.md",
+        "sha256": "ef5a29aedd94f19725ed84765a489c382e29417fc06736eae89f63594ed87938"
+      },
+      {
+        "file": "OWNER-TESTS.md",
+        "sha256": "56ca15bf1162ba2bb4bce6f8bb8a9e5ebed378ba3996983814d94df0ec8a3362"
+      },
+      {
+        "file": "PRIMARY-SHA256SUMS",
+        "sha256": "0d9eb41fc434d0a485ff998b39c9c2513e6c065ad5f23ab5c9c26e5a8f016423"
+      },
+      {
+        "file": "README.md",
+        "sha256": "b3bc2e2b35ec96dfa91cdf2fa81203a2bc4b809c1125fd2958000b7914058c6d"
+      },
+      {
+        "file": "REPRODUCE.md",
+        "sha256": "f922600e4ade2d3f841341e36562b1c6cce5958bdb326e1baea168bab7a928ef"
+      },
+      {
+        "file": "build-receipt.json",
+        "sha256": "a174bb6719084a97036de94363f55de3523e0febd0f8f182fa43a7c72bc227c2"
+      },
+      {
+        "file": "criteria-review.json",
+        "sha256": "90132b48ca085015b68770b6d7549431a1549931d3af33232456844edcf079c9"
+      },
+      {
+        "file": "development-history-772230a-index.json",
+        "sha256": "db63d7cb929203269f1803b9818d306219a386296eb162bec80d3b6bfaae2265"
+      },
+      {
+        "file": "development-history-772230a.zip",
+        "sha256": "3f037e45d9f9613b68946d0e4ea12ffd448dc24b43c7525a4db1732381a31d18"
+      },
+      {
+        "file": "legacy-runtime-manifest.json",
+        "sha256": "70e2184ef1e89aafb49a9a70aeb643c76ec5d52a1e26c1712d41ad5139f964d0"
+      },
+      {
+        "file": "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+        "sha256": "e8d32968573989565dc74eb4e2bd8bd41e97107ebdbd6f57e56e69f565ef1487"
+      },
+      {
+        "file": "obsgod-decky.zip",
+        "sha256": "fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a"
+      },
+      {
+        "file": "pre-migration-772230a-public-proof.zip",
+        "sha256": "b3b117bd4527643a1525be87481e8b0bb594939854c9b5126a45d514a9237c43"
+      },
+      {
+        "file": "primary-qualification.json",
+        "sha256": "b0cc5991ddad4bad3e6982e513038958ad06ab7cac9051f029d274fe3a2d5e0d"
+      },
+      {
+        "file": "qualification-summary.json",
+        "sha256": "efeea7e7c15b3b8c951a0fd2ad149dd34042c441a6dbe58286cdc55d7c9cf461"
+      },
+      {
+        "file": "source-review-before-full-run.md",
+        "sha256": "ae408f6f7cf5a66a5ba12993557e38efb2c19592b2fc7cd46d585d10475f158c"
+      },
+      {
+        "file": "source-review.json",
+        "sha256": "e3eb068f050cd2d603407f2ea2a5560c6443df2584957d52d1de12e8d29f9176"
+      }
+    ],
+    "expected_final_file_count": 21,
+    "permitted_after_review": [
+      "Add PUBLIC-PROOF-REVIEW.json verbatim",
+      "Add PUBLIC-OWNER-REVIEW.json verbatim",
+      "Recompute SHA256SUMS to cover all20 payload files"
+    ],
+    "reviewed_base_checksum_sha256": "352b401e2ade00a21106e937cb6a4db8cef3da69ef297c6f6182f20f5f433719",
+    "reviewed_base_file_count": 19,
+    "reviewed_base_payload_count": 18,
+    "self_hash_or_final_checksum_assertion": false
+  },
+  "generic_proof": {
+    "file": "pre-migration-772230a-public-proof.zip",
+    "members": 184,
+    "result": "passed; see PUBLIC-PROOF-REVIEW.json",
+    "sha256": "b3b117bd4527643a1525be87481e8b0bb594939854c9b5126a45d514a9237c43"
+  },
+  "limits": [
+    "Credential/privacy scans are pattern based and cannot prove absence of arbitrary secrets or personal data.",
+    "The separate history exception is bound to exact archive/history/field/body/value/review hashes and never globally allowed."
+  ],
+  "owner_documents": {
+    "historical_source_review": "Retained under source-review-before-full-run.md; completed qualification summary is authoritative for the later run.",
+    "owner_tests_sha256": "56ca15bf1162ba2bb4bce6f8bb8a9e5ebed378ba3996983814d94df0ec8a3362",
+    "relative_markdown_links": "all resolve after the single approved immutable-source inventory-link correction",
+    "reviewed": [
+      "README.md",
+      "OWNER-PACKET.json",
+      "OWNER-PACKET.md",
+      "OWNER-TESTS.md",
+      "REPRODUCE.md",
+      "source-review-before-full-run.md",
+      "qualification-summary.json",
+      "criteria-review.json",
+      "source-review.json"
+    ],
+    "source_review_reuse": "Existing exact-source engineering review reused; whole source was not reread.",
+    "strict_text_privacy_scan": "passed with no byte changes across all15 staged text files"
+  },
+  "owner_instructions": "Standard Decky install; explicit dependency consent and Start; private setup; current cleanup-helper dry-run/default preservation first. Legacy retirement and wipe/export recovery remain later explicit choices; no private export or raw log sharing.",
+  "package_integrity": {
+    "capture_preferred_source_native_bindings_and_licenses_notices": "verified",
+    "complete_source_or_product_checks_rerun": false,
+    "manifests_current_source_dirty_false": true,
+    "optional_runtime_tar": {
+      "bytes": 12053779,
+      "current_uninstall_sha256": "e79ce1dfb85021b78d5390071cf48f72308ff40b6ffb6565200a86258eadbce9",
+      "embedded_plugin_zip_matches": true,
+      "file": "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+      "manifest_payload_digests": 24,
+      "regular_members": 25,
+      "sha256": "e8d32968573989565dc74eb4e2bd8bd41e97107ebdbd6f57e56e69f565ef1487"
+    },
+    "source_inventory_files": 648,
+    "standard_zip": {
+      "bytes": 4570722,
+      "equals_retained_two_build_primary": true,
+      "file": "obsgod-decky.zip",
+      "manifest_payload_digests": 32,
+      "regular_members": 33,
+      "sha256": "fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a"
+    }
+  },
+  "publication_boundary": "Review checkpoint only. No product release, updater offer, deployment, migration, Store submission, spending or other-repository approval is implied. Immutable hosted download verification remains a delivery step.",
+  "qualification_claims": {
+    "act_probe_and_six_jobs": "unrun",
+    "act_root_shortfall_bytes": 3915341996,
+    "current_command_predicates": {
+      "failed": 0,
+      "passed": 70,
+      "unavailable": 2
+    },
+    "initial_failed_appendix": "Separate incomplete attempt; no passes reused.",
+    "pr114": {
+      "billing_refusals": 15,
+      "comparison_http_status": 403,
+      "executed_steps": 0,
+      "push_only_skips": 1,
+      "sbom_http_status": 404
+    }
+  },
+  "remaining_gates": [
+    "Actual supported-loader/SteamOS/Deck/controller/headset/provider observations",
+    "Native non-Linux runtime acceptance and independent/new-user adoption",
+    "Required full matrix, hosted services and human reviews",
+    "Rights, publisher, exact destination, signing/unsigned-preview and release/deployment/migration decisions"
+  ],
+  "result": "passed",
+  "review_side_effects": {
+    "disk_extraction": false,
+    "product_execution": false,
+    "publication": false,
+    "source_or_stage_mutation": false
+  },
+  "review_type": "Independent automated package, archive, privacy and owner-instruction review; not formal human GitHub approval.",
+  "reviewed_utc": "2026-11-20T20:58:10.447864+00:00",
+  "schema": "deckystream.public-owner-artifact-review/v1",
+  "separate_development_history": {
+    "approved_body_sha256": "4eedf9286b5997c01b328dd5a5df1555f4cc1b336274ce1c5d9c05e4d0448006",
+    "approved_field": "history.items[3].body",
+    "approved_public_record": "https://github.com/szmyty/obsgod/pull/4",
+    "approved_value_sha256": "652c7dc687d98c9889304ed2e408c74b611e86a40caa51c4b43f1dd5913c5cd0",
+    "bytes": 202064,
+    "carried_unique_criteria": 230,
+    "carry_sha256": "19e47337af318bc92971fe6f98140307fe400bd9806a18ecc2b5a920d6d91f16",
+    "counts": {
+      "conversation_comments": 41,
+      "inline_review_comments": 0,
+      "issues": 67,
+      "pull_requests": 47,
+      "submitted_reviews": 3
+    },
+    "exact_exception_review_sha256": "fe5bef71719358eaadcabfe934af5f990217ff6b484c33eace13d2e4b38298a1",
+    "exact_member_crc_metadata_hash_source_equality": "passed",
+    "file": "development-history-772230a.zip",
+    "fixed_members": 5,
+    "global_or_generic_proof_exception": false,
+    "index_file": "development-history-772230a-index.json",
+    "index_sha256": "db63d7cb929203269f1803b9818d306219a386296eb162bec80d3b6bfaae2265",
+    "migration_or_acceptance_claimed": false,
+    "raw_history_sha256": "2a5fddf297c292613bd96af7cd8c157fa5bdc726191bc35eb4dce64bca096f1f",
+    "raw_history_strict_scan": "rejected only at the separately approved exact field",
+    "remainder_method": "The separately reviewed exact bound body was replaced in memory for remainder scanning. Raw archived bytes were unchanged. A whole-history scan replacing only the matched value still rejects.",
+    "sha256": "3f037e45d9f9613b68946d0e4ea12ffd448dc24b43c7525a4db1732381a31d18"
+  },
+  "source": {
+    "clean": true,
+    "revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+    "tree": "f157ea77d16a1f1ce04bf1e47b584f9183c9c359"
+  }
+}

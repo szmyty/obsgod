@@ -1,0 +1,72 @@
+{
+  "approved_current_selection_sha256": "ce3c8e9240de48fd4e85c4549199b9bd0f9283516bc60b6c5ceb25f8fa3e267a",
+  "approved_failed_appendix_selection_sha256": "d308554d903cfe5a3d0da50cc1559e261a77298fe76cbef58fc8912eb9355874",
+  "archive": {
+    "bytes": 683339,
+    "current_text_members": 179,
+    "file": "pre-migration-772230a-public-proof.zip",
+    "index_members": 1,
+    "index_sha256": "218d5214a20068075b1b03a4f49a6e301774a6669800181982936d1de82ece54",
+    "members": 184,
+    "previous_failed_appendix_members": 4,
+    "sha256": "b3b117bd4527643a1525be87481e8b0bb594939854c9b5126a45d514a9237c43"
+  },
+  "claims": {
+    "act": "Unavailable; runner probe and six workflow jobs unrun after capacity refusal.",
+    "actual_pr114_readiness": "Unavailable/incomplete; service and hosted gates retained.",
+    "current_command_predicates": {
+      "failed": 0,
+      "passed": 70,
+      "unavailable": 2
+    },
+    "gallery": "Direct-file attempt failed under administrator policy and remains unavailable; same bytes passed loopback.",
+    "previous_incomplete_attempt": {
+      "failed": 1,
+      "passed": 44,
+      "qualifies_current_run": false,
+      "unavailable": 1
+    }
+  },
+  "integrity": {
+    "actual_command_logs": 72,
+    "current_source_and_actual_log_hash_bindings": true,
+    "every_member_crc_size_sha256_utf8_regular_mode": true,
+    "exact_member_set": true,
+    "filtered_native_summaries": 18,
+    "launcher_logs": 4,
+    "selected_original_public_and_archive_bytes_identical": true
+  },
+  "limits": [
+    "Pattern scanning cannot prove absence of arbitrary secrets or personal data.",
+    "Separate development history has its own exact-field approval; no exception applies to this generic proof.",
+    "Local commands and native Linux fixtures do not prove full ACT, hosted acceptance, actual Deck/loader/provider, native non-Linux, rights or adoption."
+  ],
+  "privacy": {
+    "additional_redactions": 0,
+    "history_exception_applied": false,
+    "raw_history_included": false,
+    "raw_text_and_recursively_decoded_pattern_scan": "passed",
+    "strict_helper_sha256": "2293a8a16059c14f770b9179bd12b2a1def37f6d28a42ee762f11ed0d81ea3dc"
+  },
+  "publication_or_source_changes_performed_by_review": false,
+  "result": "passed",
+  "review_type": "Independent automated artifact review; not a formal human GitHub approval.",
+  "reviewed_utc": "2026-11-20T20:58:10.447864+00:00",
+  "schema": "deckystream.public-proof-artifact-review/v1",
+  "selection_verification_sha256": "e8ce10b4fd674289b2f1486b4dace472ffd130d9064e561f98cc1c7748f9891e",
+  "source": {
+    "clean": true,
+    "revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+    "tree": "f157ea77d16a1f1ce04bf1e47b584f9183c9c359"
+  },
+  "stage_boundary": {
+    "base_file_count": 19,
+    "expected_final_file_count": 21,
+    "later_additions_only": [
+      "PUBLIC-PROOF-REVIEW.json",
+      "PUBLIC-OWNER-REVIEW.json",
+      "updated SHA256SUMS"
+    ],
+    "scope": "This proof was reviewed as part of the19-file base owner packet. The companion owner review covers package/checksum/document boundaries."
+  }
+}

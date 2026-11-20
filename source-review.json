@@ -1,0 +1,495 @@
+{
+  "schema": "deckystream.pre-migration-independent-source-review/v1",
+  "recorded_utc": "2026-11-20T20:23:36.640193+00:00",
+  "reviewer": "/root/final_issue_evidence_map",
+  "source": {
+    "revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+    "tree": "f157ea77d16a1f1ce04bf1e47b584f9183c9c359",
+    "clean": true,
+    "tracked_file_count": 648,
+    "diff_base": "736be3e2964179f180de34d21dbe81dd33fd8c52"
+  },
+  "result": "no-blocking-source-finding-in-bounded-diff",
+  "formal_human_github_review": false,
+  "github_mutations": false,
+  "tracked_source_edits": false,
+  "test_reruns_performed": false,
+  "changed_files": [
+    {
+      "path": "ARCHITECTURE.md",
+      "sha256": "aebb442e6872135805bb3e2469eba7277a8c309b0004801186a3b7f9ce247d45"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "04fb9f769a2d43928fc765dcf3c29921579e314c5f4d06ad656ada75dd97eba1"
+    },
+    {
+      "path": "CONTINUITY.md",
+      "sha256": "262cfd6550fe2aa7fbf4e24b2e74cec5ceb6d26ffb2e376015509ce1172cef6e"
+    },
+    {
+      "path": "DECISIONS.md",
+      "sha256": "2a4129eeeb49cff71d46ff43014ac2c1bdd49d2cb5ef03cbf947132f1d62d09d"
+    },
+    {
+      "path": "ONTOLOGY.md",
+      "sha256": "1d43035d19646afe7fe1df805b9c3309abdcd0439b3f745d554beb4e6754dbd2"
+    },
+    {
+      "path": "ROADMAP.md",
+      "sha256": "7b7b1896feafe3d274400d98f50630af2a9d4b412995991418cc23a0b69f3c2c"
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "c39388c091a6da9b3bb03dee747d4bd482da8b2ada3b73db453db5f459e0b249"
+    },
+    {
+      "path": "docs/authentication-decision-packet.md",
+      "sha256": "60c9ab4c06a27998c41e36057d568c8eacc658187b2ee8618775f3393887e549"
+    },
+    {
+      "path": "docs/authentication-options.md",
+      "sha256": "38fbcf1d8219e56360343c130d089fca835bcbfe9cd526023a8718e5010874be"
+    },
+    {
+      "path": "docs/cleanup-recovery.md",
+      "sha256": "53e0df848b2039b57bc9a8a0f1885f9a819a22083bf1dff842a2d9d30bfbcf09"
+    },
+    {
+      "path": "docs/destination-readiness.md",
+      "sha256": "5baf8a472aae2abd628f06948fb578b8d6e53fa3d6f2422c9f07c75f62612590"
+    },
+    {
+      "path": "docs/evidence/authentication-sources-20261114.json",
+      "sha256": "d0388a88dc9977fa9dd59ab6eb7ea940f1b7de4453cc7adf10ac5fd3a7948c69"
+    },
+    {
+      "path": "docs/evidence/authentication-sources.json",
+      "sha256": "c3cfb349892feb78ac324a0ace0dce35ccd1b226f53b20cc080a9426dc1be616"
+    },
+    {
+      "path": "docs/evidence/destination-readiness-a6d13ad.json",
+      "sha256": "3371c7fc70df95465121e5363159a3403c56fdf34198094135210917e7571285"
+    },
+    {
+      "path": "docs/evidence/destination-readiness-a6d13ad.md",
+      "sha256": "f7d0b6e2a8e85ca90bf0b6a538a3f13d5f583184a603720eacd2dd2679074ff8"
+    },
+    {
+      "path": "docs/evidence/pre-migration-focused-preparation.json",
+      "sha256": "10388c0731be125e0e428d09051dbaf3d73d7e3101b586ed39c364ac35512095"
+    },
+    {
+      "path": "docs/evidence/pre-migration-history-privacy-review.json",
+      "sha256": "f47fd200c1961bd9f56c85b0f36c21da8fefd2b0ba886b8a4096cd629651c273"
+    },
+    {
+      "path": "docs/history/README.md",
+      "sha256": "ca2b322d3065d27dbe07526a827685bf723e094baedd158d1ee8ead35091a3ce"
+    },
+    {
+      "path": "docs/legacy-cleanup-kit.md",
+      "sha256": "fac89fdca817b822e52d452592419dd32df41d618adcae0b2135810aa9c7429e"
+    },
+    {
+      "path": "docs/migration-review.md",
+      "sha256": "e14035946d92767f3016aac3107e8f867f6cf562bd99dc8268c2d23a0d771da5"
+    },
+    {
+      "path": "docs/pre-migration-readiness.md",
+      "sha256": "0dd7079fd8d37e8ea5eeaa72e6cfb2e13a97c8b98193e028b619379bd09c44c6"
+    },
+    {
+      "path": "docs/release-engineering.md",
+      "sha256": "1d16e3344fa6ba8a757dd8d85055795e3509f1712fd5f81c88e9404208773b20"
+    },
+    {
+      "path": "docs/release-readiness.md",
+      "sha256": "b154becf45c259ece213edb4e0b34a6368b704e9f25aeebaee4f217c3617106c"
+    },
+    {
+      "path": "docs/steam-deck.md",
+      "sha256": "b242ca93d91702de584749a1d6015c0fe8b2347cd106d53b3c41759873d1ebe1"
+    },
+    {
+      "path": "scripts/destination-readiness.py",
+      "sha256": "e0a6ee1803147121c67565bcc69a5854588d3fcda9c873839285963bf7902a50"
+    },
+    {
+      "path": "scripts/export-project-history.py",
+      "sha256": "3fd9eb08418955d48eb29385252fd6b594451073907ace3bacef5188fa1dccab"
+    },
+    {
+      "path": "scripts/tests/test_destination_readiness.py",
+      "sha256": "6515a9d6a7511c4f220cee6ce9e7818a87c464caf7f5d71069a849582cb064e8"
+    },
+    {
+      "path": "scripts/tests/test_project_history.py",
+      "sha256": "7f6e4e68590218166e32660d1ee1a4f387f4695345a6db923f574f244cb0f7c7"
+    },
+    {
+      "path": "site/content/uninstall.html",
+      "sha256": "ba6638d99008799f07e20d51314f6e392e36fdcb075f1c5a69243a42d1d4eb8a"
+    },
+    {
+      "path": "steamdeck/tests/test_uninstall_self.py",
+      "sha256": "813d4723aa74b1d522117a12d376fdbcc875946f24137b88d5b589860730de5d"
+    },
+    {
+      "path": "steamdeck/tests/test_wipe_export.py",
+      "sha256": "4c0cd536154d97f4331582f66c4087c20c8d67eba4e8301735e73b2d280ddff6"
+    },
+    {
+      "path": "steamdeck/uninstall.py",
+      "sha256": "e79ce1dfb85021b78d5390071cf48f72308ff40b6ffb6565200a86258eadbce9"
+    }
+  ],
+  "reviewed_contracts": [
+    {
+      "area": "explicit wipe export",
+      "finding": "Export runs under retained update/install/control leases before remove_plugin or selected deletion. Home-relative normalized selection, no-follow source descriptors, owned regular single-link source guards, metadata-only approved aliases and exact per-member/digest verification are preserved. Exclusive same-directory link publication follows file fsync, then directory fsync and final inode/content checks. Fresh idle and selection/export identities gate first and later destructive boundaries. Normal/reset/legacy scopes are separate.",
+      "tests": "20 focused export cases plus35 retained removal cases; current772 application-python passed289 tests with2 wrapper-only skips.",
+      "limits": [
+        "Private TAR is not encrypted and intentionally retains credentials; archive path/hash metadata only is returned.",
+        "Recovery stages selected regular files manually and reinstalls a separately verified application; no automatic restore/application rollback is asserted.",
+        "120-second budget is cooperative and does not guarantee hard wall-clock termination of blocked I/O.",
+        "OS/same-user administrator compromise and sudden power failure are not fixture-proven; actual Deck loader/recovery remains unrun."
+      ]
+    },
+    {
+      "area": "public history pagination",
+      "finding": "Exact public canonical metadata binds positive integer repository ID before alias use. Only same-ID/same-endpoint numeric aliases normalize to canonical requests; original filters, next sequential page and one bounded demonstrated opaque cursor are retained. Credentials/authority/fragment/control/redirect/query confusion fail closed. Existing page/request/byte bounds and auth-free public capture remain.",
+      "tests": "15 focused tests including34 malicious pagination subcases; current772 tooling-python151 passed.",
+      "limits": [
+        "Current development capture is not an atomic retirement backup and is bound to its own remote refs.",
+        "Raw verbatim public history needs byte-bound privacy review; an old example exception cannot authorize newly captured bytes."
+      ]
+    },
+    {
+      "area": "destination/service readiness",
+      "finding": "Transport is exact-host GET-only, bounded and no-redirect. Existing gh authentication stays in-memory. Explicit public repo/real PR, repoIDs, exact commits/trees/blob hashes and public-head identity are verified. Conservative source policy remains separate from actual service/run/PR/job/step observations. Unique source job display plus unique source/runtime step identity prevents unrelated success substitution. Incomplete/403/404/empty data remain explicit gates.",
+      "tests": "22 focused tests including duplicate/dynamic source/runtime label cases; current772 tooling-python151 passed.",
+      "limits": [
+        "Static workflow markers are not a full YAML/action/script audit or proof of no possible publication.",
+        "Collector does not read/enable the actual Dependency Graph setting; destination owner must correlate settings/manifest ingestion.",
+        "Actual final-source live collector execution remains pending; priora6 probe does not qualify new source or an unknown destination."
+      ]
+    },
+    {
+      "area": "docs/release/authentication boundaries",
+      "finding": "Guide now uses Decky replacement/removal as primary, keeps optional legacy helper version/hash-sensitive and pre-wipe credentials explicit. Full existing runtime TAR is reused for cleanup preview; no second removal framework. Original230 ledger and historical469 installer remain unchanged. Proposed auth packet keeps account/registration/login/service coding unactivated; preparation does not imply release, migration, rights or human approval.",
+      "tests": "Focused doc/privacy/link/projection checks recorded in source preparation; first current772 brand/frontend/browser checks passed.",
+      "limits": [
+        "A new concrete current772 artifact/owner packet and final full qualification are pending.",
+        "Owner design selection, exact migration destination/authority, device/provider and rights/adoption decisions remain separate."
+      ]
+    }
+  ],
+  "qualification_observation": {
+    "path": "/workspace/.obsgod-tools/pre-migration-readiness-20261120-736be3e/qualification-772230a32a8f-20261120T192407Z-11d98725/available/available-checks.json",
+    "sha256": "335fa0f74ebd62e82dd1a6706154f004abd1e65b890d815ac00ee556ec93d92d",
+    "completed": false,
+    "result": "failed",
+    "check_counts": {
+      "unavailable": 1,
+      "passed": 44,
+      "failed": 1
+    },
+    "log_hashes_verified": 46,
+    "checks": [
+      {
+        "name": "supported-matrix",
+        "result": "unavailable",
+        "exit_code": 3,
+        "log_sha256": "ac9424bb6f18cbf451b182b325e01706880f0ce0fc531d5014ed1a6689b6f1c5"
+      },
+      {
+        "name": "official-prepared-assembly",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "355e44c11c2f177019bc363878c1371c8065cc8c7f16485e6abf7a72330b1c60"
+      },
+      {
+        "name": "preserve-dist-owned-rename",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "workflow-primary-negative",
+        "result": "passed",
+        "exit_code": 1,
+        "log_sha256": "f23c0fe6bf3ea8f794779cb0347e78deff14f97ac3d275f57298959f6a1e4b2e"
+      },
+      {
+        "name": "compatibility-1",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "7076ee77f56bfa390952956a972e0fc20696ffe32784caf5c59457735436a898"
+      },
+      {
+        "name": "updater-1",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "37795a2c72e10d260783d1e4eb1b58f1e0d625f9592d5f3c22fce8b832581708"
+      },
+      {
+        "name": "compatibility-2",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "7c91d7c7a228b8f0a35817d6897e01f1adef062677ded204afeb630b45894440"
+      },
+      {
+        "name": "updater-2",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "37795a2c72e10d260783d1e4eb1b58f1e0d625f9592d5f3c22fce8b832581708"
+      },
+      {
+        "name": "artifact-audit-1",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "e679024d227f0eef7ebd2c2f4ad7bd3dd605161922f4fecd17ee1a9aa13fc966"
+      },
+      {
+        "name": "artifact-audit-2",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "e679024d227f0eef7ebd2c2f4ad7bd3dd605161922f4fecd17ee1a9aa13fc966"
+      },
+      {
+        "name": "application-python",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "f7b933b5318f4124f6ef776f2a31653db5594bda17124171569ed204e3810c8f"
+      },
+      {
+        "name": "tooling-python",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "4bc733240f47df45eda3c29e40807f9259c3014ed1f1dddca18540054d431fd4"
+      },
+      {
+        "name": "go-race",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "de514bfdb515a52cbe27bad23c5bdb326fbd91dc2816402d9ddba642a25d5a36"
+      },
+      {
+        "name": "go-process",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "f26442521005ca42816b9ddebc4281b20bd9bf66289e0f75df59414a5adf1e85"
+      },
+      {
+        "name": "go-vet",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "staticcheck",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "govulncheck",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "3016e51e4eac0d421674d2128bbbdefb2924b4646e0c14a1ab034977ad73fae5"
+      },
+      {
+        "name": "frontend-absent-typecheck",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "4c51a932c40c1dc7887fef7b6e3a4ef90e59dbb21158e1fe8e6c1567a99e4a0e"
+      },
+      {
+        "name": "frontend-absent-test",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "4281cce59dea0ca513481e8c59dfbf88e20e9a4f06bddd11c3744351a9a8af66"
+      },
+      {
+        "name": "frontend-absent-build",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "cbf264a062e68115755dc2e9d5793dccda7e319bac837b36938d363b33c12e62"
+      },
+      {
+        "name": "frontend-reused-typecheck",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "4c51a932c40c1dc7887fef7b6e3a4ef90e59dbb21158e1fe8e6c1567a99e4a0e"
+      },
+      {
+        "name": "frontend-reused-test",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "a158965606f24a76222e585efa1da934b4ca2eb84263286ac68fe93548c97783"
+      },
+      {
+        "name": "frontend-reused-build",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "964477f5184387ef75507ddbc6cc2e242e5764561062dbadddfb49d464d6378c"
+      },
+      {
+        "name": "npm-audit",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "6d8c5c8f3d7684adb070417bd608d01ae90aa3dc26a65af03ffda4955f38d9a3"
+      },
+      {
+        "name": "selected-brand-tests",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "e1bbcb2ba0694e4e653f3024bcd96c59a921aaedd5829a158aac046f0fb79c6d"
+      },
+      {
+        "name": "selected-brand-drift",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "e9100fe6f6ae134029dcbf5ca6f5e72ac70ce925239fbd8e54c45be43d3720d0"
+      },
+      {
+        "name": "selected-brand-repeat",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "a6a5277759ef703973aaaa0c9874f2ebd75a71cb77e7223122bd6c53081d6a65"
+      },
+      {
+        "name": "selected-ui-projection-check",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "product-projection-check",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "identity-consumer-check",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "1c33153db3f6b55a7408ed7d9b9cb259e3746bb158911b75b57679e1c176d161"
+      },
+      {
+        "name": "packaged-settings",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "f6ef95b5d2eeb63f8a565bd1e288d0a118035defc8b6b3e4dc678195563f3da5"
+      },
+      {
+        "name": "browser-panel",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "bd02e037a42e8dc0a3083eec72e4f59e516bb2dcb89690c89c41072781a4a811"
+      },
+      {
+        "name": "browser-dependencies",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "3ccce3bdeef5d81acb5d9cd6be286732db15f2bf77be535f143dbf6b0d6f54f1"
+      },
+      {
+        "name": "browser-configuration",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "e203dcf5f78dec53d6e7d1482721ac0bb2290622a87fcddb62a86ac2be4b339e"
+      },
+      {
+        "name": "browser-m3-panel",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "f127a8ec33356abb88c4d3055da556dce284d8ba595277550ccf2f482ae5453e"
+      },
+      {
+        "name": "browser-mixer-panel",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "0179d16220fa05ff8cea119976256c9fd55c8cb01e91ec39551110ef90f39041"
+      },
+      {
+        "name": "browser-setup",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "a6016a1ebd5787b76f255aa85d5a45fbc8b7c1d779de50b878c837a4ead30463"
+      },
+      {
+        "name": "browser-m3-setup",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "8b89ee58e9039ccc809617b16bd2421e3772d33f77b5cc676d4dc686d9fad0e1"
+      },
+      {
+        "name": "browser-mixer-setup",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "8e1fd1aab86129a1761f97fbe84ee8bca41164e99a8ba6621cc570d83dbd3ce8"
+      },
+      {
+        "name": "browser-support",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "793f783e96662b00925852f207378db9d6c48f608e5b06e3a9bf1c7bc068c58d"
+      },
+      {
+        "name": "browser-site",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "008a0eea361b69f836737ebbcf1629affe593e32a588477f47c1f26a225ae53b"
+      },
+      {
+        "name": "gallery-evidence-collection",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "f425350568c6be80f7a4a76aab9d45245717494d6221f5663bd11a01a7dbf12a"
+      },
+      {
+        "name": "native-image",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "80387d46ef4b81c96f984ce95a2b005b70443a2fcadb23ef98fcf6f86733ed74"
+      },
+      {
+        "name": "native-audio",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "12dc11c0c7dfe477a57795d13064a07d6dada41a5daa6d2c77449b8109579162"
+      },
+      {
+        "name": "native-capture",
+        "result": "passed",
+        "exit_code": 0,
+        "log_sha256": "4bfe67e970711708b15a5d6ded0a1ee60fac2356d4663e0ec5842daddc68df29"
+      },
+      {
+        "name": "native-game-obs",
+        "result": "failed",
+        "exit_code": 1,
+        "log_sha256": "63ea52ddb4e92c47f20c0f0e30b4ea1ad8fb381210427e7f9b0bc3ea21c0c77b"
+      }
+    ],
+    "failure": "native-game-obs failed after writable disk exhaustion evidence; disconnect sole cause remains unproven. Preserve failed attempt and run a distinct full same-source retry after measured safe capacity.",
+    "full_act": "preflight unavailable; all6jobs unrun; this is not a new prerequisite for every software-only literal."
+  },
+  "canonical_original_ledger": {
+    "path": "docs/evidence/completion-criteria.json",
+    "sha256": "0795e6594c7bbde195bb8ebfcbc4050f0d5ecbe9c879767edbe0050540386df6",
+    "count": 230,
+    "changed_in_diff": false
+  },
+  "remaining_gates": [
+    "Fresh complete same-source qualification and reviewed/public byte-bound candidate packet.",
+    "#82-C1 actual supported Decky loader lifecycle.",
+    "#79 retained explicit review/device-open instruction and actual physical-controller observation.",
+    "#86 actual Deck/OBS Flatpak/Gamescope/audio/mic/headset/provider viewer/session/controller cases.",
+    "Applicable fullACT capacity, hosted/service/review/platform, rights/publisher and adoption acceptance.",
+    "#87 exact destination/authority/current-install fix loop; #88 actual new-install/v1; #95 actual destination Graph/real-PR service review.",
+    "#89 owner authentication discussion/design selection before code."
+  ]
+}

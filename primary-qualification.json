@@ -1,0 +1,89 @@
+{
+  "archive": "/tmp/obsgod-final-772230a3-vlid5j_i/primary/second/obsgod-decky.zip",
+  "build_context": {
+    "GOCACHE": "/tmp/obsgod-final-772230a3-vlid5j_i/go-build-user-1000",
+    "GOMODCACHE": "/tmp/obsgod-final-772230a3-vlid5j_i/go-mod-user-1000",
+    "HOME": "/tmp/obsgod-final-772230a3-vlid5j_i/primary/context/home",
+    "TMPDIR": "/tmp/obsgod-final-772230a3-vlid5j_i/primary/context/tmp"
+  },
+  "builds": [
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/obsgod/scripts/package-decky.py",
+        "--version",
+        "0.1.0-deck.9",
+        "--revision",
+        "772230a32a8fdb237a58b8a637947b31671ad509",
+        "--output",
+        "/tmp/obsgod-final-772230a3-vlid5j_i/primary/first"
+      ],
+      "exit_code": 0,
+      "inspection": {
+        "archive": "/tmp/obsgod-final-772230a3-vlid5j_i/primary/first/obsgod-decky.zip",
+        "manifest_sha256": "aa8c8fe4540ac7088678bf24ad8cf6a028f9af492dfcd18a40b60b7f3d531a45",
+        "official_cli": {
+          "status": "unrun"
+        },
+        "payload_files": 33,
+        "receipt_sha256": "a174bb6719084a97036de94363f55de3523e0febd0f8f182fa43a7c72bc227c2",
+        "sha256": "fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a",
+        "source_files": 648,
+        "source_private_inventory": "passed"
+      },
+      "log": "first.log",
+      "log_sha256": "c9bf34f4ea4e42dc2e7b89d03b6c0d2dfb9ae75e3f4b6c37ad2b37ef1c5af13d",
+      "name": "first",
+      "seconds": 26.568
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/obsgod/scripts/package-decky.py",
+        "--version",
+        "0.1.0-deck.9",
+        "--revision",
+        "772230a32a8fdb237a58b8a637947b31671ad509",
+        "--output",
+        "/tmp/obsgod-final-772230a3-vlid5j_i/primary/second"
+      ],
+      "exit_code": 0,
+      "inspection": {
+        "archive": "/tmp/obsgod-final-772230a3-vlid5j_i/primary/second/obsgod-decky.zip",
+        "manifest_sha256": "aa8c8fe4540ac7088678bf24ad8cf6a028f9af492dfcd18a40b60b7f3d531a45",
+        "official_cli": {
+          "status": "unrun"
+        },
+        "payload_files": 33,
+        "receipt_sha256": "a174bb6719084a97036de94363f55de3523e0febd0f8f182fa43a7c72bc227c2",
+        "sha256": "fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a",
+        "source_files": 648,
+        "source_private_inventory": "passed"
+      },
+      "log": "second.log",
+      "log_sha256": "40c6e5592379fd422e881d61df9053ef77852909d217f7b4f0ca065af11ef895",
+      "name": "second",
+      "seconds": 8.8
+    }
+  ],
+  "dirty": false,
+  "finished_utc": "2026-11-20T20:31:19.329475+00:00",
+  "gid": 1000,
+  "groups": [],
+  "limits": [
+    "Local build only; actual Deck, OBS/provider, hosted acceptance and publication remain separate.",
+    "Canonical ZIP bytes are compared; optional official CLI assembly is not source compilation or reproducible raw ZIP proof.",
+    "Logs are private and require review before sharing. No cache is deleted by this helper."
+  ],
+  "observed_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+  "revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+  "schema": "obsgod.primary-build-qualification/v1",
+  "sha256": "fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a",
+  "source_tree": "f157ea77d16a1f1ce04bf1e47b584f9183c9c359",
+  "started_utc": "2026-11-20T20:30:43.704514+00:00",
+  "status": "passed",
+  "uid": 1000,
+  "version": "0.1.0-deck.9"
+}
