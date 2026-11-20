@@ -1,0 +1,214 @@
+{
+  "schema": "deckystream.ui-focused-checks/v1",
+  "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+  "tree": "ea671b0c5a6807a4ee0d42b86e57f1c69e5a543a",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "uid": 1000,
+  "python": "3.12.14",
+  "node": "24.19.0",
+  "npm": "11.9.0",
+  "go": "1.27.4",
+  "playwright": "1.62.0",
+  "browser": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+  "node_tests": 160,
+  "primary_sha256": "5b068a7deb857a7d883a9f9e1bc97e82e7804541a0b6005206779cefa11c475a",
+  "primary_builds": 2,
+  "checks": [
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "--prefix",
+        "steamdeck/decky",
+        "run",
+        "typecheck"
+      ],
+      "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+      "before": {
+        "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+        "dirty": false
+      },
+      "after": {
+        "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+        "dirty": false
+      },
+      "exit_code": 0,
+      "result": "passed",
+      "seconds": 1.407,
+      "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/typecheck.log",
+      "log_sha256": "4c51a932c40c1dc7887fef7b6e3a4ef90e59dbb21158e1fe8e6c1567a99e4a0e",
+      "utc": "2026-11-20T07:03:50.579366+00:00"
+    },
+    {
+      "name": "node-tests",
+      "command": [
+        "npm",
+        "--prefix",
+        "steamdeck/decky",
+        "test"
+      ],
+      "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+      "before": {
+        "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+        "dirty": false
+      },
+      "after": {
+        "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+        "dirty": false
+      },
+      "exit_code": 0,
+      "result": "passed",
+      "seconds": 0.29,
+      "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/node-tests.log",
+      "log_sha256": "8fbb35a3ab435821ae5ec92ce910262fd14de83f807f7285461e0c6babf4adc3",
+      "utc": "2026-11-20T07:03:50.873230+00:00"
+    },
+    {
+      "name": "frontend-build",
+      "command": [
+        "npm",
+        "--prefix",
+        "steamdeck/decky",
+        "run",
+        "build"
+      ],
+      "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+      "before": {
+        "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+        "dirty": false
+      },
+      "after": {
+        "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+        "dirty": false
+      },
+      "exit_code": 0,
+      "result": "passed",
+      "seconds": 0.567,
+      "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/frontend-build.log",
+      "log_sha256": "b75ce3f762b3be18a34c775c11a2a1c08459a682d72df188469d924e62bc6429",
+      "utc": "2026-11-20T07:03:51.443361+00:00"
+    },
+    {
+      "name": "primary-two",
+      "command": [
+        "python3",
+        "scripts/qualify-decky-build.py",
+        "--revision",
+        "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+        "--version",
+        "0.1.0-deck.9",
+        "--output",
+        "/tmp/obsgod-aurora-20261120-de7c5a44/primary"
+      ],
+      "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+      "before": {
+        "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+        "dirty": false
+      },
+      "after": {
+        "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+        "dirty": false
+      },
+      "exit_code": 0,
+      "result": "passed",
+      "seconds": 30.706,
+      "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/primary-two.log",
+      "log_sha256": "9f42e0bb3bc67a6bd930d717519421d217f5b9b0c4099597634d7c5b58d10978",
+      "utc": "2026-11-20T07:06:28.507153+00:00"
+    },
+    {
+      "name": "browser-panel",
+      "command": [
+        "python3",
+        "scripts/run-user-tests.py",
+        "--output-root",
+        "/workspace/.obsgod-tools/aurora-20261120-de7c5a44",
+        "--",
+        "steamdeck/tests/browser-panel.py",
+        "/tmp/obsgod-aurora-20261120-de7c5a44/primary/second/obsgod-decky.zip",
+        "--browser",
+        "/usr/bin/chromium",
+        "--screenshots",
+        "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/browser-panel"
+      ],
+      "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+      "before": {
+        "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+        "dirty": false
+      },
+      "after": {
+        "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+        "dirty": false
+      },
+      "exit_code": 0,
+      "result": "passed",
+      "seconds": 15.701,
+      "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/browser-panel.log",
+      "log_sha256": "bd02e037a42e8dc0a3083eec72e4f59e516bb2dcb89690c89c41072781a4a811",
+      "utc": "2026-11-20T07:07:01.866004+00:00"
+    },
+    {
+      "name": "browser-configuration",
+      "command": [
+        "python3",
+        "scripts/run-user-tests.py",
+        "--output-root",
+        "/workspace/.obsgod-tools/aurora-20261120-de7c5a44",
+        "--",
+        "steamdeck/tests/browser-native-configuration.py",
+        "/tmp/obsgod-aurora-20261120-de7c5a44/primary/second/obsgod-decky.zip",
+        "--browser",
+        "/usr/bin/chromium",
+        "--output",
+        "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/browser-configuration"
+      ],
+      "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+      "before": {
+        "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+        "dirty": false
+      },
+      "after": {
+        "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+        "dirty": false
+      },
+      "exit_code": 0,
+      "result": "passed",
+      "seconds": 11.839,
+      "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/browser-configuration.log",
+      "log_sha256": "e203dcf5f78dec53d6e7d1482721ac0bb2290622a87fcddb62a86ac2be4b339e",
+      "utc": "2026-11-20T07:07:13.708408+00:00"
+    },
+    {
+      "name": "browser-m3",
+      "command": [
+        "python3",
+        "scripts/run-user-tests.py",
+        "--output-root",
+        "/workspace/.obsgod-tools/aurora-20261120-de7c5a44",
+        "--",
+        "steamdeck/tests/browser-m3-panel.py",
+        "/tmp/obsgod-aurora-20261120-de7c5a44/primary/second/obsgod-decky.zip",
+        "--browser",
+        "/usr/bin/chromium",
+        "--screenshots",
+        "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/browser-m3"
+      ],
+      "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+      "before": {
+        "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+        "dirty": false
+      },
+      "after": {
+        "revision": "448b15dc1ee91ff8ca6c5ec9b02cad4bac850024",
+        "dirty": false
+      },
+      "exit_code": 0,
+      "result": "passed",
+      "seconds": 13.513,
+      "log": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/browser-m3.log",
+      "log_sha256": "f127a8ec33356abb88c4d3055da556dce284d8ba595277550ccf2f482ae5453e",
+      "utc": "2026-11-20T07:07:27.224943+00:00"
+    }
+  ],
+  "scope": "Focused changed-UI validation; simulated Decky browser host, actual primary ZIP. No full ACT/native/provider/Deck/hosted/release acceptance."
+}

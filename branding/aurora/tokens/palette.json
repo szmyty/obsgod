@@ -1,0 +1,22 @@
+{
+  "schema": "deckystream.aurora-palette/v1",
+  "status": "selected-direction; unapproved-production-candidate",
+  "colors": {
+    "ink": "#050b14",
+    "surface": "#101d2a",
+    "text": "#edf9fc",
+    "muted": "#abc2d4",
+    "aqua": "#72f3ed",
+    "cyan": "#8df9ff",
+    "violet": "#b4a1f3",
+    "light": "#f4fbfe",
+    "lightText": "#142537",
+    "focus": "#185b86"
+  },
+  "typography": {
+    "family": "DejaVu Sans",
+    "fontSha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e",
+    "licenseFile": "branding/licenses/DejaVu.txt"
+  },
+  "usage": "Candidate product palette only; no organization palette or adopted token layer. Gradient colors are decorative; observed output state uses separate text and status cues."
+}

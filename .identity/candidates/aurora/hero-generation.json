@@ -1,0 +1,43 @@
+{
+  "schema": "deckystream.aurora-hero-generation/v1",
+  "status": "candidate generated from the owner-selected creative direction; production rights and final adoption pending",
+  "tool": "image_gen.imagegen",
+  "tool_call_name": "image_gen__imagegen",
+  "prompt": "Create ONE finished wide hero-background art candidate for deckystream using the TWO supplied reference images. Faithfully preserve the SELECTED 01 / aurora symbol in the TOP-LEFT tile of the first reference: a luminous aqua/cyan open orbital ring with its gap at upper right, and the smooth flowing S-shaped stream ribbon through the middle, with restrained violet on the right edge. Preserve that exact recognizable motif and its restrained airy material character; do not invent a different logo, play triangle, controller, letterform or alternate palette. Use the second reference only for the spacious near-black atmospheric water/haze presentation. Compose a single wide cinematic banner, target 1600 by 600 or equivalent very wide 8:3 aspect. Leave the entire LEFT 55 percent quiet dark negative space for a wordmark that will be added separately; place the symbol centered around 76 percent of the image width and slightly above the horizon, taking about 60 percent of the image height. Its glow and soft reflection can touch the calm dark water toward the lower edge. Very subtle aqua haze around the horizon, restrained violet haze far right, smooth luminous depth and carefully controlled bloom. Rich near-black ink background, clean premium gamer/creator aesthetic, legible at banner scale. No text whatsoever, no numbers, no labels, no palette swatches, no comparison grid, no lower panels, no frames or borders, no decorative UI. The image must be one continuous background scene with one symbol and abundant quiet left-side space. Output opaque background, no transparency. Do not alter either original reference file.",
+  "referenced_images": [
+    {
+      "path": ".identity/candidates/concepts/orbital-stream-color-alternatives.png",
+      "sha256": "4e2076ce7ba139a97d1ecf3b730de6db0cb15d9452cfcefbd8885b2af7b9c801"
+    },
+    {
+      "path": ".identity/candidates/concepts/orbital-stream-board.png",
+      "sha256": "5301893b21e08872262cced4e6415e117ddf20900e0ee64e816f912b298c8a5e"
+    }
+  ],
+  "generation_parameters": {
+    "transparent_background": false,
+    "referenced_image_paths": [
+      "/workspace/obsgod/.identity/candidates/concepts/orbital-stream-color-alternatives.png",
+      "/workspace/obsgod/.identity/candidates/concepts/orbital-stream-board.png"
+    ]
+  },
+  "artifact": {
+    "file": "hero-master.png",
+    "sha256": "6b3c458e2f81b9d31435fcbc87c86e8f5c8ad7df579dfca34f578beac5e75b2c",
+    "bytes": 1465734,
+    "format": "PNG",
+    "width": 2048,
+    "height": 768,
+    "aspect_ratio": "8:3",
+    "scope": "Image-generator output copied byte-identically; dimensions read from PNG header, not a pixel decode proof"
+  },
+  "provider_original_preserved": true,
+  "original_concepts_preserved": true,
+  "provenance": "Generated once by OpenAI's image_gen tool through Codex, using retained repository concept images as references. No claim of deterministic image generation, identical vector conversion, human authorship, exclusive rights or accepted production artwork.",
+  "rights": {
+    "license": "not asserted by this generation record",
+    "owner_or_publisher": "not selected by this generation record",
+    "final_review": "pending owner/source/rights/release packet"
+  },
+  "reproduction": "Preserve this raster master and hash as a pinned source for deterministic downstream exports; rerunning the image-generation prompt is not claimed reproducible."
+}

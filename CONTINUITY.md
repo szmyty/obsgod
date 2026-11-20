@@ -1,5 +1,54 @@
 # Current work
 
+## Selected aurora review candidate and qualification
+
+#112 merged normally at **069db4a21ec0a173b7dd30c12a53018c7700f79b** after
+fresh focused checks at448b15d. Its two verified-merged branches were removed.
+Draft [#113](https://github.com/szmyty/obsgod/pull/113) integrates the selected
+01 / aurora source kit, lowercase deckystream, local native marks plus an
+independent observed-state badge, README/site assets and current setup docs.
+
+Qualified clean source is **af7a20fdd0c62404e9b11d540fb605368e269380**, tree
+**d6149d9ec670cffcc30db355262aa688382b5e7e**. The completed controller has
+**67 passed command predicates and1 unavailable matrix command**. All10
+packaged browser flows,3 native Linux OBS harnesses,161 Node tests,33 branding
+tests,38-file export repeat, Go/Python/security and package/install audits passed
+with recorded skips/limits. Two complete primary builds match ZIP **4deece2b**.
+Read the [exact-source checkpoint](docs/aurora-integration-checkpoint.md) and
+[owner packet](docs/aurora-owner-packet.md).
+
+All18 immutable review-artifact files at **f2b160823800e3befd7440e6bcce8d135845a008**
+were publicly downloaded and hash-verified. This is a review branch, never a
+source merge target or release/updater offer. Actual proof ZIP, original/public
+hashes, independent source/visual/privacy reviews and all104 bounded criterion
+remainders are recorded. The original230 ledger/dependencies remain unchanged.
+All21 literal #80/#81 local criteria have evidence; issues stay open for review.
+The [foundation reconciliation](docs/evidence/aurora-af7-foundation-criteria.md)
+maps27 #76–#79 source contracts to fresh af7 evidence,0new gaps. No new
+fullACT/hardware dependency was imposed on source-only literals; real controller/
+Flatpak/provider and #79's explicit review/device keep-open checkpoint remain.
+
+FullACT preflight refused before allocation: root shortfall4,946,694,316bytes at
+the recorded attempt; all6 jobs/probe unrun. Standalone commands are not ACT jobs.
+Hosted af7:15 billing refusals+1skip,0steps, no executed non-billing source failure.
+A later read-only [capacity audit](docs/evidence/aurora-af7-resource-feasibility.md)
+found no safe reclaim/relocation plan: even optimistic measures remain short;
+no images/caches/outputs were removed. Original matrix dispositions are unchanged.
+Machine OS is still unknown; next is the capable-free-machine matrix and numbered
+owner tests, then actual #86 Steam Deck/loader/provider/controller/headset loop.
+#82-C1 real supported-loader lifecycle remains explicit. #87/#88 migration/new
+install/v1 and #95 actual destination dependency graph follow their original
+gates; #89 OAuth/phone research remains separate. Rights/license/publisher,
+required CI/platform/review and independent/new-user adoption remain open.
+
+Later evidence/documentation commits do not relabel af7 package/source bytes as
+a newer qualified revision. No release, deployment, migration, Store submission,
+paid resource or other-repository change occurred. No network/package preset or
+injected authentication change was made. Existing checkout remains the source
+workspace; old receipts apply only to their stated revisions.
+
+## Earlier checkpoints
+
 ## Aurora branding and native panel batch in progress
 
 The owner authorized merging #111 and proceeding with #80/#81, with the final

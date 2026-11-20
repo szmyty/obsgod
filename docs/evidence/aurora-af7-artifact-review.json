@@ -1,0 +1,148 @@
+{
+  "schema": "deckystream.independent-final-artifact-staging-review/v1",
+  "reviewed_utc": "2026-11-20T08:07:42.622936+00:00",
+  "reviewer": "/root/qualify_aurora",
+  "status": "passed",
+  "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+  "source_tree": "d6149d9ec670cffcc30db355262aa688382b5e7e",
+  "archive_sha256": "de58f9171eaa6b3b091dbe3a10d0ab5bb1515cc3d922cb2a4f44b61aba643241",
+  "staging": "/workspace/.obsgod-tools/aurora-20261120-de7c5a44/review-artifact",
+  "files": [
+    {
+      "name": "OWNER-PACKET.json",
+      "sha256": "35505509bb74ef1edfceb625b5555e818d967b4963212ee3731ec84784c2d1f3",
+      "bytes": 36252,
+      "nofollow_regular_read": true,
+      "scan": "raw+decoded text passed"
+    },
+    {
+      "name": "OWNER-PACKET.md",
+      "sha256": "83f428cc669cad4ccd7ffeea8b05cf19b9ef7e8c5ae84ae197a4aba0936117e0",
+      "bytes": 10615,
+      "nofollow_regular_read": true,
+      "scan": "raw+decoded text passed"
+    },
+    {
+      "name": "OWNER-TESTS.md",
+      "sha256": "17d7291c96ca118e9e6d423475de28fd365807508dd2f8b9473f7c93fba8e088",
+      "bytes": 14087,
+      "nofollow_regular_read": true,
+      "scan": "raw+decoded text passed"
+    },
+    {
+      "name": "PUBLIC-OWNER-REVIEW.json",
+      "sha256": "ed573e399e268033daadbe730e25e7a146f3311af3ccce001722176b6b3db923",
+      "bytes": 3188,
+      "nofollow_regular_read": true,
+      "scan": "raw+decoded text passed"
+    },
+    {
+      "name": "PUBLIC-OWNER-REVIEW.md",
+      "sha256": "4dd897ae183247de60dce6e895561df586355e97dbb8d1e587de2336c82cd4bc",
+      "bytes": 896,
+      "nofollow_regular_read": true,
+      "scan": "raw+decoded text passed"
+    },
+    {
+      "name": "PUBLIC-PROOF-REVIEW.json",
+      "sha256": "b693b5bbb011d77fd42bc2a807ecfc3dbc1733f636ab4d81769f8eed8cd235fe",
+      "bytes": 50497,
+      "nofollow_regular_read": true,
+      "scan": "raw+decoded text passed"
+    },
+    {
+      "name": "PUBLIC-PROOF-REVIEW.md",
+      "sha256": "506af95d47924f7d6ebe46661664c19193879f4f09a6bdab89a1a34a239bad6c",
+      "bytes": 2046,
+      "nofollow_regular_read": true,
+      "scan": "raw+decoded text passed"
+    },
+    {
+      "name": "README.md",
+      "sha256": "b15d88f77d692317d70dcc5ae8faf837d5b33452a7fdc025abc8c20d4ae36752",
+      "bytes": 1283,
+      "nofollow_regular_read": true,
+      "scan": "raw+decoded text passed"
+    },
+    {
+      "name": "REPRODUCE.md",
+      "sha256": "a66239969be2d02116336a8008eae98ce3727fad96790e93088a27ff71a1d669",
+      "bytes": 9268,
+      "nofollow_regular_read": true,
+      "scan": "raw+decoded text passed"
+    },
+    {
+      "name": "SHA256SUMS",
+      "sha256": "55ab08333dafa6a5411c09bf361058f5c3b5fe2946e1193e4971e3f778722fc2",
+      "bytes": 1467,
+      "nofollow_regular_read": true,
+      "scan": "raw+decoded text passed"
+    },
+    {
+      "name": "aurora-af7-public-proof.zip",
+      "sha256": "de58f9171eaa6b3b091dbe3a10d0ab5bb1515cc3d922cb2a4f44b61aba643241",
+      "bytes": 586090,
+      "nofollow_regular_read": true,
+      "scan": "exact reviewed binary copy"
+    },
+    {
+      "name": "build-receipt.json",
+      "sha256": "ace6c1ad10d6f52539034a47742dc2083b9dd66954c2b2dbc37741a4a94ffcad",
+      "bytes": 67570,
+      "nofollow_regular_read": true,
+      "scan": "raw+decoded text passed"
+    },
+    {
+      "name": "candidate.json",
+      "sha256": "8d65bda6eaeab87a4b035d5618e0c8e3fb2dceccf90244fa56ef581ebddae989",
+      "bytes": 928,
+      "nofollow_regular_read": true,
+      "scan": "raw+decoded text passed"
+    },
+    {
+      "name": "criteria-review.json",
+      "sha256": "00ec0dd193a5882de1199c9be5721d7aaee7df9eb4e9e3bf1faa3b6cffaaf697",
+      "bytes": 59889,
+      "nofollow_regular_read": true,
+      "scan": "raw+decoded text passed"
+    },
+    {
+      "name": "obsgod-decky.zip",
+      "sha256": "4deece2bcaba6440c168d5cb7b1bc585e346d6b2f06655a1672c0d9638afeab8",
+      "bytes": 4570728,
+      "nofollow_regular_read": true,
+      "scan": "exact reviewed binary copy"
+    },
+    {
+      "name": "qualification-summary.json",
+      "sha256": "ea422d3d2d0dde4ecd822706f4a9fddbccdd1a0b01084ee7f585dcfd3276d45a",
+      "bytes": 26153,
+      "nofollow_regular_read": true,
+      "scan": "raw+decoded text passed"
+    },
+    {
+      "name": "remaining-acceptance.json",
+      "sha256": "99972b9fb06e6594d0f82dd9588ba663de211d038a954bf2f789001aede65835",
+      "bytes": 98180,
+      "nofollow_regular_read": true,
+      "scan": "raw+decoded text passed"
+    },
+    {
+      "name": "remaining-acceptance.md",
+      "sha256": "66cb98655f70d9b2295958db205c24cdc86e908871869be818ccea27cdf15e0a",
+      "bytes": 5612,
+      "nofollow_regular_read": true,
+      "scan": "raw+decoded text passed"
+    }
+  ],
+  "member_count": 18,
+  "text_files_scanned": 16,
+  "checksum_rows_verified": 17,
+  "errors": [],
+  "scope": "Read-only exact18 final staged files. All16 text files scanned raw/recursively decoded for credentials/known masks/editor placeholders; two binary ZIPs unchanged from independent proof/primary identity review. Four copied independent attestations match their private reviewed originals. SHA256SUMS covers all17 other files.",
+  "historical_snapshot": "The prior13-file staging report retained a set-mismatch failure because root concurrently added the four attestations/checksumlist. All13 byte/hash/privacy assertions passed then and those bytes are unchanged now. That administrative snapshot failure is preserved; this report validates the actual final18 set.",
+  "limits": [
+    "No qualification, source edit, staging mutation, publication or GitHub changes were performed.",
+    "Any byte changes after these hashes require renewed binding. Full CI/platform/device/rights/adoption gates remain."
+  ]
+}

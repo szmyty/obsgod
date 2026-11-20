@@ -1,0 +1,50 @@
+{
+  "assets": [
+    {
+      "creator": "OpenAI Codex, for szmyty/obsgod",
+      "humanApproval": null,
+      "id": "mark",
+      "method": "Separately authored SVG orbital stream geometry based on visually inspected owner-selected 01 / aurora direction; not traced, automatically vectorized or asserted identical to the raster concept.",
+      "path": ".identity/candidates/aurora/mark.svg",
+      "proposedLicense": "MIT, subject to owner decision",
+      "rightsStatus": "owner-review-required; no trademark clearance, copyright eligibility or rights transfer asserted",
+      "sha256": "f3b68d3937e49767a80415d98177f36f9d80adcd4b6cc8d0441ce0b87485a9c3"
+    },
+    {
+      "creator": "OpenAI Codex, for szmyty/obsgod",
+      "humanApproval": null,
+      "id": "mark-small",
+      "method": "Separately authored SVG orbital stream geometry based on visually inspected owner-selected 01 / aurora direction; not traced, automatically vectorized or asserted identical to the raster concept.",
+      "path": ".identity/candidates/aurora/mark-small.svg",
+      "proposedLicense": "MIT, subject to owner decision",
+      "rightsStatus": "owner-review-required; no trademark clearance, copyright eligibility or rights transfer asserted",
+      "sha256": "e53ee844953468d21e8c7255bea8e1e18f715859ffb2eead6ae5d05ca9819356"
+    },
+    {
+      "creator": "OpenAI image generation requested for this repository",
+      "humanApproval": null,
+      "id": "hero-master",
+      "method": "One image_gen edit from retained selected references; original output preserved unchanged. See hero-generation.json for exact prompt and reference digests.",
+      "path": ".identity/candidates/aurora/hero-master.png",
+      "proposedLicense": null,
+      "rightsStatus": "owner-review-required",
+      "sha256": "6b3c458e2f81b9d31435fcbc87c86e8f5c8ad7df579dfca34f578beac5e75b2c"
+    }
+  ],
+  "boundaries": [
+    "Creative direction is owner-selected; final source/export/rights and publication decisions are not invented.",
+    "Original generated raster references and separately authored vectors remain distinct.",
+    "No approved Identity compiler output, release, migration, target qualification or ownership transfer is claimed."
+  ],
+  "creativeDirection": ".identity/candidates/concepts/selection.json",
+  "profile": "orbital-stream-aurora",
+  "project": {
+    "displayName": "deckystream",
+    "id": "decky-stream",
+    "organization": null,
+    "repository": "https://github.com/szmyty/obsgod"
+  },
+  "runtime": "Locally bundled review-preview projection only; decorative gradient is independent of observed streaming state.",
+  "schema": "deckystream.aurora-candidates/v1",
+  "status": "proposed-unapproved"
+}

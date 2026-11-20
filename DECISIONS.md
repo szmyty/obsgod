@@ -83,6 +83,19 @@ remain supported. There is no schema generator or new validation dependency.
 Read [the contract](docs/settings-boundary.md). These repairs do not accept a
 proposed identity/companion ADR or authorize publication/migration/spending.
 
+## Selected aurora source preview (#80–#81)
+
+The selected source preview now uses lowercase `deckystream` metadata and the
+01 / aurora local artwork profile. This implements the owner's direction, not
+an acceptance of the proposed organization/repository migration or a final
+artwork rights/license grant. The vector mark and recorded generated raster
+master remain distinct. Compact decorative gradients are bundled locally;
+observed state retains its own label/badge and authorization semantics. The
+current-source install path is the standard Decky ZIP with consented first-run
+dependency setup and native destination entry; Desktop Setup/app remain optional.
+Historical install downloads keep their exact source/checksums. Read
+[selected aurora](docs/selected-aurora.md) for source/export and remaining gates.
+
 ## Native destination setup (#79)
 
 Owner-authorized manual-key setup now uses the normal Decky panel and existing

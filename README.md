@@ -1,25 +1,24 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: light)" srcset="branding/repository/header-light.png">
-    <source media="(prefers-color-scheme: dark)" srcset="branding/repository/header.png">
-    <img src="branding/repository/header.png" width="960" alt="Decky Stream — stream from Steam Deck with OBS">
+    <source media="(prefers-color-scheme: light)" srcset="branding/aurora/github/readme-header-light.png">
+    <source media="(prefers-color-scheme: dark)" srcset="branding/aurora/github/readme-header.png">
+    <img src="branding/aurora/github/readme-header.png" width="960" alt="deckystream — stream from Steam Deck with OBS">
   </picture>
 </p>
 
-# Decky Stream
+# deckystream
 
-**Stream from Steam Deck with OBS.** Set up in Desktop Mode, then control your
-stream, microphone and local recordings from Decky's Quick Access panel in
-Gaming Mode.
+**Stream from Steam Deck with OBS.** Set up and control your stream, microphone
+and local recordings from Decky's Quick Access panel in Gaming Mode.
 
-[Install the review build](docs/current-review-install.md) ·
+[Current review download and tests](docs/aurora-owner-packet.md) ·
 [User guide](docs/steam-deck.md) · [Get help](SUPPORT.md) ·
 [Roadmap](ROADMAP.md) · [Support development](#support-development)
 
-**Development preview.** The linked review build has passed its available local
-qualification. Actual Deck/provider-viewer acceptance, required CI and applicable
-reviews remain open. See the [exact-source results](audits/qualification-4699235.md)
-for what passed and what remains unrun or unavailable. The executable, installed
+**Development preview.** The current review candidate is exact source `af7a20f`:67
+local command predicates passed; the full ACT matrix is unavailable. Actual Deck/
+provider-viewer acceptance, required CI and applicable reviews remain open. See
+[exact-source results and limits](docs/aurora-integration-checkpoint.md). The executable, installed
 plugin and storage compatibility names are still `obsgod` / `OBSGod`.
 
 ## What you can do
@@ -38,17 +37,20 @@ making a local clip or recovering a connection does not start a stream.
 
 ## Install and make your first stream
 
-You need Steam Deck Desktop/Gaming Mode, Decky Loader and compatible OBS Studio
-with its capture/audio dependencies. The full installer checks dependencies and
-installs the paired Decky plugin; follow the guide for prerequisites and any
-action it requests.
+The current source uses one standard Decky plugin ZIP. Decky Loader must already
+be installed; OBS Studio and matching capture dependencies are consented first-run
+setup, with progress, cancel and retry. A separate Desktop application is optional.
+Use the [checksum-bound current review packet](docs/aurora-owner-packet.md); final
+qualification remains tracked in [#85](https://github.com/szmyty/obsgod/issues/85).
 
-1. In **Desktop Mode**, stop streaming, recording and replay. Keep Steam and
-   Decky running, then use the [checksum-verifying review installer](docs/current-review-install.md).
-2. Open **Decky Stream Setup** from Applications and configure the destination
-   and stream key locally. Preserve your existing settings and recordings.
-3. Return to **Gaming Mode** and open the plugin through Decky's Quick Access
-   panel. Make a local test clip and verify both its picture and sound.
+1. Stop streaming, recording and replay before replacement. Install the exact
+   checksum-bound standard ZIP supplied with your candidate through Decky's
+   normal plugin installation controls; a GitHub source ZIP is not that package.
+2. Open the plugin in **Gaming Mode**. Review missing dependencies and choose
+   **Install** or **Later**. In **Stream destination**, save the server and private
+   key. Existing settings/media are preserved; Desktop Setup remains optional.
+3. Make a local test clip and verify both picture and sound. The streaming
+   indicator stays stopped during local recording.
 4. Select the intended picture/audio, explicitly **Start streaming**, and check
    the result from a separate viewer. OBS reporting transmission does not prove
    the destination received audible video.
@@ -58,8 +60,10 @@ includes its WebSocket server, so a second WebSocket plugin is unnecessary.
 OBS remains a graphical application managed in the background; a graphical
 session is required.
 
-The linked manual review checkpoint is exact source `4699235e9e925b76ca492d5a00a375ed37fb338e`,
-not a newly published release or an update offered by **Check for updates**.
+The current review checkpoint is exact source `af7a20fdd0c62404e9b11d540fb605368e269380`,
+not a release or update offered by **Check for updates**. The unchanged
+[historical Desktop review installer](docs/current-review-install.md) still targets
+`4699235e9e925b76ca492d5a00a375ed37fb338e`.
 The older [1a/d0a candidate](docs/candidate-9-install.md) remains unchanged, and
 [published previews](https://github.com/szmyty/obsgod/releases) do not contain all
 current work. Use the source revision and checksums supplied with your candidate.
@@ -82,9 +86,11 @@ current work. Use the source revision and checksums supplied with your candidate
   [identity/migration decisions](docs/identity-migration.md),
   [draft brand review](docs/branding-review.md) and [site preview](docs/branding-site-preview.md).
 
-Repository artwork is a proposed Decky Stream identity for review. Its creative
-and rights status is recorded in the brand review; it does not establish final
-brand approval or change the installed plugin's native theme.
+The selected aurora direction now appears in this source preview and the local
+Decky UI. [Open ordinary PNGs and the offline gallery](branding/aurora/README.md).
+Original concepts and the earlier mint kit remain available. Source/export and
+rights status is recorded in the brand review; this does not establish final
+publication approval or Steam Deck rendering acceptance.
 
 ## CLI and automation
 

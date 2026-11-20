@@ -43,7 +43,7 @@ class BuildSiteSafety(unittest.TestCase):
             (self.source / directory).mkdir(parents=True, exist_ok=True)
         shutil.copytree(ROOT / "site", self.source / "site", dirs_exist_ok=True)
         for name in ("product.json", "support.json", ".github/FUNDING.yml",
-                     "steamdeck/decky/src/support-data.mjs", "scripts/build-site.py"):
+                     "steamdeck/decky/src/support-data.mjs", "scripts/build-site.py", "scripts/brand_png.py"):
             shutil.copyfile(ROOT / name, self.source / name)
 
     def render(self):
@@ -59,6 +59,17 @@ class BuildSiteSafety(unittest.TestCase):
         (cache / "test_build.cpython-312.pyc").write_bytes(b"interpreter-cache-fixture")
         (self.source / "site/leftover.pyc").write_bytes(b"other-interpreter-cache-fixture")
         self.assertEqual(first, self.render())
+
+    def test_disguised_or_oversized_png_is_rejected(self):
+        path = self.source / "site/assets/unsafe.png"
+        path.write_bytes(b"<svg onload='unexpected()'></svg>")
+        with self.assertRaises(ValueError):
+            self.render()
+        source = bytearray((ROOT / "site/assets/brand-icon.png").read_bytes())
+        source[16:20] = (100_000).to_bytes(4, "big")
+        path.write_bytes(source)
+        with self.assertRaises(ValueError):
+            self.render()
 
     def test_display_metadata_is_html_escaped(self):
         path = self.source / "product.json"

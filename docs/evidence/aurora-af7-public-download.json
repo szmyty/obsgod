@@ -1,0 +1,152 @@
+{
+  "revision": "af7a20fdd0c62404e9b11d540fb605368e269380",
+  "artifact_commit": "f2b160823800e3befd7440e6bcce8d135845a008",
+  "checked_utc": "2026-11-20T08:07:18.735744+00:00",
+  "files": [
+    {
+      "file": "OWNER-PACKET.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/f2b160823800e3befd7440e6bcce8d135845a008/OWNER-PACKET.json",
+      "http_status": 200,
+      "bytes": 36252,
+      "sha256": "35505509bb74ef1edfceb625b5555e818d967b4963212ee3731ec84784c2d1f3",
+      "result": "passed"
+    },
+    {
+      "file": "OWNER-PACKET.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/f2b160823800e3befd7440e6bcce8d135845a008/OWNER-PACKET.md",
+      "http_status": 200,
+      "bytes": 10615,
+      "sha256": "83f428cc669cad4ccd7ffeea8b05cf19b9ef7e8c5ae84ae197a4aba0936117e0",
+      "result": "passed"
+    },
+    {
+      "file": "OWNER-TESTS.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/f2b160823800e3befd7440e6bcce8d135845a008/OWNER-TESTS.md",
+      "http_status": 200,
+      "bytes": 14087,
+      "sha256": "17d7291c96ca118e9e6d423475de28fd365807508dd2f8b9473f7c93fba8e088",
+      "result": "passed"
+    },
+    {
+      "file": "PUBLIC-OWNER-REVIEW.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/f2b160823800e3befd7440e6bcce8d135845a008/PUBLIC-OWNER-REVIEW.json",
+      "http_status": 200,
+      "bytes": 3188,
+      "sha256": "ed573e399e268033daadbe730e25e7a146f3311af3ccce001722176b6b3db923",
+      "result": "passed"
+    },
+    {
+      "file": "PUBLIC-OWNER-REVIEW.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/f2b160823800e3befd7440e6bcce8d135845a008/PUBLIC-OWNER-REVIEW.md",
+      "http_status": 200,
+      "bytes": 896,
+      "sha256": "4dd897ae183247de60dce6e895561df586355e97dbb8d1e587de2336c82cd4bc",
+      "result": "passed"
+    },
+    {
+      "file": "PUBLIC-PROOF-REVIEW.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/f2b160823800e3befd7440e6bcce8d135845a008/PUBLIC-PROOF-REVIEW.json",
+      "http_status": 200,
+      "bytes": 50497,
+      "sha256": "b693b5bbb011d77fd42bc2a807ecfc3dbc1733f636ab4d81769f8eed8cd235fe",
+      "result": "passed"
+    },
+    {
+      "file": "PUBLIC-PROOF-REVIEW.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/f2b160823800e3befd7440e6bcce8d135845a008/PUBLIC-PROOF-REVIEW.md",
+      "http_status": 200,
+      "bytes": 2046,
+      "sha256": "506af95d47924f7d6ebe46661664c19193879f4f09a6bdab89a1a34a239bad6c",
+      "result": "passed"
+    },
+    {
+      "file": "README.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/f2b160823800e3befd7440e6bcce8d135845a008/README.md",
+      "http_status": 200,
+      "bytes": 1283,
+      "sha256": "b15d88f77d692317d70dcc5ae8faf837d5b33452a7fdc025abc8c20d4ae36752",
+      "result": "passed"
+    },
+    {
+      "file": "REPRODUCE.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/f2b160823800e3befd7440e6bcce8d135845a008/REPRODUCE.md",
+      "http_status": 200,
+      "bytes": 9268,
+      "sha256": "a66239969be2d02116336a8008eae98ce3727fad96790e93088a27ff71a1d669",
+      "result": "passed"
+    },
+    {
+      "file": "SHA256SUMS",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/f2b160823800e3befd7440e6bcce8d135845a008/SHA256SUMS",
+      "http_status": 200,
+      "bytes": 1467,
+      "sha256": "55ab08333dafa6a5411c09bf361058f5c3b5fe2946e1193e4971e3f778722fc2",
+      "result": "passed"
+    },
+    {
+      "file": "aurora-af7-public-proof.zip",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/f2b160823800e3befd7440e6bcce8d135845a008/aurora-af7-public-proof.zip",
+      "http_status": 200,
+      "bytes": 586090,
+      "sha256": "de58f9171eaa6b3b091dbe3a10d0ab5bb1515cc3d922cb2a4f44b61aba643241",
+      "result": "passed"
+    },
+    {
+      "file": "build-receipt.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/f2b160823800e3befd7440e6bcce8d135845a008/build-receipt.json",
+      "http_status": 200,
+      "bytes": 67570,
+      "sha256": "ace6c1ad10d6f52539034a47742dc2083b9dd66954c2b2dbc37741a4a94ffcad",
+      "result": "passed"
+    },
+    {
+      "file": "candidate.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/f2b160823800e3befd7440e6bcce8d135845a008/candidate.json",
+      "http_status": 200,
+      "bytes": 928,
+      "sha256": "8d65bda6eaeab87a4b035d5618e0c8e3fb2dceccf90244fa56ef581ebddae989",
+      "result": "passed"
+    },
+    {
+      "file": "criteria-review.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/f2b160823800e3befd7440e6bcce8d135845a008/criteria-review.json",
+      "http_status": 200,
+      "bytes": 59889,
+      "sha256": "00ec0dd193a5882de1199c9be5721d7aaee7df9eb4e9e3bf1faa3b6cffaaf697",
+      "result": "passed"
+    },
+    {
+      "file": "obsgod-decky.zip",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/f2b160823800e3befd7440e6bcce8d135845a008/obsgod-decky.zip",
+      "http_status": 200,
+      "bytes": 4570728,
+      "sha256": "4deece2bcaba6440c168d5cb7b1bc585e346d6b2f06655a1672c0d9638afeab8",
+      "result": "passed"
+    },
+    {
+      "file": "qualification-summary.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/f2b160823800e3befd7440e6bcce8d135845a008/qualification-summary.json",
+      "http_status": 200,
+      "bytes": 26153,
+      "sha256": "ea422d3d2d0dde4ecd822706f4a9fddbccdd1a0b01084ee7f585dcfd3276d45a",
+      "result": "passed"
+    },
+    {
+      "file": "remaining-acceptance.json",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/f2b160823800e3befd7440e6bcce8d135845a008/remaining-acceptance.json",
+      "http_status": 200,
+      "bytes": 98180,
+      "sha256": "99972b9fb06e6594d0f82dd9588ba663de211d038a954bf2f789001aede65835",
+      "result": "passed"
+    },
+    {
+      "file": "remaining-acceptance.md",
+      "url": "https://raw.githubusercontent.com/szmyty/obsgod/f2b160823800e3befd7440e6bcce8d135845a008/remaining-acceptance.md",
+      "http_status": 200,
+      "bytes": 5612,
+      "sha256": "66cb98655f70d9b2295958db205c24cdc86e908871869be818ccea27cdf15e0a",
+      "result": "passed"
+    }
+  ],
+  "status": "passed"
+}

@@ -1,0 +1,12 @@
+{
+  "actual_device": "unrun",
+  "decorative_gradient": "Not a status indicator; inspect actual-size sheets and target rendering separately",
+  "method": "WCAG sRGB relative luminance",
+  "minimum_normal_text": 4.5,
+  "text_ratios": {
+    "body_on_ink": 18.373,
+    "focused_label": 6.792,
+    "light_text_on_light": 14.877,
+    "muted_on_ink": 10.709
+  }
+}

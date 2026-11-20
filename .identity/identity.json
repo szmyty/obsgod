@@ -3,7 +3,7 @@
   "schema": "identity.project/v1",
   "project": {
     "id": "decky-stream",
-    "displayName": "Decky Stream",
+    "displayName": "deckystream",
     "repository": "https://github.com/szmyty/obsgod",
     "tagline": "Stream from Steam Deck with OBS",
     "kind": "product"

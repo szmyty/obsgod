@@ -52,7 +52,12 @@ def main():
                 page.on("pageerror", lambda error: errors.append(str(error)))
                 page.goto("http://127.0.0.1:" + str(server.server_port))
                 page.get_by_role("status").filter(has_text="Stopped").wait_for()
-                page.get_by_text("Decky Stream",exact=False).wait_for()
+                page.get_by_text("deckystream",exact=False).wait_for()
+                marks = page.locator('img[data-brand="aurora"]')
+                assert marks.count() == 2
+                page.wait_for_function("[...document.querySelectorAll('img[data-brand=aurora]')].every(image=>image.complete&&image.naturalWidth>0)")
+                decorative_sources = marks.evaluate_all("images=>images.map(image=>image.src)")
+                assert all(source.startswith("data:image/svg+xml,") for source in decorative_sources)
                 assert page.evaluate("plugin.name") == "OBSGod", "display-name change must preserve loader identity"
                 page.get_by_text("Status updates automatically",exact=True).wait_for()
                 page.get_by_text("System audio: Not confirmed",exact=True).wait_for()
@@ -117,6 +122,7 @@ def main():
                 page.get_by_role("button",name="Start streaming",exact=True).evaluate("button=>{button.click();button.click();button.click();}")
                 page.get_by_role("status").filter(has_text="OBS streaming").wait_for()
                 page.get_by_role("img", name="OBS streaming").wait_for()
+                assert marks.evaluate_all("images=>images.map(image=>image.src)") == decorative_sources, "decorative colors cannot become output state"
                 console.get_by_text("Streaming fixture started",exact=False).wait_for()
                 assert page.evaluate("fixture.calls.start") == 1
                 assert page.get_by_role("button",name="Start streaming",exact=True).is_disabled()

@@ -1,6 +1,6 @@
 # Architecture
 
-Decky Stream is a local OBS controller with a Steam Deck integration. The working
+deckystream is a local OBS controller with a Steam Deck integration. The working
 display name comes from `product.json`; compatible executable, Go module, plugin
 identity and storage namespace remain `obsgod`/`OBSGod`. A display-name change
 does not migrate an installation or establish new repository ownership.
@@ -9,6 +9,14 @@ This is the canonical component and boundary description. See
 [vocabulary](ONTOLOGY.md), [decisions](DECISIONS.md), [roadmap](ROADMAP.md),
 [security](SECURITY.md) and [continuity](CONTINUITY.md). Feature guides describe
 individual workflows; qualification records identify the exact tested revision.
+
+The selected aurora profile keeps original raster concepts, a separately authored
+vector source and one recorded generated hero master distinct. Pinned local
+exports feed ordinary PNG downloads, the offline gallery, README/site and the
+bundled compact UI mark. `product.json` supplies lowercase display styling;
+compatibility IDs and empty Identity approval/token layers remain unchanged.
+The decorative gradient is separate from observed streaming status. Rendering
+and provenance checks do not imply rights, publisher or actual device approval.
 
 ## Components and dependency direction
 

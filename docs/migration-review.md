@@ -3,7 +3,7 @@
 Issues #35/#36. This is a staged plan and local compatibility inventory. It does
 not transfer or rename a repository, create an organization, deploy a site, or
 publish a release. Intended repository slug: `deckystream` (owner update
-2026-11-14); current display: **Decky Stream**.
+2026-11-14); current source-preview display: **deckystream**.
 Current source/release trust stays `szmyty/obsgod` until the new owner and exact
 repository are chosen, authorized and tested.
 
@@ -11,7 +11,7 @@ repository are chosen, authorized and tested.
 
 | Surface | Current / intended behavior |
 | --- | --- |
-| Human display | `Decky Stream`, centralized in `product.json` and generated projections. |
+| Human display | `deckystream`, centralized in `product.json` and generated projections; historical records say Decky Stream. |
 | Current repository | `szmyty/obsgod`; owner of a future `<owner>/deckystream` is unresolved. |
 | CLI / package artifact names | `obsgod`, `obsgod-deck_VERSION_linux_amd64.tar.gz`, `obsgod-decky.zip`; preserve old entry points/artifacts during transition. |
 | Decky plugin | Plugin identity `OBSGod`, installed directory `obsgod`; preserve one instance controlling the managed endpoint. |
@@ -73,7 +73,8 @@ transition and new source/artifact revisions plus commands/platform/outcomes.
    one plugin folder, synthetic credentials and all sentinel paths.
 2. Offer a narrowly trusted transition artifact through the old identity. Check
    without installing; then upgrade with every output positively stopped. Verify
-   the three package versions, same private paths, preserved secret pair and one
+   the loaded plugin version and any separately installed optional Desktop/updater
+   versions, same private paths, preserved secret pair and one
    endpoint owner. Repair the same version twice and compare ownership inventory.
 3. Offer the new canonical identity through the bounded policy. Reject an
    unlisted owner, unrelated redirected host/path, mixed old/new metadata, moving
