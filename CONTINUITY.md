@@ -1,36 +1,37 @@
 # Current work
 
-## Current source preparation while owner tests are deferred
+## Current pre-migration source and review checkpoint
 
-The owner permits source work now and machine/Deck testing later. Branch
-**work/pre-migration-readiness** starts from736be3e (draft#113), with new
-stacked draft#114 and pushed checkpointsf0f0d1d→a6d13ad, in the same
-isolated checkout. Read the [bounded batch](docs/pre-migration-readiness.md).
-Concrete work: missing verified export before explicit wipe (#82-C4), normal
-Decky update/removal guide corrections (#84), bounded real GitHub history
-pagination repair/current230 carry-forward (#87), cleanup download preparation,
-and a read-only exact-destination/real-PR readiness collector (#88/#95).
-Fresh proposed OAuth/phone research is prepared for #89's owner discussion;
-no login/account/broker code is activated. No destination or release is chosen.
+Draft #114 is stacked after #113. Exact clean packaged source is
+**772230a32a8fdb237a58b8a637947b31671ad509**, tree
+**f157ea77d16a1f1ce04bf1e47b584f9183c9c359**, 648 tracked files.
+The new [checkpoint](docs/pre-migration-qualified-checkpoint.md) binds immutable
+artifacts, commands, counts and remaining gates. This later entry is notes only;
+it is not the qualified package revision. Candidate version remains 0.1.0-deck.9.
 
-Private wipe export20new+35retained focused tests and independent review passed;
-history pagination15focused tests and the real67issue/47PR/41comment/3review
-export passed, retaining230criteria. Raw history independently passed verbatim
-sharing review with one exact-field documentation-example exception (strict
-scanner unchanged). Collector22focused tests and final independent identity review passed; its
-older a6PR114development probe used57GETs with existingauth and preserved
-SBOM404/comparison403/15billing+1skip/0steps as unavailable. The [focused
-record](docs/evidence/pre-migration-focused-preparation.json) preserves the
-prior source/probe stages; final integrated qualification is next. Runtime startup briefly reset `/tmp`; workspace files/
-Git branches/pins survived, temporary old artifacts did not. Rebuild final
-qualification outputs fresh. Source changes are not qualified by af7 receipts.
-Keep focused checks and final exact-source qualification ahead of a new install
-candidate. FullACT/hosted/device/required-review/rights/adoption gates stay
-explicit; deferring the owner's test is not a passing result. No migration,
-release, deployment, spending or other-repository change is performed.
+Verified private pre-wipe export, current Decky update/removal guidance, history
+pagination/230 carry-forward and a read-only exact-PR readiness collector are
+implemented. #89 authentication research remains proposed, ready for discussion.
+The fresh complete standalone run has 70 passed command predicates, 2 unavailable
+and 0 failed. All 3 native OBS harnesses and 10 packaged browser flows passed.
+The first 44-pass/1-unavailable/1-failed attempt is retained separately; ENOSPC
+is observed but the sole disconnect cause remains unproven.
 
+Local ACT remains unavailable: 7,544,361,132 bytes required versus 3,629,019,136
+available, short 3,915,341,996; probe and 6 jobs unrun. Real PR #114 observations retain
+SBOM 404/comparison 403 and 15 hosted billing refusals / 1 skip / 0 steps. Actual
+supported-loader/Deck/controller/mic/headset/provider/session evidence remains
+#82-C1/#79/#83/#86. Required rights/review/platform/CI/adoption and exact-owner
+migration/new-install gates stay open. All 230 originals and 111 current clauses
+(104 bounded plus 7 authentication) remain; priority creates no new dependencies.
 
-## Selected aurora review candidate and qualification
+Use the numbered current-candidate owner tests when hardware is available.
+Then repair/requalify reported defects before exact-destination #87 migration,
+#95 service checks and #88 official-install/v1 approval preparation. No merge,
+issue closure, release, deployment, migration or spending occurred here. Old af7
+artifacts and historical installer hashes remain unchanged.
+
+## Earlier aurora review candidate and qualification
 
 #112 merged normally at **069db4a21ec0a173b7dd30c12a53018c7700f79b** after
 fresh focused checks at448b15d. Its two verified-merged branches were removed.

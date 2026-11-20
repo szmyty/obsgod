@@ -1,72 +1,55 @@
 # Current pre-migration readiness batch
 
-The owner permits continuing source work while machine/Steam Deck testing is
-unavailable. This advances preparation; it does not supply target results or
-activate a destination, release, service or previously proposed decision.
+The source work is implemented in draft #114, stacked after #113. Exact clean
+packaged source is **772230a32a8fdb237a58b8a637947b31671ad509**, tree
+**f157ea77d16a1f1ce04bf1e47b584f9183c9c359**, with 648 files.
+Read the [qualified available-check checkpoint](pre-migration-qualified-checkpoint.md)
+for immutable artifacts, hashes, complete commands and remaining acceptance.
+This readiness update is a notes-only follow-up; it is not a new packaged source.
 
-## Bounded work
+## Implemented preparation
 
-- **#82/#84:** correct the current guide's Desktop-only update/removal instructions.
-  Standard plugin installation/replacement/removal uses Decky controls; optional
-  legacy tools remain explicit. The source audit also found no verified private
-  export before explicit wipe. A guarded durable pre-wipe export is implemented at source commit
-  `a6d13ad85b132101453dc76a7c96152cf47fcfdd`;20 new and35 retained focused
-  tests passed with independent source review. Final integrated qualification
-  and actual device/recovery testing remain separate.
-- **#87:** prepare a current guarded legacy-cleanup download using existing
-  packaging/removal policy. Refresh the existing development history exporter
-  and original230 carry-forward. The first real capture stopped safely on
-  GitHub's verified numeric/cursor pagination; the bounded repair passed15
-  focused tests. The real rerun captured67 issues,47 PRs,41 comments and3
-  reviews at remote default069db4a, preserving all230 criteria. Raw history
-  passed independent review for verbatim sharing with one exact-field documented
-  password-example exception; the strict scanner itself remains unchanged. The
-  frozen memorial/history and historical installer URLs stay unchanged.
-- **#88/#95:** prepare a read-only exact-repository/real-PR readiness collector.
-  It reports actual identity, refs, dependency manifests/service responses,
-  workflow execution and billing limits without enabling or changing anything.
-  Its22 focused tests passed, including ambiguous job/step-name rejection.
-  The development a6d13ad PR114 probe used57 GETs and existing authentication;
-  SBOM404/comparison403 and15 billing refusals/1skip/0steps remain unavailable.
-  That probe used the earlier collector source, retained separately from the
-  final guard fixes; a future destination is not inferred from this public fork.
-- **#89:** [fresh provider research](authentication-decision-packet.md) is ready
-  for discussion. Twitch public device authorization is the proposed first
-  option; Kick manual keys remain the proposal until confidential/public-client
-  ownership is resolved. No OAuth implementation or account/service action.
+- #82/#84: normal updates/removal use Decky; optional Desktop recovery is
+  version/hash-sensitive. The demonstrated missing export before explicit wipe
+  is repaired: verified private TAR before deletion, retained outside removal
+  roots, with credentials/privacy and manual-recovery limits explicit. 20 new
+  and 35 retained focused removal tests passed with no skips.
+- #87: real GitHub history numeric/cursor pagination is bound to the exact
+  public repository ID/endpoint/query. 15 focused tests passed. The fresh current
+  exporter captured 67 issues, 47 PRs, 41 comments and 3 reviews at remote default
+  069db4a while preserving 230 original criteria/dependencies. The separate history
+  archive has exact-byte privacy review; refresh capture at actual retirement.
+  The same-source full-runtime TAR supplies an optional
+  [current cleanup helper](legacy-cleanup-kit.md) without installing another app.
+- #88/#95: the GET-only collector binds an explicit repository/real PR to exact
+  source and observed job/step identities. 22 focused tests passed. Actual current
+  source queried PR #114 using 57 GETs; SBOM 404/comparison 403 and 15 billing refusals/
+  1 skip / 0 executed steps remain unavailable. It neither enables Graph nor proves
+  an unselected destination ready.
+- #89: the [fresh decision packet](authentication-decision-packet.md) proposes
+  Twitch public device authorization first and Kick manual keys until an owned
+  confidential/public-client strategy is selected. Owner discussion precedes
+  authentication code; no registration, broker or provider account test occurred.
 
-## Source and evidence boundaries
+## Qualification and next actions
 
-The existing [aurora review packet](aurora-owner-packet.md) qualifies source
-`af7a20f`, not this subsequent working branch. Its download remains immutable.
-New source needs focused regressions and a new exact-source available-check/
-package checkpoint. FullACT capacity, hosted billing and actual Deck/loader/
-controller/headset/provider results remain separate unavailable/unrun gates.
-The [earlier resource audit](evidence/aurora-af7-resource-feasibility.md) showed
-no safe cleanup/relocation path within preserved capacity/reserves.
+The fresh complete standalone run records 70 passed command predicates, 2
+unavailable and 0 failed, including 3 native OBS harnesses and 10 browser flows.
+The first 44-pass/1-unavailable/1-failed attempt is retained separately; disk
+exhaustion is evidenced but the sole disconnect cause is unproven. Older af7
+receipts do not qualify this source; its old artifacts/installer hashes remain.
 
-All230 original criteria/dependencies remain. Actual #87 migration follows its
-owner/destination/current-install gates; #88 clean new install and v1 approval
-and #95 actual destination service evidence cannot be inferred from preparation.
-No release, deployment, repository move, app registration, provider contact,
-paid resource or automatic issue closure is part of this batch.
+Full ACT still lacks 3,915,341,996 root/Docker bytes at the recorded preflight;
+probe and all 6 jobs remain unrun. Actual #79/#82-C1/#83/#86 Decky/Deck/controller/
+mic/headset/provider/session acceptance, required CI/services/reviews, rights/
+publisher/platform/adoption and exact OWNER destination gates remain explicit.
+All 230 original criteria/dependencies and 111 current clauses (104 bounded plus
+7 separate authentication research) remain; no new hard dependencies are added.
 
-## Checkpoints and remaining execution
-
-Draft [#114](https://github.com/szmyty/obsgod/pull/114) is stacked after #113.
-Initial docs/research source isf0f0d1d; the wipe/history repair isa6d13ad.
-The existing af7 source-qualified artifact remains immutable; no older result
-qualifies this new source. The runtime briefly restarted during preparation:
-workspace/source and pushed checkpoints survived, but `/tmp` was cleared.
-Fresh final builds, browsers and native outputs must use new private paths.
-
-The [focused preparation record](evidence/pre-migration-focused-preparation.json)
-and [current-repo development observation](evidence/destination-readiness-a6d13ad.json)
-retain source hashes, real limits and older failed/intermediate evidence.
-
-Next freeze the integrated source, run the full required available checks and
-build/publish only review artifacts. Prepare the existing full-runtime archive
-as an optional [cleanup-helper download](legacy-cleanup-kit.md) with preview-only
-instructions; it is
-not an extra application required for normal Decky installation. Actual legacy
-retirement/wipe/migration is not performed as a test on this workspace.
+The owner can test the exact candidate later, then reported defects receive
+affected repairs/requalification. Actual #87 migration follows its current-install
+fix loop and destination/authority gates; #88 new-install/v1 and #95 actual
+destination services remain later. No issue closure, merge, release, deployment,
+repository move, app registration, contact, spending or automatic publication
+occurred. The later notes receive relevant doc checks; immutable 772 candidate
+bytes and its qualification are unchanged.
