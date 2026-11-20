@@ -8,7 +8,11 @@ import json
 from pathlib import Path, PurePosixPath
 import re
 import subprocess
+import sys
 from urllib.parse import unquote, urlsplit
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from brand_png import validate_png
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -197,15 +201,17 @@ def render(root=ROOT):
         files[name] = rendered.encode("utf-8")
     for path in sorted((root / "site/assets").rglob("*")):
         if path.is_file():
-            if path.is_symlink() or path.suffix not in {".css", ".js"}:
+            if path.is_symlink() or path.suffix not in {".css", ".js", ".png"}:
                 raise ValueError("Unexpected site asset")
             data = path.read_bytes()
+            if path.suffix == ".png":
+                validate_png(data)
             if path.suffix == ".css" and re.search(r"url\s*\(|@import", data.decode("utf-8"), re.IGNORECASE):
                 raise ValueError("Preview CSS must not fetch additional assets")
             files["assets/" + path.relative_to(root / "site/assets").as_posix()] = data
     validation = check_links(files)
     inputs = [product_path, root / "support.json", root / ".github/FUNDING.yml",
-              root / "steamdeck/decky/src/support-data.mjs", root / "scripts/build-site.py"]
+              root / "steamdeck/decky/src/support-data.mjs", root / "scripts/build-site.py", root / "scripts/brand_png.py"]
     inputs += sorted(p for p in (root / "site").rglob("*")
                      if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc")
     manifest = {"schema_version": 1, "kind": "offline-documentation-preview", "source": source,

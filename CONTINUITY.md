@@ -1,5 +1,31 @@
 # Current work
 
+## Selected aurora integration and restored execution
+
+The owner authorized merging #112 and continuing. Fresh focused checks at clean
+448b15d actually passed: TypeScript,160 Node tests, frontend build, two complete
+primary ZIP builds (5b068a7d) and all three affected packaged browser suites.
+Normal merge is **069db4a21ec0a173b7dd30c12a53018c7700f79b**, with exactly the
+reviewed head tree. No protection was bypassed; hosted billing jobs ran no steps.
+#80/#81 remain open for their selected artwork/integration acceptance.
+
+Execution now works on the existing checkout; Git/API/Docker and pinned tools
+were verified. Branch **feat/aurora-selected-brand** implements the selected
+source/export kit, local native logo and separate status badge, lowercase display,
+README/site projections and fresh Identity consumer evidence. Read the
+[selected source/rights contract](docs/selected-aurora.md). Original concepts,
+mint outputs, stable IDs and all230 criteria/dependencies remain intact.
+
+Asset/guard tests and fresh-repeat exports passed during preparation, but no
+working-tree result is promoted to a later source. Commit the integrated source,
+run fresh appropriate checks and record exact revisions/commands/platforms and
+passed/failed/skipped/unavailable/unrun outcomes. Full #85 matrix/owner-machine
+and actual #86 Deck/provider/controller/headset acceptance remain separate. No
+rights/production-adoption decision, release/deploy/migration/Store action,
+spending or other-repository change is implied.
+
+## Earlier checkpoints
+
 ## Aurora branding and native panel batch in progress
 
 The owner authorized merging #111 and proceeding with #80/#81, with the final

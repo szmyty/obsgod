@@ -79,7 +79,7 @@ Path(os.environ['OBSGOD_TEST_BROWSER_URL']).write_text(sys.argv[1])
                 page.on("pageerror", lambda error: errors.append(str(error)))
                 page.goto(ready.read_text())
                 page.get_by_role("heading", name="Connect your stream").wait_for()
-                expect(page.locator("#product-name")).to_contain_text("Decky Stream")
+                expect(page.locator("#product-name")).to_contain_text("deckystream")
                 assert "#" not in page.url, "Private setup token remained visible in URL"
                 # Guides are explicit hints; selecting another provider cannot
                 # silently change either a server or a key already being typed.

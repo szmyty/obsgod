@@ -1,12 +1,12 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: light)" srcset="branding/repository/header-light.png">
-    <source media="(prefers-color-scheme: dark)" srcset="branding/repository/header.png">
-    <img src="branding/repository/header.png" width="960" alt="Decky Stream — stream from Steam Deck with OBS">
+    <source media="(prefers-color-scheme: light)" srcset="branding/aurora/github/readme-header-light.png">
+    <source media="(prefers-color-scheme: dark)" srcset="branding/aurora/github/readme-header.png">
+    <img src="branding/aurora/github/readme-header.png" width="960" alt="deckystream — stream from Steam Deck with OBS">
   </picture>
 </p>
 
-# Decky Stream
+# deckystream
 
 **Stream from Steam Deck with OBS.** Set up in Desktop Mode, then control your
 stream, microphone and local recordings from Decky's Quick Access panel in
@@ -82,9 +82,11 @@ current work. Use the source revision and checksums supplied with your candidate
   [identity/migration decisions](docs/identity-migration.md),
   [draft brand review](docs/branding-review.md) and [site preview](docs/branding-site-preview.md).
 
-Repository artwork is a proposed Decky Stream identity for review. Its creative
-and rights status is recorded in the brand review; it does not establish final
-brand approval or change the installed plugin's native theme.
+The selected aurora direction now appears in this source preview and the local
+Decky UI. [Open ordinary PNGs and the offline gallery](branding/aurora/README.md).
+Original concepts and the earlier mint kit remain available. Source/export and
+rights status is recorded in the brand review; this does not establish final
+publication approval or Steam Deck rendering acceptance.
 
 ## CLI and automation
 

@@ -1,0 +1,186 @@
+{
+  "approval": "proposed-unapproved",
+  "identity_revision": "cfb6c29bd02589a47fc48050ab02e7e0da359719",
+  "limits": [
+    "Candidate exports, not approved Identity compiler output",
+    "Image generation is not deterministic; downstream exports are pinned to its unchanged source",
+    "Final rights, owner/publisher and target adoption remain explicit",
+    "Decorative color does not establish observed stream state"
+  ],
+  "outputs": {
+    "README.md": {
+      "bytes": 1087,
+      "sha256": "bf098c36e8ed5d0afb357151529dedac1a0818db3b0bde3d92e7810e8fff5ef5"
+    },
+    "deckystream-aurora-png.zip": {
+      "bytes": 1323637,
+      "sha256": "c1df01a1bc7b4fb34c3d84e7567e84899d4737792e3065cdc6429a5d8b4d9b9c"
+    },
+    "docs/wordmark.png": {
+      "bytes": 30250,
+      "sha256": "86e43825d4607bb2eca49939ab7cb1e9dd00cd3ad51636e871e932166d53e51d"
+    },
+    "docs/wordmark.svg": {
+      "bytes": 2236,
+      "sha256": "9e26de836854c7cce55c1e4d2ac398e3495d59e840d816e5b737922f32109707"
+    },
+    "github/avatar-256.png": {
+      "bytes": 26399,
+      "sha256": "c2412d514a1652dd9cc8721107cf4b91ec07a85cbf7f34147f8b921b865241b0"
+    },
+    "github/avatar-512.png": {
+      "bytes": 67176,
+      "sha256": "a7a4f4bfe55e20712243a87e5ada54baf028116d60a7ebf6b609833a52640735"
+    },
+    "github/readme-header-light.png": {
+      "bytes": 96640,
+      "sha256": "3a915f09460bff4566bd61ef1548840197f988512423a14ff35415ec1a29c92c"
+    },
+    "github/readme-header-light.svg": {
+      "bytes": 2729,
+      "sha256": "fa0e2f410af2ed0645cbc769726c1c83f8723083bd655db98e89c528d48c3090"
+    },
+    "github/readme-header.png": {
+      "bytes": 716057,
+      "sha256": "b17e46ed5e667c185d81e0444609042ff66601d1148b45bac06af829d31cbff7"
+    },
+    "github/readme-header.svg": {
+      "bytes": 1955226,
+      "sha256": "6d8cef9733d7de2c2921c64bd6b7e159c8193cca473216204cc7ed4e71af3743"
+    },
+    "github/social-preview.png": {
+      "bytes": 75298,
+      "sha256": "840b22f7178d969b4f34f87948c430f1ff1dfcb7adfc8da96ad2e6369108159b"
+    },
+    "github/social-preview.svg": {
+      "bytes": 2618,
+      "sha256": "a062e632f01aef30d4465f42f7b96e6f2ae46bfc6f41b241420d0424382db84c"
+    },
+    "index.html": {
+      "bytes": 3577245,
+      "sha256": "ff381e1f97a8cc5e92637cde907b3b119495f00dad35b66d84aefce9b97c7554"
+    },
+    "licenses/DejaVu.txt": {
+      "bytes": 2734,
+      "sha256": "e180b3d65bf650dffffd71dd21b6180767b469a18dd87e1d8552be69bb9ecdf0"
+    },
+    "masters/mark-on-light.png": {
+      "bytes": 73639,
+      "sha256": "a4eccba55c0f1fffd07dd4cd1ab6190e306f0693dfbccd4bcd881544f69499b8"
+    },
+    "masters/mark-on-light.svg": {
+      "bytes": 2174,
+      "sha256": "36e7e0cb75d2937d50df6ae0d789ab23abc4a9a41d2378fb206928af5519fbda"
+    },
+    "masters/mark-small.png": {
+      "bytes": 5141,
+      "sha256": "43ffc4df29cb4b53d93d06a9eeeef08fe926ec030ebd124aa26b4064a95dcfa6"
+    },
+    "masters/mark-small.svg": {
+      "bytes": 926,
+      "sha256": "e53ee844953468d21e8c7255bea8e1e18f715859ffb2eead6ae5d05ca9819356"
+    },
+    "masters/mark-transparent.png": {
+      "bytes": 84448,
+      "sha256": "c53fe726ff5d38f3486abe5aebb36a43bfa07a6a0f721b199aba225f6e616c42"
+    },
+    "masters/mark-transparent.svg": {
+      "bytes": 1844,
+      "sha256": "f3b68d3937e49767a80415d98177f36f9d80adcd4b6cc8d0441ce0b87485a9c3"
+    },
+    "masters/mark.png": {
+      "bytes": 67176,
+      "sha256": "a7a4f4bfe55e20712243a87e5ada54baf028116d60a7ebf6b609833a52640735"
+    },
+    "masters/mark.svg": {
+      "bytes": 2099,
+      "sha256": "1acacc20b0cb969bba8ee4e40171877fca6b88c897697cf22e44b34c35d6f049"
+    },
+    "metadata/hero-generation.json": {
+      "bytes": 3671,
+      "sha256": "e81d0d34aa1045784184430d9c8b6cff4e16699879277e9bc3224ef99d515312"
+    },
+    "metadata/rights-and-sources.json": {
+      "bytes": 2697,
+      "sha256": "6ea8d8ba91db26ceae9c6923abe9a699d811e918ea31f7158dcba55dcda5c1a1"
+    },
+    "review/contrast.json": {
+      "bytes": 357,
+      "sha256": "2f8ac24faa39039041fe8417cad11523c221e61419981c762be7fd4eb89c49d3"
+    },
+    "review/legibility-sheet.png": {
+      "bytes": 48385,
+      "sha256": "a04a8b38c0de5d22a3a9aa9f0bfd59d470022cee19bf5bcb69e2331ab7ded790"
+    },
+    "review/legibility-sheet.svg": {
+      "bytes": 5443,
+      "sha256": "684e77788dcff6d2581511ef9f6ee6c07870435876f650f831b8275852d50da0"
+    },
+    "review/menu-sheet.png": {
+      "bytes": 43036,
+      "sha256": "4aab69e5953462cd2d146eaa98650b186985f06ed64b98a051380e48c83d2e9b"
+    },
+    "review/menu-sheet.svg": {
+      "bytes": 8553,
+      "sha256": "4716e2cc7ef4d9d4b24ee9f397e855a7a79c4a9e6ae644423b2a39c4f9fd355b"
+    },
+    "tokens/palette.css": {
+      "bytes": 239,
+      "sha256": "35a9af225f837d6cd9fa33f497deb67ad7e24969d661c55fc332a9f71d770fd0"
+    },
+    "tokens/palette.json": {
+      "bytes": 747,
+      "sha256": "2ef1f5d3c2f5c48aa746392a8d43154d8b0976be3b186ed1412ebf62b23edc6c"
+    },
+    "web/favicon-16.png": {
+      "bytes": 670,
+      "sha256": "67683169c963186844438b8f455dad9cfc72b446c404286ccf842658c40c0ad0"
+    },
+    "web/favicon-24.png": {
+      "bytes": 972,
+      "sha256": "e9b159e6accc1cf8c0fdb26f6d9e06469b8d892a899dab536451d229912d8555"
+    },
+    "web/favicon-32.png": {
+      "bytes": 1301,
+      "sha256": "99289b4b96d1c125f71fa98d3536cb4576bdcd67fb42468ae57d207c94910d5d"
+    },
+    "web/favicon-64.png": {
+      "bytes": 2567,
+      "sha256": "ecff9a20f7766df248c160676e735447d98c6678f5044615248c995d893a09b4"
+    },
+    "web/favicon.svg": {
+      "bytes": 926,
+      "sha256": "e53ee844953468d21e8c7255bea8e1e18f715859ffb2eead6ae5d05ca9819356"
+    }
+  },
+  "profile": "orbital-stream-aurora",
+  "schema": "deckystream.selected-brand-kit/v1",
+  "source_sha256": "f0e99fa947016798bc15480d7dae38ed286266a9d630fc7fdd79048a271e21e5",
+  "sources": {
+    ".identity/candidates/aurora/hero-generation.json": "e81d0d34aa1045784184430d9c8b6cff4e16699879277e9bc3224ef99d515312",
+    ".identity/candidates/aurora/hero-master.png": "6b3c458e2f81b9d31435fcbc87c86e8f5c8ad7df579dfca34f578beac5e75b2c",
+    ".identity/candidates/aurora/inventory.json": "cf813f7113ac00da0a8598dbd0f047e0edf180da6d2962fc6f208c7ce379f729",
+    ".identity/candidates/aurora/mark-small.svg": "e53ee844953468d21e8c7255bea8e1e18f715859ffb2eead6ae5d05ca9819356",
+    ".identity/candidates/aurora/mark.svg": "f3b68d3937e49767a80415d98177f36f9d80adcd4b6cc8d0441ce0b87485a9c3",
+    ".identity/candidates/aurora/palette.json": "2ef1f5d3c2f5c48aa746392a8d43154d8b0976be3b186ed1412ebf62b23edc6c",
+    ".identity/candidates/concepts/orbital-stream-board.json": "11c3fb844bd6399e8eca7610471d9b7a65591853a9b87595bbae9a02e6fd5a59",
+    ".identity/candidates/concepts/orbital-stream-board.png": "5301893b21e08872262cced4e6415e117ddf20900e0ee64e816f912b298c8a5e",
+    ".identity/candidates/concepts/orbital-stream-color-alternatives.json": "58ef610ac68cb0c9e05acb70122757f6a81384d2bca41c235e5ed83b733d0018",
+    ".identity/candidates/concepts/orbital-stream-color-alternatives.png": "4e2076ce7ba139a97d1ecf3b730de6db0cb15d9452cfcefbd8885b2af7b9c801",
+    ".identity/candidates/concepts/orbital-stream-gradient-icon.json": "7867731b2d468cbc5a8ff9cfa5dfb52a4d6f3552312a1a8a06e9ffad1f40cd50",
+    ".identity/candidates/concepts/orbital-stream-gradient-icon.png": "4c59ae9c7716c3889bd837071b55cef0e8641419405ded250f8d73620eab5f49",
+    ".identity/candidates/concepts/selection.json": "800b30fadb99ed014c3b0b4e4ed8bdf81971808ba3580bca9104951ced7ea7be",
+    ".identity/governance/approvals.json": "e96c088f11ded1d42a60872e3de0384299615b778c4927f20f1b441bd9db7bc9",
+    ".identity/identity.json": "1d6ff33e1def27298238c36fbf90c5e44ddd1ef4a8633152b094366af4130107",
+    ".identity/toolchain.lock.json": "15e37a8b4b1e10bab3414166e4a48fb6040543622d7a8a45270179d0d26416c6",
+    "branding/licenses/DejaVu.txt": "e180b3d65bf650dffffd71dd21b6180767b469a18dd87e1d8552be69bb9ecdf0",
+    "scripts/generate-aurora-kit.py": "f11ec37965d9936e3a30c6e38439c5aae32bbd4fc5972905b248af506d59db70",
+    "scripts/generate-brand-kit.py": "7550197dd0adb409cb541d3725dfe1267570085d395e2b95cabc7ad35c725916"
+  },
+  "status": "selected-direction; unapproved-production-candidate",
+  "toolchain": {
+    "font_sha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e",
+    "inkscape": "Inkscape 1.4 (e7c3feb100, 2024-10-09)",
+    "raster_reproduction": "Pinned master exports; image generation itself is not claimed deterministic"
+  }
+}

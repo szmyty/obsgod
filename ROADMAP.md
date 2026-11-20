@@ -1,5 +1,18 @@
 # Product roadmap
 
+## Selected aurora integration #80/#81
+
+#112 merged normally at **069db4a** after fresh focused source448b15d validation:
+160 Node tests, typecheck/build, primary2 and three packaged browsers passed.
+The restored existing workspace now supports selected aurora source/exports,
+lowercase display and local UI/README/site integration. See the
+[selected source contract](docs/selected-aurora.md). Source-changing repairs and
+fresh candidate checks precede final #85 qualification/machine tests, then #86
+actual Steam Deck validation. All230 original criteria/dependencies and actual
+rights/publisher/CI/adoption gates remain. No release/deploy/migration/spending.
+
+## Earlier checkpoints
+
 ## Aurora/native-panel batch #80/#81
 
 #111 merged normally into `master` at **699fac3** and bounded #104 closed with

@@ -1,5 +1,18 @@
 # deckystream implementation and migration roadmap
 
+## Selected source and native branding integration
+
+#112 is merged at **069db4a**, after actual clean448b15d typecheck/build,
+160 Node tests, primary-repeat and three packaged browser passes. #80/#81 now
+advance the selected kit, local native mark/independent status badge, lowercase
+metadata and README/site assets on **feat/aurora-selected-brand**. Read the
+[selected source/rights contract](selected-aurora.md). Fresh integrated-source
+checks remain required; old receipts do not qualify new assets/code. Final #85
+machine qualification then #86 actual Deck tests remain separate, with all230
+original criteria/dependencies intact. No release/deploy/migration is performed.
+
+## Earlier checkpoints
+
 #111 merged into actual `master` at **699fac3**, and #104 closed after six
 bounded criterion mappings; source qualification remains exact 0c79846. The owner
 now authorizes selected aurora artwork and native UI #80/#81. Follow the

@@ -111,7 +111,7 @@ for name in ['install', 'update', 'uninstall']:
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     assert module.app_directories(pathlib.Path(sys.argv[2]), {})[0] == pathlib.Path(sys.argv[2]) / '.local/share/obsgod'
-    if hasattr(module, 'DISPLAY_NAME'): assert module.DISPLAY_NAME == 'Decky Stream'
+    if hasattr(module, 'DISPLAY_NAME'): assert module.DISPLAY_NAME == 'deckystream'
 """
         result = subprocess.run([sys.executable, "-I", "-c", code, str(ROOT), str(self.home)], cwd=self.home, capture_output=True, text=True, timeout=10)
         self.assertEqual(result.returncode, 0, result.stderr)

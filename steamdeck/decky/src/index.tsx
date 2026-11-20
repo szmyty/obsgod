@@ -4,6 +4,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { health } from "./health.mjs";
 import { createView, currentResult, observe, controls } from "./state.mjs";
 import { product } from "./product";
+import { AuroraMark } from "./AuroraMark";
 import { Support } from "./Support";
 import { StreamTools, MediaTools, HealthTools, invokeTool, type ToolCommand } from "./Advanced";
 import {mediaControls} from "./advanced-state.mjs";
@@ -83,7 +84,9 @@ function useStateView(){
   return health(currentResult(view,now),view.progressAt,now);
 }
 
-function Dot(){const state=useStateView();return <span role="img" aria-label={state.label} style={{color:state.color,fontSize:24,lineHeight:1}}>●</span>;}
+function Dot({size=24}:{size?:number}){const state=useStateView();return <span role="img" aria-label={state.label} style={{color:state.color,fontSize:size,lineHeight:1}}>●</span>;}
+
+function PluginIcon(){return <span style={{position:"relative",display:"inline-flex"}}><AuroraMark size={28}/><span style={{position:"absolute",right:-2,bottom:-2,background:"#0b111b",borderRadius:"50%",padding:2,lineHeight:1}}><Dot size={10}/></span></span>;}
 
 async function clearConsole(){
   try{
@@ -315,5 +318,5 @@ export default definePlugin(()=>{
   dependencyReadiness={ready:false,reason:"Checking dependency setup…",state:"unknown"};
   active=true;instance++;view.epoch++;pollTask=undefined;
   void refresh();const timer=setInterval(()=>{void refresh();changed();},1500);
-  return {name:product.compatibility.plugin,titleView:<div className={staticClasses.Title}>{product.displayName} <small style={{fontWeight:400,opacity:.7}}>preview</small></div>,content:<Content/>,icon:<Dot/>,onDismount(){cancelPanelTalk();active=false;instance++;view.epoch++;clearInterval(timer);listeners.clear();busy="";updateChecking=false;}};
+  return {name:product.compatibility.plugin,titleView:<div className={staticClasses.Title} style={{display:"flex",alignItems:"center",gap:8}}><AuroraMark size={20}/><span>{product.displayName}</span><small style={{fontWeight:400,opacity:.7}}>preview</small></div>,content:<Content/>,icon:<PluginIcon/>,onDismount(){cancelPanelTalk();active=false;instance++;view.epoch++;clearInterval(timer);listeners.clear();busy="";updateChecking=false;}};
 });

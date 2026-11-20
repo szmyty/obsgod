@@ -6,6 +6,10 @@ on:
       - 'site/**'
       - 'scripts/build-site.py'
       - 'scripts/generate-support.mjs'
+      - 'scripts/generate-aurora-ui.py'
+      - 'scripts/brand_png.py'
+      - '.identity/candidates/aurora/**'
+      - 'branding/aurora/**'
       - 'product.json'
       - 'support.json'
       - '.github/FUNDING.yml'
@@ -16,6 +20,10 @@ on:
       - 'site/**'
       - 'scripts/build-site.py'
       - 'scripts/generate-support.mjs'
+      - 'scripts/generate-aurora-ui.py'
+      - 'scripts/brand_png.py'
+      - '.identity/candidates/aurora/**'
+      - 'branding/aurora/**'
       - 'product.json'
       - 'support.json'
       - '.github/FUNDING.yml'
@@ -39,6 +47,7 @@ jobs:
       - name: Check shared funding metadata and build offline preview
         run: |
           node scripts/generate-support.mjs --check
+          python scripts/generate-aurora-ui.py --check
           python scripts/build-site.py
           python scripts/build-site.py --check
           python -B site/tests/test_build.py

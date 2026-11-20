@@ -1,5 +1,18 @@
 # Decky Stream branding owner packet
 
+## Selected aurora source preview implemented
+
+The 01 / aurora candidate now has separate vector sources, one preserved generated
+hero master, a pinned local export profile and ordinary PNG/offline-gallery
+outputs under `branding/aurora/`. Native/header/site/README use the selected
+local assets and lowercase display metadata, with compatibility IDs unchanged.
+Read the [current source/export/rights contract](selected-aurora.md). Original
+concepts, earlier mint outputs and their dated receipts below remain historical.
+Creative direction approval is not final rights, publisher or device acceptance.
+No production Identity compiler/release, site deployment or migration is claimed.
+
+## Earlier checkpoints
+
 **Current direction, 2026-11-14:** owner selected **01 / aurora**, recorded with
 source hashes in [selection.json](../.identity/candidates/concepts/selection.json).
 Retain other art as concepts. [#80](https://github.com/szmyty/obsgod/issues/80)

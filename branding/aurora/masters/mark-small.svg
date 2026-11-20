@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title desc">
+<title id="title">deckystream compact aurora candidate</title><desc id="desc">A simplified separately authored orbital stream mark for small dark-menu presentation. Color is decorative and does not indicate stream state.</desc>
+<defs><linearGradient id="aurora-compact" x1="30" y1="110" x2="220" y2="110" gradientUnits="userSpaceOnUse"><stop stop-color="#91fff4"/><stop offset=".6" stop-color="#72f3ed"/><stop offset="1" stop-color="#c7b3ff"/></linearGradient></defs>
+<path d="M193 63 A92 92 0 1 0 217 105" fill="none" stroke="url(#aurora-compact)" stroke-width="21"/>
+<path d="M37 105 C33 136 53 152 80 141 C107 131 129 103 157 94 C187 84 212 94 220 120 L220 158 C216 133 199 119 175 123 C147 127 125 150 100 164 C72 181 46 173 38 152 C33 138 33 121 37 105 Z" fill="url(#aurora-compact)"/>
+</svg>

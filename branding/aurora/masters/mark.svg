@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title desc"><title id="title">deckystream aurora on dark</title><desc id="desc">Selected aurora candidate. Production rights and actual device acceptance remain pending; decorative color does not indicate stream state.</desc><rect width="256" height="256" fill="#050b14"/><g transform="translate(0 0) scale(1.0)"><defs xmlns="http://www.w3.org/2000/svg">
+  <linearGradient id="dark-aurora-orbit" x1="35" y1="45" x2="221" y2="194" gradientUnits="userSpaceOnUse"><stop stop-color="#b5fff9" /><stop offset=".32" stop-color="#75f4ee" /><stop offset=".68" stop-color="#3fcbd7" /><stop offset="1" stop-color="#b4a1f3" /></linearGradient>
+  <linearGradient id="dark-aurora-ribbon" x1="55" y1="156" x2="210" y2="101" gradientUnits="userSpaceOnUse"><stop stop-color="#7ff7ee" /><stop offset=".47" stop-color="#64e4e5" /><stop offset=".78" stop-color="#90c9f3" /><stop offset="1" stop-color="#bb9cf4" /></linearGradient>
+  <filter id="dark-aurora-glow" x="-25%" y="-25%" width="150%" height="150%"><feGaussianBlur stdDeviation="3" /></filter>
+</defs>
+<g xmlns="http://www.w3.org/2000/svg" fill="none" stroke="url(#dark-aurora-orbit)" stroke-width="20" opacity=".22" filter="url(#dark-aurora-glow)"><path d="M193 63 A92 92 0 1 0 217 105" /></g>
+<path xmlns="http://www.w3.org/2000/svg" d="M193 63 A92 92 0 1 0 217 105" fill="none" stroke="url(#dark-aurora-orbit)" stroke-width="18" />
+<path xmlns="http://www.w3.org/2000/svg" d="M38 107 C34 136 53 151 80 141 C106 132 127 104 156 95 C185 85 211 91 219 119 C223 132 223 146 220 158 C217 133 199 119 175 123 C147 127 125 150 100 164 C73 180 48 174 39 154 C33 141 33 124 38 107 Z" fill="url(#dark-aurora-ribbon)" />
+<path xmlns="http://www.w3.org/2000/svg" d="M193 57 C160 29 117 25 81 47 C49 65 33 95 35 127" fill="none" stroke="#d7fff9" stroke-width="1.3" opacity=".56" />
+<path xmlns="http://www.w3.org/2000/svg" d="M44 138 C68 170 106 128 144 107 C176 89 200 92 213 111" fill="none" stroke="#d9ffff" stroke-width="1" opacity=".4" />
+</g></svg>

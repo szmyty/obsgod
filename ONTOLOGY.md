@@ -6,7 +6,7 @@ concrete fields and commands.
 
 | Term | Meaning |
 | --- | --- |
-| Decky Stream | Owner-selected working display name; not a compatibility-ID migration. |
+| deckystream | Owner-selected lowercase source-preview display; historical records use Decky Stream. This is not a compatibility-ID migration. |
 | `obsgod` / `OBSGod` | Existing CLI/module/storage namespace and Decky identity. Future `decky-stream` migration is explicit. |
 | Generic connection | Configured endpoint for an existing OBS; does not imply runtime ownership. |
 | Managed OBS | Isolated graphical OBS instance controlled by the Deck integration; ordinary OBS remains separate. |

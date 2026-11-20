@@ -1,7 +1,8 @@
 # Decky Stream brief
 
-Status: **01 / aurora creative direction selected by the owner**. Final vector
-masters, exports, rights/license treatment and production adoption remain open.
+Status: **01 / aurora creative direction selected by the owner**. Candidate
+vector/raster masters and exports are implemented for source-preview review;
+rights/license treatment, production adoption and device acceptance remain open.
 
 Decky Stream makes local OBS controls available in Steam Deck's Quick Access
 panel. The core remains usable without payment or a service account. It controls
@@ -9,10 +10,10 @@ a graphical OBS installation through its authenticated local WebSocket; it is
 not OBS, Decky Loader or Valve software and is not an official product of those
 projects. Its release support claims must match actual hardware qualification.
 
-Selected user-facing name: **Decky Stream**. Intended repository slug:
+Selected user-facing name and source-preview display: **deckystream**. Intended repository slug:
 **deckystream** (owner preference updated 2026-11-14 from `decky-stream`).
-The owner prefers lowercase, single-word naming; artwork and runtime identifiers
-are reconciled during the branding/implementation batch, not by this slug choice.
+The owner prefers lowercase, single-word naming. The selected artwork batch
+applies display styling while preserving installed compatibility identifiers.
 Current repository: https://github.com/szmyty/obsgod . CLI/storage/plugin IDs stay
 `obsgod`/`OBSGod` until an independently qualified compatibility migration.
 
