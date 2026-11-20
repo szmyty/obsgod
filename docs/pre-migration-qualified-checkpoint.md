@@ -53,7 +53,8 @@ The completed main report SHA256 is
 `4727b7dbcb5b3a81c024ee0b0738a2b61bcb38c5c1ed5ced9bf3d25157c29c31`.
 
 - Two complete primary source builds produced the same standard ZIP, with
-  33 payload files and 648 preferred-source files. Official CLI `0.0.7` separately
+  33 payload files and a 648-file tracked-source hash inventory. The inventory
+  count is not the number of entries inside the plugin ZIP. Official CLI `0.0.7` separately
   assembled prepared bytes and matched all 33 files. This does not claim that
   its builder compiled our source or that its raw ZIP is reproducible.
 - Go race/process/static/security checks, Python application checks
