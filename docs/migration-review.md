@@ -1,13 +1,14 @@
 # Repository and name migration rehearsal packet
 
-Current preparation starts from the [source/rights/owner packet](aurora-owner-packet.md)
-and [exact qualified candidate](aurora-integration-checkpoint.md). A later source
+Current preparation starts from the [source/rights/owner packet](https://github.com/szmyty/obsgod/blob/430cc391cb63f080214aacc279e5c04b1092c7a5/OWNER-PACKET.md)
+and [exact qualified candidate](pre-migration-qualified-checkpoint.md). A later source
 change needs a new candidate; historical fixture or download receipts below do
 not activate a future owner. Source preparation and test fixtures can continue
 before the owner test, while the actual move/new install retain #87/#88's stated
 gates. No destination repository is created or changed by preparation.
 
-Issues #35/#36. This is a staged plan and local compatibility inventory. It does
+Current execution is tracked in #87/#88, with original #35/#36 scope preserved.
+This is a staged plan and local compatibility inventory. It does
 not transfer or rename a repository, create an organization, deploy a site, or
 publish a release. Intended repository slug: `deckystream` (owner update
 2026-11-14); current source-preview display: **deckystream**.

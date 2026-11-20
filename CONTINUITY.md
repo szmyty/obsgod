@@ -1,13 +1,25 @@
 # Current work
 
-## Current pre-migration source and review checkpoint
+## Merged implementation and current test handoff
 
-Draft #114 is stacked after #113. Exact clean packaged source is
+The owner authorized merging before manual testing. #113 merged at
+**c05e06e208bf44fd3e3cfaee5ea9342935a9279a**, followed by #114 at
+**a315224a8a5cdf8e415a9e5bdc8b9bc5a8740640**. That implementation merge has
+tree **69a83da2fbb086b25b107510de16814c64ce24b3**, matching reviewed head
+68f7a288, with 649 tracked files. The repository's current default remains
+`master`; the future destination will use `main` after its separate approval.
+
+The exact clean packaged source remains
 **772230a32a8fdb237a58b8a637947b31671ad509**, tree
 **f157ea77d16a1f1ce04bf1e47b584f9183c9c359**, 648 tracked files.
-The new [checkpoint](docs/pre-migration-qualified-checkpoint.md) binds immutable
-artifacts, commands, counts and remaining gates. This later entry is notes only;
-it is not the qualified package revision. Candidate version remains 0.1.0-deck.9.
+The [checkpoint](docs/pre-migration-qualified-checkpoint.md) binds immutable
+artifacts, commands, counts and remaining gates. These later handoff updates are
+Markdown only; they do not qualify or relabel a new package revision. Candidate
+version remains 0.1.0-deck.9. Follow the
+[remaining pre-test sequence](ROADMAP.md#before-manual-testing). The
+[47-clause assessment](docs/evidence/bounded-source-closure-20261120.md) supports
+bounded source closure for #76–#78/#80–#81/#84 after the handoff merge; actual
+device, full-matrix, rights and adoption gates stay separate.
 
 Verified private pre-wipe export, current Decky update/removal guidance, history
 pagination/230 carry-forward and a read-only exact-PR readiness collector are
@@ -27,9 +39,10 @@ migration/new-install gates stay open. All 230 originals and 111 current clauses
 
 Use the numbered current-candidate owner tests when hardware is available.
 Then repair/requalify reported defects before exact-destination #87 migration,
-#95 service checks and #88 official-install/v1 approval preparation. No merge,
-issue closure, release, deployment, migration or spending occurred here. Old af7
-artifacts and historical installer hashes remain unchanged.
+#95 service checks and #88 official-install/v1 approval preparation. The source
+merges do not close acceptance criteria or publish a release. No deployment,
+migration or spending occurred. Old af7 artifacts and historical installer hashes
+remain unchanged.
 
 ## Earlier aurora review candidate and qualification
 

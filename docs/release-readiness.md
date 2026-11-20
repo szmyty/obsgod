@@ -1,10 +1,17 @@
 # Current release readiness
 
-Use the [current exact-source checkpoint](aurora-integration-checkpoint.md) and
-[owner packet](aurora-owner-packet.md) for the standard Decky ZIP, source/hash,
+Use the [current exact-source checkpoint](pre-migration-qualified-checkpoint.md) and
+[owner packet](https://github.com/szmyty/obsgod/blob/430cc391cb63f080214aacc279e5c04b1092c7a5/OWNER-PACKET.md)
+for the standard Decky ZIP, source/hash,
 qualification limits, numbered tests and current owner facts. Later source
 changes require affected checks and a newly pinned candidate; old passing
 receipts never qualify them.
+
+The existing test download remains exact source `772230a`, with 70 passed local
+command checks and two unavailable. The implementation merges and later Markdown
+handoff updates do not rebuild it or relabel those receipts as a newer revision.
+Use the [remaining-work sequence](../ROADMAP.md#before-manual-testing) before
+the paired owner test/fix loop.
 
 Source preparation can proceed while owner tests are deferred. Actual Deck,
 loader/provider/controller/headset, full applicable matrix, required services/

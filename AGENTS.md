@@ -49,7 +49,7 @@ Current owner sequence is selected **01 / aurora** → normal Decky implementati
 and branding integration → bounded audit/cleanup → final full available matrix
 and current-identity test build → owner Deck test/fix loop → migration → actual
 new-install retest. The creative direction is selected and its source-preview artwork/native integration
-have exact-source local evidence; see the [current checkpoint](docs/aurora-integration-checkpoint.md).
+have exact-source local evidence; see the [current checkpoint](docs/pre-migration-qualified-checkpoint.md).
 Actual device, full matrix, rights and adoption gates remain. Use focused checks during work.
 Separate companion/StreamGod remains deferred. Provider OAuth/phone login is
 research-only #89; discuss its design before coding it and do not block the
