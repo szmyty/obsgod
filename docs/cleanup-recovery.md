@@ -83,6 +83,36 @@ absent managed process is not restarted. If explicitly closing an idle instance
 changes selected runtime state, the old preview is refused and a fresh preview
 is required; external changes are not silently accepted as cleanup side effects.
 
+## Durable private export before explicit wipe
+
+The original #82-C4 contract requires recoverable export before a complete wipe.
+`--wipe` now plans a unique TAR in the owned private
+`XDG_DATA_HOME/obsgod-wipe-exports` sibling namespace (default
+`~/.local/share/obsgod-wipe-exports`). `--export PATH` chooses a new private target
+for wipe only. The export is never inside a selected deletion tree or plugin
+root. Preview is read-only and advertises that the archive contains credentials
+and remains after wipe. Existing non-wipe/reset/legacy-retirement semantics stay.
+
+Under the existing update→install→control leases, export streams only the pinned
+selection through no-follow descriptors and checks single-link owned files.
+Retained lock inodes are excluded; media appears only if separately selected.
+Known aliases are manifest metadata, never followed or materialized as TAR links.
+The bounded operation checks contents/digests, syncs the private0600 temporary
+file, publishes without overwriting, syncs its0700 owned parent and verifies the
+named artifact before the first plugin/data removal. Export failure causes no
+removal; selected roots, coordination and export identities remain checked at
+later operation boundaries. No broad ownership/permission repair is performed.
+
+The archive preserves a private copy of selected data after wipe, including
+possible stream keys/control passwords/history. It is not encrypted and must
+never enter public diagnostics. `RECOVERY.json` describes entries/hashes and
+manual staging; there is no automatic restore, re-created alias or asserted
+application rollback. Use a separately verified install artifact, inspect/recover
+selected paths in a new private staging directory and deliberately dispose of
+the exact export when no longer wanted. A later lost/changed export stops further
+removal; the tool does not claim that an artifact it cannot re-observe survived.
+See the [user commands](steam-deck.md#private-recovery-export-before-wipe).
+
 To retire only obsolete Desktop app files, preview
 `python3 uninstall.py --legacy-app-only --dry-run`. This explicit scope removes
 owned app releases, matching aliases and managed launchers while preserving the

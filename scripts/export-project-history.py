@@ -56,6 +56,7 @@ class PublicGitHub:
             raise ExportError("Use an exact owner/repository name.")
         self.repository = repository
         self.base = "https://api.github.com/repos/" + repository
+        self.repository_id = None
         self.open_url = open_url or urllib.request.build_opener(NoRedirects()).open
         self.lock = threading.Lock()
         self.requests = self.bytes = 0
@@ -65,7 +66,7 @@ class PublicGitHub:
             parsed = urllib.parse.urlsplit(url)
             if (parsed.scheme != "https" or parsed.netloc != "api.github.com" or parsed.port
                     or parsed.username or parsed.password or parsed.fragment
-                    or any(c in url for c in "\r\n\x00")
+                    or any(ord(c) < 32 or ord(c) == 127 for c in url) or "#" in url
                     or not (parsed.path == "/repos/" + self.repository
                             or parsed.path.startswith("/repos/" + self.repository + "/"))):
                 return False
@@ -73,10 +74,46 @@ class PublicGitHub:
         except (ValueError, TypeError):
             return False
 
+    def verify_repository(self, metadata):
+        repository_id = metadata.get("id")
+        if (metadata.get("private") is not False or metadata.get("visibility") != "public"
+                or metadata.get("full_name") != self.repository
+                or type(repository_id) is not int or repository_id <= 0
+                or self.repository_id not in (None, repository_id)):
+            raise ExportError("Only the exact public repository may be exported; private or moved repositories are refused.")
+        self.repository_id = repository_id
+
+    def pagination_url(self, url, endpoint, original_query, page):
+        """Accept GitHub's verified-ID alias, but request only the canonical path."""
+        try:
+            if len(url) > 4096:
+                raise ValueError
+            parsed = urllib.parse.urlsplit(url)
+            prefix = "/repos/" + self.repository
+            numeric_path = ("/repositories/" + str(self.repository_id) + endpoint[len(prefix):]
+                            if self.repository_id is not None else None)
+            if parsed.path != endpoint and parsed.path != numeric_path:
+                raise ValueError
+            canonical = urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, endpoint,
+                                                parsed.query, parsed.fragment))
+            if not self.safe_url(canonical, endpoint) or any(ord(c) < 32 or ord(c) == 127 for c in url) or "#" in url:
+                raise ValueError
+            query = urllib.parse.parse_qs(parsed.query, keep_blank_values=True,
+                                          strict_parsing=True, max_num_fields=16)
+            if (set(query) not in (set(original_query) | {"page"}, set(original_query) | {"page", "after"})
+                    or any(query.get(k) != v for k, v in original_query.items())
+                    or query.get("page") != [str(page)]
+                    or ("after" in query and (len(query["after"]) != 1
+                        or not re.fullmatch(r"[A-Za-z0-9_+/=-]{1,1024}", query["after"][0])))):
+                raise ValueError
+            return canonical
+        except (ValueError, TypeError):
+            raise ExportError("GitHub supplied an unsupported pagination address.") from None
+
     def get(self, path, pages=False):
         url = self.base + path
         endpoint = urllib.parse.urlsplit(url).path
-        original_query = urllib.parse.parse_qs(urllib.parse.urlsplit(url).query)
+        original_query = urllib.parse.parse_qs(urllib.parse.urlsplit(url).query, keep_blank_values=True)
         records, seen = [], set()
         for _ in range(MAX_PAGES if pages else 1):
             if not self.safe_url(url, endpoint) or url in seen:
@@ -114,12 +151,7 @@ class PublicGitHub:
             following = re.search(r'<([^>]+)>;\s*rel="next"', link)
             if not following:
                 return records
-            url = following[1]
-            query = urllib.parse.parse_qs(urllib.parse.urlsplit(url).query)
-            if (not self.safe_url(url, endpoint) or set(query) != set(original_query) | {"page"}
-                    or any(query.get(k) != v for k, v in original_query.items())
-                    or len(query.get("page", [])) != 1 or not query["page"][0].isdigit()):
-                raise ExportError("GitHub supplied an unsupported pagination address.")
+            url = self.pagination_url(following[1], endpoint, original_query, _ + 2)
         raise ExportError("The capture exceeded its page limit.")
 
 
@@ -149,9 +181,7 @@ def branch_head(api, branch):
 def capture(api, purpose="checkpoint"):
     started = now()
     repo = api.get("")
-    if (repo.get("private") is not False or repo.get("visibility") != "public"
-            or repo.get("full_name") != api.repository):
-        raise ExportError("Only the exact public repository may be exported; private or moved repositories are refused.")
+    api.verify_repository(repo)
     branch = repo.get("default_branch")
     if not isinstance(branch, str) or not branch or any(ord(c) < 32 for c in branch):
         raise ExportError("The public default branch is invalid.")

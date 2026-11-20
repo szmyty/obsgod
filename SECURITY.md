@@ -29,3 +29,14 @@ publisher identity or a code signature.
 Security updates, support terms and publication remain owner decisions. Do not
 describe a preview as a supported stable release before its required review,
 CI and device gates pass.
+
+## Private wipe recovery archives
+
+Explicit `uninstall.py --wipe` retains a verified recovery TAR outside its removal
+roots, normally in the XDG data sibling `obsgod-wipe-exports`. It may contain
+stream keys, OBS control passwords and private history. Owned directory/archive
+modes0700/0600 provide local filesystem privacy, not encryption. Do not upload
+these archives to issues, logs or support bundles. Inspect/recover only selected
+owned paths in a new private staging directory; never extract over HOME or assume
+automatic application rollback. Deliberately dispose of the exact archive when
+it is no longer needed. Failed export cannot authorize wiping the originals.

@@ -32,7 +32,12 @@ milestones; conversation comments; inline review comments; submitted reviews;
 and PR base/head/merge metadata. Captured bodies retain their SHA-256 values.
 Issue/PR membership, duplicate IDs and conversation counts are checked. Private
 pending reviews are outside the export. Pagination cannot leave the exact API
-repository/endpoint or add unexpected query parameters. Each request has a
+repository/endpoint or add unexpected query parameters. GitHub's numeric
+repository aliases must match the exact positive repository ID verified from
+canonical public metadata. Its bounded opaque `after` cursor and sequential
+next page are accepted only with unchanged endpoint/filters; follow-up requests
+still use the canonical owner/repository path. This is not permission to follow
+moved repositories, redirects or another numeric repository. Each request has a
 15-second timeout, with page/request/response/total-size limits.
 
 ## Refresh at actual retirement

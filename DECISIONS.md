@@ -127,3 +127,16 @@ Module caches, artifacts, evidence and existing presets remain intact. Failed or
 interrupted attempts retain their own outcome instead of inheriting a later
 pass. See [local CI](docs/local-ci.md). No product permission, proposed ADR,
 release/publisher, deployment, migration or spending decision is changed.
+
+## Explicit wipe recovery (#82-C4)
+
+The source audit demonstrated that explicit wipe could delete settings and
+rollback copies without first preserving the required recoverable export.
+The owner-authorized repair creates a bounded, durable private TAR before any
+plugin/data removal. Its sibling XDG data namespace intentionally survives wipe;
+plan/result state that it may contain credentials. It is filesystem-private,
+not encrypted, and is excluded from public support material. Copy, verification,
+publication or sync failure cannot authorize removal. Existing coordination and
+path identities stay authoritative; normal/reset/legacy scopes remain distinct.
+This records implementation, not a device/restore/rights acceptance or a new ADR
+approval. Manual recovery and separately verified reinstallation remain explicit.

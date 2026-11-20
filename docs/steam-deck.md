@@ -275,12 +275,47 @@ deliberate migration; it refuses conflicting installations instead of guessing.
   settings, credentials, history and recordings.
 - `--reset` resets owned settings, credentials, isolated OBS, state and cache
   while retaining the installed app/plugin.
-- `--wipe` removes owned app/data/rollback copies as well. Recordings remain a
-  separate explicit choice.
+- `--wipe` first creates a verified private recovery export, then removes owned
+  app/data/rollback copies. The export survives wipe and may contain credentials;
+  recordings remain a separate explicit choice.
 - `--delete-recordings` additionally selects standard OBS date-named MKVs in
   `Videos/OBSGod`; use repeatable `--recording PATH` for an explicitly selected
   other MKV there. Review the exact dry-run inventory first.
 - `--yes` is the noninteractive equivalent of confirming the displayed plan.
+
+### Private recovery export before wipe
+
+`--wipe` now requires a successful private recovery TAR before it can remove the
+plugin or selected data. Its fresh inventory names the export and explicitly
+states that it can contain stream keys, OBS passwords and private history.
+The default is `${XDG_DATA_HOME:-~/.local/share}/obsgod-wipe-exports/` with a
+unique filename. The owned export directory is mode0700 and the archive0600;
+this is filesystem privacy, not encryption. It is outside the removal roots.
+
+To select a new archive in a dedicated private folder, use the same exact path
+for preview and the later explicit operation:
+
+```sh
+python3 uninstall.py --wipe --export "$HOME/.local/share/obsgod-wipe-exports/migration-1.tar" --dry-run
+python3 uninstall.py --wipe --export "$HOME/.local/share/obsgod-wipe-exports/migration-1.tar"
+```
+
+An existing archive is never overwritten. Unsafe paths/links/ownership, changed
+inventory, failed copying/verification or durability failure stop before the
+first removal. A later interruption can leave partial removal, with an honest
+result and the completed export's path/hash when still available. Review and
+retry rather than bypassing a safety refusal. Large selections may exceed the
+bounded export budget; they are not deleted after a failed export.
+
+Keep this TAR private; do not attach it to an issue, log console or support
+bundle. For recovery, stage it only in a new private directory, inspect
+`RECOVERY.json` and its file hashes, then recover selected owned data deliberately
+while outputs are stopped. Never extract over HOME. Alias entries are metadata,
+not instructions to recreate links. Reinstall a separately verified plugin ZIP;
+verified export is not proof of an automatic restore or application rollback.
+After successful recovery/testing, delete the exact retained archive deliberately
+if no recovery copy should remain. Normal uninstall, reset and legacy retirement
+do not automatically create this export or change their existing scopes.
 
 Removal requires idle, known output and a supported Decky removal path; missing
 or malformed status is not permission to delete. A partial failure stops with

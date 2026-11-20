@@ -18,6 +18,13 @@ compatibility IDs and empty Identity approval/token layers remain unchanged.
 The decorative gradient is separate from observed streaming status. Rendering
 and provenance checks do not imply rights, publisher or actual device approval.
 
+The retained cleanup tool creates a verified durable private export before an
+explicit wipe. The export lives in an owned XDG data sibling outside selected
+removal roots and intentionally survives; it can contain credentials and is not
+public evidence. Existing cleanup leases/path identities gate export and removal.
+No automatic restore or new provider/OBS credential store is introduced. Normal
+Decky removal and optional legacy retirement remain separate scopes.
+
 ## Components and dependency direction
 
 | Component | Responsibility and boundary |
