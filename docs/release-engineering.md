@@ -15,8 +15,18 @@ Use the pinned toolchain and repository commands in
 packaging; dirty manifests cannot be qualified or used by the updater. Keep the
 source commit, package version and review-only artifact commit distinct.
 
-From the exact, clean revision, package the runtime and updater twice and compare
-`SHA256SUMS` and `UPDATER-SHA256SUMS`. Then run:
+For the normal plugin, use the maintained [standard Decky package entry](decky-package.md):
+`python3 scripts/qualify-decky-build.py --revision FULL_SOURCE_COMMIT --output NEW_PRIVATE_DIRECTORY`.
+Replace both markers with the exact clean source and a new absolute private
+output directory. It runs two complete primary builds and verifies canonical
+`obsgod-decky.zip` bytes, source, native payload and licenses. It does not install
+on the Deck. Optional official CLI assembly is a separate prepared-byte check,
+not source compilation or reproducibility of its raw ZIP.
+
+Legacy Desktop runtime/updater and generic packages remain compatibility/audit
+artifacts; they are not extra applications required for a standard Decky install.
+For their retained full audit, package the runtime and updater twice at the same
+clean revision and compare `SHA256SUMS` and `UPDATER-SHA256SUMS`. Then run:
 
 ```sh
 python3 scripts/release-audit.py --revision "$(git rev-parse HEAD)" --output dist/supply-chain

@@ -15,8 +15,9 @@ controller, audio or Kick compatibility. Required device checks remain open.
 The current source produces one `obsgod-decky.zip`, installed through Decky's
 normal plugin controls. Do not substitute a GitHub source-code ZIP. A separate
 Desktop application/updater is optional and its version need not match the plugin.
-The final current-source review download and numbered machine/Deck test packet
-remain [#85](https://github.com/szmyty/obsgod/issues/85); the retained
+The [current review download and numbered tests](aurora-owner-packet.md) identify
+exact source and checksums; final qualification remains
+[#85](https://github.com/szmyty/obsgod/issues/85). The retained
 [4699235 review installer](current-review-install.md) is explicitly historical.
 
 1. Install Decky Loader from its official project if needed. Stop streaming,
@@ -208,39 +209,58 @@ configuration are deleted or replaced by the installer.
 
 ## Updates and recovery
 
-**Check for updates** appears near the bottom of the panel, above optional support. It shows the installed and
-latest compatible runtime versions, no-update, offline or failure results. A
-check never replaces files or interrupts output. Updater-only releases are not
-mistaken for new streaming runtimes. Historical immutable same-repository
-artifacts and normal GitHub release assets are validated through their manifests
-and checksums; downloads are never accepted from arbitrary repositories.
+**Check for updates** near the bottom of the panel observes the loaded plugin's
+version and distribution channel. It reports a compatible newer release,
+no update, offline or an actionable failure; checking never replaces files or
+interrupts output. A manual review-artifact branch is not an updater offer.
+Version alone may match across previews, so also retain the exact source/hash
+from your review packet.
 
-To apply an update, stop streaming and recording, enter **Desktop Mode**, and
-open **Update OBSGod** from Applications → Multimedia, or the bundled
-**Update OBSGod.desktop** (also available as `Update OBSGod.sh`). The updater checks output safety, downloads/verifies a
-compatible candidate and runs the same unified installer. It preserves key,
-settings, media and unrelated plugins. Repeated installation and same-version
-repair are supported; a partial failure must show what changed and how to retry
-or recover. Do not assume Decky's own Reinstall button fetches a newer OBSGod
-runtime.
+For a standard ZIP installation, use **Decky's own plugin update/replacement
+controls** with the exact verified candidate. Stop streaming, recording and
+replay and confirm fresh idle first; recover unknown state before replacement.
+Decky's loader owns replacement. Plugin shutdown hooks are best effort and
+cannot veto a loader operation or promise that output stopped. After reopening,
+check the loaded version/source, fresh status and retained settings/media.
+A Reinstall button may reuse its offered package; it does not prove that the
+latest repository source was fetched. The real loader journey remains #86.
 
-The historical preview4.1 updater is a fixed preview4 bootstrap, not a dynamic
-latest-version updater. Download the current reviewed installer/updater to
-leave that generation; its immutable verification cannot be repointed to newer
-bytes. The maintained preview6 updater can verify a new unified candidate,
-while publication and actual-device upgrade acceptance remain separate gates.
+### Optional legacy Desktop app recovery
 
-Keep Steam's normal Desktop frontend available for Decky's supported installer
-bridge. The earlier generic instruction to close Big Picture was not a proven
-cause of the owner's failure. The new transport preserves the frontend's
-WebSocket instead of taking its single connection. Cloud protocol fixtures do
-not prove the actual Steam frontend works; that remains a device check.
+Only installations that actually have the separate Desktop app/updater use
+**Update OBSGod** under Applications → Multimedia, `Update OBSGod.desktop` or
+`Update OBSGod.sh`. A normal Decky ZIP creates none of these. Its optional app
+version need not equal the loaded plugin, and its absence does not require
+installing a second copy or repairing a pair.
+
+The legacy updater checks output safety and verifies its selected archive before
+using the unified installer. Review exactly which app/plugin version it will
+replace; preserve settings, keys, media, ordinary OBS and other plugins. On a
+partial failure, use its reported recovery rather than manually deleting folders.
+Historical preview4.1 is a fixed preview4 bootstrap and cannot fetch newer bytes;
+its immutable URL/hash stays unchanged. Maintained dynamic-updater compatibility
+and actual-device upgrade success remain distinct evidence.
+
+Legacy installer transport needs Steam's normal Desktop frontend available.
+Closing Big Picture was not a proven explanation for the earlier failure.
+Protocol fixtures preserve the frontend's WebSocket rather than taking its
+single connection; actual Steam/Decky behavior still needs the owner test.
 
 ## Uninstall, reset and wipe
 
-Open **Uninstall Decky Stream** in Desktop Mode, or run the bundled
-`uninstall.py`. Review its inventory before confirmation. For the default
-installation location:
+For a normal plugin-only installation, stop all outputs, confirm fresh idle,
+and use **Decky's plugin removal controls**. Preserve the existing private
+settings/media and review your backup/recovery plan first. The plugin's hooks
+are best effort; do not infer successful teardown or data retention from a click.
+Actual supported-loader removal/preservation is recorded in the owner test loop.
+
+### Optional Desktop cleanup, reset and explicit wipe
+
+Only if the legacy Desktop app is installed, open **Uninstall Decky Stream** in
+Desktop Mode or use its reviewed `uninstall.py`. The current cleanup helper can
+also inventory those legacy pieces without installing the Desktop app. A normal
+Decky ZIP does not create the Applications launcher or the path below.
+For an existing default-location Desktop installation:
 
 ```sh
 python3 ~/.local/share/obsgod/current/uninstall.py --dry-run --json

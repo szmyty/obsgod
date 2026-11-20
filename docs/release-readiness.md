@@ -1,4 +1,29 @@
-Latest qualified follow-up: exact source **4699235**,
+# Current release readiness
+
+Use the [current exact-source checkpoint](aurora-integration-checkpoint.md) and
+[owner packet](aurora-owner-packet.md) for the standard Decky ZIP, source/hash,
+qualification limits, numbered tests and current owner facts. Later source
+changes require affected checks and a newly pinned candidate; old passing
+receipts never qualify them.
+
+Source preparation can proceed while owner tests are deferred. Actual Deck,
+loader/provider/controller/headset, full applicable matrix, required services/
+reviews and rights/adoption evidence remain explicit. Migration preparation is
+separate from executing #87; post-move install and the concrete v1 decision are
+#88, with actual destination dependency graph/review in #95.
+
+Current repository remains `szmyty/obsgod` on `master`. There is no requirement
+to rename this archive's branch before current testing. The future approved
+`OWNER/deckystream` will use `main`; its exact owner and publication authority
+remain unresolved. No release, deployment or other-repository action is implied.
+
+## Historical packets
+
+Everything below describes its stated older candidate, including historical
+branch/API observations. Preserve the exact artifacts/commands and consult the
+current packet above for today's source and gates.
+
+Historical qualified follow-up: exact source **4699235**,
 [verified review installation](current-review-install.md) and
 [revision-bound audit](../audits/qualification-4699235.md). The packets below are
 historical and do not supersede that follow-up or qualify newer source.
