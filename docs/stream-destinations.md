@@ -7,7 +7,9 @@ local RTMP endpoint without a new service account.
 
 ## Destination setup
 
-1. Stop streaming and recording, then close idle managed OBS in Desktop Setup.
+1. Stop streaming, recording and replay. In the panel's **Stream destination**,
+   use **Close managed OBS to edit settings** only after idle output is confirmed.
+   The optional Desktop form provides the same protected writer.
 2. Select a destination guide. Selecting a guide changes its help only; it never
    overwrites a server URL or an entered key.
 3. Copy the intended account/event server URL and its separate stream key into
@@ -23,7 +25,7 @@ local RTMP endpoint without a new service account.
 | Destination | Account and event preparation | Server selection |
 | --- | --- | --- |
 | Kick | Use Creator Dashboard → Channel → Stream URL and Key; set the stream title and category. | Copy your own dashboard URL. No account-specific URL is guessed. |
-| Twitch | Use the Creator Dashboard's stream settings and primary stream key. | The explicit **Use recommended server** action offers the secure default from Twitch's public ingest list. You may paste another official ingest. |
+| Twitch | Use the Creator Dashboard's stream settings and primary stream key. | The explicit **Use Twitch secure server** action offers the secure default from Twitch's public ingest list. You may paste another official ingest. |
 | YouTube | Enable live streaming and select/create the intended event in Live Control Room. Check whether the event requires a separate Go Live confirmation. | Use the lock icon in Stream settings to copy that event's RTMPS URL and key. No event-specific URL is guessed. |
 | Custom RTMP(S) | Follow the destination's instructions. Plain RTMP remains supported for local/offline workflows. | Paste the server and key separately. |
 

@@ -1,23 +1,56 @@
-# Decky Stream Steam Deck guide
+# deckystream Steam Deck guide
 
 OBSGod runs an isolated OBS Studio Flatpak and exposes streaming controls in
 Decky's Quick Access panel. Stock OBS still needs a graphical session; this is
 managed background OBS, not a headless OBS server. SteamOS/Linux x86_64 is the
 supported target. Normal use does not disable SteamOS read-only protection.
 
-**The Milestone 3 streaming candidate is under draft review.** Use the candidate and checksums identified
-in its draft PRs, not an older published preview as evidence of these fixes.
+**This is the current-source guide.** Use the exact candidate and checksums in
+your review packet, not an older published preview as evidence of newer fixes.
 Cloud tests do not establish actual Steam Deck, Flatpak, Gamescope, AMD encoder,
 controller, audio or Kick compatibility. Required device checks remain open.
 
-## Install or upgrade
+## Current standard-plugin setup
+
+The current source produces one `obsgod-decky.zip`, installed through Decky's
+normal plugin controls. Do not substitute a GitHub source-code ZIP. A separate
+Desktop application/updater is optional and its version need not match the plugin.
+The final current-source review download and numbered machine/Deck test packet
+remain [#85](https://github.com/szmyty/obsgod/issues/85); the retained
+[4699235 review installer](current-review-install.md) is explicitly historical.
+
+1. Install Decky Loader from its official project if needed. Stop streaming,
+   recording and replay before replacing a plugin; unknown output requires
+   recovery/inspection first. Use the exact ZIP/checksum supplied by the review.
+2. Open **••• → Decky → deckystream** in Gaming Mode. Existing installation
+   identity may still be **OBSGod**. First-run setup lists missing user-scoped
+   OBS/GStreamer dependencies; choose **Install** or **Later**. Declining leaves
+   setup required. Downloads do not run merely because Decky loads the plugin.
+3. In **Stream destination**, enter the provider's server and separate stream key.
+   Saved settings collapse behind **Edit saved destination**. STEAM + X opens
+   the keyboard; a saved key is never read back. Saving does not start output.
+4. Make a **10-second test clip**, then verify picture and sound. The streaming
+   indicator remains stopped during a local recording. Explicitly Start only
+   after choosing capture/audio, and verify the channel from another device.
+
+Desktop Setup is an optional authenticated loopback tool for advanced profiles,
+idle media and storage choices. The panel provides **Optional Desktop Setup
+instructions** for the bundled `setup.py`; Decky's ZIP install does not create
+a separate Applications launcher. Never share the private local page URL.
+
+## Retained Desktop archive installation
+
+The steps below apply to older reviewed Desktop/runtime archives or an explicitly
+chosen optional Desktop installation. They are not prerequisites for the standard
+plugin flow above. Preserve the exact source/checksums of the archive being used.
 
 1. In **Desktop Mode**, download the reviewed candidate archive ending in
    `_linux_amd64.tar.gz` and extract the entire archive. Leave an existing OBSGod
    installation in place; settings and the stream key should be preserved.
-   Stop streaming, local recording and replay first. Close idle managed OBS with
-   **Restart OBS** before upgrading from an older version that cannot report
-   replay state. The installer refuses active or unconfirmed output.
+   Stop streaming, local recording and replay first. If an older version cannot
+   confirm replay/output state, follow its named inspection/recovery path before
+   replacement. Restarting is not a close-to-edit operation or proof of idle.
+   The installer refuses active or unconfirmed output.
 2. Make sure **Decky Loader** is installed and Steam is running normally in
    Desktop Mode. Decky is part of the **••• Quick Access panel** in Gaming Mode;
    it is not a normal Desktop Applications entry. If Decky is missing or its
@@ -97,7 +130,8 @@ Desktop Setup now offers credential-free local connection information, an explic
 read-only connection test, and password change/reset while managed OBS is fully
 closed. See [destinations and control recovery](stream-destinations.md).
 
-Configure in Desktop Mode and start inside Gaming Mode. Session switching may
+Configure basic destination/password settings in the native panel, or use optional
+Desktop Setup for its advanced controls. Start inside Gaming Mode. Session switching may
 terminate OBS; Desktop-to-Gaming stream continuity is not promised without
 recorded platform evidence. The launcher follows the current Steam graphical,
 D-Bus and audio session without forcing an incompatible Qt backend.

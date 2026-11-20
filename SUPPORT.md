@@ -12,7 +12,8 @@ not purchase a service agreement or change streaming/recovery access.
 
 Before reporting a problem:
 
-1. Record the exact app, plugin and updater versions shown in the panel, plus
+1. Record the exact plugin version and any separately installed optional Desktop
+   app/updater versions shown in the panel, plus
    Deck model, SteamOS channel/version, Decky and OBS versions.
 2. State whether you were in Desktop or Gaming Mode, the selected destination,
    video mode, audio output and the last action. Do not include a stream URL/key.
@@ -23,7 +24,10 @@ Before reporting a problem:
    [configuration reference](docs/configuration.md) and
    [support configuration](docs/support.md).
 
-Use the bundled Desktop installer for repair. Avoid deleting configuration or
+Use the panel's named setup/recovery action or Decky's normal replacement
+controls for the standard plugin. The retained Desktop installer repairs an
+optional Desktop installation; its absence does not mean the plugin is broken.
+Avoid deleting configuration or
 ordinary OBS files while troubleshooting. The uninstall tool's dry-run explains
 its scope before removal; recording deletion is a separate explicit choice.
 

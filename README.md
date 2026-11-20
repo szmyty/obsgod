@@ -12,7 +12,7 @@
 stream, microphone and local recordings from Decky's Quick Access panel in
 Gaming Mode.
 
-[Install the review build](docs/current-review-install.md) ·
+[Historical review download](docs/current-review-install.md) ·
 [User guide](docs/steam-deck.md) · [Get help](SUPPORT.md) ·
 [Roadmap](ROADMAP.md) · [Support development](#support-development)
 
@@ -38,17 +38,20 @@ making a local clip or recovering a connection does not start a stream.
 
 ## Install and make your first stream
 
-You need Steam Deck Desktop/Gaming Mode, Decky Loader and compatible OBS Studio
-with its capture/audio dependencies. The full installer checks dependencies and
-installs the paired Decky plugin; follow the guide for prerequisites and any
-action it requests.
+The current source uses one standard Decky plugin ZIP. Decky Loader must already
+be installed; OBS Studio and matching capture dependencies are consented first-run
+setup, with progress, cancel and retry. A separate Desktop application is optional.
+The next exact-source install/test packet is tracked in [#85](https://github.com/szmyty/obsgod/issues/85).
+The historical review download above remains its explicitly named older source.
 
-1. In **Desktop Mode**, stop streaming, recording and replay. Keep Steam and
-   Decky running, then use the [checksum-verifying review installer](docs/current-review-install.md).
-2. Open **Decky Stream Setup** from Applications and configure the destination
-   and stream key locally. Preserve your existing settings and recordings.
-3. Return to **Gaming Mode** and open the plugin through Decky's Quick Access
-   panel. Make a local test clip and verify both its picture and sound.
+1. Stop streaming, recording and replay before replacement. Install the exact
+   checksum-bound standard ZIP supplied with your candidate through Decky's
+   normal plugin installation controls; a GitHub source ZIP is not that package.
+2. Open the plugin in **Gaming Mode**. Review missing dependencies and choose
+   **Install** or **Later**. In **Stream destination**, save the server and private
+   key. Existing settings/media are preserved; Desktop Setup remains optional.
+3. Make a local test clip and verify both picture and sound. The streaming
+   indicator stays stopped during local recording.
 4. Select the intended picture/audio, explicitly **Start streaming**, and check
    the result from a separate viewer. OBS reporting transmission does not prove
    the destination received audible video.
