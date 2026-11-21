@@ -1,0 +1,437 @@
+{
+  "schema": "deckystream.pretest-readiness/v1",
+  "recorded_utc": "2026-11-21T00:30:17.899818+00:00",
+  "scope": "Fresh read-only/pre-allocation evidence for exact main a2137bf and a documentation-only guided testing handoff. No later source, binary, manual or release qualification is inferred.",
+  "observed_source": {
+    "revision": "a2137bf214c77efda3ce3fb87879f88004c6477c",
+    "tree": "6795ecffc02440b3096409c100fb1b59b331754c",
+    "clean_at_matrix_attempt": true,
+    "default_branch": "master",
+    "current_source_only_diff_from_test_candidate": "Thirteen Markdown/evidence JSON files; Go, Python, frontend, native assets and workflows unchanged."
+  },
+  "qualified_test_candidate": {
+    "revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+    "tree": "f157ea77d16a1f1ce04bf1e47b584f9183c9c359",
+    "tracked_source_inventory_entries": 648,
+    "version": "0.1.0-deck.9",
+    "artifact_commit": "430cc391cb63f080214aacc279e5c04b1092c7a5",
+    "plugin_zip": {
+      "path": "obsgod-decky.zip",
+      "bytes": 4570722,
+      "sha256": "fa206d93fcca0dd32b6dbebd1a641c40177f6a0acd7e635f68307a3bd2745e8a"
+    },
+    "optional_cleanup_runtime": {
+      "path": "obsgod-deck_0.1.0-deck.9_linux_amd64.tar.gz",
+      "bytes": 12053779,
+      "sha256": "e8d32968573989565dc74eb4e2bd8bd41e97107ebdbd6f57e56e69f565ef1487"
+    },
+    "prior_available_command_predicates": {
+      "passed": 70,
+      "unavailable": 2,
+      "failed": 0
+    },
+    "prior_passed_fixture_groups": {
+      "native_linux_obs": 3,
+      "packaged_browser": 10
+    },
+    "all21_public_review_downloads_previously_verified": true,
+    "device_installation": "unrun",
+    "limits": "The candidate and previous70+2 receipts keep their exact772 source; source merges and later documents do not relabel them."
+  },
+  "current_matrix_attempt": {
+    "source_revision": "a2137bf214c77efda3ce3fb87879f88004c6477c",
+    "source_tree": "6795ecffc02440b3096409c100fb1b59b331754c",
+    "command": [
+      "python3",
+      "-B",
+      "scripts/local-ci.py",
+      "matrix",
+      "--act",
+      "/workspace/.obsgod-tools/pkg/bin/act",
+      "--state",
+      "/workspace/.obsgod-tools/pretest-booklet-20261121/matrix-state",
+      "--profile",
+      "constrained",
+      "--scratch",
+      "/tmp/obsgod-pretest-a2137bf-s6ayh_bk"
+    ],
+    "started_utc": "2026-11-21T00:25:53.539257+00:00",
+    "finished_utc": "2026-11-21T00:25:53.699024+00:00",
+    "exit_code": 3,
+    "result": "unavailable",
+    "completed": false,
+    "reason": "Resource preflight refused before any workflow",
+    "profile": "constrained",
+    "jobs": [
+      {
+        "action": "lint",
+        "result": "unrun"
+      },
+      {
+        "action": "build",
+        "result": "unrun"
+      },
+      {
+        "action": "coverage",
+        "result": "unrun"
+      },
+      {
+        "action": "snapshot",
+        "result": "unrun"
+      },
+      {
+        "action": "docs",
+        "result": "unrun"
+      },
+      {
+        "action": "candidate",
+        "result": "unrun"
+      }
+    ],
+    "probe": {
+      "exit_code": null,
+      "status": "unrun"
+    },
+    "allocation_policy": {
+      "formula": "2 * cached image Size for vfs; 0 for other drivers",
+      "runner_copy_allowance_bytes": 3249393836,
+      "scope": "Conservative pre-allocation allowance, not a peak-space guarantee"
+    },
+    "docker_metadata": {
+      "commands": [
+        [
+          "docker",
+          "--host",
+          "unix:///var/run/docker.sock",
+          "info",
+          "--format",
+          "{{json .Driver}}"
+        ],
+        [
+          "docker",
+          "--host",
+          "unix:///var/run/docker.sock",
+          "image",
+          "inspect",
+          "--format",
+          "{{json .Size}}",
+          "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270"
+        ]
+      ],
+      "driver": "vfs",
+      "image": "ghcr.io/catthehacker/ubuntu:act-24.04@sha256:19619a010b204f44c5340bff7d39b68551109fe6a56a53f75201ea91e05d4270",
+      "image_size_bytes": 1624696918
+    },
+    "root": {
+      "required_bytes": 7544361132,
+      "available_bytes": 3123400704,
+      "shortfall_bytes": 4420960428
+    },
+    "scratch": {
+      "required_bytes": 6442450944,
+      "available_bytes": 8664485888,
+      "same_host_filesystem": false
+    },
+    "original_inputs": {
+      "attempt_sha256": "fd9e12ed0f6114477ead9793c248bd71bd950bb98182e45483ca88f088d8e52e",
+      "session_sha256": "348cff095cb895d28beae190849b9857958bb05da6c1189f8ee0c768120c58dc",
+      "preflight_sha256": "ac0947397c48709a173e6e9305ed7021646f28ba8c5dd84e56b79c54f944c53a",
+      "log_sha256": "6989b8419a212e9f9a0d2d1f61644fbf0f99aee960c83fc65660bd8406554c00",
+      "log_bytes": 1871
+    },
+    "raw_private_output_published": false,
+    "log_observation": "Maintained matrix created a new session and refused preflight before allocating the cached runner probe or any workflow."
+  },
+  "hosted_actions_observation": {
+    "recorded_utc": "2026-11-21T00:27:37.435287+00:00",
+    "source_revision": "a2137bf214c77efda3ce3fb87879f88004c6477c",
+    "workflow_runs": 5,
+    "summary": {
+      "failed_jobs": 7,
+      "billing_refusals": 7,
+      "push_only_skips": 1,
+      "executed_steps": 0,
+      "other_failed_jobs": 0
+    },
+    "jobs": [
+      {
+        "run_id": 44833294131,
+        "event": "push",
+        "workflow": "goreleaser",
+        "job_id": 136623363007,
+        "name": "goreleaser",
+        "status": "completed",
+        "conclusion": "failure",
+        "runner_id": 0,
+        "step_count": 0,
+        "check_run_id": 136623363007,
+        "annotation_count": 1,
+        "annotation_message_sha256": [
+          "d6a85449a832584ff038e3a3ed8f9fceb8d038d49a9ad1676b85e092c3c59da2"
+        ],
+        "billing_lock_observed": true,
+        "raw_annotation_text_published": false
+      },
+      {
+        "run_id": 44833294115,
+        "event": "push",
+        "workflow": "coverage",
+        "job_id": 136623362835,
+        "name": "coverage",
+        "status": "completed",
+        "conclusion": "failure",
+        "runner_id": 0,
+        "step_count": 0,
+        "check_run_id": 136623362835,
+        "annotation_count": 1,
+        "annotation_message_sha256": [
+          "d6a85449a832584ff038e3a3ed8f9fceb8d038d49a9ad1676b85e092c3c59da2"
+        ],
+        "billing_lock_observed": true,
+        "raw_annotation_text_published": false
+      },
+      {
+        "run_id": 44833294148,
+        "event": "push",
+        "workflow": "lint",
+        "job_id": 136623363197,
+        "name": "format, vet and staticcheck",
+        "status": "completed",
+        "conclusion": "failure",
+        "runner_id": 0,
+        "step_count": 0,
+        "check_run_id": 136623363197,
+        "annotation_count": 1,
+        "annotation_message_sha256": [
+          "d6a85449a832584ff038e3a3ed8f9fceb8d038d49a9ad1676b85e092c3c59da2"
+        ],
+        "billing_lock_observed": true,
+        "raw_annotation_text_published": false
+      },
+      {
+        "run_id": 44833294148,
+        "event": "push",
+        "workflow": "lint",
+        "job_id": 136623364770,
+        "name": "dependency-review",
+        "status": "completed",
+        "conclusion": "skipped",
+        "runner_id": null,
+        "step_count": 0,
+        "check_run_id": 136623364770,
+        "annotation_count": 0,
+        "annotation_message_sha256": [],
+        "billing_lock_observed": false,
+        "raw_annotation_text_published": false
+      },
+      {
+        "run_id": 44833294027,
+        "event": "push",
+        "workflow": "build",
+        "job_id": 136623362378,
+        "name": "build (windows-2025)",
+        "status": "completed",
+        "conclusion": "failure",
+        "runner_id": 0,
+        "step_count": 0,
+        "check_run_id": 136623362378,
+        "annotation_count": 1,
+        "annotation_message_sha256": [
+          "d6a85449a832584ff038e3a3ed8f9fceb8d038d49a9ad1676b85e092c3c59da2"
+        ],
+        "billing_lock_observed": true,
+        "raw_annotation_text_published": false
+      },
+      {
+        "run_id": 44833294027,
+        "event": "push",
+        "workflow": "build",
+        "job_id": 136623362749,
+        "name": "build (ubuntu-24.04)",
+        "status": "completed",
+        "conclusion": "failure",
+        "runner_id": 0,
+        "step_count": 0,
+        "check_run_id": 136623362749,
+        "annotation_count": 1,
+        "annotation_message_sha256": [
+          "d6a85449a832584ff038e3a3ed8f9fceb8d038d49a9ad1676b85e092c3c59da2"
+        ],
+        "billing_lock_observed": true,
+        "raw_annotation_text_published": false
+      },
+      {
+        "run_id": 44833294027,
+        "event": "push",
+        "workflow": "build",
+        "job_id": 136623362856,
+        "name": "build (macos-15)",
+        "status": "completed",
+        "conclusion": "failure",
+        "runner_id": 0,
+        "step_count": 0,
+        "check_run_id": 136623362856,
+        "annotation_count": 2,
+        "annotation_message_sha256": [
+          "d6a85449a832584ff038e3a3ed8f9fceb8d038d49a9ad1676b85e092c3c59da2",
+          "40b261232d8f7f67fe1cb1f116234e07fe08b62a1a0c920569c080aee8b64244"
+        ],
+        "billing_lock_observed": true,
+        "raw_annotation_text_published": false
+      },
+      {
+        "run_id": 44833294236,
+        "event": "push",
+        "workflow": "Steam Deck candidate",
+        "job_id": 136623365308,
+        "name": "candidate",
+        "status": "completed",
+        "conclusion": "failure",
+        "runner_id": 0,
+        "step_count": 0,
+        "check_run_id": 136623365308,
+        "annotation_count": 1,
+        "annotation_message_sha256": [
+          "d6a85449a832584ff038e3a3ed8f9fceb8d038d49a9ad1676b85e092c3c59da2"
+        ],
+        "billing_lock_observed": true,
+        "raw_annotation_text_published": false
+      }
+    ],
+    "request_receipts": [
+      {
+        "endpoint": "repos/szmyty/obsgod/actions/runs/44833294027/jobs?per_page=100",
+        "exit_code": 0,
+        "response_sha256": "1214213932b43b303810e4ba2ec444daf2def4da4a73bbbf6addbe847f1f5d6f"
+      },
+      {
+        "endpoint": "repos/szmyty/obsgod/actions/runs/44833294115/jobs?per_page=100",
+        "exit_code": 0,
+        "response_sha256": "0e73e50a090619f90eb5fa34872c9358093a1a2ff6f48ce202ccbe6c5f4a161f"
+      },
+      {
+        "endpoint": "repos/szmyty/obsgod/actions/runs/44833294131/jobs?per_page=100",
+        "exit_code": 0,
+        "response_sha256": "1a452991753580917910515ba87d7c3dfad1acba2423b0a31024d6baa8b24211"
+      },
+      {
+        "endpoint": "repos/szmyty/obsgod/actions/runs/44833294148/jobs?per_page=100",
+        "exit_code": 0,
+        "response_sha256": "5fe413d817a494da631748c1dbb975083c39e65330358ce1c55cb68af7d7943d"
+      },
+      {
+        "endpoint": "repos/szmyty/obsgod/actions/runs/44833294236/jobs?per_page=100",
+        "exit_code": 0,
+        "response_sha256": "aa07ec2ea063b798268d925609946b6543a2fe95bb97fa72af35bf333e34d59f"
+      },
+      {
+        "endpoint": "repos/szmyty/obsgod/actions/runs?head_sha=a2137bf214c77efda3ce3fb87879f88004c6477c&per_page=100",
+        "exit_code": 0,
+        "response_sha256": "f04d6eaf58481db26b4f042e30f87ec4bcad77263f254aab2e4a44c99dfba2d7"
+      },
+      {
+        "endpoint": "repos/szmyty/obsgod/check-runs/136623362378/annotations?per_page=100",
+        "exit_code": 0,
+        "response_sha256": "509ed7623513ef76d6c33c915dcbd1c5a279778bfbdd57b514b345b5da715653"
+      },
+      {
+        "endpoint": "repos/szmyty/obsgod/check-runs/136623362749/annotations?per_page=100",
+        "exit_code": 0,
+        "response_sha256": "509ed7623513ef76d6c33c915dcbd1c5a279778bfbdd57b514b345b5da715653"
+      },
+      {
+        "endpoint": "repos/szmyty/obsgod/check-runs/136623362835/annotations?per_page=100",
+        "exit_code": 0,
+        "response_sha256": "509ed7623513ef76d6c33c915dcbd1c5a279778bfbdd57b514b345b5da715653"
+      },
+      {
+        "endpoint": "repos/szmyty/obsgod/check-runs/136623362856/annotations?per_page=100",
+        "exit_code": 0,
+        "response_sha256": "454cf3b57eaa9dd524e9aaeab49c71c08f4d7a3b0b9988ea65e9d9156eec5602"
+      },
+      {
+        "endpoint": "repos/szmyty/obsgod/check-runs/136623363007/annotations?per_page=100",
+        "exit_code": 0,
+        "response_sha256": "509ed7623513ef76d6c33c915dcbd1c5a279778bfbdd57b514b345b5da715653"
+      },
+      {
+        "endpoint": "repos/szmyty/obsgod/check-runs/136623363197/annotations?per_page=100",
+        "exit_code": 0,
+        "response_sha256": "509ed7623513ef76d6c33c915dcbd1c5a279778bfbdd57b514b345b5da715653"
+      },
+      {
+        "endpoint": "repos/szmyty/obsgod/check-runs/136623364770/annotations?per_page=100",
+        "exit_code": 0,
+        "response_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "endpoint": "repos/szmyty/obsgod/check-runs/136623365308/annotations?per_page=100",
+        "exit_code": 0,
+        "response_sha256": "509ed7623513ef76d6c33c915dcbd1c5a279778bfbdd57b514b345b5da715653"
+      }
+    ],
+    "original_observation_sha256": "4fd40d2020c6e621b8f3b4b531003d6668492c2a48a5a425d32285194c6acd6e",
+    "authentication": "Existing injected gh authentication; no token readback or environment dump published",
+    "limits": [
+      "No workflow rerun, job execution, setting change, publication or spending occurred.",
+      "Zero-step billing refusal is unavailable hosted execution, not a source failure or a test pass.",
+      "Push-only dependency review skip is not an advisory/service pass.",
+      "This observes exact a2137bf remote source and does not qualify later local documents or a new binary."
+    ]
+  },
+  "tools_observed": {
+    "python": "3.12.14",
+    "go": "go1.27.4 linux/amd64",
+    "go_executable": "/workspace/.obsgod-tools/toolchains/go1.27.4/go/bin/go",
+    "node": "v24.19.0",
+    "npm": "11.9.0",
+    "act": "0.2.97",
+    "docker_client": "28.4.0",
+    "docker_server": "28.4.0",
+    "presets": "No package/proxy/CA/network preset or injected authentication change was made by this preparation."
+  },
+  "owner_decisions": {
+    "future_repository": "unselected OWNER/deckystream",
+    "administrator_creation_and_retirement_authority": "unresolved",
+    "legal_publisher_and_support_contact": "unresolved",
+    "production_art_license_rights_and_adoption": "proposed or unresolved; selected01/aurora is a creative direction only",
+    "release_version_and_signing_policy": "final candidate/decision pending",
+    "site_domains_hosting_and_deployer": "unselected",
+    "optional_oauth": "research only; owner design discussion before coding or registration"
+  },
+  "remaining_open_issues": [
+    46,
+    79,
+    82,
+    83,
+    85,
+    86,
+    87,
+    88,
+    89,
+    95
+  ],
+  "bounded_source_issues_closed": [
+    76,
+    77,
+    78,
+    80,
+    81,
+    84
+  ],
+  "original230_ledger": {
+    "path": "docs/evidence/completion-criteria.json",
+    "sha256": "0795e6594c7bbde195bb8ebfcbc4050f0d5ecbe9c879767edbe0050540386df6",
+    "count": 230,
+    "unchanged": true
+  },
+  "limits": [
+    "ACT six workflows and Docker probe are UNRUN after actual exit3; no standalone test is relabeled a workflow pass.",
+    "All observed failed hosted jobs had the billing-lock annotation and zero steps. A push-only dependency-review skip is not an advisory pass.",
+    "Earlier exactPR114 SBOM404/comparison403 observations do not establish the actual Graph setting, absent authentication or a future destination.",
+    "Actual Steam Deck/SteamOS/Decky loader/OBS33/Flatpak/Gamescope/AMD/controller/microphone/headset/provider/session/adoption remain UNRUN.",
+    "The booklet and result template are instructions, not test evidence.",
+    "Rights/license/publisher/destination/signing/site decisions are not invented and do not block the first local clip on the current compatible installation.",
+    "No source feature, OAuth client, new repository, deployment, product release, paid resource, destructive cleanup, dependency deletion or manual session was executed."
+  ]
+}

@@ -1,71 +1,68 @@
 # Product roadmap
 
-## Current pre-migration candidate and remaining tests
+## Current test-ready implementation
 
-#113 and #114 are merged in order, with implementation merge `a315224` matching
-the reviewed `68f7a288` tree. They advance #82/#84 private wipe recovery and
-current Decky guidance,
-#87 history/cleanup preparation, #88/#95 read-only readiness evidence and
-#89 proposed authentication research. Exact clean packaged source 772230a
-(tree f157ea77, 648 files) recorded 70 passed command predicates, 2 unavailable
-and 0 failed. Read the
-[exact-source checkpoint](docs/pre-migration-qualified-checkpoint.md) and its
-immutable owner packet. These later notes do not relabel the packaged revision.
+Implementation #113 → #114 and handoff #115 are merged. The six bounded source
+issues #76, #77, #78, #80, #81 and #84 closed against their
+[47-clause evidence](docs/evidence/bounded-source-closure-20261120.md). All 230
+original criteria/dependencies and 111 current clauses remain preserved; this
+source acceptance does not pass actual device, rights or adoption requirements.
 
-Full local ACT remains unavailable after a 3,915,341,996-byte root/Docker shortfall;
-all 6 jobs/probe are unrun. Real PR #114 retained SBOM 404/comparison 403 and 15 hosted
-billing refusals / 1 skip / 0 steps. All 3 native and 10 browser checks passed; actual
-#79/#82-C1/#83/#86 loader/Deck/controller/audio/provider/session acceptance,
-required review/rights/CI/platform/adoption and exact destination authority remain.
-The first failed 772 attempt is retained separately, not reused as passing proof.
-
-All 230 original criteria/dependencies and 111 current clauses (104 bounded plus
-7 authentication) remain. Source merges do not close missing acceptance or
-publish a release, deploy a site, migrate the repository or authorize spending.
+The compatible test candidate is still exact source `772230a`, with the
+[immutable 430cc391 build/evidence packet](https://github.com/szmyty/obsgod/tree/430cc391cb63f080214aacc279e5c04b1092c7a5).
+Its 70 passed/two unavailable command checks, three native Linux OBS harnesses
+and ten browser flows are pinned to that source, not later merge or document
+revisions. The [current readiness page](docs/pretest-readiness.md) records the
+fresh automation refusal and remaining owner facts.
 
 ## Before manual testing
 
-1. **#84 — Current handoff.** Reconcile current README, setup, recovery,
-   release and migration entry points with the exact `772230a` test candidate.
-   These Markdown updates implement that cleanup; historical af7/469 packets,
-   download commands and receipts retain their original source boundaries.
-2. **#76–#78/#80–#81/#84 — Source acceptance reviewed.** The
-   [47-clause assessment](docs/evidence/bounded-source-closure-20261120.md)
-   supports these bounded implementation closures after the handoff merge.
-   Keep #79's explicit review/device checkpoint, #82-C1 loader lifecycle and
-   #83 hardware observations open; source merge is not acceptance.
-3. **#85 — Qualification and test handoff.** Use the immutable candidate,
-   checksums, rollback and numbered cases linked above. A new source/artifact
-   candidate needs affected checks and its own exact revision. Complete the
-   supported ACT matrix on adequate free Linux capacity when available; current
-   ACT, hosted billing and GitHub service limitations remain separate and do
-   not turn into passes or require paid execution.
-4. **#87/#88 — Owner facts, in parallel.** Record the exact
-   `OWNER/deckystream`, administrator/publisher/contact, artwork rights/license,
-   signing or transparent unsigned policy, and site destinations. These are
-   migration/publication decisions, not prerequisites for testing the current
-   compatible plugin with manual keys.
+- **Prepared:** current build/checksums/rollback, source and rights inventory,
+  scoped cleanup helper, current entry links, source-acceptance reconciliation,
+  [step-by-step booklet](docs/testing-booklet.md), [printable PDF](docs/testing-booklet.pdf)
+  and detailed regression/evidence references.
+- **#85 remains gated:** a fresh `a2137bf` matrix attempt exited 3 before runner
+  allocation, short 4,420,960,428 root/Docker bytes; six jobs and the probe are
+  unrun. Hosted main had seven zero-step billing failures plus one skip. Use
+  adequate free capacity and actual service access to finish required evidence;
+  do not prune preserved work, spend or turn unavailable checks into passes.
+- **#87/#88 owner facts can proceed in parallel:** exact `OWNER/deckystream`,
+  administrator/creation/retirement authority, publisher/contact, artwork
+  rights/license, signing/unsigned policy and site destinations. These choices
+  do not prevent local manual-key testing on the current compatible installation.
 
-## Paired testing and final transition
+The available pre-test preparation is complete; external execution and owner
+facts above remain explicit. Missing CI does not become a new dependency that
+prevents gathering the separate #86 manual evidence.
 
-1. **#86, with #82/#83 — Test and repair together.** Follow the numbered cases:
-   setup and an audible moving local clip, then explicit provider/viewer testing,
-   game/menu privacy, microphone/headsets, session and update/recovery/removal.
-   Record actual outcomes; fix demonstrated failures, supply a new exact
-   candidate and repeat affected cases.
-2. **#87 → #95/#88 — Approved migration and clean installation.** After the
-   current-install fix loop and exact authority, perform the migration, verify
-   the actual destination's dependency graph, manifest ingestion and review
-   execution on a real PR, then test its
-   new canonical download and installation. Record independent/new-user adoption
-   and remaining CI/platform/rights/review gates in the concrete v1 packet.
-3. **#88/#46 — Publication and closure.** Prepare the exact final version,
-   artifacts, changelog and responsible publishers before specific release or
-   deployment approval. Reconcile #46 last against its original criteria.
+## Our testing session
 
-**#89 stays separate:** login research is ready for owner design discussion;
-authentication coding or app registration does not start automatically. The
-current manual-key streaming path does not wait for optional login.
+**#86 is the next hands-on phase.** Follow the booklet one page at a time:
+inspection → compatible update/setup → playable local video and audio → private
+configuration and observed status → game-only/idle privacy → microphone/headsets
+→ explicitly chosen provider/viewer test → later session/update/recovery/removal.
+The session supplies the remaining **#79**, **#82-C1** and **#83** observations.
+Actual outcomes are unrun until reported. Stop dependent steps after a failure,
+repair the demonstrated defect, build a new exact candidate and repeat affected
+cases. Keep ordinary OBS, shared dependencies, keys and existing media safe.
+
+## After current-install acceptance
+
+1. **#87 — Approved migration.** Resolve the exact destination and authority,
+   prepare its source/trust/ID transition and refreshed retirement history,
+   obtain the required approval, then perform the move and controlled cleanup.
+2. **#95/#88 — Destination and new installation.** Verify actual Graph setting,
+   Go/npm manifest ingestion and dependency-review execution on a real PR at
+   that destination; download and test its canonical clean installation. Keep
+   account billing, platform, review and independent-adoption evidence separate.
+3. **#88/#46 — v1 and final closure.** Bind final source, version/changelog,
+   artifacts, rights, responsible publishers and remaining checks. Obtain precise
+   release/deployment approval, publish only after those gates, and reconcile
+   parent #46 last. A source merge never closes missing original acceptance.
+
+**#89 stays separate:** provider login/QR research is prepared for owner design
+discussion. No OAuth code, app registration, broker or shared secret is added
+automatically; the current manual-key stream does not wait for optional login.
 
 ## Earlier aurora review candidate
 

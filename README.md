@@ -11,7 +11,9 @@
 **Stream from Steam Deck with OBS.** Set up and control your stream, microphone
 and local recordings from Decky's Quick Access panel in Gaming Mode.
 
-[Current review download and tests](docs/pre-migration-qualified-checkpoint.md) ·
+[Step-by-step testing booklet](docs/testing-booklet.md) ·
+[Printable PDF](docs/testing-booklet.pdf) ·
+[Current review build](docs/pre-migration-qualified-checkpoint.md) ·
 [User guide](docs/steam-deck.md) · [Get help](SUPPORT.md) ·
 [Roadmap](ROADMAP.md) · [Support development](#support-development)
 
@@ -37,6 +39,11 @@ Broadcasting requires an explicit **Start**. Installing, changing settings,
 making a local clip or recovering a connection does not start a stream.
 
 ## Install and make your first stream
+
+For this preview, follow the [testing booklet](docs/testing-booklet.md) one page
+at a time. Start with inspection and a local clip; live streaming is a later
+explicit step. [Pre-test readiness](docs/pretest-readiness.md) records completed
+preparation and unavailable CI/owner gates.
 
 The current source uses one standard Decky plugin ZIP. Decky Loader must already
 be installed; OBS Studio and matching capture dependencies are consented first-run
