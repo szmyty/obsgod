@@ -1,0 +1,62 @@
+{
+  "schema": "deckystream.testing-booklet-export/v1",
+  "source_base_revision": "a2137bf214c77efda3ce3fb87879f88004c6477c",
+  "tested_product_revision": "772230a32a8fdb237a58b8a637947b31671ad509",
+  "booklet_source": {
+    "path": "docs/testing-booklet.md",
+    "sha256": "6122c14c581f78e5c7080becbb17c72d33b14ce83cd0a4c964e7ac139708d230"
+  },
+  "PDF": {
+    "path": "docs/testing-booklet.pdf",
+    "bytes": 74844,
+    "sha256": "958b9729d244801352d6f0db430dbfb50caa77fb6566dc544a5cb31122351a2c",
+    "pages": 12,
+    "core_pages": 10,
+    "encrypted": false,
+    "JavaScript": false,
+    "forms": false
+  },
+  "optional_export_inputs": {
+    "docs/booklet-export/header.tex": "d9d2f817349dc1ff57b44841791ce975260db63af6c67aa0bfd1883188ff62a2",
+    "docs/booklet-export/layout.lua": "38eac96b5300fe57c5981c536226e60a914df618393b039da120a1c6f92d0373",
+    "docs/booklet-export/README.md": "15ea68991f5fd312fc7b5dd37cfb48e66d8e726b8785c6746fa7d8c0bfc91e50"
+  },
+  "tools": {
+    "pandoc": "3.1.11.1",
+    "XeTeX": "TeX Live 2025/dev/Debian",
+    "main_font": "DejaVu Sans",
+    "mono_font": "DejaVu Sans Mono"
+  },
+  "fixed_metadata_epoch": 1795215538,
+  "validation": {
+    "page_boundaries": "Page1..10 matched actualPDFpages1..10",
+    "full_ZIP_checksum_text": "present",
+    "external_HTTPS_links": [
+      "https://github.com/szmyty/obsgod/tree/772230a32a8fdb237a58b8a637947b31671ad509",
+      "https://raw.githubusercontent.com/szmyty/obsgod/430cc391cb63f080214aacc279e5c04b1092c7a5/obsgod-decky.zip",
+      "https://github.com/szmyty/obsgod/blob/430cc391cb63f080214aacc279e5c04b1092c7a5/SHA256SUMS",
+      "https://github.com/szmyty/obsgod/blob/430cc391cb63f080214aacc279e5c04b1092c7a5/OWNER-PACKET.md",
+      "https://github.com/szmyty/obsgod/blob/430cc391cb63f080214aacc279e5c04b1092c7a5/OWNER-TESTS.md",
+      "https://github.com/szmyty/obsgod/blob/a2137bf214c77efda3ce3fb87879f88004c6477c/docs/legacy-cleanup-kit.md",
+      "https://github.com/szmyty/obsgod/blob/a2137bf214c77efda3ce3fb87879f88004c6477c/ROADMAP.md"
+    ],
+    "internal_GoTo_links": [
+      {
+        "destination": "section*.12",
+        "page": 11
+      }
+    ],
+    "visually_reviewed_pages": [
+      1,
+      11,
+      12
+    ],
+    "result": "passed document export checks; no device test executed"
+  },
+  "limits": [
+    "Optional documentation renderer only; no new Steam Deck or ordinary plugin-build dependency.",
+    "PDF reproducibility across toolchains is not asserted. Creation metadata uses recorded source epoch; it is not a test date.",
+    "The initial TeX-header failure and intermediate appendix overflow were corrected before delivery; private generation logs remain retained.",
+    "All actual manual observations remain unrun; the tested product candidate and previous qualification are unchanged."
+  ]
+}

@@ -1,48 +1,65 @@
 # Current work
 
-## Merged implementation and current test handoff
+## Guided testing handoff
 
-The owner authorized merging before manual testing. #113 merged at
-**c05e06e208bf44fd3e3cfaee5ea9342935a9279a**, followed by #114 at
-**a315224a8a5cdf8e415a9e5bdc8b9bc5a8740640**. That implementation merge has
-tree **69a83da2fbb086b25b107510de16814c64ce24b3**, matching reviewed head
-68f7a288, with 649 tracked files. The repository's current default remains
-`master`; the future destination will use `main` after its separate approval.
+The owner requested all feasible pre-manual work, source integration and a simple
+booklet for testing together one step at a time. Start with the
+[testing booklet](docs/testing-booklet.md) or [printable PDF](docs/testing-booklet.pdf).
+The [readiness record](docs/pretest-readiness.md) separates completed preparation,
+external gates and the exact candidate; the booklet itself is not a passed test.
 
-The exact clean packaged source remains
+Implementation PR #113 merged at **c05e06e208bf44fd3e3cfaee5ea9342935a9279a**,
+#114 at **a315224a8a5cdf8e415a9e5bdc8b9bc5a8740640**, then current-link and
+acceptance handoff #115 at **a2137bf214c77efda3ce3fb87879f88004c6477c**.
+The #115 merge tree **6795ecffc02440b3096409c100fb1b59b331754c** matches its
+reviewed documentation head. The default branch remains `master`; the future
+approved destination will use `main`.
+
+Bounded source issues **#76, #77, #78, #80, #81 and #84 are closed** against the
+[47-clause assessment](docs/evidence/bounded-source-closure-20261120.md), not
+merge alone. All 230 original criteria/dependencies remain unchanged. Ten issues
+remain: #46, #79, #82, #83, #85, #86, #87, #88, #89 and #95. Actual #79 device
+acceptance, #82-C1 supported-loader lifecycle and #83/#86 hardware/provider cases
+remain **UNRUN**.
+
+The test download stays pinned to exact clean source
 **772230a32a8fdb237a58b8a637947b31671ad509**, tree
-**f157ea77d16a1f1ce04bf1e47b584f9183c9c359**, 648 tracked files.
-The [checkpoint](docs/pre-migration-qualified-checkpoint.md) binds immutable
-artifacts, commands, counts and remaining gates. These later handoff updates are
-Markdown only; they do not qualify or relabel a new package revision. Candidate
-version remains 0.1.0-deck.9. Follow the
-[remaining pre-test sequence](ROADMAP.md#before-manual-testing). The
-[47-clause assessment](docs/evidence/bounded-source-closure-20261120.md) supports
-bounded source closure for #76–#78/#80–#81/#84 after the handoff merge; actual
-device, full-matrix, rights and adoption gates stay separate.
+**f157ea77d16a1f1ce04bf1e47b584f9183c9c359**, with 648 tracked-source inventory
+entries. The [immutable 430cc391 packet](https://github.com/szmyty/obsgod/tree/430cc391cb63f080214aacc279e5c04b1092c7a5)
+provides version 0.1.0-deck.9, standard ZIP, checksums, optional current cleanup
+helper, rollback and detailed evidence. All 21 review downloads were verified.
+At that exact source, 70 command checks passed and two were unavailable; all
+three native OBS harnesses and ten packaged browser flows passed. The earlier
+failed attempt remains separately recorded. Later Markdown/evidence-only
+changes do not relabel or rebuild the qualified candidate.
 
-Verified private pre-wipe export, current Decky update/removal guidance, history
-pagination/230 carry-forward and a read-only exact-PR readiness collector are
-implemented. #89 authentication research remains proposed, ready for discussion.
-The fresh complete standalone run has 70 passed command predicates, 2 unavailable
-and 0 failed. All 3 native OBS harnesses and 10 packaged browser flows passed.
-The first 44-pass/1-unavailable/1-failed attempt is retained separately; ENOSPC
-is observed but the sole disconnect cause remains unproven.
+A fresh maintained matrix invocation at clean **a2137bf** exited 3 at preflight:
+root/Docker required **7,544,361,132 bytes**, available **3,123,400,704**, short
+**4,420,960,428**. Scratch had 8,664,485,888 bytes versus 6,442,450,944 required.
+The Docker probe and all six ACT workflows remain **UNRUN**. Fresh hosted reads
+at that same revision observed five runs/eight jobs: seven billing-lock failures,
+one push-only dependency-review skip and zero executed steps, with no non-billing
+failed job. This is unavailable execution, not source failure or passing CI.
+The [filtered evidence](docs/evidence/pretest-readiness.json) retains commands,
+input hashes, measured budgets, job IDs and annotation-message hashes without
+publishing raw private logs or credentials. The previous exact-PR SBOM 404/
+comparison 403 observations stay separate from actual future-destination #95.
 
-Local ACT remains unavailable: 7,544,361,132 bytes required versus 3,629,019,136
-available, short 3,915,341,996; probe and 6 jobs unrun. Real PR #114 observations retain
-SBOM 404/comparison 403 and 15 hosted billing refusals / 1 skip / 0 steps. Actual
-supported-loader/Deck/controller/mic/headset/provider/session evidence remains
-#82-C1/#79/#83/#86. Required rights/review/platform/CI/adoption and exact-owner
-migration/new-install gates stay open. All 230 originals and 111 current clauses
-(104 bounded plus 7 authentication) remain; priority creates no new dependencies.
+Next is our guided #86 test/fix loop on the current compatible installation.
+Start with inspection only, then setup, playable local picture/audio, intentional
+capture privacy, opt-in microphone/headsets and an explicitly chosen live test.
+Later session/update/recovery/removal cases preserve ordinary OBS, shared
+Flatpaks, credentials and media. Do not wipe or retire legacy files to prepare
+normal testing. Record exact outcomes and filtered diagnostics; actual failures
+receive a new pinned candidate and affected requalification.
 
-Use the numbered current-candidate owner tests when hardware is available.
-Then repair/requalify reported defects before exact-destination #87 migration,
-#95 service checks and #88 official-install/v1 approval preparation. The source
-merges do not close acceptance criteria or publish a release. No deployment,
-migration or spending occurred. Old af7 artifacts and historical installer hashes
-remain unchanged.
+Owner destination, rights/license/publisher/contact, signing and site choices
+can be prepared in parallel and remain unresolved. They do not block a local
+clip on the current installation. After current-install acceptance and exact
+authority, execute #87, verify actual #95 services, then #88 canonical new-install/
+adoption/v1 preparation; #46 closes last. #89 remains research-only before owner
+design discussion. No product release, deployment, migration, account registration
+or spending occurred. Old af7 artifacts and historical installer hashes stay intact.
 
 ## Earlier aurora review candidate and qualification
 
