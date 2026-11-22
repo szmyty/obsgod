@@ -27,7 +27,7 @@ a palette or repository does not create those rights facts.
 ## Identity version boundary
 
 Fresh follow-through inspection of the full releases collection found only
-published stable **v1.0.0** and **v1.0.0-rc.2**. Upstream main is now
+published stable **v1.0.0** and prerelease **v1.0.0-rc.2**. Upstream main is now
 `ec8fce30c3c96c7781238eb0a8899d6f0cee0a40`; the
 [Identity owner packet](https://github.com/egohygiene/identity/blob/ec8fce30c3c96c7781238eb0a8899d6f0cee0a40/docs/work/98/OWNER_PACKET.md)
 still records **v1.1.0 as proposed**, an unselected release commit and Cargo

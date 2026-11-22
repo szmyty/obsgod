@@ -31,9 +31,12 @@ after that recommendation. The actual creation command still carries the exact
 
 ### One-shot entrypoint
 
-The standalone Bash launcher works from any folder. It needs Bash, Python 3.12+
-and Git; authenticated inspection or apply also needs the owner's existing
-GitHub CLI session. It installs no tools or changes to caller configuration.
+The standalone Bash launcher works from any folder. Preparation needs Bash,
+Python 3.12+ and Git. Authenticated inspection requires a GitHub CLI session
+with active organization administrator access. Apply also needs a configured
+Git author/committer identity and working Git HTTPS push authentication;
+`gh` authentication alone does not configure or prove the latter. The launcher
+installs no tools and leaves caller configuration unchanged.
 Use the exact source pin supplied with the launcher, not a moving branch name:
 
 ```sh

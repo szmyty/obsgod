@@ -16,6 +16,16 @@ authenticated GitHub CLI and the existing exact-source/owner/destination checks.
 No system installation, release, deployment, old-repo deletion or automatic
 retry is part of the entrypoint.
 
+[PR #120](https://github.com/szmyty/obsgod/pull/120) records the launcher and
+its [scoped evidence](docs/evidence/migration-entrypoint-review.json). Source
+`bd5d016` passed 13 entrypoint, 30 snapshot/migration and 24 updater tests, plus
+Bash syntax, whitespace and 279 local documentation links. A real default run
+fetched live source `685f337`, captured public history and prepared all 671
+tracked entries and 230 criteria without requesting GitHub writes. Independent
+code review accepted the process-group/caller-preservation checks; operator
+review clarified actual Git identity/HTTPS push and organization-admin
+prerequisites. These results do not qualify a new product binary or actual apply.
+
 Fresh release inspection still observes Identity stable v1.0.0 only. The
 anticipated new release tag and explicit SVG/PNG artwork license choice remain
 needed for production branding adoption; general go-ahead is not recorded as
