@@ -1,0 +1,86 @@
+{
+  "schema": "deckystream.fresh-repository-preparation-review/v1",
+  "source_revision": "9a02e9d8ca6d7f34e23fa1393849bf89b7ba232f",
+  "code_revision": "a8dbf8a62fafb7ac97830f7660e8f36c58b08b8d",
+  "destination": "egohygiene/deckystream",
+  "destination_status": "assistant-recommendation; owner-run flag is explicit selection",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "python": "3.12.14",
+  "checks": [
+    {
+      "name": "fresh-repository fixtures",
+      "command": "python3 -B -m unittest discover -s scripts/tests -p test_fresh_repository.py -v",
+      "result": "passed",
+      "tests": 30,
+      "scope": "actual disposable Git objects and mocked GitHub creation/push"
+    },
+    {
+      "name": "existing release checks",
+      "command": "python3 -B -m unittest discover -s steamdeck/tests -p test_releases.py -v",
+      "result": "passed",
+      "tests": 24
+    },
+    {
+      "name": "staged destination release/fresh suites",
+      "result": "passed",
+      "release_tests": 24,
+      "fresh_tests": 30,
+      "scope": "disposable staged egohygiene/deckystream source; no external writes"
+    },
+    {
+      "name": "public-history preservation suite",
+      "result": "passed",
+      "tests": 15
+    },
+    {
+      "name": "aurora export drift",
+      "result": "passed",
+      "files": 38
+    },
+    {
+      "name": "UI and PNG regressions",
+      "result": "passed",
+      "tests": 8
+    },
+    {
+      "name": "pinned Identity authoring validator",
+      "result": "passed",
+      "identity_revision": "cfb6c29bd02589a47fc48050ab02e7e0da359719",
+      "scope": "unreleased source contract, not production adoption"
+    },
+    {
+      "name": "preparation docs links/anchors",
+      "result": "passed",
+      "count": 277
+    },
+    {
+      "name": "real offline CLI preparation",
+      "result": "passed",
+      "files": 670,
+      "criteria_count": 230,
+      "changed_paths": [
+        ".identity/identity.json",
+        "product.json",
+        "steamdeck/decky/src/product.ts",
+        "steamdeck/product.py",
+        "steamdeck/releases.py"
+      ]
+    }
+  ],
+  "source_archive_sha256": "216766f480baa1dfb43989d50bf8ab30a9e7e3fa78773c43171737322ba89d7d",
+  "snapshot_archive_sha256": "7c09a1d9ddaaa5f8c5187488d045287dbc07c2aaa017cdcbb9d5ba2c661e7fc1",
+  "remaining_plan_blockers": [
+    "fresh-public-retirement-history-backup-required"
+  ],
+  "review_findings_repaired": [
+    "Existing release URL fixtures and migration fixture setup assumed the old publisher; make them derive from actual policy and exercise staged suite.",
+    "Inherited Git SHA256 defaults could create an unsupported fresh root; force SHA1 and reject a non-40-character result before POST."
+  ],
+  "external_operations": "none; offline preparation and disposable fixtures only",
+  "limits": [
+    "No actual destination repository, owner lookup, push, rules or service evidence.",
+    "New Identity release, asset license/usage and publisher choices remain explicit.",
+    "No hosted CI/ACT, actual Steam Deck/provider, release, deployment, archive copy or deletion passed.",
+    "Existing runtime candidate772230a/artifact430cc391 remains separate."
+  ]
+}

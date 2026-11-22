@@ -14,6 +14,17 @@ declared canonical repository metadata/projection files in a separate snapshot.
 It preserves current source/history/installed IDs and refuses existing remote
 destinations. No actual creation/push to another repository was performed.
 
+[PR #119](https://github.com/szmyty/obsgod/pull/119) checkpoints this preparation.
+Code at `a8dbf8a` passed 30 fresh-repository and 24 existing release tests; the
+same suites pass in a disposable staged destination tree. Fifteen public-history
+tests also pass. A real offline CLI run at `9a02e9d` retained 670 source entries
+and all 230 criteria, with exactly five staged canonical paths. The
+[scoped review](docs/evidence/fresh-repository-preparation-review.json) records
+hashes and limitations. Independent review found and fixed publisher-specific
+fixtures and inherited SHA256 Git defaults before any actual creation. The
+remaining plan input is a matching public tracker backup; this preparation
+neither performs authenticated destination inspection nor passes hardware/CI.
+
 The assistant recommends `egohygiene/deckystream` after the owner asked for
 advice; this is preparation, not a fabricated final owner selection. The owner
 will select the exact destination by the command they run. Source remains

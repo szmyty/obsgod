@@ -1,5 +1,9 @@
 # Fresh deckystream repository: owner-run preparation
 
+[PR #119](https://github.com/szmyty/obsgod/pull/119) and the
+[exact preparation review](evidence/fresh-repository-preparation-review.json)
+record the working command, repaired review findings and unrun external steps.
+
 The owner moved testing after repository creation. #117 is merged in
 [PR #118](https://github.com/szmyty/obsgod/pull/118) at `8523207`. This runbook
 prepares the fresh snapshot requested under #87; it is not an executed migration.
