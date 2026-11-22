@@ -58,7 +58,7 @@ and [current work](../CONTINUITY.md). Use the pinned toolchain in the build guid
 | Understand ownership and dependency boundaries | [Architecture](../ARCHITECTURE.md), [vocabulary](../ONTOLOGY.md), [decisions](../DECISIONS.md) |
 | Build and validate the plugin | [Steam Deck building](steam-deck-building.md), [standard package](decky-package.md), [local CI](local-ci.md) |
 | Change configuration, storage or lifecycle behavior | [Native configuration](native-configuration.md), [Decky storage](decky-storage.md), [runtime correctness](runtime-correctness.md), [cleanup and recovery](cleanup-recovery.md) |
-| Prepare release or migration work | [Release engineering](release-engineering.md), [identity and migration](identity-migration.md), [migration review](migration-review.md) |
+| Prepare release or migration work | [Owner-run fresh repository](fresh-repository-runbook.md), [brand adoption packet](migration-brand-packet.md), [finalization checklist](finalization-checklist.md), [release engineering](release-engineering.md) |
 | Find active priorities | [Roadmap](../ROADMAP.md), [implementation roadmap](implementation-roadmap.md) |
 | Report a defect or vulnerability | [Support](../SUPPORT.md), [security reporting](../SECURITY.md) |
 

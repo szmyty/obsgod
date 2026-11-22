@@ -1,11 +1,19 @@
-# Repository and name migration rehearsal packet
+# Repository and name migration preparation
+
+**Active owner update, 2026-11-22:** Prepare and create the fresh repository
+before the hands-on test session. Use the [owner-run snapshot runbook](fresh-repository-runbook.md)
+and [post-migration finalization template](finalization-checklist.md). The
+earlier rehearsal/transfer material below preserves contracts and history;
+its test-before-move order is superseded by the [sequence decision](../DECISIONS.md#owner-sequence-update-2026-11-22).
+Actual device, destination service and release outcomes remain unrun.
 
 Current preparation starts from the [source/rights/owner packet](https://github.com/szmyty/obsgod/blob/430cc391cb63f080214aacc279e5c04b1092c7a5/OWNER-PACKET.md)
 and [exact qualified candidate](pre-migration-qualified-checkpoint.md). A later source
 change needs a new candidate; historical fixture or download receipts below do
 not activate a future owner. Source preparation and test fixtures can continue
-before the owner test, while the actual move/new install retain #87/#88's stated
-gates. No destination repository is created or changed by preparation.
+before the owner test. Source creation can now precede that test under the
+owner's amendment; the actual new install is qualified afterwards. No
+destination repository is created or changed by preparation.
 
 Current execution is tracked in #87/#88, with original #35/#36 scope preserved.
 This is a staged plan and local compatibility inventory. It does

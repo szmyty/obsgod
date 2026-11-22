@@ -1,5 +1,33 @@
 # Local GitHub Actions validation
 
+## Useful local confidence while hosted billing is unavailable
+
+The owner cannot fund hosted Actions. Billing does not prevent standalone local
+tests, builds, security scans, package checks or actual Steam Deck observations.
+Use those results, pinned to the final source, for the concrete release decision
+while identifying any unavailable hosted/platform/service checks separately.
+Required branch protections still apply; no standalone check is a hosted pass.
+
+The 2026-11-22 metadata-only constrained preflight at exact source `f4561aa`
+needed 7,544,361,132 root/Docker bytes and observed 3,110,805,504: a shortfall of
+4,433,555,628 bytes (about 4.1 GiB). Separate scratch passed its budget. Docker
+works with the cached runner, but all six ACT jobs/probe remained unrun; no
+images/caches were deleted. A capable free workspace can run the maintained
+matrix without changing its checks. This is a dated measurement, not a promise
+of current capacity or a passing final-source run.
+
+For a constrained machine, run the existing Go/race/vet/static/security, Python,
+frontend, generator, package and browser commands directly where their actual
+requirements are available; see [building](steam-deck-building.md). Set PATH to
+the pinned toolchain first: in this Cloud workspace bare `/usr/bin/go` is not
+the project Go tool. Keep compiler/temp output in private suitable directories
+and preserve current package/network presets. Record each command's real result.
+Native OBS containers still need enough Docker storage; do not bypass the
+preflight or relabel their absence. Actual Graph/advisory review and real Deck/
+provider evidence remain distinct tasks in [finalization](finalization-checklist.md).
+
+## Maintained ACT route
+
 Issue #61 uses the existing workflows with act 0.2.97, not a substitute workflow
 that silently omits checks. Linux containers do not emulate native macOS,
 Windows, Steam Deck/Flatpak/Gamescope, controller/AMD hardware, hosted GitHub
