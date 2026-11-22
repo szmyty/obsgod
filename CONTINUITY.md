@@ -1,5 +1,37 @@
 # Current work
 
+## Pinned owner entrypoint follow-through
+
+After the recommendation to use `egohygiene/deckystream`, the owner said
+"ok lets do it". Preparation and the owner-run entrypoint now target that exact
+repository. This does not establish organization administration rights or an
+executed migration; the existing connection's organization-membership read was
+403, while ordinary repository and user reads worked.
+
+Work on the existing checkout prepares a one-shot Bash entrypoint that clones
+the exact supplied source SHA into a retained private workspace, refreshes the
+public history, then invokes the guarded snapshot tool. Default preparation
+does not create a GitHub repository. Explicit `--apply` uses the owner's normal
+authenticated GitHub CLI and the existing exact-source/owner/destination checks.
+No system installation, release, deployment, old-repo deletion or automatic
+retry is part of the entrypoint.
+
+[PR #120](https://github.com/szmyty/obsgod/pull/120) records the launcher and
+its [scoped evidence](docs/evidence/migration-entrypoint-review.json). Source
+`bd5d016` passed 13 entrypoint, 30 snapshot/migration and 24 updater tests, plus
+Bash syntax, whitespace and 279 local documentation links. A real default run
+fetched live source `685f337`, captured public history and prepared all 671
+tracked entries and 230 criteria without requesting GitHub writes. Independent
+code review accepted the process-group/caller-preservation checks; operator
+review clarified actual Git identity/HTTPS push and organization-admin
+prerequisites. These results do not qualify a new product binary or actual apply.
+
+Fresh release inspection still observes Identity stable v1.0.0 only. The
+anticipated new release tag and explicit SVG/PNG artwork license choice remain
+needed for production branding adoption; general go-ahead is not recorded as
+a fabricated license/rights decision. Keep selected aurora source/exports and
+the unreleased cfb6 authoring pin honest while completing independent work.
+
 ## Fresh-repository preparation after #117
 
 #117 is merged and closed through [PR #118](https://github.com/szmyty/obsgod/pull/118)

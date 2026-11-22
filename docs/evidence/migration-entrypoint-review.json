@@ -1,0 +1,67 @@
+{
+  "schema": "deckystream.migration-entrypoint-review/v1",
+  "launcher_source": "bd5d016e203bfd41d2f951f82bce485489153bd0",
+  "launcher_sha256": "65015601930aa59d7889cfbd127af83580084f900187af1edd35a7191b9a7b1d",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "python": "3.12.14",
+  "checks": [
+    {
+      "command": "bash -n scripts/migrate-fresh-repository.sh",
+      "result": "passed"
+    },
+    {
+      "command": "python3 -B -m unittest discover -s scripts/tests -p test_migration_entrypoint.py -v",
+      "result": "passed",
+      "tests": 13,
+      "scope": "mocked remote helpers plus actual disposable Git caller-preservation probe"
+    },
+    {
+      "command": "python3 -B -m unittest discover -s scripts/tests -p test_fresh_repository.py -q",
+      "result": "passed",
+      "tests": 30
+    },
+    {
+      "command": "python3 -B -m unittest discover -s steamdeck/tests -p test_releases.py -q",
+      "result": "passed",
+      "tests": 24
+    }
+  ],
+  "live_read_only_run": {
+    "command": "bash scripts/migrate-fresh-repository.sh --source-sha 685f337a848966fcb379e85fa7c63f69d92117cf --destination egohygiene/deckystream --workspace PRIVATE_NEW_DIRECTORY",
+    "exit_code": 0,
+    "source_pin": "685f337a848966fcb379e85fa7c63f69d92117cf",
+    "state": "prepared-no-github-writes",
+    "tracked_source_entries": 671,
+    "criteria_count": 230,
+    "history_counts": {
+      "issues": 68,
+      "pull_requests": 51,
+      "conversation_comments": 41,
+      "inline_review_comments": 0,
+      "submitted_reviews": 3
+    },
+    "source_archive_sha256": "9ee58ad1fe41089762fc5945c5532207763bc78462610019312d8c545db73070",
+    "snapshot_archive_sha256": "5baf56deaa352e6f5bd2825d6f4258d8678f40b3ee808017c35854a4a94a8bc4",
+    "github_writes_requested": false
+  },
+  "review": "Independent code review; process-group interruption regression and exact Git-root/caller preservation covered. Operator documentation reviewed separately.",
+  "limits": [
+    "Live GitHub create/push and organization authority remain unrun.",
+    "Hosted CI, full ACT, actual Steam Deck/provider and product release are not qualified by helper tests.",
+    "Identity full collection still exposes only v1.0.0 and old rc.2; proposed v1.1.0 is not a released tag.",
+    "Artwork license choice and production adoption remain pending."
+  ],
+  "git": "git version 2.52.0",
+  "bash": "GNU bash, version 5.2.37(1)-release (x86_64-pc-linux-gnu)",
+  "operator_review": {
+    "result": "passed after prerequisite clarification",
+    "facts": [
+      "active organization administrator gh access",
+      "configured Git author/committer identity",
+      "working HTTPS Git push credentials; gh auth alone is not proof",
+      "final chat handoff needs actual merged default SHA and launcher checksum"
+    ],
+    "scope": "read-only independent review of runbook/current records; no creation or rights approval"
+  },
+  "documentation_links_passed": 279
+}
