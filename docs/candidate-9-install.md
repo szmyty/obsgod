@@ -1,5 +1,12 @@
 # Install the completion review candidate
 
+> **Historical Desktop installer: source `1a482808`, artifact `d0a4973f`.** The
+> commands and checksums below remain specific to that older review. Current
+> standard Decky ZIP setup and optional Desktop Setup are in the
+> [Steam Deck guide](steam-deck.md); the current pinned source is `772230a` in
+> artifact `430cc391`, documented in the [current checkpoint](pre-migration-qualified-checkpoint.md).
+> See the [documentation index](README.md) for current tasks.
+
 Candidate **0.1.0-deck.9** comes from exact clean source
 `1a482808a8281c8bce092cea057df758836b34e9` (tree `fba5cfaed616313e2a6b679a55ff234d21a21538`). The available local matrix passed at that revision;
 actual Steam Deck/OBS33/Flatpak/Gamescope/controller, external viewers/adoption,

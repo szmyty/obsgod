@@ -1,5 +1,32 @@
 # Product roadmap
 
+## Active journey: polish, prepare, migrate, then test
+
+The owner changed the order on 2026-11-22. [The decision](DECISIONS.md#owner-sequence-update-2026-11-22)
+supersedes the older test-before-move instructions below; original acceptance
+criteria and their unmet results remain preserved.
+
+1. **#117 — OSS polish:** readable README routes, documentation map, clear
+   current/historical guides, contributor entry points and useful issue intake.
+2. **Branding and #87 preparation:** keep selected 01 / aurora, verify the actual
+   released Identity contract and adoption facts, choose the exact repository,
+   and prepare the complete source/trust/history packet plus owner-run command.
+3. **Fresh repository:** the owner runs the reviewed command for the exact
+   destination, with default `main`. No automatic release/deployment or old-repo
+   deletion. Consolidate the unfinished acceptance into one real linked checklist.
+4. **Finalization/test loop:** finish available #85 local evidence, #86 Deck
+   tests and #79/#82/#83 observations, then actual destination #95/#88 services,
+   clean installation, recovery and adoption evidence. Fix defects and repeat
+   affected checks on the exact final candidate. Unavailable hosted CI stays
+   separate; local results are useful evidence, not hosted service passes.
+5. **Release and retirement:** prepare/approve the exact v1 tag/assets/notes,
+   publish only at that step, then preserve old recovery/history before any
+   retirement. Reconcile #46 last. **#89 remains separate** optional login research.
+
+Manual testing no longer blocks migration preparation or source creation. Exact
+destination, source/rights facts and safe update identity still need concrete
+handling. A polished repository is not proof of a working Deck broadcast.
+
 ## Current test-ready implementation
 
 Implementation #113 → #114 and handoff #115 are merged. The six bounded source

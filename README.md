@@ -11,11 +11,9 @@
 **Stream from Steam Deck with OBS.** Set up and control your stream, microphone
 and local recordings from Decky's Quick Access panel in Gaming Mode.
 
-[Step-by-step testing booklet](docs/testing-booklet.md) ·
-[Printable PDF](docs/testing-booklet.pdf) ·
-[Current review build](docs/pre-migration-qualified-checkpoint.md) ·
-[User guide](docs/steam-deck.md) · [Get help](SUPPORT.md) ·
-[Roadmap](ROADMAP.md) · [Support development](#support-development)
+[Get started](#install-and-make-your-first-stream) ·
+[Documentation](docs/README.md) · [Contribute](CONTRIBUTING.md) ·
+[Get help](SUPPORT.md) · [Support development](#support-development)
 
 **Development preview.** The current review candidate is exact source `772230a`:
 70 local command checks passed and two were unavailable. The full ACT matrix and
@@ -23,6 +21,19 @@ GitHub dependency readiness remain unavailable/incomplete. Actual Deck/provider-
 acceptance, required CI and applicable reviews remain open. See
 [exact-source results and limits](docs/pre-migration-qualified-checkpoint.md). The executable, installed
 plugin and storage compatibility names are still `obsgod` / `OBSGod`.
+
+## Find your starting point
+
+| I want to… | Start here |
+| --- | --- |
+| Try the plugin on my Steam Deck | [Guided preview booklet](docs/testing-booklet.md), also available as a [printable PDF](docs/testing-booklet.pdf). Inspect the current installation before changing it. |
+| Control an OBS instance from the command line | [CLI and automation](#cli-and-automation), then the [command guide](docs/cli-usage.md). |
+| Fix a problem | [Getting help](SUPPORT.md): versions, the failed step and filtered diagnostics. Report suspected vulnerabilities through [security guidance](SECURITY.md). |
+| Improve the project | [Contributor routes and source map](CONTRIBUTING.md). Pick documentation, the CLI or the Decky plugin. |
+
+The [documentation map](docs/README.md) separates everyday guides, development,
+qualification records and project history. [ROADMAP.md](ROADMAP.md) tracks the
+active journey; historical passing checks apply only to their named revisions.
 
 ## What you can do
 
@@ -79,6 +90,9 @@ The older [1a/d0a candidate](docs/candidate-9-install.md) remains unchanged, and
 current work. Use the source revision and checksums supplied with your candidate.
 
 ## Documentation
+
+Use the [documentation map](docs/README.md) for a task-oriented index. The most
+common guides are:
 
 - **Set up:** [Steam Deck guide](docs/steam-deck.md),
   [destinations and password recovery](docs/stream-destinations.md),

@@ -1,5 +1,12 @@
 # Install the qualified source review
 
+> **Historical Desktop installer: source `4699235`, artifact `eb92598`.** The
+> commands and checksums below remain specific to that older review. Current
+> standard Decky ZIP setup and optional Desktop Setup are in the
+> [Steam Deck guide](steam-deck.md); the current pinned source is `772230a` in
+> artifact `430cc391`, documented in the [current checkpoint](pre-migration-qualified-checkpoint.md).
+> See the [documentation index](README.md) for current tasks.
+
 This manual review build is package **0.1.0-deck.9** from exact source
 `4699235e9e925b76ca492d5a00a375ed37fb338e`. Its immutable
 [19-file checkpoint](https://github.com/szmyty/obsgod/tree/eb92598f3a4a0dc426749c290bacfe7251452909)

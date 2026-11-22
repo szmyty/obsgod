@@ -1,0 +1,33 @@
+name: CLI / automation bug
+description: Report a reproducible standalone CLI or reusable OBS API problem
+body:
+  - type: markdown
+    attributes:
+      value: "For standalone `obsgod`, configuration, completions or reusable OBS API problems. Use the Steam Deck bug form for managed Deck/Decky problems. Never include OBS passwords, stream keys, private setup links, wallet seeds or raw private profiles/logs. Follow [SECURITY.md](https://github.com/szmyty/obsgod/security/policy) for suspected vulnerabilities; do not post sensitive details here."
+  - type: textarea
+    id: versions
+    attributes:
+      label: Version and environment
+      description: Include `obsgod version --json`, OS/architecture, installation method or source revision, and OBS version if relevant. Mention the shell for completion problems.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Command and minimal steps
+      description: Replace credentials, server URLs and private paths with placeholders. Include relevant flag/environment-variable names and whether OBS was running; never paste their secret values.
+      placeholder: "1. Run a redacted command…\n2. Observe…"
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+      description: Include the exit status and reviewed, redacted output. State whether the problem is reproducible; do not start a real broadcast just to reproduce it.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Relevant checks or workaround
+      description: Optional. Include offline/help behavior or focused test results if useful. Distinguish passed, failed, unavailable and unrun checks. Review all output before sharing.
