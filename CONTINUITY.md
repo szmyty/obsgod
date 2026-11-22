@@ -13,7 +13,9 @@ README audience routes, documentation/CLI/Decky contributor entry points,
 separate CLI/feature intake and visible historical-installer context. The
 five funding providers already agree with generated packaged buttons; Patreon
 remains inactive and unconfigured wallets hidden. Focused documentation review
-is recorded separately from runtime qualification.
+is recorded in the [criterion review](docs/oss-experience-review.md), separately
+from runtime qualification. [PR #118](https://github.com/szmyty/obsgod/pull/118)
+holds this bounded documentation work.
 
 The next exact Identity release is not assumed from pending upstream work.
 Selected 01 / aurora and existing concepts remain intact. Final destination
