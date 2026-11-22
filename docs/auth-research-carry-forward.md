@@ -11,7 +11,7 @@ Twitch public-client device authorization/QR, while Kick remains manual-key
 pending a supported public/confidential-client approach. Recheck official
 provider endpoints, scopes, ownership and current terms before a design decision.
 
-- [ ] Reconcile every original #89 criterion and retained #14/#40 auth intent.
+- [ ] Reconcile every original szmyty/obsgod#89 criterion and retained szmyty/obsgod#14/#40 auth intent.
 - [ ] Verify Twitch device expiry/deny/cancel/polling, stream-key authorization
   and account/registration ownership without assuming a browser session.
 - [ ] Resolve actual Kick PKCE/client-secret and key-access requirements; do not

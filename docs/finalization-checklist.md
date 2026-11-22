@@ -4,11 +4,11 @@ Issue-body template for the actual new repository. Create it only after the
 destination exists; replace this paragraph with its real repository/source/
 snapshot and migration receipt links. No case below is prefilled as passed.
 
-This consolidates remaining old-repository #46, #79, #82, #83, #85, #86, #87,
-#88 and #95 work. The full original 230-criterion ledger and dependencies remain
+This consolidates remaining old-repository szmyty/obsgod#46, szmyty/obsgod#79, szmyty/obsgod#82, szmyty/obsgod#83, szmyty/obsgod#85, szmyty/obsgod#86, szmyty/obsgod#87,
+szmyty/obsgod#88 and szmyty/obsgod#95 work. The full original 230-criterion ledger and dependencies remain
 under `docs/history/` and `docs/evidence/completion-criteria.json`. Preserve real
 links and explicit accepted/deferred/superseded dispositions. Consolidation is
-administrative, not evidence. Optional old #89 login research stays separate.
+administrative, not evidence. Optional old szmyty/obsgod#89 login research stays separate.
 
 ## 1. Finish the actual repository
 
@@ -23,7 +23,7 @@ administrative, not evidence. Optional old #89 login research stays separate.
 - [ ] Resolve generic CLI module/install instructions before the old repository
   is retired. A new repository URL does not change the retained Go module path.
 
-## 2. Produce the exact finished test candidate — old #85
+## 2. Produce the exact finished test candidate — old szmyty/obsgod#85
 
 - [ ] Finish source-changing repairs first, freeze a clean revision and run
   appropriate pinned Go/race/static/security, Python, frontend, browser,
@@ -32,13 +32,13 @@ administrative, not evidence. Optional old #89 login research stays separate.
   the real refusal and standalone results separately; never label them ACT or
   hosted passes. Do not spend or repeatedly retry known billing refusals.
 - [ ] Query actual destination Graph setting, Go/npm manifest ingestion and
-  real-PR base/head dependency comparison/review — old #95. Keep account billing,
+  real-PR base/head dependency comparison/review — old szmyty/obsgod#95. Keep account billing,
   permissions and fork/capability facts separate; local scans are complementary.
 - [ ] Supply the destination-bound standard Decky ZIP, checksums, source/notices,
   retained rollback and short install/test instructions. Rebuild after source or
   publisher changes; old `772230a` receipts do not qualify this new candidate.
 
-## 3. Our Steam Deck session — old #86 plus #79/#82/#83
+## 3. Our Steam Deck session — old szmyty/obsgod#86 plus szmyty/obsgod#79/#82/#83
 
 We work one checkpoint at a time: expected result → user observation → pass/fail
 or explicit skipped/unavailable/unrun → repair/new candidate → affected retest.
@@ -61,7 +61,7 @@ or explicit skipped/unavailable/unrun → repair/new candidate → affected rete
   controller. Preserve ordinary OBS, shared dependencies, other plugins, keys
   and media; verify export before any later deliberately chosen owned-data wipe.
 
-## 4. Independent install and release packet — old #88
+## 4. Independent install and release packet — old szmyty/obsgod#88
 
 - [ ] A fresh canonical download/new-user journey establishes install → setup →
   audible clip → viewer → update/recovery → uninstall with supported claims.
