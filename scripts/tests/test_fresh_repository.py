@@ -31,6 +31,19 @@ def local_git(path, *arguments, data=None):
                           stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout
 
 
+def source_updater_fixture():
+    """Keep the old-source fixture portable when ROOT is the new repository.
+
+    Normalize only its one literal; all current updater policy code is retained.
+    """
+    data = (ROOT / "steamdeck/releases.py").read_bytes()
+    assignment = M.repository_assignment(data)
+    lines = data.splitlines(keepends=True)
+    start = sum(map(len, lines[:assignment.lineno - 1])) + assignment.col_offset
+    end = sum(map(len, lines[:assignment.end_lineno - 1])) + assignment.end_col_offset
+    return (data[:start] + json.dumps(M.SOURCE_REPOSITORY).encode() + data[end:]).decode()
+
+
 class API:
     def __init__(self, organization=False):
         self.calls = []
@@ -149,7 +162,7 @@ class Preparation(Fixture):
     def test_staging_changes_exactly_five_canonical_files_and_preserves_source_archive(self):
         # Exercise the real reviewed updater; production never executes it while
         # staging, and all of its policy code must remain byte-identical.
-        self.put("steamdeck/releases.py", (ROOT / "steamdeck/releases.py").read_text())
+        self.put("steamdeck/releases.py", source_updater_fixture())
         self.commit()
         self.history()
         original = self.prepared()
@@ -187,7 +200,7 @@ class Preparation(Fixture):
         self.assertIn(b"source/.identity/identity.json", (self.output / "canonical-changes.diff").read_bytes())
 
     def test_staged_updater_accepts_only_exact_new_repository_and_rejects_old_source(self):
-        self.put("steamdeck/releases.py", (ROOT / "steamdeck/releases.py").read_text())
+        self.put("steamdeck/releases.py", source_updater_fixture())
         self.commit()
         self.history()
         staged = self.prepared(staged=True)
@@ -208,6 +221,28 @@ class Preparation(Fixture):
                 with self.subTest(url=url):
                     self.assertEqual(updater._safe_url(url), accepted)
         self.assertIn(b'REPOSITORY = "szmyty/obsgod"', (self.source / "steamdeck/releases.py").read_bytes())
+
+    def test_existing_release_suite_passes_against_copied_staged_real_updater(self):
+        self.put("steamdeck/releases.py", source_updater_fixture())
+        self.commit()
+        self.history()
+        staged = self.prepared(staged=True)
+        package = self.base / "existing release suite/steamdeck"
+        tests = package / "tests"
+        tests.mkdir(parents=True)
+        (package / "releases.py").write_bytes(staged[3]["steamdeck/releases.py"])
+        (package / "paths.py").write_bytes((ROOT / "steamdeck/paths.py").read_bytes())
+        suite_path = tests / "test_releases.py"
+        suite_path.write_bytes((ROOT / "steamdeck/tests/test_releases.py").read_bytes())
+        suite_spec = importlib.util.spec_from_file_location("copied_staged_release_suite", suite_path)
+        suite_module = importlib.util.module_from_spec(suite_spec)
+        suite_spec.loader.exec_module(suite_module)
+        self.assertEqual(suite_module.releases.REPOSITORY, DESTINATION)
+        suite = unittest.defaultTestLoader.loadTestsFromModule(suite_module)
+        output = io.StringIO()
+        result = unittest.TextTestRunner(stream=output).run(suite)
+        self.assertGreaterEqual(result.testsRun, 24)
+        self.assertTrue(result.wasSuccessful(), output.getvalue())
 
     def test_pure_projection_rendering_matches_existing_generator_semantics(self):
         value = json.loads((self.source / "product.json").read_bytes())
@@ -337,6 +372,23 @@ class Preparation(Fixture):
         self.assertEqual(sentinel.read_bytes(), b"caller-owned index must survive")
         self.assertEqual(list(objects.iterdir()), [])
 
+    def test_snapshot_remains_sha1_under_inherited_sha256_defaults(self):
+        prepared = self.prepared()
+        repository = self.base / "explicit-sha1.git"
+        environment = {"GIT_DEFAULT_HASH": "sha256", "GIT_CONFIG_COUNT": "1",
+                       "GIT_CONFIG_KEY_0": "init.defaultObjectFormat", "GIT_CONFIG_VALUE_0": "sha256",
+                       "GIT_AUTHOR_NAME": "Fixture Owner", "GIT_AUTHOR_EMAIL": "fixture@example.invalid",
+                       "GIT_COMMITTER_NAME": "Fixture Owner", "GIT_COMMITTER_EMAIL": "fixture@example.invalid"}
+        with patch.dict(os.environ, environment):
+            commit = M.snapshot_commit(repository, prepared[3], prepared[2], prepared[5])
+        self.assertRegex(commit, r"^[0-9a-f]{40}$")
+        self.assertEqual(local_git(repository, "rev-parse", "--show-object-format").strip(), b"sha1")
+        self.assertEqual(local_git(repository, "rev-list", "--parents", "-n", "1", "main").strip(), commit.encode())
+        for path, metadata in prepared[2].items():
+            self.assertEqual(local_git(repository, "rev-parse", "main:" + path).strip(), metadata["git_blob"].encode())
+            tree_entry = local_git(repository, "ls-tree", "main", "--", path).decode()
+            self.assertTrue(tree_entry.startswith(metadata["mode"] + " blob "))
+
     def test_effective_git_fetch_and_push_rewrites_are_rejected_before_creation(self):
         url = "https://github.com/" + DESTINATION + ".git"
         for setting in ("insteadOf", "pushInsteadOf"):
@@ -383,6 +435,17 @@ class Apply(Fixture):
             self.invoke_apply(self.prepared(), api)
         self.assertEqual(api.calls, [])
         self.assertFalse(self.output.exists())
+
+    def test_non_sha1_snapshot_commit_is_refused_before_remote_creation(self):
+        prepared = self.prepared(canonical=True)
+        api = API()
+        api.source_sha = self.sha
+        with patch.object(M, "snapshot_commit", return_value="f" * 64), self.assertRaisesRegex(M.PreparationError, "40-character SHA1"):
+            M.apply(prepared, self.output, api)
+        self.assertTrue(all(call[0] == "GET" for call in api.calls))
+        state = json.loads((self.output / "apply-receipt.json").read_bytes())
+        self.assertFalse(state["creation_attempted"])
+        self.assertFalse(state["remote_created"])
 
     def test_explicit_staging_allows_mocked_apply_without_activating_old_checkout(self):
         source_product = (self.source / "product.json").read_bytes()

@@ -12,6 +12,9 @@ from unittest.mock import patch
 spec = importlib.util.spec_from_file_location("obsgod_releases", Path(__file__).resolve().parents[1] / "releases.py")
 releases = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(releases)
+REPOSITORY_URL = "https://github.com/" + releases.REPOSITORY
+RAW_URL = "https://raw.githubusercontent.com/" + releases.REPOSITORY
+API_URL = "https://api.github.com/repos/" + releases.REPOSITORY
 
 
 class ReleaseChecks(unittest.TestCase):
@@ -20,9 +23,9 @@ class ReleaseChecks(unittest.TestCase):
         archive = "obsgod-deck_" + version + "_linux_amd64.tar.gz"
         manifest = {"version": version, "revision": revision, "platform": "linux/amd64", "dirty": False, "updater_version": version, "files": {name: "a" * 64 for name in ["obsgod", "obsgod-decky.zip", "setup.py", "bridge.py"]}}
         data = json.dumps(manifest).encode()
-        base = "https://raw.githubusercontent.com/szmyty/obsgod/" + "2" * 40 + "/" if raw else "https://github.com/szmyty/obsgod/releases/download/v" + version + "/"
+        base = RAW_URL + "/" + "2" * 40 + "/" if raw else REPOSITORY_URL + "/releases/download/v" + version + "/"
         values = {
-            "https://api.github.com/repos/szmyty/obsgod/commits/v" + version: json.dumps({"sha": revision}).encode(),
+            API_URL + "/commits/v" + version: json.dumps({"sha": revision}).encode(),
             base + "manifest.json": data,
             base + "SHA256SUMS": (hashlib.sha256(data).hexdigest() + "  manifest.json\n" + hashlib.sha256(b"archive").hexdigest() + "  " + archive + "\n").encode(),
         }
@@ -56,7 +59,7 @@ class ReleaseChecks(unittest.TestCase):
     def test_immutable_legacy_artifact_accepted_and_mutable_or_foreign_rejected(self):
         release, values, _ = self.fixture(raw=True)
         self.assertTrue(self.run_check([release], values)["available"])
-        for bad in [release["body"].replace("2" * 40, "master"), release["body"].replace("szmyty/obsgod", "attacker/obsgod")]:
+        for bad in [release["body"].replace("2" * 40, "master"), release["body"].replace(releases.REPOSITORY, "attacker/obsgod")]:
             result = self.run_check([dict(release, body=bad)], {})
             self.assertFalse(result["ok"])
             self.assertEqual(result["state"], "unsupported")
@@ -98,7 +101,7 @@ class ReleaseChecks(unittest.TestCase):
 
     def test_actual_tag_revision_is_checked_instead_of_creation_target(self):
         release, values, _ = self.fixture()
-        tag_url = "https://api.github.com/repos/szmyty/obsgod/commits/" + release["tag_name"]
+        tag_url = API_URL + "/commits/" + release["tag_name"]
         values[tag_url] = json.dumps({"sha": "9" * 40}).encode()
         result = self.run_check([release], values)
         self.assertFalse(result["ok"])
@@ -115,7 +118,7 @@ class ReleaseChecks(unittest.TestCase):
     def test_download_checksum_and_source_url_fail_before_installation(self):
         with tempfile.TemporaryDirectory() as temporary:
             path = Path(temporary) / "archive"
-            candidate = {"archive_url": "https://github.com/szmyty/obsgod/releases/download/v1.0.0/obsgod-deck_1.0.0_linux_amd64.tar.gz", "archive_sha256": hashlib.sha256(b"expected").hexdigest()}
+            candidate = {"archive_url": REPOSITORY_URL + "/releases/download/v1.0.0/obsgod-deck_1.0.0_linux_amd64.tar.gz", "archive_sha256": hashlib.sha256(b"expected").hexdigest()}
             with patch.object(releases, "_open_url", return_value=io.BytesIO(b"corrupted")):
                 with self.assertRaisesRegex(releases.ReleaseError, "checksum"):
                     releases.download_archive(candidate, path)
@@ -125,12 +128,25 @@ class ReleaseChecks(unittest.TestCase):
                 opened.assert_not_called()
 
     def test_url_policy_and_version_validation(self):
-        for url in ["http://github.com/szmyty/obsgod/releases/download/v1.0.0/archive", "https://raw.githubusercontent.com/szmyty/obsgod/master/archive", "https://github.com:invalid/szmyty/obsgod/releases/download/v1.0.0/archive", "https://github.com/szmyty/obsgod/releases/download/v1.0.0/archive?secret=fixture", "https://github.com@evil.invalid/szmyty/obsgod/releases/download/v1.0.0/archive"]:
+        for url in ["http://github.com/" + releases.REPOSITORY + "/releases/download/v1.0.0/archive", RAW_URL + "/master/archive", "https://github.com:invalid/" + releases.REPOSITORY + "/releases/download/v1.0.0/archive", REPOSITORY_URL + "/releases/download/v1.0.0/archive?secret=fixture", "https://github.com@evil.invalid/" + releases.REPOSITORY + "/releases/download/v1.0.0/archive"]:
             self.assertFalse(releases._safe_url(url))
         for value in ["unknown", "01.0.0", "1.0.0-preview.01", "1.0.0/../../escape", None]:
             with self.assertRaises(releases.ReleaseError):
                 releases.version_key(value)
         self.assertGreater(releases.version_key("1.0.0"), releases.version_key("1.0.0-rc.99"))
+
+    def test_only_exact_build_selected_repository_is_trusted(self):
+        def urls(repository):
+            return ("https://api.github.com/repos/" + repository + "/releases?per_page=100",
+                    "https://api.github.com/repos/" + repository + "/commits/v1.0.0",
+                    "https://github.com/" + repository + "/releases/download/v1.0.0/archive.tar.gz",
+                    "https://raw.githubusercontent.com/" + repository + "/" + "1" * 40 + "/manifest.json")
+        for url in urls(releases.REPOSITORY):
+            self.assertTrue(releases._safe_url(url), url)
+        # The old source becomes an explicitly rejected publisher after staging.
+        for repository in {"szmyty/obsgod", "unlisted-owner/deckystream"} - {releases.REPOSITORY}:
+            for url in urls(repository):
+                self.assertFalse(releases._safe_url(url), url)
 
     def test_installed_versions_detect_mismatch_without_reading_secrets(self):
         with tempfile.TemporaryDirectory() as temporary, patch.dict(os.environ, {"HOME": temporary}):
@@ -173,7 +189,7 @@ class RedirectTrust(unittest.TestCase):
             releases.urllib.request.Request(source), None, 302, "Found", {}, target)
 
     def test_official_asset_redirect_is_allowed_once(self):
-        source = "https://github.com/szmyty/obsgod/releases/download/v1.0.0/archive.tar.gz"
+        source = REPOSITORY_URL + "/releases/download/v1.0.0/archive.tar.gz"
         target = "https://release-assets.githubusercontent.com/github-production-release-asset/1263344065/abcdef12-abcd-1234-abcd-123456abcdef?sig=fixture"
         self.assertEqual(self.redirect(source, target).full_url, target)
         with self.assertRaises(releases.ReleaseError):
@@ -181,8 +197,8 @@ class RedirectTrust(unittest.TestCase):
 
     def test_changed_owner_api_raw_or_untrusted_download_redirects_fail_closed(self):
         approved = [releases.RELEASES_URL,
-                    "https://raw.githubusercontent.com/szmyty/obsgod/" + "1" * 40 + "/manifest.json",
-                    "https://github.com/szmyty/obsgod/releases/download/v1.0.0/archive.tar.gz"]
+                    RAW_URL + "/" + "1" * 40 + "/manifest.json",
+                    REPOSITORY_URL + "/releases/download/v1.0.0/archive.tar.gz"]
         targets = ["https://api.github.com/repos/new-owner/decky-stream/releases?per_page=100",
                    "https://github.com/new-owner/decky-stream/releases/download/v1.0.0/archive.tar.gz",
                    "https://attacker.invalid/file", "http://release-assets.githubusercontent.com/file",
@@ -198,14 +214,14 @@ class RedirectTrust(unittest.TestCase):
 class PluginReleaseChecks(unittest.TestCase):
     def fixture(self, version="0.1.0-deck.10"):
         revision = "1" * 40
-        base = "https://github.com/szmyty/obsgod/releases/download/v" + version + "/"
+        base = REPOSITORY_URL + "/releases/download/v" + version + "/"
         receipt = {"version": version, "revision": revision, "dirty": False,
                    "platform": "linux/amd64", "archive": "obsgod-decky.zip", "sha256": "a" * 64}
         entry = {"tag_name": "v" + version, "prerelease": "-" in version, "draft": False,
                  "assets": [{"name": name, "browser_download_url": base + name}
                             for name in ("obsgod-decky.zip", "build-receipt.json", "SHA256SUMS")]}
         values = {releases.RELEASES_URL: json.dumps([entry]).encode(),
-                  "https://api.github.com/repos/szmyty/obsgod/commits/v" + version: json.dumps({"sha": revision}).encode(),
+                  API_URL + "/commits/v" + version: json.dumps({"sha": revision}).encode(),
                   base + "build-receipt.json": json.dumps(receipt).encode(),
                   base + "SHA256SUMS": ("a" * 64 + "  obsgod-decky.zip\n").encode()}
         return entry, receipt, values, base

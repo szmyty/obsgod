@@ -520,7 +520,7 @@ def receipt(output, value):
 
 
 def snapshot_commit(repository, payload, inventory, sidecars):
-    run(["git", "init", "--bare", "--template=", "--initial-branch=main", str(repository)])
+    run(["git", "init", "--bare", "--template=", "--object-format=sha1", "--initial-branch=main", str(repository)])
     index = []
     items = [(p, data, inventory[p]["mode"]) for p, data in payload.items()]
     items += [(SIDECARS[p], data, "100644") for p, data in sidecars.items()]
@@ -530,6 +530,8 @@ def snapshot_commit(repository, payload, inventory, sidecars):
     git(repository, "update-index", "-z", "--index-info", data=b"".join(index))
     tree = git(repository, "write-tree").decode().strip()
     commit = git(repository, "commit-tree", tree, "-m", "Initial deckystream snapshot [skip ci]").decode().strip()
+    if not SHA.fullmatch(commit):
+        raise PreparationError("Snapshot commit must be a full 40-character SHA1 before repository creation.")
     git(repository, "update-ref", "refs/heads/main", commit)
     return commit
 
@@ -571,6 +573,8 @@ def apply(prepared, output, api):
         with tempfile.TemporaryDirectory(prefix="fresh-deckystream-") as temporary:
             repository = Path(temporary) / "snapshot.git"
             state["snapshot_commit"] = snapshot_commit(repository, payload, inventory, sidecars)
+            if not isinstance(state["snapshot_commit"], str) or not SHA.fullmatch(state["snapshot_commit"]):
+                raise PreparationError("Snapshot commit must be a full 40-character SHA1 before repository creation.")
             remote = exact_push_remote(repository, plan["destination"])
             state["state"] = "ready-to-create"
             receipt(output, state)
