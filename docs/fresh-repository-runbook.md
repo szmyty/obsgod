@@ -7,9 +7,9 @@ record the working command, repaired review findings and unrun external steps.
 The owner moved testing after repository creation. #117 is merged in
 [PR #118](https://github.com/szmyty/obsgod/pull/118) at `8523207`. This runbook
 prepares the fresh snapshot requested under #87; it is not an executed migration.
-Recommended destination: **`egohygiene/deckystream`**. That is the assistant's
-recommendation after the owner asked for advice, not a fabricated owner decision.
-The exact `--destination` in an owner-run apply is the explicit selection.
+Working destination: **`egohygiene/deckystream`**, following the owner's go-ahead
+after that recommendation. The actual creation command still carries the exact
+`--destination` and verifies the executing account's authority.
 
 ## What is ready, and what is still a fact
 
@@ -28,6 +28,49 @@ The exact `--destination` in an owner-run apply is the explicit selection.
   exact candidate before the [finalization session](finalization-checklist.md).
 
 ## Local preparation: no GitHub writes
+
+### One-shot entrypoint
+
+The standalone Bash launcher works from any folder. It needs Bash, Python 3.12+
+and Git; authenticated inspection or apply also needs the owner's existing
+GitHub CLI session. It installs no tools or changes to caller configuration.
+Use the exact source pin supplied with the launcher, not a moving branch name:
+
+```sh
+bash /path/to/migrate-fresh-repository.sh \
+  --source-sha FULL_40_CHARACTER_MERGED_SHA \
+  --destination egohygiene/deckystream
+```
+
+Default execution prepares only. The launcher creates and prints a retained
+private workspace, fetches the exact public default-branch commit, refreshes
+the public history, and calls the guarded tool with canonical staging. Read
+`result/plan.json` and `result/canonical-changes.diff`; the source checkout,
+archives, public history and private logs remain available. An optional
+`--workspace /absolute/private/new-directory` chooses a new retained location.
+
+Add `--inspect-destination` for authenticated read-only inspection. Add
+**`--apply` only for the explicit owner-run creation step**. This flag creates
+the new public repository and pushes its reviewed source; it does not merely
+check it. The underlying guard still verifies actual authority, exact source
+and destination absence. The current Cloud connection's membership read is
+403, so use a normal owner `gh` session with organization access for that step.
+Do not paste authentication tokens into chat or logs.
+
+The launcher stops on a changed source default HEAD, unsafe workspace, failed
+history export or mismatched result. It never chooses a newer pin, overwrites an
+existing destination or retries a partial apply automatically. On interruption
+or timeout, owned helper descendants are stopped and the state is retained;
+an already submitted network mutation can remain uncertain. Inspect both
+`entrypoint-state.json` and `result/apply-receipt.json` before another action.
+`steps.log` is private and may contain tool/credential output; do not publish it.
+
+For a reviewed download command, verify the launcher's supplied SHA-256 before
+executing it. The final immutable source SHA is a command argument rather than
+a self-referential pin embedded in the launcher. Pending Identity release and
+artwork adoption facts remain separate from a successful preparation run.
+
+### Direct helper for an existing checkout
 
 Use a clean checkout and replace the source SHA with the exact merged revision
 being reviewed. The selected destination must be a real explicit owner, never

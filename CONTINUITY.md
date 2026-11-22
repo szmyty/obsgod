@@ -1,5 +1,27 @@
 # Current work
 
+## Pinned owner entrypoint follow-through
+
+After the recommendation to use `egohygiene/deckystream`, the owner said
+"ok lets do it". Preparation and the owner-run entrypoint now target that exact
+repository. This does not establish organization administration rights or an
+executed migration; the existing connection's organization-membership read was
+403, while ordinary repository and user reads worked.
+
+Work on the existing checkout prepares a one-shot Bash entrypoint that clones
+the exact supplied source SHA into a retained private workspace, refreshes the
+public history, then invokes the guarded snapshot tool. Default preparation
+does not create a GitHub repository. Explicit `--apply` uses the owner's normal
+authenticated GitHub CLI and the existing exact-source/owner/destination checks.
+No system installation, release, deployment, old-repo deletion or automatic
+retry is part of the entrypoint.
+
+Fresh release inspection still observes Identity stable v1.0.0 only. The
+anticipated new release tag and explicit SVG/PNG artwork license choice remain
+needed for production branding adoption; general go-ahead is not recorded as
+a fabricated license/rights decision. Keep selected aurora source/exports and
+the unreleased cfb6 authoring pin honest while completing independent work.
+
 ## Fresh-repository preparation after #117
 
 #117 is merged and closed through [PR #118](https://github.com/szmyty/obsgod/pull/118)

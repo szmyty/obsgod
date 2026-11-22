@@ -1,5 +1,27 @@
 # Decision records
 
+## Destination and owner entrypoint follow-through
+
+On 2026-11-22, after the assistant recommended `egohygiene/deckystream` over
+`incomprisllc/deckystream`, the owner instructed "ok lets do it". Use the former
+as the working destination for the concrete owner-run command. Actual creation
+remains an explicit command action with verified authority; the current cloud
+connection's 403 on organization membership does not prove authority absent or
+establish it. Preserve the existing repository and injected authentication.
+
+Make the command usable from a terminal without requiring manual source/history
+assembly: bootstrap an exact immutable source revision into a new retained
+private directory, refresh the bounded public export and call the existing
+guarded snapshot tool. Forward `--apply` only when explicitly supplied. Default
+preparation, a source clone or a rendered plan does not publish the new repo.
+The original checkout, old GitHub repository, releases and user installation
+remain outside the entrypoint's removal scope.
+
+This instruction selects the working destination and continuation, not an
+artwork license, production approval, an unpublished Identity release, a target
+test pass or the later destructive retirement. Record those actual facts when
+provided or observed.
+
 This practical Ego Hygiene documentation bootstrap records current choices and
 separates them from owner decisions still pending. It does not claim compliance
 with every evolving framework document or start a standards migration.
