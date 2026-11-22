@@ -1,12 +1,19 @@
 # Before the fresh Decky Stream repository
 
-**Current execution plan:** [the implementation roadmap](implementation-roadmap.md),
-parent #46, supersedes the earlier lane ordering below. Owner selected
-01 / aurora. Complete #76–#85 under current OBSGod, deliver manual Deck tests
-and fix reports in #86, then execute the exact approved migration in #87 and
-repeat the actual new install in #88. OAuth/phone login is separate research #89.
+**Current execution plan:** the owner moved testing after migration on
+2026-11-22. Follow the [active roadmap](../ROADMAP.md),
+[owner-run fresh snapshot runbook](fresh-repository-runbook.md) and
+[finalization checklist](finalization-checklist.md). Selected 01 / aurora stays;
+#117 is merged. Prepare the exact branding/source/history transition now,
+create the selected repository through the reviewed owner command, then run
+the new-install Deck test/fix loop. OAuth/phone login stays separate research #89.
 The following prepared engineering table remains history, not a request to
 repeat already completed legacy/API or NFPM source work.
+
+## Earlier engineering plan and observations — 2026-11-14
+
+The remaining sections retain their original dated facts; they are not a fresh
+upstream-release, repository-state or qualification observation.
 
 Prepared 2026-11-14 UTC from live #46 and the existing checkout. The owner prefers
 a fresh source snapshot and clean tracker rather than transferring the old fork's
@@ -19,7 +26,7 @@ The nondeferred engineering pass has now been implemented and checked in draft
 sources, focused passes, repaired failures and remaining gates. The table below
 preserves the original work plan; final full testing still follows the new logo.
 
-## Current owner-directed sequence
+## Earlier owner-directed sequence — retained history
 
 1. Repair brand-kit opening/download compatibility and finish feasible engineering
    here, using focused checks during implementation.

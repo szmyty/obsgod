@@ -1,5 +1,11 @@
 # deckystream identity source — selected aurora preview
 
+For the newly requested released-spec adoption, use the
+[concrete brand packet](../docs/migration-brand-packet.md). The anticipated new
+Identity release is not assumed published; the lock below remains its stated
+unreleased pin until an actual tag/toolchain is verified. No new artwork or
+approval is inferred from migration preparation.
+
 This is a manually authored `identity.project/v1` consumer source, following Ego
 Hygiene Identity's supported authoring path. The stable brand ID remains
 `decky-stream`. The intended future repository slug is **deckystream**, and the

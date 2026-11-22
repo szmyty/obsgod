@@ -75,7 +75,9 @@ connections. Existing required tests and package/network presets remain.
 | Consumer/target proof | Actual Decky/SteamOS/controller/headset/provider and new-install adoption remain the owner test/migration gates |
 
 Source/export checks support a reviewable candidate, not a rights grant or product
-release. Final source qualification and machine tests remain #85, followed by
-actual Steam Deck validation under #86. All 230 original criteria/dependencies
+release. The owner now prepares/migrates before final testing; see the
+[brand adoption packet](migration-brand-packet.md) and [active roadmap](../ROADMAP.md).
+Final source qualification and machine/Steam Deck observations remain explicit
+in the carried-forward finalization checklist. All 230 original criteria/dependencies
 remain intact. No Identity repository change, release, deployment, migration,
 Store submission or paid resource is performed by these tools.

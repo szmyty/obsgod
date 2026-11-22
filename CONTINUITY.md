@@ -1,5 +1,38 @@
 # Current work
 
+## Fresh-repository preparation after #117
+
+#117 is merged and closed through [PR #118](https://github.com/szmyty/obsgod/pull/118)
+at **852320741d3f23aa513e3798528b3576b8b179fb**; its tree matches reviewed
+2014528. All 12 bounded OSS criteria have [recorded evidence](docs/oss-experience-review.md).
+Current work prepares #87 under the owner's new migration-before-testing order.
+
+The [owner-run runbook](docs/fresh-repository-runbook.md) describes a source-only
+fresh snapshot and explicit apply. `scripts/prepare-fresh-repository.py` defaults
+to an offline plan, retains the original archive and stages only the five
+declared canonical repository metadata/projection files in a separate snapshot.
+It preserves current source/history/installed IDs and refuses existing remote
+destinations. No actual creation/push to another repository was performed.
+
+The assistant recommends `egohygiene/deckystream` after the owner asked for
+advice; this is preparation, not a fabricated final owner selection. The owner
+will select the exact destination by the command they run. Source remains
+`szmyty/obsgod`; no runtime update trust is activated here.
+
+The [brand packet](docs/migration-brand-packet.md) binds existing selected assets
+and the new Identity version boundary. Latest observed published stable is still
+v1.0.0; the current cfb6 authoring pin is explicitly unreleased. New release tag,
+actual artwork license/usage and publisher facts remain unresolved. All 38
+selected exports passed fresh read-only raster drift checking; six UI projection
+and two PNG regressions passed. These are not production adoption or device proof.
+
+Prepared body templates consolidate the remaining work into one
+[finalization/test issue](docs/finalization-checklist.md) and separate
+[optional login research](docs/auth-research-carry-forward.md) after the new
+repository exists. Do not invent fresh issue numbers or close old remainders
+before recording real destination links. Full ACT/hosted/service/device results
+remain separate, and no release, deployment, archive copy or deletion occurred.
+
 ## OSS polish and revised migration-first journey
 
 The owner authorized implementing and merging #117, followed by branding and
