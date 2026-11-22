@@ -1,5 +1,32 @@
 # Current work
 
+## OSS polish and revised migration-first journey
+
+The owner authorized implementing and merging #117, followed by branding and
+migration preparation, then testing the finished installation after migration.
+The [sequence decision](DECISIONS.md#owner-sequence-update-2026-11-22) supersedes
+the earlier test-before-move order below. Original criteria/evidence remain;
+none of the absent device/service/rights results becomes a pass.
+
+The #117 source adds a task-oriented [documentation map](docs/README.md), four
+README audience routes, documentation/CLI/Decky contributor entry points,
+separate CLI/feature intake and visible historical-installer context. The
+five funding providers already agree with generated packaged buttons; Patreon
+remains inactive and unconfigured wallets hidden. Focused documentation review
+is recorded separately from runtime qualification.
+
+The next exact Identity release is not assumed from pending upstream work.
+Selected 01 / aurora and existing concepts remain intact. Final destination
+(`egohygiene/deckystream` or `incomprisllc/deckystream`) is not selected by a
+question in chat. Prepare the reviewable source/rights/history packet and
+owner-run command while those facts are resolved; do not change another
+repository, publish a release or delete the current repository as a side effect.
+
+The runtime candidate remains exact `772230a` / immutable artifact `430cc391`.
+Documentation changes do not rebuild or relabel it. Actual Deck/provider tests
+remain unrun and move to the post-migration finalization checklist. #89 remains
+separate research before owner design discussion.
+
 ## Guided testing handoff
 
 The owner requested all feasible pre-manual work, source integration and a simple

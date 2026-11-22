@@ -45,10 +45,14 @@ source; the memorial is history, not another backlog.
 
 ## Decisions, validation and handoff
 
-Current owner sequence is selected **01 / aurora** → normal Decky implementation
-and branding integration → bounded audit/cleanup → final full available matrix
-and current-identity test build → owner Deck test/fix loop → migration → actual
-new-install retest. The creative direction is selected and its source-preview artwork/native integration
+The owner updated the sequence on 2026-11-22: **OSS polish #117 → branding and
+migration preparation → owner-run fresh repository creation → final local and
+Steam Deck test/fix loop → release decision → legacy retirement**. The owner
+explicitly moved device testing after migration; do not restore the older
+test-before-move prerequisite. Exact destination, Identity release/rights facts
+and safe source/trust preparation are still required for the concrete command.
+See [the sequence decision](DECISIONS.md#owner-sequence-update-2026-11-22).
+The creative direction is selected and its source-preview artwork/native integration
 have exact-source local evidence; see the [current checkpoint](docs/pre-migration-qualified-checkpoint.md).
 Actual device, full matrix, rights and adoption gates remain. Use focused checks during work.
 Separate companion/StreamGod remains deferred. Provider OAuth/phone login is
@@ -73,9 +77,10 @@ spending, transfer or another repository's changes need applicable authorization
 prepare concrete artifacts/evidence before an approval action and do not ask
 again for already authorized work.
 
-The owner now requested focused implementation issues under existing parent #46,
-superseding the earlier two-issue tracker shape. Preserve all 230 original
-criteria/dependencies and historical receipts; the new child issues are bounded
+The owner requested focused implementation issues under existing parent #46,
+then one carried-forward finalization checklist at the new destination. Preserve
+all 230 original criteria/dependencies and historical receipts, recording the
+owner's later sequence amendment alongside them; the child issues are bounded
 work, not replacement acceptance. Transfer remaining criteria only with evidence
 and a responsible next action. Superseded/consolidated is not passed. Missing
 device/CI/review/rights/adoption evidence remains visible.

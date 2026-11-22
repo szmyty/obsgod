@@ -1,5 +1,12 @@
 # deckystream: our step-by-step testing booklet
 
+> **Sequence update, 2026-11-22:** The owner now plans to migrate the repository
+> before the hands-on test session. Follow the [active roadmap](../ROADMAP.md#active-journey-polish-prepare-migrate-then-test).
+> This booklet retains the exact current-identity `772230a` / `430cc391` reference
+> and reusable test cases. Before testing the migrated installation, bind its
+> actual new candidate/downloads in the finalization checklist; these older
+> receipts do not qualify a new repository or build. No device case has passed yet.
+
 We will use this together in chat. **Do one small step, report what happened,
 then wait for the next step.** We can pause between any two steps.
 
@@ -404,7 +411,7 @@ observed.
 | 23a — current cleanup-helper preview | Separate [verified helper guide](legacy-cleanup-kit.md); optional, preview only |
 | 23b–23c — legacy retirement, explicit wipe and recovery | Separate later owner choices, not a workaround or ordinary test prerequisite |
 | 24 — honest results and repair/rebuild/retest | Every checkpoint and “If any step fails” |
-| 25 — migration, destination services and new-install/adoption/v1 | After current-install acceptance; [roadmap](../ROADMAP.md) |
+| 25 — migration, destination services and new-install/adoption/v1 | Owner now plans migration before the session; bind the new candidate and carry these cases into finalization. See the [active roadmap](../ROADMAP.md). |
 
 A private wipe-export TAR contains credentials, is not encrypted and intentionally
 survives wipe. It is never a support upload. No actual retirement, wipe, restore,

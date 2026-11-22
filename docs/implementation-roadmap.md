@@ -1,3 +1,12 @@
+# Current sequence amendment
+The owner moved testing after migration on 2026-11-22. Follow the active
+[roadmap](../ROADMAP.md#active-journey-polish-prepare-migrate-then-test) and
+[recorded decision](../DECISIONS.md#owner-sequence-update-2026-11-22).
+The original implementation/dependency record below remains historical evidence;
+the amendment does not mark its unfinished acceptance criteria passed.
+
+---
+
 # deckystream implementation and migration roadmap
 
 ## Current merged implementation and remaining sequence

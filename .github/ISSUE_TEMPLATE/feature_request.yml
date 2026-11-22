@@ -1,0 +1,36 @@
+name: Feature request
+description: Propose a bounded improvement to docs, CLI or Steam Deck workflows
+body:
+  - type: markdown
+    attributes:
+      value: "Describe a problem and a small, reviewable outcome. A request does not promise implementation or change current support/publication gates. Never include credentials, private setup links or raw private profiles/logs. Follow [SECURITY.md](https://github.com/szmyty/obsgod/security/policy) for suspected vulnerabilities."
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Documentation / onboarding
+        - CLI / reusable OBS control
+        - Steam Deck / Decky
+        - Other / not sure
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or workflow
+      description: Who is affected, what are they trying to do, and what happens today? Include an existing issue link if relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Proposed outcome and scope
+      description: Describe the smallest useful change and how someone could check it works. Note compatibility, offline use, privacy or broadcasting effects if relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives or current workaround
+      description: Optional. Describe approaches you have considered and what they leave unresolved.

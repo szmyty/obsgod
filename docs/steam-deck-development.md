@@ -1,5 +1,13 @@
 # Steam Deck preview implementation
 
+> **Historical implementation record (2026-11-11).** The Desktop-first journey,
+> issue numbers, tool/access observations and test results below describe that
+> original work. For current standard Decky ZIP setup and optional Desktop Setup,
+> use the [Steam Deck guide](steam-deck.md); for the pinned `772230a` source and
+> `430cc391` review packet, use the [current checkpoint](pre-migration-qualified-checkpoint.md).
+> Browse current tasks in the [documentation index](README.md). This record does
+> not qualify later source or establish current hardware/hosted acceptance.
+
 User journey: install to the user's home in Desktop Mode, enter a generic RTMP(S)
 server and stream key on the device, install the included Decky ZIP, then start and
 stop from Gaming Mode's Quick Access menu. No provider account API is required.

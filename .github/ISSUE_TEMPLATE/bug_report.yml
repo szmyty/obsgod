@@ -3,7 +3,7 @@ description: Report a reproducible preview problem without credentials
 body:
   - type: markdown
     attributes:
-      value: "Never include stream keys, passwords, private setup links, wallet seeds or raw OBS profiles/logs. Use SECURITY.md for sensitive security reports."
+      value: "For Steam Deck / Decky problems. For standalone CLI problems, use the CLI / automation bug form. Never include stream keys, passwords, private setup links, wallet seeds, wipe-recovery archives or raw OBS profiles/logs. Follow [SECURITY.md](https://github.com/szmyty/obsgod/security/policy) for suspected vulnerabilities; do not post sensitive details here."
   - type: textarea
     id: versions
     attributes:

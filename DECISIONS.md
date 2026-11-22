@@ -140,3 +140,33 @@ publication or sync failure cannot authorize removal. Existing coordination and
 path identities stay authoritative; normal/reset/legacy scopes remain distinct.
 This records implementation, not a device/restore/rights acceptance or a new ADR
 approval. Manual recovery and separately verified reinstallation remain explicit.
+
+## Owner sequence update 2026-11-22
+
+The owner authorized implementing and normally merging OSS polish #117, then
+preparing the selected branding and fresh-repository migration before the next
+manual test. Device access is unavailable until later. This supersedes the old
+active requirement to complete #86 before moving the source; it does not pass
+any device, provider, lifecycle, CI, rights or adoption criterion.
+
+The current sequence is #117 → branding/migration preparation → the owner's
+concrete command for the selected `OWNER/deckystream` → one carried-forward
+finalization/test checklist → local and Steam Deck fixes → concrete release
+decision → old repository retirement. Keep #89 separate. Retain the original
+criteria and dependencies as history with this amendment and actual new links,
+not as silently completed or deleted work. No exact organization was selected
+in that request: `egohygiene` and `incomprisllc` remain alternatives until answered.
+
+The user wants a fresh Git history. Use an explicit tracked-source snapshot,
+preserving source attribution, notices, the memorial and portable tracker data;
+do not delete `.git` in the working checkout. Initial migration is not a product
+release or deployment. Existing installed identities and safe update trust must
+not change through a broad text replacement. Prepare the actual transition and
+test the destination-specific source before making supported release claims.
+
+The owner proposed deleting `szmyty/obsgod` after the finished new release and a
+copy in `szmyty/archive`. That is a later destructive retirement, not part of
+the creation command. A source snapshot without Git metadata does not preserve
+old GitHub releases, artifact branches, tracker discussions or their URLs.
+Identify those dependencies and preserve recovery evidence before retirement;
+recommend read-only archival if public legacy links still depend on the source.
